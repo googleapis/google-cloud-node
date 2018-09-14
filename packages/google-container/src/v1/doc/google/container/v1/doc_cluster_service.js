@@ -119,7 +119,7 @@
  * @memberof google.container.v1
  * @see [google.container.v1.NodeConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var NodeConfig = {
+const NodeConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -161,7 +161,7 @@ var NodeConfig = {
  * @memberof google.container.v1
  * @see [google.container.v1.MasterAuth definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var MasterAuth = {
+const MasterAuth = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -175,7 +175,7 @@ var MasterAuth = {
  * @memberof google.container.v1
  * @see [google.container.v1.ClientCertificateConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ClientCertificateConfig = {
+const ClientCertificateConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -212,7 +212,7 @@ var ClientCertificateConfig = {
  * @memberof google.container.v1
  * @see [google.container.v1.AddonsConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var AddonsConfig = {
+const AddonsConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -229,7 +229,7 @@ var AddonsConfig = {
  * @memberof google.container.v1
  * @see [google.container.v1.HttpLoadBalancing definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var HttpLoadBalancing = {
+const HttpLoadBalancing = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -247,7 +247,7 @@ var HttpLoadBalancing = {
  * @memberof google.container.v1
  * @see [google.container.v1.HorizontalPodAutoscaling definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var HorizontalPodAutoscaling = {
+const HorizontalPodAutoscaling = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -261,7 +261,7 @@ var HorizontalPodAutoscaling = {
  * @memberof google.container.v1
  * @see [google.container.v1.KubernetesDashboard definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var KubernetesDashboard = {
+const KubernetesDashboard = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -277,7 +277,7 @@ var KubernetesDashboard = {
  * @memberof google.container.v1
  * @see [google.container.v1.NetworkPolicyConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var NetworkPolicyConfig = {
+const NetworkPolicyConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -301,7 +301,7 @@ var NetworkPolicyConfig = {
  * @memberof google.container.v1
  * @see [google.container.v1.MasterAuthorizedNetworksConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var MasterAuthorizedNetworksConfig = {
+const MasterAuthorizedNetworksConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -336,7 +336,7 @@ var MasterAuthorizedNetworksConfig = {
  * @memberof google.container.v1
  * @see [google.container.v1.LegacyAbac definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var LegacyAbac = {
+const LegacyAbac = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -356,7 +356,7 @@ var LegacyAbac = {
  * @memberof google.container.v1
  * @see [google.container.v1.NetworkPolicy definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var NetworkPolicy = {
+const NetworkPolicy = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -476,7 +476,7 @@ var NetworkPolicy = {
  * @memberof google.container.v1
  * @see [google.container.v1.IPAllocationPolicy definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var IPAllocationPolicy = {
+const IPAllocationPolicy = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -683,7 +683,7 @@ var IPAllocationPolicy = {
  * @memberof google.container.v1
  * @see [google.container.v1.Cluster definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var Cluster = {
+const Cluster = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -794,7 +794,7 @@ var Cluster = {
  * @memberof google.container.v1
  * @see [google.container.v1.ClusterUpdate definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ClusterUpdate = {
+const ClusterUpdate = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -844,7 +844,7 @@ var ClusterUpdate = {
  * @memberof google.container.v1
  * @see [google.container.v1.Operation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var Operation = {
+const Operation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -998,7 +998,7 @@ var Operation = {
  * @memberof google.container.v1
  * @see [google.container.v1.CreateClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var CreateClusterRequest = {
+const CreateClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1021,7 +1021,7 @@ var CreateClusterRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.GetClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var GetClusterRequest = {
+const GetClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1049,7 +1049,7 @@ var GetClusterRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.UpdateClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var UpdateClusterRequest = {
+const UpdateClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1083,7 +1083,7 @@ var UpdateClusterRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.UpdateNodePoolRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var UpdateNodePoolRequest = {
+const UpdateNodePoolRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1114,7 +1114,7 @@ var UpdateNodePoolRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetNodePoolAutoscalingRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetNodePoolAutoscalingRequest = {
+const SetNodePoolAutoscalingRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1144,7 +1144,7 @@ var SetNodePoolAutoscalingRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetLoggingServiceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetLoggingServiceRequest = {
+const SetLoggingServiceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1174,7 +1174,7 @@ var SetLoggingServiceRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetMonitoringServiceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetMonitoringServiceRequest = {
+const SetMonitoringServiceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1203,7 +1203,7 @@ var SetMonitoringServiceRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetAddonsConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetAddonsConfigRequest = {
+const SetAddonsConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1235,7 +1235,7 @@ var SetAddonsConfigRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetLocationsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetLocationsRequest = {
+const SetLocationsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1263,7 +1263,7 @@ var SetLocationsRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.UpdateMasterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var UpdateMasterRequest = {
+const UpdateMasterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1296,7 +1296,7 @@ var UpdateMasterRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetMasterAuthRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetMasterAuthRequest = {
+const SetMasterAuthRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1351,7 +1351,7 @@ var SetMasterAuthRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.DeleteClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var DeleteClusterRequest = {
+const DeleteClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1371,7 +1371,7 @@ var DeleteClusterRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.ListClustersRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ListClustersRequest = {
+const ListClustersRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1392,7 +1392,7 @@ var ListClustersRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.ListClustersResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ListClustersResponse = {
+const ListClustersResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1415,7 +1415,7 @@ var ListClustersResponse = {
  * @memberof google.container.v1
  * @see [google.container.v1.GetOperationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var GetOperationRequest = {
+const GetOperationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1434,7 +1434,7 @@ var GetOperationRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.ListOperationsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ListOperationsRequest = {
+const ListOperationsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1456,7 +1456,7 @@ var ListOperationsRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.CancelOperationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var CancelOperationRequest = {
+const CancelOperationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1476,7 +1476,7 @@ var CancelOperationRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.ListOperationsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ListOperationsResponse = {
+const ListOperationsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1495,7 +1495,7 @@ var ListOperationsResponse = {
  * @memberof google.container.v1
  * @see [google.container.v1.GetServerConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var GetServerConfigRequest = {
+const GetServerConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1521,7 +1521,7 @@ var GetServerConfigRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.ServerConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ServerConfig = {
+const ServerConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1549,7 +1549,7 @@ var ServerConfig = {
  * @memberof google.container.v1
  * @see [google.container.v1.CreateNodePoolRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var CreateNodePoolRequest = {
+const CreateNodePoolRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1575,7 +1575,7 @@ var CreateNodePoolRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.DeleteNodePoolRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var DeleteNodePoolRequest = {
+const DeleteNodePoolRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1598,7 +1598,7 @@ var DeleteNodePoolRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.ListNodePoolsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ListNodePoolsRequest = {
+const ListNodePoolsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1624,7 +1624,7 @@ var ListNodePoolsRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.GetNodePoolRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var GetNodePoolRequest = {
+const GetNodePoolRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1685,7 +1685,7 @@ var GetNodePoolRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.NodePool definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var NodePool = {
+const NodePool = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1764,7 +1764,7 @@ var NodePool = {
  * @memberof google.container.v1
  * @see [google.container.v1.NodeManagement definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var NodeManagement = {
+const NodeManagement = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1785,7 +1785,7 @@ var NodeManagement = {
  * @memberof google.container.v1
  * @see [google.container.v1.AutoUpgradeOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var AutoUpgradeOptions = {
+const AutoUpgradeOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1801,7 +1801,7 @@ var AutoUpgradeOptions = {
  * @memberof google.container.v1
  * @see [google.container.v1.MaintenancePolicy definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var MaintenancePolicy = {
+const MaintenancePolicy = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1817,7 +1817,7 @@ var MaintenancePolicy = {
  * @memberof google.container.v1
  * @see [google.container.v1.MaintenanceWindow definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var MaintenanceWindow = {
+const MaintenanceWindow = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1839,7 +1839,7 @@ var MaintenanceWindow = {
  * @memberof google.container.v1
  * @see [google.container.v1.DailyMaintenanceWindow definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var DailyMaintenanceWindow = {
+const DailyMaintenanceWindow = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1871,7 +1871,7 @@ var DailyMaintenanceWindow = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetNodePoolManagementRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetNodePoolManagementRequest = {
+const SetNodePoolManagementRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1901,7 +1901,7 @@ var SetNodePoolManagementRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetNodePoolSizeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetNodePoolSizeRequest = {
+const SetNodePoolSizeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1929,7 +1929,7 @@ var SetNodePoolSizeRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.RollbackNodePoolUpgradeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var RollbackNodePoolUpgradeRequest = {
+const RollbackNodePoolUpgradeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1945,7 +1945,7 @@ var RollbackNodePoolUpgradeRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.ListNodePoolsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var ListNodePoolsResponse = {
+const ListNodePoolsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1968,7 +1968,7 @@ var ListNodePoolsResponse = {
  * @memberof google.container.v1
  * @see [google.container.v1.NodePoolAutoscaling definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var NodePoolAutoscaling = {
+const NodePoolAutoscaling = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2004,7 +2004,7 @@ var NodePoolAutoscaling = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetLabelsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetLabelsRequest = {
+const SetLabelsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2031,7 +2031,7 @@ var SetLabelsRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetLegacyAbacRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetLegacyAbacRequest = {
+const SetLegacyAbacRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2055,7 +2055,7 @@ var SetLegacyAbacRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.StartIPRotationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var StartIPRotationRequest = {
+const StartIPRotationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2078,7 +2078,7 @@ var StartIPRotationRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.CompleteIPRotationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var CompleteIPRotationRequest = {
+const CompleteIPRotationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2096,7 +2096,7 @@ var CompleteIPRotationRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.AcceleratorConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var AcceleratorConfig = {
+const AcceleratorConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2124,7 +2124,7 @@ var AcceleratorConfig = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetNetworkPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetNetworkPolicyRequest = {
+const SetNetworkPolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -2153,6 +2153,6 @@ var SetNetworkPolicyRequest = {
  * @memberof google.container.v1
  * @see [google.container.v1.SetMaintenancePolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
-var SetMaintenancePolicyRequest = {
+const SetMaintenancePolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

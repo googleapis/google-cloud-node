@@ -71,13 +71,13 @@ class ClusterManagerClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -88,7 +88,7 @@ class ClusterManagerClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -97,7 +97,7 @@ class ClusterManagerClient {
     );
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.container.v1.ClusterManager',
       gapicConfig,
       opts.clientConfig,
@@ -111,14 +111,14 @@ class ClusterManagerClient {
 
     // Put together the "service stub" for
     // google.container.v1.ClusterManager.
-    var clusterManagerStub = gaxGrpc.createStub(
+    const clusterManagerStub = gaxGrpc.createStub(
       protos.google.container.v1.ClusterManager,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var clusterManagerStubMethods = [
+    const clusterManagerStubMethods = [
       'listClusters',
       'getCluster',
       'createCluster',
@@ -155,7 +155,7 @@ class ClusterManagerClient {
         clusterManagerStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -228,19 +228,19 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    * };
    * client.listClusters(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -286,21 +286,21 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
    * };
    * client.getCluster(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -361,21 +361,21 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var cluster = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const cluster = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   cluster: cluster,
    * };
    * client.createCluster(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -425,15 +425,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var update = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const update = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -441,7 +441,7 @@ class ClusterManagerClient {
    * };
    * client.updateCluster(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -495,17 +495,17 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePoolId = '';
-   * var nodeVersion = '';
-   * var imageType = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePoolId = '';
+   * const nodeVersion = '';
+   * const imageType = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -515,7 +515,7 @@ class ClusterManagerClient {
    * };
    * client.updateNodePool(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -567,16 +567,16 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePoolId = '';
-   * var autoscaling = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePoolId = '';
+   * const autoscaling = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -585,7 +585,7 @@ class ClusterManagerClient {
    * };
    * client.setNodePoolAutoscaling(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -641,15 +641,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var loggingService = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const loggingService = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -657,7 +657,7 @@ class ClusterManagerClient {
    * };
    * client.setLoggingService(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -709,15 +709,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var monitoringService = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const monitoringService = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -725,7 +725,7 @@ class ClusterManagerClient {
    * };
    * client.setMonitoringService(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -776,15 +776,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var addonsConfig = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const addonsConfig = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -792,7 +792,7 @@ class ClusterManagerClient {
    * };
    * client.setAddonsConfig(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -846,15 +846,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var locations = [];
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const locations = [];
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -862,7 +862,7 @@ class ClusterManagerClient {
    * };
    * client.setLocations(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -912,15 +912,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var masterVersion = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const masterVersion = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -928,7 +928,7 @@ class ClusterManagerClient {
    * };
    * client.updateMaster(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -984,16 +984,16 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var action = 'UNKNOWN';
-   * var update = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const action = 'UNKNOWN';
+   * const update = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1002,7 +1002,7 @@ class ClusterManagerClient {
    * };
    * client.setMasterAuth(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1056,21 +1056,21 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
    * };
    * client.deleteCluster(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1113,19 +1113,19 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    * };
    * client.listOperations(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1171,21 +1171,21 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var operationId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const operationId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   operationId: operationId,
    * };
    * client.getOperation(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1227,14 +1227,14 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var operationId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const operationId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   operationId: operationId,
@@ -1279,19 +1279,19 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    * };
    * client.getServerConfig(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1337,21 +1337,21 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
    * };
    * client.listNodePools(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1399,15 +1399,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePoolId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePoolId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1415,7 +1415,7 @@ class ClusterManagerClient {
    * };
    * client.getNodePool(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1465,15 +1465,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePool = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePool = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1481,7 +1481,7 @@ class ClusterManagerClient {
    * };
    * client.createNodePool(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1529,15 +1529,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePoolId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePoolId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1545,7 +1545,7 @@ class ClusterManagerClient {
    * };
    * client.deleteNodePool(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1594,15 +1594,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePoolId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePoolId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1610,7 +1610,7 @@ class ClusterManagerClient {
    * };
    * client.rollbackNodePoolUpgrade(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1666,16 +1666,16 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePoolId = '';
-   * var management = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePoolId = '';
+   * const management = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1684,7 +1684,7 @@ class ClusterManagerClient {
    * };
    * client.setNodePoolManagement(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1743,16 +1743,16 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var resourceLabels = {};
-   * var labelFingerprint = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const resourceLabels = {};
+   * const labelFingerprint = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1761,7 +1761,7 @@ class ClusterManagerClient {
    * };
    * client.setLabels(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1809,15 +1809,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var enabled = false;
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const enabled = false;
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -1825,7 +1825,7 @@ class ClusterManagerClient {
    * };
    * client.setLegacyAbac(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1871,21 +1871,21 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
    * };
    * client.startIPRotation(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1931,21 +1931,21 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
    * };
    * client.completeIPRotation(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1995,16 +1995,16 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var nodePoolId = '';
-   * var nodeCount = 0;
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const nodePoolId = '';
+   * const nodeCount = 0;
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -2013,7 +2013,7 @@ class ClusterManagerClient {
    * };
    * client.setNodePoolSize(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -2063,15 +2063,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var networkPolicy = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const networkPolicy = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -2079,7 +2079,7 @@ class ClusterManagerClient {
    * };
    * client.setNetworkPolicy(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -2130,15 +2130,15 @@ class ClusterManagerClient {
    *
    * const container = require('@google-cloud/container');
    *
-   * var client = new container.v1.ClusterManagerClient({
+   * const client = new container.v1.ClusterManagerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var zone = '';
-   * var clusterId = '';
-   * var maintenancePolicy = {};
-   * var request = {
+   * const projectId = '';
+   * const zone = '';
+   * const clusterId = '';
+   * const maintenancePolicy = {};
+   * const request = {
    *   projectId: projectId,
    *   zone: zone,
    *   clusterId: clusterId,
@@ -2146,7 +2146,7 @@ class ClusterManagerClient {
    * };
    * client.setMaintenancePolicy(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

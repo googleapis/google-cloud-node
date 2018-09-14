@@ -18,25 +18,25 @@ describe('ClusterManagerSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
     throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
   }
-  var projectId = process.env.GCLOUD_PROJECT;
+  const projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service', done => {
     const container = require('../src');
 
-    var client = new container.v1.ClusterManagerClient({
+    const client = new container.v1.ClusterManagerClient({
       // optional auth parameters.
     });
 
-    var projectId2 = projectId;
-    var zone = 'us-central1-a';
-    var request = {
+    const projectId2 = projectId;
+    const zone = 'us-central1-a';
+    const request = {
       projectId: projectId2,
       zone: zone,
     };
     client
       .listClusters(request)
       .then(responses => {
-        var response = responses[0];
+        const response = responses[0];
         console.log(response);
       })
       .then(done)

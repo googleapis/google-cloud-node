@@ -18,28 +18,28 @@ const assert = require('assert');
 
 const containerModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ClusterManagerClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const request = {
         projectId: projectId,
         zone: zone,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listClusters = mockSimpleGrpcMethod(
@@ -55,15 +55,15 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes listClusters with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const request = {
         projectId: projectId,
         zone: zone,
       };
@@ -86,45 +86,45 @@ describe('ClusterManagerClient', () => {
 
   describe('getCluster', () => {
     it('invokes getCluster without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var description = 'description-1724546052';
-      var initialNodeCount = 1682564205;
-      var loggingService = 'loggingService-1700501035';
-      var monitoringService = 'monitoringService1469270462';
-      var network = 'network1843485230';
-      var clusterIpv4Cidr = 'clusterIpv4Cidr-141875831';
-      var subnetwork = 'subnetwork-1302785042';
-      var enableKubernetesAlpha = false;
-      var labelFingerprint = 'labelFingerprint714995737';
-      var selfLink = 'selfLink-1691268851';
-      var zone2 = 'zone2-696322977';
-      var endpoint = 'endpoint1741102485';
-      var initialClusterVersion = 'initialClusterVersion-276373352';
-      var currentMasterVersion = 'currentMasterVersion-920953983';
-      var currentNodeVersion = 'currentNodeVersion-407476063';
-      var createTime = 'createTime-493574096';
-      var statusMessage = 'statusMessage-239442758';
-      var nodeIpv4CidrSize = 1181176815;
-      var servicesIpv4Cidr = 'servicesIpv4Cidr1966438125';
-      var currentNodeCount = 178977560;
-      var expireTime = 'expireTime-96179731';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const description = 'description-1724546052';
+      const initialNodeCount = 1682564205;
+      const loggingService = 'loggingService-1700501035';
+      const monitoringService = 'monitoringService1469270462';
+      const network = 'network1843485230';
+      const clusterIpv4Cidr = 'clusterIpv4Cidr-141875831';
+      const subnetwork = 'subnetwork-1302785042';
+      const enableKubernetesAlpha = false;
+      const labelFingerprint = 'labelFingerprint714995737';
+      const selfLink = 'selfLink-1691268851';
+      const zone2 = 'zone2-696322977';
+      const endpoint = 'endpoint1741102485';
+      const initialClusterVersion = 'initialClusterVersion-276373352';
+      const currentMasterVersion = 'currentMasterVersion-920953983';
+      const currentNodeVersion = 'currentNodeVersion-407476063';
+      const createTime = 'createTime-493574096';
+      const statusMessage = 'statusMessage-239442758';
+      const nodeIpv4CidrSize = 1181176815;
+      const servicesIpv4Cidr = 'servicesIpv4Cidr1966438125';
+      const currentNodeCount = 178977560;
+      const expireTime = 'expireTime-96179731';
+      const expectedResponse = {
         name: name,
         description: description,
         initialNodeCount: initialNodeCount,
@@ -163,16 +163,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes getCluster with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -196,31 +196,31 @@ describe('ClusterManagerClient', () => {
 
   describe('createCluster', () => {
     it('invokes createCluster without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var cluster = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const cluster = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         cluster: cluster,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -245,16 +245,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes createCluster with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var cluster = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const cluster = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         cluster: cluster,
@@ -278,17 +278,17 @@ describe('ClusterManagerClient', () => {
 
   describe('updateCluster', () => {
     it('invokes updateCluster without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var update = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const update = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -296,15 +296,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -329,17 +329,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes updateCluster with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var update = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const update = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -364,19 +364,19 @@ describe('ClusterManagerClient', () => {
 
   describe('updateNodePool', () => {
     it('invokes updateNodePool without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var nodeVersion = 'nodeVersion1790136219';
-      var imageType = 'imageType-1442758754';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const nodeVersion = 'nodeVersion1790136219';
+      const imageType = 'imageType-1442758754';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -386,15 +386,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -419,19 +419,19 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes updateNodePool with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var nodeVersion = 'nodeVersion1790136219';
-      var imageType = 'imageType-1442758754';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const nodeVersion = 'nodeVersion1790136219';
+      const imageType = 'imageType-1442758754';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -458,18 +458,18 @@ describe('ClusterManagerClient', () => {
 
   describe('setNodePoolAutoscaling', () => {
     it('invokes setNodePoolAutoscaling without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var autoscaling = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const autoscaling = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -478,15 +478,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -511,18 +511,18 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setNodePoolAutoscaling with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var autoscaling = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const autoscaling = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -548,17 +548,17 @@ describe('ClusterManagerClient', () => {
 
   describe('setLoggingService', () => {
     it('invokes setLoggingService without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var loggingService = 'loggingService-1700501035';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const loggingService = 'loggingService-1700501035';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -566,15 +566,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -599,17 +599,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setLoggingService with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var loggingService = 'loggingService-1700501035';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const loggingService = 'loggingService-1700501035';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -634,17 +634,17 @@ describe('ClusterManagerClient', () => {
 
   describe('setMonitoringService', () => {
     it('invokes setMonitoringService without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var monitoringService = 'monitoringService1469270462';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const monitoringService = 'monitoringService1469270462';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -652,15 +652,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -685,17 +685,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setMonitoringService with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var monitoringService = 'monitoringService1469270462';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const monitoringService = 'monitoringService1469270462';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -720,17 +720,17 @@ describe('ClusterManagerClient', () => {
 
   describe('setAddonsConfig', () => {
     it('invokes setAddonsConfig without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var addonsConfig = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const addonsConfig = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -738,15 +738,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -771,17 +771,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setAddonsConfig with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var addonsConfig = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const addonsConfig = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -806,17 +806,17 @@ describe('ClusterManagerClient', () => {
 
   describe('setLocations', () => {
     it('invokes setLocations without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var locations = [];
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const locations = [];
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -824,15 +824,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -857,17 +857,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setLocations with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var locations = [];
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const locations = [];
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -892,17 +892,17 @@ describe('ClusterManagerClient', () => {
 
   describe('updateMaster', () => {
     it('invokes updateMaster without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var masterVersion = 'masterVersion-2139460613';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const masterVersion = 'masterVersion-2139460613';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -910,15 +910,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -943,17 +943,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes updateMaster with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var masterVersion = 'masterVersion-2139460613';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const masterVersion = 'masterVersion-2139460613';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -978,18 +978,18 @@ describe('ClusterManagerClient', () => {
 
   describe('setMasterAuth', () => {
     it('invokes setMasterAuth without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var action = 'UNKNOWN';
-      var update = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const action = 'UNKNOWN';
+      const update = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -998,15 +998,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1031,18 +1031,18 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setMasterAuth with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var action = 'UNKNOWN';
-      var update = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const action = 'UNKNOWN';
+      const update = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1068,31 +1068,31 @@ describe('ClusterManagerClient', () => {
 
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1117,16 +1117,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes deleteCluster with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1150,21 +1150,21 @@ describe('ClusterManagerClient', () => {
 
   describe('listOperations', () => {
     it('invokes listOperations without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const request = {
         projectId: projectId,
         zone: zone,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listOperations = mockSimpleGrpcMethod(
@@ -1180,15 +1180,15 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes listOperations with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const request = {
         projectId: projectId,
         zone: zone,
       };
@@ -1211,31 +1211,31 @@ describe('ClusterManagerClient', () => {
 
   describe('getOperation', () => {
     it('invokes getOperation without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var operationId = 'operationId-274116877';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const operationId = 'operationId-274116877';
+      const request = {
         projectId: projectId,
         zone: zone,
         operationId: operationId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1260,16 +1260,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes getOperation with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var operationId = 'operationId-274116877';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const operationId = 'operationId-274116877';
+      const request = {
         projectId: projectId,
         zone: zone,
         operationId: operationId,
@@ -1293,16 +1293,16 @@ describe('ClusterManagerClient', () => {
 
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var operationId = 'operationId-274116877';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const operationId = 'operationId-274116877';
+      const request = {
         projectId: projectId,
         zone: zone,
         operationId: operationId,
@@ -1318,16 +1318,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes cancelOperation with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var operationId = 'operationId-274116877';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const operationId = 'operationId-274116877';
+      const request = {
         projectId: projectId,
         zone: zone,
         operationId: operationId,
@@ -1350,23 +1350,23 @@ describe('ClusterManagerClient', () => {
 
   describe('getServerConfig', () => {
     it('invokes getServerConfig without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const request = {
         projectId: projectId,
         zone: zone,
       };
 
       // Mock response
-      var defaultClusterVersion = 'defaultClusterVersion111003029';
-      var defaultImageType = 'defaultImageType-918225828';
-      var expectedResponse = {
+      const defaultClusterVersion = 'defaultClusterVersion111003029';
+      const defaultImageType = 'defaultImageType-918225828';
+      const expectedResponse = {
         defaultClusterVersion: defaultClusterVersion,
         defaultImageType: defaultImageType,
       };
@@ -1385,15 +1385,15 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes getServerConfig with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const request = {
         projectId: projectId,
         zone: zone,
       };
@@ -1416,23 +1416,23 @@ describe('ClusterManagerClient', () => {
 
   describe('listNodePools', () => {
     it('invokes listNodePools without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listNodePools = mockSimpleGrpcMethod(
@@ -1448,16 +1448,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes listNodePools with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1481,17 +1481,17 @@ describe('ClusterManagerClient', () => {
 
   describe('getNodePool', () => {
     it('invokes getNodePool without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1499,12 +1499,12 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var initialNodeCount = 1682564205;
-      var selfLink = 'selfLink-1691268851';
-      var version = 'version351608024';
-      var statusMessage = 'statusMessage-239442758';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const initialNodeCount = 1682564205;
+      const selfLink = 'selfLink-1691268851';
+      const version = 'version351608024';
+      const statusMessage = 'statusMessage-239442758';
+      const expectedResponse = {
         name: name,
         initialNodeCount: initialNodeCount,
         selfLink: selfLink,
@@ -1526,17 +1526,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes getNodePool with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1561,17 +1561,17 @@ describe('ClusterManagerClient', () => {
 
   describe('createNodePool', () => {
     it('invokes createNodePool without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePool = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePool = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1579,15 +1579,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1612,17 +1612,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes createNodePool with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePool = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePool = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1647,17 +1647,17 @@ describe('ClusterManagerClient', () => {
 
   describe('deleteNodePool', () => {
     it('invokes deleteNodePool without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1665,15 +1665,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1698,17 +1698,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes deleteNodePool with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1733,17 +1733,17 @@ describe('ClusterManagerClient', () => {
 
   describe('rollbackNodePoolUpgrade', () => {
     it('invokes rollbackNodePoolUpgrade without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1751,15 +1751,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1784,17 +1784,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes rollbackNodePoolUpgrade with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1819,18 +1819,18 @@ describe('ClusterManagerClient', () => {
 
   describe('setNodePoolManagement', () => {
     it('invokes setNodePoolManagement without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var management = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const management = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1839,15 +1839,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1872,18 +1872,18 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setNodePoolManagement with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var management = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const management = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1909,18 +1909,18 @@ describe('ClusterManagerClient', () => {
 
   describe('setLabels', () => {
     it('invokes setLabels without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var resourceLabels = {};
-      var labelFingerprint = 'labelFingerprint714995737';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const resourceLabels = {};
+      const labelFingerprint = 'labelFingerprint714995737';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1929,15 +1929,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -1962,18 +1962,18 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setLabels with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var resourceLabels = {};
-      var labelFingerprint = 'labelFingerprint714995737';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const resourceLabels = {};
+      const labelFingerprint = 'labelFingerprint714995737';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -1999,17 +1999,17 @@ describe('ClusterManagerClient', () => {
 
   describe('setLegacyAbac', () => {
     it('invokes setLegacyAbac without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var enabled = false;
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const enabled = false;
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2017,15 +2017,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -2050,17 +2050,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setLegacyAbac with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var enabled = false;
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const enabled = false;
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2085,31 +2085,31 @@ describe('ClusterManagerClient', () => {
 
   describe('startIPRotation', () => {
     it('invokes startIPRotation without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -2134,16 +2134,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes startIPRotation with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2167,31 +2167,31 @@ describe('ClusterManagerClient', () => {
 
   describe('completeIPRotation', () => {
     it('invokes completeIPRotation without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -2216,16 +2216,16 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes completeIPRotation with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2249,18 +2249,18 @@ describe('ClusterManagerClient', () => {
 
   describe('setNodePoolSize', () => {
     it('invokes setNodePoolSize without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var nodeCount = 1539922066;
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const nodeCount = 1539922066;
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2269,15 +2269,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -2302,18 +2302,18 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setNodePoolSize with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var nodePoolId = 'nodePoolId1043384033';
-      var nodeCount = 1539922066;
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const nodePoolId = 'nodePoolId1043384033';
+      const nodeCount = 1539922066;
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2339,17 +2339,17 @@ describe('ClusterManagerClient', () => {
 
   describe('setNetworkPolicy', () => {
     it('invokes setNetworkPolicy without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var networkPolicy = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const networkPolicy = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2357,15 +2357,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -2390,17 +2390,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setNetworkPolicy with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var networkPolicy = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const networkPolicy = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2425,17 +2425,17 @@ describe('ClusterManagerClient', () => {
 
   describe('setMaintenancePolicy', () => {
     it('invokes setMaintenancePolicy without error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var maintenancePolicy = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const maintenancePolicy = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
@@ -2443,15 +2443,15 @@ describe('ClusterManagerClient', () => {
       };
 
       // Mock response
-      var name = 'name3373707';
-      var zone2 = 'zone2-696322977';
-      var detail = 'detail-1335224239';
-      var statusMessage = 'statusMessage-239442758';
-      var selfLink = 'selfLink-1691268851';
-      var targetLink = 'targetLink-2084812312';
-      var startTime = 'startTime-1573145462';
-      var endTime = 'endTime1725551537';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const zone2 = 'zone2-696322977';
+      const detail = 'detail-1335224239';
+      const statusMessage = 'statusMessage-239442758';
+      const selfLink = 'selfLink-1691268851';
+      const targetLink = 'targetLink-2084812312';
+      const startTime = 'startTime-1573145462';
+      const endTime = 'endTime1725551537';
+      const expectedResponse = {
         name: name,
         zone: zone2,
         detail: detail,
@@ -2476,17 +2476,17 @@ describe('ClusterManagerClient', () => {
     });
 
     it('invokes setMaintenancePolicy with error', done => {
-      var client = new containerModule.v1.ClusterManagerClient({
+      const client = new containerModule.v1.ClusterManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var zone = 'zone3744684';
-      var clusterId = 'clusterId240280960';
-      var maintenancePolicy = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const zone = 'zone3744684';
+      const clusterId = 'clusterId240280960';
+      const maintenancePolicy = {};
+      const request = {
         projectId: projectId,
         zone: zone,
         clusterId: clusterId,
