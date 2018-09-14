@@ -28,7 +28,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TranslationDatasetMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/translation.proto}
  */
-var TranslationDatasetMetadata = {
+const TranslationDatasetMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -45,7 +45,7 @@ var TranslationDatasetMetadata = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TranslationEvaluationMetrics definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/translation.proto}
  */
-var TranslationEvaluationMetrics = {
+const TranslationEvaluationMetrics = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -70,7 +70,7 @@ var TranslationEvaluationMetrics = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TranslationModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/translation.proto}
  */
-var TranslationModelMetadata = {
+const TranslationModelMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -86,6 +86,6 @@ var TranslationModelMetadata = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TranslationAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/translation.proto}
  */
-var TranslationAnnotation = {
+const TranslationAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

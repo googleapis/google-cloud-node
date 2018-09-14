@@ -30,7 +30,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.CreateDatasetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var CreateDatasetRequest = {
+const CreateDatasetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -44,7 +44,7 @@ var CreateDatasetRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.GetDatasetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var GetDatasetRequest = {
+const GetDatasetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -78,7 +78,7 @@ var GetDatasetRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ListDatasetsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ListDatasetsRequest = {
+const ListDatasetsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -98,7 +98,7 @@ var ListDatasetsRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ListDatasetsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ListDatasetsResponse = {
+const ListDatasetsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -112,7 +112,7 @@ var ListDatasetsResponse = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.DeleteDatasetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var DeleteDatasetRequest = {
+const DeleteDatasetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -132,7 +132,7 @@ var DeleteDatasetRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ImportDataRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ImportDataRequest = {
+const ImportDataRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -151,7 +151,7 @@ var ImportDataRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ExportDataRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ExportDataRequest = {
+const ExportDataRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -170,7 +170,7 @@ var ExportDataRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.CreateModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var CreateModelRequest = {
+const CreateModelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -184,7 +184,7 @@ var CreateModelRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.GetModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var GetModelRequest = {
+const GetModelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -220,7 +220,7 @@ var GetModelRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ListModelsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ListModelsRequest = {
+const ListModelsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -240,7 +240,7 @@ var ListModelsRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ListModelsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ListModelsResponse = {
+const ListModelsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -254,7 +254,7 @@ var ListModelsResponse = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.DeleteModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var DeleteModelRequest = {
+const DeleteModelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -268,7 +268,7 @@ var DeleteModelRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.DeployModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var DeployModelRequest = {
+const DeployModelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -282,7 +282,7 @@ var DeployModelRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.UndeployModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var UndeployModelRequest = {
+const UndeployModelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -296,7 +296,7 @@ var UndeployModelRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.GetModelEvaluationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var GetModelEvaluationRequest = {
+const GetModelEvaluationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -334,7 +334,7 @@ var GetModelEvaluationRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ListModelEvaluationsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ListModelEvaluationsRequest = {
+const ListModelEvaluationsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -354,6 +354,6 @@ var ListModelEvaluationsRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ListModelEvaluationsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
  */
-var ListModelEvaluationsResponse = {
+const ListModelEvaluationsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

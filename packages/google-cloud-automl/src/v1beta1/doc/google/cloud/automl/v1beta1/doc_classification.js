@@ -29,7 +29,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ClassificationAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/classification.proto}
  */
-var ClassificationAnnotation = {
+const ClassificationAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -64,7 +64,7 @@ var ClassificationAnnotation = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ClassificationEvaluationMetrics definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/classification.proto}
  */
-var ClassificationEvaluationMetrics = {
+const ClassificationEvaluationMetrics = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -149,7 +149,7 @@ var ClassificationEvaluationMetrics = {
  * @enum {number}
  * @memberof google.cloud.automl.v1beta1
  */
-var ClassificationType = {
+const ClassificationType = {
 
   /**
    * Should not be used, an un-set enum has this value by default.

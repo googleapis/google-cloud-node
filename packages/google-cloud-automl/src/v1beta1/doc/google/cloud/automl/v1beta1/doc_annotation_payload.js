@@ -44,6 +44,6 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.AnnotationPayload definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/annotation_payload.proto}
  */
-var AnnotationPayload = {
+const AnnotationPayload = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

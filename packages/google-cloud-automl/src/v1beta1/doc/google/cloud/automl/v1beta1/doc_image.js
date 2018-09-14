@@ -28,7 +28,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ImageClassificationDatasetMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/image.proto}
  */
-var ImageClassificationDatasetMetadata = {
+const ImageClassificationDatasetMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -58,6 +58,6 @@ var ImageClassificationDatasetMetadata = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ImageClassificationModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/image.proto}
  */
-var ImageClassificationModelMetadata = {
+const ImageClassificationModelMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

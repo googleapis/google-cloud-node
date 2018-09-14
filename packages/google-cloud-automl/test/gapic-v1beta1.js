@@ -18,32 +18,32 @@ const assert = require('assert');
 
 const automlModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('PredictionServiceClient', () => {
   describe('predict', () => {
     it('invokes predict without error', done => {
-      var client = new automlModule.v1beta1.PredictionServiceClient({
+      const client = new automlModule.v1beta1.PredictionServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var payload = {};
-      var request = {
+      const payload = {};
+      const request = {
         name: formattedName,
         payload: payload,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.predict = mockSimpleGrpcMethod(
@@ -59,19 +59,19 @@ describe('PredictionServiceClient', () => {
     });
 
     it('invokes predict with error', done => {
-      var client = new automlModule.v1beta1.PredictionServiceClient({
+      const client = new automlModule.v1beta1.PredictionServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var payload = {};
-      var request = {
+      const payload = {};
+      const request = {
         name: formattedName,
         payload: payload,
       };
@@ -95,24 +95,24 @@ describe('PredictionServiceClient', () => {
 describe('AutoMlClient', () => {
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var dataset = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const dataset = {};
+      const request = {
         parent: formattedParent,
         dataset: dataset,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var exampleCount = 1517063674;
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const exampleCount = 1517063674;
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         exampleCount: exampleCount,
@@ -132,15 +132,15 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes createDataset with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var dataset = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const dataset = {};
+      const request = {
         parent: formattedParent,
         dataset: dataset,
       };
@@ -163,26 +163,26 @@ describe('AutoMlClient', () => {
 
   describe('getDataset', () => {
     it('invokes getDataset without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var exampleCount = 1517063674;
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const exampleCount = 1517063674;
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         exampleCount: exampleCount,
@@ -202,18 +202,18 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes getDataset with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -235,22 +235,22 @@ describe('AutoMlClient', () => {
 
   describe('listDatasets', () => {
     it('invokes listDatasets without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var datasetsElement = {};
-      var datasets = [datasetsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const datasetsElement = {};
+      const datasets = [datasetsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         datasets: datasets,
       };
@@ -273,14 +273,14 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes listDatasets with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -302,23 +302,23 @@ describe('AutoMlClient', () => {
 
   describe('deleteDataset', function() {
     it('invokes deleteDataset without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.deleteDataset = mockLongRunningGrpcMethod(
@@ -329,7 +329,7 @@ describe('AutoMlClient', () => {
       client
         .deleteDataset(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -342,18 +342,18 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes deleteDataset with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -367,7 +367,7 @@ describe('AutoMlClient', () => {
       client
         .deleteDataset(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -381,7 +381,7 @@ describe('AutoMlClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -398,25 +398,25 @@ describe('AutoMlClient', () => {
 
   describe('importData', function() {
     it('invokes importData without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var inputConfig = {};
-      var request = {
+      const inputConfig = {};
+      const request = {
         name: formattedName,
         inputConfig: inputConfig,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.importData = mockLongRunningGrpcMethod(
@@ -427,7 +427,7 @@ describe('AutoMlClient', () => {
       client
         .importData(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -440,19 +440,19 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes importData with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var inputConfig = {};
-      var request = {
+      const inputConfig = {};
+      const request = {
         name: formattedName,
         inputConfig: inputConfig,
       };
@@ -467,7 +467,7 @@ describe('AutoMlClient', () => {
       client
         .importData(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -481,7 +481,7 @@ describe('AutoMlClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -498,25 +498,25 @@ describe('AutoMlClient', () => {
 
   describe('exportData', function() {
     it('invokes exportData without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var outputConfig = {};
-      var request = {
+      const outputConfig = {};
+      const request = {
         name: formattedName,
         outputConfig: outputConfig,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.exportData = mockLongRunningGrpcMethod(
@@ -527,7 +527,7 @@ describe('AutoMlClient', () => {
       client
         .exportData(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -540,19 +540,19 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes exportData with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.datasetPath(
+      const formattedName = client.datasetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[DATASET]'
       );
-      var outputConfig = {};
-      var request = {
+      const outputConfig = {};
+      const request = {
         name: formattedName,
         outputConfig: outputConfig,
       };
@@ -567,7 +567,7 @@ describe('AutoMlClient', () => {
       client
         .exportData(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -581,7 +581,7 @@ describe('AutoMlClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -598,24 +598,24 @@ describe('AutoMlClient', () => {
 
   describe('createModel', function() {
     it('invokes createModel without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var model = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const model = {};
+      const request = {
         parent: formattedParent,
         model: model,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var datasetId = 'datasetId-2115646910';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const datasetId = 'datasetId-2115646910';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         datasetId: datasetId,
@@ -630,7 +630,7 @@ describe('AutoMlClient', () => {
       client
         .createModel(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -643,15 +643,15 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes createModel with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var model = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const model = {};
+      const request = {
         parent: formattedParent,
         model: model,
       };
@@ -666,7 +666,7 @@ describe('AutoMlClient', () => {
       client
         .createModel(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -680,7 +680,7 @@ describe('AutoMlClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -697,26 +697,26 @@ describe('AutoMlClient', () => {
 
   describe('getModel', () => {
     it('invokes getModel without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var datasetId = 'datasetId-2115646910';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const datasetId = 'datasetId-2115646910';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         datasetId: datasetId,
@@ -736,18 +736,18 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes getModel with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -769,22 +769,22 @@ describe('AutoMlClient', () => {
 
   describe('listModels', () => {
     it('invokes listModels without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var modelElement = {};
-      var model = [modelElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const modelElement = {};
+      const model = [modelElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         model: model,
       };
@@ -803,14 +803,14 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes listModels with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -832,23 +832,23 @@ describe('AutoMlClient', () => {
 
   describe('deleteModel', function() {
     it('invokes deleteModel without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.deleteModel = mockLongRunningGrpcMethod(
@@ -859,7 +859,7 @@ describe('AutoMlClient', () => {
       client
         .deleteModel(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -872,18 +872,18 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes deleteModel with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -897,7 +897,7 @@ describe('AutoMlClient', () => {
       client
         .deleteModel(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -911,7 +911,7 @@ describe('AutoMlClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -928,25 +928,25 @@ describe('AutoMlClient', () => {
 
   describe('deployModel', () => {
     it('invokes deployModel without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var done_ = true;
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const done_ = true;
+      const expectedResponse = {
         name: name2,
         done: done_,
       };
@@ -965,18 +965,18 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes deployModel with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -998,25 +998,25 @@ describe('AutoMlClient', () => {
 
   describe('undeployModel', () => {
     it('invokes undeployModel without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var done_ = true;
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const done_ = true;
+      const expectedResponse = {
         name: name2,
         done: done_,
       };
@@ -1035,18 +1035,18 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes undeployModel with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelPath(
+      const formattedName = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1068,27 +1068,27 @@ describe('AutoMlClient', () => {
 
   describe('getModelEvaluation', () => {
     it('invokes getModelEvaluation without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelEvaluationPath(
+      const formattedName = client.modelEvaluationPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]',
         '[MODEL_EVALUATION]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var annotationSpecId = 'annotationSpecId60690191';
-      var evaluatedExampleCount = 277565350;
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const annotationSpecId = 'annotationSpecId60690191';
+      const evaluatedExampleCount = 277565350;
+      const expectedResponse = {
         name: name2,
         annotationSpecId: annotationSpecId,
         evaluatedExampleCount: evaluatedExampleCount,
@@ -1108,19 +1108,19 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes getModelEvaluation with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.modelEvaluationPath(
+      const formattedName = client.modelEvaluationPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]',
         '[MODEL_EVALUATION]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1142,26 +1142,26 @@ describe('AutoMlClient', () => {
 
   describe('listModelEvaluations', () => {
     it('invokes listModelEvaluations without error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.modelPath(
+      const formattedParent = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var modelEvaluationElement = {};
-      var modelEvaluation = [modelEvaluationElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const modelEvaluationElement = {};
+      const modelEvaluation = [modelEvaluationElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         modelEvaluation: modelEvaluation,
       };
@@ -1184,18 +1184,18 @@ describe('AutoMlClient', () => {
     });
 
     it('invokes listModelEvaluations with error', done => {
-      var client = new automlModule.v1beta1.AutoMlClient({
+      const client = new automlModule.v1beta1.AutoMlClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.modelPath(
+      const formattedParent = client.modelPath(
         '[PROJECT]',
         '[LOCATION]',
         '[MODEL]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
@@ -1232,7 +1232,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

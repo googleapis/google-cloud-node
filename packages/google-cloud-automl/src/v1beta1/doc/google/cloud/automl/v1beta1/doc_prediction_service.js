@@ -43,7 +43,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.PredictRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/prediction_service.proto}
  */
-var PredictRequest = {
+const PredictRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -66,6 +66,6 @@ var PredictRequest = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.PredictResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/prediction_service.proto}
  */
-var PredictResponse = {
+const PredictResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

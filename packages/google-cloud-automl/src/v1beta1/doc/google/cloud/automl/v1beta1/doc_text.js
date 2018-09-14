@@ -28,7 +28,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TextClassificationDatasetMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/text.proto}
  */
-var TextClassificationDatasetMetadata = {
+const TextClassificationDatasetMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -38,6 +38,6 @@ var TextClassificationDatasetMetadata = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TextClassificationModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/text.proto}
  */
-var TextClassificationModelMetadata = {
+const TextClassificationModelMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

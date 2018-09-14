@@ -56,6 +56,6 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.Dataset definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/dataset.proto}
  */
-var Dataset = {
+const Dataset = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

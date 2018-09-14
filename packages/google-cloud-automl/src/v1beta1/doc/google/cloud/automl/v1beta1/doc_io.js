@@ -27,7 +27,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.InputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/io.proto}
  */
-var InputConfig = {
+const InputConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -43,7 +43,7 @@ var InputConfig = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.OutputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/io.proto}
  */
-var OutputConfig = {
+const OutputConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -59,7 +59,7 @@ var OutputConfig = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.GcsSource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/io.proto}
  */
-var GcsSource = {
+const GcsSource = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -78,6 +78,6 @@ var GcsSource = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.GcsDestination definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/io.proto}
  */
-var GcsDestination = {
+const GcsDestination = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

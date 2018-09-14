@@ -56,6 +56,6 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ModelEvaluation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/model_evaluation.proto}
  */
-var ModelEvaluation = {
+const ModelEvaluation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

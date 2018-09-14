@@ -71,13 +71,13 @@ class PredictionServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -88,7 +88,7 @@ class PredictionServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -106,7 +106,7 @@ class PredictionServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.automl.v1beta1.PredictionService',
       gapicConfig,
       opts.clientConfig,
@@ -120,20 +120,20 @@ class PredictionServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.automl.v1beta1.PredictionService.
-    var predictionServiceStub = gaxGrpc.createStub(
+    const predictionServiceStub = gaxGrpc.createStub(
       protos.google.cloud.automl.v1beta1.PredictionService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var predictionServiceStubMethods = ['predict'];
+    const predictionServiceStubMethods = ['predict'];
     for (let methodName of predictionServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         predictionServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -216,19 +216,19 @@ class PredictionServiceClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.PredictionServiceClient({
+   * const client = new automl.v1beta1.PredictionServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
-   * var payload = {};
-   * var request = {
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const payload = {};
+   * const request = {
    *   name: formattedName,
    *   payload: payload,
    * };
    * client.predict(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

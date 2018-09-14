@@ -35,7 +35,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.Image definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/data_items.proto}
  */
-var Image = {
+const Image = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -59,7 +59,7 @@ var Image = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TextSnippet definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/data_items.proto}
  */
-var TextSnippet = {
+const TextSnippet = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -80,6 +80,6 @@ var TextSnippet = {
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ExamplePayload definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/data_items.proto}
  */
-var ExamplePayload = {
+const ExamplePayload = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

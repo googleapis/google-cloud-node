@@ -71,7 +71,7 @@
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.Model definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/model.proto}
  */
-var Model = {
+const Model = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**

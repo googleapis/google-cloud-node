@@ -80,13 +80,13 @@ class AutoMlClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -97,7 +97,7 @@ class AutoMlClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -139,7 +139,7 @@ class AutoMlClient {
         'modelEvaluation'
       ),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -159,26 +159,28 @@ class AutoMlClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var deleteDatasetResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var deleteDatasetMetadata = protoFilesRoot.lookup(
+    const deleteDatasetResponse = protoFilesRoot.lookup(
+      'google.protobuf.Empty'
+    );
+    const deleteDatasetMetadata = protoFilesRoot.lookup(
       'google.cloud.automl.v1beta1.OperationMetadata'
     );
-    var importDataResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var importDataMetadata = protoFilesRoot.lookup(
+    const importDataResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const importDataMetadata = protoFilesRoot.lookup(
       'google.cloud.automl.v1beta1.OperationMetadata'
     );
-    var exportDataResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var exportDataMetadata = protoFilesRoot.lookup(
+    const exportDataResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const exportDataMetadata = protoFilesRoot.lookup(
       'google.cloud.automl.v1beta1.OperationMetadata'
     );
-    var createModelResponse = protoFilesRoot.lookup(
+    const createModelResponse = protoFilesRoot.lookup(
       'google.cloud.automl.v1beta1.Model'
     );
-    var createModelMetadata = protoFilesRoot.lookup(
+    const createModelMetadata = protoFilesRoot.lookup(
       'google.cloud.automl.v1beta1.OperationMetadata'
     );
-    var deleteModelResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var deleteModelMetadata = protoFilesRoot.lookup(
+    const deleteModelResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const deleteModelMetadata = protoFilesRoot.lookup(
       'google.cloud.automl.v1beta1.OperationMetadata'
     );
 
@@ -211,7 +213,7 @@ class AutoMlClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.automl.v1beta1.AutoMl',
       gapicConfig,
       opts.clientConfig,
@@ -225,14 +227,14 @@ class AutoMlClient {
 
     // Put together the "service stub" for
     // google.cloud.automl.v1beta1.AutoMl.
-    var autoMlStub = gaxGrpc.createStub(
+    const autoMlStub = gaxGrpc.createStub(
       protos.google.cloud.automl.v1beta1.AutoMl,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var autoMlStubMethods = [
+    const autoMlStubMethods = [
       'createDataset',
       'getDataset',
       'listDatasets',
@@ -253,7 +255,7 @@ class AutoMlClient {
         autoMlStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -325,19 +327,19 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * var dataset = {};
-   * var request = {
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const dataset = {};
+   * const request = {
    *   parent: formattedParent,
    *   dataset: dataset,
    * };
    * client.createDataset(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -376,14 +378,14 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
    * client.getDataset({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -449,16 +451,16 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    * client.listDatasets({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -468,17 +470,17 @@ class AutoMlClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -545,11 +547,11 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * client.listDatasetsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -593,42 +595,42 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
    *
    * // Handle the operation using the promise pattern.
    * client.deleteDataset({name: formattedName})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.deleteDataset({name: formattedName})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -690,13 +692,13 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
-   * var inputConfig = {};
-   * var request = {
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const inputConfig = {};
+   * const request = {
    *   name: formattedName,
    *   inputConfig: inputConfig,
    * };
@@ -704,29 +706,29 @@ class AutoMlClient {
    * // Handle the operation using the promise pattern.
    * client.importData(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
-   * var inputConfig = {};
-   * var request = {
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const inputConfig = {};
+   * const request = {
    *   name: formattedName,
    *   inputConfig: inputConfig,
    * };
@@ -734,8 +736,8 @@ class AutoMlClient {
    * // Handle the operation using the event emitter pattern.
    * client.importData(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -796,13 +798,13 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
-   * var outputConfig = {};
-   * var request = {
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const outputConfig = {};
+   * const request = {
    *   name: formattedName,
    *   outputConfig: outputConfig,
    * };
@@ -810,29 +812,29 @@ class AutoMlClient {
    * // Handle the operation using the promise pattern.
    * client.exportData(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
-   * var outputConfig = {};
-   * var request = {
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const outputConfig = {};
+   * const request = {
    *   name: formattedName,
    *   outputConfig: outputConfig,
    * };
@@ -840,8 +842,8 @@ class AutoMlClient {
    * // Handle the operation using the event emitter pattern.
    * client.exportData(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -904,13 +906,13 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * var model = {};
-   * var request = {
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const model = {};
+   * const request = {
    *   parent: formattedParent,
    *   model: model,
    * };
@@ -918,29 +920,29 @@ class AutoMlClient {
    * // Handle the operation using the promise pattern.
    * client.createModel(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * var model = {};
-   * var request = {
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const model = {};
+   * const request = {
    *   parent: formattedParent,
    *   model: model,
    * };
@@ -948,8 +950,8 @@ class AutoMlClient {
    * // Handle the operation using the event emitter pattern.
    * client.createModel(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -1004,14 +1006,14 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    * client.getModel({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1080,16 +1082,16 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    * client.listModels({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -1099,17 +1101,17 @@ class AutoMlClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -1179,11 +1181,11 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * client.listModelsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1230,42 +1232,42 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    *
    * // Handle the operation using the promise pattern.
    * client.deleteModel({name: formattedName})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.deleteModel({name: formattedName})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -1322,14 +1324,14 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    * client.deployModel({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1370,14 +1372,14 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    * client.undeployModel({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1416,14 +1418,14 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.modelEvaluationPath('[PROJECT]', '[LOCATION]', '[MODEL]', '[MODEL_EVALUATION]');
+   * const formattedName = client.modelEvaluationPath('[PROJECT]', '[LOCATION]', '[MODEL]', '[MODEL_EVALUATION]');
    * client.getModelEvaluation({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1494,16 +1496,16 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedParent = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    *
    * client.listModelEvaluations({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -1513,17 +1515,17 @@ class AutoMlClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedParent = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -1595,11 +1597,11 @@ class AutoMlClient {
    *
    * const automl = require('automl.v1beta1');
    *
-   * var client = new automl.v1beta1.AutoMlClient({
+   * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const formattedParent = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
    * client.listModelEvaluationsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
