@@ -20,12 +20,12 @@ import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as promisify from '@google-cloud/promisify';
+import {Record} from '../src';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
-  // tslint:disable-next-line:variable-name
-  promisifyAll(Class, options) {
-    if (Class.name !== 'Record') {
+  promisifyAll(esClass: Function, options: promisify.PromisifyAllOptions) {
+    if (esClass.name !== 'Record') {
       return;
     }
     promisified = true;
@@ -34,9 +34,10 @@ const fakePromisify = extend({}, promisify, {
 });
 
 describe('Record', () => {
-  // tslint:disable-next-line:variable-name
-  let Record;
-  let record;
+  // tslint:disable-next-line
+  let Record: any;
+  // tslint:disable-next-line:no-any
+  let record: any;
 
   const ZONE = {
     deleteRecords() {},
@@ -85,7 +86,7 @@ describe('Record', () => {
     });
 
     it('should re-assign rrdatas to data', () => {
-      const originalRrdatas = [];
+      const originalRrdatas = new Array<string>();
 
       const recordThatHadRrdatas = new Record(ZONE, TYPE, {
         rrdatas: originalRrdatas,
@@ -294,7 +295,7 @@ describe('Record', () => {
 
   describe('delete', () => {
     it('should call zone.deleteRecords', done => {
-      record.zone_.deleteRecords = (records, callback) => {
+      record.zone_.deleteRecords = (records: Record[], callback: Function) => {
         assert.strictEqual(records, record);
         callback();
       };

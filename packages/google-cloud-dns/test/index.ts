@@ -19,26 +19,27 @@
 import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as extend from 'extend';
-import * as nodeutil from 'util';
 import * as proxyquire from 'proxyquire';
 import {Service, ServiceConfig, ServiceOptions} from '@google-cloud/common';
 import {util} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
+import {RequestOptions} from 'http';
+import {CoreOptions, OptionsWithUri, Response} from 'request';
+import {Zone} from '../src';
 
 let extended = false;
 const fakePaginator = {
   paginator: {
-    // tslint:disable-next-line:variable-name
-    extend(Class, methods) {
-      if (Class.name !== 'DNS') {
+    extend(esClass: Function, methods: string[]) {
+      if (esClass.name !== 'DNS') {
         return;
       }
       extended = true;
       methods = arrify(methods);
-      assert.strictEqual(Class.name, 'DNS');
+      assert.strictEqual(esClass.name, 'DNS');
       assert.deepStrictEqual(methods, ['getZones']);
     },
-    streamify(methodName) {
+    streamify(methodName: string) {
       return methodName;
     },
   },
@@ -60,8 +61,8 @@ const originalFakeUtil = extend(true, {}, fakeUtil);
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
   // tslint:disable-next-line:variable-name
-  promisifyAll(Class, options) {
-    if (Class.name !== 'DNS') {
+  promisifyAll(esClass: Function, options: promisify.PromisifyAllOptions) {
+    if (esClass.name !== 'DNS') {
       return;
     }
     promisified = true;
@@ -77,8 +78,10 @@ class FakeZone {
 }
 
 describe('DNS', () => {
-  let DNS;
-  let dns;
+  // tslint:disable-next-line: no-any
+  let DNS: any;
+  // tslint:disable-next-line: no-any
+  let dns: any;
 
   const PROJECT_ID = 'project-id';
 
@@ -154,7 +157,7 @@ describe('DNS', () => {
     it('should use a provided description', done => {
       const cfg = extend({}, config, {description: 'description'});
 
-      dns.request = reqOpts => {
+      dns.request = (reqOpts: CoreOptions) => {
         assert.strictEqual(reqOpts.json.description, cfg.description);
         done();
       };
@@ -163,7 +166,7 @@ describe('DNS', () => {
     });
 
     it('should default a description to ""', done => {
-      dns.request = reqOpts => {
+      dns.request = (reqOpts: CoreOptions) => {
         assert.strictEqual(reqOpts.json.description, '');
         done();
       };
@@ -172,10 +175,9 @@ describe('DNS', () => {
     });
 
     it('should make the correct API request', done => {
-      dns.request = reqOpts => {
+      dns.request = (reqOpts: OptionsWithUri) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/managedZones');
-
         const expectedBody = extend({}, config, {
           name: zoneName,
           description: '',
@@ -193,18 +195,20 @@ describe('DNS', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        dns.request = (reqOpts, callback) => {
+        dns.request = (reqOpts: {}, callback: Function) => {
           callback(error, apiResponse);
         };
       });
 
       it('should execute callback with error and API response', done => {
-        dns.createZone(zoneName, config, (err, zone, apiResponse_) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(zone, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
+        dns.createZone(
+            zoneName, config,
+            (err: Error, zone: Zone, apiResponse_: Response) => {
+              assert.strictEqual(err, error);
+              assert.strictEqual(zone, null);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
     });
 
@@ -213,7 +217,7 @@ describe('DNS', () => {
       const zone = {};
 
       beforeEach(() => {
-        dns.request = (reqOpts, callback) => {
+        dns.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponse);
         };
 
@@ -223,7 +227,7 @@ describe('DNS', () => {
       });
 
       it('should create a zone from the response', done => {
-        dns.zone = name => {
+        dns.zone = (name: string) => {
           assert.strictEqual(name, apiResponse.name);
           setImmediate(done);
           return zone;
@@ -233,17 +237,19 @@ describe('DNS', () => {
       });
 
       it('should execute callback with zone and API response', done => {
-        dns.createZone(zoneName, config, (err, zone_, apiResponse_) => {
-          assert.ifError(err);
-          assert.strictEqual(zone_, zone);
-          assert.strictEqual(apiResponse_, apiResponse);
+        dns.createZone(
+            zoneName, config,
+            (err: Error, zone_: Zone, apiResponse_: Response) => {
+              assert.ifError(err);
+              assert.strictEqual(zone_, zone);
+              assert.strictEqual(apiResponse_, apiResponse);
 
-          done();
-        });
+              done();
+            });
       });
 
       it('should set the metadata to the response', done => {
-        dns.createZone(zoneName, config, (err, zone) => {
+        dns.createZone(zoneName, config, (err: Error, zone: Zone) => {
           assert.strictEqual(zone.metadata, apiResponse);
           done();
         });
@@ -255,7 +261,7 @@ describe('DNS', () => {
     it('should make the correct request', done => {
       const query = {a: 'b', c: 'd'};
 
-      dns.request = reqOpts => {
+      dns.request = (reqOpts: OptionsWithUri) => {
         assert.strictEqual(reqOpts.uri, '/managedZones');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -266,7 +272,7 @@ describe('DNS', () => {
     });
 
     it('should use an empty query if one was not provided', done => {
-      dns.request = reqOpts => {
+      dns.request = (reqOpts: CoreOptions) => {
         assert.strictEqual(Object.keys(reqOpts.qs).length, 0);
         done();
       };
@@ -279,20 +285,23 @@ describe('DNS', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        dns.request = (reqOpts, callback) => {
+        dns.request = (reqOpts: {}, callback: Function) => {
           callback(error, apiResponse);
         };
       });
 
       it('should execute callback with error and API response', done => {
-        dns.getZones({}, (err, zones, nextQuery, apiResponse_) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(zones, null);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(apiResponse_, apiResponse);
+        dns.getZones(
+            {},
+            (err: Error, zones: Zone[], nextQuery: {},
+             apiResponse_: Response) => {
+              assert.strictEqual(err, error);
+              assert.strictEqual(zones, null);
+              assert.strictEqual(nextQuery, null);
+              assert.strictEqual(apiResponse_, apiResponse);
 
-          done();
-        });
+              done();
+            });
       });
     });
 
@@ -301,7 +310,7 @@ describe('DNS', () => {
       const apiResponse = {managedZones: [zone]};
 
       beforeEach(() => {
-        dns.request = (reqOpts, callback) => {
+        dns.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponse);
         };
 
@@ -311,7 +320,7 @@ describe('DNS', () => {
       });
 
       it('should create zones from the response', done => {
-        dns.zone = zoneName => {
+        dns.zone = (zoneName: string) => {
           assert.strictEqual(zoneName, zone.name);
           setImmediate(done);
           return zone;
@@ -328,11 +337,11 @@ describe('DNS', () => {
         const query = {a: 'b', c: 'd'};
         const originalQuery = extend({}, query);
 
-        dns.request = (reqOpts, callback) => {
+        dns.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        dns.getZones(query, (err, zones, nextQuery) => {
+        dns.getZones(query, (err: Error, zones: Zone[], nextQuery: {}) => {
           assert.ifError(err);
 
           // Check the original query wasn't modified.
@@ -348,18 +357,21 @@ describe('DNS', () => {
       });
 
       it('should execute callback with zones and API response', done => {
-        dns.getZones({}, (err, zones, nextQuery, apiResponse_) => {
-          assert.ifError(err);
-          assert.strictEqual(zones[0], zone);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(apiResponse_, apiResponse);
+        dns.getZones(
+            {},
+            (err: Error, zones: Zone[], nextQuery: {},
+             apiResponse_: Response) => {
+              assert.ifError(err);
+              assert.strictEqual(zones[0], zone);
+              assert.strictEqual(nextQuery, null);
+              assert.strictEqual(apiResponse_, apiResponse);
 
-          done();
-        });
+              done();
+            });
       });
 
       it('should assign metadata to zones', done => {
-        dns.getZones({}, (err, zones) => {
+        dns.getZones({}, (err: Error, zones: Zone[]) => {
           assert.ifError(err);
           assert.strictEqual(zones[0].metadata, zone);
           done();

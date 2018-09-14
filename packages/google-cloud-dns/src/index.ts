@@ -24,6 +24,7 @@ import * as extend from 'extend';
 import {teenyRequest} from 'teeny-request';
 import {Zone} from './zone';
 import {Response} from 'request';
+export {Record, RecordMetadata} from './record';
 
 export interface GetZonesRequest {
   autoPaginate?: boolean;

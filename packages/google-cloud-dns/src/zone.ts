@@ -29,7 +29,7 @@ import {teenyRequest} from 'teeny-request';
 const zonefile = require('dns-zonefile');
 
 import {Change, ChangeCallback, CreateChangeRequest} from './change';
-import {Record} from './record';
+import {Record, RecordMetadata, RecordObject} from './record';
 import {DNS} from '.';
 import {Response} from 'request';
 
@@ -50,6 +50,20 @@ export interface GetRecordsRequest {
   pageToken?: string;
   type?: string;
   filterByTypes_?: {[index: string]: boolean};
+}
+
+export interface GetChangesRequest {
+  autoPaginate?: boolean;
+  maxApiCalls?: number;
+  maxResults?: number;
+  pageToken?: string;
+  sort?: string;
+  sortOrder?: string;
+}
+
+export interface GetChangesCallback {
+  (err: Error|null, changes?: Change[]|null, nextQuery?: {}|null,
+   apiResponse?: Response): void;
 }
 
 /**
@@ -349,7 +363,7 @@ class Zone extends ServiceObject {
     if (!config || (!config.add && !config.delete)) {
       throw new Error('Cannot create a change with no additions or deletions.');
     }
-    const groupByType = changes => {
+    const groupByType = (changes: RecordObject[]) => {
       changes = groupBy(changes, 'type');
       const changesArray: Array<{}> = [];
       // tslint:disable-next-line:forin
@@ -361,7 +375,8 @@ class Zone extends ServiceObject {
           const templateRecord = extend({}, records[0]);
           if (records.length > 1) {
             // Combine the `rrdatas` values from all records of the same type.
-            templateRecord.rrdatas = flatten(records.map(x => x.rrdatas));
+            templateRecord.rrdatas =
+                flatten(records.map((x: RecordObject) => x.rrdatas));
           }
           changesArray.push(templateRecord);
         }
@@ -643,7 +658,7 @@ class Zone extends ServiceObject {
    * //-
    * zone.export(zoneFilename).then(() => {});
    */
-  export(localPath: string, callback) {
+  export(localPath: string, callback: (err: Error|null) => void) {
     this.getRecords((err, records) => {
       if (err) {
         callback(err);
@@ -718,8 +733,13 @@ class Zone extends ServiceObject {
    *   const changes = data[0];
    * });
    */
-  getChanges(query, callback?) {
-    if (is.fn(query)) {
+  getChanges(callback: GetChangesCallback): void;
+  getChanges(query: GetChangesRequest, callback: GetChangesCallback): void;
+  getChanges(
+      queryOrCallback: GetChangesRequest|GetChangesCallback,
+      callback?: GetChangesCallback) {
+    let query = queryOrCallback as GetChangesRequest;
+    if (typeof query === 'function') {
       callback = query;
       query = {};
     }
@@ -734,10 +754,10 @@ class Zone extends ServiceObject {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, null, resp);
+            callback!(err, null, null, resp);
             return;
           }
-          const changes = (resp.changes || []).map(change => {
+          const changes = (resp.changes || []).map((change: Change) => {
             const changeInstance = this.change(change.id);
             changeInstance.metadata = change;
             return changeInstance;
@@ -748,7 +768,7 @@ class Zone extends ServiceObject {
               pageToken: resp.nextPageToken,
             });
           }
-          callback(null, changes, nextQuery, resp);
+          callback!(null, changes, nextQuery, resp);
         });
   }
   /**
@@ -879,12 +899,12 @@ class Zone extends ServiceObject {
             callback!(err, null, null, resp);
             return;
           }
-          let records = (resp.rrsets || []).map(record => {
-            return this.record(record.type, record);
+          let records = (resp.rrsets || []).map((record: RecordMetadata) => {
+            return this.record(record.type!, record);
           });
           if ((query as GetRecordsRequest).filterByTypes_) {
-            records = records.filter(record => {
-              return (query as GetRecordsRequest).filterByTypes_![record.type];
+            records = records.filter((record: RecordMetadata) => {
+              return (query as GetRecordsRequest).filterByTypes_![record.type!];
             });
           }
           let nextQuery: {}|null = null;
@@ -1009,7 +1029,7 @@ class Zone extends ServiceObject {
    *   delete: oldARecord
    * }, (err, change, apiResponse) => {});
    */
-  record(type: string, metadata: {}) {
+  record(type: string, metadata: RecordMetadata) {
     return new Record(this, type, metadata);
   }
   /**

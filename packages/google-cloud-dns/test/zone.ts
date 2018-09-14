@@ -24,12 +24,14 @@ import * as proxyquire from 'proxyquire';
 import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import * as uuid from 'uuid';
+import {CreateChangeRequest, Change} from '../src/change';
+import {Record, RecordObject} from '../src/record';
+import {CoreOptions, OptionsWithUri, Response} from 'request';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
-  // tslint:disable-next-line:variable-name
-  promisifyAll(Class, options) {
-    if (Class.name !== 'Zone') {
+  promisifyAll(esClass: Function, options: promisify.PromisifyAllOptions) {
+    if (esClass.name !== 'Zone') {
       return;
     }
     promisified = true;
@@ -37,15 +39,15 @@ const fakePromisify = extend({}, promisify, {
   }
 });
 
-let parseOverride;
+let parseOverride: Function|null;
 const fakeDnsZonefile = {
   parse() {
     return (parseOverride || (() => {})).apply(null, arguments);
   },
 };
 
-let writeFileOverride;
-let readFileOverride;
+let writeFileOverride: Function|null;
+let readFileOverride: Function|null;
 const fakeFs = {
   readFile() {
     return (readFileOverride || (() => {})).apply(null, arguments);
@@ -75,7 +77,7 @@ class FakeRecord {
 }
 
 class FakeServiceObject extends ServiceObject {
-  calledWith_;
+  calledWith_: IArguments;
   constructor(config: ServiceObjectConfig) {
     super(config);
     this.calledWith_ = arguments;
@@ -85,26 +87,26 @@ class FakeServiceObject extends ServiceObject {
 let extended = false;
 const fakePaginator = {
   paginator: {
-    // tslint:disable-next-line:variable-name
-    extend(Class, methods) {
-      if (Class.name !== 'Zone') {
+    extend(esClass: Function, methods: string[]) {
+      if (esClass.name !== 'Zone') {
         return;
       }
       extended = true;
       methods = arrify(methods);
-      assert.strictEqual(Class.name, 'Zone');
+      assert.strictEqual(esClass.name, 'Zone');
       assert.deepStrictEqual(methods, ['getChanges', 'getRecords']);
     },
-    streamify(methodName) {
+    streamify(methodName: string) {
       return methodName;
     },
   },
 };
 
 describe('Zone', () => {
-  // tslint:disable-next-line:variable-name
-  let Zone;
-  let zone;
+  // tslint:disable-next-line
+  let Zone: any;
+  // tslint:disable-next-line:no-any
+  let zone: any;
 
   const DNS = {
     createZone() {},
@@ -155,7 +157,7 @@ describe('Zone', () => {
     it('should inherit from ServiceObject', done => {
       const dnsInstance = extend({}, DNS, {
         createZone: {
-          bind(context) {
+          bind(context: {}) {
             assert.strictEqual(context, dnsInstance);
             done();
           },
@@ -183,10 +185,11 @@ describe('Zone', () => {
     it('should create a change with additions', done => {
       const records = ['a', 'b', 'c'];
 
-      zone.createChange = (options, callback) => {
-        assert.strictEqual(options.add, records);
-        callback();
-      };
+      zone.createChange =
+          (options: CreateChangeRequest, callback: Function) => {
+            assert.strictEqual(options.add, records);
+            callback();
+          };
 
       zone.addRecords(records, done);
     });
@@ -203,7 +206,7 @@ describe('Zone', () => {
   });
 
   describe('createChange', () => {
-    function generateRecord(recordJson?) {
+    function generateRecord(recordJson?: {}) {
       recordJson = extend(
           {
             name: uuid.v1(),
@@ -230,7 +233,7 @@ describe('Zone', () => {
 
       const expectedAdditions = recordsToAdd.map(x => x.toJSON());
 
-      zone.request = reqOpts => {
+      zone.request = (reqOpts: CoreOptions) => {
         assert.strictEqual(reqOpts.json.add, undefined);
         assert.deepStrictEqual(reqOpts.json.additions, expectedAdditions);
         done();
@@ -244,7 +247,7 @@ describe('Zone', () => {
 
       const expectedDeletions = recordsToDelete.map(x => x.toJSON());
 
-      zone.request = reqOpts => {
+      zone.request = (reqOpts: CoreOptions) => {
         assert.strictEqual(reqOpts.json.delete, undefined);
         assert.deepStrictEqual(reqOpts.json.deletions, expectedDeletions);
         done();
@@ -259,9 +262,10 @@ describe('Zone', () => {
         generateRecord({name: 'name.com.', type: 'mx'}),
       ];
 
-      zone.request = reqOpts => {
-        const expectedRRDatas =
-            flatten(recordsToAdd.map(x => x.toJSON()).map(x => x.rrdatas));
+      zone.request = (reqOpts: CoreOptions) => {
+        const expectedRRDatas = flatten(
+            // tslint:disable-next-line:no-any
+            recordsToAdd.map(x => x.toJSON()).map((x: any) => x!.rrdatas));
 
         assert.deepStrictEqual(reqOpts.json.additions, [
           {
@@ -278,7 +282,7 @@ describe('Zone', () => {
     });
 
     it('should make correct API request', done => {
-      zone.request = reqOpts => {
+      zone.request = (reqOpts: OptionsWithUri) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/changes');
 
@@ -293,17 +297,18 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(error, apiResponse);
         };
       });
 
       it('should execute callback with error & API response', done => {
-        zone.createChange({add: []}, (err, change, apiResponse_) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
+        zone.createChange(
+            {add: []}, (err: Error, change: Change, apiResponse_: Response) => {
+              assert.strictEqual(err, error);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
     });
 
@@ -311,7 +316,7 @@ describe('Zone', () => {
       const apiResponse = {id: 1, a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponse);
         };
       });
@@ -319,21 +324,20 @@ describe('Zone', () => {
       it('should execute callback with Change & API response', done => {
         const change = {};
 
-        zone.change = id => {
+        zone.change = (id: string) => {
           assert.strictEqual(id, apiResponse.id);
           return change;
         };
 
-        zone.createChange({add: []}, (err, change_, apiResponse_) => {
-          assert.ifError(err);
-
-          assert.strictEqual(change_, change);
-          assert.strictEqual(change_.metadata, apiResponse);
-
-          assert.strictEqual(apiResponse_, apiResponse);
-
-          done();
-        });
+        zone.createChange(
+            {add: []},
+            (err: Error, change_: Change, apiResponse_: Response) => {
+              assert.ifError(err);
+              assert.strictEqual(change_, change);
+              assert.strictEqual(change_.metadata, apiResponse);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
     });
   });
@@ -353,7 +357,7 @@ describe('Zone', () => {
           done();
         };
 
-        zone.empty = callback => {
+        zone.empty = (callback: Function) => {
           callback();
         };
 
@@ -366,7 +370,7 @@ describe('Zone', () => {
     it('should delete records by type if a string is given', done => {
       const recordsToDelete = 'ns';
 
-      zone.deleteRecordsByType_ = (types, callback) => {
+      zone.deleteRecordsByType_ = (types: string[], callback: Function) => {
         assert.deepStrictEqual(types, [recordsToDelete]);
         callback();
       };
@@ -377,10 +381,11 @@ describe('Zone', () => {
     it('should create a change if record objects given', done => {
       const recordsToDelete = {a: 'b', c: 'd'};
 
-      zone.createChange = (options, callback) => {
-        assert.deepStrictEqual(options.delete, [recordsToDelete]);
-        callback();
-      };
+      zone.createChange =
+          (options: CreateChangeRequest, callback: Function) => {
+            assert.deepStrictEqual(options.delete, [recordsToDelete]);
+            callback();
+          };
 
       zone.deleteRecords(recordsToDelete, done);
     });
@@ -399,13 +404,13 @@ describe('Zone', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        zone.getRecords = callback => {
+        zone.getRecords = (callback: Function) => {
           callback(error);
         };
       });
 
       it('should execute callback with error', done => {
-        zone.empty(err => {
+        zone.empty((err: Error) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -432,13 +437,13 @@ describe('Zone', () => {
       });
 
       beforeEach(() => {
-        zone.getRecords = callback => {
+        zone.getRecords = (callback: Function) => {
           callback(null, records);
         };
       });
 
       it('should execute callback if no records matched', done => {
-        zone.getRecords = callback => {
+        zone.getRecords = (callback: Function) => {
           callback(null, []);
         };
 
@@ -446,10 +451,11 @@ describe('Zone', () => {
       });
 
       it('should delete non-NS and non-SOA records', done => {
-        zone.deleteRecords = (recordsToDelete, callback) => {
-          assert.deepStrictEqual(recordsToDelete, expectedRecordsToDelete);
-          callback();
-        };
+        zone.deleteRecords =
+            (recordsToDelete: string[], callback: Function) => {
+              assert.deepStrictEqual(recordsToDelete, expectedRecordsToDelete);
+              callback();
+            };
 
         zone.empty(done);
       });
@@ -485,7 +491,7 @@ describe('Zone', () => {
     const expectedZonefileContents = 'a\na\na\na';
 
     beforeEach(() => {
-      zone.getRecords = callback => {
+      zone.getRecords = (callback: Function) => {
         callback(null, records);
       };
     });
@@ -495,11 +501,11 @@ describe('Zone', () => {
         const error = new Error('Error.');
 
         it('should execute callback with error', done => {
-          zone.getRecords = callback => {
+          zone.getRecords = (callback: Function) => {
             callback(error);
           };
 
-          zone.export(path, err => {
+          zone.export(path, (err: Error) => {
             assert.strictEqual(err, error);
             done();
           });
@@ -519,13 +525,14 @@ describe('Zone', () => {
 
     describe('write file', () => {
       it('should write correct zone file', done => {
-        writeFileOverride = (path_, content, encoding) => {
-          assert.strictEqual(path_, path);
-          assert.strictEqual(content, expectedZonefileContents);
-          assert.strictEqual(encoding, 'utf-8');
+        writeFileOverride =
+            (path_: string, content: string, encoding: string) => {
+              assert.strictEqual(path_, path);
+              assert.strictEqual(content, expectedZonefileContents);
+              assert.strictEqual(encoding, 'utf-8');
 
-          done();
-        };
+              done();
+            };
 
         zone.export(path, assert.ifError);
       });
@@ -534,13 +541,15 @@ describe('Zone', () => {
         const error = new Error('Error.');
 
         beforeEach(() => {
-          writeFileOverride = (path, content, encoding, callback) => {
-            callback(error);
-          };
+          writeFileOverride =
+              (path: string, content: string, encoding: string,
+               callback: Function) => {
+                callback(error);
+              };
         });
 
         it('should execute the callback with an error', done => {
-          zone.export(path, err => {
+          zone.export(path, (err: Error) => {
             assert.strictEqual(err, error);
             done();
           });
@@ -549,13 +558,15 @@ describe('Zone', () => {
 
       describe('success', () => {
         beforeEach(() => {
-          writeFileOverride = (path, content, encoding, callback) => {
-            callback();
-          };
+          writeFileOverride =
+              (path: string, content: string, encoding: string,
+               callback: Function) => {
+                callback();
+              };
         });
 
         it('should execute the callback', done => {
-          zone.export(path, err => {
+          zone.export(path, (err: Error) => {
             assert.ifError(err);
             done();
           });
@@ -566,7 +577,7 @@ describe('Zone', () => {
 
   describe('getChanges', () => {
     it('should accept only a callback', done => {
-      zone.request = reqOpts => {
+      zone.request = (reqOpts: CoreOptions) => {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -577,7 +588,7 @@ describe('Zone', () => {
     it('should accept a sort', done => {
       const query = {sort: 'desc'};
 
-      zone.request = reqOpts => {
+      zone.request = (reqOpts: CoreOptions) => {
         assert.strictEqual(reqOpts.qs.sortOrder, 'descending');
         assert.strictEqual(reqOpts.qs.sort, undefined);
 
@@ -590,7 +601,7 @@ describe('Zone', () => {
     it('should make the correct API request', done => {
       const query = {a: 'b', c: 'd'};
 
-      zone.request = reqOpts => {
+      zone.request = (reqOpts: OptionsWithUri) => {
         assert.strictEqual(reqOpts.uri, '/changes');
         assert.strictEqual(reqOpts.qs, query);
 
@@ -605,17 +616,20 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(error, apiResponse);
         };
       });
 
       it('should execute callback with error & API response', done => {
-        zone.getChanges({}, (err, changes, nextQuery, apiResponse_) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
+        zone.getChanges(
+            {},
+            (err: Error, changes: Change[], nextQuery: {},
+             apiResponse_: Response) => {
+              assert.strictEqual(err, error);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
     });
 
@@ -625,7 +639,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponse);
         };
       });
@@ -639,15 +653,13 @@ describe('Zone', () => {
           pageToken: nextPageToken,
         };
 
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        zone.getChanges({}, (err, changes, nextQuery) => {
+        zone.getChanges({}, (err: Error, changes: Change[], nextQuery: {}) => {
           assert.ifError(err);
-
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
-
           done();
         });
       });
@@ -655,18 +667,21 @@ describe('Zone', () => {
       it('should execute callback with Changes & API response', done => {
         const change = {};
 
-        zone.change = id => {
+        zone.change = (id: string) => {
           assert.strictEqual(id, apiResponse.changes[0].id);
           return change;
         };
 
-        zone.getChanges({}, (err, changes, nextQuery, apiResponse_) => {
-          assert.ifError(err);
-          assert.strictEqual(changes[0], change);
-          assert.strictEqual(changes[0].metadata, apiResponse.changes[0]);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
+        zone.getChanges(
+            {},
+            (err: Error, changes: Change[], nextQuery: {},
+             apiResponse_: Response) => {
+              assert.ifError(err);
+              assert.strictEqual(changes[0], change);
+              assert.strictEqual(changes[0].metadata, apiResponse.changes[0]);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
     });
   });
@@ -677,21 +692,24 @@ describe('Zone', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(error, apiResponse);
         };
       });
 
       it('should execute callback with error & API response', done => {
-        zone.getRecords({}, (err, changes, nextQuery, apiResponse_) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
+        zone.getRecords(
+            {},
+            (err: Error, changes: Change[], nextQuery: {},
+             apiResponse_: Response) => {
+              assert.strictEqual(err, error);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
 
       it('should not require a query', done => {
-        zone.getRecords(err => {
+        zone.getRecords((err: Error) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -704,7 +722,7 @@ describe('Zone', () => {
       };
 
       beforeEach(() => {
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponse);
         };
       });
@@ -716,11 +734,11 @@ describe('Zone', () => {
         });
         const expectedNextQuery = {pageToken: nextPageToken};
 
-        zone.request = (reqOpts, callback) => {
+        zone.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        zone.getRecords({}, (err, records, nextQuery) => {
+        zone.getRecords({}, (err: Error, records: Record[], nextQuery: {}) => {
           assert.ifError(err);
           assert.deepStrictEqual(nextQuery, expectedNextQuery);
           done();
@@ -730,18 +748,21 @@ describe('Zone', () => {
       it('should execute callback with Records & API response', done => {
         const record = {};
 
-        zone.record = (type, recordObject) => {
+        zone.record = (type: string, recordObject: RecordObject) => {
           assert.strictEqual(type, apiResponse.rrsets[0].type);
           assert.strictEqual(recordObject, apiResponse.rrsets[0]);
           return record;
         };
 
-        zone.getRecords({}, (err, records, nextQuery, apiResponse_) => {
-          assert.ifError(err);
-          assert.strictEqual(records[0], record);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
+        zone.getRecords(
+            {},
+            (err: Error, records: Record[], nextQuery: {},
+             apiResponse_: Response) => {
+              assert.ifError(err);
+              assert.strictEqual(records[0], record);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
 
         it('should not require a query', done => {
           zone.getRecords(done);
@@ -752,7 +773,7 @@ describe('Zone', () => {
         it('should accept a string type', done => {
           const types = ['MX', 'CNAME'];
 
-          zone.getRecords(types, (err, records) => {
+          zone.getRecords(types, (err: Error, records: Record[]) => {
             assert.ifError(err);
 
             assert.strictEqual(records.length, 0);
@@ -764,7 +785,7 @@ describe('Zone', () => {
         it('should accept an array of types', done => {
           const type = 'MX';
 
-          zone.getRecords(type, (err, records) => {
+          zone.getRecords(type, (err: Error, records: Record[]) => {
             assert.ifError(err);
 
             assert.strictEqual(records.length, 0);
@@ -774,7 +795,7 @@ describe('Zone', () => {
         });
 
         it('should not send filterByTypes_ in API request', done => {
-          zone.request = reqOpts => {
+          zone.request = (reqOpts: CoreOptions) => {
             assert.strictEqual(reqOpts.qs.filterByTypes_, undefined);
             done();
           };
@@ -789,7 +810,7 @@ describe('Zone', () => {
     const path = './zonefile';
 
     it('should read from the file', done => {
-      readFileOverride = (path_, encoding) => {
+      readFileOverride = (path_: string, encoding: string) => {
         assert.strictEqual(path, path);
         assert.strictEqual(encoding, 'utf-8');
         done();
@@ -802,13 +823,14 @@ describe('Zone', () => {
       const error = new Error('Error.');
 
       beforeEach(() => {
-        readFileOverride = (path, encoding, callback) => {
-          callback(error);
-        };
+        readFileOverride =
+            (path: string, encoding: string, callback: Function) => {
+              callback(error);
+            };
       });
 
       it('should execute the callback', done => {
-        zone.import(path, err => {
+        zone.import(path, (err: Error) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -829,22 +851,24 @@ describe('Zone', () => {
           return parsedZonefile;
         };
 
-        readFileOverride = (path, encoding, callback) => {
-          callback();
-        };
+        readFileOverride =
+            (path: string, encoding: string, callback: Function) => {
+              callback();
+            };
       });
 
       it('should add records', done => {
-        zone.addRecords = (recordsToCreate, callback) => {
-          assert.strictEqual(recordsToCreate.length, 1);
-          const recordToCreate = recordsToCreate[0];
-          assert(recordToCreate instanceof FakeRecord);
-          const args = recordToCreate.calledWith_;
-          assert.strictEqual(args[0], zone);
-          assert.strictEqual(args[1], recordType);
-          assert.strictEqual(args[2], parsedZonefile[recordType]);
-          callback();
-        };
+        zone.addRecords =
+            (recordsToCreate: FakeRecord[], callback: Function) => {
+              assert.strictEqual(recordsToCreate.length, 1);
+              const recordToCreate = recordsToCreate[0];
+              assert(recordToCreate instanceof FakeRecord);
+              const args = recordToCreate.calledWith_;
+              assert.strictEqual(args[0], zone);
+              assert.strictEqual(args[1], recordType);
+              assert.strictEqual(args[2], parsedZonefile[recordType]);
+              callback();
+            };
         zone.import(path, done);
       });
 
@@ -853,7 +877,7 @@ describe('Zone', () => {
         parsedZonefile.$ttl = defaultTTL;
         parsedZonefile[recordType] = {};
         parsedZonefile.mx = {ttl: '180'};
-        zone.addRecords = recordsToCreate => {
+        zone.addRecords = (recordsToCreate: FakeRecord[]) => {
           const record1 = recordsToCreate[0].calledWith_[2];
           assert.strictEqual(record1.ttl, defaultTTL);
           const record2 = recordsToCreate[1].calledWith_[2];
@@ -881,7 +905,7 @@ describe('Zone', () => {
   describe('replaceRecords', () => {
     it('should get records', done => {
       const recordType = 'ns';
-      zone.getRecords = recordType_ => {
+      zone.getRecords = (recordType_: string) => {
         assert.strictEqual(recordType_, recordType);
         done();
       };
@@ -891,13 +915,13 @@ describe('Zone', () => {
     describe('error', () => {
       const error = new Error('Error.');
       beforeEach(() => {
-        zone.getRecords = (recordType, callback) => {
+        zone.getRecords = (recordType: string, callback: Function) => {
           callback(error);
         };
       });
 
       it('should execute callback with error', done => {
-        zone.replaceRecords('a', [], err => {
+        zone.replaceRecords('a', [], (err: Error) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -918,19 +942,18 @@ describe('Zone', () => {
       ];
 
       beforeEach(() => {
-        zone.getRecords = (recordType, callback) => {
+        zone.getRecords = (recordType: string, callback: Function) => {
           callback(null, recordsToDelete);
         };
       });
 
       it('should create a change', done => {
-        zone.createChange = (options, callback) => {
-          assert.strictEqual(options.add, recordsToCreate);
-          assert.strictEqual(options.delete, recordsToDelete);
-
-          callback();
-        };
-
+        zone.createChange =
+            (options: CreateChangeRequest, callback: Function) => {
+              assert.strictEqual(options.add, recordsToCreate);
+              assert.strictEqual(options.delete, recordsToDelete);
+              callback();
+            };
         zone.replaceRecords('a', recordsToCreate, done);
       });
     });
@@ -939,7 +962,7 @@ describe('Zone', () => {
   describe('deleteRecordsByType_', () => {
     it('should get records', done => {
       const recordType = 'ns';
-      zone.getRecords = recordType_ => {
+      zone.getRecords = (recordType_: string) => {
         assert.strictEqual(recordType_, recordType);
         done();
       };
@@ -949,13 +972,13 @@ describe('Zone', () => {
     describe('error', () => {
       const error = new Error('Error.');
       beforeEach(() => {
-        zone.getRecords = (recordType, callback) => {
+        zone.getRecords = (recordType: string, callback: Function) => {
           callback(error);
         };
       });
 
       it('should execute callback with error', done => {
-        zone.deleteRecordsByType_('a', err => {
+        zone.deleteRecordsByType_('a', (err: Error) => {
           assert.strictEqual(err, error);
           done();
         });
@@ -970,21 +993,20 @@ describe('Zone', () => {
       ];
 
       beforeEach(() => {
-        zone.getRecords = (recordType, callback) => {
+        zone.getRecords = (recordType: string, callback: Function) => {
           callback(null, recordsToDelete);
         };
       });
 
       it('should execute callback if no records matched', done => {
-        zone.getRecords = (recordType, callback) => {
+        zone.getRecords = (recordType: string, callback: Function) => {
           callback(null, []);
         };
-
         zone.deleteRecordsByType_('a', done);
       });
 
       it('should delete records', done => {
-        zone.deleteRecords = (records, callback) => {
+        zone.deleteRecords = (records: Record[], callback: Function) => {
           assert.strictEqual(records, recordsToDelete);
           callback();
         };

@@ -21,12 +21,13 @@ import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
+import {Response} from 'request';
+import {Change} from '../src/change';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
-  // tslint:disable-next-line:variable-name
-  promisifyAll(Class) {
-    if (Class.name === 'Change') {
+  promisifyAll(esClass: Function) {
+    if (esClass.name === 'Change') {
       promisified = true;
     }
   },
@@ -41,9 +42,10 @@ class FakeServiceObject extends ServiceObject {
 }
 
 describe('Change', () => {
-  // tslint:disable-next-line:variable-name
-  let Change;
-  let change;
+  // tslint:disable-next-line:variable-name no-any
+  let Change: any;
+  // tslint:disable-next-line: no-any
+  let change: any;
 
   const ZONE = {
     name: 'zone-name',
@@ -90,7 +92,7 @@ describe('Change', () => {
     it('should call the parent change method', done => {
       const config = {};
 
-      change.parent.createChange = config_ => {
+      change.parent.createChange = (config_: {}) => {
         assert.strictEqual(config, config_);
         done();
       };
@@ -103,19 +105,19 @@ describe('Change', () => {
       const apiResponse = {};
 
       beforeEach(() => {
-        change.parent.createChange = (config, callback) => {
+        change.parent.createChange = (config: {}, callback: Function) => {
           callback(error, null, apiResponse);
         };
       });
 
       it('should execute callback with error & apiResponse', done => {
-        change.create({}, (err, change, apiResponse_) => {
-          assert.strictEqual(err, error);
-          assert.strictEqual(change, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-
-          done();
-        });
+        change.create(
+            {}, (err: Error, change: Change, apiResponse_: Response) => {
+              assert.strictEqual(err, error);
+              assert.strictEqual(change, null);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
     });
 
@@ -127,22 +129,23 @@ describe('Change', () => {
       const apiResponse = {};
 
       beforeEach(() => {
-        change.parent.createChange = (config, callback) => {
+        change.parent.createChange = (config: {}, callback: Function) => {
           callback(null, changeInstance, apiResponse);
         };
       });
 
       it('should execute callback with self & API response', done => {
-        change.create({}, (err, change_, apiResponse_) => {
-          assert.ifError(err);
-          assert.strictEqual(change_, change);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
+        change.create(
+            {}, (err: Error, change_: Change, apiResponse_: Response) => {
+              assert.ifError(err);
+              assert.strictEqual(change_, change);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
       });
 
       it('should assign the ID and metadata from the change', done => {
-        change.create({}, (err, change_) => {
+        change.create({}, (err: Error, change_: Change) => {
           assert.ifError(err);
           assert.strictEqual(change_.id, changeInstance.id);
           assert.strictEqual(change_.metadata, changeInstance.metadata);

@@ -25,6 +25,8 @@ const tmp = require('tmp');
 import * as uuid from 'uuid';
 import {DNS} from '../src';
 import {ChangeCallback} from '../src/change';
+import {Record} from '../src';
+import {Response} from 'request';
 
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
@@ -175,7 +177,7 @@ describe('dns', () => {
       });
 
       tmp.setGracefulCleanup();
-      tmp.file((err, tmpFilePath) => {
+      tmp.file((err: Error, tmpFilePath: string) => {
         assert.ifError(err);
         fs.writeFileSync(tmpFilePath, zoneFileTemplate, 'utf-8');
         ZONE.empty(err => {
@@ -191,7 +193,7 @@ describe('dns', () => {
               })[0];
 
               assert.strictEqual(
-                  spfRecord.toJSON().rrdatas[0],
+                  spfRecord.toJSON().rrdatas![0],
                   '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"');
 
               const txtRecord = records!.filter(record => {
@@ -199,7 +201,7 @@ describe('dns', () => {
               })[0];
 
               assert.strictEqual(
-                  txtRecord.toJSON().rrdatas[0],
+                  txtRecord.toJSON().rrdatas![0],
                   '"google-site-verification=xxxxxxxxxxxxYYYYYYXXX"');
 
               done();
@@ -211,7 +213,7 @@ describe('dns', () => {
 
     it('should export records to a zone file', done => {
       tmp.setGracefulCleanup();
-      tmp.file((err, tmpFilename) => {
+      tmp.file((err: Error, tmpFilename: string) => {
         assert.ifError(err);
         async.series(
             [
@@ -245,7 +247,7 @@ describe('dns', () => {
       it('should get a list of changes', done => {
         ZONE.getChanges((err, changes) => {
           assert.ifError(err);
-          assert(changes.length >= 0);
+          assert(changes!.length >= 0);
           done();
         });
       });
@@ -253,7 +255,7 @@ describe('dns', () => {
       it('should get metadata', done => {
         ZONE.getChanges((err, changes) => {
           assert.ifError(err);
-          const change = changes[0];
+          const change = changes![0];
           const expectedMetadata = change.metadata;
           change.getMetadata((err, metadata) => {
             assert.ifError(err);
@@ -292,13 +294,15 @@ describe('dns', () => {
 
       ZONE.replaceRecords('cname', newRecords, err => {
         assert.ifError(err);
-        const onRecordsReceived = (err, records, nextQuery) => {
-          if (nextQuery) {
-            ZONE.getRecords(nextQuery, onRecordsReceived);
-            return;
-          }
-          ZONE.deleteRecords(newRecords, done);
-        };
+        const onRecordsReceived =
+            (err?: Error|null, records?: Record[]|null, nextQuery?: {}|null,
+             apiResponse?: Response) => {
+              if (nextQuery) {
+                ZONE.getRecords(nextQuery, onRecordsReceived);
+                return;
+              }
+              ZONE.deleteRecords(newRecords, done);
+            };
         ZONE.getRecords(
             {
               type: 'cname',

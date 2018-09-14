@@ -23,6 +23,21 @@ import {ChangeCallback} from './change';
 import {Zone} from './zone';
 const format = require('string-format-obj');
 
+export interface RecordObject {
+  rrdatas?: Array<{}>;
+  rrdata?: {};
+  data?: {};
+  type?: string;
+}
+
+export interface RecordMetadata {
+  name: string;
+  data: string|string[];
+  ttl: number;
+  type?: string;
+  signatureRrdatas?: string[];
+}
+
 /**
  * Create a Resource Record object.
  *
@@ -49,13 +64,13 @@ const format = require('string-format-obj');
  *   data: '1.2.3.4'
  * });
  */
-export class Record {
+export class Record implements RecordObject {
   zone_: Zone;
   type: string;
-  metadata;
-  rrdatas;
-  data;
-  constructor(zone: Zone, type: string, metadata) {
+  metadata: RecordMetadata;
+  rrdatas?: Array<{}>;
+  data?: {};
+  constructor(zone: Zone, type: string, metadata: RecordMetadata) {
     this.zone_ = zone;
     /**
      * @name Record#type
@@ -137,7 +152,7 @@ export class Record {
    * @returns {object}
    */
   toJSON() {
-    const recordObject = extend({}, this.metadata, {
+    const recordObject: RecordObject = extend({}, this.metadata, {
       type: this.type.toUpperCase(),
     });
     if (recordObject.data) {
@@ -171,7 +186,7 @@ export class Record {
    *     based on the type of record.
    * @returns {Record}
    */
-  static fromZoneRecord_(zone: Zone, type: string, bindData) {
+  static fromZoneRecord_(zone: Zone, type: string, bindData: RecordMetadata) {
     const typeToZoneFormat = {
       a: '{ip}',
       aaaa: '{ip}',
@@ -182,7 +197,7 @@ export class Record {
       spf: '{data}',
       srv: '{priority} {weight} {port} {target}',
       txt: '{txt}',
-    };
+    } as {[index: string]: string};
     const metadata = {
       data: format(typeToZoneFormat[type.toLowerCase()], bindData),
       name: bindData.name,
