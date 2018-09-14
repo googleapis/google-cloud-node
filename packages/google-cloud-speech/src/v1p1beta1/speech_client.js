@@ -72,13 +72,13 @@ class SpeechClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,7 +89,7 @@ class SpeechClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -104,7 +104,7 @@ class SpeechClient {
         gax.StreamType.BIDI_STREAMING
       ),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -124,10 +124,10 @@ class SpeechClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var longRunningRecognizeResponse = protoFilesRoot.lookup(
+    const longRunningRecognizeResponse = protoFilesRoot.lookup(
       'google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse'
     );
-    var longRunningRecognizeMetadata = protoFilesRoot.lookup(
+    const longRunningRecognizeMetadata = protoFilesRoot.lookup(
       'google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata'
     );
 
@@ -140,7 +140,7 @@ class SpeechClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.speech.v1p1beta1.Speech',
       gapicConfig,
       opts.clientConfig,
@@ -154,14 +154,14 @@ class SpeechClient {
 
     // Put together the "service stub" for
     // google.cloud.speech.v1p1beta1.Speech.
-    var speechStub = gaxGrpc.createStub(
+    const speechStub = gaxGrpc.createStub(
       protos.google.cloud.speech.v1p1beta1.Speech,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var speechStubMethods = [
+    const speechStubMethods = [
       'recognize',
       'longRunningRecognize',
       'streamingRecognize',
@@ -171,7 +171,7 @@ class SpeechClient {
         speechStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -247,29 +247,29 @@ class SpeechClient {
    *
    * const speech = require('speech.v1p1beta1');
    *
-   * var client = new speech.v1p1beta1.SpeechClient({
+   * const client = new speech.v1p1beta1.SpeechClient({
    *   // optional auth parameters.
    * });
    *
-   * var encoding = 'FLAC';
-   * var sampleRateHertz = 44100;
-   * var languageCode = 'en-US';
-   * var config = {
+   * const encoding = 'FLAC';
+   * const sampleRateHertz = 44100;
+   * const languageCode = 'en-US';
+   * const config = {
    *   encoding: encoding,
    *   sampleRateHertz: sampleRateHertz,
    *   languageCode: languageCode,
    * };
-   * var uri = 'gs://bucket_name/file_name.flac';
-   * var audio = {
+   * const uri = 'gs://bucket_name/file_name.flac';
+   * const audio = {
    *   uri: uri,
    * };
-   * var request = {
+   * const request = {
    *   config: config,
    *   audio: audio,
    * };
    * client.recognize(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -318,23 +318,23 @@ class SpeechClient {
    *
    * const speech = require('speech.v1p1beta1');
    *
-   * var client = new speech.v1p1beta1.SpeechClient({
+   * const client = new speech.v1p1beta1.SpeechClient({
    *   // optional auth parameters.
    * });
    *
-   * var encoding = 'FLAC';
-   * var sampleRateHertz = 44100;
-   * var languageCode = 'en-US';
-   * var config = {
+   * const encoding = 'FLAC';
+   * const sampleRateHertz = 44100;
+   * const languageCode = 'en-US';
+   * const config = {
    *   encoding: encoding,
    *   sampleRateHertz: sampleRateHertz,
    *   languageCode: languageCode,
    * };
-   * var uri = 'gs://bucket_name/file_name.flac';
-   * var audio = {
+   * const uri = 'gs://bucket_name/file_name.flac';
+   * const audio = {
    *   uri: uri,
    * };
-   * var request = {
+   * const request = {
    *   config: config,
    *   audio: audio,
    * };
@@ -342,39 +342,39 @@ class SpeechClient {
    * // Handle the operation using the promise pattern.
    * client.longRunningRecognize(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var encoding = 'FLAC';
-   * var sampleRateHertz = 44100;
-   * var languageCode = 'en-US';
-   * var config = {
+   * const encoding = 'FLAC';
+   * const sampleRateHertz = 44100;
+   * const languageCode = 'en-US';
+   * const config = {
    *   encoding: encoding,
    *   sampleRateHertz: sampleRateHertz,
    *   languageCode: languageCode,
    * };
-   * var uri = 'gs://bucket_name/file_name.flac';
-   * var audio = {
+   * const uri = 'gs://bucket_name/file_name.flac';
+   * const audio = {
    *   uri: uri,
    * };
-   * var request = {
+   * const request = {
    *   config: config,
    *   audio: audio,
    * };
@@ -382,8 +382,8 @@ class SpeechClient {
    * // Handle the operation using the event emitter pattern.
    * client.longRunningRecognize(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -432,14 +432,14 @@ class SpeechClient {
    *
    * const speech = require('speech.v1p1beta1');
    *
-   * var client = new speech.v1p1beta1.SpeechClient({
+   * const client = new speech.v1p1beta1.SpeechClient({
    *   // optional auth parameters.
    * });
    *
-   * var stream = client.streamingRecognize().on('data', response => {
+   * const stream = client.streamingRecognize().on('data', response => {
    *   // doThingsWith(response)
    * });
-   * var request = {};
+   * const request = {};
    * // Write request objects.
    * stream.write(request);
    */

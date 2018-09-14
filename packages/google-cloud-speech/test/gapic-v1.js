@@ -19,38 +19,38 @@ const through2 = require('through2');
 
 const speechModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('SpeechClient', () => {
   describe('recognize', () => {
     it('invokes recognize without error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      const encoding = 'FLAC';
+      const sampleRateHertz = 44100;
+      const languageCode = 'en-US';
+      const config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      const uri = 'gs://bucket_name/file_name.flac';
+      const audio = {
         uri: uri,
       };
-      var request = {
+      const request = {
         config: config,
         audio: audio,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.recognize = mockSimpleGrpcMethod(
@@ -66,25 +66,25 @@ describe('SpeechClient', () => {
     });
 
     it('invokes recognize with error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      const encoding = 'FLAC';
+      const sampleRateHertz = 44100;
+      const languageCode = 'en-US';
+      const config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      const uri = 'gs://bucket_name/file_name.flac';
+      const audio = {
         uri: uri,
       };
-      var request = {
+      const request = {
         config: config,
         audio: audio,
       };
@@ -107,31 +107,31 @@ describe('SpeechClient', () => {
 
   describe('longRunningRecognize', function() {
     it('invokes longRunningRecognize without error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      const encoding = 'FLAC';
+      const sampleRateHertz = 44100;
+      const languageCode = 'en-US';
+      const config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      const uri = 'gs://bucket_name/file_name.flac';
+      const audio = {
         uri: uri,
       };
-      var request = {
+      const request = {
         config: config,
         audio: audio,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.longRunningRecognize = mockLongRunningGrpcMethod(
@@ -142,7 +142,7 @@ describe('SpeechClient', () => {
       client
         .longRunningRecognize(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -155,25 +155,25 @@ describe('SpeechClient', () => {
     });
 
     it('invokes longRunningRecognize with error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      const encoding = 'FLAC';
+      const sampleRateHertz = 44100;
+      const languageCode = 'en-US';
+      const config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      const uri = 'gs://bucket_name/file_name.flac';
+      const audio = {
         uri: uri,
       };
-      var request = {
+      const request = {
         config: config,
         audio: audio,
       };
@@ -188,7 +188,7 @@ describe('SpeechClient', () => {
       client
         .longRunningRecognize(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -202,7 +202,7 @@ describe('SpeechClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new speechModule.v1.SpeechClient({
+      const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -219,16 +219,16 @@ describe('SpeechClient', () => {
 
   describe('streamingRecognize', () => {
     it('invokes streamingRecognize without error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.streamingRecognize = mockBidiStreamingGrpcMethod(
@@ -236,7 +236,7 @@ describe('SpeechClient', () => {
         expectedResponse
       );
 
-      var stream = client
+      const stream = client
         .streamingRecognize()
         .on('data', response => {
           assert.deepStrictEqual(response, expectedResponse);
@@ -250,13 +250,13 @@ describe('SpeechClient', () => {
     });
 
     it('invokes streamingRecognize with error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      const client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock Grpc layer
       client._innerApiCalls.streamingRecognize = mockBidiStreamingGrpcMethod(
@@ -265,7 +265,7 @@ describe('SpeechClient', () => {
         error
       );
 
-      var stream = client
+      const stream = client
         .streamingRecognize()
         .on('data', () => {
           assert.fail();
@@ -296,7 +296,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 
 function mockBidiStreamingGrpcMethod(expectedRequest, response, error) {
   return () => {
-    var mockStream = through2.obj((chunk, enc, callback) => {
+    const mockStream = through2.obj((chunk, enc, callback) => {
       assert.deepStrictEqual(chunk, expectedRequest);
       if (error) {
         callback(error);
@@ -311,7 +311,7 @@ function mockBidiStreamingGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

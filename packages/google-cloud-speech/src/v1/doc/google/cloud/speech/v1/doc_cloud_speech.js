@@ -33,7 +33,7 @@
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognizeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var RecognizeRequest = {
+const RecognizeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -56,7 +56,7 @@ var RecognizeRequest = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.LongRunningRecognizeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var LongRunningRecognizeRequest = {
+const LongRunningRecognizeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -88,7 +88,7 @@ var LongRunningRecognizeRequest = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognizeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var StreamingRecognizeRequest = {
+const StreamingRecognizeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -125,7 +125,7 @@ var StreamingRecognizeRequest = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognitionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var StreamingRecognitionConfig = {
+const StreamingRecognitionConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -243,7 +243,7 @@ var StreamingRecognitionConfig = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognitionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var RecognitionConfig = {
+const RecognitionConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -350,7 +350,7 @@ var RecognitionConfig = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeechContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var SpeechContext = {
+const SpeechContext = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -378,7 +378,7 @@ var SpeechContext = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognitionAudio definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var RecognitionAudio = {
+const RecognitionAudio = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -397,7 +397,7 @@ var RecognitionAudio = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.RecognizeResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var RecognizeResponse = {
+const RecognizeResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -418,7 +418,7 @@ var RecognizeResponse = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.LongRunningRecognizeResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var LongRunningRecognizeResponse = {
+const LongRunningRecognizeResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -445,7 +445,7 @@ var LongRunningRecognizeResponse = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.LongRunningRecognizeMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var LongRunningRecognizeMetadata = {
+const LongRunningRecognizeMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -523,7 +523,7 @@ var LongRunningRecognizeMetadata = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognizeResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var StreamingRecognizeResponse = {
+const StreamingRecognizeResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -582,7 +582,7 @@ var StreamingRecognizeResponse = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var StreamingRecognitionResult = {
+const StreamingRecognitionResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -601,7 +601,7 @@ var StreamingRecognitionResult = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeechRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var SpeechRecognitionResult = {
+const SpeechRecognitionResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -629,7 +629,7 @@ var SpeechRecognitionResult = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.SpeechRecognitionAlternative definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var SpeechRecognitionAlternative = {
+const SpeechRecognitionAlternative = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -663,6 +663,6 @@ var SpeechRecognitionAlternative = {
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.WordInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
  */
-var WordInfo = {
+const WordInfo = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

@@ -58,7 +58,7 @@
  * @memberof google.longrunning
  * @see [google.longrunning.Operation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/longrunning/operations.proto}
  */
-var Operation = {
+const Operation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -72,7 +72,7 @@ var Operation = {
  * @memberof google.longrunning
  * @see [google.longrunning.GetOperationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/longrunning/operations.proto}
  */
-var GetOperationRequest = {
+const GetOperationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -95,7 +95,7 @@ var GetOperationRequest = {
  * @memberof google.longrunning
  * @see [google.longrunning.ListOperationsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/longrunning/operations.proto}
  */
-var ListOperationsRequest = {
+const ListOperationsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -114,7 +114,7 @@ var ListOperationsRequest = {
  * @memberof google.longrunning
  * @see [google.longrunning.ListOperationsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/longrunning/operations.proto}
  */
-var ListOperationsResponse = {
+const ListOperationsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -128,7 +128,7 @@ var ListOperationsResponse = {
  * @memberof google.longrunning
  * @see [google.longrunning.CancelOperationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/longrunning/operations.proto}
  */
-var CancelOperationRequest = {
+const CancelOperationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -142,6 +142,6 @@ var CancelOperationRequest = {
  * @memberof google.longrunning
  * @see [google.longrunning.DeleteOperationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/longrunning/operations.proto}
  */
-var DeleteOperationRequest = {
+const DeleteOperationRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
