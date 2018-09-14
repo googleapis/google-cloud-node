@@ -27,7 +27,7 @@
  * @memberof google.protobuf
  * @see [google.protobuf.DoubleValue definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var DoubleValue = {
+const DoubleValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -43,7 +43,7 @@ var DoubleValue = {
  * @memberof google.protobuf
  * @see [google.protobuf.FloatValue definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var FloatValue = {
+const FloatValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -59,7 +59,7 @@ var FloatValue = {
  * @memberof google.protobuf
  * @see [google.protobuf.Int64Value definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var Int64Value = {
+const Int64Value = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -75,7 +75,7 @@ var Int64Value = {
  * @memberof google.protobuf
  * @see [google.protobuf.UInt64Value definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var UInt64Value = {
+const UInt64Value = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -91,7 +91,7 @@ var UInt64Value = {
  * @memberof google.protobuf
  * @see [google.protobuf.Int32Value definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var Int32Value = {
+const Int32Value = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -107,7 +107,7 @@ var Int32Value = {
  * @memberof google.protobuf
  * @see [google.protobuf.UInt32Value definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var UInt32Value = {
+const UInt32Value = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -123,7 +123,7 @@ var UInt32Value = {
  * @memberof google.protobuf
  * @see [google.protobuf.BoolValue definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var BoolValue = {
+const BoolValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -139,7 +139,7 @@ var BoolValue = {
  * @memberof google.protobuf
  * @see [google.protobuf.StringValue definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var StringValue = {
+const StringValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -155,6 +155,6 @@ var StringValue = {
  * @memberof google.protobuf
  * @see [google.protobuf.BytesValue definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
  */
-var BytesValue = {
+const BytesValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

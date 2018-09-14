@@ -42,7 +42,7 @@
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.EntityResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var EntityResult = {
+const EntityResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -136,7 +136,7 @@ var EntityResult = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.Query definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var Query = {
+const Query = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -150,7 +150,7 @@ var Query = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.KindExpression definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var KindExpression = {
+const KindExpression = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -165,7 +165,7 @@ var KindExpression = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.PropertyReference definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var PropertyReference = {
+const PropertyReference = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -181,7 +181,7 @@ var PropertyReference = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.Projection definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var Projection = {
+const Projection = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -202,7 +202,7 @@ var Projection = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.PropertyOrder definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var PropertyOrder = {
+const PropertyOrder = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -247,7 +247,7 @@ var PropertyOrder = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.Filter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var Filter = {
+const Filter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -269,7 +269,7 @@ var Filter = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.CompositeFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var CompositeFilter = {
+const CompositeFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -314,7 +314,7 @@ var CompositeFilter = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.PropertyFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var PropertyFilter = {
+const PropertyFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -395,7 +395,7 @@ var PropertyFilter = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.GqlQuery definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var GqlQuery = {
+const GqlQuery = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -415,7 +415,7 @@ var GqlQuery = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.GqlQueryParameter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var GqlQueryParameter = {
+const GqlQueryParameter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -462,7 +462,7 @@ var GqlQueryParameter = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.QueryResultBatch definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/query.proto}
  */
-var QueryResultBatch = {
+const QueryResultBatch = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**

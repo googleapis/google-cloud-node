@@ -35,7 +35,7 @@
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.LookupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var LookupRequest = {
+const LookupRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -67,7 +67,7 @@ var LookupRequest = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.LookupResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var LookupResponse = {
+const LookupResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -104,7 +104,7 @@ var LookupResponse = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.RunQueryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var RunQueryRequest = {
+const RunQueryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -125,7 +125,7 @@ var RunQueryRequest = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.RunQueryResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var RunQueryResponse = {
+const RunQueryResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -144,7 +144,7 @@ var RunQueryResponse = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.BeginTransactionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var BeginTransactionRequest = {
+const BeginTransactionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -158,7 +158,7 @@ var BeginTransactionRequest = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.BeginTransactionResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var BeginTransactionResponse = {
+const BeginTransactionResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -176,7 +176,7 @@ var BeginTransactionResponse = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.RollbackRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var RollbackRequest = {
+const RollbackRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -187,7 +187,7 @@ var RollbackRequest = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.RollbackResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var RollbackResponse = {
+const RollbackResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -228,7 +228,7 @@ var RollbackResponse = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.CommitRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var CommitRequest = {
+const CommitRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -274,7 +274,7 @@ var CommitRequest = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.CommitResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var CommitResponse = {
+const CommitResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -294,7 +294,7 @@ var CommitResponse = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.AllocateIdsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var AllocateIdsRequest = {
+const AllocateIdsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -311,7 +311,7 @@ var AllocateIdsRequest = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.AllocateIdsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var AllocateIdsResponse = {
+const AllocateIdsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -334,7 +334,7 @@ var AllocateIdsResponse = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.ReserveIdsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var ReserveIdsRequest = {
+const ReserveIdsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -344,7 +344,7 @@ var ReserveIdsRequest = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.ReserveIdsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var ReserveIdsResponse = {
+const ReserveIdsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -383,7 +383,7 @@ var ReserveIdsResponse = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.Mutation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var Mutation = {
+const Mutation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -411,7 +411,7 @@ var Mutation = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.MutationResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var MutationResult = {
+const MutationResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -433,7 +433,7 @@ var MutationResult = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.ReadOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var ReadOptions = {
+const ReadOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -482,7 +482,7 @@ var ReadOptions = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.TransactionOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
  */
-var TransactionOptions = {
+const TransactionOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
