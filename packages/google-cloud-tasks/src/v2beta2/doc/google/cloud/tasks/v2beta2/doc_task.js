@@ -93,7 +93,7 @@
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.Task definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/task.proto}
  */
-var Task = {
+const Task = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -174,7 +174,7 @@ var Task = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.TaskStatus definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/task.proto}
  */
-var TaskStatus = {
+const TaskStatus = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -214,6 +214,6 @@ var TaskStatus = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.AttemptStatus definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/task.proto}
  */
-var AttemptStatus = {
+const AttemptStatus = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

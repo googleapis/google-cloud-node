@@ -21,7 +21,7 @@
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.PullTarget definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/target.proto}
  */
-var PullTarget = {
+const PullTarget = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -59,7 +59,7 @@ var PullTarget = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.PullMessage definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/target.proto}
  */
-var PullMessage = {
+const PullMessage = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -92,7 +92,7 @@ var PullMessage = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.AppEngineHttpTarget definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/target.proto}
  */
-var AppEngineHttpTarget = {
+const AppEngineHttpTarget = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -227,7 +227,7 @@ var AppEngineHttpTarget = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.AppEngineHttpRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/target.proto}
  */
-var AppEngineHttpRequest = {
+const AppEngineHttpRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -354,7 +354,7 @@ var AppEngineHttpRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.AppEngineRouting definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/target.proto}
  */
-var AppEngineRouting = {
+const AppEngineRouting = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -364,7 +364,7 @@ var AppEngineRouting = {
  * @enum {number}
  * @memberof google.cloud.tasks.v2beta2
  */
-var HttpMethod = {
+const HttpMethod = {
 
   /**
    * HTTP method unspecified

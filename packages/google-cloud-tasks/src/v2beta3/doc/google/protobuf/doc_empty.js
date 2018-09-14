@@ -29,6 +29,6 @@
  * @memberof google.protobuf
  * @see [google.protobuf.Empty definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/empty.proto}
  */
-var Empty = {
+const Empty = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

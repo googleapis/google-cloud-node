@@ -72,13 +72,13 @@ class CloudTasksClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,7 +89,7 @@ class CloudTasksClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -126,7 +126,7 @@ class CloudTasksClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.tasks.v2beta2.CloudTasks',
       gapicConfig,
       opts.clientConfig,
@@ -140,14 +140,14 @@ class CloudTasksClient {
 
     // Put together the "service stub" for
     // google.cloud.tasks.v2beta2.CloudTasks.
-    var cloudTasksStub = gaxGrpc.createStub(
+    const cloudTasksStub = gaxGrpc.createStub(
       protos.google.cloud.tasks.v2beta2.CloudTasks,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var cloudTasksStubMethods = [
+    const cloudTasksStubMethods = [
       'listQueues',
       'getQueue',
       'createQueue',
@@ -174,7 +174,7 @@ class CloudTasksClient {
         cloudTasksStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -275,16 +275,16 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    * client.listQueues({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -294,17 +294,17 @@ class CloudTasksClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -383,11 +383,11 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * client.listQueuesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -430,14 +430,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    * client.getQueue({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -508,19 +508,19 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * var queue = {};
-   * var request = {
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const queue = {};
+   * const request = {
    *   parent: formattedParent,
    *   queue: queue,
    * };
    * client.createQueue(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -595,14 +595,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var queue = {};
+   * const queue = {};
    * client.updateQueue({queue: queue})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -659,11 +659,11 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    * client.deleteQueue({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -715,14 +715,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    * client.purgeQueue({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -777,14 +777,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    * client.pauseQueue({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -844,14 +844,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedName = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    * client.resumeQueue({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -907,14 +907,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedResource = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedResource = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    * client.getIamPolicy({resource: formattedResource})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -979,19 +979,19 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedResource = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
-   * var policy = {};
-   * var request = {
+   * const formattedResource = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const policy = {};
+   * const request = {
    *   resource: formattedResource,
    *   policy: policy,
    * };
    * client.setIamPolicy(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1050,19 +1050,19 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedResource = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
-   * var permissions = [];
-   * var request = {
+   * const formattedResource = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const permissions = [];
+   * const request = {
    *   resource: formattedResource,
    *   permissions: permissions,
    * };
    * client.testIamPermissions(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1152,16 +1152,16 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    *
    * client.listTasks({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -1171,17 +1171,17 @@ class CloudTasksClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -1264,11 +1264,11 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
    * client.listTasksStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -1326,14 +1326,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
+   * const formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
    * client.getTask({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1443,19 +1443,19 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
-   * var task = {};
-   * var request = {
+   * const formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const task = {};
+   * const request = {
    *   parent: formattedParent,
    *   task: task,
    * };
    * client.createTask(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1505,11 +1505,11 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
+   * const formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
    * client.deleteTask({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -1641,19 +1641,19 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
-   * var leaseDuration = {};
-   * var request = {
+   * const formattedParent = client.queuePath('[PROJECT]', '[LOCATION]', '[QUEUE]');
+   * const leaseDuration = {};
+   * const request = {
    *   parent: formattedParent,
    *   leaseDuration: leaseDuration,
    * };
    * client.leaseTasks(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1721,13 +1721,13 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
-   * var scheduleTime = {};
-   * var request = {
+   * const formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
+   * const scheduleTime = {};
+   * const request = {
    *   name: formattedName,
    *   scheduleTime: scheduleTime,
    * };
@@ -1816,21 +1816,21 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
-   * var scheduleTime = {};
-   * var leaseDuration = {};
-   * var request = {
+   * const formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
+   * const scheduleTime = {};
+   * const leaseDuration = {};
+   * const request = {
    *   name: formattedName,
    *   scheduleTime: scheduleTime,
    *   leaseDuration: leaseDuration,
    * };
    * client.renewLease(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1909,19 +1909,19 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
-   * var scheduleTime = {};
-   * var request = {
+   * const formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
+   * const scheduleTime = {};
+   * const request = {
    *   name: formattedName,
    *   scheduleTime: scheduleTime,
    * };
    * client.cancelLease(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -2011,14 +2011,14 @@ class CloudTasksClient {
    *
    * const tasks = require('tasks.v2beta2');
    *
-   * var client = new tasks.v2beta2.CloudTasksClient({
+   * const client = new tasks.v2beta2.CloudTasksClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
+   * const formattedName = client.taskPath('[PROJECT]', '[LOCATION]', '[QUEUE]', '[TASK]');
    * client.runTask({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

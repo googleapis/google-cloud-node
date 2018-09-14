@@ -18,29 +18,29 @@ const assert = require('assert');
 
 const tasksModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('CloudTasksClient', () => {
   describe('listQueues', () => {
     it('invokes listQueues without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var queuesElement = {};
-      var queues = [queuesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const queuesElement = {};
+      const queues = [queuesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         queues: queues,
       };
@@ -59,14 +59,14 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes listQueues with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -88,24 +88,24 @@ describe('CloudTasksClient', () => {
 
   describe('getQueue', () => {
     it('invokes getQueue without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -123,18 +123,18 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes getQueue with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -156,22 +156,22 @@ describe('CloudTasksClient', () => {
 
   describe('createQueue', () => {
     it('invokes createQueue without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var queue = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const queue = {};
+      const request = {
         parent: formattedParent,
         queue: queue,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const expectedResponse = {
         name: name,
       };
 
@@ -189,15 +189,15 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes createQueue with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var queue = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const queue = {};
+      const request = {
         parent: formattedParent,
         queue: queue,
       };
@@ -220,20 +220,20 @@ describe('CloudTasksClient', () => {
 
   describe('updateQueue', () => {
     it('invokes updateQueue without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var queue = {};
-      var request = {
+      const queue = {};
+      const request = {
         queue: queue,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const expectedResponse = {
         name: name,
       };
 
@@ -251,14 +251,14 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes updateQueue with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var queue = {};
-      var request = {
+      const queue = {};
+      const request = {
         queue: queue,
       };
 
@@ -280,18 +280,18 @@ describe('CloudTasksClient', () => {
 
   describe('deleteQueue', () => {
     it('invokes deleteQueue without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -305,18 +305,18 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes deleteQueue with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -337,24 +337,24 @@ describe('CloudTasksClient', () => {
 
   describe('purgeQueue', () => {
     it('invokes purgeQueue without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -372,18 +372,18 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes purgeQueue with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -405,24 +405,24 @@ describe('CloudTasksClient', () => {
 
   describe('pauseQueue', () => {
     it('invokes pauseQueue without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -440,18 +440,18 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes pauseQueue with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -473,24 +473,24 @@ describe('CloudTasksClient', () => {
 
   describe('resumeQueue', () => {
     it('invokes resumeQueue without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -508,18 +508,18 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes resumeQueue with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.queuePath(
+      const formattedName = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -541,25 +541,25 @@ describe('CloudTasksClient', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.queuePath(
+      const formattedResource = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         resource: formattedResource,
       };
 
       // Mock response
-      var version = 351608024;
-      var etag = '21';
-      var expectedResponse = {
+      const version = 351608024;
+      const etag = '21';
+      const expectedResponse = {
         version: version,
         etag: etag,
       };
@@ -578,18 +578,18 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes getIamPolicy with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.queuePath(
+      const formattedResource = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         resource: formattedResource,
       };
 
@@ -611,27 +611,27 @@ describe('CloudTasksClient', () => {
 
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.queuePath(
+      const formattedResource = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var policy = {};
-      var request = {
+      const policy = {};
+      const request = {
         resource: formattedResource,
         policy: policy,
       };
 
       // Mock response
-      var version = 351608024;
-      var etag = '21';
-      var expectedResponse = {
+      const version = 351608024;
+      const etag = '21';
+      const expectedResponse = {
         version: version,
         etag: etag,
       };
@@ -650,19 +650,19 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes setIamPolicy with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.queuePath(
+      const formattedResource = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var policy = {};
-      var request = {
+      const policy = {};
+      const request = {
         resource: formattedResource,
         policy: policy,
       };
@@ -685,25 +685,25 @@ describe('CloudTasksClient', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.queuePath(
+      const formattedResource = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var permissions = [];
-      var request = {
+      const permissions = [];
+      const request = {
         resource: formattedResource,
         permissions: permissions,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.testIamPermissions = mockSimpleGrpcMethod(
@@ -719,19 +719,19 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes testIamPermissions with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.queuePath(
+      const formattedResource = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var permissions = [];
-      var request = {
+      const permissions = [];
+      const request = {
         resource: formattedResource,
         permissions: permissions,
       };
@@ -754,26 +754,26 @@ describe('CloudTasksClient', () => {
 
   describe('listTasks', () => {
     it('invokes listTasks without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.queuePath(
+      const formattedParent = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var tasksElement = {};
-      var tasks = [tasksElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const tasksElement = {};
+      const tasks = [tasksElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         tasks: tasks,
       };
@@ -792,18 +792,18 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes listTasks with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.queuePath(
+      const formattedParent = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
@@ -825,25 +825,25 @@ describe('CloudTasksClient', () => {
 
   describe('getTask', () => {
     it('invokes getTask without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -861,19 +861,19 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes getTask with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -895,26 +895,26 @@ describe('CloudTasksClient', () => {
 
   describe('createTask', () => {
     it('invokes createTask without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.queuePath(
+      const formattedParent = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var task = {};
-      var request = {
+      const task = {};
+      const request = {
         parent: formattedParent,
         task: task,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const expectedResponse = {
         name: name,
       };
 
@@ -932,19 +932,19 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes createTask with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.queuePath(
+      const formattedParent = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var task = {};
-      var request = {
+      const task = {};
+      const request = {
         parent: formattedParent,
         task: task,
       };
@@ -967,19 +967,19 @@ describe('CloudTasksClient', () => {
 
   describe('deleteTask', () => {
     it('invokes deleteTask without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -993,19 +993,19 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes deleteTask with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1026,25 +1026,25 @@ describe('CloudTasksClient', () => {
 
   describe('leaseTasks', () => {
     it('invokes leaseTasks without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.queuePath(
+      const formattedParent = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var leaseDuration = {};
-      var request = {
+      const leaseDuration = {};
+      const request = {
         parent: formattedParent,
         leaseDuration: leaseDuration,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.leaseTasks = mockSimpleGrpcMethod(
@@ -1060,19 +1060,19 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes leaseTasks with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.queuePath(
+      const formattedParent = client.queuePath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]'
       );
-      var leaseDuration = {};
-      var request = {
+      const leaseDuration = {};
+      const request = {
         parent: formattedParent,
         leaseDuration: leaseDuration,
       };
@@ -1095,20 +1095,20 @@ describe('CloudTasksClient', () => {
 
   describe('acknowledgeTask', () => {
     it('invokes acknowledgeTask without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var scheduleTime = {};
-      var request = {
+      const scheduleTime = {};
+      const request = {
         name: formattedName,
         scheduleTime: scheduleTime,
       };
@@ -1123,20 +1123,20 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes acknowledgeTask with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var scheduleTime = {};
-      var request = {
+      const scheduleTime = {};
+      const request = {
         name: formattedName,
         scheduleTime: scheduleTime,
       };
@@ -1158,29 +1158,29 @@ describe('CloudTasksClient', () => {
 
   describe('renewLease', () => {
     it('invokes renewLease without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var scheduleTime = {};
-      var leaseDuration = {};
-      var request = {
+      const scheduleTime = {};
+      const leaseDuration = {};
+      const request = {
         name: formattedName,
         scheduleTime: scheduleTime,
         leaseDuration: leaseDuration,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -1198,21 +1198,21 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes renewLease with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var scheduleTime = {};
-      var leaseDuration = {};
-      var request = {
+      const scheduleTime = {};
+      const leaseDuration = {};
+      const request = {
         name: formattedName,
         scheduleTime: scheduleTime,
         leaseDuration: leaseDuration,
@@ -1236,27 +1236,27 @@ describe('CloudTasksClient', () => {
 
   describe('cancelLease', () => {
     it('invokes cancelLease without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var scheduleTime = {};
-      var request = {
+      const scheduleTime = {};
+      const request = {
         name: formattedName,
         scheduleTime: scheduleTime,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -1274,20 +1274,20 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes cancelLease with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var scheduleTime = {};
-      var request = {
+      const scheduleTime = {};
+      const request = {
         name: formattedName,
         scheduleTime: scheduleTime,
       };
@@ -1310,25 +1310,25 @@ describe('CloudTasksClient', () => {
 
   describe('runTask', () => {
     it('invokes runTask without error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -1346,19 +1346,19 @@ describe('CloudTasksClient', () => {
     });
 
     it('invokes runTask with error', done => {
-      var client = new tasksModule.v2beta2.CloudTasksClient({
+      const client = new tasksModule.v2beta2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.taskPath(
+      const formattedName = client.taskPath(
         '[PROJECT]',
         '[LOCATION]',
         '[QUEUE]',
         '[TASK]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 

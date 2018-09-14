@@ -44,7 +44,7 @@
  * @memberof google.cloud.tasks.v2beta3
  * @see [google.cloud.tasks.v2beta3.AppEngineHttpQueue definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta3/target.proto}
  */
-var AppEngineHttpQueue = {
+const AppEngineHttpQueue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -177,7 +177,7 @@ var AppEngineHttpQueue = {
  * @memberof google.cloud.tasks.v2beta3
  * @see [google.cloud.tasks.v2beta3.AppEngineHttpRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta3/target.proto}
  */
-var AppEngineHttpRequest = {
+const AppEngineHttpRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -263,7 +263,7 @@ var AppEngineHttpRequest = {
  * @memberof google.cloud.tasks.v2beta3
  * @see [google.cloud.tasks.v2beta3.AppEngineRouting definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta3/target.proto}
  */
-var AppEngineRouting = {
+const AppEngineRouting = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -273,7 +273,7 @@ var AppEngineRouting = {
  * @enum {number}
  * @memberof google.cloud.tasks.v2beta3
  */
-var HttpMethod = {
+const HttpMethod = {
 
   /**
    * HTTP method unspecified

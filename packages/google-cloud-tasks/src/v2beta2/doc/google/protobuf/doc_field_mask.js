@@ -231,6 +231,6 @@
  * @memberof google.protobuf
  * @see [google.protobuf.FieldMask definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/field_mask.proto}
  */
-var FieldMask = {
+const FieldMask = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

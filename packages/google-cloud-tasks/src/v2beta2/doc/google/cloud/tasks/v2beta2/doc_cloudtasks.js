@@ -59,7 +59,7 @@
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.ListQueuesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var ListQueuesRequest = {
+const ListQueuesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -86,7 +86,7 @@ var ListQueuesRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.ListQueuesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var ListQueuesResponse = {
+const ListQueuesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -103,7 +103,7 @@ var ListQueuesResponse = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.GetQueueRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var GetQueueRequest = {
+const GetQueueRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -133,7 +133,7 @@ var GetQueueRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.CreateQueueRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var CreateQueueRequest = {
+const CreateQueueRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -164,7 +164,7 @@ var CreateQueueRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.UpdateQueueRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var UpdateQueueRequest = {
+const UpdateQueueRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -181,7 +181,7 @@ var UpdateQueueRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.DeleteQueueRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var DeleteQueueRequest = {
+const DeleteQueueRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -198,7 +198,7 @@ var DeleteQueueRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.PurgeQueueRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var PurgeQueueRequest = {
+const PurgeQueueRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -215,7 +215,7 @@ var PurgeQueueRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.PauseQueueRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var PauseQueueRequest = {
+const PauseQueueRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -232,7 +232,7 @@ var PauseQueueRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.ResumeQueueRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var ResumeQueueRequest = {
+const ResumeQueueRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -285,7 +285,7 @@ var ResumeQueueRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.ListTasksRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var ListTasksRequest = {
+const ListTasksRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -310,7 +310,7 @@ var ListTasksRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.ListTasksResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var ListTasksResponse = {
+const ListTasksResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -343,7 +343,7 @@ var ListTasksResponse = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.GetTaskRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var GetTaskRequest = {
+const GetTaskRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -417,7 +417,7 @@ var GetTaskRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.CreateTaskRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var CreateTaskRequest = {
+const CreateTaskRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -435,7 +435,7 @@ var CreateTaskRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.DeleteTaskRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var DeleteTaskRequest = {
+const DeleteTaskRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -520,7 +520,7 @@ var DeleteTaskRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.LeaseTasksRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var LeaseTasksRequest = {
+const LeaseTasksRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -536,7 +536,7 @@ var LeaseTasksRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.LeaseTasksResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var LeaseTasksResponse = {
+const LeaseTasksResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -565,7 +565,7 @@ var LeaseTasksResponse = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.AcknowledgeTaskRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var AcknowledgeTaskRequest = {
+const AcknowledgeTaskRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -621,7 +621,7 @@ var AcknowledgeTaskRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.RenewLeaseRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var RenewLeaseRequest = {
+const RenewLeaseRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -666,7 +666,7 @@ var RenewLeaseRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.CancelLeaseRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var CancelLeaseRequest = {
+const CancelLeaseRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -700,6 +700,6 @@ var CancelLeaseRequest = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.RunTaskRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/cloudtasks.proto}
  */
-var RunTaskRequest = {
+const RunTaskRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

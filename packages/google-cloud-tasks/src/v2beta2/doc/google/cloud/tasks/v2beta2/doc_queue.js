@@ -115,7 +115,7 @@
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.Queue definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/queue.proto}
  */
-var Queue = {
+const Queue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -255,7 +255,7 @@ var Queue = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.RateLimits definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/queue.proto}
  */
-var RateLimits = {
+const RateLimits = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -370,6 +370,6 @@ var RateLimits = {
  * @memberof google.cloud.tasks.v2beta2
  * @see [google.cloud.tasks.v2beta2.RetryConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta2/queue.proto}
  */
-var RetryConfig = {
+const RetryConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
