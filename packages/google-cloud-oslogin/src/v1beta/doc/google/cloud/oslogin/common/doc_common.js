@@ -50,7 +50,7 @@
  * @memberof google.cloud.oslogin.common
  * @see [google.cloud.oslogin.common.PosixAccount definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/common/common.proto}
  */
-var PosixAccount = {
+const PosixAccount = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -72,6 +72,6 @@ var PosixAccount = {
  * @memberof google.cloud.oslogin.common
  * @see [google.cloud.oslogin.common.SshPublicKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/common/common.proto}
  */
-var SshPublicKey = {
+const SshPublicKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

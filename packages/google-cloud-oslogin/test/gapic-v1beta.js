@@ -18,21 +18,21 @@ const assert = require('assert');
 
 const osLoginModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('OsLoginServiceClient', () => {
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.projectPath('[USER]', '[PROJECT]');
-      var request = {
+      const formattedName = client.projectPath('[USER]', '[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -46,14 +46,14 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes deletePosixAccount with error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.projectPath('[USER]', '[PROJECT]');
-      var request = {
+      const formattedName = client.projectPath('[USER]', '[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -74,14 +74,14 @@ describe('OsLoginServiceClient', () => {
 
   describe('deleteSshPublicKey', () => {
     it('invokes deleteSshPublicKey without error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
-      var request = {
+      const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+      const request = {
         name: formattedName,
       };
 
@@ -95,14 +95,14 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes deleteSshPublicKey with error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
-      var request = {
+      const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+      const request = {
         name: formattedName,
       };
 
@@ -123,21 +123,21 @@ describe('OsLoginServiceClient', () => {
 
   describe('getLoginProfile', () => {
     it('invokes getLoginProfile without error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.userPath('[USER]');
-      var request = {
+      const formattedName = client.userPath('[USER]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var suspended = false;
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const suspended = false;
+      const expectedResponse = {
         name: name2,
         suspended: suspended,
       };
@@ -156,14 +156,14 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes getLoginProfile with error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.userPath('[USER]');
-      var request = {
+      const formattedName = client.userPath('[USER]');
+      const request = {
         name: formattedName,
       };
 
@@ -185,22 +185,22 @@ describe('OsLoginServiceClient', () => {
 
   describe('getSshPublicKey', () => {
     it('invokes getSshPublicKey without error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
-      var request = {
+      const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var key = 'key106079';
-      var expirationTimeUsec = 2058878882;
-      var fingerprint = 'fingerprint-1375934236';
-      var expectedResponse = {
+      const key = 'key106079';
+      const expirationTimeUsec = 2058878882;
+      const fingerprint = 'fingerprint-1375934236';
+      const expectedResponse = {
         key: key,
         expirationTimeUsec: expirationTimeUsec,
         fingerprint: fingerprint,
@@ -220,14 +220,14 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes getSshPublicKey with error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
-      var request = {
+      const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+      const request = {
         name: formattedName,
       };
 
@@ -249,21 +249,21 @@ describe('OsLoginServiceClient', () => {
 
   describe('importSshPublicKey', () => {
     it('invokes importSshPublicKey without error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.userPath('[USER]');
-      var sshPublicKey = {};
-      var request = {
+      const formattedParent = client.userPath('[USER]');
+      const sshPublicKey = {};
+      const request = {
         parent: formattedParent,
         sshPublicKey: sshPublicKey,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.importSshPublicKey = mockSimpleGrpcMethod(
@@ -279,15 +279,15 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes importSshPublicKey with error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.userPath('[USER]');
-      var sshPublicKey = {};
-      var request = {
+      const formattedParent = client.userPath('[USER]');
+      const sshPublicKey = {};
+      const request = {
         parent: formattedParent,
         sshPublicKey: sshPublicKey,
       };
@@ -310,24 +310,24 @@ describe('OsLoginServiceClient', () => {
 
   describe('updateSshPublicKey', () => {
     it('invokes updateSshPublicKey without error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
-      var sshPublicKey = {};
-      var request = {
+      const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+      const sshPublicKey = {};
+      const request = {
         name: formattedName,
         sshPublicKey: sshPublicKey,
       };
 
       // Mock response
-      var key = 'key106079';
-      var expirationTimeUsec = 2058878882;
-      var fingerprint = 'fingerprint-1375934236';
-      var expectedResponse = {
+      const key = 'key106079';
+      const expirationTimeUsec = 2058878882;
+      const fingerprint = 'fingerprint-1375934236';
+      const expectedResponse = {
         key: key,
         expirationTimeUsec: expirationTimeUsec,
         fingerprint: fingerprint,
@@ -347,15 +347,15 @@ describe('OsLoginServiceClient', () => {
     });
 
     it('invokes updateSshPublicKey with error', done => {
-      var client = new osLoginModule.v1beta.OsLoginServiceClient({
+      const client = new osLoginModule.v1beta.OsLoginServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
-      var sshPublicKey = {};
-      var request = {
+      const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+      const sshPublicKey = {};
+      const request = {
         name: formattedName,
         sshPublicKey: sshPublicKey,
       };

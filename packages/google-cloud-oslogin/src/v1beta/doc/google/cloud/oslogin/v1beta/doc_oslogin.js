@@ -38,7 +38,7 @@
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.LoginProfile definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var LoginProfile = {
+const LoginProfile = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -54,7 +54,7 @@ var LoginProfile = {
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.DeletePosixAccountRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var DeletePosixAccountRequest = {
+const DeletePosixAccountRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -70,7 +70,7 @@ var DeletePosixAccountRequest = {
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var DeleteSshPublicKeyRequest = {
+const DeleteSshPublicKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -84,7 +84,7 @@ var DeleteSshPublicKeyRequest = {
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.GetLoginProfileRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var GetLoginProfileRequest = {
+const GetLoginProfileRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -100,7 +100,7 @@ var GetLoginProfileRequest = {
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.GetSshPublicKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var GetSshPublicKeyRequest = {
+const GetSshPublicKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -122,7 +122,7 @@ var GetSshPublicKeyRequest = {
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var ImportSshPublicKeyRequest = {
+const ImportSshPublicKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -138,7 +138,7 @@ var ImportSshPublicKeyRequest = {
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.ImportSshPublicKeyResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var ImportSshPublicKeyResponse = {
+const ImportSshPublicKeyResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -164,6 +164,6 @@ var ImportSshPublicKeyResponse = {
  * @memberof google.cloud.oslogin.v1beta
  * @see [google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/oslogin/v1beta/oslogin.proto}
  */
-var UpdateSshPublicKeyRequest = {
+const UpdateSshPublicKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
