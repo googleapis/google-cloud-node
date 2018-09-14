@@ -18,41 +18,43 @@ const assert = require('assert');
 
 const bigqueryDataTransferModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DataTransferServiceClient', () => {
   describe('getDataSource', () => {
     it('invokes getDataSource without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectDataSourcePath(
+      const formattedName = client.projectDataSourcePath(
         '[PROJECT]',
         '[DATA_SOURCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var dataSourceId = 'dataSourceId-1015796374';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var clientId = 'clientId-1904089585';
-      var supportsMultipleTransfers = true;
-      var updateDeadlineSeconds = 991471694;
-      var defaultSchedule = 'defaultSchedule-800168235';
-      var supportsCustomSchedule = true;
-      var helpUrl = 'helpUrl-789431439';
-      var defaultDataRefreshWindowDays = 1804935157;
-      var manualRunsDisabled = true;
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const dataSourceId = 'dataSourceId-1015796374';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const clientId = 'clientId-1904089585';
+      const supportsMultipleTransfers = true;
+      const updateDeadlineSeconds = 991471694;
+      const defaultSchedule = 'defaultSchedule-800168235';
+      const supportsCustomSchedule = true;
+      const helpUrl = 'helpUrl-789431439';
+      const defaultDataRefreshWindowDays = 1804935157;
+      const manualRunsDisabled = true;
+      const expectedResponse = {
         name: name2,
         dataSourceId: dataSourceId,
         displayName: displayName,
@@ -81,17 +83,19 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes getDataSource with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectDataSourcePath(
+      const formattedName = client.projectDataSourcePath(
         '[PROJECT]',
         '[DATA_SOURCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -113,22 +117,24 @@ describe('DataTransferServiceClient', () => {
 
   describe('listDataSources', () => {
     it('invokes listDataSources without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var dataSourcesElement = {};
-      var dataSources = [dataSourcesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const dataSourcesElement = {};
+      const dataSources = [dataSourcesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         dataSources: dataSources,
       };
@@ -151,14 +157,16 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listDataSources with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -180,30 +188,32 @@ describe('DataTransferServiceClient', () => {
 
   describe('createTransferConfig', () => {
     it('invokes createTransferConfig without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var transferConfig = {};
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const transferConfig = {};
+      const request = {
         parent: formattedParent,
         transferConfig: transferConfig,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var destinationDatasetId = 'destinationDatasetId1541564179';
-      var displayName = 'displayName1615086568';
-      var dataSourceId = 'dataSourceId-1015796374';
-      var schedule = 'schedule-697920873';
-      var dataRefreshWindowDays = 327632845;
-      var disabled = true;
-      var userId = 147132913;
-      var datasetRegion = 'datasetRegion959248539';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const destinationDatasetId = 'destinationDatasetId1541564179';
+      const displayName = 'displayName1615086568';
+      const dataSourceId = 'dataSourceId-1015796374';
+      const schedule = 'schedule-697920873';
+      const dataRefreshWindowDays = 327632845;
+      const disabled = true;
+      const userId = 147132913;
+      const datasetRegion = 'datasetRegion959248539';
+      const expectedResponse = {
         name: name,
         destinationDatasetId: destinationDatasetId,
         displayName: displayName,
@@ -229,15 +239,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes createTransferConfig with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var transferConfig = {};
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const transferConfig = {};
+      const request = {
         parent: formattedParent,
         transferConfig: transferConfig,
       };
@@ -260,30 +272,32 @@ describe('DataTransferServiceClient', () => {
 
   describe('updateTransferConfig', () => {
     it('invokes updateTransferConfig without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var transferConfig = {};
-      var updateMask = {};
-      var request = {
+      const transferConfig = {};
+      const updateMask = {};
+      const request = {
         transferConfig: transferConfig,
         updateMask: updateMask,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var destinationDatasetId = 'destinationDatasetId1541564179';
-      var displayName = 'displayName1615086568';
-      var dataSourceId = 'dataSourceId-1015796374';
-      var schedule = 'schedule-697920873';
-      var dataRefreshWindowDays = 327632845;
-      var disabled = true;
-      var userId = 147132913;
-      var datasetRegion = 'datasetRegion959248539';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const destinationDatasetId = 'destinationDatasetId1541564179';
+      const displayName = 'displayName1615086568';
+      const dataSourceId = 'dataSourceId-1015796374';
+      const schedule = 'schedule-697920873';
+      const dataRefreshWindowDays = 327632845;
+      const disabled = true;
+      const userId = 147132913;
+      const datasetRegion = 'datasetRegion959248539';
+      const expectedResponse = {
         name: name,
         destinationDatasetId: destinationDatasetId,
         displayName: displayName,
@@ -309,15 +323,17 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes updateTransferConfig with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var transferConfig = {};
-      var updateMask = {};
-      var request = {
+      const transferConfig = {};
+      const updateMask = {};
+      const request = {
         transferConfig: transferConfig,
         updateMask: updateMask,
       };
@@ -340,17 +356,19 @@ describe('DataTransferServiceClient', () => {
 
   describe('deleteTransferConfig', () => {
     it('invokes deleteTransferConfig without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectTransferConfigPath(
+      const formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -366,17 +384,19 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes deleteTransferConfig with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectTransferConfigPath(
+      const formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -397,31 +417,33 @@ describe('DataTransferServiceClient', () => {
 
   describe('getTransferConfig', () => {
     it('invokes getTransferConfig without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectTransferConfigPath(
+      const formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var destinationDatasetId = 'destinationDatasetId1541564179';
-      var displayName = 'displayName1615086568';
-      var dataSourceId = 'dataSourceId-1015796374';
-      var schedule = 'schedule-697920873';
-      var dataRefreshWindowDays = 327632845;
-      var disabled = true;
-      var userId = 147132913;
-      var datasetRegion = 'datasetRegion959248539';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const destinationDatasetId = 'destinationDatasetId1541564179';
+      const displayName = 'displayName1615086568';
+      const dataSourceId = 'dataSourceId-1015796374';
+      const schedule = 'schedule-697920873';
+      const dataRefreshWindowDays = 327632845;
+      const disabled = true;
+      const userId = 147132913;
+      const datasetRegion = 'datasetRegion959248539';
+      const expectedResponse = {
         name: name2,
         destinationDatasetId: destinationDatasetId,
         displayName: displayName,
@@ -447,17 +469,19 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes getTransferConfig with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectTransferConfigPath(
+      const formattedName = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -479,22 +503,24 @@ describe('DataTransferServiceClient', () => {
 
   describe('listTransferConfigs', () => {
     it('invokes listTransferConfigs without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var transferConfigsElement = {};
-      var transferConfigs = [transferConfigsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const transferConfigsElement = {};
+      const transferConfigs = [transferConfigsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         transferConfigs: transferConfigs,
       };
@@ -517,14 +543,16 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listTransferConfigs with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -546,26 +574,28 @@ describe('DataTransferServiceClient', () => {
 
   describe('scheduleTransferRuns', () => {
     it('invokes scheduleTransferRuns without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectTransferConfigPath(
+      const formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var startTime = {};
-      var endTime = {};
-      var request = {
+      const startTime = {};
+      const endTime = {};
+      const request = {
         parent: formattedParent,
         startTime: startTime,
         endTime: endTime,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.scheduleTransferRuns = mockSimpleGrpcMethod(
@@ -581,19 +611,21 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes scheduleTransferRuns with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectTransferConfigPath(
+      const formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var startTime = {};
-      var endTime = {};
-      var request = {
+      const startTime = {};
+      const endTime = {};
+      const request = {
         parent: formattedParent,
         startTime: startTime,
         endTime: endTime,
@@ -617,28 +649,30 @@ describe('DataTransferServiceClient', () => {
 
   describe('getTransferRun', () => {
     it('invokes getTransferRun without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectRunPath(
+      const formattedName = client.projectRunPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var destinationDatasetId = 'destinationDatasetId1541564179';
-      var dataSourceId = 'dataSourceId-1015796374';
-      var userId = 147132913;
-      var schedule = 'schedule-697920873';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const destinationDatasetId = 'destinationDatasetId1541564179';
+      const dataSourceId = 'dataSourceId-1015796374';
+      const userId = 147132913;
+      const schedule = 'schedule-697920873';
+      const expectedResponse = {
         name: name2,
         destinationDatasetId: destinationDatasetId,
         dataSourceId: dataSourceId,
@@ -660,18 +694,20 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes getTransferRun with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectRunPath(
+      const formattedName = client.projectRunPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -693,18 +729,20 @@ describe('DataTransferServiceClient', () => {
 
   describe('deleteTransferRun', () => {
     it('invokes deleteTransferRun without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectRunPath(
+      const formattedName = client.projectRunPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -718,18 +756,20 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes deleteTransferRun with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectRunPath(
+      const formattedName = client.projectRunPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -750,25 +790,27 @@ describe('DataTransferServiceClient', () => {
 
   describe('listTransferRuns', () => {
     it('invokes listTransferRuns without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectTransferConfigPath(
+      const formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var transferRunsElement = {};
-      var transferRuns = [transferRunsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const transferRunsElement = {};
+      const transferRuns = [transferRunsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         transferRuns: transferRuns,
       };
@@ -791,17 +833,19 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listTransferRuns with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectTransferConfigPath(
+      const formattedParent = client.projectTransferConfigPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
@@ -823,26 +867,28 @@ describe('DataTransferServiceClient', () => {
 
   describe('listTransferLogs', () => {
     it('invokes listTransferLogs without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectRunPath(
+      const formattedParent = client.projectRunPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var transferMessagesElement = {};
-      var transferMessages = [transferMessagesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const transferMessagesElement = {};
+      const transferMessages = [transferMessagesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         transferMessages: transferMessages,
       };
@@ -865,18 +911,20 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes listTransferLogs with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedParent = client.projectRunPath(
+      const formattedParent = client.projectRunPath(
         '[PROJECT]',
         '[TRANSFER_CONFIG]',
         '[RUN]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
@@ -898,23 +946,25 @@ describe('DataTransferServiceClient', () => {
 
   describe('checkValidCreds', () => {
     it('invokes checkValidCreds without error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectDataSourcePath(
+      const formattedName = client.projectDataSourcePath(
         '[PROJECT]',
         '[DATA_SOURCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var hasValidCreds = false;
-      var expectedResponse = {
+      const hasValidCreds = false;
+      const expectedResponse = {
         hasValidCreds: hasValidCreds,
       };
 
@@ -932,17 +982,19 @@ describe('DataTransferServiceClient', () => {
     });
 
     it('invokes checkValidCreds with error', done => {
-      var client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
-      var formattedName = client.projectDataSourcePath(
+      const formattedName = client.projectDataSourcePath(
         '[PROJECT]',
         '[DATA_SOURCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 

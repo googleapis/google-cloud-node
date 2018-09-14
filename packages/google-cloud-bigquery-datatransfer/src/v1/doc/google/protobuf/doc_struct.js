@@ -32,7 +32,7 @@
  * @memberof google.protobuf
  * @see [google.protobuf.Struct definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto}
  */
-var Struct = {
+const Struct = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -72,7 +72,7 @@ var Struct = {
  * @memberof google.protobuf
  * @see [google.protobuf.Value definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto}
  */
-var Value = {
+const Value = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -90,7 +90,7 @@ var Value = {
  * @memberof google.protobuf
  * @see [google.protobuf.ListValue definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto}
  */
-var ListValue = {
+const ListValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -103,7 +103,7 @@ var ListValue = {
  * @enum {number}
  * @memberof google.protobuf
  */
-var NullValue = {
+const NullValue = {
 
   /**
    * Null value.

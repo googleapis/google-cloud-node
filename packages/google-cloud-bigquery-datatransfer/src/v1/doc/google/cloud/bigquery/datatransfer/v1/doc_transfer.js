@@ -100,7 +100,7 @@
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.TransferConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/transfer.proto}
  */
-var TransferConfig = {
+const TransferConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -180,7 +180,7 @@ var TransferConfig = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.TransferRun definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/transfer.proto}
  */
-var TransferRun = {
+const TransferRun = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -204,7 +204,7 @@ var TransferRun = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.TransferMessage definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/transfer.proto}
  */
-var TransferMessage = {
+const TransferMessage = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -243,7 +243,7 @@ var TransferMessage = {
  * @enum {number}
  * @memberof google.cloud.bigquery.datatransfer.v1
  */
-var TransferType = {
+const TransferType = {
 
   /**
    * Invalid or Unknown transfer type placeholder.
@@ -268,7 +268,7 @@ var TransferType = {
  * @enum {number}
  * @memberof google.cloud.bigquery.datatransfer.v1
  */
-var TransferState = {
+const TransferState = {
 
   /**
    * State placeholder.

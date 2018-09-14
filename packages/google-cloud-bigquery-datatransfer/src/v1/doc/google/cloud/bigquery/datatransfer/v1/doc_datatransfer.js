@@ -82,7 +82,7 @@
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.DataSourceParameter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var DataSourceParameter = {
+const DataSourceParameter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -220,7 +220,7 @@ var DataSourceParameter = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.DataSource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var DataSource = {
+const DataSource = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -289,7 +289,7 @@ var DataSource = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var GetDataSourceRequest = {
+const GetDataSourceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -314,7 +314,7 @@ var GetDataSourceRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListDataSourcesRequest = {
+const ListDataSourcesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -336,7 +336,7 @@ var ListDataSourcesRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListDataSourcesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListDataSourcesResponse = {
+const ListDataSourcesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -381,7 +381,7 @@ var ListDataSourcesResponse = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var CreateTransferConfigRequest = {
+const CreateTransferConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -421,7 +421,7 @@ var CreateTransferConfigRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var UpdateTransferConfigRequest = {
+const UpdateTransferConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -436,7 +436,7 @@ var UpdateTransferConfigRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var GetTransferConfigRequest = {
+const GetTransferConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -452,7 +452,7 @@ var GetTransferConfigRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var DeleteTransferConfigRequest = {
+const DeleteTransferConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -467,7 +467,7 @@ var DeleteTransferConfigRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var GetTransferRunRequest = {
+const GetTransferRunRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -482,7 +482,7 @@ var GetTransferRunRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var DeleteTransferRunRequest = {
+const DeleteTransferRunRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -510,7 +510,7 @@ var DeleteTransferRunRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListTransferConfigsRequest = {
+const ListTransferConfigsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -532,7 +532,7 @@ var ListTransferConfigsRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListTransferConfigsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListTransferConfigsResponse = {
+const ListTransferConfigsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -570,7 +570,7 @@ var ListTransferConfigsResponse = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListTransferRunsRequest = {
+const ListTransferRunsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -611,7 +611,7 @@ var ListTransferRunsRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListTransferRunsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListTransferRunsResponse = {
+const ListTransferRunsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -642,7 +642,7 @@ var ListTransferRunsResponse = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListTransferLogsRequest = {
+const ListTransferLogsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -664,7 +664,7 @@ var ListTransferLogsRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ListTransferLogsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ListTransferLogsResponse = {
+const ListTransferLogsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -684,7 +684,7 @@ var ListTransferLogsResponse = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var CheckValidCredsRequest = {
+const CheckValidCredsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -698,7 +698,7 @@ var CheckValidCredsRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var CheckValidCredsResponse = {
+const CheckValidCredsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -725,7 +725,7 @@ var CheckValidCredsResponse = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ScheduleTransferRunsRequest = {
+const ScheduleTransferRunsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -741,6 +741,6 @@ var ScheduleTransferRunsRequest = {
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
-var ScheduleTransferRunsResponse = {
+const ScheduleTransferRunsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
