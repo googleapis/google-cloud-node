@@ -18,23 +18,23 @@ const assert = require('assert');
 
 const textToSpeechModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('TextToSpeechClient', () => {
   describe('listVoices', () => {
     it('invokes listVoices without error', done => {
-      var client = new textToSpeechModule.v1.TextToSpeechClient({
+      const client = new textToSpeechModule.v1.TextToSpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listVoices = mockSimpleGrpcMethod(
@@ -50,13 +50,13 @@ describe('TextToSpeechClient', () => {
     });
 
     it('invokes listVoices with error', done => {
-      var client = new textToSpeechModule.v1.TextToSpeechClient({
+      const client = new textToSpeechModule.v1.TextToSpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var request = {};
+      const request = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listVoices = mockSimpleGrpcMethod(
@@ -76,24 +76,24 @@ describe('TextToSpeechClient', () => {
 
   describe('synthesizeSpeech', () => {
     it('invokes synthesizeSpeech without error', done => {
-      var client = new textToSpeechModule.v1.TextToSpeechClient({
+      const client = new textToSpeechModule.v1.TextToSpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var input = {};
-      var voice = {};
-      var audioConfig = {};
-      var request = {
+      const input = {};
+      const voice = {};
+      const audioConfig = {};
+      const request = {
         input: input,
         voice: voice,
         audioConfig: audioConfig,
       };
 
       // Mock response
-      var audioContent = '16';
-      var expectedResponse = {
+      const audioContent = '16';
+      const expectedResponse = {
         audioContent: audioContent,
       };
 
@@ -111,16 +111,16 @@ describe('TextToSpeechClient', () => {
     });
 
     it('invokes synthesizeSpeech with error', done => {
-      var client = new textToSpeechModule.v1.TextToSpeechClient({
+      const client = new textToSpeechModule.v1.TextToSpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var input = {};
-      var voice = {};
-      var audioConfig = {};
-      var request = {
+      const input = {};
+      const voice = {};
+      const audioConfig = {};
+      const request = {
         input: input,
         voice: voice,
         audioConfig: audioConfig,

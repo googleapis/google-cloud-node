@@ -32,7 +32,7 @@
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.ListVoicesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var ListVoicesRequest = {
+const ListVoicesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -48,7 +48,7 @@ var ListVoicesRequest = {
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.ListVoicesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var ListVoicesResponse = {
+const ListVoicesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -75,7 +75,7 @@ var ListVoicesResponse = {
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.Voice definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var Voice = {
+const Voice = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -101,7 +101,7 @@ var Voice = {
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var SynthesizeSpeechRequest = {
+const SynthesizeSpeechRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -124,7 +124,7 @@ var SynthesizeSpeechRequest = {
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.SynthesisInput definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var SynthesisInput = {
+const SynthesisInput = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -161,7 +161,7 @@ var SynthesisInput = {
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.VoiceSelectionParams definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var VoiceSelectionParams = {
+const VoiceSelectionParams = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -211,7 +211,7 @@ var VoiceSelectionParams = {
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.AudioConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var AudioConfig = {
+const AudioConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -228,7 +228,7 @@ var AudioConfig = {
  * @memberof google.cloud.texttospeech.v1beta1
  * @see [google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/texttospeech/v1beta1/cloud_tts.proto}
  */
-var SynthesizeSpeechResponse = {
+const SynthesizeSpeechResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -239,7 +239,7 @@ var SynthesizeSpeechResponse = {
  * @enum {number}
  * @memberof google.cloud.texttospeech.v1beta1
  */
-var SsmlVoiceGender = {
+const SsmlVoiceGender = {
 
   /**
    * An unspecified gender.
@@ -273,7 +273,7 @@ var SsmlVoiceGender = {
  * @enum {number}
  * @memberof google.cloud.texttospeech.v1beta1
  */
-var AudioEncoding = {
+const AudioEncoding = {
 
   /**
    * Not specified. Will return result google.rpc.Code.INVALID_ARGUMENT.

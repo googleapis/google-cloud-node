@@ -71,13 +71,13 @@ class TextToSpeechClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -88,7 +88,7 @@ class TextToSpeechClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -97,7 +97,7 @@ class TextToSpeechClient {
     );
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.texttospeech.v1beta1.TextToSpeech',
       gapicConfig,
       opts.clientConfig,
@@ -111,20 +111,20 @@ class TextToSpeechClient {
 
     // Put together the "service stub" for
     // google.cloud.texttospeech.v1beta1.TextToSpeech.
-    var textToSpeechStub = gaxGrpc.createStub(
+    const textToSpeechStub = gaxGrpc.createStub(
       protos.google.cloud.texttospeech.v1beta1.TextToSpeech,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var textToSpeechStubMethods = ['listVoices', 'synthesizeSpeech'];
+    const textToSpeechStubMethods = ['listVoices', 'synthesizeSpeech'];
     for (let methodName of textToSpeechStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         textToSpeechStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -199,14 +199,14 @@ class TextToSpeechClient {
    *
    * const textToSpeech = require('text-to-speech.v1beta1');
    *
-   * var client = new textToSpeech.v1beta1.TextToSpeechClient({
+   * const client = new textToSpeech.v1beta1.TextToSpeechClient({
    *   // optional auth parameters.
    * });
    *
    *
    * client.listVoices({})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -256,21 +256,21 @@ class TextToSpeechClient {
    *
    * const textToSpeech = require('text-to-speech.v1beta1');
    *
-   * var client = new textToSpeech.v1beta1.TextToSpeechClient({
+   * const client = new textToSpeech.v1beta1.TextToSpeechClient({
    *   // optional auth parameters.
    * });
    *
-   * var input = {};
-   * var voice = {};
-   * var audioConfig = {};
-   * var request = {
+   * const input = {};
+   * const voice = {};
+   * const audioConfig = {};
+   * const request = {
    *   input: input,
    *   voice: voice,
    *   audioConfig: audioConfig,
    * };
    * client.synthesizeSpeech(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
