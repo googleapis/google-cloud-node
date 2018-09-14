@@ -18,29 +18,29 @@ const assert = require('assert');
 
 const redisModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('CloudRedisClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var instancesElement = {};
-      var instances = [instancesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const instancesElement = {};
+      const instances = [instancesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         instances: instances,
       };
@@ -63,14 +63,14 @@ describe('CloudRedisClient', () => {
     });
 
     it('invokes listInstances with error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -92,35 +92,35 @@ describe('CloudRedisClient', () => {
 
   describe('getInstance', () => {
     it('invokes getInstance without error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.instancePath(
+      const formattedName = client.instancePath(
         '[PROJECT]',
         '[LOCATION]',
         '[INSTANCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var locationId = 'locationId552319461';
-      var alternativeLocationId = 'alternativeLocationId-718920621';
-      var redisVersion = 'redisVersion-685310444';
-      var reservedIpRange = 'reservedIpRange-1082940580';
-      var host = 'host3208616';
-      var port = 3446913;
-      var currentLocationId = 'currentLocationId1312712735';
-      var statusMessage = 'statusMessage-239442758';
-      var memorySizeGb = 34199707;
-      var authorizedNetwork = 'authorizedNetwork-1733809270';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const locationId = 'locationId552319461';
+      const alternativeLocationId = 'alternativeLocationId-718920621';
+      const redisVersion = 'redisVersion-685310444';
+      const reservedIpRange = 'reservedIpRange-1082940580';
+      const host = 'host3208616';
+      const port = 3446913;
+      const currentLocationId = 'currentLocationId1312712735';
+      const statusMessage = 'statusMessage-239442758';
+      const memorySizeGb = 34199707;
+      const authorizedNetwork = 'authorizedNetwork-1733809270';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         locationId: locationId,
@@ -149,18 +149,18 @@ describe('CloudRedisClient', () => {
     });
 
     it('invokes getInstance with error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.instancePath(
+      const formattedName = client.instancePath(
         '[PROJECT]',
         '[LOCATION]',
         '[INSTANCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -182,40 +182,40 @@ describe('CloudRedisClient', () => {
 
   describe('createInstance', function() {
     it('invokes createInstance without error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var instanceId = 'test_instance';
-      var tier = 'BASIC';
-      var memorySizeGb = 1;
-      var instance = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const instanceId = 'test_instance';
+      const tier = 'BASIC';
+      const memorySizeGb = 1;
+      const instance = {
         tier: tier,
         memorySizeGb: memorySizeGb,
       };
-      var request = {
+      const request = {
         parent: formattedParent,
         instanceId: instanceId,
         instance: instance,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var locationId = 'locationId552319461';
-      var alternativeLocationId = 'alternativeLocationId-718920621';
-      var redisVersion = 'redisVersion-685310444';
-      var reservedIpRange = 'reservedIpRange-1082940580';
-      var host = 'host3208616';
-      var port = 3446913;
-      var currentLocationId = 'currentLocationId1312712735';
-      var statusMessage = 'statusMessage-239442758';
-      var memorySizeGb2 = 1493816946;
-      var authorizedNetwork = 'authorizedNetwork-1733809270';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const locationId = 'locationId552319461';
+      const alternativeLocationId = 'alternativeLocationId-718920621';
+      const redisVersion = 'redisVersion-685310444';
+      const reservedIpRange = 'reservedIpRange-1082940580';
+      const host = 'host3208616';
+      const port = 3446913;
+      const currentLocationId = 'currentLocationId1312712735';
+      const statusMessage = 'statusMessage-239442758';
+      const memorySizeGb2 = 1493816946;
+      const authorizedNetwork = 'authorizedNetwork-1733809270';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         locationId: locationId,
@@ -239,7 +239,7 @@ describe('CloudRedisClient', () => {
       client
         .createInstance(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -252,21 +252,21 @@ describe('CloudRedisClient', () => {
     });
 
     it('invokes createInstance with error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var instanceId = 'test_instance';
-      var tier = 'BASIC';
-      var memorySizeGb = 1;
-      var instance = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const instanceId = 'test_instance';
+      const tier = 'BASIC';
+      const memorySizeGb = 1;
+      const instance = {
         tier: tier,
         memorySizeGb: memorySizeGb,
       };
-      var request = {
+      const request = {
         parent: formattedParent,
         instanceId: instanceId,
         instance: instance,
@@ -282,7 +282,7 @@ describe('CloudRedisClient', () => {
       client
         .createInstance(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -296,7 +296,7 @@ describe('CloudRedisClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -313,43 +313,43 @@ describe('CloudRedisClient', () => {
 
   describe('updateInstance', function() {
     it('invokes updateInstance without error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var pathsElement = 'display_name';
-      var pathsElement2 = 'memory_size_gb';
-      var paths = [pathsElement, pathsElement2];
-      var updateMask = {
+      const pathsElement = 'display_name';
+      const pathsElement2 = 'memory_size_gb';
+      const paths = [pathsElement, pathsElement2];
+      const updateMask = {
         paths: paths,
       };
-      var displayName = 'UpdatedDisplayName';
-      var memorySizeGb = 4;
-      var instance = {
+      const displayName = 'UpdatedDisplayName';
+      const memorySizeGb = 4;
+      const instance = {
         displayName: displayName,
         memorySizeGb: memorySizeGb,
       };
-      var request = {
+      const request = {
         updateMask: updateMask,
         instance: instance,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName2 = 'displayName21615000987';
-      var locationId = 'locationId552319461';
-      var alternativeLocationId = 'alternativeLocationId-718920621';
-      var redisVersion = 'redisVersion-685310444';
-      var reservedIpRange = 'reservedIpRange-1082940580';
-      var host = 'host3208616';
-      var port = 3446913;
-      var currentLocationId = 'currentLocationId1312712735';
-      var statusMessage = 'statusMessage-239442758';
-      var memorySizeGb2 = 1493816946;
-      var authorizedNetwork = 'authorizedNetwork-1733809270';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName2 = 'displayName21615000987';
+      const locationId = 'locationId552319461';
+      const alternativeLocationId = 'alternativeLocationId-718920621';
+      const redisVersion = 'redisVersion-685310444';
+      const reservedIpRange = 'reservedIpRange-1082940580';
+      const host = 'host3208616';
+      const port = 3446913;
+      const currentLocationId = 'currentLocationId1312712735';
+      const statusMessage = 'statusMessage-239442758';
+      const memorySizeGb2 = 1493816946;
+      const authorizedNetwork = 'authorizedNetwork-1733809270';
+      const expectedResponse = {
         name: name,
         displayName: displayName2,
         locationId: locationId,
@@ -373,7 +373,7 @@ describe('CloudRedisClient', () => {
       client
         .updateInstance(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -386,25 +386,25 @@ describe('CloudRedisClient', () => {
     });
 
     it('invokes updateInstance with error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var pathsElement = 'display_name';
-      var pathsElement2 = 'memory_size_gb';
-      var paths = [pathsElement, pathsElement2];
-      var updateMask = {
+      const pathsElement = 'display_name';
+      const pathsElement2 = 'memory_size_gb';
+      const paths = [pathsElement, pathsElement2];
+      const updateMask = {
         paths: paths,
       };
-      var displayName = 'UpdatedDisplayName';
-      var memorySizeGb = 4;
-      var instance = {
+      const displayName = 'UpdatedDisplayName';
+      const memorySizeGb = 4;
+      const instance = {
         displayName: displayName,
         memorySizeGb: memorySizeGb,
       };
-      var request = {
+      const request = {
         updateMask: updateMask,
         instance: instance,
       };
@@ -419,7 +419,7 @@ describe('CloudRedisClient', () => {
       client
         .updateInstance(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -433,7 +433,7 @@ describe('CloudRedisClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -450,23 +450,23 @@ describe('CloudRedisClient', () => {
 
   describe('deleteInstance', function() {
     it('invokes deleteInstance without error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.instancePath(
+      const formattedName = client.instancePath(
         '[PROJECT]',
         '[LOCATION]',
         '[INSTANCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.deleteInstance = mockLongRunningGrpcMethod(
@@ -477,7 +477,7 @@ describe('CloudRedisClient', () => {
       client
         .deleteInstance(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -490,18 +490,18 @@ describe('CloudRedisClient', () => {
     });
 
     it('invokes deleteInstance with error', done => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.instancePath(
+      const formattedName = client.instancePath(
         '[PROJECT]',
         '[LOCATION]',
         '[INSTANCE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -515,7 +515,7 @@ describe('CloudRedisClient', () => {
       client
         .deleteInstance(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -529,7 +529,7 @@ describe('CloudRedisClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new redisModule.v1beta1.CloudRedisClient({
+      const client = new redisModule.v1beta1.CloudRedisClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -561,7 +561,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

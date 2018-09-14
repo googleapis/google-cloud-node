@@ -113,7 +113,7 @@
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.Instance definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var Instance = {
+const Instance = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -213,7 +213,7 @@ var Instance = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.ListInstancesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var ListInstancesRequest = {
+const ListInstancesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -242,7 +242,7 @@ var ListInstancesRequest = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.ListInstancesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var ListInstancesResponse = {
+const ListInstancesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -258,7 +258,7 @@ var ListInstancesResponse = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.GetInstanceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var GetInstanceRequest = {
+const GetInstanceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -289,7 +289,7 @@ var GetInstanceRequest = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.CreateInstanceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var CreateInstanceRequest = {
+const CreateInstanceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -318,7 +318,7 @@ var CreateInstanceRequest = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.UpdateInstanceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var UpdateInstanceRequest = {
+const UpdateInstanceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -334,7 +334,7 @@ var UpdateInstanceRequest = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.DeleteInstanceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var DeleteInstanceRequest = {
+const DeleteInstanceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -370,7 +370,7 @@ var DeleteInstanceRequest = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.OperationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var OperationMetadata = {
+const OperationMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -390,7 +390,7 @@ var OperationMetadata = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.LocationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var LocationMetadata = {
+const LocationMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -401,6 +401,6 @@ var LocationMetadata = {
  * @memberof google.cloud.redis.v1
  * @see [google.cloud.redis.v1.ZoneMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
  */
-var ZoneMetadata = {
+const ZoneMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
