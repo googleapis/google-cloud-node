@@ -133,7 +133,7 @@
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.Device definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var Device = {
+const Device = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -199,7 +199,7 @@ var Device = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.DeviceRegistry definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var DeviceRegistry = {
+const DeviceRegistry = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -216,7 +216,7 @@ var DeviceRegistry = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.MqttConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var MqttConfig = {
+const MqttConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -233,7 +233,7 @@ var MqttConfig = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.HttpConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var HttpConfig = {
+const HttpConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -254,7 +254,7 @@ var HttpConfig = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.EventNotificationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var EventNotificationConfig = {
+const EventNotificationConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -269,7 +269,7 @@ var EventNotificationConfig = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.StateNotificationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var StateNotificationConfig = {
+const StateNotificationConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -285,7 +285,7 @@ var StateNotificationConfig = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.RegistryCredential definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var RegistryCredential = {
+const RegistryCredential = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -318,7 +318,7 @@ var RegistryCredential = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.X509CertificateDetails definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var X509CertificateDetails = {
+const X509CertificateDetails = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -342,7 +342,7 @@ var X509CertificateDetails = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.PublicKeyCertificate definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var PublicKeyCertificate = {
+const PublicKeyCertificate = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -375,7 +375,7 @@ var PublicKeyCertificate = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.DeviceCredential definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var DeviceCredential = {
+const DeviceCredential = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -394,7 +394,7 @@ var DeviceCredential = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.PublicKeyCredential definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var PublicKeyCredential = {
+const PublicKeyCredential = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -433,7 +433,7 @@ var PublicKeyCredential = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.DeviceConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var DeviceConfig = {
+const DeviceConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -453,7 +453,7 @@ var DeviceConfig = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.DeviceState definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
-var DeviceState = {
+const DeviceState = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -464,7 +464,7 @@ var DeviceState = {
  * @enum {number}
  * @memberof google.cloud.iot.v1
  */
-var MqttState = {
+const MqttState = {
 
   /**
    * No MQTT state specified. If not specified, MQTT will be enabled by default.
@@ -489,7 +489,7 @@ var MqttState = {
  * @enum {number}
  * @memberof google.cloud.iot.v1
  */
-var HttpState = {
+const HttpState = {
 
   /**
    * No HTTP state specified. If not specified, DeviceService will be
@@ -514,7 +514,7 @@ var HttpState = {
  * @enum {number}
  * @memberof google.cloud.iot.v1
  */
-var PublicKeyCertificateFormat = {
+const PublicKeyCertificateFormat = {
 
   /**
    * The format has not been specified. This is an invalid default value and
@@ -536,7 +536,7 @@ var PublicKeyCertificateFormat = {
  * @enum {number}
  * @memberof google.cloud.iot.v1
  */
-var PublicKeyFormat = {
+const PublicKeyFormat = {
 
   /**
    * The format has not been specified. This is an invalid default value and

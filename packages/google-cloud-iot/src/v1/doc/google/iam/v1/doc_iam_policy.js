@@ -35,7 +35,7 @@
  * @memberof google.iam.v1
  * @see [google.iam.v1.SetIamPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/iam_policy.proto}
  */
-var SetIamPolicyRequest = {
+const SetIamPolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -51,7 +51,7 @@ var SetIamPolicyRequest = {
  * @memberof google.iam.v1
  * @see [google.iam.v1.GetIamPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/iam_policy.proto}
  */
-var GetIamPolicyRequest = {
+const GetIamPolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -73,7 +73,7 @@ var GetIamPolicyRequest = {
  * @memberof google.iam.v1
  * @see [google.iam.v1.TestIamPermissionsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/iam_policy.proto}
  */
-var TestIamPermissionsRequest = {
+const TestIamPermissionsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -88,6 +88,6 @@ var TestIamPermissionsRequest = {
  * @memberof google.iam.v1
  * @see [google.iam.v1.TestIamPermissionsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/iam_policy.proto}
  */
-var TestIamPermissionsResponse = {
+const TestIamPermissionsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

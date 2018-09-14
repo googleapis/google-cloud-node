@@ -18,30 +18,30 @@ const assert = require('assert');
 
 const iotModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DeviceManagerClient', () => {
   describe('createDeviceRegistry', () => {
     it('invokes createDeviceRegistry without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var deviceRegistry = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const deviceRegistry = {};
+      const request = {
         parent: formattedParent,
         deviceRegistry: deviceRegistry,
       };
 
       // Mock response
-      var id = 'id3355';
-      var name = 'name3373707';
-      var expectedResponse = {
+      const id = 'id3355';
+      const name = 'name3373707';
+      const expectedResponse = {
         id: id,
         name: name,
       };
@@ -60,15 +60,15 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes createDeviceRegistry with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var deviceRegistry = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const deviceRegistry = {};
+      const request = {
         parent: formattedParent,
         deviceRegistry: deviceRegistry,
       };
@@ -91,25 +91,25 @@ describe('DeviceManagerClient', () => {
 
   describe('getDeviceRegistry', () => {
     it('invokes getDeviceRegistry without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.registryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var id = 'id3355';
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const id = 'id3355';
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         id: id,
         name: name2,
       };
@@ -128,18 +128,18 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes getDeviceRegistry with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.registryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -161,23 +161,23 @@ describe('DeviceManagerClient', () => {
 
   describe('updateDeviceRegistry', () => {
     it('invokes updateDeviceRegistry without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var deviceRegistry = {};
-      var updateMask = {};
-      var request = {
+      const deviceRegistry = {};
+      const updateMask = {};
+      const request = {
         deviceRegistry: deviceRegistry,
         updateMask: updateMask,
       };
 
       // Mock response
-      var id = 'id3355';
-      var name = 'name3373707';
-      var expectedResponse = {
+      const id = 'id3355';
+      const name = 'name3373707';
+      const expectedResponse = {
         id: id,
         name: name,
       };
@@ -196,15 +196,15 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes updateDeviceRegistry with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var deviceRegistry = {};
-      var updateMask = {};
-      var request = {
+      const deviceRegistry = {};
+      const updateMask = {};
+      const request = {
         deviceRegistry: deviceRegistry,
         updateMask: updateMask,
       };
@@ -227,18 +227,18 @@ describe('DeviceManagerClient', () => {
 
   describe('deleteDeviceRegistry', () => {
     it('invokes deleteDeviceRegistry without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.registryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -254,18 +254,18 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes deleteDeviceRegistry with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.registryPath(
+      const formattedName = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -286,22 +286,22 @@ describe('DeviceManagerClient', () => {
 
   describe('listDeviceRegistries', () => {
     it('invokes listDeviceRegistries without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var deviceRegistriesElement = {};
-      var deviceRegistries = [deviceRegistriesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const deviceRegistriesElement = {};
+      const deviceRegistries = [deviceRegistriesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         deviceRegistries: deviceRegistries,
       };
@@ -324,14 +324,14 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes listDeviceRegistries with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -353,29 +353,29 @@ describe('DeviceManagerClient', () => {
 
   describe('createDevice', () => {
     it('invokes createDevice without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.registryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var device = {};
-      var request = {
+      const device = {};
+      const request = {
         parent: formattedParent,
         device: device,
       };
 
       // Mock response
-      var id = 'id3355';
-      var name = 'name3373707';
-      var numId = 1034366860;
-      var blocked = true;
-      var expectedResponse = {
+      const id = 'id3355';
+      const name = 'name3373707';
+      const numId = 1034366860;
+      const blocked = true;
+      const expectedResponse = {
         id: id,
         name: name,
         numId: numId,
@@ -396,19 +396,19 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes createDevice with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.registryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var device = {};
-      var request = {
+      const device = {};
+      const request = {
         parent: formattedParent,
         device: device,
       };
@@ -431,28 +431,28 @@ describe('DeviceManagerClient', () => {
 
   describe('getDevice', () => {
     it('invokes getDevice without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var id = 'id3355';
-      var name2 = 'name2-1052831874';
-      var numId = 1034366860;
-      var blocked = true;
-      var expectedResponse = {
+      const id = 'id3355';
+      const name2 = 'name2-1052831874';
+      const numId = 1034366860;
+      const blocked = true;
+      const expectedResponse = {
         id: id,
         name: name2,
         numId: numId,
@@ -473,19 +473,19 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes getDevice with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -507,25 +507,25 @@ describe('DeviceManagerClient', () => {
 
   describe('updateDevice', () => {
     it('invokes updateDevice without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var device = {};
-      var updateMask = {};
-      var request = {
+      const device = {};
+      const updateMask = {};
+      const request = {
         device: device,
         updateMask: updateMask,
       };
 
       // Mock response
-      var id = 'id3355';
-      var name = 'name3373707';
-      var numId = 1034366860;
-      var blocked = true;
-      var expectedResponse = {
+      const id = 'id3355';
+      const name = 'name3373707';
+      const numId = 1034366860;
+      const blocked = true;
+      const expectedResponse = {
         id: id,
         name: name,
         numId: numId,
@@ -546,15 +546,15 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes updateDevice with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var device = {};
-      var updateMask = {};
-      var request = {
+      const device = {};
+      const updateMask = {};
+      const request = {
         device: device,
         updateMask: updateMask,
       };
@@ -577,19 +577,19 @@ describe('DeviceManagerClient', () => {
 
   describe('deleteDevice', () => {
     it('invokes deleteDevice without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -603,19 +603,19 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes deleteDevice with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -636,26 +636,26 @@ describe('DeviceManagerClient', () => {
 
   describe('listDevices', () => {
     it('invokes listDevices without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.registryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var devicesElement = {};
-      var devices = [devicesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const devicesElement = {};
+      const devices = [devicesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         devices: devices,
       };
@@ -678,18 +678,18 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes listDevices with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.registryPath(
+      const formattedParent = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
@@ -711,28 +711,28 @@ describe('DeviceManagerClient', () => {
 
   describe('modifyCloudToDeviceConfig', () => {
     it('invokes modifyCloudToDeviceConfig without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var binaryData = '40';
-      var request = {
+      const binaryData = '40';
+      const request = {
         name: formattedName,
         binaryData: binaryData,
       };
 
       // Mock response
-      var version = 351608024;
-      var binaryData2 = '-37';
-      var expectedResponse = {
+      const version = 351608024;
+      const binaryData2 = '-37';
+      const expectedResponse = {
         version: version,
         binaryData: binaryData2,
       };
@@ -751,20 +751,20 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes modifyCloudToDeviceConfig with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var binaryData = '40';
-      var request = {
+      const binaryData = '40';
+      const request = {
         name: formattedName,
         binaryData: binaryData,
       };
@@ -787,24 +787,24 @@ describe('DeviceManagerClient', () => {
 
   describe('listDeviceConfigVersions', () => {
     it('invokes listDeviceConfigVersions without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listDeviceConfigVersions = mockSimpleGrpcMethod(
@@ -820,19 +820,19 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes listDeviceConfigVersions with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -854,24 +854,24 @@ describe('DeviceManagerClient', () => {
 
   describe('listDeviceStates', () => {
     it('invokes listDeviceStates without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listDeviceStates = mockSimpleGrpcMethod(
@@ -887,19 +887,19 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes listDeviceStates with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.devicePath(
+      const formattedName = client.devicePath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]',
         '[DEVICE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -921,27 +921,27 @@ describe('DeviceManagerClient', () => {
 
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.registryPath(
+      const formattedResource = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var policy = {};
-      var request = {
+      const policy = {};
+      const request = {
         resource: formattedResource,
         policy: policy,
       };
 
       // Mock response
-      var version = 351608024;
-      var etag = '21';
-      var expectedResponse = {
+      const version = 351608024;
+      const etag = '21';
+      const expectedResponse = {
         version: version,
         etag: etag,
       };
@@ -960,19 +960,19 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes setIamPolicy with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.registryPath(
+      const formattedResource = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var policy = {};
-      var request = {
+      const policy = {};
+      const request = {
         resource: formattedResource,
         policy: policy,
       };
@@ -995,25 +995,25 @@ describe('DeviceManagerClient', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.registryPath(
+      const formattedResource = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         resource: formattedResource,
       };
 
       // Mock response
-      var version = 351608024;
-      var etag = '21';
-      var expectedResponse = {
+      const version = 351608024;
+      const etag = '21';
+      const expectedResponse = {
         version: version,
         etag: etag,
       };
@@ -1032,18 +1032,18 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes getIamPolicy with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.registryPath(
+      const formattedResource = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var request = {
+      const request = {
         resource: formattedResource,
       };
 
@@ -1065,25 +1065,25 @@ describe('DeviceManagerClient', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.registryPath(
+      const formattedResource = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var permissions = [];
-      var request = {
+      const permissions = [];
+      const request = {
         resource: formattedResource,
         permissions: permissions,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.testIamPermissions = mockSimpleGrpcMethod(
@@ -1099,19 +1099,19 @@ describe('DeviceManagerClient', () => {
     });
 
     it('invokes testIamPermissions with error', done => {
-      var client = new iotModule.v1.DeviceManagerClient({
+      const client = new iotModule.v1.DeviceManagerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.registryPath(
+      const formattedResource = client.registryPath(
         '[PROJECT]',
         '[LOCATION]',
         '[REGISTRY]'
       );
-      var permissions = [];
-      var request = {
+      const permissions = [];
+      const request = {
         resource: formattedResource,
         permissions: permissions,
       };

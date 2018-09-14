@@ -33,7 +33,7 @@
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.CreateDeviceRegistryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var CreateDeviceRegistryRequest = {
+const CreateDeviceRegistryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -48,7 +48,7 @@ var CreateDeviceRegistryRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.GetDeviceRegistryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var GetDeviceRegistryRequest = {
+const GetDeviceRegistryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -63,7 +63,7 @@ var GetDeviceRegistryRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.DeleteDeviceRegistryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var DeleteDeviceRegistryRequest = {
+const DeleteDeviceRegistryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -90,7 +90,7 @@ var DeleteDeviceRegistryRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.UpdateDeviceRegistryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var UpdateDeviceRegistryRequest = {
+const UpdateDeviceRegistryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -116,7 +116,7 @@ var UpdateDeviceRegistryRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDeviceRegistriesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDeviceRegistriesRequest = {
+const ListDeviceRegistriesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -137,7 +137,7 @@ var ListDeviceRegistriesRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDeviceRegistriesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDeviceRegistriesResponse = {
+const ListDeviceRegistriesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -160,7 +160,7 @@ var ListDeviceRegistriesResponse = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.CreateDeviceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var CreateDeviceRequest = {
+const CreateDeviceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -182,7 +182,7 @@ var CreateDeviceRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.GetDeviceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var GetDeviceRequest = {
+const GetDeviceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -209,7 +209,7 @@ var GetDeviceRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.UpdateDeviceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var UpdateDeviceRequest = {
+const UpdateDeviceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -225,7 +225,7 @@ var UpdateDeviceRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.DeleteDeviceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var DeleteDeviceRequest = {
+const DeleteDeviceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -267,7 +267,7 @@ var DeleteDeviceRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDevicesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDevicesRequest = {
+const ListDevicesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -287,7 +287,7 @@ var ListDevicesRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDevicesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDevicesResponse = {
+const ListDevicesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -313,7 +313,7 @@ var ListDevicesResponse = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ModifyCloudToDeviceConfigRequest = {
+const ModifyCloudToDeviceConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -334,7 +334,7 @@ var ModifyCloudToDeviceConfigRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDeviceConfigVersionsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDeviceConfigVersionsRequest = {
+const ListDeviceConfigVersionsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -351,7 +351,7 @@ var ListDeviceConfigVersionsRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDeviceConfigVersionsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDeviceConfigVersionsResponse = {
+const ListDeviceConfigVersionsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -372,7 +372,7 @@ var ListDeviceConfigVersionsResponse = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDeviceStatesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDeviceStatesRequest = {
+const ListDeviceStatesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -389,6 +389,6 @@ var ListDeviceStatesRequest = {
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDeviceStatesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
-var ListDeviceStatesResponse = {
+const ListDeviceStatesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
