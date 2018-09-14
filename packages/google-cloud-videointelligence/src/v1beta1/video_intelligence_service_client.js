@@ -72,13 +72,13 @@ class VideoIntelligenceServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,14 +89,14 @@ class VideoIntelligenceServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
         'google/cloud/videointelligence/v1beta1/video_intelligence.proto'
       )
     );
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -116,10 +116,10 @@ class VideoIntelligenceServiceClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var annotateVideoResponse = protoFilesRoot.lookup(
+    const annotateVideoResponse = protoFilesRoot.lookup(
       'google.cloud.videointelligence.v1beta1.AnnotateVideoResponse'
     );
-    var annotateVideoMetadata = protoFilesRoot.lookup(
+    const annotateVideoMetadata = protoFilesRoot.lookup(
       'google.cloud.videointelligence.v1beta1.AnnotateVideoProgress'
     );
 
@@ -132,7 +132,7 @@ class VideoIntelligenceServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.videointelligence.v1beta1.VideoIntelligenceService',
       gapicConfig,
       opts.clientConfig,
@@ -146,20 +146,20 @@ class VideoIntelligenceServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.videointelligence.v1beta1.VideoIntelligenceService.
-    var videoIntelligenceServiceStub = gaxGrpc.createStub(
+    const videoIntelligenceServiceStub = gaxGrpc.createStub(
       protos.google.cloud.videointelligence.v1beta1.VideoIntelligenceService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var videoIntelligenceServiceStubMethods = ['annotateVideo'];
+    const videoIntelligenceServiceStubMethods = ['annotateVideo'];
     for (let methodName of videoIntelligenceServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         videoIntelligenceServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -260,14 +260,14 @@ class VideoIntelligenceServiceClient {
    *
    * const videointelligence = require('@google-cloud/videointelligence');
    *
-   * var client = new videointelligence.v1beta1.VideoIntelligenceServiceClient({
+   * const client = new videointelligence.v1beta1.VideoIntelligenceServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var inputUri = 'gs://demomaker/cat.mp4';
-   * var featuresElement = 'LABEL_DETECTION';
-   * var features = [featuresElement];
-   * var request = {
+   * const inputUri = 'gs://demomaker/cat.mp4';
+   * const featuresElement = 'LABEL_DETECTION';
+   * const features = [featuresElement];
+   * const request = {
    *   inputUri: inputUri,
    *   features: features,
    * };
@@ -275,30 +275,30 @@ class VideoIntelligenceServiceClient {
    * // Handle the operation using the promise pattern.
    * client.annotateVideo(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var inputUri = 'gs://demomaker/cat.mp4';
-   * var featuresElement = 'LABEL_DETECTION';
-   * var features = [featuresElement];
-   * var request = {
+   * const inputUri = 'gs://demomaker/cat.mp4';
+   * const featuresElement = 'LABEL_DETECTION';
+   * const features = [featuresElement];
+   * const request = {
    *   inputUri: inputUri,
    *   features: features,
    * };
@@ -306,8 +306,8 @@ class VideoIntelligenceServiceClient {
    * // Handle the operation using the event emitter pattern.
    * client.annotateVideo(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

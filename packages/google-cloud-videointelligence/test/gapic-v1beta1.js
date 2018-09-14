@@ -18,14 +18,14 @@ const assert = require('assert');
 
 const videointelligenceModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('VideoIntelligenceServiceClient', () => {
   describe('annotateVideo', function() {
     it('invokes annotateVideo without error', done => {
-      var client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
+      const client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -33,16 +33,16 @@ describe('VideoIntelligenceServiceClient', () => {
       );
 
       // Mock request
-      var inputUri = 'gs://demomaker/cat.mp4';
-      var featuresElement = 'LABEL_DETECTION';
-      var features = [featuresElement];
-      var request = {
+      const inputUri = 'gs://demomaker/cat.mp4';
+      const featuresElement = 'LABEL_DETECTION';
+      const features = [featuresElement];
+      const request = {
         inputUri: inputUri,
         features: features,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.annotateVideo = mockLongRunningGrpcMethod(
@@ -53,7 +53,7 @@ describe('VideoIntelligenceServiceClient', () => {
       client
         .annotateVideo(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -66,7 +66,7 @@ describe('VideoIntelligenceServiceClient', () => {
     });
 
     it('invokes annotateVideo with error', done => {
-      var client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
+      const client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -74,10 +74,10 @@ describe('VideoIntelligenceServiceClient', () => {
       );
 
       // Mock request
-      var inputUri = 'gs://demomaker/cat.mp4';
-      var featuresElement = 'LABEL_DETECTION';
-      var features = [featuresElement];
-      var request = {
+      const inputUri = 'gs://demomaker/cat.mp4';
+      const featuresElement = 'LABEL_DETECTION';
+      const features = [featuresElement];
+      const request = {
         inputUri: inputUri,
         features: features,
       };
@@ -92,7 +92,7 @@ describe('VideoIntelligenceServiceClient', () => {
       client
         .annotateVideo(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -106,7 +106,7 @@ describe('VideoIntelligenceServiceClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
+      const client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
         {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
@@ -127,7 +127,7 @@ describe('VideoIntelligenceServiceClient', () => {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {
