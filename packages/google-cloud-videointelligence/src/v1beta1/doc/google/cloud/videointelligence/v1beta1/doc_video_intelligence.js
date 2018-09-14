@@ -61,7 +61,7 @@
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.AnnotateVideoRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var AnnotateVideoRequest = {
+const AnnotateVideoRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -106,7 +106,7 @@ var AnnotateVideoRequest = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.VideoContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var VideoContext = {
+const VideoContext = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -123,7 +123,7 @@ var VideoContext = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.VideoSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var VideoSegment = {
+const VideoSegment = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -150,7 +150,7 @@ var VideoSegment = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.LabelLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var LabelLocation = {
+const LabelLocation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -172,7 +172,7 @@ var LabelLocation = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.LabelAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var LabelAnnotation = {
+const LabelAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -216,7 +216,7 @@ var LabelAnnotation = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.SafeSearchAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var SafeSearchAnnotation = {
+const SafeSearchAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -239,7 +239,7 @@ var SafeSearchAnnotation = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.BoundingBox definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var BoundingBox = {
+const BoundingBox = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -258,7 +258,7 @@ var BoundingBox = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.FaceLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var FaceLocation = {
+const FaceLocation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -284,7 +284,7 @@ var FaceLocation = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.FaceAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var FaceAnnotation = {
+const FaceAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -325,7 +325,7 @@ var FaceAnnotation = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.VideoAnnotationResults definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var VideoAnnotationResults = {
+const VideoAnnotationResults = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -343,7 +343,7 @@ var VideoAnnotationResults = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.AnnotateVideoResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var AnnotateVideoResponse = {
+const AnnotateVideoResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -372,7 +372,7 @@ var AnnotateVideoResponse = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.VideoAnnotationProgress definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var VideoAnnotationProgress = {
+const VideoAnnotationProgress = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -390,7 +390,7 @@ var VideoAnnotationProgress = {
  * @memberof google.cloud.videointelligence.v1beta1
  * @see [google.cloud.videointelligence.v1beta1.AnnotateVideoProgress definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1beta1/video_intelligence.proto}
  */
-var AnnotateVideoProgress = {
+const AnnotateVideoProgress = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -400,7 +400,7 @@ var AnnotateVideoProgress = {
  * @enum {number}
  * @memberof google.cloud.videointelligence.v1beta1
  */
-var Feature = {
+const Feature = {
 
   /**
    * Unspecified.
@@ -434,7 +434,7 @@ var Feature = {
  * @enum {number}
  * @memberof google.cloud.videointelligence.v1beta1
  */
-var LabelLevel = {
+const LabelLevel = {
 
   /**
    * Unspecified.
@@ -469,7 +469,7 @@ var LabelLevel = {
  * @enum {number}
  * @memberof google.cloud.videointelligence.v1beta1
  */
-var LabelDetectionMode = {
+const LabelDetectionMode = {
 
   /**
    * Unspecified.
@@ -498,7 +498,7 @@ var LabelDetectionMode = {
  * @enum {number}
  * @memberof google.cloud.videointelligence.v1beta1
  */
-var Likelihood = {
+const Likelihood = {
 
   /**
    * Unknown likelihood.
