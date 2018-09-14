@@ -38,7 +38,7 @@
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.Feature definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var Feature = {
+const Feature = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -134,7 +134,7 @@ var Feature = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.ImageSource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var ImageSource = {
+const ImageSource = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -157,7 +157,7 @@ var ImageSource = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.Image definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var Image = {
+const Image = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -249,7 +249,7 @@ var Image = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.FaceAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var FaceAnnotation = {
+const FaceAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -473,7 +473,7 @@ var FaceAnnotation = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.LocationInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var LocationInfo = {
+const LocationInfo = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -493,7 +493,7 @@ var LocationInfo = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.Property definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var Property = {
+const Property = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -552,7 +552,7 @@ var Property = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.EntityAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var EntityAnnotation = {
+const EntityAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -597,7 +597,7 @@ var EntityAnnotation = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.SafeSearchAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var SafeSearchAnnotation = {
+const SafeSearchAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -618,7 +618,7 @@ var SafeSearchAnnotation = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.LatLongRect definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var LatLongRect = {
+const LatLongRect = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -642,7 +642,7 @@ var LatLongRect = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.ColorInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var ColorInfo = {
+const ColorInfo = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -658,7 +658,7 @@ var ColorInfo = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.DominantColorsAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var DominantColorsAnnotation = {
+const DominantColorsAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -674,7 +674,7 @@ var DominantColorsAnnotation = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.ImageProperties definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var ImageProperties = {
+const ImageProperties = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -698,7 +698,7 @@ var ImageProperties = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.CropHint definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var CropHint = {
+const CropHint = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -714,7 +714,7 @@ var CropHint = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.CropHintsAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var CropHintsAnnotation = {
+const CropHintsAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -733,7 +733,7 @@ var CropHintsAnnotation = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.CropHintsParams definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var CropHintsParams = {
+const CropHintsParams = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -747,7 +747,7 @@ var CropHintsParams = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.WebDetectionParams definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var WebDetectionParams = {
+const WebDetectionParams = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -783,7 +783,7 @@ var WebDetectionParams = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.ImageContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var ImageContext = {
+const ImageContext = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -810,7 +810,7 @@ var ImageContext = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.AnnotateImageRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var AnnotateImageRequest = {
+const AnnotateImageRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -881,7 +881,7 @@ var AnnotateImageRequest = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.AnnotateImageResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var AnnotateImageResponse = {
+const AnnotateImageResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -897,7 +897,7 @@ var AnnotateImageResponse = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var BatchAnnotateImagesRequest = {
+const BatchAnnotateImagesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -913,7 +913,7 @@ var BatchAnnotateImagesRequest = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/image_annotator.proto}
  */
-var BatchAnnotateImagesResponse = {
+const BatchAnnotateImagesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -924,7 +924,7 @@ var BatchAnnotateImagesResponse = {
  * @enum {number}
  * @memberof google.cloud.vision.v1p1beta1
  */
-var Likelihood = {
+const Likelihood = {
 
   /**
    * Unknown likelihood.

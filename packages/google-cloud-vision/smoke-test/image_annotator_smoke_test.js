@@ -18,30 +18,30 @@ describe('ImageAnnotatorSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const vision = require('../src');
 
-    var client = new vision.v1p3beta1.ImageAnnotatorClient({
+    const client = new vision.v1p3beta1.ImageAnnotatorClient({
       // optional auth parameters.
     });
 
-    var gcsImageUri = 'gs://gapic-toolkit/President_Barack_Obama.jpg';
-    var source = {
+    const gcsImageUri = 'gs://gapic-toolkit/President_Barack_Obama.jpg';
+    const source = {
       gcsImageUri: gcsImageUri,
     };
-    var image = {
+    const image = {
       source: source,
     };
-    var type = 'FACE_DETECTION';
-    var featuresElement = {
+    const type = 'FACE_DETECTION';
+    const featuresElement = {
       type: type,
     };
-    var features = [featuresElement];
-    var requestsElement = {
+    const features = [featuresElement];
+    const requestsElement = {
       image: image,
       features: features,
     };
-    var requests = [requestsElement];
+    const requests = [requestsElement];
     client.batchAnnotateImages({requests: requests})
       .then(responses => {
-        var response = responses[0];
+        const response = responses[0];
         console.log(response);
       })
       .then(done)

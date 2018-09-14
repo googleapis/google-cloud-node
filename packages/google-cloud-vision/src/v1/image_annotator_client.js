@@ -74,13 +74,13 @@ class ImageAnnotatorClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -91,14 +91,14 @@ class ImageAnnotatorClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
         'google/cloud/vision/v1/image_annotator.proto'
       )
     );
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -118,10 +118,10 @@ class ImageAnnotatorClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var asyncBatchAnnotateFilesResponse = protoFilesRoot.lookup(
+    const asyncBatchAnnotateFilesResponse = protoFilesRoot.lookup(
       'google.cloud.vision.v1.AsyncBatchAnnotateFilesResponse'
     );
-    var asyncBatchAnnotateFilesMetadata = protoFilesRoot.lookup(
+    const asyncBatchAnnotateFilesMetadata = protoFilesRoot.lookup(
       'google.cloud.vision.v1.OperationMetadata'
     );
 
@@ -138,7 +138,7 @@ class ImageAnnotatorClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.vision.v1.ImageAnnotator',
       gapicConfig,
       opts.clientConfig,
@@ -152,14 +152,14 @@ class ImageAnnotatorClient {
 
     // Put together the "service stub" for
     // google.cloud.vision.v1.ImageAnnotator.
-    var imageAnnotatorStub = gaxGrpc.createStub(
+    const imageAnnotatorStub = gaxGrpc.createStub(
       protos.google.cloud.vision.v1.ImageAnnotator,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var imageAnnotatorStubMethods = [
+    const imageAnnotatorStubMethods = [
       'batchAnnotateImages',
       'asyncBatchAnnotateFiles',
     ];
@@ -168,7 +168,7 @@ class ImageAnnotatorClient {
         imageAnnotatorStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -240,14 +240,14 @@ class ImageAnnotatorClient {
    *
    * const vision = require('@google-cloud/vision');
    *
-   * var client = new vision.v1.ImageAnnotatorClient({
+   * const client = new vision.v1.ImageAnnotatorClient({
    *   // optional auth parameters.
    * });
    *
-   * var requests = [];
+   * const requests = [];
    * client.batchAnnotateImages({requests: requests})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -293,42 +293,42 @@ class ImageAnnotatorClient {
    *
    * const vision = require('@google-cloud/vision');
    *
-   * var client = new vision.v1.ImageAnnotatorClient({
+   * const client = new vision.v1.ImageAnnotatorClient({
    *   // optional auth parameters.
    * });
    *
-   * var requests = [];
+   * const requests = [];
    *
    * // Handle the operation using the promise pattern.
    * client.asyncBatchAnnotateFiles({requests: requests})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var requests = [];
+   * const requests = [];
    *
    * // Handle the operation using the event emitter pattern.
    * client.asyncBatchAnnotateFiles({requests: requests})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

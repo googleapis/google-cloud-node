@@ -18,32 +18,32 @@ const assert = require('assert');
 
 const visionModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ProductSearchClient', () => {
   describe('createProductSet', () => {
     it('invokes createProductSet without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var productSet = {};
-      var productSetId = 'productSetId4216680';
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const productSet = {};
+      const productSetId = 'productSetId4216680';
+      const request = {
         parent: formattedParent,
         productSet: productSet,
         productSetId: productSetId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
       };
@@ -62,16 +62,16 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes createProductSet with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var productSet = {};
-      var productSetId = 'productSetId4216680';
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const productSet = {};
+      const productSetId = 'productSetId4216680';
+      const request = {
         parent: formattedParent,
         productSet: productSet,
         productSetId: productSetId,
@@ -95,22 +95,22 @@ describe('ProductSearchClient', () => {
 
   describe('listProductSets', () => {
     it('invokes listProductSets without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var productSetsElement = {};
-      var productSets = [productSetsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const productSetsElement = {};
+      const productSets = [productSetsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         productSets: productSets,
       };
@@ -133,14 +133,14 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes listProductSets with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -162,25 +162,25 @@ describe('ProductSearchClient', () => {
 
   describe('getProductSet', () => {
     it('invokes getProductSet without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
       };
@@ -199,18 +199,18 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes getProductSet with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -232,23 +232,23 @@ describe('ProductSearchClient', () => {
 
   describe('updateProductSet', () => {
     it('invokes updateProductSet without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var productSet = {};
-      var updateMask = {};
-      var request = {
+      const productSet = {};
+      const updateMask = {};
+      const request = {
         productSet: productSet,
         updateMask: updateMask,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
       };
@@ -267,15 +267,15 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes updateProductSet with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var productSet = {};
-      var updateMask = {};
-      var request = {
+      const productSet = {};
+      const updateMask = {};
+      const request = {
         productSet: productSet,
         updateMask: updateMask,
       };
@@ -298,18 +298,18 @@ describe('ProductSearchClient', () => {
 
   describe('deleteProductSet', () => {
     it('invokes deleteProductSet without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -323,18 +323,18 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes deleteProductSet with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -355,27 +355,27 @@ describe('ProductSearchClient', () => {
 
   describe('createProduct', () => {
     it('invokes createProduct without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var product = {};
-      var productId = 'productId1753008747';
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const product = {};
+      const productId = 'productId1753008747';
+      const request = {
         parent: formattedParent,
         product: product,
         productId: productId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var productCategory = 'productCategory-1607451058';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const productCategory = 'productCategory-1607451058';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         description: description,
@@ -396,16 +396,16 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes createProduct with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var product = {};
-      var productId = 'productId1753008747';
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const product = {};
+      const productId = 'productId1753008747';
+      const request = {
         parent: formattedParent,
         product: product,
         productId: productId,
@@ -429,22 +429,22 @@ describe('ProductSearchClient', () => {
 
   describe('listProducts', () => {
     it('invokes listProducts without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var productsElement = {};
-      var products = [productsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const productsElement = {};
+      const products = [productsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         products: products,
       };
@@ -467,14 +467,14 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes listProducts with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -496,27 +496,27 @@ describe('ProductSearchClient', () => {
 
   describe('getProduct', () => {
     it('invokes getProduct without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productPath(
+      const formattedName = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var productCategory = 'productCategory-1607451058';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const productCategory = 'productCategory-1607451058';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         description: description,
@@ -537,18 +537,18 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes getProduct with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productPath(
+      const formattedName = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -570,25 +570,25 @@ describe('ProductSearchClient', () => {
 
   describe('updateProduct', () => {
     it('invokes updateProduct without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var product = {};
-      var updateMask = {};
-      var request = {
+      const product = {};
+      const updateMask = {};
+      const request = {
         product: product,
         updateMask: updateMask,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var description = 'description-1724546052';
-      var productCategory = 'productCategory-1607451058';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const productCategory = 'productCategory-1607451058';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         description: description,
@@ -609,15 +609,15 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes updateProduct with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var product = {};
-      var updateMask = {};
-      var request = {
+      const product = {};
+      const updateMask = {};
+      const request = {
         product: product,
         updateMask: updateMask,
       };
@@ -640,18 +640,18 @@ describe('ProductSearchClient', () => {
 
   describe('deleteProduct', () => {
     it('invokes deleteProduct without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productPath(
+      const formattedName = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -665,18 +665,18 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes deleteProduct with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productPath(
+      const formattedName = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -697,29 +697,29 @@ describe('ProductSearchClient', () => {
 
   describe('createReferenceImage', () => {
     it('invokes createReferenceImage without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.productPath(
+      const formattedParent = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var referenceImage = {};
-      var referenceImageId = 'referenceImageId1946713331';
-      var request = {
+      const referenceImage = {};
+      const referenceImageId = 'referenceImageId1946713331';
+      const request = {
         parent: formattedParent,
         referenceImage: referenceImage,
         referenceImageId: referenceImageId,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var uri = 'uri116076';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const uri = 'uri116076';
+      const expectedResponse = {
         name: name,
         uri: uri,
       };
@@ -738,20 +738,20 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes createReferenceImage with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.productPath(
+      const formattedParent = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var referenceImage = {};
-      var referenceImageId = 'referenceImageId1946713331';
-      var request = {
+      const referenceImage = {};
+      const referenceImageId = 'referenceImageId1946713331';
+      const request = {
         parent: formattedParent,
         referenceImage: referenceImage,
         referenceImageId: referenceImageId,
@@ -775,19 +775,19 @@ describe('ProductSearchClient', () => {
 
   describe('deleteReferenceImage', () => {
     it('invokes deleteReferenceImage without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.referenceImagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
         '[REFERENCE_IMAGE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -803,19 +803,19 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes deleteReferenceImage with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.referenceImagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
         '[REFERENCE_IMAGE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -836,27 +836,27 @@ describe('ProductSearchClient', () => {
 
   describe('listReferenceImages', () => {
     it('invokes listReferenceImages without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.productPath(
+      const formattedParent = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var pageSize = 883849137;
-      var nextPageToken = '';
-      var referenceImagesElement = {};
-      var referenceImages = [referenceImagesElement];
-      var expectedResponse = {
+      const pageSize = 883849137;
+      const nextPageToken = '';
+      const referenceImagesElement = {};
+      const referenceImages = [referenceImagesElement];
+      const expectedResponse = {
         pageSize: pageSize,
         nextPageToken: nextPageToken,
         referenceImages: referenceImages,
@@ -880,18 +880,18 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes listReferenceImages with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.productPath(
+      const formattedParent = client.productPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
@@ -913,26 +913,26 @@ describe('ProductSearchClient', () => {
 
   describe('getReferenceImage', () => {
     it('invokes getReferenceImage without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.referenceImagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
         '[REFERENCE_IMAGE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var uri = 'uri116076';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const uri = 'uri116076';
+      const expectedResponse = {
         name: name2,
         uri: uri,
       };
@@ -951,19 +951,19 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes getReferenceImage with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.referenceImagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
         '[REFERENCE_IMAGE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -985,19 +985,19 @@ describe('ProductSearchClient', () => {
 
   describe('addProductToProductSet', () => {
     it('invokes addProductToProductSet without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var product = 'product-309474065';
-      var request = {
+      const product = 'product-309474065';
+      const request = {
         name: formattedName,
         product: product,
       };
@@ -1014,19 +1014,19 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes addProductToProductSet with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var product = 'product-309474065';
-      var request = {
+      const product = 'product-309474065';
+      const request = {
         name: formattedName,
         product: product,
       };
@@ -1048,19 +1048,19 @@ describe('ProductSearchClient', () => {
 
   describe('removeProductFromProductSet', () => {
     it('invokes removeProductFromProductSet without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var product = 'product-309474065';
-      var request = {
+      const product = 'product-309474065';
+      const request = {
         name: formattedName,
         product: product,
       };
@@ -1077,19 +1077,19 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes removeProductFromProductSet with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var product = 'product-309474065';
-      var request = {
+      const product = 'product-309474065';
+      const request = {
         name: formattedName,
         product: product,
       };
@@ -1111,26 +1111,26 @@ describe('ProductSearchClient', () => {
 
   describe('listProductsInProductSet', () => {
     it('invokes listProductsInProductSet without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var productsElement = {};
-      var products = [productsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const productsElement = {};
+      const products = [productsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         products: products,
       };
@@ -1153,18 +1153,18 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes listProductsInProductSet with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.productSetPath(
+      const formattedName = client.productSetPath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1186,21 +1186,21 @@ describe('ProductSearchClient', () => {
 
   describe('importProductSets', function() {
     it('invokes importProductSets without error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var inputConfig = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const inputConfig = {};
+      const request = {
         parent: formattedParent,
         inputConfig: inputConfig,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.importProductSets = mockLongRunningGrpcMethod(
@@ -1211,7 +1211,7 @@ describe('ProductSearchClient', () => {
       client
         .importProductSets(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1224,15 +1224,15 @@ describe('ProductSearchClient', () => {
     });
 
     it('invokes importProductSets with error', done => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var inputConfig = {};
-      var request = {
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const inputConfig = {};
+      const request = {
         parent: formattedParent,
         inputConfig: inputConfig,
       };
@@ -1247,7 +1247,7 @@ describe('ProductSearchClient', () => {
       client
         .importProductSets(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1261,7 +1261,7 @@ describe('ProductSearchClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new visionModule.v1p3beta1.ProductSearchClient({
+      const client = new visionModule.v1p3beta1.ProductSearchClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1279,19 +1279,19 @@ describe('ProductSearchClient', () => {
 describe('ImageAnnotatorClient', () => {
   describe('batchAnnotateImages', () => {
     it('invokes batchAnnotateImages without error', done => {
-      var client = new visionModule.v1p3beta1.ImageAnnotatorClient({
+      const client = new visionModule.v1p3beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchAnnotateImages = mockSimpleGrpcMethod(
@@ -1307,14 +1307,14 @@ describe('ImageAnnotatorClient', () => {
     });
 
     it('invokes batchAnnotateImages with error', done => {
-      var client = new visionModule.v1p3beta1.ImageAnnotatorClient({
+      const client = new visionModule.v1p3beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
@@ -1336,19 +1336,19 @@ describe('ImageAnnotatorClient', () => {
 
   describe('asyncBatchAnnotateFiles', function() {
     it('invokes asyncBatchAnnotateFiles without error', done => {
-      var client = new visionModule.v1p3beta1.ImageAnnotatorClient({
+      const client = new visionModule.v1p3beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.asyncBatchAnnotateFiles = mockLongRunningGrpcMethod(
@@ -1359,7 +1359,7 @@ describe('ImageAnnotatorClient', () => {
       client
         .asyncBatchAnnotateFiles(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1372,14 +1372,14 @@ describe('ImageAnnotatorClient', () => {
     });
 
     it('invokes asyncBatchAnnotateFiles with error', done => {
-      var client = new visionModule.v1p3beta1.ImageAnnotatorClient({
+      const client = new visionModule.v1p3beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
@@ -1393,7 +1393,7 @@ describe('ImageAnnotatorClient', () => {
       client
         .asyncBatchAnnotateFiles(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1407,7 +1407,7 @@ describe('ImageAnnotatorClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new visionModule.v1p3beta1.ImageAnnotatorClient({
+      const client = new visionModule.v1p3beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1439,7 +1439,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

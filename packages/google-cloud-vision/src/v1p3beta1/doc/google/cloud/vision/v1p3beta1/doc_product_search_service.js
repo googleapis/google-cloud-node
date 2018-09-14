@@ -57,7 +57,7 @@
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.Product definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var Product = {
+const Product = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -118,7 +118,7 @@ var Product = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ProductSet definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ProductSet = {
+const ProductSet = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -158,7 +158,7 @@ var ProductSet = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ReferenceImage definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ReferenceImage = {
+const ReferenceImage = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -186,7 +186,7 @@ var ReferenceImage = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.CreateProductRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var CreateProductRequest = {
+const CreateProductRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -209,7 +209,7 @@ var CreateProductRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListProductsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListProductsRequest = {
+const ListProductsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -229,7 +229,7 @@ var ListProductsRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListProductsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListProductsResponse = {
+const ListProductsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -246,7 +246,7 @@ var ListProductsResponse = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.GetProductRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var GetProductRequest = {
+const GetProductRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -272,7 +272,7 @@ var GetProductRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.UpdateProductRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var UpdateProductRequest = {
+const UpdateProductRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -289,7 +289,7 @@ var UpdateProductRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.DeleteProductRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var DeleteProductRequest = {
+const DeleteProductRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -316,7 +316,7 @@ var DeleteProductRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.CreateProductSetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var CreateProductSetRequest = {
+const CreateProductSetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -338,7 +338,7 @@ var CreateProductSetRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListProductSetsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListProductSetsRequest = {
+const ListProductSetsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -358,7 +358,7 @@ var ListProductSetsRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListProductSetsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListProductSetsResponse = {
+const ListProductSetsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -375,7 +375,7 @@ var ListProductSetsResponse = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.GetProductSetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var GetProductSetRequest = {
+const GetProductSetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -399,7 +399,7 @@ var GetProductSetRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.UpdateProductSetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var UpdateProductSetRequest = {
+const UpdateProductSetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -416,7 +416,7 @@ var UpdateProductSetRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.DeleteProductSetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var DeleteProductSetRequest = {
+const DeleteProductSetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -445,7 +445,7 @@ var DeleteProductSetRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.CreateReferenceImageRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var CreateReferenceImageRequest = {
+const CreateReferenceImageRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -471,7 +471,7 @@ var CreateReferenceImageRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListReferenceImagesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListReferenceImagesRequest = {
+const ListReferenceImagesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -493,7 +493,7 @@ var ListReferenceImagesRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListReferenceImagesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListReferenceImagesResponse = {
+const ListReferenceImagesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -511,7 +511,7 @@ var ListReferenceImagesResponse = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.GetReferenceImageRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var GetReferenceImageRequest = {
+const GetReferenceImageRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -529,7 +529,7 @@ var GetReferenceImageRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.DeleteReferenceImageRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var DeleteReferenceImageRequest = {
+const DeleteReferenceImageRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -552,7 +552,7 @@ var DeleteReferenceImageRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.AddProductToProductSetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var AddProductToProductSetRequest = {
+const AddProductToProductSetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -575,7 +575,7 @@ var AddProductToProductSetRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.RemoveProductFromProductSetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var RemoveProductFromProductSetRequest = {
+const RemoveProductFromProductSetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -598,7 +598,7 @@ var RemoveProductFromProductSetRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListProductsInProductSetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListProductsInProductSetRequest = {
+const ListProductsInProductSetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -618,7 +618,7 @@ var ListProductsInProductSetRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ListProductsInProductSetResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ListProductsInProductSetResponse = {
+const ListProductsInProductSetResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -687,7 +687,7 @@ var ListProductsInProductSetResponse = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ImportProductSetsGcsSource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ImportProductSetsGcsSource = {
+const ImportProductSetsGcsSource = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -704,7 +704,7 @@ var ImportProductSetsGcsSource = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ImportProductSetsInputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ImportProductSetsInputConfig = {
+const ImportProductSetsInputConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -725,7 +725,7 @@ var ImportProductSetsInputConfig = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ImportProductSetsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ImportProductSetsRequest = {
+const ImportProductSetsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -755,7 +755,7 @@ var ImportProductSetsRequest = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ImportProductSetsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var ImportProductSetsResponse = {
+const ImportProductSetsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -785,7 +785,7 @@ var ImportProductSetsResponse = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.BatchOperationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search_service.proto}
  */
-var BatchOperationMetadata = {
+const BatchOperationMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**

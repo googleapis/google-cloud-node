@@ -18,26 +18,26 @@ const assert = require('assert');
 
 const visionModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ImageAnnotatorClient', () => {
   describe('batchAnnotateImages', () => {
     it('invokes batchAnnotateImages without error', done => {
-      var client = new visionModule.v1.ImageAnnotatorClient({
+      const client = new visionModule.v1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchAnnotateImages = mockSimpleGrpcMethod(
@@ -53,14 +53,14 @@ describe('ImageAnnotatorClient', () => {
     });
 
     it('invokes batchAnnotateImages with error', done => {
-      var client = new visionModule.v1.ImageAnnotatorClient({
+      const client = new visionModule.v1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
@@ -82,19 +82,19 @@ describe('ImageAnnotatorClient', () => {
 
   describe('asyncBatchAnnotateFiles', function() {
     it('invokes asyncBatchAnnotateFiles without error', done => {
-      var client = new visionModule.v1.ImageAnnotatorClient({
+      const client = new visionModule.v1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.asyncBatchAnnotateFiles = mockLongRunningGrpcMethod(
@@ -105,7 +105,7 @@ describe('ImageAnnotatorClient', () => {
       client
         .asyncBatchAnnotateFiles(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -118,14 +118,14 @@ describe('ImageAnnotatorClient', () => {
     });
 
     it('invokes asyncBatchAnnotateFiles with error', done => {
-      var client = new visionModule.v1.ImageAnnotatorClient({
+      const client = new visionModule.v1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
@@ -139,7 +139,7 @@ describe('ImageAnnotatorClient', () => {
       client
         .asyncBatchAnnotateFiles(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -153,7 +153,7 @@ describe('ImageAnnotatorClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new visionModule.v1.ImageAnnotatorClient({
+      const client = new visionModule.v1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -185,7 +185,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

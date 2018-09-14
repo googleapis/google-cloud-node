@@ -78,7 +78,7 @@
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ProductSearchParams definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search.proto}
  */
-var ProductSearchParams = {
+const ProductSearchParams = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -116,7 +116,7 @@ var ProductSearchParams = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.ProductSearchResults definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/product_search.proto}
  */
-var ProductSearchResults = {
+const ProductSearchResults = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -180,7 +180,7 @@ var ProductSearchResults = {
  * @enum {number}
  * @memberof google.cloud.vision.v1p3beta1
  */
-var ProductSearchCategory = {
+const ProductSearchCategory = {
 
   /**
    * Default value used when a category is not specified.
@@ -204,7 +204,7 @@ var ProductSearchCategory = {
  * @enum {number}
  * @memberof google.cloud.vision.v1p3beta1
  */
-var ProductSearchResultsView = {
+const ProductSearchResultsView = {
 
   /**
    * Product search results contain only `product_category` and `product_id`.

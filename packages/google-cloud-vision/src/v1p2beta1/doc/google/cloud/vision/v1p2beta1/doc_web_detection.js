@@ -55,7 +55,7 @@
  * @memberof google.cloud.vision.v1p2beta1
  * @see [google.cloud.vision.v1p2beta1.WebDetection definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/web_detection.proto}
  */
-var WebDetection = {
+const WebDetection = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**

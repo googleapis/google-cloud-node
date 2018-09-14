@@ -29,7 +29,7 @@
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.Vertex definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/geometry.proto}
  */
-var Vertex = {
+const Vertex = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -48,7 +48,7 @@ var Vertex = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.NormalizedVertex definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/geometry.proto}
  */
-var NormalizedVertex = {
+const NormalizedVertex = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -69,7 +69,7 @@ var NormalizedVertex = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.BoundingPoly definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/geometry.proto}
  */
-var BoundingPoly = {
+const BoundingPoly = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -85,7 +85,7 @@ var BoundingPoly = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.NormalizedBoundingPoly definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/geometry.proto}
  */
-var NormalizedBoundingPoly = {
+const NormalizedBoundingPoly = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -107,6 +107,6 @@ var NormalizedBoundingPoly = {
  * @memberof google.cloud.vision.v1p3beta1
  * @see [google.cloud.vision.v1p3beta1.Position definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p3beta1/geometry.proto}
  */
-var Position = {
+const Position = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

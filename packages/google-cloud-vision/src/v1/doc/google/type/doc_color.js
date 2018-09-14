@@ -159,6 +159,6 @@
  * @memberof google.type
  * @see [google.type.Color definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/type/color.proto}
  */
-var Color = {
+const Color = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

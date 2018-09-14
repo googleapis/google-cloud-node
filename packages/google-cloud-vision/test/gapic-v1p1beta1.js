@@ -18,26 +18,26 @@ const assert = require('assert');
 
 const visionModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ImageAnnotatorClient', () => {
   describe('batchAnnotateImages', () => {
     it('invokes batchAnnotateImages without error', done => {
-      var client = new visionModule.v1p1beta1.ImageAnnotatorClient({
+      const client = new visionModule.v1p1beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchAnnotateImages = mockSimpleGrpcMethod(
@@ -53,14 +53,14 @@ describe('ImageAnnotatorClient', () => {
     });
 
     it('invokes batchAnnotateImages with error', done => {
-      var client = new visionModule.v1p1beta1.ImageAnnotatorClient({
+      const client = new visionModule.v1p1beta1.ImageAnnotatorClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var requests = [];
-      var request = {
+      const requests = [];
+      const request = {
         requests: requests,
       };
 

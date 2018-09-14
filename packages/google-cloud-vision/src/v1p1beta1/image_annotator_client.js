@@ -73,13 +73,13 @@ class ImageAnnotatorClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -90,7 +90,7 @@ class ImageAnnotatorClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -99,7 +99,7 @@ class ImageAnnotatorClient {
     );
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.vision.v1p1beta1.ImageAnnotator',
       gapicConfig,
       opts.clientConfig,
@@ -113,20 +113,20 @@ class ImageAnnotatorClient {
 
     // Put together the "service stub" for
     // google.cloud.vision.v1p1beta1.ImageAnnotator.
-    var imageAnnotatorStub = gaxGrpc.createStub(
+    const imageAnnotatorStub = gaxGrpc.createStub(
       protos.google.cloud.vision.v1p1beta1.ImageAnnotator,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var imageAnnotatorStubMethods = ['batchAnnotateImages'];
+    const imageAnnotatorStubMethods = ['batchAnnotateImages'];
     for (let methodName of imageAnnotatorStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         imageAnnotatorStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -198,14 +198,14 @@ class ImageAnnotatorClient {
    *
    * const vision = require('@google-cloud/vision');
    *
-   * var client = new vision.v1p1beta1.ImageAnnotatorClient({
+   * const client = new vision.v1p1beta1.ImageAnnotatorClient({
    *   // optional auth parameters.
    * });
    *
-   * var requests = [];
+   * const requests = [];
    * client.batchAnnotateImages({requests: requests})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

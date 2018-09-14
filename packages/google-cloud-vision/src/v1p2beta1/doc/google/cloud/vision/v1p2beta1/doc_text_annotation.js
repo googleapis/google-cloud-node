@@ -36,7 +36,7 @@
  * @memberof google.cloud.vision.v1p2beta1
  * @see [google.cloud.vision.v1p2beta1.TextAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/text_annotation.proto}
  */
-var TextAnnotation = {
+const TextAnnotation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -167,7 +167,7 @@ var TextAnnotation = {
  * @memberof google.cloud.vision.v1p2beta1
  * @see [google.cloud.vision.v1p2beta1.Page definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/text_annotation.proto}
  */
-var Page = {
+const Page = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -220,7 +220,7 @@ var Page = {
  * @memberof google.cloud.vision.v1p2beta1
  * @see [google.cloud.vision.v1p2beta1.Block definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/text_annotation.proto}
  */
-var Block = {
+const Block = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -302,7 +302,7 @@ var Block = {
  * @memberof google.cloud.vision.v1p2beta1
  * @see [google.cloud.vision.v1p2beta1.Paragraph definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/text_annotation.proto}
  */
-var Paragraph = {
+const Paragraph = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -346,7 +346,7 @@ var Paragraph = {
  * @memberof google.cloud.vision.v1p2beta1
  * @see [google.cloud.vision.v1p2beta1.Word definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/text_annotation.proto}
  */
-var Word = {
+const Word = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -387,6 +387,6 @@ var Word = {
  * @memberof google.cloud.vision.v1p2beta1
  * @see [google.cloud.vision.v1p2beta1.Symbol definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p2beta1/text_annotation.proto}
  */
-var Symbol = {
+const Symbol = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

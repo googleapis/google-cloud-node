@@ -29,7 +29,7 @@
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.Vertex definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/geometry.proto}
  */
-var Vertex = {
+const Vertex = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -45,7 +45,7 @@ var Vertex = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.BoundingPoly definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/geometry.proto}
  */
-var BoundingPoly = {
+const BoundingPoly = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -67,6 +67,6 @@ var BoundingPoly = {
  * @memberof google.cloud.vision.v1p1beta1
  * @see [google.cloud.vision.v1p1beta1.Position definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1p1beta1/geometry.proto}
  */
-var Position = {
+const Position = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
