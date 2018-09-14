@@ -76,13 +76,13 @@ class DatastoreClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -93,7 +93,7 @@ class DatastoreClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -102,7 +102,7 @@ class DatastoreClient {
     );
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.datastore.v1.Datastore',
       gapicConfig,
       opts.clientConfig,
@@ -116,14 +116,14 @@ class DatastoreClient {
 
     // Put together the "service stub" for
     // google.datastore.v1.Datastore.
-    var datastoreStub = gaxGrpc.createStub(
+    const datastoreStub = gaxGrpc.createStub(
       protos.google.datastore.v1.Datastore,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var datastoreStubMethods = [
+    const datastoreStubMethods = [
       'lookup',
       'runQuery',
       'beginTransaction',
@@ -137,7 +137,7 @@ class DatastoreClient {
         datastoreStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -215,19 +215,19 @@ class DatastoreClient {
    *
    * const datastore = require('@google-cloud/datastore');
    *
-   * var client = new datastore.v1.DatastoreClient({
+   * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var keys = [];
-   * var request = {
+   * const projectId = '';
+   * const keys = [];
+   * const request = {
    *   projectId: projectId,
    *   keys: keys,
    * };
    * client.lookup(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -285,19 +285,19 @@ class DatastoreClient {
    *
    * const datastore = require('@google-cloud/datastore');
    *
-   * var client = new datastore.v1.DatastoreClient({
+   * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var partitionId = {};
-   * var request = {
+   * const projectId = '';
+   * const partitionId = {};
+   * const request = {
    *   projectId: projectId,
    *   partitionId: partitionId,
    * };
    * client.runQuery(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -340,14 +340,14 @@ class DatastoreClient {
    *
    * const datastore = require('@google-cloud/datastore');
    *
-   * var client = new datastore.v1.DatastoreClient({
+   * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
+   * const projectId = '';
    * client.beginTransaction({projectId: projectId})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -411,21 +411,21 @@ class DatastoreClient {
    *
    * const datastore = require('@google-cloud/datastore');
    *
-   * var client = new datastore.v1.DatastoreClient({
+   * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var mode = 'MODE_UNSPECIFIED';
-   * var mutations = [];
-   * var request = {
+   * const projectId = '';
+   * const mode = 'MODE_UNSPECIFIED';
+   * const mutations = [];
+   * const request = {
    *   projectId: projectId,
    *   mode: mode,
    *   mutations: mutations,
    * };
    * client.commit(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -467,19 +467,19 @@ class DatastoreClient {
    *
    * const datastore = require('@google-cloud/datastore');
    *
-   * var client = new datastore.v1.DatastoreClient({
+   * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var transaction = '';
-   * var request = {
+   * const projectId = '';
+   * const transaction = '';
+   * const request = {
    *   projectId: projectId,
    *   transaction: transaction,
    * };
    * client.rollback(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -524,19 +524,19 @@ class DatastoreClient {
    *
    * const datastore = require('@google-cloud/datastore');
    *
-   * var client = new datastore.v1.DatastoreClient({
+   * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var keys = [];
-   * var request = {
+   * const projectId = '';
+   * const keys = [];
+   * const request = {
    *   projectId: projectId,
    *   keys: keys,
    * };
    * client.allocateIds(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -583,19 +583,19 @@ class DatastoreClient {
    *
    * const datastore = require('@google-cloud/datastore');
    *
-   * var client = new datastore.v1.DatastoreClient({
+   * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var keys = [];
-   * var request = {
+   * const projectId = '';
+   * const keys = [];
+   * const request = {
    *   projectId: projectId,
    *   keys: keys,
    * };
    * client.reserveIds(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

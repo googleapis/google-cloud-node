@@ -46,7 +46,7 @@
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.PartitionId definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/entity.proto}
  */
-var PartitionId = {
+const PartitionId = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -87,7 +87,7 @@ var PartitionId = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.Key definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/entity.proto}
  */
-var Key = {
+const Key = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -136,7 +136,7 @@ var Key = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.ArrayValue definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/entity.proto}
  */
-var ArrayValue = {
+const ArrayValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -214,7 +214,7 @@ var ArrayValue = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.Value definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/entity.proto}
  */
-var Value = {
+const Value = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -247,6 +247,6 @@ var Value = {
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.Entity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/entity.proto}
  */
-var Entity = {
+const Entity = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
