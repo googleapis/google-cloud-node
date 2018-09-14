@@ -110,6 +110,6 @@
  * @memberof google.protobuf
  * @see [google.protobuf.Timestamp definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/timestamp.proto}
  */
-var Timestamp = {
+const Timestamp = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
