@@ -66,7 +66,7 @@
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.Cluster definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var Cluster = {
+const Cluster = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -129,7 +129,7 @@ var Cluster = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ClusterConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var ClusterConfig = {
+const ClusterConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -221,7 +221,7 @@ var ClusterConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.GceClusterConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var GceClusterConfig = {
+const GceClusterConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -279,7 +279,7 @@ var GceClusterConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.InstanceGroupConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var InstanceGroupConfig = {
+const InstanceGroupConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -297,7 +297,7 @@ var InstanceGroupConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ManagedGroupConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var ManagedGroupConfig = {
+const ManagedGroupConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -322,7 +322,7 @@ var ManagedGroupConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.AcceleratorConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var AcceleratorConfig = {
+const AcceleratorConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -344,7 +344,7 @@ var AcceleratorConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.DiskConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var DiskConfig = {
+const DiskConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -367,7 +367,7 @@ var DiskConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.NodeInitializationAction definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var NodeInitializationAction = {
+const NodeInitializationAction = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -397,7 +397,7 @@ var NodeInitializationAction = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ClusterStatus definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var ClusterStatus = {
+const ClusterStatus = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -497,7 +497,7 @@ var ClusterStatus = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.SoftwareConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var SoftwareConfig = {
+const SoftwareConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -517,7 +517,7 @@ var SoftwareConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ClusterMetrics definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var ClusterMetrics = {
+const ClusterMetrics = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -540,7 +540,7 @@ var ClusterMetrics = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.CreateClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var CreateClusterRequest = {
+const CreateClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -617,7 +617,7 @@ var CreateClusterRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.UpdateClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var UpdateClusterRequest = {
+const UpdateClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -638,7 +638,7 @@ var UpdateClusterRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.DeleteClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var DeleteClusterRequest = {
+const DeleteClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -659,7 +659,7 @@ var DeleteClusterRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.GetClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var GetClusterRequest = {
+const GetClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -704,7 +704,7 @@ var GetClusterRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ListClustersRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var ListClustersRequest = {
+const ListClustersRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -725,7 +725,7 @@ var ListClustersRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ListClustersResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var ListClustersResponse = {
+const ListClustersResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -746,7 +746,7 @@ var ListClustersResponse = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.DiagnoseClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var DiagnoseClusterRequest = {
+const DiagnoseClusterRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -762,6 +762,6 @@ var DiagnoseClusterRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.DiagnoseClusterResults definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
  */
-var DiagnoseClusterResults = {
+const DiagnoseClusterResults = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

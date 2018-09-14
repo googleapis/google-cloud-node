@@ -18,19 +18,19 @@ describe('ClusterControllerSmokeTest', () => {
   if (!process.env.GCLOUD_PROJECT) {
     throw new Error('Usage: GCLOUD_PROJECT=<project_id> node #{$0}');
   }
-  var projectId = process.env.GCLOUD_PROJECT;
+  const projectId = process.env.GCLOUD_PROJECT;
 
   it('successfully makes a call to the service using promises', done => {
     const dataproc = require('../src');
 
-    var client = new dataproc.v1.ClusterControllerClient({
+    const client = new dataproc.v1.ClusterControllerClient({
       // optional auth parameters.
     });
 
     // Iterate over all elements.
-    var projectId2 = projectId;
-    var region = 'global';
-    var request = {
+    const projectId2 = projectId;
+    const region = 'global';
+    const request = {
       projectId: projectId2,
       region: region,
     };
@@ -38,7 +38,7 @@ describe('ClusterControllerSmokeTest', () => {
     client
       .listClusters(request)
       .then(responses => {
-        var resources = responses[0];
+        const resources = responses[0];
         for (let i = 0; i < resources.length; i += 1) {
           console.log(resources[i]);
         }
@@ -50,26 +50,26 @@ describe('ClusterControllerSmokeTest', () => {
   it('successfully makes a call to the service using callbacks', done => {
     const dataproc = require('../src');
 
-    var client = new dataproc.v1.ClusterControllerClient({
+    const client = new dataproc.v1.ClusterControllerClient({
       // optional auth parameters.
     });
 
     // Or obtain the paged response.
-    var projectId2 = projectId;
-    var region = 'global';
-    var request = {
+    const projectId2 = projectId;
+    const region = 'global';
+    const request = {
       projectId: projectId2,
       region: region,
     };
 
-    var options = {autoPaginate: false};
-    var callback = responses => {
+    const options = {autoPaginate: false};
+    const callback = responses => {
       // The actual resources in a response.
-      var resources = responses[0];
+      const resources = responses[0];
       // The next request if the response shows that there are more responses.
-      var nextRequest = responses[1];
+      const nextRequest = responses[1];
       // The actual response object, if necessary.
-      // var rawResponse = responses[2];
+      // const rawResponse = responses[2];
       for (let i = 0; i < resources.length; i += 1) {
         console.log(resources[i]);
       }
@@ -88,13 +88,13 @@ describe('ClusterControllerSmokeTest', () => {
   it('successfully makes a call to the service using streaming', done => {
     const dataproc = require('../src');
 
-    var client = new dataproc.v1.ClusterControllerClient({
+    const client = new dataproc.v1.ClusterControllerClient({
       // optional auth parameters.
     });
 
-    var projectId2 = projectId;
-    var region = 'global';
-    var request = {
+    const projectId2 = projectId;
+    const region = 'global';
+    const request = {
       projectId: projectId2,
       region: region,
     };

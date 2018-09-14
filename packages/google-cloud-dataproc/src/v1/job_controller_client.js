@@ -71,13 +71,13 @@ class JobControllerClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -88,7 +88,7 @@ class JobControllerClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -104,7 +104,7 @@ class JobControllerClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dataproc.v1.JobController',
       gapicConfig,
       opts.clientConfig,
@@ -118,14 +118,14 @@ class JobControllerClient {
 
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.JobController.
-    var jobControllerStub = gaxGrpc.createStub(
+    const jobControllerStub = gaxGrpc.createStub(
       protos.google.cloud.dataproc.v1.JobController,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var jobControllerStubMethods = [
+    const jobControllerStubMethods = [
       'submitJob',
       'getJob',
       'listJobs',
@@ -138,7 +138,7 @@ class JobControllerClient {
         jobControllerStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -212,21 +212,21 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var job = {};
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const job = {};
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   job: job,
    * };
    * client.submitJob(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -270,21 +270,21 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var jobId = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const jobId = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   jobId: jobId,
    * };
    * client.getJob(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -369,21 +369,21 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var projectId = '';
-   * var region = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    * };
    *
    * client.listJobs(request)
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -393,22 +393,22 @@ class JobControllerClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var projectId = '';
-   * var region = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    * };
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -494,13 +494,13 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    * };
@@ -561,16 +561,16 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var jobId = '';
-   * var job = {};
-   * var updateMask = {};
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const jobId = '';
+   * const job = {};
+   * const updateMask = {};
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   jobId: jobId,
@@ -579,7 +579,7 @@ class JobControllerClient {
    * };
    * client.updateJob(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -626,21 +626,21 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var jobId = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const jobId = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   jobId: jobId,
    * };
    * client.cancelJob(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -682,14 +682,14 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var jobId = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const jobId = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   jobId: jobId,

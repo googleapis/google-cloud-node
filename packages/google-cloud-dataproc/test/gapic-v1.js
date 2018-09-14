@@ -18,33 +18,33 @@ const assert = require('assert');
 
 const dataprocModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ClusterControllerClient', () => {
   describe('createCluster', function() {
     it('invokes createCluster without error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var cluster = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const cluster = {};
+      const request = {
         projectId: projectId,
         region: region,
         cluster: cluster,
       };
 
       // Mock response
-      var projectId2 = 'projectId2939242356';
-      var clusterName = 'clusterName-1018081872';
-      var clusterUuid = 'clusterUuid-1017854240';
-      var expectedResponse = {
+      const projectId2 = 'projectId2939242356';
+      const clusterName = 'clusterName-1018081872';
+      const clusterUuid = 'clusterUuid-1017854240';
+      const expectedResponse = {
         projectId: projectId2,
         clusterName: clusterName,
         clusterUuid: clusterUuid,
@@ -59,7 +59,7 @@ describe('ClusterControllerClient', () => {
       client
         .createCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -72,16 +72,16 @@ describe('ClusterControllerClient', () => {
     });
 
     it('invokes createCluster with error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var cluster = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const cluster = {};
+      const request = {
         projectId: projectId,
         region: region,
         cluster: cluster,
@@ -97,7 +97,7 @@ describe('ClusterControllerClient', () => {
       client
         .createCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -111,7 +111,7 @@ describe('ClusterControllerClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -128,18 +128,18 @@ describe('ClusterControllerClient', () => {
 
   describe('updateCluster', function() {
     it('invokes updateCluster without error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var cluster = {};
-      var updateMask = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const cluster = {};
+      const updateMask = {};
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
@@ -148,10 +148,10 @@ describe('ClusterControllerClient', () => {
       };
 
       // Mock response
-      var projectId2 = 'projectId2939242356';
-      var clusterName2 = 'clusterName2875867491';
-      var clusterUuid = 'clusterUuid-1017854240';
-      var expectedResponse = {
+      const projectId2 = 'projectId2939242356';
+      const clusterName2 = 'clusterName2875867491';
+      const clusterUuid = 'clusterUuid-1017854240';
+      const expectedResponse = {
         projectId: projectId2,
         clusterName: clusterName2,
         clusterUuid: clusterUuid,
@@ -166,7 +166,7 @@ describe('ClusterControllerClient', () => {
       client
         .updateCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -179,18 +179,18 @@ describe('ClusterControllerClient', () => {
     });
 
     it('invokes updateCluster with error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var cluster = {};
-      var updateMask = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const cluster = {};
+      const updateMask = {};
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
@@ -208,7 +208,7 @@ describe('ClusterControllerClient', () => {
       client
         .updateCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -222,7 +222,7 @@ describe('ClusterControllerClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -239,23 +239,23 @@ describe('ClusterControllerClient', () => {
 
   describe('deleteCluster', function() {
     it('invokes deleteCluster without error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.deleteCluster = mockLongRunningGrpcMethod(
@@ -266,7 +266,7 @@ describe('ClusterControllerClient', () => {
       client
         .deleteCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -279,16 +279,16 @@ describe('ClusterControllerClient', () => {
     });
 
     it('invokes deleteCluster with error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
@@ -304,7 +304,7 @@ describe('ClusterControllerClient', () => {
       client
         .deleteCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -318,7 +318,7 @@ describe('ClusterControllerClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -335,26 +335,26 @@ describe('ClusterControllerClient', () => {
 
   describe('getCluster', () => {
     it('invokes getCluster without error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
       };
 
       // Mock response
-      var projectId2 = 'projectId2939242356';
-      var clusterName2 = 'clusterName2875867491';
-      var clusterUuid = 'clusterUuid-1017854240';
-      var expectedResponse = {
+      const projectId2 = 'projectId2939242356';
+      const clusterName2 = 'clusterName2875867491';
+      const clusterUuid = 'clusterUuid-1017854240';
+      const expectedResponse = {
         projectId: projectId2,
         clusterName: clusterName2,
         clusterUuid: clusterUuid,
@@ -374,16 +374,16 @@ describe('ClusterControllerClient', () => {
     });
 
     it('invokes getCluster with error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
@@ -407,24 +407,24 @@ describe('ClusterControllerClient', () => {
 
   describe('listClusters', () => {
     it('invokes listClusters without error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const request = {
         projectId: projectId,
         region: region,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var clustersElement = {};
-      var clusters = [clustersElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const clustersElement = {};
+      const clusters = [clustersElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         clusters: clusters,
       };
@@ -447,15 +447,15 @@ describe('ClusterControllerClient', () => {
     });
 
     it('invokes listClusters with error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const request = {
         projectId: projectId,
         region: region,
       };
@@ -478,23 +478,23 @@ describe('ClusterControllerClient', () => {
 
   describe('diagnoseCluster', function() {
     it('invokes diagnoseCluster without error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.diagnoseCluster = mockLongRunningGrpcMethod(
@@ -505,7 +505,7 @@ describe('ClusterControllerClient', () => {
       client
         .diagnoseCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -518,16 +518,16 @@ describe('ClusterControllerClient', () => {
     });
 
     it('invokes diagnoseCluster with error', done => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var clusterName = 'clusterName-1018081872';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const clusterName = 'clusterName-1018081872';
+      const request = {
         projectId: projectId,
         region: region,
         clusterName: clusterName,
@@ -543,7 +543,7 @@ describe('ClusterControllerClient', () => {
       client
         .diagnoseCluster(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -557,7 +557,7 @@ describe('ClusterControllerClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dataprocModule.v1.ClusterControllerClient({
+      const client = new dataprocModule.v1.ClusterControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -575,25 +575,25 @@ describe('ClusterControllerClient', () => {
 describe('JobControllerClient', () => {
   describe('submitJob', () => {
     it('invokes submitJob without error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var job = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const job = {};
+      const request = {
         projectId: projectId,
         region: region,
         job: job,
       };
 
       // Mock response
-      var driverOutputResourceUri = 'driverOutputResourceUri-542229086';
-      var driverControlFilesUri = 'driverControlFilesUri207057643';
-      var expectedResponse = {
+      const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
+      const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
       };
@@ -612,16 +612,16 @@ describe('JobControllerClient', () => {
     });
 
     it('invokes submitJob with error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var job = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const job = {};
+      const request = {
         projectId: projectId,
         region: region,
         job: job,
@@ -645,25 +645,25 @@ describe('JobControllerClient', () => {
 
   describe('getJob', () => {
     it('invokes getJob without error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
       };
 
       // Mock response
-      var driverOutputResourceUri = 'driverOutputResourceUri-542229086';
-      var driverControlFilesUri = 'driverControlFilesUri207057643';
-      var expectedResponse = {
+      const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
+      const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
       };
@@ -682,16 +682,16 @@ describe('JobControllerClient', () => {
     });
 
     it('invokes getJob with error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
@@ -711,24 +711,24 @@ describe('JobControllerClient', () => {
 
   describe('listJobs', () => {
     it('invokes listJobs without error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const request = {
         projectId: projectId,
         region: region,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var jobsElement = {};
-      var jobs = [jobsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const jobsElement = {};
+      const jobs = [jobsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         jobs: jobs,
       };
@@ -747,15 +747,15 @@ describe('JobControllerClient', () => {
     });
 
     it('invokes listJobs with error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const request = {
         projectId: projectId,
         region: region,
       };
@@ -778,18 +778,18 @@ describe('JobControllerClient', () => {
 
   describe('updateJob', () => {
     it('invokes updateJob without error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var job = {};
-      var updateMask = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const job = {};
+      const updateMask = {};
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
@@ -798,9 +798,9 @@ describe('JobControllerClient', () => {
       };
 
       // Mock response
-      var driverOutputResourceUri = 'driverOutputResourceUri-542229086';
-      var driverControlFilesUri = 'driverControlFilesUri207057643';
-      var expectedResponse = {
+      const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
+      const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
       };
@@ -819,18 +819,18 @@ describe('JobControllerClient', () => {
     });
 
     it('invokes updateJob with error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var job = {};
-      var updateMask = {};
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const job = {};
+      const updateMask = {};
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
@@ -856,25 +856,25 @@ describe('JobControllerClient', () => {
 
   describe('cancelJob', () => {
     it('invokes cancelJob without error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
       };
 
       // Mock response
-      var driverOutputResourceUri = 'driverOutputResourceUri-542229086';
-      var driverControlFilesUri = 'driverControlFilesUri207057643';
-      var expectedResponse = {
+      const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
+      const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
       };
@@ -893,16 +893,16 @@ describe('JobControllerClient', () => {
     });
 
     it('invokes cancelJob with error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
@@ -926,16 +926,16 @@ describe('JobControllerClient', () => {
 
   describe('deleteJob', () => {
     it('invokes deleteJob without error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
@@ -951,16 +951,16 @@ describe('JobControllerClient', () => {
     });
 
     it('invokes deleteJob with error', done => {
-      var client = new dataprocModule.v1.JobControllerClient({
+      const client = new dataprocModule.v1.JobControllerClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var projectId = 'projectId-1969970175';
-      var region = 'region-934795532';
-      var jobId = 'jobId-1154752291';
-      var request = {
+      const projectId = 'projectId-1969970175';
+      const region = 'region-934795532';
+      const jobId = 'jobId-1154752291';
+      const request = {
         projectId: projectId,
         region: region,
         jobId: jobId,
@@ -998,7 +998,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

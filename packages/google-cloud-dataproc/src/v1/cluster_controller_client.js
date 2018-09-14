@@ -73,13 +73,13 @@ class ClusterControllerClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -90,7 +90,7 @@ class ClusterControllerClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -108,7 +108,7 @@ class ClusterControllerClient {
         'clusters'
       ),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -128,26 +128,28 @@ class ClusterControllerClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var createClusterResponse = protoFilesRoot.lookup(
+    const createClusterResponse = protoFilesRoot.lookup(
       'google.cloud.dataproc.v1.Cluster'
     );
-    var createClusterMetadata = protoFilesRoot.lookup(
+    const createClusterMetadata = protoFilesRoot.lookup(
       'google.cloud.dataproc.v1.ClusterOperationMetadata'
     );
-    var updateClusterResponse = protoFilesRoot.lookup(
+    const updateClusterResponse = protoFilesRoot.lookup(
       'google.cloud.dataproc.v1.Cluster'
     );
-    var updateClusterMetadata = protoFilesRoot.lookup(
+    const updateClusterMetadata = protoFilesRoot.lookup(
       'google.cloud.dataproc.v1.ClusterOperationMetadata'
     );
-    var deleteClusterResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var deleteClusterMetadata = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.ClusterOperationMetadata'
-    );
-    var diagnoseClusterResponse = protoFilesRoot.lookup(
+    const deleteClusterResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
-    var diagnoseClusterMetadata = protoFilesRoot.lookup(
+    const deleteClusterMetadata = protoFilesRoot.lookup(
+      'google.cloud.dataproc.v1.ClusterOperationMetadata'
+    );
+    const diagnoseClusterResponse = protoFilesRoot.lookup(
+      'google.protobuf.Empty'
+    );
+    const diagnoseClusterMetadata = protoFilesRoot.lookup(
       'google.cloud.dataproc.v1.DiagnoseClusterResults'
     );
 
@@ -175,7 +177,7 @@ class ClusterControllerClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dataproc.v1.ClusterController',
       gapicConfig,
       opts.clientConfig,
@@ -189,14 +191,14 @@ class ClusterControllerClient {
 
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.ClusterController.
-    var clusterControllerStub = gaxGrpc.createStub(
+    const clusterControllerStub = gaxGrpc.createStub(
       protos.google.cloud.dataproc.v1.ClusterController,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var clusterControllerStubMethods = [
+    const clusterControllerStubMethods = [
       'createCluster',
       'updateCluster',
       'deleteCluster',
@@ -209,7 +211,7 @@ class ClusterControllerClient {
         clusterControllerStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -284,14 +286,14 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var cluster = {};
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const cluster = {};
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   cluster: cluster,
@@ -300,30 +302,30 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.createCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var projectId = '';
-   * var region = '';
-   * var cluster = {};
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const cluster = {};
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   cluster: cluster,
@@ -332,8 +334,8 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.createCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -447,16 +449,16 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var clusterName = '';
-   * var cluster = {};
-   * var updateMask = {};
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const cluster = {};
+   * const updateMask = {};
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   clusterName: clusterName,
@@ -467,32 +469,32 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.updateCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var projectId = '';
-   * var region = '';
-   * var clusterName = '';
-   * var cluster = {};
-   * var updateMask = {};
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const cluster = {};
+   * const updateMask = {};
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   clusterName: clusterName,
@@ -503,8 +505,8 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.updateCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -564,14 +566,14 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var clusterName = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   clusterName: clusterName,
@@ -580,30 +582,30 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.deleteCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var projectId = '';
-   * var region = '';
-   * var clusterName = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   clusterName: clusterName,
@@ -612,8 +614,8 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.deleteCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -673,21 +675,21 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var clusterName = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   clusterName: clusterName,
    * };
    * client.getCluster(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -767,21 +769,21 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var projectId = '';
-   * var region = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    * };
    *
    * client.listClusters(request)
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -791,22 +793,22 @@ class ClusterControllerClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var projectId = '';
-   * var region = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    * };
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -887,13 +889,13 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    * };
@@ -943,14 +945,14 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * var client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
-   * var projectId = '';
-   * var region = '';
-   * var clusterName = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   clusterName: clusterName,
@@ -959,30 +961,30 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.diagnoseCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var projectId = '';
-   * var region = '';
-   * var clusterName = '';
-   * var request = {
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const request = {
    *   projectId: projectId,
    *   region: region,
    *   clusterName: clusterName,
@@ -991,8 +993,8 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.diagnoseCluster(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

@@ -28,7 +28,7 @@
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.LoggingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var LoggingConfig = {
+const LoggingConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -139,7 +139,7 @@ var LoggingConfig = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.HadoopJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var HadoopJob = {
+const HadoopJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -187,7 +187,7 @@ var HadoopJob = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.SparkJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var SparkJob = {
+const SparkJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -236,7 +236,7 @@ var SparkJob = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.PySparkJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var PySparkJob = {
+const PySparkJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -263,7 +263,7 @@ var PySparkJob = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.QueryList definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var QueryList = {
+const QueryList = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -303,7 +303,7 @@ var QueryList = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.HiveJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var HiveJob = {
+const HiveJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -340,7 +340,7 @@ var HiveJob = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.SparkSqlJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var SparkSqlJob = {
+const SparkSqlJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -384,7 +384,7 @@ var SparkSqlJob = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.PigJob definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var PigJob = {
+const PigJob = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -402,7 +402,7 @@ var PigJob = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.JobPlacement definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var JobPlacement = {
+const JobPlacement = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -433,7 +433,7 @@ var JobPlacement = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.JobStatus definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var JobStatus = {
+const JobStatus = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -552,7 +552,7 @@ var JobStatus = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.JobReference definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var JobReference = {
+const JobReference = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -584,7 +584,7 @@ var JobReference = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.YarnApplication definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var YarnApplication = {
+const YarnApplication = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -736,7 +736,7 @@ var YarnApplication = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.Job definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var Job = {
+const Job = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -760,7 +760,7 @@ var Job = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.JobScheduling definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var JobScheduling = {
+const JobScheduling = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -783,7 +783,7 @@ var JobScheduling = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.SubmitJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var SubmitJobRequest = {
+const SubmitJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -804,7 +804,7 @@ var SubmitJobRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.GetJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var GetJobRequest = {
+const GetJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -857,7 +857,7 @@ var GetJobRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ListJobsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var ListJobsRequest = {
+const ListJobsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -918,7 +918,7 @@ var ListJobsRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.UpdateJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var UpdateJobRequest = {
+const UpdateJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -939,7 +939,7 @@ var UpdateJobRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ListJobsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var ListJobsResponse = {
+const ListJobsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -960,7 +960,7 @@ var ListJobsResponse = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.CancelJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var CancelJobRequest = {
+const CancelJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -981,6 +981,6 @@ var CancelJobRequest = {
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.DeleteJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/jobs.proto}
  */
-var DeleteJobRequest = {
+const DeleteJobRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
