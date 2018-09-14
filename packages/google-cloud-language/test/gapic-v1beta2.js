@@ -18,27 +18,27 @@ const assert = require('assert');
 
 const languageModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('LanguageServiceClient', () => {
   describe('analyzeSentiment', () => {
     it('invokes analyzeSentiment without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
       // Mock response
-      var language = 'language-1613589672';
-      var expectedResponse = {
+      const language = 'language-1613589672';
+      const expectedResponse = {
         language: language,
       };
 
@@ -56,14 +56,14 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeSentiment with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
@@ -85,20 +85,20 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeEntities', () => {
     it('invokes analyzeEntities without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
       // Mock response
-      var language = 'language-1613589672';
-      var expectedResponse = {
+      const language = 'language-1613589672';
+      const expectedResponse = {
         language: language,
       };
 
@@ -116,14 +116,14 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeEntities with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
@@ -145,20 +145,20 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeEntitySentiment', () => {
     it('invokes analyzeEntitySentiment without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
       // Mock response
-      var language = 'language-1613589672';
-      var expectedResponse = {
+      const language = 'language-1613589672';
+      const expectedResponse = {
         language: language,
       };
 
@@ -176,14 +176,14 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeEntitySentiment with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
@@ -205,20 +205,20 @@ describe('LanguageServiceClient', () => {
 
   describe('analyzeSyntax', () => {
     it('invokes analyzeSyntax without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
       // Mock response
-      var language = 'language-1613589672';
-      var expectedResponse = {
+      const language = 'language-1613589672';
+      const expectedResponse = {
         language: language,
       };
 
@@ -236,14 +236,14 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes analyzeSyntax with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
@@ -265,19 +265,19 @@ describe('LanguageServiceClient', () => {
 
   describe('classifyText', () => {
     it('invokes classifyText without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.classifyText = mockSimpleGrpcMethod(
@@ -293,14 +293,14 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes classifyText with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         document: document,
       };
 
@@ -322,22 +322,22 @@ describe('LanguageServiceClient', () => {
 
   describe('annotateText', () => {
     it('invokes annotateText without error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var features = {};
-      var request = {
+      const document = {};
+      const features = {};
+      const request = {
         document: document,
         features: features,
       };
 
       // Mock response
-      var language = 'language-1613589672';
-      var expectedResponse = {
+      const language = 'language-1613589672';
+      const expectedResponse = {
         language: language,
       };
 
@@ -355,15 +355,15 @@ describe('LanguageServiceClient', () => {
     });
 
     it('invokes annotateText with error', done => {
-      var client = new languageModule.v1beta2.LanguageServiceClient({
+      const client = new languageModule.v1beta2.LanguageServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var document = {};
-      var features = {};
-      var request = {
+      const document = {};
+      const features = {};
+      const request = {
         document: document,
         features: features,
       };

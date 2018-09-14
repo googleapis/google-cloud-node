@@ -49,7 +49,7 @@
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Document definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var Document = {
+const Document = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -96,7 +96,7 @@ var Document = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Sentence definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var Sentence = {
+const Sentence = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -145,7 +145,7 @@ var Sentence = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Entity definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var Entity = {
+const Entity = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -223,7 +223,7 @@ var Entity = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Token definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var Token = {
+const Token = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -244,7 +244,7 @@ var Token = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.Sentiment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var Sentiment = {
+const Sentiment = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -315,7 +315,7 @@ var Sentiment = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.PartOfSpeech definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var PartOfSpeech = {
+const PartOfSpeech = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -863,7 +863,7 @@ var PartOfSpeech = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.DependencyEdge definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var DependencyEdge = {
+const DependencyEdge = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1317,7 +1317,7 @@ var DependencyEdge = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.EntityMention definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var EntityMention = {
+const EntityMention = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1359,7 +1359,7 @@ var EntityMention = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.TextSpan definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var TextSpan = {
+const TextSpan = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1377,7 +1377,7 @@ var TextSpan = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.ClassificationCategory definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var ClassificationCategory = {
+const ClassificationCategory = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1399,7 +1399,7 @@ var ClassificationCategory = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSentimentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeSentimentRequest = {
+const AnalyzeSentimentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1425,7 +1425,7 @@ var AnalyzeSentimentRequest = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSentimentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeSentimentResponse = {
+const AnalyzeSentimentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1446,7 +1446,7 @@ var AnalyzeSentimentResponse = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeEntitySentimentRequest = {
+const AnalyzeEntitySentimentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1467,7 +1467,7 @@ var AnalyzeEntitySentimentRequest = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitySentimentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeEntitySentimentResponse = {
+const AnalyzeEntitySentimentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1488,7 +1488,7 @@ var AnalyzeEntitySentimentResponse = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitiesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeEntitiesRequest = {
+const AnalyzeEntitiesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1509,7 +1509,7 @@ var AnalyzeEntitiesRequest = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeEntitiesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeEntitiesResponse = {
+const AnalyzeEntitiesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1530,7 +1530,7 @@ var AnalyzeEntitiesResponse = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSyntaxRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeSyntaxRequest = {
+const AnalyzeSyntaxRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1556,7 +1556,7 @@ var AnalyzeSyntaxRequest = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnalyzeSyntaxResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnalyzeSyntaxResponse = {
+const AnalyzeSyntaxResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1572,7 +1572,7 @@ var AnalyzeSyntaxResponse = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.ClassifyTextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var ClassifyTextRequest = {
+const ClassifyTextRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1588,7 +1588,7 @@ var ClassifyTextRequest = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.ClassifyTextResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var ClassifyTextResponse = {
+const ClassifyTextResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1615,7 +1615,7 @@ var ClassifyTextResponse = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnnotateTextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnnotateTextRequest = {
+const AnnotateTextRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -1689,7 +1689,7 @@ var AnnotateTextRequest = {
  * @memberof google.cloud.language.v1beta2
  * @see [google.cloud.language.v1beta2.AnnotateTextResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta2/language_service.proto}
  */
-var AnnotateTextResponse = {
+const AnnotateTextResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1703,7 +1703,7 @@ var AnnotateTextResponse = {
  * @enum {number}
  * @memberof google.cloud.language.v1beta2
  */
-var EncodingType = {
+const EncodingType = {
 
   /**
    * If `EncodingType` is not specified, encoding-dependent information (such as

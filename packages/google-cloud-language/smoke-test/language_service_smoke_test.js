@@ -18,19 +18,19 @@ describe('LanguageServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const language = require('../src');
 
-    var client = new language.v1beta2.LanguageServiceClient({
+    const client = new language.v1beta2.LanguageServiceClient({
       // optional auth parameters.
     });
 
-    var content = 'Hello, world!';
-    var type = 'PLAIN_TEXT';
-    var document = {
+    const content = 'Hello, world!';
+    const type = 'PLAIN_TEXT';
+    const document = {
       content: content,
       type: type,
     };
     client.analyzeSentiment({document: document})
       .then(responses => {
-        var response = responses[0];
+        const response = responses[0];
         console.log(response);
       })
       .then(done)
