@@ -74,13 +74,13 @@ class OsLoginServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -91,7 +91,7 @@ class OsLoginServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -113,7 +113,7 @@ class OsLoginServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.oslogin.v1beta.OsLoginService',
       gapicConfig,
       opts.clientConfig,
@@ -127,14 +127,14 @@ class OsLoginServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.oslogin.v1beta.OsLoginService.
-    var osLoginServiceStub = gaxGrpc.createStub(
+    const osLoginServiceStub = gaxGrpc.createStub(
       protos.google.cloud.oslogin.v1beta.OsLoginService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var osLoginServiceStubMethods = [
+    const osLoginServiceStubMethods = [
       'deletePosixAccount',
       'deleteSshPublicKey',
       'getLoginProfile',
@@ -147,7 +147,7 @@ class OsLoginServiceClient {
         osLoginServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -218,11 +218,11 @@ class OsLoginServiceClient {
    *
    * const osLogin = require('@google-cloud/os-login');
    *
-   * var client = new osLogin.v1beta.OsLoginServiceClient({
+   * const client = new osLogin.v1beta.OsLoginServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[USER]', '[PROJECT]');
+   * const formattedName = client.projectPath('[USER]', '[PROJECT]');
    * client.deletePosixAccount({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -258,11 +258,11 @@ class OsLoginServiceClient {
    *
    * const osLogin = require('@google-cloud/os-login');
    *
-   * var client = new osLogin.v1beta.OsLoginServiceClient({
+   * const client = new osLogin.v1beta.OsLoginServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+   * const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
    * client.deleteSshPublicKey({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -300,14 +300,14 @@ class OsLoginServiceClient {
    *
    * const osLogin = require('@google-cloud/os-login');
    *
-   * var client = new osLogin.v1beta.OsLoginServiceClient({
+   * const client = new osLogin.v1beta.OsLoginServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.userPath('[USER]');
+   * const formattedName = client.userPath('[USER]');
    * client.getLoginProfile({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -348,14 +348,14 @@ class OsLoginServiceClient {
    *
    * const osLogin = require('@google-cloud/os-login');
    *
-   * var client = new osLogin.v1beta.OsLoginServiceClient({
+   * const client = new osLogin.v1beta.OsLoginServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+   * const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
    * client.getSshPublicKey({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -402,19 +402,19 @@ class OsLoginServiceClient {
    *
    * const osLogin = require('@google-cloud/os-login');
    *
-   * var client = new osLogin.v1beta.OsLoginServiceClient({
+   * const client = new osLogin.v1beta.OsLoginServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.userPath('[USER]');
-   * var sshPublicKey = {};
-   * var request = {
+   * const formattedParent = client.userPath('[USER]');
+   * const sshPublicKey = {};
+   * const request = {
    *   parent: formattedParent,
    *   sshPublicKey: sshPublicKey,
    * };
    * client.importSshPublicKey(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -464,19 +464,19 @@ class OsLoginServiceClient {
    *
    * const osLogin = require('@google-cloud/os-login');
    *
-   * var client = new osLogin.v1beta.OsLoginServiceClient({
+   * const client = new osLogin.v1beta.OsLoginServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
-   * var sshPublicKey = {};
-   * var request = {
+   * const formattedName = client.fingerprintPath('[USER]', '[FINGERPRINT]');
+   * const sshPublicKey = {};
+   * const request = {
    *   name: formattedName,
    *   sshPublicKey: sshPublicKey,
    * };
    * client.updateSshPublicKey(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
