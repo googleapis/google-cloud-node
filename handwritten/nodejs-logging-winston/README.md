@@ -7,7 +7,7 @@
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-logging-winston?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-logging-winston)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-logging-winston/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-logging-winston)
 
-This module provides an easy to use, higher-level layer for working with
+This module provides a higher-level layer for working with
 [Stackdriver Logging](https://cloud.google.com/logging/docs), compatible with
 [Winston](https://www.npmjs.com/package/winston). Simply attach this as a
 transport to your existing Winston loggers.
@@ -64,45 +64,49 @@ For a more detailed Stackdriver Logging setup guide, see https://cloud.google.co
 
 ### Using the client library
 
+#### `winston@3.x`
+
 ```javascript
 const winston = require('winston');
-const Logger = winston.Logger;
-const Console = winston.transports.Console;
+const {LoggingWinston} = require('@google-cloud/logging-winston')
 
-// Imports the Google Cloud client library for Winston
-
-// Node 6+
-const {LoggingWinston} = require('@google-cloud/logging-winston');
-
-// Node 4+
-// const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
-
-// Using ES6 style imports via TypeScript or Babel
-// import {LoggingWinston} from '@google-cloud/logging-winston';
-
-// Creates a Winston Stackdriver Logging client
 const loggingWinston = new LoggingWinston();
 
-// Create a Winston logger that streams to Stackdriver Logging
-// Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
-const logger = new Logger({
-  level: 'info', // log at 'info' and above
+const logger = winston.createLogger({
+  level: 'info',
   transports: [
-    // Log to the console
-    new Console(),
-    // And log to Stackdriver Logging
+    new winston.transports.Console(),
+    // Add Stackdriver Logging
     loggingWinston,
-  ],
+  ]
 });
 
-// Writes some log entries
 logger.error('warp nacelles offline');
-logger.info('shields at 99%');
+```
+Creates a Winston logger that streams to Stackdriver Logging
+
+Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
+
+#### `winston@2.x`
+
+```javascript
+const winston = require('winston');
+const {LoggingWinston} = require('@google-cloud/logging-winston');
+
+const logger = new winston.Logger({
+  transports:[
+     new winston.transports.Console(),
+     new LoggingWinston()
+  ]
+})
+
+logger.info('hello winston')
+
 ```
 
 ### Error Reporting
 
-Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instatiating a `LoggingWinston` instance:
+Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instantiating a `LoggingWinston` instance:
 
 ```javascript
 const loggingWinston = new LoggingWinston({
@@ -139,7 +143,7 @@ winston.info(`${req.url} endpoint hit`, {
 });
 ```
 
-The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
+The `httpRequest` property must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
 
 ### Correlating Logs with Traces
 
@@ -213,6 +217,7 @@ has instructions for running the samples.
 | --------------------------- | --------------------------------- | ------ |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-logging-winston/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Explict Auth Setup | [source code](https://github.com/googleapis/nodejs-logging-winston/blob/master/samples/setup_explicit.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md) |
+
 
 ## Versioning
 
