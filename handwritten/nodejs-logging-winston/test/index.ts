@@ -15,23 +15,26 @@
  */
 
 import * as assert from 'assert';
-import * as proxyquire from 'proxyquire';
-import * as nodeutil from 'util';
+import * as TransportStream from 'winston-transport';
+
 import * as types from '../src/types/core';
 
-describe('logging-winston', () => {
-  let fakeLogInstance: types.StackdriverLogging;
-  let fakeLoggingOptions_: types.Options|null;
-  let fakeLogName_: string|null;
+const inject = require('require-inject');
 
-  function fakeLogging(options: types.Options) {
-    fakeLoggingOptions_ = options;
-    return {
-      log: (logName: string) => {
-        fakeLogName_ = logName;
-        return fakeLogInstance;
-      },
-    };
+describe('logging-winston', () => {
+  let fakeLoggingOptions_: types.Options|null;
+  // tslint:disable-next-line:no-any
+  let lastFakeLoggingArgs: IArguments|any[] = [];
+
+  class FakeLogging {
+    constructor(options: {}) {
+      fakeLoggingOptions_ = options;
+    }
+    log(level: string, message: string, metadata: {}|undefined,
+        callback: () => void): void {
+      lastFakeLoggingArgs = arguments;
+      if (callback) setImmediate(callback);
+    }
   }
 
   class FakeTransport {
@@ -48,10 +51,9 @@ describe('logging-winston', () => {
     Transport: FakeTransport,
   };
 
-  const loggingWinstonLib = proxyquire('../src/index.js', {
-    '@google-cloud/logging': fakeLogging,
-    winston: fakeWinston,
-  });
+  const loggingWinstonLib = inject(
+      '../src/winston2',
+      {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
   // loggingWinston is LoggingWinston namespace which cannot be determined type.
   // tslint:disable-next-line:no-any
   let loggingWinston: any;
@@ -68,39 +70,79 @@ describe('logging-winston', () => {
   };
 
   beforeEach(() => {
-    fakeLogInstance = {};
     fakeLoggingOptions_ = null;
-    fakeLogName_ = null;
     loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
   });
 
-  describe('instantiation', () => {
-    it('should inherit from winston.Transport', () => {
-      assert.deepStrictEqual(loggingWinston.transportCalledWith_[0], {
-        level: OPTIONS.level,
-        name: OPTIONS.logName,
-      });
-    });
-
-    it('should default to logging.write scope', () => {
-      assert.deepStrictEqual((fakeLoggingOptions_ as types.Options).scopes, [
-        'https://www.googleapis.com/auth/logging.write',
-      ]);
-    });
-
+  // tslint:disable-next-line:no-any
+  function passesOptionsCorrectly(loggingWinstonLib: {LoggingWinston: any}) {
     it('should initialize Log instance using provided scopes', () => {
       const fakeScope = 'fake scope';
 
       const optionsWithScopes: types.Options = Object.assign({}, OPTIONS);
       optionsWithScopes.scopes = fakeScope;
-
-      const loggingWinston =
-          new loggingWinstonLib.LoggingWinston(optionsWithScopes);
+      // tslint:disable-next-line:no-unused-expression
+      new loggingWinstonLib.LoggingWinston(optionsWithScopes);
 
       assert.deepStrictEqual(fakeLoggingOptions_, optionsWithScopes);
     });
 
+    it('should pass the provided options.inspectMetadata', () => {
+      const optionsWithInspectMetadata = Object.assign({}, OPTIONS, {
+        inspectMetadata: true,
+      });
+
+      // tslint:disable-next-line:no-unused-expression
+      new loggingWinstonLib.LoggingWinston(optionsWithInspectMetadata);
+      assert.strictEqual(fakeLoggingOptions_!.inspectMetadata, true);
+    });
+
+    it('should pass provided levels', () => {
+      assert.strictEqual(fakeLoggingOptions_!.levels, OPTIONS.levels);
+    });
+
+    it('should pass Log instance using provided name', () => {
+      const logName = 'log-name-override';
+
+      const optionsWithLogName = Object.assign({}, OPTIONS);
+      optionsWithLogName.logName = logName;
+      // tslint:disable-next-line:no-unused-expression
+      new loggingWinstonLib.LoggingWinston(optionsWithLogName);
+
+      assert.strictEqual(fakeLoggingOptions_!.logName, logName);
+    });
+
+
+    it('should pass the provided resource', () => {
+      assert.strictEqual(fakeLoggingOptions_!.resource, OPTIONS.resource);
+    });
+
+    it('should pass the provided service context', () => {
+      assert.strictEqual(
+          fakeLoggingOptions_!.serviceContext, OPTIONS.serviceContext);
+    });
+  }
+
+  describe('instantiation/options winston 2', () => {
+    const loggingWinstonLib = inject(
+        '../src/winston2',
+        {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
+
+    const loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
+
+    it('should inherit from winston.Transport', () => {
+      assert.deepEqual(loggingWinston.transportCalledWith_[0], {
+        level: OPTIONS.level,
+        name: OPTIONS.logName,
+      });
+    });
+
     it('should assign itself to winston.transports', () => {
+      // have to reinject to make the object identity check pass consistently
+      const loggingWinstonLib = inject('../src/winston2', {
+        '../src/common': {LoggingCommon: FakeLogging},
+        winston: fakeWinston
+      });
       assert.strictEqual(
           // StackDriverLogging is added to winston.transports.
           // tslint:disable-next-line:no-any
@@ -108,446 +150,72 @@ describe('logging-winston', () => {
           loggingWinstonLib.LoggingWinston);
     });
 
-    it('should localize inspectMetadata to default value', () => {
-      assert.strictEqual(loggingWinston.inspectMetadata, false);
-    });
-
-    it('should localize the provided options.inspectMetadata', () => {
-      const optionsWithInspectMetadata = Object.assign({}, OPTIONS, {
-        inspectMetadata: true,
-      });
-
-      const loggingWinston =
-          new loggingWinstonLib.LoggingWinston(optionsWithInspectMetadata);
-      assert.strictEqual(loggingWinston.inspectMetadata, true);
-    });
-
-    it('should localize provided levels', () => {
-      assert.strictEqual(loggingWinston.levels, OPTIONS.levels);
-    });
-
-    it('should default to npm levels', () => {
-      const optionsWithoutLevels = Object.assign({}, OPTIONS);
-      delete optionsWithoutLevels.levels;
-
-      const loggingWinston =
-          new loggingWinstonLib.LoggingWinston(optionsWithoutLevels);
-      assert.deepStrictEqual(loggingWinston.levels, {
-        error: 3,
-        warn: 4,
-        info: 6,
-        verbose: 7,
-        debug: 7,
-        silly: 7,
-      });
-    });
-
-    it('should localize Log instance using default name', () => {
-      const loggingOptions = Object.assign({}, fakeLoggingOptions_);
-      delete (loggingOptions as types.Options).scopes;
-
-      assert.deepStrictEqual(loggingOptions, OPTIONS);
-      assert.strictEqual(fakeLogName_, OPTIONS.logName);
-    });
-
-    it('should localize Log instance using provided name', () => {
-      const logName = 'log-name-override';
-
-      const optionsWithLogName = Object.assign({}, OPTIONS);
-      optionsWithLogName.logName = logName;
-
-      const loggingWinston =
-          new loggingWinstonLib.LoggingWinston(optionsWithLogName);
-
-      const loggingOptions = Object.assign({}, fakeLoggingOptions_);
-      delete (loggingOptions as types.Options).scopes;
-
-      assert.deepStrictEqual(loggingOptions, optionsWithLogName);
-      assert.strictEqual(fakeLogName_, logName);
-    });
-
-    it('should localize the provided resource', () => {
-      assert.strictEqual(loggingWinston.resource, OPTIONS.resource);
-    });
-
-    it('should localize the provided service context', () => {
-      assert.strictEqual(loggingWinston.serviceContext, OPTIONS.serviceContext);
-    });
-
-    it('should not throw if a serviceContext is not specified', () => {
-      // tslint:disable-next-line:no-unused-expression
-      new loggingWinstonLib.LoggingWinston();
-    });
-
-    it('should throw if a serviceContext is specified without a service',
-       done => {
-         try {
-           // tslint:disable-next-line:no-unused-expression
-           new loggingWinstonLib.LoggingWinston({serviceContext: {}});
-         } catch (err) {
-           assert.strictEqual(
-               err.message,
-               `If 'serviceContext' is specified then ` +
-                   `'serviceContext.service' is required.`);
-           done();
-         }
-       });
+    passesOptionsCorrectly(loggingWinstonLib);
   });
 
-  describe('log', () => {
+  describe('instantiation/options winston 3', () => {
+    const loggingWinstonLib = inject(
+        '../src/winston3', {'../src/common': {LoggingCommon: FakeLogging}});
+
+    it('should inherit from winston-transport.TransportStream', () => {
+      const loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
+      assert.ok(loggingWinston instanceof TransportStream);
+    });
+
+    passesOptionsCorrectly(loggingWinstonLib);
+  });
+
+  describe('log winston2', () => {
     const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
-    const STACKDRIVER_LEVEL = 'alert';  // (code 1)
     const MESSAGE = 'message';
-    const METADATA = {
-      value: () => {},
-    };
+    const METADATA = {a: 1};
+
+    const loggingWinstonLib = inject(
+        '../src/winston2',
+        {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
+
+    const loggingWinston = new loggingWinstonLib.LoggingWinston();
 
     beforeEach(() => {
-      // tslint:disable-next-line:no-any
-      fakeLogInstance.entry = (() => {}) as any;
-      loggingWinston.stackdriverLog.emergency = () => {};
-      loggingWinston.stackdriverLog[STACKDRIVER_LEVEL] = () => {};
+      lastFakeLoggingArgs = [];
     });
 
-    it('should throw on a bad log level', () => {
-      assert.throws(() => {
-        loggingWinston.log(
-            'non-existent-level', MESSAGE, METADATA, assert.ifError);
-      }, /Unknown log level: non-existent-level/);
-    });
-
-    it('should not throw on `0` log level', () => {
-      const options = Object.assign({}, OPTIONS, {
-        levels: {
-          zero: 0,
-        },
-      });
-
-      loggingWinston = new loggingWinstonLib.LoggingWinston(options);
-
-      loggingWinston.log('zero', 'test message');
-    });
-
-    it('should properly create an entry', (done) => {
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(entryMetadata, {
-              resource: loggingWinston.resource,
-            });
-            assert.deepStrictEqual(data, {
-              message: MESSAGE,
-              metadata: METADATA,
-            });
-            done();
-          };
-
+    it('should properly call common.log', (done) => {
       loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-    });
-
-    it('should append stack when metadata is an error', (done) => {
-      const error = {
-        stack: 'the stack',
-      };
-
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(data, {
-              message: MESSAGE + ' ' + error.stack,
-              metadata: error,
-              serviceContext: OPTIONS.serviceContext,
-            });
-            done();
-          };
-
-      loggingWinston.log(LEVEL, MESSAGE, error, assert.ifError);
-    });
-
-    it('should use stack when metadata is err without message', (done) => {
-      const error = {
-        stack: 'the stack',
-      };
-
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(data, {
-              message: error.stack,
-              metadata: error,
-              serviceContext: OPTIONS.serviceContext,
-            });
-            done();
-          };
-
-      loggingWinston.log(LEVEL, '', error, assert.ifError);
-    });
-
-    it('should not require metadata', (done) => {
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(entryMetadata, {
-              resource: loggingWinston.resource,
-            });
-            assert.deepStrictEqual(data, {
-              message: MESSAGE,
-              metadata: {},
-            });
-            done();
-          };
-
-      loggingWinston.log(LEVEL, MESSAGE, assert.ifError);
-    });
-
-    it('should inspect metadata when inspectMetadata is set', (done) => {
-      loggingWinston.inspectMetadata = true;
-
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            const expectedWinstonMetadata = {};
-
-            for (const prop of Object.keys(METADATA)) {
-              // metadata does not have index signature.
-              // tslint:disable-next-line:no-any
-              (expectedWinstonMetadata as any)[prop] =
-                  // tslint:disable-next-line:no-any
-                  nodeutil.inspect((METADATA as any)[prop]);
-            }
-            assert.deepStrictEqual(data.metadata, expectedWinstonMetadata);
-
-            done();
-          };
-
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-    });
-
-    it('should promote httpRequest property to metadata', (done) => {
-      const HTTP_REQUEST = {
-        statusCode: 418,
-      };
-      const metadataWithRequest = Object.assign(
-          {
-            httpRequest: HTTP_REQUEST,
-          },
-          METADATA);
-
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(entryMetadata, {
-              resource: loggingWinston.resource,
-              httpRequest: HTTP_REQUEST,
-            });
-            assert.deepStrictEqual(data, {
-              message: MESSAGE,
-              metadata: METADATA,
-            });
-            done();
-          };
-      loggingWinston.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
-    });
-
-    it('should promote labels from metadata to log entry', (done) => {
-      const LABELS = {labelKey: 'labelValue'};
-      const metadataWithLabels = Object.assign({labels: LABELS}, METADATA);
-
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(entryMetadata, {
-              resource: loggingWinston.resource,
-              labels: LABELS,
-            });
-            assert.deepStrictEqual(data, {
-              message: MESSAGE,
-              metadata: METADATA,
-            });
-            done();
-          };
-      loggingWinston.log(LEVEL, MESSAGE, metadataWithLabels, assert.ifError);
-    });
-
-    it('should promote prefixed trace property to metadata', (done) => {
-      const metadataWithTrace = Object.assign({}, METADATA);
-      const loggingTraceKey =
-          loggingWinstonLib.LoggingWinston.LOGGING_TRACE_KEY;
-      // metadataWithTrace does not have index signature.
-      // tslint:disable-next-line:no-any
-      (metadataWithTrace as any)[loggingTraceKey] = 'trace1';
-
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(entryMetadata, {
-              resource: loggingWinston.resource,
-              trace: 'trace1',
-            });
-            assert.deepStrictEqual(data, {
-              message: MESSAGE,
-              metadata: METADATA,
-            });
-            done();
-          };
-      loggingWinston.log(LEVEL, MESSAGE, metadataWithTrace, assert.ifError);
-    });
-
-    it('should set trace metadata from agent if available', (done) => {
-      const oldTraceAgent = global._google_trace_agent;
-      global._google_trace_agent = {
-        getCurrentContextId: () => {
-          return 'trace1';
-        },
-        getWriterProjectId: () => {
-          return 'project1';
-        },
-      };
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(entryMetadata, {
-              resource: loggingWinston.resource,
-              trace: 'projects/project1/traces/trace1',
-            });
-            assert.deepStrictEqual(data, {
-              message: MESSAGE,
-              metadata: METADATA,
-            });
-            done();
-          };
-
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-
-      global._google_trace_agent = oldTraceAgent;
-    });
-
-    it('should leave out trace metadata if trace unavailable', () => {
-      loggingWinston.stackdriverLog.entry =
-          (entryMetadata: types.StackdriverEntryMetadata,
-           data: types.StackdriverData) => {
-            assert.deepStrictEqual(entryMetadata, {
-              resource: loggingWinston.resource,
-            });
-            assert.deepStrictEqual(data, {
-              message: MESSAGE,
-              metadata: METADATA,
-            });
-          };
-
-      const oldTraceAgent = global._google_trace_agent;
-
-      global._google_trace_agent = {};
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-
-      global._google_trace_agent = {
-        getCurrentContextId: () => {
-          return null;
-        },
-        getWriterProjectId: () => {
-          return null;
-        },
-      };
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-
-      global._google_trace_agent = {
-        getCurrentContextId: () => {
-          return null;
-        },
-        getWriterProjectId: () => {
-          return 'project1';
-        },
-      };
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-
-      global._google_trace_agent = {
-        getCurrentContextId: () => {
-          return 'trace1';
-        },
-        getWriterProjectId: () => {
-          return null;
-        },
-      };
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-
-      global._google_trace_agent = oldTraceAgent;
-    });
-
-    it('should write to the log', (done) => {
-      const entry = {};
-
-      loggingWinston.stackdriverLog.entry = () => {
-        return entry;
-      };
-
-      loggingWinston.stackdriverLog[STACKDRIVER_LEVEL] =
-          (entry_: types.StackdriverEntry, callback: () => void) => {
-            assert.strictEqual(entry_, entry);
-            callback();  // done()
-          };
-
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, done);
+      const [level, message, meta] = lastFakeLoggingArgs;
+      assert.strictEqual(level, 'one');
+      assert.strictEqual(message, 'message');
+      assert.deepEqual(meta, {a: 1});
+      done();
     });
   });
 
-  describe('label and labels', () => {
+  describe('log winston3', () => {
     const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
-    const STACKDRIVER_LEVEL = 'alert';  // (code 1)
     const MESSAGE = 'message';
-    const PREFIX = 'prefix';
-    const LABELS = {label1: 'value1'};
-    const METADATA = {value: () => {}, labels: {label2: 'value2'}};
+    const METADATA = {a: 1};
+
+    const loggingWinstonLib = inject(
+        '../src/winston3',
+        {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
+
+    const loggingWinston = new loggingWinstonLib.LoggingWinston();
 
     beforeEach(() => {
-      const opts = Object.assign({}, OPTIONS, {
-        prefix: PREFIX,
-        labels: LABELS,
-      });
-
-      loggingWinston = new loggingWinstonLib.LoggingWinston(opts);
+      lastFakeLoggingArgs = [];
     });
 
-    it('should properly create an entry with labels and [prefix] message',
-       (done) => {
-         loggingWinston.stackdriverLog.entry =
-             (entryMetadata1: types.StackdriverEntryMetadata,
-              data1: types.StackdriverData) => {
-               assert.deepStrictEqual(entryMetadata1, {
-                 resource: loggingWinston.resource,
-                 // labels should have been merged.
-                 labels: {
-                   label1: 'value1',
-                   label2: 'value2',
-                 }
-               });
-               assert.deepStrictEqual(data1, {
-                 message: `[${PREFIX}] ${MESSAGE}`,
-                 metadata: METADATA,
-               });
+    it('should properly call common.log', (done) => {
+      const args =
+          Object.assign({}, METADATA, {level: LEVEL, message: MESSAGE});
 
-               const metadataWithoutLabels = Object.assign({}, METADATA);
-               delete metadataWithoutLabels.labels;
+      loggingWinston.log(args);
 
-               loggingWinston.stackdriverLog.entry =
-                   (entryMetadata2: types.StackdriverEntryMetadata,
-                    data2: types.StackdriverData) => {
-                     console.log(entryMetadata2.labels);
-                     assert.deepStrictEqual(entryMetadata2, {
-                       resource: loggingWinston.resource,
-                       labels: {label1: 'value1'}
-                     });
-                     assert.deepStrictEqual(data2, {
-                       message: `[${PREFIX}] ${MESSAGE}`,
-                       metadata: METADATA,
-                     });
-                     done();
-                   };
-
-               loggingWinston.log(
-                   LEVEL, MESSAGE, metadataWithoutLabels, assert.ifError);
-             };
-
-         loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-       });
+      const [level, message, meta] = lastFakeLoggingArgs;
+      assert.strictEqual(level, 'one');
+      assert.strictEqual(message, 'message');
+      assert.deepEqual(meta, {a: 1});
+      done();
+    });
   });
 });
