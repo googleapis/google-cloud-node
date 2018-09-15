@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import * as TransportStream from "winston-transport";
+
+
 export interface Options {
   /**
    * The default log level. Winston will filter messages with a severity lower
@@ -193,6 +196,7 @@ export interface StackdriverEntry {
        data?: {message: string}|string) => StackdriverEntry;
   data?: {message: string}|string;
   metadata?: StackdriverEntryMetadata;
+  jsonPayload?:{[key: string]: any};
 }
 type LogWriteResponse = Array<{}>;
 
@@ -212,4 +216,33 @@ export interface HttpRequest {
   cacheValidatedWithOriginServer: boolean;
   cacheFillBytes: string;
   protocol: string;
+}
+
+export type Winston3LogArg = {
+  /**
+   * the logging message
+   */
+  message: string,
+  /**
+   * the log level defined in NPM_LEVEL_NAME_TO_CODE
+   */
+  level: string,
+  /**
+   * the stack for an error
+   */
+  stack?: string,
+  /**
+   * not used but should not be passed through to common
+   */
+  splat?: {},
+  /**
+   * set httpRequest to a http.clientRequest object to log it
+   */
+  httpRequest?: HttpRequest, labels: {}
+}&{[key: string]: string | {}};
+
+
+export interface Logger extends TransportStream {
+  new(options?: Options):any;
+  LOGGING_TRACE_KEY:string;
 }

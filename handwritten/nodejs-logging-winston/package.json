@@ -69,16 +69,19 @@
     "postcompile": "cpy ./src/types/* ./build/src/types",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "npm run compile && node ./bin/install-winston2.js",
     "posttest": "npm run check"
   },
   "dependencies": {
     "@google-cloud/logging": "^3.0.2",
     "@sindresorhus/is": "^0.10.0",
-    "lodash.mapvalues": "^4.6.0"
+    "lodash.mapvalues": "^4.6.0",
+    "logform": "^1.9.1",
+    "semver": "^5.5.1",
+    "winston-transport": "^4.2.0"
   },
   "devDependencies": {
-    "@google-cloud/common": "^0.24.0",
+    "@google-cloud/common": "^0.23.0",
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@types/glob": "^5.0.35",
     "@types/is": "0.0.20",
@@ -90,8 +93,8 @@
     "@types/pify": "^3.0.2",
     "@types/proxyquire": "^1.3.28",
     "@types/rimraf": "^2.0.2",
+    "@types/semver": "^5.5.0",
     "@types/tmp": "0.0.33",
-    "@types/winston": "^2.3.9",
     "codecov": "^3.0.2",
     "cpy-cli": "^2.0.0",
     "delay": "^4.0.0",
@@ -110,16 +113,16 @@
     "pify": "^4.0.0",
     "post-install-check": "0.0.1",
     "prettier": "^1.13.6",
-    "proxyquire": "^2.0.1",
     "request": "^2.88.0",
+    "require-inject": "^1.4.3",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.6",
     "teeny-request": "^3.6.0",
     "tmp": "0.0.33",
     "typescript": "^3.0.0",
-    "winston": "^2.2.0"
+    "winston": "^3.1.0"
   },
   "peerDependencies": {
-    "winston": "^2.x"
+    "winston": ">=2.x <=3.x"
   }
 }
