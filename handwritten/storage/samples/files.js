@@ -339,7 +339,7 @@ function generateSignedUrl(bucketName, filename) {
   // These options will allow temporary read access to the file
   const options = {
     action: 'read',
-    expires: '03-17-2025',
+    expires: Date.now() + 1000 * 60 * 60, // one hour
   };
 
   // Get a signed URL for the file
