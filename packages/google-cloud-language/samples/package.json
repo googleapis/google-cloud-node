@@ -8,9 +8,7 @@
   "repository": "googleapis/nodejs-language",
   "private": true,
   "scripts": {
-    "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
-    "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
-    "test": "npm run cover"
+    "test": "mocha"
   },
   "dependencies": {
     "@google-cloud/language": "^1.2.0",
@@ -19,7 +17,7 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
-    "ava": "^0.25.0",
+    "mocha": "^5.2.0",
     "uuid": "^3.2.1"
   }
 }
