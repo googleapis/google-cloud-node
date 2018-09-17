@@ -16,6 +16,7 @@
 
 'use strict';
 
+var common = require('@google-cloud/common');
 var pumpify = require('pumpify');
 var streamEvents = require('stream-events');
 var through = require('through2');
@@ -108,7 +109,14 @@ module.exports = () => {
           next(null, payload);
         }),
         requestStream,
-        through.obj(),
+        through.obj((response, enc, next) => {
+          if (response.error) {
+            next(new common.util.ApiError(response.error));
+            return;
+          }
+
+          next(null, response);
+        }),
       ]);
     });
 

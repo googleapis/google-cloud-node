@@ -18,14 +18,38 @@
 
 var assert = require('assert');
 var Buffer = require('safe-buffer').Buffer;
+var common = require('@google-cloud/common');
+var proxyquire = require('proxyquire');
 var sinon = require('sinon');
 var stream = require('stream');
 
-var speech = require('../');
-
 describe('Speech helper methods', () => {
-  var sandbox = sinon.sandbox.create();
   var client;
+  var FakeApiErrorOverride;
+  var sandbox = sinon.createSandbox();
+  var speech;
+
+  class FakeApiError extends common.util.ApiError {
+    constructor(error) {
+      super();
+
+      if (FakeApiErrorOverride) {
+        return FakeApiErrorOverride(error);
+      }
+    }
+  }
+
+  before(() => {
+    speech = proxyquire('../', {
+      './helpers.js': proxyquire('../src/helpers.js', {
+        '@google-cloud/common': {
+          util: {
+            ApiError: FakeApiError,
+          },
+        },
+      }),
+    });
+  });
 
   beforeEach(() => {
     client = new speech.v1.SpeechClient();
@@ -103,6 +127,33 @@ describe('Speech helper methods', () => {
       });
 
       requestStream.emit('error', error);
+    });
+
+    it('destroys the user stream when the response contains an error', done => {
+      // Stub the underlying _streamingRecognize method to just return
+      // a bogus stream.
+      var requestStream = new stream.PassThrough({objectMode: true});
+      sandbox
+        .stub(client._innerApiCalls, 'streamingRecognize')
+        .returns(requestStream);
+
+      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
+
+      var error = {};
+      var fakeApiError = {};
+
+      FakeApiErrorOverride = err => {
+        assert.strictEqual(err, error);
+        return fakeApiError;
+      };
+
+      userStream.once('error', err => {
+        assert.strictEqual(err, fakeApiError);
+        done();
+      });
+
+      userStream.emit('writing');
+      requestStream.end({error});
     });
 
     it('re-emits response from the request stream', done => {

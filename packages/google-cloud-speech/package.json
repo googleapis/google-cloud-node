@@ -76,6 +76,7 @@
     "test": "npm run cover"
   },
   "dependencies": {
+    "@google-cloud/common": "^0.24.0",
     "extend": "^3.0.1",
     "google-gax": "^0.20.0",
     "google-proto-files": "^0.16.0",
@@ -100,6 +101,7 @@
     "nyc": "^13.0.0",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.5",
+    "proxyquire": "^2.1.0",
     "safe-buffer": "^5.1.2",
     "sinon": "^6.0.0"
   }
