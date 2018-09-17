@@ -2,140 +2,135 @@
 [//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud Speech API: Node.js Samples
+# [Google Cloud Speech API: Node.js Client](https://github.com/googleapis/nodejs-speech)
 
-[![Open in Cloud Shell][shell_img]][shell_link]
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-speech.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-speech)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-speech?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-speech)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-speech/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-speech)
 
 The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integration of Google speech recognition technologies into developer applications. Send audio and receive a text transcription from the Cloud Speech API service.
 
-## Table of Contents
 
-* [Before you begin](#before-you-begin)
+* [Using the client library](#using-the-client-library)
 * [Samples](#samples)
-  * [Speech Recognition](#speech-recognition)
-  * [Speech Recognition v1p1beta1](#speech-recognition-v1p1beta1)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
 
-## Before you begin
+## Using the client library
 
-Before running the samples, make sure you've followed the steps in the
-[Before you begin section](../README.md#before-you-begin) of the client
-library's README.
+1.  [Select or create a Cloud Platform project][projects].
+
+1.  [Enable billing for your project][billing].
+
+1.  [Enable the Google Cloud Speech API API][enable_api].
+
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
+
+1. Install the client library:
+
+        npm install --save @google-cloud/speech
+
+1. Try an example:
+
+```javascript
+// Imports the Google Cloud client library
+const speech = require('@google-cloud/speech');
+const fs = require('fs');
+
+// Creates a client
+const client = new speech.SpeechClient();
+
+// The name of the audio file to transcribe
+const fileName = './resources/audio.raw';
+
+// Reads a local audio file and converts it to base64
+const file = fs.readFileSync(fileName);
+const audioBytes = file.toString('base64');
+
+// The audio file's encoding, sample rate in hertz, and BCP-47 language code
+const audio = {
+  content: audioBytes,
+};
+const config = {
+  encoding: 'LINEAR16',
+  sampleRateHertz: 16000,
+  languageCode: 'en-US',
+};
+const request = {
+  audio: audio,
+  config: config,
+};
+
+// Detects speech in the audio file
+client
+  .recognize(request)
+  .then(data => {
+    const response = data[0];
+    const transcription = response.results
+      .map(result => result.alternatives[0].transcript)
+      .join('\n');
+    console.log(`Transcription: ${transcription}`);
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
+```
 
 ## Samples
 
-### Speech Recognition
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-speech/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
 
-View the [source code][recognize_0_code].
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Speech Recognition | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.js,samples/README.md) |
+| Speech Recognition v1p1beta1 | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md) |
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.js,samples/README.md)
+The [Speech API Node.js Client API Reference][client-docs] documentation
+also contains samples.
 
-__Usage:__ `node recognize.js --help`
+## Versioning
 
-```
-recognize.js <command>
+This library follows [Semantic Versioning](http://semver.org/).
 
-Commands:
-  recognize.js sync <filename>           Detects speech in a local audio file.
-  recognize.js sync-gcs <gcsUri>         Detects speech in an audio file located in a Google Cloud Storage bucket.
-  recognize.js sync-words <filename>     Detects speech in a local audio file with word time offset.
-  recognize.js async <filename>          Creates a job to detect speech in a local audio file, and waits for the job to
-                                         complete.
-  recognize.js async-gcs <gcsUri>        Creates a job to detect speech in an audio file located in a Google Cloud
-                                         Storage bucket, and waits for the job to complete.
-  recognize.js async-gcs-words <gcsUri>  Creates a job to detect speech  with word time offset in an audio file located
-                                         in a Google Cloud Storage bucket, and waits for the job to complete.
-  recognize.js stream <filename>         Detects speech in a local audio file by streaming it to the Speech API.
-  recognize.js listen                    Detects speech in a microphone input stream. This command requires that you
-                                         have SoX installed and available in your $PATH. See
-                                         https://www.npmjs.com/package/node-record-lpcm16#dependencies
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
 
-Options:
-  --version              Show version number                                                                   [boolean]
-  --encoding, -e                                                                          [string] [default: "LINEAR16"]
-  --sampleRateHertz, -r                                                                        [number] [default: 16000]
-  --languageCode, -l                                                                         [string] [default: "en-US"]
-  --help                 Show help                                                                             [boolean]
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
-Examples:
-  node recognize.js sync ./resources/audio.raw -e LINEAR16 -r 16000
-  node recognize.js async-gcs gs://gcs-test-data/vr.flac -e FLAC -r 16000
-  node recognize.js stream ./resources/audio.raw  -e LINEAR16 -r 16000
-  node recognize.js listen
+[launch_stages]: https://cloud.google.com/terms/launch-stages
 
-For more information, see https://cloud.google.com/speech/docs
-```
+## Contributing
 
-[recognize_0_docs]: https://cloud.google.com/speech/docs
-[recognize_0_code]: recognize.js
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-speech/blob/master/.github/CONTRIBUTING.md).
 
-### Speech Recognition v1p1beta1
+## License
 
-View the [source code][recognize.v1p1beta1_1_code].
+Apache Version 2.0
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md)
+See [LICENSE](https://github.com/googleapis/nodejs-speech/blob/master/LICENSE)
 
-__Usage:__ `node recognize.v1p1beta1.js --help`
+## What's Next
 
-```
-recognize.v1p1beta1.js <command>
+* [Speech API Documentation][product-docs]
+* [Speech API Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-speech](https://github.com/googleapis/nodejs-speech)
 
-Commands:
-  recognize.v1p1beta1.js sync-model <filename> <model>    Detects speech in a local audio file using provided model.
-  recognize.v1p1beta1.js sync-model-gcs <gcsUri> <model>  Detects speech in an audio file located in a Google Cloud
-                                                          Storage bucket using provided model.
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
-Options:
-  --version              Show version number                                                                   [boolean]
-  --encoding, -e                                                                          [string] [default: "LINEAR16"]
-  --sampleRateHertz, -r                                                                        [number] [default: 16000]
-  --languageCode, -l                                                                         [string] [default: "en-US"]
-  --help                 Show help                                                                             [boolean]
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
-Examples:
-  node recognize.v1p1beta1.js sync-model ./resources/Google_Gnome.wav video -e LINEAR16 -r 16000
-  node recognize.v1p1beta1.js sync-model-gcs gs://gcs-test-data/Google_Gnome.wav phone_call -e FLAC -r 16000
-
-For more information, see https://cloud.google.com/speech/docs
-```
-
-[recognize.v1p1beta1_1_docs]: https://cloud.google.com/speech/docs
-[recognize.v1p1beta1_1_code]: recognize.v1p1beta1.js
-
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/README.md
-
-### betaFeatures v1p1beta1
-
-View the [source code][betaFeatures_code].
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/betaFeatures.js,samples/README.md)
-
-__Usage:__ `node betaFeatures.js --help`
-
-```
-betaFeatures.js <command>
-
-Commands:
-  betaFeatures.js sync-model <filename> <model>    Detects speech in a local audio file using provided model.
-  betaFeatures.js sync-model-gcs <gcsUri> <model>  Detects speech in an audio file located in a Google Cloud
-                                                          Storage bucket using provided model.
-
-Options:
-  --version              Show version number                                                                   [boolean]
-  --encoding, -e                                                                          [string] [default: "LINEAR16"]
-  --sampleRateHertz, -r                                                                        [number] [default: 16000]
-  --languageCode, -l                                                                         [string] [default: "en-US"]
-  --help                 Show help                                                                             [boolean]
-
-Examples:
-  node betaFeatures.js sync-model ./resources/Google_Gnome.wav video -e LINEAR16 -r 16000
-  node betaFeatures.js sync-model-gcs gs://gcs-test-data/Google_Gnome.wav phone_call -e FLAC -r 16000
-
-For more information, see https://cloud.google.com/speech/docs
-```
-
-[betaFeatures_docs]: https://cloud.google.com/speech/docs
-[betaFeatures_code]: betaFeatures.js
-
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/README.md
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/speech/latest/
+[product-docs]: https://cloud.google.com/speech/docs
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=speech.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
