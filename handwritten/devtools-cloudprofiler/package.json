@@ -31,7 +31,7 @@
     "console-log-level": "^1.4.0",
     "delay": "^3.1.0",
     "extend": "^3.0.1",
-    "gcp-metadata": "^0.7.0",
+    "gcp-metadata": "^0.8.0",
     "nan": "^2.8.0",
     "parse-duration": "^0.1.1",
     "pify": "^4.0.0",
