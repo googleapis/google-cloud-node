@@ -57,6 +57,11 @@ var ListKeyRingsRequest = {
  *   Optional pagination token, returned earlier via
  *   ListCryptoKeysResponse.next_page_token.
  *
+ * @property {number} versionView
+ *   The fields of the primary version to include in the response.
+ *
+ *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
+ *
  * @typedef ListCryptoKeysRequest
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListCryptoKeysRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
@@ -82,6 +87,11 @@ var ListCryptoKeysRequest = {
  * @property {string} pageToken
  *   Optional pagination token, returned earlier via
  *   ListCryptoKeyVersionsResponse.next_page_token.
+ *
+ * @property {number} view
+ *   The fields to include in the response.
+ *
+ *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
  *
  * @typedef ListCryptoKeyVersionsRequest
  * @memberof google.cloud.kms.v1
@@ -201,6 +211,21 @@ var GetCryptoKeyRequest = {
  * @see [google.cloud.kms.v1.GetCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
 var GetCryptoKeyVersionRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for KeyManagementService.GetPublicKey.
+ *
+ * @property {string} name
+ *   The name of the CryptoKeyVersion public key to
+ *   get.
+ *
+ * @typedef GetPublicKeyRequest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.GetPublicKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+var GetPublicKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -327,10 +352,23 @@ var UpdateCryptoKeyVersionRequest = {
  * @property {string} plaintext
  *   Required. The data to encrypt. Must be no larger than 64KiB.
  *
+ *   The maximum size depends on the key version's
+ *   protection_level. For
+ *   SOFTWARE keys, the plaintext must be no larger
+ *   than 64KiB. For HSM keys, the combined length of the
+ *   plaintext and additional_authenticated_data fields must be no larger than
+ *   8KiB.
+ *
  * @property {string} additionalAuthenticatedData
  *   Optional data that, if specified, must also be provided during decryption
- *   through DecryptRequest.additional_authenticated_data.  Must be no
- *   larger than 64KiB.
+ *   through DecryptRequest.additional_authenticated_data.
+ *
+ *   The maximum size depends on the key version's
+ *   protection_level. For
+ *   SOFTWARE keys, the AAD must be no larger than
+ *   64KiB. For HSM keys, the combined length of the
+ *   plaintext and additional_authenticated_data fields must be no larger than
+ *   8KiB.
  *
  * @typedef EncryptRequest
  * @memberof google.cloud.kms.v1
@@ -364,6 +402,46 @@ var DecryptRequest = {
 };
 
 /**
+ * Request message for KeyManagementService.AsymmetricSign.
+ *
+ * @property {string} name
+ *   Required. The resource name of the CryptoKeyVersion to use for signing.
+ *
+ * @property {Object} digest
+ *   Required. The digest of the data to sign. The digest must be produced with
+ *   the same digest algorithm as specified by the key version's
+ *   algorithm.
+ *
+ *   This object should have the same structure as [Digest]{@link google.cloud.kms.v1.Digest}
+ *
+ * @typedef AsymmetricSignRequest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.AsymmetricSignRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+var AsymmetricSignRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for KeyManagementService.AsymmetricDecrypt.
+ *
+ * @property {string} name
+ *   Required. The resource name of the CryptoKeyVersion to use for
+ *   decryption.
+ *
+ * @property {string} ciphertext
+ *   Required. The data encrypted with the named CryptoKeyVersion's public
+ *   key using OAEP.
+ *
+ * @typedef AsymmetricDecryptRequest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.AsymmetricDecryptRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+var AsymmetricDecryptRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Response message for KeyManagementService.Decrypt.
  *
  * @property {string} plaintext
@@ -391,6 +469,34 @@ var DecryptResponse = {
  * @see [google.cloud.kms.v1.EncryptResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
 var EncryptResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response message for KeyManagementService.AsymmetricSign.
+ *
+ * @property {string} signature
+ *   The created signature.
+ *
+ * @typedef AsymmetricSignResponse
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.AsymmetricSignResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+var AsymmetricSignResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response message for KeyManagementService.AsymmetricDecrypt.
+ *
+ * @property {string} plaintext
+ *   The decrypted data originally encrypted with the matching public key.
+ *
+ * @typedef AsymmetricDecryptResponse
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.AsymmetricDecryptResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+var AsymmetricDecryptResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -436,5 +542,41 @@ var DestroyCryptoKeyVersionRequest = {
  * @see [google.cloud.kms.v1.RestoreCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
 var RestoreCryptoKeyVersionRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A Digest holds a cryptographic message digest.
+ *
+ * @property {string} sha256
+ *   A message digest produced with the SHA-256 algorithm.
+ *
+ * @property {string} sha384
+ *   A message digest produced with the SHA-384 algorithm.
+ *
+ * @property {string} sha512
+ *   A message digest produced with the SHA-512 algorithm.
+ *
+ * @typedef Digest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.Digest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+var Digest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Cloud KMS metadata for the given google.cloud.location.Location.
+ *
+ * @property {boolean} hsmAvailable
+ *   Indicates whether CryptoKeys with
+ *   protection_level
+ *   HSM can be created in this location.
+ *
+ * @typedef LocationMetadata
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.LocationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+var LocationMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

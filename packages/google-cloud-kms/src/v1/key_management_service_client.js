@@ -31,6 +31,9 @@ const VERSION = require('../../package.json').version;
  * * CryptoKey
  * * CryptoKeyVersion
  *
+ * If you are using manual gRPC libraries, see
+ * [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
+ *
  * @class
  * @memberof v1
  */
@@ -439,6 +442,10 @@ class KeyManagementServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {number} [request.versionView]
+   *   The fields of the primary version to include in the response.
+   *
+   *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -551,6 +558,10 @@ class KeyManagementServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {number} [request.versionView]
+   *   The fields of the primary version to include in the response.
+   *
+   *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -597,6 +608,10 @@ class KeyManagementServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {number} [request.view]
+   *   The fields to include in the response.
+   *
+   *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -713,6 +728,10 @@ class KeyManagementServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {number} [request.view]
+   *   The fields to include in the response.
+   *
+   *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -976,7 +995,9 @@ class KeyManagementServiceClient {
   /**
    * Create a new CryptoKey within a KeyRing.
    *
-   * CryptoKey.purpose is required.
+   * CryptoKey.purpose and
+   * CryptoKey.version_template.algorithm
+   * are required.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1267,6 +1288,8 @@ class KeyManagementServiceClient {
 
   /**
    * Encrypts data, so that it can only be recovered by a call to Decrypt.
+   * The CryptoKey.purpose must be
+   * ENCRYPT_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1278,10 +1301,23 @@ class KeyManagementServiceClient {
    *   primary version.
    * @param {string} request.plaintext
    *   Required. The data to encrypt. Must be no larger than 64KiB.
+   *
+   *   The maximum size depends on the key version's
+   *   protection_level. For
+   *   SOFTWARE keys, the plaintext must be no larger
+   *   than 64KiB. For HSM keys, the combined length of the
+   *   plaintext and additional_authenticated_data fields must be no larger than
+   *   8KiB.
    * @param {string} [request.additionalAuthenticatedData]
    *   Optional data that, if specified, must also be provided during decryption
-   *   through DecryptRequest.additional_authenticated_data.  Must be no
-   *   larger than 64KiB.
+   *   through DecryptRequest.additional_authenticated_data.
+   *
+   *   The maximum size depends on the key version's
+   *   protection_level. For
+   *   SOFTWARE keys, the AAD must be no larger than
+   *   64KiB. For HSM keys, the combined length of the
+   *   plaintext and additional_authenticated_data fields must be no larger than
+   *   8KiB.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1334,7 +1370,8 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Decrypts data that was protected by Encrypt.
+   * Decrypts data that was protected by Encrypt. The CryptoKey.purpose
+   * must be ENCRYPT_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1399,7 +1436,9 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Update the version of a CryptoKey that will be used in Encrypt
+   * Update the version of a CryptoKey that will be used in Encrypt.
+   *
+   * Returns an error if called on an asymmetric key.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1532,7 +1571,7 @@ class KeyManagementServiceClient {
 
   /**
    * Restore a CryptoKeyVersion in the
-   * DESTROY_SCHEDULED,
+   * DESTROY_SCHEDULED
    * state.
    *
    * Upon restoration of the CryptoKeyVersion, state
