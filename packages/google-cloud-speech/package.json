@@ -76,7 +76,7 @@
     "test": "npm run cover"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.24.0",
+    "@google-cloud/common": "^0.25.0",
     "extend": "^3.0.1",
     "google-gax": "^0.20.0",
     "google-proto-files": "^0.16.0",
