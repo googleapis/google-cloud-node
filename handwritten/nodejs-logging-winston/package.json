@@ -81,7 +81,7 @@
     "winston-transport": "^4.2.0"
   },
   "devDependencies": {
-    "@google-cloud/common": "^0.23.0",
+    "@google-cloud/common": "^0.25.0",
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@types/glob": "^5.0.35",
     "@types/is": "0.0.20",
