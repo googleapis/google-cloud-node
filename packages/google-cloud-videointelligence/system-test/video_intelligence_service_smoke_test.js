@@ -18,23 +18,26 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const videoIntelligence = require('../src');
 
-    var client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient({
-      // optional auth parameters.
-    });
+    let client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
+      {
+        // optional auth parameters.
+      }
+    );
 
-    var inputUri = 'gs://demomaker/cat.mp4';
-    var featuresElement = 'LABEL_DETECTION';
-    var features = [featuresElement];
-    var request = {
+    let inputUri = 'gs://demomaker/cat.mp4';
+    let featuresElement = 'LABEL_DETECTION';
+    let features = [featuresElement];
+    let request = {
       inputUri: inputUri,
       features: features,
     };
 
     // Handle the operation using the promise pattern.
-    client.annotateVideo(request)
+    client
+      .annotateVideo(request)
       .then(responses => {
-        var operation = responses[0];
-        var initialApiResponse = responses[1];
+        let operation = responses[0];
+        let initialApiResponse = responses[1];
         console.log(operation);
         console.log(initialApiResponse);
 
@@ -43,13 +46,13 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
       })
       .then(responses => {
         // The final result of the operation.
-        var result = responses[0];
+        let result = responses[0];
 
         // The metadata value of the completed operation.
-        var metadata = responses[1];
+        let metadata = responses[1];
 
         // The response of the api call returning the complete operation.
-        var finalApiResponse = responses[2];
+        let finalApiResponse = responses[2];
 
         console.log(result);
         console.log(metadata);
@@ -62,23 +65,26 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
   it('successfully makes a call to the service', done => {
     const videoIntelligence = require('../src');
 
-    var client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient({
-      // optional auth parameters.
-    });
+    let client = new videoIntelligence.v1p1beta1.VideoIntelligenceServiceClient(
+      {
+        // optional auth parameters.
+      }
+    );
 
-    var inputUri = 'gs://demomaker/cat.mp4';
-    var featuresElement = 'LABEL_DETECTION';
-    var features = [featuresElement];
-    var request = {
+    let inputUri = 'gs://demomaker/cat.mp4';
+    let featuresElement = 'LABEL_DETECTION';
+    let features = [featuresElement];
+    let request = {
       inputUri: inputUri,
       features: features,
     };
 
     // Handle the operation using the event emitter pattern.
-    client.annotateVideo(request)
+    client
+      .annotateVideo(request)
       .then(responses => {
-        var operation = responses[0];
-        var initialApiResponse = responses[1];
+        let operation = responses[0];
+        let initialApiResponse = responses[1];
 
         // Adding a listener for the "complete" event starts polling for the
         // completion of the operation.
