@@ -109,7 +109,7 @@ describe('Network', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var computeInstance = extend({}, COMPUTE, {
+      const computeInstance = extend({}, COMPUTE, {
         createNetwork: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);

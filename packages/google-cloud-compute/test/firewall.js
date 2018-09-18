@@ -81,7 +81,7 @@ describe('Firewall', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      var computeInstance = extend({}, COMPUTE, {
+      const computeInstance = extend({}, COMPUTE, {
         createFirewall: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);

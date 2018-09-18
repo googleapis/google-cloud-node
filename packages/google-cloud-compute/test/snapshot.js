@@ -89,7 +89,7 @@ describe('Snapshot', function() {
     });
 
     it('should allow creating for a Disk object snapshot', function(done) {
-      var scope = {
+      const scope = {
         constructor: {
           name: 'Disk',
         },

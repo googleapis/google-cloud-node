@@ -81,7 +81,7 @@ describe('Autoscaler', function() {
     it('should inherit from ServiceObject', function() {
       let createMethod = util.noop;
 
-      var zoneInstance = extend({}, ZONE, {
+      const zoneInstance = extend({}, ZONE, {
         createAutoscaler: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);

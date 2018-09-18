@@ -113,7 +113,7 @@ describe('Disk', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var zoneInstance = extend({}, ZONE, {
+      const zoneInstance = extend({}, ZONE, {
         createDisk: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);

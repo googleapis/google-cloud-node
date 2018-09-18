@@ -70,7 +70,7 @@ describe('Image', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      var computeInstance = extend({}, COMPUTE, {
+      const computeInstance = extend({}, COMPUTE, {
         createImage: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);

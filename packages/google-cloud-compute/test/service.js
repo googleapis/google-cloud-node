@@ -79,7 +79,7 @@ describe('Service', function() {
     it('should inherit from ServiceObject', function() {
       let createMethod = util.noop;
 
-      var computeInstance = extend({}, COMPUTE, {
+      const computeInstance = extend({}, COMPUTE, {
         createService: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);

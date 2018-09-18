@@ -75,7 +75,7 @@ describe('Subnetwork', function() {
     it('should inherit from ServiceObject', function() {
       let createSubnetworkBound = {};
 
-      var regionInstance = extend({}, REGION, {
+      const regionInstance = extend({}, REGION, {
         createSubnetwork: {
           bind: function(context) {
             assert.strictEqual(context, regionInstance);

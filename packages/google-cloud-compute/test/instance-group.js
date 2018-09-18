@@ -110,7 +110,7 @@ describe('InstanceGroup', function() {
     it('should inherit from ServiceObject', function(done) {
       let instanceGroup;
 
-      var zoneInstance = extend({}, ZONE, {
+      const zoneInstance = extend({}, ZONE, {
         createInstanceGroup: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);

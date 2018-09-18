@@ -75,7 +75,7 @@ describe('Address', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var regionInstance = extend({}, REGION, {
+      const regionInstance = extend({}, REGION, {
         createAddress: {
           bind: function(context) {
             assert.strictEqual(context, regionInstance);

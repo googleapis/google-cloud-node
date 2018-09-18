@@ -123,7 +123,7 @@ describe('VM', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var zoneInstance = extend({}, ZONE, {
+      const zoneInstance = extend({}, ZONE, {
         createVM: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
@@ -150,7 +150,6 @@ describe('VM', function() {
   });
 
   describe('attachDisk', function() {
-    let CONFIG = {};
     let EXPECTED_BODY;
 
     beforeEach(function() {
@@ -162,12 +161,12 @@ describe('VM', function() {
 
     it('should throw if a Disk object is not provided', function() {
       assert.throws(function() {
-        vm.attachDisk('disk-3', CONFIG, assert.ifError);
+        vm.attachDisk('disk-3', {}, assert.ifError);
       }, /A Disk object must be provided/);
 
       assert.doesNotThrow(function() {
         vm.request = util.noop;
-        vm.attachDisk(DISK, CONFIG, assert.ifError);
+        vm.attachDisk(DISK, {}, assert.ifError);
       });
     });
 
@@ -181,7 +180,7 @@ describe('VM', function() {
     });
 
     describe('options.readOnly', function() {
-      var CONFIG = extend({}, CONFIG, {readOnly: true});
+      const CONFIG = {readOnly: true};
 
       it('should set the correct mode', function(done) {
         let expectedBody = extend({}, EXPECTED_BODY, {mode: 'READ_ONLY'});
@@ -213,7 +212,7 @@ describe('VM', function() {
         callback();
       };
 
-      vm.attachDisk(DISK, CONFIG, done);
+      vm.attachDisk(DISK, {}, done);
     });
   });
 
