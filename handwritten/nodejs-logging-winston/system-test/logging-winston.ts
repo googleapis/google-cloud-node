@@ -15,7 +15,6 @@
  */
 
 import * as assert from 'assert';
-import delay from 'delay';
 import * as types from '../src/types/core';
 import {ErrorsApiTransport} from './errors-transport';
 
@@ -242,6 +241,8 @@ function pollLogs(logName: string, logTime: number, size = 1, timeout = 90000) {
               pageSize: size,
             },
             (err: Error, entries: types.StackdriverEntry[]) => {
+              if (!entries || !entries.length) return loop();
+
               const {receiveTimestamp} =
                   (entries[entries.length - 1].metadata || {}) as
                   {receiveTimestamp: {seconds: number, nanos: number}};
