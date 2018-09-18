@@ -72,13 +72,13 @@ class AssetServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    let gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    let clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,7 +89,7 @@ class AssetServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    let protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -103,7 +103,7 @@ class AssetServiceClient {
     this._pathTemplates = {
       projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -123,10 +123,10 @@ class AssetServiceClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var exportAssetsResponse = protoFilesRoot.lookup(
+    let exportAssetsResponse = protoFilesRoot.lookup(
       'google.cloud.asset.v1beta1.ExportAssetsResponse'
     );
-    var exportAssetsMetadata = protoFilesRoot.lookup(
+    let exportAssetsMetadata = protoFilesRoot.lookup(
       'google.cloud.asset.v1beta1.ExportAssetsRequest'
     );
 
@@ -139,7 +139,7 @@ class AssetServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    let defaults = gaxGrpc.constructSettings(
       'google.cloud.asset.v1beta1.AssetService',
       gapicConfig,
       opts.clientConfig,
@@ -153,20 +153,20 @@ class AssetServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.asset.v1beta1.AssetService.
-    var assetServiceStub = gaxGrpc.createStub(
+    let assetServiceStub = gaxGrpc.createStub(
       protos.google.cloud.asset.v1beta1.AssetService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var assetServiceStubMethods = ['exportAssets', 'batchGetAssetsHistory'];
+    let assetServiceStubMethods = ['exportAssets', 'batchGetAssetsHistory'];
     for (let methodName of assetServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         assetServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              let args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
