@@ -53,13 +53,13 @@ describe('MetricServiceSmokeTest', () => {
     let formattedName = client.projectPath(projectId);
 
     let options = {autoPaginate: false};
-    var callback = responses => {
+    const callback = responses => {
       // The actual resources in a response.
       let resources = responses[0];
       // The next request if the response shows that there are more responses.
       let nextRequest = responses[1];
       // The actual response object, if necessary.
-      // var rawResponse = responses[2];
+      // const rawResponse = responses[2];
       for (let i = 0; i < resources.length; i += 1) {
         console.log(resources[i]);
       }
