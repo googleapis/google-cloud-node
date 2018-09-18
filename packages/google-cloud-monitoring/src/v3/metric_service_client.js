@@ -72,13 +72,13 @@ class MetricServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    let gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    let clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,7 +89,7 @@ class MetricServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    let protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -132,7 +132,7 @@ class MetricServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    let defaults = gaxGrpc.constructSettings(
       'google.monitoring.v3.MetricService',
       gapicConfig,
       opts.clientConfig,
@@ -146,14 +146,14 @@ class MetricServiceClient {
 
     // Put together the "service stub" for
     // google.monitoring.v3.MetricService.
-    var metricServiceStub = gaxGrpc.createStub(
+    let metricServiceStub = gaxGrpc.createStub(
       protos.google.monitoring.v3.MetricService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var metricServiceStubMethods = [
+    let metricServiceStubMethods = [
       'listMonitoredResourceDescriptors',
       'getMonitoredResourceDescriptor',
       'listMetricDescriptors',
@@ -168,7 +168,7 @@ class MetricServiceClient {
         metricServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              let args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),

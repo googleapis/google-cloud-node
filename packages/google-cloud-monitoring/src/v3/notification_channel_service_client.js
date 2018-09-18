@@ -72,13 +72,13 @@ class NotificationChannelServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    let gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    let clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,7 +89,7 @@ class NotificationChannelServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    let protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -127,7 +127,7 @@ class NotificationChannelServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    let defaults = gaxGrpc.constructSettings(
       'google.monitoring.v3.NotificationChannelService',
       gapicConfig,
       opts.clientConfig,
@@ -141,14 +141,14 @@ class NotificationChannelServiceClient {
 
     // Put together the "service stub" for
     // google.monitoring.v3.NotificationChannelService.
-    var notificationChannelServiceStub = gaxGrpc.createStub(
+    let notificationChannelServiceStub = gaxGrpc.createStub(
       protos.google.monitoring.v3.NotificationChannelService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var notificationChannelServiceStubMethods = [
+    let notificationChannelServiceStubMethods = [
       'listNotificationChannelDescriptors',
       'getNotificationChannelDescriptor',
       'listNotificationChannels',
@@ -162,7 +162,7 @@ class NotificationChannelServiceClient {
         notificationChannelServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              let args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),

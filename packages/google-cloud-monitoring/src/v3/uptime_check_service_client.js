@@ -78,13 +78,13 @@ class UptimeCheckServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    let gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    let clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -95,7 +95,7 @@ class UptimeCheckServiceClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    let protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -130,7 +130,7 @@ class UptimeCheckServiceClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    let defaults = gaxGrpc.constructSettings(
       'google.monitoring.v3.UptimeCheckService',
       gapicConfig,
       opts.clientConfig,
@@ -144,14 +144,14 @@ class UptimeCheckServiceClient {
 
     // Put together the "service stub" for
     // google.monitoring.v3.UptimeCheckService.
-    var uptimeCheckServiceStub = gaxGrpc.createStub(
+    let uptimeCheckServiceStub = gaxGrpc.createStub(
       protos.google.monitoring.v3.UptimeCheckService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var uptimeCheckServiceStubMethods = [
+    let uptimeCheckServiceStubMethods = [
       'listUptimeCheckConfigs',
       'getUptimeCheckConfig',
       'createUptimeCheckConfig',
@@ -164,7 +164,7 @@ class UptimeCheckServiceClient {
         uptimeCheckServiceStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              let args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
