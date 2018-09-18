@@ -60,7 +60,7 @@
     "prettier": "prettier --write samples/*.js samples/*/*.js",
     "presamples-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "presystem-test": "npm run compile",
+    "presystem-test": "npm run pretest",
     "system-test": "mocha build/system-test --timeout 600000",
     "test": "mocha build/test",
     "check": "gts check",
