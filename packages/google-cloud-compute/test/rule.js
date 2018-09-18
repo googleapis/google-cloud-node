@@ -16,13 +16,13 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-var util = require('@google-cloud/common').util;
+let assert = require('assert');
+let extend = require('extend');
+let proxyquire = require('proxyquire');
+let util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+let fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Rule') {
       promisified = true;
@@ -35,16 +35,16 @@ function FakeServiceObject() {
 }
 
 describe('Rule', function() {
-  var Rule;
-  var rule;
+  let Rule;
+  let rule;
 
   function Compute() {
     this.createRule = util.noop;
     this.operation = util.noop;
   }
 
-  var COMPUTE = new Compute();
-  var RULE_NAME = 'rule-name';
+  let COMPUTE = new Compute();
+  let RULE_NAME = 'rule-name';
 
   before(function() {
     Rule = proxyquire('../src/rule.js', {
@@ -61,8 +61,8 @@ describe('Rule', function() {
 
   describe('instantiation', function() {
     it('should inherit from ServiceObject', function() {
-      var computeInstance = new Compute();
-      var bindMethod = {};
+      let computeInstance = new Compute();
+      let bindMethod = {};
 
       extend(computeInstance, {
         createRule: {
@@ -73,10 +73,10 @@ describe('Rule', function() {
         },
       });
 
-      var rule = new Rule(computeInstance, RULE_NAME);
+      let rule = new Rule(computeInstance, RULE_NAME);
       assert(rule instanceof FakeServiceObject);
 
-      var calledWith = rule.calledWith_[0];
+      let calledWith = rule.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/forwardingRules');
@@ -95,10 +95,10 @@ describe('Rule', function() {
     });
 
     it('should not use global forwarding rules', function() {
-      var rule = new Rule({createRule: util.noop}, RULE_NAME);
+      let rule = new Rule({createRule: util.noop}, RULE_NAME);
       assert(rule instanceof FakeServiceObject);
 
-      var calledWith = rule.calledWith_[0];
+      let calledWith = rule.calledWith_[0];
 
       assert.strictEqual(calledWith.baseUrl, '/forwardingRules');
     });
@@ -119,8 +119,8 @@ describe('Rule', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -145,7 +145,7 @@ describe('Rule', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -156,7 +156,7 @@ describe('Rule', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        let operation = {};
 
         rule.scope.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -181,7 +181,7 @@ describe('Rule', function() {
   });
 
   describe('setTarget', function() {
-    var TARGET = 'target';
+    let TARGET = 'target';
 
     it('should make the correct API request', function(done) {
       rule.request = function(reqOpts) {
@@ -196,8 +196,8 @@ describe('Rule', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      let error = new Error('Error.');
+      let apiResponse = {};
 
       beforeEach(function() {
         rule.request = function(reqOpts, callback) {
@@ -216,7 +216,7 @@ describe('Rule', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -227,7 +227,7 @@ describe('Rule', function() {
       });
 
       it('should execute callback with operation & response', function(done) {
-        var operation = {};
+        let operation = {};
 
         rule.scope.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+let common = require('@google-cloud/common');
+let util = require('util');
 
 /**
  * A Snapshot object allows you to interact with a Google Compute Engine
@@ -43,9 +43,9 @@ var util = require('util');
  * const snapshot = disk.snapshot('disk-snapshot-name');
  */
 function Snapshot(scope, name) {
-  var isDisk = scope.constructor.name === 'Disk';
+  let isDisk = scope.constructor.name === 'Disk';
 
-  var methods = {
+  let methods = {
     /**
      * Check if the snapshot exists.
      *
@@ -127,7 +127,7 @@ function Snapshot(scope, name) {
     getMetadata: true,
   };
 
-  var config = {
+  let config = {
     parent: scope,
     baseUrl:
       'https://www.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots',
@@ -223,7 +223,7 @@ util.inherits(Snapshot, common.ServiceObject);
 Snapshot.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
 
-  var compute = this.compute;
+  let compute = this.compute;
 
   common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
@@ -231,7 +231,7 @@ Snapshot.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = compute.operation(resp.name);
+    let operation = compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);

@@ -16,14 +16,14 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
-var concat = require('concat-stream');
-var is = require('is');
-var prop = require('propprop');
-var uuid = require('uuid');
+let assert = require('assert');
+let async = require('async');
+let concat = require('concat-stream');
+let is = require('is');
+let prop = require('propprop');
+let uuid = require('uuid');
 
-var Compute = require('../');
+let Compute = require('../');
 
 describe('Compute', function() {
   // Since the Compute Engine API is rather large and involves long-running
@@ -40,20 +40,20 @@ describe('Compute', function() {
   // deleted. This will also pick up any previously-created objects that were
   // unable to be removed if a prior test run had unexpectedly quit.
 
-  var TESTS_PREFIX = 'gcloud-tests-';
-  var REGION_NAME = 'us-central1';
-  var ZONE_NAME = 'us-central1-a';
+  let TESTS_PREFIX = 'gcloud-tests-';
+  let REGION_NAME = 'us-central1';
+  let ZONE_NAME = 'us-central1-a';
 
-  var compute = new Compute();
-  var region = compute.region(REGION_NAME);
-  var zone = compute.zone(ZONE_NAME);
+  let compute = new Compute();
+  let region = compute.region(REGION_NAME);
+  let zone = compute.zone(ZONE_NAME);
 
   before(deleteAllTestObjects);
   after(deleteAllTestObjects);
 
   describe('addresses', function() {
-    var ADDRESS_NAME = generateName('address');
-    var address = region.address(ADDRESS_NAME);
+    let ADDRESS_NAME = generateName('address');
+    let address = region.address(ADDRESS_NAME);
 
     before(create(address));
 
@@ -74,7 +74,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of addresses in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getAddressesStream()
@@ -94,14 +94,14 @@ describe('Compute', function() {
   });
 
   describe('autoscalers', function() {
-    var AUTOSCALER_NAME = generateName('autoscaler');
-    var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
+    let AUTOSCALER_NAME = generateName('autoscaler');
+    let autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
-    var NETWORK_NAME = generateName('network');
-    var network = compute.network(NETWORK_NAME);
+    let NETWORK_NAME = generateName('network');
+    let network = compute.network(NETWORK_NAME);
 
-    var INSTANCE_TEMPLATE_NAME = generateName('instance-template');
-    var INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
+    let INSTANCE_TEMPLATE_NAME = generateName('instance-template');
+    let INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
 
     before(function(done) {
       async.series(
@@ -175,7 +175,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of autoscalers in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getAutoscalersStream()
@@ -190,7 +190,7 @@ describe('Compute', function() {
     });
 
     it('should set & get metadata', function(done) {
-      var description = 'description';
+      let description = 'description';
 
       autoscaler.setMetadata(
         {
@@ -210,8 +210,8 @@ describe('Compute', function() {
   });
 
   describe('disks', function() {
-    var DISK_NAME = generateName('disk');
-    var disk = zone.disk(DISK_NAME);
+    let DISK_NAME = generateName('disk');
+    let disk = zone.disk(DISK_NAME);
 
     before(create(disk, {os: 'ubuntu'}));
 
@@ -232,7 +232,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of disks in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getDisksStream()
@@ -263,20 +263,20 @@ describe('Compute', function() {
     });
 
     it('should run operation as a promise', function() {
-      var snapshot = disk.snapshot(generateName('snapshot'));
+      let snapshot = disk.snapshot(generateName('snapshot'));
 
       return snapshot.create().then(function(response) {
-        var operation = response[1];
+        let operation = response[1];
         return operation.promise();
       });
     });
   });
 
   describe('firewalls', function() {
-    var FIREWALL_NAME = generateName('firewall');
-    var firewall = compute.firewall(FIREWALL_NAME);
+    let FIREWALL_NAME = generateName('firewall');
+    let firewall = compute.firewall(FIREWALL_NAME);
 
-    var CONFIG = {
+    let CONFIG = {
       protocols: {
         tcp: [3000],
         icmp: true, // This should open all ports on this protocol
@@ -286,7 +286,7 @@ describe('Compute', function() {
       ranges: ['0.0.0.0/0'],
     };
 
-    var expectedMetadata = {
+    let expectedMetadata = {
       allowed: [
         {
           IPProtocol: 'tcp',
@@ -323,7 +323,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of firewalls in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getFirewallsStream()
@@ -339,10 +339,10 @@ describe('Compute', function() {
   });
 
   describe('health checks', function() {
-    var HEALTH_CHECK_NAME = generateName('health-check');
-    var healthCheck = compute.healthCheck(HEALTH_CHECK_NAME);
+    let HEALTH_CHECK_NAME = generateName('health-check');
+    let healthCheck = compute.healthCheck(HEALTH_CHECK_NAME);
 
-    var OPTIONS = {
+    let OPTIONS = {
       description: 'A health check.',
       interval: 50,
       timeout: 25,
@@ -363,7 +363,7 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      var description = 'The best description. Possibly ever.';
+      let description = 'The best description. Possibly ever.';
 
       healthCheck.setMetadata(
         {
@@ -398,7 +398,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of health checks in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getHealthChecksStream()
@@ -414,12 +414,12 @@ describe('Compute', function() {
   });
 
   describe('health checks (https)', function() {
-    var HEALTH_CHECK_NAME = generateName('health-check');
-    var healthCheck = compute.healthCheck(HEALTH_CHECK_NAME, {
+    let HEALTH_CHECK_NAME = generateName('health-check');
+    let healthCheck = compute.healthCheck(HEALTH_CHECK_NAME, {
       https: true,
     });
 
-    var OPTIONS = {
+    let OPTIONS = {
       description: 'A health check.',
       interval: 50,
       timeout: 25,
@@ -440,7 +440,7 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      var description = 'The best description. Possibly ever.';
+      let description = 'The best description. Possibly ever.';
 
       healthCheck.setMetadata(
         {
@@ -475,7 +475,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of health checks in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getHealthChecksStream({https: true})
@@ -491,8 +491,8 @@ describe('Compute', function() {
   });
 
   describe('images', function() {
-    var DISK = zone.disk(generateName('disk'));
-    var IMAGE = compute.image(generateName('image'));
+    let DISK = zone.disk(generateName('disk'));
+    let IMAGE = compute.image(generateName('image'));
 
     before(create(DISK, {os: 'ubuntu'}));
     before(create(IMAGE, DISK));
@@ -514,7 +514,7 @@ describe('Compute', function() {
     });
 
     it('should list images in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getImagesStream()
@@ -530,10 +530,10 @@ describe('Compute', function() {
   });
 
   describe('instance groups', function() {
-    var INSTANCE_GROUP_NAME = generateName('instance-group');
-    var instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
+    let INSTANCE_GROUP_NAME = generateName('instance-group');
+    let instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
 
-    var OPTIONS = {
+    let OPTIONS = {
       description: 'new instance group',
       ports: {
         http: 80,
@@ -568,7 +568,7 @@ describe('Compute', function() {
     });
 
     it('should list project instance groups in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getInstanceGroupsStream()
@@ -591,7 +591,7 @@ describe('Compute', function() {
     });
 
     it('should list zonal instance groups in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       zone
         .getInstanceGroupsStream()
@@ -606,7 +606,7 @@ describe('Compute', function() {
     });
 
     it('should set named ports', function(done) {
-      var ports = OPTIONS.ports;
+      let ports = OPTIONS.ports;
 
       instanceGroup.setPorts(
         ports,
@@ -628,7 +628,7 @@ describe('Compute', function() {
     });
 
     describe('adding and removing VMs', function() {
-      var vm = zone.vm(generateName('vm'));
+      let vm = zone.vm(generateName('vm'));
 
       before(create(vm, {os: 'ubuntu'}));
 
@@ -640,7 +640,7 @@ describe('Compute', function() {
         instanceGroup.getVMs(function(err, vms) {
           assert.ifError(err);
 
-          var vmNamesInGroup = vms.map(prop('name'));
+          let vmNamesInGroup = vms.map(prop('name'));
           assert(vmNamesInGroup.indexOf(vm.name) > -1);
 
           done();
@@ -653,7 +653,7 @@ describe('Compute', function() {
           .on('error', done)
           .pipe(
             concat(function(vms) {
-              var vmNamesInGroup = vms.map(prop('name'));
+              let vmNamesInGroup = vms.map(prop('name'));
               assert(vmNamesInGroup.indexOf(vm.name) > -1);
 
               done();
@@ -677,7 +677,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of machine types in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getMachineTypesStream()
@@ -715,7 +715,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of machine types in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       zone
         .getMachineTypesStream()
@@ -744,10 +744,10 @@ describe('Compute', function() {
   });
 
   describe('networks', function() {
-    var NETWORK_NAME = generateName('network');
-    var network = compute.network(NETWORK_NAME);
+    let NETWORK_NAME = generateName('network');
+    let network = compute.network(NETWORK_NAME);
 
-    var CONFIG = {
+    let CONFIG = {
       range: '10.240.0.0/16',
     };
 
@@ -770,7 +770,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of networks in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getNetworksStream()
@@ -795,7 +795,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of operations in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getOperationsStream()
@@ -811,7 +811,7 @@ describe('Compute', function() {
   });
 
   describe('project', function() {
-    var project;
+    let project;
 
     beforeEach(function() {
       project = compute.project();
@@ -844,7 +844,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of regions in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getRegionsStream()
@@ -867,7 +867,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of addresses in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       region
         .getOperationsStream()
@@ -890,7 +890,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of operations in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       region
         .getOperationsStream()
@@ -906,19 +906,19 @@ describe('Compute', function() {
   });
 
   describe('rules', function() {
-    var RULE_NAME = generateName('rule');
-    var rule = compute.rule(RULE_NAME);
+    let RULE_NAME = generateName('rule');
+    let rule = compute.rule(RULE_NAME);
 
-    var service = compute.service(generateName('service'));
+    let service = compute.service(generateName('service'));
 
-    var INSTANCE_GROUP_NAME = generateName('instance-group');
-    var HEALTH_CHECK_NAME = generateName('health-check');
+    let INSTANCE_GROUP_NAME = generateName('instance-group');
+    let HEALTH_CHECK_NAME = generateName('health-check');
 
     // To create a rule, we need to also create a TargetHttpProxy and UrlMap.
     // Until they are officially supported by google-cloud-node, we make manual
     // requests to create and delete them.
-    var TARGET_PROXY_NAME = generateName('target-proxy');
-    var URL_MAP_NAME = generateName('url-map');
+    let TARGET_PROXY_NAME = generateName('target-proxy');
+    let URL_MAP_NAME = generateName('url-map');
 
     before(function(done) {
       async.series(
@@ -971,7 +971,7 @@ describe('Compute', function() {
     });
 
     it('should have created the right rule', function(done) {
-      var target = [
+      let target = [
         'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
         TARGET_PROXY_NAME,
       ].join('');
@@ -992,7 +992,7 @@ describe('Compute', function() {
     });
 
     it('should set a new target', function(done) {
-      var target = [
+      let target = [
         'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
         '/global/targetHttpProxies/' + TARGET_PROXY_NAME,
       ].join('');
@@ -1019,13 +1019,13 @@ describe('Compute', function() {
   });
 
   describe('rules (regional)', function() {
-    var RULE_NAME = generateName('rule');
-    var rule = region.rule(RULE_NAME);
+    let RULE_NAME = generateName('rule');
+    let rule = region.rule(RULE_NAME);
 
-    var TARGET_INSTANCE_NAME = generateName('target-instance');
+    let TARGET_INSTANCE_NAME = generateName('target-instance');
 
-    var VM_NAME = generateName('vm');
-    var vm = zone.vm(VM_NAME);
+    let VM_NAME = generateName('vm');
+    let vm = zone.vm(VM_NAME);
 
     before(function(done) {
       async.series(
@@ -1059,7 +1059,7 @@ describe('Compute', function() {
     });
 
     it('should have created the right rule', function(done) {
-      var target = [
+      let target = [
         'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
         '/zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME,
       ].join('');
@@ -1081,10 +1081,10 @@ describe('Compute', function() {
   });
 
   describe('services', function() {
-    var service = compute.service(generateName('service'));
+    let service = compute.service(generateName('service'));
 
-    var INSTANCE_GROUP_NAME = generateName('instance-group');
-    var HEALTH_CHECK_NAME = generateName('health-check');
+    let INSTANCE_GROUP_NAME = generateName('instance-group');
+    let HEALTH_CHECK_NAME = generateName('health-check');
 
     before(function(done) {
       createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME, done);
@@ -1099,7 +1099,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of services in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getServicesStream()
@@ -1128,7 +1128,7 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      var description = 'The best description. Possibly ever.';
+      let description = 'The best description. Possibly ever.';
 
       service.setMetadata(
         {
@@ -1165,7 +1165,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of snapshots in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getSnapshotsStream()
@@ -1181,17 +1181,17 @@ describe('Compute', function() {
   });
 
   describe('subnetworks', function() {
-    var NETWORK_NAME = generateName('network');
-    var network = compute.network(NETWORK_NAME);
+    let NETWORK_NAME = generateName('network');
+    let network = compute.network(NETWORK_NAME);
 
-    var SUBNETWORK_NAME = generateName('subnetwork');
-    var subnetwork = region.subnetwork(SUBNETWORK_NAME);
+    let SUBNETWORK_NAME = generateName('subnetwork');
+    let subnetwork = region.subnetwork(SUBNETWORK_NAME);
 
-    var NETWORK_CONFIG = {
+    let NETWORK_CONFIG = {
       autoCreateSubnetworks: false,
     };
 
-    var SUBNETWORK_CONFIG = {
+    let SUBNETWORK_CONFIG = {
       network: 'global/networks/' + NETWORK_NAME,
       range: '10.0.1.0/24',
     };
@@ -1223,7 +1223,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of subnetworks in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getSubnetworksStream()
@@ -1246,7 +1246,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of regional subnetworks in stream', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       region
         .getSubnetworksStream()
@@ -1266,8 +1266,8 @@ describe('Compute', function() {
   });
 
   describe('vms', function() {
-    var VM_NAME = generateName('vm');
-    var vm = zone.vm(VM_NAME);
+    let VM_NAME = generateName('vm');
+    let vm = zone.vm(VM_NAME);
 
     before(create(vm, {os: 'ubuntu', http: true}));
 
@@ -1288,7 +1288,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of vms in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getVMsStream()
@@ -1307,12 +1307,12 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      var disk = zone.disk(generateName('disk'));
+      let disk = zone.disk(generateName('disk'));
 
       async.series([createDisk, attachDisk, detachDisk], done);
 
       function createDisk(callback) {
-        var config = {
+        let config = {
           os: 'ubuntu',
         };
 
@@ -1333,7 +1333,7 @@ describe('Compute', function() {
     });
 
     it('should set tags', function(done) {
-      var newTagName = 'new-tag';
+      let newTagName = 'new-tag';
 
       vm.getTags(function(err, tags, fingerprint) {
         assert.ifError(err);
@@ -1361,7 +1361,7 @@ describe('Compute', function() {
     });
 
     it('should resize the machine', function(done) {
-      var machineType = 'n1-standard-2';
+      let machineType = 'n1-standard-2';
 
       vm.resize(machineType, function(err) {
         assert.ifError(err);
@@ -1369,7 +1369,7 @@ describe('Compute', function() {
         vm.getMetadata(function(err, metadata) {
           assert.ifError(err);
 
-          var expectedMachineType = [
+          let expectedMachineType = [
             'https://www.googleapis.com/compute/v1',
             'zones',
             zone.id,
@@ -1391,10 +1391,10 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      var key = 'newKey';
-      var value = 'newValue';
+      let key = 'newKey';
+      let value = 'newValue';
 
-      var newMetadata = {};
+      let newMetadata = {};
       newMetadata[key] = value;
 
       vm.setMetadata(
@@ -1448,7 +1448,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of zones in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       compute
         .getZonesStream()
@@ -1471,7 +1471,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of disks in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       zone
         .getDisksStream()
@@ -1494,7 +1494,7 @@ describe('Compute', function() {
     });
 
     it('should get a list of operations in stream mode', function(done) {
-      var resultsMatched = 0;
+      let resultsMatched = 0;
 
       zone
         .getOperationsStream()
@@ -1649,11 +1649,11 @@ describe('Compute', function() {
   }
 
   function createService(name, instanceGroupName, healthCheckName, callback) {
-    var service = compute.service(name);
-    var group = zone.instanceGroup(instanceGroupName);
-    var healthCheck = compute.healthCheck(healthCheckName);
-    var groupUrl;
-    var healthCheckUrl;
+    let service = compute.service(name);
+    let group = zone.instanceGroup(instanceGroupName);
+    let healthCheck = compute.healthCheck(healthCheckName);
+    let groupUrl;
+    let healthCheckUrl;
 
     async.series(
       [
@@ -1764,7 +1764,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = compute.operation(resp.name);
+        let operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1784,7 +1784,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = compute.operation(resp.name);
+        let operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1833,7 +1833,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = compute.operation(resp.name);
+        let operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1853,7 +1853,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = compute.operation(resp.name);
+        let operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1905,7 +1905,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = zone.operation(resp.name);
+        let operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1925,7 +1925,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = zone.operation(resp.name);
+        let operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1957,7 +1957,7 @@ describe('Compute', function() {
         return;
       }
 
-      var names = resp.items.map(prop('name'));
+      let names = resp.items.map(prop('name'));
       async.each(names, deleteInstanceTemplate, callback);
     });
   }
@@ -2005,7 +2005,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = compute.operation(resp.name);
+        let operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -2025,7 +2025,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = compute.operation(resp.name);
+        let operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -2057,7 +2057,7 @@ describe('Compute', function() {
         return;
       }
 
-      var names = resp.items.map(prop('name'));
+      let names = resp.items.map(prop('name'));
       async.each(names, deleteInstanceGroupManager, callback);
     });
   }
@@ -2080,7 +2080,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = zone.operation(resp.name);
+        let operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -2100,7 +2100,7 @@ describe('Compute', function() {
           return;
         }
 
-        var operation = zone.operation(resp.name);
+        let operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });

@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+let assert = require('assert');
+let extend = require('extend');
+let nodeutil = require('util');
+let proxyquire = require('proxyquire');
+let ServiceObject = require('@google-cloud/common').ServiceObject;
+let util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+let fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Autoscaler') {
       promisified = true;
@@ -40,13 +40,13 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Autoscaler', function() {
-  var Autoscaler;
-  var autoscaler;
+  let Autoscaler;
+  let autoscaler;
 
-  var AUTOSCALER_NAME = 'autoscaler-name';
+  let AUTOSCALER_NAME = 'autoscaler-name';
 
-  var COMPUTE = {projectId: 'project-id'};
-  var ZONE = {
+  let COMPUTE = {projectId: 'project-id'};
+  let ZONE = {
     compute: COMPUTE,
     name: 'us-central1-a',
     createAutoscaler: util.noop,
@@ -79,7 +79,7 @@ describe('Autoscaler', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      var createMethod = util.noop;
+      let createMethod = util.noop;
 
       var zoneInstance = extend({}, ZONE, {
         createAutoscaler: {
@@ -90,10 +90,10 @@ describe('Autoscaler', function() {
         },
       });
 
-      var autoscaler = new Autoscaler(zoneInstance, AUTOSCALER_NAME);
+      let autoscaler = new Autoscaler(zoneInstance, AUTOSCALER_NAME);
       assert(autoscaler instanceof ServiceObject);
 
-      var calledWith = autoscaler.calledWith_[0];
+      let calledWith = autoscaler.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, zoneInstance);
       assert.strictEqual(calledWith.baseUrl, '/autoscalers');
@@ -119,8 +119,8 @@ describe('Autoscaler', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -145,7 +145,7 @@ describe('Autoscaler', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -156,7 +156,7 @@ describe('Autoscaler', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        let operation = {};
 
         autoscaler.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -182,7 +182,7 @@ describe('Autoscaler', function() {
 
   describe('setMetadata', function() {
     it('should make the correct API request', function(done) {
-      var metadata = {};
+      let metadata = {};
 
       autoscaler.zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'PATCH');
@@ -200,8 +200,8 @@ describe('Autoscaler', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         autoscaler.zone.request = function(reqOpts, callback) {
@@ -220,7 +220,7 @@ describe('Autoscaler', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -231,8 +231,8 @@ describe('Autoscaler', function() {
       });
 
       it('should execute callback with operation & response', function(done) {
-        var operation = {};
-        var metadata = {a: 'b'};
+        let operation = {};
+        let metadata = {a: 'b'};
 
         autoscaler.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

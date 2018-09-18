@@ -16,10 +16,10 @@
 
 'use strict';
 
-var assert = require('assert');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
+let assert = require('assert');
+let nodeutil = require('util');
+let proxyquire = require('proxyquire');
+let ServiceObject = require('@google-cloud/common').ServiceObject;
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -29,14 +29,14 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('MachineType', function() {
-  var MachineType;
-  var machineType;
-  var ZONE_NAME = 'zone-1';
-  var ZONE = {
+  let MachineType;
+  let machineType;
+  let ZONE_NAME = 'zone-1';
+  let ZONE = {
     name: ZONE_NAME,
   };
 
-  var MACHINE_TYPE_NAME = 'g1-small';
+  let MACHINE_TYPE_NAME = 'g1-small';
 
   before(function() {
     MachineType = proxyquire('../src/machine-type.js', {
@@ -62,7 +62,7 @@ describe('MachineType', function() {
     it('should inherit from ServiceObject', function() {
       assert(machineType instanceof ServiceObject);
 
-      var calledWith = machineType.calledWith_[0];
+      let calledWith = machineType.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, ZONE);
       assert.strictEqual(calledWith.baseUrl, '/machineTypes');

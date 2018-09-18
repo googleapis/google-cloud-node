@@ -16,24 +16,24 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+let arrify = require('arrify');
+let common = require('@google-cloud/common');
+let extend = require('extend');
+let format = require('string-format-obj');
+let is = require('is');
+let util = require('util');
 
-var Firewall = require('./firewall.js');
-var HealthCheck = require('./health-check.js');
-var Network = require('./network.js');
-var Operation = require('./operation.js');
-var Project = require('./project.js');
-var Region = require('./region.js');
-var Rule = require('./rule.js');
-var Service = require('./service.js');
-var Snapshot = require('./snapshot.js');
-var Zone = require('./zone.js');
-var Image = require('./image.js');
+let Firewall = require('./firewall.js');
+let HealthCheck = require('./health-check.js');
+let Network = require('./network.js');
+let Operation = require('./operation.js');
+let Project = require('./project.js');
+let Region = require('./region.js');
+let Rule = require('./rule.js');
+let Service = require('./service.js');
+let Snapshot = require('./snapshot.js');
+let Zone = require('./zone.js');
+let Image = require('./image.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -81,7 +81,7 @@ var Image = require('./image.js');
 function Compute(options) {
   options = common.util.normalizeArguments(this, options);
 
-  var config = {
+  let config = {
     baseUrl: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json'),
@@ -151,7 +151,7 @@ util.inherits(Compute, common.Service);
  * });
  */
 Compute.prototype.createFirewall = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
   if (!is.string(name)) {
     throw new Error('A firewall name must be provided.');
@@ -161,19 +161,19 @@ Compute.prototype.createFirewall = function(name, config, callback) {
     throw new Error('A firewall configuration object must be provided.');
   }
 
-  var body = extend({}, config, {
+  let body = extend({}, config, {
     name: name,
   });
 
   if (body.protocols) {
     body.allowed = arrify(body.allowed);
 
-    for (var protocol in body.protocols) {
-      var allowedConfig = {
+    for (let protocol in body.protocols) {
+      let allowedConfig = {
         IPProtocol: protocol,
       };
 
-      var ports = body.protocols[protocol];
+      let ports = body.protocols[protocol];
 
       if (ports === false || ports.length === 0) {
         continue;
@@ -210,9 +210,9 @@ Compute.prototype.createFirewall = function(name, config, callback) {
         return;
       }
 
-      var firewall = self.firewall(name);
+      let firewall = self.firewall(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, firewall, operation, resp);
@@ -268,7 +268,7 @@ Compute.prototype.createFirewall = function(name, config, callback) {
  * });
  */
 Compute.prototype.createHealthCheck = function(name, options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -279,11 +279,11 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
     throw new Error('A health check name must be provided.');
   }
 
-  var body = extend({}, options, {
+  let body = extend({}, options, {
     name: name,
   });
 
-  var https = options.https;
+  let https = options.https;
   delete body.https;
 
   if (body.interval) {
@@ -308,11 +308,11 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
         return;
       }
 
-      var healthCheck = self.healthCheck(name, {
+      let healthCheck = self.healthCheck(name, {
         https: https,
       });
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, healthCheck, operation, resp);
@@ -355,7 +355,7 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  * });
  */
 Compute.prototype.createImage = function(name, disk, options, callback) {
-  var self = this;
+  let self = this;
 
   if (!common.util.isCustomType(disk, 'Disk')) {
     throw new Error('A Disk object is required.');
@@ -366,7 +366,7 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
     options = {};
   }
 
-  var body = extend(
+  let body = extend(
     {
       name: name,
       sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
@@ -388,9 +388,9 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
         callback(err, null, resp);
         return;
       }
-      var image = self.image(name);
+      let image = self.image(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, image, operation, resp);
@@ -445,9 +445,9 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
  * });
  */
 Compute.prototype.createNetwork = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
-  var body = extend({}, config, {
+  let body = extend({}, config, {
     name: name,
   });
 
@@ -473,9 +473,9 @@ Compute.prototype.createNetwork = function(name, config, callback) {
         return;
       }
 
-      var network = self.network(name);
+      let network = self.network(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, network, operation, resp);
@@ -542,9 +542,9 @@ Compute.prototype.createNetwork = function(name, config, callback) {
  * });
  */
 Compute.prototype.createRule = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
-  var body = extend({}, config, {
+  let body = extend({}, config, {
     name: name,
   });
 
@@ -575,9 +575,9 @@ Compute.prototype.createRule = function(name, config, callback) {
         return;
       }
 
-      var rule = self.rule(name);
+      let rule = self.rule(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, rule, operation, resp);
@@ -633,9 +633,9 @@ Compute.prototype.createRule = function(name, config, callback) {
  * });
  */
 Compute.prototype.createService = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
-  var body = extend({}, config, {
+  let body = extend({}, config, {
     name: name,
   });
 
@@ -651,9 +651,9 @@ Compute.prototype.createService = function(name, config, callback) {
         return;
       }
 
-      var service = self.service(name);
+      let service = self.service(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, service, operation, resp);
@@ -734,7 +734,7 @@ Compute.prototype.firewall = function(name) {
  * });
  */
 Compute.prototype.getAddresses = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -754,7 +754,7 @@ Compute.prototype.getAddresses = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -762,14 +762,14 @@ Compute.prototype.getAddresses = function(options, callback) {
         });
       }
 
-      var regions = resp.items || {};
+      let regions = resp.items || {};
 
-      var addresses = Object.keys(regions).reduce(function(acc, regionName) {
-        var region = self.region(regionName.replace('regions/', ''));
-        var regionAddresses = regions[regionName].addresses || [];
+      let addresses = Object.keys(regions).reduce(function(acc, regionName) {
+        let region = self.region(regionName.replace('regions/', ''));
+        let regionAddresses = regions[regionName].addresses || [];
 
         regionAddresses.forEach(function(address) {
-          var addressInstance = region.address(address.name);
+          let addressInstance = region.address(address.name);
           addressInstance.metadata = address;
           acc.push(addressInstance);
         });
@@ -868,7 +868,7 @@ Compute.prototype.getAddressesStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getAutoscalers = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -888,7 +888,7 @@ Compute.prototype.getAutoscalers = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -896,18 +896,18 @@ Compute.prototype.getAutoscalers = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      let zones = resp.items || {};
 
-      var autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
+      let autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
         if (zoneName.indexOf('zones/') !== 0) {
           return acc;
         }
 
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var zoneAutoscalers = zones[zoneName].autoscalers || [];
+        let zone = self.zone(zoneName.replace('zones/', ''));
+        let zoneAutoscalers = zones[zoneName].autoscalers || [];
 
         zoneAutoscalers.forEach(function(autoscaler) {
-          var autoscalerInstance = zone.autoscaler(autoscaler.name);
+          let autoscalerInstance = zone.autoscaler(autoscaler.name);
           autoscalerInstance.metadata = autoscaler;
           acc.push(autoscalerInstance);
         });
@@ -1005,7 +1005,7 @@ Compute.prototype.getAutoscalersStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getDisks = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1025,7 +1025,7 @@ Compute.prototype.getDisks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1033,14 +1033,14 @@ Compute.prototype.getDisks = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      let zones = resp.items || {};
 
-      var disks = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var disks = zones[zoneName].disks || [];
+      let disks = Object.keys(zones).reduce(function(acc, zoneName) {
+        let zone = self.zone(zoneName.replace('zones/', ''));
+        let disks = zones[zoneName].disks || [];
 
         disks.forEach(function(disk) {
-          var diskInstance = zone.disk(disk.name);
+          let diskInstance = zone.disk(disk.name);
           diskInstance.metadata = disk;
           acc.push(diskInstance);
         });
@@ -1138,7 +1138,7 @@ Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * });
  */
 Compute.prototype.getInstanceGroups = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1158,7 +1158,7 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1166,14 +1166,14 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      let zones = resp.items || {};
 
-      var instanceGroups = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var instanceGroups = zones[zoneName].instanceGroups || [];
+      let instanceGroups = Object.keys(zones).reduce(function(acc, zoneName) {
+        let zone = self.zone(zoneName.replace('zones/', ''));
+        let instanceGroups = zones[zoneName].instanceGroups || [];
 
         instanceGroups.forEach(function(group) {
-          var instanceGroupInstance = zone.instanceGroup(group.name);
+          let instanceGroupInstance = zone.instanceGroup(group.name);
           instanceGroupInstance.metadata = group;
           acc.push(instanceGroupInstance);
         });
@@ -1270,7 +1270,7 @@ Compute.prototype.getInstanceGroupsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getFirewalls = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1290,7 +1290,7 @@ Compute.prototype.getFirewalls = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1298,8 +1298,8 @@ Compute.prototype.getFirewalls = function(options, callback) {
         });
       }
 
-      var firewalls = (resp.items || []).map(function(firewall) {
-        var firewallInstance = self.firewall(firewall.name);
+      let firewalls = (resp.items || []).map(function(firewall) {
+        let firewallInstance = self.firewall(firewall.name);
         firewallInstance.metadata = firewall;
         return firewallInstance;
       });
@@ -1394,7 +1394,7 @@ Compute.prototype.getFirewallsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getHealthChecks = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1403,7 +1403,7 @@ Compute.prototype.getHealthChecks = function(options, callback) {
 
   options = extend({}, options);
 
-  var https = options.https;
+  let https = options.https;
   delete options.https;
 
   this.request(
@@ -1417,7 +1417,7 @@ Compute.prototype.getHealthChecks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1425,8 +1425,8 @@ Compute.prototype.getHealthChecks = function(options, callback) {
         });
       }
 
-      var healthChecks = (resp.items || []).map(function(healthCheck) {
-        var healthCheckInstance = self.healthCheck(healthCheck.name, {
+      let healthChecks = (resp.items || []).map(function(healthCheck) {
+        let healthCheckInstance = self.healthCheck(healthCheck.name, {
           https: https,
         });
         healthCheckInstance.metadata = healthCheck;
@@ -1520,7 +1520,7 @@ Compute.prototype.getHealthChecksStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getImages = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1540,7 +1540,7 @@ Compute.prototype.getImages = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1548,8 +1548,8 @@ Compute.prototype.getImages = function(options, callback) {
         });
       }
 
-      var images = (resp.items || []).map(function(image) {
-        var imageInstance = self.image(image.name);
+      let images = (resp.items || []).map(function(image) {
+        let imageInstance = self.image(image.name);
         imageInstance.metadata = image;
         return imageInstance;
       });
@@ -1644,7 +1644,7 @@ Compute.prototype.getImagesStream = common.paginator.streamify('getImages');
  * });
  */
 Compute.prototype.getMachineTypes = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1664,7 +1664,7 @@ Compute.prototype.getMachineTypes = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1672,14 +1672,14 @@ Compute.prototype.getMachineTypes = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      let zones = resp.items || {};
 
-      var machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var machineTypesByZone = zones[zoneName].machineTypes || [];
+      let machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
+        let zone = self.zone(zoneName.replace('zones/', ''));
+        let machineTypesByZone = zones[zoneName].machineTypes || [];
 
         machineTypesByZone.forEach(function(machineType) {
-          var machineTypeInstance = zone.machineType(machineType.name);
+          let machineTypeInstance = zone.machineType(machineType.name);
           machineTypeInstance.metadata = machineType;
           acc.push(machineTypeInstance);
         });
@@ -1778,7 +1778,7 @@ Compute.prototype.getMachineTypesStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getNetworks = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1798,7 +1798,7 @@ Compute.prototype.getNetworks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1806,8 +1806,8 @@ Compute.prototype.getNetworks = function(options, callback) {
         });
       }
 
-      var networks = (resp.items || []).map(function(network) {
-        var networkInstance = self.network(network.name);
+      let networks = (resp.items || []).map(function(network) {
+        let networkInstance = self.network(network.name);
         networkInstance.metadata = network;
         return networkInstance;
       });
@@ -1900,7 +1900,7 @@ Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
  * });
  */
 Compute.prototype.getOperations = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1920,7 +1920,7 @@ Compute.prototype.getOperations = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1928,8 +1928,8 @@ Compute.prototype.getOperations = function(options, callback) {
         });
       }
 
-      var operations = (resp.items || []).map(function(operation) {
-        var operationInstance = self.operation(operation.name);
+      let operations = (resp.items || []).map(function(operation) {
+        let operationInstance = self.operation(operation.name);
         operationInstance.metadata = operation;
         return operationInstance;
       });
@@ -2025,7 +2025,7 @@ Compute.prototype.getOperationsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getRegions = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2043,7 +2043,7 @@ Compute.prototype.getRegions = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2051,8 +2051,8 @@ Compute.prototype.getRegions = function(options, callback) {
         });
       }
 
-      var regions = resp.items.map(function(region) {
-        var regionInstance = self.region(region.name);
+      let regions = resp.items.map(function(region) {
+        let regionInstance = self.region(region.name);
         regionInstance.metadata = region;
         return regionInstance;
       });
@@ -2145,7 +2145,7 @@ Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
  * });
  */
 Compute.prototype.getRules = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2165,7 +2165,7 @@ Compute.prototype.getRules = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2173,8 +2173,8 @@ Compute.prototype.getRules = function(options, callback) {
         });
       }
 
-      var rules = (resp.items || []).map(function(rule) {
-        var ruleInstance = self.rule(rule.name);
+      let rules = (resp.items || []).map(function(rule) {
+        let ruleInstance = self.rule(rule.name);
         ruleInstance.metadata = rule;
         return ruleInstance;
       });
@@ -2267,7 +2267,7 @@ Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
  * });
  */
 Compute.prototype.getServices = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2287,7 +2287,7 @@ Compute.prototype.getServices = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2295,8 +2295,8 @@ Compute.prototype.getServices = function(options, callback) {
         });
       }
 
-      var services = (resp.items || []).map(function(service) {
-        var serviceInstance = self.service(service.name);
+      let services = (resp.items || []).map(function(service) {
+        let serviceInstance = self.service(service.name);
         serviceInstance.metadata = service;
         return serviceInstance;
       });
@@ -2389,7 +2389,7 @@ Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
  * });
  */
 Compute.prototype.getSnapshots = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2409,7 +2409,7 @@ Compute.prototype.getSnapshots = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2417,8 +2417,8 @@ Compute.prototype.getSnapshots = function(options, callback) {
         });
       }
 
-      var snapshots = (resp.items || []).map(function(snapshot) {
-        var snapshotInstance = self.snapshot(snapshot.name);
+      let snapshots = (resp.items || []).map(function(snapshot) {
+        let snapshotInstance = self.snapshot(snapshot.name);
         snapshotInstance.metadata = snapshot;
         return snapshotInstance;
       });
@@ -2513,7 +2513,7 @@ Compute.prototype.getSnapshotsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getSubnetworks = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2533,7 +2533,7 @@ Compute.prototype.getSubnetworks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2541,14 +2541,14 @@ Compute.prototype.getSubnetworks = function(options, callback) {
         });
       }
 
-      var regions = resp.items || {};
+      let regions = resp.items || {};
 
-      var subnetworks = Object.keys(regions).reduce(function(acc, regionName) {
-        var region = self.region(regionName.replace('regions/', ''));
-        var subnetworks = regions[regionName].subnetworks || [];
+      let subnetworks = Object.keys(regions).reduce(function(acc, regionName) {
+        let region = self.region(regionName.replace('regions/', ''));
+        let subnetworks = regions[regionName].subnetworks || [];
 
         subnetworks.forEach(function(subnetwork) {
-          var subnetworkInstance = region.subnetwork(subnetwork.name);
+          let subnetworkInstance = region.subnetwork(subnetwork.name);
           subnetworkInstance.metadata = subnetwork;
           acc.push(subnetworkInstance);
         });
@@ -2646,7 +2646,7 @@ Compute.prototype.getSubnetworksStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getVMs = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2666,7 +2666,7 @@ Compute.prototype.getVMs = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2674,14 +2674,14 @@ Compute.prototype.getVMs = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      let zones = resp.items || {};
 
-      var vms = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var instances = zones[zoneName].instances || [];
+      let vms = Object.keys(zones).reduce(function(acc, zoneName) {
+        let zone = self.zone(zoneName.replace('zones/', ''));
+        let instances = zones[zoneName].instances || [];
 
         instances.forEach(function(instance) {
-          var vmInstance = zone.vm(instance.name);
+          let vmInstance = zone.vm(instance.name);
           vmInstance.metadata = instance;
           acc.push(vmInstance);
         });
@@ -2777,7 +2777,7 @@ Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
  * });
  */
 Compute.prototype.getZones = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2795,7 +2795,7 @@ Compute.prototype.getZones = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2803,8 +2803,8 @@ Compute.prototype.getZones = function(options, callback) {
         });
       }
 
-      var zones = resp.items.map(function(zone) {
-        var zoneInstance = self.zone(zone.name);
+      let zones = resp.items.map(function(zone) {
+        let zoneInstance = self.zone(zone.name);
         zoneInstance.metadata = zone;
         return zoneInstance;
       });
@@ -3012,8 +3012,8 @@ Compute.prototype.zone = function(name) {
 Compute.prototype.execAfterOperation_ = function(callback) {
   return function(err) {
     // arguments = [..., op, apiResponse]
-    var operation = arguments[arguments.length - 2];
-    var apiResponse = arguments[arguments.length - 1];
+    let operation = arguments[arguments.length - 2];
+    let apiResponse = arguments[arguments.length - 1];
 
     if (err) {
       callback(err, apiResponse);

@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+let assert = require('assert');
+let extend = require('extend');
+let nodeutil = require('util');
+let proxyquire = require('proxyquire');
+let ServiceObject = require('@google-cloud/common').ServiceObject;
+let util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+let fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Firewall') {
       promisified = true;
@@ -40,15 +40,15 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Firewall', function() {
-  var Firewall;
-  var firewall;
+  let Firewall;
+  let firewall;
 
-  var COMPUTE = {
+  let COMPUTE = {
     projectId: 'project-id',
     createFirewall: util.noop,
   };
-  var FIREWALL_NAME = 'tcp-3000';
-  var FIREWALL_NETWORK = 'global/networks/default';
+  let FIREWALL_NAME = 'tcp-3000';
+  let FIREWALL_NETWORK = 'global/networks/default';
 
   before(function() {
     Firewall = proxyquire('../src/firewall.js', {
@@ -89,11 +89,11 @@ describe('Firewall', function() {
         },
       });
 
-      var firewall = new Firewall(computeInstance, FIREWALL_NAME);
+      let firewall = new Firewall(computeInstance, FIREWALL_NAME);
 
       assert(firewall instanceof ServiceObject);
 
-      var calledWith = firewall.calledWith_[0];
+      let calledWith = firewall.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/firewalls');
@@ -118,8 +118,8 @@ describe('Firewall', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -144,7 +144,7 @@ describe('Firewall', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -155,7 +155,7 @@ describe('Firewall', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        let operation = {};
 
         firewall.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -181,7 +181,7 @@ describe('Firewall', function() {
 
   describe('setMetadata', function() {
     it('should make the correct API request', function(done) {
-      var metadata = {};
+      let metadata = {};
 
       firewall.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'PATCH');
@@ -199,8 +199,8 @@ describe('Firewall', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         firewall.request = function(reqOpts, callback) {
@@ -219,7 +219,7 @@ describe('Firewall', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -230,8 +230,8 @@ describe('Firewall', function() {
       });
 
       it('should execute callback with operation & response', function(done) {
-        var operation = {};
-        var metadata = {a: 'b'};
+        let operation = {};
+        let metadata = {a: 'b'};
 
         firewall.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

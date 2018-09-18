@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+let common = require('@google-cloud/common');
+let util = require('util');
 
 /**
  * A Firewall object allows you to interact with a Google Compute Engine
@@ -36,7 +36,7 @@ var util = require('util');
  * const firewall = compute.firewall('tcp-3000');
  */
 function Firewall(compute, name) {
-  var methods = {
+  let methods = {
     /**
      * Create a firewall.
      *
@@ -222,7 +222,7 @@ util.inherits(Firewall, common.ServiceObject);
  * });
  */
 Firewall.prototype.delete = function(callback) {
-  var compute = this.compute;
+  let compute = this.compute;
 
   callback = callback || common.util.noop;
 
@@ -232,7 +232,7 @@ Firewall.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = compute.operation(resp.name);
+    let operation = compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -275,7 +275,7 @@ Firewall.prototype.delete = function(callback) {
  * });
  */
 Firewall.prototype.setMetadata = function(metadata, callback) {
-  var compute = this.compute;
+  let compute = this.compute;
 
   callback = callback || common.util.noop;
 
@@ -295,7 +295,7 @@ Firewall.prototype.setMetadata = function(metadata, callback) {
         return;
       }
 
-      var operation = compute.operation(resp.name);
+      let operation = compute.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);

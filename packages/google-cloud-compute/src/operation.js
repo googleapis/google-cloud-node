@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+let common = require('@google-cloud/common');
+let util = require('util');
 
 /**
  * An Operation object allows you to interact with a Google Compute Engine
@@ -87,9 +87,9 @@ var util = require('util');
  * operation.removeAllListeners();
  */
 function Operation(scope, name) {
-  var isCompute = scope.constructor.name === 'Compute';
+  let isCompute = scope.constructor.name === 'Compute';
 
-  var methods = {
+  let methods = {
     /**
      * Delete the operation.
      *
@@ -219,11 +219,11 @@ util.inherits(Operation, common.Operation);
  * });
  */
 Operation.prototype.getMetadata = function(callback) {
-  var self = this;
+  let self = this;
 
   callback = callback || common.util.noop;
 
-  var getMetadata = common.ServiceObject.prototype.getMetadata;
+  let getMetadata = common.ServiceObject.prototype.getMetadata;
 
   getMetadata.call(this, function(err, apiResponse) {
     // An Operation entity contains a property named `error`. This makes
@@ -231,7 +231,7 @@ Operation.prototype.getMetadata = function(callback) {
     // this callback. We have to make sure this isn't a false error by seeing if
     // the response body contains a property that wouldn't exist on a failed API
     // request (`name`).
-    var requestFailed = err && (!apiResponse || apiResponse.name !== self.name);
+    let requestFailed = err && (!apiResponse || apiResponse.name !== self.name);
 
     if (requestFailed) {
       callback(err, null, apiResponse);
@@ -254,12 +254,12 @@ Operation.prototype.getMetadata = function(callback) {
  * @private
  */
 Operation.prototype.poll_ = function(callback) {
-  var self = this;
+  let self = this;
 
   this.getMetadata(function(err, metadata, apiResponse) {
     // Parsing the response body will automatically create an ApiError object if
     // the operation failed.
-    var parsedHttpRespBody = common.util.parseHttpRespBody(apiResponse);
+    let parsedHttpRespBody = common.util.parseHttpRespBody(apiResponse);
     err = err || parsedHttpRespBody.err;
 
     if (err) {

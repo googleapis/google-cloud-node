@@ -16,21 +16,21 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var async = require('async');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var gceImages = require('gce-images');
-var is = require('is');
-var util = require('util');
+let arrify = require('arrify');
+let async = require('async');
+let common = require('@google-cloud/common');
+let extend = require('extend');
+let format = require('string-format-obj');
+let gceImages = require('gce-images');
+let is = require('is');
+let util = require('util');
 
-var Autoscaler = require('./autoscaler.js');
-var Disk = require('./disk.js');
-var InstanceGroup = require('./instance-group.js');
-var MachineType = require('./machine-type.js');
-var Operation = require('./operation.js');
-var VM = require('./vm.js');
+let Autoscaler = require('./autoscaler.js');
+let Disk = require('./disk.js');
+let InstanceGroup = require('./instance-group.js');
+let MachineType = require('./machine-type.js');
+let Operation = require('./operation.js');
+let VM = require('./vm.js');
 
 /**
  * A Zone object allows you to interact with a Google Compute Engine zone.
@@ -48,7 +48,7 @@ var VM = require('./vm.js');
  * const zone = compute.zone('us-central1-a');
  */
 function Zone(compute, name) {
-  var methods = {
+  let methods = {
     /**
      * Check if the zone exists.
      *
@@ -247,13 +247,13 @@ Zone.prototype.autoscaler = function(name) {
  * });
  */
 Zone.prototype.createAutoscaler = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
   if (!config.target) {
     throw new Error('Cannot create an autoscaler without a target.');
   }
 
-  var json = extend(true, {}, config, {
+  let json = extend(true, {}, config, {
     name: name,
     autoscalingPolicy: {},
   });
@@ -310,9 +310,9 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
         return;
       }
 
-      var autoscaler = self.autoscaler(name);
+      let autoscaler = self.autoscaler(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, autoscaler, operation, resp);
@@ -379,10 +379,10 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
  * });
  */
 Zone.prototype.createDisk = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
-  var query = {};
-  var body = extend({}, config, {
+  let query = {};
+  let body = extend({}, config, {
     name: name,
   });
 
@@ -419,9 +419,9 @@ Zone.prototype.createDisk = function(name, config, callback) {
         return;
       }
 
-      var disk = self.disk(name);
+      let disk = self.disk(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, disk, operation, resp);
@@ -472,14 +472,14 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * });
  */
 Zone.prototype.createInstanceGroup = function(name, options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
     options = {};
   }
 
-  var body = extend({}, options, {
+  let body = extend({}, options, {
     name: name,
   });
 
@@ -500,9 +500,9 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
         return;
       }
 
-      var instanceGroup = self.instanceGroup(name);
+      let instanceGroup = self.instanceGroup(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, instanceGroup, operation, resp);
@@ -617,9 +617,9 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * });
  */
 Zone.prototype.createVM = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
-  var body = extend(
+  let body = extend(
     {
       name: name,
       machineType: 'n1-standard-1',
@@ -650,7 +650,7 @@ Zone.prototype.createVM = function(name, config, callback) {
     // We will add tags to the created instance (http-server and/or
     // https-server), and create the appropriate firewall rules to allow
     // connections on the necessary ports to these tags.
-    var createFirewallMethods = [];
+    let createFirewallMethods = [];
 
     body.networkInterfaces[0].accessConfigs = [
       {
@@ -729,9 +729,9 @@ Zone.prototype.createVM = function(name, config, callback) {
         return;
       }
 
-      var vm = self.vm(name);
+      let vm = self.vm(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, vm, operation, resp);
@@ -817,7 +817,7 @@ Zone.prototype.disk = function(name) {
  * });
  */
 Zone.prototype.getAutoscalers = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -837,7 +837,7 @@ Zone.prototype.getAutoscalers = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -845,8 +845,8 @@ Zone.prototype.getAutoscalers = function(options, callback) {
         });
       }
 
-      var autoscalers = arrify(resp.items).map(function(autoscaler) {
-        var autoscalerInstance = self.autoscaler(autoscaler.name);
+      let autoscalers = arrify(resp.items).map(function(autoscaler) {
+        let autoscalerInstance = self.autoscaler(autoscaler.name);
         autoscalerInstance.metadata = autoscaler;
 
         return autoscalerInstance;
@@ -949,7 +949,7 @@ Zone.prototype.getAutoscalersStream = common.paginator.streamify(
  * });
  */
 Zone.prototype.getDisks = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -969,7 +969,7 @@ Zone.prototype.getDisks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -977,8 +977,8 @@ Zone.prototype.getDisks = function(options, callback) {
         });
       }
 
-      var disks = (resp.items || []).map(function(disk) {
-        var diskInstance = self.disk(disk.name);
+      let disks = (resp.items || []).map(function(disk) {
+        let diskInstance = self.disk(disk.name);
         diskInstance.metadata = disk;
         return diskInstance;
       });
@@ -1080,7 +1080,7 @@ Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * });
  */
 Zone.prototype.getInstanceGroups = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1100,7 +1100,7 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1108,8 +1108,8 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
         });
       }
 
-      var instanceGroups = (resp.items || []).map(function(instanceGroup) {
-        var instanceGroupInstance = self.instanceGroup(instanceGroup.name);
+      let instanceGroups = (resp.items || []).map(function(instanceGroup) {
+        let instanceGroupInstance = self.instanceGroup(instanceGroup.name);
         instanceGroupInstance.metadata = instanceGroup;
         return instanceGroupInstance;
       });
@@ -1312,7 +1312,7 @@ Zone.prototype.getMachineTypesStream = common.paginator.streamify(
  * });
  */
 Zone.prototype.getOperations = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1332,7 +1332,7 @@ Zone.prototype.getOperations = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1340,8 +1340,8 @@ Zone.prototype.getOperations = function(options, callback) {
         });
       }
 
-      var operations = (resp.items || []).map(function(operation) {
-        var operationInstance = self.operation(operation.name);
+      let operations = (resp.items || []).map(function(operation) {
+        let operationInstance = self.operation(operation.name);
         operationInstance.metadata = operation;
         return operationInstance;
       });
@@ -1441,7 +1441,7 @@ Zone.prototype.getOperationsStream = common.paginator.streamify(
  * });
  */
 Zone.prototype.getVMs = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1461,7 +1461,7 @@ Zone.prototype.getVMs = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1469,8 +1469,8 @@ Zone.prototype.getVMs = function(options, callback) {
         });
       }
 
-      var vms = (resp.items || []).map(function(instance) {
-        var vmInstance = self.vm(instance.name);
+      let vms = (resp.items || []).map(function(instance) {
+        let vmInstance = self.vm(instance.name);
         vmInstance.metadata = instance;
         return vmInstance;
       });

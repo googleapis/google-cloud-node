@@ -16,11 +16,11 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+let common = require('@google-cloud/common');
+let extend = require('extend');
+let format = require('string-format-obj');
+let is = require('is');
+let util = require('util');
 
 /**
  * A Network object allows you to interact with a Google Compute Engine network.
@@ -38,7 +38,7 @@ var util = require('util');
  * const network = compute.network('network-name');
  */
 function Network(compute, name) {
-  var methods = {
+  let methods = {
     /**
      * Create a network.
      *
@@ -331,7 +331,7 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
     network: this.formattedName,
   });
 
-  var region = config.region;
+  let region = config.region;
 
   if (is.string(region)) {
     region = this.compute.region(region);
@@ -481,7 +481,7 @@ Network.prototype.getSubnetworksStream = function(options) {
  * });
  */
 Network.prototype.delete = function(callback) {
-  var compute = this.compute;
+  let compute = this.compute;
 
   callback = callback || common.util.noop;
 
@@ -491,7 +491,7 @@ Network.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = compute.operation(resp.name);
+    let operation = compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -512,7 +512,7 @@ Network.prototype.delete = function(callback) {
  * const firewall = network.firewall('firewall-name');
  */
 Network.prototype.firewall = function(name) {
-  var firewall = this.compute.firewall(name);
+  let firewall = this.compute.firewall(name);
 
   firewall.metadata = {
     network: this.formattedName,

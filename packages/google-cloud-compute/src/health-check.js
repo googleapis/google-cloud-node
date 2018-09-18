@@ -16,10 +16,10 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+let common = require('@google-cloud/common');
+let extend = require('extend');
+let is = require('is');
+let util = require('util');
 
 /**
  * Health checks ensure that Compute Engine forwards new connections only to
@@ -44,7 +44,7 @@ var util = require('util');
  * const healthCheck = gce.healthCheck('health-check-name');
  */
 function HealthCheck(compute, name, options) {
-  var methods = {
+  let methods = {
     /**
      * Create an HTTP or HTTPS health check.
      *
@@ -167,7 +167,7 @@ function HealthCheck(compute, name, options) {
 
   options = options || {};
 
-  var https = options.https;
+  let https = options.https;
 
   /**
    * The parent {@link Compute} instance of this {@link HealthCheck} instance.
@@ -231,7 +231,7 @@ util.inherits(HealthCheck, common.ServiceObject);
  * });
  */
 HealthCheck.prototype.delete = function(callback) {
-  var compute = this.compute;
+  let compute = this.compute;
 
   callback = callback || common.util.noop;
 
@@ -241,7 +241,7 @@ HealthCheck.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = compute.operation(resp.name);
+    let operation = compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -286,11 +286,11 @@ HealthCheck.prototype.delete = function(callback) {
  * });
  */
 HealthCheck.prototype.setMetadata = function(metadata, callback) {
-  var compute = this.compute;
+  let compute = this.compute;
 
   callback = callback || common.util.noop;
 
-  var setMetadata = common.ServiceObject.prototype.setMetadata;
+  let setMetadata = common.ServiceObject.prototype.setMetadata;
 
   setMetadata.call(this, metadata, function(err, resp) {
     if (err) {
@@ -298,7 +298,7 @@ HealthCheck.prototype.setMetadata = function(metadata, callback) {
       return;
     }
 
-    var operation = compute.operation(resp.name);
+    let operation = compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);

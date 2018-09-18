@@ -16,17 +16,17 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
+let arrify = require('arrify');
+let assert = require('assert');
+let extend = require('extend');
+let nodeutil = require('util');
+let proxyquire = require('proxyquire');
 
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+let ServiceObject = require('@google-cloud/common').ServiceObject;
+let util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+let fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'InstanceGroup') {
       promisified = true;
@@ -41,8 +41,8 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-var extended = false;
-var fakePaginator = {
+let extended = false;
+let fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'InstanceGroup') {
       return;
@@ -59,16 +59,16 @@ var fakePaginator = {
 };
 
 describe('InstanceGroup', function() {
-  var InstanceGroup;
-  var instanceGroup;
+  let InstanceGroup;
+  let instanceGroup;
 
-  var staticMethods = {};
+  let staticMethods = {};
 
-  var ZONE = {
+  let ZONE = {
     createInstanceGroup: util.noop,
     vm: util.noop,
   };
-  var NAME = 'instance-group-name';
+  let NAME = 'instance-group-name';
 
   before(function() {
     InstanceGroup = proxyquire('../src/instance-group.js', {
@@ -108,7 +108,7 @@ describe('InstanceGroup', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var instanceGroup;
+      let instanceGroup;
 
       var zoneInstance = extend({}, ZONE, {
         createInstanceGroup: {
@@ -118,7 +118,7 @@ describe('InstanceGroup', function() {
             setImmediate(function() {
               assert(instanceGroup instanceof ServiceObject);
 
-              var calledWith = instanceGroup.calledWith_[0];
+              let calledWith = instanceGroup.calledWith_[0];
 
               assert.strictEqual(calledWith.parent, zoneInstance);
               assert.strictEqual(calledWith.baseUrl, '/instanceGroups');
@@ -141,7 +141,7 @@ describe('InstanceGroup', function() {
   });
 
   describe('formatPorts_', function() {
-    var PORTS = {
+    let PORTS = {
       http: 80,
       https: 443,
     };
@@ -155,7 +155,7 @@ describe('InstanceGroup', function() {
   });
 
   describe('add', function() {
-    var VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
+    let VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', function(done) {
       instanceGroup.request = function(reqOpts) {
@@ -176,8 +176,8 @@ describe('InstanceGroup', function() {
     });
 
     describe('error', function() {
-      var apiResponse = {};
-      var error = new Error('Error.');
+      let apiResponse = {};
+      let error = new Error('Error.');
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -196,7 +196,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {name: 'op-name'};
+      let apiResponse = {name: 'op-name'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -205,7 +205,7 @@ describe('InstanceGroup', function() {
       });
 
       it('should return an Operation and API response', function(done) {
-        var operation = {};
+        let operation = {};
 
         instanceGroup.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -234,8 +234,8 @@ describe('InstanceGroup', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -260,7 +260,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -271,7 +271,7 @@ describe('InstanceGroup', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        let operation = {};
 
         instanceGroup.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -312,7 +312,7 @@ describe('InstanceGroup', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = {a: 'b', c: 'd'};
+      let query = {a: 'b', c: 'd'};
 
       instanceGroup.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -327,7 +327,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('options.running', function() {
-      var OPTIONS = {
+      let OPTIONS = {
         running: true,
       };
 
@@ -344,8 +344,8 @@ describe('InstanceGroup', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -365,7 +365,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         items: [{instance: 'vm-name'}],
       };
 
@@ -376,11 +376,11 @@ describe('InstanceGroup', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        let nextPageToken = 'next-page-token';
+        let apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
-        var expectedNextQuery = {
+        let expectedNextQuery = {
           pageToken: nextPageToken,
         };
 
@@ -398,7 +398,7 @@ describe('InstanceGroup', function() {
       });
 
       it('should execute callback with VMs & API response', function(done) {
-        var vm = {};
+        let vm = {};
 
         instanceGroup.zone.vm = function(name) {
           assert.strictEqual(name, apiResponse.items[0].instance);
@@ -420,7 +420,7 @@ describe('InstanceGroup', function() {
   });
 
   describe('remove', function() {
-    var VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
+    let VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
     it('should make the correct API request', function(done) {
       instanceGroup.request = function(reqOpts) {
@@ -441,8 +441,8 @@ describe('InstanceGroup', function() {
     });
 
     describe('error', function() {
-      var apiResponse = {};
-      var error = new Error('Error.');
+      let apiResponse = {};
+      let error = new Error('Error.');
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -461,7 +461,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {name: 'op-name'};
+      let apiResponse = {name: 'op-name'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -470,7 +470,7 @@ describe('InstanceGroup', function() {
       });
 
       it('should return an Operation and API response', function(done) {
-        var operation = {};
+        let operation = {};
 
         instanceGroup.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -489,13 +489,13 @@ describe('InstanceGroup', function() {
   });
 
   describe('setPorts', function() {
-    var PORTS = {
+    let PORTS = {
       http: 80,
       https: 443,
     };
 
     it('should format the named ports', function(done) {
-      var expectedNamedPorts = [];
+      let expectedNamedPorts = [];
 
       InstanceGroup.formatPorts_ = function(ports) {
         assert.strictEqual(ports, PORTS);
@@ -513,8 +513,8 @@ describe('InstanceGroup', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         instanceGroup.request = function(reqOpts, callback) {
@@ -539,7 +539,7 @@ describe('InstanceGroup', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -550,7 +550,7 @@ describe('InstanceGroup', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        let operation = {};
 
         instanceGroup.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

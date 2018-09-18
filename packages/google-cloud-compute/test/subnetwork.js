@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+let assert = require('assert');
+let extend = require('extend');
+let nodeutil = require('util');
+let proxyquire = require('proxyquire');
+let ServiceObject = require('@google-cloud/common').ServiceObject;
+let util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+let fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Subnetwork') {
       promisified = true;
@@ -40,12 +40,12 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Subnetwork', function() {
-  var Subnetwork;
-  var subnetwork;
+  let Subnetwork;
+  let subnetwork;
 
-  var SUBNETWORK_NAME = 'subnetwork_name';
-  var REGION_NAME = 'region-1';
-  var REGION = {
+  let SUBNETWORK_NAME = 'subnetwork_name';
+  let REGION_NAME = 'region-1';
+  let REGION = {
     createSubnetwork: util.noop,
     name: REGION_NAME,
   };
@@ -73,7 +73,7 @@ describe('Subnetwork', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      var createSubnetworkBound = {};
+      let createSubnetworkBound = {};
 
       var regionInstance = extend({}, REGION, {
         createSubnetwork: {
@@ -84,10 +84,10 @@ describe('Subnetwork', function() {
         },
       });
 
-      var subnetwork = new Subnetwork(regionInstance, SUBNETWORK_NAME);
+      let subnetwork = new Subnetwork(regionInstance, SUBNETWORK_NAME);
       assert(subnetwork instanceof ServiceObject);
 
-      var calledWith = subnetwork.calledWith_[0];
+      let calledWith = subnetwork.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, regionInstance);
       assert.strictEqual(calledWith.baseUrl, '/subnetworks');
@@ -118,8 +118,8 @@ describe('Subnetwork', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      let error = new Error('Error.');
+      let apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         subnetwork.request = function(reqOpts, callback) {
@@ -144,7 +144,7 @@ describe('Subnetwork', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      let apiResponse = {
         name: 'op-name',
       };
 
@@ -155,7 +155,7 @@ describe('Subnetwork', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        let operation = {};
 
         subnetwork.region.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

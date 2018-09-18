@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+let common = require('@google-cloud/common');
+let util = require('util');
 
 /**
  * An Address object allows you to interact with a Google Compute Engine
@@ -37,7 +37,7 @@ var util = require('util');
  * const address = region.address('address1');
  */
 function Address(region, name) {
-  var methods = {
+  let methods = {
     /**
      * Create an address.
      *
@@ -216,7 +216,7 @@ util.inherits(Address, common.ServiceObject);
 Address.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
 
-  var region = this.region;
+  let region = this.region;
 
   this.request(
     {
@@ -229,7 +229,7 @@ Address.prototype.delete = function(callback) {
         return;
       }
 
-      var operation = region.operation(resp.name);
+      let operation = region.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);

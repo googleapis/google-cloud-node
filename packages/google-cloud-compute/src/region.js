@@ -16,16 +16,16 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+let common = require('@google-cloud/common');
+let extend = require('extend');
+let is = require('is');
+let util = require('util');
 
-var Address = require('./address.js');
-var Network = require('./network.js');
-var Operation = require('./operation.js');
-var Rule = require('./rule.js');
-var Subnetwork = require('./subnetwork.js');
+let Address = require('./address.js');
+let Network = require('./network.js');
+let Operation = require('./operation.js');
+let Rule = require('./rule.js');
+let Subnetwork = require('./subnetwork.js');
 
 /**
  * A Region object allows you to interact with a Google Compute Engine region.
@@ -43,7 +43,7 @@ var Subnetwork = require('./subnetwork.js');
  * const region = compute.region('us-central1');
  */
 function Region(compute, name) {
-  var methods = {
+  let methods = {
     /**
      * Check if the region exists.
      *
@@ -214,7 +214,7 @@ Region.prototype.address = function(name) {
  * });
  */
 Region.prototype.createAddress = function(name, options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -235,9 +235,9 @@ Region.prototype.createAddress = function(name, options, callback) {
         return;
       }
 
-      var address = self.address(name);
+      let address = self.address(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, address, operation, resp);
@@ -298,9 +298,9 @@ Region.prototype.createAddress = function(name, options, callback) {
  * });
  */
 Region.prototype.createSubnetwork = function(name, config, callback) {
-  var self = this;
+  let self = this;
 
-  var body = extend({}, config, {
+  let body = extend({}, config, {
     name: name,
   });
 
@@ -325,9 +325,9 @@ Region.prototype.createSubnetwork = function(name, config, callback) {
         return;
       }
 
-      var subnetwork = self.subnetwork(name);
+      let subnetwork = self.subnetwork(name);
 
-      var operation = self.operation(resp.name);
+      let operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, subnetwork, operation, resp);
@@ -458,7 +458,7 @@ Region.prototype.createRule = function(name, config, callback) {
  * });
  */
 Region.prototype.getAddresses = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -478,7 +478,7 @@ Region.prototype.getAddresses = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -486,8 +486,8 @@ Region.prototype.getAddresses = function(options, callback) {
         });
       }
 
-      var addresses = (resp.items || []).map(function(address) {
-        var addressInstance = self.address(address.name);
+      let addresses = (resp.items || []).map(function(address) {
+        let addressInstance = self.address(address.name);
         addressInstance.metadata = address;
         return addressInstance;
       });
@@ -590,7 +590,7 @@ Region.prototype.getAddressesStream = common.paginator.streamify(
  * });
  */
 Region.prototype.getOperations = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -610,7 +610,7 @@ Region.prototype.getOperations = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -618,8 +618,8 @@ Region.prototype.getOperations = function(options, callback) {
         });
       }
 
-      var operations = (resp.items || []).map(function(operation) {
-        var operationInstance = self.operation(operation.name);
+      let operations = (resp.items || []).map(function(operation) {
+        let operationInstance = self.operation(operation.name);
         operationInstance.metadata = operation;
         return operationInstance;
       });
@@ -721,7 +721,7 @@ Region.prototype.getOperationsStream = common.paginator.streamify(
  * });
  */
 Region.prototype.getRules = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -741,7 +741,7 @@ Region.prototype.getRules = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -749,8 +749,8 @@ Region.prototype.getRules = function(options, callback) {
         });
       }
 
-      var rules = (resp.items || []).map(function(rule) {
-        var ruleInstance = self.rule(rule.name);
+      let rules = (resp.items || []).map(function(rule) {
+        let ruleInstance = self.rule(rule.name);
         ruleInstance.metadata = rule;
         return ruleInstance;
       });
@@ -851,7 +851,7 @@ Region.prototype.getRulesStream = common.paginator.streamify('getRules');
  * });
  */
 Region.prototype.getSubnetworks = function(options, callback) {
-  var self = this;
+  let self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -871,7 +871,7 @@ Region.prototype.getSubnetworks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -879,8 +879,8 @@ Region.prototype.getSubnetworks = function(options, callback) {
         });
       }
 
-      var subnetworks = (resp.items || []).map(function(subnetwork) {
-        var subnetworkInstance = self.subnetwork(subnetwork.name);
+      let subnetworks = (resp.items || []).map(function(subnetwork) {
+        let subnetworkInstance = self.subnetwork(subnetwork.name);
         subnetworkInstance.metadata = subnetwork;
         return subnetworkInstance;
       });
