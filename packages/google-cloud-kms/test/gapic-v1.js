@@ -18,30 +18,30 @@ const assert = require('assert');
 
 const kmsModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+let FAKE_STATUS_CODE = 1;
+let error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('KeyManagementServiceClient', () => {
   describe('listKeyRings', () => {
     it('invokes listKeyRings without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      let formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      let request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var totalSize = 705419236;
-      var keyRingsElement = {};
-      var keyRings = [keyRingsElement];
-      var expectedResponse = {
+      let nextPageToken = '';
+      let totalSize = 705419236;
+      let keyRingsElement = {};
+      let keyRings = [keyRingsElement];
+      let expectedResponse = {
         nextPageToken: nextPageToken,
         totalSize: totalSize,
         keyRings: keyRings,
@@ -65,14 +65,14 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes listKeyRings with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var request = {
+      let formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      let request = {
         parent: formattedParent,
       };
 
@@ -94,27 +94,27 @@ describe('KeyManagementServiceClient', () => {
 
   describe('listCryptoKeys', () => {
     it('invokes listCryptoKeys without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.keyRingPath(
+      let formattedParent = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var request = {
+      let request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var totalSize = 705419236;
-      var cryptoKeysElement = {};
-      var cryptoKeys = [cryptoKeysElement];
-      var expectedResponse = {
+      let nextPageToken = '';
+      let totalSize = 705419236;
+      let cryptoKeysElement = {};
+      let cryptoKeys = [cryptoKeysElement];
+      let expectedResponse = {
         nextPageToken: nextPageToken,
         totalSize: totalSize,
         cryptoKeys: cryptoKeys,
@@ -138,18 +138,18 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes listCryptoKeys with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.keyRingPath(
+      let formattedParent = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var request = {
+      let request = {
         parent: formattedParent,
       };
 
@@ -171,28 +171,28 @@ describe('KeyManagementServiceClient', () => {
 
   describe('listCryptoKeyVersions', () => {
     it('invokes listCryptoKeyVersions without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.cryptoKeyPath(
+      let formattedParent = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var request = {
+      let request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var totalSize = 705419236;
-      var cryptoKeyVersionsElement = {};
-      var cryptoKeyVersions = [cryptoKeyVersionsElement];
-      var expectedResponse = {
+      let nextPageToken = '';
+      let totalSize = 705419236;
+      let cryptoKeyVersionsElement = {};
+      let cryptoKeyVersions = [cryptoKeyVersionsElement];
+      let expectedResponse = {
         nextPageToken: nextPageToken,
         totalSize: totalSize,
         cryptoKeyVersions: cryptoKeyVersions,
@@ -216,19 +216,19 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes listCryptoKeyVersions with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.cryptoKeyPath(
+      let formattedParent = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var request = {
+      let request = {
         parent: formattedParent,
       };
 
@@ -250,24 +250,24 @@ describe('KeyManagementServiceClient', () => {
 
   describe('getKeyRing', () => {
     it('invokes getKeyRing without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.keyRingPath(
+      let formattedName = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      let name2 = 'name2-1052831874';
+      let expectedResponse = {
         name: name2,
       };
 
@@ -285,18 +285,18 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes getKeyRing with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.keyRingPath(
+      let formattedName = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
@@ -318,25 +318,25 @@ describe('KeyManagementServiceClient', () => {
 
   describe('getCryptoKey', () => {
     it('invokes getCryptoKey without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPath(
+      let formattedName = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      let name2 = 'name2-1052831874';
+      let expectedResponse = {
         name: name2,
       };
 
@@ -354,19 +354,19 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes getCryptoKey with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPath(
+      let formattedName = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
@@ -388,26 +388,26 @@ describe('KeyManagementServiceClient', () => {
 
   describe('getCryptoKeyVersion', () => {
     it('invokes getCryptoKeyVersion without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyVersionPath(
+      let formattedName = client.cryptoKeyVersionPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]',
         '[CRYPTO_KEY_VERSION]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      let name2 = 'name2-1052831874';
+      let expectedResponse = {
         name: name2,
       };
 
@@ -425,20 +425,20 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes getCryptoKeyVersion with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyVersionPath(
+      let formattedName = client.cryptoKeyVersionPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]',
         '[CRYPTO_KEY_VERSION]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
@@ -460,24 +460,24 @@ describe('KeyManagementServiceClient', () => {
 
   describe('createKeyRing', () => {
     it('invokes createKeyRing without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var keyRingId = 'keyRingId-2056646742';
-      var keyRing = {};
-      var request = {
+      let formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      let keyRingId = 'keyRingId-2056646742';
+      let keyRing = {};
+      let request = {
         parent: formattedParent,
         keyRingId: keyRingId,
         keyRing: keyRing,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      let name = 'name3373707';
+      let expectedResponse = {
         name: name,
       };
 
@@ -495,16 +495,16 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes createKeyRing with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      var keyRingId = 'keyRingId-2056646742';
-      var keyRing = {};
-      var request = {
+      let formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      let keyRingId = 'keyRingId-2056646742';
+      let keyRing = {};
+      let request = {
         parent: formattedParent,
         keyRingId: keyRingId,
         keyRing: keyRing,
@@ -528,41 +528,41 @@ describe('KeyManagementServiceClient', () => {
 
   describe('createCryptoKey', () => {
     it('invokes createCryptoKey without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.keyRingPath(
+      let formattedParent = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var cryptoKeyId = 'my-app-key';
-      var purpose = 'ENCRYPT_DECRYPT';
-      var seconds = 2147483647;
-      var nextRotationTime = {
+      let cryptoKeyId = 'my-app-key';
+      let purpose = 'ENCRYPT_DECRYPT';
+      let seconds = 2147483647;
+      let nextRotationTime = {
         seconds: seconds,
       };
-      var seconds2 = 604800;
-      var rotationPeriod = {
+      let seconds2 = 604800;
+      let rotationPeriod = {
         seconds: seconds2,
       };
-      var cryptoKey = {
+      let cryptoKey = {
         purpose: purpose,
         nextRotationTime: nextRotationTime,
         rotationPeriod: rotationPeriod,
       };
-      var request = {
+      let request = {
         parent: formattedParent,
         cryptoKeyId: cryptoKeyId,
         cryptoKey: cryptoKey,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      let name = 'name3373707';
+      let expectedResponse = {
         name: name,
       };
 
@@ -580,33 +580,33 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes createCryptoKey with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.keyRingPath(
+      let formattedParent = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var cryptoKeyId = 'my-app-key';
-      var purpose = 'ENCRYPT_DECRYPT';
-      var seconds = 2147483647;
-      var nextRotationTime = {
+      let cryptoKeyId = 'my-app-key';
+      let purpose = 'ENCRYPT_DECRYPT';
+      let seconds = 2147483647;
+      let nextRotationTime = {
         seconds: seconds,
       };
-      var seconds2 = 604800;
-      var rotationPeriod = {
+      let seconds2 = 604800;
+      let rotationPeriod = {
         seconds: seconds2,
       };
-      var cryptoKey = {
+      let cryptoKey = {
         purpose: purpose,
         nextRotationTime: nextRotationTime,
         rotationPeriod: rotationPeriod,
       };
-      var request = {
+      let request = {
         parent: formattedParent,
         cryptoKeyId: cryptoKeyId,
         cryptoKey: cryptoKey,
@@ -630,27 +630,27 @@ describe('KeyManagementServiceClient', () => {
 
   describe('createCryptoKeyVersion', () => {
     it('invokes createCryptoKeyVersion without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.cryptoKeyPath(
+      let formattedParent = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var cryptoKeyVersion = {};
-      var request = {
+      let cryptoKeyVersion = {};
+      let request = {
         parent: formattedParent,
         cryptoKeyVersion: cryptoKeyVersion,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      let name = 'name3373707';
+      let expectedResponse = {
         name: name,
       };
 
@@ -668,20 +668,20 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes createCryptoKeyVersion with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.cryptoKeyPath(
+      let formattedParent = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var cryptoKeyVersion = {};
-      var request = {
+      let cryptoKeyVersion = {};
+      let request = {
         parent: formattedParent,
         cryptoKeyVersion: cryptoKeyVersion,
       };
@@ -704,22 +704,22 @@ describe('KeyManagementServiceClient', () => {
 
   describe('updateCryptoKey', () => {
     it('invokes updateCryptoKey without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var cryptoKey = {};
-      var updateMask = {};
-      var request = {
+      let cryptoKey = {};
+      let updateMask = {};
+      let request = {
         cryptoKey: cryptoKey,
         updateMask: updateMask,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      let name = 'name3373707';
+      let expectedResponse = {
         name: name,
       };
 
@@ -737,15 +737,15 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes updateCryptoKey with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var cryptoKey = {};
-      var updateMask = {};
-      var request = {
+      let cryptoKey = {};
+      let updateMask = {};
+      let request = {
         cryptoKey: cryptoKey,
         updateMask: updateMask,
       };
@@ -768,22 +768,22 @@ describe('KeyManagementServiceClient', () => {
 
   describe('updateCryptoKeyVersion', () => {
     it('invokes updateCryptoKeyVersion without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var cryptoKeyVersion = {};
-      var updateMask = {};
-      var request = {
+      let cryptoKeyVersion = {};
+      let updateMask = {};
+      let request = {
         cryptoKeyVersion: cryptoKeyVersion,
         updateMask: updateMask,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      let name = 'name3373707';
+      let expectedResponse = {
         name: name,
       };
 
@@ -801,15 +801,15 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes updateCryptoKeyVersion with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var cryptoKeyVersion = {};
-      var updateMask = {};
-      var request = {
+      let cryptoKeyVersion = {};
+      let updateMask = {};
+      let request = {
         cryptoKeyVersion: cryptoKeyVersion,
         updateMask: updateMask,
       };
@@ -832,28 +832,28 @@ describe('KeyManagementServiceClient', () => {
 
   describe('encrypt', () => {
     it('invokes encrypt without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPathPath(
+      let formattedName = client.cryptoKeyPathPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY_PATH]'
       );
-      var plaintext = '-9';
-      var request = {
+      let plaintext = '-9';
+      let request = {
         name: formattedName,
         plaintext: plaintext,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var ciphertext = '-72';
-      var expectedResponse = {
+      let name2 = 'name2-1052831874';
+      let ciphertext = '-72';
+      let expectedResponse = {
         name: name2,
         ciphertext: ciphertext,
       };
@@ -872,20 +872,20 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes encrypt with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPathPath(
+      let formattedName = client.cryptoKeyPathPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY_PATH]'
       );
-      var plaintext = '-9';
-      var request = {
+      let plaintext = '-9';
+      let request = {
         name: formattedName,
         plaintext: plaintext,
       };
@@ -908,27 +908,27 @@ describe('KeyManagementServiceClient', () => {
 
   describe('decrypt', () => {
     it('invokes decrypt without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPath(
+      let formattedName = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var ciphertext = '-72';
-      var request = {
+      let ciphertext = '-72';
+      let request = {
         name: formattedName,
         ciphertext: ciphertext,
       };
 
       // Mock response
-      var plaintext = '-9';
-      var expectedResponse = {
+      let plaintext = '-9';
+      let expectedResponse = {
         plaintext: plaintext,
       };
 
@@ -946,20 +946,20 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes decrypt with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPath(
+      let formattedName = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var ciphertext = '-72';
-      var request = {
+      let ciphertext = '-72';
+      let request = {
         name: formattedName,
         ciphertext: ciphertext,
       };
@@ -982,27 +982,27 @@ describe('KeyManagementServiceClient', () => {
 
   describe('updateCryptoKeyPrimaryVersion', () => {
     it('invokes updateCryptoKeyPrimaryVersion without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPath(
+      let formattedName = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var cryptoKeyVersionId = 'cryptoKeyVersionId729489152';
-      var request = {
+      let cryptoKeyVersionId = 'cryptoKeyVersionId729489152';
+      let request = {
         name: formattedName,
         cryptoKeyVersionId: cryptoKeyVersionId,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      let name2 = 'name2-1052831874';
+      let expectedResponse = {
         name: name2,
       };
 
@@ -1020,20 +1020,20 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes updateCryptoKeyPrimaryVersion with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyPath(
+      let formattedName = client.cryptoKeyPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]'
       );
-      var cryptoKeyVersionId = 'cryptoKeyVersionId729489152';
-      var request = {
+      let cryptoKeyVersionId = 'cryptoKeyVersionId729489152';
+      let request = {
         name: formattedName,
         cryptoKeyVersionId: cryptoKeyVersionId,
       };
@@ -1056,26 +1056,26 @@ describe('KeyManagementServiceClient', () => {
 
   describe('destroyCryptoKeyVersion', () => {
     it('invokes destroyCryptoKeyVersion without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyVersionPath(
+      let formattedName = client.cryptoKeyVersionPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]',
         '[CRYPTO_KEY_VERSION]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      let name2 = 'name2-1052831874';
+      let expectedResponse = {
         name: name2,
       };
 
@@ -1093,20 +1093,20 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes destroyCryptoKeyVersion with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyVersionPath(
+      let formattedName = client.cryptoKeyVersionPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]',
         '[CRYPTO_KEY_VERSION]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
@@ -1128,26 +1128,26 @@ describe('KeyManagementServiceClient', () => {
 
   describe('restoreCryptoKeyVersion', () => {
     it('invokes restoreCryptoKeyVersion without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyVersionPath(
+      let formattedName = client.cryptoKeyVersionPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]',
         '[CRYPTO_KEY_VERSION]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      let name2 = 'name2-1052831874';
+      let expectedResponse = {
         name: name2,
       };
 
@@ -1165,20 +1165,20 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes restoreCryptoKeyVersion with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.cryptoKeyVersionPath(
+      let formattedName = client.cryptoKeyVersionPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]',
         '[CRYPTO_KEY]',
         '[CRYPTO_KEY_VERSION]'
       );
-      var request = {
+      let request = {
         name: formattedName,
       };
 
@@ -1200,27 +1200,27 @@ describe('KeyManagementServiceClient', () => {
 
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.keyRingPath(
+      let formattedResource = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var policy = {};
-      var request = {
+      let policy = {};
+      let request = {
         resource: formattedResource,
         policy: policy,
       };
 
       // Mock response
-      var version = 351608024;
-      var etag = '21';
-      var expectedResponse = {
+      let version = 351608024;
+      let etag = '21';
+      let expectedResponse = {
         version: version,
         etag: etag,
       };
@@ -1239,19 +1239,19 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes setIamPolicy with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.keyRingPath(
+      let formattedResource = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var policy = {};
-      var request = {
+      let policy = {};
+      let request = {
         resource: formattedResource,
         policy: policy,
       };
@@ -1274,25 +1274,25 @@ describe('KeyManagementServiceClient', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.keyRingPath(
+      let formattedResource = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var request = {
+      let request = {
         resource: formattedResource,
       };
 
       // Mock response
-      var version = 351608024;
-      var etag = '21';
-      var expectedResponse = {
+      let version = 351608024;
+      let etag = '21';
+      let expectedResponse = {
         version: version,
         etag: etag,
       };
@@ -1311,18 +1311,18 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes getIamPolicy with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.keyRingPath(
+      let formattedResource = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var request = {
+      let request = {
         resource: formattedResource,
       };
 
@@ -1344,25 +1344,25 @@ describe('KeyManagementServiceClient', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.keyRingPath(
+      let formattedResource = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var permissions = [];
-      var request = {
+      let permissions = [];
+      let request = {
         resource: formattedResource,
         permissions: permissions,
       };
 
       // Mock response
-      var expectedResponse = {};
+      let expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.testIamPermissions = mockSimpleGrpcMethod(
@@ -1378,19 +1378,19 @@ describe('KeyManagementServiceClient', () => {
     });
 
     it('invokes testIamPermissions with error', done => {
-      var client = new kmsModule.v1.KeyManagementServiceClient({
+      let client = new kmsModule.v1.KeyManagementServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedResource = client.keyRingPath(
+      let formattedResource = client.keyRingPath(
         '[PROJECT]',
         '[LOCATION]',
         '[KEY_RING]'
       );
-      var permissions = [];
-      var request = {
+      let permissions = [];
+      let request = {
         resource: formattedResource,
         permissions: permissions,
       };
