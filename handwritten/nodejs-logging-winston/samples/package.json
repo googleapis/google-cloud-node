@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^0.9.0",
-    "winston": "^2.4.0",
+    "winston": "^3.1.0",
     "yargs": "^12.0.0"
   },
   "devDependencies": {
