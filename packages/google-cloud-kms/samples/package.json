@@ -16,7 +16,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@google-cloud/kms": "^0.1.0"
+    "@google-cloud/kms": "^0.2.0"
   },
   "devDependencies": {}
 }
