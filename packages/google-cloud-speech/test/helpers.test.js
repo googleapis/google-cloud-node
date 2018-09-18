@@ -16,18 +16,18 @@
 
 'use strict';
 
-var assert = require('assert');
-var Buffer = require('safe-buffer').Buffer;
-var common = require('@google-cloud/common');
-var proxyquire = require('proxyquire');
-var sinon = require('sinon');
-var stream = require('stream');
+let assert = require('assert');
+let Buffer = require('safe-buffer').Buffer;
+let common = require('@google-cloud/common');
+let proxyquire = require('proxyquire');
+let sinon = require('sinon');
+let stream = require('stream');
 
 describe('Speech helper methods', () => {
-  var client;
-  var FakeApiErrorOverride;
-  var sandbox = sinon.createSandbox();
-  var speech;
+  let client;
+  let FakeApiErrorOverride;
+  let sandbox = sinon.createSandbox();
+  let speech;
 
   class FakeApiError extends common.util.ApiError {
     constructor(error) {
@@ -60,22 +60,22 @@ describe('Speech helper methods', () => {
   });
 
   describe('streamingRecognize', () => {
-    var CONFIG = {
+    let CONFIG = {
       config: {encoding: 'LINEAR16', languageCode: 'en-us', sampleRate: 16000},
     };
-    var OPTIONS = {timeout: Infinity};
+    let OPTIONS = {timeout: Infinity};
 
     it('writes the config to the resulting stream', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({objectMode: true});
-      var sr = sandbox
+      let requestStream = new stream.PassThrough({objectMode: true});
+      let sr = sandbox
         .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
       // Call the new helper method and establish that the config was
       // forwarded as expected.
-      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
+      let userStream = client.streamingRecognize(CONFIG, OPTIONS);
 
       // Establish that the underlying streamingRecognize was called with
       // the options.
@@ -96,12 +96,12 @@ describe('Speech helper methods', () => {
     it('does not require options', () => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({objectMode: true});
-      var sr = sandbox
+      let requestStream = new stream.PassThrough({objectMode: true});
+      let sr = sandbox
         .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
-      var userStream = client.streamingRecognize(CONFIG);
+      let userStream = client.streamingRecognize(CONFIG);
 
       userStream.emit('writing');
 
@@ -112,14 +112,14 @@ describe('Speech helper methods', () => {
     it('destroys the user stream when the request stream errors', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({objectMode: true});
+      let requestStream = new stream.PassThrough({objectMode: true});
       sandbox
         .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
-      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
+      let userStream = client.streamingRecognize(CONFIG, OPTIONS);
 
-      var error = new Error('Request stream error');
+      let error = new Error('Request stream error');
 
       userStream.once('error', err => {
         assert.strictEqual(err, error);
@@ -132,15 +132,15 @@ describe('Speech helper methods', () => {
     it('destroys the user stream when the response contains an error', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({objectMode: true});
+      let requestStream = new stream.PassThrough({objectMode: true});
       sandbox
         .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
-      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
+      let userStream = client.streamingRecognize(CONFIG, OPTIONS);
 
-      var error = {};
-      var fakeApiError = {};
+      let error = {};
+      let fakeApiError = {};
 
       FakeApiErrorOverride = err => {
         assert.strictEqual(err, error);
@@ -159,14 +159,14 @@ describe('Speech helper methods', () => {
     it('re-emits response from the request stream', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({objectMode: true});
+      let requestStream = new stream.PassThrough({objectMode: true});
       sandbox
         .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
-      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
+      let userStream = client.streamingRecognize(CONFIG, OPTIONS);
 
-      var response = {};
+      let response = {};
 
       userStream.on('response', _response => {
         assert.strictEqual(_response, response);
@@ -180,13 +180,13 @@ describe('Speech helper methods', () => {
     it('wraps incoming audio data', done => {
       // Stub the underlying _streamingRecognize method to just return
       // a bogus stream.
-      var requestStream = new stream.PassThrough({objectMode: true});
+      let requestStream = new stream.PassThrough({objectMode: true});
       sandbox
         .stub(client._innerApiCalls, 'streamingRecognize')
         .returns(requestStream);
 
-      var userStream = client.streamingRecognize(CONFIG, OPTIONS);
-      var audioContent = Buffer.from('audio content');
+      let userStream = client.streamingRecognize(CONFIG, OPTIONS);
+      let audioContent = Buffer.from('audio content');
 
       requestStream._write = (data, enc, next) => {
         assert.deepStrictEqual(data, {

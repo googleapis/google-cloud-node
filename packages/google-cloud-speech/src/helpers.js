@@ -16,17 +16,17 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var pumpify = require('pumpify');
-var streamEvents = require('stream-events');
-var through = require('through2');
+let common = require('@google-cloud/common');
+let pumpify = require('pumpify');
+let streamEvents = require('stream-events');
+let through = require('through2');
 
 /*!
  * Return a dictionary-like object with helpers to augment the Speech
  * GAPIC.
  */
 module.exports = () => {
-  var methods = {};
+  let methods = {};
 
   /**
    * Performs bidirectional streaming speech recognition: receive results while
@@ -69,9 +69,9 @@ module.exports = () => {
     }
 
     // Format the audio content as input request for pipeline
-    var recognizeStream = streamEvents(pumpify.obj());
+    let recognizeStream = streamEvents(pumpify.obj());
 
-    var requestStream = this._innerApiCalls
+    let requestStream = this._innerApiCalls
       .streamingRecognize(options)
       .on('error', err => {
         recognizeStream.destroy(err);

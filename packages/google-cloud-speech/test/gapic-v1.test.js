@@ -18,38 +18,38 @@ const assert = require('assert');
 
 const speechModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+let FAKE_STATUS_CODE = 1;
+let error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('SpeechClient', () => {
   describe('recognize', () => {
     it('invokes recognize without error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      let client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      let encoding = 'FLAC';
+      let sampleRateHertz = 44100;
+      let languageCode = 'en-US';
+      let config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      let uri = 'gs://bucket_name/file_name.flac';
+      let audio = {
         uri: uri,
       };
-      var request = {
+      let request = {
         config: config,
         audio: audio,
       };
 
       // Mock response
-      var expectedResponse = {};
+      let expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.recognize = mockSimpleGrpcMethod(
@@ -65,25 +65,25 @@ describe('SpeechClient', () => {
     });
 
     it('invokes recognize with error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      let client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      let encoding = 'FLAC';
+      let sampleRateHertz = 44100;
+      let languageCode = 'en-US';
+      let config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      let uri = 'gs://bucket_name/file_name.flac';
+      let audio = {
         uri: uri,
       };
-      var request = {
+      let request = {
         config: config,
         audio: audio,
       };
@@ -106,31 +106,31 @@ describe('SpeechClient', () => {
 
   describe('longRunningRecognize', function() {
     it('invokes longRunningRecognize without error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      let client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      let encoding = 'FLAC';
+      let sampleRateHertz = 44100;
+      let languageCode = 'en-US';
+      let config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      let uri = 'gs://bucket_name/file_name.flac';
+      let audio = {
         uri: uri,
       };
-      var request = {
+      let request = {
         config: config,
         audio: audio,
       };
 
       // Mock response
-      var expectedResponse = {};
+      let expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.longRunningRecognize = mockLongRunningGrpcMethod(
@@ -141,7 +141,7 @@ describe('SpeechClient', () => {
       client
         .longRunningRecognize(request)
         .then(responses => {
-          var operation = responses[0];
+          let operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -154,25 +154,25 @@ describe('SpeechClient', () => {
     });
 
     it('invokes longRunningRecognize with error', done => {
-      var client = new speechModule.v1.SpeechClient({
+      let client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var encoding = 'FLAC';
-      var sampleRateHertz = 44100;
-      var languageCode = 'en-US';
-      var config = {
+      let encoding = 'FLAC';
+      let sampleRateHertz = 44100;
+      let languageCode = 'en-US';
+      let config = {
         encoding: encoding,
         sampleRateHertz: sampleRateHertz,
         languageCode: languageCode,
       };
-      var uri = 'gs://bucket_name/file_name.flac';
-      var audio = {
+      let uri = 'gs://bucket_name/file_name.flac';
+      let audio = {
         uri: uri,
       };
-      var request = {
+      let request = {
         config: config,
         audio: audio,
       };
@@ -187,7 +187,7 @@ describe('SpeechClient', () => {
       client
         .longRunningRecognize(request)
         .then(responses => {
-          var operation = responses[0];
+          let operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -201,7 +201,7 @@ describe('SpeechClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new speechModule.v1.SpeechClient({
+      let client = new speechModule.v1.SpeechClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -233,7 +233,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    let mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {
