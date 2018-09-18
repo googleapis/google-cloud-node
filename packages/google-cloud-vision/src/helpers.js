@@ -102,7 +102,7 @@ let _coerceRequest = (request, callback) => {
  * @returns {function} The function that, when called, will call annotateImage
  *   asking for the single feature annotation.
  */
-var _createSingleFeatureMethod = featureValue => {
+let _createSingleFeatureMethod = featureValue => {
   return function(annotateImageRequest, callOptions, callback) {
     // Sanity check: If we got a string or buffer, we need this to be
     // in object form now, so we can tack on the features list.
@@ -152,7 +152,7 @@ var _createSingleFeatureMethod = featureValue => {
  *   onto the pure GAPIC.
  */
 module.exports = apiVersion => {
-  var methods = {};
+  let methods = {};
 
   /**
    * Annotate a single image with the requested features.
@@ -236,7 +236,7 @@ module.exports = apiVersion => {
 
         // We are guaranteed to only have one response element, since we
         // only sent one image.
-        var response = r.responses[0];
+        let response = r.responses[0];
 
         // Fire the callback if applicable.
         return callback(undefined, response);

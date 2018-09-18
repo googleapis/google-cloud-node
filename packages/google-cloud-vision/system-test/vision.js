@@ -80,30 +80,30 @@ describe('Vision', function() {
   });
 
   it('should detect from a URL', () => {
-    var url = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
+    let url = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
     return client.logoDetection(url).then(responses => {
-      var response = responses[0];
+      let response = responses[0];
       assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
     });
   });
 
   it('should detect from a filename', () => {
     return client.logoDetection(IMAGES.logo).then(responses => {
-      var response = responses[0];
+      let response = responses[0];
       assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
     });
   });
 
   it('should detect from a Buffer', () => {
-    var buffer = fs.readFileSync(IMAGES.logo);
+    let buffer = fs.readFileSync(IMAGES.logo);
     return client.logoDetection(buffer).then(responses => {
-      var response = responses[0];
+      let response = responses[0];
       assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
     });
   });
 
   describe('single image', () => {
-    var TYPES = [
+    let TYPES = [
       {type: 'FACE_DETECTION'},
       {type: 'LABEL_DETECTION'},
       {type: 'SAFE_SEARCH_DETECTION'},
@@ -115,7 +115,7 @@ describe('Vision', function() {
           image: {source: {filename: IMAGES.rushmore}},
         })
         .then(responses => {
-          var response = responses[0];
+          let response = responses[0];
           assert(response.faceAnnotations.length >= 1);
           assert(response.labelAnnotations.length >= 1);
           assert(response.safeSearchAnnotation !== null);

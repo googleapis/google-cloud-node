@@ -193,7 +193,7 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method arrifies the request and
       // passes it through to the batch annotation method.
-      var request = {
+      let request = {
         image: {content: Buffer.from('bogus==')},
         features: {type: ['LOGO_DETECTION']},
       };
