@@ -73,13 +73,13 @@ class KnowledgeBasesClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -90,7 +90,7 @@ class KnowledgeBasesClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -120,7 +120,7 @@ class KnowledgeBasesClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.KnowledgeBases',
       gapicConfig,
       opts.clientConfig,
@@ -134,14 +134,14 @@ class KnowledgeBasesClient {
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.KnowledgeBases.
-    var knowledgeBasesStub = gaxGrpc.createStub(
+    const knowledgeBasesStub = gaxGrpc.createStub(
       protos.google.cloud.dialogflow.v2beta1.KnowledgeBases,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var knowledgeBasesStubMethods = [
+    const knowledgeBasesStubMethods = [
       'listKnowledgeBases',
       'getKnowledgeBase',
       'createKnowledgeBase',
@@ -152,7 +152,7 @@ class KnowledgeBasesClient {
         knowledgeBasesStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -238,16 +238,16 @@ class KnowledgeBasesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
+   * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * client.listKnowledgeBases({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -257,17 +257,17 @@ class KnowledgeBasesClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -326,11 +326,11 @@ class KnowledgeBasesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
+   * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.listKnowledgeBasesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -371,14 +371,14 @@ class KnowledgeBasesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
+   * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const formattedName = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
    * client.getKnowledgeBase({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -422,19 +422,19 @@ class KnowledgeBasesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
+   * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
-   * var knowledgeBase = {};
-   * var request = {
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const knowledgeBase = {};
+   * const request = {
    *   parent: formattedParent,
    *   knowledgeBase: knowledgeBase,
    * };
    * client.createKnowledgeBase(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -474,11 +474,11 @@ class KnowledgeBasesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.KnowledgeBasesClient({
+   * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const formattedName = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
    * client.deleteKnowledgeBase({name: formattedName}).catch(err => {
    *   console.error(err);
    * });

@@ -49,7 +49,7 @@
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.EntityType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var EntityType = {
+const EntityType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -150,7 +150,7 @@ var EntityType = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.ListEntityTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var ListEntityTypesRequest = {
+const ListEntityTypesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -171,7 +171,7 @@ var ListEntityTypesRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.ListEntityTypesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var ListEntityTypesResponse = {
+const ListEntityTypesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -193,7 +193,7 @@ var ListEntityTypesResponse = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.GetEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var GetEntityTypeRequest = {
+const GetEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -220,7 +220,7 @@ var GetEntityTypeRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.CreateEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var CreateEntityTypeRequest = {
+const CreateEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -249,7 +249,7 @@ var CreateEntityTypeRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.UpdateEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var UpdateEntityTypeRequest = {
+const UpdateEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -264,7 +264,7 @@ var UpdateEntityTypeRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.DeleteEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var DeleteEntityTypeRequest = {
+const DeleteEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -302,7 +302,7 @@ var DeleteEntityTypeRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var BatchUpdateEntityTypesRequest = {
+const BatchUpdateEntityTypesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -318,7 +318,7 @@ var BatchUpdateEntityTypesRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var BatchUpdateEntityTypesResponse = {
+const BatchUpdateEntityTypesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -337,7 +337,7 @@ var BatchUpdateEntityTypesResponse = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var BatchDeleteEntityTypesRequest = {
+const BatchDeleteEntityTypesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -364,7 +364,7 @@ var BatchDeleteEntityTypesRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.BatchCreateEntitiesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var BatchCreateEntitiesRequest = {
+const BatchCreateEntitiesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -396,7 +396,7 @@ var BatchCreateEntitiesRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var BatchUpdateEntitiesRequest = {
+const BatchUpdateEntitiesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -423,7 +423,7 @@ var BatchUpdateEntitiesRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var BatchDeleteEntitiesRequest = {
+const BatchDeleteEntitiesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -439,6 +439,6 @@ var BatchDeleteEntitiesRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.EntityTypeBatch definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
  */
-var EntityTypeBatch = {
+const EntityTypeBatch = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

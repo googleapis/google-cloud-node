@@ -136,7 +136,7 @@
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.Intent definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var Intent = {
+const Intent = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -977,7 +977,7 @@ var Intent = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListIntentsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var ListIntentsRequest = {
+const ListIntentsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -998,7 +998,7 @@ var ListIntentsRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListIntentsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var ListIntentsResponse = {
+const ListIntentsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1025,7 +1025,7 @@ var ListIntentsResponse = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.GetIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var GetIntentRequest = {
+const GetIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1057,7 +1057,7 @@ var GetIntentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.CreateIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var CreateIntentRequest = {
+const CreateIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1091,7 +1091,7 @@ var CreateIntentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.UpdateIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var UpdateIntentRequest = {
+const UpdateIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1106,7 +1106,7 @@ var UpdateIntentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.DeleteIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var DeleteIntentRequest = {
+const DeleteIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1148,7 +1148,7 @@ var DeleteIntentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.BatchUpdateIntentsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var BatchUpdateIntentsRequest = {
+const BatchUpdateIntentsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1164,7 +1164,7 @@ var BatchUpdateIntentsRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var BatchUpdateIntentsResponse = {
+const BatchUpdateIntentsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1185,7 +1185,7 @@ var BatchUpdateIntentsResponse = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.BatchDeleteIntentsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var BatchDeleteIntentsRequest = {
+const BatchDeleteIntentsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1201,7 +1201,7 @@ var BatchDeleteIntentsRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.IntentBatch definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
  */
-var IntentBatch = {
+const IntentBatch = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1213,7 +1213,7 @@ var IntentBatch = {
  * @enum {number}
  * @memberof google.cloud.dialogflow.v2beta1
  */
-var IntentView = {
+const IntentView = {
 
   /**
    * Training phrases field is not populated in the response.

@@ -51,7 +51,7 @@
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.DetectIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var DetectIntentRequest = {
+const DetectIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -77,7 +77,7 @@ var DetectIntentRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.DetectIntentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var DetectIntentResponse = {
+const DetectIntentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -122,7 +122,7 @@ var DetectIntentResponse = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.QueryParameters definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var QueryParameters = {
+const QueryParameters = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -155,7 +155,7 @@ var QueryParameters = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.QueryInput definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var QueryInput = {
+const QueryInput = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -249,7 +249,7 @@ var QueryInput = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.QueryResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var QueryResult = {
+const QueryResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -310,7 +310,7 @@ var QueryResult = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.StreamingDetectIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var StreamingDetectIntentRequest = {
+const StreamingDetectIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -351,7 +351,7 @@ var StreamingDetectIntentRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.StreamingDetectIntentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var StreamingDetectIntentResponse = {
+const StreamingDetectIntentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -419,7 +419,7 @@ var StreamingDetectIntentResponse = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.StreamingRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var StreamingRecognitionResult = {
+const StreamingRecognitionResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -483,7 +483,7 @@ var StreamingRecognitionResult = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.InputAudioConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var InputAudioConfig = {
+const InputAudioConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -504,7 +504,7 @@ var InputAudioConfig = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.TextInput definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var TextInput = {
+const TextInput = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -533,7 +533,7 @@ var TextInput = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.EventInput definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
  */
-var EventInput = {
+const EventInput = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -545,7 +545,7 @@ var EventInput = {
  * @enum {number}
  * @memberof google.cloud.dialogflow.v2
  */
-var AudioEncoding = {
+const AudioEncoding = {
 
   /**
    * Not specified.

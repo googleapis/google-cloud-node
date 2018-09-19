@@ -87,13 +87,13 @@ class ContextsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -104,7 +104,7 @@ class ContextsClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -136,7 +136,7 @@ class ContextsClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2.Contexts',
       gapicConfig,
       opts.clientConfig,
@@ -150,14 +150,14 @@ class ContextsClient {
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Contexts.
-    var contextsStub = gaxGrpc.createStub(
+    const contextsStub = gaxGrpc.createStub(
       protos.google.cloud.dialogflow.v2.Contexts,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var contextsStubMethods = [
+    const contextsStubMethods = [
       'listContexts',
       'getContext',
       'createContext',
@@ -170,7 +170,7 @@ class ContextsClient {
         contextsStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -256,16 +256,16 @@ class ContextsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
    *
    * client.listContexts({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -275,17 +275,17 @@ class ContextsClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -344,11 +344,11 @@ class ContextsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
    * client.listContextsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -389,14 +389,14 @@ class ContextsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.contextPath('[PROJECT]', '[SESSION]', '[CONTEXT]');
+   * const formattedName = client.contextPath('[PROJECT]', '[SESSION]', '[CONTEXT]');
    * client.getContext({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -440,19 +440,19 @@ class ContextsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-   * var context = {};
-   * var request = {
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const context = {};
+   * const request = {
    *   parent: formattedParent,
    *   context: context,
    * };
    * client.createContext(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -497,14 +497,14 @@ class ContextsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
    * });
    *
-   * var context = {};
+   * const context = {};
    * client.updateContext({context: context})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -541,11 +541,11 @@ class ContextsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.contextPath('[PROJECT]', '[SESSION]', '[CONTEXT]');
+   * const formattedName = client.contextPath('[PROJECT]', '[SESSION]', '[CONTEXT]');
    * client.deleteContext({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -580,11 +580,11 @@ class ContextsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.ContextsClient({
+   * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
    * client.deleteAllContexts({parent: formattedParent}).catch(err => {
    *   console.error(err);
    * });

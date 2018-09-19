@@ -55,7 +55,7 @@
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.Document definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
-var Document = {
+const Document = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -108,7 +108,7 @@ var Document = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListDocumentsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
-var ListDocumentsRequest = {
+const ListDocumentsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -128,7 +128,7 @@ var ListDocumentsRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListDocumentsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
-var ListDocumentsResponse = {
+const ListDocumentsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -144,7 +144,7 @@ var ListDocumentsResponse = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.GetDocumentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
-var GetDocumentRequest = {
+const GetDocumentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -164,7 +164,7 @@ var GetDocumentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.CreateDocumentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
-var CreateDocumentRequest = {
+const CreateDocumentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -180,7 +180,7 @@ var CreateDocumentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.DeleteDocumentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
-var DeleteDocumentRequest = {
+const DeleteDocumentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -196,7 +196,7 @@ var DeleteDocumentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
-var KnowledgeOperationMetadata = {
+const KnowledgeOperationMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**

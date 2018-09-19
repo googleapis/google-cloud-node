@@ -98,13 +98,13 @@ class EntityTypesClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -115,7 +115,7 @@ class EntityTypesClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -145,7 +145,7 @@ class EntityTypesClient {
         'entityTypes'
       ),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -165,34 +165,34 @@ class EntityTypesClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var batchUpdateEntityTypesResponse = protoFilesRoot.lookup(
+    const batchUpdateEntityTypesResponse = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse'
     );
-    var batchUpdateEntityTypesMetadata = protoFilesRoot.lookup(
+    const batchUpdateEntityTypesMetadata = protoFilesRoot.lookup(
       'google.protobuf.Struct'
     );
-    var batchDeleteEntityTypesResponse = protoFilesRoot.lookup(
+    const batchDeleteEntityTypesResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
-    var batchDeleteEntityTypesMetadata = protoFilesRoot.lookup(
+    const batchDeleteEntityTypesMetadata = protoFilesRoot.lookup(
       'google.protobuf.Struct'
     );
-    var batchCreateEntitiesResponse = protoFilesRoot.lookup(
+    const batchCreateEntitiesResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
-    var batchCreateEntitiesMetadata = protoFilesRoot.lookup(
+    const batchCreateEntitiesMetadata = protoFilesRoot.lookup(
       'google.protobuf.Struct'
     );
-    var batchUpdateEntitiesResponse = protoFilesRoot.lookup(
+    const batchUpdateEntitiesResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
-    var batchUpdateEntitiesMetadata = protoFilesRoot.lookup(
+    const batchUpdateEntitiesMetadata = protoFilesRoot.lookup(
       'google.protobuf.Struct'
     );
-    var batchDeleteEntitiesResponse = protoFilesRoot.lookup(
+    const batchDeleteEntitiesResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
-    var batchDeleteEntitiesMetadata = protoFilesRoot.lookup(
+    const batchDeleteEntitiesMetadata = protoFilesRoot.lookup(
       'google.protobuf.Struct'
     );
 
@@ -233,7 +233,7 @@ class EntityTypesClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.EntityTypes',
       gapicConfig,
       opts.clientConfig,
@@ -247,14 +247,14 @@ class EntityTypesClient {
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.EntityTypes.
-    var entityTypesStub = gaxGrpc.createStub(
+    const entityTypesStub = gaxGrpc.createStub(
       protos.google.cloud.dialogflow.v2beta1.EntityTypes,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var entityTypesStubMethods = [
+    const entityTypesStubMethods = [
       'listEntityTypes',
       'getEntityType',
       'createEntityType',
@@ -271,7 +271,7 @@ class EntityTypesClient {
         entityTypesStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -364,16 +364,16 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    *
    * client.listEntityTypes({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -383,17 +383,17 @@ class EntityTypesClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -458,11 +458,11 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    * client.listEntityTypesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -509,14 +509,14 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
    * client.getEntityType({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -566,19 +566,19 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var entityType = {};
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const entityType = {};
+   * const request = {
    *   parent: formattedParent,
    *   entityType: entityType,
    * };
    * client.createEntityType(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -630,14 +630,14 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var entityType = {};
+   * const entityType = {};
    * client.updateEntityType({entityType: entityType})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -674,11 +674,11 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
    * client.deleteEntityType({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -738,42 +738,42 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    *
    * // Handle the operation using the promise pattern.
    * client.batchUpdateEntityTypes({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.batchUpdateEntityTypes({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -839,13 +839,13 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var entityTypeNames = [];
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const entityTypeNames = [];
+   * const request = {
    *   parent: formattedParent,
    *   entityTypeNames: entityTypeNames,
    * };
@@ -853,29 +853,29 @@ class EntityTypesClient {
    * // Handle the operation using the promise pattern.
    * client.batchDeleteEntityTypes(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var entityTypeNames = [];
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const entityTypeNames = [];
+   * const request = {
    *   parent: formattedParent,
    *   entityTypeNames: entityTypeNames,
    * };
@@ -883,8 +883,8 @@ class EntityTypesClient {
    * // Handle the operation using the event emitter pattern.
    * client.batchDeleteEntityTypes(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -957,13 +957,13 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-   * var entities = [];
-   * var request = {
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entities = [];
+   * const request = {
    *   parent: formattedParent,
    *   entities: entities,
    * };
@@ -971,29 +971,29 @@ class EntityTypesClient {
    * // Handle the operation using the promise pattern.
    * client.batchCreateEntities(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-   * var entities = [];
-   * var request = {
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entities = [];
+   * const request = {
    *   parent: formattedParent,
    *   entities: entities,
    * };
@@ -1001,8 +1001,8 @@ class EntityTypesClient {
    * // Handle the operation using the event emitter pattern.
    * client.batchCreateEntities(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -1076,13 +1076,13 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-   * var entities = [];
-   * var request = {
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entities = [];
+   * const request = {
    *   parent: formattedParent,
    *   entities: entities,
    * };
@@ -1090,29 +1090,29 @@ class EntityTypesClient {
    * // Handle the operation using the promise pattern.
    * client.batchUpdateEntities(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-   * var entities = [];
-   * var request = {
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entities = [];
+   * const request = {
    *   parent: formattedParent,
    *   entities: entities,
    * };
@@ -1120,8 +1120,8 @@ class EntityTypesClient {
    * // Handle the operation using the event emitter pattern.
    * client.batchUpdateEntities(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -1190,13 +1190,13 @@ class EntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.EntityTypesClient({
+   * const client = new dialogflow.v2beta1.EntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-   * var entityValues = [];
-   * var request = {
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entityValues = [];
+   * const request = {
    *   parent: formattedParent,
    *   entityValues: entityValues,
    * };
@@ -1204,29 +1204,29 @@ class EntityTypesClient {
    * // Handle the operation using the promise pattern.
    * client.batchDeleteEntities(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-   * var entityValues = [];
-   * var request = {
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entityValues = [];
+   * const request = {
    *   parent: formattedParent,
    *   entityValues: entityValues,
    * };
@@ -1234,8 +1234,8 @@ class EntityTypesClient {
    * // Handle the operation using the event emitter pattern.
    * client.batchDeleteEntities(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

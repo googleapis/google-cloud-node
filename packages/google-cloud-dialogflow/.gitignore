@@ -11,3 +11,5 @@ system-test/*key.json
 .DS_Store
 google-cloud-logging-winston-*.tgz
 google-cloud-logging-bunyan-*.tgz
+package-lock.json
+__pycache__/

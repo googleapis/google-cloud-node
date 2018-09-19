@@ -35,7 +35,7 @@
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.VoiceSelectionParams definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/audio_config.proto}
  */
-var VoiceSelectionParams = {
+const VoiceSelectionParams = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -77,7 +77,7 @@ var VoiceSelectionParams = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.SynthesizeSpeechConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/audio_config.proto}
  */
-var SynthesizeSpeechConfig = {
+const SynthesizeSpeechConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -105,7 +105,7 @@ var SynthesizeSpeechConfig = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.OutputAudioConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/audio_config.proto}
  */
-var OutputAudioConfig = {
+const OutputAudioConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -116,7 +116,7 @@ var OutputAudioConfig = {
  * @enum {number}
  * @memberof google.cloud.dialogflow.v2beta1
  */
-var SsmlVoiceGender = {
+const SsmlVoiceGender = {
 
   /**
    * An unspecified gender, which means that the client doesn't care which
@@ -146,7 +146,7 @@ var SsmlVoiceGender = {
  * @enum {number}
  * @memberof google.cloud.dialogflow.v2beta1
  */
-var OutputAudioEncoding = {
+const OutputAudioEncoding = {
 
   /**
    * Not specified.

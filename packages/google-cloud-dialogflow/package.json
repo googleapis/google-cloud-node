@@ -46,7 +46,8 @@
     "test-no-cover": "mocha test/",
     "test": "npm run cover",
     "system-test": "mocha system-test/ --timeout 600000",
-    "all-test": "npm test && npm run system-test && npm run samples-test"
+    "all-test": "npm test && npm run system-test && npm run samples-test",
+    "fix": "eslint **/*.js --fix && npm run prettier"
   },
   "dependencies": {
     "google-gax": "^0.17.1",

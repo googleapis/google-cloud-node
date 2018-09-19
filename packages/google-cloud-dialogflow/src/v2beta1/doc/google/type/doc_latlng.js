@@ -66,6 +66,6 @@
  * @memberof google.type
  * @see [google.type.LatLng definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/type/latlng.proto}
  */
-var LatLng = {
+const LatLng = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

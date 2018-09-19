@@ -82,13 +82,13 @@ class SessionEntityTypesClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -99,7 +99,7 @@ class SessionEntityTypesClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -137,7 +137,7 @@ class SessionEntityTypesClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.SessionEntityTypes',
       gapicConfig,
       opts.clientConfig,
@@ -151,14 +151,14 @@ class SessionEntityTypesClient {
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.SessionEntityTypes.
-    var sessionEntityTypesStub = gaxGrpc.createStub(
+    const sessionEntityTypesStub = gaxGrpc.createStub(
       protos.google.cloud.dialogflow.v2beta1.SessionEntityTypes,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var sessionEntityTypesStubMethods = [
+    const sessionEntityTypesStubMethods = [
       'listSessionEntityTypes',
       'getSessionEntityType',
       'createSessionEntityType',
@@ -170,7 +170,7 @@ class SessionEntityTypesClient {
         sessionEntityTypesStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -260,16 +260,16 @@ class SessionEntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
+   * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
    *
    * client.listSessionEntityTypes({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -279,17 +279,17 @@ class SessionEntityTypesClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -356,11 +356,11 @@ class SessionEntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
+   * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
    * client.listSessionEntityTypesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -405,14 +405,14 @@ class SessionEntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
+   * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.sessionEntityTypePath('[PROJECT]', '[SESSION]', '[ENTITY_TYPE]');
+   * const formattedName = client.sessionEntityTypePath('[PROJECT]', '[SESSION]', '[ENTITY_TYPE]');
    * client.getSessionEntityType({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -460,19 +460,19 @@ class SessionEntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
+   * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-   * var sessionEntityType = {};
-   * var request = {
+   * const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+   * const sessionEntityType = {};
+   * const request = {
    *   parent: formattedParent,
    *   sessionEntityType: sessionEntityType,
    * };
    * client.createSessionEntityType(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -526,14 +526,14 @@ class SessionEntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
+   * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var sessionEntityType = {};
+   * const sessionEntityType = {};
    * client.updateSessionEntityType({sessionEntityType: sessionEntityType})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -578,11 +578,11 @@ class SessionEntityTypesClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.SessionEntityTypesClient({
+   * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.sessionEntityTypePath('[PROJECT]', '[SESSION]', '[ENTITY_TYPE]');
+   * const formattedName = client.sessionEntityTypePath('[PROJECT]', '[SESSION]', '[ENTITY_TYPE]');
    * client.deleteSessionEntityType({name: formattedName}).catch(err => {
    *   console.error(err);
    * });

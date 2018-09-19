@@ -96,13 +96,13 @@ class AgentsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -113,7 +113,7 @@ class AgentsClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -138,7 +138,7 @@ class AgentsClient {
         'agents'
       ),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -158,16 +158,18 @@ class AgentsClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var trainAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var trainAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
-    var exportAgentResponse = protoFilesRoot.lookup(
+    const trainAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const trainAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
+    const exportAgentResponse = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2.ExportAgentResponse'
     );
-    var exportAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
-    var importAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var importAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
-    var restoreAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var restoreAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
+    const exportAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
+    const importAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const importAgentMetadata = protoFilesRoot.lookup('google.protobuf.Struct');
+    const restoreAgentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const restoreAgentMetadata = protoFilesRoot.lookup(
+      'google.protobuf.Struct'
+    );
 
     this._descriptors.longrunning = {
       trainAgent: new gax.LongrunningDescriptor(
@@ -193,7 +195,7 @@ class AgentsClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2.Agents',
       gapicConfig,
       opts.clientConfig,
@@ -207,14 +209,14 @@ class AgentsClient {
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Agents.
-    var agentsStub = gaxGrpc.createStub(
+    const agentsStub = gaxGrpc.createStub(
       protos.google.cloud.dialogflow.v2.Agents,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var agentsStubMethods = [
+    const agentsStubMethods = [
       'getAgent',
       'searchAgents',
       'trainAgent',
@@ -227,7 +229,7 @@ class AgentsClient {
         agentsStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -296,14 +298,14 @@ class AgentsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.AgentsClient({
+   * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.getAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -367,16 +369,16 @@ class AgentsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.AgentsClient({
+   * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * client.searchAgents({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -386,17 +388,17 @@ class AgentsClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -455,11 +457,11 @@ class AgentsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.AgentsClient({
+   * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.searchAgentsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -503,42 +505,42 @@ class AgentsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.AgentsClient({
+   * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the promise pattern.
    * client.trainAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.trainAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -601,42 +603,42 @@ class AgentsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.AgentsClient({
+   * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the promise pattern.
    * client.exportAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.exportAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -717,42 +719,42 @@ class AgentsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.AgentsClient({
+   * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the promise pattern.
    * client.importAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.importAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -832,42 +834,42 @@ class AgentsClient {
    *
    * const dialogflow = require('dialogflow.v2');
    *
-   * var client = new dialogflow.v2.AgentsClient({
+   * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the promise pattern.
    * client.restoreAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.restoreAgent({parent: formattedParent})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

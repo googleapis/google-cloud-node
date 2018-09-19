@@ -19,34 +19,34 @@ const through2 = require('through2');
 
 const dialogflowModule = require('../src');
 
-var FAKE_STATUS_CODE = 1;
-var error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AgentsClient', () => {
   describe('getAgent', () => {
     it('invokes getAgent without error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var parent2 = 'parent21175163357';
-      var displayName = 'displayName1615086568';
-      var defaultLanguageCode = 'defaultLanguageCode856575222';
-      var timeZone = 'timeZone36848094';
-      var description = 'description-1724546052';
-      var avatarUri = 'avatarUri-402824826';
-      var enableLogging = false;
-      var classificationThreshold = 1.11581064e8;
-      var expectedResponse = {
+      const parent2 = 'parent21175163357';
+      const displayName = 'displayName1615086568';
+      const defaultLanguageCode = 'defaultLanguageCode856575222';
+      const timeZone = 'timeZone36848094';
+      const description = 'description-1724546052';
+      const avatarUri = 'avatarUri-402824826';
+      const enableLogging = false;
+      const classificationThreshold = 1.11581064e8;
+      const expectedResponse = {
         parent: parent2,
         displayName: displayName,
         defaultLanguageCode: defaultLanguageCode,
@@ -71,14 +71,14 @@ describe('AgentsClient', () => {
     });
 
     it('invokes getAgent with error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -100,22 +100,22 @@ describe('AgentsClient', () => {
 
   describe('searchAgents', () => {
     it('invokes searchAgents without error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var agentsElement = {};
-      var agents = [agentsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const agentsElement = {};
+      const agents = [agentsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         agents: agents,
       };
@@ -138,14 +138,14 @@ describe('AgentsClient', () => {
     });
 
     it('invokes searchAgents with error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -167,19 +167,19 @@ describe('AgentsClient', () => {
 
   describe('trainAgent', function() {
     it('invokes trainAgent without error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.trainAgent = mockLongRunningGrpcMethod(
@@ -190,7 +190,7 @@ describe('AgentsClient', () => {
       client
         .trainAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -203,14 +203,14 @@ describe('AgentsClient', () => {
     });
 
     it('invokes trainAgent with error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -224,7 +224,7 @@ describe('AgentsClient', () => {
       client
         .trainAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -238,7 +238,7 @@ describe('AgentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -255,20 +255,20 @@ describe('AgentsClient', () => {
 
   describe('exportAgent', function() {
     it('invokes exportAgent without error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var agentUri = 'agentUri-1700713166';
-      var expectedResponse = {
+      const agentUri = 'agentUri-1700713166';
+      const expectedResponse = {
         agentUri: agentUri,
       };
 
@@ -281,7 +281,7 @@ describe('AgentsClient', () => {
       client
         .exportAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -294,14 +294,14 @@ describe('AgentsClient', () => {
     });
 
     it('invokes exportAgent with error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -315,7 +315,7 @@ describe('AgentsClient', () => {
       client
         .exportAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -329,7 +329,7 @@ describe('AgentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -346,19 +346,19 @@ describe('AgentsClient', () => {
 
   describe('importAgent', function() {
     it('invokes importAgent without error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.importAgent = mockLongRunningGrpcMethod(
@@ -369,7 +369,7 @@ describe('AgentsClient', () => {
       client
         .importAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -382,14 +382,14 @@ describe('AgentsClient', () => {
     });
 
     it('invokes importAgent with error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -403,7 +403,7 @@ describe('AgentsClient', () => {
       client
         .importAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -417,7 +417,7 @@ describe('AgentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -434,19 +434,19 @@ describe('AgentsClient', () => {
 
   describe('restoreAgent', function() {
     it('invokes restoreAgent without error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.restoreAgent = mockLongRunningGrpcMethod(
@@ -457,7 +457,7 @@ describe('AgentsClient', () => {
       client
         .restoreAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -470,14 +470,14 @@ describe('AgentsClient', () => {
     });
 
     it('invokes restoreAgent with error', done => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -491,7 +491,7 @@ describe('AgentsClient', () => {
       client
         .restoreAgent(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -505,7 +505,7 @@ describe('AgentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.AgentsClient({
+      const client = new dialogflowModule.v2beta1.AgentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -523,22 +523,22 @@ describe('AgentsClient', () => {
 describe('ContextsClient', () => {
   describe('listContexts', () => {
     it('invokes listContexts without error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var contextsElement = {};
-      var contexts = [contextsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const contextsElement = {};
+      const contexts = [contextsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         contexts: contexts,
       };
@@ -561,14 +561,14 @@ describe('ContextsClient', () => {
     });
 
     it('invokes listContexts with error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -590,25 +590,25 @@ describe('ContextsClient', () => {
 
   describe('getContext', () => {
     it('invokes getContext without error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.contextPath(
+      const formattedName = client.contextPath(
         '[PROJECT]',
         '[SESSION]',
         '[CONTEXT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var lifespanCount = 1178775510;
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const lifespanCount = 1178775510;
+      const expectedResponse = {
         name: name2,
         lifespanCount: lifespanCount,
       };
@@ -627,18 +627,18 @@ describe('ContextsClient', () => {
     });
 
     it('invokes getContext with error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.contextPath(
+      const formattedName = client.contextPath(
         '[PROJECT]',
         '[SESSION]',
         '[CONTEXT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -660,23 +660,23 @@ describe('ContextsClient', () => {
 
   describe('createContext', () => {
     it('invokes createContext without error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var context = {};
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const context = {};
+      const request = {
         parent: formattedParent,
         context: context,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var lifespanCount = 1178775510;
-      var expectedResponse = {
+      const name = 'name3373707';
+      const lifespanCount = 1178775510;
+      const expectedResponse = {
         name: name,
         lifespanCount: lifespanCount,
       };
@@ -695,15 +695,15 @@ describe('ContextsClient', () => {
     });
 
     it('invokes createContext with error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var context = {};
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const context = {};
+      const request = {
         parent: formattedParent,
         context: context,
       };
@@ -726,21 +726,21 @@ describe('ContextsClient', () => {
 
   describe('updateContext', () => {
     it('invokes updateContext without error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var context = {};
-      var request = {
+      const context = {};
+      const request = {
         context: context,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var lifespanCount = 1178775510;
-      var expectedResponse = {
+      const name = 'name3373707';
+      const lifespanCount = 1178775510;
+      const expectedResponse = {
         name: name,
         lifespanCount: lifespanCount,
       };
@@ -759,14 +759,14 @@ describe('ContextsClient', () => {
     });
 
     it('invokes updateContext with error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var context = {};
-      var request = {
+      const context = {};
+      const request = {
         context: context,
       };
 
@@ -788,18 +788,18 @@ describe('ContextsClient', () => {
 
   describe('deleteContext', () => {
     it('invokes deleteContext without error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.contextPath(
+      const formattedName = client.contextPath(
         '[PROJECT]',
         '[SESSION]',
         '[CONTEXT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -813,18 +813,18 @@ describe('ContextsClient', () => {
     });
 
     it('invokes deleteContext with error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.contextPath(
+      const formattedName = client.contextPath(
         '[PROJECT]',
         '[SESSION]',
         '[CONTEXT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -845,14 +845,14 @@ describe('ContextsClient', () => {
 
   describe('deleteAllContexts', () => {
     it('invokes deleteAllContexts without error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -866,14 +866,14 @@ describe('ContextsClient', () => {
     });
 
     it('invokes deleteAllContexts with error', done => {
-      var client = new dialogflowModule.v2beta1.ContextsClient({
+      const client = new dialogflowModule.v2beta1.ContextsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -895,25 +895,25 @@ describe('ContextsClient', () => {
 describe('DocumentsClient', () => {
   describe('listDocuments', () => {
     it('invokes listDocuments without error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.knowledgeBasePath(
+      const formattedParent = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var documentsElement = {};
-      var documents = [documentsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const documentsElement = {};
+      const documents = [documentsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         documents: documents,
       };
@@ -936,17 +936,17 @@ describe('DocumentsClient', () => {
     });
 
     it('invokes listDocuments with error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.knowledgeBasePath(
+      const formattedParent = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var request = {
+      const request = {
         parent: formattedParent,
       };
 
@@ -968,27 +968,27 @@ describe('DocumentsClient', () => {
 
   describe('getDocument', () => {
     it('invokes getDocument without error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.documentPath(
+      const formattedName = client.documentPath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]',
         '[DOCUMENT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var mimeType = 'mimeType-196041627';
-      var contentUri = 'contentUri-388807514';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const mimeType = 'mimeType-196041627';
+      const contentUri = 'contentUri-388807514';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         mimeType: mimeType,
@@ -1009,18 +1009,18 @@ describe('DocumentsClient', () => {
     });
 
     it('invokes getDocument with error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.documentPath(
+      const formattedName = client.documentPath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]',
         '[DOCUMENT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1042,28 +1042,28 @@ describe('DocumentsClient', () => {
 
   describe('createDocument', function() {
     it('invokes createDocument without error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.knowledgeBasePath(
+      const formattedParent = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         parent: formattedParent,
         document: document,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var mimeType = 'mimeType-196041627';
-      var contentUri = 'contentUri-388807514';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const mimeType = 'mimeType-196041627';
+      const contentUri = 'contentUri-388807514';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         mimeType: mimeType,
@@ -1079,7 +1079,7 @@ describe('DocumentsClient', () => {
       client
         .createDocument(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1092,18 +1092,18 @@ describe('DocumentsClient', () => {
     });
 
     it('invokes createDocument with error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.knowledgeBasePath(
+      const formattedParent = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var document = {};
-      var request = {
+      const document = {};
+      const request = {
         parent: formattedParent,
         document: document,
       };
@@ -1118,7 +1118,7 @@ describe('DocumentsClient', () => {
       client
         .createDocument(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1132,7 +1132,7 @@ describe('DocumentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1149,23 +1149,23 @@ describe('DocumentsClient', () => {
 
   describe('deleteDocument', function() {
     it('invokes deleteDocument without error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.documentPath(
+      const formattedName = client.documentPath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]',
         '[DOCUMENT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.deleteDocument = mockLongRunningGrpcMethod(
@@ -1176,7 +1176,7 @@ describe('DocumentsClient', () => {
       client
         .deleteDocument(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1189,18 +1189,18 @@ describe('DocumentsClient', () => {
     });
 
     it('invokes deleteDocument with error', done => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.documentPath(
+      const formattedName = client.documentPath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]',
         '[DOCUMENT]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1214,7 +1214,7 @@ describe('DocumentsClient', () => {
       client
         .deleteDocument(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1228,7 +1228,7 @@ describe('DocumentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.DocumentsClient({
+      const client = new dialogflowModule.v2beta1.DocumentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1246,22 +1246,22 @@ describe('DocumentsClient', () => {
 describe('EntityTypesClient', () => {
   describe('listEntityTypes', () => {
     it('invokes listEntityTypes without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var entityTypesElement = {};
-      var entityTypes = [entityTypesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const entityTypesElement = {};
+      const entityTypes = [entityTypesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         entityTypes: entityTypes,
       };
@@ -1284,14 +1284,14 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes listEntityTypes with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -1313,21 +1313,21 @@ describe('EntityTypesClient', () => {
 
   describe('getEntityType', () => {
     it('invokes getEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var request = {
+      const formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
       };
@@ -1346,14 +1346,14 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes getEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var request = {
+      const formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+      const request = {
         name: formattedName,
       };
 
@@ -1375,23 +1375,23 @@ describe('EntityTypesClient', () => {
 
   describe('createEntityType', () => {
     it('invokes createEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var entityType = {};
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const entityType = {};
+      const request = {
         parent: formattedParent,
         entityType: entityType,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
       };
@@ -1410,15 +1410,15 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes createEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var entityType = {};
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const entityType = {};
+      const request = {
         parent: formattedParent,
         entityType: entityType,
       };
@@ -1441,21 +1441,21 @@ describe('EntityTypesClient', () => {
 
   describe('updateEntityType', () => {
     it('invokes updateEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var entityType = {};
-      var request = {
+      const entityType = {};
+      const request = {
         entityType: entityType,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
       };
@@ -1474,14 +1474,14 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes updateEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var entityType = {};
-      var request = {
+      const entityType = {};
+      const request = {
         entityType: entityType,
       };
 
@@ -1503,14 +1503,14 @@ describe('EntityTypesClient', () => {
 
   describe('deleteEntityType', () => {
     it('invokes deleteEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var request = {
+      const formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+      const request = {
         name: formattedName,
       };
 
@@ -1524,14 +1524,14 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes deleteEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var request = {
+      const formattedName = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+      const request = {
         name: formattedName,
       };
 
@@ -1552,19 +1552,19 @@ describe('EntityTypesClient', () => {
 
   describe('batchUpdateEntityTypes', function() {
     it('invokes batchUpdateEntityTypes without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchUpdateEntityTypes = mockLongRunningGrpcMethod(
@@ -1575,7 +1575,7 @@ describe('EntityTypesClient', () => {
       client
         .batchUpdateEntityTypes(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1588,14 +1588,14 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes batchUpdateEntityTypes with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -1609,7 +1609,7 @@ describe('EntityTypesClient', () => {
       client
         .batchUpdateEntityTypes(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1623,7 +1623,7 @@ describe('EntityTypesClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1640,21 +1640,21 @@ describe('EntityTypesClient', () => {
 
   describe('batchDeleteEntityTypes', function() {
     it('invokes batchDeleteEntityTypes without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var entityTypeNames = [];
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const entityTypeNames = [];
+      const request = {
         parent: formattedParent,
         entityTypeNames: entityTypeNames,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchDeleteEntityTypes = mockLongRunningGrpcMethod(
@@ -1665,7 +1665,7 @@ describe('EntityTypesClient', () => {
       client
         .batchDeleteEntityTypes(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1678,15 +1678,15 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes batchDeleteEntityTypes with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var entityTypeNames = [];
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const entityTypeNames = [];
+      const request = {
         parent: formattedParent,
         entityTypeNames: entityTypeNames,
       };
@@ -1701,7 +1701,7 @@ describe('EntityTypesClient', () => {
       client
         .batchDeleteEntityTypes(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1715,7 +1715,7 @@ describe('EntityTypesClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1732,21 +1732,24 @@ describe('EntityTypesClient', () => {
 
   describe('batchCreateEntities', function() {
     it('invokes batchCreateEntities without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var entities = [];
-      var request = {
+      const formattedParent = client.entityTypePath(
+        '[PROJECT]',
+        '[ENTITY_TYPE]'
+      );
+      const entities = [];
+      const request = {
         parent: formattedParent,
         entities: entities,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchCreateEntities = mockLongRunningGrpcMethod(
@@ -1757,7 +1760,7 @@ describe('EntityTypesClient', () => {
       client
         .batchCreateEntities(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1770,15 +1773,18 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes batchCreateEntities with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var entities = [];
-      var request = {
+      const formattedParent = client.entityTypePath(
+        '[PROJECT]',
+        '[ENTITY_TYPE]'
+      );
+      const entities = [];
+      const request = {
         parent: formattedParent,
         entities: entities,
       };
@@ -1793,7 +1799,7 @@ describe('EntityTypesClient', () => {
       client
         .batchCreateEntities(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1807,7 +1813,7 @@ describe('EntityTypesClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1824,21 +1830,24 @@ describe('EntityTypesClient', () => {
 
   describe('batchUpdateEntities', function() {
     it('invokes batchUpdateEntities without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var entities = [];
-      var request = {
+      const formattedParent = client.entityTypePath(
+        '[PROJECT]',
+        '[ENTITY_TYPE]'
+      );
+      const entities = [];
+      const request = {
         parent: formattedParent,
         entities: entities,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchUpdateEntities = mockLongRunningGrpcMethod(
@@ -1849,7 +1858,7 @@ describe('EntityTypesClient', () => {
       client
         .batchUpdateEntities(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1862,15 +1871,18 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes batchUpdateEntities with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var entities = [];
-      var request = {
+      const formattedParent = client.entityTypePath(
+        '[PROJECT]',
+        '[ENTITY_TYPE]'
+      );
+      const entities = [];
+      const request = {
         parent: formattedParent,
         entities: entities,
       };
@@ -1885,7 +1897,7 @@ describe('EntityTypesClient', () => {
       client
         .batchUpdateEntities(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1899,7 +1911,7 @@ describe('EntityTypesClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1916,21 +1928,24 @@ describe('EntityTypesClient', () => {
 
   describe('batchDeleteEntities', function() {
     it('invokes batchDeleteEntities without error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var entityValues = [];
-      var request = {
+      const formattedParent = client.entityTypePath(
+        '[PROJECT]',
+        '[ENTITY_TYPE]'
+      );
+      const entityValues = [];
+      const request = {
         parent: formattedParent,
         entityValues: entityValues,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchDeleteEntities = mockLongRunningGrpcMethod(
@@ -1941,7 +1956,7 @@ describe('EntityTypesClient', () => {
       client
         .batchDeleteEntities(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -1954,15 +1969,18 @@ describe('EntityTypesClient', () => {
     });
 
     it('invokes batchDeleteEntities with error', done => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
-      var entityValues = [];
-      var request = {
+      const formattedParent = client.entityTypePath(
+        '[PROJECT]',
+        '[ENTITY_TYPE]'
+      );
+      const entityValues = [];
+      const request = {
         parent: formattedParent,
         entityValues: entityValues,
       };
@@ -1977,7 +1995,7 @@ describe('EntityTypesClient', () => {
       client
         .batchDeleteEntities(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -1991,7 +2009,7 @@ describe('EntityTypesClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.EntityTypesClient({
+      const client = new dialogflowModule.v2beta1.EntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2009,22 +2027,22 @@ describe('EntityTypesClient', () => {
 describe('IntentsClient', () => {
   describe('listIntents', () => {
     it('invokes listIntents without error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var intentsElement = {};
-      var intents = [intentsElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const intentsElement = {};
+      const intents = [intentsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         intents: intents,
       };
@@ -2047,14 +2065,14 @@ describe('IntentsClient', () => {
     });
 
     it('invokes listIntents with error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -2076,30 +2094,30 @@ describe('IntentsClient', () => {
 
   describe('getIntent', () => {
     it('invokes getIntent without error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.intentPath('[PROJECT]', '[INTENT]');
-      var request = {
+      const formattedName = client.intentPath('[PROJECT]', '[INTENT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var priority = 1165461084;
-      var isFallback = false;
-      var mlEnabled = false;
-      var mlDisabled = true;
-      var endInteraction = true;
-      var action = 'action-1422950858';
-      var resetContexts = true;
-      var rootFollowupIntentName = 'rootFollowupIntentName402253784';
-      var parentFollowupIntentName = 'parentFollowupIntentName-1131901680';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const priority = 1165461084;
+      const isFallback = false;
+      const mlEnabled = false;
+      const mlDisabled = true;
+      const endInteraction = true;
+      const action = 'action-1422950858';
+      const resetContexts = true;
+      const rootFollowupIntentName = 'rootFollowupIntentName402253784';
+      const parentFollowupIntentName = 'parentFollowupIntentName-1131901680';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         priority: priority,
@@ -2127,14 +2145,14 @@ describe('IntentsClient', () => {
     });
 
     it('invokes getIntent with error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.intentPath('[PROJECT]', '[INTENT]');
-      var request = {
+      const formattedName = client.intentPath('[PROJECT]', '[INTENT]');
+      const request = {
         name: formattedName,
       };
 
@@ -2156,32 +2174,32 @@ describe('IntentsClient', () => {
 
   describe('createIntent', () => {
     it('invokes createIntent without error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var intent = {};
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const intent = {};
+      const request = {
         parent: formattedParent,
         intent: intent,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var priority = 1165461084;
-      var isFallback = false;
-      var mlEnabled = false;
-      var mlDisabled = true;
-      var endInteraction = true;
-      var action = 'action-1422950858';
-      var resetContexts = true;
-      var rootFollowupIntentName = 'rootFollowupIntentName402253784';
-      var parentFollowupIntentName = 'parentFollowupIntentName-1131901680';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const priority = 1165461084;
+      const isFallback = false;
+      const mlEnabled = false;
+      const mlDisabled = true;
+      const endInteraction = true;
+      const action = 'action-1422950858';
+      const resetContexts = true;
+      const rootFollowupIntentName = 'rootFollowupIntentName402253784';
+      const parentFollowupIntentName = 'parentFollowupIntentName-1131901680';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         priority: priority,
@@ -2209,15 +2227,15 @@ describe('IntentsClient', () => {
     });
 
     it('invokes createIntent with error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var intent = {};
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const intent = {};
+      const request = {
         parent: formattedParent,
         intent: intent,
       };
@@ -2240,32 +2258,32 @@ describe('IntentsClient', () => {
 
   describe('updateIntent', () => {
     it('invokes updateIntent without error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var intent = {};
-      var languageCode = 'languageCode-412800396';
-      var request = {
+      const intent = {};
+      const languageCode = 'languageCode-412800396';
+      const request = {
         intent: intent,
         languageCode: languageCode,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var priority = 1165461084;
-      var isFallback = false;
-      var mlEnabled = false;
-      var mlDisabled = true;
-      var endInteraction = true;
-      var action = 'action-1422950858';
-      var resetContexts = true;
-      var rootFollowupIntentName = 'rootFollowupIntentName402253784';
-      var parentFollowupIntentName = 'parentFollowupIntentName-1131901680';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const priority = 1165461084;
+      const isFallback = false;
+      const mlEnabled = false;
+      const mlDisabled = true;
+      const endInteraction = true;
+      const action = 'action-1422950858';
+      const resetContexts = true;
+      const rootFollowupIntentName = 'rootFollowupIntentName402253784';
+      const parentFollowupIntentName = 'parentFollowupIntentName-1131901680';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         priority: priority,
@@ -2293,15 +2311,15 @@ describe('IntentsClient', () => {
     });
 
     it('invokes updateIntent with error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var intent = {};
-      var languageCode = 'languageCode-412800396';
-      var request = {
+      const intent = {};
+      const languageCode = 'languageCode-412800396';
+      const request = {
         intent: intent,
         languageCode: languageCode,
       };
@@ -2324,14 +2342,14 @@ describe('IntentsClient', () => {
 
   describe('deleteIntent', () => {
     it('invokes deleteIntent without error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.intentPath('[PROJECT]', '[INTENT]');
-      var request = {
+      const formattedName = client.intentPath('[PROJECT]', '[INTENT]');
+      const request = {
         name: formattedName,
       };
 
@@ -2345,14 +2363,14 @@ describe('IntentsClient', () => {
     });
 
     it('invokes deleteIntent with error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.intentPath('[PROJECT]', '[INTENT]');
-      var request = {
+      const formattedName = client.intentPath('[PROJECT]', '[INTENT]');
+      const request = {
         name: formattedName,
       };
 
@@ -2373,21 +2391,21 @@ describe('IntentsClient', () => {
 
   describe('batchUpdateIntents', function() {
     it('invokes batchUpdateIntents without error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var languageCode = 'languageCode-412800396';
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const languageCode = 'languageCode-412800396';
+      const request = {
         parent: formattedParent,
         languageCode: languageCode,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchUpdateIntents = mockLongRunningGrpcMethod(
@@ -2398,7 +2416,7 @@ describe('IntentsClient', () => {
       client
         .batchUpdateIntents(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -2411,15 +2429,15 @@ describe('IntentsClient', () => {
     });
 
     it('invokes batchUpdateIntents with error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var languageCode = 'languageCode-412800396';
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const languageCode = 'languageCode-412800396';
+      const request = {
         parent: formattedParent,
         languageCode: languageCode,
       };
@@ -2434,7 +2452,7 @@ describe('IntentsClient', () => {
       client
         .batchUpdateIntents(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -2448,7 +2466,7 @@ describe('IntentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2465,21 +2483,21 @@ describe('IntentsClient', () => {
 
   describe('batchDeleteIntents', function() {
     it('invokes batchDeleteIntents without error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var intents = [];
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const intents = [];
+      const request = {
         parent: formattedParent,
         intents: intents,
       };
 
       // Mock response
-      var expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchDeleteIntents = mockLongRunningGrpcMethod(
@@ -2490,7 +2508,7 @@ describe('IntentsClient', () => {
       client
         .batchDeleteIntents(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -2503,15 +2521,15 @@ describe('IntentsClient', () => {
     });
 
     it('invokes batchDeleteIntents with error', done => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectAgentPath('[PROJECT]');
-      var intents = [];
-      var request = {
+      const formattedParent = client.projectAgentPath('[PROJECT]');
+      const intents = [];
+      const request = {
         parent: formattedParent,
         intents: intents,
       };
@@ -2526,7 +2544,7 @@ describe('IntentsClient', () => {
       client
         .batchDeleteIntents(request)
         .then(responses => {
-          var operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -2540,7 +2558,7 @@ describe('IntentsClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      var client = new dialogflowModule.v2beta1.IntentsClient({
+      const client = new dialogflowModule.v2beta1.IntentsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -2558,22 +2576,22 @@ describe('IntentsClient', () => {
 describe('KnowledgeBasesClient', () => {
   describe('listKnowledgeBases', () => {
     it('invokes listKnowledgeBases without error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var knowledgeBasesElement = {};
-      var knowledgeBases = [knowledgeBasesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const knowledgeBasesElement = {};
+      const knowledgeBases = [knowledgeBasesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         knowledgeBases: knowledgeBases,
       };
@@ -2596,14 +2614,14 @@ describe('KnowledgeBasesClient', () => {
     });
 
     it('invokes listKnowledgeBases with error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -2625,24 +2643,24 @@ describe('KnowledgeBasesClient', () => {
 
   describe('getKnowledgeBase', () => {
     it('invokes getKnowledgeBase without error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.knowledgeBasePath(
+      const formattedName = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
       };
@@ -2661,17 +2679,17 @@ describe('KnowledgeBasesClient', () => {
     });
 
     it('invokes getKnowledgeBase with error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.knowledgeBasePath(
+      const formattedName = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -2693,23 +2711,23 @@ describe('KnowledgeBasesClient', () => {
 
   describe('createKnowledgeBase', () => {
     it('invokes createKnowledgeBase without error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var knowledgeBase = {};
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const knowledgeBase = {};
+      const request = {
         parent: formattedParent,
         knowledgeBase: knowledgeBase,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var displayName = 'displayName1615086568';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
       };
@@ -2728,15 +2746,15 @@ describe('KnowledgeBasesClient', () => {
     });
 
     it('invokes createKnowledgeBase with error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.projectPath('[PROJECT]');
-      var knowledgeBase = {};
-      var request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const knowledgeBase = {};
+      const request = {
         parent: formattedParent,
         knowledgeBase: knowledgeBase,
       };
@@ -2759,17 +2777,17 @@ describe('KnowledgeBasesClient', () => {
 
   describe('deleteKnowledgeBase', () => {
     it('invokes deleteKnowledgeBase without error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.knowledgeBasePath(
+      const formattedName = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -2783,17 +2801,17 @@ describe('KnowledgeBasesClient', () => {
     });
 
     it('invokes deleteKnowledgeBase with error', done => {
-      var client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
+      const client = new dialogflowModule.v2beta1.KnowledgeBasesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.knowledgeBasePath(
+      const formattedName = client.knowledgeBasePath(
         '[PROJECT]',
         '[KNOWLEDGE_BASE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -2815,22 +2833,22 @@ describe('KnowledgeBasesClient', () => {
 describe('SessionEntityTypesClient', () => {
   describe('listSessionEntityTypes', () => {
     it('invokes listSessionEntityTypes without error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      var nextPageToken = '';
-      var sessionEntityTypesElement = {};
-      var sessionEntityTypes = [sessionEntityTypesElement];
-      var expectedResponse = {
+      const nextPageToken = '';
+      const sessionEntityTypesElement = {};
+      const sessionEntityTypes = [sessionEntityTypesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         sessionEntityTypes: sessionEntityTypes,
       };
@@ -2853,14 +2871,14 @@ describe('SessionEntityTypesClient', () => {
     });
 
     it('invokes listSessionEntityTypes with error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -2882,24 +2900,24 @@ describe('SessionEntityTypesClient', () => {
 
   describe('getSessionEntityType', () => {
     it('invokes getSessionEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.sessionEntityTypePath(
+      const formattedName = client.sessionEntityTypePath(
         '[PROJECT]',
         '[SESSION]',
         '[ENTITY_TYPE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      var name2 = 'name2-1052831874';
-      var expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
         name: name2,
       };
 
@@ -2917,18 +2935,18 @@ describe('SessionEntityTypesClient', () => {
     });
 
     it('invokes getSessionEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.sessionEntityTypePath(
+      const formattedName = client.sessionEntityTypePath(
         '[PROJECT]',
         '[SESSION]',
         '[ENTITY_TYPE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -2950,22 +2968,22 @@ describe('SessionEntityTypesClient', () => {
 
   describe('createSessionEntityType', () => {
     it('invokes createSessionEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var sessionEntityType = {};
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const sessionEntityType = {};
+      const request = {
         parent: formattedParent,
         sessionEntityType: sessionEntityType,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const expectedResponse = {
         name: name,
       };
 
@@ -2983,15 +3001,15 @@ describe('SessionEntityTypesClient', () => {
     });
 
     it('invokes createSessionEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
-      var sessionEntityType = {};
-      var request = {
+      const formattedParent = client.sessionPath('[PROJECT]', '[SESSION]');
+      const sessionEntityType = {};
+      const request = {
         parent: formattedParent,
         sessionEntityType: sessionEntityType,
       };
@@ -3014,20 +3032,20 @@ describe('SessionEntityTypesClient', () => {
 
   describe('updateSessionEntityType', () => {
     it('invokes updateSessionEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var sessionEntityType = {};
-      var request = {
+      const sessionEntityType = {};
+      const request = {
         sessionEntityType: sessionEntityType,
       };
 
       // Mock response
-      var name = 'name3373707';
-      var expectedResponse = {
+      const name = 'name3373707';
+      const expectedResponse = {
         name: name,
       };
 
@@ -3045,14 +3063,14 @@ describe('SessionEntityTypesClient', () => {
     });
 
     it('invokes updateSessionEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var sessionEntityType = {};
-      var request = {
+      const sessionEntityType = {};
+      const request = {
         sessionEntityType: sessionEntityType,
       };
 
@@ -3074,18 +3092,18 @@ describe('SessionEntityTypesClient', () => {
 
   describe('deleteSessionEntityType', () => {
     it('invokes deleteSessionEntityType without error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.sessionEntityTypePath(
+      const formattedName = client.sessionEntityTypePath(
         '[PROJECT]',
         '[SESSION]',
         '[ENTITY_TYPE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -3101,18 +3119,18 @@ describe('SessionEntityTypesClient', () => {
     });
 
     it('invokes deleteSessionEntityType with error', done => {
-      var client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
+      const client = new dialogflowModule.v2beta1.SessionEntityTypesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedName = client.sessionEntityTypePath(
+      const formattedName = client.sessionEntityTypePath(
         '[PROJECT]',
         '[SESSION]',
         '[ENTITY_TYPE]'
       );
-      var request = {
+      const request = {
         name: formattedName,
       };
 
@@ -3134,23 +3152,23 @@ describe('SessionEntityTypesClient', () => {
 describe('SessionsClient', () => {
   describe('detectIntent', () => {
     it('invokes detectIntent without error', done => {
-      var client = new dialogflowModule.v2beta1.SessionsClient({
+      const client = new dialogflowModule.v2beta1.SessionsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedSession = client.sessionPath('[PROJECT]', '[SESSION]');
-      var queryInput = {};
-      var request = {
+      const formattedSession = client.sessionPath('[PROJECT]', '[SESSION]');
+      const queryInput = {};
+      const request = {
         session: formattedSession,
         queryInput: queryInput,
       };
 
       // Mock response
-      var responseId = 'responseId1847552473';
-      var outputAudio = '24';
-      var expectedResponse = {
+      const responseId = 'responseId1847552473';
+      const outputAudio = '24';
+      const expectedResponse = {
         responseId: responseId,
         outputAudio: outputAudio,
       };
@@ -3169,15 +3187,15 @@ describe('SessionsClient', () => {
     });
 
     it('invokes detectIntent with error', done => {
-      var client = new dialogflowModule.v2beta1.SessionsClient({
+      const client = new dialogflowModule.v2beta1.SessionsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var formattedSession = client.sessionPath('[PROJECT]', '[SESSION]');
-      var queryInput = {};
-      var request = {
+      const formattedSession = client.sessionPath('[PROJECT]', '[SESSION]');
+      const queryInput = {};
+      const request = {
         session: formattedSession,
         queryInput: queryInput,
       };
@@ -3200,23 +3218,23 @@ describe('SessionsClient', () => {
 
   describe('streamingDetectIntent', () => {
     it('invokes streamingDetectIntent without error', done => {
-      var client = new dialogflowModule.v2beta1.SessionsClient({
+      const client = new dialogflowModule.v2beta1.SessionsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var session = 'session1984987798';
-      var queryInput = {};
-      var request = {
+      const session = 'session1984987798';
+      const queryInput = {};
+      const request = {
         session: session,
         queryInput: queryInput,
       };
 
       // Mock response
-      var responseId = 'responseId1847552473';
-      var outputAudio = '24';
-      var expectedResponse = {
+      const responseId = 'responseId1847552473';
+      const outputAudio = '24';
+      const expectedResponse = {
         responseId: responseId,
         outputAudio: outputAudio,
       };
@@ -3227,7 +3245,7 @@ describe('SessionsClient', () => {
         expectedResponse
       );
 
-      var stream = client
+      const stream = client
         .streamingDetectIntent()
         .on('data', response => {
           assert.deepStrictEqual(response, expectedResponse);
@@ -3241,15 +3259,15 @@ describe('SessionsClient', () => {
     });
 
     it('invokes streamingDetectIntent with error', done => {
-      var client = new dialogflowModule.v2beta1.SessionsClient({
+      const client = new dialogflowModule.v2beta1.SessionsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      var session = 'session1984987798';
-      var queryInput = {};
-      var request = {
+      const session = 'session1984987798';
+      const queryInput = {};
+      const request = {
         session: session,
         queryInput: queryInput,
       };
@@ -3261,7 +3279,7 @@ describe('SessionsClient', () => {
         error
       );
 
-      var stream = client
+      const stream = client
         .streamingDetectIntent()
         .on('data', () => {
           assert.fail();
@@ -3292,7 +3310,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 
 function mockBidiStreamingGrpcMethod(expectedRequest, response, error) {
   return () => {
-    var mockStream = through2.obj((chunk, enc, callback) => {
+    const mockStream = through2.obj((chunk, enc, callback) => {
       assert.deepStrictEqual(chunk, expectedRequest);
       if (error) {
         callback(error);
@@ -3307,7 +3325,7 @@ function mockBidiStreamingGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    var mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

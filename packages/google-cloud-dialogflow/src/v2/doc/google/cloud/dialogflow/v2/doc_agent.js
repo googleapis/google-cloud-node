@@ -70,7 +70,7 @@
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.Agent definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var Agent = {
+const Agent = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -111,7 +111,7 @@ var Agent = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.GetAgentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var GetAgentRequest = {
+const GetAgentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -133,7 +133,7 @@ var GetAgentRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.SearchAgentsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var SearchAgentsRequest = {
+const SearchAgentsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -154,7 +154,7 @@ var SearchAgentsRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.SearchAgentsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var SearchAgentsResponse = {
+const SearchAgentsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -169,7 +169,7 @@ var SearchAgentsResponse = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.TrainAgentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var TrainAgentRequest = {
+const TrainAgentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -189,7 +189,7 @@ var TrainAgentRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.ExportAgentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var ExportAgentRequest = {
+const ExportAgentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -220,7 +220,7 @@ var ExportAgentRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.ExportAgentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var ExportAgentResponse = {
+const ExportAgentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -255,7 +255,7 @@ var ExportAgentResponse = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.ImportAgentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var ImportAgentRequest = {
+const ImportAgentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -290,6 +290,6 @@ var ImportAgentRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.RestoreAgentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/agent.proto}
  */
-var RestoreAgentRequest = {
+const RestoreAgentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

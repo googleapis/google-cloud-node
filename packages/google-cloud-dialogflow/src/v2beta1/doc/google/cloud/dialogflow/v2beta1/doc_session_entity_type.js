@@ -49,7 +49,7 @@
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.SessionEntityType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session_entity_type.proto}
  */
-var SessionEntityType = {
+const SessionEntityType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -105,7 +105,7 @@ var SessionEntityType = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListSessionEntityTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session_entity_type.proto}
  */
-var ListSessionEntityTypesRequest = {
+const ListSessionEntityTypesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -126,7 +126,7 @@ var ListSessionEntityTypesRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListSessionEntityTypesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session_entity_type.proto}
  */
-var ListSessionEntityTypesResponse = {
+const ListSessionEntityTypesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -145,7 +145,7 @@ var ListSessionEntityTypesResponse = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.GetSessionEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session_entity_type.proto}
  */
-var GetSessionEntityTypeRequest = {
+const GetSessionEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -169,7 +169,7 @@ var GetSessionEntityTypeRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.CreateSessionEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session_entity_type.proto}
  */
-var CreateSessionEntityTypeRequest = {
+const CreateSessionEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -195,7 +195,7 @@ var CreateSessionEntityTypeRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.UpdateSessionEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session_entity_type.proto}
  */
-var UpdateSessionEntityTypeRequest = {
+const UpdateSessionEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -214,6 +214,6 @@ var UpdateSessionEntityTypeRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.DeleteSessionEntityTypeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session_entity_type.proto}
  */
-var DeleteSessionEntityTypeRequest = {
+const DeleteSessionEntityTypeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

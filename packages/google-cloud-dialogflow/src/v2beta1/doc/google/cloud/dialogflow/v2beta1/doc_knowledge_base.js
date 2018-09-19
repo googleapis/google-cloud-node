@@ -31,7 +31,7 @@
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.KnowledgeBase definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
  */
-var KnowledgeBase = {
+const KnowledgeBase = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -53,7 +53,7 @@ var KnowledgeBase = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
  */
-var ListKnowledgeBasesRequest = {
+const ListKnowledgeBasesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -73,7 +73,7 @@ var ListKnowledgeBasesRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.ListKnowledgeBasesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
  */
-var ListKnowledgeBasesResponse = {
+const ListKnowledgeBasesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -88,7 +88,7 @@ var ListKnowledgeBasesResponse = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.GetKnowledgeBaseRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
  */
-var GetKnowledgeBaseRequest = {
+const GetKnowledgeBaseRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -108,7 +108,7 @@ var GetKnowledgeBaseRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.CreateKnowledgeBaseRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
  */
-var CreateKnowledgeBaseRequest = {
+const CreateKnowledgeBaseRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -127,6 +127,6 @@ var CreateKnowledgeBaseRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.DeleteKnowledgeBaseRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
  */
-var DeleteKnowledgeBaseRequest = {
+const DeleteKnowledgeBaseRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

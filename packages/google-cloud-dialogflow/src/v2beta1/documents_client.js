@@ -72,13 +72,13 @@ class DocumentsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,7 +89,7 @@ class DocumentsClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -119,7 +119,7 @@ class DocumentsClient {
         'documents'
       ),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -139,14 +139,16 @@ class DocumentsClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var createDocumentResponse = protoFilesRoot.lookup(
+    const createDocumentResponse = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2beta1.Document'
     );
-    var createDocumentMetadata = protoFilesRoot.lookup(
+    const createDocumentMetadata = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
     );
-    var deleteDocumentResponse = protoFilesRoot.lookup('google.protobuf.Empty');
-    var deleteDocumentMetadata = protoFilesRoot.lookup(
+    const deleteDocumentResponse = protoFilesRoot.lookup(
+      'google.protobuf.Empty'
+    );
+    const deleteDocumentMetadata = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
     );
 
@@ -164,7 +166,7 @@ class DocumentsClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.Documents',
       gapicConfig,
       opts.clientConfig,
@@ -178,14 +180,14 @@ class DocumentsClient {
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.Documents.
-    var documentsStub = gaxGrpc.createStub(
+    const documentsStub = gaxGrpc.createStub(
       protos.google.cloud.dialogflow.v2beta1.Documents,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var documentsStubMethods = [
+    const documentsStubMethods = [
       'listDocuments',
       'getDocument',
       'createDocument',
@@ -196,7 +198,7 @@ class DocumentsClient {
         documentsStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -283,16 +285,16 @@ class DocumentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.DocumentsClient({
+   * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
    *
    * client.listDocuments({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -302,17 +304,17 @@ class DocumentsClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -371,11 +373,11 @@ class DocumentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.DocumentsClient({
+   * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
    * client.listDocumentsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -417,14 +419,14 @@ class DocumentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.DocumentsClient({
+   * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.documentPath('[PROJECT]', '[KNOWLEDGE_BASE]', '[DOCUMENT]');
+   * const formattedName = client.documentPath('[PROJECT]', '[KNOWLEDGE_BASE]', '[DOCUMENT]');
    * client.getDocument({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -471,13 +473,13 @@ class DocumentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.DocumentsClient({
+   * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
-   * var document = {};
-   * var request = {
+   * const formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const document = {};
+   * const request = {
    *   parent: formattedParent,
    *   document: document,
    * };
@@ -485,29 +487,29 @@ class DocumentsClient {
    * // Handle the operation using the promise pattern.
    * client.createDocument(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
-   * var document = {};
-   * var request = {
+   * const formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const document = {};
+   * const request = {
    *   parent: formattedParent,
    *   document: document,
    * };
@@ -515,8 +517,8 @@ class DocumentsClient {
    * // Handle the operation using the event emitter pattern.
    * client.createDocument(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -576,42 +578,42 @@ class DocumentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.DocumentsClient({
+   * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.documentPath('[PROJECT]', '[KNOWLEDGE_BASE]', '[DOCUMENT]');
+   * const formattedName = client.documentPath('[PROJECT]', '[KNOWLEDGE_BASE]', '[DOCUMENT]');
    *
    * // Handle the operation using the promise pattern.
    * client.deleteDocument({name: formattedName})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedName = client.documentPath('[PROJECT]', '[KNOWLEDGE_BASE]', '[DOCUMENT]');
+   * const formattedName = client.documentPath('[PROJECT]', '[KNOWLEDGE_BASE]', '[DOCUMENT]');
    *
    * // Handle the operation using the event emitter pattern.
    * client.deleteDocument({name: formattedName})
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

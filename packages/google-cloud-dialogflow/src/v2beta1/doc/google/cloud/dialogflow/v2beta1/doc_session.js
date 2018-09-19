@@ -62,7 +62,7 @@
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.DetectIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var DetectIntentRequest = {
+const DetectIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -81,12 +81,13 @@ var DetectIntentRequest = {
  *
  * @property {Object[]} alternativeQueryResults
  *   If Knowledge Connectors are enabled, there could be more than one result
- *   returned for a given query or event and this field will contain all results
- *   except for the top one which is captured in query_result. The alternative
- *   results are ordered by decreasing
+ *   returned for a given query or event, and this field will contain all
+ *   results except for the top one, which is captured in query_result. The
+ *   alternative results are ordered by decreasing
  *   `QueryResult.intent_detection_confidence`. If Knowledge Connectors are
- *   disabled this field will be empty  at which point those additional results
- *   will be surfaced here.
+ *   disabled, this field will be empty until multiple responses for regular
+ *   intents are supported, at which point those additional results will be
+ *   surfaced here.
  *
  *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2beta1.QueryResult}
  *
@@ -110,7 +111,7 @@ var DetectIntentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.DetectIntentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var DetectIntentResponse = {
+const DetectIntentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -172,7 +173,7 @@ var DetectIntentResponse = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.QueryParameters definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var QueryParameters = {
+const QueryParameters = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -205,7 +206,7 @@ var QueryParameters = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.QueryInput definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var QueryInput = {
+const QueryInput = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -313,7 +314,7 @@ var QueryInput = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.QueryResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var QueryResult = {
+const QueryResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -329,7 +330,7 @@ var QueryResult = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.KnowledgeAnswers definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var KnowledgeAnswers = {
+const KnowledgeAnswers = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -477,7 +478,7 @@ var KnowledgeAnswers = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.StreamingDetectIntentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var StreamingDetectIntentRequest = {
+const StreamingDetectIntentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -517,12 +518,13 @@ var StreamingDetectIntentRequest = {
  *
  * @property {Object[]} alternativeQueryResults
  *   If Knowledge Connectors are enabled, there could be more than one result
- *   returned for a given query or event and this field will contain all results
- *   except for the top one which is captured in query_result. The alternative
- *   results are ordered by decreasing
+ *   returned for a given query or event, and this field will contain all
+ *   results except for the top one, which is captured in query_result. The
+ *   alternative results are ordered by decreasing
  *   `QueryResult.intent_detection_confidence`. If Knowledge Connectors are
- *   disabled this field will be empty  at which point those additional results
- *   will be surfaced here.
+ *   disabled, this field will be empty until multiple responses for regular
+ *   intents are supported, at which point those additional results will be
+ *   surfaced here.
  *
  *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2beta1.QueryResult}
  *
@@ -545,7 +547,7 @@ var StreamingDetectIntentRequest = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.StreamingDetectIntentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var StreamingDetectIntentResponse = {
+const StreamingDetectIntentResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -613,7 +615,7 @@ var StreamingDetectIntentResponse = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.StreamingRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var StreamingRecognitionResult = {
+const StreamingRecognitionResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -694,7 +696,7 @@ var StreamingRecognitionResult = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.InputAudioConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var InputAudioConfig = {
+const InputAudioConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -715,7 +717,7 @@ var InputAudioConfig = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.TextInput definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var TextInput = {
+const TextInput = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -744,7 +746,7 @@ var TextInput = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.EventInput definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var EventInput = {
+const EventInput = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -760,7 +762,7 @@ var EventInput = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.SentimentAnalysisRequestConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var SentimentAnalysisRequestConfig = {
+const SentimentAnalysisRequestConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -777,7 +779,7 @@ var SentimentAnalysisRequestConfig = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.SentimentAnalysisResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var SentimentAnalysisResult = {
+const SentimentAnalysisResult = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -797,7 +799,7 @@ var SentimentAnalysisResult = {
  * @memberof google.cloud.dialogflow.v2beta1
  * @see [google.cloud.dialogflow.v2beta1.Sentiment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
  */
-var Sentiment = {
+const Sentiment = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -811,7 +813,7 @@ var Sentiment = {
  * @enum {number}
  * @memberof google.cloud.dialogflow.v2beta1
  */
-var AudioEncoding = {
+const AudioEncoding = {
 
   /**
    * Not specified.

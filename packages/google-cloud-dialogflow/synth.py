@@ -12,32 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""This script is used to synthesize generated parts of this library."""
-
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-from pathlib import Path
 import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-# create common templates by gapic
-common_templates = gcp.CommonTemplates()
-
 versions = ['v2', 'v2beta1']
 for version in versions:
     library = gapic.node_library('dialogflow', version)
     s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
 
-templates = common_templates.node_library(package_name="dialogflow")
+common_templates = gcp.CommonTemplates()
+templates = common_templates.node_library()
 s.copy(templates)
 
-'''
-Node.js specific cleanup
-'''
-subprocess.run(['npm', 'ci'])
-
+subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])

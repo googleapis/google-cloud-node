@@ -102,13 +102,13 @@ class IntentsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    var gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    var clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -119,7 +119,7 @@ class IntentsClient {
     }
 
     // Load the applicable protos.
-    var protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -149,7 +149,7 @@ class IntentsClient {
         'intents'
       ),
     };
-    var protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
@@ -169,16 +169,16 @@ class IntentsClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
-    var batchUpdateIntentsResponse = protoFilesRoot.lookup(
+    const batchUpdateIntentsResponse = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2beta1.BatchUpdateIntentsResponse'
     );
-    var batchUpdateIntentsMetadata = protoFilesRoot.lookup(
+    const batchUpdateIntentsMetadata = protoFilesRoot.lookup(
       'google.protobuf.Struct'
     );
-    var batchDeleteIntentsResponse = protoFilesRoot.lookup(
+    const batchDeleteIntentsResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
-    var batchDeleteIntentsMetadata = protoFilesRoot.lookup(
+    const batchDeleteIntentsMetadata = protoFilesRoot.lookup(
       'google.protobuf.Struct'
     );
 
@@ -196,7 +196,7 @@ class IntentsClient {
     };
 
     // Put together the default options sent with requests.
-    var defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.dialogflow.v2beta1.Intents',
       gapicConfig,
       opts.clientConfig,
@@ -210,14 +210,14 @@ class IntentsClient {
 
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.Intents.
-    var intentsStub = gaxGrpc.createStub(
+    const intentsStub = gaxGrpc.createStub(
       protos.google.cloud.dialogflow.v2beta1.Intents,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    var intentsStubMethods = [
+    const intentsStubMethods = [
       'listIntents',
       'getIntent',
       'createIntent',
@@ -231,7 +231,7 @@ class IntentsClient {
         intentsStub.then(
           stub =>
             function() {
-              var args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -328,16 +328,16 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    *
    * client.listIntents({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -347,17 +347,17 @@ class IntentsClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -426,11 +426,11 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
    * client.listIntentsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -481,14 +481,14 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.intentPath('[PROJECT]', '[INTENT]');
+   * const formattedName = client.intentPath('[PROJECT]', '[INTENT]');
    * client.getIntent({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -542,19 +542,19 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var intent = {};
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const intent = {};
+   * const request = {
    *   parent: formattedParent,
    *   intent: intent,
    * };
    * client.createIntent(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -610,19 +610,19 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var intent = {};
-   * var languageCode = '';
-   * var request = {
+   * const intent = {};
+   * const languageCode = '';
+   * const request = {
    *   intent: intent,
    *   languageCode: languageCode,
    * };
    * client.updateIntent(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -659,11 +659,11 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.intentPath('[PROJECT]', '[INTENT]');
+   * const formattedName = client.intentPath('[PROJECT]', '[INTENT]');
    * client.deleteIntent({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -725,13 +725,13 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var languageCode = '';
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const languageCode = '';
+   * const request = {
    *   parent: formattedParent,
    *   languageCode: languageCode,
    * };
@@ -739,29 +739,29 @@ class IntentsClient {
    * // Handle the operation using the promise pattern.
    * client.batchUpdateIntents(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var languageCode = '';
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const languageCode = '';
+   * const request = {
    *   parent: formattedParent,
    *   languageCode: languageCode,
    * };
@@ -769,8 +769,8 @@ class IntentsClient {
    * // Handle the operation using the event emitter pattern.
    * client.batchUpdateIntents(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -833,13 +833,13 @@ class IntentsClient {
    *
    * const dialogflow = require('dialogflow.v2beta1');
    *
-   * var client = new dialogflow.v2beta1.IntentsClient({
+   * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var intents = [];
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const intents = [];
+   * const request = {
    *   parent: formattedParent,
    *   intents: intents,
    * };
@@ -847,29 +847,29 @@ class IntentsClient {
    * // Handle the operation using the promise pattern.
    * client.batchDeleteIntents(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectAgentPath('[PROJECT]');
-   * var intents = [];
-   * var request = {
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const intents = [];
+   * const request = {
    *   parent: formattedParent,
    *   intents: intents,
    * };
@@ -877,8 +877,8 @@ class IntentsClient {
    * // Handle the operation using the event emitter pattern.
    * client.batchDeleteIntents(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

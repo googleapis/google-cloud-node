@@ -39,7 +39,7 @@
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.Context definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var Context = {
+const Context = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -61,7 +61,7 @@ var Context = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.ListContextsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var ListContextsRequest = {
+const ListContextsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -82,7 +82,7 @@ var ListContextsRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.ListContextsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var ListContextsResponse = {
+const ListContextsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -97,7 +97,7 @@ var ListContextsResponse = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.GetContextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var GetContextRequest = {
+const GetContextRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -117,7 +117,7 @@ var GetContextRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.CreateContextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var CreateContextRequest = {
+const CreateContextRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -138,7 +138,7 @@ var CreateContextRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.UpdateContextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var UpdateContextRequest = {
+const UpdateContextRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -153,7 +153,7 @@ var UpdateContextRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.DeleteContextRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var DeleteContextRequest = {
+const DeleteContextRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -168,6 +168,6 @@ var DeleteContextRequest = {
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.DeleteAllContextsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/context.proto}
  */
-var DeleteAllContextsRequest = {
+const DeleteAllContextsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
