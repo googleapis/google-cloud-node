@@ -284,32 +284,32 @@ export interface DeleteLabelsCallback {
 }
 
 /**
- * @typedef {array} DisableOptionserPaysResponse
+ * @typedef {array} DisableRequesterPaysResponse
  * @property {object} 0 The full API response.
  */
-export type DisableOptionserPaysResponse = [request.Response];
+export type DisableRequesterPaysResponse = [request.Response];
 
 /**
- * @callback DisableOptionserPaysCallback
+ * @callback DisableRequesterPaysCallback
  * @param {?Error} err Request error, if any.
  * @param {object} apiResponse The full API response.
  */
-export interface DisableOptionserPaysCallback {
+export interface DisableRequesterPaysCallback {
   (err: Error|null, apiResponse?: object);
 }
 
 /**
- * @typedef {array} EnableOptionserPaysResponse
+ * @typedef {array} EnableRequesterPaysResponse
  * @property {object} 0 The full API response.
  */
-export type EnableOptionserPaysResponse = [request.Response];
+export type EnableRequesterPaysResponse = [request.Response];
 
 /**
- * @callback EnableOptionserPaysCallback
+ * @callback EnableRequesterPaysCallback
  * @param {?Error} err Request error, if any.
  * @param {object} apiResponse The full API response.
  */
-export interface EnableOptionserPaysCallback {
+export interface EnableRequesterPaysCallback {
   (err: Error|null, apiResponse: request.Response);
 }
 
@@ -1296,15 +1296,15 @@ class Bucket extends ServiceObject {
    *
    * Disable `requesterPays` functionality from this bucket.
    *
-   * @param {DisableOptionserPaysCallback} [callback] Callback function.
-   * @returns {Promise<DisableOptionserPaysCallback>}
+   * @param {DisableRequesterPaysCallback} [callback] Callback function.
+   * @returns {Promise<DisableRequesterPaysCallback>}
    *
    * @example
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
-   * bucket.disableOptionserPays(function(err, apiResponse) {
+   * bucket.disableRequesterPays(function(err, apiResponse) {
    *   if (!err) {
    *     // requesterPays functionality disabled successfully.
    *   }
@@ -1313,7 +1313,7 @@ class Bucket extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * bucket.disableOptionserPays().then(function(data) {
+   * bucket.disableRequesterPays().then(function(data) {
    *   const apiResponse = data[0];
    * });
    *
@@ -1321,10 +1321,10 @@ class Bucket extends ServiceObject {
    * region_tag:storage_disable_requester_pays
    * Example of disabling requester pays:
    */
-  disableOptionserPays(): Promise<DisableOptionserPaysResponse>;
-  disableOptionserPays(callback: DisableOptionserPaysCallback): void;
-  disableOptionserPays(callback?: DisableOptionserPaysCallback):
-      Promise<DisableOptionserPaysResponse>|void {
+  disableRequesterPays(): Promise<DisableRequesterPaysResponse>;
+  disableRequesterPays(callback: DisableRequesterPaysCallback): void;
+  disableRequesterPays(callback?: DisableRequesterPaysCallback):
+      Promise<DisableRequesterPaysResponse>|void {
     this.setMetadata(
         {
           billing: {
@@ -1346,15 +1346,15 @@ class Bucket extends ServiceObject {
    * bucket owner, to have the requesting user assume the charges for the access
    * to your bucket and its contents.
    *
-   * @param {EnableOptionserPaysCallback} [callback] Callback function.
-   * @returns {Promise<EnableOptionserPaysResponse>}
+   * @param {EnableRequesterPaysCallback} [callback] Callback function.
+   * @returns {Promise<EnableRequesterPaysResponse>}
    *
    * @example
    * const {Storage} = require('@google-cloud/storage');
    * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
-   * bucket.enableOptionserPays(function(err, apiResponse) {
+   * bucket.enableRequesterPays(function(err, apiResponse) {
    *   if (!err) {
    *     // requesterPays functionality enabled successfully.
    *   }
@@ -1363,7 +1363,7 @@ class Bucket extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * bucket.enableOptionserPays().then(function(data) {
+   * bucket.enableRequesterPays().then(function(data) {
    *   const apiResponse = data[0];
    * });
    *
@@ -1371,10 +1371,10 @@ class Bucket extends ServiceObject {
    * region_tag:storage_enable_requester_pays
    * Example of enabling requester pays:
    */
-  enableOptionserPays(): Promise<EnableOptionserPaysResponse>;
-  enableOptionserPays(callback: EnableOptionserPaysCallback): void;
-  enableOptionserPays(callback?: EnableOptionserPaysCallback):
-      Promise<EnableOptionserPaysResponse>|void {
+  enableRequesterPays(): Promise<EnableRequesterPaysResponse>;
+  enableRequesterPays(callback: EnableRequesterPaysCallback): void;
+  enableRequesterPays(callback?: EnableRequesterPaysCallback):
+      Promise<EnableRequesterPaysResponse>|void {
     this.setMetadata(
         {
           billing: {
