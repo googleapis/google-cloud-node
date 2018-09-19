@@ -6,7 +6,7 @@
   "author": "Google LLC",
   "repository": "dialogflow/dialogflow-nodejs-client-v2",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "test": "ava system-test"
