@@ -20,6 +20,16 @@ import {ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as request from 'request';
 import {Storage} from '.';
+import {Response} from 'request';
+
+/**
+ * @callback StopCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+export interface StopCallback {
+  (err: Error|null, apiResponse?: request.Response): void;
+}
 
 /**
  * Create a channel object to interact with a Cloud Storage channel.
@@ -67,11 +77,6 @@ class Channel extends ServiceObject {
    * @property {object} 0 The full API response.
    */
   /**
-   * @callback StopCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
    * Stop this channel.
    *
    * @param {StopCallback} [callback] Callback function.
@@ -94,9 +99,10 @@ class Channel extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  stop(callback?) {
+  stop(): Promise<Response>;
+  stop(callback: StopCallback): void;
+  stop(callback?: StopCallback): Promise<Response>|void {
     callback = callback || util.noop;
-
     this.request(
         {
           method: 'POST',
@@ -104,7 +110,7 @@ class Channel extends ServiceObject {
           json: this.metadata,
         },
         (err, apiResponse) => {
-          callback(err, apiResponse);
+          callback!(err, apiResponse);
         });
   }
 }

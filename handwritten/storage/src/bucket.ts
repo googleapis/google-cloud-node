@@ -18,7 +18,7 @@
 
 import * as arrify from 'arrify';
 import * as async from 'async';
-import {ExistsCallback, ServiceObject, Metadata, util, DeleteCallback, InstanceResponseCallback, GetConfig, GetMetadataCallback} from '@google-cloud/common';
+import {ExistsCallback, ServiceObject, Metadata, util, DeleteCallback, InstanceResponseCallback, GetConfig, GetMetadataCallback, DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
@@ -26,7 +26,7 @@ import * as fs from 'fs';
 import * as is from 'is';
 import * as mime from 'mime-types';
 import * as path from 'path';
-import * as snakeize from 'snakeize';
+const snakeize = require('snakeize');
 import * as request from 'request';
 
 import {Acl} from './acl';
@@ -52,6 +52,15 @@ interface MetadataOptions {
 
 interface BucketOptions {
   userProject?: string;
+}
+
+/**
+ * @callback GetFilesCallback
+ * @param {?Error} err Request error, if any.
+ * @param {File[]} files Array of {@link File} instances.
+ */
+export interface GetFilesCallback {
+  (err: Error|null, files?: File[]): void;
 }
 
 /**
@@ -128,7 +137,7 @@ export interface CombineOptions {
  * @param {object} apiResponse The full API response.
  */
 export interface CombineCallback {
-  (err: Error|null, newFile: File|null, apiResponse: request.Response);
+  (err: Error|null, newFile: File|null, apiResponse: request.Response): void;
 }
 
 /**
@@ -174,7 +183,7 @@ export type CreateChannelResponse = [Channel, request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface CreateChannelCallback {
-  (err: Error|null, channel: Channel|null, apiResponse: request.Response);
+  (err: Error|null, channel: Channel|null, apiResponse: request.Response): void;
 }
 
 /**
@@ -214,7 +223,7 @@ export interface CreateNotificationOptions {
  */
 export interface CreateNotificationCallback {
   (err: Error|null, notification: Notification|null,
-   apiResponse: request.Response);
+   apiResponse: request.Response): void;
 }
 
 /**
@@ -245,7 +254,7 @@ export type DeleteBucketResponse = [request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface DeleteBucketCallback extends DeleteCallback {
-  (err: Error|null, apiResponse: request.Response);
+  (err: Error|null, apiResponse: request.Response): void;
 }
 
 /**
@@ -265,7 +274,7 @@ export interface DeleteFilesOptions extends GetFilesOptions {
  * @param {object} [apiResponse] The full API response.
  */
 export interface DeleteFilesCallback {
-  (err: Error|Error[]|null, apiResponse?: object);
+  (err: Error|Error[]|null, apiResponse?: object): void;
 }
 
 /**
@@ -280,7 +289,7 @@ export type DeleteLabelsResponse = [request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface DeleteLabelsCallback {
-  (err: Error|null, apiResponse?: object);
+  (err: Error|null, apiResponse?: object): void;
 }
 
 /**
@@ -295,7 +304,7 @@ export type DisableRequesterPaysResponse = [request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface DisableRequesterPaysCallback {
-  (err: Error|null, apiResponse?: object);
+  (err: Error|null, apiResponse?: object): void;
 }
 
 /**
@@ -310,7 +319,7 @@ export type EnableRequesterPaysResponse = [request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface EnableRequesterPaysCallback {
-  (err: Error|null, apiResponse: request.Response);
+  (err: Error|null, apiResponse: request.Response): void;
 }
 
 /**
@@ -360,7 +369,7 @@ export type GetBucketResponse = [Bucket, request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface GetBucketCallback extends InstanceResponseCallback {
-  (err: Error|null, bucket: Bucket|null, apiResponse: request.Response);
+  (err: Error|null, bucket: Bucket|null, apiResponse: request.Response): void;
 }
 
 /**
@@ -384,7 +393,7 @@ export type GetLabelsResponse = [request.Response];
  * @param {object} labels Object of labels currently set on this bucket.
  */
 export interface GetLabelsCallback {
-  (err: Error|null, labels: object|null);
+  (err: Error|null, labels: object|null): void;
 }
 
 /**
@@ -401,7 +410,8 @@ export type GetBucketMetadataResponse = [object, request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface GetBucketMetadataCallback extends GetMetadataCallback {
-  (err: Error|null, metadata: Metadata|null, apiResponse: request.Response);
+  (err: Error|null, metadata: Metadata|null,
+   apiResponse: request.Response): void;
 }
 
 /**
@@ -431,7 +441,7 @@ export interface GetNotificationsOptions {
  */
 export interface GetNotificationsCallback {
   (err: Error|null, notifications: Notification[]|null,
-   apiResponse: request.Response);
+   apiResponse: request.Response): void;
 }
 
 /**
@@ -1201,7 +1211,7 @@ class Bucket extends ServiceObject {
 
       // Iterate through each file and attempt to delete it.
       async.eachLimit<File, Error>(
-          files, MAX_PARALLEL_LIMIT, deleteFile, err => {
+          files!, MAX_PARALLEL_LIMIT, deleteFile, err => {
             if (err || errors.length > 0) {
               callback!(err || errors);
               return;
@@ -1552,11 +1562,6 @@ class Bucket extends ServiceObject {
    * @property {File[]} 0 Array of {@link File} instances.
    */
   /**
-   * @callback GetFilesCallback
-   * @param {?Error} err Request error, if any.
-   * @param {File[]} files Array of {@link File} instances.
-   */
-  /**
    * Get {@link File} objects for the files currently in the bucket.
    *
    * @see [Objects: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/list}
@@ -1624,12 +1629,16 @@ class Bucket extends ServiceObject {
    * region_tag:storage_list_files_with_prefix
    * Example of listing files, filtered by a prefix:
    */
-  getFiles(query: GetFilesOptions, callback?) {
+  getFiles(query?: GetFilesOptions): Promise<[File[]]>;
+  getFiles(query: GetFilesOptions, callback: GetFilesCallback): void;
+  getFiles(callback: GetFilesCallback): void;
+  getFiles(
+      queryOrCallback?: GetFilesOptions|GetFilesCallback,
+      callback?: GetFilesCallback): void|Promise<[File[]]> {
+    let query = typeof queryOrCallback === 'object' ? queryOrCallback : {};
     if (!callback) {
-      callback = query;
-      query = {};
+      callback = queryOrCallback as GetFilesCallback;
     }
-
     query = extend({}, query);
 
     if (query.directory) {
@@ -1644,7 +1653,8 @@ class Bucket extends ServiceObject {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, null, resp);
+            // tslint:disable-next-line:no-any
+            (callback as any)(err, null, null, resp);
             return;
           }
 
@@ -1671,8 +1681,8 @@ class Bucket extends ServiceObject {
               pageToken: resp.nextPageToken,
             });
           }
-
-          callback(null, files, nextQuery, resp);
+          // tslint:disable-next-line:no-any
+          (callback as any)(null, files, nextQuery, resp);
         });
   }
 
@@ -2145,13 +2155,15 @@ class Bucket extends ServiceObject {
    * @param {object} reqOpts - The request options.
    * @param {function} callback - The callback function.
    */
-  request(reqOpts): Promise<request.Response>;
-  request(reqOpts, callback): void;
-  request(reqOpts, callback?): void|Promise<request.Response> {
+  request(reqOpts: DecorateRequestOptions): Promise<request.Response>;
+  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
+      void;
+  request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
+      void|Promise<request.Response> {
     if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
       reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
     }
-    return super.request(reqOpts, callback);
+    return super.request(reqOpts, callback!);
   }
 
   /**
@@ -2691,7 +2703,7 @@ class Bucket extends ServiceObject {
       };
 
       // Iterate through each file and make it public or private.
-      async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, err => {
+      async.eachLimit(files!, MAX_PARALLEL_LIMIT, processFile, err => {
         if (err || errors.length > 0) {
           callback(err || errors, updatedFiles);
           return;

@@ -16,7 +16,7 @@
 
 'use strict';
 
-import {ServiceObject, util} from '@google-cloud/common';
+import {ServiceObject, util, DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import compressible = require('compressible');
 import concat = require('concat-stream');
@@ -24,14 +24,14 @@ import * as crypto from 'crypto';
 import * as duplexify from 'duplexify';
 import * as extend from 'extend';
 import * as fs from 'fs';
-import * as hashStreamValidation from 'hash-stream-validation';
+const hashStreamValidation = require('hash-stream-validation');
 import * as is from 'is';
 import * as mime from 'mime';
 import * as once from 'once';
 import * as os from 'os';
 const pumpify = require('pumpify');
 import * as resumableUpload from 'gcs-resumable-upload';
-import {Stream, Duplex} from 'stream';
+import {Duplex, Writable} from 'stream';
 import * as streamEvents from 'stream-events';
 import * as through from 'through2';
 import * as xdgBasedir from 'xdg-basedir';
@@ -42,6 +42,7 @@ import * as r from 'request';
 import {Storage} from '.';
 import {Bucket} from './bucket';
 import {Acl} from './acl';
+import {ResponseBody} from '@google-cloud/common/build/src/util';
 
 /**
  * Custom error type for errors related to creating a resumable upload.
@@ -434,13 +435,14 @@ class File extends ServiceObject {
    * region_tag:storage_copy_file
    * Another example:
    */
-  copy(destination: string|Bucket|File, callback: FileCallback);
+  copy(destination: string|Bucket|File, callback: FileCallback): void;
   copy(
       destination: string|Bucket|File, options: CopyOptions,
-      callback: FileCallback);
+      callback: FileCallback): void;
   copy(
       destination: string|Bucket|File,
-      optionsOrCallback: CopyOptions|FileCallback, callback?: FileCallback) {
+      optionsOrCallback: CopyOptions|FileCallback,
+      callback?: FileCallback): void {
     const noDestinationError =
         new Error('Destination file should have a name.');
 
@@ -458,9 +460,9 @@ class File extends ServiceObject {
     options = extend(true, {}, options);
     callback = callback || util.noop;
 
-    let destBucket;
-    let destName;
-    let newFile;
+    let destBucket: Bucket|File;
+    let destName: string;
+    let newFile: File;
 
     if (typeof destination === 'string') {
       const parsedDestination = GS_URL_REGEXP.exec(destination);
@@ -495,9 +497,9 @@ class File extends ServiceObject {
       delete options.userProject;
     }
 
-    newFile = newFile || destBucket.file(destName);
+    newFile = newFile! || destBucket.file(destName);
 
-    const headers = {};
+    const headers: {[index: string]: string|undefined} = {};
 
     if (is.defined(this.encryptionKey)) {
       headers['x-goog-copy-source-encryption-algorithm'] = 'AES256';
@@ -653,7 +655,8 @@ class File extends ServiceObject {
     const rangeRequest = is.number(options.start) || is.number(options.end);
     const tailRequest = options.end! < 0;
 
-    let validateStream;  // Created later, if necessary.
+    // tslint:disable-next-line:no-any
+    let validateStream: any;  // Created later, if necessary.
     const throughStream = streamEvents(through()) as Duplex;
 
     let crc32c = true;
@@ -722,7 +725,8 @@ class File extends ServiceObject {
           .on('response',
               res => {
                 throughStream.emit('response', res);
-                util.handleResp(null, res, null, onResponse);
+                // tslint:disable-next-line:no-any
+                util.handleResp(null, res, null, onResponse as any);
               })
           .resume();
 
@@ -735,44 +739,46 @@ class File extends ServiceObject {
       //      which will return the bytes from the source without decompressing
       //      gzip'd content. We then send it through decompressed, if
       //      applicable, to the user.
-      const onResponse = (err, body, rawResponseStream) => {
-        if (err) {
-          // Get error message from the body.
-          rawResponseStream.pipe(concat(body => {
-            err.message = body.toString();
-            throughStream.destroy(err);
-          }));
+      const onResponse =
+          (err: Error|null, body: ResponseBody,
+           rawResponseStream: r.Request) => {
+            if (err) {
+              // Get error message from the body.
+              rawResponseStream.pipe(concat(body => {
+                err.message = body.toString();
+                throughStream.destroy(err);
+              }));
 
-          return;
-        }
+              return;
+            }
 
-        const headers = rawResponseStream.toJSON().headers;
-        const isCompressed = headers['content-encoding'] === 'gzip';
+            const headers = rawResponseStream.toJSON().headers;
+            const isCompressed = headers['content-encoding'] === 'gzip';
+            const shouldRunValidation = !rangeRequest && (crc32c || md5);
+            const throughStreams: Writable[] = [];
 
-        const shouldRunValidation = !rangeRequest && (crc32c || md5);
+            if (shouldRunValidation) {
+              validateStream = hashStreamValidation({crc32c, md5});
+              throughStreams.push(validateStream);
+            }
 
-        const throughStreams = [] as Stream[];
+            if (isCompressed) {
+              throughStreams.push(zlib.createGunzip());
+            }
 
-        if (shouldRunValidation) {
-          validateStream = hashStreamValidation({crc32c, md5});
-          throughStreams.push(validateStream);
-        }
+            if (throughStreams.length === 1) {
+              rawResponseStream =
+                  // tslint:disable-next-line:no-any
+                  (rawResponseStream.pipe(throughStreams[0]) as any);
+            } else if (throughStreams.length > 1) {
+              rawResponseStream =
+                  rawResponseStream.pipe(pumpify.obj(throughStreams));
+            }
 
-        if (isCompressed) {
-          throughStreams.push(zlib.createGunzip());
-        }
-
-        if (throughStreams.length === 1) {
-          rawResponseStream = rawResponseStream.pipe(throughStreams[0]);
-        } else if (throughStreams.length > 1) {
-          rawResponseStream =
-              rawResponseStream.pipe(pumpify.obj(throughStreams));
-        }
-
-        rawResponseStream.on('end', onComplete).pipe(throughStream, {
-          end: false
-        });
-      };
+            rawResponseStream.on('end', onComplete).pipe(throughStream, {
+              end: false
+            });
+          };
 
       // This is hooked to the `complete` event from the request stream. This is
       // our chance to validate the data and let the user know if anything went
@@ -2260,14 +2266,15 @@ class File extends ServiceObject {
    * @param {object} reqOpts - The request options.
    * @param {function} callback - The callback function.
    */
-  request(reqOpts): Promise<r.Response>;
-  request(reqOpts, callback): void;
-  request(reqOpts, callback?): void|Promise<r.Response> {
+  request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
+  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
+      void;
+  request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
+      void|Promise<r.Response> {
     if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
       reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
     }
-
-    return super.request(reqOpts, callback);
+    return super.request(reqOpts, callback!);
   }
 
   /**
@@ -2581,11 +2588,10 @@ class File extends ServiceObject {
         },
         options);
 
-    const reqOpts = {
+    const reqOpts: DecorateRequestOptions = {
       qs: {
         name: this.name,
-        // tslint:disable-next-line:no-any
-      } as any,
+      },
       uri: `${STORAGE_UPLOAD_BASE_URL}/${this.bucket.name}/o`,
     };
 
@@ -2611,7 +2617,7 @@ class File extends ServiceObject {
 
     util.makeWritableStream(dup, {
       makeAuthenticatedRequest: reqOpts => {
-        this.request(reqOpts, (err, body, resp) => {
+        this.request(reqOpts as DecorateRequestOptions, (err, body, resp) => {
           if (err) {
             dup.destroy(err);
             return;

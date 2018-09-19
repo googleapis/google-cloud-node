@@ -20,6 +20,7 @@ import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as is from 'is';
+import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
 
 interface AclQuery {
   generation: number;
@@ -757,7 +758,8 @@ class Acl extends AclRoleAccessorMethods {
    * @param {*} body Request body contents.
    * @param {function} callback Callback function.
    */
-  request(reqOpts, callback) {
+  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
+      void {
     reqOpts.uri = this.pathPrefix + reqOpts.uri;
     this.request_(reqOpts, callback);
   }
