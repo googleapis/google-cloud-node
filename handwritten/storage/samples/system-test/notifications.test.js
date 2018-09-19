@@ -16,7 +16,7 @@
 'use strict';
 
 const path = require(`path`);
-const pubsub = require('@google-cloud/pubsub')();
+const PubSub = require('@google-cloud/pubsub');
 const {Storage} = require(`@google-cloud/storage`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
@@ -29,6 +29,7 @@ const bucket = storage.bucket(bucketName);
 const notificationId = '1';
 const notification = bucket.notification(notificationId);
 const topicName = `nodejs-storage-samples-${uuid.v4()}`;
+const pubsub = new PubSub();
 const topic = pubsub.topic(topicName);
 const cmd = `node notifications.js`;
 
