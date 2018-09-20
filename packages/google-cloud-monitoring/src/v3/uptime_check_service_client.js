@@ -78,13 +78,13 @@ class UptimeCheckServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    let gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    let clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -95,7 +95,7 @@ class UptimeCheckServiceClient {
     }
 
     // Load the applicable protos.
-    let protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -130,7 +130,7 @@ class UptimeCheckServiceClient {
     };
 
     // Put together the default options sent with requests.
-    let defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.monitoring.v3.UptimeCheckService',
       gapicConfig,
       opts.clientConfig,
@@ -144,14 +144,14 @@ class UptimeCheckServiceClient {
 
     // Put together the "service stub" for
     // google.monitoring.v3.UptimeCheckService.
-    let uptimeCheckServiceStub = gaxGrpc.createStub(
+    const uptimeCheckServiceStub = gaxGrpc.createStub(
       protos.google.monitoring.v3.UptimeCheckService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    let uptimeCheckServiceStubMethods = [
+    const uptimeCheckServiceStubMethods = [
       'listUptimeCheckConfigs',
       'getUptimeCheckConfig',
       'createUptimeCheckConfig',
@@ -159,12 +159,12 @@ class UptimeCheckServiceClient {
       'deleteUptimeCheckConfig',
       'listUptimeCheckIps',
     ];
-    for (let methodName of uptimeCheckServiceStubMethods) {
+    for (const methodName of uptimeCheckServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         uptimeCheckServiceStub.then(
           stub =>
             function() {
-              let args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),

@@ -18,29 +18,29 @@ const assert = require('assert');
 
 const monitoringModule = require('../src');
 
-let FAKE_STATUS_CODE = 1;
-let error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AlertPolicyServiceClient', () => {
   describe('listAlertPolicies', () => {
     it('invokes listAlertPolicies without error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let alertPoliciesElement = {};
-      let alertPolicies = [alertPoliciesElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const alertPoliciesElement = {};
+      const alertPolicies = [alertPoliciesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         alertPolicies: alertPolicies,
       };
@@ -63,14 +63,14 @@ describe('AlertPolicyServiceClient', () => {
     });
 
     it('invokes listAlertPolicies with error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -92,21 +92,24 @@ describe('AlertPolicyServiceClient', () => {
 
   describe('getAlertPolicy', () => {
     it('invokes getAlertPolicy without error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
-      let request = {
+      const formattedName = client.alertPolicyPath(
+        '[PROJECT]',
+        '[ALERT_POLICY]'
+      );
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let displayName = 'displayName1615086568';
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
       };
@@ -125,14 +128,17 @@ describe('AlertPolicyServiceClient', () => {
     });
 
     it('invokes getAlertPolicy with error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
-      let request = {
+      const formattedName = client.alertPolicyPath(
+        '[PROJECT]',
+        '[ALERT_POLICY]'
+      );
+      const request = {
         name: formattedName,
       };
 
@@ -154,23 +160,23 @@ describe('AlertPolicyServiceClient', () => {
 
   describe('createAlertPolicy', () => {
     it('invokes createAlertPolicy without error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let alertPolicy = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const alertPolicy = {};
+      const request = {
         name: formattedName,
         alertPolicy: alertPolicy,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let displayName = 'displayName1615086568';
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
       };
@@ -189,15 +195,15 @@ describe('AlertPolicyServiceClient', () => {
     });
 
     it('invokes createAlertPolicy with error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let alertPolicy = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const alertPolicy = {};
+      const request = {
         name: formattedName,
         alertPolicy: alertPolicy,
       };
@@ -220,14 +226,17 @@ describe('AlertPolicyServiceClient', () => {
 
   describe('deleteAlertPolicy', () => {
     it('invokes deleteAlertPolicy without error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
-      let request = {
+      const formattedName = client.alertPolicyPath(
+        '[PROJECT]',
+        '[ALERT_POLICY]'
+      );
+      const request = {
         name: formattedName,
       };
 
@@ -241,14 +250,17 @@ describe('AlertPolicyServiceClient', () => {
     });
 
     it('invokes deleteAlertPolicy with error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
-      let request = {
+      const formattedName = client.alertPolicyPath(
+        '[PROJECT]',
+        '[ALERT_POLICY]'
+      );
+      const request = {
         name: formattedName,
       };
 
@@ -269,21 +281,21 @@ describe('AlertPolicyServiceClient', () => {
 
   describe('updateAlertPolicy', () => {
     it('invokes updateAlertPolicy without error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let alertPolicy = {};
-      let request = {
+      const alertPolicy = {};
+      const request = {
         alertPolicy: alertPolicy,
       };
 
       // Mock response
-      let name = 'name3373707';
-      let displayName = 'displayName1615086568';
-      let expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name,
         displayName: displayName,
       };
@@ -302,14 +314,14 @@ describe('AlertPolicyServiceClient', () => {
     });
 
     it('invokes updateAlertPolicy with error', done => {
-      let client = new monitoringModule.v3.AlertPolicyServiceClient({
+      const client = new monitoringModule.v3.AlertPolicyServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let alertPolicy = {};
-      let request = {
+      const alertPolicy = {};
+      const request = {
         alertPolicy: alertPolicy,
       };
 
@@ -332,22 +344,22 @@ describe('AlertPolicyServiceClient', () => {
 describe('GroupServiceClient', () => {
   describe('listGroups', () => {
     it('invokes listGroups without error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let groupElement = {};
-      let group = [groupElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const groupElement = {};
+      const group = [groupElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         group: group,
       };
@@ -366,14 +378,14 @@ describe('GroupServiceClient', () => {
     });
 
     it('invokes listGroups with error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -395,24 +407,24 @@ describe('GroupServiceClient', () => {
 
   describe('getGroup', () => {
     it('invokes getGroup without error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-      let request = {
+      const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let displayName = 'displayName1615086568';
-      let parentName = 'parentName1015022848';
-      let filter = 'filter-1274492040';
-      let isCluster = false;
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const parentName = 'parentName1015022848';
+      const filter = 'filter-1274492040';
+      const isCluster = false;
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         parentName: parentName,
@@ -434,14 +446,14 @@ describe('GroupServiceClient', () => {
     });
 
     it('invokes getGroup with error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-      let request = {
+      const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+      const request = {
         name: formattedName,
       };
 
@@ -463,26 +475,26 @@ describe('GroupServiceClient', () => {
 
   describe('createGroup', () => {
     it('invokes createGroup without error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let group = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const group = {};
+      const request = {
         name: formattedName,
         group: group,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let displayName = 'displayName1615086568';
-      let parentName = 'parentName1015022848';
-      let filter = 'filter-1274492040';
-      let isCluster = false;
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const parentName = 'parentName1015022848';
+      const filter = 'filter-1274492040';
+      const isCluster = false;
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         parentName: parentName,
@@ -504,15 +516,15 @@ describe('GroupServiceClient', () => {
     });
 
     it('invokes createGroup with error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let group = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const group = {};
+      const request = {
         name: formattedName,
         group: group,
       };
@@ -535,24 +547,24 @@ describe('GroupServiceClient', () => {
 
   describe('updateGroup', () => {
     it('invokes updateGroup without error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let group = {};
-      let request = {
+      const group = {};
+      const request = {
         group: group,
       };
 
       // Mock response
-      let name = 'name3373707';
-      let displayName = 'displayName1615086568';
-      let parentName = 'parentName1015022848';
-      let filter = 'filter-1274492040';
-      let isCluster = false;
-      let expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const parentName = 'parentName1015022848';
+      const filter = 'filter-1274492040';
+      const isCluster = false;
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         parentName: parentName,
@@ -574,14 +586,14 @@ describe('GroupServiceClient', () => {
     });
 
     it('invokes updateGroup with error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let group = {};
-      let request = {
+      const group = {};
+      const request = {
         group: group,
       };
 
@@ -603,14 +615,14 @@ describe('GroupServiceClient', () => {
 
   describe('deleteGroup', () => {
     it('invokes deleteGroup without error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-      let request = {
+      const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+      const request = {
         name: formattedName,
       };
 
@@ -624,14 +636,14 @@ describe('GroupServiceClient', () => {
     });
 
     it('invokes deleteGroup with error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-      let request = {
+      const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+      const request = {
         name: formattedName,
       };
 
@@ -652,23 +664,23 @@ describe('GroupServiceClient', () => {
 
   describe('listGroupMembers', () => {
     it('invokes listGroupMembers without error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-      let request = {
+      const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let totalSize = 705419236;
-      let membersElement = {};
-      let members = [membersElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const totalSize = 705419236;
+      const membersElement = {};
+      const members = [membersElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         totalSize: totalSize,
         members: members,
@@ -692,14 +704,14 @@ describe('GroupServiceClient', () => {
     });
 
     it('invokes listGroupMembers with error', done => {
-      let client = new monitoringModule.v3.GroupServiceClient({
+      const client = new monitoringModule.v3.GroupServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.groupPath('[PROJECT]', '[GROUP]');
-      let request = {
+      const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+      const request = {
         name: formattedName,
       };
 
@@ -722,22 +734,22 @@ describe('GroupServiceClient', () => {
 describe('MetricServiceClient', () => {
   describe('listMonitoredResourceDescriptors', () => {
     it('invokes listMonitoredResourceDescriptors without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let resourceDescriptorsElement = {};
-      let resourceDescriptors = [resourceDescriptorsElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const resourceDescriptorsElement = {};
+      const resourceDescriptors = [resourceDescriptorsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         resourceDescriptors: resourceDescriptors,
       };
@@ -760,14 +772,14 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes listMonitoredResourceDescriptors with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -789,26 +801,26 @@ describe('MetricServiceClient', () => {
 
   describe('getMonitoredResourceDescriptor', () => {
     it('invokes getMonitoredResourceDescriptor without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.monitoredResourceDescriptorPath(
+      const formattedName = client.monitoredResourceDescriptorPath(
         '[PROJECT]',
         '[MONITORED_RESOURCE_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let type = 'type3575610';
-      let displayName = 'displayName1615086568';
-      let description = 'description-1724546052';
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const type = 'type3575610';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name2,
         type: type,
         displayName: displayName,
@@ -829,17 +841,17 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes getMonitoredResourceDescriptor with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.monitoredResourceDescriptorPath(
+      const formattedName = client.monitoredResourceDescriptorPath(
         '[PROJECT]',
         '[MONITORED_RESOURCE_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -861,22 +873,22 @@ describe('MetricServiceClient', () => {
 
   describe('listMetricDescriptors', () => {
     it('invokes listMetricDescriptors without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let metricDescriptorsElement = {};
-      let metricDescriptors = [metricDescriptorsElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const metricDescriptorsElement = {};
+      const metricDescriptors = [metricDescriptorsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         metricDescriptors: metricDescriptors,
       };
@@ -899,14 +911,14 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes listMetricDescriptors with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -928,27 +940,27 @@ describe('MetricServiceClient', () => {
 
   describe('getMetricDescriptor', () => {
     it('invokes getMetricDescriptor without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.metricDescriptorPath(
+      const formattedName = client.metricDescriptorPath(
         '[PROJECT]',
         '[METRIC_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let type = 'type3575610';
-      let unit = 'unit3594628';
-      let description = 'description-1724546052';
-      let displayName = 'displayName1615086568';
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const type = 'type3575610';
+      const unit = 'unit3594628';
+      const description = 'description-1724546052';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name2,
         type: type,
         unit: unit,
@@ -970,17 +982,17 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes getMetricDescriptor with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.metricDescriptorPath(
+      const formattedName = client.metricDescriptorPath(
         '[PROJECT]',
         '[METRIC_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1002,26 +1014,26 @@ describe('MetricServiceClient', () => {
 
   describe('createMetricDescriptor', () => {
     it('invokes createMetricDescriptor without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let metricDescriptor = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const metricDescriptor = {};
+      const request = {
         name: formattedName,
         metricDescriptor: metricDescriptor,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let type = 'type3575610';
-      let unit = 'unit3594628';
-      let description = 'description-1724546052';
-      let displayName = 'displayName1615086568';
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const type = 'type3575610';
+      const unit = 'unit3594628';
+      const description = 'description-1724546052';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
         name: name2,
         type: type,
         unit: unit,
@@ -1043,15 +1055,15 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes createMetricDescriptor with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let metricDescriptor = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const metricDescriptor = {};
+      const request = {
         name: formattedName,
         metricDescriptor: metricDescriptor,
       };
@@ -1074,17 +1086,17 @@ describe('MetricServiceClient', () => {
 
   describe('deleteMetricDescriptor', () => {
     it('invokes deleteMetricDescriptor without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.metricDescriptorPath(
+      const formattedName = client.metricDescriptorPath(
         '[PROJECT]',
         '[METRIC_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1100,17 +1112,17 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes deleteMetricDescriptor with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.metricDescriptorPath(
+      const formattedName = client.metricDescriptorPath(
         '[PROJECT]',
         '[METRIC_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1131,17 +1143,17 @@ describe('MetricServiceClient', () => {
 
   describe('listTimeSeries', () => {
     it('invokes listTimeSeries without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let filter = 'filter-1274492040';
-      let interval = {};
-      let view = 'FULL';
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const filter = 'filter-1274492040';
+      const interval = {};
+      const view = 'FULL';
+      const request = {
         name: formattedName,
         filter: filter,
         interval: interval,
@@ -1149,10 +1161,10 @@ describe('MetricServiceClient', () => {
       };
 
       // Mock response
-      let nextPageToken = '';
-      let timeSeriesElement = {};
-      let timeSeries = [timeSeriesElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const timeSeriesElement = {};
+      const timeSeries = [timeSeriesElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         timeSeries: timeSeries,
       };
@@ -1175,17 +1187,17 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes listTimeSeries with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let filter = 'filter-1274492040';
-      let interval = {};
-      let view = 'FULL';
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const filter = 'filter-1274492040';
+      const interval = {};
+      const view = 'FULL';
+      const request = {
         name: formattedName,
         filter: filter,
         interval: interval,
@@ -1210,15 +1222,15 @@ describe('MetricServiceClient', () => {
 
   describe('createTimeSeries', () => {
     it('invokes createTimeSeries without error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let timeSeries = [];
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const timeSeries = [];
+      const request = {
         name: formattedName,
         timeSeries: timeSeries,
       };
@@ -1233,15 +1245,15 @@ describe('MetricServiceClient', () => {
     });
 
     it('invokes createTimeSeries with error', done => {
-      let client = new monitoringModule.v3.MetricServiceClient({
+      const client = new monitoringModule.v3.MetricServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let timeSeries = [];
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const timeSeries = [];
+      const request = {
         name: formattedName,
         timeSeries: timeSeries,
       };
@@ -1264,22 +1276,22 @@ describe('MetricServiceClient', () => {
 describe('NotificationChannelServiceClient', () => {
   describe('listNotificationChannelDescriptors', () => {
     it('invokes listNotificationChannelDescriptors without error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let channelDescriptorsElement = {};
-      let channelDescriptors = [channelDescriptorsElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const channelDescriptorsElement = {};
+      const channelDescriptors = [channelDescriptorsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         channelDescriptors: channelDescriptors,
       };
@@ -1302,14 +1314,14 @@ describe('NotificationChannelServiceClient', () => {
     });
 
     it('invokes listNotificationChannelDescriptors with error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -1331,26 +1343,26 @@ describe('NotificationChannelServiceClient', () => {
 
   describe('getNotificationChannelDescriptor', () => {
     it('invokes getNotificationChannelDescriptor without error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.notificationChannelDescriptorPath(
+      const formattedName = client.notificationChannelDescriptorPath(
         '[PROJECT]',
         '[CHANNEL_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let type = 'type3575610';
-      let displayName = 'displayName1615086568';
-      let description = 'description-1724546052';
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const type = 'type3575610';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         name: name2,
         type: type,
         displayName: displayName,
@@ -1371,17 +1383,17 @@ describe('NotificationChannelServiceClient', () => {
     });
 
     it('invokes getNotificationChannelDescriptor with error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.notificationChannelDescriptorPath(
+      const formattedName = client.notificationChannelDescriptorPath(
         '[PROJECT]',
         '[CHANNEL_DESCRIPTOR]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1403,22 +1415,22 @@ describe('NotificationChannelServiceClient', () => {
 
   describe('listNotificationChannels', () => {
     it('invokes listNotificationChannels without error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let notificationChannelsElement = {};
-      let notificationChannels = [notificationChannelsElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const notificationChannelsElement = {};
+      const notificationChannels = [notificationChannelsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         notificationChannels: notificationChannels,
       };
@@ -1441,14 +1453,14 @@ describe('NotificationChannelServiceClient', () => {
     });
 
     it('invokes listNotificationChannels with error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const request = {
         name: formattedName,
       };
 
@@ -1470,26 +1482,26 @@ describe('NotificationChannelServiceClient', () => {
 
   describe('getNotificationChannel', () => {
     it('invokes getNotificationChannel without error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.notificationChannelPath(
+      const formattedName = client.notificationChannelPath(
         '[PROJECT]',
         '[NOTIFICATION_CHANNEL]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let type = 'type3575610';
-      let name2 = 'name2-1052831874';
-      let displayName = 'displayName1615086568';
-      let description = 'description-1724546052';
-      let expectedResponse = {
+      const type = 'type3575610';
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         type: type,
         name: name2,
         displayName: displayName,
@@ -1510,17 +1522,17 @@ describe('NotificationChannelServiceClient', () => {
     });
 
     it('invokes getNotificationChannel with error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.notificationChannelPath(
+      const formattedName = client.notificationChannelPath(
         '[PROJECT]',
         '[NOTIFICATION_CHANNEL]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1542,25 +1554,25 @@ describe('NotificationChannelServiceClient', () => {
 
   describe('createNotificationChannel', () => {
     it('invokes createNotificationChannel without error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let notificationChannel = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const notificationChannel = {};
+      const request = {
         name: formattedName,
         notificationChannel: notificationChannel,
       };
 
       // Mock response
-      let type = 'type3575610';
-      let name2 = 'name2-1052831874';
-      let displayName = 'displayName1615086568';
-      let description = 'description-1724546052';
-      let expectedResponse = {
+      const type = 'type3575610';
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         type: type,
         name: name2,
         displayName: displayName,
@@ -1581,15 +1593,15 @@ describe('NotificationChannelServiceClient', () => {
     });
 
     it('invokes createNotificationChannel with error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.projectPath('[PROJECT]');
-      let notificationChannel = {};
-      let request = {
+      const formattedName = client.projectPath('[PROJECT]');
+      const notificationChannel = {};
+      const request = {
         name: formattedName,
         notificationChannel: notificationChannel,
       };
@@ -1612,23 +1624,23 @@ describe('NotificationChannelServiceClient', () => {
 
   describe('updateNotificationChannel', () => {
     it('invokes updateNotificationChannel without error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let notificationChannel = {};
-      let request = {
+      const notificationChannel = {};
+      const request = {
         notificationChannel: notificationChannel,
       };
 
       // Mock response
-      let type = 'type3575610';
-      let name = 'name3373707';
-      let displayName = 'displayName1615086568';
-      let description = 'description-1724546052';
-      let expectedResponse = {
+      const type = 'type3575610';
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
         type: type,
         name: name,
         displayName: displayName,
@@ -1649,14 +1661,14 @@ describe('NotificationChannelServiceClient', () => {
     });
 
     it('invokes updateNotificationChannel with error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let notificationChannel = {};
-      let request = {
+      const notificationChannel = {};
+      const request = {
         notificationChannel: notificationChannel,
       };
 
@@ -1678,17 +1690,17 @@ describe('NotificationChannelServiceClient', () => {
 
   describe('deleteNotificationChannel', () => {
     it('invokes deleteNotificationChannel without error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.notificationChannelPath(
+      const formattedName = client.notificationChannelPath(
         '[PROJECT]',
         '[NOTIFICATION_CHANNEL]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1704,17 +1716,17 @@ describe('NotificationChannelServiceClient', () => {
     });
 
     it('invokes deleteNotificationChannel with error', done => {
-      let client = new monitoringModule.v3.NotificationChannelServiceClient({
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.notificationChannelPath(
+      const formattedName = client.notificationChannelPath(
         '[PROJECT]',
         '[NOTIFICATION_CHANNEL]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1736,23 +1748,23 @@ describe('NotificationChannelServiceClient', () => {
 describe('UptimeCheckServiceClient', () => {
   describe('listUptimeCheckConfigs', () => {
     it('invokes listUptimeCheckConfigs without error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
       // Mock response
-      let nextPageToken = '';
-      let totalSize = 705419236;
-      let uptimeCheckConfigsElement = {};
-      let uptimeCheckConfigs = [uptimeCheckConfigsElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const totalSize = 705419236;
+      const uptimeCheckConfigsElement = {};
+      const uptimeCheckConfigs = [uptimeCheckConfigsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         totalSize: totalSize,
         uptimeCheckConfigs: uptimeCheckConfigs,
@@ -1776,14 +1788,14 @@ describe('UptimeCheckServiceClient', () => {
     });
 
     it('invokes listUptimeCheckConfigs with error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const request = {
         parent: formattedParent,
       };
 
@@ -1805,25 +1817,25 @@ describe('UptimeCheckServiceClient', () => {
 
   describe('getUptimeCheckConfig', () => {
     it('invokes getUptimeCheckConfig without error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.uptimeCheckConfigPath(
+      const formattedName = client.uptimeCheckConfigPath(
         '[PROJECT]',
         '[UPTIME_CHECK_CONFIG]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
       // Mock response
-      let name2 = 'name2-1052831874';
-      let displayName = 'displayName1615086568';
-      let isInternal = true;
-      let expectedResponse = {
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const isInternal = true;
+      const expectedResponse = {
         name: name2,
         displayName: displayName,
         isInternal: isInternal,
@@ -1843,17 +1855,17 @@ describe('UptimeCheckServiceClient', () => {
     });
 
     it('invokes getUptimeCheckConfig with error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.uptimeCheckConfigPath(
+      const formattedName = client.uptimeCheckConfigPath(
         '[PROJECT]',
         '[UPTIME_CHECK_CONFIG]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -1875,24 +1887,24 @@ describe('UptimeCheckServiceClient', () => {
 
   describe('createUptimeCheckConfig', () => {
     it('invokes createUptimeCheckConfig without error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let uptimeCheckConfig = {};
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const uptimeCheckConfig = {};
+      const request = {
         parent: formattedParent,
         uptimeCheckConfig: uptimeCheckConfig,
       };
 
       // Mock response
-      let name = 'name3373707';
-      let displayName = 'displayName1615086568';
-      let isInternal = true;
-      let expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const isInternal = true;
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         isInternal: isInternal,
@@ -1912,15 +1924,15 @@ describe('UptimeCheckServiceClient', () => {
     });
 
     it('invokes createUptimeCheckConfig with error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let uptimeCheckConfig = {};
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const uptimeCheckConfig = {};
+      const request = {
         parent: formattedParent,
         uptimeCheckConfig: uptimeCheckConfig,
       };
@@ -1943,22 +1955,22 @@ describe('UptimeCheckServiceClient', () => {
 
   describe('updateUptimeCheckConfig', () => {
     it('invokes updateUptimeCheckConfig without error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let uptimeCheckConfig = {};
-      let request = {
+      const uptimeCheckConfig = {};
+      const request = {
         uptimeCheckConfig: uptimeCheckConfig,
       };
 
       // Mock response
-      let name = 'name3373707';
-      let displayName = 'displayName1615086568';
-      let isInternal = true;
-      let expectedResponse = {
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const isInternal = true;
+      const expectedResponse = {
         name: name,
         displayName: displayName,
         isInternal: isInternal,
@@ -1978,14 +1990,14 @@ describe('UptimeCheckServiceClient', () => {
     });
 
     it('invokes updateUptimeCheckConfig with error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let uptimeCheckConfig = {};
-      let request = {
+      const uptimeCheckConfig = {};
+      const request = {
         uptimeCheckConfig: uptimeCheckConfig,
       };
 
@@ -2007,17 +2019,17 @@ describe('UptimeCheckServiceClient', () => {
 
   describe('deleteUptimeCheckConfig', () => {
     it('invokes deleteUptimeCheckConfig without error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.uptimeCheckConfigPath(
+      const formattedName = client.uptimeCheckConfigPath(
         '[PROJECT]',
         '[UPTIME_CHECK_CONFIG]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -2033,17 +2045,17 @@ describe('UptimeCheckServiceClient', () => {
     });
 
     it('invokes deleteUptimeCheckConfig with error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedName = client.uptimeCheckConfigPath(
+      const formattedName = client.uptimeCheckConfigPath(
         '[PROJECT]',
         '[UPTIME_CHECK_CONFIG]'
       );
-      let request = {
+      const request = {
         name: formattedName,
       };
 
@@ -2064,19 +2076,19 @@ describe('UptimeCheckServiceClient', () => {
 
   describe('listUptimeCheckIps', () => {
     it('invokes listUptimeCheckIps without error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let request = {};
+      const request = {};
 
       // Mock response
-      let nextPageToken = '';
-      let uptimeCheckIpsElement = {};
-      let uptimeCheckIps = [uptimeCheckIpsElement];
-      let expectedResponse = {
+      const nextPageToken = '';
+      const uptimeCheckIpsElement = {};
+      const uptimeCheckIps = [uptimeCheckIpsElement];
+      const expectedResponse = {
         nextPageToken: nextPageToken,
         uptimeCheckIps: uptimeCheckIps,
       };
@@ -2099,13 +2111,13 @@ describe('UptimeCheckServiceClient', () => {
     });
 
     it('invokes listUptimeCheckIps with error', done => {
-      let client = new monitoringModule.v3.UptimeCheckServiceClient({
+      const client = new monitoringModule.v3.UptimeCheckServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let request = {};
+      const request = {};
 
       // Mock Grpc layer
       client._innerApiCalls.listUptimeCheckIps = mockSimpleGrpcMethod(

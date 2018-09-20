@@ -72,13 +72,13 @@ class NotificationChannelServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    let gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    let clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -89,7 +89,7 @@ class NotificationChannelServiceClient {
     }
 
     // Load the applicable protos.
-    let protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -127,7 +127,7 @@ class NotificationChannelServiceClient {
     };
 
     // Put together the default options sent with requests.
-    let defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.monitoring.v3.NotificationChannelService',
       gapicConfig,
       opts.clientConfig,
@@ -141,14 +141,14 @@ class NotificationChannelServiceClient {
 
     // Put together the "service stub" for
     // google.monitoring.v3.NotificationChannelService.
-    let notificationChannelServiceStub = gaxGrpc.createStub(
+    const notificationChannelServiceStub = gaxGrpc.createStub(
       protos.google.monitoring.v3.NotificationChannelService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    let notificationChannelServiceStubMethods = [
+    const notificationChannelServiceStubMethods = [
       'listNotificationChannelDescriptors',
       'getNotificationChannelDescriptor',
       'listNotificationChannels',
@@ -157,12 +157,12 @@ class NotificationChannelServiceClient {
       'updateNotificationChannel',
       'deleteNotificationChannel',
     ];
-    for (let methodName of notificationChannelServiceStubMethods) {
+    for (const methodName of notificationChannelServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         notificationChannelServiceStub.then(
           stub =>
             function() {
-              let args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
