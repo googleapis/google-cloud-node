@@ -16,17 +16,17 @@
 
 'use strict';
 
-let common = require('@google-cloud/common');
-let pumpify = require('pumpify');
-let streamEvents = require('stream-events');
-let through = require('through2');
+const common = require('@google-cloud/common');
+const pumpify = require('pumpify');
+const streamEvents = require('stream-events');
+const through = require('through2');
 
 /*!
  * Return a dictionary-like object with helpers to augment the Speech
  * GAPIC.
  */
 module.exports = () => {
-  let methods = {};
+  const methods = {};
 
   /**
    * Performs bidirectional streaming speech recognition: receive results while
@@ -69,9 +69,9 @@ module.exports = () => {
     }
 
     // Format the audio content as input request for pipeline
-    let recognizeStream = streamEvents(pumpify.obj());
+    const recognizeStream = streamEvents(pumpify.obj());
 
-    let requestStream = this._innerApiCalls
+    const requestStream = this._innerApiCalls
       .streamingRecognize(options)
       .on('error', err => {
         recognizeStream.destroy(err);
@@ -87,7 +87,7 @@ module.exports = () => {
     // config) is delayed until we get the first burst of data.
     recognizeStream.once('writing', () => {
       // The first message should contain the streaming config.
-      let firstMessage = true;
+      const firstMessage = true;
 
       // Set up appropriate piping between the stream returned by
       // the underlying API method and the one that we return.
@@ -96,7 +96,7 @@ module.exports = () => {
         // This entails that the user sends raw audio; it is wrapped in
         // the appropriate request structure.
         through.obj((obj, _, next) => {
-          let payload = {};
+          const payload = {};
           if (firstMessage && config !== undefined) {
             // Write the initial configuration to the stream.
             payload.streamingConfig = config;
