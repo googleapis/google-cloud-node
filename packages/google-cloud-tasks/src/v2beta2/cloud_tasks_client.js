@@ -169,7 +169,7 @@ class CloudTasksClient {
       'cancelLease',
       'runTask',
     ];
-    for (let methodName of cloudTasksStubMethods) {
+    for (const methodName of cloudTasksStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         cloudTasksStub.then(
           stub =>
