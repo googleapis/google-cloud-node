@@ -133,7 +133,7 @@ class JobControllerClient {
       'cancelJob',
       'deleteJob',
     ];
-    for (let methodName of jobControllerStubMethods) {
+    for (const methodName of jobControllerStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         jobControllerStub.then(
           stub =>
