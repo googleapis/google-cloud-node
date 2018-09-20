@@ -52,7 +52,10 @@ describe('Speech helper methods', () => {
   });
 
   beforeEach(() => {
-    client = new speech.v1.SpeechClient();
+    client = new speech.v1.SpeechClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
   });
 
   afterEach(() => {
