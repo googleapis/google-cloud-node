@@ -229,7 +229,7 @@ class IntentsClient {
       'batchUpdateIntents',
       'batchDeleteIntents',
     ];
-    for (let methodName of intentsStubMethods) {
+    for (const methodName of intentsStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         intentsStub.then(
           stub =>

@@ -165,7 +165,7 @@ class SessionEntityTypesClient {
       'updateSessionEntityType',
       'deleteSessionEntityType',
     ];
-    for (let methodName of sessionEntityTypesStubMethods) {
+    for (const methodName of sessionEntityTypesStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         sessionEntityTypesStub.then(
           stub =>

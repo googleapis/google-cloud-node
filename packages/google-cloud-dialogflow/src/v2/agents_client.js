@@ -224,7 +224,7 @@ class AgentsClient {
       'importAgent',
       'restoreAgent',
     ];
-    for (let methodName of agentsStubMethods) {
+    for (const methodName of agentsStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         agentsStub.then(
           stub =>
