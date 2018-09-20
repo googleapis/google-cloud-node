@@ -213,7 +213,7 @@ class CloudRedisClient {
       'updateInstance',
       'deleteInstance',
     ];
-    for (let methodName of cloudRedisStubMethods) {
+    for (const methodName of cloudRedisStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         cloudRedisStub.then(
           stub =>
