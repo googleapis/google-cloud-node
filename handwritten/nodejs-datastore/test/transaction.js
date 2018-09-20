@@ -119,8 +119,6 @@ describe('Transaction', function() {
     });
 
     it('should localize request function', function(done) {
-      let transaction;
-
       const fakeDataset = {
         request_: {
           bind: function(context) {
@@ -136,7 +134,7 @@ describe('Transaction', function() {
         },
       };
 
-      transaction = new Transaction(fakeDataset);
+      const transaction = new Transaction(fakeDataset);
     });
 
     it('should localize default properties', function() {

@@ -59,7 +59,8 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "mocha test/*.js",
     "test": "npm run cover",
-    "system-test": "mocha system-test/*.js --timeout 600000"
+    "system-test": "mocha system-test/*.js --timeout 600000",
+    "fix": "eslint '**/*.js' --fix && npm run prettier"
   },
   "dependencies": {
     "@google-cloud/projectify": "^0.3.0",

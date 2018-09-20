@@ -560,7 +560,7 @@ class Metadata extends TestHelper {
         });
 
         console.log('Properties by Kind:');
-        for (let key in propertiesByKind) {
+        for (const key in propertiesByKind) {
           console.log(key, propertiesByKind[key]);
         }
 
@@ -599,7 +599,7 @@ class Metadata extends TestHelper {
         });
 
         console.log('Task property representations:');
-        for (let key in representationsByProperty) {
+        for (const key in representationsByProperty) {
           console.log(key, representationsByProperty[key]);
         }
 
