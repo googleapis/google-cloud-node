@@ -108,7 +108,7 @@ test.serial(`should rotate keys`, async t => {
   const output = generateKeyResults.stdout + generateKeyResults.stderr;
   t.regex(output, new RegExp(`Base 64 encoded encryption key:`));
   const test = /^Base 64 encoded encryption key: (.+)$/;
-  let newKey = output.match(test)[1];
+  const newKey = output.match(test)[1];
 
   const results = await tools.runAsyncWithIO(
     `${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`,

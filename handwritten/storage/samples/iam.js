@@ -132,7 +132,7 @@ function removeBucketIamMember(bucketName, roleName, members) {
 
       // Finds and updates the appropriate role-member group
       const index = policy.bindings.findIndex(role => role.role === roleName);
-      let role = policy.bindings[index];
+      const role = policy.bindings[index];
       if (role) {
         role.members = role.members.filter(
           member => members.indexOf(member) === -1
