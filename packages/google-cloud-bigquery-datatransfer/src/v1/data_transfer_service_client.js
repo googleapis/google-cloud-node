@@ -178,7 +178,7 @@ class DataTransferServiceClient {
       'listTransferLogs',
       'checkValidCreds',
     ];
-    for (let methodName of dataTransferServiceStubMethods) {
+    for (const methodName of dataTransferServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         dataTransferServiceStub.then(
           stub =>
