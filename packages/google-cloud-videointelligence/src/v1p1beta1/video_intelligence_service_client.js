@@ -154,7 +154,7 @@ class VideoIntelligenceServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const videoIntelligenceServiceStubMethods = ['annotateVideo'];
-    for (let methodName of videoIntelligenceServiceStubMethods) {
+    for (const methodName of videoIntelligenceServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         videoIntelligenceServiceStub.then(
           stub =>
