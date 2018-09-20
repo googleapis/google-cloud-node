@@ -81,13 +81,13 @@ class KeyManagementServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    let gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gax.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    let clientHeader = [
+    const clientHeader = [
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
@@ -98,7 +98,7 @@ class KeyManagementServiceClient {
     }
 
     // Load the applicable protos.
-    let protos = merge(
+    const protos = merge(
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
@@ -153,7 +153,7 @@ class KeyManagementServiceClient {
     };
 
     // Put together the default options sent with requests.
-    let defaults = gaxGrpc.constructSettings(
+    const defaults = gaxGrpc.constructSettings(
       'google.cloud.kms.v1.KeyManagementService',
       gapicConfig,
       opts.clientConfig,
@@ -167,14 +167,14 @@ class KeyManagementServiceClient {
 
     // Put together the "service stub" for
     // google.cloud.kms.v1.KeyManagementService.
-    let keyManagementServiceStub = gaxGrpc.createStub(
+    const keyManagementServiceStub = gaxGrpc.createStub(
       protos.google.cloud.kms.v1.KeyManagementService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    let keyManagementServiceStubMethods = [
+    const keyManagementServiceStubMethods = [
       'listKeyRings',
       'listCryptoKeys',
       'listCryptoKeyVersions',
@@ -192,12 +192,12 @@ class KeyManagementServiceClient {
       'destroyCryptoKeyVersion',
       'restoreCryptoKeyVersion',
     ];
-    for (let methodName of keyManagementServiceStubMethods) {
+    for (const methodName of keyManagementServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         keyManagementServiceStub.then(
           stub =>
             function() {
-              let args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
@@ -208,24 +208,24 @@ class KeyManagementServiceClient {
 
     // Put together the "service stub" for
     // google.iam.v1.IAMPolicy.
-    let iamPolicyStub = gaxGrpc.createStub(
+    const iamPolicyStub = gaxGrpc.createStub(
       protos.google.iam.v1.IAMPolicy,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    let iamPolicyStubMethods = [
+    const iamPolicyStubMethods = [
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
     ];
-    for (let methodName of iamPolicyStubMethods) {
+    for (const methodName of iamPolicyStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         iamPolicyStub.then(
           stub =>
             function() {
-              let args = Array.prototype.slice.call(arguments, 0);
+              const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
             }
         ),
