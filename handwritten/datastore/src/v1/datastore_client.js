@@ -132,7 +132,7 @@ class DatastoreClient {
       'allocateIds',
       'reserveIds',
     ];
-    for (let methodName of datastoreStubMethods) {
+    for (const methodName of datastoreStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         datastoreStub.then(
           stub =>
