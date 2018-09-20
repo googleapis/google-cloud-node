@@ -29,7 +29,7 @@ describe('Vision helper methods', () => {
     projectId: 'bogus',
   });
 
-  let sandbox = sinon.sandbox.create();
+  const sandbox = sinon.sandbox.create();
 
   afterEach(() => {
     sandbox.restore();
@@ -37,8 +37,8 @@ describe('Vision helper methods', () => {
 
   describe('annotateImage', () => {
     it('calls batchAnnotateImages correctly', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -49,12 +49,12 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method arrifies the request and
       // passes it through to the batch annotation method.
-      let request = {
+      const request = {
         image: {content: Buffer.from('bogus==')},
         features: {type: ['LOGO_DETECTION']},
       };
       return client.annotateImage(request).then(r => {
-        let response = r[0];
+        const response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
         assert.deepStrictEqual(response, {
@@ -69,10 +69,10 @@ describe('Vision helper methods', () => {
     });
 
     it('understands buffers in a request object', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Stub out the batch annotation method.
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -83,12 +83,12 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method arrifies the request and
       // passes it through to the batch annotation method.
-      let request = {
+      const request = {
         image: Buffer.from('fakeImage'),
         features: {type: ['LOGO_DETECTION']},
       };
       return client.annotateImage(request).then(r => {
-        let response = r[0];
+        const response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
         assert.deepStrictEqual(response, {
@@ -107,18 +107,18 @@ describe('Vision helper methods', () => {
     });
 
     it('understands filenames', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Stub out `fs.readFile` and return a bogus image object.
       // This allows us to test filename detection.
-      let readFile = sandbox.stub(fs, 'readFile');
+      const readFile = sandbox.stub(fs, 'readFile');
       readFile
         .withArgs('image.jpg')
         .callsArgWith(1, null, Buffer.from('fakeImage'));
       readFile.callThrough();
 
       // Stub out the batch annotation method as before.
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -129,12 +129,12 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method arrifies the request and
       // passes it through to the batch annotation method.
-      let request = {
+      const request = {
         image: {source: {filename: 'image.jpg'}},
         features: {type: ['LOGO_DETECTION']},
       };
       return client.annotateImage(request).then(r => {
-        let response = r[0];
+        const response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
         assert.deepStrictEqual(response, {
@@ -158,17 +158,17 @@ describe('Vision helper methods', () => {
     });
 
     it('propagates the error if a file is not found', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Stub out `fs.readFile` and return a bogus image object.
       // This allows us to test filename detection.
-      let readFile = sandbox.stub(fs, 'readFile');
+      const readFile = sandbox.stub(fs, 'readFile');
       readFile.withArgs('image.jpg').callsArgWith(1, {error: 404});
       readFile.callThrough();
 
       // Ensure that the annotateImage method arrifies the request and
       // passes it through to the batch annotation method.
-      let request = {
+      const request = {
         image: {source: {filename: 'image.jpg'}},
         features: {type: ['LOGO_DETECTION']},
       };
@@ -181,8 +181,8 @@ describe('Vision helper methods', () => {
     });
 
     it('retains call options sent', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -193,12 +193,12 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method arrifies the request and
       // passes it through to the batch annotation method.
-      let request = {
+      const request = {
         image: {content: Buffer.from('bogus==')},
         features: {type: ['LOGO_DETECTION']},
       };
       return client.annotateImage(request, {foo: 'bar'}).then(r => {
-        let response = r[0];
+        const response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
         assert.deepStrictEqual(response, {
@@ -213,8 +213,8 @@ describe('Vision helper methods', () => {
     });
 
     it('fires a callback if provided', done => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -225,7 +225,7 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method does *not* pass the callback
       // on to batchAnnotateImages, but rather handles it itself.
-      let request = {
+      const request = {
         image: {content: Buffer.from('bogus==')},
         features: {type: ['LOGO_DETECTION']},
       };
@@ -245,13 +245,13 @@ describe('Vision helper methods', () => {
     });
 
     it('fires the callback on error', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, {message: 'Bad things!'});
 
       // Ensure that the annotateImage method does *not* pass the callback
       // on to batchAnnotateImages, but rather handles it itself.
-      let request = {
+      const request = {
         image: {content: Buffer.from('bogus==')},
         features: {type: ['LOGO_DETECTION']},
       };
@@ -267,8 +267,8 @@ describe('Vision helper methods', () => {
     });
 
     it('requires an image and throws without one', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let request = {};
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const request = {};
       return client
         .annotateImage(request)
         .then(assert.fail)
@@ -280,9 +280,9 @@ describe('Vision helper methods', () => {
 
   describe('single-feature methods', () => {
     it('call `annotateImage` with the correct feature', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let annotate = sandbox.spy(client, 'annotateImage');
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const annotate = sandbox.spy(client, 'annotateImage');
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -293,9 +293,9 @@ describe('Vision helper methods', () => {
 
       // Ensure that the annotateImage method does *not* pass the callback
       // on to batchAnnotateImages, but rather handles it itself.
-      let imageRequest = {image: {content: Buffer.from('bogus==')}};
+      const imageRequest = {image: {content: Buffer.from('bogus==')}};
       return client.logoDetection(Object.assign({}, imageRequest)).then(r => {
-        let response = r[0];
+        const response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
         assert.deepStrictEqual(response, {
@@ -321,10 +321,10 @@ describe('Vision helper methods', () => {
     });
 
     it('accept a URL as a string', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Stub out the batch annotation method.
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -335,7 +335,7 @@ describe('Vision helper methods', () => {
 
       // Call a request to a single-feature method using a URL.
       return client.logoDetection('https://goo.gl/logo.png').then(r => {
-        let response = r[0];
+        const response = r[0];
 
         // Ensure we got the slice of the response that we expected.
         assert.deepStrictEqual(response, {
@@ -359,10 +359,10 @@ describe('Vision helper methods', () => {
     });
 
     it('accept a filename as a string', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Stub out the batch annotation method.
-      let annotate = sandbox.stub(client, 'annotateImage');
+      const annotate = sandbox.stub(client, 'annotateImage');
       annotate.callsArgWith(2, undefined, {
         logoAnnotations: [{description: 'Google'}],
       });
@@ -389,10 +389,10 @@ describe('Vision helper methods', () => {
     });
 
     it('understand a buffer sent directly', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Stub out the batch annotation method.
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -404,7 +404,7 @@ describe('Vision helper methods', () => {
       // Ensure that the annotateImage method arrifies the request and
       // passes it through to the batch annotation method.
       return client.logoDetection(Buffer.from('fakeImage')).then(r => {
-        let response = r[0];
+        const response = r[0];
 
         // Ensure that we got the slice of the response that we expected.
         assert.deepStrictEqual(response, {
@@ -428,11 +428,11 @@ describe('Vision helper methods', () => {
     });
 
     it('handle being sent call options', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let opts = {foo: 'bar'};
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const opts = {foo: 'bar'};
 
       // Stub out the batchAnnotateImages method as usual.
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -444,7 +444,7 @@ describe('Vision helper methods', () => {
       // Perform the request. Send `opts` as an explicit second argument
       // to ensure that sending call options works appropriately.
       return client.logoDetection(Buffer.from('fakeImage'), opts).then(r => {
-        let response = r[0];
+        const response = r[0];
         assert.deepStrictEqual(response, {
           logoAnnotations: [{description: 'Google'}],
         });
@@ -466,8 +466,8 @@ describe('Vision helper methods', () => {
     });
 
     it('throw an exception if conflicting features are given', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
-      let imageRequest = {
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const imageRequest = {
         image: {content: Buffer.from('bogus==')},
         features: [{type: 0}],
       };
@@ -481,14 +481,14 @@ describe('Vision helper methods', () => {
 
     it('creates and promisify methods that are available in certain versions', () => {
       const client = new vision.v1p3beta1.ImageAnnotatorClient();
-      let request = {
+      const request = {
         image: {
           source: {
             imageUri: 'https://cloud.google.com/vision/docs/images/bicycle.jpg',
           },
         },
       };
-      let batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
+      const batchAnnotate = sandbox.stub(client, 'batchAnnotateImages');
       batchAnnotate.callsArgWith(2, undefined, {
         responses: [
           {
@@ -500,7 +500,7 @@ describe('Vision helper methods', () => {
       client
         .productSearch(request)
         .then(r => {
-          let response = r[0];
+          const response = r[0];
 
           assert.deepStrictEqual(response, {
             localizedObjectAnnotations: [{dummy: 'response'}],

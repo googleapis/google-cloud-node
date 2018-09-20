@@ -28,7 +28,7 @@ describe('Vision', () => {
 
   describe('v1', () => {
     it('returns a v1 GAPIC augmented with helpers', () => {
-      let client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
+      const client = new vision.v1.ImageAnnotatorClient(CREDENTIALS);
 
       // Assert that the GAPIC v1 methods are present on the object.
       assert(client.batchAnnotateImages instanceof Function);

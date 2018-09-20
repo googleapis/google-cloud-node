@@ -230,7 +230,7 @@ class ProductSearchClient {
       'listProductsInProductSet',
       'importProductSets',
     ];
-    for (let methodName of productSearchStubMethods) {
+    for (const methodName of productSearchStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         productSearchStub.then(
           stub =>

@@ -121,7 +121,7 @@ class ImageAnnotatorClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const imageAnnotatorStubMethods = ['batchAnnotateImages'];
-    for (let methodName of imageAnnotatorStubMethods) {
+    for (const methodName of imageAnnotatorStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         imageAnnotatorStub.then(
           stub =>

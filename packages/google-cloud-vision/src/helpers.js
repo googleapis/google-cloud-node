@@ -33,7 +33,7 @@ const gax = require('google-gax');
  *
  * @returns An object representing an AnnotateImageRequest.
  */
-let _requestToObject = request => {
+const _requestToObject = request => {
   if (is.string(request)) {
     // Is this a URL or a local file?
     // Guess based on what the string looks like, and build the full
@@ -62,7 +62,7 @@ let _requestToObject = request => {
  *   function.
  * @param {function} callback The callback to run.
  */
-let _coerceRequest = (request, callback) => {
+const _coerceRequest = (request, callback) => {
   // At this point, request must be an object with an `image` key; if not,
   // it is an error. If there is no image, throw an exception.
   if (!is.object(request) || is.undefined(request.image)) {
@@ -102,7 +102,7 @@ let _coerceRequest = (request, callback) => {
  * @returns {function} The function that, when called, will call annotateImage
  *   asking for the single feature annotation.
  */
-let _createSingleFeatureMethod = featureValue => {
+const _createSingleFeatureMethod = featureValue => {
   return function(annotateImageRequest, callOptions, callback) {
     // Sanity check: If we got a string or buffer, we need this to be
     // in object form now, so we can tack on the features list.
@@ -128,7 +128,7 @@ let _createSingleFeatureMethod = featureValue => {
 
     // If the user submitted explicit features that do not line up with
     // the precise method called, throw an exception.
-    for (let feature of annotateImageRequest.features) {
+    for (const feature of annotateImageRequest.features) {
       if (feature.type !== featureValue) {
         throw new Error(
           'Setting explicit features is not supported on this method. ' +
@@ -152,7 +152,7 @@ let _createSingleFeatureMethod = featureValue => {
  *   onto the pure GAPIC.
  */
 module.exports = apiVersion => {
-  let methods = {};
+  const methods = {};
 
   /**
    * Annotate a single image with the requested features.
@@ -227,7 +227,7 @@ module.exports = apiVersion => {
       }
 
       // Call the GAPIC batch annotation function.
-      let requests = {requests: [req]};
+      const requests = {requests: [req]};
       return this.batchAnnotateImages(requests, callOptions, (err, r) => {
         // If there is an error, handle it.
         if (err) {
@@ -236,7 +236,7 @@ module.exports = apiVersion => {
 
         // We are guaranteed to only have one response element, since we
         // only sent one image.
-        let response = r.responses[0];
+        const response = r.responses[0];
 
         // Fire the callback if applicable.
         return callback(undefined, response);

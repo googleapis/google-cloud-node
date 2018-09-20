@@ -36,10 +36,10 @@ describe('Vision', function() {
 
   const TESTS_PREFIX = 'gcloud-vision-test';
 
-  let storage = new Storage();
-  let client = new vision.v1.ImageAnnotatorClient();
+  const storage = new Storage();
+  const client = new vision.v1.ImageAnnotatorClient();
 
-  let bucket = storage.bucket(generateName());
+  const bucket = storage.bucket(generateName());
 
   before(function(done) {
     bucket.create(function(err) {
@@ -80,30 +80,31 @@ describe('Vision', function() {
   });
 
   it('should detect from a URL', () => {
-    let url = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
+    const url =
+      'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
     return client.logoDetection(url).then(responses => {
-      let response = responses[0];
+      const response = responses[0];
       assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
     });
   });
 
   it('should detect from a filename', () => {
     return client.logoDetection(IMAGES.logo).then(responses => {
-      let response = responses[0];
+      const response = responses[0];
       assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
     });
   });
 
   it('should detect from a Buffer', () => {
-    let buffer = fs.readFileSync(IMAGES.logo);
+    const buffer = fs.readFileSync(IMAGES.logo);
     return client.logoDetection(buffer).then(responses => {
-      let response = responses[0];
+      const response = responses[0];
       assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
     });
   });
 
   describe('single image', () => {
-    let TYPES = [
+    const TYPES = [
       {type: 'FACE_DETECTION'},
       {type: 'LABEL_DETECTION'},
       {type: 'SAFE_SEARCH_DETECTION'},
@@ -115,7 +116,7 @@ describe('Vision', function() {
           image: {source: {filename: IMAGES.rushmore}},
         })
         .then(responses => {
-          let response = responses[0];
+          const response = responses[0];
           assert(response.faceAnnotations.length >= 1);
           assert(response.labelAnnotations.length >= 1);
           assert(response.safeSearchAnnotation !== null);
