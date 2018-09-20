@@ -67,7 +67,7 @@
     "@types/express": "^4.11.1",
     "@types/express-serve-static-core": "^4.11.1",
     "@types/extend": "^3.0.0",
-    "@types/glob": "^5.0.35",
+    "@types/glob": "^7.0.0",
     "@types/hapi": "^17.0.12",
     "@types/is": "0.0.20",
     "@types/json-stable-stringify": "^1.0.32",
