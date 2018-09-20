@@ -35,7 +35,7 @@ describe('DeviceManagerSmokeTest', () => {
     client
       .listDeviceRegistries({parent: formattedParent})
       .then(responses => {
-        let resources = responses[0];
+        const resources = responses[0];
         for (let i = 0; i < resources.length; i += 1) {
           console.log(resources[i]);
         }
