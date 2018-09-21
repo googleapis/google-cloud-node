@@ -45,7 +45,8 @@
     "lint": "eslint src/ samples/ system-test/ test/",
     "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js smoke-test/*.js",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000"
+    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
+    "fix": "eslint --fix '**/*.js' && npm run prettier"
   },
   "dependencies": {
     "google-gax": "^0.20.0",
