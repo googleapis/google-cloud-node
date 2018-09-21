@@ -178,7 +178,7 @@ export interface TranslateConfig extends GoogleAuthOptions {
  * region_tag:translate_quickstart
  * Full quickstart example:
  */
-export class Translate extends Service {
+class Translate extends Service {
   options: TranslateConfig;
   key?: string;
   constructor(options?: TranslateConfig) {
@@ -267,12 +267,15 @@ export class Translate extends Service {
    * region_tag:translate_detect_language
    * Here's a full example:
    */
+  detect(input: string): Promise<[DetectResult, r.Response]>;
+  detect(input: string[]): Promise<[DetectResult[], r.Response]>;
   detect(input: string, callback: DetectCallback<DetectResult>): void;
   detect(input: string[], callback: DetectCallback<DetectResult[]>): void;
   detect(
       input: string|string[],
-      callback: DetectCallback<DetectResult>|
-      DetectCallback<DetectResult[]>): void {
+      callback?: DetectCallback<DetectResult>|
+      DetectCallback<DetectResult[]>): void|Promise<[DetectResult, r.Response]>|
+      Promise<[DetectResult[], r.Response]> {
     const inputIsArray = Array.isArray(input);
     input = arrify(input);
     this.request(
@@ -328,11 +331,13 @@ export class Translate extends Service {
    * region_tag:translate_list_language_names
    * Gets the language names in a language other than English:
    */
-  getLanguages(callback: GetLanguagesCallback): void;
+  getLanguages(target?: string): Promise<[LanguageResult[], r.Response]>;
   getLanguages(target: string, callback: GetLanguagesCallback): void;
+  getLanguages(callback: GetLanguagesCallback): void;
   getLanguages(
       targetOrCallback?: string|GetLanguagesCallback,
-      callback?: GetLanguagesCallback) {
+      callback?: GetLanguagesCallback):
+      void|Promise<[LanguageResult[], r.Response]> {
     let target: string;
     if (is.fn(targetOrCallback)) {
       callback = targetOrCallback as GetLanguagesCallback;
@@ -445,6 +450,12 @@ export class Translate extends Service {
    * region_tag:translate_text_with_model
    * Translation using the premium model:
    */
+  translate(input: string, options: TranslateRequest):
+      Promise<[string, r.Response]>;
+  translate(input: string[], options: TranslateRequest):
+      Promise<[string[], r.Response]>;
+  translate(input: string, to: string): Promise<[string, r.Response]>;
+  translate(input: string[], to: string): Promise<[string[], r.Response]>;
   translate(
       input: string, options: TranslateRequest,
       callback: TranslateCallback<string>): void;
@@ -457,7 +468,8 @@ export class Translate extends Service {
       void;
   translate(
       inputs: string|string[], optionsOrTo: string|TranslateRequest,
-      callback: TranslateCallback<string>|TranslateCallback<string[]>) {
+      callback?: TranslateCallback<string>|TranslateCallback<string[]>):
+      void|Promise<[string, r.Response]>|Promise<[string[], r.Response]> {
     const inputIsArray = Array.isArray(inputs);
     const input = arrify(inputs);
     let options: TranslateRequest = {};
@@ -590,3 +602,4 @@ promisifyAll(Translate, {exclude: ['request']});
  * region_tag:translate_quickstart
  * Full quickstart example:
  */
+export {Translate};

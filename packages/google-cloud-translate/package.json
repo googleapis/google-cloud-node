@@ -61,7 +61,7 @@
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix",
+    "fix": "gts fix && eslint --fix 'samples/**/*.js' && npm run prettier",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "presystem-test": "npm run compile"

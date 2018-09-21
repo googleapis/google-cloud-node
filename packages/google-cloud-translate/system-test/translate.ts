@@ -36,15 +36,11 @@ describe('translate', () => {
       },
     ];
 
-    it('should detect a langauge', (done) => {
+    it('should detect a langauge', async () => {
       const input = INPUT.map(x => x.input);
-
-      translate.detect(input, (err, results) => {
-        assert.ifError(err);
-        assert.strictEqual(results![0].language, INPUT[0].expectedLanguage);
-        assert.strictEqual(results![1].language, INPUT[1].expectedLanguage);
-        done();
-      });
+      const [results] = await translate.detect(input);
+      assert.strictEqual(results[0].language, INPUT[0].expectedLanguage);
+      assert.strictEqual(results[1].language, INPUT[1].expectedLanguage);
     });
   });
 
@@ -67,88 +63,57 @@ describe('translate', () => {
       return input.replace(/^\W|\W*$/g, '');
     }
 
-    it('should translate input', (done) => {
+    it('should translate input', async () => {
       const input = INPUT.map(x => x.input);
-
-      translate.translate(input, 'es', (err, results) => {
-        assert.ifError(err);
-        results = results!.map(removeSymbols);
-        assert.strictEqual(results![0], INPUT[0].expectedTranslation);
-        assert.strictEqual(results![1], INPUT[1].expectedTranslation);
-        done();
-      });
+      let [results] = await translate.translate(input, 'es');
+      results = results.map(removeSymbols);
+      assert.strictEqual(results[0], INPUT[0].expectedTranslation);
+      assert.strictEqual(results[1], INPUT[1].expectedTranslation);
     });
 
-    it('should translate input with from and to options', (done) => {
+    it('should translate input with from and to options', async () => {
       const input = INPUT.map(x => x.input);
-
       const opts = {
         from: 'en',
         to: 'es',
       };
-
-      translate.translate(input, opts, (err, results) => {
-        assert.ifError(err);
-        results = results!.map(removeSymbols);
-        assert.strictEqual(results![0], INPUT[0].expectedTranslation);
-        assert.strictEqual(results![1], INPUT[1].expectedTranslation);
-        done();
-      });
+      let [results] = await translate.translate(input, opts);
+      results = results.map(removeSymbols);
+      assert.strictEqual(results[0], INPUT[0].expectedTranslation);
+      assert.strictEqual(results[1], INPUT[1].expectedTranslation);
     });
 
-    it('should autodetect HTML', (done) => {
+    it('should autodetect HTML', async () => {
       const input = '<body>' + INPUT[0].input + '</body>';
-
       const opts = {
         from: 'en',
         to: 'es',
       };
-
-      translate.translate(input, opts, (err, results) => {
-        assert.ifError(err);
-
-        const translation = results!.split(/<\/*body>/g)[1].trim();
-
-        assert.strictEqual(
-            removeSymbols(translation), INPUT[0].expectedTranslation);
-
-        done();
-      });
+      const [results] = await translate.translate(input, opts);
+      const translation = results.split(/<\/*body>/g)[1].trim();
+      assert.strictEqual(
+          removeSymbols(translation), INPUT[0].expectedTranslation);
     });
   });
 
   describe('supported languages', () => {
-    it('should get a list of supported languages', (done) => {
-      translate.getLanguages((err, languages) => {
-        assert.ifError(err);
-
-        const englishResult = languages!.filter(language => {
-          return language.code === 'en';
-        })[0];
-
-        assert.deepStrictEqual(englishResult, {
-          code: 'en',
-          name: 'English',
-        });
-
-        done();
+    it('should get a list of supported languages', async () => {
+      const [languages] = await translate.getLanguages();
+      const englishResult = languages.filter(l => l.code === 'en')[0];
+      assert.deepStrictEqual(englishResult, {
+        code: 'en',
+        name: 'English',
       });
     });
 
-    it('should accept a target language', (done) => {
-      translate.getLanguages('es', (err, languages) => {
-        assert.ifError(err);
-
-        const englishResult = languages!.filter((language) => {
-          return language.code === 'en';
-        })[0];
-
-        assert.deepStrictEqual(englishResult, {
-          code: 'en',
-          name: 'inglés',
-        });
-
-        done();
+    it('should accept a target language', async () => {
+      const [languages] = await translate.getLanguages('es');
+      const englishResult = languages.filter((language) => {
+        return language.code === 'en';
+      })[0];
+      assert.deepStrictEqual(englishResult, {
+        code: 'en',
+        name: 'inglés',
       });
     });
   });
