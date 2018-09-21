@@ -20,7 +20,7 @@ import * as express from './middleware/express';
 // Export the express middleware as 'express'.
 export {express};
 
-const logging = require('@google-cloud/logging');
+const {Logging} = require('@google-cloud/logging');
 
 import * as types from './types/core';
 
@@ -77,7 +77,7 @@ export class LoggingBunyan extends Writable {
     this.logName = options.logName || 'bunyan_log';
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
-    this.stackdriverLog = logging(options).log(this.logName, {
+    this.stackdriverLog = (new Logging(options)).log(this.logName, {
       removeCircular: true,
     });
 

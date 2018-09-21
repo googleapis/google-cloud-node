@@ -20,7 +20,8 @@ const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const execa = require(`execa`);
 const delay = require(`delay`);
-const logging = require('@google-cloud/logging')();
+const {Logging} = require('@google-cloud/logging');
+const logging = new Logging();
 const got = require('got');
 
 test.before(tools.checkCredentials);
