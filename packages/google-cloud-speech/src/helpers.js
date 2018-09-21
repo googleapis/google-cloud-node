@@ -63,10 +63,9 @@ module.exports = () => {
    * // Write request objects.
    * stream.write(request);
    */
-  methods.streamingRecognize = function(config, options) {
-    if (options === undefined) {
-      options = {};
-    }
+  methods.streamingRecognize = function(streamingConfig, options) {
+    options = options || {};
+    streamingConfig = streamingConfig || {};
 
     // Format the audio content as input request for pipeline
     const recognizeStream = streamEvents(pumpify.obj());
@@ -87,7 +86,7 @@ module.exports = () => {
     // config) is delayed until we get the first burst of data.
     recognizeStream.once('writing', () => {
       // The first message should contain the streaming config.
-      const firstMessage = true;
+      requestStream.write({streamingConfig});
 
       // Set up appropriate piping between the stream returned by
       // the underlying API method and the one that we return.
@@ -95,18 +94,13 @@ module.exports = () => {
         // Format the user's input.
         // This entails that the user sends raw audio; it is wrapped in
         // the appropriate request structure.
-        through.obj((obj, _, next) => {
-          const payload = {};
-          if (firstMessage && config !== undefined) {
-            // Write the initial configuration to the stream.
-            payload.streamingConfig = config;
+        through.obj((audioContent, _, next) => {
+          if (audioContent !== undefined) {
+            next(null, {audioContent});
+            return;
           }
 
-          if (Object.keys(obj || {}).length) {
-            payload.audioContent = obj;
-          }
-
-          next(null, payload);
+          next();
         }),
         requestStream,
         through.obj((response, enc, next) => {

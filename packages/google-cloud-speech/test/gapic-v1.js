@@ -224,15 +224,12 @@ describe('SpeechClient', () => {
         projectId: 'bogus',
       });
 
-      // Mock request
-      const request = {};
-
       // Mock response
       const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.streamingRecognize = mockBidiStreamingGrpcMethod(
-        request,
+        {streamingConfig: {}},
         expectedResponse
       );
 
@@ -246,7 +243,7 @@ describe('SpeechClient', () => {
           done(err);
         });
 
-      stream.write(request);
+      stream.write();
     });
 
     it('invokes streamingRecognize with error', done => {
@@ -255,12 +252,9 @@ describe('SpeechClient', () => {
         projectId: 'bogus',
       });
 
-      // Mock request
-      const request = {};
-
       // Mock Grpc layer
       client._innerApiCalls.streamingRecognize = mockBidiStreamingGrpcMethod(
-        request,
+        {streamingConfig: {}},
         null,
         error
       );
@@ -276,7 +270,7 @@ describe('SpeechClient', () => {
           done();
         });
 
-      stream.write(request);
+      stream.write();
     });
   });
 });

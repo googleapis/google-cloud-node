@@ -35,12 +35,29 @@ for version in versions:
         excludes=['package.json', 'README.md', 'src/index.js',]
     )
 
-templates = common_templates.node_library(package_name="@google-cloud/speech")
-s.copy(templates)
+    # Manual helper methods overrides the streaming API so that it
+    # accepts streamingConfig when calling streamingRecognize. Fix
+    # the gapic tests to use the overridden method signature.
+    s.replace( f"test/gapic-{version}.js",
+        "(mockBidiStreamingGrpcMethod\()request",
+        r"\1{ streamingConfig: {} }")
+
+    s.replace(
+        f"test/gapic-{version}.js",
+        "stream\.write\(request\)",
+        "stream.write()")
+
+    s.replace(
+        f"test/gapic-{version}.js",
+        "// Mock request\n\s*const request = {};",
+        "")
+
+templates = common_templates.node_library()
+# TODO: remove excludes once var's are converted to const/let
+s.copy(templates, excludes=['.eslintrc.yml'])
 
 #
 # Node.js specific cleanup
 #
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])
