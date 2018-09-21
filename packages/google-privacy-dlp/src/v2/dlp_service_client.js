@@ -203,7 +203,7 @@ class DlpServiceClient {
       'updateJobTrigger',
       'createJobTrigger',
     ];
-    for (let methodName of dlpServiceStubMethods) {
+    for (const methodName of dlpServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
         dlpServiceStub.then(
           stub =>
