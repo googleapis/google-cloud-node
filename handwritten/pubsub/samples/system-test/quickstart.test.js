@@ -38,7 +38,7 @@ test.after.always(() => {
 });
 
 test.cb(`should create a topic`, t => {
-  const expectedTopicName = `my-new-topic`;
+  const expectedTopicName = `my-topic`;
   const pubsubMock = {
     createTopic: _topicName => {
       t.is(_topicName, expectedTopicName);
