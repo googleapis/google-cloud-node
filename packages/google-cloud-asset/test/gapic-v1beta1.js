@@ -18,28 +18,28 @@ const assert = require('assert');
 
 const assetModule = require('../src');
 
-let FAKE_STATUS_CODE = 1;
-let error = new Error();
+const FAKE_STATUS_CODE = 1;
+const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AssetServiceClient', () => {
   describe('exportAssets', function() {
     it('invokes exportAssets without error', done => {
-      let client = new assetModule.v1beta1.AssetServiceClient({
+      const client = new assetModule.v1beta1.AssetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let outputConfig = {};
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const outputConfig = {};
+      const request = {
         parent: formattedParent,
         outputConfig: outputConfig,
       };
 
       // Mock response
-      let expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.exportAssets = mockLongRunningGrpcMethod(
@@ -50,7 +50,7 @@ describe('AssetServiceClient', () => {
       client
         .exportAssets(request)
         .then(responses => {
-          let operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(responses => {
@@ -63,15 +63,15 @@ describe('AssetServiceClient', () => {
     });
 
     it('invokes exportAssets with error', done => {
-      let client = new assetModule.v1beta1.AssetServiceClient({
+      const client = new assetModule.v1beta1.AssetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let outputConfig = {};
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const outputConfig = {};
+      const request = {
         parent: formattedParent,
         outputConfig: outputConfig,
       };
@@ -86,7 +86,7 @@ describe('AssetServiceClient', () => {
       client
         .exportAssets(request)
         .then(responses => {
-          let operation = responses[0];
+          const operation = responses[0];
           return operation.promise();
         })
         .then(() => {
@@ -100,7 +100,7 @@ describe('AssetServiceClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      let client = new assetModule.v1beta1.AssetServiceClient({
+      const client = new assetModule.v1beta1.AssetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -117,23 +117,23 @@ describe('AssetServiceClient', () => {
 
   describe('batchGetAssetsHistory', () => {
     it('invokes batchGetAssetsHistory without error', done => {
-      let client = new assetModule.v1beta1.AssetServiceClient({
+      const client = new assetModule.v1beta1.AssetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let contentType = 'CONTENT_TYPE_UNSPECIFIED';
-      let readTimeWindow = {};
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const contentType = 'CONTENT_TYPE_UNSPECIFIED';
+      const readTimeWindow = {};
+      const request = {
         parent: formattedParent,
         contentType: contentType,
         readTimeWindow: readTimeWindow,
       };
 
       // Mock response
-      let expectedResponse = {};
+      const expectedResponse = {};
 
       // Mock Grpc layer
       client._innerApiCalls.batchGetAssetsHistory = mockSimpleGrpcMethod(
@@ -149,16 +149,16 @@ describe('AssetServiceClient', () => {
     });
 
     it('invokes batchGetAssetsHistory with error', done => {
-      let client = new assetModule.v1beta1.AssetServiceClient({
+      const client = new assetModule.v1beta1.AssetServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
 
       // Mock request
-      let formattedParent = client.projectPath('[PROJECT]');
-      let contentType = 'CONTENT_TYPE_UNSPECIFIED';
-      let readTimeWindow = {};
-      let request = {
+      const formattedParent = client.projectPath('[PROJECT]');
+      const contentType = 'CONTENT_TYPE_UNSPECIFIED';
+      const readTimeWindow = {};
+      const request = {
         parent: formattedParent,
         contentType: contentType,
         readTimeWindow: readTimeWindow,
@@ -197,7 +197,7 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
 function mockLongRunningGrpcMethod(expectedRequest, response, error) {
   return request => {
     assert.deepStrictEqual(request, expectedRequest);
-    let mockOperation = {
+    const mockOperation = {
       promise: function() {
         return new Promise((resolve, reject) => {
           if (error) {

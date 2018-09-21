@@ -40,7 +40,8 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
     "test-no-cover": "mocha test/*.js",
-    "test": "npm run cover"
+    "test": "npm run cover",
+    "fix": "eslint --fix '**/*.js' && npm run prettier"
   },
   "dependencies": {
     "google-gax": "^0.20.0",
