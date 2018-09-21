@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## v2.1.2
+
+### Bug fixes
+- fix: Improve typescript types ([#124](https://github.com/googleapis/nodejs-translate/pull/124))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/common to ^0.25.0 ([#122](https://github.com/googleapis/nodejs-translate/pull/122))
+- fix(deps): update dependency @google-cloud/common to ^0.24.0 ([#117](https://github.com/googleapis/nodejs-translate/pull/117))
+
+### Internal / Testing Changes
+- Enable prefer-const in the eslint config ([#123](https://github.com/googleapis/nodejs-translate/pull/123))
+- Enable no-var in eslint ([#121](https://github.com/googleapis/nodejs-translate/pull/121))
+- Update CI config ([#118](https://github.com/googleapis/nodejs-translate/pull/118))
+- Enable noImplicitThis in tsconfig ([#115](https://github.com/googleapis/nodejs-translate/pull/115))
+
 ## v2.1.1
 
 ### Internal / Testing Changes
