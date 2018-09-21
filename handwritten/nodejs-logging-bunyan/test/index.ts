@@ -55,11 +55,15 @@ describe('logging-bunyan', () => {
 
 
   const loggingBunyanLib = proxyquire('../src/index.js', {
-    '@google-cloud/logging': fakeLogging,
+    '@google-cloud/logging': {
+      Logging: fakeLogging,
+    },
     stream: fakeStream,
   });
   const loggingBunyanCached = proxyquire('../src/index.js', {
-    '@google-cloud/logging': fakeLogging,
+    '@google-cloud/logging': {
+      Logging: fakeLogging,
+    },
     stream: fakeStream,
   });
   // loggingBunyan is loggingBunyan namespace which cannot be determined type.

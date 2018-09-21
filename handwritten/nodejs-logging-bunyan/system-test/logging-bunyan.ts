@@ -21,7 +21,8 @@ import delay from 'delay';
 import * as types from '../src/types/core';
 import {ErrorsApiTransport} from './errors-transport';
 
-const logging = require('@google-cloud/logging')();
+const {Logging} = require('@google-cloud/logging');
+const logging = new Logging();
 import {LoggingBunyan} from '../src/index';
 
 const LOG_NAME = 'bunyan_log_system_tests';

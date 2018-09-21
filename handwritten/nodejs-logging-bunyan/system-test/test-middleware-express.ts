@@ -21,7 +21,8 @@ import delay from 'delay';
 
 import {express as elb} from '../src/index';
 
-const logging = require('@google-cloud/logging')();
+const {Logging} = require('@google-cloud/logging');
+const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
 const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + (10 * 1000);
