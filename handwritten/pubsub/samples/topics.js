@@ -57,7 +57,7 @@ function createTopic(topicName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
 
   // Creates a new topic
   pubsub
@@ -83,7 +83,7 @@ function deleteTopic(topicName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
 
   // Deletes the topic
   pubsub
@@ -110,7 +110,7 @@ function publishMessage(topicName, data) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
   // const data = JSON.stringify({ foo: 'bar' });
 
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
@@ -141,7 +141,7 @@ function publishMessageWithCustomAttributes(topicName, data) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
   // const data = JSON.stringify({ foo: 'bar' });
 
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
@@ -176,7 +176,7 @@ function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
   // const data = JSON.stringify({ foo: 'bar' });
   // const maxMessages = 10;
   // const maxWaitTime = 10000;
@@ -224,7 +224,7 @@ function publishOrderedMessage(topicName, data) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
   // const data = JSON.stringify({ foo: 'bar' });
 
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
@@ -267,7 +267,7 @@ function getTopicPolicy(topicName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
 
   // Retrieves the IAM policy for the topic
   pubsub
@@ -294,7 +294,7 @@ function setTopicPolicy(topicName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
 
   // The new IAM policy
   const newPolicy = {
@@ -337,7 +337,7 @@ function testTopicPermissions(topicName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
 
   const permissionsToTest = [
     `pubsub.topics.attachSubscription`,

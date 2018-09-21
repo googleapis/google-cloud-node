@@ -28,7 +28,7 @@ const pubsubClient = new PubSub({
 });
 
 // The name for the new topic
-const topicName = 'my-new-topic';
+const topicName = 'my-topic';
 
 // Creates the new topic
 pubsubClient

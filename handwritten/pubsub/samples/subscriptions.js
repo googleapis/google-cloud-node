@@ -57,7 +57,7 @@ function listTopicSubscriptions(topicName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const topicName = 'your-topic';
+  // const topicName = 'my-topic';
 
   // Lists all subscriptions for the topic
   pubsub
@@ -86,8 +86,8 @@ function createSubscription(topicName, subscriptionName) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'your-topic';
-  // const subscriptionName = 'your-subscription';
+  // const topicName = 'my-topic';
+  // const subscriptionName = 'my-sub';
 
   // Creates a new subscription
   pubsub
@@ -119,8 +119,8 @@ function createFlowControlledSubscription(
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'your-topic';
-  // const subscriptionName = 'your-subscription';
+  // const topicName = 'my-topic';
+  // const subscriptionName = 'my-sub';
   // const maxInProgress = 5;
   // const maxBytes = 10000;
 
@@ -167,8 +167,8 @@ function createPushSubscription(topicName, subscriptionName) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'your-topic';
-  // const subscriptionName = 'your-subscription';
+  // const topicName = 'my-topic';
+  // const subscriptionName = 'my-sub';
 
   const options = {
     pushConfig: {
@@ -203,8 +203,8 @@ function modifyPushConfig(topicName, subscriptionName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const topicName = 'your-topic';
-  // const subscriptionName = 'your-subscription';
+  // const topicName = 'my-topic';
+  // const subscriptionName = 'my-sub';
 
   const options = {
     // Set to an HTTPS endpoint of your choice. If necessary, register
@@ -236,7 +236,7 @@ function deleteSubscription(subscriptionName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const subscriptionName = 'your-subscription';
+  // const subscriptionName = 'my-sub';
 
   // Deletes the subscription
   pubsub
@@ -261,7 +261,7 @@ function getSubscription(subscriptionName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const subscriptionName = 'your-subscription';
+  // const subscriptionName = 'my-sub';
 
   // Gets the metadata for the subscription
   pubsub
@@ -292,7 +292,7 @@ function listenForMessages(subscriptionName, timeout) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const subscriptionName = 'your-subscription';
+  // const subscriptionName = 'my-sub';
   // const timeout = 60;
 
   // References an existing subscription
@@ -406,7 +406,7 @@ function listenForErrors(subscriptionName, timeout) {
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const subscriptionName = 'your-subscription';
+  // const subscriptionName = 'my-sub';
   // const timeout = 60;
 
   // References an existing subscription
@@ -448,7 +448,7 @@ function getSubscriptionPolicy(subscriptionName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const subscriptionName = 'your-subscription';
+  // const subscriptionName = 'my-sub';
 
   // Retrieves the IAM policy for the subscription
   pubsub
@@ -475,7 +475,7 @@ function setSubscriptionPolicy(subscriptionName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const subscriptionName = 'your-subscription';
+  // const subscriptionName = 'my-sub';
 
   // The new IAM policy
   const newPolicy = {
@@ -521,7 +521,7 @@ function testSubscriptionPermissions(subscriptionName) {
   /**
    * TODO(developer): Uncomment the following line to run the sample.
    */
-  // const subscriptionName = 'your-subscription';
+  // const subscriptionName = 'my-sub';
 
   const permissionsToTest = [
     `pubsub.subscriptions.consume`,
