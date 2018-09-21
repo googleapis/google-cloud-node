@@ -16,8 +16,8 @@
 
 'use strict';
 
-let common = require('@google-cloud/common');
-let util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /*! Developer Documentation
  *
@@ -41,7 +41,7 @@ let util = require('util');
  * const autoscaler = zone.autoscaler('autoscaler-name');
  */
 function Autoscaler(zone, name) {
-  let methods = {
+  const methods = {
     /**
      * Create an autoscaler.
      *
@@ -231,7 +231,7 @@ util.inherits(Autoscaler, common.ServiceObject);
 Autoscaler.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
 
-  let zone = this.zone;
+  const zone = this.zone;
 
   common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
@@ -239,7 +239,7 @@ Autoscaler.prototype.delete = function(callback) {
       return;
     }
 
-    let operation = zone.operation(resp.name);
+    const operation = zone.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -283,7 +283,7 @@ Autoscaler.prototype.delete = function(callback) {
  * });
  */
 Autoscaler.prototype.setMetadata = function(metadata, callback) {
-  let zone = this.zone;
+  const zone = this.zone;
 
   callback = callback || common.util.noop;
 
@@ -306,7 +306,7 @@ Autoscaler.prototype.setMetadata = function(metadata, callback) {
         return;
       }
 
-      let operation = zone.operation(resp.name);
+      const operation = zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);

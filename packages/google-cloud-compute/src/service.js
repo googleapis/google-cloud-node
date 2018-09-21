@@ -16,11 +16,11 @@
 
 'use strict';
 
-let arrify = require('arrify');
-let common = require('@google-cloud/common');
-let format = require('string-format-obj');
-let is = require('is');
-let util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const format = require('string-format-obj');
+const is = require('is');
+const util = require('util');
 
 /**
  * An HTTP(S) load balancing backend service is a centralized service for
@@ -44,7 +44,7 @@ let util = require('util');
  * const service = const.service('service-name');
  */
 function Service(compute, name) {
-  let methods = {
+  const methods = {
     /**
      * Create a backend service.
      *
@@ -231,7 +231,7 @@ util.inherits(Service, common.ServiceObject);
  * });
  */
 Service.prototype.delete = function(callback) {
-  let compute = this.compute;
+  const compute = this.compute;
 
   callback = callback || common.util.noop;
 
@@ -241,7 +241,7 @@ Service.prototype.delete = function(callback) {
       return;
     }
 
-    let operation = compute.operation(resp.name);
+    const operation = compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -360,7 +360,7 @@ Service.prototype.getHealth = function(group, callback) {
  * });
  */
 Service.prototype.setMetadata = function(metadata, callback) {
-  let compute = this.compute;
+  const compute = this.compute;
 
   callback = callback || common.util.noop;
 
@@ -376,7 +376,7 @@ Service.prototype.setMetadata = function(metadata, callback) {
         return;
       }
 
-      let operation = compute.operation(resp.name);
+      const operation = compute.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);

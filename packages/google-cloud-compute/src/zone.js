@@ -16,21 +16,21 @@
 
 'use strict';
 
-let arrify = require('arrify');
-let async = require('async');
-let common = require('@google-cloud/common');
-let extend = require('extend');
-let format = require('string-format-obj');
-let gceImages = require('gce-images');
-let is = require('is');
-let util = require('util');
+const arrify = require('arrify');
+const async = require('async');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const format = require('string-format-obj');
+const gceImages = require('gce-images');
+const is = require('is');
+const util = require('util');
 
-let Autoscaler = require('./autoscaler.js');
-let Disk = require('./disk.js');
-let InstanceGroup = require('./instance-group.js');
-let MachineType = require('./machine-type.js');
-let Operation = require('./operation.js');
-let VM = require('./vm.js');
+const Autoscaler = require('./autoscaler.js');
+const Disk = require('./disk.js');
+const InstanceGroup = require('./instance-group.js');
+const MachineType = require('./machine-type.js');
+const Operation = require('./operation.js');
+const VM = require('./vm.js');
 
 /**
  * A Zone object allows you to interact with a Google Compute Engine zone.
@@ -48,7 +48,7 @@ let VM = require('./vm.js');
  * const zone = compute.zone('us-central1-a');
  */
 function Zone(compute, name) {
-  let methods = {
+  const methods = {
     /**
      * Check if the zone exists.
      *
@@ -247,13 +247,13 @@ Zone.prototype.autoscaler = function(name) {
  * });
  */
 Zone.prototype.createAutoscaler = function(name, config, callback) {
-  let self = this;
+  const self = this;
 
   if (!config.target) {
     throw new Error('Cannot create an autoscaler without a target.');
   }
 
-  let json = extend(true, {}, config, {
+  const json = extend(true, {}, config, {
     name: name,
     autoscalingPolicy: {},
   });
@@ -310,9 +310,9 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
         return;
       }
 
-      let autoscaler = self.autoscaler(name);
+      const autoscaler = self.autoscaler(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, autoscaler, operation, resp);
@@ -379,10 +379,10 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
  * });
  */
 Zone.prototype.createDisk = function(name, config, callback) {
-  let self = this;
+  const self = this;
 
-  let query = {};
-  let body = extend({}, config, {
+  const query = {};
+  const body = extend({}, config, {
     name: name,
   });
 
@@ -419,9 +419,9 @@ Zone.prototype.createDisk = function(name, config, callback) {
         return;
       }
 
-      let disk = self.disk(name);
+      const disk = self.disk(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, disk, operation, resp);
@@ -472,14 +472,14 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * });
  */
 Zone.prototype.createInstanceGroup = function(name, options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
     options = {};
   }
 
-  let body = extend({}, options, {
+  const body = extend({}, options, {
     name: name,
   });
 
@@ -500,9 +500,9 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
         return;
       }
 
-      let instanceGroup = self.instanceGroup(name);
+      const instanceGroup = self.instanceGroup(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, instanceGroup, operation, resp);
@@ -617,9 +617,9 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * });
  */
 Zone.prototype.createVM = function(name, config, callback) {
-  let self = this;
+  const self = this;
 
-  let body = extend(
+  const body = extend(
     {
       name: name,
       machineType: 'n1-standard-1',
@@ -650,7 +650,7 @@ Zone.prototype.createVM = function(name, config, callback) {
     // We will add tags to the created instance (http-server and/or
     // https-server), and create the appropriate firewall rules to allow
     // connections on the necessary ports to these tags.
-    let createFirewallMethods = [];
+    const createFirewallMethods = [];
 
     body.networkInterfaces[0].accessConfigs = [
       {
@@ -729,9 +729,9 @@ Zone.prototype.createVM = function(name, config, callback) {
         return;
       }
 
-      let vm = self.vm(name);
+      const vm = self.vm(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, vm, operation, resp);
@@ -817,7 +817,7 @@ Zone.prototype.disk = function(name) {
  * });
  */
 Zone.prototype.getAutoscalers = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -845,8 +845,8 @@ Zone.prototype.getAutoscalers = function(options, callback) {
         });
       }
 
-      let autoscalers = arrify(resp.items).map(function(autoscaler) {
-        let autoscalerInstance = self.autoscaler(autoscaler.name);
+      const autoscalers = arrify(resp.items).map(function(autoscaler) {
+        const autoscalerInstance = self.autoscaler(autoscaler.name);
         autoscalerInstance.metadata = autoscaler;
 
         return autoscalerInstance;
@@ -949,7 +949,7 @@ Zone.prototype.getAutoscalersStream = common.paginator.streamify(
  * });
  */
 Zone.prototype.getDisks = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -977,8 +977,8 @@ Zone.prototype.getDisks = function(options, callback) {
         });
       }
 
-      let disks = (resp.items || []).map(function(disk) {
-        let diskInstance = self.disk(disk.name);
+      const disks = (resp.items || []).map(function(disk) {
+        const diskInstance = self.disk(disk.name);
         diskInstance.metadata = disk;
         return diskInstance;
       });
@@ -1080,7 +1080,7 @@ Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * });
  */
 Zone.prototype.getInstanceGroups = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1108,8 +1108,8 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
         });
       }
 
-      let instanceGroups = (resp.items || []).map(function(instanceGroup) {
-        let instanceGroupInstance = self.instanceGroup(instanceGroup.name);
+      const instanceGroups = (resp.items || []).map(function(instanceGroup) {
+        const instanceGroupInstance = self.instanceGroup(instanceGroup.name);
         instanceGroupInstance.metadata = instanceGroup;
         return instanceGroupInstance;
       });
@@ -1312,7 +1312,7 @@ Zone.prototype.getMachineTypesStream = common.paginator.streamify(
  * });
  */
 Zone.prototype.getOperations = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1340,8 +1340,8 @@ Zone.prototype.getOperations = function(options, callback) {
         });
       }
 
-      let operations = (resp.items || []).map(function(operation) {
-        let operationInstance = self.operation(operation.name);
+      const operations = (resp.items || []).map(function(operation) {
+        const operationInstance = self.operation(operation.name);
         operationInstance.metadata = operation;
         return operationInstance;
       });
@@ -1441,7 +1441,7 @@ Zone.prototype.getOperationsStream = common.paginator.streamify(
  * });
  */
 Zone.prototype.getVMs = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1469,8 +1469,8 @@ Zone.prototype.getVMs = function(options, callback) {
         });
       }
 
-      let vms = (resp.items || []).map(function(instance) {
-        let vmInstance = self.vm(instance.name);
+      const vms = (resp.items || []).map(function(instance) {
+        const vmInstance = self.vm(instance.name);
         vmInstance.metadata = instance;
         return vmInstance;
       });

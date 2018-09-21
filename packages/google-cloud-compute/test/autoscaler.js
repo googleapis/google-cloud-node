@@ -16,15 +16,15 @@
 
 'use strict';
 
-let assert = require('assert');
-let extend = require('extend');
-let nodeutil = require('util');
-let proxyquire = require('proxyquire');
-let ServiceObject = require('@google-cloud/common').ServiceObject;
-let util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
 let promisified = false;
-let fakeUtil = extend({}, util, {
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Autoscaler') {
       promisified = true;
@@ -43,10 +43,10 @@ describe('Autoscaler', function() {
   let Autoscaler;
   let autoscaler;
 
-  let AUTOSCALER_NAME = 'autoscaler-name';
+  const AUTOSCALER_NAME = 'autoscaler-name';
 
-  let COMPUTE = {projectId: 'project-id'};
-  let ZONE = {
+  const COMPUTE = {projectId: 'project-id'};
+  const ZONE = {
     compute: COMPUTE,
     name: 'us-central1-a',
     createAutoscaler: util.noop,
@@ -79,7 +79,7 @@ describe('Autoscaler', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      let createMethod = util.noop;
+      const createMethod = util.noop;
 
       const zoneInstance = extend({}, ZONE, {
         createAutoscaler: {
@@ -90,10 +90,10 @@ describe('Autoscaler', function() {
         },
       });
 
-      let autoscaler = new Autoscaler(zoneInstance, AUTOSCALER_NAME);
+      const autoscaler = new Autoscaler(zoneInstance, AUTOSCALER_NAME);
       assert(autoscaler instanceof ServiceObject);
 
-      let calledWith = autoscaler.calledWith_[0];
+      const calledWith = autoscaler.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, zoneInstance);
       assert.strictEqual(calledWith.baseUrl, '/autoscalers');
@@ -119,8 +119,8 @@ describe('Autoscaler', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -145,7 +145,7 @@ describe('Autoscaler', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -156,7 +156,7 @@ describe('Autoscaler', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        let operation = {};
+        const operation = {};
 
         autoscaler.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -182,7 +182,7 @@ describe('Autoscaler', function() {
 
   describe('setMetadata', function() {
     it('should make the correct API request', function(done) {
-      let metadata = {};
+      const metadata = {};
 
       autoscaler.zone.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'PATCH');
@@ -200,8 +200,8 @@ describe('Autoscaler', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         autoscaler.zone.request = function(reqOpts, callback) {
@@ -220,7 +220,7 @@ describe('Autoscaler', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -231,8 +231,8 @@ describe('Autoscaler', function() {
       });
 
       it('should execute callback with operation & response', function(done) {
-        let operation = {};
-        let metadata = {a: 'b'};
+        const operation = {};
+        const metadata = {a: 'b'};
 
         autoscaler.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

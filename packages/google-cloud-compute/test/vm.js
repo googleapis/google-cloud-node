@@ -16,17 +16,17 @@
 
 'use strict';
 
-let assert = require('assert');
-let extend = require('extend');
-let nodeutil = require('util');
-let proxyquire = require('proxyquire');
-let ServiceObject = require('@google-cloud/common').ServiceObject;
-let util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-let utilCached = extend({}, util);
+const utilCached = extend({}, util);
 
 let promisified = false;
-let fakeUtil = extend({}, util, {
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'VM') {
       promisified = true;
@@ -48,20 +48,20 @@ describe('VM', function() {
   let Disk;
   let DISK;
 
-  let COMPUTE = {
+  const COMPUTE = {
     authClient: {
       projectId: 'project-id',
     },
     projectId: 'project-id',
   };
-  let ZONE = {
+  const ZONE = {
     compute: COMPUTE,
     name: 'us-central1-a',
     createDisk: util.noop,
     createVM: util.noop,
   };
-  let VM_NAME = 'vm-name';
-  let FULLY_QUALIFIED_NAME = [
+  const VM_NAME = 'vm-name';
+  const FULLY_QUALIFIED_NAME = [
     'project/project-id/zones/zone-name/instances/',
     VM_NAME,
   ].join('');
@@ -96,7 +96,7 @@ describe('VM', function() {
     });
 
     it('should strip a qualified name to just the instance name', function() {
-      let vm = new VM(ZONE, FULLY_QUALIFIED_NAME);
+      const vm = new VM(ZONE, FULLY_QUALIFIED_NAME);
       assert.strictEqual(vm.name, VM_NAME);
     });
 
@@ -132,10 +132,10 @@ describe('VM', function() {
         },
       });
 
-      let vm = new VM(zoneInstance, VM_NAME);
+      const vm = new VM(zoneInstance, VM_NAME);
       assert(vm instanceof ServiceObject);
 
-      let calledWith = vm.calledWith_[0];
+      const calledWith = vm.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, zoneInstance);
       assert.strictEqual(calledWith.baseUrl, '/instances');
@@ -183,7 +183,7 @@ describe('VM', function() {
       const CONFIG = {readOnly: true};
 
       it('should set the correct mode', function(done) {
-        let expectedBody = extend({}, EXPECTED_BODY, {mode: 'READ_ONLY'});
+        const expectedBody = extend({}, EXPECTED_BODY, {mode: 'READ_ONLY'});
 
         vm.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, expectedBody);
@@ -273,7 +273,7 @@ describe('VM', function() {
     });
 
     it('should replace projectId token in disk name', function(done) {
-      let REPLACED_DEVICE_NAME = 'replaced-device-name';
+      const REPLACED_DEVICE_NAME = 'replaced-device-name';
 
       fakeUtil.replaceProjectIdToken = function(value, projectId) {
         assert.strictEqual(value, DISK.formattedName);
@@ -282,7 +282,7 @@ describe('VM', function() {
       };
 
       vm.getMetadata = function(callback) {
-        let metadata = {
+        const metadata = {
           disks: [
             {
               source: REPLACED_DEVICE_NAME,
@@ -303,7 +303,7 @@ describe('VM', function() {
     });
 
     it('should return an error if device name not found', function(done) {
-      let metadata = {
+      const metadata = {
         disks: [
           {
             source: 'a',
@@ -319,7 +319,7 @@ describe('VM', function() {
       vm.detachDisk(DISK, function(err) {
         assert.strictEqual(err.name, 'DetachDiskError');
 
-        let errorMessage = 'Device name for this disk was not found.';
+        const errorMessage = 'Device name for this disk was not found.';
         assert.strictEqual(err.message, errorMessage);
 
         done();
@@ -351,7 +351,7 @@ describe('VM', function() {
 
     describe('refreshing metadata', function() {
       describe('error', function() {
-        let ERROR = new Error('Error.');
+        const ERROR = new Error('Error.');
 
         beforeEach(function() {
           vm.getMetadata = function(callback) {
@@ -371,7 +371,7 @@ describe('VM', function() {
   });
 
   describe('getSerialPortOutput', function() {
-    let EXPECTED_QUERY = {port: 1};
+    const EXPECTED_QUERY = {port: 1};
 
     it('should default to port 1', function(done) {
       FakeServiceObject.prototype.request = function(reqOpts) {
@@ -383,7 +383,7 @@ describe('VM', function() {
     });
 
     it('should override the default port', function(done) {
-      let port = 8001;
+      const port = 8001;
 
       FakeServiceObject.prototype.request = function(reqOpts) {
         assert.strictEqual(reqOpts.qs.port, port);
@@ -405,8 +405,8 @@ describe('VM', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
@@ -426,7 +426,7 @@ describe('VM', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {contents: 'contents'};
+      const apiResponse = {contents: 'contents'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
@@ -456,8 +456,8 @@ describe('VM', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         vm.getMetadata = function(callback) {
@@ -478,14 +478,14 @@ describe('VM', function() {
     });
 
     describe('success', function() {
-      let metadata = {
+      const metadata = {
         tags: {
           items: [],
           fingerprint: 'fingerprint',
         },
       };
 
-      let apiResponse = {a: 'b', c: 'd'};
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         vm.getMetadata = function(callback) {
@@ -532,7 +532,7 @@ describe('VM', function() {
   });
 
   describe('resize', function() {
-    let MACHINE_TYPE = 'zones/' + ZONE.name + '/machineTypes/machineType';
+    const MACHINE_TYPE = 'zones/' + ZONE.name + '/machineTypes/machineType';
 
     beforeEach(function() {
       vm.request = util.noop;
@@ -556,7 +556,7 @@ describe('VM', function() {
     });
 
     it('should allow a partial machine type', function(done) {
-      let partialMachineType = MACHINE_TYPE.split('/').pop();
+      const partialMachineType = MACHINE_TYPE.split('/').pop();
 
       vm.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -572,7 +572,7 @@ describe('VM', function() {
 
     describe('error', function() {
       describe('instance is running', function() {
-        let error = new Error('Instance is starting or running.');
+        const error = new Error('Instance is starting or running.');
 
         beforeEach(function() {
           vm.zone.parent.execAfterOperation_ = function(callback) {
@@ -590,8 +590,8 @@ describe('VM', function() {
         });
 
         describe('stopping failed', function() {
-          let vmStopError = new Error('Error.');
-          let apiResponse = {};
+          const vmStopError = new Error('Error.');
+          const apiResponse = {};
 
           beforeEach(function() {
             // First: vm.request()
@@ -651,8 +651,8 @@ describe('VM', function() {
       });
 
       describe('instance is stopped', function() {
-        let error = new Error('Error');
-        let apiResponse = {};
+        const error = new Error('Error');
+        const apiResponse = {};
 
         beforeEach(function() {
           vm.zone.parent.execAfterOperation_ = function(callback) {
@@ -696,7 +696,7 @@ describe('VM', function() {
     });
 
     it('should not start the VM by request', function(done) {
-      let apiResponse = {};
+      const apiResponse = {};
 
       vm.zone.parent.execAfterOperation_ = function(callback) {
         callback(null, apiResponse);
@@ -715,14 +715,14 @@ describe('VM', function() {
   });
 
   describe('setMetadata', function() {
-    let METADATA = {
+    const METADATA = {
       newKey: 'newValue',
     };
 
     describe('getting the current fingerprint', function() {
       describe('error', function() {
-        let error = new Error('Error.');
-        let apiResponse = {};
+        const error = new Error('Error.');
+        const apiResponse = {};
 
         beforeEach(function() {
           vm.getMetadata = function(callback) {
@@ -741,13 +741,13 @@ describe('VM', function() {
         });
 
         describe('success', function() {
-          let metadata = {
+          const metadata = {
             metadata: {
               fingerprint: '===',
             },
           };
 
-          let apiResponse = {};
+          const apiResponse = {};
 
           beforeEach(function() {
             vm.getMetadata = function(callback) {
@@ -756,7 +756,7 @@ describe('VM', function() {
           });
 
           it('should make the correct request', function(done) {
-            let expectedNewMetadata = extend(true, {}, metadata.metadata, {
+            const expectedNewMetadata = extend(true, {}, metadata.metadata, {
               items: [
                 {
                   key: 'newKey',
@@ -781,8 +781,8 @@ describe('VM', function() {
   });
 
   describe('setTags', function() {
-    let TAGS = [];
-    let FINGERPRINT = '';
+    const TAGS = [];
+    const FINGERPRINT = '';
 
     it('should make the correct request', function(done) {
       vm.request = function(reqOpts, callback) {
@@ -856,7 +856,7 @@ describe('VM', function() {
   });
 
   describe('waitFor', function() {
-    let VALID_STATUSES = [
+    const VALID_STATUSES = [
       'PROVISIONING',
       'STAGING',
       'RUNNING',
@@ -900,10 +900,10 @@ describe('VM', function() {
     });
 
     it('should create a waiter', function(done) {
-      let now = new Date() / 1000;
+      const now = new Date() / 1000;
       vm.waitFor(VALID_STATUSES[0], done);
 
-      let createdWaiter = vm.waiters.pop();
+      const createdWaiter = vm.waiters.pop();
 
       assert.strictEqual(createdWaiter.status, VALID_STATUSES[0]);
       assert.strictEqual(createdWaiter.timeout, 300);
@@ -939,7 +939,7 @@ describe('VM', function() {
   });
 
   describe('startPolling_', function() {
-    let METADATA = {};
+    const METADATA = {};
 
     beforeEach(function() {
       vm.hasActiveWaiters = true;
@@ -969,7 +969,7 @@ describe('VM', function() {
     });
 
     describe('metadata refresh error', function() {
-      let ERROR = new Error('Error.');
+      const ERROR = new Error('Error.');
 
       beforeEach(function() {
         vm.getMetadata = function(callback) {
@@ -1004,8 +1004,8 @@ describe('VM', function() {
     });
 
     describe('desired status reached', function() {
-      let STATUS = 'status';
-      let METADATA = {
+      const STATUS = 'status';
+      const METADATA = {
         status: STATUS,
       };
 
@@ -1044,7 +1044,7 @@ describe('VM', function() {
     });
 
     describe('timeout exceeded', function() {
-      let STATUS = 'status';
+      const STATUS = 'status';
 
       beforeEach(function() {
         vm.waiters.push({
@@ -1086,8 +1086,8 @@ describe('VM', function() {
     });
 
     describe('desired status not reached yet', function() {
-      let STATUS = 'status';
-      let setTimeout = global.setTimeout;
+      const STATUS = 'status';
+      const setTimeout = global.setTimeout;
 
       beforeEach(function() {
         vm.waiters.push({
@@ -1122,7 +1122,7 @@ describe('VM', function() {
 
   describe('request', function() {
     it('should make the correct request to Compute', function(done) {
-      let reqOpts = {};
+      const reqOpts = {};
 
       FakeServiceObject.prototype.request = function(reqOpts_) {
         assert.strictEqual(this, vm);
@@ -1135,8 +1135,8 @@ describe('VM', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
@@ -1155,7 +1155,7 @@ describe('VM', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {name: 'operation-name'};
+      const apiResponse = {name: 'operation-name'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.request = function(reqOpts, callback) {
@@ -1164,7 +1164,7 @@ describe('VM', function() {
       });
 
       it('should execute callback with Zone object & API resp', function(done) {
-        let operation = {};
+        const operation = {};
 
         vm.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

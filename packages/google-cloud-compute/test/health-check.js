@@ -16,15 +16,15 @@
 
 'use strict';
 
-let assert = require('assert');
-let extend = require('extend');
-let nodeutil = require('util');
-let proxyquire = require('proxyquire');
-let ServiceObject = require('@google-cloud/common').ServiceObject;
-let util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
 let promisified = false;
-let fakeUtil = extend({}, util, {
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'HealthCheck') {
       promisified = true;
@@ -42,11 +42,11 @@ describe('HealthCheck', function() {
   let HealthCheck;
   let healthCheck;
 
-  let COMPUTE = {
+  const COMPUTE = {
     createHealthCheck: util.noop,
   };
-  let HEALTH_CHECK_NAME = 'health-check-name';
-  let OPTIONS = {};
+  const HEALTH_CHECK_NAME = 'health-check-name';
+  const OPTIONS = {};
 
   before(function() {
     HealthCheck = proxyquire('../src/health-check.js', {
@@ -69,7 +69,7 @@ describe('HealthCheck', function() {
     it('should inherit from ServiceObject', function() {
       assert(healthCheck instanceof FakeServiceObject);
 
-      let calledWith = healthCheck.calledWith_[0];
+      const calledWith = healthCheck.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(calledWith.id, HEALTH_CHECK_NAME);
@@ -87,17 +87,17 @@ describe('HealthCheck', function() {
 
     describe('http', function() {
       it('should set the correct baseUrl', function() {
-        let calledWith = healthCheck.calledWith_[0];
+        const calledWith = healthCheck.calledWith_[0];
 
         assert.strictEqual(calledWith.baseUrl, '/global/httpHealthChecks');
       });
 
       it('should not set options.https when created', function(done) {
-        let createMethod = healthCheck.calledWith_[0].createMethod;
+        const createMethod = healthCheck.calledWith_[0].createMethod;
 
-        let NAME = 'name';
-        let OPTIONS = {a: 'b'};
-        let originalOptions = extend({}, OPTIONS);
+        const NAME = 'name';
+        const OPTIONS = {a: 'b'};
+        const originalOptions = extend({}, OPTIONS);
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
@@ -110,7 +110,7 @@ describe('HealthCheck', function() {
       });
 
       it('should not require a callback when creating', function(done) {
-        let createMethod = healthCheck.calledWith_[0].createMethod;
+        const createMethod = healthCheck.calledWith_[0].createMethod;
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.deepStrictEqual(opts, {});
@@ -131,17 +131,17 @@ describe('HealthCheck', function() {
       });
 
       it('should set the correct baseUrl', function() {
-        let calledWith = healthCheck.calledWith_[0];
+        const calledWith = healthCheck.calledWith_[0];
 
         assert.strictEqual(calledWith.baseUrl, '/global/httpsHealthChecks');
       });
 
       it('should set options.https = true when created', function(done) {
-        let createMethod = healthCheck.calledWith_[0].createMethod;
+        const createMethod = healthCheck.calledWith_[0].createMethod;
 
-        let NAME = 'name';
-        let OPTIONS = {a: 'b'};
-        let originalOptions = extend({}, OPTIONS);
+        const NAME = 'name';
+        const OPTIONS = {a: 'b'};
+        const originalOptions = extend({}, OPTIONS);
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
@@ -154,7 +154,7 @@ describe('HealthCheck', function() {
       });
 
       it('should not require a callback when creating', function(done) {
-        let createMethod = healthCheck.calledWith_[0].createMethod;
+        const createMethod = healthCheck.calledWith_[0].createMethod;
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.deepStrictEqual(opts, {https: true});
@@ -177,8 +177,8 @@ describe('HealthCheck', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -203,7 +203,7 @@ describe('HealthCheck', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -214,7 +214,7 @@ describe('HealthCheck', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        let operation = {};
+        const operation = {};
 
         healthCheck.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -239,7 +239,7 @@ describe('HealthCheck', function() {
   });
 
   describe('setMetadata', function() {
-    let METADATA = {};
+    const METADATA = {};
 
     it('should call ServiceObject.setMetadata', function(done) {
       FakeServiceObject.prototype.setMetadata = function(metadata) {
@@ -252,8 +252,8 @@ describe('HealthCheck', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       beforeEach(function() {
         FakeServiceObject.prototype.setMetadata = function(metadata, callback) {
@@ -272,7 +272,7 @@ describe('HealthCheck', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -283,8 +283,8 @@ describe('HealthCheck', function() {
       });
 
       it('should execute callback with operation & response', function(done) {
-        let operation = {};
-        let metadata = {a: 'b'};
+        const operation = {};
+        const metadata = {a: 'b'};
 
         healthCheck.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

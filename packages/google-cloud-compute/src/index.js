@@ -16,24 +16,24 @@
 
 'use strict';
 
-let arrify = require('arrify');
-let common = require('@google-cloud/common');
-let extend = require('extend');
-let format = require('string-format-obj');
-let is = require('is');
-let util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const format = require('string-format-obj');
+const is = require('is');
+const util = require('util');
 
-let Firewall = require('./firewall.js');
-let HealthCheck = require('./health-check.js');
-let Network = require('./network.js');
-let Operation = require('./operation.js');
-let Project = require('./project.js');
-let Region = require('./region.js');
-let Rule = require('./rule.js');
-let Service = require('./service.js');
-let Snapshot = require('./snapshot.js');
-let Zone = require('./zone.js');
-let Image = require('./image.js');
+const Firewall = require('./firewall.js');
+const HealthCheck = require('./health-check.js');
+const Network = require('./network.js');
+const Operation = require('./operation.js');
+const Project = require('./project.js');
+const Region = require('./region.js');
+const Rule = require('./rule.js');
+const Service = require('./service.js');
+const Snapshot = require('./snapshot.js');
+const Zone = require('./zone.js');
+const Image = require('./image.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -81,7 +81,7 @@ let Image = require('./image.js');
 function Compute(options) {
   options = common.util.normalizeArguments(this, options);
 
-  let config = {
+  const config = {
     baseUrl: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json'),
@@ -151,7 +151,7 @@ util.inherits(Compute, common.Service);
  * });
  */
 Compute.prototype.createFirewall = function(name, config, callback) {
-  let self = this;
+  const self = this;
 
   if (!is.string(name)) {
     throw new Error('A firewall name must be provided.');
@@ -161,19 +161,19 @@ Compute.prototype.createFirewall = function(name, config, callback) {
     throw new Error('A firewall configuration object must be provided.');
   }
 
-  let body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
   if (body.protocols) {
     body.allowed = arrify(body.allowed);
 
-    for (let protocol in body.protocols) {
-      let allowedConfig = {
+    for (const protocol in body.protocols) {
+      const allowedConfig = {
         IPProtocol: protocol,
       };
 
-      let ports = body.protocols[protocol];
+      const ports = body.protocols[protocol];
 
       if (ports === false || ports.length === 0) {
         continue;
@@ -210,9 +210,9 @@ Compute.prototype.createFirewall = function(name, config, callback) {
         return;
       }
 
-      let firewall = self.firewall(name);
+      const firewall = self.firewall(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, firewall, operation, resp);
@@ -268,7 +268,7 @@ Compute.prototype.createFirewall = function(name, config, callback) {
  * });
  */
 Compute.prototype.createHealthCheck = function(name, options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -279,11 +279,11 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
     throw new Error('A health check name must be provided.');
   }
 
-  let body = extend({}, options, {
+  const body = extend({}, options, {
     name: name,
   });
 
-  let https = options.https;
+  const https = options.https;
   delete body.https;
 
   if (body.interval) {
@@ -308,11 +308,11 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
         return;
       }
 
-      let healthCheck = self.healthCheck(name, {
+      const healthCheck = self.healthCheck(name, {
         https: https,
       });
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, healthCheck, operation, resp);
@@ -355,7 +355,7 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  * });
  */
 Compute.prototype.createImage = function(name, disk, options, callback) {
-  let self = this;
+  const self = this;
 
   if (!common.util.isCustomType(disk, 'Disk')) {
     throw new Error('A Disk object is required.');
@@ -366,7 +366,7 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
     options = {};
   }
 
-  let body = extend(
+  const body = extend(
     {
       name: name,
       sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
@@ -388,9 +388,9 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
         callback(err, null, resp);
         return;
       }
-      let image = self.image(name);
+      const image = self.image(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, image, operation, resp);
@@ -445,9 +445,9 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
  * });
  */
 Compute.prototype.createNetwork = function(name, config, callback) {
-  let self = this;
+  const self = this;
 
-  let body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
@@ -473,9 +473,9 @@ Compute.prototype.createNetwork = function(name, config, callback) {
         return;
       }
 
-      let network = self.network(name);
+      const network = self.network(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, network, operation, resp);
@@ -542,9 +542,9 @@ Compute.prototype.createNetwork = function(name, config, callback) {
  * });
  */
 Compute.prototype.createRule = function(name, config, callback) {
-  let self = this;
+  const self = this;
 
-  let body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
@@ -575,9 +575,9 @@ Compute.prototype.createRule = function(name, config, callback) {
         return;
       }
 
-      let rule = self.rule(name);
+      const rule = self.rule(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, rule, operation, resp);
@@ -633,9 +633,9 @@ Compute.prototype.createRule = function(name, config, callback) {
  * });
  */
 Compute.prototype.createService = function(name, config, callback) {
-  let self = this;
+  const self = this;
 
-  let body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
@@ -651,9 +651,9 @@ Compute.prototype.createService = function(name, config, callback) {
         return;
       }
 
-      let service = self.service(name);
+      const service = self.service(name);
 
-      let operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, service, operation, resp);
@@ -734,7 +734,7 @@ Compute.prototype.firewall = function(name) {
  * });
  */
 Compute.prototype.getAddresses = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -762,14 +762,14 @@ Compute.prototype.getAddresses = function(options, callback) {
         });
       }
 
-      let regions = resp.items || {};
+      const regions = resp.items || {};
 
-      let addresses = Object.keys(regions).reduce(function(acc, regionName) {
-        let region = self.region(regionName.replace('regions/', ''));
-        let regionAddresses = regions[regionName].addresses || [];
+      const addresses = Object.keys(regions).reduce(function(acc, regionName) {
+        const region = self.region(regionName.replace('regions/', ''));
+        const regionAddresses = regions[regionName].addresses || [];
 
         regionAddresses.forEach(function(address) {
-          let addressInstance = region.address(address.name);
+          const addressInstance = region.address(address.name);
           addressInstance.metadata = address;
           acc.push(addressInstance);
         });
@@ -868,7 +868,7 @@ Compute.prototype.getAddressesStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getAutoscalers = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -896,18 +896,18 @@ Compute.prototype.getAutoscalers = function(options, callback) {
         });
       }
 
-      let zones = resp.items || {};
+      const zones = resp.items || {};
 
-      let autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
+      const autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
         if (zoneName.indexOf('zones/') !== 0) {
           return acc;
         }
 
-        let zone = self.zone(zoneName.replace('zones/', ''));
-        let zoneAutoscalers = zones[zoneName].autoscalers || [];
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const zoneAutoscalers = zones[zoneName].autoscalers || [];
 
         zoneAutoscalers.forEach(function(autoscaler) {
-          let autoscalerInstance = zone.autoscaler(autoscaler.name);
+          const autoscalerInstance = zone.autoscaler(autoscaler.name);
           autoscalerInstance.metadata = autoscaler;
           acc.push(autoscalerInstance);
         });
@@ -1005,7 +1005,7 @@ Compute.prototype.getAutoscalersStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getDisks = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1033,14 +1033,14 @@ Compute.prototype.getDisks = function(options, callback) {
         });
       }
 
-      let zones = resp.items || {};
+      const zones = resp.items || {};
 
-      let disks = Object.keys(zones).reduce(function(acc, zoneName) {
-        let zone = self.zone(zoneName.replace('zones/', ''));
-        let disks = zones[zoneName].disks || [];
+      const disks = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const disks = zones[zoneName].disks || [];
 
         disks.forEach(function(disk) {
-          let diskInstance = zone.disk(disk.name);
+          const diskInstance = zone.disk(disk.name);
           diskInstance.metadata = disk;
           acc.push(diskInstance);
         });
@@ -1138,7 +1138,7 @@ Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * });
  */
 Compute.prototype.getInstanceGroups = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1166,14 +1166,14 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
         });
       }
 
-      let zones = resp.items || {};
+      const zones = resp.items || {};
 
-      let instanceGroups = Object.keys(zones).reduce(function(acc, zoneName) {
-        let zone = self.zone(zoneName.replace('zones/', ''));
-        let instanceGroups = zones[zoneName].instanceGroups || [];
+      const instanceGroups = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const instanceGroups = zones[zoneName].instanceGroups || [];
 
         instanceGroups.forEach(function(group) {
-          let instanceGroupInstance = zone.instanceGroup(group.name);
+          const instanceGroupInstance = zone.instanceGroup(group.name);
           instanceGroupInstance.metadata = group;
           acc.push(instanceGroupInstance);
         });
@@ -1270,7 +1270,7 @@ Compute.prototype.getInstanceGroupsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getFirewalls = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1298,8 +1298,8 @@ Compute.prototype.getFirewalls = function(options, callback) {
         });
       }
 
-      let firewalls = (resp.items || []).map(function(firewall) {
-        let firewallInstance = self.firewall(firewall.name);
+      const firewalls = (resp.items || []).map(function(firewall) {
+        const firewallInstance = self.firewall(firewall.name);
         firewallInstance.metadata = firewall;
         return firewallInstance;
       });
@@ -1394,7 +1394,7 @@ Compute.prototype.getFirewallsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getHealthChecks = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1403,7 +1403,7 @@ Compute.prototype.getHealthChecks = function(options, callback) {
 
   options = extend({}, options);
 
-  let https = options.https;
+  const https = options.https;
   delete options.https;
 
   this.request(
@@ -1425,8 +1425,8 @@ Compute.prototype.getHealthChecks = function(options, callback) {
         });
       }
 
-      let healthChecks = (resp.items || []).map(function(healthCheck) {
-        let healthCheckInstance = self.healthCheck(healthCheck.name, {
+      const healthChecks = (resp.items || []).map(function(healthCheck) {
+        const healthCheckInstance = self.healthCheck(healthCheck.name, {
           https: https,
         });
         healthCheckInstance.metadata = healthCheck;
@@ -1520,7 +1520,7 @@ Compute.prototype.getHealthChecksStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getImages = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1548,8 +1548,8 @@ Compute.prototype.getImages = function(options, callback) {
         });
       }
 
-      let images = (resp.items || []).map(function(image) {
-        let imageInstance = self.image(image.name);
+      const images = (resp.items || []).map(function(image) {
+        const imageInstance = self.image(image.name);
         imageInstance.metadata = image;
         return imageInstance;
       });
@@ -1644,7 +1644,7 @@ Compute.prototype.getImagesStream = common.paginator.streamify('getImages');
  * });
  */
 Compute.prototype.getMachineTypes = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1672,14 +1672,14 @@ Compute.prototype.getMachineTypes = function(options, callback) {
         });
       }
 
-      let zones = resp.items || {};
+      const zones = resp.items || {};
 
-      let machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
-        let zone = self.zone(zoneName.replace('zones/', ''));
-        let machineTypesByZone = zones[zoneName].machineTypes || [];
+      const machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const machineTypesByZone = zones[zoneName].machineTypes || [];
 
         machineTypesByZone.forEach(function(machineType) {
-          let machineTypeInstance = zone.machineType(machineType.name);
+          const machineTypeInstance = zone.machineType(machineType.name);
           machineTypeInstance.metadata = machineType;
           acc.push(machineTypeInstance);
         });
@@ -1778,7 +1778,7 @@ Compute.prototype.getMachineTypesStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getNetworks = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1806,8 +1806,8 @@ Compute.prototype.getNetworks = function(options, callback) {
         });
       }
 
-      let networks = (resp.items || []).map(function(network) {
-        let networkInstance = self.network(network.name);
+      const networks = (resp.items || []).map(function(network) {
+        const networkInstance = self.network(network.name);
         networkInstance.metadata = network;
         return networkInstance;
       });
@@ -1900,7 +1900,7 @@ Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
  * });
  */
 Compute.prototype.getOperations = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1928,8 +1928,8 @@ Compute.prototype.getOperations = function(options, callback) {
         });
       }
 
-      let operations = (resp.items || []).map(function(operation) {
-        let operationInstance = self.operation(operation.name);
+      const operations = (resp.items || []).map(function(operation) {
+        const operationInstance = self.operation(operation.name);
         operationInstance.metadata = operation;
         return operationInstance;
       });
@@ -2025,7 +2025,7 @@ Compute.prototype.getOperationsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getRegions = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2051,8 +2051,8 @@ Compute.prototype.getRegions = function(options, callback) {
         });
       }
 
-      let regions = resp.items.map(function(region) {
-        let regionInstance = self.region(region.name);
+      const regions = resp.items.map(function(region) {
+        const regionInstance = self.region(region.name);
         regionInstance.metadata = region;
         return regionInstance;
       });
@@ -2145,7 +2145,7 @@ Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
  * });
  */
 Compute.prototype.getRules = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2173,8 +2173,8 @@ Compute.prototype.getRules = function(options, callback) {
         });
       }
 
-      let rules = (resp.items || []).map(function(rule) {
-        let ruleInstance = self.rule(rule.name);
+      const rules = (resp.items || []).map(function(rule) {
+        const ruleInstance = self.rule(rule.name);
         ruleInstance.metadata = rule;
         return ruleInstance;
       });
@@ -2267,7 +2267,7 @@ Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
  * });
  */
 Compute.prototype.getServices = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2295,8 +2295,8 @@ Compute.prototype.getServices = function(options, callback) {
         });
       }
 
-      let services = (resp.items || []).map(function(service) {
-        let serviceInstance = self.service(service.name);
+      const services = (resp.items || []).map(function(service) {
+        const serviceInstance = self.service(service.name);
         serviceInstance.metadata = service;
         return serviceInstance;
       });
@@ -2389,7 +2389,7 @@ Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
  * });
  */
 Compute.prototype.getSnapshots = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2417,8 +2417,8 @@ Compute.prototype.getSnapshots = function(options, callback) {
         });
       }
 
-      let snapshots = (resp.items || []).map(function(snapshot) {
-        let snapshotInstance = self.snapshot(snapshot.name);
+      const snapshots = (resp.items || []).map(function(snapshot) {
+        const snapshotInstance = self.snapshot(snapshot.name);
         snapshotInstance.metadata = snapshot;
         return snapshotInstance;
       });
@@ -2513,7 +2513,7 @@ Compute.prototype.getSnapshotsStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getSubnetworks = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2541,20 +2541,24 @@ Compute.prototype.getSubnetworks = function(options, callback) {
         });
       }
 
-      let regions = resp.items || {};
+      const regions = resp.items || {};
 
-      let subnetworks = Object.keys(regions).reduce(function(acc, regionName) {
-        let region = self.region(regionName.replace('regions/', ''));
-        let subnetworks = regions[regionName].subnetworks || [];
+      const subnetworks = Object.keys(regions).reduce(function(
+        acc,
+        regionName
+      ) {
+        const region = self.region(regionName.replace('regions/', ''));
+        const subnetworks = regions[regionName].subnetworks || [];
 
         subnetworks.forEach(function(subnetwork) {
-          let subnetworkInstance = region.subnetwork(subnetwork.name);
+          const subnetworkInstance = region.subnetwork(subnetwork.name);
           subnetworkInstance.metadata = subnetwork;
           acc.push(subnetworkInstance);
         });
 
         return acc;
-      }, []);
+      },
+      []);
 
       callback(null, subnetworks, nextQuery, resp);
     }
@@ -2646,7 +2650,7 @@ Compute.prototype.getSubnetworksStream = common.paginator.streamify(
  * });
  */
 Compute.prototype.getVMs = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2674,14 +2678,14 @@ Compute.prototype.getVMs = function(options, callback) {
         });
       }
 
-      let zones = resp.items || {};
+      const zones = resp.items || {};
 
-      let vms = Object.keys(zones).reduce(function(acc, zoneName) {
-        let zone = self.zone(zoneName.replace('zones/', ''));
-        let instances = zones[zoneName].instances || [];
+      const vms = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const instances = zones[zoneName].instances || [];
 
         instances.forEach(function(instance) {
-          let vmInstance = zone.vm(instance.name);
+          const vmInstance = zone.vm(instance.name);
           vmInstance.metadata = instance;
           acc.push(vmInstance);
         });
@@ -2777,7 +2781,7 @@ Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
  * });
  */
 Compute.prototype.getZones = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2803,8 +2807,8 @@ Compute.prototype.getZones = function(options, callback) {
         });
       }
 
-      let zones = resp.items.map(function(zone) {
-        let zoneInstance = self.zone(zone.name);
+      const zones = resp.items.map(function(zone) {
+        const zoneInstance = self.zone(zone.name);
         zoneInstance.metadata = zone;
         return zoneInstance;
       });
@@ -3012,8 +3016,8 @@ Compute.prototype.zone = function(name) {
 Compute.prototype.execAfterOperation_ = function(callback) {
   return function(err) {
     // arguments = [..., op, apiResponse]
-    let operation = arguments[arguments.length - 2];
-    let apiResponse = arguments[arguments.length - 1];
+    const operation = arguments[arguments.length - 2];
+    const apiResponse = arguments[arguments.length - 1];
 
     if (err) {
       callback(err, apiResponse);

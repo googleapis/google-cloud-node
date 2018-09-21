@@ -16,8 +16,8 @@
 
 'use strict';
 
-let common = require('@google-cloud/common');
-let util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * A Project object allows you to interact with your Google Compute Engine
@@ -41,7 +41,7 @@ function Project(compute) {
    */
   this.id = compute.projectId;
 
-  let methods = {
+  const methods = {
     /**
      * Get a Project object.
      *

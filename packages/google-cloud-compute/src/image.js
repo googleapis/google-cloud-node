@@ -16,8 +16,8 @@
 
 'use strict';
 
-let common = require('@google-cloud/common');
-let util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * An Image object allows you to interact with a Google Compute Engine image.
@@ -35,7 +35,7 @@ let util = require('util');
  * const image = compute.image('image-name');
  */
 function Image(compute, name) {
-  let methods = {
+  const methods = {
     /**
      * Create an image.
      *
@@ -194,7 +194,7 @@ util.inherits(Image, common.ServiceObject);
  * });
  */
 Image.prototype.delete = function(callback) {
-  let compute = this.parent;
+  const compute = this.parent;
 
   callback = callback || common.util.noop;
 
@@ -204,7 +204,7 @@ Image.prototype.delete = function(callback) {
       return;
     }
 
-    let operation = compute.operation(resp.name);
+    const operation = compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);

@@ -16,13 +16,13 @@
 
 'use strict';
 
-let assert = require('assert');
-let extend = require('extend');
-let proxyquire = require('proxyquire');
-let util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const proxyquire = require('proxyquire');
+const util = require('@google-cloud/common').util;
 
 let promisified = false;
-let fakeUtil = extend({}, util, {
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Rule') {
       promisified = true;
@@ -43,8 +43,8 @@ describe('Rule', function() {
     this.operation = util.noop;
   }
 
-  let COMPUTE = new Compute();
-  let RULE_NAME = 'rule-name';
+  const COMPUTE = new Compute();
+  const RULE_NAME = 'rule-name';
 
   before(function() {
     Rule = proxyquire('../src/rule.js', {
@@ -61,8 +61,8 @@ describe('Rule', function() {
 
   describe('instantiation', function() {
     it('should inherit from ServiceObject', function() {
-      let computeInstance = new Compute();
-      let bindMethod = {};
+      const computeInstance = new Compute();
+      const bindMethod = {};
 
       extend(computeInstance, {
         createRule: {
@@ -73,10 +73,10 @@ describe('Rule', function() {
         },
       });
 
-      let rule = new Rule(computeInstance, RULE_NAME);
+      const rule = new Rule(computeInstance, RULE_NAME);
       assert(rule instanceof FakeServiceObject);
 
-      let calledWith = rule.calledWith_[0];
+      const calledWith = rule.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/forwardingRules');
@@ -95,10 +95,10 @@ describe('Rule', function() {
     });
 
     it('should not use global forwarding rules', function() {
-      let rule = new Rule({createRule: util.noop}, RULE_NAME);
+      const rule = new Rule({createRule: util.noop}, RULE_NAME);
       assert(rule instanceof FakeServiceObject);
 
-      let calledWith = rule.calledWith_[0];
+      const calledWith = rule.calledWith_[0];
 
       assert.strictEqual(calledWith.baseUrl, '/forwardingRules');
     });
@@ -119,8 +119,8 @@ describe('Rule', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -145,7 +145,7 @@ describe('Rule', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -156,7 +156,7 @@ describe('Rule', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        let operation = {};
+        const operation = {};
 
         rule.scope.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -181,7 +181,7 @@ describe('Rule', function() {
   });
 
   describe('setTarget', function() {
-    let TARGET = 'target';
+    const TARGET = 'target';
 
     it('should make the correct API request', function(done) {
       rule.request = function(reqOpts) {
@@ -196,8 +196,8 @@ describe('Rule', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       beforeEach(function() {
         rule.request = function(reqOpts, callback) {
@@ -216,7 +216,7 @@ describe('Rule', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -227,7 +227,7 @@ describe('Rule', function() {
       });
 
       it('should execute callback with operation & response', function(done) {
-        let operation = {};
+        const operation = {};
 
         rule.scope.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

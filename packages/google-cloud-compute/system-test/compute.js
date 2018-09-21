@@ -16,14 +16,14 @@
 
 'use strict';
 
-let assert = require('assert');
-let async = require('async');
-let concat = require('concat-stream');
-let is = require('is');
-let prop = require('propprop');
-let uuid = require('uuid');
+const assert = require('assert');
+const async = require('async');
+const concat = require('concat-stream');
+const is = require('is');
+const prop = require('propprop');
+const uuid = require('uuid');
 
-let Compute = require('../');
+const Compute = require('../');
 
 describe('Compute', function() {
   // Since the Compute Engine API is rather large and involves long-running
@@ -40,20 +40,20 @@ describe('Compute', function() {
   // deleted. This will also pick up any previously-created objects that were
   // unable to be removed if a prior test run had unexpectedly quit.
 
-  let TESTS_PREFIX = 'gcloud-tests-';
-  let REGION_NAME = 'us-central1';
-  let ZONE_NAME = 'us-central1-a';
+  const TESTS_PREFIX = 'gcloud-tests-';
+  const REGION_NAME = 'us-central1';
+  const ZONE_NAME = 'us-central1-a';
 
-  let compute = new Compute();
-  let region = compute.region(REGION_NAME);
-  let zone = compute.zone(ZONE_NAME);
+  const compute = new Compute();
+  const region = compute.region(REGION_NAME);
+  const zone = compute.zone(ZONE_NAME);
 
   before(deleteAllTestObjects);
   after(deleteAllTestObjects);
 
   describe('addresses', function() {
-    let ADDRESS_NAME = generateName('address');
-    let address = region.address(ADDRESS_NAME);
+    const ADDRESS_NAME = generateName('address');
+    const address = region.address(ADDRESS_NAME);
 
     before(create(address));
 
@@ -94,14 +94,14 @@ describe('Compute', function() {
   });
 
   describe('autoscalers', function() {
-    let AUTOSCALER_NAME = generateName('autoscaler');
-    let autoscaler = zone.autoscaler(AUTOSCALER_NAME);
+    const AUTOSCALER_NAME = generateName('autoscaler');
+    const autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
-    let NETWORK_NAME = generateName('network');
-    let network = compute.network(NETWORK_NAME);
+    const NETWORK_NAME = generateName('network');
+    const network = compute.network(NETWORK_NAME);
 
-    let INSTANCE_TEMPLATE_NAME = generateName('instance-template');
-    let INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
+    const INSTANCE_TEMPLATE_NAME = generateName('instance-template');
+    const INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
 
     before(function(done) {
       async.series(
@@ -190,7 +190,7 @@ describe('Compute', function() {
     });
 
     it('should set & get metadata', function(done) {
-      let description = 'description';
+      const description = 'description';
 
       autoscaler.setMetadata(
         {
@@ -210,8 +210,8 @@ describe('Compute', function() {
   });
 
   describe('disks', function() {
-    let DISK_NAME = generateName('disk');
-    let disk = zone.disk(DISK_NAME);
+    const DISK_NAME = generateName('disk');
+    const disk = zone.disk(DISK_NAME);
 
     before(create(disk, {os: 'ubuntu'}));
 
@@ -263,20 +263,20 @@ describe('Compute', function() {
     });
 
     it('should run operation as a promise', function() {
-      let snapshot = disk.snapshot(generateName('snapshot'));
+      const snapshot = disk.snapshot(generateName('snapshot'));
 
       return snapshot.create().then(function(response) {
-        let operation = response[1];
+        const operation = response[1];
         return operation.promise();
       });
     });
   });
 
   describe('firewalls', function() {
-    let FIREWALL_NAME = generateName('firewall');
-    let firewall = compute.firewall(FIREWALL_NAME);
+    const FIREWALL_NAME = generateName('firewall');
+    const firewall = compute.firewall(FIREWALL_NAME);
 
-    let CONFIG = {
+    const CONFIG = {
       protocols: {
         tcp: [3000],
         icmp: true, // This should open all ports on this protocol
@@ -286,7 +286,7 @@ describe('Compute', function() {
       ranges: ['0.0.0.0/0'],
     };
 
-    let expectedMetadata = {
+    const expectedMetadata = {
       allowed: [
         {
           IPProtocol: 'tcp',
@@ -339,10 +339,10 @@ describe('Compute', function() {
   });
 
   describe('health checks', function() {
-    let HEALTH_CHECK_NAME = generateName('health-check');
-    let healthCheck = compute.healthCheck(HEALTH_CHECK_NAME);
+    const HEALTH_CHECK_NAME = generateName('health-check');
+    const healthCheck = compute.healthCheck(HEALTH_CHECK_NAME);
 
-    let OPTIONS = {
+    const OPTIONS = {
       description: 'A health check.',
       interval: 50,
       timeout: 25,
@@ -363,7 +363,7 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      let description = 'The best description. Possibly ever.';
+      const description = 'The best description. Possibly ever.';
 
       healthCheck.setMetadata(
         {
@@ -414,12 +414,12 @@ describe('Compute', function() {
   });
 
   describe('health checks (https)', function() {
-    let HEALTH_CHECK_NAME = generateName('health-check');
-    let healthCheck = compute.healthCheck(HEALTH_CHECK_NAME, {
+    const HEALTH_CHECK_NAME = generateName('health-check');
+    const healthCheck = compute.healthCheck(HEALTH_CHECK_NAME, {
       https: true,
     });
 
-    let OPTIONS = {
+    const OPTIONS = {
       description: 'A health check.',
       interval: 50,
       timeout: 25,
@@ -440,7 +440,7 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      let description = 'The best description. Possibly ever.';
+      const description = 'The best description. Possibly ever.';
 
       healthCheck.setMetadata(
         {
@@ -491,8 +491,8 @@ describe('Compute', function() {
   });
 
   describe('images', function() {
-    let DISK = zone.disk(generateName('disk'));
-    let IMAGE = compute.image(generateName('image'));
+    const DISK = zone.disk(generateName('disk'));
+    const IMAGE = compute.image(generateName('image'));
 
     before(create(DISK, {os: 'ubuntu'}));
     before(create(IMAGE, DISK));
@@ -530,10 +530,10 @@ describe('Compute', function() {
   });
 
   describe('instance groups', function() {
-    let INSTANCE_GROUP_NAME = generateName('instance-group');
-    let instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
+    const INSTANCE_GROUP_NAME = generateName('instance-group');
+    const instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
 
-    let OPTIONS = {
+    const OPTIONS = {
       description: 'new instance group',
       ports: {
         http: 80,
@@ -606,7 +606,7 @@ describe('Compute', function() {
     });
 
     it('should set named ports', function(done) {
-      let ports = OPTIONS.ports;
+      const ports = OPTIONS.ports;
 
       instanceGroup.setPorts(
         ports,
@@ -628,7 +628,7 @@ describe('Compute', function() {
     });
 
     describe('adding and removing VMs', function() {
-      let vm = zone.vm(generateName('vm'));
+      const vm = zone.vm(generateName('vm'));
 
       before(create(vm, {os: 'ubuntu'}));
 
@@ -640,7 +640,7 @@ describe('Compute', function() {
         instanceGroup.getVMs(function(err, vms) {
           assert.ifError(err);
 
-          let vmNamesInGroup = vms.map(prop('name'));
+          const vmNamesInGroup = vms.map(prop('name'));
           assert(vmNamesInGroup.indexOf(vm.name) > -1);
 
           done();
@@ -653,7 +653,7 @@ describe('Compute', function() {
           .on('error', done)
           .pipe(
             concat(function(vms) {
-              let vmNamesInGroup = vms.map(prop('name'));
+              const vmNamesInGroup = vms.map(prop('name'));
               assert(vmNamesInGroup.indexOf(vm.name) > -1);
 
               done();
@@ -744,10 +744,10 @@ describe('Compute', function() {
   });
 
   describe('networks', function() {
-    let NETWORK_NAME = generateName('network');
-    let network = compute.network(NETWORK_NAME);
+    const NETWORK_NAME = generateName('network');
+    const network = compute.network(NETWORK_NAME);
 
-    let CONFIG = {
+    const CONFIG = {
       range: '10.240.0.0/16',
     };
 
@@ -906,19 +906,19 @@ describe('Compute', function() {
   });
 
   describe('rules', function() {
-    let RULE_NAME = generateName('rule');
-    let rule = compute.rule(RULE_NAME);
+    const RULE_NAME = generateName('rule');
+    const rule = compute.rule(RULE_NAME);
 
-    let service = compute.service(generateName('service'));
+    const service = compute.service(generateName('service'));
 
-    let INSTANCE_GROUP_NAME = generateName('instance-group');
-    let HEALTH_CHECK_NAME = generateName('health-check');
+    const INSTANCE_GROUP_NAME = generateName('instance-group');
+    const HEALTH_CHECK_NAME = generateName('health-check');
 
     // To create a rule, we need to also create a TargetHttpProxy and UrlMap.
     // Until they are officially supported by google-cloud-node, we make manual
     // requests to create and delete them.
-    let TARGET_PROXY_NAME = generateName('target-proxy');
-    let URL_MAP_NAME = generateName('url-map');
+    const TARGET_PROXY_NAME = generateName('target-proxy');
+    const URL_MAP_NAME = generateName('url-map');
 
     before(function(done) {
       async.series(
@@ -971,7 +971,7 @@ describe('Compute', function() {
     });
 
     it('should have created the right rule', function(done) {
-      let target = [
+      const target = [
         'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
         TARGET_PROXY_NAME,
       ].join('');
@@ -1019,13 +1019,13 @@ describe('Compute', function() {
   });
 
   describe('rules (regional)', function() {
-    let RULE_NAME = generateName('rule');
-    let rule = region.rule(RULE_NAME);
+    const RULE_NAME = generateName('rule');
+    const rule = region.rule(RULE_NAME);
 
-    let TARGET_INSTANCE_NAME = generateName('target-instance');
+    const TARGET_INSTANCE_NAME = generateName('target-instance');
 
-    let VM_NAME = generateName('vm');
-    let vm = zone.vm(VM_NAME);
+    const VM_NAME = generateName('vm');
+    const vm = zone.vm(VM_NAME);
 
     before(function(done) {
       async.series(
@@ -1081,10 +1081,10 @@ describe('Compute', function() {
   });
 
   describe('services', function() {
-    let service = compute.service(generateName('service'));
+    const service = compute.service(generateName('service'));
 
-    let INSTANCE_GROUP_NAME = generateName('instance-group');
-    let HEALTH_CHECK_NAME = generateName('health-check');
+    const INSTANCE_GROUP_NAME = generateName('instance-group');
+    const HEALTH_CHECK_NAME = generateName('health-check');
 
     before(function(done) {
       createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME, done);
@@ -1128,7 +1128,7 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      let description = 'The best description. Possibly ever.';
+      const description = 'The best description. Possibly ever.';
 
       service.setMetadata(
         {
@@ -1181,17 +1181,17 @@ describe('Compute', function() {
   });
 
   describe('subnetworks', function() {
-    let NETWORK_NAME = generateName('network');
-    let network = compute.network(NETWORK_NAME);
+    const NETWORK_NAME = generateName('network');
+    const network = compute.network(NETWORK_NAME);
 
-    let SUBNETWORK_NAME = generateName('subnetwork');
-    let subnetwork = region.subnetwork(SUBNETWORK_NAME);
+    const SUBNETWORK_NAME = generateName('subnetwork');
+    const subnetwork = region.subnetwork(SUBNETWORK_NAME);
 
-    let NETWORK_CONFIG = {
+    const NETWORK_CONFIG = {
       autoCreateSubnetworks: false,
     };
 
-    let SUBNETWORK_CONFIG = {
+    const SUBNETWORK_CONFIG = {
       network: 'global/networks/' + NETWORK_NAME,
       range: '10.0.1.0/24',
     };
@@ -1266,8 +1266,8 @@ describe('Compute', function() {
   });
 
   describe('vms', function() {
-    let VM_NAME = generateName('vm');
-    let vm = zone.vm(VM_NAME);
+    const VM_NAME = generateName('vm');
+    const vm = zone.vm(VM_NAME);
 
     before(create(vm, {os: 'ubuntu', http: true}));
 
@@ -1307,12 +1307,12 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      let disk = zone.disk(generateName('disk'));
+      const disk = zone.disk(generateName('disk'));
 
       async.series([createDisk, attachDisk, detachDisk], done);
 
       function createDisk(callback) {
-        let config = {
+        const config = {
           os: 'ubuntu',
         };
 
@@ -1333,7 +1333,7 @@ describe('Compute', function() {
     });
 
     it('should set tags', function(done) {
-      let newTagName = 'new-tag';
+      const newTagName = 'new-tag';
 
       vm.getTags(function(err, tags, fingerprint) {
         assert.ifError(err);
@@ -1361,7 +1361,7 @@ describe('Compute', function() {
     });
 
     it('should resize the machine', function(done) {
-      let machineType = 'n1-standard-2';
+      const machineType = 'n1-standard-2';
 
       vm.resize(machineType, function(err) {
         assert.ifError(err);
@@ -1369,7 +1369,7 @@ describe('Compute', function() {
         vm.getMetadata(function(err, metadata) {
           assert.ifError(err);
 
-          let expectedMachineType = [
+          const expectedMachineType = [
             'https://www.googleapis.com/compute/v1',
             'zones',
             zone.id,
@@ -1391,10 +1391,10 @@ describe('Compute', function() {
     });
 
     it('should set metadata', function(done) {
-      let key = 'newKey';
-      let value = 'newValue';
+      const key = 'newKey';
+      const value = 'newValue';
 
-      let newMetadata = {};
+      const newMetadata = {};
       newMetadata[key] = value;
 
       vm.setMetadata(
@@ -1649,9 +1649,9 @@ describe('Compute', function() {
   }
 
   function createService(name, instanceGroupName, healthCheckName, callback) {
-    let service = compute.service(name);
-    let group = zone.instanceGroup(instanceGroupName);
-    let healthCheck = compute.healthCheck(healthCheckName);
+    const service = compute.service(name);
+    const group = zone.instanceGroup(instanceGroupName);
+    const healthCheck = compute.healthCheck(healthCheckName);
     let groupUrl;
     let healthCheckUrl;
 
@@ -1764,7 +1764,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = compute.operation(resp.name);
+        const operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1784,7 +1784,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = compute.operation(resp.name);
+        const operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1833,7 +1833,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = compute.operation(resp.name);
+        const operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1853,7 +1853,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = compute.operation(resp.name);
+        const operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1905,7 +1905,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = zone.operation(resp.name);
+        const operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1925,7 +1925,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = zone.operation(resp.name);
+        const operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -1957,7 +1957,7 @@ describe('Compute', function() {
         return;
       }
 
-      let names = resp.items.map(prop('name'));
+      const names = resp.items.map(prop('name'));
       async.each(names, deleteInstanceTemplate, callback);
     });
   }
@@ -2005,7 +2005,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = compute.operation(resp.name);
+        const operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -2025,7 +2025,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = compute.operation(resp.name);
+        const operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -2057,7 +2057,7 @@ describe('Compute', function() {
         return;
       }
 
-      let names = resp.items.map(prop('name'));
+      const names = resp.items.map(prop('name'));
       async.each(names, deleteInstanceGroupManager, callback);
     });
   }
@@ -2080,7 +2080,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = zone.operation(resp.name);
+        const operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
@@ -2100,7 +2100,7 @@ describe('Compute', function() {
           return;
         }
 
-        let operation = zone.operation(resp.name);
+        const operation = zone.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });

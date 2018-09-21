@@ -16,8 +16,8 @@
 
 'use strict';
 
-let common = require('@google-cloud/common');
-let util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * An Subnetwork object allows you to interact with a Google Compute Engine
@@ -49,7 +49,7 @@ function Subnetwork(region, name) {
    */
   this.region = region;
 
-  let methods = {
+  const methods = {
     /**
      * Create a subnetwork.
      *
@@ -221,7 +221,7 @@ util.inherits(Subnetwork, common.ServiceObject);
 Subnetwork.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
 
-  let region = this.region;
+  const region = this.region;
 
   this.request(
     {
@@ -234,7 +234,7 @@ Subnetwork.prototype.delete = function(callback) {
         return;
       }
 
-      let operation = region.operation(resp.name);
+      const operation = region.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);

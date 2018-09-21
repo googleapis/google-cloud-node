@@ -16,15 +16,15 @@
 
 'use strict';
 
-let assert = require('assert');
-let extend = require('extend');
-let nodeutil = require('util');
-let proxyquire = require('proxyquire');
-let ServiceObject = require('@google-cloud/common').ServiceObject;
-let util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
 let promisified = false;
-let fakeUtil = extend({}, util, {
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Image') {
       promisified = true;
@@ -43,12 +43,12 @@ describe('Image', function() {
   let Image;
   let image;
 
-  let COMPUTE = {
+  const COMPUTE = {
     projectId: 'project-id',
     createImage: util.noop,
     operation: util.noop,
   };
-  let IMAGE_NAME = 'image-name';
+  const IMAGE_NAME = 'image-name';
 
   before(function() {
     Image = proxyquire('../src/image.js', {
@@ -78,10 +78,10 @@ describe('Image', function() {
         },
       });
 
-      let image = new Image(computeInstance, IMAGE_NAME);
+      const image = new Image(computeInstance, IMAGE_NAME);
       assert(image instanceof ServiceObject);
 
-      let calledWith = image.calledWith_[0];
+      const calledWith = image.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/images');
@@ -106,8 +106,8 @@ describe('Image', function() {
     });
 
     describe('error', function() {
-      let error = new Error('Error.');
-      let apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -132,7 +132,7 @@ describe('Image', function() {
     });
 
     describe('success', function() {
-      let apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -143,7 +143,7 @@ describe('Image', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        let operation = {};
+        const operation = {};
 
         image.parent.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

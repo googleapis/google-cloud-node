@@ -16,11 +16,11 @@
 
 'use strict';
 
-let arrify = require('arrify');
-let common = require('@google-cloud/common');
-let extend = require('extend');
-let is = require('is');
-let util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const is = require('is');
+const util = require('util');
 
 /**
  * You can create and manage groups of virtual machine instances so that you
@@ -40,7 +40,7 @@ let util = require('util');
  * const instanceGroup = zone.instanceGroup('web-servers');
  */
 function InstanceGroup(zone, name) {
-  let methods = {
+  const methods = {
     /**
      * Create an instance group.
      *
@@ -249,7 +249,7 @@ InstanceGroup.formatPorts_ = function(ports) {
  * });
  */
 InstanceGroup.prototype.add = function(vms, callback) {
-  let self = this;
+  const self = this;
 
   this.request(
     {
@@ -269,7 +269,7 @@ InstanceGroup.prototype.add = function(vms, callback) {
         return;
       }
 
-      let operation = self.zone.operation(resp.name);
+      const operation = self.zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);
@@ -308,7 +308,7 @@ InstanceGroup.prototype.add = function(vms, callback) {
  * });
  */
 InstanceGroup.prototype.delete = function(callback) {
-  let self = this;
+  const self = this;
 
   callback = callback || common.util.noop;
 
@@ -318,7 +318,7 @@ InstanceGroup.prototype.delete = function(callback) {
       return;
     }
 
-    let operation = self.zone.operation(resp.name);
+    const operation = self.zone.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -384,7 +384,7 @@ InstanceGroup.prototype.delete = function(callback) {
  * });
  */
 InstanceGroup.prototype.getVMs = function(options, callback) {
-  let self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -422,8 +422,8 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
         });
       }
 
-      let vms = arrify(resp.items).map(function(vm) {
-        let vmInstance = self.zone.vm(vm.instance);
+      const vms = arrify(resp.items).map(function(vm) {
+        const vmInstance = self.zone.vm(vm.instance);
         vmInstance.metadata = vm;
         return vmInstance;
       });
@@ -505,7 +505,7 @@ InstanceGroup.prototype.getVMsStream = common.paginator.streamify('getVMs');
  * });
  */
 InstanceGroup.prototype.remove = function(vms, callback) {
-  let self = this;
+  const self = this;
 
   this.request(
     {
@@ -525,7 +525,7 @@ InstanceGroup.prototype.remove = function(vms, callback) {
         return;
       }
 
-      let operation = self.zone.operation(resp.name);
+      const operation = self.zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(err, operation, resp);
@@ -571,7 +571,7 @@ InstanceGroup.prototype.remove = function(vms, callback) {
  * });
  */
 InstanceGroup.prototype.setPorts = function(ports, callback) {
-  let self = this;
+  const self = this;
 
   callback = callback || common.util.noop;
 
@@ -589,7 +589,7 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
         return;
       }
 
-      let operation = self.zone.operation(resp.name);
+      const operation = self.zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);

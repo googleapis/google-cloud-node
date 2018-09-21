@@ -16,14 +16,14 @@
 
 'use strict';
 
-let common = require('@google-cloud/common');
-let createErrorClass = require('create-error-class');
-let extend = require('extend');
-let format = require('string-format-obj');
-let is = require('is');
-let util = require('util');
+const common = require('@google-cloud/common');
+const createErrorClass = require('create-error-class');
+const extend = require('extend');
+const format = require('string-format-obj');
+const is = require('is');
+const util = require('util');
 
-let Disk = require('./disk.js');
+const Disk = require('./disk.js');
 
 /**
  * Custom error type for errors related to detaching a disk.
@@ -33,7 +33,7 @@ let Disk = require('./disk.js');
  * @param {string} message - Custom error message.
  * @returns {Error}
  */
-let DetachDiskError = createErrorClass('DetachDiskError');
+const DetachDiskError = createErrorClass('DetachDiskError');
 
 /**
  * Custom error type for when `waitFor()` does not return a status in a timely
@@ -44,14 +44,14 @@ let DetachDiskError = createErrorClass('DetachDiskError');
  * @param {string} message - Custom error message.
  * @returns {Error}
  */
-let WaitForTimeoutError = createErrorClass('WaitForTimeoutError');
+const WaitForTimeoutError = createErrorClass('WaitForTimeoutError');
 
 /**
  * The statuses that a VM can be in.
  *
  * @private
  */
-let VALID_STATUSES = [
+const VALID_STATUSES = [
   'PROVISIONING',
   'STAGING',
   'RUNNING',
@@ -66,7 +66,7 @@ let VALID_STATUSES = [
  *
  * @private
  */
-let WAIT_FOR_POLLING_INTERVAL_MS = 2000;
+const WAIT_FOR_POLLING_INTERVAL_MS = 2000;
 
 /**
  * An Instance object allows you to interact with a Google Compute Engine
@@ -108,7 +108,7 @@ function VM(zone, name) {
     name: this.name,
   });
 
-  let methods = {
+  const methods = {
     /**
      * Create a virtual machine.
      *
@@ -313,7 +313,7 @@ VM.prototype.attachDisk = function(disk, options, callback) {
     options = {};
   }
 
-  let body = extend(
+  const body = extend(
     {
       // Default the deviceName to the name of the disk, like the Console does.
       deviceName: disk.name,
@@ -415,7 +415,7 @@ VM.prototype.delete = function(callback) {
  * });
  */
 VM.prototype.detachDisk = function(disk, callback) {
-  let self = this;
+  const self = this;
 
   if (!(disk instanceof Disk)) {
     throw new Error('A Disk object must be provided.');
@@ -427,20 +427,20 @@ VM.prototype.detachDisk = function(disk, callback) {
       return;
     }
 
-    let diskName = common.util.replaceProjectIdToken(
+    const diskName = common.util.replaceProjectIdToken(
       disk.formattedName,
       self.zone.compute.authClient.projectId
     );
 
     let deviceName;
-    let baseUrl = 'https://www.googleapis.com/compute/v1/';
-    let disks = metadata.disks || [];
+    const baseUrl = 'https://www.googleapis.com/compute/v1/';
+    const disks = metadata.disks || [];
 
     // Try to find the deviceName by matching the source of the attached disks
     // to the name of the disk provided by the user.
     for (let i = 0; !deviceName && i < disks.length; i++) {
-      let attachedDisk = disks[i];
-      let source = attachedDisk.source.replace(baseUrl, '');
+      const attachedDisk = disks[i];
+      const source = attachedDisk.source.replace(baseUrl, '');
 
       if (source === diskName) {
         deviceName = attachedDisk.deviceName;
@@ -499,14 +499,14 @@ VM.prototype.getSerialPortOutput = function(port, callback) {
     port = 1;
   }
 
-  let reqOpts = {
+  const reqOpts = {
     uri: '/serialPort',
     qs: {
       port: port,
     },
   };
 
-  let request = common.ServiceObject.prototype.request;
+  const request = common.ServiceObject.prototype.request;
 
   request.call(this, reqOpts, function(err, resp) {
     if (err) {
@@ -658,8 +658,8 @@ VM.prototype.reset = function(callback) {
  * });
  */
 VM.prototype.resize = function(machineType, options, callback) {
-  let self = this;
-  let compute = this.zone.parent;
+  const self = this;
+  const compute = this.zone.parent;
 
   if (is.fn(options)) {
     callback = options;
@@ -668,7 +668,7 @@ VM.prototype.resize = function(machineType, options, callback) {
 
   options = options || {};
 
-  let isPartialMachineType = machineType.indexOf('/') === -1;
+  const isPartialMachineType = machineType.indexOf('/') === -1;
 
   if (isPartialMachineType) {
     machineType = format('zones/{zoneName}/machineTypes/{machineType}', {
@@ -752,7 +752,7 @@ VM.prototype.resize = function(machineType, options, callback) {
  * });
  */
 VM.prototype.setMetadata = function(metadata, callback) {
-  let self = this;
+  const self = this;
 
   callback = callback || common.util.noop;
 
@@ -762,12 +762,12 @@ VM.prototype.setMetadata = function(metadata, callback) {
       return;
     }
 
-    let newMetadata = {
+    const newMetadata = {
       fingerprint: currentMetadata.metadata.fingerprint,
       items: [],
     };
 
-    for (let prop in metadata) {
+    for (const prop in metadata) {
       if (metadata.hasOwnProperty(prop)) {
         newMetadata.items.push({
           key: prop,
@@ -832,7 +832,7 @@ VM.prototype.setMetadata = function(metadata, callback) {
  * });
  */
 VM.prototype.setTags = function(tags, fingerprint, callback) {
-  let body = {
+  const body = {
     items: tags,
     fingerprint: fingerprint,
   };
@@ -1028,16 +1028,16 @@ VM.prototype.waitFor = function(status, options, callback) {
  * @private
  */
 VM.prototype.startPolling_ = function() {
-  let self = this;
+  const self = this;
 
   if (!this.hasActiveWaiters) {
     return;
   }
 
   this.getMetadata(function(err, metadata) {
-    let now = new Date() / 1000;
+    const now = new Date() / 1000;
 
-    let waitersToRemove = self.waiters.filter(function(waiter) {
+    const waitersToRemove = self.waiters.filter(function(waiter) {
       if (err) {
         waiter.callback(err);
         return true;
@@ -1049,7 +1049,7 @@ VM.prototype.startPolling_ = function() {
       }
 
       if (now - waiter.startTime >= waiter.timeout) {
-        let waitForTimeoutError = new WaitForTimeoutError(
+        const waitForTimeoutError = new WaitForTimeoutError(
           [
             'waitFor timed out waiting for VM ' + self.name,
             'to be in status: ' + waiter.status,
@@ -1090,9 +1090,9 @@ VM.prototype.startPolling_ = function() {
  * @param {function} callback - The callback function.
  */
 VM.prototype.request = function(reqOpts, callback) {
-  let zone = this.zone;
+  const zone = this.zone;
 
-  let request = common.ServiceObject.prototype.request;
+  const request = common.ServiceObject.prototype.request;
 
   request.call(this, reqOpts, function(err, resp) {
     if (err) {
@@ -1100,7 +1100,7 @@ VM.prototype.request = function(reqOpts, callback) {
       return;
     }
 
-    let operation = zone.operation(resp.name);
+    const operation = zone.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);

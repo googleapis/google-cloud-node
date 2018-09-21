@@ -16,13 +16,13 @@
 
 'use strict';
 
-let assert = require('assert');
-let extend = require('extend');
-let proxyquire = require('proxyquire');
-let util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const proxyquire = require('proxyquire');
+const util = require('@google-cloud/common').util;
 
 let promisified = false;
-let fakeUtil = extend({}, util, {
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Project') {
       promisified = true;
@@ -38,8 +38,8 @@ describe('Project', function() {
   let Project;
   let project;
 
-  let PROJECT_ID = 'project-1';
-  let COMPUTE = {
+  const PROJECT_ID = 'project-1';
+  const COMPUTE = {
     projectId: PROJECT_ID,
     authConfig: {a: 'b', c: 'd'},
   };
@@ -69,7 +69,7 @@ describe('Project', function() {
     it('should inherit from ServiceObject', function() {
       assert(project instanceof FakeServiceObject);
 
-      let calledWith = project.calledWith_[0];
+      const calledWith = project.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(calledWith.baseUrl, '');
