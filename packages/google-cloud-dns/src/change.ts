@@ -17,19 +17,21 @@
 'use strict';
 
 import {teenyRequest} from 'teeny-request';
-import {ServiceObject} from '@google-cloud/common';
+import {ServiceObject, CreateOptions} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import {Zone} from './zone';
 import {Record} from './record';
-import {Response} from 'request';
+import * as r from 'request';
 
-export interface CreateChangeRequest {
+export interface CreateChangeRequest extends CreateOptions {
   add?: Record|Record[];
   delete?: Record|Record[];
 }
 
+export type CreateChangeResponse = [Change, r.Response];
+
 export interface ChangeCallback {
-  (err?: Error|null, change?: Change|null, apiResponse?: Response): void;
+  (err: Error|null, change?: Change|null, apiResponse?: r.Response): void;
 }
 
 /**
@@ -45,6 +47,7 @@ export interface ChangeCallback {
  * const change = zone.change('change-id');
  */
 export class Change extends ServiceObject {
+  parent!: Zone;
   constructor(zone: Zone, id?: string) {
     const methods = {
       /**
@@ -192,9 +195,8 @@ export class Change extends ServiceObject {
        */
       id,
       methods,
-      requestModule: teenyRequest,
-      // tslint:disable-next-line:no-any
-    } as any);
+      requestModule: teenyRequest as typeof r,
+    });
   }
   /**
    * Create a change.
@@ -230,15 +232,16 @@ export class Change extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  create(callback: ChangeCallback): void;
+  create(config?: CreateChangeRequest): Promise<CreateChangeResponse>;
   create(config: CreateChangeRequest, callback: ChangeCallback): void;
+  create(callback: ChangeCallback): void;
   create(
-      configOrCallback: CreateChangeRequest|ChangeCallback,
-      callback?: ChangeCallback) {
+      configOrCallback?: CreateChangeRequest|ChangeCallback,
+      callback?: ChangeCallback): void|Promise<CreateChangeResponse> {
     const config = typeof configOrCallback === 'object' ? configOrCallback : {};
     callback =
         typeof configOrCallback === 'function' ? configOrCallback! : callback;
-    (this.parent as Zone).createChange(config, (err, change, apiResponse) => {
+    this.parent.createChange(config, (err, change, apiResponse) => {
       if (err) {
         callback!(err, null, apiResponse);
         return;

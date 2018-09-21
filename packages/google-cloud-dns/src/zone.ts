@@ -31,7 +31,7 @@ const zonefile = require('dns-zonefile');
 import {Change, ChangeCallback, CreateChangeRequest} from './change';
 import {Record, RecordMetadata, RecordObject} from './record';
 import {DNS} from '.';
-import {Response} from 'request';
+import * as r from 'request';
 
 export interface DeleteZoneConfig {
   force?: boolean;
@@ -39,7 +39,7 @@ export interface DeleteZoneConfig {
 
 export interface GetRecordsCallback {
   (err: Error|null, records?: Record[]|null, nextQuery?: {}|null,
-   apiResponse?: Response): void;
+   apiResponse?: r.Response): void;
 }
 
 export interface GetRecordsRequest {
@@ -63,7 +63,7 @@ export interface GetChangesRequest {
 
 export interface GetChangesCallback {
   (err: Error|null, changes?: Change[]|null, nextQuery?: {}|null,
-   apiResponse?: Response): void;
+   apiResponse?: r.Response): void;
 }
 
 /**
@@ -245,8 +245,7 @@ class Zone extends ServiceObject {
       id: name,
       createMethod: dns.createZone.bind(dns),
       methods,
-      // tslint:disable-next-line:no-any
-      requestModule: teenyRequest as any,
+      requestModule: teenyRequest as typeof r,
     });
     /**
      * @name Zone#name
@@ -460,11 +459,12 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
+  delete(options?: DeleteZoneConfig): Promise<[r.Response]>;
   delete(callback: DeleteCallback): void;
   delete(options: DeleteZoneConfig, callback: DeleteCallback): void;
   delete(
-      optionsOrCallback: DeleteZoneConfig|DeleteCallback,
-      callback?: DeleteCallback): void {
+      optionsOrCallback?: DeleteZoneConfig|DeleteCallback,
+      callback?: DeleteCallback): void|Promise<[r.Response]> {
     const options =
         typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     callback =
@@ -473,7 +473,7 @@ class Zone extends ServiceObject {
       this.empty(this.delete.bind(this, callback));
       return;
     }
-    super.delete(callback);
+    super.delete(callback!);
   }
   /**
    * @typedef {array} ZoneDeleteRecordsResponse
@@ -616,7 +616,7 @@ class Zone extends ServiceObject {
         return record.type !== 'NS' && record.type !== 'SOA';
       });
       if (recordsToDelete.length === 0) {
-        callback();
+        callback(null);
       } else {
         this.deleteRecords(recordsToDelete, callback);
       }
@@ -1134,7 +1134,7 @@ class Zone extends ServiceObject {
       return;
     }
     if (records!.length === 0) {
-      callback();
+      callback(null);
       return;
     }
     this.deleteRecords(records!, callback);

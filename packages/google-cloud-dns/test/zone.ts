@@ -353,7 +353,8 @@ describe('Zone', () => {
       });
 
       it('should try to delete again after emptying', done => {
-        FakeServiceObject.prototype.delete = () => {
+        // tslint:disable-next-line:no-any
+        (FakeServiceObject.prototype as any).delete = () => {
           done();
         };
 

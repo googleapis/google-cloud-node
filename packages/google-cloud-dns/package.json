@@ -51,7 +51,7 @@
     "system-test": "mocha build/system-test --timeout 600000",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix && prettier --write samples/*.js samples/*/*.js",
+    "fix": "eslint --fix 'samples/**/*.js' && prettier --write samples/*.js samples/*/*.js && gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile"
   },
