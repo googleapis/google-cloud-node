@@ -49,9 +49,12 @@ describe('logging-common', () => {
     Transport: FakeTransport,
   };
 
-  const loggingCommonLib = inject(
-      '../src/common',
-      {'@google-cloud/logging': fakeLogging, winston: fakeWinston});
+  const loggingCommonLib = inject('../src/common', {
+    '@google-cloud/logging': {
+      Logging: fakeLogging,
+    },
+    winston: fakeWinston
+  });
 
 
   // loggingCommon is loggingCommon namespace which cannot be determined type.

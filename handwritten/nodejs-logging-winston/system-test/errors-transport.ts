@@ -16,6 +16,7 @@
 
 import * as common from '@google-cloud/common';
 import delay from 'delay';
+import * as request from 'request';
 import {teenyRequest} from 'teeny-request';
 
 const packageJson = require('../../package.json');
@@ -51,8 +52,7 @@ export class ErrorsApiTransport extends common.Service {
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson,
-      // tslint:disable-next-line:no-any
-      requestModule: teenyRequest as any
+      requestModule: teenyRequest as typeof request
     });
   }
 

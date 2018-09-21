@@ -23,7 +23,8 @@ const inject = require('require-inject');
 const winston3 = require('winston');
 const winston2 = require('../../test/winston-2/node_modules/winston');
 
-const logging = require('@google-cloud/logging')();
+const {Logging} = require('@google-cloud/logging');
+const logging = new Logging();
 const LoggingWinston = require('../src/index').LoggingWinston;
 const LOG_NAME = 'winston_log_system_tests';
 
