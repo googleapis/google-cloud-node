@@ -60,6 +60,9 @@ Commands:
                                                      metadata
   detect.js fulltext <fileName>                      Extracts full text from a local image file.
   detect.js fulltext-gcs <bucketName> <fileName>     Extracts full text from an image in Google Cloud Storage.
+  detect.js pdf <bucketName> <fileName>              Extracts full text from a pdf file
+  detect.js localize-objects <fileName>              Detects Objects in a local image file
+  detect.js localize-objects-gcs <gcsUri>            Detects Objects Google Cloud Storage Bucket
 
 Options:
   --version  Show version number                                                                               [boolean]
@@ -88,6 +91,9 @@ Examples:
   node detect.js web-geo-gcs my-bucket your-image.jpg
   node detect.js fulltext ./resources/wakeupcat.jpg
   node detect.js fulltext-gcs my-bucket your-image.jpg
+  node detect.js pdf my-bucket my-pdf.pdf
+  node detect.js localize-objects ./resources/duck_and_truck.jpg
+  node detect.js localize-objects-gcs gs://bucket/bucketImage.png
 
 For more information, see https://cloud.google.com/vision/docs
 ```
