@@ -73,7 +73,7 @@
     "posttest": "npm run check"
   },
   "dependencies": {
-    "@google-cloud/logging": "^3.0.2",
+    "@google-cloud/logging": "^4.0.1",
     "@sindresorhus/is": "^0.10.0",
     "lodash.mapvalues": "^4.6.0",
     "logform": "^1.9.1",

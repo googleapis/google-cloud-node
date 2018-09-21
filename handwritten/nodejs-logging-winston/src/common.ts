@@ -17,7 +17,7 @@
 import * as util from 'util';
 import * as types from './types/core';
 
-const logging = require('@google-cloud/logging');
+const {Logging} = require('@google-cloud/logging');
 const mapValues = require('lodash.mapvalues');
 
 type Callback = (err: Error, apiResponse: {}) => void;
@@ -96,7 +96,7 @@ export class LoggingCommon {
 
     this.inspectMetadata = options.inspectMetadata === true;
     this.levels = options.levels || NPM_LEVEL_NAME_TO_CODE;
-    this.stackdriverLog = new logging(options).log(logName);
+    this.stackdriverLog = new Logging(options).log(logName);
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
     this.prefix = options.prefix;
