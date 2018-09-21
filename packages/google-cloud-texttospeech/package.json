@@ -45,7 +45,8 @@
     "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test",
-    "docs": "jsdoc -c .jsdoc.js"
+    "docs": "jsdoc -c .jsdoc.js",
+    "fix": "eslint --fix '**/*.js' && npm run prettier"
   },
   "dependencies": {
     "google-gax": "^0.20.0",
