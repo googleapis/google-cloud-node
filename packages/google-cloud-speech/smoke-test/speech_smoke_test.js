@@ -38,8 +38,7 @@ describe('SpeechSmokeTest', () => {
       config: config,
       audio: audio,
     };
-    client
-      .recognize(request)
+    client.recognize(request)
       .then(responses => {
         const response = responses[0];
         console.log(response);
