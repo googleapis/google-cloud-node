@@ -16,6 +16,7 @@
 
 'use strict';
 
+import {Stream} from 'stream';
 import * as arrify from 'arrify';
 import {Service, GoogleAuthOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
@@ -115,7 +116,7 @@ export type CreateZoneResponse = [Zone, Response];
  * Full quickstart example:
  */
 class DNS extends Service {
-  getZonesStream: Function;
+  getZonesStream: (query: GetZonesRequest) => Stream;
   constructor(options?: GoogleAuthOptions) {
     options = options || {};
     const config = {
