@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## v0.22.1
+
+### Bug fixes
+- Fix response output for Detect Labels ([#199](https://github.com/googleapis/nodejs-vision/pull/199))
+
+### Documentation
+- Vision GA – vision_localize_objects & vision_localize_object_gcs ([#200](https://github.com/googleapis/nodejs-vision/pull/200))
+- Product search rebased ([#196](https://github.com/googleapis/nodejs-vision/pull/196))
+
+### Internal / Testing Changes
+- Enable prefer-const in the eslint config ([#201](https://github.com/googleapis/nodejs-vision/pull/201))
+- Enable no-var in eslint ([#198](https://github.com/googleapis/nodejs-vision/pull/198))
+- Switch to let/const ([#194](https://github.com/googleapis/nodejs-vision/pull/194))
+- fix(deps): update dependency google-gax to ^0.20.0 ([#193](https://github.com/googleapis/nodejs-vision/pull/193))
+
 ## v0.22.0
 
 ### New Features
