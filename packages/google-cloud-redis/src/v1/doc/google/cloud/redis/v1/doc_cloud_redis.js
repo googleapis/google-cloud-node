@@ -361,7 +361,7 @@ const DeleteInstanceRequest = {
  *   Operation status details.
  *
  * @property {boolean} cancelRequested
- *   Specifies if cancellation was requested for the operaiton.
+ *   Specifies if cancellation was requested for the operation.
  *
  * @property {string} apiVersion
  *   API version.
