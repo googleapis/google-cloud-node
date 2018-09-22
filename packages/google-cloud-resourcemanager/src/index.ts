@@ -16,7 +16,7 @@
 
 'use strict';
 
-import {Service, Operation} from '@google-cloud/common';
+import {Service, Operation, GoogleAuthOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
@@ -25,6 +25,55 @@ import {Project} from './project';
 import * as r from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
 
+export type CreateProjectCallback =
+    (err: Error|null, project?: Project|null, operation?: Operation,
+     apiResponse?: r.Response) => void;
+export type CreateProjectResponse = [Project, Operation, r.Response];
+export type GetProjectsResponse = [Project[], r.Response];
+export type GetProjectsCallback =
+    (err: Error|null, projects?: Project[]|null, nextQuery?: {}|null,
+     apiResponse?: r.Response) => void;
+
+export interface GetProjectOptions {
+  autoPaginate?: boolean;
+  filter?: string;
+  maxApiCalls?: number;
+  maxResults?: number;
+  pageSize?: number;
+  pageToken?: string;
+}
+
+export enum LifecylceState {
+  /**
+   * 	Unspecified state. This is only used/useful for distinguishing unset
+   * values.
+   */
+  'LIFECYCLE_STATE_UNSPECIFIED',
+  /**
+   * 	The normal and active state.
+   */
+  'ACTIVE',
+  /**
+   * 	The project has been marked for deletion by the user (by invoking
+   * projects.delete) or by the system (Google Cloud Platform). This can
+   * generally be reversed by invoking projects.undelete.
+   */
+  'DELETE_REQUESTED',
+  /**
+   * 	This lifecycle state is no longer used and not returned by the API.
+   */
+  'DELETE_IN_PROGRESS',
+}
+
+export interface CreateProjectOptions {
+  projectNumber?: string;
+  projectId?: string;
+  lifecycleState?: LifecylceState;
+  name: string;
+  createTime: string;
+  labels: {[index: string]: string};
+  parent: {type: string, id: string};
+}
 
 /**
  * @typedef {object} ClientConfig
@@ -52,6 +101,10 @@ import {teenyRequest} from 'teeny-request';
  * @property {Constructor} [promise] Custom promise module to use instead of
  *     native Promises.
  */
+export interface ClientConfig extends GoogleAuthOptions {
+  autoRetry?: boolean;
+  maxRetries?: boolean;
+}
 
 /**
  * The [Cloud Resource Manager](https://cloud.google.com/resource-manager/)
@@ -88,9 +141,8 @@ import {teenyRequest} from 'teeny-request';
  * Full quickstart example:
  */
 class Resource extends Service {
-  getProjectsStream;
-  constructor(options?) {
-    options = options || {};
+  getProjectsStream: Function;
+  constructor(options: ClientConfig = {}) {
     const config = {
       baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
@@ -190,12 +242,20 @@ class Resource extends Service {
    *     // Project created successfully!
    *   });
    */
-  createProject(id, options, callback) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
-
+  createProject(id: string, options?: CreateProjectOptions):
+      Promise<CreateProjectResponse>;
+  createProject(
+      id: string, options: CreateProjectOptions,
+      callback: CreateProjectCallback): void;
+  createProject(id: string, callback: CreateProjectCallback): void;
+  createProject(
+      id: string,
+      optionsOrCallback?: CreateProjectOptions|CreateProjectCallback,
+      callback?: CreateProjectCallback): void|Promise<CreateProjectResponse> {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     this.request(
         {
           method: 'POST',
@@ -206,13 +266,13 @@ class Resource extends Service {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            callback!(err, null, resp);
             return;
           }
           const project = this.project(resp.projectId);
           const operation = this.operation(resp.name);
           operation.metadata = resp;
-          callback(null, project, operation, resp);
+          callback!(null, project, operation, resp);
         });
   }
 
@@ -267,14 +327,16 @@ class Resource extends Service {
    *   const projects = data[0];
    * });
    */
-  getProjects(options, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
-
-    options = options || {};
-
+  getProjects(options?: GetProjectOptions): Promise<GetProjectsResponse>;
+  getProjects(options: GetProjectOptions, callback: GetProjectsCallback): void;
+  getProjects(callback: GetProjectsCallback): void;
+  getProjects(
+      optionsOrCallback?: GetProjectOptions|GetProjectsCallback,
+      callback?: GetProjectsCallback): void|Promise<GetProjectsResponse> {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     this.request(
         {
           uri: '/projects',
@@ -282,11 +344,11 @@ class Resource extends Service {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, null, resp);
+            callback!(err, null, null, resp);
             return;
           }
 
-          let nextQuery = null;
+          let nextQuery: GetProjectOptions;
 
           if (resp.nextPageToken) {
             nextQuery = extend({}, options, {
@@ -294,13 +356,13 @@ class Resource extends Service {
             });
           }
 
-          const projects = (resp.projects || []).map(project => {
+          const projects = (resp.projects || []).map((project: Project) => {
             const projectInstance = this.project(project.projectId);
             projectInstance.metadata = project;
             return projectInstance;
           });
 
-          callback(null, projects, nextQuery, resp);
+          callback!(null, projects, nextQuery!, resp);
         });
   }
 
@@ -321,7 +383,7 @@ class Resource extends Service {
    *
    * const operation = resource.operation('68850831366825');
    */
-  operation(name) {
+  operation(name: string) {
     if (!name) {
       throw new Error('A name must be specified for an operation.');
     }

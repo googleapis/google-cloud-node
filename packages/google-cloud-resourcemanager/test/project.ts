@@ -19,13 +19,14 @@
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {ServiceObject, util} from '@google-cloud/common';
+import {ServiceObject, util, ServiceObjectConfig, DecorateRequestOptions} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
+import {RequestCallback, Response} from 'request';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
   // tslint:disable-next-line variable-name
-  promisifyAll(Class) {
+  promisifyAll(Class: Function) {
     if (Class.name === 'Project') {
       promisified = true;
     }
@@ -33,17 +34,18 @@ const fakePromisify = extend({}, promisify, {
 });
 
 class FakeServiceObject extends ServiceObject {
-  calledWith_;
-  constructor(config) {
+  calledWith_: IArguments;
+  constructor(config: ServiceObjectConfig) {
     super(config);
     this.calledWith_ = arguments;
   }
 }
 
 describe('Project', () => {
-  // tslint:disable-next-line variable-name
-  let Project;
-  let project;
+  // tslint:disable-next-line variable-name no-any
+  let Project: any;
+  // tslint:disable-next-line no-any
+  let project: any;
 
   const RESOURCE = {
     createProject: util.noop,
@@ -67,7 +69,7 @@ describe('Project', () => {
     it('should inherit from ServiceObject', done => {
       const resourceInstance = extend({}, RESOURCE, {
         createProject: {
-          bind(context) {
+          bind(context: {}) {
             assert.strictEqual(context, resourceInstance);
             done();
           },
@@ -106,13 +108,14 @@ describe('Project', () => {
     const apiResponse = {a: 'b', c: 'd'};
 
     beforeEach(() => {
-      project.request = (reqOpts, callback) => {
-        callback(error, apiResponse);
-      };
+      project.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error, apiResponse);
+          };
     });
 
     it('should make the correct API request', done => {
-      project.request = reqOpts => {
+      project.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, ':undelete');
         done();
@@ -121,7 +124,7 @@ describe('Project', () => {
     });
 
     it('should execute the callback with error & API response', done => {
-      project.restore((err, apiResponse_) => {
+      project.restore((err: Error, apiResponse_: Response) => {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
         done();

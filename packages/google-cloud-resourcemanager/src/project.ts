@@ -22,6 +22,10 @@ import {Resource} from '.';
 import * as r from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
 
+export type RestoreCallback = (err: Error|null, apiResonse?: r.Response) =>
+    void;
+export type RestoreResponse = [r.Response];
+
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.
  *
@@ -296,16 +300,17 @@ class Project extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  restore(callback) {
+  restore(): Promise<RestoreResponse>;
+  restore(callback: RestoreCallback): void;
+  restore(callback?: RestoreCallback): void|Promise<RestoreResponse> {
     callback = callback || util.noop;
-
     this.request(
         {
           method: 'POST',
           uri: ':undelete',
         },
         (err, resp) => {
-          callback(err, resp);
+          callback!(err, resp);
         });
   }
 }

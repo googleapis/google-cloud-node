@@ -23,6 +23,7 @@ import {GoogleAuth} from 'google-auth-library';
 import * as uuid from 'uuid';
 
 import {Resource, Project} from '../src';
+import {Operation} from '@google-cloud/common';
 
 describe('Resource', () => {
   const PREFIX = 'gcloud-tests-';
@@ -33,7 +34,7 @@ describe('Resource', () => {
     it('should get a list of projects', done => {
       resource.getProjects((err, projects) => {
         assert.ifError(err);
-        assert(projects.length > 0);
+        assert(projects!.length > 0);
         done();
       });
     });
@@ -58,8 +59,7 @@ describe('Resource', () => {
     it('should get metadata', done => {
       project.getMetadata((err, metadata) => {
         assert.ifError(err);
-        // tslint:disable-next-line no-any
-        assert.notStrictEqual((metadata as any).projectId, undefined);
+        assert.notStrictEqual(metadata.projectId, undefined);
         done();
       });
     });
@@ -104,16 +104,17 @@ describe('Resource', () => {
               return;
             }
 
-            project.create((err, project, operation) => {
-              if (err) {
-                done(err);
-                return;
-              }
-              testProjects.push(project);
-              operation.on('error', done).on('complete', () => {
-                done();
-              });
-            });
+            project.create(
+                (err: Error, project: Project, operation: Operation) => {
+                  if (err) {
+                    done(err);
+                    return;
+                  }
+                  testProjects.push(project);
+                  operation.on('error', done).on('complete', () => {
+                    done();
+                  });
+                });
           });
     });
 
@@ -134,30 +135,25 @@ describe('Resource', () => {
     it('should have created the project', done => {
       project.getMetadata((err, metadata) => {
         assert.ifError(err);
-        // tslint:disable-next-line no-any
-        assert.strictEqual((metadata as any).projectId, (project as any).id);
+        assert.strictEqual(metadata.projectId, project.id);
         done();
       });
     });
 
     it('should run operation as a promise', done => {
       const project = resource.project(generateName('project'));
-      // tslint:disable-next-line no-any
-      (project as any)
-          .create()
+      project.create()
           .then(response => {
-            const operation = response[1];
+            const operation = response[1] as {} as Operation;
             return operation.promise();
           })
           .then(() => {
             testProjects.push(project);
-            // tslint:disable-next-line no-any
-            return (project as any).getMetadata();
+            return project.getMetadata();
           })
           .then(response => {
             const metadata = response[0];
-            // tslint:disable-next-line no-any
-            assert.strictEqual(metadata.projectId, (project as any).id);
+            assert.strictEqual(metadata.projectId, project.id);
             done();
           });
     });
@@ -166,25 +162,12 @@ describe('Resource', () => {
       const newProjectName = 'gcloud-tests-project-name';
       project.getMetadata((err, metadata) => {
         assert.ifError(err);
-        // tslint:disable-next-line no-any
-        const originalProjectName = (metadata as any).name;
+        const originalProjectName = metadata.name;
         assert.notStrictEqual(originalProjectName, newProjectName);
-        // tslint:disable-next-line no-any
-        (project as any)
-            .setMetadata(
-                {
-                  name: newProjectName,
-                },
-                (err) => {
-                  assert.ifError(err);
-                  // tslint:disable-next-line no-any
-                  (project as any)
-                      .setMetadata(
-                          {
-                            name: originalProjectName,
-                          },
-                          done);
-                });
+        project.setMetadata({name: newProjectName}, err => {
+          assert.ifError(err);
+          project.setMetadata({name: originalProjectName}, done);
+        });
       });
     });
 
@@ -195,7 +178,7 @@ describe('Resource', () => {
       });
     });
 
-    function deleteTestProjects(callback) {
+    function deleteTestProjects(callback: (err?: Error) => void) {
       if (!CAN_RUN_TESTS) {
         callback();
         return;
@@ -211,8 +194,8 @@ describe('Resource', () => {
                   callback(err);
                   return;
                 }
-                const projectsToDelete = projects.filter(project => {
-                  const isTestProject = project.id.indexOf(PREFIX) === 0;
+                const projectsToDelete = projects!.filter(project => {
+                  const isTestProject = project.id!.indexOf(PREFIX) === 0;
                   const deleted =
                       project.metadata.lifecycleState === 'DELETE_REQUESTED';
                   return isTestProject && !deleted;
@@ -224,7 +207,7 @@ describe('Resource', () => {
           callback);
     }
 
-    function generateName(resourceType) {
+    function generateName(resourceType: string) {
       return PREFIX + resourceType + '-' + uuid.v1().substr(0, 8);
     }
   });
