@@ -28,8 +28,7 @@ describe('LanguageServiceSmokeTest', () => {
       content: content,
       type: type,
     };
-    client
-      .analyzeSentiment({document: document})
+    client.analyzeSentiment({document: document})
       .then(responses => {
         const response = responses[0];
         console.log(response);
