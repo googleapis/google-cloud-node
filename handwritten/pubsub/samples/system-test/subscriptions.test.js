@@ -160,6 +160,18 @@ test.serial(`should listen for messages`, async t => {
   t.true(output.includes(`Received message ${messageIds}:`));
 });
 
+test.serial(`should listen for messages synchronously`, async t => {
+  await pubsub
+    .topic(topicNameOne)
+    .publisher()
+    .publish(Buffer.from(`Hello, world!`));
+  const output = await tools.runAsync(
+    `${cmd} sync-pull ${projectId} ${subscriptionNameOne}`,
+    cwd
+  );
+  t.true(output.includes(`Done.`));
+});
+
 test.serial(`should listen for ordered messages`, async t => {
   const timeout = 5;
   const subscriptions = require('../subscriptions');
