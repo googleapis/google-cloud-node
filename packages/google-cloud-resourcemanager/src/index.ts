@@ -20,7 +20,6 @@ import {Service, Operation, GoogleAuthOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import * as is from 'is';
 import {Project} from './project';
 import * as r from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';

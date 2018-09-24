@@ -17,13 +17,15 @@
 'use strict';
 
 import * as assert from 'assert';
-import * as async from 'async';
-const exec = require('methmeth');
-import {GoogleAuth} from 'google-auth-library';
 import * as uuid from 'uuid';
-
 import {Resource, Project} from '../src';
 import {Operation} from '@google-cloud/common';
+
+if (!process.env.GCLOUD_PROJECT ||
+    !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+  throw new Error(
+      'the GCLOUD_PROJECT and GOOGLE_APPLICATION_CREDENTIAL environment variables must be set to run the system tests 👻');
+}
 
 describe('Resource', () => {
   const PREFIX = 'gcloud-tests-';
@@ -41,13 +43,9 @@ describe('Resource', () => {
 
     it('should get a list of projects in stream mode', done => {
       let resultsMatched = 0;
-
       resource.getProjectsStream()
           .on('error', done)
-          .on('data',
-              () => {
-                resultsMatched++;
-              })
+          .on('data', () => resultsMatched++)
           .on('end', () => {
             assert(resultsMatched > 0);
             done();
@@ -72,65 +70,25 @@ describe('Resource', () => {
   //   - Restore a project
   //   - Delete a project
   describe('lifecycle', () => {
-    let CAN_RUN_TESTS = true;
     const testProjects: Project[] = [];
-
     const resource = new Resource();
-
     const project = resource.project(generateName('project'));
 
-    before(done => {
-      const authClient = new GoogleAuth();
-
-      async.series(
-          [
-            (callback) => {
-              // See if an auth token exists.
-              authClient.getAccessToken()
-                  .then(() => {
-                    CAN_RUN_TESTS = true;
-                    callback();
-                  })
-                  .catch(e => {
-                    CAN_RUN_TESTS = e === null;
-                    callback();
-                  });
-            },
-            deleteTestProjects,
-          ],
-          (err) => {
-            if (err || !CAN_RUN_TESTS) {
-              done(err);
-              return;
-            }
-
-            project.create(
-                (err: Error, project: Project, operation: Operation) => {
-                  if (err) {
-                    done(err);
-                    return;
-                  }
-                  testProjects.push(project);
-                  operation.on('error', done).on('complete', () => {
-                    done();
-                  });
-                });
-          });
+    before(async () => {
+      await deleteTestProjects();
+      // TODO(beckwith): The TypeScript types for `create` here aren't correct.
+      // This should return [Project, Operation, Response], but the default
+      // signature for `ServiceObject.create` doesn't match.  The fix is to
+      // create an overridden create method on the `Project` object.
+      // https://github.com/googleapis/nodejs-resource/issues/91
+      const res = await project.create();
+      testProjects.push(res[0] as Project);
+      return new Promise((resolve, reject) => {
+        (res[1] as {} as Operation).on('error', reject).on('complete', resolve);
+      });
     });
 
-    beforeEach(function() {
-      if (!CAN_RUN_TESTS) {
-        this.skip();
-      }
-    });
-
-    after(function(done) {
-      if (!CAN_RUN_TESTS) {
-        this.skip();
-        return;
-      }
-      deleteTestProjects(done);
-    });
+    after(async () => deleteTestProjects());
 
     it('should have created the project', done => {
       project.getMetadata((err, metadata) => {
@@ -178,33 +136,15 @@ describe('Resource', () => {
       });
     });
 
-    function deleteTestProjects(callback: (err?: Error) => void) {
-      if (!CAN_RUN_TESTS) {
-        callback();
-        return;
-      }
-      async.series(
-          [
-            callback => {
-              async.eachSeries(testProjects, exec('delete'), callback);
-            },
-            callback => {
-              resource.getProjects((err, projects) => {
-                if (err) {
-                  callback(err);
-                  return;
-                }
-                const projectsToDelete = projects!.filter(project => {
-                  const isTestProject = project.id!.indexOf(PREFIX) === 0;
-                  const deleted =
-                      project.metadata.lifecycleState === 'DELETE_REQUESTED';
-                  return isTestProject && !deleted;
-                });
-                async.each(projectsToDelete, exec('delete'), callback);
-              });
-            },
-          ],
-          callback);
+    async function deleteTestProjects() {
+      await Promise.all(testProjects.map(x => x.delete()));
+      const [projects] = await resource.getProjects();
+      const projectsToDelete = projects.filter(project => {
+        const isTestProject = project.id!.indexOf(PREFIX) === 0;
+        const deleted = project.metadata.lifecycleState === 'DELETE_REQUESTED';
+        return isTestProject && !deleted;
+      });
+      await Promise.all(projectsToDelete.map(x => x.delete()));
     }
 
     function generateName(resourceType: string) {
