@@ -38,9 +38,12 @@ for version in versions:
         excludes=['package.json', 'README.md', 'src/index.js'],
     )
 
+common_templates = gcp.CommonTemplates()
+templates = common_templates.node_library()
+s.copy(templates)
+
 #
 # Node.js specific cleanup
 #
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])
