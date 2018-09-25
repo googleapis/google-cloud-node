@@ -59,8 +59,12 @@ const StoredType = {
  * sensitive information configurable to the data in question.
  *
  * @property {Object} infoType
- *   All CustomInfoTypes must have a name
- *   that does not conflict with built-in InfoTypes or other CustomInfoTypes.
+ *   CustomInfoType can either be a new infoType, or an extension of built-in
+ *   infoType, when the name matches one of existing infoTypes and that infoType
+ *   is specified in `InspectContent.info_types` field. Specifying the latter
+ *   adds findings to the one detected by the system. If built-in info type is
+ *   not specified in `InspectContent.info_types` list then the name is treated
+ *   as a custom info type.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
@@ -99,6 +103,12 @@ const StoredType = {
  *   `surrogate_type` CustomInfoType.
  *
  *   This object should have the same structure as [DetectionRule]{@link google.privacy.dlp.v2.DetectionRule}
+ *
+ * @property {number} exclusionType
+ *   If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding
+ *   to be returned. It still can be used for rules matching.
+ *
+ *   The number should be among the values of [ExclusionType]{@link google.privacy.dlp.v2.ExclusionType}
  *
  * @typedef CustomInfoType
  * @memberof google.privacy.dlp.v2
@@ -171,7 +181,9 @@ const CustomInfoType = {
    * Message defining a custom regular expression.
    *
    * @property {string} pattern
-   *   Pattern defining the regular expression.
+   *   Pattern defining the regular expression. Its syntax
+   *   (https://github.com/google/re2/wiki/Syntax) can be found under the
+   *   google/re2 repository on GitHub.
    *
    * @typedef Regex
    * @memberof google.privacy.dlp.v2
@@ -293,6 +305,24 @@ const CustomInfoType = {
     HotwordRule: {
       // This is for documentation. Actual contents will be loaded by gRPC.
     }
+  },
+
+  /**
+   * @enum {number}
+   * @memberof google.privacy.dlp.v2
+   */
+  ExclusionType: {
+
+    /**
+     * A finding of this custom info type will not be excluded from results.
+     */
+    EXCLUSION_TYPE_UNSPECIFIED: 0,
+
+    /**
+     * A finding of this custom info type will be excluded from final results,
+     * but can still affect rule execution.
+     */
+    EXCLUSION_TYPE_EXCLUDE: 1
   }
 };
 
@@ -369,10 +399,12 @@ const DatastoreOptions = {
 };
 
 /**
- * Options defining a file or a set of files (path ending with *) within
- * a Google Cloud Storage bucket.
+ * Options defining a file or a set of files within a Google Cloud Storage
+ * bucket.
  *
  * @property {Object} fileSet
+ *   The set of one or more files to scan.
+ *
  *   This object should have the same structure as [FileSet]{@link google.privacy.dlp.v2.FileSet}
  *
  * @property {number} bytesLimitPerFile
@@ -412,8 +444,8 @@ const CloudStorageOptions = {
    * Set of files to scan.
    *
    * @property {string} url
-   *   The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
-   *   path is allowed.
+   *   The Cloud Storage url of the file(s) to scan, in the format
+   *   `gs://<bucket>/<path>`. Trailing wildcard in the path is allowed.
    *
    * @typedef FileSet
    * @memberof google.privacy.dlp.v2

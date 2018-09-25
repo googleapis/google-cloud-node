@@ -16,6 +16,105 @@
 // to be loaded as the JS file.
 
 /**
+ * List of exclude infoTypes.
+ *
+ * @property {Object[]} infoTypes
+ *   InfoType list in ExclusionRule rule drops a finding when it overlaps or
+ *   contained within with a finding of an infoType from this list. For
+ *   example, for `InspectionRuleSet.info_types` containing "PHONE_NUMBER"` and
+ *   `exclusion_rule` containing `exclude_info_types.info_types` with
+ *   "EMAIL_ADDRESS" the phone number findings are dropped if they overlap
+ *   with EMAIL_ADDRESS finding.
+ *   That leads to "555-222-2222@example.org" to generate only a single
+ *   finding, namely email address.
+ *
+ *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
+ *
+ * @typedef ExcludeInfoTypes
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.ExcludeInfoTypes definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+const ExcludeInfoTypes = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The rule that specifies conditions when findings of infoTypes specified in
+ * `InspectionRuleSet` are removed from results.
+ *
+ * @property {Object} dictionary
+ *   Dictionary which defines the rule.
+ *
+ *   This object should have the same structure as [Dictionary]{@link google.privacy.dlp.v2.Dictionary}
+ *
+ * @property {Object} regex
+ *   Regular expression which defines the rule.
+ *
+ *   This object should have the same structure as [Regex]{@link google.privacy.dlp.v2.Regex}
+ *
+ * @property {Object} excludeInfoTypes
+ *   Set of infoTypes for which findings would affect this rule.
+ *
+ *   This object should have the same structure as [ExcludeInfoTypes]{@link google.privacy.dlp.v2.ExcludeInfoTypes}
+ *
+ * @property {number} matchingType
+ *   How the rule is applied, see MatchingType documentation for details.
+ *
+ *   The number should be among the values of [MatchingType]{@link google.privacy.dlp.v2.MatchingType}
+ *
+ * @typedef ExclusionRule
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.ExclusionRule definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+const ExclusionRule = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A single inspection rule to be applied to infoTypes, specified in
+ * `InspectionRuleSet`.
+ *
+ * @property {Object} hotwordRule
+ *   Hotword-based detection rule.
+ *
+ *   This object should have the same structure as [HotwordRule]{@link google.privacy.dlp.v2.HotwordRule}
+ *
+ * @property {Object} exclusionRule
+ *   Exclusion rule.
+ *
+ *   This object should have the same structure as [ExclusionRule]{@link google.privacy.dlp.v2.ExclusionRule}
+ *
+ * @typedef InspectionRule
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.InspectionRule definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+const InspectionRule = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Rule set for modifying a set of infoTypes to alter behavior under certain
+ * circumstances, depending on the specific details of the rules within the set.
+ *
+ * @property {Object[]} infoTypes
+ *   List of infoTypes this rule set is applied to.
+ *
+ *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
+ *
+ * @property {Object[]} rules
+ *   Set of rules to be applied to infoTypes. The rules are applied in order.
+ *
+ *   This object should have the same structure as [InspectionRule]{@link google.privacy.dlp.v2.InspectionRule}
+ *
+ * @typedef InspectionRuleSet
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.InspectionRuleSet definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+const InspectionRuleSet = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Configuration description of the scanning process.
  * When used with redactContent only info_types and min_likelihood are currently
  * used.
@@ -64,6 +163,13 @@
  *   If empty, text, images, and other content will be included.
  *
  *   The number should be among the values of [ContentOption]{@link google.privacy.dlp.v2.ContentOption}
+ *
+ * @property {Object[]} ruleSet
+ *   Set of rules to apply to the findings for this InspectConfig.
+ *   Exclusion rules, contained in the set are executed in the end, other
+ *   rules are executed in the order they are specified for each info type.
+ *
+ *   This object should have the same structure as [InspectionRuleSet]{@link google.privacy.dlp.v2.InspectionRuleSet}
  *
  * @typedef InspectConfig
  * @memberof google.privacy.dlp.v2
@@ -3220,6 +3326,21 @@ const GetInspectTemplateRequest = {
  *   Optional size of the page, can be limited by server. If zero server returns
  *   a page of max size 100.
  *
+ * @property {string} orderBy
+ *   Optional comma separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+ *   default sorting order is ascending, redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to time the template was created.
+ *   - `update_time`: corresponds to time the template was last updated.
+ *   - `name`: corresponds to template's name.
+ *   - `display_name`: corresponds to template's display name.
+ *
  * @typedef ListInspectTemplatesRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListInspectTemplatesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -3381,9 +3502,11 @@ const CreateDlpJobRequest = {
  *
  *   Supported fields are:
  *
- *   - `create_time`: corresponds to time the triggeredJob was created.
- *   - `update_time`: corresponds to time the triggeredJob was last updated.
+ *   - `create_time`: corresponds to time the JobTrigger was created.
+ *   - `update_time`: corresponds to time the JobTrigger was last updated.
  *   - `name`: corresponds to JobTrigger's name.
+ *   - `display_name`: corresponds to JobTrigger's display name.
+ *   - `status`: corresponds to JobTrigger's status.
  *
  * @typedef ListJobTriggersRequest
  * @memberof google.privacy.dlp.v2
@@ -3743,6 +3866,21 @@ const GetDeidentifyTemplateRequest = {
  *   Optional size of the page, can be limited by server. If zero server returns
  *   a page of max size 100.
  *
+ * @property {string} orderBy
+ *   Optional comma separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+ *   default sorting order is ascending, redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc,update_time, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to time the template was created.
+ *   - `update_time`: corresponds to time the template was last updated.
+ *   - `name`: corresponds to template's name.
+ *   - `display_name`: corresponds to template's display name.
+ *
  * @typedef ListDeidentifyTemplatesRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListDeidentifyTemplatesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -3999,6 +4137,22 @@ const GetStoredInfoTypeRequest = {
  *   Optional size of the page, can be limited by server. If zero server returns
  *   a page of max size 100.
  *
+ * @property {string} orderBy
+ *   Optional comma separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+ *   default sorting order is ascending, redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, display_name, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to time the most recent version of the
+ *   resource was created.
+ *   - `state`: corresponds to the state of the resource.
+ *   - `name`: corresponds to resource name.
+ *   - `display_name`: corresponds to info type's display name.
+ *
  * @typedef ListStoredInfoTypesRequest
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.ListStoredInfoTypesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -4065,6 +4219,49 @@ const ContentOption = {
    * Images found in the data.
    */
   CONTENT_IMAGE: 2
+};
+
+/**
+ * Type of the match which can be applied to different ways of matching, like
+ * Dictionary, regular expression and intersecting with findings of another
+ * info type.
+ *
+ * @enum {number}
+ * @memberof google.privacy.dlp.v2
+ */
+const MatchingType = {
+
+  /**
+   * Invalid.
+   */
+  MATCHING_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * Full match.
+   *
+   * - Dictionary: join of Dictionary results matched complete finding quote
+   * - Regex: all regex matches fill a finding quote start to end
+   * - Exclude info type: completely inside affecting info types findings
+   */
+  MATCHING_TYPE_FULL_MATCH: 1,
+
+  /**
+   * Partial match.
+   *
+   * - Dictionary: at least one of the tokens in the finding matches
+   * - Regex: substring of the finding matches
+   * - Exclude info type: intersects with affecting info types findings
+   */
+  MATCHING_TYPE_PARTIAL_MATCH: 2,
+
+  /**
+   * Inverse match.
+   *
+   * - Dictionary: no tokens in the finding match the dictionary
+   * - Regex: finding doesn't match the regex
+   * - Exclude info type: no intersection with affecting info types findings
+   */
+  MATCHING_TYPE_INVERSE_MATCH: 3
 };
 
 /**

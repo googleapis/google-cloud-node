@@ -793,6 +793,20 @@ class DlpServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the template was created.
+   *   - `update_time`: corresponds to time the template was last updated.
+   *   - `name`: corresponds to template's name.
+   *   - `display_name`: corresponds to template's display name.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -898,6 +912,20 @@ class DlpServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the template was created.
+   *   - `update_time`: corresponds to time the template was last updated.
+   *   - `name`: corresponds to template's name.
+   *   - `display_name`: corresponds to template's display name.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1170,6 +1198,20 @@ class DlpServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the template was created.
+   *   - `update_time`: corresponds to time the template was last updated.
+   *   - `name`: corresponds to template's name.
+   *   - `display_name`: corresponds to template's display name.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1279,6 +1321,20 @@ class DlpServiceClient {
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc,update_time, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the template was created.
+   *   - `update_time`: corresponds to time the template was last updated.
+   *   - `name`: corresponds to template's name.
+   *   - `display_name`: corresponds to template's display name.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1781,9 +1837,11 @@ class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `create_time`: corresponds to time the triggeredJob was created.
-   *   - `update_time`: corresponds to time the triggeredJob was last updated.
+   *   - `create_time`: corresponds to time the JobTrigger was created.
+   *   - `update_time`: corresponds to time the JobTrigger was last updated.
    *   - `name`: corresponds to JobTrigger's name.
+   *   - `display_name`: corresponds to JobTrigger's display name.
+   *   - `status`: corresponds to JobTrigger's status.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1898,9 +1956,11 @@ class DlpServiceClient {
    *
    *   Supported fields are:
    *
-   *   - `create_time`: corresponds to time the triggeredJob was created.
-   *   - `update_time`: corresponds to time the triggeredJob was last updated.
+   *   - `create_time`: corresponds to time the JobTrigger was created.
+   *   - `update_time`: corresponds to time the JobTrigger was last updated.
    *   - `name`: corresponds to JobTrigger's name.
+   *   - `display_name`: corresponds to JobTrigger's display name.
+   *   - `status`: corresponds to JobTrigger's status.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
