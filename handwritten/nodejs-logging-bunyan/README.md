@@ -102,7 +102,11 @@ that we can better refine this express integration.***
 
 We provide a middleware that can be used in an express application. Apart from
 being easy to use, this enables some more powerful features of Stackdriver
-Logging: request bundling.
+Logging: request bundling. Any application logs emitted on behalf of a specific
+request will be shown nested inside the request log as you see in this
+screenshot:
+
+![Request Bundling Example](doc/images/request-bundling.png)
 
 The middleware adds a `bunyan`-style log function to the `request` object. You
 can use this wherever you have access to the `request` object (`req` in the
