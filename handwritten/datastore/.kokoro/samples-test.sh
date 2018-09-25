@@ -24,6 +24,11 @@ export GCLOUD_PROJECT=long-door-651
 
 cd $(dirname $0)/..
 
+# Run a pre-test hook, if a pre-samples-test.sh is in the project
+if [ -f .kokoro/pre-samples-test.sh ]; then
+    . .kokoro/pre-samples-test.sh
+fi
+
 npm install
 
 # Install and link samples
