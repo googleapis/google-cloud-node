@@ -30,7 +30,7 @@ export interface CreateChangeRequest extends CreateOptions {
 
 export type CreateChangeResponse = [Change, r.Response];
 
-export interface ChangeCallback {
+export interface CreateChangeCallback {
   (err: Error|null, change?: Change|null, apiResponse?: r.Response): void;
 }
 
@@ -233,11 +233,11 @@ export class Change extends ServiceObject {
    * });
    */
   create(config?: CreateChangeRequest): Promise<CreateChangeResponse>;
-  create(config: CreateChangeRequest, callback: ChangeCallback): void;
-  create(callback: ChangeCallback): void;
+  create(config: CreateChangeRequest, callback: CreateChangeCallback): void;
+  create(callback: CreateChangeCallback): void;
   create(
-      configOrCallback?: CreateChangeRequest|ChangeCallback,
-      callback?: ChangeCallback): void|Promise<CreateChangeResponse> {
+      configOrCallback?: CreateChangeRequest|CreateChangeCallback,
+      callback?: CreateChangeCallback): void|Promise<CreateChangeResponse> {
     const config = typeof configOrCallback === 'object' ? configOrCallback : {};
     callback =
         typeof configOrCallback === 'function' ? configOrCallback! : callback;

@@ -24,7 +24,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import {teenyRequest} from 'teeny-request';
 import {Zone} from './zone';
-import {Response} from 'request';
+import * as r from 'request';
 export {Record, RecordMetadata} from './record';
 
 export interface GetZonesRequest {
@@ -41,13 +41,13 @@ export interface DNSConfig extends GoogleAuthOptions {
 
 export interface GetZonesCallback {
   (err: Error|null, zones: Zone[]|null, nextQuery?: GetZonesRequest|null,
-   apiResponse?: Response): void;
+   apiResponse?: r.Response): void;
 }
 
-export type GetZonesResponse = [Zone[], GetZonesRequest | null, Response];
+export type GetZonesResponse = [Zone[], GetZonesRequest | null, r.Response];
 
 export interface GetZoneCallback {
-  (err: Error|null, zone?: Zone|null, apiResponse?: Response): void;
+  (err: Error|null, zone?: Zone|null, apiResponse?: r.Response): void;
 }
 
 export interface CreateZoneRequest {
@@ -56,7 +56,7 @@ export interface CreateZoneRequest {
   name?: string;
 }
 
-export type CreateZoneResponse = [Zone, Response];
+export type CreateZoneResponse = [Zone, r.Response];
 
 /**
  * @typedef {object} ClientConfig
@@ -126,8 +126,7 @@ class DNS extends Service {
         'https://www.googleapis.com/auth/cloud-platform',
       ],
       packageJson: require('../../package.json'),
-      // tslint:disable-next-line:no-any
-      requestModule: teenyRequest as any,
+      requestModule: teenyRequest as typeof r,
     };
     super(config, options);
 

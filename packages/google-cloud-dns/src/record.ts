@@ -19,9 +19,10 @@
 import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import {ChangeCallback} from './change';
+import {CreateChangeCallback, Change} from './change';
 import {Zone} from './zone';
 const format = require('string-format-obj');
+import * as r from 'request';
 
 export interface RecordObject {
   rrdatas?: Array<{}>;
@@ -36,6 +37,23 @@ export interface RecordMetadata {
   ttl: number;
   type?: string;
   signatureRrdatas?: string[];
+}
+
+/**
+ * @typedef {array} DeleteRecordResponse
+ * @property {Change} 0 A {@link Change} object.
+ * @property {object} 1 The full API response.
+ */
+export type DeleteRecordResponse = [Change, r.Response];
+
+/**
+ * @callback DeleteRecordCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?Change} change A {@link Change} object.
+ * @param {object} apiResponse The full API response.
+ */
+export interface DeleteRecordCallback {
+  (err: Error|null, change?: Change, apiResponse?: r.Response): void;
 }
 
 /**
@@ -95,17 +113,7 @@ export class Record implements RecordObject {
       delete this.rrdatas;
     }
   }
-  /**
-   * @typedef {array} DeleteRecordResponse
-   * @property {Change} 0 A {@link Change} object.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback DeleteRecordCallback
-   * @param {?Error} err Request error, if any.
-   * @param {?Change} change A {@link Change} object.
-   * @param {object} apiResponse The full API response.
-   */
+
   /**
    * Delete this record by creating a change on your zone. This is a convenience
    * method for:
@@ -143,8 +151,10 @@ export class Record implements RecordObject {
    *   const apiResponse = data[1];
    * });
    */
-  delete(callback: ChangeCallback) {
-    this.zone_.deleteRecords(this, callback);
+  delete(): Promise<DeleteRecordResponse>;
+  delete(callback: CreateChangeCallback): void;
+  delete(callback?: CreateChangeCallback): void|Promise<DeleteRecordResponse> {
+    this.zone_.deleteRecords(this, callback!);
   }
   /**
    * Serialize the record instance to the format the API expects.

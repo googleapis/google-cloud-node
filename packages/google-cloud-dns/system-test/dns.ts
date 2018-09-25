@@ -24,7 +24,7 @@ import * as fs from 'fs';
 const tmp = require('tmp');
 import * as uuid from 'uuid';
 import {DNS} from '../src';
-import {ChangeCallback} from '../src/change';
+import {CreateChangeCallback} from '../src/change';
 import {Record} from '../src';
 import {Response} from 'request';
 
@@ -217,9 +217,9 @@ describe('dns', () => {
         assert.ifError(err);
         async.series(
             [
-              next => ZONE.empty(next as ChangeCallback),
+              next => ZONE.empty(next as CreateChangeCallback),
               next => ZONE.addRecords(
-                  [records.spf, records.srv], next as ChangeCallback),
+                  [records.spf, records.srv], next as CreateChangeCallback),
               next => ZONE.export(tmpFilename, next)
             ],
             done);
@@ -315,8 +315,7 @@ describe('dns', () => {
     it('should replace records', async () => {
       const name = 'test-zone-' + uuid.v4().substr(0, 18);
       // Do this in a new zone so no existing records are affected.
-      // tslint:disable-next-line:no-any
-      const [zone] = await (dns as any).createZone(name, {dnsName: DNS_DOMAIN});
+      const [zone] = await dns.createZone(name, {dnsName: DNS_DOMAIN});
       const [originalRecords] = await zone.getRecords('ns');
       const originalData = originalRecords[0].data;
       const newRecord = zone.record('ns', {
