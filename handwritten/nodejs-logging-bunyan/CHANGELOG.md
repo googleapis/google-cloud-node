@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## v0.9.2
+
+### Bug Fixes
+- fix: logged errors are reported to error reporting ([#122](https://github.com/googleapis/nodejs-logging-bunyan/pull/122))
+- chore: fix `stream` example in README ([#134](https://github.com/googleapis/nodejs-logging-bunyan/pull/134))
+- fix(deps): update @google-cloud/logging to 4.x ([#152](https://github.com/googleapis/nodejs-logging-bunyan/pull/152))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/common to ^0.25.0 ([#150](https://github.com/googleapis/nodejs-logging-bunyan/pull/150))
+- chore(deps): update dependency delay to v4 ([#142](https://github.com/googleapis/nodejs-logging-bunyan/pull/142))
+- fix(deps): update dependency @google-cloud/common to ^0.24.0 ([#146](https://github.com/googleapis/nodejs-logging-bunyan/pull/146))
+- fix(deps): update dependency @opencensus/propagation-stackdriver to ^0.0.4 ([#141](https://github.com/googleapis/nodejs-logging-bunyan/pull/141))
+- fix(deps): update dependency @google-cloud/common to ^0.23.0 ([#139](https://github.com/googleapis/nodejs-logging-bunyan/pull/139))
+- fix(deps): update samples dependency @google-cloud/logging-bunyan to ^0.9.0 ([#137](https://github.com/googleapis/nodejs-logging-bunyan/pull/137))
+- chore(deps): update dependency execa to v1 ([#138](https://github.com/googleapis/nodejs-logging-bunyan/pull/138))
+
+### Internal / Testing Changes
+- Enable prefer-const in the eslint config ([#151](https://github.com/googleapis/nodejs-logging-bunyan/pull/151))
+- Enable no-var in eslint ([#149](https://github.com/googleapis/nodejs-logging-bunyan/pull/149))
+- Update CI config ([#147](https://github.com/googleapis/nodejs-logging-bunyan/pull/147))
+- Add synth script and update CI ([#144](https://github.com/googleapis/nodejs-logging-bunyan/pull/144))
+- Retry npm install in CI ([#143](https://github.com/googleapis/nodejs-logging-bunyan/pull/143))
+- chore(deps): update dependency nyc to v13 ([#140](https://github.com/googleapis/nodejs-logging-bunyan/pull/140))
+
 ## v0.9.1
 
 ### Fixes
