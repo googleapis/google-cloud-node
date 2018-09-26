@@ -17,7 +17,7 @@
     "test": "node -e 'console.log(`no tests`)'"
   },
   "dependencies": {
-    "@google-cloud/os-login": "^0.2.0"
+    "@google-cloud/os-login": "^0.3.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0"
