@@ -23,7 +23,8 @@
   },
   "keywords": [],
   "files": [
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "author": "Google Inc.",
   "license": "Apache-2.0",
