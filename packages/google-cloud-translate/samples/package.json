@@ -15,6 +15,8 @@
   },
   "dependencies": {
     "@google-cloud/translate": "^2.1.2",
+    "@google-cloud/automl": "^0.1.1",
+    "mathjs": "^5.1.0",
     "yargs": "^12.0.1"
   },
   "devDependencies": {
