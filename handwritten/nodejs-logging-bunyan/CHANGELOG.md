@@ -4,6 +4,11 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## v0.9.4
+
+### Documentation
+- fix: doc string is malformed for jsdoc ([#164](https://github.com/googleapis/nodejs-logging-bunyan/pull/164))
+
 ## v0.9.2
 
 ### Bug Fixes
