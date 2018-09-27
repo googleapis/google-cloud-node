@@ -74,7 +74,7 @@
  * @memberof google.iam.v1
  * @see [google.iam.v1.Policy definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/policy.proto}
  */
-var Policy = {
+const Policy = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -113,7 +113,7 @@ var Policy = {
  * @memberof google.iam.v1
  * @see [google.iam.v1.Binding definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/policy.proto}
  */
-var Binding = {
+const Binding = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -129,7 +129,7 @@ var Binding = {
  * @memberof google.iam.v1
  * @see [google.iam.v1.PolicyDelta definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/policy.proto}
  */
-var PolicyDelta = {
+const PolicyDelta = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -157,6 +157,6 @@ var PolicyDelta = {
  * @memberof google.iam.v1
  * @see [google.iam.v1.BindingDelta definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/policy.proto}
  */
-var BindingDelta = {
+const BindingDelta = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
