@@ -16,7 +16,8 @@
     ]
   },
   "files": [
-    "build/src"
+    "build/src",
+    "!build/src/**/*.map"
   ],
   "contributors": [
     "Ace Nassri <anassri@google.com>",
