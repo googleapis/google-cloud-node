@@ -36,7 +36,7 @@
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.TemporalAsset definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/assets.proto}
  */
-var TemporalAsset = {
+const TemporalAsset = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -58,7 +58,7 @@ var TemporalAsset = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.TimeWindow definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/assets.proto}
  */
-var TimeWindow = {
+const TimeWindow = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -90,7 +90,7 @@ var TimeWindow = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.Asset definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/assets.proto}
  */
-var Asset = {
+const Asset = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -139,6 +139,6 @@ var Asset = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.Resource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/assets.proto}
  */
-var Resource = {
+const Resource = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

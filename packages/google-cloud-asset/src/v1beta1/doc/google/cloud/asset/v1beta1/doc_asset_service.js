@@ -52,7 +52,7 @@
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.ExportAssetsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/asset_service.proto}
  */
-var ExportAssetsRequest = {
+const ExportAssetsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -76,7 +76,7 @@ var ExportAssetsRequest = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.ExportAssetsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/asset_service.proto}
  */
-var ExportAssetsResponse = {
+const ExportAssetsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -113,7 +113,7 @@ var ExportAssetsResponse = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.BatchGetAssetsHistoryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/asset_service.proto}
  */
-var BatchGetAssetsHistoryRequest = {
+const BatchGetAssetsHistoryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -129,7 +129,7 @@ var BatchGetAssetsHistoryRequest = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.BatchGetAssetsHistoryResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/asset_service.proto}
  */
-var BatchGetAssetsHistoryResponse = {
+const BatchGetAssetsHistoryResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -145,7 +145,7 @@ var BatchGetAssetsHistoryResponse = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.OutputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/asset_service.proto}
  */
-var OutputConfig = {
+const OutputConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -162,7 +162,7 @@ var OutputConfig = {
  * @memberof google.cloud.asset.v1beta1
  * @see [google.cloud.asset.v1beta1.GcsDestination definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/asset/v1beta1/asset_service.proto}
  */
-var GcsDestination = {
+const GcsDestination = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -172,7 +172,7 @@ var GcsDestination = {
  * @enum {number}
  * @memberof google.cloud.asset.v1beta1
  */
-var ContentType = {
+const ContentType = {
 
   /**
    * Unspecified content type.

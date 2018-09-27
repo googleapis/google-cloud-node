@@ -259,13 +259,13 @@ class AssetServiceClient {
    *
    * const asset = require('asset.v1beta1');
    *
-   * var client = new asset.v1beta1.AssetServiceClient({
+   * const client = new asset.v1beta1.AssetServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
-   * var outputConfig = {};
-   * var request = {
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const outputConfig = {};
+   * const request = {
    *   parent: formattedParent,
    *   outputConfig: outputConfig,
    * };
@@ -273,29 +273,29 @@ class AssetServiceClient {
    * // Handle the operation using the promise pattern.
    * client.exportAssets(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
    *     // The final result of the operation.
-   *     var result = responses[0];
+   *     const result = responses[0];
    *
    *     // The metadata value of the completed operation.
-   *     var metadata = responses[1];
+   *     const metadata = responses[1];
    *
    *     // The response of the api call returning the complete operation.
-   *     var finalApiResponse = responses[2];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
-   * var outputConfig = {};
-   * var request = {
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const outputConfig = {};
+   * const request = {
    *   parent: formattedParent,
    *   outputConfig: outputConfig,
    * };
@@ -303,8 +303,8 @@ class AssetServiceClient {
    * // Handle the operation using the event emitter pattern.
    * client.exportAssets(request)
    *   .then(responses => {
-   *     var operation = responses[0];
-   *     var initialApiResponse = responses[1];
+   *     const operation = responses[0];
+   *     const initialApiResponse = responses[1];
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -383,21 +383,21 @@ class AssetServiceClient {
    *
    * const asset = require('asset.v1beta1');
    *
-   * var client = new asset.v1beta1.AssetServiceClient({
+   * const client = new asset.v1beta1.AssetServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
-   * var contentType = 'CONTENT_TYPE_UNSPECIFIED';
-   * var readTimeWindow = {};
-   * var request = {
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const contentType = 'CONTENT_TYPE_UNSPECIFIED';
+   * const readTimeWindow = {};
+   * const request = {
    *   parent: formattedParent,
    *   contentType: contentType,
    *   readTimeWindow: readTimeWindow,
    * };
    * client.batchGetAssetsHistory(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
