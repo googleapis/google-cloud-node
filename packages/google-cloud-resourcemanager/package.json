@@ -12,6 +12,7 @@
   "types": "./build/src/index.d.ts",
   "files": [
     "build/src",
+    "!build/src/**/*.map",
     "AUTHORS",
     "CONTRIBUTORS",
     "LICENSE"
