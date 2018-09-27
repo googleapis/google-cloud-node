@@ -76,21 +76,33 @@ export interface RequestProfile {
 }
 
 /**
+ * @return the message of the response body, if that field exists. Otherwise,
+ * returns the response status message.
+ */
+function getResponseErrorMessage(response: http.IncomingMessage): string|
+    undefined {
+  // tslint:disable-next-line: no-any
+  const body = (response as any).body;
+  if (body && body.message && typeof body.message === 'string') {
+    return body.message;
+  }
+  return response.statusMessage;
+}
+
+/**
  * @return number indicated by backoff if the response indicates a backoff and
  * that backoff is greater than 0. Otherwise returns undefined.
  */
 function getServerResponseBackoff(response: http.IncomingMessage): number|
     undefined {
-  // tslint:disable-next-line: no-any
-  const body = (response as any).body;
-
   // The response currently does not have field containing the server-specified
   // backoff. As a workaround, response body's message is parsed to get the
   // backoff.
   // TODO (issue #250): Remove this workaround and get the retry delay from
   // body.error.details.
-  if (body && body.message && typeof body.message === 'string') {
-    return parseBackoffDuration(body.message);
+  const message = getResponseErrorMessage(response);
+  if (message) {
+    return parseBackoffDuration(message);
   }
   return undefined;
 }
@@ -161,8 +173,8 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
  * Error constructed from HTTP server response which indicates backoff.
  */
 class BackoffResponseError extends Error {
-  constructor(response: http.IncomingMessage, readonly backoffMillis: number) {
-    super(response.statusMessage);
+  constructor(message: string|undefined, readonly backoffMillis: number) {
+    super(message);
   }
 }
 
@@ -211,9 +223,10 @@ function responseToProfileOrError(
     response?: http.IncomingMessage): RequestProfile {
   // response.statusCode is guaranteed to exist on client requests.
   if (response && isErrorResponseStatusCode(response.statusCode!)) {
+    const message = getResponseErrorMessage(response);
     const delayMillis = getServerResponseBackoff(response);
     if (delayMillis) {
-      throw new BackoffResponseError(response, delayMillis);
+      throw new BackoffResponseError(message, delayMillis);
     }
     throw new Error(response.statusMessage);
   }
