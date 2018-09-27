@@ -15,5 +15,5 @@
 'use strict';
 
 describe('VideoIntelligenceServiceSmokeTest', () => {
-  LongRunningOptionalArrayMethod$;
+  $unhandledCase: LongRunningOptionalArrayMethod$
 });
