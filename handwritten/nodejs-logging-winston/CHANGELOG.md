@@ -4,6 +4,11 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## v0.10.1
+
+### Documentation
+- Add missing @class docstring ([#176](https://github.com/googleapis/nodejs-logging-winston/pull/176))
+
 ## v0.10.0
 
 **This release has breaking changes**.  Support for node.js 4.x and 9.x has ended.
