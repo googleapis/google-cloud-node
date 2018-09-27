@@ -9,7 +9,6 @@
     "node": ">=8"
   },
   "scripts": {
-    "ava": "ava -T 20s --verbose test/*.test.js ./system-test/*.test.js",
     "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
     "test": "ava -T 5m --verbose system-test/*.test.js"
   },
