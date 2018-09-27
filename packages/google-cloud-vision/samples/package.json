@@ -12,8 +12,11 @@
     "test": "ava -T 1m --verbose system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/vision": "^0.22.1",
+
+    "@google-cloud/automl": "^0.1.1",
+    "@google-cloud/vision": "^0.22.0",
     "async": "^2.6.1",
+    "mathjs": "^5.0.4",
     "natural": "^0.6.1",
     "redis": "^2.8.0",
     "yargs": "^12.0.0"
@@ -22,6 +25,8 @@
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@google-cloud/storage": "^2.0.0",
     "ava": "^0.25.0",
+    "proxyquire": "^2.0.1",
+    "sinon": "^6.0.1",
     "uuid": "^3.2.1"
   },
   "optionalDependencies": {
