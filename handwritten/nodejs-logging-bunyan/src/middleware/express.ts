@@ -25,50 +25,12 @@ export type NextFunction = (err?: Error) => void;
 import {LOGGING_TRACE_KEY, LoggingBunyan} from '../index';
 import * as types from '../types/core';
 
-export type LogObject = {
-  // tslint:disable-next-line:no-any bunyan interface.
-  [level in bunyan.LogLevelString]: (...args: any[]) => void;
-};
+// @types/bunyan doesn't export Logger. Access it via ReturnType on
+// createLogger.
+type Logger = ReturnType<typeof bunyan.createLogger>;
 
 export interface AnnotatedRequest extends Request {
-  log: LogObject;
-}
-
-function makeLogFunction(
-    level: bunyan.LogLevelString,
-    logger: ReturnType<typeof bunyan.createLogger>, trace: string|null) {
-  // tslint:disable-next-line:no-any bunyan interface.
-  return (...args: any[]) => {
-    let fields;
-    if (args[0] instanceof Error) {
-      // logger.info(err, ...);
-      fields = {err: args[0]};
-      args[0] = fields;
-    } else if (typeof args[0] !== 'object' || Array.isArray(args[0])) {
-      // logger.info(msg, ...);
-      fields = {};
-      args.unshift(fields);
-    } else {
-      // logger.info({...}, msg, ....);
-      fields = args[0];
-    }
-    if (trace) {
-      fields[LOGGING_TRACE_KEY] = trace;
-    }
-    return logger[level].apply(logger, args);
-  };
-}
-
-function makeLogObject(
-    logger: ReturnType<typeof bunyan.createLogger>,
-    trace: string|null): LogObject {
-  const log = {} as LogObject;
-  const levels: bunyan.LogLevelString[] =
-      ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
-  levels.forEach((level: bunyan.LogLevelString) => {
-    log[level] = makeLogFunction(level, logger, trace);
-  });
-  return log;
+  log: Logger;
 }
 
 export interface MiddlewareOptions extends types.Options {
@@ -76,7 +38,7 @@ export interface MiddlewareOptions extends types.Options {
 }
 
 export interface MiddlewareReturnType {
-  logger: ReturnType<typeof bunyan.createLogger>;
+  logger: Logger;
   // tslint:disable-next-line:no-any express middleware.
   mw: (req: Request, res: Response, next: NextFunction) => any;
 }
@@ -121,7 +83,8 @@ export async function middleware(options?: MiddlewareOptions):
 
       const trace = `projects/${projectId}/traces/${spanContext.traceId}`;
 
-      (req as AnnotatedRequest).log = makeLogObject(logger, trace);
+      (req as AnnotatedRequest).log =
+          logger.child({[LOGGING_TRACE_KEY]: trace}, true /*simple child */);
       next();
     }
   };
