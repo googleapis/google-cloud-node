@@ -185,7 +185,7 @@ class Zone extends ServiceObject {
        * Create a zone.
        *
        * @method Zone#create
-       * @param {CreateZoneRequest} [metadata] Metadata to set for the zone.
+       * @param {CreateZoneRequest} metadata Metadata to set for the zone.
        * @param {CreateZoneCallback} [callback] Callback function.
        * @returns {Promise<CreateZoneResponse>}
        *

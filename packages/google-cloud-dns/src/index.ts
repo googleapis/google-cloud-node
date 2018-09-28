@@ -189,7 +189,7 @@ class DNS extends Service {
    * @throws {error} If a zone dnsName is not provided.
    *
    * @param {string} name Name of the zone to create, e.g. "my-zone".
-   * @param {CreateZoneRequest} [config] Config to set for the zone.
+   * @param {CreateZoneRequest} config Config to set for the zone.
    * @param {CreateZoneCallback} [callback] Callback function.
    * @returns {Promise<CreateZoneResponse>}
    * @throws {Error} If a name is not provided.
