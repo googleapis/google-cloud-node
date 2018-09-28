@@ -37,18 +37,10 @@ export class LoggingWinston extends TransportStream {
 
   log({message, level, splat, stack, ...metadata}: types.Winston3LogArg,
       callback: Callback) {
-    if (stack) {
-      // this happens if someone calls.
-      // logger.error(new Error('boop'))
-      // winston 3 console logging produces this output
-      //   {"level":"error"}
-      // whereas this logging transport will generate
-      //   {"level":"error","message":error.message +' '+error.stack}
-      //
-      // this should make the errors appear in the stack driver error reporting
-      // console.
-      message = message + ' ' + stack;
-    }
+    // If the whole message is an error we have to manually copy the stack into
+    // metadata. Errors dont have enumerable properties so they don't
+    // destructure.
+    if (stack) metadata.stack = stack;
 
     this.common.log(level, message, metadata || {}, callback);
   }
