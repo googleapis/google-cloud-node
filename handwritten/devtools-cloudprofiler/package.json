@@ -29,7 +29,7 @@
     "@google-cloud/common": "^0.25.0",
     "bindings": "^1.2.1",
     "console-log-level": "^1.4.0",
-    "delay": "^3.1.0",
+    "delay": "^4.0.1",
     "extend": "^3.0.1",
     "gcp-metadata": "^0.8.0",
     "nan": "^2.8.0",
