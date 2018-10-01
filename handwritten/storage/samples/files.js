@@ -23,7 +23,7 @@
 
 'use strict';
 
-function listFiles(bucketName) {
+async function listFiles(bucketName) {
   // [START storage_list_files]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -37,24 +37,16 @@ function listFiles(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Lists files in the bucket
-  storage
-    .bucket(bucketName)
-    .getFiles()
-    .then(results => {
-      const files = results[0];
+  const [files] = await storage.bucket(bucketName).getFiles();
 
-      console.log('Files:');
-      files.forEach(file => {
-        console.log(file.name);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  console.log('Files:');
+  files.forEach(file => {
+    console.log(file.name);
+  });
   // [END storage_list_files]
 }
 
-function listFilesByPrefix(bucketName, prefix, delimiter) {
+async function listFilesByPrefix(bucketName, prefix, delimiter) {
   // [START storage_list_files_with_prefix]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -97,24 +89,16 @@ function listFilesByPrefix(bucketName, prefix, delimiter) {
   }
 
   // Lists files in the bucket, filtered by a prefix
-  storage
-    .bucket(bucketName)
-    .getFiles(options)
-    .then(results => {
-      const files = results[0];
+  const [files] = await storage.bucket(bucketName).getFiles(options);
 
-      console.log('Files:');
-      files.forEach(file => {
-        console.log(file.name);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  console.log('Files:');
+  files.forEach(file => {
+    console.log(file.name);
+  });
   // [END storage_list_files_with_prefix]
 }
 
-function uploadFile(bucketName, filename) {
+async function uploadFile(bucketName, filename) {
   // [START storage_upload_file]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -129,28 +113,22 @@ function uploadFile(bucketName, filename) {
   // const filename = 'Local file to upload, e.g. ./local/path/to/file.txt';
 
   // Uploads a local file to the bucket
-  storage
-    .bucket(bucketName)
-    .upload(filename, {
-      // Support for HTTP requests made with `Accept-Encoding: gzip`
-      gzip: true,
-      metadata: {
-        // Enable long-lived HTTP caching headers
-        // Use only if the contents of the file will never change
-        // (If the contents will change, use cacheControl: 'no-cache')
-        cacheControl: 'public, max-age=31536000',
-      },
-    })
-    .then(() => {
-      console.log(`${filename} uploaded to ${bucketName}.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await storage.bucket(bucketName).upload(filename, {
+    // Support for HTTP requests made with `Accept-Encoding: gzip`
+    gzip: true,
+    metadata: {
+      // Enable long-lived HTTP caching headers
+      // Use only if the contents of the file will never change
+      // (If the contents will change, use cacheControl: 'no-cache')
+      cacheControl: 'public, max-age=31536000',
+    },
+  });
+
+  console.log(`${filename} uploaded to ${bucketName}.`);
   // [END storage_upload_file]
 }
 
-function uploadFileWithKmsKey(bucketName, filename, kmsKeyName) {
+async function uploadFileWithKmsKey(bucketName, filename, kmsKeyName) {
   // [START storage_upload_with_kms_key]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -166,21 +144,15 @@ function uploadFileWithKmsKey(bucketName, filename, kmsKeyName) {
   // const kmsKeyName = 'KMS key resource id, e.g. my-key';
 
   // Uploads a local file to the bucket with the kms key
-  storage
-    .bucket(bucketName)
-    .upload(filename, {
-      kmsKeyName,
-    })
-    .then(() => {
-      console.log(`${filename} uploaded to ${bucketName} using ${kmsKeyName}.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await storage.bucket(bucketName).upload(filename, {
+    kmsKeyName,
+  });
+
+  console.log(`${filename} uploaded to ${bucketName} using ${kmsKeyName}.`);
   // [END storage_upload_with_kms_key]
 }
 
-function downloadFile(bucketName, srcFilename, destFilename) {
+async function downloadFile(bucketName, srcFilename, destFilename) {
   // [START storage_download_file]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -201,22 +173,18 @@ function downloadFile(bucketName, srcFilename, destFilename) {
   };
 
   // Downloads the file
-  storage
+  await storage
     .bucket(bucketName)
     .file(srcFilename)
-    .download(options)
-    .then(() => {
-      console.log(
-        `gs://${bucketName}/${srcFilename} downloaded to ${destFilename}.`
-      );
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .download(options);
+
+  console.log(
+    `gs://${bucketName}/${srcFilename} downloaded to ${destFilename}.`
+  );
   // [END storage_download_file]
 }
 
-function deleteFile(bucketName, filename) {
+async function deleteFile(bucketName, filename) {
   // [START storage_delete_file]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -231,20 +199,16 @@ function deleteFile(bucketName, filename) {
   // const filename = 'File to delete, e.g. file.txt';
 
   // Deletes the file from the bucket
-  storage
+  await storage
     .bucket(bucketName)
     .file(filename)
-    .delete()
-    .then(() => {
-      console.log(`gs://${bucketName}/${filename} deleted.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .delete();
+
+  console.log(`gs://${bucketName}/${filename} deleted.`);
   // [END storage_delete_file]
 }
 
-function getMetadata(bucketName, filename) {
+async function getMetadata(bucketName, filename) {
   // [START storage_get_metadata]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -259,42 +223,36 @@ function getMetadata(bucketName, filename) {
   // const filename = 'File to access, e.g. file.txt';
 
   // Gets the metadata for the file
-  storage
+  const [metadata] = await storage
     .bucket(bucketName)
     .file(filename)
-    .getMetadata()
-    .then(results => {
-      const metadata = results[0];
+    .getMetadata();
 
-      console.log(`File: ${metadata.name}`);
-      console.log(`Bucket: ${metadata.bucket}`);
-      console.log(`Storage class: ${metadata.storageClass}`);
-      console.log(`Self link: ${metadata.selfLink}`);
-      console.log(`ID: ${metadata.id}`);
-      console.log(`Size: ${metadata.size}`);
-      console.log(`Updated: ${metadata.updated}`);
-      console.log(`Generation: ${metadata.generation}`);
-      console.log(`Metageneration: ${metadata.metageneration}`);
-      console.log(`Etag: ${metadata.etag}`);
-      console.log(`Owner: ${metadata.owner}`);
-      console.log(`Component count: ${metadata.component_count}`);
-      console.log(`Crc32c: ${metadata.crc32c}`);
-      console.log(`md5Hash: ${metadata.md5Hash}`);
-      console.log(`Cache-control: ${metadata.cacheControl}`);
-      console.log(`Content-type: ${metadata.contentType}`);
-      console.log(`Content-disposition: ${metadata.contentDisposition}`);
-      console.log(`Content-encoding: ${metadata.contentEncoding}`);
-      console.log(`Content-language: ${metadata.contentLanguage}`);
-      console.log(`Metadata: ${metadata.metadata}`);
-      console.log(`Media link: ${metadata.mediaLink}`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  console.log(`File: ${metadata.name}`);
+  console.log(`Bucket: ${metadata.bucket}`);
+  console.log(`Storage class: ${metadata.storageClass}`);
+  console.log(`Self link: ${metadata.selfLink}`);
+  console.log(`ID: ${metadata.id}`);
+  console.log(`Size: ${metadata.size}`);
+  console.log(`Updated: ${metadata.updated}`);
+  console.log(`Generation: ${metadata.generation}`);
+  console.log(`Metageneration: ${metadata.metageneration}`);
+  console.log(`Etag: ${metadata.etag}`);
+  console.log(`Owner: ${metadata.owner}`);
+  console.log(`Component count: ${metadata.component_count}`);
+  console.log(`Crc32c: ${metadata.crc32c}`);
+  console.log(`md5Hash: ${metadata.md5Hash}`);
+  console.log(`Cache-control: ${metadata.cacheControl}`);
+  console.log(`Content-type: ${metadata.contentType}`);
+  console.log(`Content-disposition: ${metadata.contentDisposition}`);
+  console.log(`Content-encoding: ${metadata.contentEncoding}`);
+  console.log(`Content-language: ${metadata.contentLanguage}`);
+  console.log(`Metadata: ${metadata.metadata}`);
+  console.log(`Media link: ${metadata.mediaLink}`);
   // [END storage_get_metadata]
 }
 
-function makePublic(bucketName, filename) {
+async function makePublic(bucketName, filename) {
   // [START storage_make_public]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -309,20 +267,16 @@ function makePublic(bucketName, filename) {
   // const filename = 'File to make public, e.g. file.txt';
 
   // Makes the file public
-  storage
+  await storage
     .bucket(bucketName)
     .file(filename)
-    .makePublic()
-    .then(() => {
-      console.log(`gs://${bucketName}/${filename} is now public.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .makePublic();
+
+  console.log(`gs://${bucketName}/${filename} is now public.`);
   // [END storage_make_public]
 }
 
-function generateSignedUrl(bucketName, filename) {
+async function generateSignedUrl(bucketName, filename) {
   // [START storage_generate_signed_url]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -343,22 +297,16 @@ function generateSignedUrl(bucketName, filename) {
   };
 
   // Get a signed URL for the file
-  storage
+  const [url] = await storage
     .bucket(bucketName)
     .file(filename)
-    .getSignedUrl(options)
-    .then(results => {
-      const url = results[0];
+    .getSignedUrl(options);
 
-      console.log(`The signed url for ${filename} is ${url}.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  console.log(`The signed url for ${filename} is ${url}.`);
   // [END storage_generate_signed_url]
 }
 
-function moveFile(bucketName, srcFilename, destFilename) {
+async function moveFile(bucketName, srcFilename, destFilename) {
   // [START storage_move_file]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -374,22 +322,23 @@ function moveFile(bucketName, srcFilename, destFilename) {
   // const destFilename = 'Destination for file, e.g. moved.txt';
 
   // Moves the file within the bucket
-  storage
+  await storage
     .bucket(bucketName)
     .file(srcFilename)
-    .move(destFilename)
-    .then(() => {
-      console.log(
-        `gs://${bucketName}/${srcFilename} moved to gs://${bucketName}/${destFilename}.`
-      );
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .move(destFilename);
+
+  console.log(
+    `gs://${bucketName}/${srcFilename} moved to gs://${bucketName}/${destFilename}.`
+  );
   // [END storage_move_file]
 }
 
-function copyFile(srcBucketName, srcFilename, destBucketName, destFilename) {
+async function copyFile(
+  srcBucketName,
+  srcFilename,
+  destBucketName,
+  destFilename
+) {
   // [START storage_copy_file]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -406,18 +355,14 @@ function copyFile(srcBucketName, srcFilename, destBucketName, destFilename) {
   // const destFilename = 'Destination name of file, e.g. file.txt';
 
   // Copies the file to the other bucket
-  storage
+  await storage
     .bucket(srcBucketName)
     .file(srcFilename)
-    .copy(storage.bucket(destBucketName).file(destFilename))
-    .then(() => {
-      console.log(
-        `gs://${srcBucketName}/${srcFilename} copied to gs://${destBucketName}/${destFilename}.`
-      );
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .copy(storage.bucket(destBucketName).file(destFilename));
+
+  console.log(
+    `gs://${srcBucketName}/${srcFilename} copied to gs://${destBucketName}/${destFilename}.`
+  );
   // [END storage_copy_file]
 }
 

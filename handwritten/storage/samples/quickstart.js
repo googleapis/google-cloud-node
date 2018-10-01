@@ -31,12 +31,14 @@ const storage = new Storage({
 const bucketName = 'my-new-bucket';
 
 // Creates the new bucket
-storage
-  .createBucket(bucketName)
-  .then(() => {
-    console.log(`Bucket ${bucketName} created.`);
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
+async function createBucket() {
+  await storage.createBucket(bucketName);
+  console.log(`Bucket ${bucketName} created.`);
+}
+
+try {
+  createBucket();
+} catch (err) {
+  console.error('ERROR:', err);
+}
 // [END storage_quickstart]

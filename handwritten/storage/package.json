@@ -67,7 +67,7 @@
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix",
+    "fix": "gts fix && eslint --fix samples/**/*.js system-test/",
     "prepare": "npm run compile"
   },
   "nyc": {

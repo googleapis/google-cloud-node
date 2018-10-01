@@ -18,8 +18,8 @@
 
 'use strict';
 
-const storage = require('@google-cloud/storage')();
-
+const {Storage} = require('@google-cloud/storage');
+const storage = new Storage();
 const NAME_REG_EXP = /^nodejs-storage-samples-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/;
 
 storage

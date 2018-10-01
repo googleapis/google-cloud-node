@@ -23,7 +23,7 @@
 
 'use strict';
 
-function createBucket(bucketName) {
+async function createBucket(bucketName) {
   // [START storage_create_bucket]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -37,21 +37,16 @@ function createBucket(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Creates a new bucket
-  storage
-    .createBucket(bucketName, {
-      location: 'ASIA',
-      storageClass: 'COLDLINE',
-    })
-    .then(() => {
-      console.log(`Bucket ${bucketName} created.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await storage.createBucket(bucketName, {
+    location: 'ASIA',
+    storageClass: 'COLDLINE',
+  });
+
+  console.log(`Bucket ${bucketName} created.`);
   // [END storage_create_bucket]
 }
 
-function listBuckets() {
+async function listBuckets() {
   // [START storage_list_buckets]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -60,23 +55,15 @@ function listBuckets() {
   const storage = new Storage();
 
   // Lists all buckets in the current project
-  storage
-    .getBuckets()
-    .then(results => {
-      const buckets = results[0];
-
-      console.log('Buckets:');
-      buckets.forEach(bucket => {
-        console.log(bucket.name);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  const [buckets] = await storage.getBuckets();
+  console.log('Buckets:');
+  buckets.forEach(bucket => {
+    console.log(bucket.name);
+  });
   // [END storage_list_buckets]
 }
 
-function deleteBucket(bucketName) {
+async function deleteBucket(bucketName) {
   // [START storage_delete_bucket]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -90,19 +77,13 @@ function deleteBucket(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Deletes the bucket
-  storage
-    .bucket(bucketName)
-    .delete()
-    .then(() => {
-      console.log(`Bucket ${bucketName} deleted.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await storage.bucket(bucketName).delete();
+
+  console.log(`Bucket ${bucketName} deleted.`);
   // [END storage_delete_bucket]
 }
 
-function enableDefaultKMSKey(bucketName, defaultKmsKeyName) {
+async function enableDefaultKMSKey(bucketName, defaultKmsKeyName) {
   // [START storage_set_bucket_default_kms_key]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -117,21 +98,15 @@ function enableDefaultKMSKey(bucketName, defaultKmsKeyName) {
   // const defaultKmsKeyName = 'KMS key resource id, e.g. my-key';
 
   // Enables a default KMS key for the bucket
-  storage
-    .bucket(bucketName)
-    .setMetadata({
-      encryption: {
-        defaultKmsKeyName,
-      },
-    })
-    .then(() => {
-      console.log(
-        `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
-      );
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await storage.bucket(bucketName).setMetadata({
+    encryption: {
+      defaultKmsKeyName,
+    },
+  });
+
+  console.log(
+    `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
+  );
   // [END storage_set_bucket_default_kms_key]
 }
 

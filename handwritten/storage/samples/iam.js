@@ -15,7 +15,7 @@
 
 'use strict';
 
-function viewBucketIamMembers(bucketName) {
+async function viewBucketIamMembers(bucketName) {
   // [START storage_view_bucket_iam_members]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -29,31 +29,25 @@ function viewBucketIamMembers(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Gets and displays the bucket's IAM policy
-  storage
-    .bucket(bucketName)
-    .iam.getPolicy()
-    .then(results => {
-      const policy = results[0].bindings;
+  const results = await storage.bucket(bucketName).iam.getPolicy();
 
-      // Displays the roles in the bucket's IAM policy
-      console.log(`Roles for bucket ${bucketName}:`);
-      policy.forEach(role => {
-        console.log(`  Role: ${role.role}`);
-        console.log(`  Members:`);
+  const policy = results[0].bindings;
 
-        const members = role.members;
-        members.forEach(member => {
-          console.log(`    ${member}`);
-        });
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
+  // Displays the roles in the bucket's IAM policy
+  console.log(`Roles for bucket ${bucketName}:`);
+  policy.forEach(role => {
+    console.log(`  Role: ${role.role}`);
+    console.log(`  Members:`);
+
+    const members = role.members;
+    members.forEach(member => {
+      console.log(`    ${member}`);
     });
+  });
   // [END storage_view_bucket_iam_members]
 }
 
-function addBucketIamMember(bucketName, roleName, members) {
+async function addBucketIamMember(bucketName, roleName, members) {
   // [START storage_add_bucket_iam_member]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -75,35 +69,28 @@ function addBucketIamMember(bucketName, roleName, members) {
   const bucket = storage.bucket(bucketName);
 
   // Gets and updates the bucket's IAM policy
-  bucket.iam
-    .getPolicy()
-    .then(results => {
-      const policy = results[0];
+  const [policy] = await bucket.iam.getPolicy();
 
-      // Adds the new roles to the bucket's IAM policy
-      policy.bindings.push({
-        role: roleName,
-        members: members,
-      });
+  // Adds the new roles to the bucket's IAM policy
+  policy.bindings.push({
+    role: roleName,
+    members: members,
+  });
 
-      // Updates the bucket's IAM policy
-      return bucket.iam.setPolicy(policy);
-    })
-    .then(() => {
-      console.log(
-        `Added the following member(s) with role ${roleName} to ${bucketName}:`
-      );
-      members.forEach(member => {
-        console.log(`  ${member}`);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  // Updates the bucket's IAM policy
+  await bucket.iam.setPolicy(policy);
+
+  console.log(
+    `Added the following member(s) with role ${roleName} to ${bucketName}:`
+  );
+
+  members.forEach(member => {
+    console.log(`  ${member}`);
+  });
   // [END storage_add_bucket_iam_member]
 }
 
-function removeBucketIamMember(bucketName, roleName, members) {
+async function removeBucketIamMember(bucketName, roleName, members) {
   // [START storage_remove_bucket_iam_member]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -125,44 +112,36 @@ function removeBucketIamMember(bucketName, roleName, members) {
   const bucket = storage.bucket(bucketName);
 
   // Gets and updates the bucket's IAM policy
-  bucket.iam
-    .getPolicy()
-    .then(data => {
-      const policy = data[0];
+  const [policy] = await bucket.iam.getPolicy();
 
-      // Finds and updates the appropriate role-member group
-      const index = policy.bindings.findIndex(role => role.role === roleName);
-      const role = policy.bindings[index];
-      if (role) {
-        role.members = role.members.filter(
-          member => members.indexOf(member) === -1
-        );
+  // Finds and updates the appropriate role-member group
+  const index = policy.bindings.findIndex(role => role.role === roleName);
+  const role = policy.bindings[index];
+  if (role) {
+    role.members = role.members.filter(
+      member => members.indexOf(member) === -1
+    );
 
-        // Updates the policy object with the new (or empty) role-member group
-        if (role.members.length === 0) {
-          policy.bindings.splice(index, 1);
-        } else {
-          policy.bindings.index = role;
-        }
+    // Updates the policy object with the new (or empty) role-member group
+    if (role.members.length === 0) {
+      policy.bindings.splice(index, 1);
+    } else {
+      policy.bindings.index = role;
+    }
 
-        // Updates the bucket's IAM policy
-        return bucket.iam.setPolicy(policy);
-      } else {
-        // No matching role-member group(s) were found
-        throw new Error('No matching role-member group(s) found.');
-      }
-    })
-    .then(() => {
-      console.log(
-        `Removed the following member(s) with role ${roleName} from ${bucketName}:`
-      );
-      members.forEach(member => {
-        console.log(`  ${member}`);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    // Updates the bucket's IAM policy
+    await bucket.iam.setPolicy(policy);
+  } else {
+    // No matching role-member group(s) were found
+    throw new Error('No matching role-member group(s) found.');
+  }
+
+  console.log(
+    `Removed the following member(s) with role ${roleName} from ${bucketName}:`
+  );
+  members.forEach(member => {
+    console.log(`  ${member}`);
+  });
   // [END storage_remove_bucket_iam_member]
 }
 

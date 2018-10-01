@@ -23,7 +23,7 @@
 
 'use strict';
 
-function enableRequesterPays(bucketName) {
+async function enableRequesterPays(bucketName) {
   // [START storage_enable_requester_pays]
   // Imports the Google Cloud client library
   const {Storage} = require(`@google-cloud/storage`);
@@ -37,21 +37,15 @@ function enableRequesterPays(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Enables requester-pays requests
-  storage
-    .bucket(bucketName)
-    .enableRequesterPays()
-    .then(() => {
-      console.log(
-        `Requester-pays requests have been enabled for bucket ${bucketName}.`
-      );
-    })
-    .catch(err => {
-      console.error(`ERROR:`, err);
-    });
+  await storage.bucket(bucketName).enableRequesterPays();
+
+  console.log(
+    `Requester-pays requests have been enabled for bucket ${bucketName}.`
+  );
   // [END storage_enable_requester_pays]
 }
 
-function disableRequesterPays(bucketName) {
+async function disableRequesterPays(bucketName) {
   // [START storage_disable_requester_pays]
   // Imports the Google Cloud client library
   const {Storage} = require(`@google-cloud/storage`);
@@ -65,21 +59,15 @@ function disableRequesterPays(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Disables requester-pays requests
-  storage
-    .bucket(bucketName)
-    .disableRequesterPays()
-    .then(() => {
-      console.log(
-        `Requester-pays requests have been disabled for bucket ${bucketName}.`
-      );
-    })
-    .catch(err => {
-      console.error(`ERROR:`, err);
-    });
+  await storage.bucket(bucketName).disableRequesterPays();
+
+  console.log(
+    `Requester-pays requests have been disabled for bucket ${bucketName}.`
+  );
   // [END storage_disable_requester_pays]
 }
 
-function getRequesterPaysStatus(bucketName) {
+async function getRequesterPaysStatus(bucketName) {
   // [START storage_get_requester_pays_status]
   // Imports the Google Cloud client library
   const {Storage} = require(`@google-cloud/storage`);
@@ -93,28 +81,21 @@ function getRequesterPaysStatus(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Gets the requester-pays status of a bucket
-  storage
-    .bucket(bucketName)
-    .getMetadata()
-    .then(data => {
-      let status;
-      const metadata = data[0];
-      if (metadata && metadata.billing && metadata.billing.requesterPays) {
-        status = `enabled`;
-      } else {
-        status = `disabled`;
-      }
-      console.log(
-        `Requester-pays requests are ${status} for bucket ${bucketName}.`
-      );
-    })
-    .catch(err => {
-      console.error(`ERROR:`, err);
-    });
+  const [metadata] = await storage.bucket(bucketName).getMetadata();
+
+  let status;
+  if (metadata && metadata.billing && metadata.billing.requesterPays) {
+    status = `enabled`;
+  } else {
+    status = `disabled`;
+  }
+  console.log(
+    `Requester-pays requests are ${status} for bucket ${bucketName}.`
+  );
   // [END storage_get_requester_pays_status]
 }
 
-function downloadFileUsingRequesterPays(
+async function downloadFileUsingRequesterPays(
   projectId,
   bucketName,
   srcFilename,
@@ -144,18 +125,14 @@ function downloadFileUsingRequesterPays(
   };
 
   // Downloads the file
-  storage
+  await storage
     .bucket(bucketName)
     .file(srcFilename)
-    .download(options)
-    .then(() => {
-      console.log(
-        `gs://${bucketName}/${srcFilename} downloaded to ${destFilename} using requester-pays requests.`
-      );
-    })
-    .catch(err => {
-      console.error(`ERROR:`, err);
-    });
+    .download(options);
+
+  console.log(
+    `gs://${bucketName}/${srcFilename} downloaded to ${destFilename} using requester-pays requests.`
+  );
   // [END storage_download_file_requester_pays]
 }
 

@@ -46,7 +46,7 @@ function generateEncryptionKey() {
 }
 // [END storage_generate_encryption_key]
 
-function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
+async function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
   // [START storage_upload_encrypted_file]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -74,21 +74,20 @@ function uploadEncryptedFile(bucketName, srcFilename, destFilename, key) {
 
   // Encrypts and uploads a local file, e.g. "./local/path/to/file.txt".
   // The file will only be retrievable using the key used to upload it.
-  storage
-    .bucket(bucketName)
-    .upload(srcFilename, options)
-    .then(() => {
-      console.log(
-        `File ${srcFilename} uploaded to gs://${bucketName}/${destFilename}.`
-      );
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await storage.bucket(bucketName).upload(srcFilename, options);
+
+  console.log(
+    `File ${srcFilename} uploaded to gs://${bucketName}/${destFilename}.`
+  );
   // [END storage_upload_encrypted_file]
 }
 
-function downloadEncryptedFile(bucketName, srcFilename, destFilename, key) {
+async function downloadEncryptedFile(
+  bucketName,
+  srcFilename,
+  destFilename,
+  key
+) {
   // [START storage_download_encrypted_file]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -113,21 +112,17 @@ function downloadEncryptedFile(bucketName, srcFilename, destFilename, key) {
 
   // Descrypts and downloads the file. This can only be done with the key used
   // to encrypt and upload the file.
-  storage
+  await storage
     .bucket(bucketName)
     .file(srcFilename)
     .setEncryptionKey(Buffer.from(key, 'base64'))
-    .download(options)
-    .then(() => {
-      console.log(`File ${srcFilename} downloaded to ${destFilename}.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .download(options);
+
+  console.log(`File ${srcFilename} downloaded to ${destFilename}.`);
   // [END storage_download_encrypted_file]
 }
 
-function rotateEncryptionKey(bucketName, fileName, oldKey, newKey) {
+async function rotateEncryptionKey(bucketName, fileName, oldKey, newKey) {
   // [START storage_rotate_encryption_key]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -145,20 +140,16 @@ function rotateEncryptionKey(bucketName, fileName, oldKey, newKey) {
   // const oldKey = 'The current base64 encoded customer-supplied encryption key';
   // const newKey = 'A new base64 encoded customer-supplied encryption key';
 
-  storage
+  await storage
     .bucket(bucketName)
     .file(fileName, {
       encryptionKey: Buffer.from(oldKey, 'base64'),
     })
     .rotateEncryptionKey({
       encryptionKey: Buffer.from(newKey, 'base64'),
-    })
-    .then(() => {
-      console.log(`Encryption key rotated successfully.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
     });
+
+  console.log(`Encryption key rotated successfully.`);
   // [END storage_rotate_encryption_key]
 }
 

@@ -23,7 +23,7 @@
 
 'use strict';
 
-function createNotification(bucketName, topic) {
+async function createNotification(bucketName, topic) {
   // [START storage_create_notification]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -38,19 +38,13 @@ function createNotification(bucketName, topic) {
   // const topic = 'Name of a topic, e.g. my-topic';
 
   // Creates a notification
-  storage
-    .bucket(bucketName)
-    .createNotification(topic)
-    .then(() => {
-      console.log('Notification subscription created.');
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await storage.bucket(bucketName).createNotification(topic);
+
+  console.log('Notification subscription created.');
   // [END storage_create_notification]
 }
 
-function listNotifications(bucketName) {
+async function listNotifications(bucketName) {
   // [START storage_list_notifications]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -64,24 +58,16 @@ function listNotifications(bucketName) {
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
   // Lists notifications in the bucket
-  storage
-    .bucket(bucketName)
-    .getNotifications()
-    .then(results => {
-      const notifications = results[0];
+  const [notifications] = await storage.bucket(bucketName).getNotifications();
 
-      console.log('Notifications:');
-      notifications.forEach(notification => {
-        console.log(notification.id);
-      });
-    })
-    .catch(err => {
-      console.log('ERROR:', err);
-    });
+  console.log('Notifications:');
+  notifications.forEach(notification => {
+    console.log(notification.id);
+  });
   // [END storage_list_notifications]
 }
 
-function getMetadata(bucketName, notificationId) {
+async function getMetadata(bucketName, notificationId) {
   // [START storage_notifications_get_metadata]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -96,30 +82,24 @@ function getMetadata(bucketName, notificationId) {
   // const notificationId = 'ID of notification to get, e.g. 1';
 
   // Get the notification metadata
-  storage
+  const [metadata] = await storage
     .bucket(bucketName)
     .notification(notificationId)
-    .getMetadata()
-    .then(results => {
-      const metadata = results[0];
+    .getMetadata();
 
-      console.log(`ID: ${metadata.id}`);
-      console.log(`Topic: ${metadata.topic}`);
-      console.log(`Event Types: ${metadata.event_types}`);
-      console.log(`Custom Attributes: ${metadata.custom_attributes}`);
-      console.log(`Payload Format: ${metadata.payload_format}`);
-      console.log(`Object Name Prefix: ${metadata.object_name_prefix}`);
-      console.log(`Etag: ${metadata.etag}`);
-      console.log(`Self Link: ${metadata.selfLink}`);
-      console.log(`Kind: ${metadata.kind}`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  console.log(`ID: ${metadata.id}`);
+  console.log(`Topic: ${metadata.topic}`);
+  console.log(`Event Types: ${metadata.event_types}`);
+  console.log(`Custom Attributes: ${metadata.custom_attributes}`);
+  console.log(`Payload Format: ${metadata.payload_format}`);
+  console.log(`Object Name Prefix: ${metadata.object_name_prefix}`);
+  console.log(`Etag: ${metadata.etag}`);
+  console.log(`Self Link: ${metadata.selfLink}`);
+  console.log(`Kind: ${metadata.kind}`);
   // [END storage_notifications_get_metadata]
 }
 
-function deleteNotification(bucketName, notificationId) {
+async function deleteNotification(bucketName, notificationId) {
   // [START storage_delete_notification]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -134,16 +114,12 @@ function deleteNotification(bucketName, notificationId) {
   // const notificationId = 'ID of notification to delete, e.g. 1';
 
   // Deletes the notification from the bucket
-  storage
+  await storage
     .bucket(bucketName)
     .notification(notificationId)
-    .delete()
-    .then(() => {
-      console.log(`Notification ${notificationId} deleted.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .delete();
+
+  console.log(`Notification ${notificationId} deleted.`);
   // [END storage_delete_notification]
 }
 
