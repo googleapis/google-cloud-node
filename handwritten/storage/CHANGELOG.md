@@ -66,8 +66,8 @@ const storage = new Storage({
 });
 ```
 
-### `bucket.upload` method removed
-To better support a variety of HTTP clients, the `bucket.upload` method has been removed. It can be replaced with your favorite HTTP client.
+### `bucket.upload` no longer accepts URLs
+To better support a variety of HTTP clients, the remote fetching functionality of `bucket.upload` has been removed. It can be replaced with your favorite HTTP client.
 
 #### Old Code
 ```js
