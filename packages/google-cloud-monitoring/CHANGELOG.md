@@ -2,7 +2,7 @@
 
 [npm history][1]
 
-[1]: https://www.npmjs.com/package/nodejs-monitoring?activeTab=versions
+[1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
 ## v0.6.0
 
