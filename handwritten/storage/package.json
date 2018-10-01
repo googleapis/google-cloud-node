@@ -121,7 +121,7 @@
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^3.0.0",
     "eslint-plugin-node": "^7.0.0",
-    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-prettier": "^3.0.0",
     "gts": "^0.8.0",
     "ink-docstrap": "https://github.com/docstrap/docstrap/tarball/master",
     "intelli-espower-loader": "^1.0.1",
