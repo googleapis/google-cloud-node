@@ -183,6 +183,7 @@ class DNS extends Service {
   /**
    * Create a managed zone.
    *
+   * @method DNS#createZone
    * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
    *
    * @throws {error} If a zone name is not provided.
@@ -276,6 +277,7 @@ class DNS extends Service {
   /**
    * Gets a list of managed zones for the project.
    *
+   * @method DNS#getZones
    * @see [ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list}
    *
    * @param {GetZonesRequest} [query] Query object for listing zones.
