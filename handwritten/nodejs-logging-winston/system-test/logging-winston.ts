@@ -186,11 +186,11 @@ describe('LoggingWinston', () => {
   });
 
   describe('ErrorReporting', () => {
-    const ERROR_REPORTING_POLL_TIMEOUT = 60 * 1000;
+    const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
     beforeEach(async function() {
-      this.timeout(ERROR_REPORTING_POLL_TIMEOUT);
+      this.timeout(WRITE_CONSISTENCY_DELAY_MS);
     });
 
     after(async () => {
