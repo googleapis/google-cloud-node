@@ -320,13 +320,12 @@ class AclRoleAccessorMethods {
  * @param {object} options Configuration options.
  */
 class Acl extends AclRoleAccessorMethods {
-  default?: Acl;
+  default !: Acl;
   pathPrefix;
   request_;
 
   constructor(options) {
     super();
-
     this.pathPrefix = options.pathPrefix;
     this.request_ = options.request;
   }

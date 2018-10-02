@@ -60,7 +60,8 @@ interface BucketOptions {
  * @param {File[]} files Array of {@link File} instances.
  */
 export interface GetFilesCallback {
-  (err: Error|null, files?: File[]): void;
+  (err: Error|null, files?: File[], nextQuery?: {},
+   apiResponse?: request.Response): void;
 }
 
 /**
@@ -69,13 +70,13 @@ export interface GetFilesCallback {
  * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
  */
 interface WatchAllOptions {
-  delimiter: string;
-  maxResults: number;
-  pageToken: string;
-  prefix: string;
-  projection: string;
-  userProject: string;
-  versions: boolean;
+  delimiter?: string;
+  maxResults?: number;
+  pageToken?: string;
+  prefix?: string;
+  projection?: string;
+  userProject?: string;
+  versions?: boolean;
 }
 
 /**
@@ -2349,7 +2350,7 @@ class Bucket extends ServiceObject {
    * //-
    * bucket.setStorageClass('regional').then(function() {});
    */
-  setStorageClass(storageClass, options, callback) {
+  setStorageClass(storageClass, options, callback?) {
     // In case we get input like `storageClass`, convert to `storage_class`.
     storageClass = storageClass.replace(/-/g, '_')
                        .replace(

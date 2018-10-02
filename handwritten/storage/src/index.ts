@@ -17,7 +17,7 @@
 'use strict';
 
 import * as arrify from 'arrify';
-import {Service, GoogleAuthOptions} from '@google-cloud/common';
+import {Service, GoogleAuthOptions, CreateOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
@@ -38,7 +38,8 @@ export interface StorageOptions extends GoogleAuthOptions {
   promise?: typeof Promise;
 }
 
-export interface BucketOptions {
+export interface BucketOptions extends CreateOptions {
+  location?: string;
   kmsKeyName?: string;
   userProject?: string;
 }
@@ -558,7 +559,7 @@ class Storage extends Service {
    * region_tag:storage_list_buckets
    * Another example:
    */
-  getBuckets(query, callback) {
+  getBuckets(query, callback?) {
     if (!callback) {
       callback = query;
       query = {};
@@ -640,7 +641,7 @@ class Storage extends Service {
    *   const apiResponse = data[1];
    * });
    */
-  getServiceAccount(options, callback) {
+  getServiceAccount(options, callback?) {
     if (!callback) {
       callback = options;
       options = {};
@@ -719,3 +720,5 @@ promisifyAll(Storage, {
  * Full quickstart example:
  */
 export {Storage};
+
+export {Bucket, File, Channel};

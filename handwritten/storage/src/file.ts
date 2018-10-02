@@ -92,7 +92,7 @@ const GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
  *     billed for all requests made from File object.
  */
 export interface FileOptions {
-  encryptionKey?: string;
+  encryptionKey?: string|Buffer;
   generation?: number|string;
   kmsKeyName?: string;
   userProject?: string;
@@ -2475,7 +2475,7 @@ class File extends ServiceObject {
    * //-
    * file.setStorageClass('regional').then(function() {});
    */
-  setStorageClass(storageClass, options, callback) {
+  setStorageClass(storageClass, options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
