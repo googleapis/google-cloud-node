@@ -43,7 +43,7 @@
  * @property {Object} appEngineHttpQueue
  *   App Engine HTTP queue.
  *
- *   An App Engine queue is a queue that has an AppEngineHttpQeueue type.
+ *   An App Engine queue is a queue that has an AppEngineHttpQueue type.
  *
  *   This object should have the same structure as [AppEngineHttpQueue]{@link google.cloud.tasks.v2beta3.AppEngineHttpQueue}
  *
