@@ -19,9 +19,9 @@
  * Export asset request.
  *
  * @property {string} parent
- *   Required. The relative name of the root asset. Can only be an organization
- *   number (such as "organizations/123"), or a project id (such as
- *   "projects/my-project-id") or a project number (such as "projects/12345").
+ *   Required. The relative name of the root asset. This can only be an organization
+ *   number (such as "organizations/123"), a project ID (such as
+ *   "projects/my-project-id"), or a project number (such as "projects/12345").
  *
  * @property {Object} readTime
  *   Timestamp to take an asset snapshot. This can only be set to a timestamp in
@@ -33,7 +33,7 @@
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {string[]} assetTypes
- *   A list of asset types of which to take a snapshot for. Example:
+ *   A list of asset types of which to take a snapshot for. For example:
  *   "google.compute.disk". If specified, only matching assets will be returned.
  *
  * @property {number} contentType
@@ -85,14 +85,14 @@ const ExportAssetsResponse = {
  *
  * @property {string} parent
  *   Required. The relative name of the root asset. It can only be an
- *   organization number (such as "organizations/123"), or a project id (such as
- *   "projects/my-project-id")"or a project number (such as "projects/12345").
+ *   organization number (such as "organizations/123"), a project ID (such as
+ *   "projects/my-project-id")", or a project number (such as "projects/12345").
  *
  * @property {string[]} assetNames
- *   A list of the full names of the assets. See:
- *   https://cloud.google.com/apis/design/resource_names#full_resource_name
- *   Example:
- *   "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1".
+ *   A list of the full names of the assets. For example:
+ *   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
+ *   See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+ *   for more info.
  *
  *   The request becomes a no-op if the asset name list is empty, and the max
  *   size of the asset name list is 100 in one request.
@@ -137,7 +137,7 @@ const BatchGetAssetsHistoryResponse = {
  * Output configuration for export assets destination.
  *
  * @property {Object} gcsDestination
- *   Destination on Google Cloud Storage (GCS).
+ *   Destination on Cloud Storage.
  *
  *   This object should have the same structure as [GcsDestination]{@link google.cloud.asset.v1beta1.GcsDestination}
  *
@@ -150,13 +150,12 @@ const OutputConfig = {
 };
 
 /**
- * A Google Cloud Storage (GCS) location.
+ * A Cloud Storage location.
  *
  * @property {string} uri
- *   The path of the GCS objects. It's the same path that is used by gsutil, for
- *   example: "gs://bucket_name/object_path". See:
- *   https://cloud.google.com/storage/docs/viewing-editing-metadata for more
- *   information.
+ *   The path of the Cloud Storage objects. It's the same path that is used by
+ *    gsutil. For example: "gs://bucket_name/object_path". See [Viewing and Editing Object Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
+ *   for more information.
  *
  * @typedef GcsDestination
  * @memberof google.cloud.asset.v1beta1
