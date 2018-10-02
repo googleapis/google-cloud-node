@@ -31,7 +31,7 @@
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.KeyRing definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/resources.proto}
  */
-var KeyRing = {
+const KeyRing = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -115,7 +115,7 @@ var KeyRing = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.CryptoKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/resources.proto}
  */
-var CryptoKey = {
+const CryptoKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -182,7 +182,7 @@ var CryptoKey = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.CryptoKeyVersionTemplate definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/resources.proto}
  */
-var CryptoKeyVersionTemplate = {
+const CryptoKeyVersionTemplate = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -202,7 +202,7 @@ var CryptoKeyVersionTemplate = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.KeyOperationAttestation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/resources.proto}
  */
-var KeyOperationAttestation = {
+const KeyOperationAttestation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -292,7 +292,7 @@ var KeyOperationAttestation = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.CryptoKeyVersion definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/resources.proto}
  */
-var CryptoKeyVersion = {
+const CryptoKeyVersion = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -491,7 +491,7 @@ var CryptoKeyVersion = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.PublicKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/resources.proto}
  */
-var PublicKey = {
+const PublicKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -501,7 +501,7 @@ var PublicKey = {
  * @enum {number}
  * @memberof google.cloud.kms.v1
  */
-var ProtectionLevel = {
+const ProtectionLevel = {
 
   /**
    * Not specified.

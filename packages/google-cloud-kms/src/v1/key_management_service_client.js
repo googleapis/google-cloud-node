@@ -191,6 +191,9 @@ class KeyManagementServiceClient {
       'updateCryptoKeyPrimaryVersion',
       'destroyCryptoKeyVersion',
       'restoreCryptoKeyVersion',
+      'getPublicKey',
+      'asymmetricDecrypt',
+      'asymmetricSign',
     ];
     for (const methodName of keyManagementServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -311,16 +314,16 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    * client.listKeyRings({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -330,17 +333,17 @@ class KeyManagementServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -406,11 +409,11 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * client.listKeyRingsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -473,16 +476,16 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
    *
    * client.listCryptoKeys({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -492,17 +495,17 @@ class KeyManagementServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -572,11 +575,11 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
    * client.listCryptoKeysStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -639,16 +642,16 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
    *
    * client.listCryptoKeyVersions({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -658,17 +661,17 @@ class KeyManagementServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -742,11 +745,11 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
    * client.listCryptoKeyVersionsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -786,14 +789,14 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const formattedName = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
    * client.getKeyRing({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -840,14 +843,14 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const formattedName = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
    * client.getCryptoKey({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -893,14 +896,14 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
+   * const formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
    * client.getCryptoKeyVersion({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -954,21 +957,21 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * var keyRingId = '';
-   * var keyRing = {};
-   * var request = {
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const keyRingId = '';
+   * const keyRing = {};
+   * const request = {
    *   parent: formattedParent,
    *   keyRingId: keyRingId,
    *   keyRing: keyRing,
    * };
    * client.createKeyRing(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1026,34 +1029,34 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
-   * var cryptoKeyId = 'my-app-key';
-   * var purpose = 'ENCRYPT_DECRYPT';
-   * var seconds = 2147483647;
-   * var nextRotationTime = {
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const cryptoKeyId = 'my-app-key';
+   * const purpose = 'ENCRYPT_DECRYPT';
+   * const seconds = 2147483647;
+   * const nextRotationTime = {
    *   seconds: seconds,
    * };
-   * var seconds2 = 604800;
-   * var rotationPeriod = {
+   * const seconds2 = 604800;
+   * const rotationPeriod = {
    *   seconds: seconds2,
    * };
-   * var cryptoKey = {
+   * const cryptoKey = {
    *   purpose: purpose,
    *   nextRotationTime: nextRotationTime,
    *   rotationPeriod: rotationPeriod,
    * };
-   * var request = {
+   * const request = {
    *   parent: formattedParent,
    *   cryptoKeyId: cryptoKeyId,
    *   cryptoKey: cryptoKey,
    * };
    * client.createCryptoKey(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1108,19 +1111,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
-   * var cryptoKeyVersion = {};
-   * var request = {
+   * const formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const cryptoKeyVersion = {};
+   * const request = {
    *   parent: formattedParent,
    *   cryptoKeyVersion: cryptoKeyVersion,
    * };
    * client.createCryptoKeyVersion(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1176,19 +1179,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var cryptoKey = {};
-   * var updateMask = {};
-   * var request = {
+   * const cryptoKey = {};
+   * const updateMask = {};
+   * const request = {
    *   cryptoKey: cryptoKey,
    *   updateMask: updateMask,
    * };
    * client.updateCryptoKey(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1246,19 +1249,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var cryptoKeyVersion = {};
-   * var updateMask = {};
-   * var request = {
+   * const cryptoKeyVersion = {};
+   * const updateMask = {};
+   * const request = {
    *   cryptoKeyVersion: cryptoKeyVersion,
    *   updateMask: updateMask,
    * };
    * client.updateCryptoKeyVersion(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1333,19 +1336,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.cryptoKeyPathPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY_PATH]');
-   * var plaintext = '';
-   * var request = {
+   * const formattedName = client.cryptoKeyPathPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY_PATH]');
+   * const plaintext = '';
+   * const request = {
    *   name: formattedName,
    *   plaintext: plaintext,
    * };
    * client.encrypt(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1399,19 +1402,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
-   * var ciphertext = '';
-   * var request = {
+   * const formattedName = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const ciphertext = '';
+   * const request = {
    *   name: formattedName,
    *   ciphertext: ciphertext,
    * };
    * client.decrypt(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1461,19 +1464,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
-   * var cryptoKeyVersionId = '';
-   * var request = {
+   * const formattedName = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const cryptoKeyVersionId = '';
+   * const request = {
    *   name: formattedName,
    *   cryptoKeyVersionId: cryptoKeyVersionId,
    * };
    * client.updateCryptoKeyPrimaryVersion(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1534,14 +1537,14 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
+   * const formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
    * client.destroyCryptoKeyVersion({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1597,14 +1600,14 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
+   * const formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
    * client.restoreCryptoKeyVersion({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1630,6 +1633,193 @@ class KeyManagementServiceClient {
       options,
       callback
     );
+  }
+
+  /**
+   * Returns the public key for the given CryptoKeyVersion. The
+   * CryptoKey.purpose must be
+   * ASYMMETRIC_SIGN or
+   * ASYMMETRIC_DECRYPT.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the CryptoKeyVersion public key to
+   *   get.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [PublicKey]{@link google.cloud.kms.v1.PublicKey}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PublicKey]{@link google.cloud.kms.v1.PublicKey}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
+   * client.getPublicKey({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getPublicKey(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getPublicKey(request, options, callback);
+  }
+
+  /**
+   * Decrypts data that was encrypted with a public key retrieved from
+   * GetPublicKey corresponding to a CryptoKeyVersion with
+   * CryptoKey.purpose ASYMMETRIC_DECRYPT.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the CryptoKeyVersion to use for
+   *   decryption.
+   * @param {string} request.ciphertext
+   *   Required. The data encrypted with the named CryptoKeyVersion's public
+   *   key using OAEP.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AsymmetricDecryptResponse]{@link google.cloud.kms.v1.AsymmetricDecryptResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AsymmetricDecryptResponse]{@link google.cloud.kms.v1.AsymmetricDecryptResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
+   * const ciphertext = '';
+   * const request = {
+   *   name: formattedName,
+   *   ciphertext: ciphertext,
+   * };
+   * client.asymmetricDecrypt(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  asymmetricDecrypt(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.asymmetricDecrypt(request, options, callback);
+  }
+
+  /**
+   * Signs data using a CryptoKeyVersion with CryptoKey.purpose
+   * ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+   * key retrieved from GetPublicKey.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the CryptoKeyVersion to use for signing.
+   * @param {Object} request.digest
+   *   Required. The digest of the data to sign. The digest must be produced with
+   *   the same digest algorithm as specified by the key version's
+   *   algorithm.
+   *
+   *   This object should have the same structure as [Digest]{@link google.cloud.kms.v1.Digest}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AsymmetricSignResponse]{@link google.cloud.kms.v1.AsymmetricSignResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AsymmetricSignResponse]{@link google.cloud.kms.v1.AsymmetricSignResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
+   * const digest = {};
+   * const request = {
+   *   name: formattedName,
+   *   digest: digest,
+   * };
+   * client.asymmetricSign(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  asymmetricSign(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.asymmetricSign(request, options, callback);
   }
 
   /**
@@ -1664,19 +1854,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedResource = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
-   * var policy = {};
-   * var request = {
+   * const formattedResource = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const policy = {};
+   * const request = {
    *   resource: formattedResource,
    *   policy: policy,
    * };
    * client.setIamPolicy(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1726,14 +1916,14 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedResource = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const formattedResource = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
    * client.getIamPolicy({resource: formattedResource})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -1788,19 +1978,19 @@ class KeyManagementServiceClient {
    *
    * const kms = require('@google-cloud/kms');
    *
-   * var client = new kms.v1.KeyManagementServiceClient({
+   * const client = new kms.v1.KeyManagementServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedResource = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
-   * var permissions = [];
-   * var request = {
+   * const formattedResource = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const permissions = [];
+   * const request = {
    *   resource: formattedResource,
    *   permissions: permissions,
    * };
    * client.testIamPermissions(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

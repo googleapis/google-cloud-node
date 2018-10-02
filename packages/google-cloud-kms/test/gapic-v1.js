@@ -1198,6 +1198,230 @@ describe('KeyManagementServiceClient', () => {
     });
   });
 
+  describe('getPublicKey', () => {
+    it('invokes getPublicKey without error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.cryptoKeyVersionPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]',
+        '[CRYPTO_KEY_VERSION]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const pem = 'pem110872';
+      const expectedResponse = {
+        pem: pem,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getPublicKey = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getPublicKey(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getPublicKey with error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.cryptoKeyVersionPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]',
+        '[CRYPTO_KEY_VERSION]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getPublicKey = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getPublicKey(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('asymmetricDecrypt', () => {
+    it('invokes asymmetricDecrypt without error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.cryptoKeyVersionPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]',
+        '[CRYPTO_KEY_VERSION]'
+      );
+      const ciphertext = '-72';
+      const request = {
+        name: formattedName,
+        ciphertext: ciphertext,
+      };
+
+      // Mock response
+      const plaintext = '-9';
+      const expectedResponse = {
+        plaintext: plaintext,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.asymmetricDecrypt = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.asymmetricDecrypt(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes asymmetricDecrypt with error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.cryptoKeyVersionPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]',
+        '[CRYPTO_KEY_VERSION]'
+      );
+      const ciphertext = '-72';
+      const request = {
+        name: formattedName,
+        ciphertext: ciphertext,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.asymmetricDecrypt = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.asymmetricDecrypt(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('asymmetricSign', () => {
+    it('invokes asymmetricSign without error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.cryptoKeyVersionPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]',
+        '[CRYPTO_KEY_VERSION]'
+      );
+      const digest = {};
+      const request = {
+        name: formattedName,
+        digest: digest,
+      };
+
+      // Mock response
+      const signature = '106';
+      const expectedResponse = {
+        signature: signature,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.asymmetricSign = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.asymmetricSign(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes asymmetricSign with error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.cryptoKeyVersionPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]',
+        '[CRYPTO_KEY_VERSION]'
+      );
+      const digest = {};
+      const request = {
+        name: formattedName,
+        digest: digest,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.asymmetricSign = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.asymmetricSign(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
       const client = new kmsModule.v1.KeyManagementServiceClient({

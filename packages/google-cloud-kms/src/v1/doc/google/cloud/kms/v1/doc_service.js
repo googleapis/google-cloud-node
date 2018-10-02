@@ -36,7 +36,7 @@
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListKeyRingsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var ListKeyRingsRequest = {
+const ListKeyRingsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -66,7 +66,7 @@ var ListKeyRingsRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListCryptoKeysRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var ListCryptoKeysRequest = {
+const ListCryptoKeysRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -97,7 +97,7 @@ var ListCryptoKeysRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListCryptoKeyVersionsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var ListCryptoKeyVersionsRequest = {
+const ListCryptoKeyVersionsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -120,7 +120,7 @@ var ListCryptoKeyVersionsRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListKeyRingsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var ListKeyRingsResponse = {
+const ListKeyRingsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -143,7 +143,7 @@ var ListKeyRingsResponse = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListCryptoKeysResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var ListCryptoKeysResponse = {
+const ListCryptoKeysResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -168,7 +168,7 @@ var ListCryptoKeysResponse = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListCryptoKeyVersionsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var ListCryptoKeyVersionsResponse = {
+const ListCryptoKeyVersionsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -182,7 +182,7 @@ var ListCryptoKeyVersionsResponse = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.GetKeyRingRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var GetKeyRingRequest = {
+const GetKeyRingRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -196,7 +196,7 @@ var GetKeyRingRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.GetCryptoKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var GetCryptoKeyRequest = {
+const GetCryptoKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -210,7 +210,7 @@ var GetCryptoKeyRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.GetCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var GetCryptoKeyVersionRequest = {
+const GetCryptoKeyVersionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -225,7 +225,7 @@ var GetCryptoKeyVersionRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.GetPublicKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var GetPublicKeyRequest = {
+const GetPublicKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -249,7 +249,7 @@ var GetPublicKeyRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.CreateKeyRingRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var CreateKeyRingRequest = {
+const CreateKeyRingRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -273,7 +273,7 @@ var CreateKeyRingRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.CreateCryptoKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var CreateCryptoKeyRequest = {
+const CreateCryptoKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -293,7 +293,7 @@ var CreateCryptoKeyRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.CreateCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var CreateCryptoKeyVersionRequest = {
+const CreateCryptoKeyVersionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -314,7 +314,7 @@ var CreateCryptoKeyVersionRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.UpdateCryptoKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var UpdateCryptoKeyRequest = {
+const UpdateCryptoKeyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -335,7 +335,7 @@ var UpdateCryptoKeyRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.UpdateCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var UpdateCryptoKeyVersionRequest = {
+const UpdateCryptoKeyVersionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -374,7 +374,7 @@ var UpdateCryptoKeyVersionRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.EncryptRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var EncryptRequest = {
+const EncryptRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -397,7 +397,7 @@ var EncryptRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.DecryptRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var DecryptRequest = {
+const DecryptRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -418,7 +418,7 @@ var DecryptRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.AsymmetricSignRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var AsymmetricSignRequest = {
+const AsymmetricSignRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -437,7 +437,7 @@ var AsymmetricSignRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.AsymmetricDecryptRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var AsymmetricDecryptRequest = {
+const AsymmetricDecryptRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -451,7 +451,7 @@ var AsymmetricDecryptRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.DecryptResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var DecryptResponse = {
+const DecryptResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -468,7 +468,7 @@ var DecryptResponse = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.EncryptResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var EncryptResponse = {
+const EncryptResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -482,7 +482,7 @@ var EncryptResponse = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.AsymmetricSignResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var AsymmetricSignResponse = {
+const AsymmetricSignResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -496,7 +496,7 @@ var AsymmetricSignResponse = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.AsymmetricDecryptResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var AsymmetricDecryptResponse = {
+const AsymmetricDecryptResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -513,7 +513,7 @@ var AsymmetricDecryptResponse = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var UpdateCryptoKeyPrimaryVersionRequest = {
+const UpdateCryptoKeyPrimaryVersionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -527,7 +527,7 @@ var UpdateCryptoKeyPrimaryVersionRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.DestroyCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var DestroyCryptoKeyVersionRequest = {
+const DestroyCryptoKeyVersionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -541,7 +541,7 @@ var DestroyCryptoKeyVersionRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.RestoreCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var RestoreCryptoKeyVersionRequest = {
+const RestoreCryptoKeyVersionRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -561,7 +561,7 @@ var RestoreCryptoKeyVersionRequest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.Digest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var Digest = {
+const Digest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -577,6 +577,6 @@ var Digest = {
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.LocationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
  */
-var LocationMetadata = {
+const LocationMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
