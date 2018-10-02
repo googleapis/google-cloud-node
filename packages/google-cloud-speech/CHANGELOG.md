@@ -4,6 +4,32 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## v2.1.1
+
+### Bug fixes
+- fix: send streamingConfig as a separate write before audioContent ([#176](https://github.com/googleapis/nodejs-speech/pull/176))
+- fix: Parse response errors and emit as error event. ([#172](https://github.com/googleapis/nodejs-speech/pull/172))
+- fix(deps): update dependency google-gax to ^0.20.0 ([#168](https://github.com/googleapis/nodejs-speech/pull/168))
+- fix(samples): storage import ([#166](https://github.com/googleapis/nodejs-speech/pull/166))
+- fix(deps): update dependency @google-cloud/common to ^0.25.0 ([#178](https://github.com/googleapis/nodejs-speech/pull/178))
+
+### Documentation
+- docs(sample): auto_punctuation & model selection ([#179](https://github.com/googleapis/nodejs-speech/pull/179))
+- docs: regenerate library README.md that got overwritten by samples README ([#175](https://github.com/googleapis/nodejs-speech/pull/175))
+
+### Internal / Testing Changes
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#193](https://github.com/googleapis/nodejs-speech/pull/193))
+- Update kokoro config ([#190](https://github.com/googleapis/nodejs-speech/pull/190))
+- Update kokoro config ([#189](https://github.com/googleapis/nodejs-speech/pull/189))
+- test: remove appveyor config ([#187](https://github.com/googleapis/nodejs-speech/pull/187))
+- Update the CI config ([#185](https://github.com/googleapis/nodejs-speech/pull/185))
+- test: throw on deprecation ([#132](https://github.com/googleapis/nodejs-speech/pull/132))
+- Fix unhandled promise rejection in tests ([#180](https://github.com/googleapis/nodejs-speech/pull/180))
+- Enable prefer-const in the eslint config ([#181](https://github.com/googleapis/nodejs-speech/pull/181))
+- Enable no-var in eslint ([#177](https://github.com/googleapis/nodejs-speech/pull/177))
+- fix(tests): match regex ([#174](https://github.com/googleapis/nodejs-speech/pull/174))
+- Switch to let/const ([#169](https://github.com/googleapis/nodejs-speech/pull/169))
+
 ## v2.1.0
 
 ### Implementation Changes
