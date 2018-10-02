@@ -4,6 +4,38 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## v0.7.0
+
+### Breaking Changes
+- BREAKING: Drop support for node.js 4.x ([#164](https://github.com/googleapis/nodejs-dialogflow/pull/164))
+
+### Bug fixes
+- Fix typo in comment ([#168](https://github.com/googleapis/nodejs-dialogflow/pull/168))
+- Update old samples to new agent using Room Reservations and match can… ([#162](https://github.com/googleapis/nodejs-dialogflow/pull/162))
+- fix(samples/resource): fix intent creation ([#104](https://github.com/googleapis/nodejs-dialogflow/pull/104))
+- fix(deps): update dependency google-gax to ^0.20.0 ([#142](https://github.com/googleapis/nodejs-dialogflow/pull/142))
+- Remove dependency on @google-cloud/common ([#165](https://github.com/googleapis/nodejs-dialogflow/pull/165))
+- Fix typo in word 'session' in detect sample comments ([#147](https://github.com/googleapis/nodejs-dialogflow/pull/147))
+- fix(deps): update dependency uuid to v3.3.2 ([#122](https://github.com/googleapis/nodejs-dialogflow/pull/122))
+
+### New Features
+- Run the synth generator and update config ([#161](https://github.com/googleapis/nodejs-dialogflow/pull/161))
+
+### Documentation
+- feat(samples): Beta features PR  ([#144](https://github.com/googleapis/nodejs-dialogflow/pull/144))
+
+### Internal / Testing Changes
+- Update kokoro config ([#173](https://github.com/googleapis/nodejs-dialogflow/pull/173))
+- test: remove appveyor config ([#172](https://github.com/googleapis/nodejs-dialogflow/pull/172))
+- Configure kokoro CI ([#171](https://github.com/googleapis/nodejs-dialogflow/pull/171))
+- Enable prefer-const in the eslint config ([#167](https://github.com/googleapis/nodejs-dialogflow/pull/167))
+- chore(deps): update dependency eslint-config-prettier to v3 ([#148](https://github.com/googleapis/nodejs-dialogflow/pull/148))
+- chore(deps): update dependency eslint-plugin-node to v7 ([#135](https://github.com/googleapis/nodejs-dialogflow/pull/135))
+- Ignore package-lock.json ([#163](https://github.com/googleapis/nodejs-dialogflow/pull/163))
+- chore(deps): update dependency nyc to v13 ([#154](https://github.com/googleapis/nodejs-dialogflow/pull/154))
+- chore: assert.equal => assert.strictEqual ([#139](https://github.com/googleapis/nodejs-dialogflow/pull/139))
+- chore(deps): update dependency eslint to v5 ([#112](https://github.com/googleapis/nodejs-dialogflow/pull/112))
+
 ## v0.6.0
 
 ### New Features
