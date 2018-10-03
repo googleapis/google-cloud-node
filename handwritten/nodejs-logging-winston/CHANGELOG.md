@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## v0.10.2
+
+### Fixes
+- fix: Doesnt set service context winston3 ([#180](https://github.com/googleapis/nodejs-logging-winston/pull/180))
+- fix: Don't publish sourcemaps ([#178](https://github.com/googleapis/nodejs-logging-winston/pull/178))
+
+### Internal / Testing Changes
+- test: increasing error_reporting poll timeout for system tests ([#187](https://github.com/googleapis/nodejs-logging-winston/pull/187))
+- Update kokoro config ([#185](https://github.com/googleapis/nodejs-logging-winston/pull/185))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#183](https://github.com/googleapis/nodejs-logging-winston/pull/183))
+
 ## v0.10.1
 
 ### Documentation
