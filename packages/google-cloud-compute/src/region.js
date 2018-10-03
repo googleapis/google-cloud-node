@@ -21,6 +21,7 @@ const extend = require('extend');
 const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {paginator} = require('@google-cloud/paginator');
 
 const Address = require('./address.js');
 const Network = require('./network.js');
@@ -529,9 +530,7 @@ Region.prototype.getAddresses = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getAddressesStream = common.paginator.streamify(
-  'getAddresses'
-);
+Region.prototype.getAddressesStream = paginator.streamify('getAddresses');
 
 /**
  * Get a list of operations for this region.
@@ -661,9 +660,7 @@ Region.prototype.getOperations = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getOperationsStream = common.paginator.streamify(
-  'getOperations'
-);
+Region.prototype.getOperationsStream = paginator.streamify('getOperations');
 
 /**
  * Get a list of forwading rules in this region.
@@ -792,7 +789,7 @@ Region.prototype.getRules = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getRulesStream = common.paginator.streamify('getRules');
+Region.prototype.getRulesStream = paginator.streamify('getRules');
 
 /**
  * Get a list of subnetworks in this region.
@@ -922,9 +919,7 @@ Region.prototype.getSubnetworks = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getSubnetworksStream = common.paginator.streamify(
-  'getSubnetworks'
-);
+Region.prototype.getSubnetworksStream = paginator.streamify('getSubnetworks');
 
 /**
  * Get a reference to a Google Compute Engine region operation.
@@ -985,7 +980,7 @@ Region.prototype.subnetwork = function(name) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(Region, [
+paginator.extend(Region, [
   'getAddresses',
   'getOperations',
   'getRules',

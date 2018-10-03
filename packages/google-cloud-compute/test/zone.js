@@ -87,25 +87,27 @@ nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 let extended = false;
 const fakePaginator = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'Zone') {
-      return;
-    }
+  paginator: {
+    extend: function(Class, methods) {
+      if (Class.name !== 'Zone') {
+        return;
+      }
 
-    extended = true;
-    methods = arrify(methods);
-    assert.strictEqual(Class.name, 'Zone');
-    assert.deepStrictEqual(methods, [
-      'getAutoscalers',
-      'getDisks',
-      'getInstanceGroups',
-      'getMachineTypes',
-      'getOperations',
-      'getVMs',
-    ]);
-  },
-  streamify: function(methodName) {
-    return methodName;
+      extended = true;
+      methods = arrify(methods);
+      assert.strictEqual(Class.name, 'Zone');
+      assert.deepStrictEqual(methods, [
+        'getAutoscalers',
+        'getDisks',
+        'getInstanceGroups',
+        'getMachineTypes',
+        'getOperations',
+        'getVMs',
+      ]);
+    },
+    streamify: function(methodName) {
+      return methodName;
+    },
   },
 };
 
@@ -124,8 +126,8 @@ describe('Zone', function() {
       'gce-images': fakeGceImages,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator,
       },
+      '@google-cloud/paginator': fakePaginator,
       '@google-cloud/promisify': fakePromisify,
       './autoscaler.js': FakeAutoscaler,
       './disk.js': FakeDisk,

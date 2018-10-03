@@ -28,17 +28,16 @@ const promisify = require('@google-cloud/promisify');
 
 const slice = Array.prototype.slice;
 
-let promisified = false;
 const fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
 });
 
+let promisified = false;
 const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Compute') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, [
       'address',
@@ -65,34 +64,36 @@ const fakePromisify = extend({}, promisify, {
 const originalFakeUtil = extend(true, {}, fakeUtil);
 
 const fakePaginator = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'Compute') {
-      return;
-    }
+  paginator: {
+    extend: function(Class, methods) {
+      if (Class.name !== 'Compute') {
+        return;
+      }
 
-    methods = arrify(methods);
-    assert.deepStrictEqual(methods, [
-      'getAddresses',
-      'getAutoscalers',
-      'getDisks',
-      'getFirewalls',
-      'getImages',
-      'getHealthChecks',
-      'getInstanceGroups',
-      'getMachineTypes',
-      'getNetworks',
-      'getOperations',
-      'getRegions',
-      'getRules',
-      'getServices',
-      'getSnapshots',
-      'getSubnetworks',
-      'getVMs',
-      'getZones',
-    ]);
-  },
-  streamify: function(methodName) {
-    return methodName;
+      methods = arrify(methods);
+      assert.deepStrictEqual(methods, [
+        'getAddresses',
+        'getAutoscalers',
+        'getDisks',
+        'getFirewalls',
+        'getImages',
+        'getHealthChecks',
+        'getInstanceGroups',
+        'getMachineTypes',
+        'getNetworks',
+        'getOperations',
+        'getRegions',
+        'getRules',
+        'getServices',
+        'getSnapshots',
+        'getSubnetworks',
+        'getVMs',
+        'getZones',
+      ]);
+    },
+    streamify: function(methodName) {
+      return methodName;
+    },
   },
 };
 
@@ -175,9 +176,9 @@ describe('Compute', function() {
     Compute = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        paginator: fakePaginator,
         util: fakeUtil,
       },
+      '@google-cloud/paginator': fakePaginator,
       '@google-cloud/promisify': fakePromisify,
       './firewall.js': FakeFirewall,
       './health-check.js': FakeHealthCheck,

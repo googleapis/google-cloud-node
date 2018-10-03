@@ -25,6 +25,7 @@ const gceImages = require('gce-images');
 const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {paginator} = require('@google-cloud/paginator');
 
 const Autoscaler = require('./autoscaler.js');
 const Disk = require('./disk.js');
@@ -889,9 +890,7 @@ Zone.prototype.getAutoscalers = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getAutoscalersStream = common.paginator.streamify(
-  'getAutoscalers'
-);
+Zone.prototype.getAutoscalersStream = paginator.streamify('getAutoscalers');
 
 /**
  *  Get a list of disks in this zone.
@@ -1020,7 +1019,7 @@ Zone.prototype.getDisks = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
+Zone.prototype.getDisksStream = paginator.streamify('getDisks');
 
 /**
  * Get a list of instance groups for this zone.
@@ -1151,7 +1150,7 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getInstanceGroupsStream = common.paginator.streamify(
+Zone.prototype.getInstanceGroupsStream = paginator.streamify(
   'getInstanceGroups'
 );
 
@@ -1251,9 +1250,7 @@ Zone.prototype.getMachineTypes = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getMachineTypesStream = common.paginator.streamify(
-  'getMachineTypes'
-);
+Zone.prototype.getMachineTypesStream = paginator.streamify('getMachineTypes');
 
 /**
  * Get a list of operations for this zone.
@@ -1383,9 +1380,7 @@ Zone.prototype.getOperations = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getOperationsStream = common.paginator.streamify(
-  'getOperations'
-);
+Zone.prototype.getOperationsStream = paginator.streamify('getOperations');
 
 /**
  * Get a list of VM instances in this zone.
@@ -1512,7 +1507,7 @@ Zone.prototype.getVMs = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getVMsStream = common.paginator.streamify('getVMs');
+Zone.prototype.getVMsStream = paginator.streamify('getVMs');
 
 /**
  * Get a reference to a Google Compute Engine instance group.
@@ -1647,7 +1642,7 @@ Zone.prototype.createHttpsServerFirewall_ = function(callback) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(Zone, [
+paginator.extend(Zone, [
   'getAutoscalers',
   'getDisks',
   'getInstanceGroups',

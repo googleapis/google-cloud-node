@@ -70,23 +70,25 @@ nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 let extended = false;
 const fakePaginator = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'Region') {
-      return;
-    }
+  paginator: {
+    extend: function(Class, methods) {
+      if (Class.name !== 'Region') {
+        return;
+      }
 
-    extended = true;
-    methods = arrify(methods);
-    assert.strictEqual(Class.name, 'Region');
-    assert.deepStrictEqual(methods, [
-      'getAddresses',
-      'getOperations',
-      'getRules',
-      'getSubnetworks',
-    ]);
-  },
-  streamify: function(methodName) {
-    return methodName;
+      extended = true;
+      methods = arrify(methods);
+      assert.strictEqual(Class.name, 'Region');
+      assert.deepStrictEqual(methods, [
+        'getAddresses',
+        'getOperations',
+        'getRules',
+        'getSubnetworks',
+      ]);
+    },
+    streamify: function(methodName) {
+      return methodName;
+    },
   },
 };
 
@@ -103,8 +105,8 @@ describe('Region', function() {
     Region = proxyquire('../src/region.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator,
       },
+      '@google-cloud/paginator': fakePaginator,
       '@google-cloud/promisify': fakePromisify,
       './address.js': FakeAddress,
       './network.js': FakeNetwork,
