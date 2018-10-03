@@ -68,7 +68,7 @@ Options:
                                                               [string] [default: "6ac7bd60-96a7-11e8-aaf1-2be61153eaa1"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
                                                                                               "AUDIO_ENCODING_LINEAR16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
@@ -122,9 +122,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -195,9 +195,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -268,9 +268,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -341,9 +341,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -414,9 +414,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -487,9 +487,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -560,9 +560,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -633,9 +633,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -706,9 +706,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -779,9 +779,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -852,9 +852,9 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
@@ -915,9 +915,9 @@ Options:
                                                               [string] [default: "6d22c460-96a7-11e8-8898-73a768ffb741"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -959,9 +959,9 @@ Options:
                                                               [string] [default: "6d5434a0-96a7-11e8-a573-1fed0528f24b"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                              "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
