@@ -23,6 +23,7 @@ const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {replaceProjectIdToken} = require('@google-cloud/projectify');
 
 const Disk = require('./disk.js');
 
@@ -432,7 +433,7 @@ VM.prototype.detachDisk = function(disk, callback) {
       return;
     }
 
-    const diskName = common.util.replaceProjectIdToken(
+    const diskName = replaceProjectIdToken(
       disk.formattedName,
       self.zone.compute.authClient.projectId
     );
