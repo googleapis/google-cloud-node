@@ -19,10 +19,10 @@
 const assert = require('assert');
 const extend = require('extend');
 const proxyquire = require('proxyquire');
-const util = require('@google-cloud/common').util;
+const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakeUtil = extend({}, util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Project') {
       promisified = true;
@@ -48,8 +48,8 @@ describe('Project', function() {
     Project = proxyquire('../src/project.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify,
     });
   });
 

@@ -19,7 +19,7 @@
 const assert = require('assert');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const ServiceObject = require('@google-cloud/common').ServiceObject;
+const {ServiceObject} = require('@google-cloud/common');
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;

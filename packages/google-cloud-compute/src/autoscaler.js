@@ -17,6 +17,7 @@
 'use strict';
 
 const common = require('@google-cloud/common');
+const {promisifyAll} = require('@google-cloud/promisify');
 const util = require('util');
 
 /*! Developer Documentation
@@ -319,6 +320,6 @@ Autoscaler.prototype.setMetadata = function(metadata, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Autoscaler);
+promisifyAll(Autoscaler);
 
 module.exports = Autoscaler;

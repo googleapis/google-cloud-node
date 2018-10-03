@@ -18,6 +18,7 @@
 
 const common = require('@google-cloud/common');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * Forwarding rules work in conjunction with target pools and target instances
@@ -314,7 +315,7 @@ Rule.prototype.setTarget = function(target, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Rule);
+promisifyAll(Rule);
 
 /**
  * Reference to the {@link Rule} class.

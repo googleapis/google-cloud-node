@@ -22,6 +22,7 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 const Firewall = require('./firewall.js');
 const HealthCheck = require('./health-check.js');
@@ -3059,7 +3060,7 @@ common.paginator.extend(Compute, [
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Compute, {
+promisifyAll(Compute, {
   exclude: [
     'address',
     'autoscaler',

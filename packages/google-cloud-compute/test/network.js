@@ -21,16 +21,15 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const ServiceObject = require('@google-cloud/common').ServiceObject;
-const util = require('@google-cloud/common').util;
+const {ServiceObject, util} = require('@google-cloud/common');
+const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakeUtil = extend({}, util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Network') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, ['firewall']);
   },
@@ -66,8 +65,8 @@ describe('Network', function() {
     Network = proxyquire('../src/network.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify,
     });
 
     Region = require('../src/region.js');

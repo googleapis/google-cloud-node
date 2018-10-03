@@ -21,6 +21,7 @@ const common = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * You can create and manage groups of virtual machine instances so that you
@@ -608,6 +609,6 @@ common.paginator.extend(InstanceGroup, ['getVMs']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(InstanceGroup);
+promisifyAll(InstanceGroup);
 
 module.exports = InstanceGroup;

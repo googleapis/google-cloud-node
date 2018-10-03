@@ -22,6 +22,7 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 const Disk = require('./disk.js');
 
@@ -1116,6 +1117,6 @@ VM.prototype.request = function(reqOpts, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(VM);
+promisifyAll(VM);
 
 module.exports = VM;

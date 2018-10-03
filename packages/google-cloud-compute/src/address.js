@@ -17,6 +17,7 @@
 'use strict';
 
 const common = require('@google-cloud/common');
+const {promisifyAll} = require('@google-cloud/promisify');
 const util = require('util');
 
 /**
@@ -242,6 +243,6 @@ Address.prototype.delete = function(callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Address);
+promisifyAll(Address);
 
 module.exports = Address;

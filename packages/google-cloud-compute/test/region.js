@@ -18,20 +18,19 @@
 
 const arrify = require('arrify');
 const assert = require('assert');
-const common = require('@google-cloud/common');
+const {ServiceObject} = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const ServiceObject = common.ServiceObject;
+const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakeUtil = extend({}, common.util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Region') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, [
       'address',
@@ -105,8 +104,8 @@ describe('Region', function() {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         paginator: fakePaginator,
-        util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify,
       './address.js': FakeAddress,
       './network.js': FakeNetwork,
       './operation.js': FakeOperation,

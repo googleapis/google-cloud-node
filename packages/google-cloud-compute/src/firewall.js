@@ -18,6 +18,7 @@
 
 const common = require('@google-cloud/common');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * A Firewall object allows you to interact with a Google Compute Engine
@@ -308,7 +309,7 @@ Firewall.prototype.setMetadata = function(metadata, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Firewall);
+promisifyAll(Firewall);
 
 /**
  * Reference to the {@link Firewall} class.

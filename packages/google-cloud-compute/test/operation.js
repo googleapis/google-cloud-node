@@ -19,7 +19,8 @@
 const assert = require('assert');
 const extend = require('extend');
 const proxyquire = require('proxyquire').noPreserveCache();
-const util = require('@google-cloud/common').util;
+const {util} = require('@google-cloud/common');
+const promisify = require('@google-cloud/promisify');
 
 function FakeOperation() {
   this.calledWith_ = arguments;
@@ -36,9 +37,11 @@ const fakeUtil = extend({}, util, {
     if (parseHttpRespBodyOverride) {
       return parseHttpRespBodyOverride.apply(null, arguments);
     }
-
     return util.parseHttpRespBody.apply(this, arguments);
   },
+});
+
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Operation') {
       promisified = true;
@@ -62,6 +65,7 @@ describe('Operation', function() {
         ServiceObject: FakeServiceObject,
         util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify,
     });
   });
 

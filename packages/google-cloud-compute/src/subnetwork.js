@@ -18,6 +18,7 @@
 
 const common = require('@google-cloud/common');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * An Subnetwork object allows you to interact with a Google Compute Engine
@@ -247,6 +248,6 @@ Subnetwork.prototype.delete = function(callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Subnetwork);
+promisifyAll(Subnetwork);
 
 module.exports = Subnetwork;

@@ -20,6 +20,7 @@ const common = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 const Address = require('./address.js');
 const Network = require('./network.js');
@@ -996,7 +997,7 @@ common.paginator.extend(Region, [
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Region, {
+promisifyAll(Region, {
   exclude: ['address', 'operation', 'rule', 'subnetwork'],
 });
 

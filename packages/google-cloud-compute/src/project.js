@@ -18,6 +18,7 @@
 
 const common = require('@google-cloud/common');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * A Project object allows you to interact with your Google Compute Engine
@@ -112,7 +113,7 @@ util.inherits(Project, common.ServiceObject);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Project);
+promisifyAll(Project);
 
 /**
  * Reference to the {@link Project} class.

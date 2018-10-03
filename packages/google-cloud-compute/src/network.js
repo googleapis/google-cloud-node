@@ -21,6 +21,7 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * A Network object allows you to interact with a Google Compute Engine network.
@@ -628,7 +629,7 @@ Network.prototype.getFirewallsStream = function(options) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Network, {
+promisifyAll(Network, {
   exclude: ['firewall'],
 });
 

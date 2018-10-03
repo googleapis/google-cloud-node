@@ -21,6 +21,7 @@ const common = require('@google-cloud/common');
 const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * An HTTP(S) load balancing backend service is a centralized service for
@@ -389,7 +390,7 @@ Service.prototype.setMetadata = function(metadata, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Service);
+promisifyAll(Service);
 
 /**
  * Reference to the {@link Service} class.

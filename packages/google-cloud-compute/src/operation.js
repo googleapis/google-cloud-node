@@ -18,6 +18,7 @@
 
 const common = require('@google-cloud/common');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * An Operation object allows you to interact with a Google Compute Engine
@@ -288,7 +289,7 @@ Operation.prototype.poll_ = function(callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Operation);
+promisifyAll(Operation);
 
 /**
  * Reference to the {@link Operation} class.

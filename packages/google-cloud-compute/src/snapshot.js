@@ -18,6 +18,7 @@
 
 const common = require('@google-cloud/common');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * A Snapshot object allows you to interact with a Google Compute Engine
@@ -243,7 +244,7 @@ Snapshot.prototype.delete = function(callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Snapshot);
+promisifyAll(Snapshot);
 
 /**
  * Reference to the {@link Snapshot} class.

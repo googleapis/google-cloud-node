@@ -23,14 +23,17 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const Service = require('@google-cloud/common').Service;
-const util = require('@google-cloud/common').util;
+const {Service, util} = require('@google-cloud/common');
+const promisify = require('@google-cloud/promisify');
 
 const slice = Array.prototype.slice;
 
 let promisified = false;
 const fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
+});
+
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Compute') {
       return;
@@ -175,6 +178,7 @@ describe('Compute', function() {
         paginator: fakePaginator,
         util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify,
       './firewall.js': FakeFirewall,
       './health-check.js': FakeHealthCheck,
       './image.js': FakeImage,

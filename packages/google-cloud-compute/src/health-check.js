@@ -20,6 +20,7 @@ const common = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 /**
  * Health checks ensure that Compute Engine forwards new connections only to
@@ -310,7 +311,7 @@ HealthCheck.prototype.setMetadata = function(metadata, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(HealthCheck);
+promisifyAll(HealthCheck);
 
 /**
  * Reference to the {@link HealthCheck} class.

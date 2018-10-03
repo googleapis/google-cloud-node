@@ -18,13 +18,13 @@
 
 const assert = require('assert');
 const extend = require('extend');
-const common = require('@google-cloud/common');
+const {ServiceObject} = require('@google-cloud/common');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const ServiceObject = common.ServiceObject;
+const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakeUtil = extend({}, common.util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Snapshot') {
       promisified = true;
@@ -50,8 +50,8 @@ describe('Snapshot', function() {
     Snapshot = proxyquire('../src/snapshot.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil,
       },
+      '@google-cloud/promisify': fakePromisify,
     });
   });
 

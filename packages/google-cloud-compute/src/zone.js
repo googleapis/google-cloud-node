@@ -24,6 +24,7 @@ const format = require('string-format-obj');
 const gceImages = require('gce-images');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
 
 const Autoscaler = require('./autoscaler.js');
 const Disk = require('./disk.js');
@@ -1660,7 +1661,7 @@ common.paginator.extend(Zone, [
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Zone, {
+promisifyAll(Zone, {
   exclude: [
     'autoscaler',
     'disk',
