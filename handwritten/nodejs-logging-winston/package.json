@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^4.0.1",
-    "@sindresorhus/is": "^0.10.0",
+    "@sindresorhus/is": "^0.12.0",
     "lodash.mapvalues": "^4.6.0",
     "logform": "^1.9.1",
     "semver": "^5.5.1",
