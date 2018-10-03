@@ -63,7 +63,7 @@
     "fix": "eslint --fix '**/*.js'"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.17.0",
+    "@google-cloud/common": "^0.25.0",
     "@google-cloud/paginator": "^0.1.1",
     "@google-cloud/projectify": "^0.3.0",
     "@google-cloud/promisify": "^0.3.1",

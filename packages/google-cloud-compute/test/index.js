@@ -207,20 +207,6 @@ describe('Compute', function() {
       assert(compute instanceof Compute);
     });
 
-    it('should normalize the arguments', function() {
-      let normalizeArgumentsCalled = false;
-      const options = {};
-
-      fakeUtil.normalizeArguments = function(context, options_) {
-        normalizeArgumentsCalled = true;
-        assert.strictEqual(options_, options);
-        return options_;
-      };
-
-      new Compute(options);
-      assert.strictEqual(normalizeArgumentsCalled, true);
-    });
-
     it('should inherit from Service', function() {
       assert(compute instanceof Service);
 

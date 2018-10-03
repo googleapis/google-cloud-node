@@ -81,7 +81,7 @@ const Image = require('./image.js');
  * });
  */
 function Compute(options) {
-  options = common.util.normalizeArguments(this, options);
+  options = options || {};
 
   const config = {
     baseUrl: 'https://www.googleapis.com/compute/v1',
