@@ -22,6 +22,7 @@ const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * An HTTP(S) load balancing backend service is a centralized service for
@@ -185,6 +186,7 @@ function Service(compute, name) {
     id: name,
     createMethod: compute.createService.bind(compute),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

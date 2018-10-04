@@ -22,7 +22,7 @@ const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
-
+const {teenyRequest} = require('teeny-request');
 const Snapshot = require('./snapshot.js');
 
 /**
@@ -178,6 +178,7 @@ function Disk(zone, name) {
     id: name,
     createMethod: zone.createDisk.bind(zone),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

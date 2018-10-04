@@ -22,6 +22,7 @@ const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * A Network object allows you to interact with a Google Compute Engine network.
@@ -172,6 +173,7 @@ function Network(compute, name) {
     id: name,
     createMethod: compute.createNetwork.bind(compute),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

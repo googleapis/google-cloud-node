@@ -19,6 +19,7 @@
 const common = require('@google-cloud/common');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * A Snapshot object allows you to interact with a Google Compute Engine
@@ -138,6 +139,7 @@ function Snapshot(scope, name) {
      */
     id: name,
     methods: methods,
+    requestModule: teenyRequest,
   };
 
   if (isDisk) {

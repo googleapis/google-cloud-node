@@ -19,6 +19,7 @@
 const common = require('@google-cloud/common');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * A Firewall object allows you to interact with a Google Compute Engine
@@ -169,6 +170,7 @@ function Firewall(compute, name) {
     id: name,
     createMethod: compute.createFirewall.bind(compute),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

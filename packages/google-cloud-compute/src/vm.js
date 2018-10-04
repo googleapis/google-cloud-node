@@ -24,6 +24,7 @@ const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {replaceProjectIdToken} = require('@google-cloud/projectify');
+const {teenyRequest} = require('teeny-request');
 
 const Disk = require('./disk.js');
 
@@ -250,6 +251,7 @@ function VM(zone, name) {
     id: this.name,
     createMethod: zone.createVM.bind(zone),
     methods: methods,
+    requestModule: teenyRequest,
   });
 }
 

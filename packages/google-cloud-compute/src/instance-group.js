@@ -23,6 +23,7 @@ const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * You can create and manage groups of virtual machine instances so that you
@@ -177,6 +178,7 @@ function InstanceGroup(zone, name) {
     id: name,
     createMethod: zone.createInstanceGroup.bind(zone),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

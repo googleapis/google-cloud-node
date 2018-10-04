@@ -73,7 +73,8 @@
     "extend": "^3.0.1",
     "gce-images": "^0.3.3",
     "is": "^3.2.1",
-    "string-format-obj": "^1.1.1"
+    "string-format-obj": "^1.1.1",
+    "teeny-request": "^3.10.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",

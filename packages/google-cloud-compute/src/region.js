@@ -22,6 +22,7 @@ const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
+const {teenyRequest} = require('teeny-request');
 
 const Address = require('./address.js');
 const Network = require('./network.js');
@@ -135,6 +136,7 @@ function Region(compute, name) {
      */
     id: name,
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

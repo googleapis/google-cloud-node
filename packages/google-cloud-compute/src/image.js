@@ -19,6 +19,7 @@
 const common = require('@google-cloud/common');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * An Image object allows you to interact with a Google Compute Engine image.
@@ -160,6 +161,7 @@ function Image(compute, name) {
     id: name,
     createMethod: compute.createImage.bind(compute),
     methods: methods,
+    requestModule: teenyRequest,
   });
 }
 

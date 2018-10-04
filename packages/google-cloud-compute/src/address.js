@@ -19,6 +19,7 @@
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
 const util = require('util');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * An Address object allows you to interact with a Google Compute Engine
@@ -166,6 +167,7 @@ function Address(region, name) {
     id: name,
     createMethod: region.createAddress.bind(region),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

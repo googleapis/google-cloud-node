@@ -21,6 +21,7 @@ const extend = require('extend');
 const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * Health checks ensure that Compute Engine forwards new connections only to
@@ -196,6 +197,7 @@ function HealthCheck(compute, name, options) {
       compute.createHealthCheck(name, options, callback);
     },
     methods: methods,
+    requestModule: teenyRequest,
   });
 }
 

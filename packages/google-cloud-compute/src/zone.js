@@ -26,6 +26,7 @@ const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
+const {teenyRequest} = require('teeny-request');
 
 const Autoscaler = require('./autoscaler.js');
 const Disk = require('./disk.js');
@@ -140,6 +141,7 @@ function Zone(compute, name) {
      */
     id: name,
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

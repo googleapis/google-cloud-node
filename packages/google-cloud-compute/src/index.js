@@ -24,6 +24,7 @@ const is = require('is');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
+const {teenyRequest} = require('teeny-request');
 
 const Firewall = require('./firewall.js');
 const HealthCheck = require('./health-check.js');
@@ -87,6 +88,7 @@ function Compute(options) {
     baseUrl: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json'),
+    requestModule: teenyRequest,
   };
 
   common.Service.call(this, config, options);

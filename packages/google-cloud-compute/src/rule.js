@@ -19,6 +19,7 @@
 const common = require('@google-cloud/common');
 const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * Forwarding rules work in conjunction with target pools and target instances
@@ -191,6 +192,7 @@ function Rule(scope, name) {
     id: name,
     createMethod: scope.createRule.bind(scope),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

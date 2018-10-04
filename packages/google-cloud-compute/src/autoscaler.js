@@ -19,6 +19,7 @@
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
 const util = require('util');
+const {teenyRequest} = require('teeny-request');
 
 /*! Developer Documentation
  *
@@ -181,6 +182,7 @@ function Autoscaler(zone, name) {
     id: name,
     createMethod: zone.createAutoscaler.bind(zone),
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**

@@ -18,6 +18,7 @@
 
 const common = require('@google-cloud/common');
 const util = require('util');
+const {teenyRequest} = require('teeny-request');
 
 /**
  * A MachineType object allows you to interact with a Google Compute Engine
@@ -131,6 +132,7 @@ function MachineType(zone, name) {
      */
     id: name,
     methods: methods,
+    requestModule: teenyRequest,
   });
 
   /**
