@@ -1384,7 +1384,7 @@ describe('storage', () => {
     it('should handle non-network errors', done => {
       const file = bucket.file('hi.jpg');
       file.download(err => {
-        assert.strictEqual(err.code, 404);
+        assert.strictEqual((err as ApiError).code, 404);
         done();
       });
     });
@@ -1593,7 +1593,7 @@ describe('storage', () => {
 
       it('should not download from the unencrypted file', done => {
         unencryptedFile.download(err => {
-          assert(err.message.indexOf([
+          assert(err!.message.indexOf([
             'The target object is encrypted by a',
             'customer-supplied encryption key.',
           ].join(' ')) > -1);
