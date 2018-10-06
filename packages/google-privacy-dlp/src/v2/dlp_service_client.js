@@ -1517,6 +1517,20 @@ class DlpServiceClient {
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    *
    *   The number should be among the values of [DlpJobType]{@link google.privacy.dlp.v2.DlpJobType}
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc, end_time asc, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the job was created.
+   *   - `end_time`: corresponds to time the job ended.
+   *   - `name`: corresponds to job's name.
+   *   - `state`: corresponds to `state`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1649,6 +1663,20 @@ class DlpServiceClient {
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    *
    *   The number should be among the values of [DlpJobType]{@link google.privacy.dlp.v2.DlpJobType}
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc, end_time asc, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the job was created.
+   *   - `end_time`: corresponds to time the job ended.
+   *   - `name`: corresponds to job's name.
+   *   - `state`: corresponds to `state`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

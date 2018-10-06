@@ -425,9 +425,15 @@ const Location = {
  *
  * @property {string} containerName
  *   Name of the container where the finding is located.
- *   The top level name is the source file name or table name. Nested names
- *   could be absent if the embedded object has no string identifier
- *   (for an example an image contained within a document).
+ *   The top level name is the source file name or table name. Names of some
+ *   common storage containers are formatted as follows:
+ *
+ *   * BigQuery tables:  `<project_id>:<dataset_id>.<table_id>`
+ *   * Cloud Storage files: `gs://<bucket>/<path>`
+ *   * Datastore namespace: <namespace>
+ *
+ *   Nested names could be absent if the embedded object has no string
+ *   identifier (for an example an image contained within a document).
  *
  * @property {Object} recordLocation
  *   Location within a row or record of a database table.
@@ -3727,6 +3733,21 @@ const GetDlpJobRequest = {
  *   The type of job. Defaults to `DlpJobType.INSPECT`
  *
  *   The number should be among the values of [DlpJobType]{@link google.privacy.dlp.v2.DlpJobType}
+ *
+ * @property {string} orderBy
+ *   Optional comma separated list of fields to order by,
+ *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+ *   default sorting order is ascending, redundant space characters are
+ *   insignificant.
+ *
+ *   Example: `name asc, end_time asc, create_time desc`
+ *
+ *   Supported fields are:
+ *
+ *   - `create_time`: corresponds to time the job was created.
+ *   - `end_time`: corresponds to time the job ended.
+ *   - `name`: corresponds to job's name.
+ *   - `state`: corresponds to `state`
  *
  * @typedef ListDlpJobsRequest
  * @memberof google.privacy.dlp.v2
