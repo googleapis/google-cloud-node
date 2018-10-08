@@ -20,3 +20,10 @@ logging.basicConfig(level=logging.DEBUG)
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build')
 s.copy(templates)
+
+# Create .config directory under $HOME to get around permissions issues
+# with resumable upload.
+s.replace(
+    ".circleci/config.yml",
+    "command: npm run system-test",
+    "command: mkdir $HOME/.config && npm run system-test")
