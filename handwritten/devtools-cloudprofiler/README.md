@@ -137,9 +137,9 @@ To enable the profiling agent for a Node.js program running in the App Engine
 flexible environment, import the agent at the top of your application’s main
 script or entry point by including the following code snippet:
 
-    ```js
-    var profiler = require('@google-cloud/profiler').start();
-    ```
+```js
+var profiler = require('@google-cloud/profiler').start();
+```
 
 You can specify which version of Node.js you're using by adding a snippet like
 the following to your `package.json`:
