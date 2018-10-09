@@ -4,6 +4,50 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.1.0
+
+This release brings support for Bucket/Object lock operations, as well as disable TypeScript as we continue to annotate the project with types.
+
+### New Features
+- feat: Support Bucket/Object lock operations ([#374](https://github.com/googleapis/nodejs-storage/pull/374))
+
+### Implementation Changes
+- disable types for now ([#392](https://github.com/googleapis/nodejs-storage/pull/392))
+- Don't publish sourcemaps ([#412](https://github.com/googleapis/nodejs-storage/pull/412))
+#### TypeScript support (in progress)
+- fix: add better types for file.ts ([#436](https://github.com/googleapis/nodejs-storage/pull/436))
+- fix: use ~ for typescript (and fix compile errors) ([#426](https://github.com/googleapis/nodejs-storage/pull/426))
+- fix: Add typing for File#download() ([#409](https://github.com/googleapis/nodejs-storage/pull/409))
+- chore: convert system tests to typescript ([#424](https://github.com/googleapis/nodejs-storage/pull/424))
+- Improve TypeScript types (part 4) ([#402](https://github.com/googleapis/nodejs-storage/pull/402))
+- ts: convert jsdoc types to typescript interfaces (1) ([#383](https://github.com/googleapis/nodejs-storage/pull/383))
+- fix: TS definition ([#387](https://github.com/googleapis/nodejs-storage/pull/387))
+- Annotate types [#3](https://github.com/googleapis/nodejs-storage/pull/3) ([#391](https://github.com/googleapis/nodejs-storage/pull/391))
+- Annotate types (2) ([#388](https://github.com/googleapis/nodejs-storage/pull/388))
+
+### Dependencies
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#419](https://github.com/googleapis/nodejs-storage/pull/419))
+
+### Documentation
+- docs: Modify source location for templates ([#410](https://github.com/googleapis/nodejs-storage/pull/410))
+- docs: Explain `Bucket#upload()` still exists ([#421](https://github.com/googleapis/nodejs-storage/pull/421))
+
+### Internal / Testing Changes
+- fix(tests): fix system tests on CircleCI ([#431](https://github.com/googleapis/nodejs-storage/pull/431))
+- fix(tests): system-test compiles to ./build, fix relative path ([#428](https://github.com/googleapis/nodejs-storage/pull/428))
+- Update kokoro config ([#425](https://github.com/googleapis/nodejs-storage/pull/425))
+- chore(samples): convert samples to async/await ([#422](https://github.com/googleapis/nodejs-storage/pull/422))
+- build: samples test by adding approprate test variables ([#423](https://github.com/googleapis/nodejs-storage/pull/423))
+- build: bring in latest kokoro cfgs to run System tests on PRs ([#413](https://github.com/googleapis/nodejs-storage/pull/413))
+- test: remove appveyor config ([#411](https://github.com/googleapis/nodejs-storage/pull/411))
+- Enable prefer-const in the eslint config ([#404](https://github.com/googleapis/nodejs-storage/pull/404))
+- fix(test): instantiate PubSub using new ([#403](https://github.com/googleapis/nodejs-storage/pull/403))
+- fix: optionsOrCallback could be undefined if not given, check before assign ([#401](https://github.com/googleapis/nodejs-storage/pull/401))
+- Fix the requesterPays methods ([#400](https://github.com/googleapis/nodejs-storage/pull/400))
+- Enable no-var in eslint ([#398](https://github.com/googleapis/nodejs-storage/pull/398))
+- samples: don't use USA formatted dates for expiry ([#396](https://github.com/googleapis/nodejs-storage/pull/396))
+- fix: copy(): Use correct destination file name in URI ([#389](https://github.com/googleapis/nodejs-storage/pull/389))
+
 ## v2.0.3
 
 ### Implementation Changes
