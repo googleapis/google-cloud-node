@@ -16,7 +16,7 @@
 
 'use strict';
 
-import {ServiceObject, util, DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
+import {ServiceObject, util, DecorateRequestOptions, BodyResponseCallback, Metadata, GetConfig} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import compressible = require('compressible');
 import concat = require('concat-stream');
@@ -38,11 +38,191 @@ import * as xdgBasedir from 'xdg-basedir';
 import * as zlib from 'zlib';
 import * as url from 'url';
 import * as r from 'request';
+import * as http from 'http';
 
 import {Storage} from '.';
 import {Bucket} from './bucket';
 import {Acl} from './acl';
 import {ResponseBody} from '@google-cloud/common/build/src/util';
+import {normalize} from './util';
+
+export interface GetSignedUrlConfig {
+  action: 'read'|'write'|'delete'|'resumable';
+  cname?: string;
+  contentMd5?: string;
+  contentType?: string;
+  expires: number;
+  extensionHeaders?: http.OutgoingHttpHeaders;
+  promptSaveAs?: string;
+  responseDisposition?: string;
+  responseType?: string;
+}
+
+interface GetSignedUrlConfigInternal {
+  action: string;
+  resource?: string;
+  extensionHeaders?: http.OutgoingHttpHeaders;
+  contentMd5?: string;
+  contentType?: string;
+  promptSaveAs?: string;
+  responseType?: string;
+  responseDisposition?: string;
+  cname?: string;
+}
+
+/**
+ * @typedef {array} GetSignedUrlResponse
+ * @property {object} 0 The signed URL.
+ */
+export type GetSignedUrlResponse = [string];
+
+/**
+ * @callback GetSignedUrlCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} url The signed URL.
+ */
+export interface GetSignedUrlCallback {
+  (err: Error|null, url?: string): void;
+}
+
+export interface PolicyDocument {
+  expiration: string;
+  conditions: Array<Array<string|number>>;
+}
+
+/**
+ * @typedef {array} GetSignedPolicyResponse
+ * @property {object} 0 The document policy.
+ */
+export type GetSignedPolicyResponse = [PolicyDocument];
+
+/**
+ * @callback GetSignedPolicyCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} policy The document policy.
+ */
+export interface GetSignedPolicyCallback {
+  (err: Error|null, policy?: PolicyDocument): void;
+}
+
+export interface GetSignedPolicyOptions {
+  equals?: string[]|string[][];
+  expires: number;
+  startsWith?: string[]|string[][];
+  acl?: string;
+  successRedirect?: string;
+  successStatus?: string;
+  contentLengthRange?: {min?: number; max?: number;};
+}
+
+export interface GetFileMetadataOptions {
+  userProject?: string;
+}
+
+/**
+ * @typedef {array} GetFileMetadataResponse
+ * @property {object} 0 The {@link File} metadata.
+ * @property {object} 1 The full API response.
+ */
+export type GetFileMetadataResponse = [File, r.Response];
+
+/**
+ * @callback GetFileMetadataCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} metadata The {@link File} metadata.
+ * @param {object} apiResponse The full API response.
+ */
+export interface GetFileMetadataCallback {
+  (err: Error|null, metadata?: Metadata, apiResponse?: r.Response): void;
+}
+
+export interface GetFileOptions extends GetConfig {
+  userProject?: string;
+}
+
+/**
+ * @typedef {array} GetFileResponse
+ * @property {File} 0 The {@link File}.
+ * @property {object} 1 The full API response.
+ */
+export type GetFileResponse = [File, r.Response];
+
+/**
+ * @callback GetFileCallback
+ * @param {?Error} err Request error, if any.
+ * @param {File} file The {@link File}.
+ * @param {object} apiResponse The full API response.
+ */
+export interface GetFileCallback {
+  (err: Error|null, file?: File, apiResponse?: r.Response): void;
+}
+
+export interface FileExistsOptions {
+  userProject?: string;
+}
+
+/**
+ * @typedef {array} FileExistsResponse
+ * @property {boolean} 0 Whether the {@link File} exists.
+ */
+export type FileExistsResponse = [boolean];
+
+/**
+ * @callback FileExistsCallback
+ * @param {?Error} err Request error, if any.
+ * @param {boolean} exists Whether the {@link File} exists.
+ */
+export interface FileExistsCallback {
+  (err: Error|null, exists?: boolean): void;
+}
+
+export interface DeleteFileOptions {
+  userProject?: string;
+}
+
+/**
+ * @typedef {array} DeleteFileResponse
+ * @property {object} 0 The full API response.
+ */
+export type DeleteFileResponse = [r.Response];
+
+/**
+ * @callback DeleteFileCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+export interface DeleteFileCallback {
+  (err: Error|null, apiResponse?: r.Response): void;
+}
+
+export type PredefinedAcl = 'authenticatedRead'|'bucketOwnerFullControl'|
+    'bucketOwnerRead'|'private'|'projectPrivate'|'publicRead';
+
+export interface CreateResumableUploadOptions {
+  metadata?: Metadata;
+  origin?: string;
+  offset?: number;
+  predefinedAcl?: PredefinedAcl;
+  private?: boolean;
+  public?: boolean;
+  uri?: string;
+  userProject?: string;
+}
+
+/**
+ * @typedef {array} CreateResumableUploadResponse
+ * @property {string} 0 The resumable upload's unique session URI.
+ */
+export type CreateResumableUploadResponse = [string];
+
+/**
+ * @callback CreateResumableUploadCallback
+ * @param {?Error} err Request error, if any.
+ * @param {string} uri The resumable upload's unique session URI.
+ */
+export interface CreateResumableUploadCallback {
+  (err: Error|null, uri?: string): void;
+}
 
 /**
  * Custom error type for errors related to creating a resumable upload.
@@ -526,7 +706,7 @@ class File extends ServiceObject {
     }
 
     if (is.defined(newFile.encryptionKey)) {
-      this.setEncryptionKey(newFile.encryptionKey);
+      this.setEncryptionKey(newFile.encryptionKey!);
     } else if (is.defined(options.destinationKmsKeyName)) {
       query.destinationKmsKeyName = options.destinationKmsKeyName;
       delete options.destinationKmsKeyName;
@@ -800,7 +980,7 @@ class File extends ServiceObject {
       // This is hooked to the `complete` event from the request stream. This is
       // our chance to validate the data and let the user know if anything went
       // wrong.
-      const onComplete = err => {
+      const onComplete = (err: Error|null) => {
         if (err) {
           throughStream.destroy(err);
           return;
@@ -866,15 +1046,6 @@ class File extends ServiceObject {
     return throughStream;
   }
 
-  /**
-   * @typedef {array} CreateResumableUploadResponse
-   * @property {string} 0 The resumable upload's unique session URI.
-   */
-  /**
-   * @callback CreateResumableUploadCallback
-   * @param {?Error} err Request error, if any.
-   * @param {string} uri The resumable upload's unique session URI.
-   */
   /**
    * Create a unique resumable upload session URI. This is the first step when
    * performing a resumable upload.
@@ -942,11 +1113,21 @@ class File extends ServiceObject {
    *   const uri = data[0];
    * });
    */
-  createResumableUpload(options, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
+  createResumableUpload(options?: CreateResumableUploadOptions):
+      Promise<CreateResumableUploadResponse>;
+  createResumableUpload(
+      options: CreateResumableUploadOptions,
+      callback: CreateResumableUploadCallback): void;
+  createResumableUpload(callback: CreateResumableUploadCallback): void;
+  createResumableUpload(
+      optionsOrCallback?: CreateResumableUploadOptions|
+      CreateResumableUploadCallback,
+      callback?: CreateResumableUploadCallback):
+      void|Promise<CreateResumableUploadResponse> {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
     resumableUpload.createURI(
         {
@@ -954,8 +1135,7 @@ class File extends ServiceObject {
           bucket: this.bucket.name,
           file: this.name,
           generation: this.generation,
-          // tslint:disable-next-line:no-any
-          key: this.encryptionKey as any,
+          key: this.encryptionKey,
           kmsKeyName: this.kmsKeyName,
           metadata: options.metadata,
           offset: options.offset,
@@ -965,7 +1145,7 @@ class File extends ServiceObject {
           public: options.public,
           userProject: options.userProject,
         },
-        callback);
+        callback!);
   }
 
   /**
@@ -1260,7 +1440,7 @@ class File extends ServiceObject {
 
           const error = new RequestError(message);
           error.code = code;
-          error.errors = [err];
+          error.errors = [err!];
 
           fileWriteStream.destroy(error);
         });
@@ -1274,15 +1454,6 @@ class File extends ServiceObject {
     return stream;
   }
 
-  /**
-   * @typedef {array} DeleteFileResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback DeleteFileCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Delete the file.
    *
@@ -1313,13 +1484,17 @@ class File extends ServiceObject {
    * region_tag:storage_delete_file
    * Another example:
    */
-  delete(options, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
-
+  delete(options?: DeleteFileOptions): Promise<DeleteFileResponse>;
+  delete(options: DeleteFileOptions, callback: DeleteFileCallback): void;
+  delete(callback: DeleteFileCallback): void;
+  delete(
+      optionsOrCallback?: DeleteFileOptions|DeleteFileCallback,
+      callback?: DeleteFileCallback): void|Promise<DeleteFileResponse> {
+    let options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     options = extend({}, this.requestQueryObject, options);
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     (this.parent as ServiceObject).delete.call(this, options, callback);
   }
 
@@ -1408,15 +1583,6 @@ class File extends ServiceObject {
   }
 
   /**
-   * @typedef {array} FileExistsResponse
-   * @property {boolean} 0 Whether the {@link File} exists.
-   */
-  /**
-   * @callback FileExistsCallback
-   * @param {?Error} err Request error, if any.
-   * @param {boolean} exists Whether the {@link File} exists.
-   */
-  /**
    * Check if the file exists.
    *
    * @param {options} [options] Configuration options.
@@ -1441,7 +1607,16 @@ class File extends ServiceObject {
    *   const exists = data[0];
    * });
    */
-  exists(options, callback?) {
+  exists(options?: FileExistsOptions): Promise<FileExistsResponse>;
+  exists(options: FileExistsOptions, callback: FileExistsCallback): void;
+  exists(callback: FileExistsCallback): void;
+  exists(
+      optionsOrCallback?: FileExistsOptions|FileExistsCallback,
+      callback?: FileExistsCallback): Promise<FileExistsResponse>|void {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     (this.parent as ServiceObject).exists.call(this, options, callback);
   }
 
@@ -1488,9 +1663,10 @@ class File extends ServiceObject {
    * region_tag:storage_download_encrypted_file
    * Example of downloading an encrypted file:
    */
-  setEncryptionKey(encryptionKey) {
+  setEncryptionKey(encryptionKey: string|Buffer) {
     this.encryptionKey = encryptionKey;
-    this.encryptionKeyBase64 = Buffer.from(encryptionKey).toString('base64');
+    this.encryptionKeyBase64 =
+        Buffer.from(encryptionKey as string).toString('base64');
     this.encryptionKeyHash =
         crypto
             .createHash('sha256')
@@ -1514,17 +1690,6 @@ class File extends ServiceObject {
     return this;
   }
 
-  /**
-   * @typedef {array} GetFileResponse
-   * @property {File} 0 The {@link File}.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetFileCallback
-   * @param {?Error} err Request error, if any.
-   * @param {File} file The {@link File}.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Get a file object and its metadata if it exists.
    *
@@ -1553,22 +1718,18 @@ class File extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  get(options, callback?) {
-    // tslint:disable-next-line:no-any
-    (this.parent as any).get.call(this, options, callback);
+  get(options?: GetFileOptions): Promise<GetFileResponse>;
+  get(options: GetFileOptions, callback: GetFileCallback): void;
+  get(callback: GetFileCallback): void;
+  get(optionsOrCallback?: GetFileOptions|GetFileCallback,
+      callback?: GetFileCallback): void|Promise<GetFileResponse> {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+    (this.parent as ServiceObject).get.call(this, options, callback);
   }
 
-  /**
-   * @typedef {array} GetFileMetadataResponse
-   * @property {object} 0 The {@link File} metadata.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetFileMetadataCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} metadata The {@link File} metadata.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Get the file's metadata.
    *
@@ -1601,16 +1762,21 @@ class File extends ServiceObject {
    * region_tag:storage_get_metadata
    * Another example:
    */
-  getMetadata(options, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
-
+  getMetadata(options?: GetFileMetadataOptions):
+      Promise<GetFileMetadataResponse>;
+  getMetadata(
+      options: GetFileMetadataOptions, callback: GetFileMetadataCallback): void;
+  getMetadata(callback: GetFileMetadataCallback): void;
+  getMetadata(
+      optionsOrCallback?: GetFileMetadataOptions|GetFileMetadataCallback,
+      callback?: GetFileMetadataCallback):
+      void|Promise<GetFileMetadataResponse> {
+    let options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     options = extend({}, this.requestQueryObject, options);
-
-    // tslint:disable-next-line:no-any
-    (this.parent as any).getMetadata.call(this, options, callback);
+    (this.parent as ServiceObject).getMetadata.call(this, options, callback);
   }
 
   /**
@@ -1701,8 +1867,18 @@ class File extends ServiceObject {
    *   const policy = data[0];
    * });
    */
-  getSignedPolicy(options, callback) {
-    const expires = new Date(options.expires);
+  getSignedPolicy(options: GetSignedPolicyOptions):
+      Promise<GetSignedPolicyResponse>;
+  getSignedPolicy(
+      options: GetSignedPolicyOptions, callback: GetSignedPolicyCallback): void;
+  getSignedPolicy(callback: GetSignedPolicyCallback): void;
+  getSignedPolicy(
+      optionsOrCallback?: GetSignedPolicyOptions|GetSignedPolicyCallback,
+      cb?: GetSignedPolicyCallback): void|Promise<GetSignedPolicyResponse> {
+    const args = normalize<GetSignedPolicyOptions>(optionsOrCallback, cb);
+    let options = args.options;
+    const callback = args.callback;
+    const expires = new Date((options as GetSignedPolicyOptions).expires);
 
     if (expires.valueOf() < Date.now()) {
       throw new Error('An expiration date cannot be in the past.');
@@ -1718,10 +1894,10 @@ class File extends ServiceObject {
     ] as object[];
 
     if (is.array(options.equals)) {
-      if (!is.array(options.equals[0])) {
-        options.equals = [options.equals];
+      if (!is.array((options.equals as string[][])[0])) {
+        options.equals = [options.equals as string[]];
       }
-      options.equals.forEach(condition => {
+      (options.equals as string[][]).forEach(condition => {
         if (!is.array(condition) || condition.length !== 2) {
           throw new Error('Equals condition must be an array of 2 elements.');
         }
@@ -1730,10 +1906,10 @@ class File extends ServiceObject {
     }
 
     if (is.array(options.startsWith)) {
-      if (!is.array(options.startsWith[0])) {
-        options.startsWith = [options.startsWith];
+      if (!is.array((options.startsWith as string[][])[0])) {
+        options.startsWith = [options.startsWith as string[]];
       }
-      options.startsWith.forEach(condition => {
+      (options.startsWith as string[][]).forEach(condition => {
         if (!is.array(condition) || condition.length !== 2) {
           throw new Error(
               'StartsWith condition must be an array of 2 elements.');
@@ -1792,15 +1968,6 @@ class File extends ServiceObject {
             });
   }
 
-  /**
-   * @typedef {array} GetSignedUrlResponse
-   * @property {object} 0 The signed URL.
-   */
-  /**
-   * @callback GetSignedUrlCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} url The signed URL.
-   */
   /**
    * Get a signed URL to allow limited time access to the file.
    *
@@ -1915,8 +2082,11 @@ class File extends ServiceObject {
    * region_tag:storage_generate_signed_url
    * Another example:
    */
-  getSignedUrl(config, callback) {
-    const expiresInMSeconds = new Date(config.expires).valueOf();
+  getSignedUrl(cfg: GetSignedUrlConfig): Promise<GetSignedPolicyResponse>;
+  getSignedUrl(cfg: GetSignedUrlConfig, callback: GetSignedUrlCallback): void;
+  getSignedUrl(cfg: GetSignedUrlConfig, callback?: GetSignedUrlCallback):
+      void|Promise<GetSignedPolicyResponse> {
+    const expiresInMSeconds = new Date(cfg.expires).valueOf();
 
     if (expiresInMSeconds < Date.now()) {
       throw new Error('An expiration date cannot be in the past.');
@@ -1925,14 +2095,14 @@ class File extends ServiceObject {
     const expiresInSeconds =
         Math.round(expiresInMSeconds / 1000);  // The API expects seconds.
 
-    config = extend({}, config);
+    const config: GetSignedUrlConfigInternal = extend({}, cfg);
 
-    config.action = {
+    config.action = ({
       read: 'GET',
       write: 'PUT',
       delete: 'DELETE',
       resumable: 'POST',
-    }[config.action];
+    } as {[index: string]: string})[config.action];
 
     const name = encodeURIComponent(this.name);
     config.resource = '/' + this.bucket.name + '/' + name;
@@ -1971,7 +2141,7 @@ class File extends ServiceObject {
             } as SignedUrlQuery;
 
             if (is.string(config.responseType)) {
-              query['response-content-type'] = config.responseType;
+              query['response-content-type'] = config.responseType!;
             }
 
             if (is.string(config.promptSaveAs)) {
@@ -1980,7 +2150,7 @@ class File extends ServiceObject {
             }
             if (is.string(config.responseDisposition)) {
               query['response-content-disposition'] =
-                  config.responseDisposition;
+                  config.responseDisposition!;
             }
 
             if (this.generation) {
@@ -1996,11 +2166,11 @@ class File extends ServiceObject {
               query,
             });
 
-            callback(null, signedUrl);
+            callback!(null, signedUrl);
           });
         })
         .catch(err => {
-          callback(new SigningError(err.message));
+          callback!(new SigningError(err.message));
         });
   }
 
@@ -2548,7 +2718,8 @@ class File extends ServiceObject {
    *
    * @private
    */
-  startResumableUpload_(dup, options) {
+  startResumableUpload_(
+      dup: duplexify.Duplexify, options: CreateResumableUploadOptions) {
     options = extend(
         {
           metadata: {},
@@ -2597,7 +2768,8 @@ class File extends ServiceObject {
    *
    * @private
    */
-  startSimpleUpload_(dup, options) {
+  startSimpleUpload_(
+      dup: duplexify.Duplexify, options?: CreateResumableUploadOptions) {
     options = extend(
         {
           metadata: {},

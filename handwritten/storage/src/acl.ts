@@ -221,7 +221,7 @@ class AclRoleAccessorMethods {
     AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));
   }
 
-  _assignAccessMethods(role) {
+  _assignAccessMethods(role: string) {
     const accessMethods = AclRoleAccessorMethods.accessMethods;
     const entities = AclRoleAccessorMethods.entities;
     const roleGroup = role.toLowerCase() + 's';
@@ -321,7 +321,7 @@ class AclRoleAccessorMethods {
  */
 class Acl extends AclRoleAccessorMethods {
   default !: Acl;
-  pathPrefix;
+  pathPrefix: string;
   request_;
 
   constructor(options) {
