@@ -1,7 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this library
- ---
+
+---
+
 Thanks for stopping by to let us know something could be better!
 
 **Please Read**: If you have a support contract with Google, please create an issue in the [support console](https://cloud.google.com/support/), and reference this issue. This will ensure a timely response.
