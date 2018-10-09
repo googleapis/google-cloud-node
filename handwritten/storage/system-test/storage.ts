@@ -31,6 +31,13 @@ import * as uuid from 'uuid';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
 import {Storage, Bucket} from '../src';
 import {DeleteBucketCallback} from '../src/bucket';
+import * as nock from 'nock';
+
+// block all attempts to chat with the metadata server (kokoro runs on GCE)
+nock('http://metadata.google.internal')
+    .get(url => true)
+    .replyWithError({code: 'ENOTFOUND'})
+    .persist();
 
 // tslint:disable-next-line:variable-name
 const PubSub = require('@google-cloud/pubsub');
@@ -113,7 +120,6 @@ describe('storage', () => {
 
         const {Storage} = require('../src');
         storageWithoutAuth = new Storage();
-
         done();
       });
     });
