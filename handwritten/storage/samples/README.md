@@ -18,6 +18,7 @@
   * [Files](#files)
   * [Notifications](#notifications)
   * [Requester Pays](#requester-pays)
+  * [Bucket Lock](#bucket-lock)
 
 ## Before you begin
 
@@ -269,6 +270,56 @@ For more information, see https://cloud.google.com/storage/docs
 
 [requesterPays_5_docs]: https://cloud.google.com/storage/docs
 [requesterPays_5_code]: requesterPays.js
+
+### Bucket Lock
+
+View the [source code][bucketLock_6_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/bucketLock.js,samples/README.md)
+
+__Usage:__ `node bucketLock.js --help`
+
+```
+bucketLock.js <command>
+
+Commands:
+  bucketLock.js set-retention-policy <bucketName> <period>      Defines a retention policy on a given bucket.
+  bucketLock.js remove-retention-policy <bucketName>            Removes a retention policy on a given bucket if the
+                                                                policy is unlocked.
+  bucketLock.js get-retention-policy <bucketName>               Get a retention policy for a given bucket.
+  bucketLock.js enable-default-event-based-hold <bucketName>    Enable default event-based hold for a given bucket.
+  bucketLock.js disable-default-event-based-hold <bucketName>   Disable default event-based hold for a given bucket.
+  bucketLock.js set-event-based-hold <bucketName> <fileName>    Set an event-based hold for a given file.
+  bucketLock.js release-event-based-hold <bucketName>           Release an event-based hold for a given file.
+  <fileName>
+  bucketLock.js set-temporary-hold <bucketName> <fileName>      Set a temporary hold for a given file.
+  bucketLock.js release-temporary-hold <bucketName> <fileName>  Release a temporary hold for a given file.
+
+Options:
+  --version  Show version number                                                                               [boolean]
+  --help     Show help                                                                                         [boolean]
+
+Examples:
+  node bucketLock.js set-retention-policy my-bucket 5           Defines a retention policy of 5 seconds on a
+                                                                "my-bucket".
+  node bucketLock.js remove-retention-policy my-bucket          Removes a retention policy from "my-bucket".
+  node bucketLock.js get-retention-policy my-bucket             Get the retention policy for "my-bucket".
+  node bucketLock.js enable-default-event-based-hold my-bucket  Enable a default event-based hold for "my-bucket".
+  node bucketLock.js disable-default-event-based-hold           Disable a default-event based hold for "my-bucket".
+  my-bucket
+  node bucketLock.js get-default-event-based-hold my-bucket     Get the value of a default-event-based hold for
+                                                                "my-bucket".
+  node bucketLock.js set-event-based-hold my-bucket my-file     Sets an event-based hold on "my-file".
+  node bucketLock.js release-event-based-hold my-bucket         Releases an event-based hold on "my-file".
+  my-file
+  node bucketLock.js set-temporary-hold my-bucket my-file       Sets a temporary hold on "my-file".
+  node bucketLock.js release-temporary-hold my-bucket my-file   Releases a temporary hold on "my-file".
+
+For more information, see https://cloud.google.com/storage/docs
+```
+
+[bucketLock_6_docs]: https://cloud.google.com/storage/docs
+[bucketLock_6_code]: bucketLock.js
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/README.md

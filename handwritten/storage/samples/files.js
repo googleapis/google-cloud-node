@@ -247,8 +247,12 @@ async function getMetadata(bucketName, filename) {
   console.log(`Content-disposition: ${metadata.contentDisposition}`);
   console.log(`Content-encoding: ${metadata.contentEncoding}`);
   console.log(`Content-language: ${metadata.contentLanguage}`);
-  console.log(`Metadata: ${metadata.metadata}`);
   console.log(`Media link: ${metadata.mediaLink}`);
+  console.log(`KMS Key Name: ${metadata.kmsKeyName}`);
+  console.log(`Temporary Hold: ${metadata.temporaryHold}`);
+  console.log(`Event-based hold: ${metadata.eventBasedHold}`);
+  console.log(`Effective Expiration Time: ${metadata.effectiveExpirationTime}`);
+  console.log(`Metadata: ${metadata.metadata}`);
   // [END storage_get_metadata]
 }
 

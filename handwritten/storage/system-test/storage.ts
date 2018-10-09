@@ -29,9 +29,10 @@ import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
-import {Storage, Bucket} from '../src';
+import {Storage, Bucket, File} from '../src';
 import {DeleteBucketCallback} from '../src/bucket';
 import * as nock from 'nock';
+import {DeleteFileCallback} from '../src/file';
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
@@ -117,6 +118,7 @@ describe('storage', () => {
         GOOGLE_APPLICATION_CREDENTIALS =
             process.env.GOOGLE_APPLICATION_CREDENTIALS;
         delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
+        delete require.cache[require.resolve('../src')];
 
         const {Storage} = require('../src');
         storageWithoutAuth = new Storage();
@@ -895,6 +897,249 @@ describe('storage', () => {
     });
   });
 
+  describe('bucket retention policies', () => {
+    const RETENTION_DURATION_SECONDS = 10;
+
+    describe('bucket', () => {
+      it('should create a bucket with a retention policy', done => {
+        const bucket = storage.bucket(generateName());
+
+        async.series(
+            [
+              next => {
+                storage.createBucket(
+                    bucket.name, {
+                      retentionPolicy: {
+                        retentionPeriod: RETENTION_DURATION_SECONDS,
+                      },
+                    },
+                    err => {
+                      if (err) {
+                        next(err);
+                        return;
+                      }
+
+                      next();
+                    });
+              },
+              next => bucket.getMetadata(err => next(err)),
+            ],
+            err => {
+              assert.ifError(err);
+              assert.strictEqual(
+                  bucket.metadata.retentionPolicy.retentionPeriod,
+                  `${RETENTION_DURATION_SECONDS}`);
+              done();
+            });
+      });
+
+      it('should set a retention policy', done => {
+        const bucket = storage.bucket(generateName());
+
+        async.series(
+            [
+              next => bucket.create(next),
+              next =>
+                  bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
+              next => bucket.getMetadata(err => next(err)),
+            ],
+            err => {
+              assert.ifError(err);
+              assert.strictEqual(
+                  bucket.metadata.retentionPolicy.retentionPeriod,
+                  `${RETENTION_DURATION_SECONDS}`);
+              done();
+            });
+      });
+
+      it('should lock the retention period', done => {
+        const bucket = storage.bucket(generateName());
+
+        async.series(
+            [
+              next => bucket.create(next),
+              next =>
+                  bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
+              next => bucket.getMetadata(err => next(err)),
+              next => {
+                bucket.lock(bucket.metadata.metageneration, next);
+              },
+              next => bucket.setRetentionPeriod(
+                  RETENTION_DURATION_SECONDS / 2, next),
+            ],
+            err => {
+              if (!err) {
+                done(new Error('Expected an error.'));
+                return;
+              }
+
+              // tslint:disable-next-line:no-any
+              assert.strictEqual((err as any).code, 403);
+              done();
+            });
+      });
+
+      it('should remove a retention period', done => {
+        const bucket = storage.bucket(generateName());
+
+        async.series(
+            [
+              next => bucket.create(next),
+              next =>
+                  bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
+              next => bucket.removeRetentionPeriod(next),
+              next => bucket.getMetadata(err => next(err)),
+            ],
+            err => {
+              assert.ifError(err);
+              assert.strictEqual(bucket.metadata.retentionPolicy, undefined);
+              done();
+            });
+      });
+    });
+
+    describe('file', () => {
+      const BUCKET = storage.bucket(generateName());
+      const FILE = BUCKET.file(generateName());
+
+      before(done => {
+        BUCKET.create(
+            {
+              retentionPolicy: {
+                retentionPeriod: 1,
+              },
+            },
+            err => {
+              if (err) {
+                done(err);
+                return;
+              }
+
+              FILE.save('data', done);
+            });
+      });
+
+      afterEach(() => {
+        return FILE.setMetadata({temporaryHold: null, eventBasedHold: null});
+      });
+
+      after(() => {
+        return FILE.delete();
+      });
+
+      it('should set and release an event-based hold', done => {
+        async.series(
+            [
+              next => FILE.setMetadata({eventBasedHold: true}, next),
+              next => {
+                assert.strictEqual(FILE.metadata.eventBasedHold, true);
+                next();
+              },
+              next => FILE.setMetadata({eventBasedHold: false}, next),
+              next => {
+                assert.strictEqual(FILE.metadata.eventBasedHold, false);
+                next();
+              }
+            ],
+            done);
+      });
+
+      it('should set and release a temporary hold', done => {
+        async.series(
+            [
+              next => FILE.setMetadata({temporaryHold: true}, next),
+              next => {
+                assert.strictEqual(FILE.metadata.temporaryHold, true);
+                next();
+              },
+              next => FILE.setMetadata({temporaryHold: false}, next),
+              next => {
+                assert.strictEqual(FILE.metadata.temporaryHold, false);
+                next();
+              }
+            ],
+            done);
+      });
+
+      it('should get an expiration date', done => {
+        FILE.getExpirationDate((err, expirationDate) => {
+          assert.ifError(err);
+          assert(expirationDate instanceof Date);
+          done();
+        });
+      });
+    });
+
+    describe('operations on held objects', () => {
+      const BUCKET = storage.bucket(generateName());
+      const FILES: File[] = [];
+
+      const RETENTION_PERIOD_SECONDS = 5;  // Each test has this much time!
+
+      function createFile(callback) {
+        const file = BUCKET.file(generateName());
+        FILES.push(file);
+
+        file.save('data', err => {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          callback(null, file);
+        });
+      }
+
+      function deleteFiles(callback) {
+        async.each(FILES, (file, next) => {
+          file.setMetadata({temporaryHold: null}, err => {
+            if (err) {
+              next(err);
+              return;
+            }
+            file.delete(next as DeleteFileCallback);
+          });
+        }, callback);
+      }
+
+      before(done => {
+        BUCKET.create(
+            {
+              retentionPolicy: {
+                retentionPeriod: RETENTION_PERIOD_SECONDS,
+              },
+            },
+            done);
+      });
+
+      after(done => {
+        setTimeout(deleteFiles, RETENTION_PERIOD_SECONDS * 1000, done);
+      });
+
+      it('should block an overwrite request', done => {
+        createFile((err, file) => {
+          assert.ifError(err);
+
+          file.save('new data', err => {
+            assert.strictEqual(err.code, 403);
+            done();
+          });
+        });
+      });
+
+      it('should block a delete request', done => {
+        createFile((err, file) => {
+          assert.ifError(err);
+
+          file.delete(err => {
+            assert.strictEqual(err.code, 403);
+            done();
+          });
+        });
+      });
+    });
+  });
+
   describe('requester pays', () => {
     const HAS_2ND_PROJECT = is.defined(process.env.GCN_STORAGE_2ND_PROJECT_ID);
     let bucket;
@@ -1320,7 +1565,7 @@ describe('storage', () => {
 
       writeStream.on('error', done);
       writeStream.on('finish', () => {
-        let data = Buffer.from('');
+        let data = Buffer.from('', 'utf8');
 
         file.createReadStream()
             .on('error', done)
@@ -1602,6 +1847,11 @@ describe('storage', () => {
 
       it('should not download from the unencrypted file', done => {
         unencryptedFile.download(err => {
+          if (!err) {
+            done(new Error('Expected an error.'));
+            return;
+          }
+
           assert(err!.message.indexOf([
             'The target object is encrypted by a',
             'customer-supplied encryption key.',

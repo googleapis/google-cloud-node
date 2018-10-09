@@ -51,6 +51,7 @@ export interface CreateBucketRequest {
   nearline?: boolean;
   regional?: boolean;
   requesterPays?: boolean;
+  retentionPolicy?: object;
   userProject?: string;
 }
 
@@ -381,6 +382,17 @@ class Storage extends Service {
    * const metadata = {
    *   location: 'US-CENTRAL1',
    *   regional: true
+   * };
+   *
+   * storage.createBucket('new-bucket', metadata, callback);
+   *
+   * //-
+   * // Create a bucket with a retention policy of 6 months.
+   * //-
+   * const metadata = {
+   *   retentionPolicy: {
+   *     retentionPeriod: 15780000 // 6 months in seconds.
+   *   }
    * };
    *
    * storage.createBucket('new-bucket', metadata, callback);
