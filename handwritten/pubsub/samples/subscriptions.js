@@ -312,6 +312,7 @@ function listenForMessages(subscriptionName, timeout) {
 
   // Listen for new messages until timeout is hit
   subscription.on(`message`, messageHandler);
+
   setTimeout(() => {
     subscription.removeListener('message', messageHandler);
     console.log(`${messageCount} message(s) received.`);
@@ -544,6 +545,7 @@ function listenForErrors(subscriptionName, timeout) {
   // Listen for new messages/errors until timeout is hit
   subscription.on(`message`, messageHandler);
   subscription.on(`error`, errorHandler);
+
   setTimeout(() => {
     subscription.removeListener(`message`, messageHandler);
     subscription.removeListener(`error`, errorHandler);

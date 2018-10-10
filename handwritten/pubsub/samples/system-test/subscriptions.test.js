@@ -226,7 +226,7 @@ test.serial(`should listen for ordered messages`, async t => {
 
 test.serial(`should listen for error messages`, async t => {
   const output = await tools.runAsyncWithIO(
-    `${cmd} listen-errors nonexistent-subscription -t 3`,
+    `${cmd} listen-errors nonexistent-subscription`,
     cwd
   );
   t.true(output.stderr.includes(`Resource not found`));
