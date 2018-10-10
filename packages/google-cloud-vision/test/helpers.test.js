@@ -29,7 +29,7 @@ describe('Vision helper methods', () => {
     projectId: 'bogus',
   });
 
-  const sandbox = sinon.sandbox.create();
+  const sandbox = sinon.createSandbox();
 
   afterEach(() => {
     sandbox.restore();
@@ -480,7 +480,7 @@ describe('Vision helper methods', () => {
     });
 
     it('creates and promisify methods that are available in certain versions', () => {
-      const client = new vision.v1p3beta1.ImageAnnotatorClient();
+      const client = new vision.v1p3beta1.ImageAnnotatorClient(CREDENTIALS);
       const request = {
         image: {
           source: {
