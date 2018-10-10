@@ -550,6 +550,15 @@ const NormalizedBoundingPoly = {
  *
  *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1p2beta1.VideoSegment}
  *
+ * @property {number} confidence
+ *   Confidence for the track of detected text. It is calculated as the highest
+ *   over all frames where OCR detected text appears.
+ *
+ * @property {Object[]} frames
+ *   Information related to the frames where OCR detected text appears.
+ *
+ *   This object should have the same structure as [TextFrame]{@link google.cloud.videointelligence.v1p2beta1.TextFrame}
+ *
  * @typedef TextSegment
  * @memberof google.cloud.videointelligence.v1p2beta1
  * @see [google.cloud.videointelligence.v1p2beta1.TextSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p2beta1/video_intelligence.proto}
@@ -588,15 +597,6 @@ const TextFrame = {
  *
  * @property {string} text
  *   The detected text.
- *
- * @property {number} confidence
- *   Confidence for the track of detected text. It is calculated as the highest
- *   over all frames where OCR detected text appears.
- *
- * @property {Object[]} frames
- *   Information related to the frames where OCR detected text appears.
- *
- *   This object should have the same structure as [TextFrame]{@link google.cloud.videointelligence.v1p2beta1.TextFrame}
  *
  * @property {Object[]} segments
  *   All video segments where OCR detected text appears.
