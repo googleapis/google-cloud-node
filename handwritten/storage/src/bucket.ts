@@ -673,7 +673,7 @@ class Bucket extends ServiceObject {
        * Create a bucket.
        *
        * @method Bucket#create
-       * @param {CreateBucketOptions} [metadata] Metadata to set for the bucket.
+       * @param {CreateBucketRequest} [metadata] Metadata to set for the bucket.
        * @param {CreateBucketCallback} [callback] Callback function.
        * @returns {Promise<CreateBucketResponse>}
        *
