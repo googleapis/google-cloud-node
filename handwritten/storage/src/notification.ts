@@ -19,7 +19,9 @@
 import {ServiceObject, util, ApiError, GetMetadataCallback} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as is from 'is';
-import * as request from 'request';
+import * as request from 'request';  // Only for type declarations.
+import {teenyRequest} from 'teeny-request';
+
 import {Bucket} from './bucket';
 import {ResponseBody} from '@google-cloud/common/build/src/util';
 
@@ -87,6 +89,7 @@ export interface GetNotificationCallback {
 export interface DeleteNotificationCallback {
   (err: Error|null, apiResponse?: request.Response): void;
 }
+
 
 /**
  * A Notification object is created from your {@link Bucket} object using
@@ -191,7 +194,7 @@ class Notification extends ServiceObject {
       id: id.toString(),
       createMethod: bucket.createNotification.bind(bucket),
       methods,
-      requestModule: request,
+      requestModule: teenyRequest as typeof request,
     });
   }
 

@@ -27,7 +27,8 @@ import * as is from 'is';
 import * as mime from 'mime-types';
 import * as path from 'path';
 const snakeize = require('snakeize');
-import * as request from 'request';
+import * as request from 'request';  // Only for type declarations.
+import {teenyRequest} from 'teeny-request';
 
 import {Acl} from './acl';
 import {Channel} from './channel';
@@ -703,7 +704,7 @@ class Bucket extends ServiceObject {
       id: name,
       createMethod: storage.createBucket.bind(storage),
       methods,
-      requestModule: request,
+      requestModule: teenyRequest as typeof request,
     });
 
     this.name = name;
