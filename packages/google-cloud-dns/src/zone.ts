@@ -98,6 +98,19 @@ export interface GetRecordsRequest {
   filterByTypes_?: {[index: string]: boolean};
 }
 
+/**
+ * Query object for listing changes.
+ *
+ * @typedef {object} GetChangesRequest
+ * @property {boolean} [autoPaginate=true] Have pagination handled automatically.
+ * @property {number} [maxApiCalls] Maximum number of API calls to make.
+ * @property {number} [maxResults] Maximum number of items plus prefixes to
+ *     return.
+ * @property {string} [pageToken] A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @property {string} [sort] Set to 'asc' for ascending, and 'desc' for
+ *     descending or omit for no sorting.
+ */
 export interface GetChangesRequest {
   autoPaginate?: boolean;
   maxApiCalls?: number;
@@ -106,6 +119,20 @@ export interface GetChangesRequest {
   sort?: string;
   sortOrder?: string;
 }
+
+/**
+ * @typedef {array} GetChangesResponse
+ * @property {Change[]} 0 Array of {@link Change} instances.
+ * @property {object} 1 The full API response.
+ */
+export type GetChangesResponse = [Change[], r.Response];
+
+/**
+ * @callback GetChangesCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Change[]} changes Array of {@link Change} instances.
+ * @param {object} apiResponse The full API response.
+ */
 
 export interface GetChangesCallback {
   (err: Error|null, changes?: Change[]|null, nextQuery?: {}|null,
@@ -679,30 +706,6 @@ class Zone extends ServiceObject {
     });
   }
   /**
-   * Query object for listing changes.
-   *
-   * @typedef {object} GetChangesRequest
-   * @property {boolean} [autoPaginate=true] Have pagination handled automatically.
-   * @property {number} [maxApiCalls] Maximum number of API calls to make.
-   * @property {number} [maxResults] Maximum number of items plus prefixes to
-   *     return.
-   * @property {string} [pageToken] A previously-returned page token
-   *     representing part of the larger set of results to view.
-   * @property {string} [sort] Set to 'asc' for ascending, and 'desc' for
-   *     descending or omit for no sorting.
-   */
-  /**
-   * @typedef {array} GetChangesResponse
-   * @property {Change[]} 0 Array of {@link Change} instances.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetChangesCallback
-   * @param {?Error} err Request error, if any.
-   * @param {Change[]} changes Array of {@link Change} instances.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
    * Get the list of changes associated with this zone. A change is an atomic
    * update to a collection of records.
    *
@@ -741,11 +744,12 @@ class Zone extends ServiceObject {
    *   const changes = data[0];
    * });
    */
+  getChanges(query?: GetChangesRequest): Promise<GetChangesResponse>;
   getChanges(callback: GetChangesCallback): void;
   getChanges(query: GetChangesRequest, callback: GetChangesCallback): void;
   getChanges(
-      queryOrCallback: GetChangesRequest|GetChangesCallback,
-      callback?: GetChangesCallback) {
+      queryOrCallback?: GetChangesRequest|GetChangesCallback,
+      callback?: GetChangesCallback): void|Promise<GetChangesResponse> {
     let query = queryOrCallback as GetChangesRequest;
     if (typeof query === 'function') {
       callback = query;
@@ -927,24 +931,13 @@ class Zone extends ServiceObject {
         });
   }
 /**
- * @typedef {array} ZoneImportResponse
- * @property {Change} 0 A {@link Change} object.
- * @property {object} 1 The full API response.
- */
-/**
- * @callback ZoneImportCallback
- * @param {?Error} err Request error, if any.
- * @param {?Change} change A {@link Change} object.
- * @param {object} apiResponse The full API response.
- */
-/**
  * Copy the records from a zone file into this zone.
  *
  * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
  *
  * @param {string} localPath The fully qualified path to the zone file.
- * @param {ZoneImportCallback} [callback] Callback function.
- * @returns {Promise<ZoneImportResponse>}
+ * @param {CreateChangeCallback} [callback] Callback function.
+ * @returns {Promise<CreateChangeResponse>}
  * @example
  * const {DNS} = require('@google-cloud/dns');
  * const dns = new DNS();
@@ -966,9 +959,11 @@ class Zone extends ServiceObject {
  *   const apiResponse = data[1];
  * });
  */
-import(localPath: string, callback: CreateChangeCallback) {fs.readFile(localPath, 'utf-8', (err, file) => {
+import(localPath: string): Promise<CreateChangeResponse>;
+import(localPath: string, callback: CreateChangeCallback): void;
+import(localPath: string, callback?: CreateChangeCallback): void|Promise<CreateChangeResponse> {fs.readFile(localPath, 'utf-8', (err, file) => {
     if (err) {
-      callback(err);
+      callback!(err);
       return;
     }
     const parsedZonefile = zonefile.parse(file);
@@ -983,7 +978,7 @@ import(localPath: string, callback: CreateChangeCallback) {fs.readFile(localPath
         recordsToCreate.push(Record.fromZoneRecord_(this, recordType, record));
       });
     });
-    this.addRecords(recordsToCreate, callback);
+    this.addRecords(recordsToCreate, callback!);
   });}
   /**
    * A {@link Record} object can be used to construct a record you want to
