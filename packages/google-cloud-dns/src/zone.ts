@@ -34,55 +34,6 @@ import {DNS} from '.';
 import * as r from 'request';
 
 /**
- * @typedef {array} ZoneDeleteRecordsResponse
- * @property {Change} 0 A {@link Change} object.
- * @property {object} 1 The full API response.
- */
-export type ZoneDeleteRecordsResponse = [Change, r.Response];
-
-/**
- * @callback ZoneDeleteRecordsCallback
- * @param {?Error} err Request error, if any.
- * @param {?Change} change A {@link Change} object.
- * @param {object} apiResponse The full API response.
- */
-export interface ZoneDeleteRecordsCallback {
-  (err: Error|null, change?: Change|null, apiResponse?: r.Response): void;
-}
-
-/**
- * @typedef {array} ZoneReplaceRecordsResponse
- * @property {Change} 0 A {@link Change} object.
- * @property {object} 1 The full API response.
- */
-export type ZoneReplaceRecordsResponse = [Change, r.Response];
-
-/**
- * @callback ZoneReplaceRecordsCallback
- * @param {?Error} err Request error, if any.
- * @param {?Change} change A {@link Change} object.
- * @param {object} apiResponse The full API response.
- */
-export interface ZoneReplaceRecordsCallback {
-  (err: Error|null, change?: Change, apiResponse?: r.Response): void;
-}
-
-/**
- * @typedef {array} DeleteZoneResponse
- * @property {object} 0 The full API response.
- */
-export type DeleteZoneResponse = [r.Response];
-
-/**
- * @callback DeleteZoneCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
-export interface DeleteZoneCallback {
-  (err: Error|null, apiResponse?: r.Response): void;
-}
-
-/**
  * Config to set for the change.
  *
  * @typedef {object} CreateChangeRequest
@@ -114,21 +65,17 @@ export interface CreateChangeCallback {
 }
 
 /**
- * @typedef {array} ZoneAddRecordsResponse
- * @property {Change} 0 A {@link Change} object.
- * @property {object} 1 The full API response.
+ * @typedef {array} DeleteZoneResponse
+ * @property {object} 0 The full API response.
  */
-export type ZoneAddRecordsResponse = [Change, r.Response];
+export type DeleteZoneResponse = [r.Response];
 
 /**
- * @callback ZoneAddRecordsCallback
+ * @callback DeleteZoneCallback
  * @param {?Error} err Request error, if any.
- * @param {?Change} change A {@link Change} object.
  * @param {object} apiResponse The full API response.
  */
-export interface ZoneAddRecordsCallback {
-  (err: Error|null, change?: Change|null, apiResponse?: r.Response): void;
-}
+export interface DeleteZoneCallback extends DeleteCallback {}
 
 export interface DeleteZoneConfig {
   force?: boolean;
@@ -163,6 +110,21 @@ export interface GetChangesRequest {
 export interface GetChangesCallback {
   (err: Error|null, changes?: Change[]|null, nextQuery?: {}|null,
    apiResponse?: r.Response): void;
+}
+
+/**
+ * @typedef {array} ZoneExportResponse
+ * @property {object} 0 The full API response.
+ */
+export type ZoneExportResponse = [r.Response];
+
+/**
+ * @callback ZoneExportCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+export interface ZoneExportCallback {
+  (err: Error|null): void;
 }
 
 /**
@@ -360,11 +322,14 @@ class Zone extends ServiceObject {
    * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
    *
    * @param {Record|Record[]} record The {@link Record} object(s) to add.
-   * @param {ZoneAddRecordsCallback} [callback] Callback function.
-   * @returns {Promise<ZoneAddRecordsResponse>}
+   * @param {CreateChangeCallback} [callback] Callback function.
+   * @returns {Promise<CreateChangeResponse>}
    */
-  addRecords(records: Record|Record[], callback: ZoneAddRecordsCallback) {
-    this.createChange({add: records}, callback);
+  addRecords(records: Record|Record[]): Promise<CreateChangeResponse>;
+  addRecords(records: Record|Record[], callback: CreateChangeCallback): void;
+  addRecords(records: Record|Record[], callback?: CreateChangeCallback):
+      void|Promise<CreateChangeResponse> {
+    this.createChange({add: records}, callback!);
   }
   /**
    * Create a reference to a {@link Change} object in this zone.
@@ -427,7 +392,11 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  createChange(config: CreateChangeRequest, callback: CreateChangeCallback) {
+  createChange(config: CreateChangeRequest): Promise<CreateChangeResponse>;
+  createChange(config: CreateChangeRequest, callback: CreateChangeCallback):
+      void;
+  createChange(config: CreateChangeRequest, callback?: CreateChangeCallback):
+      void|Promise<CreateChangeResponse> {
     if (!config || (!config.add && !config.delete)) {
       throw new Error('Cannot create a change with no additions or deletions.');
     }
@@ -467,12 +436,12 @@ class Zone extends ServiceObject {
         },
         (err, resp) => {
           if (err) {
-            callback(err, null, resp);
+            callback!(err, null, resp);
             return;
           }
           const change = this.change(resp.id);
           change.metadata = resp;
-          callback(null, change, resp);
+          callback!(null, change, resp);
         });
   }
 
@@ -520,12 +489,12 @@ class Zone extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  delete(options?: DeleteZoneConfig): Promise<[r.Response]>;
-  delete(callback: DeleteCallback): void;
-  delete(options: DeleteZoneConfig, callback: DeleteCallback): void;
+  delete(options?: DeleteZoneConfig): Promise<DeleteZoneResponse>;
+  delete(callback: DeleteZoneCallback): void;
+  delete(options: DeleteZoneConfig, callback: DeleteZoneCallback): void;
   delete(
-      optionsOrCallback?: DeleteZoneConfig|DeleteCallback,
-      callback?: DeleteCallback): void|Promise<[r.Response]> {
+      optionsOrCallback?: DeleteZoneConfig|DeleteZoneCallback,
+      callback?: DeleteZoneCallback): void|Promise<DeleteZoneResponse> {
     const options =
         typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     callback =
@@ -553,8 +522,8 @@ class Zone extends ServiceObject {
    *     as a record type. All records that match that type will be retrieved
    * and then deleted. You can also provide a {@link Record} object or array of
    *     {@link Record} objects.
-   * @param {ZoneDeleteRecordsCallback} [callback] Callback function.
-   * @returns {Promise<ZoneDeleteRecordsResponse>}
+   * @param {CreateChangeCallback} [callback] Callback function.
+   * @returns {Promise<CreateChangeResponse>}
    *
    * @example
    * const {DNS} = require('@google-cloud/dns');
@@ -616,15 +585,13 @@ class Zone extends ServiceObject {
    * });
    */
   deleteRecords(records?: Record|Record[]|
-                string): Promise<ZoneDeleteRecordsResponse>;
-  deleteRecords(callback: ZoneDeleteRecordsCallback): void;
+                string): Promise<CreateChangeResponse>;
+  deleteRecords(callback: CreateChangeCallback): void;
   deleteRecords(
-      records: Record|Record[]|string,
-      callback: ZoneDeleteRecordsCallback): void;
+      records: Record|Record[]|string, callback: CreateChangeCallback): void;
   deleteRecords(
-      recordsOrCallback?: Record|Record[]|string|ZoneDeleteRecordsCallback,
-      callback?: ZoneDeleteRecordsCallback):
-      void|Promise<ZoneDeleteRecordsResponse> {
+      recordsOrCallback?: Record|Record[]|string|CreateChangeCallback,
+      callback?: CreateChangeCallback): void|Promise<CreateChangeResponse> {
     let records: Array<Record|string>;
     if (typeof recordsOrCallback === 'function') {
       callback = recordsOrCallback;
@@ -640,17 +607,6 @@ class Zone extends ServiceObject {
     this.createChange({delete: records as Record[]}, callback!);
   }
   /**
-   * @typedef {array} ZoneEmptyResponse
-   * @property {Change} 0 A {@link Change} object.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback ZoneEmptyCallback
-   * @param {?Error} err Request error, if any.
-   * @param {?Change} change A {@link Change} object.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
    * Emptying your zone means leaving only 'NS' and 'SOA' records. This method
    * will first fetch the non-NS and non-SOA records from your zone using
    * {@link Zone#getRecords}, then use {@link Zone#createChange} to
@@ -658,34 +614,28 @@ class Zone extends ServiceObject {
    *
    * @see [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
    *
-   * @param {ZoneEmptyCallback} [callback] Callback function.
-   * @returns {Promise<ZoneEmptyResponse>}
+   * @param {CreateChangeCallback} [callback] Callback function.
+   * @returns {Promise<CreateChangeResponse>}
    */
-  empty(callback: CreateChangeCallback) {
+  empty(): Promise<CreateChangeResponse|[]>;
+  empty(callback: CreateChangeCallback): void;
+  empty(callback?: CreateChangeCallback):
+      void|Promise<CreateChangeResponse|[]> {
     this.getRecords((err, records) => {
       if (err) {
-        callback(err);
+        callback!(err);
         return;
       }
       const recordsToDelete = records!.filter(record => {
         return record.type !== 'NS' && record.type !== 'SOA';
       });
       if (recordsToDelete.length === 0) {
-        callback(null);
+        callback!(null);
       } else {
-        this.deleteRecords(recordsToDelete, callback);
+        this.deleteRecords(recordsToDelete, callback!);
       }
     });
   }
-  /**
-   * @typedef {array} ZoneExportResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback ZoneExportCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Provide a path to a zone file to copy records into the zone.
    *
@@ -713,15 +663,18 @@ class Zone extends ServiceObject {
    * //-
    * zone.export(zoneFilename).then(() => {});
    */
-  export(localPath: string, callback: (err: Error|null) => void) {
+  export(localPath: string): Promise<ZoneExportResponse>;
+  export(localPath: string, callback: ZoneExportCallback): void;
+  export(localPath: string, callback?: ZoneExportCallback):
+      void|Promise<ZoneExportResponse> {
     this.getRecords((err, records) => {
       if (err) {
-        callback(err);
+        callback!(err);
         return;
       }
       const stringRecords = records!.map(x => x.toString()).join('\n');
       fs.writeFile(localPath, stringRecords, 'utf-8', err => {
-        callback(err || null);
+        callback!(err || null);
       });
     });
   }
@@ -1098,8 +1051,8 @@ import(localPath: string, callback: CreateChangeCallback) {fs.readFile(localPath
    *
    * @param {string|string[]} recordTypes The type(s) of records to replace.
    * @param {Record|Record[]} newRecords The {@link Record} object(s) to add.
-   * @param {ZoneReplaceRecordsCallback} [callback] Callback function.
-   * @returns {Promise<ZoneReplaceRecordsResponse>}
+   * @param {CreateChangeCallback} [callback] Callback function.
+   * @returns {Promise<CreateChangeResponse>}
    *
    * @example
    * const {DNS} = require('@google-cloud/dns');
@@ -1138,14 +1091,13 @@ import(localPath: string, callback: CreateChangeCallback) {fs.readFile(localPath
    *   const apiResponse = data[1];
    * });
    */
-  replaceRecords(recordType: string|string[], newRecords: Record|Record[]): Promise<ZoneReplaceRecordsResponse>;
+  replaceRecords(recordType: string|string[], newRecords: Record|Record[]): Promise<CreateChangeResponse>;
   replaceRecords(
       recordType: string|string[], newRecords: Record|Record[],
       callback: CreateChangeCallback): void;
   replaceRecords(
       recordType: string|string[], newRecords: Record|Record[],
-      callback?: CreateChangeCallback):
-      void|Promise<ZoneReplaceRecordsResponse> {
+      callback?: CreateChangeCallback): void|Promise<CreateChangeResponse> {
     this.getRecords(recordType, (err, recordsToDelete) => {
       if (err) {
         callback!(err);
@@ -1178,13 +1130,11 @@ import(localPath: string, callback: CreateChangeCallback) {fs.readFile(localPath
    *   }
    * });
    */
-  deleteRecordsByType_(recordTypes: string[]):
-      Promise<ZoneDeleteRecordsResponse>;
-  deleteRecordsByType_(
-      recordTypes: string[], callback: ZoneDeleteRecordsCallback): void;
-  deleteRecordsByType_(
-      recordTypes: string[], callback?: ZoneDeleteRecordsCallback):
-      void|Promise<ZoneDeleteRecordsResponse> {
+  deleteRecordsByType_(recordTypes: string[]): Promise<CreateChangeResponse>;
+  deleteRecordsByType_(recordTypes: string[], callback: CreateChangeCallback):
+      void;
+  deleteRecordsByType_(recordTypes: string[], callback?: CreateChangeCallback):
+      void|Promise<CreateChangeResponse> {
     this.getRecords(recordTypes, (err, records) => {
       if (err) {
         callback!(err);
