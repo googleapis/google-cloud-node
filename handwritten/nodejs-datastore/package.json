@@ -97,6 +97,6 @@
     "power-assert": "^1.5.0",
     "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
-    "sinon": "^6.0.0"
+    "sinon": "^7.0.0"
   }
 }
