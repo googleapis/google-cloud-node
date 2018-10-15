@@ -79,7 +79,7 @@
     "@google-cloud/common": "^0.25.0",
     "extend": "^3.0.1",
     "google-gax": "^0.20.0",
-    "google-proto-files": "^0.16.0",
+    "google-proto-files": "^0.17.0",
     "lodash.merge": "^4.6.1",
     "protobufjs": "^6.8.6",
     "pumpify": "^1.5.1",
