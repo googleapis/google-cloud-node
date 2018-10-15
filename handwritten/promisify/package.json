@@ -38,7 +38,7 @@
     "intelli-espower-loader": "^1.0.1",
     "mocha": "^5.2.0",
     "nyc": "^13.0.0",
-    "sinon": "^6.1.3",
+    "sinon": "^7.0.0",
     "source-map-support": "^0.5.6",
     "typescript": "^3.0.0"
   },
