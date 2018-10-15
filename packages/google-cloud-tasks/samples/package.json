@@ -23,7 +23,7 @@
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "ava": "^0.25.0",
     "proxyquire": "^2.0.1",
-    "sinon": "^6.3.3"
+    "sinon": "^7.0.0"
   },
   "cloud-repo-tools": {
     "requiresKeyFile": true,
