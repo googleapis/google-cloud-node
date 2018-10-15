@@ -103,6 +103,6 @@
     "prettier": "^1.13.5",
     "proxyquire": "^2.1.0",
     "safe-buffer": "^5.1.2",
-    "sinon": "^6.0.0"
+    "sinon": "^7.0.0"
   }
 }
