@@ -21,14 +21,28 @@ import {Service, GoogleAuthOptions, CreateOptions} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import * as request from 'request';  // Only for type declarations.
+import * as r from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
+import {Readable} from 'stream';
 
 import {Bucket} from './bucket';
 import {Channel} from './channel';
 import {File} from './file';
+import {normalize} from './util';
 
-interface CreateBucketQuery {
+export interface GetServiceAccountOptions {
+  userProject?: string;
+}
+export interface ServiceAccount {
+  emailAddress?: string;
+}
+export type GetServiceAccountResponse = [ServiceAccount, r.Response];
+export interface GetServiceAccountCallback {
+  (err: Error|null, serviceAccount?: ServiceAccount,
+   apiResponse?: r.Response): void;
+}
+
+export interface CreateBucketQuery {
   project: string;
   userProject: string;
 }
@@ -57,7 +71,21 @@ export interface CreateBucketRequest {
 }
 
 export interface BucketCallback {
-  (err: Error|null, bucket?: Bucket|null, apiResponse?: request.Response): void;
+  (err: Error|null, bucket?: Bucket|null, apiResponse?: r.Response): void;
+}
+
+export type GetBucketsResponse = [Bucket[]];
+export interface GetBucketsCallback {
+  (err: Error|null, buckets: Bucket[]): void;
+}
+export interface GetBucketsRequest {
+  prefix?: string;
+  project?: string;
+  autoPaginate?: boolean;
+  maxApiCalls?: number;
+  maxResults?: number;
+  pageToken?: string;
+  userProject?: string;
 }
 
 /**
@@ -247,7 +275,7 @@ class Storage extends Service {
    *     this.end();
    *   });
    */
-  getBucketsStream;
+  getBucketsStream: () => Readable;
 
   constructor(options: StorageOptions = {}) {
     const config = {
@@ -259,7 +287,7 @@ class Storage extends Service {
         'https://www.googleapis.com/auth/devstorage.full_control',
       ],
       packageJson: require('../../package.json'),
-      requestModule: teenyRequest as typeof request,
+      requestModule: teenyRequest as typeof r,
     };
 
     super(config, options);
@@ -440,11 +468,7 @@ class Storage extends Service {
       metadata = metadataOrCallback as CreateBucketRequest;
     }
 
-    const body: CreateBucketRequest&
-        {name?: string, storageClass?: string, billing?: {}} =
-            extend({}, metadata, {
-              name,
-            });
+    const body = extend({}, metadata, {name}) as {[index: string]: string | {}};
 
     const storageClasses = {
       coldline: 'COLDLINE',
@@ -452,7 +476,7 @@ class Storage extends Service {
       multiRegional: 'MULTI_REGIONAL',
       nearline: 'NEARLINE',
       regional: 'REGIONAL',
-    };
+    } as {[index: string]: string};
 
     Object.keys(storageClasses).forEach(storageClass => {
       if (body[storageClass]) {
@@ -473,7 +497,7 @@ class Storage extends Service {
     } as CreateBucketQuery;
 
     if (body.userProject) {
-      query.userProject = body.userProject;
+      query.userProject = body.userProject as string;
       delete body.userProject;
     }
 
@@ -572,18 +596,20 @@ class Storage extends Service {
    * region_tag:storage_list_buckets
    * Another example:
    */
-  getBuckets(query, callback?) {
-    if (!callback) {
-      callback = query;
-      query = {};
-    }
-
-    query.project = query.project || this.projectId;
+  getBuckets(options?: GetBucketsRequest): Promise<GetBucketsResponse>;
+  getBuckets(options: GetBucketsRequest, callback: GetBucketsCallback): void;
+  getBuckets(callback: GetBucketsCallback): void;
+  getBuckets(
+      optionsOrCallback?: GetBucketsRequest|GetBucketsCallback,
+      cb?: GetBucketsCallback): void|Promise<GetBucketsResponse> {
+    const {options, callback} =
+        normalize<GetBucketsRequest>(optionsOrCallback, cb);
+    options.project = options.project || this.projectId;
 
     this.request(
         {
           uri: '/b',
-          qs: query,
+          qs: options,
         },
         (err, resp) => {
           if (err) {
@@ -597,10 +623,9 @@ class Storage extends Service {
             return bucketInstance;
           });
 
-          let nextQuery = null;
-          if (resp.nextPageToken) {
-            nextQuery = extend({}, query, {pageToken: resp.nextPageToken});
-          }
+          const nextQuery = resp.nextPageToken ?
+              extend({}, options, {pageToken: resp.nextPageToken}) :
+              null;
 
           callback(null, buckets, nextQuery, resp);
         });
@@ -654,12 +679,17 @@ class Storage extends Service {
    *   const apiResponse = data[1];
    * });
    */
-  getServiceAccount(options, callback?) {
-    if (!callback) {
-      callback = options;
-      options = {};
-    }
-
+  getServiceAccount(options?: GetServiceAccountOptions):
+      Promise<GetServiceAccountResponse>;
+  getServiceAccount(
+      options: GetServiceAccountOptions,
+      callback: GetServiceAccountCallback): void;
+  getServiceAccount(callback: GetServiceAccountCallback): void;
+  getServiceAccount(
+      optionsOrCallback?: GetServiceAccountOptions|GetServiceAccountCallback,
+      cb?: GetServiceAccountCallback): void|Promise<GetServiceAccountResponse> {
+    const {options, callback} =
+        normalize<GetServiceAccountOptions>(optionsOrCallback, cb);
     this.request(
         {
           uri: `/projects/${this.projectId}/serviceAccount`,
@@ -671,7 +701,7 @@ class Storage extends Service {
             return;
           }
 
-          const camelCaseResponse = {};
+          const camelCaseResponse = {} as {[index: string]: string};
 
           for (const prop in resp) {
             if (resp.hasOwnProperty(prop)) {

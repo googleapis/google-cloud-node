@@ -199,7 +199,7 @@ describe('storage', () => {
             },
             (err, accessControl) => {
               assert.ifError(err);
-              assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
               bucket.acl.default.get(
                   {
@@ -243,7 +243,7 @@ describe('storage', () => {
             },
             (err, accessControl) => {
               assert.ifError(err);
-              assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
               const opts = {entity: USER_ACCOUNT};
 
@@ -264,7 +264,7 @@ describe('storage', () => {
             },
             (err, accessControl) => {
               assert.ifError(err);
-              assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
               bucket.acl.update(
                   {
@@ -1932,7 +1932,7 @@ describe('storage', () => {
                     return;
                   }
 
-                  SERVICE_ACCOUNT_EMAIL = serviceAccount.emailAddress;
+                  SERVICE_ACCOUNT_EMAIL = serviceAccount!.emailAddress;
 
                   next();
                 });

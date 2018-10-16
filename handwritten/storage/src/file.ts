@@ -47,6 +47,11 @@ import {Acl} from './acl';
 import {ResponseBody} from '@google-cloud/common/build/src/util';
 import {normalize} from './util';
 
+export type GetExpirationDateResponse = [Date];
+export interface GetExpirationDateCallback {
+  (err: Error|null, expirationDate?: Date|null, apiResponse?: r.Response): void;
+}
+
 export interface GetSignedUrlConfig {
   action: 'read'|'write'|'delete'|'resumable';
   cname?: string;
@@ -340,7 +345,8 @@ export type MoveResponse = [r.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface MoveCallback {
-  (err: Error|null, destinationFile?: File|null, apiResponse?: r.Response);
+  (err: Error|null, destinationFile?: File|null,
+   apiResponse?: r.Response): void;
 }
 /**
  * @typedef {object} MoveOptions Configuration options for File#move(). See an
@@ -551,7 +557,7 @@ export interface SaveOptions extends CreateWriteStreamOptions {}
  * @param {?Error} err Request error, if any.
  */
 export interface SaveCallback {
-  (err?: Error|null);
+  (err?: Error|null): void;
 }
 
 /**
@@ -568,7 +574,7 @@ export interface SetFileMetadataOptions {
  * @param {object} apiResponse The full API response.
  */
 export interface SetFileMetadataCallback {
-  (err?: Error|null, apiResponse?: r.Response);
+  (err?: Error|null, apiResponse?: r.Response): void;
 }
 
 /**
@@ -602,7 +608,7 @@ interface SetStorageClassRequest extends SetStorageClassOptions {
  * @param {object} apiResponse The full API response.
  */
 export interface SetStorageClassCallback {
-  (err?: Error|null, apiResponse?: r.Response);
+  (err?: Error|null, apiResponse?: r.Response): void;
 }
 
 class RequestError extends Error {
@@ -1920,20 +1926,23 @@ class File extends ServiceObject {
    *   // expirationDate is a Date object.
    * });
    */
-  getExpirationDate(callback?) {
+  getExpirationDate(): Promise<GetExpirationDateResponse>;
+  getExpirationDate(callback: GetExpirationDateCallback): void;
+  getExpirationDate(callback?: GetExpirationDateCallback):
+      void|Promise<GetExpirationDateResponse> {
     this.getMetadata((err, metadata, apiResponse) => {
       if (err) {
-        callback(err, null, apiResponse);
+        callback!(err, null, apiResponse);
         return;
       }
 
       if (!metadata.retentionExpirationTime) {
         const error = new Error('An expiration time is not available.');
-        callback(error, null, apiResponse);
+        callback!(error, null, apiResponse);
         return;
       }
 
-      callback(null, new Date(metadata.retentionExpirationTime), apiResponse);
+      callback!(null, new Date(metadata.retentionExpirationTime), apiResponse);
     });
   }
 
@@ -2497,17 +2506,14 @@ class File extends ServiceObject {
   makePublic(callback?: MakeFilePublicCallback):
       Promise<MakeFilePublicResponse>|void {
     callback = callback || util.noop;
-
-    // tslint:disable-next-line:no-any
-    (this.acl as any)
-        .add(
-            {
-              entity: 'allUsers',
-              role: 'READER',
-            },
-            (err, resp) => {
-              callback!(err, resp);
-            });
+    this.acl.add(
+        {
+          entity: 'allUsers',
+          role: 'READER',
+        },
+        (err, acl, resp) => {
+          callback!(err, resp);
+        });
   }
 
   /**

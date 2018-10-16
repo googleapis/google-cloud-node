@@ -21,6 +21,23 @@ import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as is from 'is';
 import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
+import * as r from 'request';
+
+export interface AddAclOptions {
+  entity: string;
+  role: string;
+  generation?: number;
+  userProject?: string;
+}
+export type AddAclResponse = [AccessControlObject, r.Response];
+export interface AddAclCallback {
+  (err: Error|null, acl?: AccessControlObject|null,
+   apiResponse?: r.Response): void;
+}
+export type RemoveAclResponse = [r.Response];
+export interface RemoveAclCallback {
+  (err: Error|null, apiResponse?: r.Response): void;
+}
 
 interface AclQuery {
   generation: number;
@@ -403,7 +420,10 @@ class Acl extends AclRoleAccessorMethods {
    * region_tag:storage_add_bucket_default_owner
    * Example of adding a default owner to a bucket:
    */
-  add(options, callback?) {
+  add(options: AddAclOptions): Promise<AddAclResponse>;
+  add(options: AddAclOptions, callback: AddAclCallback): void;
+  add(options: AddAclOptions,
+      callback?: AddAclCallback): void|Promise<AddAclResponse> {
     const query = {} as AclQuery;
 
     if (options.generation) {
