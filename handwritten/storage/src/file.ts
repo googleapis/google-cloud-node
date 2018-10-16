@@ -31,7 +31,7 @@ import * as once from 'once';
 import * as os from 'os';
 const pumpify = require('pumpify');
 import * as resumableUpload from 'gcs-resumable-upload';
-import {Duplex, Writable} from 'stream';
+import {Duplex, Writable, Readable} from 'stream';
 import * as streamEvents from 'stream-events';
 import * as through from 'through2';
 import * as xdgBasedir from 'xdg-basedir';
@@ -226,6 +226,162 @@ export interface CreateResumableUploadCallback {
 }
 
 /**
+ * @typedef {object} CreateWriteStreamOptions Configuration options for File#createWriteStream().
+ * @property {string} [contentType] Alias for
+ *     `options.metadata.contentType`. If set to `auto`, the file name is used
+ *     to determine the contentType.
+ * @property {string|boolean} [gzip] If true, automatically gzip the file.
+ *     If set to `auto`, the contentType is used to determine if the file
+ * should be gzipped. This will set `options.metadata.contentEncoding` to
+ * `gzip` if necessary.
+ * @property {object} [metadata] See the examples below or
+ *     [Objects: insert request
+ * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON)
+ *     for more details.
+ * @property {number} [offset] The starting byte of the upload stream, for
+ *     resuming an interrupted upload. Defaults to 0.
+ * @property {string} [predefinedAcl] Apply a predefined set of access
+ *     controls to this object.
+ *
+ *     Acceptable values are:
+ *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
+ *       `allAuthenticatedUsers` get `READER` access.
+ *
+ *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
+ *       project team owners get `OWNER` access.
+ *
+ *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
+ *       team owners get `READER` access.
+ *
+ *     - **`private`** - Object owner gets `OWNER` access.
+ *
+ *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
+ *       team members get access according to their roles.
+ *
+ *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+ * get `READER` access.
+ * @property {boolean} [private] Make the uploaded file private. (Alias for
+ *     `options.predefinedAcl = 'private'`)
+ * @property {boolean} [public] Make the uploaded file public. (Alias for
+ *     `options.predefinedAcl = 'publicRead'`)
+ * @property {boolean} [resumable] Force a resumable upload. NOTE: When
+ *     working with streams, the file format and size is unknown until it's
+ *     completely consumed. Because of this, it's best for you to be explicit
+ *     for what makes sense given your input.
+ * @property {string} [uri] The URI for an already-created resumable
+ *     upload. See {@link File#createResumableUpload}.
+ * @property {string} [userProject] The ID of the project which will be
+ *     billed for the request.
+ * @property {string|boolean} [validation] Possible values: `"md5"`,
+ *     `"crc32c"`, or `false`. By default, data integrity is validated with a
+ *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
+ *     supported for composite objects. An error will be raised if MD5 is
+ *     specified but is not available. You may also choose to skip validation
+ *     completely, however this is **not recommended**.
+ */
+export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
+  contentType?: string;
+  gzip?: string|boolean;
+  resumable?: boolean;
+  validation?: string|boolean;
+}
+
+/**
+ * @typedef {object} MakeFilePrivateOptions Configuration options for File#makePrivate().
+ * @property {boolean} [strict] If true, set the file to be private to
+ *     only the owner user. Otherwise, it will be private to the project.
+ * @property {string} [userProject] The ID of the project which will be
+ *     billed for the request.
+ */
+export interface MakeFilePrivateOptions {
+  strict?: boolean;
+  userProject?: string;
+}
+
+/**
+ * @typedef {array} MakeFilePrivateResponse
+ * @property {object} 0 The full API response.
+ */
+export type MakeFilePrivateResponse = [r.Response];
+
+/**
+ * @callback MakeFilePrivateCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+export interface MakeFilePrivateCallback extends SetFileMetadataCallback {}
+
+/**
+ * @typedef {array} MakeFilePublicResponse
+ * @property {object} 0 The full API response.
+ */
+export type MakeFilePublicResponse = [r.Response];
+
+/**
+ * @callback MakeFilePublicCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+export interface MakeFilePublicCallback {
+  (err?: Error|null, apiResponse?: r.Response): void;
+}
+
+/**
+ * @typedef {array} MoveResponse
+ * @property {File} 0 The destination File.
+ * @property {object} 1 The full API response.
+ */
+export type MoveResponse = [r.Response];
+
+/**
+ * @callback MoveCallback
+ * @param {?Error} err Request error, if any.
+ * @param {?File} destinationFile The destination File.
+ * @param {object} apiResponse The full API response.
+ */
+export interface MoveCallback {
+  (err: Error|null, destinationFile?: File|null, apiResponse?: r.Response);
+}
+/**
+ * @typedef {object} MoveOptions Configuration options for File#move(). See an
+ *     [Object
+ * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+ * @param {string} [userProject] The ID of the project which will be
+ *     billed for the request.
+ */
+export interface MoveOptions {
+  userProject?: string;
+}
+
+/**
+ * @param {string|buffer|object} RotateEncryptionKeyOptions Configuration options
+ *     for File#rotateEncryptionKey().
+ * If a string or Buffer is provided, it is interpreted as an AES-256,
+ * customer-supplied encryption key. If you'd like to use a Cloud KMS key name,
+ * you must specify an options object with the property name: `kmsKeyName`.
+ * @param {string|buffer} [options.encryptionKey] An AES-256 encryption key.
+ * @param {string} [options.kmsKeyName] A Cloud KMS key name.
+ */
+export type RotateEncryptionKeyOptions = string|Buffer|EncryptionKeyOptions;
+
+export interface EncryptionKeyOptions {
+  encryptionKey?: string|Buffer;
+  kmsKeyName?: string;
+}
+
+/**
+ * @callback RotateEncryptionKeyCallback
+ * @extends CopyCallback
+ */
+export interface RotateEncryptionKeyCallback extends CopyCallback {}
+
+/**
+ * @typedef RotateEncryptionKeyResponse
+ * @extends CopyResponse
+ */
+export type RotateEncryptionKeyResponse = CopyResponse;
+
+/**
  * Custom error type for errors related to creating a resumable upload.
  *
  * @private
@@ -280,19 +436,19 @@ export interface FileOptions {
 }
 
 /**
- * @param {object} CopyOptions Configuration options. See an
+ * @typedef {object} CopyOptions Configuration options for File#copy(). See an
  *     [Object
  * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
- * @param {string} [destinationKmsKeyName] Resource name of the Cloud
+ * @property {string} [destinationKmsKeyName] Resource name of the Cloud
  *     KMS key, of the form
  *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
  *     that will be used to encrypt the object. Overwrites the object metadata's
  *     `kms_key_name` value, if any.
- * @param {string} [keepAcl] Retain the ACL for the new file.
- * @param {string} [predefinedAcl] Set the ACL for the new file.
- * @param {string} [token] A previously-returned `rewriteToken` from an
+ * @property {string} [keepAcl] Retain the ACL for the new file.
+ * @property {string} [predefinedAcl] Set the ACL for the new file.
+ * @property {string} [token] A previously-returned `rewriteToken` from an
  *     unfinished rewrite request.
- * @param {string} [userProject] The ID of the project which will be
+ * @property {string} [userProject] The ID of the project which will be
  *     billed for the request.
  */
 export interface CopyOptions {
@@ -301,6 +457,17 @@ export interface CopyOptions {
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
+}
+
+/**
+ * @typedef {array} CopyResponse
+ * @property {File} 0 The copied {@link File}.
+ * @property {object} 1 The full API response.
+ */
+export type CopyResponse = [File, r.Response];
+
+export interface CopyCallback {
+  (err: Error|null, file?: File|null, apiResponse?: r.Response): void;
 }
 
 /**
@@ -373,13 +540,74 @@ export interface CreateReadStreamOptions {
   end?: number;
 }
 
+/**
+ * @typedef {object} SaveOptions
+ * @extends CreateWriteStreamOptions
+ */
+export interface SaveOptions extends CreateWriteStreamOptions {}
+
+/**
+ * @callback SaveCallback
+ * @param {?Error} err Request error, if any.
+ */
+export interface SaveCallback {
+  (err?: Error|null);
+}
+
+/**
+ * @typedef {object} SetFileMetadataOptions Configuration options for File#setMetadata().
+ * @param {string} [userProject] The ID of the project which will be billed for the request.
+ */
+export interface SetFileMetadataOptions {
+  userProject?: string;
+}
+
+/**
+ * @callback SetFileMetadataCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+export interface SetFileMetadataCallback {
+  (err?: Error|null, apiResponse?: r.Response);
+}
+
+/**
+ * @typedef {array} SetFileMetadataResponse
+ * @property {object} 0 The full API response.
+ */
+export type SetFileMetadataResponse = [r.Response];
+
+/**
+ * @typedef {array} SetStorageClassResponse
+ * @property {object} 0 The full API response.
+ */
+export type SetStorageClassResponse = [r.Response];
+
+/**
+ * @typedef {object} SetStorageClassOptions Configuration options for File#setStorageClass().
+ * @property {string} [userProject] The ID of the project which will be
+ *     billed for the request.
+ */
+export interface SetStorageClassOptions {
+  userProject?: string;
+}
+
+interface SetStorageClassRequest extends SetStorageClassOptions {
+  storageClass?: string;
+}
+
+/**
+ * @callback SetStorageClassCallback
+ * @param {?Error} err Request error, if any.
+ * @param {object} apiResponse The full API response.
+ */
+export interface SetStorageClassCallback {
+  (err?: Error|null, apiResponse?: r.Response);
+}
+
 class RequestError extends Error {
   code?: string;
   errors?: Error[];
-}
-
-export interface FileCallback {
-  (err: Error|null, file?: File|null, apiResponse?: r.Response): void;
 }
 
 /**
@@ -511,11 +739,6 @@ class File extends ServiceObject {
   }
 
   /**
-   * @typedef {array} CopyResponse
-   * @property {File} 0 The copied {@link File}.
-   * @property {object} 1 The full API response.
-   */
-  /**
    * @callback CopyCallback
    * @param {?Error} err Request error, if any.
    * @param {File} copiedFile The copied {@link File}.
@@ -531,20 +754,7 @@ class File extends ServiceObject {
    * @throws {Error} If the destination file is not provided.
    *
    * @param {string|Bucket|File} destination Destination file.
-   * @param {object} [options] Configuration options. See an
-   *     [Object
-   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
-   * @param {string} [options.destinationKmsKeyName] Resource name of the Cloud
-   *     KMS key, of the form
-   *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
-   *     that will be used to encrypt the object. Overwrites the object
-   * metadata's `kms_key_name` value, if any.
-   * @param {string} [options.keepAcl] Retain the ACL for the new file.
-   * @param {string} [options.predefinedAcl] Set the ACL for the new file.
-   * @param {string} [options.token] A previously-returned `rewriteToken` from an
-   *     unfinished rewrite request.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
+   * @param {CopyOptions} [options] Configuration options. See an
    * @param {CopyCallback} [callback] Callback function.
    * @returns {Promise<CopyResponse>}
    *
@@ -634,14 +844,15 @@ class File extends ServiceObject {
    * region_tag:storage_copy_file
    * Another example:
    */
-  copy(destination: string|Bucket|File, callback: FileCallback): void;
+  copy(destination: string|Bucket|File): Promise<CopyResponse>;
+  copy(destination: string|Bucket|File, callback: CopyCallback): void;
   copy(
       destination: string|Bucket|File, options: CopyOptions,
-      callback: FileCallback): void;
+      callback: CopyCallback): void;
   copy(
       destination: string|Bucket|File,
-      optionsOrCallback: CopyOptions|FileCallback,
-      callback?: FileCallback): void {
+      optionsOrCallback?: CopyOptions|CopyCallback,
+      callback?: CopyCallback): Promise<CopyResponse>|void {
     const noDestinationError =
         new Error('Destination file should have a name.');
 
@@ -850,7 +1061,7 @@ class File extends ServiceObject {
    *   .on('error', function(err) {})
    *   .pipe(fs.createWriteStream('/Users/stephen/logfile.txt'));
    */
-  createReadStream(options: CreateReadStreamOptions = {}) {
+  createReadStream(options: CreateReadStreamOptions = {}): Readable {
     const rangeRequest = is.number(options.start) || is.number(options.end);
     const tailRequest = options.end! < 0;
 
@@ -1045,7 +1256,7 @@ class File extends ServiceObject {
 
     throughStream.on('reading', makeRequest);
 
-    return throughStream;
+    return throughStream as Readable;
   }
 
   /**
@@ -1184,58 +1395,7 @@ class File extends ServiceObject {
    * @see [Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload}
    * @see [Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}
    *
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.contentType] Alias for
-   *     `options.metadata.contentType`. If set to `auto`, the file name is used
-   *     to determine the contentType.
-   * @param {string|boolean} [options.gzip] If true, automatically gzip the file.
-   *     If set to `auto`, the contentType is used to determine if the file
-   * should be gzipped. This will set `options.metadata.contentEncoding` to
-   * `gzip` if necessary.
-   * @param {object} [options.metadata] See the examples below or
-   *     [Objects: insert request
-   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON)
-   *     for more details.
-   * @param {string} [options.offset] The starting byte of the upload stream, for
-   *     resuming an interrupted upload. Defaults to 0.
-   * @param {string} [options.predefinedAcl] Apply a predefined set of access
-   *     controls to this object.
-   *
-   *     Acceptable values are:
-   *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
-   *       `allAuthenticatedUsers` get `READER` access.
-   *
-   *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
-   *       project team owners get `OWNER` access.
-   *
-   *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
-   *       team owners get `READER` access.
-   *
-   *     - **`private`** - Object owner gets `OWNER` access.
-   *
-   *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
-   *       team members get access according to their roles.
-   *
-   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
-   * get `READER` access.
-   * @param {boolean} [options.private] Make the uploaded file private. (Alias for
-   *     `options.predefinedAcl = 'private'`)
-   * @param {boolean} [options.public] Make the uploaded file public. (Alias for
-   *     `options.predefinedAcl = 'publicRead'`)
-   * @param {boolean} [options.resumable] Force a resumable upload. NOTE: When
-   *     working with streams, the file format and size is unknown until it's
-   *     completely consumed. Because of this, it's best for you to be explicit
-   *     for what makes sense given your input.
-   * @param {string} [options.uri] The URI for an already-created resumable
-   *     upload. See {@link File#createResumableUpload}.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {string|boolean} [options.validation] Possible values: `"md5"`,
-   *     `"crc32c"`, or `false`. By default, data integrity is validated with a
-   *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
-   *     supported for composite objects. An error will be raised if MD5 is
-   *     specified but is not available. You may also choose to skip validation
-   *     completely, however this is **not recommended**.
+   * @param {CreateWriteStreamOptions} [options] Configuration options.
    * @returns {WritableStream}
    *
    * @example
@@ -1299,7 +1459,7 @@ class File extends ServiceObject {
    *   });
    */
   // tslint:disable-next-line:no-any
-  createWriteStream(options: any = {}) {
+  createWriteStream(options: CreateWriteStreamOptions = {}): Writable {
     options = extend({metadata: {}}, options);
 
     if (options.contentType) {
@@ -1323,7 +1483,7 @@ class File extends ServiceObject {
     let crc32c = true;
     let md5 = false;
 
-    if (is.string(options.validation)) {
+    if (typeof options.validation === 'string') {
       options.validation = options.validation.toLowerCase();
       crc32c = options.validation === 'crc32c';
       md5 = options.validation === 'md5';
@@ -1453,7 +1613,7 @@ class File extends ServiceObject {
       stream.uncork();
     });
 
-    return stream;
+    return stream as Writable;
   }
 
   /**
@@ -2233,25 +2393,12 @@ class File extends ServiceObject {
   }
 
   /**
-   * @typedef {array} MakeFilePrivateResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback MakeFilePrivateCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
    * Make a file private to the project and remove all other permissions.
    * Set `options.strict` to true to make the file private to only the owner.
    *
    * @see [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
    *
-   * @param {object} [options] Configuration options.
-   * @param {boolean} [options.strict] If true, set the file to be private to
-   *     only the owner user. Otherwise, it will be private to the project.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
+   * @param {MakeFilePrivateOptions} [options] Configuration options.
    * @param {MakeFilePrivateCallback} [callback] Callback function.
    * @returns {Promise<MakeFilePrivateResponse>}
    *
@@ -2279,11 +2426,19 @@ class File extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  makePrivate(options, callback) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
+  makePrivate(options?: MakeFilePrivateOptions):
+      Promise<MakeFilePrivateResponse>;
+  makePrivate(callback: MakeFilePrivateCallback): void;
+  makePrivate(
+      options: MakeFilePrivateOptions, callback: MakeFilePrivateCallback): void;
+  makePrivate(
+      optionsOrCallback?: MakeFilePrivateOptions|MakeFilePrivateCallback,
+      callback?: MakeFilePrivateCallback): Promise<MakeFilePrivateResponse>|
+      void {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
     const query = {
       predefinedAcl: options.strict ? 'private' : 'projectPrivate',
@@ -2301,13 +2456,9 @@ class File extends ServiceObject {
           // acls on the file.
           acl: null,
         },
-        query, callback);
+        query, callback!);
   }
 
-  /**
-   * @typedef {array} MakeFilePublicResponse
-   * @property {object} 0 The full API response.
-   */
   /**
    * @callback MakeFilePublicCallback
    * @param {?Error} err Request error, if any.
@@ -2341,7 +2492,10 @@ class File extends ServiceObject {
    * region_tag:storage_make_public
    * Another example:
    */
-  makePublic(callback) {
+  makePublic(): Promise<MakeFilePublicResponse>;
+  makePublic(callback: MakeFilePublicCallback): void;
+  makePublic(callback?: MakeFilePublicCallback):
+      Promise<MakeFilePublicResponse>|void {
     callback = callback || util.noop;
 
     // tslint:disable-next-line:no-any
@@ -2352,21 +2506,10 @@ class File extends ServiceObject {
               role: 'READER',
             },
             (err, resp) => {
-              callback(err, resp);
+              callback!(err, resp);
             });
   }
 
-  /**
-   * @typedef {array} MoveResponse
-   * @property {File} 0 The destination File.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback MoveCallback
-   * @param {?Error} err Request error, if any.
-   * @param {File} destinationFile The destination File.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Move this file to another location. By default, this will rename the file
    * and keep it in the same bucket, but you can choose to move it to another
@@ -2386,11 +2529,6 @@ class File extends ServiceObject {
    * @throws {Error} If the destination file is not provided.
    *
    * @param {string|Bucket|File} destination Destination file.
-   * @param {object} [options] Configuration options. See an
-   *     [Object
-   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
    * @param {MoveCallback} [callback] Callback function.
    * @returns {Promise<MoveResponse>}
    *
@@ -2482,22 +2620,31 @@ class File extends ServiceObject {
    * region_tag:storage_move_file
    * Another example:
    */
-  move(destination, options, callback) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
+  move(destination: string|Bucket|File, options?: MoveOptions):
+      Promise<MoveResponse>;
+  move(destination: string|Bucket|File, callback: MoveCallback): void;
+  move(
+      destination: string|Bucket|File, options: MoveOptions,
+      callback: MoveCallback): void;
+  move(
+      destination: string|Bucket|File,
+      optionsOrCallback?: MoveOptions|MoveCallback,
+      callback?: MoveCallback): Promise<MoveResponse>|void {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
     callback = callback || util.noop;
 
     this.copy(destination, options, (err, destinationFile, apiResponse) => {
       if (err) {
-        callback(err, null, apiResponse);
+        callback!(err, null, apiResponse);
         return;
       }
 
       this.delete(options, (err, apiResponse) => {
-        callback(err, destinationFile, apiResponse);
+        callback!(err, destinationFile, apiResponse);
       });
     });
   }
@@ -2527,33 +2674,41 @@ class File extends ServiceObject {
    *
    * @see [Customer-supplied Encryption Keys]{@link https://cloud.google.com/storage/docs/encryption#customer-supplied}
    *
-   * @param {string|buffer|object} options If a string or Buffer is provided, it
-   *     is interpreted as an AES-256, customer-supplied encryption key. If
-   * you'd like to use a Cloud KMS key name, you must specify an options object
-   * with the property name: `kmsKeyName`.
-   * @param {string|buffer} [options.encryptionKey] An AES-256 encryption key.
-   * @param {string} [options.kmsKeyName] A Cloud KMS key name.
-   * @returns {File}
+   * @param {RotateEncryptionKeyOptions} [options] - Configuration options.
+   * @param {RotateEncryptionKeyCallback} [callback]
+   * @returns {Promise<File>}
    *
    * @example <caption>include:samples/encryption.js</caption>
    * region_tag:storage_rotate_encryption_key
    * Example of rotating the encryption key for this file:
    */
-  rotateEncryptionKey(options, callback) {
-    if (!is.object(options)) {
+  rotateEncryptionKey(options?: RotateEncryptionKeyOptions):
+      Promise<RotateEncryptionKeyResponse>;
+  rotateEncryptionKey(callback: RotateEncryptionKeyCallback): void;
+  rotateEncryptionKey(
+      options: RotateEncryptionKeyOptions,
+      callback: RotateEncryptionKeyCallback): void;
+  rotateEncryptionKey(
+      optionsOrCallback?: RotateEncryptionKeyOptions|
+      RotateEncryptionKeyCallback,
+      callback?: RotateEncryptionKeyCallback):
+      Promise<RotateEncryptionKeyResponse>|void {
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+    let options: EncryptionKeyOptions = {};
+    if (typeof optionsOrCallback === 'string' ||
+        optionsOrCallback instanceof Buffer) {
       options = {
-        encryptionKey: options,
+        encryptionKey: optionsOrCallback,
       };
+    } else if (typeof optionsOrCallback === 'object') {
+      options = optionsOrCallback;
     }
 
     const newFile = this.bucket.file(this.id!, options);
-    this.copy(newFile, callback);
+    this.copy(newFile, callback!);
   }
 
-  /**
-   * @callback SaveCallback
-   * @param {?Error} err Request error, if any.
-   */
   /**
    * Write arbitrary data to a file.
    *
@@ -2570,7 +2725,7 @@ class File extends ServiceObject {
    * </p>
    *
    * @param {*} data The data to write to a file.
-   * @param {object} [options] See {@link File#createWriteStream}'s `options`
+   * @param {SaveOptions} [options] See {@link File#createWriteStream}'s `options`
    *     parameter.
    * @param {SaveCallback} [callback] Callback function.
    * @returns {Promise}
@@ -2594,27 +2749,25 @@ class File extends ServiceObject {
    * //-
    * file.save(contents).then(function() {});
    */
-  save(data, options?, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
+  // tslint:disable:no-any
+  save(data: any, options?: SaveOptions): Promise<void>;
+  save(data: any, callback: SaveCallback): void;
+  save(data: any, options: SaveOptions, callback: SaveCallback): void;
+  save(
+      data: any, optionsOrCallback?: SaveOptions|SaveCallback,
+      callback?: SaveCallback): Promise<void>|void {
+    // tslint:enable:no-any
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
     this.createWriteStream(options)
-        .on('error', callback)
-        .on('finish', callback)
+        .on('error', callback!)
+        .on('finish', callback!)
         .end(data);
   }
 
-  /**
-   * @typedef {array} SetFileMetadataResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback SetFileMetadataCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Merge the given metadata with the current remote file's metadata. This
    * will set metadata if it was previously unset or update previously set
@@ -2629,9 +2782,7 @@ class File extends ServiceObject {
    * @see [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
    *
    * @param {object} [metadata] The metadata you wish to update.
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
+   * @param {SetFileMetadataOptions} [options] Configuration options.
    * @param {SetFileMetadataCallback} [callback] Callback function.
    * @returns {Promise<SetFileMetadataResponse>}
    *
@@ -2688,27 +2839,28 @@ class File extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  setMetadata(metadata, options?, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
+  setMetadata(metadata: Metadata, options?: SetFileMetadataOptions):
+      Promise<SetFileMetadataResponse>;
+  setMetadata(metadata: Metadata, callback: SetFileMetadataCallback): void;
+  setMetadata(
+      metadata: Metadata, options: SetFileMetadataOptions,
+      callback: SetFileMetadataCallback): void;
+  setMetadata(
+      metadata: Metadata,
+      optionsOrCallback?: SetFileMetadataOptions|SetFileMetadataCallback,
+      callback?: SetFileMetadataCallback): Promise<SetFileMetadataResponse>|
+      void {
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+    let options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
 
     options = extend({}, this.requestQueryObject, options);
 
     // tslint:disable-next-line:no-any
-    (this.parent as any).setMetadata.call(this, metadata, options, callback);
+    (this.parent as any).setMetadata.call(this, metadata, options, callback!);
   }
 
-  /**
-   * @typedef {array} SetStorageClassResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback SetStorageClassCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
   /**
    * Set the storage class for this file.
    *
@@ -2717,7 +2869,7 @@ class File extends ServiceObject {
    *
    * @param {string} storageClass The new storage class. (`multi_regional`,
    *     `regional`, `nearline`, `coldline`)
-   * @param {object} [options] Configuration options.
+   * @param {SetStorageClassOptions} [options] Configuration options.
    * @param {string} [options.userProject] The ID of the project which will be
    *     billed for the request.
    * @param {SetStorageClassCallback} [callback] Callback function.
@@ -2737,32 +2889,43 @@ class File extends ServiceObject {
    * //-
    * file.setStorageClass('regional').then(function() {});
    */
-  setStorageClass(storageClass, options, callback?) {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
-
-    options = extend(true, {}, options);
+  setStorageClass(storageClass: string, options?: SetStorageClassOptions):
+      Promise<SetStorageClassResponse>;
+  setStorageClass(
+      storageClass: string, options: SetStorageClassOptions,
+      callback: SetStorageClassCallback): void;
+  setStorageClass(storageClass: string, callback?: SetStorageClassCallback):
+      void;
+  setStorageClass(
+      storageClass: string,
+      optionsOrCallback?: SetStorageClassOptions|SetStorageClassCallback,
+      callback?: SetStorageClassCallback): Promise<SetStorageClassResponse>|
+      void {
+    callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    const req = extend<SetStorageClassRequest, SetStorageClassOptions>(
+        true, {}, options);
 
     // In case we get input like `storageClass`, convert to `storage_class`.
-    options.storageClass = storageClass.replace(/-/g, '_')
-                               .replace(
-                                   /([a-z])([A-Z])/g,
-                                   (_, low, up) => {
-                                     return low + '_' + up;
-                                   })
-                               .toUpperCase();
+    req.storageClass = storageClass.replace(/-/g, '_')
+                           .replace(
+                               /([a-z])([A-Z])/g,
+                               (_, low, up) => {
+                                 return low + '_' + up;
+                               })
+                           .toUpperCase();
 
-    this.copy(this, options, (err, file, apiResponse) => {
+    this.copy(this, req, (err, file, apiResponse) => {
       if (err) {
-        callback(err, apiResponse);
+        callback!(err, apiResponse!);
         return;
       }
 
       this.metadata = file!.metadata;
 
-      callback(null, apiResponse);
+      callback!(null, apiResponse!);
     });
   }
 
@@ -2780,7 +2943,7 @@ class File extends ServiceObject {
    *
    * file.setUserProject('grape-spaceship-123');
    */
-  setUserProject(userProject: string) {
+  setUserProject(userProject: string): void {
     this.userProject = userProject;
   }
 
@@ -2795,7 +2958,7 @@ class File extends ServiceObject {
    * @private
    */
   startResumableUpload_(
-      dup: duplexify.Duplexify, options: CreateResumableUploadOptions) {
+      dup: duplexify.Duplexify, options: CreateResumableUploadOptions): void {
     options = extend(
         {
           metadata: {},
@@ -2845,7 +3008,7 @@ class File extends ServiceObject {
    * @private
    */
   startSimpleUpload_(
-      dup: duplexify.Duplexify, options?: CreateResumableUploadOptions) {
+      dup: duplexify.Duplexify, options?: CreateResumableUploadOptions): void {
     options = extend(
         {
           metadata: {},

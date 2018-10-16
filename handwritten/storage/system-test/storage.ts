@@ -28,6 +28,7 @@ import * as path from 'path';
 import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
+import * as r from 'request';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
 import {Storage, Bucket, File} from '../src';
 import {DeleteBucketCallback} from '../src/bucket';
@@ -2266,7 +2267,7 @@ describe('storage', () => {
     it('should allow changing the storage class', done => {
       const file = bucket.file(generateName());
 
-      async.series(
+      async.series<r.Response, Error|null>(
           [
             next => {
               bucket.upload(FILES.logo.path, {destination: file}, next);
