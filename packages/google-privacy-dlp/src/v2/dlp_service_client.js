@@ -130,6 +130,12 @@ class DlpServiceClient {
       dlpJobPathTemplate: new gax.PathTemplate(
         'projects/{project}/dlpJobs/{dlp_job}'
       ),
+      organizationStoredInfoTypePathTemplate: new gax.PathTemplate(
+        'organizations/{organization}/storedInfoTypes/{stored_info_type}'
+      ),
+      projectStoredInfoTypePathTemplate: new gax.PathTemplate(
+        'projects/{project}/storedInfoTypes/{stored_info_type}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -151,6 +157,11 @@ class DlpServiceClient {
         'pageToken',
         'nextPageToken',
         'jobTriggers'
+      ),
+      listStoredInfoTypes: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'storedInfoTypes'
       ),
     };
 
@@ -202,6 +213,11 @@ class DlpServiceClient {
       'deleteJobTrigger',
       'updateJobTrigger',
       'createJobTrigger',
+      'createStoredInfoType',
+      'updateStoredInfoType',
+      'getStoredInfoType',
+      'listStoredInfoTypes',
+      'deleteStoredInfoType',
     ];
     for (const methodName of dlpServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -2222,6 +2238,400 @@ class DlpServiceClient {
     return this._innerApiCalls.createJobTrigger(request, options, callback);
   }
 
+  /**
+   * Creates a pre-built stored infoType to be used for inspection.
+   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+   * learn more.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource name, for example projects/my-project-id or
+   *   organizations/my-org-id.
+   * @param {Object} [request.config]
+   *   Configuration of the storedInfoType to create.
+   *
+   *   This object should have the same structure as [StoredInfoTypeConfig]{@link google.privacy.dlp.v2.StoredInfoTypeConfig}
+   * @param {string} [request.storedInfoTypeId]
+   *   The storedInfoType ID can contain uppercase and lowercase letters,
+   *   numbers, and hyphens; that is, it must match the regular
+   *   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+   *   characters. Can be empty to allow the system to generate one.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * const client = new dlp.v2.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
+   * client.createStoredInfoType({parent: formattedParent})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createStoredInfoType(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.createStoredInfoType(request, options, callback);
+  }
+
+  /**
+   * Updates the stored infoType by creating a new version. The existing version
+   * will continue to be used until the new version is ready.
+   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+   * learn more.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name of organization and storedInfoType to be updated, for
+   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   projects/project-id/storedInfoTypes/432452342.
+   * @param {Object} [request.config]
+   *   Updated configuration for the storedInfoType. If not provided, a new
+   *   version of the storedInfoType will be created with the existing
+   *   configuration.
+   *
+   *   This object should have the same structure as [StoredInfoTypeConfig]{@link google.privacy.dlp.v2.StoredInfoTypeConfig}
+   * @param {Object} [request.updateMask]
+   *   Mask to control which fields get updated.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * const client = new dlp.v2.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.organizationStoredInfoTypePath('[ORGANIZATION]', '[STORED_INFO_TYPE]');
+   * client.updateStoredInfoType({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  updateStoredInfoType(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.updateStoredInfoType(request, options, callback);
+  }
+
+  /**
+   * Gets a stored infoType.
+   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+   * learn more.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name of the organization and storedInfoType to be read, for
+   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   projects/project-id/storedInfoTypes/432452342.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * const client = new dlp.v2.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.organizationStoredInfoTypePath('[ORGANIZATION]', '[STORED_INFO_TYPE]');
+   * client.getStoredInfoType({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getStoredInfoType(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.getStoredInfoType(request, options, callback);
+  }
+
+  /**
+   * Lists stored infoTypes.
+   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+   * learn more.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource name, for example projects/my-project-id or
+   *   organizations/my-org-id.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc, display_name, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the most recent version of the
+   *   resource was created.
+   *   - `state`: corresponds to the state of the resource.
+   *   - `name`: corresponds to resource name.
+   *   - `display_name`: corresponds to info type's display name.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListStoredInfoTypesResponse]{@link google.privacy.dlp.v2.ListStoredInfoTypesResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListStoredInfoTypesResponse]{@link google.privacy.dlp.v2.ListStoredInfoTypesResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * const client = new dlp.v2.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
+   *
+   * client.listStoredInfoTypes({parent: formattedParent})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (let i = 0; i < resources.length; i += 1) {
+   *       // doThingsWith(resources[i])
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (let i = 0; i < resources.length; i += 1) {
+   *     // doThingsWith(resources[i]);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listStoredInfoTypes(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listStoredInfoTypes({parent: formattedParent}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listStoredInfoTypes(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.listStoredInfoTypes(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listStoredInfoTypes}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listStoredInfoTypes} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource name, for example projects/my-project-id or
+   *   organizations/my-org-id.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {string} [request.orderBy]
+   *   Optional comma separated list of fields to order by,
+   *   followed by `asc` or `desc` postfix. This list is case-insensitive,
+   *   default sorting order is ascending, redundant space characters are
+   *   insignificant.
+   *
+   *   Example: `name asc, display_name, create_time desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `create_time`: corresponds to time the most recent version of the
+   *   resource was created.
+   *   - `state`: corresponds to the state of the resource.
+   *   - `name`: corresponds to resource name.
+   *   - `display_name`: corresponds to info type's display name.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [StoredInfoType]{@link google.privacy.dlp.v2.StoredInfoType} on 'data' event.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * const client = new dlp.v2.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
+   * client.listStoredInfoTypesStream({parent: formattedParent})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listStoredInfoTypesStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listStoredInfoTypes.createStream(
+      this._innerApiCalls.listStoredInfoTypes,
+      request,
+      options
+    );
+  }
+
+  /**
+   * Deletes a stored infoType.
+   * See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+   * learn more.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name of the organization and storedInfoType to be deleted, for
+   *   example `organizations/433245324/storedInfoTypes/432452342` or
+   *   projects/project-id/storedInfoTypes/432452342.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dlp = require('@google-cloud/dlp');
+   *
+   * const client = new dlp.v2.DlpServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.organizationStoredInfoTypePath('[ORGANIZATION]', '[STORED_INFO_TYPE]');
+   * client.deleteStoredInfoType({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteStoredInfoType(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.deleteStoredInfoType(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2333,6 +2743,34 @@ class DlpServiceClient {
     return this._pathTemplates.dlpJobPathTemplate.render({
       project: project,
       dlp_job: dlpJob,
+    });
+  }
+
+  /**
+   * Return a fully-qualified organization_stored_info_type resource name string.
+   *
+   * @param {String} organization
+   * @param {String} storedInfoType
+   * @returns {String}
+   */
+  organizationStoredInfoTypePath(organization, storedInfoType) {
+    return this._pathTemplates.organizationStoredInfoTypePathTemplate.render({
+      organization: organization,
+      stored_info_type: storedInfoType,
+    });
+  }
+
+  /**
+   * Return a fully-qualified project_stored_info_type resource name string.
+   *
+   * @param {String} project
+   * @param {String} storedInfoType
+   * @returns {String}
+   */
+  projectStoredInfoTypePath(project, storedInfoType) {
+    return this._pathTemplates.projectStoredInfoTypePathTemplate.render({
+      project: project,
+      stored_info_type: storedInfoType,
     });
   }
 
@@ -2521,6 +2959,62 @@ class DlpServiceClient {
    */
   matchDlpJobFromDlpJobName(dlpJobName) {
     return this._pathTemplates.dlpJobPathTemplate.match(dlpJobName).dlp_job;
+  }
+
+  /**
+   * Parse the organizationStoredInfoTypeName from a organization_stored_info_type resource.
+   *
+   * @param {String} organizationStoredInfoTypeName
+   *   A fully-qualified path representing a organization_stored_info_type resources.
+   * @returns {String} - A string representing the organization.
+   */
+  matchOrganizationFromOrganizationStoredInfoTypeName(
+    organizationStoredInfoTypeName
+  ) {
+    return this._pathTemplates.organizationStoredInfoTypePathTemplate.match(
+      organizationStoredInfoTypeName
+    ).organization;
+  }
+
+  /**
+   * Parse the organizationStoredInfoTypeName from a organization_stored_info_type resource.
+   *
+   * @param {String} organizationStoredInfoTypeName
+   *   A fully-qualified path representing a organization_stored_info_type resources.
+   * @returns {String} - A string representing the stored_info_type.
+   */
+  matchStoredInfoTypeFromOrganizationStoredInfoTypeName(
+    organizationStoredInfoTypeName
+  ) {
+    return this._pathTemplates.organizationStoredInfoTypePathTemplate.match(
+      organizationStoredInfoTypeName
+    ).stored_info_type;
+  }
+
+  /**
+   * Parse the projectStoredInfoTypeName from a project_stored_info_type resource.
+   *
+   * @param {String} projectStoredInfoTypeName
+   *   A fully-qualified path representing a project_stored_info_type resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectStoredInfoTypeName(projectStoredInfoTypeName) {
+    return this._pathTemplates.projectStoredInfoTypePathTemplate.match(
+      projectStoredInfoTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the projectStoredInfoTypeName from a project_stored_info_type resource.
+   *
+   * @param {String} projectStoredInfoTypeName
+   *   A fully-qualified path representing a project_stored_info_type resources.
+   * @returns {String} - A string representing the stored_info_type.
+   */
+  matchStoredInfoTypeFromProjectStoredInfoTypeName(projectStoredInfoTypeName) {
+    return this._pathTemplates.projectStoredInfoTypePathTemplate.match(
+      projectStoredInfoTypeName
+    ).stored_info_type;
   }
 }
 

@@ -1559,6 +1559,322 @@ describe('DlpServiceClient', () => {
       });
     });
   });
+
+  describe('createStoredInfoType', () => {
+    it('invokes createStoredInfoType without error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const expectedResponse = {
+        name: name,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createStoredInfoType = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createStoredInfoType(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createStoredInfoType with error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createStoredInfoType = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createStoredInfoType(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateStoredInfoType', () => {
+    it('invokes updateStoredInfoType without error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.organizationStoredInfoTypePath(
+        '[ORGANIZATION]',
+        '[STORED_INFO_TYPE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
+        name: name2,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateStoredInfoType = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateStoredInfoType(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateStoredInfoType with error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.organizationStoredInfoTypePath(
+        '[ORGANIZATION]',
+        '[STORED_INFO_TYPE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateStoredInfoType = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateStoredInfoType(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getStoredInfoType', () => {
+    it('invokes getStoredInfoType without error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.organizationStoredInfoTypePath(
+        '[ORGANIZATION]',
+        '[STORED_INFO_TYPE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
+        name: name2,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getStoredInfoType = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getStoredInfoType(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getStoredInfoType with error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.organizationStoredInfoTypePath(
+        '[ORGANIZATION]',
+        '[STORED_INFO_TYPE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getStoredInfoType = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getStoredInfoType(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listStoredInfoTypes', () => {
+    it('invokes listStoredInfoTypes without error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const storedInfoTypesElement = {};
+      const storedInfoTypes = [storedInfoTypesElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        storedInfoTypes: storedInfoTypes,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listStoredInfoTypes = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.storedInfoTypes);
+      };
+
+      client.listStoredInfoTypes(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.storedInfoTypes);
+        done();
+      });
+    });
+
+    it('invokes listStoredInfoTypes with error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listStoredInfoTypes = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listStoredInfoTypes(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteStoredInfoType', () => {
+    it('invokes deleteStoredInfoType without error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.organizationStoredInfoTypePath(
+        '[ORGANIZATION]',
+        '[STORED_INFO_TYPE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteStoredInfoType = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteStoredInfoType(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteStoredInfoType with error', done => {
+      const client = new dlpModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.organizationStoredInfoTypePath(
+        '[ORGANIZATION]',
+        '[STORED_INFO_TYPE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteStoredInfoType = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteStoredInfoType(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
