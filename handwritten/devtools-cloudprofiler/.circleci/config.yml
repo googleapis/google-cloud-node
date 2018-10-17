@@ -29,7 +29,7 @@ gochecks: &gochecks
       command: gofmtdiff=$(gofmt -s -d .) && if [ -n "$gofmtdiff" ]; then printf 'gofmt -s found:\n%s\n' "$gofmtdiff" && exit 1; fi
    - run:
       name: Install golint.
-      command: go get -u github.com/golang/lint/golint
+      command: go get -u golang.org/x/lint/golint
    - run:
       name: Run lint check.
       command: golintlint=$(golint ./...) && if [ -n "$golintlint" ]; then printf 'golint found:\n%s\n' "$golintlint" && exit 1; fi
