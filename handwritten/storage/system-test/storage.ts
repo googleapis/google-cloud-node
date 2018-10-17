@@ -31,7 +31,7 @@ import * as uuid from 'uuid';
 import * as r from 'request';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
 import {Storage, Bucket, File} from '../src';
-import {DeleteBucketCallback} from '../src/bucket';
+import {DeleteBucketCallback, UploadCallback} from '../src/bucket';
 import * as nock from 'nock';
 import {DeleteFileCallback} from '../src/file';
 
@@ -498,7 +498,7 @@ describe('storage', () => {
             (err, file) => {
               assert.ifError(err);
 
-              file.getMetadata((err, metadata) => {
+              file!.getMetadata((err, metadata) => {
                 assert.ifError(err);
                 assert.strictEqual(
                     metadata.customerEncryption.encryptionAlgorithm, 'AES256');
@@ -518,7 +518,7 @@ describe('storage', () => {
             (err, file) => {
               assert.ifError(err);
 
-              file.getMetadata((err, metadata) => {
+              file!.getMetadata((err, metadata) => {
                 assert.ifError(err);
                 assert.strictEqual(
                     metadata.customerEncryption.encryptionAlgorithm, 'AES256');
@@ -536,7 +536,7 @@ describe('storage', () => {
             (err, file) => {
               assert.ifError(err);
 
-              file.acl.get({entity: 'allUsers'}, (err, aclObject) => {
+              file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
                 assert.ifError(err);
                 assert.deepStrictEqual(aclObject, {
                   entity: 'allUsers',
@@ -556,7 +556,7 @@ describe('storage', () => {
             (err, file) => {
               assert.ifError(err);
 
-              file.acl.get({entity: 'allUsers'}, (err, aclObject) => {
+              file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
                 assert.ifError(err);
                 assert.deepStrictEqual(aclObject, {
                   entity: 'allUsers',
@@ -576,7 +576,7 @@ describe('storage', () => {
             (err, file) => {
               assert.ifError(err);
 
-              file.acl.get({entity: 'allUsers'}, (err, aclObject) => {
+              file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
                 assert.strictEqual(err.code, 404);
                 assert.strictEqual(err.message, 'Not Found');
                 assert.strictEqual(aclObject, null);
@@ -785,7 +785,7 @@ describe('storage', () => {
     it('should allow changing the storage class', done => {
       const bucket = storage.bucket(generateName());
 
-      async.series(
+      async.series<{}, Error|null>(
           [
             next => {
               bucket.create(next);
@@ -937,7 +937,7 @@ describe('storage', () => {
       it('should set a retention policy', done => {
         const bucket = storage.bucket(generateName());
 
-        async.series(
+        async.series<{}, Error|null>(
             [
               next => bucket.create(next),
               next =>
@@ -956,7 +956,7 @@ describe('storage', () => {
       it('should lock the retention period', done => {
         const bucket = storage.bucket(generateName());
 
-        async.series(
+        async.series<{}, Error|null>(
             [
               next => bucket.create(next),
               next =>
@@ -983,7 +983,7 @@ describe('storage', () => {
       it('should remove a retention period', done => {
         const bucket = storage.bucket(generateName());
 
-        async.series(
+        async.series<{}, Error|null>(
             [
               next => bucket.create(next),
               next =>
@@ -1598,7 +1598,7 @@ describe('storage', () => {
       bucket.upload(FILES.big.path, (err, file) => {
         assert.ifError(err);
 
-        const fileSize = file.metadata.size;
+        const fileSize = file!.metadata.size;
         const byteRange = {
           start: Math.floor((fileSize * 1) / 3),
           end: Math.floor((fileSize * 2) / 3),
@@ -1606,7 +1606,7 @@ describe('storage', () => {
         const expectedContentSize = byteRange.start + 1;
 
         let sizeStreamed = 0;
-        file.createReadStream(byteRange)
+        file!.createReadStream(byteRange)
             .on('data',
                 chunk => {
                   sizeStreamed += chunk.length;
@@ -1614,7 +1614,7 @@ describe('storage', () => {
             .on('error', done)
             .on('end', () => {
               assert.strictEqual(sizeStreamed, expectedContentSize);
-              file.delete(done);
+              file!.delete(done);
             });
       });
     });
@@ -1625,7 +1625,7 @@ describe('storage', () => {
       bucket.upload(FILES.big.path, (err, file) => {
         assert.ifError(err);
 
-        file.download((err, remoteContents) => {
+        file!.download((err, remoteContents) => {
           assert.ifError(err);
           assert.strictEqual(String(fileContents), String(remoteContents));
           done();
@@ -1651,10 +1651,10 @@ describe('storage', () => {
       bucket.upload(FILES.html.path, options, (err, file) => {
         assert.ifError(err);
 
-        file.download((err, contents) => {
+        file!.download((err, contents) => {
           assert.ifError(err);
           assert.strictEqual(contents.toString(), expectedContents);
-          file.delete(done);
+          file!.delete(done);
         });
       });
     });
@@ -1683,14 +1683,14 @@ describe('storage', () => {
             if (attempt >= 5) {
               return assert.ifError(err);
             }
-            return file.download(downloadCallback);
+            return file!.download(downloadCallback);
           }
 
           // Ensure the contents match.
           assert.strictEqual(contents.toString(), expectedContents);
-          file.delete(done);
+          file!.delete(done);
         };
-        file.download(downloadCallback);
+        file!.download(downloadCallback);
       });
     });
 
@@ -1699,10 +1699,10 @@ describe('storage', () => {
         const file = bucket.file('TestFile');
         const data = 'hello';
 
-        file.save(data, err => {
+        file!.save(data, err => {
           assert.ifError(err);
 
-          file.download((err, contents) => {
+          file!.download((err, contents) => {
             assert.strictEqual(contents.toString(), data);
             done();
           });
@@ -1714,7 +1714,7 @@ describe('storage', () => {
       it('should stream write, then remove file (3mb)', done => {
         const file = bucket.file('LargeFile');
         fs.createReadStream(FILES.big.path)
-            .pipe(file.createWriteStream({resumable: false}))
+            .pipe(file!.createWriteStream({resumable: false}))
             .on('error', done)
             .on('finish', () => {
               assert.strictEqual(file.metadata.md5Hash, FILES.big.hash);
@@ -1731,11 +1731,11 @@ describe('storage', () => {
         bucket.upload(FILES.logo.path, options, (err, file) => {
           assert.ifError(err);
 
-          file.getMetadata((err, metadata) => {
+          file!.getMetadata((err, metadata) => {
             assert.ifError(err);
             assert.strictEqual(
                 metadata.contentType, options.metadata.contentType);
-            file.delete(done);
+            file!.delete(done);
           });
         });
       });
@@ -2195,10 +2195,10 @@ describe('storage', () => {
       bucket.upload(FILES.logo.path, opts, (err, file) => {
         assert.ifError(err);
 
-        file.copy('CloudLogoCopy', (err, copiedFile) => {
+        file!.copy('CloudLogoCopy', (err, copiedFile) => {
           assert.ifError(err);
           async.parallel(
-              [file.delete.bind(file), copiedFile.delete.bind(copiedFile)],
+              [file!.delete.bind(file), copiedFile!.delete.bind(copiedFile)],
               done);
         });
       });
@@ -2209,7 +2209,8 @@ describe('storage', () => {
       const file = bucket.file('Big');
       const copiedFile = otherBucket.file(file.name);
 
-      async.series(
+      // tslint:disable-next-line:no-any
+      (async.series as any)(
           [
             callback =>
                 bucket.upload(FILES.logo.path, {destination: file}, callback),
@@ -2246,7 +2247,7 @@ describe('storage', () => {
           assert.ifError(err);
 
           const destPath = 'gs://' + otherBucket.name + '/CloudLogoCopy';
-          file.copy(destPath, err => {
+          file!.copy(destPath, err => {
             assert.ifError(err);
 
             otherBucket.getFiles((err, files) => {
@@ -2267,7 +2268,8 @@ describe('storage', () => {
     it('should allow changing the storage class', done => {
       const file = bucket.file(generateName());
 
-      async.series<r.Response, Error|null>(
+      // tslint:disable-next-line:no-any
+      (async.series as any)(
           [
             next => {
               bucket.upload(FILES.logo.path, {destination: file}, next);
