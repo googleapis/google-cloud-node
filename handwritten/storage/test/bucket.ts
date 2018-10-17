@@ -19,33 +19,36 @@
 import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as async from 'async';
-import {ServiceObject, util, ServiceObjectConfig} from '@google-cloud/common';
+import {ServiceObject, util, ServiceObjectConfig, DecorateRequestOptions} from '@google-cloud/common';
 import * as extend from 'extend';
 import * as mime from 'mime-types';
 import * as path from 'path';
-import * as propAssign from 'prop-assign';
 import * as proxyquire from 'proxyquire';
-import * as snakeize from 'snakeize';
+const snakeize = require('snakeize');
 import * as stream from 'stream';
 import * as through from 'through2';
-import {Bucket} from '../src/bucket';
+import {Bucket} from '../src';
+import {CreateWriteStreamOptions} from '../src/file';
+import {PromisifyAllOptions} from '@google-cloud/promisify';
+import * as r from 'request';
+import {file} from 'tmp';
 
 class FakeFile {
   calledWith_: IArguments;
   bucket: Bucket;
   name: string;
-  options: {};
+  options?: {};
   metadata: {};
   createWriteStream: Function;
   isSameFile?: () => boolean;
-  constructor(bucket, name, options?) {
+  constructor(bucket: Bucket, name: string, options?: {}) {
     this.calledWith_ = arguments;
     this.bucket = bucket;
     this.name = name;
     this.options = options;
     this.metadata = {};
 
-    this.createWriteStream = options => {
+    this.createWriteStream = (options: CreateWriteStreamOptions) => {
       this.metadata = options.metadata;
       const ws = new stream.Writable();
       ws.write = () => {
@@ -61,13 +64,13 @@ class FakeFile {
 class FakeNotification {
   bucket: Bucket;
   id: string;
-  constructor(bucket, id) {
+  constructor(bucket: Bucket, id: string) {
     this.bucket = bucket;
     this.id = id;
   }
 }
 
-let eachLimitOverride;
+let eachLimitOverride: Function|null;
 
 const fakeAsync = extend({}, async);
 fakeAsync.eachLimit = (...args) =>
@@ -76,7 +79,7 @@ fakeAsync.eachLimit = (...args) =>
 let promisified = false;
 const fakePromisify = {
   // tslint:disable-next-line:variable-name
-  promisifyAll(Class, options) {
+  promisifyAll(Class: Function, options: PromisifyAllOptions) {
     if (Class.name !== 'Bucket') {
       return;
     }
@@ -96,7 +99,7 @@ let extended = false;
 const fakePaginator = {
   paginator: {
     // tslint:disable-next-line:variable-name
-    extend(Class, methods) {
+    extend(Class: Function, methods: string[]) {
       if (Class.name !== 'Bucket') {
         return;
       }
@@ -106,7 +109,7 @@ const fakePaginator = {
       assert.deepStrictEqual(methods, ['getFiles']);
       extended = true;
     },
-    streamify(methodName) {
+    streamify(methodName: string) {
       return methodName;
     },
   },
@@ -135,9 +138,10 @@ class FakeServiceObject extends ServiceObject {
 }
 
 describe('Bucket', () => {
-  // tslint:disable-next-line:variable-name
-  let Bucket;
-  let bucket;
+  // tslint:disable-next-line:variable-name no-any
+  let Bucket: any;
+  // tslint:disable-next-line: no-any
+  let bucket: any;
 
   const STORAGE = {
     createBucket: util.noop,
@@ -197,7 +201,7 @@ describe('Bucket', () => {
     });
 
     describe('ACL objects', () => {
-      let _request;
+      let _request: typeof r;
 
       before(() => {
         _request = Bucket.prototype.request;
@@ -205,7 +209,7 @@ describe('Bucket', () => {
 
       beforeEach(() => {
         Bucket.prototype.request = {
-          bind(ctx) {
+          bind(ctx: {}) {
             return ctx;
           },
         };
@@ -235,7 +239,7 @@ describe('Bucket', () => {
     it('should inherit from ServiceObject', done => {
       const storageInstance = extend({}, STORAGE, {
         createBucket: {
-          bind(context) {
+          bind(context: {}) {
             assert.strictEqual(context, storageInstance);
             done();
           },
@@ -293,7 +297,7 @@ describe('Bucket', () => {
       const destinationFileName = 'destination.txt';
 
       const originalFileMethod = bucket.file;
-      bucket.file = name => {
+      bucket.file = (name: string) => {
         const file = originalFileMethod(name);
 
         if (name === '2.txt') {
@@ -302,7 +306,7 @@ describe('Bucket', () => {
 
         assert.strictEqual(name, destinationFileName);
 
-        file.request = reqOpts => {
+        file.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/compose');
           assert.strictEqual(reqOpts.json.sourceObjects[0].name, file1.name);
@@ -320,7 +324,7 @@ describe('Bucket', () => {
     it('should use content type from the destination metadata', done => {
       const destination = bucket.file('destination.txt');
 
-      destination.request = reqOpts => {
+      destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
             reqOpts.json.destination.contentType,
             mime.contentType(destination.name));
@@ -335,7 +339,7 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.txt');
       destination.metadata = {contentType: 'content-type'};
 
-      destination.request = reqOpts => {
+      destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
             reqOpts.json.destination.contentType,
             destination.metadata.contentType);
@@ -349,7 +353,7 @@ describe('Bucket', () => {
     it('should detect dest content type if not in metadata', done => {
       const destination = bucket.file('destination.txt');
 
-      destination.request = reqOpts => {
+      destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
             reqOpts.json.destination.contentType,
             mime.contentType(destination.name));
@@ -364,7 +368,7 @@ describe('Bucket', () => {
       const sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       const destination = bucket.file('destination.txt');
 
-      destination.request = reqOpts => {
+      destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, '/compose');
         assert.deepStrictEqual(reqOpts.json, {
           destination: {contentType: mime.contentType(destination.name)},
@@ -381,7 +385,7 @@ describe('Bucket', () => {
       const sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       const destination = bucket.file('needs encoding.jpg');
 
-      destination.request = reqOpts => {
+      destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri.indexOf(destination), -1);
         done();
       };
@@ -396,7 +400,7 @@ describe('Bucket', () => {
 
       const destination = bucket.file('destination.txt');
 
-      destination.request = reqOpts => {
+      destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.json.sourceObjects, [
           {name: sources[0].name, generation: sources[0].metadata.generation},
           {name: sources[1].name, generation: sources[1].metadata.generation},
@@ -416,7 +420,7 @@ describe('Bucket', () => {
       const sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       const destination = bucket.file('destination.txt');
 
-      destination.request = reqOpts => {
+      destination.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -428,9 +432,10 @@ describe('Bucket', () => {
       const sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       const destination = bucket.file('destination.txt');
 
-      destination.request = (reqOpts, callback) => {
-        callback();
-      };
+      destination.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback();
+          };
 
       bucket.combine(sources, destination, done);
     });
@@ -441,9 +446,10 @@ describe('Bucket', () => {
 
       const error = new Error('Error.');
 
-      destination.request = (reqOpts, callback) => {
-        callback(error);
-      };
+      destination.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error);
+          };
 
       bucket.combine(sources, destination, err => {
         assert.strictEqual(err, error);
@@ -456,9 +462,10 @@ describe('Bucket', () => {
       const destination = bucket.file('destination.txt');
       const resp = {success: true};
 
-      destination.request = (reqOpts, callback) => {
-        callback(null, resp);
-      };
+      destination.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, resp);
+          };
 
       bucket.combine(sources, destination, (err, obj, apiResponse) => {
         assert.strictEqual(resp, apiResponse);
@@ -492,7 +499,7 @@ describe('Bucket', () => {
       });
       const originalConfig = extend({}, config);
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/o/watch');
 
@@ -514,7 +521,7 @@ describe('Bucket', () => {
         userProject: 'user-project-id',
       };
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -527,9 +534,10 @@ describe('Bucket', () => {
       const apiResponse = {};
 
       beforeEach(() => {
-        bucket.request = (reqOpts, callback) => {
-          callback(error, apiResponse);
-        };
+        bucket.request =
+            (reqOpts: DecorateRequestOptions, callback: Function) => {
+              callback(error, apiResponse);
+            };
       });
 
       it('should execute callback with error & API response', done => {
@@ -549,9 +557,10 @@ describe('Bucket', () => {
       };
 
       beforeEach(() => {
-        bucket.request = (reqOpts, callback) => {
-          callback(null, apiResponse);
-        };
+        bucket.request =
+            (reqOpts: DecorateRequestOptions, callback: Function) => {
+              callback(null, apiResponse);
+            };
       });
 
       it('should exec a callback with Channel & API response', done => {
@@ -607,7 +616,7 @@ describe('Bucket', () => {
       const expectedTopic = PUBSUB_SERVICE_PATH + topic;
       const expectedJson = extend({topic: expectedTopic}, snakeize(options));
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/notificationConfigs');
         assert.deepStrictEqual(reqOpts.json, expectedJson);
@@ -619,7 +628,7 @@ describe('Bucket', () => {
     });
 
     it('should accept incomplete topic names', done => {
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.json.topic, FULL_TOPIC_NAME);
         done();
       };
@@ -637,7 +646,7 @@ describe('Bucket', () => {
         return true;
       };
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.json.topic, expectedTopicName);
         done();
       };
@@ -646,7 +655,7 @@ describe('Bucket', () => {
     });
 
     it('should set a default payload format', done => {
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.json.payload_format, 'JSON_API_V1');
         done();
       };
@@ -660,7 +669,7 @@ describe('Bucket', () => {
         payload_format: 'JSON_API_V1',
       };
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.json, expectedJson);
         done();
       };
@@ -673,7 +682,7 @@ describe('Bucket', () => {
         userProject: 'grape-spaceship-123',
       };
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
@@ -685,9 +694,10 @@ describe('Bucket', () => {
       const error = new Error('err');
       const response = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(error, response);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error, response);
+          };
 
       bucket.createNotification(TOPIC, (err, notification, resp) => {
         assert.strictEqual(err, error);
@@ -702,9 +712,10 @@ describe('Bucket', () => {
       const response = {id: fakeId};
       const fakeNotification = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(null, response);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, response);
+          };
 
       bucket.notification = id => {
         assert.strictEqual(id, fakeId);
@@ -723,12 +734,13 @@ describe('Bucket', () => {
 
   describe('delete', () => {
     it('should make the correct request', done => {
-      bucket.request = (reqOpts, callback) => {
-        assert.strictEqual(reqOpts.method, 'DELETE');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepStrictEqual(reqOpts.qs, {});
-        callback();  // done()
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            assert.strictEqual(reqOpts.method, 'DELETE');
+            assert.strictEqual(reqOpts.uri, '');
+            assert.deepStrictEqual(reqOpts.qs, {});
+            callback();  // done()
+          };
 
       bucket.delete(done);
     });
@@ -736,7 +748,7 @@ describe('Bucket', () => {
     it('should accept options', done => {
       const options = {};
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -745,10 +757,11 @@ describe('Bucket', () => {
     });
 
     it('should not require a callback', done => {
-      bucket.request = (reqOpts, callback) => {
-        assert.doesNotThrow(callback);
-        done();
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            assert.doesNotThrow(callback);
+            done();
+          };
 
       bucket.delete();
     });
@@ -756,7 +769,7 @@ describe('Bucket', () => {
 
   describe('deleteFiles', () => {
     it('should accept only a callback', done => {
-      bucket.getFiles = (query, callback) => {
+      bucket.getFiles = (query, callback: Function) => {
         assert.deepStrictEqual(query, {});
         callback(null, []);
       };
@@ -781,7 +794,7 @@ describe('Bucket', () => {
         done();
       };
 
-      bucket.getFiles = (query, callback) => {
+      bucket.getFiles = (query, callback: Function) => {
         callback(null, []);
       };
 
@@ -792,14 +805,16 @@ describe('Bucket', () => {
       const query = {};
       let timesCalled = 0;
 
-      const files = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('delete', (query_, callback) => {
-            timesCalled++;
-            assert.strictEqual(query_, query);
-            callback();
-          }));
+      const files = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.delete = (query_, callback: Function) => {
+          timesCalled++;
+          assert.strictEqual(query_, query);
+          callback();
+        };
+        return file;
+      });
 
-      bucket.getFiles = (query_, callback) => {
+      bucket.getFiles = (query_, callback: Function) => {
         assert.strictEqual(query_, query);
         callback(null, files);
       };
@@ -814,7 +829,7 @@ describe('Bucket', () => {
     it('should execute callback with error from getting files', done => {
       const error = new Error('Error.');
 
-      bucket.getFiles = (query, callback) => {
+      bucket.getFiles = (query, callback: Function) => {
         callback(error);
       };
 
@@ -827,12 +842,12 @@ describe('Bucket', () => {
     it('should execute callback with error from deleting file', done => {
       const error = new Error('Error.');
 
-      const files = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('delete', (query, callback) => {
-            callback(error);
-          }));
+      const files = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.delete = (query, callback: Function) => callback(error);
+        return file;
+      });
 
-      bucket.getFiles = (query, callback) => {
+      bucket.getFiles = (query, callback: Function) => {
         callback(null, files);
       };
 
@@ -845,12 +860,14 @@ describe('Bucket', () => {
     it('should execute callback with queued errors', done => {
       const error = new Error('Error.');
 
-      const files = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('delete', (query, callback) => {
-            callback(error);
-          }));
+      const files = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.delete = (query, callback: Function) => {
+          callback(error);
+        };
+        return file;
+      });
 
-      bucket.getFiles = (query, callback) => {
+      bucket.getFiles = (query, callback: Function) => {
         callback(null, files);
       };
 
@@ -895,7 +912,7 @@ describe('Bucket', () => {
           callback(null, labels);
         };
 
-        bucket.setLabels = (labels, callback) => {
+        bucket.setLabels = (labels, callback: Function) => {
           assert.deepStrictEqual(labels, {
             labelone: null,
             labeltwo: null,
@@ -911,7 +928,7 @@ describe('Bucket', () => {
       const LABEL = 'labelname';
 
       it('should call setLabels with a single label', done => {
-        bucket.setLabels = (labels, callback) => {
+        bucket.setLabels = (labels, callback: Function) => {
           assert.deepStrictEqual(labels, {
             [LABEL]: null,
           });
@@ -926,7 +943,7 @@ describe('Bucket', () => {
       const LABELS = ['labelonename', 'labeltwoname'];
 
       it('should call setLabels with multiple labels', done => {
-        bucket.setLabels = (labels, callback) => {
+        bucket.setLabels = (labels, callback: Function) => {
           assert.deepStrictEqual(labels, {
             labelonename: null,
             labeltwoname: null,
@@ -941,7 +958,7 @@ describe('Bucket', () => {
 
   describe('disableRequesterPays', () => {
     it('should call setMetadata correctly', done => {
-      bucket.setMetadata = (metadata, callback) => {
+      bucket.setMetadata = (metadata, callback: Function) => {
         assert.deepStrictEqual(metadata, {
           billing: {
             requesterPays: false,
@@ -954,7 +971,7 @@ describe('Bucket', () => {
     });
 
     it('should not require a callback', done => {
-      bucket.setMetadata = (metadata, callback) => {
+      bucket.setMetadata = (metadata, callback: Function) => {
         assert.doesNotThrow(callback);
         done();
       };
@@ -965,7 +982,7 @@ describe('Bucket', () => {
 
   describe('enableRequesterPays', () => {
     it('should call setMetadata correctly', done => {
-      bucket.setMetadata = (metadata, callback) => {
+      bucket.setMetadata = (metadata, callback: Function) => {
         assert.deepStrictEqual(metadata, {
           billing: {
             requesterPays: true,
@@ -978,7 +995,7 @@ describe('Bucket', () => {
     });
 
     it('should not require a callback', done => {
-      bucket.setMetadata = (metadata, callback) => {
+      bucket.setMetadata = (metadata, callback: Function) => {
         assert.doesNotThrow(callback);
         done();
       };
@@ -1008,7 +1025,7 @@ describe('Bucket', () => {
     });
 
     it('should execute callback with false if 404', done => {
-      bucket.get = (options, callback) => {
+      bucket.get = (options, callback: Function) => {
         callback({code: 404});
       };
 
@@ -1022,7 +1039,7 @@ describe('Bucket', () => {
     it('should execute callback with error if not 404', done => {
       const error = {code: 500};
 
-      bucket.get = (options, callback) => {
+      bucket.get = (options, callback: Function) => {
         callback(error);
       };
 
@@ -1034,7 +1051,7 @@ describe('Bucket', () => {
     });
 
     it('should execute callback with true if no error', done => {
-      bucket.get = (options, callback) => {
+      bucket.get = (options, callback: Function) => {
         callback();
       };
 
@@ -1102,7 +1119,7 @@ describe('Bucket', () => {
       const error = new Error('Error.');
       const metadata = {};
 
-      bucket.getMetadata = (options, callback) => {
+      bucket.getMetadata = (options, callback: Function) => {
         callback(error, metadata);
       };
 
@@ -1118,7 +1135,7 @@ describe('Bucket', () => {
     it('should execute callback with instance & metadata', done => {
       const metadata = {};
 
-      bucket.getMetadata = (options, callback) => {
+      bucket.getMetadata = (options, callback: Function) => {
         callback(null, metadata);
       };
 
@@ -1143,7 +1160,7 @@ describe('Bucket', () => {
           autoCreate: true,
         };
 
-        bucket.getMetadata = (options, callback) => {
+        bucket.getMetadata = (options, callback: Function) => {
           callback(ERROR, METADATA);
         };
       });
@@ -1175,7 +1192,7 @@ describe('Bucket', () => {
           const apiResponse = {};
 
           bucket.create = callback => {
-            bucket.get = (config, callback) => {
+            bucket.get = (config, callback: Function) => {
               assert.deepStrictEqual(config, {});
               callback();  // done()
             };
@@ -1197,7 +1214,7 @@ describe('Bucket', () => {
           };
 
           bucket.create = callback => {
-            bucket.get = (config, callback) => {
+            bucket.get = (config, callback: Function) => {
               assert.deepStrictEqual(config, {});
               callback();  // done()
             };
@@ -1213,7 +1230,7 @@ describe('Bucket', () => {
 
   describe('getFiles', () => {
     it('should get files without a query', done => {
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, '/o');
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1224,7 +1241,7 @@ describe('Bucket', () => {
 
     it('should get files with a query', done => {
       const token = 'next-page-token';
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.qs, {maxResults: 5, pageToken: token});
         done();
       };
@@ -1233,7 +1250,7 @@ describe('Bucket', () => {
 
     it('should allow setting a directory', done => {
       const directory = 'directory-name';
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.prefix, `${directory}/`);
         assert.strictEqual(reqOpts.qs.directory, undefined);
         done();
@@ -1243,7 +1260,7 @@ describe('Bucket', () => {
 
     it('should strip excess slashes from a directory', done => {
       const directory = 'directory-name///';
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs.prefix, `directory-name/`);
         done();
       };
@@ -1252,9 +1269,10 @@ describe('Bucket', () => {
 
     it('should return nextQuery if more results exist', () => {
       const token = 'next-page-token';
-      bucket.request = (reqOpts, callback) => {
-        callback(null, {nextPageToken: token, items: []});
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, {nextPageToken: token, items: []});
+          };
       bucket.getFiles({maxResults: 5}, (err, results, nextQuery) => {
         assert.strictEqual(nextQuery.pageToken, token);
         assert.strictEqual(nextQuery.maxResults, 5);
@@ -1262,20 +1280,22 @@ describe('Bucket', () => {
     });
 
     it('should return null nextQuery if there are no more results', () => {
-      bucket.request = (reqOpts, callback) => {
-        callback(null, {items: []});
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, {items: []});
+          };
       bucket.getFiles({maxResults: 5}, (err, results, nextQuery) => {
         assert.strictEqual(nextQuery, null);
       });
     });
 
     it('should return File objects', done => {
-      bucket.request = (reqOpts, callback) => {
-        callback(null, {
-          items: [{name: 'fake-file-name', generation: 1}],
-        });
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, {
+              items: [{name: 'fake-file-name', generation: 1}],
+            });
+          };
       bucket.getFiles((err, files) => {
         assert.ifError(err);
         assert(files[0] instanceof FakeFile);
@@ -1286,11 +1306,12 @@ describe('Bucket', () => {
     });
 
     it('should return versioned Files if queried for versions', done => {
-      bucket.request = (reqOpts, callback) => {
-        callback(null, {
-          items: [{name: 'fake-file-name', generation: 1}],
-        });
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, {
+              items: [{name: 'fake-file-name', generation: 1}],
+            });
+          };
 
       bucket.getFiles({versions: true}, (err, files) => {
         assert.ifError(err);
@@ -1303,11 +1324,12 @@ describe('Bucket', () => {
     it('should set kmsKeyName on file', done => {
       const kmsKeyName = 'kms-key-name';
 
-      bucket.request = (reqOpts, callback) => {
-        callback(null, {
-          items: [{name: 'fake-file-name', kmsKeyName}],
-        });
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, {
+              items: [{name: 'fake-file-name', kmsKeyName}],
+            });
+          };
 
       bucket.getFiles({versions: true}, (err, files) => {
         assert.ifError(err);
@@ -1318,9 +1340,10 @@ describe('Bucket', () => {
 
     it('should return apiResponse in callback', done => {
       const resp = {items: [{name: 'fake-file-name'}]};
-      bucket.request = (reqOpts, callback) => {
-        callback(null, resp);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, resp);
+          };
       bucket.getFiles((err, files, nextQuery, apiResponse) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
@@ -1331,9 +1354,10 @@ describe('Bucket', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(error, apiResponse);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error, apiResponse);
+          };
 
       bucket.getFiles((err, files, nextQuery, apiResponse_) => {
         assert.strictEqual(err, error);
@@ -1353,9 +1377,10 @@ describe('Bucket', () => {
           my: 'custom metadata',
         },
       };
-      bucket.request = (reqOpts, callback) => {
-        callback(null, {items: [fileMetadata]});
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, {items: [fileMetadata]});
+          };
       bucket.getFiles((err, files) => {
         assert.ifError(err);
         assert.deepStrictEqual(files[0].metadata, fileMetadata);
@@ -1387,7 +1412,7 @@ describe('Bucket', () => {
     it('should return error from getMetadata', done => {
       const error = new Error('Error.');
 
-      bucket.getMetadata = (options, callback) => {
+      bucket.getMetadata = (options, callback: Function) => {
         callback(error);
       };
 
@@ -1404,7 +1429,7 @@ describe('Bucket', () => {
         },
       };
 
-      bucket.getMetadata = (options, callback) => {
+      bucket.getMetadata = (options, callback: Function) => {
         callback(null, metadata);
       };
 
@@ -1418,7 +1443,7 @@ describe('Bucket', () => {
     it('should return empty object if no labels exist', done => {
       const metadata = {};
 
-      bucket.getMetadata = (options, callback) => {
+      bucket.getMetadata = (options, callback: Function) => {
         callback(null, metadata);
       };
 
@@ -1432,7 +1457,7 @@ describe('Bucket', () => {
 
   describe('getMetadata', () => {
     it('should make the correct request', done => {
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, '');
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
@@ -1444,7 +1469,7 @@ describe('Bucket', () => {
     it('should accept options', done => {
       const options = {};
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -1456,9 +1481,10 @@ describe('Bucket', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(error, apiResponse);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error, apiResponse);
+          };
 
       bucket.getMetadata((err, metadata, apiResponse_) => {
         assert.strictEqual(err, error);
@@ -1471,9 +1497,10 @@ describe('Bucket', () => {
     it('should update metadata', done => {
       const apiResponse = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(null, apiResponse);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, apiResponse);
+          };
 
       bucket.getMetadata(err => {
         assert.ifError(err);
@@ -1485,9 +1512,10 @@ describe('Bucket', () => {
     it('should execute callback with metadata & API response', done => {
       const apiResponse = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(null, apiResponse);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, apiResponse);
+          };
 
       bucket.getMetadata((err, metadata, apiResponse_) => {
         assert.ifError(err);
@@ -1502,7 +1530,7 @@ describe('Bucket', () => {
     it('should make the correct request', done => {
       const options = {};
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.uri, '/notificationConfigs');
         assert.strictEqual(reqOpts.qs, options);
         done();
@@ -1512,7 +1540,7 @@ describe('Bucket', () => {
     });
 
     it('should optionally accept options', done => {
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
@@ -1524,9 +1552,10 @@ describe('Bucket', () => {
       const error = new Error('err');
       const response = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(error, response);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error, response);
+          };
 
       bucket.getNotifications((err, notifications, resp) => {
         assert.strictEqual(err, error);
@@ -1540,9 +1569,10 @@ describe('Bucket', () => {
       const fakeItems = [{id: '1'}, {id: '2'}, {id: '3'}];
       const response = {items: fakeItems};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(null, response);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, response);
+          };
 
       let callCount = 0;
       const fakeNotifications = [{}, {}, {}];
@@ -1579,17 +1609,18 @@ describe('Bucket', () => {
     it('should make the correct request', done => {
       const metageneration = 8;
 
-      bucket.request = (reqOpts, callback) => {
-        assert.deepStrictEqual(reqOpts, {
-          method: 'POST',
-          uri: '/lockRetentionPolicy',
-          qs: {
-            ifMetagenerationMatch: metageneration,
-          },
-        });
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            assert.deepStrictEqual(reqOpts, {
+              method: 'POST',
+              uri: '/lockRetentionPolicy',
+              qs: {
+                ifMetagenerationMatch: metageneration,
+              },
+            });
 
-        callback();  // done()
-      };
+            callback();  // done()
+          };
 
       bucket.lock(metageneration, done);
     });
@@ -1600,7 +1631,7 @@ describe('Bucket', () => {
       let didSetPredefinedAcl = false;
       let didMakeFilesPrivate = false;
 
-      bucket.setMetadata = (metadata, options, callback) => {
+      bucket.setMetadata = (metadata, options, callback: Function) => {
         assert.deepStrictEqual(metadata, {acl: null});
         assert.deepStrictEqual(options, {predefinedAcl: 'projectPrivate'});
 
@@ -1608,7 +1639,7 @@ describe('Bucket', () => {
         callback();
       };
 
-      bucket.makeAllFilesPublicPrivate_ = (opts, callback) => {
+      bucket.makeAllFilesPublicPrivate_ = (opts, callback: Function) => {
         assert.strictEqual(opts.private, true);
         assert.strictEqual(opts.force, true);
         didMakeFilesPrivate = true;
@@ -1637,9 +1668,10 @@ describe('Bucket', () => {
     });
 
     it('should not make files private by default', done => {
-      bucket.request = (reqOpts, callback) => {
-        callback();
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback();
+          };
 
       bucket.makeAllFilesPublicPrivate_ = () => {
         throw new Error('Please, no. I do not want to be called.');
@@ -1651,9 +1683,10 @@ describe('Bucket', () => {
     it('should execute callback with error', done => {
       const error = new Error('Error.');
 
-      bucket.request = (reqOpts, callback) => {
-        callback(error);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error);
+          };
 
       bucket.makePrivate(err => {
         assert.strictEqual(err, error);
@@ -1664,9 +1697,10 @@ describe('Bucket', () => {
 
   describe('makePublic', () => {
     beforeEach(() => {
-      bucket.request = (reqOpts, callback) => {
-        callback();
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback();
+          };
     });
 
     it('should set ACL, default ACL, and publicize files', done => {
@@ -1674,21 +1708,21 @@ describe('Bucket', () => {
       let didSetDefaultAcl = false;
       let didMakeFilesPublic = false;
 
-      bucket.acl.add = (opts, callback) => {
+      bucket.acl.add = (opts, callback: Function) => {
         assert.strictEqual(opts.entity, 'allUsers');
         assert.strictEqual(opts.role, 'READER');
         didSetAcl = true;
         callback();
       };
 
-      bucket.acl.default.add = (opts, callback) => {
+      bucket.acl.default.add = (opts, callback: Function) => {
         assert.strictEqual(opts.entity, 'allUsers');
         assert.strictEqual(opts.role, 'READER');
         didSetDefaultAcl = true;
         callback();
       };
 
-      bucket.makeAllFilesPublicPrivate_ = (opts, callback) => {
+      bucket.makeAllFilesPublicPrivate_ = (opts, callback: Function) => {
         assert.strictEqual(opts.public, true);
         assert.strictEqual(opts.force, true);
         didMakeFilesPublic = true;
@@ -1710,11 +1744,11 @@ describe('Bucket', () => {
     });
 
     it('should not make files public by default', done => {
-      bucket.acl.add = (opts, callback) => {
+      bucket.acl.add = (opts, callback: Function) => {
         callback();
       };
 
-      bucket.acl.default.add = (opts, callback) => {
+      bucket.acl.default.add = (opts, callback: Function) => {
         callback();
       };
 
@@ -1728,7 +1762,7 @@ describe('Bucket', () => {
     it('should execute callback with error', done => {
       const error = new Error('Error.');
 
-      bucket.acl.add = (opts, callback) => {
+      bucket.acl.add = (opts, callback: Function) => {
         callback(error);
       };
 
@@ -1758,7 +1792,7 @@ describe('Bucket', () => {
 
   describe('removeRetentionPeriod', () => {
     it('should call setMetadata correctly', done => {
-      bucket.setMetadata = (metadata, callback) => {
+      bucket.setMetadata = (metadata, callback: Function) => {
         assert.deepStrictEqual(metadata, {
           retentionPolicy: null,
         });
@@ -1828,7 +1862,7 @@ describe('Bucket', () => {
       const options = {};
 
       extend(FakeServiceObject.prototype, {
-        request(reqOpts, callback) {
+        request(reqOpts: DecorateRequestOptions, callback) {
           assert.strictEqual(this, bucket);
           assert.strictEqual(reqOpts, options);
           callback();  // done fn
@@ -1843,7 +1877,7 @@ describe('Bucket', () => {
     it('should correctly call setMetadata', done => {
       const labels = {};
 
-      bucket.setMetadata = (metadata, options, callback) => {
+      bucket.setMetadata = (metadata, options, callback: Function) => {
         assert.strictEqual(metadata.labels, labels);
         callback();  // done()
       };
@@ -1868,7 +1902,7 @@ describe('Bucket', () => {
     it('should make the correct request', done => {
       const metadata = {};
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'PATCH');
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.json, metadata);
@@ -1880,10 +1914,11 @@ describe('Bucket', () => {
     });
 
     it('should not require a callback', done => {
-      bucket.request = (reqOpts, callback) => {
-        assert.doesNotThrow(callback);
-        done();
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            assert.doesNotThrow(callback);
+            done();
+          };
 
       bucket.setMetadata({});
     });
@@ -1891,7 +1926,7 @@ describe('Bucket', () => {
     it('should accept options', done => {
       const options = {};
 
-      bucket.request = reqOpts => {
+      bucket.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -1903,9 +1938,10 @@ describe('Bucket', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(error, apiResponse);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error, apiResponse);
+          };
 
       bucket.setMetadata({}, (err, apiResponse_) => {
         assert.strictEqual(err, error);
@@ -1917,9 +1953,10 @@ describe('Bucket', () => {
     it('should update metadata', done => {
       const apiResponse = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(null, apiResponse);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, apiResponse);
+          };
 
       bucket.setMetadata({}, err => {
         assert.ifError(err);
@@ -1931,9 +1968,10 @@ describe('Bucket', () => {
     it('should execute callback with metadata & API response', done => {
       const apiResponse = {};
 
-      bucket.request = (reqOpts, callback) => {
-        callback(null, apiResponse);
-      };
+      bucket.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(null, apiResponse);
+          };
 
       bucket.setMetadata({}, (err, apiResponse_) => {
         assert.ifError(err);
@@ -1947,7 +1985,7 @@ describe('Bucket', () => {
     it('should call setMetadata correctly', done => {
       const duration = 90000;
 
-      bucket.setMetadata = (metadata, callback) => {
+      bucket.setMetadata = (metadata, callback: Function) => {
         assert.deepStrictEqual(metadata, {
           retentionPolicy: {
             retentionPeriod: duration,
@@ -1985,7 +2023,7 @@ describe('Bucket', () => {
     });
 
     it('should call setMetdata correctly', done => {
-      bucket.setMetadata = (metadata, options, callback) => {
+      bucket.setMetadata = (metadata, options, callback: Function) => {
         assert.deepStrictEqual(metadata, {storageClass: STORAGE_CLASS});
         assert.strictEqual(options, OPTIONS);
         assert.strictEqual(callback, CALLBACK);
@@ -2255,12 +2293,12 @@ describe('Bucket', () => {
     });
 
     it('should process 10 files at a time', done => {
-      eachLimitOverride = (arr, limit) => {
+      eachLimitOverride = (arr: {}, limit: number) => {
         assert.strictEqual(limit, 10);
         done();
       };
 
-      bucket.getFiles = (options, callback) => {
+      bucket.getFiles = (options: {}, callback: Function) => {
         callback(null, []);
       };
 
@@ -2270,13 +2308,15 @@ describe('Bucket', () => {
     it('should make files public', done => {
       let timesCalled = 0;
 
-      const files = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('makePublic', callback => {
-            timesCalled++;
-            callback();
-          }));
+      const files = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.makePublic = (callback: Function) => {
+          timesCalled++;
+          callback();
+        };
+        return file;
+      });
 
-      bucket.getFiles = (options, callback) => {
+      bucket.getFiles = (options: {}, callback: Function) => {
         callback(null, files);
       };
 
@@ -2293,13 +2333,15 @@ describe('Bucket', () => {
       };
       let timesCalled = 0;
 
-      const files = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('makePrivate', (options_, callback) => {
-            timesCalled++;
-            callback();
-          }));
+      const files = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.makePrivate = (options_, callback: Function) => {
+          timesCalled++;
+          callback();
+        };
+        return file;
+      });
 
-      bucket.getFiles = (options_, callback) => {
+      bucket.getFiles = (options_, callback: Function) => {
         callback(null, files);
       };
 
@@ -2313,7 +2355,7 @@ describe('Bucket', () => {
     it('should execute callback with error from getting files', done => {
       const error = new Error('Error.');
 
-      bucket.getFiles = (options, callback) => {
+      bucket.getFiles = (options, callback: Function) => {
         callback(error);
       };
 
@@ -2326,12 +2368,12 @@ describe('Bucket', () => {
     it('should execute callback with error from changing file', done => {
       const error = new Error('Error.');
 
-      const files = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('makePublic', callback => {
-            callback(error);
-          }));
+      const files = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.makePublic = callback => callback(error);
+        return file;
+      });
 
-      bucket.getFiles = (options, callback) => {
+      bucket.getFiles = (options, callback: Function) => {
         callback(null, files);
       };
 
@@ -2344,12 +2386,12 @@ describe('Bucket', () => {
     it('should execute callback with queued errors', done => {
       const error = new Error('Error.');
 
-      const files = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('makePublic', callback => {
-            callback(error);
-          }));
+      const files = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.makePublic = callback => callback(error);
+        return file;
+      });
 
-      bucket.getFiles = (options, callback) => {
+      bucket.getFiles = (options, callback: Function) => {
         callback(null, files);
       };
 
@@ -2366,18 +2408,16 @@ describe('Bucket', () => {
 
     it('should execute callback with files changed', done => {
       const error = new Error('Error.');
+      const successFiles = [bucket.file('1'), bucket.file('2')].map(file => {
+        file.makePublic = callback => callback();
+        return file;
+      });
+      const errorFiles = [bucket.file('3'), bucket.file('4')].map(file => {
+        file.makePublic = callback => callback(error);
+        return file;
+      });
 
-      const successFiles = [bucket.file('1'), bucket.file('2')].map(
-          propAssign('makePublic', callback => {
-            callback();
-          }));
-
-      const errorFiles = [bucket.file('3'), bucket.file('4')].map(
-          propAssign('makePublic', callback => {
-            callback(error);
-          }));
-
-      bucket.getFiles = (options, callback) => {
+      bucket.getFiles = (options, callback: Function) => {
         callback(null, successFiles.concat(errorFiles));
       };
 

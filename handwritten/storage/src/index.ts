@@ -766,3 +766,4 @@ promisifyAll(Storage, {
 export {Storage};
 
 export {Bucket, File, Channel, AccessControlObject};
+export {Notification} from './notification';

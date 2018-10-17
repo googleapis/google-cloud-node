@@ -22,12 +22,12 @@
 
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
-import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
+import {ServiceObject, ServiceObjectConfig, DecorateRequestOptions} from '@google-cloud/common';
 
 let promisified = false;
 const fakePromisify = {
   // tslint:disable-next-line:variable-name
-  promisifyAll(Class) {
+  promisifyAll(Class: Function) {
     if (Class.name === 'Channel') {
       promisified = true;
     }
@@ -47,9 +47,10 @@ describe('Channel', () => {
   const ID = 'channel-id';
   const RESOURCE_ID = 'resource-id';
 
-  // tslint:disable-next-line:variable-name
-  let Channel;
-  let channel;
+  // tslint:disable-next-line:variable-name no-any
+  let Channel: any;
+  // tslint:disable-next-line: no-any
+  let channel: any;
 
   before(() => {
     Channel = proxyquire('../src/channel.js', {
@@ -90,7 +91,7 @@ describe('Channel', () => {
 
   describe('stop', () => {
     it('should make the correct request', done => {
-      channel.request = reqOpts => {
+      channel.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/stop');
         assert.strictEqual(reqOpts.json, channel.metadata);
@@ -105,11 +106,12 @@ describe('Channel', () => {
       const error = {};
       const apiResponse = {};
 
-      channel.request = (reqOpts, callback) => {
-        callback(error, apiResponse);
-      };
+      channel.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            callback(error, apiResponse);
+          };
 
-      channel.stop((err, apiResponse_) => {
+      channel.stop((err: Error, apiResponse_: {}) => {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
@@ -117,10 +119,11 @@ describe('Channel', () => {
     });
 
     it('should not require a callback', done => {
-      channel.request = (reqOpts, callback) => {
-        assert.doesNotThrow(callback);
-        done();
-      };
+      channel.request =
+          (reqOpts: DecorateRequestOptions, callback: Function) => {
+            assert.doesNotThrow(callback);
+            done();
+          };
 
       channel.stop();
     });

@@ -20,17 +20,18 @@ import * as assert from 'assert';
 import * as async from 'async';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {util} from '@google-cloud/common';
+import {util, DecorateRequestOptions} from '@google-cloud/common';
+import * as r from 'request';
 
+// tslint:disable-next-line:variable-name no-any
+let Acl: any;
 // tslint:disable-next-line:variable-name
-let Acl;
-// tslint:disable-next-line:variable-name
-let AclRoleAccessorMethods;
+let AclRoleAccessorMethods: Function;
 describe('storage/acl', () => {
   let promisified = false;
   const fakePromisify = {
     // tslint:disable-next-line:variable-name
-    promisifyAll(Class) {
+    promisifyAll(Class: Function) {
       if (Class.name === 'Acl') {
         promisified = true;
       }
@@ -39,7 +40,8 @@ describe('storage/acl', () => {
 
   // tslint:disable-next-line:variable-name
   const {Storage} = require('../src');
-  let acl;
+  // tslint:disable-next-line: no-any
+  let acl: any;
 
   const ERROR = new Error('Error.');
   const MAKE_REQ = util.noop;
@@ -72,7 +74,7 @@ describe('storage/acl', () => {
 
   describe('add', () => {
     it('should make the correct api request', done => {
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '');
         assert.deepStrictEqual(reqOpts.json, {entity: ENTITY, role: ROLE});
@@ -89,7 +91,7 @@ describe('storage/acl', () => {
         generation: 8,
       };
 
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: r.Options) => {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
         done();
       };
@@ -104,7 +106,7 @@ describe('storage/acl', () => {
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: r.Options) => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
@@ -116,16 +118,16 @@ describe('storage/acl', () => {
       const apiResponse = {entity: ENTITY, role: ROLE};
       const expectedAclObject = {entity: ENTITY, role: ROLE};
 
-      acl.makeAclObject_ = (obj) => {
+      acl.makeAclObject_ = (obj: {}) => {
         assert.deepStrictEqual(obj, apiResponse);
         return expectedAclObject;
       };
 
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, apiResponse);
       };
 
-      acl.add({entity: ENTITY, role: ROLE}, (err, aclObject) => {
+      acl.add({entity: ENTITY, role: ROLE}, (err: Error, aclObject: {}) => {
         assert.ifError(err);
         assert.deepStrictEqual(aclObject, expectedAclObject);
         done();
@@ -133,11 +135,11 @@ describe('storage/acl', () => {
     });
 
     it('should execute the callback with an error', done => {
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
 
-      acl.add({entity: ENTITY, role: ROLE}, (err) => {
+      acl.add({entity: ENTITY, role: ROLE}, (err: Error) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
@@ -146,20 +148,22 @@ describe('storage/acl', () => {
     it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, resp);
       };
 
-      acl.add({entity: ENTITY, role: ROLE}, (err, acls, apiResponse) => {
-        assert.deepStrictEqual(resp, apiResponse);
-        done();
-      });
+      acl.add(
+          {entity: ENTITY, role: ROLE},
+          (err: Error, acls: {}, apiResponse: r.Response) => {
+            assert.deepStrictEqual(resp, apiResponse);
+            done();
+          });
     });
   });
 
   describe('delete', () => {
     it('should make the correct api request', done => {
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
 
@@ -175,7 +179,7 @@ describe('storage/acl', () => {
         generation: 8,
       };
 
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: r.Options) => {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
         done();
       };
@@ -190,7 +194,7 @@ describe('storage/acl', () => {
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: r.Options) => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
@@ -199,11 +203,11 @@ describe('storage/acl', () => {
     });
 
     it('should execute the callback with an error', done => {
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
 
-      acl.delete({entity: ENTITY}, (err) => {
+      acl.delete({entity: ENTITY}, (err: Error) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
@@ -212,11 +216,11 @@ describe('storage/acl', () => {
     it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, resp);
       };
 
-      acl.delete({entity: ENTITY}, (err, apiResponse) => {
+      acl.delete({entity: ENTITY}, (err: Error, apiResponse: r.Response) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
@@ -226,7 +230,7 @@ describe('storage/acl', () => {
   describe('get', () => {
     describe('all ACL objects', () => {
       it('should make the correct API request', done => {
-        acl.request = reqOpts => {
+        acl.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.uri, '');
 
           done();
@@ -238,7 +242,7 @@ describe('storage/acl', () => {
       it('should accept a configuration object', done => {
         const generation = 1;
 
-        acl.request = reqOpts => {
+        acl.request = (reqOpts: r.Options) => {
           assert.strictEqual(reqOpts.qs.generation, generation);
 
           done();
@@ -262,15 +266,15 @@ describe('storage/acl', () => {
           {entity: ENTITY, role: ROLE},
         ];
 
-        acl.makeAclObject_ = (obj, index) => {
+        acl.makeAclObject_ = (obj: {}, index: number) => {
           return expectedAclObjects[index];
         };
 
-        acl.request = (reqOpts, callback) => {
+        acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
           callback(null, apiResponse);
         };
 
-        acl.get((err, aclObjects) => {
+        acl.get((err: Error, aclObjects: Array<{}>) => {
           assert.ifError(err);
           assert.deepStrictEqual(aclObjects, expectedAclObjects);
           done();
@@ -280,7 +284,7 @@ describe('storage/acl', () => {
 
     describe('ACL object for an entity', () => {
       it('should get a specific ACL object', done => {
-        acl.request = reqOpts => {
+        acl.request = (reqOpts: DecorateRequestOptions) => {
           assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
 
           done();
@@ -292,7 +296,7 @@ describe('storage/acl', () => {
       it('should accept a configuration object', done => {
         const generation = 1;
 
-        acl.request = reqOpts => {
+        acl.request = (reqOpts: r.Options) => {
           assert.strictEqual(reqOpts.qs.generation, generation);
 
           done();
@@ -307,7 +311,7 @@ describe('storage/acl', () => {
           userProject: 'grape-spaceship-123',
         };
 
-        acl.request = reqOpts => {
+        acl.request = (reqOpts: r.Options) => {
           assert.strictEqual(reqOpts.qs.userProject, options.userProject);
           done();
         };
@@ -323,11 +327,11 @@ describe('storage/acl', () => {
           return expectedAclObject;
         };
 
-        acl.request = (reqOpts, callback) => {
+        acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
           callback(null, apiResponse);
         };
 
-        acl.get({entity: ENTITY}, (err, aclObject) => {
+        acl.get({entity: ENTITY}, (err: Error, aclObject: {}) => {
           assert.ifError(err);
           assert.deepStrictEqual(aclObject, expectedAclObject);
           done();
@@ -336,11 +340,11 @@ describe('storage/acl', () => {
     });
 
     it('should execute the callback with an error', done => {
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
 
-      acl.get((err) => {
+      acl.get((err: Error) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
@@ -349,11 +353,11 @@ describe('storage/acl', () => {
     it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, resp);
       };
 
-      acl.get((err, acls, apiResponse) => {
+      acl.get((err: Error, acls: Array<{}>, apiResponse: r.Response) => {
         assert.deepStrictEqual(resp, apiResponse);
         done();
       });
@@ -362,7 +366,7 @@ describe('storage/acl', () => {
 
   describe('update', () => {
     it('should make the correct API request', done => {
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.method, 'PUT');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
         assert.deepStrictEqual(reqOpts.json, {role: ROLE});
@@ -380,7 +384,7 @@ describe('storage/acl', () => {
         generation: 8,
       };
 
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: r.Options) => {
         assert.strictEqual(reqOpts.qs.generation, options.generation);
         done();
       };
@@ -395,7 +399,7 @@ describe('storage/acl', () => {
         userProject: 'grape-spaceship-123',
       };
 
-      acl.request = reqOpts => {
+      acl.request = (reqOpts: r.Options) => {
         assert.strictEqual(reqOpts.qs.userProject, options.userProject);
         done();
       };
@@ -411,11 +415,11 @@ describe('storage/acl', () => {
         return expectedAclObject;
       };
 
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, apiResponse);
       };
 
-      acl.update({entity: ENTITY, role: ROLE}, (err, aclObject) => {
+      acl.update({entity: ENTITY, role: ROLE}, (err: Error, aclObject: {}) => {
         assert.ifError(err);
         assert.deepStrictEqual(aclObject, expectedAclObject);
         done();
@@ -423,11 +427,11 @@ describe('storage/acl', () => {
     });
 
     it('should execute the callback with an error', done => {
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(ERROR);
       };
 
-      acl.update({entity: ENTITY, role: ROLE}, (err) => {
+      acl.update({entity: ENTITY, role: ROLE}, (err: Error) => {
         assert.deepStrictEqual(err, ERROR);
         done();
       });
@@ -436,15 +440,16 @@ describe('storage/acl', () => {
     it('should execute the callback with apiResponse', done => {
       const resp = {success: true};
 
-      acl.request = (reqOpts, callback) => {
+      acl.request = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, resp);
       };
 
       const config = {entity: ENTITY, role: ROLE};
-      acl.update(config, (err, acls, apiResponse) => {
-        assert.deepStrictEqual(resp, apiResponse);
-        done();
-      });
+      acl.update(
+          config, (err: Error, acls: Array<{}>, apiResponse: r.Response) => {
+            assert.deepStrictEqual(resp, apiResponse);
+            done();
+          });
     });
   });
 
@@ -479,7 +484,7 @@ describe('storage/acl', () => {
         uri,
       };
 
-      acl.request_ = (reqOpts_, callback) => {
+      acl.request_ = (reqOpts_: DecorateRequestOptions, callback: Function) => {
         assert.strictEqual(reqOpts_, reqOpts);
         assert.strictEqual(reqOpts_.uri, PATH_PREFIX + uri);
         callback();  // done()
@@ -491,10 +496,12 @@ describe('storage/acl', () => {
 });
 
 describe('storage/AclRoleAccessorMethods', () => {
-  let aclEntity;
+  // tslint:disable-next-line: no-any
+  let aclEntity: any;
 
   beforeEach(() => {
-    aclEntity = new AclRoleAccessorMethods();
+    // tslint:disable-next-line: no-any
+    aclEntity = new (AclRoleAccessorMethods as any)();
   });
 
   describe('initialization', () => {
@@ -535,7 +542,7 @@ describe('storage/AclRoleAccessorMethods', () => {
       const userName = 'email@example.com';
       const role = 'fakerole';
 
-      aclEntity.add = (options, callback) => {
+      aclEntity.add = (options: {}, callback: Function) => {
         assert.deepStrictEqual(options, {
           entity: 'user-' + userName,
           role,
@@ -544,7 +551,7 @@ describe('storage/AclRoleAccessorMethods', () => {
         callback();
       };
 
-      aclEntity.delete = (options, callback) => {
+      aclEntity.delete = (options: {}, callback: Function) => {
         assert.deepStrictEqual(options, {
           entity: 'allUsers',
           role,
@@ -583,7 +590,7 @@ describe('storage/AclRoleAccessorMethods', () => {
     });
 
     it('should not pass in the callback if undefined', done => {
-      aclEntity.add = (...args) => {
+      aclEntity.add = (...args: Array<{}>) => {
         assert.strictEqual(args.length, 1);
         done();
       };
@@ -606,7 +613,7 @@ describe('storage/AclRoleAccessorMethods', () => {
           },
           fakeOptions);
 
-      aclEntity.add = (options) => {
+      aclEntity.add = (options: {}) => {
         assert.deepStrictEqual(options, expectedOptions);
         done();
       };
