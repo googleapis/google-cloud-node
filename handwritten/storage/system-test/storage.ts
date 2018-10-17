@@ -28,10 +28,9 @@ import * as path from 'path';
 import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
-import * as r from 'request';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
-import {Storage, Bucket, File} from '../src';
-import {DeleteBucketCallback, UploadCallback} from '../src/bucket';
+import {Storage, Bucket, File, AccessControlObject} from '../src';
+import {DeleteBucketCallback} from '../src/bucket';
 import * as nock from 'nock';
 import {DeleteFileCallback} from '../src/file';
 
@@ -208,7 +207,8 @@ describe('storage', () => {
                   (err, accessControl) => {
                     assert.ifError(err);
                     assert.strictEqual(
-                        accessControl.role, storage.acl.OWNER_ROLE);
+                        (accessControl as AccessControlObject)!.role,
+                        storage.acl.OWNER_ROLE);
 
                     bucket.acl.default.update(
                         {
@@ -218,7 +218,8 @@ describe('storage', () => {
                         (err, accessControl) => {
                           assert.ifError(err);
                           assert.strictEqual(
-                              accessControl.role, storage.acl.READER_ROLE);
+                              (accessControl as AccessControlObject).role,
+                              storage.acl.READER_ROLE);
 
                           bucket.acl.default.delete(
                               {entity: USER_ACCOUNT}, done);
@@ -249,7 +250,9 @@ describe('storage', () => {
 
               bucket.acl.get(opts, (err, accessControl) => {
                 assert.ifError(err);
-                assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
+                assert.strictEqual(
+                    (accessControl as AccessControlObject).role,
+                    storage.acl.OWNER_ROLE);
 
                 bucket.acl.delete(opts, done);
               });
@@ -274,7 +277,7 @@ describe('storage', () => {
                   (err, accessControl) => {
                     assert.ifError(err);
                     assert.strictEqual(
-                        accessControl.role, storage.acl.WRITER_ROLE);
+                        accessControl!.role, storage.acl.WRITER_ROLE);
 
                     bucket.acl.delete({entity: USER_ACCOUNT}, done);
                   });
@@ -343,8 +346,8 @@ describe('storage', () => {
           bucket.makePrivate(err => {
             assert.ifError(err);
             bucket.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-              assert.strictEqual(err.code, 404);
-              assert.strictEqual(err.message, 'Not Found');
+              assert.strictEqual((err as ApiError).code, 404);
+              assert.strictEqual(err!.message, 'Not Found');
               assert.strictEqual(aclObject, null);
               done();
             });
@@ -577,8 +580,8 @@ describe('storage', () => {
               assert.ifError(err);
 
               file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-                assert.strictEqual(err.code, 404);
-                assert.strictEqual(err.message, 'Not Found');
+                assert.strictEqual((err as ApiError)!.code, 404);
+                assert.strictEqual(err!.message, 'Not Found');
                 assert.strictEqual(aclObject, null);
                 done();
               });

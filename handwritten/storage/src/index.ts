@@ -29,6 +29,7 @@ import {Bucket} from './bucket';
 import {Channel} from './channel';
 import {File} from './file';
 import {normalize} from './util';
+import {AccessControlObject} from './acl';
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -764,4 +765,4 @@ promisifyAll(Storage, {
  */
 export {Storage};
 
-export {Bucket, File, Channel};
+export {Bucket, File, Channel, AccessControlObject};
