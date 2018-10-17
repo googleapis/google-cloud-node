@@ -18,7 +18,7 @@
 
 import * as arrify from 'arrify';
 import * as async from 'async';
-import {ExistsCallback, ServiceObject, Metadata, util, DeleteCallback, InstanceResponseCallback, GetConfig, GetMetadataCallback, DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
+import {ExistsCallback, ServiceObject, Metadata, util, DeleteCallback, InstanceResponseCallback, GetConfig, GetMetadataCallback, DecorateRequestOptions, BodyResponseCallback, ApiError} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
@@ -705,7 +705,7 @@ interface MakeAllFilesPublicPrivateOptions {
  * @param {File[]} files Files that were updated.
  */
 interface MakeAllFilesPublicPrivateCallback {
-  (err?: Error|Error[]|null, files?: File[]);
+  (err?: Error|Error[]|null, files?: File[]): void;
 }
 
 /**
@@ -1085,8 +1085,7 @@ class Bucket extends ServiceObject {
             destination: {
               contentType: destinationFile.metadata.contentType,
             },
-            // tslint:disable-next-line:no-any
-            sourceObjects: (sources as any).map(source => {
+            sourceObjects: (sources as File[]).map(source => {
               const sourceObject = {
                 name: source.name,
               } as SourceObject;
@@ -1455,31 +1454,28 @@ class Bucket extends ServiceObject {
         return;
       }
 
-      const deleteFile = (file, callback) => {
-        file.delete(query, (err: Error) => {
+      const deleteFile = (file: File, callback: (err?: Error|null) => void) => {
+        file.delete(query, err => {
           if (err) {
             if (query.force) {
               errors.push(err);
               callback!();
               return;
             }
-
             callback!(err);
             return;
           }
-
           callback!(null);
         });
       };
 
       // Iterate through each file and attempt to delete it.
-      async.eachLimit<File, Error>(
+      async.eachLimit<File, Error|null|undefined>(
           files!, MAX_PARALLEL_LIMIT, deleteFile, err => {
             if (err || errors.length > 0) {
               callback!(err || errors);
               return;
             }
-
             callback!(null);
           });
     });
@@ -1536,9 +1532,9 @@ class Bucket extends ServiceObject {
       labels = arrify(labelsOrCallback);
     }
 
-    const deleteLabels = labels => {
-      const nullLabelMap: Labels = labels.reduce((nullLabelMap, labelKey) => {
-        nullLabelMap[labelKey] = null;
+    const deleteLabels = (labels: string[]) => {
+      const nullLabelMap = labels.reduce((nullLabelMap, labelKey) => {
+        (nullLabelMap as {[index: string]: null})[labelKey] = null;
         return nullLabelMap;
       }, {});
 
@@ -1551,7 +1547,6 @@ class Bucket extends ServiceObject {
           callback!(err);
           return;
         }
-
         deleteLabels(Object.keys(labels!));
       });
     } else {
@@ -1783,19 +1778,20 @@ class Bucket extends ServiceObject {
     const autoCreate = options.autoCreate;
     delete options.autoCreate;
 
-    const onCreate = (err, bucket, apiResponse) => {
-      if (err) {
-        if (err.code === 409) {
-          this.get(options, callback!);
-          return;
-        }
+    const onCreate =
+        (err: ApiError, bucket: Bucket, apiResponse: request.Response) => {
+          if (err) {
+            if (err.code === 409) {
+              this.get(options, callback!);
+              return;
+            }
 
-        callback!(err, null, apiResponse);
-        return;
-      }
+            callback!(err, null, apiResponse);
+            return;
+          }
 
-      callback!(null, bucket, apiResponse);
-    };
+          callback!(null, bucket, apiResponse);
+        };
 
     this.getMetadata(options, (err, metadata) => {
       if (err) {
@@ -2289,13 +2285,13 @@ class Bucket extends ServiceObject {
           query, done);
     };
 
-    const makeFilesPrivate = done => {
+    const makeFilesPrivate = (done: SetBucketMetadataCallback) => {
       if (!options.includeFiles) {
         done();
         return;
       }
-
-      this.makeAllFilesPublicPrivate_(options, done);
+      this.makeAllFilesPublicPrivate_(
+          options, done as MakeAllFilesPublicPrivateCallback);
     };
 
     async.series([setPredefinedAcl, makeFilesPrivate], callback!);
@@ -2917,7 +2913,8 @@ class Bucket extends ServiceObject {
   upload(
       pathString: string, optionsOrCallback?: UploadOptions|UploadCallback,
       callback?: UploadCallback): Promise<UploadResponse>|void {
-    if (global['GCLOUD_SANDBOX_ENV']) {
+    // tslint:disable-next-line:no-any
+    if ((global as any)['GCLOUD_SANDBOX_ENV']) {
       return;
     }
 
@@ -2932,7 +2929,7 @@ class Bucket extends ServiceObject {
         },
         options);
 
-    let newFile;
+    let newFile: File;
     if (options.destination instanceof File) {
       newFile = options.destination;
     } else if (
@@ -2978,7 +2975,7 @@ class Bucket extends ServiceObject {
       fs.createReadStream(pathString)
           .on('error', callback!)
           .pipe(newFile.createWriteStream(options))
-          .on('error', callback)
+          .on('error', callback!)
           .on('finish', () => {
             callback!(null, newFile, newFile.metadata);
           });
@@ -3026,8 +3023,8 @@ class Bucket extends ServiceObject {
         return;
       }
 
-      const processFile = (file: File, callback) => {
-        const processedCallback = err => {
+      const processFile = (file: File, callback: Function) => {
+        const processedCallback = (err?: Error|null) => {
           if (err) {
             if (options.force) {
               errors.push(err);
