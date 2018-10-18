@@ -1394,27 +1394,63 @@ describe('Compute', function() {
       const key = 'newKey';
       const value = 'newValue';
 
-      const newMetadata = {};
-      newMetadata[key] = value;
-
-      vm.setMetadata(
-        newMetadata,
-        compute.execAfterOperation_(function(err) {
+      async.series(
+        [
+          next =>
+            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+          next => vm.getMetadata(next),
+        ],
+        err => {
           assert.ifError(err);
+          assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
+          done();
+        }
+      );
+    });
 
-          vm.getMetadata(function(err, metadata) {
-            assert.ifError(err);
+    it('should allow updating old metadata', function(done) {
+      const key = 'newKey';
+      const value = 'newValue';
+      const overriddenValue = `${value}${value}`;
 
-            assert.deepStrictEqual(metadata.metadata.items, [
-              {
-                key: key,
-                value: value,
-              },
-            ]);
+      async.series(
+        [
+          next =>
+            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+          next =>
+            vm.setMetadata(
+              {[key]: overriddenValue},
+              compute.execAfterOperation_(next)
+            ),
+          next => vm.getMetadata(next),
+        ],
+        err => {
+          assert.ifError(err);
+          assert.deepStrictEqual(vm.metadata.metadata.items, [
+            {key, value: overriddenValue},
+          ]);
+          done();
+        }
+      );
+    });
 
-            done();
-          });
-        })
+    it('should allow removing old metadata', function(done) {
+      const key = 'newKey';
+      const value = 'newValue';
+
+      async.series(
+        [
+          next =>
+            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+          next =>
+            vm.setMetadata({[key]: null}, compute.execAfterOperation_(next)),
+          next => vm.getMetadata(next),
+        ],
+        err => {
+          assert.ifError(err);
+          assert.strictEqual(vm.metadata.metadata.items, undefined);
+          done();
+        }
       );
     });
 

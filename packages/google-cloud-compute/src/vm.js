@@ -725,7 +725,11 @@ VM.prototype.resize = function(machineType, options, callback) {
 };
 
 /**
- * Set the metadata for this instance.
+ * Set the custom metadata for this instance.
+ *
+ * This will combine the `metadata` key/value pairs with any pre-existing
+ * metadata. Any changes will override pre-existing keys. To remove a
+ * pre-existing key, explicitly set the key's value to `null`.
  *
  * @see [Instances: setMetadata API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMetadata}
  *
@@ -743,7 +747,8 @@ VM.prototype.resize = function(machineType, options, callback) {
  * const vm = zone.vm('vm-name');
  *
  * const metadata = {
- *   'startup-script': '...'
+ *   'startup-script': '...',
+ *   customKey: null // Setting `null` will remove the `customKey` property.
  * };
  *
  * vm.setMetadata(metadata, function(err, operation, apiResponse) {
@@ -770,17 +775,28 @@ VM.prototype.setMetadata = function(metadata, callback) {
       return;
     }
 
-    const newMetadata = {
+    const request = {
       fingerprint: currentMetadata.metadata.fingerprint,
       items: [],
     };
 
-    for (const prop in metadata) {
-      if (metadata.hasOwnProperty(prop)) {
-        newMetadata.items.push({
-          key: prop,
-          value: metadata[prop],
-        });
+    const metadataJSON = (currentMetadata.metadata.items || []).reduce(
+      (metadataJSON, keyValPair) => {
+        metadataJSON[keyValPair.key] = keyValPair.value;
+        return metadataJSON;
+      },
+      {}
+    );
+
+    const newMetadataJSON = Object.assign(metadataJSON, metadata);
+
+    for (const key in newMetadataJSON) {
+      if (newMetadataJSON.hasOwnProperty(key)) {
+        const value = newMetadataJSON[key];
+
+        if (value !== null) {
+          request.items.push({key, value});
+        }
       }
     }
 
@@ -788,7 +804,7 @@ VM.prototype.setMetadata = function(metadata, callback) {
       {
         method: 'POST',
         uri: '/setMetadata',
-        json: newMetadata,
+        json: request,
       },
       callback
     );
