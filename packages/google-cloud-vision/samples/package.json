@@ -30,6 +30,6 @@
     "uuid": "^3.2.1"
   },
   "optionalDependencies": {
-    "canvas": "^1.6.11"
+    "canvas": "^2.0.0"
   }
 }
