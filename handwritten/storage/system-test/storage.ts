@@ -22,8 +22,8 @@ import * as crypto from 'crypto';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as is from 'is';
-import * as fetch from 'node-fetch';
-import * as normalizeNewline from 'normalize-newline';
+const fetch = require('node-fetch');
+const normalizeNewline = require('normalize-newline');
 import * as path from 'path';
 import * as through from 'through2';
 import * as tmp from 'tmp';
@@ -98,8 +98,8 @@ describe('storage', () => {
   });
 
   describe('without authentication', () => {
-    let privateBucket;
-    let privateFile;
+    let privateBucket: Bucket;
+    let privateFile: File;
     let storageWithoutAuth;
 
     let GOOGLE_APPLICATION_CREDENTIALS;
@@ -132,7 +132,7 @@ describe('storage', () => {
     });
 
     describe('public data', () => {
-      let bucket;
+      let bucket: Bucket;
 
       before(() => {
         bucket = storageWithoutAuth.bucket('gcp-public-data-landsat');
@@ -145,9 +145,7 @@ describe('storage', () => {
             },
             (err, files) => {
               assert.ifError(err);
-
-              const file = files[0];
-
+              const file = files![0];
               file.download(done);
             });
       });

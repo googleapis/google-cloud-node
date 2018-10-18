@@ -28,13 +28,14 @@ import * as url from 'url';
 import {ServiceObject, util, ServiceObjectConfig} from '@google-cloud/common';
 import * as zlib from 'zlib';
 import {Readable} from 'stream';
-
-const {Bucket} = require('../src/bucket.js');
-let duplexify;
+import * as duplexify from 'duplexify';
+import {PromisifyAllOptions} from '@google-cloud/promisify';
+import * as resumableUpload from 'gcs-resumable-upload';
+import {Bucket} from '../src';
 
 let promisified = false;
-let makeWritableStreamOverride;
-let handleRespOverride;
+let makeWritableStreamOverride: Function|null;
+let handleRespOverride: Function|null;
 const fakeUtil = extend({}, util, {
   handleResp() {
     (handleRespOverride || util.handleResp).apply(null, arguments);
@@ -48,7 +49,7 @@ const fakeUtil = extend({}, util, {
 
 const fakePromisify = {
   // tslint:disable-next-line:variable-name
-  promisifyAll(Class, options) {
+  promisifyAll(Class: Function, options: PromisifyAllOptions) {
     if (Class.name !== 'File') {
       return;
     }
@@ -61,7 +62,7 @@ const fakePromisify = {
 const fsCached = extend(true, {}, fs);
 const fakeFs = extend(true, {}, fsCached);
 
-let hashStreamValidationOverride;
+let hashStreamValidationOverride: Function|null;
 const hashStreamValidation = require('hash-stream-validation');
 function fakeHashStreamValidation() {
   return (hashStreamValidationOverride || hashStreamValidation)
@@ -71,15 +72,15 @@ function fakeHashStreamValidation() {
 const osCached = extend(true, {}, require('os'));
 const fakeOs = extend(true, {}, osCached);
 
-let resumableUploadOverride;
-const resumableUpload = require('gcs-resumable-upload');
+// tslint:disable-next-line: no-any
+let resumableUploadOverride: any;
 function fakeResumableUpload() {
   return () => {
     return resumableUploadOverride || resumableUpload;
   };
 }
 extend(fakeResumableUpload, {
-  createURI(...args) {
+  createURI(...args: Array<{}>) {
     let createURI = resumableUpload.createURI;
 
     if (resumableUploadOverride && resumableUploadOverride.createURI) {
@@ -90,7 +91,7 @@ extend(fakeResumableUpload, {
   },
 });
 extend(fakeResumableUpload, {
-  upload(...args) {
+  upload(...args: Array<{}>) {
     let upload = resumableUpload.upload;
     if (resumableUploadOverride && resumableUploadOverride.upload) {
       upload = resumableUploadOverride.upload;
@@ -107,7 +108,8 @@ class FakeServiceObject extends ServiceObject {
   }
 }
 
-let xdgConfigOverride;
+// tslint:disable-next-line: no-any
+let xdgConfigOverride: any;
 const xdgBasedirCached = require('xdg-basedir');
 const fakeXdgBasedir = extend(true, {}, xdgBasedirCached);
 Object.defineProperty(fakeXdgBasedir, 'config', {
@@ -119,15 +121,19 @@ Object.defineProperty(fakeXdgBasedir, 'config', {
 });
 
 describe('File', () => {
-  // tslint:disable-next-line:variable-name
-  let File;
-  let file;
+  // tslint:disable-next-line:variable-name no-any
+  let File: any;
+  // tslint:disable-next-line: no-any
+  let file: any;
 
   const FILE_NAME = 'file-name.png';
-  let directoryFile;
+  // tslint:disable-next-line: no-any
+  let directoryFile: any;
 
-  let STORAGE;
-  let BUCKET;
+  // tslint:disable-next-line: no-any
+  let STORAGE: any;
+  // tslint:disable-next-line: no-any
+  let BUCKET: any;
 
   before(() => {
     File = proxyquire('../src/file.js', {
@@ -142,7 +148,6 @@ describe('File', () => {
              os: fakeOs,
              'xdg-basedir': fakeXdgBasedir,
            }).File;
-    duplexify = require('duplexify');
   });
 
   beforeEach(() => {
@@ -3488,7 +3493,8 @@ describe('File', () => {
           file.startSimpleUpload_(stream);
 
           stream.on('error', err => {
-            assert.strictEqual(stream.destroyed, true);
+            // tslint:disable-next-line: no-any
+            assert.strictEqual((stream as any).destroyed, true);
             assert.strictEqual(err, error);
             done();
           });

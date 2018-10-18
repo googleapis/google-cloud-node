@@ -690,7 +690,7 @@ export interface UploadOptions extends CreateResumableUploadOptions,
  * @property {string} [userProject] The ID of the project which will be
  *     billed for the request.
  */
-interface MakeAllFilesPublicPrivateOptions {
+export interface MakeAllFilesPublicPrivateOptions {
   force?: boolean;
   private?: boolean;
   public?: boolean;
@@ -3049,7 +3049,7 @@ class Bucket extends ServiceObject {
 
       // Iterate through each file and make it public or private.
       async.eachLimit<File, Error>(
-          files!, MAX_PARALLEL_LIMIT, processFile, (err?: Error) => {
+          files!, MAX_PARALLEL_LIMIT, processFile, (err?: Error|null) => {
             if (err || errors.length > 0) {
               callback!(err || errors, updatedFiles);
               return;

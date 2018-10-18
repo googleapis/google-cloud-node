@@ -19,18 +19,21 @@
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {util} from '@google-cloud/common';
+import {util, DecorateRequestOptions} from '@google-cloud/common';
+import {Bucket} from '../src';
 
 describe('storage/iam', () => {
-  // tslint:disable-next-line:variable-name
-  let Iam;
-  let iam;
+  // tslint:disable-next-line:variable-name no-any
+  let Iam: any;
+  // tslint:disable-next-line: no-any
+  let iam: any;
 
-  let BUCKET_INSTANCE;
+  // tslint:disable-next-line: no-any
+  let BUCKET_INSTANCE: any;
   let promisified = false;
   const fakePromisify = {
     // tslint:disable-next-line:variable-name
-    promisifyAll(Class) {
+    promisifyAll(Class: Function) {
       if (Class.name === 'Iam') {
         promisified = true;
       }
@@ -61,7 +64,7 @@ describe('storage/iam', () => {
 
     it('should localize the request function', done => {
       extend(BUCKET_INSTANCE, {
-        request(callback) {
+        request(callback: Function) {
           assert.strictEqual(this, BUCKET_INSTANCE);
           callback();  // done()
         },
@@ -78,7 +81,7 @@ describe('storage/iam', () => {
 
   describe('getPolicy', () => {
     it('should make the correct api request', done => {
-      iam.request_ = (reqOpts, callback) => {
+      iam.request_ = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.deepStrictEqual(reqOpts, {
           uri: '/iam',
           qs: {},
@@ -95,7 +98,7 @@ describe('storage/iam', () => {
         userProject: 'grape-spaceship-123',
       };
 
-      iam.request_ = reqOpts => {
+      iam.request_ = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -116,7 +119,7 @@ describe('storage/iam', () => {
         a: 'b',
       };
 
-      iam.request_ = (reqOpts, callback) => {
+      iam.request_ = (reqOpts: DecorateRequestOptions, callback: Function) => {
         assert.deepStrictEqual(reqOpts, {
           method: 'PUT',
           uri: '/iam',
@@ -143,7 +146,7 @@ describe('storage/iam', () => {
         userProject: 'grape-spaceship-123',
       };
 
-      iam.request_ = reqOpts => {
+      iam.request_ = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(reqOpts.qs, options);
         done();
       };
@@ -162,7 +165,7 @@ describe('storage/iam', () => {
     it('should make the correct API request', done => {
       const permissions = 'storage.bucket.list';
 
-      iam.request_ = reqOpts => {
+      iam.request_ = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts, {
           uri: '/iam/testPermissions',
           qs: {
@@ -182,16 +185,17 @@ describe('storage/iam', () => {
       const error = new Error('Error.');
       const apiResponse = {};
 
-      iam.request_ = (reqOpts, callback) => {
+      iam.request_ = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(error, apiResponse);
       };
 
-      iam.testPermissions(permissions, (err, permissions, apiResp) => {
-        assert.strictEqual(err, error);
-        assert.strictEqual(permissions, null);
-        assert.strictEqual(apiResp, apiResponse);
-        done();
-      });
+      iam.testPermissions(
+          permissions, (err: Error, permissions: Array<{}>, apiResp: {}) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(permissions, null);
+            assert.strictEqual(apiResp, apiResponse);
+            done();
+          });
     });
 
     it('should pass back a hash of permissions the user has', done => {
@@ -200,20 +204,21 @@ describe('storage/iam', () => {
         permissions: ['storage.bucket.consume'],
       };
 
-      iam.request_ = (reqOpts, callback) => {
+      iam.request_ = (reqOpts: DecorateRequestOptions, callback: Function) => {
         callback(null, apiResponse);
       };
 
-      iam.testPermissions(permissions, (err, permissions, apiResp) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(permissions, {
-          'storage.bucket.list': false,
-          'storage.bucket.consume': true,
-        });
-        assert.strictEqual(apiResp, apiResponse);
+      iam.testPermissions(
+          permissions, (err: Error, permissions: Array<{}>, apiResp: {}) => {
+            assert.ifError(err);
+            assert.deepStrictEqual(permissions, {
+              'storage.bucket.list': false,
+              'storage.bucket.consume': true,
+            });
+            assert.strictEqual(apiResp, apiResponse);
 
-        done();
-      });
+            done();
+          });
     });
 
     it('should accept an options object', done => {
@@ -228,7 +233,7 @@ describe('storage/iam', () => {
           },
           options);
 
-      iam.request_ = reqOpts => {
+      iam.request_ = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.qs, expectedQuery);
         done();
       };
