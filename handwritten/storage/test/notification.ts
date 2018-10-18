@@ -20,7 +20,7 @@ import * as assert from 'assert';
 import {ServiceObject, util, ServiceObjectConfig, DecorateRequestOptions} from '@google-cloud/common';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {Notification, Bucket} from '../src';
+import {Bucket} from '../src';
 
 class FakeServiceObject extends ServiceObject {
   calledWith_: IArguments;

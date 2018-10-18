@@ -84,7 +84,7 @@ describe('Storage', () => {
   let Bucket: any;
 
   before(() => {
-    Storage = proxyquire('../src', {
+    Storage = proxyquire('../src/storage', {
                 '@google-cloud/promisify': fakePromisify,
                 '@google-cloud/paginator': fakePaginator,
                 '@google-cloud/common': {

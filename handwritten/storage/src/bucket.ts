@@ -35,7 +35,7 @@ import {Channel} from './channel';
 import {File, FileOptions, CreateResumableUploadOptions, CreateWriteStreamOptions} from './file';
 import {Iam} from './iam';
 import {Notification} from './notification';
-import {Storage} from './index';
+import {Storage} from './storage';
 
 interface SourceObject {
   name: string;

@@ -21,7 +21,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 import * as request from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
 
-import {Storage} from '.';
+import {Storage} from './storage';
 import {Response} from 'request';
 
 /**

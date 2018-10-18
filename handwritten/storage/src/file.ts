@@ -41,7 +41,7 @@ import * as http from 'http';
 import * as r from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
 
-import {Storage} from '.';
+import {Storage} from './storage';
 import {Bucket} from './bucket';
 import {Acl} from './acl';
 import {ResponseBody} from '@google-cloud/common/build/src/util';
