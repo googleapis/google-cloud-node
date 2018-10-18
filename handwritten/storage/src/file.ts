@@ -2814,7 +2814,7 @@ class File extends ServiceObject {
    *   metadata: {
    *     abc: '123', // will be set.
    *     unsetMe: null, // will be unset (deleted).
-   *     hello: 'goodbye' // will be updated from 'hello' to 'goodbye'.
+   *     hello: 'goodbye' // will be updated from 'world' to 'goodbye'.
    *   }
    * }, function(err, apiResponse) {
    *   // metadata should now be { abc: '123', hello: 'goodbye' }
