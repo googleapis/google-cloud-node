@@ -5,9 +5,6 @@
 # [Dialogflow: Node.js Client](https://github.com/dialogflow/dialogflow-nodejs-client-v2)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/dialogflow/dialogflow-nodejs-client-v2.svg?style=flat)](https://circleci.com/gh/dialogflow/dialogflow-nodejs-client-v2)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/dialogflow/dialogflow-nodejs-client-v2?branch=master&svg=true)](https://ci.appveyor.com/project/dialogflow/dialogflow-nodejs-client-v2)
-[![codecov](https://img.shields.io/codecov/c/github/dialogflow/dialogflow-nodejs-client-v2/master.svg?style=flat)](https://codecov.io/gh/dialogflow/dialogflow-nodejs-client-v2)
 
 > Node.js idiomatic client for [Dialogflow][product-docs].
 
