@@ -45,7 +45,7 @@ const PubSub = require('@google-cloud/pubsub');
 
 describe('storage', () => {
   const USER_ACCOUNT = 'user-spsawchuk@gmail.com';
-  const TESTS_PREFIX = 'gcloud-storage-tests-';
+  const TESTS_PREFIX = `storage-tests-${shortUUID()}-`;
 
   const storage = new Storage({});
   const bucket = storage.bucket(generateName());
@@ -2801,8 +2801,12 @@ describe('storage', () => {
     topic.delete(callback);
   }
 
+  function shortUUID() {
+    return uuid.v1().split('-').shift();
+  }
+
   function generateName() {
-    return TESTS_PREFIX + uuid.v1();
+    return TESTS_PREFIX + shortUUID();
   }
 
   function deleteAllBuckets(callback) {
