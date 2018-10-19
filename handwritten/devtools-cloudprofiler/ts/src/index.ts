@@ -27,6 +27,7 @@ import {Profiler} from './profiler';
 import * as heapProfiler from './profilers/heap-profiler';
 
 const pjson = require('../../package.json');
+const serviceRegex = /^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/;
 
 /**
  * @return value of metadata field.
@@ -84,7 +85,14 @@ function initConfigLocal(config: Config): ProfilerConfig {
       extend(true, {}, defaultConfig, envSetConfig, envConfig, config);
 
   if (!hasService(mergedConfig)) {
-    throw new Error('Service must be specified in the configuration.');
+    throw new Error('Service must be specified in the configuration');
+  }
+
+  if (!serviceRegex.test(mergedConfig.serviceContext.service)) {
+    throw new Error(`Service ${
+        mergedConfig.serviceContext
+            .service} does not match regular expression "${
+        serviceRegex.toString()}"`);
   }
 
   return mergedConfig;

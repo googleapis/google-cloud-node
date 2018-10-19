@@ -204,16 +204,34 @@ describe('createProfiler', () => {
       disableHeap: true,
       disableTime: true,
     };
-    createProfiler(config)
-        .then(() => {
-          assert.fail('expected error because no service in config');
-        })
-        .catch((e: Error) => {
-          assert.strictEqual(
-              e.message,
-              'Could not start profiler: Error: Service must be specified in the configuration');
-        });
+    try {
+      await createProfiler(config);
+      assert.fail('expected an error because no service was specified');
+    } catch (e) {
+      assert.strictEqual(
+          e.message, 'Service must be specified in the configuration');
+    }
   });
+
+  it('should reject when no service does not match service regular expression',
+     async () => {
+       metadataStub = sinon.stub(gcpMetadata, 'instance');
+       metadataStub.throwsException('cannot access metadata');
+       const config = {
+         logLevel: 2,
+         serviceContext: {service: 'serviceName', version: ''},
+         disableHeap: true,
+         disableTime: true,
+       };
+       try {
+         await createProfiler(config);
+         assert.fail('expected an error because invalid service was specified');
+       } catch (e) {
+         assert.strictEqual(
+             e.message,
+             'Service serviceName does not match regular expression "/^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/"');
+       }
+     });
 
   it('should get have no projectId when no projectId given', async () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
@@ -273,8 +291,8 @@ describe('createProfiler', () => {
              {version: 'process-version', service: 'process-service'},
          disableHeap: true,
          disableTime: true,
-         instance: 'envConfig-instance',
-         zone: 'envConfig-zone'
+         instance: 'env_config_instance',
+         zone: 'env_config_zone'
        };
        const profiler: Profiler = await createProfiler(config);
        const expConfig = Object.assign({}, defaultConfig, expConfigParams);
@@ -319,12 +337,12 @@ describe('createProfiler', () => {
        const expConfigParams = {
          logLevel: 3,
          serviceContext:
-             {version: 'envConfig-version', service: 'envConfig-service'},
+             {version: 'env_config_version', service: 'env_config_service'},
          disableHeap: true,
          disableTime: true,
-         instance: 'envConfig-instance',
-         zone: 'envConfig-zone',
-         projectId: 'envConfig-fake-projectId'
+         instance: 'env_config_instance',
+         zone: 'env_config_zone',
+         projectId: 'env_config_fake-projectId'
        };
 
        const config = {};
@@ -336,8 +354,8 @@ describe('createProfiler', () => {
     const config = {
       projectId: 'config-projectId',
       serviceContext: {service: 'config-service'},
-      instance: 'envConfig-instance',
-      zone: 'envConfig-zone',
+      instance: 'env_config_instance',
+      zone: 'env_config_zone',
     };
     const profiler: Profiler = await createProfiler(config);
     assert.ok(
@@ -349,8 +367,8 @@ describe('createProfiler', () => {
       projectId: 'config-projectId',
       serviceContext: {service: 'config-service'},
       disableHeap: true,
-      instance: 'envConfig-instance',
-      zone: 'envConfig-zone',
+      instance: 'env_config_instance',
+      zone: 'env_config_zone',
     };
     const profiler: Profiler = await createProfiler(config);
     assert.ok(!startStub.called, 'expected heap profiler to not be started');

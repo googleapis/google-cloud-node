@@ -1,12 +1,12 @@
 {
   "logLevel": 3,
   "serviceContext": {
-    "version": "envConfig-version",
-    "service": "envConfig-service"
+    "version": "env_config_version",
+    "service": "env_config_service"
   },
   "disableHeap": true,
   "disableTime": true,
-  "instance": "envConfig-instance",
-  "zone": "envConfig-zone",
-  "projectId": "envConfig-fake-projectId"
+  "instance": "env_config_instance",
+  "zone": "env_config_zone",
+  "projectId": "env_config_fake-projectId"
 }
