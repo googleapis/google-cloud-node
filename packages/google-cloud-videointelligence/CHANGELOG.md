@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## v1.4.1
+
+### Implementation Changes
+- chore: minor generator changes ([#110](https://github.com/googleapis/nodejs-video-intelligence/pull/110))
+
+### Internal / Testing Changes
+- build: fix codecov uploading on Kokoro ([#112](https://github.com/googleapis/nodejs-video-intelligence/pull/112))
+- Update kokoro config ([#109](https://github.com/googleapis/nodejs-video-intelligence/pull/109))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#108](https://github.com/googleapis/nodejs-video-intelligence/pull/108))
+- Update CI config ([#105](https://github.com/googleapis/nodejs-video-intelligence/pull/105))
+- test: remove appveyor config ([#106](https://github.com/googleapis/nodejs-video-intelligence/pull/106))
+- Enable prefer-const in the eslint config ([#102](https://github.com/googleapis/nodejs-video-intelligence/pull/102))
+- Enable no-var in eslint ([#101](https://github.com/googleapis/nodejs-video-intelligence/pull/101))
+
 ## v1.4.0
 
 ### New Features
