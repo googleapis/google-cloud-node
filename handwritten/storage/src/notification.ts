@@ -18,7 +18,6 @@
 
 import {ServiceObject, util, ApiError, GetMetadataCallback} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as is from 'is';
 import * as request from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
 
@@ -320,7 +319,7 @@ class Notification extends ServiceObject {
         if ((err as ApiError).code === 404 && autoCreate) {
           const args = [] as object[];
 
-          if (!is.empty(options)) {
+          if (Object.keys(options).length > 0) {
             args.push(options);
           }
 

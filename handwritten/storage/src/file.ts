@@ -25,7 +25,6 @@ import * as duplexify from 'duplexify';
 import * as extend from 'extend';
 import * as fs from 'fs';
 const hashStreamValidation = require('hash-stream-validation');
-import * as is from 'is';
 import * as mime from 'mime';
 import * as once from 'once';
 import * as os from 'os';
@@ -902,13 +901,13 @@ class File extends ServiceObject {
     }
 
     const query = {} as CopyQuery;
-    if (is.defined(this.generation)) {
+    if (this.generation !== undefined) {
       query.sourceGeneration = this.generation;
     }
-    if (is.defined(options.token)) {
+    if (options.token !== undefined) {
       query.rewriteToken = options.token;
     }
-    if (is.defined(options.userProject)) {
+    if (options.userProject !== undefined) {
       query.userProject = options.userProject;
       delete options.userProject;
     }
@@ -917,19 +916,19 @@ class File extends ServiceObject {
 
     const headers: {[index: string]: string|undefined} = {};
 
-    if (is.defined(this.encryptionKey)) {
+    if (this.encryptionKey !== undefined) {
       headers['x-goog-copy-source-encryption-algorithm'] = 'AES256';
       headers['x-goog-copy-source-encryption-key'] = this.encryptionKeyBase64;
       headers['x-goog-copy-source-encryption-key-sha256'] =
           this.encryptionKeyHash;
     }
 
-    if (is.defined(newFile.encryptionKey)) {
+    if (newFile.encryptionKey !== undefined) {
       this.setEncryptionKey(newFile.encryptionKey!);
-    } else if (is.defined(options.destinationKmsKeyName)) {
+    } else if (options.destinationKmsKeyName !== undefined) {
       query.destinationKmsKeyName = options.destinationKmsKeyName;
       delete options.destinationKmsKeyName;
-    } else if (is.defined(newFile.kmsKeyName)) {
+    } else if (newFile.kmsKeyName !== undefined) {
       query.destinationKmsKeyName = newFile.kmsKeyName;
     }
 
@@ -1068,7 +1067,8 @@ class File extends ServiceObject {
    *   .pipe(fs.createWriteStream('/Users/stephen/logfile.txt'));
    */
   createReadStream(options: CreateReadStreamOptions = {}): Readable {
-    const rangeRequest = is.number(options.start) || is.number(options.end);
+    const rangeRequest =
+        typeof options.start === 'number' || typeof options.end === 'number';
     const tailRequest = options.end! < 0;
 
     // tslint:disable-next-line:no-any
@@ -1080,7 +1080,7 @@ class File extends ServiceObject {
 
     let refreshedMetadata = false;
 
-    if (is.string(options.validation)) {
+    if (typeof options.validation === 'string') {
       // tslint:disable-next-line:no-any
       (options as any).validation =
           (options.validation as string).toLowerCase();
@@ -1091,7 +1091,8 @@ class File extends ServiceObject {
     }
 
     if (rangeRequest) {
-      if (is.string(options.validation) || options.validation === true) {
+      if (typeof options.validation === 'string' ||
+          options.validation === true) {
         throw new Error('Cannot use validation with file ranges (start/end).');
       }
       // Range requests can't receive data integrity checks.
@@ -1119,8 +1120,8 @@ class File extends ServiceObject {
       } as r.Headers;
 
       if (rangeRequest) {
-        const start = is.number(options.start) ? options.start : '0';
-        const end = is.number(options.end) ? options.end : '';
+        const start = typeof options.start === 'number' ? options.start : '0';
+        const end = typeof options.end === 'number' ? options.end : '';
 
         headers.Range = `bytes=${tailRequest ? end : `${start}-${end}`}`;
       }
@@ -1726,7 +1727,7 @@ class File extends ServiceObject {
       optionsOrCallback?: DownloadOptions|DownloadCallback,
       callback?: DownloadCallback): Promise<DownloadResponse>|void {
     let options: DownloadOptions;
-    if (is.fn(optionsOrCallback)) {
+    if (typeof optionsOrCallback === 'function') {
       callback = optionsOrCallback as DownloadCallback;
       options = {};
     } else {
@@ -2120,24 +2121,24 @@ class File extends ServiceObject {
       },
     ] as object[];
 
-    if (is.array(options.equals)) {
-      if (!is.array((options.equals as string[][])[0])) {
+    if (Array.isArray(options.equals)) {
+      if (!Array.isArray((options.equals as string[][])[0])) {
         options.equals = [options.equals as string[]];
       }
       (options.equals as string[][]).forEach(condition => {
-        if (!is.array(condition) || condition.length !== 2) {
+        if (!Array.isArray(condition) || condition.length !== 2) {
           throw new Error('Equals condition must be an array of 2 elements.');
         }
         conditions.push(['eq', condition[0], condition[1]]);
       });
     }
 
-    if (is.array(options.startsWith)) {
-      if (!is.array((options.startsWith as string[][])[0])) {
+    if (Array.isArray(options.startsWith)) {
+      if (!Array.isArray((options.startsWith as string[][])[0])) {
         options.startsWith = [options.startsWith as string[]];
       }
       (options.startsWith as string[][]).forEach(condition => {
-        if (!is.array(condition) || condition.length !== 2) {
+        if (!Array.isArray(condition) || condition.length !== 2) {
           throw new Error(
               'StartsWith condition must be an array of 2 elements.');
         }
@@ -2166,7 +2167,7 @@ class File extends ServiceObject {
     if (options.contentLengthRange) {
       const min = options.contentLengthRange.min;
       const max = options.contentLengthRange.max;
-      if (!is.number(min) || !is.number(max)) {
+      if (typeof min !== 'number' || typeof max !== 'number') {
         throw new Error(
             'ContentLengthRange must have numeric min & max fields.');
       }
@@ -2367,15 +2368,15 @@ class File extends ServiceObject {
               Signature: signature,
             } as SignedUrlQuery;
 
-            if (is.string(config.responseType)) {
+            if (typeof config.responseType === 'string') {
               query['response-content-type'] = config.responseType!;
             }
 
-            if (is.string(config.promptSaveAs)) {
+            if (typeof config.promptSaveAs === 'string') {
               query['response-content-disposition'] =
                   'attachment; filename="' + config.promptSaveAs + '"';
             }
-            if (is.string(config.responseDisposition)) {
+            if (typeof config.responseDisposition === 'string') {
               query['response-content-disposition'] =
                   config.responseDisposition!;
             }
@@ -3028,11 +3029,11 @@ class File extends ServiceObject {
       uri: `${STORAGE_UPLOAD_BASE_URL}/${this.bucket.name}/o`,
     };
 
-    if (is.defined(this.generation)) {
+    if (this.generation !== undefined) {
       reqOpts.qs.ifGenerationMatch = this.generation;
     }
 
-    if (is.defined(this.kmsKeyName)) {
+    if (this.kmsKeyName !== undefined) {
       reqOpts.qs.kmsKeyName = this.kmsKeyName;
     }
 

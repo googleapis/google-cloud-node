@@ -21,7 +21,6 @@ import * as async from 'async';
 import * as crypto from 'crypto';
 import * as extend from 'extend';
 import * as fs from 'fs';
-import * as is from 'is';
 const fetch = require('node-fetch');
 const normalizeNewline = require('normalize-newline');
 import * as path from 'path';
@@ -1143,7 +1142,8 @@ describe('storage', () => {
   });
 
   describe('requester pays', () => {
-    const HAS_2ND_PROJECT = is.defined(process.env.GCN_STORAGE_2ND_PROJECT_ID);
+    const HAS_2ND_PROJECT =
+        process.env.GCN_STORAGE_2ND_PROJECT_ID !== undefined;
     let bucket;
 
     before(done => {
@@ -2683,7 +2683,7 @@ describe('storage', () => {
     it('should get an existing notification', done => {
       notification.get(err => {
         assert.ifError(err);
-        assert(!is.empty(notification.metadata));
+        assert(Object.keys(notification.metadata).length > 0);
         done();
       });
     });
@@ -2691,7 +2691,7 @@ describe('storage', () => {
     it('should get a notifications metadata', done => {
       notification.getMetadata((err, metadata) => {
         assert.ifError(err);
-        assert(is.object(metadata));
+        assert(metadata !== null && typeof metadata === 'object');
         done();
       });
     });

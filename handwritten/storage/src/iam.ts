@@ -19,7 +19,6 @@
 import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import * as is from 'is';
 import * as r from 'request';
 
 import {Bucket} from './bucket';
@@ -241,7 +240,7 @@ class Iam {
   setPolicy(
       policy: Policy, optionsOrCallback?: SetPolicyOptions|SetPolicyCallback,
       callback?: SetPolicyCallback): Promise<SetPolicyResponse>|void {
-    if (!is.object(policy)) {
+    if (policy === null || typeof policy !== 'object') {
       throw new Error('A policy object is required.');
     }
 
@@ -329,7 +328,7 @@ class Iam {
       optionsOrCallback?: TestIamPermissionsOptions|TestIamPermissionsCallback,
       callback?: TestIamPermissionsCallback):
       Promise<TestIamPermissionsResponse>|void {
-    if (!is.array(permissions) && !is.string(permissions)) {
+    if (!Array.isArray(permissions) && typeof permissions !== 'string') {
       throw new Error('Permissions are required.');
     }
 

@@ -23,7 +23,6 @@ import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as fs from 'fs';
-import * as is from 'is';
 import * as mime from 'mime-types';
 import * as path from 'path';
 const snakeize = require('snakeize');
@@ -1041,7 +1040,7 @@ class Bucket extends ServiceObject {
       sources: string[]|File[], destination: string|File,
       optionsOrCallback?: CombineOptions|CombineCallback,
       callback?: CombineCallback): Promise<CombineResponse>|void {
-    if (!is.array(sources) || sources.length < 2) {
+    if (!Array.isArray(sources) || sources.length < 2) {
       throw new Error('You must provide at least two source files.');
     }
 
@@ -1160,11 +1159,11 @@ class Bucket extends ServiceObject {
       id: string, config: CreateChannelConfig,
       optionsOrCallback?: CreateChannelOptions|CreateChannelCallback,
       callback?: CreateChannelCallback): Promise<CreateChannelResponse>|void {
-    if (!is.string(id)) {
+    if (typeof id !== 'string') {
       throw new Error('An ID is required to create a channel.');
     }
 
-    if (!is.string(config.address)) {
+    if (typeof config.address !== 'string') {
       throw new Error('An address is required to create a channel.');
     }
 
@@ -1274,12 +1273,13 @@ class Bucket extends ServiceObject {
       options = optionsOrCallback;
     }
 
-    if (is.object(topic) && util.isCustomType(topic, 'pubsub/topic')) {
+    const topicIsObject = topic !== null && typeof topic === 'object';
+    if (topicIsObject && util.isCustomType(topic, 'pubsub/topic')) {
       // tslint:disable-next-line:no-any
       topic = (topic as any).name;
     }
 
-    if (!is.string(topic)) {
+    if (typeof topic !== 'string') {
       throw new Error('A valid topic name is required.');
     }
 
@@ -1798,7 +1798,7 @@ class Bucket extends ServiceObject {
         if (err.code === 404 && autoCreate) {
           const args = [] as object[];
 
-          if (!is.empty(options)) {
+          if (Object.keys(options).length > 0) {
             args.push(options);
           }
 
@@ -2164,7 +2164,8 @@ class Bucket extends ServiceObject {
   lock(metageneration: number|string, callback: BucketLockCallback): void;
   lock(metageneration: number|string, callback?: BucketLockCallback):
       Promise<BucketLockResponse>|void {
-    if (!is.number(metageneration) && !is.string(metageneration)) {
+    const metatype = typeof metageneration;
+    if (metatype !== 'number' && metatype !== 'string') {
       throw new Error('A metageneration must be provided.');
     }
 

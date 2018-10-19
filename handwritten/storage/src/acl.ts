@@ -19,7 +19,6 @@
 import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
-import * as is from 'is';
 import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
 import * as r from 'request';
 
@@ -295,7 +294,7 @@ class AclRoleAccessorMethods {
             (entityId: string, options: {}, callback: Function|{}) => {
               let apiEntity;
 
-              if (is.fn(options)) {
+              if (typeof options === 'function') {
                 callback = options;
                 options = {};
               }
@@ -319,7 +318,7 @@ class AclRoleAccessorMethods {
 
               const args = [options];
 
-              if (is.fn(callback)) {
+              if (typeof callback === 'function') {
                 args.push(callback);
               }
 
