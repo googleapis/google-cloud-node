@@ -34,11 +34,13 @@ import (
 )
 
 var (
-	repo   = flag.String("repo", "https://github.com/GoogleCloudPlatform/cloud-profiler-nodejs.git", "git repo to test")
-	branch = flag.String("branch", "", "git branch to test")
-	commit = flag.String("commit", "", "git commit to test")
-	pr     = flag.Int("pr", 0, "git pull request to test")
-	runID  = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
+	repo               = flag.String("repo", "https://github.com/googleapis/cloud-profiler-nodejs.git", "git repo to test")
+	branch             = flag.String("branch", "", "git branch to test")
+	commit             = flag.String("commit", "", "git commit to test")
+	pr                 = flag.Int("pr", 0, "git pull request to test")
+	enableV8CanaryTest = flag.Bool("enable_v8_canary_test", false, "if tests run with the v8-canary build of node should be enabled")
+
+	runID = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
 )
 
 const cloudScope = "https://www.googleapis.com/auth/cloud-platform"
@@ -74,9 +76,10 @@ export NVM_DIR="$HOME/.nvm" >/dev/null
 
 # nvm install writes to stderr and stdout on successful install, so both are
 # redirected.
-retry nvm install {{.NodeVersion}} &>/dev/null
+{{if .NVMMirror}}NVM_NODEJS_ORG_MIRROR={{.NVMMirror}}{{end}} retry nvm install {{.NodeVersion}} &>/dev/null
 npm -v
 node -v
+NODEDIR=$(dirname $(dirname $(which node)))
 
 # Install agent
 retry git clone {{.Repo}}
@@ -84,9 +87,9 @@ cd cloud-profiler-nodejs
 retry git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pull_branch
 git checkout pull_branch
 git reset --hard {{.Commit}}
-retry npm install >/dev/null
-npm run compile
-npm pack >/dev/null
+retry npm install --nodedir="$NODEDIR" >/dev/null
+npm run compile 
+npm pack --nodedir="$NODEDIR" >/dev/null
 VERSION=$(node -e "console.log(require('./package.json').version);")
 PROFILER="$HOME/cloud-profiler-nodejs/google-cloud-profiler-$VERSION.tgz"
 
@@ -95,7 +98,7 @@ mkdir -p "$TESTDIR"
 cp -r "testing/busybench" "$TESTDIR"
 cd "$TESTDIR/busybench"
 
-retry npm install "$PROFILER" >/dev/null
+retry npm install --nodedir="$NODEDIR" "$PROFILER" >/dev/null
 retry npm install
 npm run compile
 
@@ -118,6 +121,7 @@ type nodeGCETestCase struct {
 	proftest.InstanceConfig
 	name         string
 	nodeVersion  string
+	nvmMirror    string
 	wantProfiles []profileSummary
 }
 
@@ -127,6 +131,7 @@ func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) 
 		struct {
 			Service     string
 			NodeVersion string
+			NVMMirror   string
 			Repo        string
 			PR          int
 			Branch      string
@@ -134,6 +139,7 @@ func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) 
 		}{
 			Service:     tc.name,
 			NodeVersion: tc.nodeVersion,
+			NVMMirror:   tc.nvmMirror,
 			Repo:        *repo,
 			PR:          *pr,
 			Branch:      *branch,
@@ -230,6 +236,21 @@ func TestAgentIntegration(t *testing.T) {
 			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "10",
 		},
+	}
+	if *enableV8CanaryTest {
+		testcases := append(testcases,
+			nodeGCETestCase{
+				InstanceConfig: proftest.InstanceConfig{
+					ProjectID:   projectID,
+					Zone:        zone,
+					Name:        fmt.Sprintf("profiler-test-v8-canary-%s", runID),
+					MachineType: "n1-standard-1",
+				},
+				name:         fmt.Sprintf("profiler-test-v8-canary-%s-gce", runID),
+				wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
+				nodeVersion:  "node", // install latest version of node
+				nvmMirror:    "https://nodejs.org/download/v8-canary",
+			})
 	}
 
 	// Allow test cases to run in parallel.

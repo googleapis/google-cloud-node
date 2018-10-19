@@ -33,7 +33,7 @@ cp -R "testing" "$GOPATH/src/proftest"
 cd "$GOPATH/src/proftest"
 retry go get -t -tags=integration .
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" == "" ]; then
-  go test -timeout=30m -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO"
+  go test -timeout=30m -tags=integration -run TestAgentIntegration -commit="$COMMIT" -branch="$BRANCH" -repo="$REPO" -enable_v8_canary_test
 else 
   go test -timeout=30m -tags=integration -run TestAgentIntegration -commit="$COMMIT" -pr="$KOKORO_GITHUB_PULL_REQUEST_NUMBER"
 fi

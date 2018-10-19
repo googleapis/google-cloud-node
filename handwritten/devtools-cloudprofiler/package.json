@@ -2,7 +2,7 @@
   "name": "@google-cloud/profiler",
   "version": "0.2.2",
   "description": "Adds support for Stackdriver Profiler to node.js applications",
-  "repository": "GoogleCloudPlatform/cloud-profiler-nodejs",
+  "repository": "googleapis/cloud-profiler-nodejs",
   "main": "out/src/index.js",
   "types": "out/src/index.d.ts",
   "scripts": {
@@ -34,7 +34,7 @@
     "delay": "^4.0.1",
     "extend": "^3.0.1",
     "gcp-metadata": "^0.8.0",
-    "nan": "^2.8.0",
+    "nan": "^2.11.1",
     "parse-duration": "^0.1.1",
     "pify": "^4.0.0",
     "pretty-ms": "^4.0.0",
