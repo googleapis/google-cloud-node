@@ -21,6 +21,6 @@
     "ava": "^0.25.0"
   },
   "optionalDependencies": {
-    "canvas": "^1.6.5"
+    "canvas": "^2.0.0"
   }
 }
