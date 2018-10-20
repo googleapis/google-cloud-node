@@ -23,7 +23,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 const flatten = require('lodash.flatten');
 import * as fs from 'fs';
-const groupBy = require('lodash.groupby');
+import groupBy = require('lodash.groupby');
 import * as is from 'is';
 import {teenyRequest} from 'teeny-request';
 const zonefile = require('dns-zonefile');
@@ -427,12 +427,12 @@ class Zone extends ServiceObject {
     if (!config || (!config.add && !config.delete)) {
       throw new Error('Cannot create a change with no additions or deletions.');
     }
-    const groupByType = (changes: RecordObject[]) => {
-      changes = groupBy(changes, 'type');
-      const changesArray: Array<{}> = [];
+    const groupByType = (recordsIn: RecordObject[]) => {
+      const recordsByType = groupBy(recordsIn, 'type');
+      const recordsOut: RecordObject[] = [];
       // tslint:disable-next-line:forin
-      for (const recordType in changes) {
-        const recordsByName = groupBy(changes[recordType], 'name');
+      for (const recordType in recordsByType) {
+        const recordsByName = groupBy(recordsByType[recordType], 'name');
         // tslint:disable-next-line:forin
         for (const recordName in recordsByName) {
           const records = recordsByName[recordName];
@@ -442,10 +442,10 @@ class Zone extends ServiceObject {
             templateRecord.rrdatas =
                 flatten(records.map((x: RecordObject) => x.rrdatas));
           }
-          changesArray.push(templateRecord);
+          recordsOut.push(templateRecord);
         }
       }
-      return changesArray;
+      return recordsOut;
     };
     const body = extend(
         {
