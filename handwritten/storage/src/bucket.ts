@@ -368,7 +368,8 @@ export type GetBucketResponse = [Bucket, request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface GetBucketCallback extends InstanceResponseCallback {
-  (err: Error|null, bucket: Bucket|null, apiResponse: request.Response): void;
+  (err: ApiError|null, bucket: Bucket|null,
+   apiResponse: request.Response): void;
 }
 
 /**
@@ -409,7 +410,7 @@ export type GetBucketMetadataResponse = [Metadata, request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface GetBucketMetadataCallback extends GetMetadataCallback {
-  (err: Error|null, metadata: Metadata|null,
+  (err: ApiError|null, metadata: Metadata|null,
    apiResponse: request.Response): void;
 }
 
@@ -1688,7 +1689,7 @@ class Bucket extends ServiceObject {
 
     options = options || {} as BucketExistsOptions;
 
-    this.get(options, err => {
+    this.get(options, (err: ApiError|null) => {
       if (err) {
         if (err.code === 404) {
           callback!(null, false);
@@ -1793,7 +1794,7 @@ class Bucket extends ServiceObject {
           callback!(null, bucket, apiResponse);
         };
 
-    this.getMetadata(options, (err, metadata) => {
+    this.getMetadata(options, (err: ApiError|null, metadata: Metadata|null) => {
       if (err) {
         if (err.code === 404 && autoCreate) {
           const args = [] as object[];
@@ -1990,7 +1991,7 @@ class Bucket extends ServiceObject {
       options = optionsOrCallback;
     }
 
-    this.getMetadata(options, (err, metadata) => {
+    this.getMetadata(options, (err: ApiError|null, metadata: Metadata|null) => {
       if (err) {
         callback!(err, null);
         return;
