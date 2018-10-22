@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Response} from 'express-serve-static-core';
+import {Response} from 'express';
 import * as extend from 'extend';
 
 import {expressRequestInformationExtractor} from '../../../src/request-extractors/express';

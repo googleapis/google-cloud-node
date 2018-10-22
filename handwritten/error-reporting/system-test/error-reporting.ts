@@ -157,7 +157,7 @@ describe('Request/Response lifecycle mocking', () => {
             'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
             process.env.GCLOUD_PROJECT)
             .persist()
-            .post('/events:report');
+            .post('/events:report?');
     logger = createLogger({logLevel: 5});
     client = new RequestHandler(
         new Configuration({ignoreEnvironmentCheck: true}, logger), logger);
