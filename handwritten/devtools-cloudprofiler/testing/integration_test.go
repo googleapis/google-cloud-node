@@ -238,7 +238,7 @@ func TestAgentIntegration(t *testing.T) {
 		},
 	}
 	if *enableV8CanaryTest {
-		testcases := append(testcases,
+		testcases = append(testcases,
 			nodeGCETestCase{
 				InstanceConfig: proftest.InstanceConfig{
 					ProjectID:   projectID,
