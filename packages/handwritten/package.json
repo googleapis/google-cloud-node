@@ -133,6 +133,6 @@
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.9",
     "tmp": "0.0.33",
-    "typescript": "~3.0.0"
+    "typescript": "~3.1.0"
   }
 }
