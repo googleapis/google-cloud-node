@@ -34,11 +34,11 @@ import (
 )
 
 var (
-	repo               = flag.String("repo", "https://github.com/googleapis/cloud-profiler-nodejs.git", "git repo to test")
-	branch             = flag.String("branch", "", "git branch to test")
-	commit             = flag.String("commit", "", "git commit to test")
-	pr                 = flag.Int("pr", 0, "git pull request to test")
-	enableV8CanaryTest = flag.Bool("enable_v8_canary_test", false, "if tests run with the v8-canary build of node should be enabled")
+	repo                = flag.String("repo", "https://github.com/googleapis/cloud-profiler-nodejs.git", "git repo to test")
+	branch              = flag.String("branch", "", "git branch to test")
+	commit              = flag.String("commit", "", "git commit to test")
+	pr                  = flag.Int("pr", 0, "git pull request to test")
+	runOnlyV8CanaryTest = flag.Bool("run_only_v8_canary_test", false, "if true test will be run only with the v8-canary build, otherwise, no tests will be run with v8 canary")
 
 	runID = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
 )
@@ -237,20 +237,19 @@ func TestAgentIntegration(t *testing.T) {
 			nodeVersion:  "10",
 		},
 	}
-	if *enableV8CanaryTest {
-		testcases = append(testcases,
-			nodeGCETestCase{
-				InstanceConfig: proftest.InstanceConfig{
-					ProjectID:   projectID,
-					Zone:        zone,
-					Name:        fmt.Sprintf("profiler-test-v8-canary-%s", runID),
-					MachineType: "n1-standard-1",
-				},
-				name:         fmt.Sprintf("profiler-test-v8-canary-%s-gce", runID),
-				wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
-				nodeVersion:  "node", // install latest version of node
-				nvmMirror:    "https://nodejs.org/download/v8-canary",
-			})
+	if *runOnlyV8CanaryTest {
+		testcases = []nodeGCETestCase{{
+			InstanceConfig: proftest.InstanceConfig{
+				ProjectID:   projectID,
+				Zone:        zone,
+				Name:        fmt.Sprintf("profiler-test-v8-canary-%s", runID),
+				MachineType: "n1-standard-1",
+			},
+			name:         fmt.Sprintf("profiler-test-v8-canary-%s-gce", runID),
+			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
+			nodeVersion:  "node", // install latest version of node
+			nvmMirror:    "https://nodejs.org/download/v8-canary",
+		}}
 	}
 
 	// Allow test cases to run in parallel.
