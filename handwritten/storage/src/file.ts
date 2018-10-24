@@ -93,6 +93,7 @@ export interface GetSignedUrlCallback {
 export interface PolicyDocument {
   expiration: string;
   conditions: Array<Array<string|number>>;
+  string: string;
 }
 
 /**
@@ -112,7 +113,7 @@ export interface GetSignedPolicyCallback {
 
 export interface GetSignedPolicyOptions {
   equals?: string[]|string[][];
-  expires: number;
+  expires: Date;
   startsWith?: string[]|string[][];
   acl?: string;
   successRedirect?: string;

@@ -38,7 +38,7 @@ export interface GetPolicyOptions {
  * @property {object} 0 The policy.
  * @property {object} 1 The full API response.
  */
-export type GetPolicyResponse = [object, r.Response];
+export type GetPolicyResponse = [Policy, r.Response];
 
 /**
  * @callback GetPolicyCallback
@@ -47,7 +47,7 @@ export type GetPolicyResponse = [object, r.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface GetPolicyCallback {
-  (err?: Error|null, acl?: object, apiResponse?: r.Response): void;
+  (err?: Error|null, acl?: Policy, apiResponse?: r.Response): void;
 }
 
 /**
@@ -64,7 +64,7 @@ export interface SetPolicyOptions {
  * @property {object} 0 The policy.
  * @property {object} 1 The full API response.
  */
-export type SetPolicyResponse = [object, r.Response];
+export type SetPolicyResponse = [Policy, r.Response];
 
 /**
  * @callback SetPolicyCallback
@@ -73,7 +73,7 @@ export type SetPolicyResponse = [object, r.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface SetPolicyCallback {
-  (err?: Error|null, acl?: object, apiResponse?: object): void;
+  (err?: Error|null, acl?: Policy, apiResponse?: object): void;
 }
 
 /**
@@ -82,8 +82,13 @@ export interface SetPolicyCallback {
  * @property {string} [policy.etag] Etags are used to perform a read-modify-write.
  */
 export interface Policy {
-  bindings: string[];
+  bindings: PolicyBinding[];
   etag?: string;
+}
+
+export interface PolicyBinding {
+  role: string;
+  members: string[];
 }
 
 /**

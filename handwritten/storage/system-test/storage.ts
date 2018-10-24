@@ -28,10 +28,10 @@ import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
-import {Storage, Bucket, File, AccessControlObject} from '../src';
+import {Storage, Bucket, File, AccessControlObject, Notification} from '../src';
 import {DeleteBucketCallback} from '../src/bucket';
 import * as nock from 'nock';
-import {DeleteFileCallback} from '../src/file';
+import {DeleteFileCallback, SaveCallback, DownloadOptions, DownloadCallback, FileExistsOptions, FileExistsCallback, CreateReadStreamOptions, CreateResumableUploadOptions, GetFileOptions} from '../src/file';
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
@@ -52,7 +52,8 @@ describe('storage', () => {
   const pubsub = new PubSub({
     projectId: process.env.PROJECT_ID,
   });
-  let topic;
+  // tslint:disable-next-line no-any
+  let topic: any;
 
   const FILES = {
     logo: {
@@ -73,9 +74,7 @@ describe('storage', () => {
   };
 
   before(() => {
-    // tslint:disable-next-line:no-any
-    return (bucket as any)
-        .create()
+    return bucket.create()
         .then(() => {
           return pubsub.createTopic(generateName());
         })
@@ -99,9 +98,9 @@ describe('storage', () => {
   describe('without authentication', () => {
     let privateBucket: Bucket;
     let privateFile: File;
-    let storageWithoutAuth;
+    let storageWithoutAuth: Storage;
 
-    let GOOGLE_APPLICATION_CREDENTIALS;
+    let GOOGLE_APPLICATION_CREDENTIALS: string|undefined;
 
     before(done => {
       privateBucket = bucket;  // `bucket` was created in the global `before`
@@ -151,17 +150,18 @@ describe('storage', () => {
     });
 
     describe('private data', () => {
-      let bucket;
-      let file;
+      let bucket: Bucket;
+      let file: File;
 
       before(() => {
-        bucket = storageWithoutAuth.bucket(privateBucket.id);
-        file = bucket.file(privateFile.id);
+        bucket = storageWithoutAuth.bucket(privateBucket.id!);
+        file = bucket.file(privateFile.id!);
       });
 
       it('should not download a file', done => {
         file.download(err => {
-          assert(err.message.indexOf('does not have storage.objects.get') > -1);
+          assert(
+              err!.message.indexOf('does not have storage.objects.get') > -1);
           done();
         });
       });
@@ -169,7 +169,7 @@ describe('storage', () => {
       it('should not upload a file', done => {
         file.save('new data', err => {
           assert(
-              err.message.indexOf('Could not load the default credentials') >
+              err!.message.indexOf('Could not load the default credentials') >
               -1);
           done();
         });
@@ -316,19 +316,20 @@ describe('storage', () => {
           });
         });
 
-        function createFileWithContent(content, callback) {
+        function createFileWithContent(
+            content: string, callback: SaveCallback) {
           bucket.file(generateName() + '.txt').save(content, callback);
         }
 
-        function isFilePublic(file, callback) {
+        function isFilePublic(file: File, callback: Function) {
           file.acl.get({entity: 'allUsers'}, (err, aclObject) => {
             if (err) {
               callback(err);
               return;
             }
 
-            if (aclObject.entity === 'allUsers' &&
-                aclObject.role === 'READER') {
+            if ((aclObject as AccessControlObject).entity === 'allUsers' &&
+                (aclObject as AccessControlObject).role === 'READER') {
               callback();
             } else {
               callback(new Error('File is not public.'));
@@ -367,12 +368,13 @@ describe('storage', () => {
           });
         });
 
-        function createFileWithContent(content, callback) {
+        function createFileWithContent(
+            content: string, callback: SaveCallback) {
           bucket.file(generateName() + '.txt').save(content, callback);
         }
 
-        function isFilePrivate(file, callback) {
-          file.acl.get({entity: 'allUsers'}, err => {
+        function isFilePrivate(file: File, callback: Function) {
+          file.acl.get({entity: 'allUsers'}, (err: ApiError|null) => {
             if (err && err.code === 404) {
               callback();
             } else {
@@ -384,7 +386,7 @@ describe('storage', () => {
     });
 
     describe('files', () => {
-      let file;
+      let file: File;
 
       beforeEach(done => {
         const options = {
@@ -393,7 +395,7 @@ describe('storage', () => {
 
         bucket.upload(FILES.logo.path, options, (err, f) => {
           assert.ifError(err);
-          file = f;
+          file = f!;
           done();
         });
       });
@@ -403,7 +405,8 @@ describe('storage', () => {
       });
 
       it('should get access controls', done => {
-        file.acl.get(done, (err, accessControls) => {
+        // tslint:disable-next-line no-any
+        file.acl.get(done as any, (err, accessControls) => {
           assert.ifError(err);
           assert(Array.isArray(accessControls));
           done();
@@ -422,11 +425,13 @@ describe('storage', () => {
             },
             (err, accessControl) => {
               assert.ifError(err);
-              assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
               file.acl.get({entity: USER_ACCOUNT}, (err, accessControl) => {
                 assert.ifError(err);
-                assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
+                assert.strictEqual(
+                    (accessControl as AccessControlObject).role,
+                    storage.acl.OWNER_ROLE);
 
                 file.acl.delete({entity: USER_ACCOUNT}, done);
               });
@@ -441,7 +446,7 @@ describe('storage', () => {
             },
             (err, accessControl) => {
               assert.ifError(err);
-              assert.strictEqual(accessControl.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
               file.acl.update(
                   {
@@ -452,7 +457,7 @@ describe('storage', () => {
                     assert.ifError(err);
 
                     assert.strictEqual(
-                        accessControl.role, storage.acl.READER_ROLE);
+                        accessControl!.role, storage.acl.READER_ROLE);
 
                     file.acl.delete({entity: USER_ACCOUNT}, done);
                   });
@@ -478,12 +483,13 @@ describe('storage', () => {
           assert.ifError(err);
           file.makePrivate(err => {
             assert.ifError(err);
-            file.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-              assert.strictEqual(err.code, 404);
-              assert.strictEqual(err.message, 'Not Found');
-              assert.strictEqual(aclObject, null);
-              done();
-            });
+            file.acl.get(
+                {entity: 'allUsers'}, (err: ApiError|null, aclObject) => {
+                  assert.strictEqual(err!.code, 404);
+                  assert.strictEqual(err!.message, 'Not Found');
+                  assert.strictEqual(aclObject, null);
+                  done();
+                });
           });
         });
       });
@@ -603,7 +609,7 @@ describe('storage', () => {
     });
 
     describe('buckets', () => {
-      let bucket;
+      let bucket: Bucket;
 
       before(() => {
         bucket = storage.bucket(generateName());
@@ -613,8 +619,7 @@ describe('storage', () => {
       it('should get a policy', done => {
         bucket.iam.getPolicy((err, policy) => {
           assert.ifError(err);
-
-          assert.deepStrictEqual(policy.bindings, [
+          assert.deepStrictEqual(policy!.bindings, [
             {
               members: [
                 'projectEditor:' + PROJECT_ID,
@@ -635,17 +640,16 @@ describe('storage', () => {
       it('should set a policy', done => {
         bucket.iam.getPolicy((err, policy) => {
           assert.ifError(err);
-
-          policy.bindings.push({
+          policy!.bindings.push({
             role: 'roles/storage.legacyBucketReader',
             members: ['allUsers'],
           });
 
-          bucket.iam.setPolicy(policy, (err, newPolicy) => {
+          bucket.iam.setPolicy(policy!, (err, newPolicy) => {
             assert.ifError(err);
 
             const legacyBucketReaderBinding =
-                newPolicy.bindings.filter(binding => {
+                newPolicy!.bindings.filter(binding => {
                   return binding.role === 'roles/storage.legacyBucketReader';
                 })[0];
 
@@ -677,7 +681,7 @@ describe('storage', () => {
   });
 
   describe('unicode validation', () => {
-    let bucket;
+    let bucket: Bucket;
 
     before(() => {
       bucket = storage.bucket('storage-library-test-bucket');
@@ -973,9 +977,7 @@ describe('storage', () => {
                 done(new Error('Expected an error.'));
                 return;
               }
-
-              // tslint:disable-next-line:no-any
-              assert.strictEqual((err as any).code, 403);
+              assert.strictEqual((err as ApiError).code, 403);
               done();
             });
       });
@@ -1144,7 +1146,7 @@ describe('storage', () => {
   describe('requester pays', () => {
     const HAS_2ND_PROJECT =
         process.env.GCN_STORAGE_2ND_PROJECT_ID !== undefined;
-    let bucket;
+    let bucket: Bucket;
 
     before(done => {
       bucket = storage.bucket(generateName());
@@ -1175,7 +1177,8 @@ describe('storage', () => {
         projectId: process.env.GCN_STORAGE_2ND_PROJECT_ID,
         keyFilename: process.env.GCN_STORAGE_2ND_PROJECT_KEY,
       });
-      let bucket;  // the source bucket, which will have requesterPays enabled.
+      let bucket:
+          Bucket;  // the source bucket, which will have requesterPays enabled.
       let bucketNonWhitelist;  // the bucket object from the requesting user.
 
       function isRequesterPaysEnabled(callback) {
@@ -1235,8 +1238,8 @@ describe('storage', () => {
       });
 
       describe('methods that accept userProject', () => {
-        let file;
-        let notification;
+        let file: File;
+        let notification: Notification;
         let topicName;
 
         const USER_PROJECT_OPTIONS = {
@@ -1380,14 +1383,16 @@ describe('storage', () => {
              file.copy('new-file.txt', options, done);
            }));
 
-        it('file#createReadStream', doubleTest((options, done) => {
+        it('file#createReadStream',
+           doubleTest((options: CreateReadStreamOptions, done) => {
              file.createReadStream(options)
                  .on('error', done)
                  .on('end', done)
                  .on('data', util.noop);
            }));
 
-        it('file#createResumableUpload', doubleTest((options, done) => {
+        it('file#createResumableUpload',
+           doubleTest((options: CreateResumableUploadOptions, done) => {
              file.createResumableUpload(options, (err, uri) => {
                if (err) {
                  done(err);
@@ -1401,15 +1406,18 @@ describe('storage', () => {
              });
            }));
 
-        it('file#download', doubleTest((options, done) => {
+        it('file#download',
+           doubleTest((options: DownloadOptions, done: DownloadCallback) => {
              file.download(options, done);
            }));
 
-        it('file#exists', doubleTest((options, done) => {
-             file.exists(options, done);
-           }));
+        it('file#exists',
+           doubleTest(
+               (options: FileExistsOptions, done: FileExistsCallback) => {
+                 file.exists(options, done);
+               }));
 
-        it('file#get', doubleTest((options, done) => {
+        it('file#get', doubleTest((options: GetFileOptions, done) => {
              file.get(options, done);
            }));
 
@@ -1496,7 +1504,7 @@ describe('storage', () => {
                  return;
                }
 
-               policy.bindings.push({
+               policy!.bindings.push({
                  role: 'roles/storage.objectViewer',
                  members: ['allUsers'],
                });
@@ -1891,7 +1899,7 @@ describe('storage', () => {
       const keyRingId = generateName();
       const cryptoKeyId = generateName();
 
-      let bucket;
+      let bucket: Bucket;
       let kmsKeyName;
       let keyRingsBaseUrl;
 
@@ -2001,7 +2009,7 @@ describe('storage', () => {
       });
 
       describe('files', () => {
-        let file;
+        let file: File;
 
         before(done => {
           file = bucket.file('kms-encrypted-file', {kmsKeyName});
@@ -2094,7 +2102,7 @@ describe('storage', () => {
       });
 
       describe('buckets', () => {
-        let bucket;
+        let bucket: Bucket;
 
         before(done => {
           bucket = storage.bucket(generateName(), {kmsKeyName});
@@ -2209,22 +2217,20 @@ describe('storage', () => {
       const otherBucket = storage.bucket(generateName());
       const file = bucket.file('Big');
       const copiedFile = otherBucket.file(file.name);
-
-      // tslint:disable-next-line:no-any
-      (async.series as any)(
+      async.series(
           [
-            callback =>
-                bucket.upload(FILES.logo.path, {destination: file}, callback),
-            callback => {
+            cb =>
+                // tslint:disable-next-line no-any
+            bucket.upload(FILES.logo.path, {destination: file}, cb as any),
+            cb => {
               otherBucket.create(
                   {
                     location: 'ASIA-EAST1',
                     dra: true,
                   },
-                  callback as InstanceResponseCallback);
+                  cb as InstanceResponseCallback);
             },
-            callback =>
-                file.copy(copiedFile, callback as InstanceResponseCallback)
+            cb => file.copy(copiedFile, cb as InstanceResponseCallback)
           ],
           err => {
             assert.ifError(err);
@@ -2268,12 +2274,11 @@ describe('storage', () => {
 
     it('should allow changing the storage class', done => {
       const file = bucket.file(generateName());
-
-      // tslint:disable-next-line:no-any
-      (async.series as any)(
+      async.series(
           [
             next => {
-              bucket.upload(FILES.logo.path, {destination: file}, next);
+              // tslint:disable-next-line no-any
+              bucket.upload(FILES.logo.path, {destination: file}, next as any);
             },
 
             next => {
@@ -2555,7 +2560,7 @@ describe('storage', () => {
 
   describe('sign urls', () => {
     const localFile = fs.readFileSync(FILES.logo.path);
-    let file;
+    let file: File;
 
     before(done => {
       file = bucket.file('LogoToSign.jpg');
@@ -2594,7 +2599,7 @@ describe('storage', () => {
             fetch(signedDeleteUrl, {method: 'DELETE'})
                 .then(() => {
                   file.getMetadata(err => {
-                    assert.strictEqual(err.code, 404);
+                    assert.strictEqual((err as ApiError).code, 404);
                     done();
                   });
                 })
@@ -2604,7 +2609,7 @@ describe('storage', () => {
   });
 
   describe('sign policy', () => {
-    let file;
+    let file: File;
 
     before(done => {
       file = bucket.file('LogoToSign.jpg');
@@ -2639,7 +2644,7 @@ describe('storage', () => {
         let policyJson;
 
         try {
-          policyJson = JSON.parse(policy.string);
+          policyJson = JSON.parse(policy!.string);
         } catch (e) {
           done(e);
           return;
@@ -2652,8 +2657,9 @@ describe('storage', () => {
   });
 
   describe('notifications', () => {
-    let notification;
-    let subscription;
+    let notification: Notification;
+    // tslint:disable-next-line no-any
+    let subscription: any;
 
     before(() => {
       return bucket
@@ -2738,7 +2744,7 @@ describe('storage', () => {
 
     it('should delete a notification', () => {
       let notificationCount = 0;
-      let notification;
+      let notification: Notification;
 
       return bucket
           .createNotification(topic, {
@@ -2793,11 +2799,12 @@ describe('storage', () => {
     });
   }
 
-  function deleteFile(file, callback) {
+  function deleteFile(file: File, callback: DeleteFileCallback) {
     file.delete(callback);
   }
 
-  function deleteTopic(topic, callback) {
+  // tslint:disable-next-line no-any
+  function deleteTopic(topic: any, callback: Function) {
     topic.delete(callback);
   }
 
