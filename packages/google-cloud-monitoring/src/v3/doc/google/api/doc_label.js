@@ -33,7 +33,7 @@
  * @memberof google.api
  * @see [google.api.LabelDescriptor definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/label.proto}
  */
-var LabelDescriptor = {
+const LabelDescriptor = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**

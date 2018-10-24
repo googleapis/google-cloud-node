@@ -6,6 +6,7 @@
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
+        "no_retry": [],
         "non_idempotent": []
       },
       "retry_params": {

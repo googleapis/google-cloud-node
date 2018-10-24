@@ -69,6 +69,6 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.Group definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group.proto}
  */
-var Group = {
+const Group = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

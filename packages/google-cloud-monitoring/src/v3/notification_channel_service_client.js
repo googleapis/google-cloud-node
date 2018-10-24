@@ -261,16 +261,16 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    * client.listNotificationChannelDescriptors({name: formattedName})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -280,17 +280,17 @@ class NotificationChannelServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -360,11 +360,11 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    * client.listNotificationChannelDescriptorsStream({name: formattedName})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -406,14 +406,14 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.notificationChannelDescriptorPath('[PROJECT]', '[CHANNEL_DESCRIPTOR]');
+   * const formattedName = client.notificationChannelDescriptorPath('[PROJECT]', '[CHANNEL_DESCRIPTOR]');
    * client.getNotificationChannelDescriptor({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -492,16 +492,16 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    * client.listNotificationChannels({name: formattedName})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -511,17 +511,17 @@ class NotificationChannelServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -601,11 +601,11 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    * client.listNotificationChannelsStream({name: formattedName})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -650,14 +650,14 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.notificationChannelPath('[PROJECT]', '[NOTIFICATION_CHANNEL]');
+   * const formattedName = client.notificationChannelPath('[PROJECT]', '[NOTIFICATION_CHANNEL]');
    * client.getNotificationChannel({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -712,19 +712,19 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var notificationChannel = {};
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const notificationChannel = {};
+   * const request = {
    *   name: formattedName,
    *   notificationChannel: notificationChannel,
    * };
    * client.createNotificationChannel(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -777,14 +777,14 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var notificationChannel = {};
+   * const notificationChannel = {};
    * client.updateNotificationChannel({notificationChannel: notificationChannel})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -830,11 +830,11 @@ class NotificationChannelServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.NotificationChannelServiceClient({
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.notificationChannelPath('[PROJECT]', '[NOTIFICATION_CHANNEL]');
+   * const formattedName = client.notificationChannelPath('[PROJECT]', '[NOTIFICATION_CHANNEL]');
    * client.deleteNotificationChannel({name: formattedName}).catch(err => {
    *   console.error(err);
    * });

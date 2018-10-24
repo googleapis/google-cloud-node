@@ -43,7 +43,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListNotificationChannelDescriptorsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var ListNotificationChannelDescriptorsRequest = {
+const ListNotificationChannelDescriptorsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -66,7 +66,7 @@ var ListNotificationChannelDescriptorsRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListNotificationChannelDescriptorsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var ListNotificationChannelDescriptorsResponse = {
+const ListNotificationChannelDescriptorsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -81,7 +81,7 @@ var ListNotificationChannelDescriptorsResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetNotificationChannelDescriptorRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var GetNotificationChannelDescriptorRequest = {
+const GetNotificationChannelDescriptorRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -107,7 +107,7 @@ var GetNotificationChannelDescriptorRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.CreateNotificationChannelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var CreateNotificationChannelRequest = {
+const CreateNotificationChannelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -151,7 +151,7 @@ var CreateNotificationChannelRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListNotificationChannelsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var ListNotificationChannelsRequest = {
+const ListNotificationChannelsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -173,7 +173,7 @@ var ListNotificationChannelsRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListNotificationChannelsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var ListNotificationChannelsResponse = {
+const ListNotificationChannelsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -188,7 +188,7 @@ var ListNotificationChannelsResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetNotificationChannelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var GetNotificationChannelRequest = {
+const GetNotificationChannelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -212,7 +212,7 @@ var GetNotificationChannelRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.UpdateNotificationChannelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var UpdateNotificationChannelRequest = {
+const UpdateNotificationChannelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -233,7 +233,7 @@ var UpdateNotificationChannelRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.DeleteNotificationChannelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var DeleteNotificationChannelRequest = {
+const DeleteNotificationChannelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -247,7 +247,7 @@ var DeleteNotificationChannelRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.SendNotificationChannelVerificationCodeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var SendNotificationChannelVerificationCodeRequest = {
+const SendNotificationChannelVerificationCodeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -276,7 +276,7 @@ var SendNotificationChannelVerificationCodeRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetNotificationChannelVerificationCodeRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var GetNotificationChannelVerificationCodeRequest = {
+const GetNotificationChannelVerificationCodeRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -300,7 +300,7 @@ var GetNotificationChannelVerificationCodeRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetNotificationChannelVerificationCodeResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var GetNotificationChannelVerificationCodeResponse = {
+const GetNotificationChannelVerificationCodeResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -323,6 +323,6 @@ var GetNotificationChannelVerificationCodeResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.VerifyNotificationChannelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification_service.proto}
  */
-var VerifyNotificationChannelRequest = {
+const VerifyNotificationChannelRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

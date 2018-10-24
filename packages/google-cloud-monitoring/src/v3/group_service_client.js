@@ -270,16 +270,16 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    * client.listGroups({name: formattedName})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -289,17 +289,17 @@ class GroupServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -373,11 +373,11 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    * client.listGroupsStream({name: formattedName})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -418,14 +418,14 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+   * const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
    * client.getGroup({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -472,19 +472,19 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var group = {};
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const group = {};
+   * const request = {
    *   name: formattedName,
    *   group: group,
    * };
    * client.createGroup(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -529,14 +529,14 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var group = {};
+   * const group = {};
    * client.updateGroup({group: group})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -573,11 +573,11 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+   * const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
    * client.deleteGroup({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -648,16 +648,16 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+   * const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
    *
    * client.listGroupMembers({name: formattedName})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -667,17 +667,17 @@ class GroupServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+   * const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -751,11 +751,11 @@ class GroupServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.GroupServiceClient({
+   * const client = new monitoring.v3.GroupServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.groupPath('[PROJECT]', '[GROUP]');
+   * const formattedName = client.groupPath('[PROJECT]', '[GROUP]');
    * client.listGroupMembersStream({name: formattedName})
    *   .on('data', element => {
    *     // doThingsWith(element)

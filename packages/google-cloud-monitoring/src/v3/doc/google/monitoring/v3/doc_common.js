@@ -41,7 +41,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.TypedValue definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/common.proto}
  */
-var TypedValue = {
+const TypedValue = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -66,7 +66,7 @@ var TypedValue = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.TimeInterval definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/common.proto}
  */
-var TimeInterval = {
+const TimeInterval = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -140,7 +140,7 @@ var TimeInterval = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.Aggregation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/common.proto}
  */
-var Aggregation = {
+const Aggregation = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -470,7 +470,7 @@ var Aggregation = {
  * @enum {number}
  * @memberof google.monitoring.v3
  */
-var ComparisonType = {
+const ComparisonType = {
 
   /**
    * No ordering relationship is specified.
@@ -516,7 +516,7 @@ var ComparisonType = {
  * @enum {number}
  * @memberof google.monitoring.v3
  */
-var ServiceTier = {
+const ServiceTier = {
 
   /**
    * An invalid sentinel value, used to indicate that a tier has not

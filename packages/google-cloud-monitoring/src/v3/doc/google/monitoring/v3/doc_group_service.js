@@ -52,7 +52,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListGroupsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var ListGroupsRequest = {
+const ListGroupsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -73,7 +73,7 @@ var ListGroupsRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListGroupsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var ListGroupsResponse = {
+const ListGroupsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -88,7 +88,7 @@ var ListGroupsResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetGroupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var GetGroupRequest = {
+const GetGroupRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -112,7 +112,7 @@ var GetGroupRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.CreateGroupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var CreateGroupRequest = {
+const CreateGroupRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -132,7 +132,7 @@ var CreateGroupRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.UpdateGroupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var UpdateGroupRequest = {
+const UpdateGroupRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -147,7 +147,7 @@ var UpdateGroupRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.DeleteGroupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var DeleteGroupRequest = {
+const DeleteGroupRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -187,7 +187,7 @@ var DeleteGroupRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListGroupMembersRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var ListGroupMembersRequest = {
+const ListGroupMembersRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -211,6 +211,6 @@ var ListGroupMembersRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListGroupMembersResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/group_service.proto}
  */
-var ListGroupMembersResponse = {
+const ListGroupMembersResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

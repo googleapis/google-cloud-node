@@ -57,7 +57,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.NotificationChannelDescriptor definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification.proto}
  */
-var NotificationChannelDescriptor = {
+const NotificationChannelDescriptor = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -144,7 +144,7 @@ var NotificationChannelDescriptor = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.NotificationChannel definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/notification.proto}
  */
-var NotificationChannel = {
+const NotificationChannel = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**

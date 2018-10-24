@@ -43,7 +43,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListMonitoredResourceDescriptorsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var ListMonitoredResourceDescriptorsRequest = {
+const ListMonitoredResourceDescriptorsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -65,7 +65,7 @@ var ListMonitoredResourceDescriptorsRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListMonitoredResourceDescriptorsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var ListMonitoredResourceDescriptorsResponse = {
+const ListMonitoredResourceDescriptorsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -82,7 +82,7 @@ var ListMonitoredResourceDescriptorsResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetMonitoredResourceDescriptorRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var GetMonitoredResourceDescriptorRequest = {
+const GetMonitoredResourceDescriptorRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -115,7 +115,7 @@ var GetMonitoredResourceDescriptorRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListMetricDescriptorsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var ListMetricDescriptorsRequest = {
+const ListMetricDescriptorsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -137,7 +137,7 @@ var ListMetricDescriptorsRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListMetricDescriptorsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var ListMetricDescriptorsResponse = {
+const ListMetricDescriptorsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -154,7 +154,7 @@ var ListMetricDescriptorsResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetMetricDescriptorRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var GetMetricDescriptorRequest = {
+const GetMetricDescriptorRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -175,7 +175,7 @@ var GetMetricDescriptorRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.CreateMetricDescriptorRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var CreateMetricDescriptorRequest = {
+const CreateMetricDescriptorRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -192,7 +192,7 @@ var CreateMetricDescriptorRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.DeleteMetricDescriptorRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var DeleteMetricDescriptorRequest = {
+const DeleteMetricDescriptorRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -251,7 +251,7 @@ var DeleteMetricDescriptorRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListTimeSeriesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var ListTimeSeriesRequest = {
+const ListTimeSeriesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -299,7 +299,7 @@ var ListTimeSeriesRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListTimeSeriesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var ListTimeSeriesResponse = {
+const ListTimeSeriesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -323,7 +323,7 @@ var ListTimeSeriesResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.CreateTimeSeriesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var CreateTimeSeriesRequest = {
+const CreateTimeSeriesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -347,6 +347,6 @@ var CreateTimeSeriesRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.CreateTimeSeriesError definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
  */
-var CreateTimeSeriesError = {
+const CreateTimeSeriesError = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

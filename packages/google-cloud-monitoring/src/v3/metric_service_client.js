@@ -267,16 +267,16 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    * client.listMonitoredResourceDescriptors({name: formattedName})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -286,17 +286,17 @@ class MetricServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -367,11 +367,11 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    * client.listMonitoredResourceDescriptorsStream({name: formattedName})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -414,14 +414,14 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.monitoredResourceDescriptorPath('[PROJECT]', '[MONITORED_RESOURCE_DESCRIPTOR]');
+   * const formattedName = client.monitoredResourceDescriptorPath('[PROJECT]', '[MONITORED_RESOURCE_DESCRIPTOR]');
    * client.getMonitoredResourceDescriptor({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -492,16 +492,16 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    * client.listMetricDescriptors({name: formattedName})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -511,17 +511,17 @@ class MetricServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -593,11 +593,11 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    * client.listMetricDescriptorsStream({name: formattedName})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -640,14 +640,14 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
+   * const formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
    * client.getMetricDescriptor({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -694,19 +694,19 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var metricDescriptor = {};
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const metricDescriptor = {};
+   * const request = {
    *   name: formattedName,
    *   metricDescriptor: metricDescriptor,
    * };
    * client.createMetricDescriptor(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -750,11 +750,11 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
+   * const formattedName = client.metricDescriptorPath('[PROJECT]', '[METRIC_DESCRIPTOR]');
    * client.deleteMetricDescriptor({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -841,16 +841,16 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var filter = '';
-   * var interval = {};
-   * var view = 'FULL';
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const interval = {};
+   * const view = 'FULL';
+   * const request = {
    *   name: formattedName,
    *   filter: filter,
    *   interval: interval,
@@ -859,7 +859,7 @@ class MetricServiceClient {
    *
    * client.listTimeSeries(request)
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -869,11 +869,11 @@ class MetricServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var filter = '';
-   * var interval = {};
-   * var view = 'FULL';
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const interval = {};
+   * const view = 'FULL';
+   * const request = {
    *   name: formattedName,
    *   filter: filter,
    *   interval: interval,
@@ -881,14 +881,14 @@ class MetricServiceClient {
    * };
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -974,15 +974,15 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var filter = '';
-   * var interval = {};
-   * var view = 'FULL';
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const interval = {};
+   * const view = 'FULL';
+   * const request = {
    *   name: formattedName,
    *   filter: filter,
    *   interval: interval,
@@ -1036,13 +1036,13 @@ class MetricServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.MetricServiceClient({
+   * const client = new monitoring.v3.MetricServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var timeSeries = [];
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const timeSeries = [];
+   * const request = {
    *   name: formattedName,
    *   timeSeries: timeSeries,
    * };

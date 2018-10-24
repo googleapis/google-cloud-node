@@ -30,6 +30,6 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.MutationRecord definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/mutation_record.proto}
  */
-var MutationRecord = {
+const MutationRecord = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

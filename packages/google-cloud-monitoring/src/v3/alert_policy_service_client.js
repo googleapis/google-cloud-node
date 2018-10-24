@@ -273,16 +273,16 @@ class AlertPolicyServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.AlertPolicyServiceClient({
+   * const client = new monitoring.v3.AlertPolicyServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    * client.listAlertPolicies({name: formattedName})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -292,17 +292,17 @@ class AlertPolicyServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -381,11 +381,11 @@ class AlertPolicyServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.AlertPolicyServiceClient({
+   * const client = new monitoring.v3.AlertPolicyServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
+   * const formattedName = client.projectPath('[PROJECT]');
    * client.listAlertPoliciesStream({name: formattedName})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -427,14 +427,14 @@ class AlertPolicyServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.AlertPolicyServiceClient({
+   * const client = new monitoring.v3.AlertPolicyServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
+   * const formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
    * client.getAlertPolicy({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -486,19 +486,19 @@ class AlertPolicyServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.AlertPolicyServiceClient({
+   * const client = new monitoring.v3.AlertPolicyServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.projectPath('[PROJECT]');
-   * var alertPolicy = {};
-   * var request = {
+   * const formattedName = client.projectPath('[PROJECT]');
+   * const alertPolicy = {};
+   * const request = {
    *   name: formattedName,
    *   alertPolicy: alertPolicy,
    * };
    * client.createAlertPolicy(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -538,11 +538,11 @@ class AlertPolicyServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.AlertPolicyServiceClient({
+   * const client = new monitoring.v3.AlertPolicyServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
+   * const formattedName = client.alertPolicyPath('[PROJECT]', '[ALERT_POLICY]');
    * client.deleteAlertPolicy({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -611,14 +611,14 @@ class AlertPolicyServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.AlertPolicyServiceClient({
+   * const client = new monitoring.v3.AlertPolicyServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var alertPolicy = {};
+   * const alertPolicy = {};
    * client.updateAlertPolicy({alertPolicy: alertPolicy})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {

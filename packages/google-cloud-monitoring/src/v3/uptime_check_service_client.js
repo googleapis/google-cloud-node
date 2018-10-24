@@ -256,16 +256,16 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    * client.listUptimeCheckConfigs({parent: formattedParent})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -275,17 +275,17 @@ class UptimeCheckServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    *
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -348,11 +348,11 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.projectPath('[PROJECT]');
    * client.listUptimeCheckConfigsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -393,14 +393,14 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.uptimeCheckConfigPath('[PROJECT]', '[UPTIME_CHECK_CONFIG]');
+   * const formattedName = client.uptimeCheckConfigPath('[PROJECT]', '[UPTIME_CHECK_CONFIG]');
    * client.getUptimeCheckConfig({name: formattedName})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -444,19 +444,19 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedParent = client.projectPath('[PROJECT]');
-   * var uptimeCheckConfig = {};
-   * var request = {
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const uptimeCheckConfig = {};
+   * const request = {
    *   parent: formattedParent,
    *   uptimeCheckConfig: uptimeCheckConfig,
    * };
    * client.createUptimeCheckConfig(request)
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -521,14 +521,14 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var uptimeCheckConfig = {};
+   * const uptimeCheckConfig = {};
    * client.updateUptimeCheckConfig({uptimeCheckConfig: uptimeCheckConfig})
    *   .then(responses => {
-   *     var response = responses[0];
+   *     const response = responses[0];
    *     // doThingsWith(response)
    *   })
    *   .catch(err => {
@@ -571,11 +571,11 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * var formattedName = client.uptimeCheckConfigPath('[PROJECT]', '[UPTIME_CHECK_CONFIG]');
+   * const formattedName = client.uptimeCheckConfigPath('[PROJECT]', '[UPTIME_CHECK_CONFIG]');
    * client.deleteUptimeCheckConfig({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -632,14 +632,14 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
    * client.listUptimeCheckIps({})
    *   .then(responses => {
-   *     var resources = responses[0];
+   *     const resources = responses[0];
    *     for (let i = 0; i < resources.length; i += 1) {
    *       // doThingsWith(resources[i])
    *     }
@@ -650,14 +650,14 @@ class UptimeCheckServiceClient {
    *
    * // Or obtain the paged response.
    *
-   * var options = {autoPaginate: false};
-   * var callback = responses => {
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
    *   // The actual resources in a response.
-   *   var resources = responses[0];
+   *   const resources = responses[0];
    *   // The next request if the response shows that there are more responses.
-   *   var nextRequest = responses[1];
+   *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
-   *   // var rawResponse = responses[2];
+   *   // const rawResponse = responses[2];
    *   for (let i = 0; i < resources.length; i += 1) {
    *     // doThingsWith(resources[i]);
    *   }
@@ -713,7 +713,7 @@ class UptimeCheckServiceClient {
    *
    * const monitoring = require('@google-cloud/monitoring');
    *
-   * var client = new monitoring.v3.UptimeCheckServiceClient({
+   * const client = new monitoring.v3.UptimeCheckServiceClient({
    *   // optional auth parameters.
    * });
    *

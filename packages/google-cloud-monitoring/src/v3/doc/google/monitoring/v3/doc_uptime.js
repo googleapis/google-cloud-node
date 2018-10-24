@@ -39,7 +39,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.InternalChecker definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
  */
-var InternalChecker = {
+const InternalChecker = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -136,7 +136,7 @@ var InternalChecker = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.UptimeCheckConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
  */
-var UptimeCheckConfig = {
+const UptimeCheckConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
@@ -285,7 +285,7 @@ var UptimeCheckConfig = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.UptimeCheckIp definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
  */
-var UptimeCheckIp = {
+const UptimeCheckIp = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -295,7 +295,7 @@ var UptimeCheckIp = {
  * @enum {number}
  * @memberof google.monitoring.v3
  */
-var UptimeCheckRegion = {
+const UptimeCheckRegion = {
 
   /**
    * Default value if no region is specified. Will result in uptime checks
@@ -336,7 +336,7 @@ var UptimeCheckRegion = {
  * @enum {number}
  * @memberof google.monitoring.v3
  */
-var GroupResourceType = {
+const GroupResourceType = {
 
   /**
    * Default value (not valid).

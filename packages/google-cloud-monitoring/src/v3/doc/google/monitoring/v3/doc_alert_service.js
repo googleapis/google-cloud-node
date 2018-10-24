@@ -39,7 +39,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.CreateAlertPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/alert_service.proto}
  */
-var CreateAlertPolicyRequest = {
+const CreateAlertPolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -55,7 +55,7 @@ var CreateAlertPolicyRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetAlertPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/alert_service.proto}
  */
-var GetAlertPolicyRequest = {
+const GetAlertPolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -100,7 +100,7 @@ var GetAlertPolicyRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListAlertPoliciesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/alert_service.proto}
  */
-var ListAlertPoliciesRequest = {
+const ListAlertPoliciesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -121,7 +121,7 @@ var ListAlertPoliciesRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListAlertPoliciesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/alert_service.proto}
  */
-var ListAlertPoliciesResponse = {
+const ListAlertPoliciesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -165,7 +165,7 @@ var ListAlertPoliciesResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.UpdateAlertPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/alert_service.proto}
  */
-var UpdateAlertPolicyRequest = {
+const UpdateAlertPolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -183,6 +183,6 @@ var UpdateAlertPolicyRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.DeleteAlertPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/alert_service.proto}
  */
-var DeleteAlertPolicyRequest = {
+const DeleteAlertPolicyRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

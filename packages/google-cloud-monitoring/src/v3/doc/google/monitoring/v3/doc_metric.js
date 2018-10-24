@@ -39,7 +39,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.Point definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric.proto}
  */
-var Point = {
+const Point = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -107,6 +107,6 @@ var Point = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.TimeSeries definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric.proto}
  */
-var TimeSeries = {
+const TimeSeries = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

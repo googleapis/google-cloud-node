@@ -37,7 +37,7 @@
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListUptimeCheckConfigsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var ListUptimeCheckConfigsRequest = {
+const ListUptimeCheckConfigsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -64,7 +64,7 @@ var ListUptimeCheckConfigsRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListUptimeCheckConfigsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var ListUptimeCheckConfigsResponse = {
+const ListUptimeCheckConfigsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -79,7 +79,7 @@ var ListUptimeCheckConfigsResponse = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.GetUptimeCheckConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var GetUptimeCheckConfigRequest = {
+const GetUptimeCheckConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -99,7 +99,7 @@ var GetUptimeCheckConfigRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.CreateUptimeCheckConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var CreateUptimeCheckConfigRequest = {
+const CreateUptimeCheckConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -133,7 +133,7 @@ var CreateUptimeCheckConfigRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.UpdateUptimeCheckConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var UpdateUptimeCheckConfigRequest = {
+const UpdateUptimeCheckConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -148,7 +148,7 @@ var UpdateUptimeCheckConfigRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.DeleteUptimeCheckConfigRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var DeleteUptimeCheckConfigRequest = {
+const DeleteUptimeCheckConfigRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -172,7 +172,7 @@ var DeleteUptimeCheckConfigRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListUptimeCheckIpsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var ListUptimeCheckIpsRequest = {
+const ListUptimeCheckIpsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -197,6 +197,6 @@ var ListUptimeCheckIpsRequest = {
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.ListUptimeCheckIpsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime_service.proto}
  */
-var ListUptimeCheckIpsResponse = {
+const ListUptimeCheckIpsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

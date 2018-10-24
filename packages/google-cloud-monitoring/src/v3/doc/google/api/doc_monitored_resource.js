@@ -60,7 +60,7 @@
  * @memberof google.api
  * @see [google.api.MonitoredResourceDescriptor definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/monitored_resource.proto}
  */
-var MonitoredResourceDescriptor = {
+const MonitoredResourceDescriptor = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -93,7 +93,7 @@ var MonitoredResourceDescriptor = {
  * @memberof google.api
  * @see [google.api.MonitoredResource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/monitored_resource.proto}
  */
-var MonitoredResource = {
+const MonitoredResource = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -101,15 +101,14 @@ var MonitoredResource = {
  * Auxiliary metadata for a MonitoredResource object.
  * MonitoredResource objects contain the minimum set of information to
  * uniquely identify a monitored resource instance. There is some other useful
- * auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion
- * pipeline to extract metadata for cloud resources of all types , and stores
+ * auxiliary metadata. Monitoring and Logging use an ingestion
+ * pipeline to extract metadata for cloud resources of all types, and store
  * the metadata in this message.
  *
  * @property {Object} systemLabels
  *   Output only. Values for predefined system metadata labels.
- *   System labels are a kind of metadata extracted by Google Stackdriver.
- *   Stackdriver determines what system labels are useful and how to obtain
- *   their values. Some examples: "machine_image", "vpc", "subnet_id",
+ *   System labels are a kind of metadata extracted by Google, including
+ *   "machine_image", "vpc", "subnet_id",
  *   "security_group", "name", etc.
  *   System label values can be only strings, Boolean values, or a list of
  *   strings. For example:
@@ -127,6 +126,6 @@ var MonitoredResource = {
  * @memberof google.api
  * @see [google.api.MonitoredResourceMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/monitored_resource.proto}
  */
-var MonitoredResourceMetadata = {
+const MonitoredResourceMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
