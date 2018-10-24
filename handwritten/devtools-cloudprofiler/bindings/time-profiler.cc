@@ -83,7 +83,7 @@ NAN_METHOD(StopProfiling) {
 }
 
 NAN_METHOD(SetSamplingInterval) {
-#if NODE_MODULE_VERSION > NODE_10_0_MODULE_VERSION
+#if NODE_MODULE_VERSION > NODE_8_0_MODULE_VERSION
   int us = info[0].As<Integer>()->Value();
 #else
   int us = info[0].As<Integer>()->IntegerValue();

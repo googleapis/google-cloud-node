@@ -62,7 +62,7 @@ NAN_METHOD(StartSamplingHeapProfiler) {
       return Nan::ThrowTypeError("First argument type must be Integer.");
     }
 
-#if NODE_MODULE_VERSION > NODE_10_0_MODULE_VERSION
+#if NODE_MODULE_VERSION > NODE_8_0_MODULE_VERSION
     uint64_t sample_interval = info[0].As<Integer>()->Value();
     int stack_depth = info[1].As<Integer>()->Value();
 #else
