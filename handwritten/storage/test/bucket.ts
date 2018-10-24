@@ -96,6 +96,7 @@ const fakePromisify = {
 };
 
 const fakeUtil = extend({}, util);
+fakeUtil.noop = util.noop;
 
 let extended = false;
 const fakePaginator = {
