@@ -21,17 +21,15 @@ import * as async from 'async';
 import * as crypto from 'crypto';
 import * as extend from 'extend';
 import * as fs from 'fs';
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 const normalizeNewline = require('normalize-newline');
 import * as path from 'path';
 import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
-import {Storage, Bucket, File, AccessControlObject, Notification} from '../src';
-import {DeleteBucketCallback} from '../src/bucket';
+import {Storage, Bucket, File, AccessControlObject, Notification, GetNotificationOptions, DeleteBucketCallback, CreateNotificationOptions, BucketExistsOptions, BucketExistsCallback, GetBucketOptions, GetBucketCallback, GetNotificationsCallback, MakeBucketPrivateOptions, MakeBucketPrivateCallback, SetBucketMetadataOptions, SetBucketMetadataCallback, DeleteFileCallback, SaveCallback, DownloadOptions, DownloadCallback, FileExistsOptions, FileExistsCallback, CreateReadStreamOptions, CreateResumableUploadOptions, GetFileOptions, GetFileCallback, SetStorageClassOptions, SetStorageClassCallback, UploadOptions, UploadCallback, CopyOptions, CopyCallback, GetFileMetadataOptions, GetFileMetadataCallback, MakeFilePrivateOptions, MakeFilePrivateCallback, SetFileMetadataOptions, SetFileMetadataCallback, AddAclOptions, AddAclCallback, UpdateAclCallback, UpdateAclOptions, GetAclOptions, GetAclCallback, RemoveAclOptions, RemoveAclCallback, GetPolicyOptions, GetPolicyCallback, SetPolicyCallback, TestIamPermissionsOptions, TestIamPermissionsCallback, GetNotificationCallback, GetNotificationMetadataOptions, GetNotificationMetadataCallback, DeleteNotificationOptions, DeleteNotificationCallback} from '../src';
 import * as nock from 'nock';
-import {DeleteFileCallback, SaveCallback, DownloadOptions, DownloadCallback, FileExistsOptions, FileExistsCallback, CreateReadStreamOptions, CreateResumableUploadOptions, GetFileOptions} from '../src/file';
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
@@ -54,8 +52,8 @@ describe('storage', () => {
   });
   // tslint:disable-next-line no-any
   let topic: any;
-
-  const FILES = {
+  // tslint:disable-next-line no-any
+  const FILES: {[index: string]: any} = {
     logo: {
       path: path.join(
           __dirname, '../../system-test/data/CloudPlatform_128px_Retina.png'),
@@ -594,7 +592,7 @@ describe('storage', () => {
   });
 
   describe('iam', () => {
-    let PROJECT_ID;
+    let PROJECT_ID: string;
 
     before(done => {
       storage.authClient.getProjectId((err, projectId) => {
@@ -602,8 +600,7 @@ describe('storage', () => {
           done(err);
           return;
         }
-
-        PROJECT_ID = projectId;
+        PROJECT_ID = projectId!;
         done();
       });
     });
@@ -736,7 +733,7 @@ describe('storage', () => {
     after(done => {
       async.series(
           bucketsToCreate.map(bucket => {
-            return done => {
+            return (done: DeleteBucketCallback) => {
               storage.bucket(bucket).delete(done);
             };
           }),
@@ -878,7 +875,8 @@ describe('storage', () => {
               assert.ifError(err);
 
               const expectedLabels = extend({}, LABELS);
-              delete expectedLabels[labelKeyToDelete];
+              delete (
+                  expectedLabels as {[index: string]: {}})[labelKeyToDelete];
 
               assert.deepStrictEqual(labels, expectedLabels);
 
@@ -1079,7 +1077,7 @@ describe('storage', () => {
 
       const RETENTION_PERIOD_SECONDS = 5;  // Each test has this much time!
 
-      function createFile(callback) {
+      function createFile(callback: GetFileCallback) {
         const file = BUCKET.file(generateName());
         FILES.push(file);
 
@@ -1093,7 +1091,7 @@ describe('storage', () => {
         });
       }
 
-      function deleteFiles(callback) {
+      function deleteFiles(callback: async.ErrorCallback) {
         async.each(FILES, (file, next) => {
           file.setMetadata({temporaryHold: null}, err => {
             if (err) {
@@ -1123,8 +1121,8 @@ describe('storage', () => {
         createFile((err, file) => {
           assert.ifError(err);
 
-          file.save('new data', err => {
-            assert.strictEqual(err.code, 403);
+          file!.save('new data', err => {
+            assert.strictEqual((err as ApiError).code, 403);
             done();
           });
         });
@@ -1134,8 +1132,8 @@ describe('storage', () => {
         createFile((err, file) => {
           assert.ifError(err);
 
-          file.delete(err => {
-            assert.strictEqual(err.code, 403);
+          file!.delete(err => {
+            assert.strictEqual((err as ApiError).code, 403);
             done();
           });
         });
@@ -1177,11 +1175,13 @@ describe('storage', () => {
         projectId: process.env.GCN_STORAGE_2ND_PROJECT_ID,
         keyFilename: process.env.GCN_STORAGE_2ND_PROJECT_KEY,
       });
-      let bucket:
-          Bucket;  // the source bucket, which will have requesterPays enabled.
-      let bucketNonWhitelist;  // the bucket object from the requesting user.
+      // the source bucket, which will have requesterPays enabled.
+      let bucket: Bucket;
+      // the bucket object from the requesting user.
+      let bucketNonWhitelist: Bucket;
 
-      function isRequesterPaysEnabled(callback) {
+      function isRequesterPaysEnabled(
+          callback: (err: Error|null, isEnabled?: boolean) => void) {
         bucket.getMetadata((err, metadata) => {
           if (err) {
             callback(err);
@@ -1240,7 +1240,7 @@ describe('storage', () => {
       describe('methods that accept userProject', () => {
         let file: File;
         let notification: Notification;
-        let topicName;
+        let topicName: string;
 
         const USER_PROJECT_OPTIONS = {
           userProject: process.env.GCN_STORAGE_2ND_PROJECT_ID,
@@ -1293,15 +1293,15 @@ describe('storage', () => {
           deleteBucket(bucketNonWhitelist, USER_PROJECT_OPTIONS, done);
         });
 
-        function doubleTest(testFunction) {
+        function doubleTest(testFunction: Function) {
           const failureMessage =
               'Bucket is requester pays bucket but no user project provided.';
 
-          return done => {
+          return (done: async.ErrorCallback) => {
             async.series(
                 [
                   next => {
-                    testFunction({}, err => {
+                    testFunction({}, (err: Error) => {
                       assert(err.message.indexOf(failureMessage) > -1);
                       next();
                     });
@@ -1332,79 +1332,106 @@ describe('storage', () => {
                 sourceFiles, destinationFile, USER_PROJECT_OPTIONS, done);
           });
 
-          function createFile(fileObject, callback) {
+          // tslint:disable-next-line no-any
+          function createFile(fileObject: any, callback: async.ErrorCallback) {
             fileObject.file.save(
                 fileObject.contents, USER_PROJECT_OPTIONS, callback);
           }
         });
 
-        it('bucket#createNotification', doubleTest((options, done) => {
-             bucketNonWhitelist.createNotification(
-                 topicName, options, (err, _notification) => {
-                   notification = _notification;
-                   done(err);
-                 });
-           }));
+        it('bucket#createNotification',
+           doubleTest(
+               (options: CreateNotificationOptions,
+                done: async.ErrorCallback) => {
+                 bucketNonWhitelist.createNotification(
+                     topicName, options, (err, _notification) => {
+                       notification = _notification!;
+                       done(err);
+                     });
+               }));
 
-        it('bucket#exists', doubleTest((options, done) => {
-             bucketNonWhitelist.exists(options, done);
-           }));
+        it('bucket#exists',
+           doubleTest(
+               (options: BucketExistsOptions, done: BucketExistsCallback) => {
+                 bucketNonWhitelist.exists(options, done);
+               }));
 
-        it('bucket#get', doubleTest((options, done) => {
+        it('bucket#get',
+           doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
              bucketNonWhitelist.get(options, done);
            }));
 
-        it('bucket#getMetadata', doubleTest((options, done) => {
+        it('bucket#getMetadata',
+           doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
              bucketNonWhitelist.get(options, done);
            }));
 
-        it('bucket#getNotifications', doubleTest((options, done) => {
-             bucketNonWhitelist.getNotifications(options, done);
-           }));
+        it('bucket#getNotifications',
+           doubleTest(
+               (options: GetNotificationOptions,
+                done: GetNotificationsCallback) => {
+                 bucketNonWhitelist.getNotifications(options, done);
+               }));
 
-        it('bucket#makePrivate', doubleTest((options, done) => {
-             bucketNonWhitelist.makePrivate(options, done);
-           }));
+        it('bucket#makePrivate',
+           doubleTest(
+               (options: MakeBucketPrivateOptions,
+                done: MakeBucketPrivateCallback) => {
+                 bucketNonWhitelist.makePrivate(options, done);
+               }));
 
-        it('bucket#setMetadata', doubleTest((options, done) => {
-             bucketNonWhitelist.setMetadata({newMetadata: true}, options, done);
-           }));
+        it('bucket#setMetadata',
+           doubleTest(
+               (options: SetBucketMetadataOptions,
+                done: SetBucketMetadataCallback) => {
+                 bucketNonWhitelist.setMetadata(
+                     {newMetadata: true}, options, done);
+               }));
 
-        it('bucket#setStorageClass', doubleTest((options, done) => {
-             bucketNonWhitelist.setStorageClass(
-                 'multi-regional', options, done);
-           }));
+        it('bucket#setStorageClass',
+           doubleTest(
+               (options: SetStorageClassOptions,
+                done: SetStorageClassCallback) => {
+                 bucketNonWhitelist.setStorageClass(
+                     'multi-regional', options, done);
+               }));
 
-        it('bucket#upload', doubleTest((options, done) => {
+        it('bucket#upload',
+           doubleTest((options: UploadOptions, done: UploadCallback) => {
              bucketNonWhitelist.upload(FILES.big.path, options, done);
            }));
 
-        it('file#copy', doubleTest((options, done) => {
+        it('file#copy',
+           doubleTest((options: CopyOptions, done: CopyCallback) => {
              file.copy('new-file.txt', options, done);
            }));
 
         it('file#createReadStream',
-           doubleTest((options: CreateReadStreamOptions, done) => {
-             file.createReadStream(options)
-                 .on('error', done)
-                 .on('end', done)
-                 .on('data', util.noop);
-           }));
+           doubleTest(
+               (options: CreateReadStreamOptions,
+                done: (err: Error) => void) => {
+                 file.createReadStream(options)
+                     .on('error', done)
+                     .on('end', done)
+                     .on('data', util.noop);
+               }));
 
         it('file#createResumableUpload',
-           doubleTest((options: CreateResumableUploadOptions, done) => {
-             file.createResumableUpload(options, (err, uri) => {
-               if (err) {
-                 done(err);
-                 return;
-               }
+           doubleTest(
+               (options: CreateResumableUploadOptions,
+                done: (err: Error) => void) => {
+                 file.createResumableUpload(options, (err, uri) => {
+                   if (err) {
+                     done(err);
+                     return;
+                   }
 
-               file.createWriteStream({uri})
-                   .on('error', done)
-                   .on('finish', done)
-                   .end('Test data');
-             });
-           }));
+                   file.createWriteStream({uri})
+                       .on('error', done)
+                       .on('finish', done)
+                       .end('Test data');
+                 });
+               }));
 
         it('file#download',
            doubleTest((options: DownloadOptions, done: DownloadCallback) => {
@@ -1417,19 +1444,27 @@ describe('storage', () => {
                  file.exists(options, done);
                }));
 
-        it('file#get', doubleTest((options: GetFileOptions, done) => {
+        it('file#get',
+           doubleTest((options: GetFileOptions, done: GetFileCallback) => {
              file.get(options, done);
            }));
 
-        it('file#getMetadata', doubleTest((options, done) => {
-             file.getMetadata(options, done);
-           }));
+        it('file#getMetadata',
+           doubleTest(
+               (options: GetFileMetadataOptions,
+                done: GetFileMetadataCallback) => {
+                 file.getMetadata(options, done);
+               }));
 
-        it('file#makePrivate', doubleTest((options, done) => {
-             file.makePrivate(options, done);
-           }));
+        it('file#makePrivate',
+           doubleTest(
+               (options: MakeFilePrivateOptions,
+                done: MakeFilePrivateCallback) => {
+                 file.makePrivate(options, done);
+               }));
 
-        it('file#move', doubleTest((options, done) => {
+        it('file#move',
+           doubleTest((options: GetFileOptions, done: SaveCallback) => {
              const newFile = bucketNonWhitelist.file(generateName());
 
              file.move(newFile, options, err => {
@@ -1443,15 +1478,22 @@ describe('storage', () => {
              });
            }));
 
-        it('file#setMetadata', doubleTest((options, done) => {
-             file.setMetadata({newMetadata: true}, options, done);
-           }));
+        it('file#setMetadata',
+           doubleTest(
+               (options: SetFileMetadataOptions,
+                done: SetFileMetadataCallback) => {
+                 file.setMetadata({newMetadata: true}, options, done);
+               }));
 
-        it('file#setStorageClass', doubleTest((options, done) => {
-             file.setStorageClass('multi-regional', options, done);
-           }));
+        it('file#setStorageClass',
+           doubleTest(
+               (options: SetStorageClassOptions,
+                done: SetStorageClassCallback) => {
+                 file.setStorageClass('multi-regional', options, done);
+               }));
 
-        it('acl#add', doubleTest((options, done) => {
+        it('acl#add',
+           doubleTest((options: AddAclOptions, done: AddAclCallback) => {
              options = extend(
                  {
                    entity: USER_ACCOUNT,
@@ -1462,7 +1504,8 @@ describe('storage', () => {
              bucketNonWhitelist.acl.add(options, done);
            }));
 
-        it('acl#update', doubleTest((options, done) => {
+        it('acl#update',
+           doubleTest((options: UpdateAclOptions, done: UpdateAclCallback) => {
              options = extend(
                  {
                    entity: USER_ACCOUNT,
@@ -1473,7 +1516,8 @@ describe('storage', () => {
              bucketNonWhitelist.acl.update(options, done);
            }));
 
-        it('acl#get', doubleTest((options, done) => {
+        it('acl#get',
+           doubleTest((options: GetAclOptions, done: GetAclCallback) => {
              options = extend(
                  {
                    entity: USER_ACCOUNT,
@@ -1483,7 +1527,8 @@ describe('storage', () => {
              bucketNonWhitelist.acl.get(options, done);
            }));
 
-        it('acl#delete', doubleTest((options, done) => {
+        it('acl#delete',
+           doubleTest((options: RemoveAclOptions, done: RemoveAclCallback) => {
              options = extend(
                  {
                    entity: USER_ACCOUNT,
@@ -1493,11 +1538,13 @@ describe('storage', () => {
              bucketNonWhitelist.acl.delete(options, done);
            }));
 
-        it('iam#getPolicy', doubleTest((options, done) => {
+        it('iam#getPolicy',
+           doubleTest((options: GetPolicyOptions, done: GetPolicyCallback) => {
              bucketNonWhitelist.iam.getPolicy(options, done);
            }));
 
-        it('iam#setPolicy', doubleTest((options, done) => {
+        it('iam#setPolicy',
+           doubleTest((options: GetPolicyOptions, done: SetPolicyCallback) => {
              bucket.iam.getPolicy((err, policy) => {
                if (err) {
                  done(err);
@@ -1509,45 +1556,58 @@ describe('storage', () => {
                  members: ['allUsers'],
                });
 
-               bucketNonWhitelist.iam.setPolicy(policy, options, done);
+               bucketNonWhitelist.iam.setPolicy(policy!, options, done);
              });
            }));
 
-        it('iam#testPermissions', doubleTest((options, done) => {
-             const tests = ['storage.buckets.delete'];
-             bucketNonWhitelist.iam.testPermissions(tests, options, done);
-           }));
+        it('iam#testPermissions',
+           doubleTest(
+               (options: TestIamPermissionsOptions,
+                done: TestIamPermissionsCallback) => {
+                 const tests = ['storage.buckets.delete'];
+                 bucketNonWhitelist.iam.testPermissions(tests, options, done);
+               }));
 
-        it('notification#get', doubleTest((options, done) => {
-             if (!notification) {
-               throw new Error('Notification was not successfully created.');
-             }
+        it('notification#get',
+           doubleTest(
+               (options: GetNotificationOptions,
+                done: GetNotificationCallback) => {
+                 if (!notification) {
+                   throw new Error(
+                       'Notification was not successfully created.');
+                 }
 
-             notification.get(options, done);
-           }));
+                 notification.get(options, done);
+               }));
 
-        it('notification#getMetadata', doubleTest((options, done) => {
-             if (!notification) {
-               throw new Error('Notification was not successfully created.');
-             }
+        it('notification#getMetadata',
+           doubleTest(
+               (options: GetNotificationMetadataOptions,
+                done: GetNotificationMetadataCallback) => {
+                 if (!notification) {
+                   throw new Error(
+                       'Notification was not successfully created.');
+                 }
+                 notification.getMetadata(options, done);
+               }));
 
-             notification.getMetadata(options, done);
-           }));
-
-        it('notification#delete', doubleTest((options, done) => {
-             if (!notification) {
-               throw new Error('Notification was not successfully created.');
-             }
-
-             notification.delete(options, done);
-           }));
+        it('notification#delete',
+           doubleTest(
+               (options: DeleteNotificationOptions,
+                done: DeleteNotificationCallback) => {
+                 if (!notification) {
+                   throw new Error(
+                       'Notification was not successfully created.');
+                 }
+                 notification.delete(options, done);
+               }));
       });
     });
   });
 
   describe('write, read, and remove files', () => {
     before(done => {
-      function setHash(filesKey, done) {
+      function setHash(filesKey: string, done: () => {}) {
         const file = FILES[filesKey];
         const hash = crypto.createHash('md5');
 
@@ -1558,8 +1618,8 @@ describe('storage', () => {
               done();
             });
       }
-
-      async.each(Object.keys(FILES), setHash, done);
+      // tslint:disable-next-line no-any
+      async.each(Object.keys(FILES), setHash as any, done);
     });
 
     it('should read/write from/to a file in a directory', done => {
@@ -1604,7 +1664,7 @@ describe('storage', () => {
     });
 
     it('should read a byte range from a file', done => {
-      bucket.upload(FILES.big.path, (err, file) => {
+      bucket.upload(FILES.big.path, (err: Error|null, file?: File|null) => {
         assert.ifError(err);
 
         const fileSize = file!.metadata.size;
@@ -1630,10 +1690,8 @@ describe('storage', () => {
 
     it('should download a file to memory', done => {
       const fileContents = fs.readFileSync(FILES.big.path);
-
-      bucket.upload(FILES.big.path, (err, file) => {
+      bucket.upload(FILES.big.path, (err: Error|null, file?: File|null) => {
         assert.ifError(err);
-
         file!.download((err, remoteContents) => {
           assert.ifError(err);
           assert.strictEqual(String(fileContents), String(remoteContents));
@@ -1654,12 +1712,9 @@ describe('storage', () => {
       const options = {
         gzip: true,
       };
-
       const expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
-
       bucket.upload(FILES.html.path, options, (err, file) => {
         assert.ifError(err);
-
         file!.download((err, contents) => {
           assert.ifError(err);
           assert.strictEqual(contents.toString(), expectedContents);
@@ -1685,7 +1740,7 @@ describe('storage', () => {
         // Sometimes this file is not found immediately; include some
         // retry to attempt to make the test less flaky.
         let attempt = 0;
-        const downloadCallback = (err, contents) => {
+        const downloadCallback = (err: Error|null, contents: {}) => {
           // If we got an error, gracefully retry a few times.
           if (err) {
             attempt += 1;
@@ -1707,10 +1762,8 @@ describe('storage', () => {
       it('should save arbitrary data', done => {
         const file = bucket.file('TestFile');
         const data = 'hello';
-
         file!.save(data, err => {
           assert.ifError(err);
-
           file!.download((err, contents) => {
             assert.strictEqual(contents.toString(), data);
             done();
@@ -1736,10 +1789,8 @@ describe('storage', () => {
           metadata: {contentType: 'image/png'},
           resumable: false,
         };
-
         bucket.upload(FILES.logo.path, options, (err, file) => {
           assert.ifError(err);
-
           file!.getMetadata((err, metadata) => {
             assert.ifError(err);
             assert.strictEqual(
@@ -1756,9 +1807,8 @@ describe('storage', () => {
           // Use a random name to force an empty ConfigStore cache.
           const file = bucket.file(generateName());
           const fileSize = metadata.size;
-
           upload({interrupt: true}, err => {
-            assert.strictEqual(err.message, 'Interrupted.');
+            assert.strictEqual(err!.message, 'Interrupted.');
             upload({interrupt: false}, err => {
               assert.ifError(err);
               assert.strictEqual(Number(file.metadata.size), fileSize);
@@ -1766,7 +1816,8 @@ describe('storage', () => {
             });
           });
 
-          function upload(opts, callback) {
+          // tslint:disable-next-line no-any
+          function upload(opts: any, callback: async.ErrorCallback) {
             const ws = file.createWriteStream();
             let sizeStreamed = 0;
 
@@ -1893,29 +1944,30 @@ describe('storage', () => {
       const FILE_CONTENTS = 'secret data';
 
       const BUCKET_LOCATION = 'us';
-      let PROJECT_ID;
-      let SERVICE_ACCOUNT_EMAIL;
+      let PROJECT_ID: string;
+      let SERVICE_ACCOUNT_EMAIL: string;
 
       const keyRingId = generateName();
       const cryptoKeyId = generateName();
 
       let bucket: Bucket;
-      let kmsKeyName;
-      let keyRingsBaseUrl;
+      let kmsKeyName: string;
+      let keyRingsBaseUrl: string;
 
-      function setProjectId(projectId) {
+      function setProjectId(projectId: string) {
         PROJECT_ID = projectId;
         keyRingsBaseUrl = `https://cloudkms.googleapis.com/v1/projects/${
             PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings`;
         kmsKeyName = generateKmsKeyName(cryptoKeyId);
       }
 
-      function generateKmsKeyName(cryptoKeyId) {
+      function generateKmsKeyName(cryptoKeyId: string) {
         return `projects/${PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings/${
             keyRingId}/cryptoKeys/${cryptoKeyId}`;
       }
 
-      function createCryptoKey(cryptoKeyId, callback) {
+      function createCryptoKey(
+          cryptoKeyId: string, callback: async.ErrorCallback) {
         async.series(
             [
               function createCryptoKeyId(next) {
@@ -1940,9 +1992,7 @@ describe('storage', () => {
                     next(err);
                     return;
                   }
-
-                  SERVICE_ACCOUNT_EMAIL = serviceAccount!.emailAddress;
-
+                  SERVICE_ACCOUNT_EMAIL = serviceAccount!.emailAddress!;
                   next();
                 });
               },
@@ -1982,7 +2032,7 @@ describe('storage', () => {
                     next(err);
                     return;
                   }
-                  setProjectId(projectId);
+                  setProjectId(projectId!);
                   next();
                 });
               },
@@ -2250,7 +2300,7 @@ describe('storage', () => {
         assert.ifError(err);
 
         const otherBucket = storage.bucket(generateName());
-        otherBucket.create(err => {
+        otherBucket.create((err: Error) => {
           assert.ifError(err);
 
           const destPath = 'gs://' + otherBucket.name + '/CloudLogoCopy';
@@ -2315,10 +2365,10 @@ describe('storage', () => {
         address: 'https://yahoo.com',
       };
 
-      bucket.createChannel('new-channel', config, err => {
+      bucket.createChannel('new-channel', config, (err: Error|null) => {
         // Actually creating a channel is pretty complicated. This will at least
         // let us know we hit the right endpoint and it received "yahoo.com".
-        assert(err.message.includes(config.address));
+        assert(err!.message.includes(config.address));
         done();
       });
     });
@@ -2362,7 +2412,8 @@ describe('storage', () => {
         });
       });
 
-      function createFile(fileObject, callback) {
+      // tslint:disable-next-line no-any
+      function createFile(fileObject: any, callback: SaveCallback) {
         fileObject.file.save(fileObject.contents, callback);
       }
     });
@@ -2552,7 +2603,8 @@ describe('storage', () => {
         });
       });
 
-      function createFile(fileObject, callback) {
+      // tslint:disable-next-line no-any
+      function createFile(fileObject: any, callback: SaveCallback) {
         fileObject.file.save(fileObject.contents, callback);
       }
     });
@@ -2578,7 +2630,7 @@ describe('storage', () => {
           },
           (err, signedReadUrl) => {
             assert.ifError(err);
-            fetch(signedReadUrl)
+            fetch(signedReadUrl!)
                 .then(res => res.text())
                 .then(body => {
                   assert.strictEqual(body, localFile.toString());
@@ -2596,7 +2648,7 @@ describe('storage', () => {
           },
           (err, signedDeleteUrl) => {
             assert.ifError(err);
-            fetch(signedDeleteUrl, {method: 'DELETE'})
+            fetch(signedDeleteUrl!, {method: 'DELETE'})
                 .then(() => {
                   file.getMetadata(err => {
                     assert.strictEqual((err as ApiError).code, 404);
@@ -2679,8 +2731,10 @@ describe('storage', () => {
           .then(() => {
             return bucket.getNotifications();
           })
-          .then(data => {
-            return Promise.all(data[0].map(notification => {
+          // tslint:disable-next-line no-any
+          .then((data: any) => {
+            // tslint:disable-next-line no-any
+            return Promise.all(data[0].map((notification: any) => {
               return notification.delete();
             }));
           });
@@ -2729,13 +2783,14 @@ describe('storage', () => {
     });
 
     it('should emit events to a subscription', done => {
-      subscription.on('error', done).on('message', message => {
+      // tslint:disable-next-line no-any
+      subscription.on('error', done).on('message', (message: any) => {
         const attrs = message.attributes;
         assert.strictEqual(attrs.eventType, 'OBJECT_FINALIZE');
         done();
       });
 
-      bucket.upload(FILES.logo.path, err => {
+      bucket.upload(FILES.logo.path, (err: Error|null) => {
         if (err) {
           done(err);
         }
@@ -2816,7 +2871,7 @@ describe('storage', () => {
     return TESTS_PREFIX + shortUUID();
   }
 
-  function deleteAllBuckets(callback) {
+  function deleteAllBuckets(callback: async.ErrorCallback) {
     storage.getBuckets(
         {
           prefix: TESTS_PREFIX,
@@ -2830,8 +2885,9 @@ describe('storage', () => {
         });
   }
 
-  function deleteAllTopics(callback) {
-    pubsub.getTopics((err, topics) => {
+  function deleteAllTopics(callback: async.ErrorCallback) {
+    // tslint:disable-next-line no-any
+    pubsub.getTopics((err: Error, topics: any[]) => {
       if (err) {
         callback(err);
         return;

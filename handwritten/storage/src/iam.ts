@@ -363,10 +363,12 @@ class Iam {
 
           const availablePermissions = arrify(resp.permissions);
 
-          const permissionsHash = permissionsArray.reduce((acc, permission) => {
-            acc[permission] = availablePermissions.indexOf(permission) > -1;
-            return acc;
-          }, {});
+          const permissionsHash = permissionsArray.reduce(
+              (acc: {[index: string]: boolean}, permission) => {
+                acc[permission] = availablePermissions.indexOf(permission) > -1;
+                return acc;
+              },
+              {});
 
           cb!(null, permissionsHash, resp);
         });

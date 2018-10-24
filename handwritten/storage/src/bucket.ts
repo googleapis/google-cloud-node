@@ -409,7 +409,7 @@ export type GetBucketMetadataResponse = [Metadata, request.Response];
  * @param {object} metadata The bucket metadata.
  * @param {object} apiResponse The full API response.
  */
-export interface GetBucketMetadataCallback extends GetMetadataCallback {
+export interface GetBucketMetadataCallback {
   (err: ApiError|null, metadata: Metadata|null,
    apiResponse: request.Response): void;
 }
@@ -610,7 +610,7 @@ export type UploadResponse = [File, request.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface UploadCallback {
-  (err?: Error|null, file?: File|null, apiResponse?: request.Response): void;
+  (err: Error|null, file?: File|null, apiResponse?: request.Response): void;
 }
 
 /**
@@ -2909,9 +2909,9 @@ class Bucket extends ServiceObject {
    * Example of uploading an encrypted file:
    */
   upload(pathString: string, options?: UploadOptions): Promise<UploadResponse>;
-  upload(pathString: string, callback: UploadCallback): void;
   upload(pathString: string, options: UploadOptions, callback: UploadCallback):
       void;
+  upload(pathString: string, callback: UploadCallback): void;
   upload(
       pathString: string, optionsOrCallback?: UploadOptions|UploadCallback,
       callback?: UploadCallback): Promise<UploadResponse>|void {
