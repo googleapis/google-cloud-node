@@ -18,25 +18,18 @@ import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 import logging
-
 logging.basicConfig(level=logging.DEBUG)
 
-common_templates = gcp.CommonTemplates()
-
+gapic = gcp.GAPICGenerator()
 version = "v3"
-
 library = gapic.node_library(
-    "monitoring", version, config_path="/google/monitoring/artman_monitoring.yaml"
+  "monitoring", version, config_path="/google/monitoring/artman_monitoring.yaml"
 )
-
 s.copy(library, excludes=["src/index.js", "README.md", "package.json"])
 
+common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
-"""
-Node.js specific cleanup
-"""
 subprocess.run(["npm", "install"])
-subprocess.run(["npm", "run", "prettier"])
-subprocess.run(["npm", "run", "lint"])
+subprocess.run(["npm", "run", "fix"])
