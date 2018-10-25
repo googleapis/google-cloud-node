@@ -4,6 +4,46 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.2.0
+
+### Bug Fixes
+- fix: re-enable typescript types ([#484](https://github.com/googleapis/nodejs-storage/pull/484))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/common to ^0.26.0 (edited) ([#480](https://github.com/googleapis/nodejs-storage/pull/480))
+- chore: Remove 'is' dependency ([#462](https://github.com/googleapis/nodejs-storage/pull/462))
+- chore: upgrade teeny-request to 3.11.0 with type definitions ([#457](https://github.com/googleapis/nodejs-storage/pull/457))
+- feat: use small HTTP dependency ([#416](https://github.com/googleapis/nodejs-storage/pull/416))
+
+### Documentation
+- docs: Minor docs correction ([#465](https://github.com/googleapis/nodejs-storage/pull/465))
+
+### Internal / Testing Changes
+- chore: remove old issue template ([#485](https://github.com/googleapis/nodejs-storage/pull/485))
+- chore(typescript): enable noImplicitAny ([#483](https://github.com/googleapis/nodejs-storage/pull/483))
+- chore(typescript): improve typescript types and update tests ([#482](https://github.com/googleapis/nodejs-storage/pull/482))
+- build: run tests on node11 ([#481](https://github.com/googleapis/nodejs-storage/pull/481))
+- chores(build): do not collect sponge.xml from windows builds ([#478](https://github.com/googleapis/nodejs-storage/pull/478))
+- chores(build): run codecov on continuous builds ([#476](https://github.com/googleapis/nodejs-storage/pull/476))
+- chore: update new issue template ([#475](https://github.com/googleapis/nodejs-storage/pull/475))
+- fix: enable noImplicitAny for src/bucket.ts ([#472](https://github.com/googleapis/nodejs-storage/pull/472))
+- fix(tests): use unique prefix for system tests to avoid collision with another run ([#468](https://github.com/googleapis/nodejs-storage/pull/468))
+- fix: improve the types ([#467](https://github.com/googleapis/nodejs-storage/pull/467))
+- chore: move class Storage to storage.ts, create index.ts that contains all exports ([#464](https://github.com/googleapis/nodejs-storage/pull/464))
+- chore: add types to many unit tests ([#463](https://github.com/googleapis/nodejs-storage/pull/463))
+- fix: Annotate Iam types ([#461](https://github.com/googleapis/nodejs-storage/pull/461))
+- fix: complete bucket.ts noImplicitAny ([#460](https://github.com/googleapis/nodejs-storage/pull/460))
+- fix: improve the types on acl.ts ([#459](https://github.com/googleapis/nodejs-storage/pull/459))
+- fix: improve types (7) ([#458](https://github.com/googleapis/nodejs-storage/pull/458))
+- fix: improve the types ([#453](https://github.com/googleapis/nodejs-storage/pull/453))
+- chore: update build config ([#455](https://github.com/googleapis/nodejs-storage/pull/455))
+- fix: improve typescript types in src/file.ts ([#450](https://github.com/googleapis/nodejs-storage/pull/450))
+- build: fix codecov uploading on Kokoro ([#451](https://github.com/googleapis/nodejs-storage/pull/451))
+- test: Attempt to re-enable iam#testPermissions ([#429](https://github.com/googleapis/nodejs-storage/pull/429))
+- chore(deps): update dependency sinon to v7 ([#449](https://github.com/googleapis/nodejs-storage/pull/449))
+- Re-generate library using /synth.py ([#448](https://github.com/googleapis/nodejs-storage/pull/448))
+- Correct parameter name. ([#446](https://github.com/googleapis/nodejs-storage/pull/446))
+
 ## v2.1.0
 
 This release brings support for Bucket/Object lock operations, as well as disable TypeScript as we continue to annotate the project with types.
