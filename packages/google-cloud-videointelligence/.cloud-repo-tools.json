@@ -11,6 +11,13 @@
       "file": "analyze.js",
       "docs_link": "https://cloud.google.com/video-intelligence/docs",
       "usage": "node analyze.js --help"
+    },
+    {
+      "id": "video",
+      "name": "Video Intelligence Beta",
+      "file": "analyze.v1p2beta1.js",
+      "docs_link": "https://cloud.google.com/video-intelligence/docs",
+      "usage": "node analyze.v1p2beta1.js --help"
     }
   ]
 }
