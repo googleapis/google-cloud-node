@@ -905,8 +905,9 @@ const InspectContentResponse = {
  *   from the predefined schema that are missing will be added. No columns in
  *   the existing table will be deleted.
  *
- *   If unspecified, then all available columns will be used for a new table,
- *   and no changes will be made to an existing table.
+ *   If unspecified, then all available columns will be used for a new table or
+ *   an (existing) table with no schema, and no changes will be made to an
+ *   existing table that has a schema.
  *
  *   The number should be among the values of [OutputSchema]{@link google.privacy.dlp.v2.OutputSchema}
  *
@@ -1287,7 +1288,7 @@ const PrivacyMetric = {
    * @property {Object} entityId
    *   Optional message indicating that multiple rows might be associated to a
    *   single individual. If the same entity_id is associated to multiple
-   *   quasi-identifier tuples over distict rows, we consider the entire
+   *   quasi-identifier tuples over distinct rows, we consider the entire
    *   collection of tuples as the composite quasi-identifier. This collection
    *   is a multiset: the order in which the different tuples appear in the
    *   dataset is ignored, but their frequency is taken into account.
@@ -1954,6 +1955,8 @@ const Value = {
  * Message for infoType-dependent details parsed from quote.
  *
  * @property {Object} dateTime
+ *   The date time indicated by the quote.
+ *
  *   This object should have the same structure as [DateTime]{@link google.privacy.dlp.v2.DateTime}
  *
  * @typedef QuoteInfo
@@ -1966,6 +1969,7 @@ const QuoteInfo = {
 
 /**
  * Message for a date time object.
+ * e.g. 2018-01-01, 5th August.
  *
  * @property {Object} date
  *   One or more of the following must be set. All fields are optional, but
@@ -3090,7 +3094,7 @@ const Error = {
  *
  * @property {Object[]} errors
  *   A stream of errors encountered when the trigger was activated. Repeated
- *   errors may result in the JobTrigger automaticaly being paused.
+ *   errors may result in the JobTrigger automatically being paused.
  *   Will return the last 100 errors. Whenever the JobTrigger is modified
  *   this list will be cleared. Output only field.
  *

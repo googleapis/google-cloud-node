@@ -22,7 +22,8 @@
  *   Name of the information type. Either a name of your choosing when
  *   creating a CustomInfoType, or one of the names listed
  *   at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
- *   a built-in type.
+ *   a built-in type. InfoType names should conform to the pattern
+ *   [a-zA-Z0-9_]{1,64}.
  *
  * @typedef InfoType
  * @memberof google.privacy.dlp.v2
@@ -486,7 +487,8 @@ const CloudStorageRegexFileSet = {
  * @property {number[]} fileTypes
  *   List of file type groups to include in the scan.
  *   If empty, all files are scanned and available data format processors
- *   are applied.
+ *   are applied. In addition, the binary content of the selected files
+ *   is always scanned as well.
  *
  *   The number should be among the values of [FileType]{@link google.privacy.dlp.v2.FileType}
  *
@@ -610,6 +612,12 @@ const CloudStoragePath = {
  *
  * @property {number} sampleMethod
  *   The number should be among the values of [SampleMethod]{@link google.privacy.dlp.v2.SampleMethod}
+ *
+ * @property {Object[]} excludedFields
+ *   References to fields excluded from scanning. This allows you to skip
+ *   inspection of entire columns which you know have no findings.
+ *
+ *   This object should have the same structure as [FieldId]{@link google.privacy.dlp.v2.FieldId}
  *
  * @typedef BigQueryOptions
  * @memberof google.privacy.dlp.v2
