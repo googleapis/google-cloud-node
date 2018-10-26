@@ -21,7 +21,6 @@ const assert = require('assert');
 const {ServiceObject} = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
-const nodeutil = require('util');
 const proxyquire = require('proxyquire');
 const promisify = require('@google-cloud/promisify');
 
@@ -57,16 +56,16 @@ function FakeRule() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  constructor(config) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
 
 function FakeSubnetwork() {
   this.calledWith_ = [].slice.call(arguments);
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 let extended = false;
 const fakePaginator = {

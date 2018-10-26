@@ -21,7 +21,6 @@ const assert = require('assert');
 const events = require('events');
 const extend = require('extend');
 const format = require('string-format-obj');
-const nodeutil = require('util');
 const proxyquire = require('proxyquire');
 const {Service, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
@@ -135,8 +134,10 @@ function FakeRule() {
   this.calledWith_ = slice.call(arguments);
 }
 
-function FakeServiceClass() {
-  this.calledWith_ = slice.call(arguments);
+class FakeServiceClass {
+  constructor() {
+    this.calledWith_ = slice.call(arguments);
+  }
 }
 
 function FakeSnapshot() {
@@ -156,12 +157,12 @@ function FakeZone() {
   };
 }
 
-function FakeService() {
-  this.calledWith_ = arguments;
-  Service.apply(this, arguments);
+class FakeService extends Service {
+  constructor(config, options) {
+    super(config, options);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeService, Service);
 
 describe('Compute', function() {
   let Compute;

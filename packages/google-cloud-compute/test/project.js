@@ -30,8 +30,10 @@ const fakePromisify = extend({}, promisify, {
   },
 });
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
+class FakeServiceObject {
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
 describe('Project', function() {

@@ -17,16 +17,15 @@
 'use strict';
 
 const assert = require('assert');
-const nodeutil = require('util');
 const proxyquire = require('proxyquire');
 const {ServiceObject} = require('@google-cloud/common');
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  constructor(config) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('MachineType', function() {
   let MachineType;

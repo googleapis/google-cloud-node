@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {teenyRequest} = require('teeny-request');
 
@@ -88,203 +87,185 @@ const {teenyRequest} = require('teeny-request');
  * //-
  * operation.removeAllListeners();
  */
-function Operation(scope, name) {
-  const isCompute = scope.constructor.name === 'Compute';
+class Operation extends common.Operation {
+  constructor(scope, name) {
+    const isCompute = scope.constructor.name === 'Compute';
+    const methods = {
+      /**
+       * Delete the operation.
+       *
+       * @see [GlobalOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/delete}
+       * @see [RegionOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/delete}
+       * @see [ZoneOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}
+       *
+       * @method Operation#delete
+       * @param {function=} callback - The callback function.
+       * @param {?error} callback.err - An error returned while making this
+       *     request.
+       * @param {object} callback.apiResponse - The full API response.
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const operation = compute.operation('operation-id');
+       *
+       * operation.delete(function(err, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * operation.delete().then(function(data) {
+       *   var apiResponse = data[0];
+       * });
+       */
+      delete: true,
+      /**
+       * Check if the operation exists.
+       *
+       * @method Operation#exists
+       * @param {function} callback - The callback function.
+       * @param {?error} callback.err - An error returned while making this
+       *     request.
+       * @param {boolean} callback.exists - Whether the operation exists or not.
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const operation = compute.operation('operation-id');
+       *
+       * operation.exists(function(err, exists) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * operation.exists().then(function(data) {
+       *   var exists = data[0];
+       * });
+       */
+      exists: true,
+      /**
+       * Get an operation if it exists.
+       *
+       * @method Operation#get
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const operation = compute.operation('operation-id');
+       *
+       * operation.get(function(err, operation, apiResponse) {
+       *   // `operation` is an Operation object.
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * operation.get().then(function(data) {
+       *   var operation = data[0];
+       *   var apiResponse = data[1];
+       * });
+       */
+      get: true,
+    };
+    super({
+      parent: scope,
+      baseUrl: isCompute ? '/global/operations' : '/operations',
+      /**
+       * @name Operation#id
+       * @type {string}
+       */
+      id: name,
+      methods: methods,
+      requestModule: teenyRequest,
+    });
 
-  const methods = {
     /**
-     * Delete the operation.
-     *
-     * @see [GlobalOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/delete}
-     * @see [RegionOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/delete}
-     * @see [ZoneOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}
-     *
-     * @method Operation#delete
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const operation = compute.operation('operation-id');
-     *
-     * operation.delete(function(err, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * operation.delete().then(function(data) {
-     *   var apiResponse = data[0];
-     * });
-     */
-    delete: true,
-
-    /**
-     * Check if the operation exists.
-     *
-     * @method Operation#exists
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the operation exists or not.
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const operation = compute.operation('operation-id');
-     *
-     * operation.exists(function(err, exists) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * operation.exists().then(function(data) {
-     *   var exists = data[0];
-     * });
-     */
-    exists: true,
-
-    /**
-     * Get an operation if it exists.
-     *
-     * @method Operation#get
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const operation = compute.operation('operation-id');
-     *
-     * operation.get(function(err, operation, apiResponse) {
-     *   // `operation` is an Operation object.
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * operation.get().then(function(data) {
-     *   var operation = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    get: true,
-  };
-
-  common.Operation.call(this, {
-    parent: scope,
-    baseUrl: isCompute ? '/global/operations' : '/operations',
-    /**
-     * @name Operation#id
+     * @name Operation#name
      * @type {string}
      */
-    id: name,
-    methods: methods,
-    requestModule: teenyRequest,
-  });
-
+    this.name = name;
+  }
   /**
-   * @name Operation#name
-   * @type {string}
+   * Get the operation's metadata. For a detailed description of metadata see
+   * [Operation resource](https://goo.gl/sWm1rt).
+   *
+   * @see [GlobalOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/get}
+   * @see [RegionOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/get}
+   * @see [ZoneOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}
+   *
+   * @param {function=} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request
+   * @param {object} callback.metadata - The disk's metadata.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   *
+   * operation.getMetadata(function(err, metadata, apiResponse) {
+   *   // `metadata.error`: Contains errors if the operation failed.
+   *   // `metadata.warnings`: Contains warnings.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * operation.getMetadata().then(function(data) {
+   *   const metadata = data[0];
+   *   const apiResponse = data[1];
+   * });
    */
-  this.name = name;
-}
-
-util.inherits(Operation, common.Operation);
-
-/**
- * Get the operation's metadata. For a detailed description of metadata see
- * [Operation resource](https://goo.gl/sWm1rt).
- *
- * @see [GlobalOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/get}
- * @see [RegionOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/get}
- * @see [ZoneOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}
- *
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object} callback.metadata - The disk's metadata.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * const Compute = require('@google-cloud/compute');
- * const compute = new Compute();
- *
- * operation.getMetadata(function(err, metadata, apiResponse) {
- *   // `metadata.error`: Contains errors if the operation failed.
- *   // `metadata.warnings`: Contains warnings.
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * operation.getMetadata().then(function(data) {
- *   const metadata = data[0];
- *   const apiResponse = data[1];
- * });
- */
-Operation.prototype.getMetadata = function(callback) {
-  const self = this;
-
-  callback = callback || common.util.noop;
-
-  const getMetadata = common.ServiceObject.prototype.getMetadata;
-
-  getMetadata.call(this, function(err, apiResponse) {
-    // An Operation entity contains a property named `error`. This makes
-    // `request` think the operation failed, and will return an ApiError to
-    // this callback. We have to make sure this isn't a false error by seeing if
-    // the response body contains a property that wouldn't exist on a failed API
-    // request (`name`).
-    const requestFailed =
-      err && (!apiResponse || apiResponse.name !== self.name);
-
-    if (requestFailed) {
-      callback(err, null, apiResponse);
-      return;
-    }
-
-    self.metadata = apiResponse;
-
-    callback(null, self.metadata, apiResponse);
-  });
-};
-
-/**
- * Poll `getMetadata` to check the operation's status. This runs a loop to ping
- * the API on an interval.
- *
- * Note: This method is automatically called once a "complete" event handler is
- * registered on the operation.
- *
- * @private
- */
-Operation.prototype.poll_ = function(callback) {
-  const self = this;
-
-  this.getMetadata(function(err, metadata, apiResponse) {
-    // Parsing the response body will automatically create an ApiError object if
-    // the operation failed.
-    const parsedHttpRespBody = common.util.parseHttpRespBody(apiResponse);
-    err = err || parsedHttpRespBody.err;
-
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    if (metadata.status === 'RUNNING' && !self.status) {
+  getMetadata(callback) {
+    const self = this;
+    callback = callback || common.util.noop;
+    super.getMetadata((err, apiResponse) => {
+      // An Operation entity contains a property named `error`. This makes
+      // `request` think the operation failed, and will return an ApiError to
+      // this callback. We have to make sure this isn't a false error by seeing if
+      // the response body contains a property that wouldn't exist on a failed API
+      // request (`name`).
+      const requestFailed =
+        err && (!apiResponse || apiResponse.name !== self.name);
+      if (requestFailed) {
+        callback(err, null, apiResponse);
+        return;
+      }
+      self.metadata = apiResponse;
+      callback(null, self.metadata, apiResponse);
+    });
+  }
+  /**
+   * Poll `getMetadata` to check the operation's status. This runs a loop to ping
+   * the API on an interval.
+   *
+   * Note: This method is automatically called once a "complete" event handler is
+   * registered on the operation.
+   *
+   * @private
+   */
+  poll_(callback) {
+    const self = this;
+    this.getMetadata(function(err, metadata, apiResponse) {
+      // Parsing the response body will automatically create an ApiError object if
+      // the operation failed.
+      const parsedHttpRespBody = common.util.parseHttpRespBody(apiResponse);
+      err = err || parsedHttpRespBody.err;
+      if (err) {
+        callback(err);
+        return;
+      }
+      if (metadata.status === 'RUNNING' && !self.status) {
+        self.status = metadata.status;
+        self.emit('running', metadata);
+      }
+      if (metadata.status !== 'DONE') {
+        callback();
+        return;
+      }
       self.status = metadata.status;
-      self.emit('running', metadata);
-    }
-
-    if (metadata.status !== 'DONE') {
-      callback();
-      return;
-    }
-
-    self.status = metadata.status;
-    callback(null, metadata);
-  });
-};
+      callback(null, metadata);
+    });
+  }
+}
 
 /*! Developer Documentation
  *

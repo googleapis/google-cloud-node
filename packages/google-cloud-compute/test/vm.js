@@ -18,7 +18,6 @@
 
 const assert = require('assert');
 const extend = require('extend');
-const nodeutil = require('util');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
@@ -41,12 +40,12 @@ function fakeReplaceProjectIdToken() {
   );
 }
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  constructor(config) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('VM', function() {
   let VM;

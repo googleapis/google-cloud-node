@@ -19,7 +19,6 @@
 const assert = require('assert');
 const extend = require('extend');
 const {ServiceObject} = require('@google-cloud/common');
-const nodeutil = require('util');
 const proxyquire = require('proxyquire');
 const promisify = require('@google-cloud/promisify');
 
@@ -32,12 +31,12 @@ const fakePromisify = extend({}, promisify, {
   },
 });
 
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+class FakeServiceObject extends ServiceObject {
+  constructor(config) {
+    super(config);
+    this.calledWith_ = arguments;
+  }
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Snapshot', function() {
   let Snapshot;

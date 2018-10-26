@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {teenyRequest} = require('teeny-request');
 
@@ -36,79 +35,76 @@ const {teenyRequest} = require('teeny-request');
  * const compute = new Compute();
  * const project = compute.project();
  */
-function Project(compute) {
-  /**
-   * @name Project#id
-   * @type {string}
-   */
-  this.id = compute.projectId;
-
-  const methods = {
+class Project extends common.ServiceObject {
+  constructor(compute) {
+    const methods = {
+      /**
+       * Get a Project object.
+       *
+       * @method Project#get
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const project = compute.project();
+       *
+       * project.get(function(err, project, apiResponse) {
+       *   // `project` is a Project object.
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * project.get().then(function(data) {
+       *   const project = data[0];
+       *   const apiResponse = data[1];
+       * });
+       */
+      get: true,
+      /**
+       * Get the project's metadata.
+       *
+       * @see [Projects: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/projects/get}
+       * @see [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
+       *
+       * @method Project#getMetadata
+       * @param {function=} callback - The callback function.
+       * @param {?error} callback.err - An error returned while making this
+       *     request.
+       * @param {object} callback.metadata - The machine type's metadata.
+       * @param {object} callback.apiResponse - The full API response.
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const project = compute.project();
+       *
+       * project.getMetadata(function(err, metadata, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * project.getMetadata().then(function(data) {
+       *   var metadata = data[0];
+       *   var apiResponse = data[1];
+       * });
+       */
+      getMetadata: true,
+    };
+    super({
+      parent: compute,
+      baseUrl: '',
+      id: '',
+      methods: methods,
+      requestModule: teenyRequest,
+    });
     /**
-     * Get a Project object.
-     *
-     * @method Project#get
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const project = compute.project();
-     *
-     * project.get(function(err, project, apiResponse) {
-     *   // `project` is a Project object.
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * project.get().then(function(data) {
-     *   const project = data[0];
-     *   const apiResponse = data[1];
-     * });
+     * @name Project#id
+     * @type {string}
      */
-    get: true,
-
-    /**
-     * Get the project's metadata.
-     *
-     * @see [Projects: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/projects/get}
-     * @see [Projects Resource]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
-     *
-     * @method Project#getMetadata
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The machine type's metadata.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const project = compute.project();
-     *
-     * project.getMetadata(function(err, metadata, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * project.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
-     * });
-     */
-    getMetadata: true,
-  };
-
-  common.ServiceObject.call(this, {
-    parent: compute,
-    baseUrl: '',
-    id: '',
-    methods: methods,
-    requestModule: teenyRequest,
-  });
+    this.id = compute.projectId;
+  }
 }
-
-util.inherits(Project, common.ServiceObject);
 
 /*! Developer Documentation
  *

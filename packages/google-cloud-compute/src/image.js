@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const util = require('util');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {teenyRequest} = require('teeny-request');
 
@@ -36,183 +35,174 @@ const {teenyRequest} = require('teeny-request');
  * const compute = new Compute();
  * const image = compute.image('image-name');
  */
-function Image(compute, name) {
-  const methods = {
-    /**
-     * Create an image.
-     *
-     * @method Image#create
-     * @param {Disk} disk - See {@link Compute#createImage}.
-     * @param {object} [options] - See {@link Compute#createImage}.
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const zone = compute.zone('us-central1-a');
-     * const disk = zone.disk('disk1');
-     * const image = compute.image('image-name');
-     *
-     * image.create(disk, function(err, image, operation, apiResponse) {
-     *   // `image` is an Image object.
-     *
-     *   // `operation` is an Operation object that can be used to check the
-     *   // status of the request.
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * image.create(disk).then(function(data) {
-     *   const image = data[0];
-     *   const operation = data[1];
-     *   const apiResponse = data[2];
-     * });
-     */
-    create: true,
-
-    /**
-     * Check if the image exists.
-     *
-     * @method Image#exists
-     * @param {function} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {boolean} callback.exists - Whether the image exists or not.
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const image = compute.image('image-name');
-     *
-     * image.exists(function(err, exists) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * image.exists().then(function(data) {
-     *   const exists = data[0];
-     * });
-     */
-    exists: true,
-
-    /**
-     * Get an image if it exists.
-     *
-     * @method Image#get
-     * @param {options=} options - Configuration object.
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const image = compute.image('image-name');
-     *
-     * image.get(function(err, image, apiResponse) {
-     *   // `image` is an Image object.
-     * });
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * image.get().then(function(data) {
-     *   const image = data[0];
-     *   const apiResponse = data[1];
-     * });
-     */
-    get: true,
-
-    /**
-     * Get the image's metadata.
-     *
-     * @see [Images: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/image/get}
-     * @see [Image Resource]{@link https://cloud.google.com/compute/docs/reference/v1/images}
-     *
-     * @method Image#getMetadata
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The image's metadata.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * const Compute = require('@google-cloud/compute');
-     * const compute = new Compute();
-     * const image = compute.image('image-name');
-     *
-     * image.getMetadata(function(err, metadata, apiResponse) {});
-     *
-     * //-
-     * // If the callback is omitted, we'll return a Promise.
-     * //-
-     * image.getMetadata().then(function(data) {
-     *   const metadata = data[0];
-     *   const apiResponse = data[1];
-     * });
-     */
-    getMetadata: true,
-  };
-
-  common.ServiceObject.call(this, {
-    parent: compute,
-    baseUrl: '/global/images',
-    /**
-     * @name Image#id
-     * @type {string}
-     */
-    id: name,
-    createMethod: compute.createImage.bind(compute),
-    methods: methods,
-    requestModule: teenyRequest,
-  });
+class Image extends common.ServiceObject {
+  constructor(compute, name) {
+    const methods = {
+      /**
+       * Create an image.
+       *
+       * @method Image#create
+       * @param {Disk} disk - See {@link Compute#createImage}.
+       * @param {object} [options] - See {@link Compute#createImage}.
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const zone = compute.zone('us-central1-a');
+       * const disk = zone.disk('disk1');
+       * const image = compute.image('image-name');
+       *
+       * image.create(disk, function(err, image, operation, apiResponse) {
+       *   // `image` is an Image object.
+       *
+       *   // `operation` is an Operation object that can be used to check the
+       *   // status of the request.
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * image.create(disk).then(function(data) {
+       *   const image = data[0];
+       *   const operation = data[1];
+       *   const apiResponse = data[2];
+       * });
+       */
+      create: true,
+      /**
+       * Check if the image exists.
+       *
+       * @method Image#exists
+       * @param {function} callback - The callback function.
+       * @param {?error} callback.err - An error returned while making this
+       *     request.
+       * @param {boolean} callback.exists - Whether the image exists or not.
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const image = compute.image('image-name');
+       *
+       * image.exists(function(err, exists) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * image.exists().then(function(data) {
+       *   const exists = data[0];
+       * });
+       */
+      exists: true,
+      /**
+       * Get an image if it exists.
+       *
+       * @method Image#get
+       * @param {options=} options - Configuration object.
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const image = compute.image('image-name');
+       *
+       * image.get(function(err, image, apiResponse) {
+       *   // `image` is an Image object.
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * image.get().then(function(data) {
+       *   const image = data[0];
+       *   const apiResponse = data[1];
+       * });
+       */
+      get: true,
+      /**
+       * Get the image's metadata.
+       *
+       * @see [Images: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/image/get}
+       * @see [Image Resource]{@link https://cloud.google.com/compute/docs/reference/v1/images}
+       *
+       * @method Image#getMetadata
+       * @param {function=} callback - The callback function.
+       * @param {?error} callback.err - An error returned while making this
+       *     request.
+       * @param {object} callback.metadata - The image's metadata.
+       * @param {object} callback.apiResponse - The full API response.
+       *
+       * @example
+       * const Compute = require('@google-cloud/compute');
+       * const compute = new Compute();
+       * const image = compute.image('image-name');
+       *
+       * image.getMetadata(function(err, metadata, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * image.getMetadata().then(function(data) {
+       *   const metadata = data[0];
+       *   const apiResponse = data[1];
+       * });
+       */
+      getMetadata: true,
+    };
+    super({
+      parent: compute,
+      baseUrl: '/global/images',
+      /**
+       * @name Image#id
+       * @type {string}
+       */
+      id: name,
+      createMethod: compute.createImage.bind(compute),
+      methods: methods,
+      requestModule: teenyRequest,
+    });
+  }
+  /**
+   * Delete the image.
+   *
+   * @see [Images: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/images/delete}
+   *
+   * @param {function=} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {Operation} callback.operation - An operation object
+   *     that can be used to check the status of the request.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const image = compute.image('image-name');
+   *
+   * image.delete(function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the status
+   *   // of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * image.delete().then(function(data) {
+   *   const operation = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  delete(callback) {
+    const compute = this.parent;
+    callback = callback || common.util.noop;
+    super.delete(function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+      const operation = compute.operation(resp.name);
+      operation.metadata = resp;
+      callback(null, operation, resp);
+    });
+  }
 }
-
-util.inherits(Image, common.ServiceObject);
-
-/**
- * Delete the image.
- *
- * @see [Images: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/images/delete}
- *
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {Operation} callback.operation - An operation object
- *     that can be used to check the status of the request.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * const Compute = require('@google-cloud/compute');
- * const compute = new Compute();
- * const image = compute.image('image-name');
- *
- * image.delete(function(err, operation, apiResponse) {
- *   // `operation` is an Operation object that can be used to check the status
- *   // of the request.
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * image.delete().then(function(data) {
- *   const operation = data[0];
- *   const apiResponse = data[1];
- * });
- */
-Image.prototype.delete = function(callback) {
-  const compute = this.parent;
-
-  callback = callback || common.util.noop;
-
-  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    const operation = compute.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
-};
 
 /*! Developer Documentation
  *
