@@ -53,11 +53,10 @@ for version in versions:
         "")
 
 templates = common_templates.node_library()
-# TODO: remove excludes once var's are converted to const/let
-s.copy(templates, excludes=['.eslintrc.yml'])
+s.copy(templates)
 
 #
 # Node.js specific cleanup
 #
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
+subprocess.run(['npm', 'run', 'fix'])
