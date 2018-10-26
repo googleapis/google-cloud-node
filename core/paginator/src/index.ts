@@ -299,7 +299,7 @@ export class Paginator {
     const stream = limiter.stream;
 
     stream.once('reading', () => {
-      makeRequest(query);
+      limiter.makeRequest(query);
     });
 
     function makeRequest(query?: ParsedArguments|string) {
