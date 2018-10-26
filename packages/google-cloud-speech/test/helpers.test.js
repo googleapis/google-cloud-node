@@ -17,7 +17,6 @@
 'use strict';
 
 const assert = require('assert');
-const Buffer = require('safe-buffer').Buffer;
 const common = require('@google-cloud/common');
 const proxyquire = require('proxyquire');
 const sinon = require('sinon');

@@ -77,9 +77,7 @@
   },
   "dependencies": {
     "@google-cloud/common": "^0.26.0",
-    "extend": "^3.0.1",
     "google-gax": "^0.20.0",
-    "google-proto-files": "^0.17.0",
     "lodash.merge": "^4.6.1",
     "protobufjs": "^6.8.6",
     "pumpify": "^1.5.1",
@@ -88,7 +86,6 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
-    "async": "^2.6.1",
     "codecov": "^3.0.2",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^3.0.0",
@@ -102,7 +99,6 @@
     "power-assert": "^1.6.0",
     "prettier": "^1.13.5",
     "proxyquire": "^2.1.0",
-    "safe-buffer": "^5.1.2",
     "sinon": "^7.0.0"
   }
 }
