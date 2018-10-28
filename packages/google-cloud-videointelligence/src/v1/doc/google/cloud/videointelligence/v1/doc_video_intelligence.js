@@ -71,8 +71,8 @@ const AnnotateVideoRequest = {
  *
  * @property {Object[]} segments
  *   Video segments to annotate. The segments may overlap and are not required
- *   to be contiguous or span the whole video. If unspecified, each video
- *   is treated as a single segment.
+ *   to be contiguous or span the whole video. If unspecified, each video is
+ *   treated as a single segment.
  *
  *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1.VideoSegment}
  *
@@ -95,6 +95,11 @@ const AnnotateVideoRequest = {
  *   Config for FACE_DETECTION.
  *
  *   This object should have the same structure as [FaceDetectionConfig]{@link google.cloud.videointelligence.v1.FaceDetectionConfig}
+ *
+ * @property {Object} speechTranscriptionConfig
+ *   Config for SPEECH_TRANSCRIPTION.
+ *
+ *   This object should have the same structure as [SpeechTranscriptionConfig]{@link google.cloud.videointelligence.v1.SpeechTranscriptionConfig}
  *
  * @typedef VideoContext
  * @memberof google.cloud.videointelligence.v1
@@ -470,6 +475,11 @@ const FaceAnnotation = {
  *
  *   This object should have the same structure as [ExplicitContentAnnotation]{@link google.cloud.videointelligence.v1.ExplicitContentAnnotation}
  *
+ * @property {Object[]} speechTranscriptions
+ *   Speech transcription.
+ *
+ *   This object should have the same structure as [SpeechTranscription]{@link google.cloud.videointelligence.v1.SpeechTranscription}
+ *
  * @property {Object} error
  *   If set, indicates an error. Note that for a single `AnnotateVideoRequest`
  *   some videos may succeed and some may fail.
@@ -510,8 +520,8 @@ const AnnotateVideoResponse = {
  *   [Google Cloud Storage](https://cloud.google.com/storage/).
  *
  * @property {number} progressPercent
- *   Approximate percentage processed thus far.
- *   Guaranteed to be 100 when fully processed.
+ *   Approximate percentage processed thus far. Guaranteed to be
+ *   100 when fully processed.
  *
  * @property {Object} startTime
  *   Time when the request was received.
@@ -550,6 +560,192 @@ const AnnotateVideoProgress = {
 };
 
 /**
+ * Config for SPEECH_TRANSCRIPTION.
+ *
+ * @property {string} languageCode
+ *   *Required* The language of the supplied audio as a
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+ *   Example: "en-US".
+ *   See [Language Support](https://cloud.google.com/speech/docs/languages)
+ *   for a list of the currently supported language codes.
+ *
+ * @property {number} maxAlternatives
+ *   *Optional* Maximum number of recognition hypotheses to be returned.
+ *   Specifically, the maximum number of `SpeechRecognitionAlternative` messages
+ *   within each `SpeechTranscription`. The server may return fewer than
+ *   `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will
+ *   return a maximum of one. If omitted, will return a maximum of one.
+ *
+ * @property {boolean} filterProfanity
+ *   *Optional* If set to `true`, the server will attempt to filter out
+ *   profanities, replacing all but the initial character in each filtered word
+ *   with asterisks, e.g. "f***". If set to `false` or omitted, profanities
+ *   won't be filtered out.
+ *
+ * @property {Object[]} speechContexts
+ *   *Optional* A means to provide context to assist the speech recognition.
+ *
+ *   This object should have the same structure as [SpeechContext]{@link google.cloud.videointelligence.v1.SpeechContext}
+ *
+ * @property {boolean} enableAutomaticPunctuation
+ *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   This feature is only available in select languages. Setting this for
+ *   requests in other languages has no effect at all. The default 'false' value
+ *   does not add punctuation to result hypotheses. NOTE: "This is currently
+ *   offered as an experimental service, complimentary to all users. In the
+ *   future this may be exclusively available as a premium feature."
+ *
+ * @property {number[]} audioTracks
+ *   *Optional* For file formats, such as MXF or MKV, supporting multiple audio
+ *   tracks, specify up to two tracks. Default: track 0.
+ *
+ * @property {boolean} enableSpeakerDiarization
+ *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   the top alternative of the recognition result using a speaker_tag provided
+ *   in the WordInfo.
+ *   Note: When this is true, we send all the words from the beginning of the
+ *   audio for the top alternative in every consecutive responses.
+ *   This is done in order to improve our speaker tags as our models learn to
+ *   identify the speakers in the conversation over time.
+ *
+ * @property {number} diarizationSpeakerCount
+ *   *Optional*
+ *   If set, specifies the estimated number of speakers in the conversation.
+ *   If not set, defaults to '2'.
+ *   Ignored unless enable_speaker_diarization is set to true.
+ *
+ * @property {boolean} enableWordConfidence
+ *   *Optional* If `true`, the top result includes a list of words and the
+ *   confidence for those words. If `false`, no word-level confidence
+ *   information is returned. The default is `false`.
+ *
+ * @typedef SpeechTranscriptionConfig
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.SpeechTranscriptionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const SpeechTranscriptionConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Provides "hints" to the speech recognizer to favor specific words and phrases
+ * in the results.
+ *
+ * @property {string[]} phrases
+ *   *Optional* A list of strings containing words and phrases "hints" so that
+ *   the speech recognition is more likely to recognize them. This can be used
+ *   to improve the accuracy for specific words and phrases, for example, if
+ *   specific commands are typically spoken by the user. This can also be used
+ *   to add additional words to the vocabulary of the recognizer. See
+ *   [usage limits](https://cloud.google.com/speech/limits#content).
+ *
+ * @typedef SpeechContext
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.SpeechContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const SpeechContext = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A speech recognition result corresponding to a portion of the audio.
+ *
+ * @property {Object[]} alternatives
+ *   May contain one or more recognition hypotheses (up to the maximum specified
+ *   in `max_alternatives`).  These alternatives are ordered in terms of
+ *   accuracy, with the top (first) alternative being the most probable, as
+ *   ranked by the recognizer.
+ *
+ *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.videointelligence.v1.SpeechRecognitionAlternative}
+ *
+ * @property {string} languageCode
+ *   Output only. The
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+ *   language in this result. This language code was detected to have the most
+ *   likelihood of being spoken in the audio.
+ *
+ * @typedef SpeechTranscription
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.SpeechTranscription definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const SpeechTranscription = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Alternative hypotheses (a.k.a. n-best list).
+ *
+ * @property {string} transcript
+ *   Transcript text representing the words that the user spoke.
+ *
+ * @property {number} confidence
+ *   The confidence estimate between 0.0 and 1.0. A higher number
+ *   indicates an estimated greater likelihood that the recognized words are
+ *   correct. This field is typically provided only for the top hypothesis, and
+ *   only for `is_final=true` results. Clients should not rely on the
+ *   `confidence` field as it is not guaranteed to be accurate or consistent.
+ *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
+ *
+ * @property {Object[]} words
+ *   A list of word-specific information for each recognized word.
+ *
+ *   This object should have the same structure as [WordInfo]{@link google.cloud.videointelligence.v1.WordInfo}
+ *
+ * @typedef SpeechRecognitionAlternative
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.SpeechRecognitionAlternative definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const SpeechRecognitionAlternative = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Word-specific information for recognized words. Word information is only
+ * included in the response when certain request parameters are set, such
+ * as `enable_word_time_offsets`.
+ *
+ * @property {Object} startTime
+ *   Time offset relative to the beginning of the audio, and
+ *   corresponding to the start of the spoken word. This field is only set if
+ *   `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+ *   experimental feature and the accuracy of the time offset can vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} endTime
+ *   Time offset relative to the beginning of the audio, and
+ *   corresponding to the end of the spoken word. This field is only set if
+ *   `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+ *   experimental feature and the accuracy of the time offset can vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {string} word
+ *   The word corresponding to this set of information.
+ *
+ * @property {number} confidence
+ *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
+ *   indicates an estimated greater likelihood that the recognized words are
+ *   correct. This field is set only for the top alternative.
+ *   This field is not guaranteed to be accurate and users should not rely on it
+ *   to be always provided.
+ *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
+ *
+ * @property {number} speakerTag
+ *   Output only. A distinct integer value is assigned for every speaker within
+ *   the audio. This field specifies which one of those speakers was detected to
+ *   have spoken this word. Value ranges from 1 up to diarization_speaker_count,
+ *   and is only set if speaker diarization is enabled.
+ *
+ * @typedef WordInfo
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.WordInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const WordInfo = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Video annotation feature.
  *
  * @enum {number}
@@ -580,7 +776,12 @@ const Feature = {
   /**
    * Human face detection and tracking.
    */
-  FACE_DETECTION: 4
+  FACE_DETECTION: 4,
+
+  /**
+   * Speech transcription.
+   */
+  SPEECH_TRANSCRIPTION: 6
 };
 
 /**
