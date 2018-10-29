@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## v1.5.0
+
+### New features
+- feat: add speech transcription
+
+### Documentation
+- docs(samples): video beta samples ([#123](https://github.com/googleapis/nodejs-video-intelligence/pull/123))
+
+### Internal / Testing Changes
+- chore: update issue templates ([#128](https://github.com/googleapis/nodejs-video-intelligence/pull/128))
+- chore: remove old issue template ([#124](https://github.com/googleapis/nodejs-video-intelligence/pull/124))
+- build: run tests on node11 ([#122](https://github.com/googleapis/nodejs-video-intelligence/pull/122))
+- chores(build): do not collect sponge.xml from windows builds ([#121](https://github.com/googleapis/nodejs-video-intelligence/pull/121))
+- chores(build): run codecov on continuous builds ([#120](https://github.com/googleapis/nodejs-video-intelligence/pull/120))
+- chore: update new issue template ([#119](https://github.com/googleapis/nodejs-video-intelligence/pull/119))
+
 ## v1.4.1
 
 ### Implementation Changes
