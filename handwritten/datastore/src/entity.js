@@ -17,20 +17,21 @@
 'use strict';
 
 const arrify = require('arrify');
-const createErrorClass = require('create-error-class');
 const extend = require('extend');
 const is = require('is');
 
 const entity = module.exports;
 
-const InvalidKeyError = createErrorClass('InvalidKey', function(opts) {
-  const errorMessages = {
-    MISSING_KIND: 'A key should contain at least a kind.',
-    MISSING_ANCESTOR_ID: 'Ancestor keys require an id or name.',
-  };
-
-  this.message = errorMessages[opts.code];
-});
+class InvalidKeyError extends Error {
+  constructor(opts) {
+    const errorMessages = {
+      MISSING_KIND: 'A key should contain at least a kind.',
+      MISSING_ANCESTOR_ID: 'Ancestor keys require an id or name.',
+    };
+    super(errorMessages[opts.code]);
+    this.name = 'InvalidKey';
+  }
+}
 
 /**
  * A symbol to access the Key object from an entity object.

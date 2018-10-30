@@ -17,12 +17,6 @@
 'use strict';
 
 const assert = require('assert');
-const deepStrictEqual = require('deep-strict-equal');
-assert.deepStrictEqual =
-  assert.deepStrictEqual ||
-  function() {
-    return assert(deepStrictEqual.apply(this, arguments));
-  };
 const extend = require('extend');
 
 const Datastore = require('../');
