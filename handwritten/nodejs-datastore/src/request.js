@@ -22,7 +22,6 @@ const {promisifyAll} = require('@google-cloud/promisify');
 const concat = require('concat-stream');
 const extend = require('extend');
 const is = require('is');
-const propAssign = require('prop-assign');
 const {split} = require('split-array-stream');
 const streamEvents = require('stream-events');
 const through = require('through2');
@@ -477,7 +476,10 @@ class DatastoreRequest {
   insert(entities, callback) {
     entities = arrify(entities)
       .map(DatastoreRequest.prepareEntityObject_)
-      .map(propAssign('method', 'insert'));
+      .map(x => {
+        x.method = 'insert';
+        return x;
+      });
 
     this.save(entities, callback);
   }
@@ -967,7 +969,10 @@ class DatastoreRequest {
               let values = value.arrayValue && value.arrayValue.values;
 
               if (values) {
-                values = values.map(propAssign('excludeFromIndexes', excluded));
+                values = values.map(x => {
+                  x.excludeFromIndexes = excluded;
+                  return x;
+                });
               } else {
                 value.excludeFromIndexes = data.excludeFromIndexes;
               }
@@ -1045,7 +1050,10 @@ class DatastoreRequest {
   update(entities, callback) {
     entities = arrify(entities)
       .map(DatastoreRequest.prepareEntityObject_)
-      .map(propAssign('method', 'update'));
+      .map(x => {
+        x.method = 'update';
+        return x;
+      });
 
     this.save(entities, callback);
   }
@@ -1067,7 +1075,10 @@ class DatastoreRequest {
   upsert(entities, callback) {
     entities = arrify(entities)
       .map(DatastoreRequest.prepareEntityObject_)
-      .map(propAssign('method', 'upsert'));
+      .map(x => {
+        x.method = 'upsert';
+        return x;
+      });
 
     this.save(entities, callback);
   }
