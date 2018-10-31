@@ -40,13 +40,18 @@ var (
 	pr                  = flag.Int("pr", 0, "git pull request to test")
 	runOnlyV8CanaryTest = flag.Bool("run_only_v8_canary_test", false, "if true test will be run only with the v8-canary build, otherwise, no tests will be run with v8 canary")
 
-	runID = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
+	runID             = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
+	benchFinishString = "busybench finished profiling"
+	errorString       = "failed to set up or run the benchmark"
 )
 
 const cloudScope = "https://www.googleapis.com/auth/cloud-platform"
 
 const startupTemplate = `
 #! /bin/bash
+
+# Signal any unexpected error.
+trap 'echo "{{.ErrorString}}"' ERR
 
 (
 # Shut down the VM in 5 minutes after this script exits
@@ -107,7 +112,7 @@ npm run compile
 GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --trace-warnings --require @google-cloud/profiler build/src/busybench.js 600
 
 # Indicate to test that script has finished running
-echo "busybench finished profiling"
+echo "{{.FinishString}}"
 
 # Write output to serial port 2 with timestamp.
 ) 2>&1 | while read line; do echo "$(date): ${line}"; done >/dev/ttyS1
@@ -130,21 +135,25 @@ func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) 
 	var buf bytes.Buffer
 	err := template.Execute(&buf,
 		struct {
-			Service     string
-			NodeVersion string
-			NVMMirror   string
-			Repo        string
-			PR          int
-			Branch      string
-			Commit      string
+			Service      string
+			NodeVersion  string
+			NVMMirror    string
+			Repo         string
+			PR           int
+			Branch       string
+			Commit       string
+			FinishString string
+			ErrorString  string
 		}{
-			Service:     tc.name,
-			NodeVersion: tc.nodeVersion,
-			NVMMirror:   tc.nvmMirror,
-			Repo:        *repo,
-			PR:          *pr,
-			Branch:      *branch,
-			Commit:      *commit,
+			Service:      tc.name,
+			NodeVersion:  tc.nodeVersion,
+			NVMMirror:    tc.nvmMirror,
+			Repo:         *repo,
+			PR:           *pr,
+			Branch:       *branch,
+			Commit:       *commit,
+			FinishString: benchFinishString,
+			ErrorString:  errorString,
 		})
 	if err != nil {
 		return fmt.Errorf("failed to render startup script for %s: %v", tc.name, err)
@@ -273,7 +282,7 @@ func TestAgentIntegration(t *testing.T) {
 
 			timeoutCtx, cancel := context.WithTimeout(ctx, time.Minute*25)
 			defer cancel()
-			if err := gceTr.PollForSerialOutput(timeoutCtx, &tc.InstanceConfig, "busybench finished profiling"); err != nil {
+			if err := gceTr.PollForSerialOutput(timeoutCtx, &tc.InstanceConfig, benchFinishString, errorString); err != nil {
 				t.Fatal(err)
 			}
 
