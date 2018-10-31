@@ -80,6 +80,21 @@ interface WatchAllOptions {
 }
 
 /**
+ * @typedef {object} AddLifecycleRuleOptions Configuration options for Bucket#addLifecycleRule().
+ * @property {string} [append=true] The new rules will be appended to any
+ *     pre-existing rules.
+ */
+export interface AddLifecycleRuleOptions {
+  append?: boolean;
+}
+
+export type LifecycleRule = {
+  action: {type: string, storageClass?: string}|string;
+  condition: {[key: string]: boolean | Date | number | string};
+  storageClass?: string;
+};
+
+/**
  * Query object for listing files.
  *
  * @typedef {object} GetFilesOptions
@@ -987,6 +1002,188 @@ class Bucket extends ServiceObject {
     this.iam = new Iam(this);
 
     this.getFilesStream = paginator.streamify('getFiles');
+  }
+
+  /**
+   * Add an object lifecycle management rule to the bucket.
+   *
+   * By default, an Object Lifecycle Management rule provided to this method
+   * will be included to the existing policy. To replace all existing rules,
+   * supply the `options` argument, setting `append` to `false`.
+   *
+   * @see [Object Lifecycle Management]{@link https://cloud.google.com/storage/docs/lifecycle}
+   * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
+   *
+   * @param {LifecycleRule} rule The new lifecycle rule to be added to objects
+   *     in this bucket.
+   * @param {string} [rule.storageClass] When using the `setStorageClass`
+   *     action, provide this option to dictate which storage class the object
+   *     should update to.
+   * @param {AddLifecycleRuleOptions} [options] Configuration object.
+   * @param {boolean} [options.append=true] Append the new rule to the existing
+   *     policy.
+   * @param {SetBucketMetadataCallback} [callback] Callback function.
+   * @returns {Promise<SetBucketMetadataResponse>}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const bucket = storage.bucket('albums');
+   *
+   * //-
+   * // Automatically have an object deleted from this bucket once it is 3 years
+   * // of age.
+   * //-
+   * bucket.addLifecycleRule({
+   *   action: 'delete',
+   *   condition: {
+   *     age: 365 * 3 // Specified in days.
+   *   }
+   * }, function(err, apiResponse) {
+   *   if (err) {
+   *     // Error handling omitted.
+   *   }
+   *
+   *   const lifecycleRules = bucket.metadata.lifecycle.rule;
+   *
+   *   // Iterate over the Object Lifecycle Management rules on this bucket.
+   *   lifecycleRules.forEach(lifecycleRule => {});
+   * });
+   *
+   * //-
+   * // By default, the rule you provide will be added to the existing policy.
+   * // Optionally, you can disable this behavior to replace all of the
+   * // pre-existing rules.
+   * //-
+   * const options = {
+   *   append: false
+   * };
+   *
+   * bucket.addLifecycleRule({
+   *   action: 'delete',
+   *   condition: {
+   *     age: 365 * 3 // Specified in days.
+   *   }
+   * }, options, function(err, apiResponse) {
+   *   if (err) {
+   *     // Error handling omitted.
+   *   }
+   *
+   *   // All rules have been replaced with the new "delete" rule.
+   *
+   *   // Iterate over the Object Lifecycle Management rules on this bucket.
+   *   lifecycleRules.forEach(lifecycleRule => {});
+   * });
+   *
+   * //-
+   * // For objects created before 2018, "downgrade" the storage class.
+   * //-
+   * bucket.addLifecycleRule({
+   *   action: 'setStorageClass',
+   *   storageClass: 'COLDLINE',
+   *   condition: {
+   *     createdBefore: new Date('2018')
+   *   }
+   * }, function(err, apiResponse) {});
+   *
+   * //-
+   * // Delete objects created before 2016 which have the Coldline storage
+   * // class.
+   * //-
+   * bucket.addLifecycleRule({
+   *   action: 'delete',
+   *   condition: {
+   *     matchesStorageClass: [
+   *       'COLDLINE'
+   *     ],
+   *     createdBefore: new Date('2016')
+   *   }
+   * }, function(err, apiResponse) {});
+   */
+  addLifecycleRule(rule: LifecycleRule, options?: AddLifecycleRuleOptions):
+      Promise<SetBucketMetadataResponse>;
+  addLifecycleRule(
+      rule: LifecycleRule, options: AddLifecycleRuleOptions,
+      callback: SetBucketMetadataCallback): void;
+  addLifecycleRule(rule: LifecycleRule, callback: SetBucketMetadataCallback):
+      void;
+  addLifecycleRule(
+      rule: LifecycleRule,
+      optionsOrCallback?: AddLifecycleRuleOptions|SetBucketMetadataCallback,
+      callback?: SetBucketMetadataCallback): Promise<SetBucketMetadataResponse>|
+      void {
+    let options;
+
+    if (typeof optionsOrCallback === 'function') {
+      callback = optionsOrCallback;
+    } else if (optionsOrCallback) {
+      options = optionsOrCallback;
+    }
+
+    options = options || {};
+    callback = callback || util.noop;
+
+    const newLifecycleRules = arrify(rule).map(rule => {
+      if (typeof rule.action === 'object') {
+        // This is a raw-formatted rule object, the way the API expects.
+        // Just pass it through as-is.
+        return rule;
+      }
+
+      const apiFormattedRule = {} as LifecycleRule;
+
+      apiFormattedRule.condition = {};
+      apiFormattedRule.action = {
+        type: rule.action,
+      };
+
+      // @TODO: Remove if the API becomes less picky.
+      if (rule.action === 'delete') {
+        apiFormattedRule.action.type = 'Delete';
+      }
+
+      if (rule.storageClass) {
+        apiFormattedRule.action.storageClass = rule.storageClass;
+      }
+
+      for (const condition in rule.condition) {
+        if (rule.condition[condition] instanceof Date) {
+          apiFormattedRule.condition[condition] =
+              (rule.condition[condition] as Date)
+                  .toISOString()
+                  .replace(/T.+$/, '');
+        } else {
+          apiFormattedRule.condition[condition] = rule.condition[condition];
+        }
+      }
+
+      return apiFormattedRule;
+    });
+
+    if (options.append === false) {
+      this.setMetadata({lifecycle: {rule: newLifecycleRules}}, callback);
+      return;
+    }
+
+    // The default behavior appends the previously-defined lifecycle rules with
+    // the new ones just passed in by the user.
+    this.getMetadata((err, metadata) => {
+      if (err) {
+        callback!(err);
+        return;
+      }
+
+      const currentLifecycleRules =
+          arrify(metadata.lifecycle && metadata.lifecycle.rule);
+
+      this.setMetadata(
+          {
+            lifecycle: {
+              rule: currentLifecycleRules.concat(newLifecycleRules),
+            },
+          },
+          callback!);
+    });
   }
 
   /**
@@ -2597,6 +2794,13 @@ class Bucket extends ServiceObject {
    * //-
    * bucket.setMetadata({
    *   defaultEventBasedHold: true
+   * }, function(err, apiResponse) {});
+   *
+   * //-
+   * // Remove object lifecycle rules.
+   * //-
+   * bucket.setMetadata({
+   *   lifecycle: null
    * }, function(err, apiResponse) {});
    *
    * //-

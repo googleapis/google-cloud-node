@@ -31,7 +31,7 @@ import {Bucket, Channel, Notification} from '../src';
 import {CreateWriteStreamOptions, File, SetFileMetadataOptions} from '../src/file';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import * as r from 'request';
-import {GetFilesOptions, MakeAllFilesPublicPrivateOptions} from '../src/bucket';
+import {GetBucketMetadataCallback, GetFilesOptions, MakeAllFilesPublicPrivateOptions, SetBucketMetadataCallback} from '../src/bucket';
 import {AddAclOptions} from '../src/acl';
 import {Func} from 'mocha';
 
@@ -274,6 +274,165 @@ describe('Bucket', () => {
       });
 
       assert.strictEqual(bucket.userProject, fakeUserProject);
+    });
+  });
+
+  describe('addLifecycleRule', () => {
+    beforeEach(() => {
+      bucket.getMetadata = (callback: GetBucketMetadataCallback) => {
+        callback(null, {}, {} as r.Response);
+      };
+    });
+
+    it('should accept raw input', done => {
+      const rule = {
+        action: {
+          type: 'type',
+        },
+        condition: {},
+      };
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.deepStrictEqual(metadata.lifecycle.rule, [rule]);
+        done();
+      };
+
+      bucket.addLifecycleRule(rule, assert.ifError);
+    });
+
+    it('should properly convert Delete rules', done => {
+      const rule = {
+        action: 'delete',
+        condition: {},
+      };
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.deepStrictEqual(metadata.lifecycle.rule, [{
+                                 action: {
+                                   type: 'Delete',
+                                 },
+                                 condition: rule.condition,
+                               }]);
+
+        done();
+      };
+
+      bucket.addLifecycleRule(rule, assert.ifError);
+    });
+
+    it('should properly set the storage class', done => {
+      const rule = {
+        action: 'setStorageClass',
+        storageClass: 'storage class',
+        condition: {},
+      };
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.deepStrictEqual(metadata.lifecycle.rule, [
+          {
+            action: {
+              type: rule.action,
+              storageClass: rule.storageClass,
+            },
+            condition: rule.condition,
+          },
+        ]);
+
+        done();
+      };
+
+      bucket.addLifecycleRule(rule, assert.ifError);
+    });
+
+    it('should properly set Dates within conditions', done => {
+      const date = new Date();
+
+      const rule = {
+        condition: {
+          aDateProperty: date,
+        },
+      };
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        const expectedDateString = date.toISOString().replace(/T.+$/, '');
+
+        const rule = metadata.lifecycle.rule[0];
+        assert.strictEqual(rule.condition.aDateProperty, expectedDateString);
+
+        done();
+      };
+
+      bucket.addLifecycleRule(rule, assert.ifError);
+    });
+
+    it('should optionally overwrite existing rules', done => {
+      const rule = {
+        action: {
+          type: 'type',
+        },
+        condition: {},
+      };
+
+      const options = {
+        append: false,
+      };
+
+      bucket.getMetadata = () => {
+        done(new Error('Metadata should not be refreshed.'));
+      };
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.strictEqual(metadata.lifecycle.rule.length, 1);
+        assert.deepStrictEqual(metadata.lifecycle.rule, [rule]);
+        done();
+      };
+
+      bucket.addLifecycleRule(rule, options, assert.ifError);
+    });
+
+    it('should combine rule with existing rules by default', done => {
+      const existingRule = {
+        action: {
+          type: 'type',
+        },
+        condition: {},
+      };
+
+      const newRule = {
+        action: {
+          type: 'type',
+        },
+        condition: {},
+      };
+
+      bucket.getMetadata = (callback: GetBucketMetadataCallback) => {
+        callback(null, {lifecycle: {rule: [existingRule]}}, {} as r.Response);
+      };
+
+      bucket.setMetadata = (metadata: Metadata) => {
+        assert.strictEqual(metadata.lifecycle.rule.length, 2);
+        assert.deepStrictEqual(
+            metadata.lifecycle.rule, [existingRule, newRule]);
+        done();
+      };
+
+      bucket.addLifecycleRule(newRule, assert.ifError);
+    });
+
+    it('should pass callback to setMetadata', done => {
+      const rule = {
+        action: {
+          type: 'type',
+        },
+        condition: {},
+      };
+
+      bucket.setMetadata =
+          (metadata: Metadata, callback: SetBucketMetadataCallback) => {
+            callback();  // done()
+          };
+
+      bucket.addLifecycleRule(rule, done);
     });
   });
 

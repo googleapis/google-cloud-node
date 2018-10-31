@@ -900,6 +900,108 @@ describe('storage', () => {
     });
   });
 
+  describe('bucket object lifecycle management', () => {
+    it('should add a rule', done => {
+      bucket.addLifecycleRule(
+          {
+            action: 'delete',
+            condition: {
+              age: 30,
+              isLive: true,
+            },
+          },
+          err => {
+            assert.ifError(err);
+
+            const rules = [].slice.call(bucket.metadata.lifecycle.rule);
+
+            assert.deepStrictEqual(rules.pop(), {
+              action: {
+                type: 'Delete',
+              },
+              condition: {
+                age: 30,
+                isLive: true,
+              },
+            });
+
+            done();
+          });
+    });
+
+    it('should work with dates', done => {
+      bucket.addLifecycleRule(
+          {
+            action: 'delete',
+            condition: {
+              createdBefore: new Date('2018'),
+            },
+          },
+          err => {
+            assert.ifError(err);
+
+            const rules = [].slice.call(bucket.metadata.lifecycle.rule);
+
+            assert.deepStrictEqual(rules.pop(), {
+              action: {
+                type: 'Delete',
+              },
+              condition: {
+                createdBefore: '2018-01-01',
+              },
+            });
+
+            done();
+          });
+    });
+
+    it('should append a new rule', done => {
+      const numExistingRules =
+          bucket.metadata.lifecycle && bucket.metadata.lifecycle.rule.length;
+
+      async.series(
+          [
+            next => bucket.addLifecycleRule(
+                {
+                  action: 'delete',
+                  condition: {
+                    age: 30,
+                    isLive: true,
+                  },
+                },
+                next),
+
+            next => bucket.addLifecycleRule(
+                {
+                  action: 'delete',
+                  condition: {
+                    age: 60,
+                    isLive: true,
+                  },
+                },
+                next),
+          ],
+          err => {
+            assert.ifError(err);
+            assert.strictEqual(
+                bucket.metadata.lifecycle.rule.length, numExistingRules + 2);
+            done();
+          });
+    });
+
+    it('should remove all existing rules', done => {
+      bucket.setMetadata(
+          {
+            lifecycle: null,
+          },
+          err => {
+            assert.ifError(err);
+            assert.strictEqual(bucket.metadata.lifecycle, undefined);
+            done();
+          });
+    });
+  });
+
   describe('bucket retention policies', () => {
     const RETENTION_DURATION_SECONDS = 10;
 
