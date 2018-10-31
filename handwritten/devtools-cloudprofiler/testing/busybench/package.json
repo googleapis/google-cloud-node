@@ -19,9 +19,6 @@
     "pretest": "npm run compile",
     "posttest": "npm run check"
   },
-  "devDependencies": {
-    "gts": "^0.8.0",
-    "typescript": "~2.8.0"
-  },
+  "devDependencies": {},
   "dependencies": {}
 }

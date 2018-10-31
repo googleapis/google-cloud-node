@@ -100,8 +100,7 @@ mkdir -p "$TESTDIR"
 cp -r "testing/busybench" "$TESTDIR"
 cd "$TESTDIR/busybench"
 
-retry npm install --nodedir="$NODEDIR" "$PROFILER" >/dev/null
-retry npm install
+retry npm install --nodedir="$NODEDIR" "$PROFILER" typescript gts >/dev/null
 npm run compile
 
 # Run benchmark with agent
