@@ -55,7 +55,7 @@
     "license-check": "jsgl --local ."
   },
   "dependencies": {
-    "@google-cloud/common": "^0.25.0",
+    "@google-cloud/common": "^0.26.0",
     "console-log-level": "^1.4.0",
     "is": "^3.2.1",
     "lodash.has": "^4.5.2",
