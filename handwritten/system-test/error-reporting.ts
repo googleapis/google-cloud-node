@@ -34,7 +34,7 @@ import * as util from 'util';
 import * as path from 'path';
 
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
-const TIMEOUT = 30000;
+const TIMEOUT = 60000;
 
 const envKeys = [
   'GOOGLE_APPLICATION_CREDENTIALS',
@@ -411,7 +411,7 @@ describe('Error Reporting API', () => {
   ].forEach(testCase => {
     it(`should return an expected message ${testCase.name}`,
        function(this, done) {
-         this.timeout(30000);
+         this.timeout(60000);
          const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
          const key = testCase.getKey();
          request.post(
