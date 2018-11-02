@@ -71,6 +71,13 @@ export interface CreateBucketRequest {
   userProject?: string;
 }
 
+/**
+ * @typedef {object} CreateBucketResponse
+ * @property {Bucket} bucket The newly created Bucket object.
+ * @property {object} apiResponse The full API response.
+ */
+export type CreateBucketResponse = [Bucket, r.Response];
+
 export interface BucketCallback {
   (err: Error|null, bucket?: Bucket|null, apiResponse?: r.Response): void;
 }
@@ -450,13 +457,14 @@ export class Storage extends Service {
    * region_tag:storage_create_bucket
    * Another example:
    */
+  createBucket(name: string): Promise<CreateBucketResponse>;
   createBucket(name: string, callback: BucketCallback): void;
   createBucket(
       name: string, metadata: CreateBucketRequest,
       callback: BucketCallback): void;
   createBucket(
-      name: string, metadataOrCallback: BucketCallback|CreateBucketRequest,
-      callback?: BucketCallback) {
+      name: string, metadataOrCallback?: BucketCallback|CreateBucketRequest,
+      callback?: BucketCallback): Promise<CreateBucketResponse>|void {
     if (!name) {
       throw new Error('A name is required to create a bucket.');
     }

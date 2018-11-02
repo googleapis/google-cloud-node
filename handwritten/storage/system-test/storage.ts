@@ -1739,7 +1739,7 @@ describe('storage', () => {
         file.createReadStream()
             .on('error', done)
             .on('data',
-                chunk => {
+                (chunk: Buffer) => {
                   data = Buffer.concat([data, chunk]);
                 })
             .on('end', () => {
