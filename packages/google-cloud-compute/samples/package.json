@@ -9,20 +9,22 @@
     "node": ">=8"
   },
   "scripts": {
-    "system-test": "ava -T 20s --verbose system-test/*.test.js",
-    "startup-test": "ava -T 200s --verbose startup-script/system-test/*.test.js",
+    "system-test": "mocha system-test/*.js --timeout 600000",
+    "startup-test": "mocha startup-script/system-test/*.test.js --timeout 600000",
     "test": "npm run system-test && npm run startup-test"
   },
   "dependencies": {
     "@google-cloud/compute": "^0.10.0",
     "googleapis": "^34.0.0",
+    "node-fetch": "^2.2.0",
     "nodemailer": "^4.3.1",
     "nodemailer-smtp-transport": "^2.7.4",
-    "sendgrid": "^5.2.3"
+    "sendgrid": "^5.2.3",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.1",
-    "ava": "^0.25.0",
+    "mocha": "^5.0.0",
     "proxyquire": "^2.0.1"
   }
 }
