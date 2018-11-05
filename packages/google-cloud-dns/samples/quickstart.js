@@ -19,24 +19,19 @@
 // Imports the Google Cloud client library
 const {DNS} = require('@google-cloud/dns');
 
-// Your Google Cloud Platform project ID
-const projectId = 'YOUR_PROJECT_ID';
+async function quickStart() {
+  // Your Google Cloud Platform project ID
+  const projectId = 'YOUR_PROJECT_ID';
 
-// Creates a client
-const dns = new DNS({
-  projectId: projectId,
-});
-
-// Lists all zones in the current project
-dns
-  .getZones()
-  .then(results => {
-    const zones = results[0];
-
-    console.log('Zones:');
-    zones.forEach(zone => console.log(zone.name));
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
+  // Creates a client
+  const dns = new DNS({
+    projectId: projectId,
   });
+
+  // Lists all zones in the current project
+  const [zones] = await dns.getZones();
+  console.log('Zones:');
+  zones.forEach(zone => console.log(zone.name));
+}
+quickStart().catch(console.error);
 // [END dns_quickstart]
