@@ -14,6 +14,8 @@
 
 'use strict';
 
+const ProductSearchClient = require('./product_search_client');
 const ImageAnnotatorClient = require('./image_annotator_client');
 
+module.exports.ProductSearchClient = ProductSearchClient;
 module.exports.ImageAnnotatorClient = ImageAnnotatorClient;

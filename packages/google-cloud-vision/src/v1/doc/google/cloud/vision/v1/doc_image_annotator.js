@@ -110,6 +110,11 @@ const Feature = {
     WEB_DETECTION: 10,
 
     /**
+     * Run Product Search.
+     */
+    PRODUCT_SEARCH: 12,
+
+    /**
      * Run localizer for object detection.
      */
     OBJECT_LOCALIZATION: 19
@@ -822,6 +827,11 @@ const WebDetectionParams = {
  *
  *   This object should have the same structure as [CropHintsParams]{@link google.cloud.vision.v1.CropHintsParams}
  *
+ * @property {Object} productSearchParams
+ *   Parameters for product search.
+ *
+ *   This object should have the same structure as [ProductSearchParams]{@link google.cloud.vision.v1.ProductSearchParams}
+ *
  * @property {Object} webDetectionParams
  *   Parameters for web detection.
  *
@@ -942,6 +952,11 @@ const ImageAnnotationContext = {
  *   If present, web detection has completed successfully.
  *
  *   This object should have the same structure as [WebDetection]{@link google.cloud.vision.v1.WebDetection}
+ *
+ * @property {Object} productSearchResults
+ *   If present, product search has completed successfully.
+ *
+ *   This object should have the same structure as [ProductSearchResults]{@link google.cloud.vision.v1.ProductSearchResults}
  *
  * @property {Object} error
  *   If set, represents the error message for the operation.
