@@ -26,7 +26,7 @@
 function listAllTopics() {
   // [START pubsub_list_topics]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -49,7 +49,7 @@ function listAllTopics() {
 function createTopic(topicName) {
   // [START pubsub_create_topic]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -75,7 +75,7 @@ function createTopic(topicName) {
 function deleteTopic(topicName) {
   // [START pubsub_delete_topic]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -102,7 +102,7 @@ function publishMessage(topicName, data) {
   // [START pubsub_publish]
   // [START pubsub_quickstart_publisher]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -133,7 +133,7 @@ function publishMessage(topicName, data) {
 function publishMessageWithCustomAttributes(topicName, data) {
   // [START pubsub_publish_custom_attributes]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -168,7 +168,7 @@ function publishMessageWithCustomAttributes(topicName, data) {
 function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
   // [START pubsub_publisher_batch_settings]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -216,7 +216,7 @@ function setPublishCounterValue(value) {
 function publishOrderedMessage(topicName, data) {
   // [START pubsub_publish_ordered_message]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -259,7 +259,7 @@ function publishOrderedMessage(topicName, data) {
 function getTopicPolicy(topicName) {
   // [START pubsub_get_topic_policy]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -286,7 +286,7 @@ function getTopicPolicy(topicName) {
 function setTopicPolicy(topicName) {
   // [START pubsub_set_topic_policy]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -329,7 +329,7 @@ function setTopicPolicy(topicName) {
 function testTopicPermissions(topicName) {
   // [START pubsub_test_topic_permissions]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();

@@ -26,7 +26,7 @@
 function listSubscriptions() {
   // [START pubsub_list_subscriptions]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -49,7 +49,7 @@ function listSubscriptions() {
 function listTopicSubscriptions(topicName) {
   // [START pubsub_list_topic_subscriptions]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -78,7 +78,7 @@ function listTopicSubscriptions(topicName) {
 function createSubscription(topicName, subscriptionName) {
   // [START pubsub_create_pull_subscription]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -111,7 +111,7 @@ function createFlowControlledSubscription(
 ) {
   // [START pubsub_subscriber_flow_settings]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -159,7 +159,7 @@ function createFlowControlledSubscription(
 function createPushSubscription(topicName, subscriptionName) {
   // [START pubsub_create_push_subscription]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -195,7 +195,7 @@ function createPushSubscription(topicName, subscriptionName) {
 function modifyPushConfig(topicName, subscriptionName) {
   // [START pubsub_update_push_configuration]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -228,7 +228,7 @@ function modifyPushConfig(topicName, subscriptionName) {
 function deleteSubscription(subscriptionName) {
   // [START pubsub_delete_subscription]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -253,7 +253,7 @@ function deleteSubscription(subscriptionName) {
 
 function getSubscription(subscriptionName) {
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -284,7 +284,7 @@ function listenForMessages(subscriptionName, timeout) {
   // [START pubsub_subscriber_async_pull]
   // [START pubsub_quickstart_subscriber]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -441,7 +441,7 @@ const outstandingMessages = {};
 
 function listenForOrderedMessages(subscriptionName, timeout) {
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -504,7 +504,7 @@ function listenForOrderedMessages(subscriptionName, timeout) {
 function listenForErrors(subscriptionName, timeout) {
   // [START pubsub_subscriber_error_listener]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -547,7 +547,7 @@ function listenForErrors(subscriptionName, timeout) {
 function getSubscriptionPolicy(subscriptionName) {
   // [START pubsub_get_subscription_policy]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -574,7 +574,7 @@ function getSubscriptionPolicy(subscriptionName) {
 function setSubscriptionPolicy(subscriptionName) {
   // [START pubsub_set_subscription_policy]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();
@@ -620,7 +620,7 @@ function setSubscriptionPolicy(subscriptionName) {
 function testSubscriptionPermissions(subscriptionName) {
   // [START pubsub_test_subscription_permissions]
   // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
+  const {PubSub} = require('@google-cloud/pubsub');
 
   // Creates a client
   const pubsub = new PubSub();

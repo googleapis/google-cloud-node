@@ -15,12 +15,12 @@
 
 'use strict';
 
-const proxyquire = require(`proxyquire`).noPreserveCache();
-const PubSub = proxyquire(`@google-cloud/pubsub`, {});
-const sinon = require(`sinon`);
-const test = require(`ava`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
+const proxyquire = require('proxyquire').noPreserveCache();
+const {PubSub} = proxyquire('@google-cloud/pubsub', {});
+const sinon = require('sinon');
+const test = require('ava');
+const tools = require('@google-cloud/nodejs-repo-tools');
+const uuid = require('uuid');
 
 const projectId = process.env.GCLOUD_PROJECT;
 const pubsub = new PubSub({projectId});
@@ -61,6 +61,8 @@ test.cb(`should create a topic`, t => {
   };
 
   proxyquire(`../quickstart`, {
-    '@google-cloud/pubsub': sinon.stub().returns(pubsubMock),
+    '@google-cloud/pubsub': {
+      PubSub: sinon.stub().returns(pubsubMock),
+    },
   });
 });
