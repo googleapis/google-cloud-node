@@ -96,6 +96,7 @@
     "@types/rimraf": "^2.0.2",
     "@types/semver": "^5.5.0",
     "@types/tmp": "0.0.33",
+    "@types/uuid": "^3.4.4",
     "codecov": "^3.0.2",
     "cpy-cli": "^2.0.0",
     "delay": "^4.0.0",
@@ -121,6 +122,7 @@
     "teeny-request": "^3.6.0",
     "tmp": "0.0.33",
     "typescript": "^3.0.0",
+    "uuid": "^3.3.2",
     "winston": "^3.1.0"
   },
   "peerDependencies": {

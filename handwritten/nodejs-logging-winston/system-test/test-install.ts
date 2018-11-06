@@ -22,14 +22,14 @@ const TS_CODE_SAMPLES: check.CodeSample[] = [
 new loggingWinston.LoggingWinston();`,
     description: 'imports the module using * syntax',
     dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2']
+    devDependencies: ['@types/winston@2', 'typescript@3']
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
 new LoggingWinston();`,
     description: 'imports the module with {} syntax',
     dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2']
+    devDependencies: ['@types/winston@2', 'typescript@3']
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
@@ -41,7 +41,7 @@ new LoggingWinston({
     description:
         'imports the module and starts with a partial `serviceContext`',
     dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2']
+    devDependencies: ['@types/winston@2', 'typescript@3']
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
@@ -55,7 +55,7 @@ new LoggingWinston({
     description:
         'imports the module and starts with a complete `serviceContext`',
     dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2']
+    devDependencies: ['@types/winston@2', 'typescript@3']
   },
 
   {
@@ -74,7 +74,7 @@ new winston.Logger({transports:[loggingWinston]})
 `,
     description: 'imports the module with a prefix and labels specified',
     dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2']
+    devDependencies: ['@types/winston@2', 'typescript@3']
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
@@ -93,7 +93,7 @@ winston.createLogger({transports:[loggingWinston]})
     description:
         'winston3: imports the module with a prefix and labels specified',
     dependencies: ['winston@3'],
-    devDependencies: []
+    devDependencies: ['typescript@3']
   }
 ];
 

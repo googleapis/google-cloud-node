@@ -15,7 +15,10 @@
  */
 
 import * as assert from 'assert';
+import * as uuid from 'uuid';
+
 import * as types from '../src/types/core';
+
 import {ErrorsApiTransport} from './errors-transport';
 
 const inject = require('require-inject');
@@ -26,10 +29,15 @@ const winston2 = require('../../test/winston-2/node_modules/winston');
 const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 const LoggingWinston = require('../src/index').LoggingWinston;
-const LOG_NAME = 'winston_log_system_tests';
+
+const WRITE_CONSISTENCY_DELAY_MS = 90000;
+
+const UUID = uuid.v4();
+function logName(name: string) {
+  return `${UUID}_${name}`;
+}
 
 describe('LoggingWinston', () => {
-  const WRITE_CONSISTENCY_DELAY_MS = 90000;
   const testTimestamp = new Date();
 
   // type TestData
@@ -97,7 +105,7 @@ describe('LoggingWinston', () => {
       },
     ] as typeof commonTestData);
 
-    const LOG_NAME = 'logging_winston_2_system_tests';
+    const LOG_NAME = logName('logging_winston_2_system_tests');
     const LoggingWinston = inject('../src/index', {
                              winston: winston2,
                              'winston/package.json': {version: '2.2.0'}
@@ -107,7 +115,7 @@ describe('LoggingWinston', () => {
       transports: [new LoggingWinston({logName: LOG_NAME})],
     });
 
-    it('should properly write log entries', (done) => {
+    it('should properly write log entries', async () => {
       const start = Date.now();
       testData.forEach((test) => {
         // logger does not have index signature.
@@ -115,16 +123,13 @@ describe('LoggingWinston', () => {
         (logger as any)[test.level].apply(logger, test.args);
       });
 
-      pollLogs(LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS)
-          .then((entries) => {
-            assert.strictEqual(entries.length, testData.length);
-            entries.reverse().forEach((entry, index) => {
-              const test = testData[index];
-              test.verify(entry);
-            });
-
-            done();
-          });
+      const entries = await pollLogs(
+          LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS);
+      assert.strictEqual(entries.length, testData.length);
+      entries.reverse().forEach((entry, index) => {
+        const test = testData[index];
+        test.verify(entry);
+      });
     });
   });
 
@@ -155,7 +160,7 @@ describe('LoggingWinston', () => {
       },
     ] as TestData[]);
 
-    const LOG_NAME = 'logging_winston_3_system_tests';
+    const LOG_NAME = logName('logging_winston_3_system_tests');
     const LoggingWinston = inject('../src/index', {
                              winston: winston3,
                              'winston/package.json': {version: '3.0.0'}
@@ -165,7 +170,7 @@ describe('LoggingWinston', () => {
       transports: [new LoggingWinston({logName: LOG_NAME})],
     });
 
-    it('should properly write log entries', (done) => {
+    it('should properly write log entries', async () => {
       const start = Date.now();
       testData.forEach((test) => {
         // logger does not have index signature.
@@ -173,19 +178,18 @@ describe('LoggingWinston', () => {
         (logger as any)[test.level].apply(logger, test.args);
       });
 
-      pollLogs(LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS)
-          .then((entries) => {
-            assert.strictEqual(entries.length, testData.length);
-            entries.reverse().forEach((entry, index) => {
-              const test = testData[index];
-              test.verify(entry);
-            });
-            done();
-          });
+      const entries = await pollLogs(
+          LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS);
+      assert.strictEqual(entries.length, testData.length);
+      entries.reverse().forEach((entry, index) => {
+        const test = testData[index];
+        test.verify(entry);
+      });
     });
   });
 
   describe('ErrorReporting', () => {
+    const LOG_NAME = logName('logging_winston_error_reporting_system_tests');
     const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
@@ -258,7 +262,8 @@ describe('LoggingWinston', () => {
 });
 
 // polls for the entire array of entries to be greater than logTime.
-function pollLogs(logName: string, logTime: number, size = 1, timeout = 90000) {
+function pollLogs(
+    logName: string, logTime: number, size: number, timeout: number) {
   const p = new Promise<types.StackdriverEntry[]>((resolve, reject) => {
     const end = Date.now() + timeout;
     loop();
@@ -270,7 +275,7 @@ function pollLogs(logName: string, logTime: number, size = 1, timeout = 90000) {
               pageSize: size,
             },
             (err: Error, entries: types.StackdriverEntry[]) => {
-              if (!entries || !entries.length) return loop();
+              if (!entries || entries.length < size) return loop();
 
               const {receiveTimestamp} =
                   (entries[entries.length - 1].metadata || {}) as
