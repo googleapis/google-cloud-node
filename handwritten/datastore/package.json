@@ -75,7 +75,7 @@
     "lodash.merge": "^4.6.1",
     "split-array-stream": "^2.0.0",
     "stream-events": "^1.0.4",
-    "through2": "^2.0.3"
+    "through2": "^3.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
