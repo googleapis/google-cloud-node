@@ -16,15 +16,15 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const {replaceProjectIdToken} = require('@google-cloud/projectify');
-const {promisifyAll} = require('@google-cloud/promisify');
+import * as arrify from 'arrify';
+import {replaceProjectIdToken} from '@google-cloud/projectify';
+import {promisifyAll} from '@google-cloud/promisify';
 const concat = require('concat-stream');
-const extend = require('extend');
-const is = require('is');
-const {split} = require('split-array-stream');
-const streamEvents = require('stream-events');
-const through = require('through2');
+import * as extend from 'extend';
+import * as is from 'is';
+import {split} from 'split-array-stream';
+import * as streamEvents from 'stream-events';
+import * as through from 'through2';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -55,6 +55,12 @@ const CONSISTENCY_PROTO_CODE = {
  * @class
  */
 class DatastoreRequest {
+
+  id;
+  requests_;
+  requestCallbacks_;
+  datastore;
+
   /**
    * Format a user's input to mutation methods. This will create a deep clone of
    * the input, as well as allow users to pass an object in the format of an
@@ -223,7 +229,8 @@ class DatastoreRequest {
     }
 
     const makeRequest = keys => {
-      const reqOpts = {
+      // tslint:disable-next-line no-any
+      const reqOpts: any = {
         keys: keys,
       };
 
@@ -632,7 +639,8 @@ class DatastoreRequest {
     query = extend(true, new Query(), query);
 
     const makeRequest = query => {
-      const reqOpts = {
+      // tslint:disable-next-line no-any
+      const reqOpts: any = {
         query: entity.queryToQueryProto(query),
       };
 
@@ -666,7 +674,8 @@ class DatastoreRequest {
         return;
       }
 
-      const info = {
+      // tslint:disable-next-line no-any
+      const info: any = {
         moreResults: resp.batch.moreResults,
       };
 
@@ -918,7 +927,7 @@ class DatastoreRequest {
    *   const apiResponse = data[0];
    * });
    */
-  save(entities, gaxOptions, callback) {
+  save(entities, gaxOptions, callback?) {
     entities = arrify(entities);
 
     if (is.fn(gaxOptions)) {
@@ -927,7 +936,7 @@ class DatastoreRequest {
     }
 
     const insertIndexes = {};
-    const mutations = [];
+    const mutations: {}[] = [];
     const methods = {
       insert: true,
       update: true,
@@ -940,7 +949,8 @@ class DatastoreRequest {
       .map(DatastoreRequest.prepareEntityObject_)
       .forEach((entityObject, index) => {
         const mutation = {};
-        let entityProto = {};
+        // tslint:disable-next-line no-any
+        let entityProto: any = {};
         let method = 'upsert';
 
         if (entityObject.method) {

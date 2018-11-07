@@ -20,10 +20,10 @@
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
 // https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/latest/guides/authentication
-const Datastore = require('@google-cloud/datastore');
+const {Datastore} = require('@google-cloud/datastore');
 
 // Creates a client
-const datastore = new Datastore({});
+const datastore = new Datastore();
 // [END datastore_build_service]
 
 /*

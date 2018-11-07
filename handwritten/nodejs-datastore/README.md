@@ -66,7 +66,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ```javascript
 // Imports the Google Cloud client library
-const Datastore = require('@google-cloud/datastore');
+const {Datastore} = require('@google-cloud/datastore');
 
 // Your Google Cloud Platform project ID
 const projectId = 'YOUR_PROJECT_ID';
