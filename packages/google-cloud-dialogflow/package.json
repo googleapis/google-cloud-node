@@ -71,6 +71,6 @@
     "nyc": "^13.0.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.7.4",
-    "through2": "^2.0.3"
+    "through2": "^3.0.0"
   }
 }
