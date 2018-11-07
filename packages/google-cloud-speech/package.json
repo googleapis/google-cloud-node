@@ -82,7 +82,7 @@
     "protobufjs": "^6.8.6",
     "pumpify": "^1.5.1",
     "stream-events": "^1.0.4",
-    "through2": "^2.0.3"
+    "through2": "^3.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
