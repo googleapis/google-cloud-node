@@ -15,11 +15,11 @@
 
 'use strict';
 
-const Datastore = require(`@google-cloud/datastore`);
-const datastore = new Datastore({});
-const path = require(`path`);
-const test = require(`ava`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
+const {Datastore} = require('@google-cloud/datastore');
+const datastore = new Datastore();
+const path = require('path');
+const test = require('ava');
+const tools = require('@google-cloud/nodejs-repo-tools');
 
 const cmd = `node tasks.js`;
 const cwd = path.join(__dirname, `..`);

@@ -16,14 +16,15 @@
 
 'use strict';
 
-const assert = require('assert');
-const extend = require('extend');
-const gax = new require('google-gax');
-const proxyquire = require('proxyquire');
+import * as assert from 'assert';
+import * as extend from 'extend';
+import * as gax from 'google-gax';
+import * as proxyquire from 'proxyquire';
 
 const v1 = require('../src/v1/index.js');
 
-const fakeEntity = {
+// tslint:disable-next-line no-any
+const fakeEntity: any = {
   KEY_SYMBOL: Symbol('fake key symbol'),
   Int: function(value) {
     this.value = value;
@@ -72,7 +73,7 @@ const fakeGoogleGax = {
             );
           },
         },
-      };
+      } as gax.GrpcModule;
     }
   },
 };
@@ -106,7 +107,7 @@ describe('Datastore', function() {
   };
 
   before(function() {
-    Datastore = proxyquire('../', {
+    Datastore = proxyquire('../src', {
       './entity.js': fakeEntity,
       './query.js': FakeQuery,
       './transaction.js': FakeTransaction,
@@ -115,7 +116,7 @@ describe('Datastore', function() {
         GoogleAuth: fakeGoogleAuth,
       },
       'google-gax': fakeGoogleGax,
-    });
+    }).Datastore;
   });
 
   beforeEach(function() {
@@ -142,16 +143,10 @@ describe('Datastore', function() {
   });
 
   it('should export GAX client', function() {
-    assert.strictEqual(Datastore.v1, FakeV1);
+    assert.ok(require('../src').v1);
   });
 
   describe('instantiation', function() {
-    it('should work without new', function() {
-      assert.doesNotThrow(function() {
-        Datastore({projectId: PROJECT_ID});
-      });
-    });
-
     it('should initialize an empty Client map', function() {
       assert(datastore.clients_ instanceof Map);
       assert.strictEqual(datastore.clients_.size, 0);
@@ -225,7 +220,7 @@ describe('Datastore', function() {
         extend(
           {
             libName: 'gccl',
-            libVersion: require('../package.json').version,
+            libVersion: require('../../package.json').version,
             scopes: v1.DatastoreClient.scopes,
             servicePath: datastore.baseUrl_,
             port: 443,
@@ -288,7 +283,9 @@ describe('Datastore', function() {
     });
 
     it('should also be on the prototype', function() {
-      assert.strictEqual(datastore.double, Datastore.double);
+      const aDouble = 7.0;
+      const double = datastore.double(aDouble);
+      assert.strictEqual(double.value, aDouble);
     });
   });
 
@@ -300,7 +297,9 @@ describe('Datastore', function() {
     });
 
     it('should also be on the prototype', function() {
-      assert.strictEqual(datastore.geoPoint, Datastore.geoPoint);
+      const aGeoPoint = {latitude: 24, longitude: 88};
+      const geoPoint = datastore.geoPoint(aGeoPoint);
+      assert.strictEqual(geoPoint.value, aGeoPoint);
     });
   });
 
@@ -312,7 +311,9 @@ describe('Datastore', function() {
     });
 
     it('should also be on the prototype', function() {
-      assert.strictEqual(datastore.int, Datastore.int);
+      const anInt = 7;
+      const int = datastore.int(anInt);
+      assert.strictEqual(int.value, anInt);
     });
   });
 

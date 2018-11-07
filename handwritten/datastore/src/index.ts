@@ -38,13 +38,12 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const extend = require('extend');
+import * as arrify from 'arrify';
+import * as extend from 'extend';
 const gax = require('google-gax');
 const {grpc} = new gax.GrpcClient();
-const {GoogleAuth} = require('google-auth-library');
-const is = require('is');
-const util = require('util');
+import {GoogleAuth} from 'google-auth-library';
+import * as is from 'is';
 
 const DatastoreRequest = require('./request.js');
 const entity = require('./entity.js');
@@ -105,7 +104,7 @@ const gapic = Object.freeze({
  * @param {string} [options.namespace] Namespace to isolate transactions to.
  *
  * @example <caption>Import the client library</caption>
- * const Datastore = require('@google-cloud/datastore');
+ * const {Datastore} = require('@google-cloud/datastore');
  *
  * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
  * const datastore = new Datastore();
@@ -117,7 +116,7 @@ const gapic = Object.freeze({
  * });
  *
  * @example <caption>Retrieving Records</caption>
- * const Datastore = require('@google-cloud/datastore');
+ * const {Datastore} = require('@google-cloud/datastore');
  * const datastore = new Datastore();
  *
  * // Records, called "entities" in Datastore, are retrieved by using a key. The
@@ -308,7 +307,7 @@ const gapic = Object.freeze({
  * });
  *
  * @example <caption>Queries with Ancestors</caption>
- * const Datastore = require('@google-cloud/datastore');
+ * const {Datastore} = require('@google-cloud/datastore');
  * const datastore = new Datastore();
  *
  * const customerId1 = 2993844;
@@ -380,397 +379,423 @@ const gapic = Object.freeze({
  *   console.log(entities);
  * });
  */
-function Datastore(options) {
-  options = options || {};
-  if (!(this instanceof Datastore)) {
-    return new Datastore(options);
+class Datastore extends DatastoreRequest {
+  constructor(options) {
+    super();
+    options = options || {};
+    this.clients_ = new Map();
+    this.datastore = this;
+
+    /**
+     * @name Datastore#namespace
+     * @type {string}
+     */
+    this.namespace = options.namespace;
+
+    const userProvidedProjectId =
+      options.projectId || process.env.DATASTORE_PROJECT_ID;
+    const defaultProjectId = '{{projectId}}';
+
+    /**
+     * @name Datastore#projectId
+     * @type {string}
+     */
+    this.projectId = userProvidedProjectId || defaultProjectId;
+
+    this.defaultBaseUrl_ = 'datastore.googleapis.com';
+    this.determineBaseUrl_(options.apiEndpoint);
+
+    this.options = extend(
+      {
+        libName: 'gccl',
+        libVersion: require('../../package.json').version,
+        scopes: gapic.v1.DatastoreClient.scopes,
+        servicePath: this.baseUrl_,
+        port: is.number(this.port_) ? this.port_ : 443,
+        projectId: userProvidedProjectId,
+      },
+      options
+    );
+    if (this.customEndpoint_) {
+      this.options.sslCreds = grpc.credentials.createInsecure();
+    }
+
+    this.auth = new GoogleAuth(this.options);
   }
 
-  this.clients_ = new Map();
-  this.datastore = this;
-
   /**
-   * @name Datastore#namespace
-   * @type {string}
+   * Helper function to get a Datastore Double object.
+   *
+   * @param {number} value The double value.
+   * @returns {object}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const threeDouble = datastore.double(3.0);
    */
-  this.namespace = options.namespace;
-
-  const userProvidedProjectId =
-    options.projectId || process.env.DATASTORE_PROJECT_ID;
-  const defaultProjectId = '{{projectId}}';
-
-  /**
-   * @name Datastore#projectId
-   * @type {string}
-   */
-  this.projectId = userProvidedProjectId || defaultProjectId;
-
-  this.defaultBaseUrl_ = 'datastore.googleapis.com';
-  this.determineBaseUrl_(options.apiEndpoint);
-
-  this.options = extend(
-    {
-      libName: 'gccl',
-      libVersion: require('../package.json').version,
-      scopes: gapic.v1.DatastoreClient.scopes,
-      servicePath: this.baseUrl_,
-      port: is.number(this.port_) ? this.port_ : 443,
-      projectId: userProvidedProjectId,
-    },
-    options
-  );
-  if (this.customEndpoint_) {
-    this.options.sslCreds = grpc.credentials.createInsecure();
+  static double(value) {
+    return new entity.Double(value);
   }
 
-  this.auth = new GoogleAuth(this.options);
+  double(value) {
+    return Datastore.double(value);
+  }
+
+  /**
+   * Helper function to check if something is a Datastore Double object.
+   *
+   * @param {*} value
+   * @returns {boolean}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * datastore.isDouble(0.42); // false
+   * datastore.isDouble(datastore.double(0.42)); // true
+   */
+  static isDouble(value) {
+    return entity.isDsDouble(value);
+  }
+
+  isDouble(value) {
+    return Datastore.isDouble(value);
+  }
+
+  /**
+   * Helper function to get a Datastore Geo Point object.
+   *
+   * @param {object} coordinates Coordinate value.
+   * @param {number} coordinates.latitude Latitudinal value.
+   * @param {number} coordinates.longitude Longitudinal value.
+   * @returns {object}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const coordinates = {
+   *   latitude: 40.6894,
+   *   longitude: -74.0447
+   * };
+   *
+   * const geoPoint = datastore.geoPoint(coordinates);
+   */
+  static geoPoint(coordinates) {
+    return new entity.GeoPoint(coordinates);
+  }
+
+  geoPoint(coordinates) {
+    return Datastore.geoPoint(coordinates);
+  }
+
+  /**
+   * Helper function to check if something is a Datastore Geo Point object.
+   *
+   * @param {*} value
+   * @returns {boolean}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const coordinates = {
+   *   latitude: 0,
+   *   longitude: 0
+   * };
+   *
+   * datastore.isGeoPoint(coordinates); // false
+   * datastore.isGeoPoint(datastore.geoPoint(coordinates)); // true
+   */
+  static isGeoPoint(value) {
+    return entity.isDsGeoPoint(value);
+  }
+
+  isGeoPoint(value) {
+    return Datastore.isGeoPoint(value);
+  }
+
+  /**
+   * Helper function to get a Datastore Integer object.
+   *
+   * This is also useful when using an ID outside the bounds of a JavaScript
+   * Number object.
+   *
+   * @param {number} value The integer value.
+   * @returns {object}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const sevenInteger = datastore.int(7);
+   *
+   * //-
+   * // Create an Int to support long Key IDs.
+   * //-
+   * const key = datastore.key([
+   *   'Kind',
+   *   datastore.int('100000000000001234')
+   * ]);
+   */
+  static int(value) {
+    return new entity.Int(value);
+  };
+
+  int(value) {
+    return Datastore.int(value);
+  }
+
+  /**
+   * Helper function to check if something is a Datastore Integer object.
+   *
+   * @param {*} value
+   * @returns {boolean}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * datastore.isInt(42); // false
+   * datastore.isInt(datastore.int(42)); // true
+   */
+  static isInt(value) {
+    return entity.isDsInt(value);
+  };
+
+  isInt(value) {
+    return Datastore.isInt(value);
+  }
+
+  /**
+   * Access the Key from an Entity object.
+   *
+   * @name Datastore.KEY
+   * @type {symbol}
+   */
+  /**
+   * Access the Key from an Entity object.
+   *
+   * @name Datastore#KEY
+   * @type {symbol}
+   */
+  static KEY = entity.KEY_SYMBOL;
+  KEY = Datastore.KEY;
+
+
+  /**
+   * This is one of three values which may be returned from
+   * {@link Datastore#runQuery}, {@link Transaction#runQuery}, and
+   * {@link Query#run} as `info.moreResults`.
+   *
+   * There *may* be more results after the specified end cursor.
+   *
+   * @type {string}
+   */
+  static MORE_RESULTS_AFTER_CURSOR = 'MORE_RESULTS_AFTER_CURSOR';
+  MORE_RESULTS_AFTER_CURSOR = Datastore.MORE_RESULTS_AFTER_CURSOR;
+
+  /**
+   * This is one of three values which may be returned from
+   * {@link Datastore#runQuery}, {@link Transaction#runQuery}, and
+   * {@link Query#run} as `info.moreResults`.
+   *
+   * There *may* be more results after the specified limit.
+   *
+   * @type {string}
+   */
+  static MORE_RESULTS_AFTER_LIMIT = 'MORE_RESULTS_AFTER_LIMIT';
+  MORE_RESULTS_AFTER_LIMIT = Datastore.MORE_RESULTS_AFTER_LIMIT;
+
+  /**
+   * This is one of three values which may be returned from
+   * {@link Datastore#runQuery}, {@link Transaction#runQuery}, and
+   * {@link Query#run} as `info.moreResults`.
+   *
+   * There are no more results left to query for.
+   *
+   * @type {string}
+   */
+  static NO_MORE_RESULTS = 'NO_MORE_RESULTS';
+  NO_MORE_RESULTS = Datastore.NO_MORE_RESULTS;
+
+  /**
+   * Create a query for the specified kind. See {@link Query} for all
+   * of the available methods.
+   *
+   * @see [Datastore Queries]{@link https://cloud.google.com/datastore/docs/concepts/queries}
+   * @see {@link Query}
+   *
+   * @param {string} [namespace] Namespace.
+   * @param {string} kind  The kind to query.
+   * @returns {Query}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const query = datastore.createQuery('Company');
+   */
+  createQuery(namespace, kind) {
+    if (arguments.length < 2) {
+      kind = namespace;
+      namespace = this.namespace;
+    }
+    return new Query(this, namespace, arrify(kind));
+  };
+
+  /**
+   * Helper to create a Key object, scoped to the instance's namespace by default.
+   *
+   * You may also specify a configuration object to define a namespace and path.
+   *
+   * @param {object|string|array} [options] Key path. To specify or override a namespace,
+   *     you must use an object here to explicitly state it.
+   * @param {string|array} [options.path]  Key path.
+   * @param {string} [options.namespace] Optional namespace.
+   * @returns {Key} A newly created Key from the options given.
+   *
+   * @example
+   * <caption>Create an incomplete key with a kind value of `Company`.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const key = datastore.key('Company');
+   *
+   * @example
+   * <caption>Create a complete key with a kind value of `Company` and id `123`.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const key = datastore.key(['Company', 123]);
+   *
+   * @example
+   * <caption>If the ID integer is outside the bounds of a JavaScript Number object, create an Int.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const key = datastore.key([
+   *   'Company',
+   *   datastore.int('100000000000001234')
+   * ]);
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * // Create a complete key with a kind value of `Company` and name `Google`.
+   * // Note: `id` is used for numeric identifiers and `name` is used otherwise.
+   * const key = datastore.key(['Company', 'Google']);
+   *
+   * @example
+   * <caption>Create a complete key from a provided namespace and path.</caption>
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const key = datastore.key({
+   *   namespace: 'My-NS',
+   *   path: ['Company', 123]
+   * });
+   */
+  key(options) {
+    options = is.object(options)
+      ? options
+      : {
+          namespace: this.namespace,
+          path: arrify(options),
+        };
+    return new entity.Key(options);
+  };
+
+  /**
+   * Helper function to check if something is a Datastore Key object.
+   *
+   * @param {*} value
+   * @returns {boolean}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * datastore.isKey({path: ['Company', 123]}); // false
+   * datastore.isKey(datastore.key(['Company', 123])); // true
+   */
+  static isKey(value) {
+    return entity.isDsKey(value);
+  };
+  isKey(value) {
+    return Datastore.isKey(value);
+  }
+
+  /**
+   * Create a new Transaction object.
+   *
+   * @param {object} [options] Configuration object.
+   * @param {string} [options.id] The ID of a previously run transaction.
+   * @param {boolean} [options.readOnly=false] A read-only transaction cannot
+   *     modify entities.
+   * @returns {Transaction}
+   *
+   * @example
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
+   * const transaction = datastore.transaction();
+   */
+  transaction(options) {
+    return new Transaction(this, options);
+  };
+
+  /**
+   * Determine the appropriate endpoint to use for API requests. If not explicitly
+   * defined, check for the "DATASTORE_EMULATOR_HOST" environment variable, used
+   * to connect to a local Datastore server.
+   *
+   * @private
+   *
+   * @param {string} customApiEndpoint Custom API endpoint.
+   */
+  determineBaseUrl_(customApiEndpoint) {
+    let baseUrl = this.defaultBaseUrl_;
+    const leadingProtocol = new RegExp('^https*://');
+    const trailingSlashes = new RegExp('/*$');
+    const port = new RegExp(':(\\d+)');
+
+    if (customApiEndpoint) {
+      baseUrl = customApiEndpoint;
+      this.customEndpoint_ = true;
+    } else if (process.env.DATASTORE_EMULATOR_HOST) {
+      baseUrl = process.env.DATASTORE_EMULATOR_HOST;
+      this.customEndpoint_ = true;
+    }
+
+    if (port.test(baseUrl)) {
+      this.port_ = Number(baseUrl.match(port)[1]);
+    }
+
+    this.baseUrl_ = baseUrl
+      .replace(leadingProtocol, '')
+      .replace(port, '')
+      .replace(trailingSlashes, '');
+  };
+
+  /**
+   * {@link DatastoreRequest} class.
+   *
+   * @name Datastore.DatastoreRequest
+   * @see DatastoreRequest
+   * @type {constructor}
+   */
+  DatastoreRequest = DatastoreRequest;
+
+  /**
+   * {@link Query} class.
+   *
+   * @name Datastore.Query
+   * @see Query
+   * @type {constructor}
+   */
+  Query = Query;
+
+  /**
+   * {@link Transaction} class.
+   *
+   * @name Datastore.Transaction
+   * @see Transaction
+   * @type {constructor}
+   */
+  Transaction = Transaction;
 }
 
-util.inherits(Datastore, DatastoreRequest);
-
-/**
- * Helper function to get a Datastore Double object.
- *
- * @param {number} value The double value.
- * @returns {object}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const threeDouble = datastore.double(3.0);
- */
-Datastore.prototype.double = Datastore.double = function(value) {
-  return new entity.Double(value);
-};
-
-/**
- * Helper function to check if something is a Datastore Double object.
- *
- * @param {*} value
- * @returns {boolean}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * datastore.isDouble(0.42); // false
- * datastore.isDouble(datastore.double(0.42)); // true
- */
-Datastore.prototype.isDouble = Datastore.isDouble = function(value) {
-  return entity.isDsDouble(value);
-};
-
-/**
- * Helper function to get a Datastore Geo Point object.
- *
- * @param {object} coordinates Coordinate value.
- * @param {number} coordinates.latitude Latitudinal value.
- * @param {number} coordinates.longitude Longitudinal value.
- * @returns {object}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const coordinates = {
- *   latitude: 40.6894,
- *   longitude: -74.0447
- * };
- *
- * const geoPoint = datastore.geoPoint(coordinates);
- */
-Datastore.prototype.geoPoint = Datastore.geoPoint = function(coordinates) {
-  return new entity.GeoPoint(coordinates);
-};
-
-/**
- * Helper function to check if something is a Datastore Geo Point object.
- *
- * @param {*} value
- * @returns {boolean}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const coordinates = {
- *   latitude: 0,
- *   longitude: 0
- * };
- *
- * datastore.isGeoPoint(coordinates); // false
- * datastore.isGeoPoint(datastore.geoPoint(coordinates)); // true
- */
-Datastore.prototype.isGeoPoint = Datastore.isGeoPoint = function(value) {
-  return entity.isDsGeoPoint(value);
-};
-
-/**
- * Helper function to get a Datastore Integer object.
- *
- * This is also useful when using an ID outside the bounds of a JavaScript
- * Number object.
- *
- * @param {number} value The integer value.
- * @returns {object}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const sevenInteger = datastore.int(7);
- *
- * //-
- * // Create an Int to support long Key IDs.
- * //-
- * const key = datastore.key([
- *   'Kind',
- *   datastore.int('100000000000001234')
- * ]);
- */
-Datastore.prototype.int = Datastore.int = function(value) {
-  return new entity.Int(value);
-};
-
-/**
- * Helper function to check if something is a Datastore Integer object.
- *
- * @param {*} value
- * @returns {boolean}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * datastore.isInt(42); // false
- * datastore.isInt(datastore.int(42)); // true
- */
-Datastore.prototype.isInt = Datastore.isInt = function(value) {
-  return entity.isDsInt(value);
-};
-
-/**
- * Access the Key from an Entity object.
- *
- * @name Datastore.KEY
- * @type {symbol}
- */
-/**
- * Access the Key from an Entity object.
- *
- * @name Datastore#KEY
- * @type {symbol}
- */
-Datastore.prototype.KEY = Datastore.KEY = entity.KEY_SYMBOL;
-
-/**
- * This is one of three values which may be returned from
- * {@link Datastore#runQuery}, {@link Transaction#runQuery}, and
- * {@link Query#run} as `info.moreResults`.
- *
- * There *may* be more results after the specified end cursor.
- *
- * @type {string}
- */
-Datastore.prototype.MORE_RESULTS_AFTER_CURSOR = Datastore.MORE_RESULTS_AFTER_CURSOR =
-  'MORE_RESULTS_AFTER_CURSOR';
-
-/**
- * This is one of three values which may be returned from
- * {@link Datastore#runQuery}, {@link Transaction#runQuery}, and
- * {@link Query#run} as `info.moreResults`.
- *
- * There *may* be more results after the specified limit.
- *
- * @type {string}
- */
-Datastore.prototype.MORE_RESULTS_AFTER_LIMIT = Datastore.MORE_RESULTS_AFTER_LIMIT =
-  'MORE_RESULTS_AFTER_LIMIT';
-
-/**
- * This is one of three values which may be returned from
- * {@link Datastore#runQuery}, {@link Transaction#runQuery}, and
- * {@link Query#run} as `info.moreResults`.
- *
- * There are no more results left to query for.
- *
- * @type {string}
- */
-Datastore.prototype.NO_MORE_RESULTS = Datastore.NO_MORE_RESULTS =
-  'NO_MORE_RESULTS';
-
-/**
- * Create a query for the specified kind. See {@link Query} for all
- * of the available methods.
- *
- * @see [Datastore Queries]{@link https://cloud.google.com/datastore/docs/concepts/queries}
- * @see {@link Query}
- *
- * @param {string} [namespace] Namespace.
- * @param {string} kind  The kind to query.
- * @returns {Query}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const query = datastore.createQuery('Company');
- */
-Datastore.prototype.createQuery = function(namespace, kind) {
-  if (arguments.length < 2) {
-    kind = namespace;
-    namespace = this.namespace;
-  }
-
-  return new Query(this, namespace, arrify(kind));
-};
-
-/**
- * Helper to create a Key object, scoped to the instance's namespace by default.
- *
- * You may also specify a configuration object to define a namespace and path.
- *
- * @param {object|string|array} [options] Key path. To specify or override a namespace,
- *     you must use an object here to explicitly state it.
- * @param {string|array} [options.path]  Key path.
- * @param {string} [options.namespace] Optional namespace.
- * @returns {Key} A newly created Key from the options given.
- *
- * @example
- * <caption>Create an incomplete key with a kind value of `Company`.</caption>
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const key = datastore.key('Company');
- *
- * @example
- * <caption>Create a complete key with a kind value of `Company` and id `123`.</caption>
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const key = datastore.key(['Company', 123]);
- *
- * @example
- * <caption>If the ID integer is outside the bounds of a JavaScript Number object, create an Int.</caption>
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const key = datastore.key([
- *   'Company',
- *   datastore.int('100000000000001234')
- * ]);
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * // Create a complete key with a kind value of `Company` and name `Google`.
- * // Note: `id` is used for numeric identifiers and `name` is used otherwise.
- * const key = datastore.key(['Company', 'Google']);
- *
- * @example
- * <caption>Create a complete key from a provided namespace and path.</caption>
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const key = datastore.key({
- *   namespace: 'My-NS',
- *   path: ['Company', 123]
- * });
- */
-Datastore.prototype.key = function(options) {
-  options = is.object(options)
-    ? options
-    : {
-        namespace: this.namespace,
-        path: arrify(options),
-      };
-
-  return new entity.Key(options);
-};
-
-/**
- * Helper function to check if something is a Datastore Key object.
- *
- * @param {*} value
- * @returns {boolean}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * datastore.isKey({path: ['Company', 123]}); // false
- * datastore.isKey(datastore.key(['Company', 123])); // true
- */
-Datastore.prototype.isKey = Datastore.isKey = function(value) {
-  return entity.isDsKey(value);
-};
-
-/**
- * Create a new Transaction object.
- *
- * @param {object} [options] Configuration object.
- * @param {string} [options.id] The ID of a previously run transaction.
- * @param {boolean} [options.readOnly=false] A read-only transaction cannot
- *     modify entities.
- * @returns {Transaction}
- *
- * @example
- * const Datastore = require('@google-cloud/datastore');
- * const datastore = new Datastore();
- * const transaction = datastore.transaction();
- */
-Datastore.prototype.transaction = function(options) {
-  return new Transaction(this, options);
-};
-
-/**
- * Determine the appropriate endpoint to use for API requests. If not explicitly
- * defined, check for the "DATASTORE_EMULATOR_HOST" environment variable, used
- * to connect to a local Datastore server.
- *
- * @private
- *
- * @param {string} customApiEndpoint Custom API endpoint.
- */
-Datastore.prototype.determineBaseUrl_ = function(customApiEndpoint) {
-  let baseUrl = this.defaultBaseUrl_;
-  const leadingProtocol = new RegExp('^https*://');
-  const trailingSlashes = new RegExp('/*$');
-  const port = new RegExp(':(\\d+)');
-
-  if (customApiEndpoint) {
-    baseUrl = customApiEndpoint;
-    this.customEndpoint_ = true;
-  } else if (process.env.DATASTORE_EMULATOR_HOST) {
-    baseUrl = process.env.DATASTORE_EMULATOR_HOST;
-    this.customEndpoint_ = true;
-  }
-
-  if (port.test(baseUrl)) {
-    this.port_ = Number(baseUrl.match(port)[1]);
-  }
-
-  this.baseUrl_ = baseUrl
-    .replace(leadingProtocol, '')
-    .replace(port, '')
-    .replace(trailingSlashes, '');
-};
-
-/**
- * {@link DatastoreRequest} class.
- *
- * @name Datastore.DatastoreRequest
- * @see DatastoreRequest
- * @type {constructor}
- */
-Datastore.DatastoreRequest = DatastoreRequest;
-
-/**
- * {@link Query} class.
- *
- * @name Datastore.Query
- * @see Query
- * @type {constructor}
- */
-Datastore.Query = Query;
-
-/**
- * {@link Transaction} class.
- *
- * @name Datastore.Transaction
- * @see Transaction
- * @type {constructor}
- */
-Datastore.Transaction = Transaction;
+export {Datastore};
 
 /**
  * The default export of the `@google-cloud/datastore` package is the
@@ -785,7 +810,7 @@ Datastore.Transaction = Transaction;
  * npm install --save @google-cloud/datastore
  *
  * @example <caption>Import the client library</caption>
- * const Datastore = require('@google-cloud/datastore');
+ * const {Datastore} = require('@google-cloud/datastore');
  *
  * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
  * const datastore = new Datastore();
@@ -800,7 +825,6 @@ Datastore.Transaction = Transaction;
  * region_tag:datastore_quickstart
  * Full quickstart example:
  */
-module.exports = Datastore;
 
 /**
  * @name Datastore.v1

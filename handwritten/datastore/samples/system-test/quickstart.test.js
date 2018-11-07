@@ -20,7 +20,8 @@ const sinon = require(`sinon`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 
-const datastore = proxyquire(`@google-cloud/datastore`, {})();
+const {Datastore} = proxyquire(`@google-cloud/datastore`, {});
+const datastore = new Datastore();
 
 const entity = {description: `Buy milk`};
 const kind = `Task`;
@@ -70,6 +71,8 @@ test.cb(`should get a task from Datastore`, t => {
   };
 
   proxyquire(`../quickstart`, {
-    '@google-cloud/datastore': sinon.stub().returns(datastoreMock),
+    '@google-cloud/datastore': {
+      Datastore: sinon.stub().returns(datastoreMock),
+    },
   });
 });

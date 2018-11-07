@@ -16,7 +16,7 @@
 
 'use strict';
 
-const assert = require('assert');
+import * as assert from 'assert';
 
 describe('Query', function() {
   const SCOPE = {};

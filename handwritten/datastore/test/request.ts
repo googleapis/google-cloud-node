@@ -16,12 +16,12 @@
 
 'use strict';
 
-const assert = require('assert');
-const extend = require('extend');
-const is = require('is');
-const proxyquire = require('proxyquire');
+import * as assert from 'assert';
+import * as extend from 'extend';
+import * as is from 'is';
+import * as proxyquire from 'proxyquire';
 const sinon = require('sinon');
-const through = require('through2');
+import * as through from 'through2';
 const pfy = require('@google-cloud/promisify');
 const pjy = require('@google-cloud/projectify');
 
@@ -163,7 +163,7 @@ describe('Request', function() {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'allocateIds');
 
-        const expectedKeys = [];
+        const expectedKeys: {}[] = [];
         expectedKeys.length = ALLOCATIONS;
         expectedKeys.fill(keyProto);
 
@@ -422,7 +422,8 @@ describe('Request', function() {
       const entities = apiResponseWithMultiEntities.found;
       entities.push(entities[0]);
 
-      const apiResponseWithDeferred = extend(true, {}, apiResponse);
+      // tslint:disable-next-line no-any
+      const apiResponseWithDeferred = extend(true, {}, apiResponse) as any;
       apiResponseWithDeferred.deferred = [
         apiResponseWithDeferred.found[0].entity.key,
       ];
@@ -861,7 +862,7 @@ describe('Request', function() {
           return array;
         });
 
-        const entities = [];
+        const entities: {}[] = [];
 
         request
           .runQueryStream({})
@@ -960,7 +961,7 @@ describe('Request', function() {
           return queryProto;
         });
 
-        const entities = [];
+        const entities: {}[] = [];
         let info;
 
         request
@@ -1406,7 +1407,7 @@ describe('Request', function() {
       const incompleteKey2 = new entity.Key({path: ['Incomplete']});
       const completeKey = new entity.Key({path: ['Complete', 'Key']});
 
-      const keyProtos = [];
+      const keyProtos: {}[] = [];
       const ids = [1, 2];
 
       const response = {
@@ -1643,7 +1644,8 @@ describe('Request', function() {
     it('should replace the project ID token', function(done) {
       const replacedReqOpts = {};
 
-      const expectedReqOpts = extend({}, CONFIG.reqOpts);
+      // tslint:disable-next-line no-any
+      const expectedReqOpts: any = extend({}, CONFIG.reqOpts);
       expectedReqOpts.projectId = request.projectId;
 
       pjyOverride = function(reqOpts, projectId) {

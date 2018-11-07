@@ -19,7 +19,7 @@ const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
 
-const VERSION = require('../../package.json').version;
+const VERSION = require('../../../package.json').version;
 
 /**
  * Each RPC normalizes the partition IDs of the keys in its input entities,
@@ -213,7 +213,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const datastore = require('@google-cloud/datastore');
+   * const {Datastore} = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -283,7 +283,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const datastore = require('@google-cloud/datastore');
+   * const {Datastore} = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -338,7 +338,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const datastore = require('@google-cloud/datastore');
+   * const {Datastore} = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -409,7 +409,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const datastore = require('@google-cloud/datastore');
+   * const {Datastore} = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -465,7 +465,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const datastore = require('@google-cloud/datastore');
+   * const {Datastore} = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -522,7 +522,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const datastore = require('@google-cloud/datastore');
+   * const {Datastore} = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -581,7 +581,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const datastore = require('@google-cloud/datastore');
+   * const {Datastore} = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -612,5 +612,6 @@ class DatastoreClient {
     return this._innerApiCalls.reserveIds(request, options, callback);
   }
 }
+
 
 module.exports = DatastoreClient;

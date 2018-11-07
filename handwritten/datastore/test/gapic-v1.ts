@@ -14,13 +14,14 @@
 
 'use strict';
 
-const assert = require('assert');
+import * as assert from 'assert';
 
 const datastoreModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 const error = new Error();
-error.code = FAKE_STATUS_CODE;
+// tslint:disable-next-line no-any
+(error as any).code = FAKE_STATUS_CODE;
 
 describe('DatastoreClient', () => {
   describe('lookup', () => {
@@ -69,11 +70,7 @@ describe('DatastoreClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.lookup = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.lookup = mockSimpleGrpcMethod(request, null, error);
 
       client.lookup(request, (err, response) => {
         assert(err instanceof Error);
@@ -258,11 +255,7 @@ describe('DatastoreClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.commit = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.commit = mockSimpleGrpcMethod(request, null, error);
 
       client.commit(request, (err, response) => {
         assert(err instanceof Error);
@@ -455,10 +448,9 @@ describe('DatastoreClient', () => {
       });
     });
   });
-
 });
 
-function mockSimpleGrpcMethod(expectedRequest, response, error) {
+function mockSimpleGrpcMethod(expectedRequest, response, error?) {
   return function(actualRequest, options, callback) {
     assert.deepStrictEqual(actualRequest, expectedRequest);
     if (error) {

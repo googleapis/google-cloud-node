@@ -16,12 +16,12 @@
 
 'use strict';
 
-const arrify = require('arrify');
-const assert = require('assert');
+import * as arrify from 'arrify';
+import * as assert from 'assert';
 const entity = require('../src/entity.js');
-const extend = require('extend');
-const proxyquire = require('proxyquire');
-const pfy = require('@google-cloud/promisify');
+import * as extend from 'extend';
+import * as proxyquire from 'proxyquire';
+import * as pfy from '@google-cloud/promisify';
 
 let promisified = false;
 const fakePfy = extend({}, pfy, {
@@ -34,7 +34,8 @@ const fakePfy = extend({}, pfy, {
   },
 });
 
-const DatastoreRequestOverride = {
+// tslint:disable-next-line no-any
+const DatastoreRequestOverride: any = {
   delete: function() {},
   save: function() {},
 };
@@ -119,7 +120,8 @@ describe('Transaction', function() {
     });
 
     it('should localize request function', function(done) {
-      const fakeDataset = {
+      // tslint:disable-next-line no-any
+      const fakeDataset: any = {
         request_: {
           bind: function(context) {
             assert.strictEqual(context, fakeDataset);
@@ -230,7 +232,7 @@ describe('Transaction', function() {
       transaction.delete(deleteArg2);
       transaction.save(saveArg2);
 
-      const args = [];
+      const args: {}[] = [];
 
       let deleteCalled = 0;
       DatastoreRequestOverride.delete = function() {
@@ -362,9 +364,9 @@ describe('Transaction', function() {
   describe('delete', function() {
     it('should push entities into a queue', function() {
       const keys = [
-        key('Product', 123),
-        key('Product', 234),
-        key('Product', 345),
+        key('Product123'),
+        key('Product234'),
+        key('Product345'),
       ];
 
       transaction.delete(keys);
@@ -611,9 +613,9 @@ describe('Transaction', function() {
   describe('save', function() {
     it('should push entities into a queue', function() {
       const entities = [
-        {key: key('Product', 123), data: 123},
-        {key: key('Product', 234), data: 234},
-        {key: key('Product', 345), data: 345},
+        {key: key('Product123'), data: 123},
+        {key: key('Product234'), data: 234},
+        {key: key('Product345'), data: 345},
       ];
 
       transaction.save(entities);

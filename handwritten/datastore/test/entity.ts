@@ -16,10 +16,10 @@
 
 'use strict';
 
-const assert = require('assert');
-const extend = require('extend');
+import * as assert from 'assert';
+import * as extend from 'extend';
 
-const Datastore = require('../');
+const Datastore = require('../src').Datastore;
 
 describe('entity', function() {
   let entity;

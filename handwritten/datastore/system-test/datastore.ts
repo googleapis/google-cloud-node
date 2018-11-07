@@ -16,16 +16,16 @@
 
 'use strict';
 
-const assert = require('assert');
-const async = require('async');
-const Datastore = require('../');
+import * as assert from 'assert';
+import * as async from 'async';
+const {Datastore} = require('../src');
 const entity = require('../src/entity.js');
 
 describe('Datastore', () => {
-  const testKinds = [];
-  const datastore = new Datastore({});
+  const testKinds: {}[] = [];
+  const datastore = new Datastore();
   // Override the Key method so we can track what keys are created during the
-  // tests. They are then deleted in the `after` hook.
+    // tests. They are then deleted in the `after` hook.
   const key = datastore.key;
   datastore.key = function() {
     const keyObject = key.apply(this, arguments);
@@ -322,7 +322,7 @@ describe('Datastore', () => {
       const post2 = {
         title: 'How to make the perfect homemade pasta',
         tags: ['pasta', 'homemade'],
-        publishedAt: Date('2001-01-01T00:00:00.000Z'),
+        publishedAt: new Date('2001-01-01T00:00:00.000Z'),
         author: 'Silvano',
         isDraft: false,
         wordCount: 450,
