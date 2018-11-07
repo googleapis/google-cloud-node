@@ -47,7 +47,7 @@
     "proxyquire": "^2.0.1",
     "sinon": "^7.0.0",
     "source-map-support": "^0.5.6",
-    "through2": "^2.0.3",
+    "through2": "^3.0.0",
     "typescript": "^3.0.0",
     "uuid": "^3.3.2"
   },
