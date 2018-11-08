@@ -69,7 +69,7 @@
     "@types/extend": "^3.0.0",
     "@types/glob": "^7.0.0",
     "@types/hapi": "^17.0.12",
-    "@types/is": "0.0.20",
+    "@types/is": "0.0.21",
     "@types/json-stable-stringify": "^1.0.32",
     "@types/koa": "^2.0.45",
     "@types/lodash.assign": "^4.2.3",
