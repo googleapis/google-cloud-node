@@ -76,7 +76,7 @@
     "@types/arrify": "^1.0.4",
     "@types/async": "^2.0.49",
     "@types/extend": "^3.0.0",
-    "@types/is": "0.0.20",
+    "@types/is": "0.0.21",
     "@types/lodash.flatten": "^4.4.4",
     "@types/lodash.groupby": "^4.6.4",
     "@types/mocha": "^5.2.5",
