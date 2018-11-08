@@ -42,7 +42,7 @@ export interface GetProjectOptions {
   pageToken?: string;
 }
 
-export enum LifecylceState {
+export enum LifecycleState {
   /**
    * 	Unspecified state. This is only used/useful for distinguishing unset
    * values.
@@ -67,7 +67,7 @@ export enum LifecylceState {
 export interface CreateProjectOptions {
   projectNumber?: string;
   projectId?: string;
-  lifecycleState?: LifecylceState;
+  lifecycleState?: LifecycleState;
   name: string;
   createTime: string;
   labels: {[index: string]: string};
