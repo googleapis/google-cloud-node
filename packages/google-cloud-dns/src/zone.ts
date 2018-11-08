@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import * as arrify from 'arrify';
-import {ServiceObject, DeleteCallback} from '@google-cloud/common';
+import {DeleteCallback, ServiceObject} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
+import * as arrify from 'arrify';
 import * as extend from 'extend';
-const flatten = require('lodash.flatten');
 import * as fs from 'fs';
+
 import groupBy = require('lodash.groupby');
-import * as is from 'is';
 import {teenyRequest} from 'teeny-request';
 const zonefile = require('dns-zonefile');
 
@@ -440,7 +437,8 @@ class Zone extends ServiceObject {
           if (records.length > 1) {
             // Combine the `rrdatas` values from all records of the same type.
             templateRecord.rrdatas =
-                flatten(records.map((x: RecordObject) => x.rrdatas));
+                records.map(x => x.rrdatas)
+                    .reduce((acc, rrdata) => acc!.concat(rrdata!), []);
           }
           recordsOut.push(templateRecord);
         }
@@ -627,7 +625,7 @@ class Zone extends ServiceObject {
       records = arrify<Record|string>(recordsOrCallback);
     }
 
-    if (is.string(records[0])) {
+    if (typeof records[0] === 'string') {
       this.deleteRecordsByType_(records as string[], callback!);
       return;
     }
@@ -891,7 +889,7 @@ class Zone extends ServiceObject {
       query = queryOrCallback!;
     }
 
-    if (is.string(query) || is.array(query)) {
+    if (typeof query === 'string' || Array.isArray(query)) {
       const filterByTypes_: {[index: string]: boolean} = {};
       // For faster lookups, store the record types the user wants in an object.
       arrify(query as string).forEach(type => {

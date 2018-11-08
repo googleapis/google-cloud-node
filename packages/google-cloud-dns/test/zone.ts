@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-'use strict';
-
+import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
+import * as promisify from '@google-cloud/promisify';
 import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as extend from 'extend';
-const flatten = require('lodash.flatten');
 import * as proxyquire from 'proxyquire';
-import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
-import * as promisify from '@google-cloud/promisify';
-import * as uuid from 'uuid';
-import {CreateChangeRequest, Change} from '../src/change';
-import {Record, RecordObject} from '../src/record';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
+import * as uuid from 'uuid';
+
+import {Change, CreateChangeRequest} from '../src/change';
+import {Record, RecordObject} from '../src/record';
 
 let promisified = false;
 const fakePromisify = extend({}, promisify, {
@@ -217,7 +215,7 @@ describe('Zone', () => {
 
       return {
         toJSON() {
-          return recordJson;
+          return recordJson! as {rrdatas: Array<{}>};
         },
       };
     }
@@ -263,9 +261,9 @@ describe('Zone', () => {
       ];
 
       zone.request = (reqOpts: CoreOptions) => {
-        const expectedRRDatas = flatten(
-            // tslint:disable-next-line:no-any
-            recordsToAdd.map(x => x.toJSON()).map((x: any) => x!.rrdatas));
+        const expectedRRDatas =
+            recordsToAdd.map(x => x.toJSON().rrdatas)
+                .reduce((acc, rrdata) => acc.concat(rrdata), []);
 
         assert.deepStrictEqual(reqOpts.json.additions, [
           {

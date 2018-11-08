@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
+import * as arrify from 'arrify';
 import * as extend from 'extend';
-import {CreateChangeCallback, Change} from './change';
+
+import {Change, CreateChangeCallback} from './change';
 import {Zone} from './zone';
+
 const format = require('string-format-obj');
 import * as r from 'request';
 

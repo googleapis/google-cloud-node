@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-'use strict';
-
+import {Service, ServiceConfig, ServiceOptions, util} from '@google-cloud/common';
+import * as promisify from '@google-cloud/promisify';
 import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {Service, ServiceConfig, ServiceOptions} from '@google-cloud/common';
-import {util} from '@google-cloud/common';
-import * as promisify from '@google-cloud/promisify';
-import {RequestOptions} from 'http';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
+
 import {Zone} from '../src';
 
 let extended = false;

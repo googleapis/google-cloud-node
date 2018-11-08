@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import {teenyRequest} from 'teeny-request';
-import {ServiceObject, CreateOptions} from '@google-cloud/common';
+import {CreateOptions, ServiceObject} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import {Zone} from './zone';
-import {Record} from './record';
 import * as r from 'request';
+import {teenyRequest} from 'teeny-request';
+
+import {Record} from './record';
+import {Zone} from './zone';
 
 export interface CreateChangeRequest extends CreateOptions {
   add?: Record|Record[];

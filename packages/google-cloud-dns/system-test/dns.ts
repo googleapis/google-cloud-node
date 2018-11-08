@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
-import * as async from 'async';
-const exec = require('methmeth');
-const format = require('string-format-obj');
 import * as fs from 'fs';
-const tmp = require('tmp');
-import * as uuid from 'uuid';
-import {DNS} from '../src';
-import {CreateChangeCallback} from '../src/change';
-import {Record} from '../src';
 import {Response} from 'request';
+import * as tmp from 'tmp';
+import * as util from 'util';
+import * as uuid from 'uuid';
+
+const format = require('string-format-obj');
+
+import {DNS, Record} from '../src';
 
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
@@ -111,22 +108,10 @@ describe('dns', () => {
     }),
   };
 
-  before(done => {
-    dns.getZones((err, zones) => {
-      if (err) {
-        done(err);
-        return;
-      }
-
-      async.each(zones!, exec('delete', {force: true}), err => {
-        if (err) {
-          done(err);
-          return;
-        }
-
-        ZONE.create({dnsName: DNS_DOMAIN}, done);
-      });
-    });
+  before(async () => {
+    const [zones] = await dns.getZones();
+    await Promise.all(zones.map(zone => zone.delete({force: true})));
+    await ZONE.create({dnsName: DNS_DOMAIN});
   });
 
   after(done => {
@@ -211,19 +196,13 @@ describe('dns', () => {
       });
     });
 
-    it('should export records to a zone file', done => {
+    it('should export records to a zone file', async () => {
       tmp.setGracefulCleanup();
-      tmp.file((err: Error, tmpFilename: string) => {
-        assert.ifError(err);
-        async.series(
-            [
-              next => ZONE.empty(next as CreateChangeCallback),
-              next => ZONE.addRecords(
-                  [records.spf, records.srv], next as CreateChangeCallback),
-              next => ZONE.export(tmpFilename, next)
-            ],
-            done);
-      });
+      const tmpFile: Function = util.promisify(tmp.file);
+      const tmpFilename = await tmpFile();
+      await ZONE.empty();
+      await ZONE.addRecords([records.spf, records.srv]);
+      await ZONE.export(tmpFilename);
     });
 
     describe('changes', () => {
