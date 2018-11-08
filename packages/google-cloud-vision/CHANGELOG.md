@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## v0.23.0
+
+### New Features
+- feat: add support for product search
+
+### Dependencies
+- chore(deps): update dependency eslint-plugin-node to v8 ([#245](https://github.com/googleapis/nodejs-vision/pull/245))
+- chore(deps): update dependency canvas to v2 ([#224](https://github.com/googleapis/nodejs-vision/pull/224))
+- chore(deps): update dependency sinon to v7 ([#219](https://github.com/googleapis/nodejs-vision/pull/219))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#213](https://github.com/googleapis/nodejs-vision/pull/213))
+
+### Documentation
+- fix(samples): Adding vision_product_search_tutorial_import tags ([#221](https://github.com/googleapis/nodejs-vision/pull/221))
+- fix(samples): Change the Project ID from number to string ([#220](https://github.com/googleapis/nodejs-vision/pull/220))
+- docs: Vision AutoML samples ([#197](https://github.com/googleapis/nodejs-vision/pull/197))
+
+### Internal / Testing Changes
+- chore: use latest npm on Windows ([#258](https://github.com/googleapis/nodejs-vision/pull/258))
+- chore: update lint configs ([#257](https://github.com/googleapis/nodejs-vision/pull/257))
+- chore: update CircleCI config ([#253](https://github.com/googleapis/nodejs-vision/pull/253))
+- chore: update issue templates ([#244](https://github.com/googleapis/nodejs-vision/pull/244))
+- chore: remove old issue template ([#242](https://github.com/googleapis/nodejs-vision/pull/242))
+- build: run tests on node11 ([#239](https://github.com/googleapis/nodejs-vision/pull/239))
+- chores(build): do not collect sponge.xml from windows builds ([#238](https://github.com/googleapis/nodejs-vision/pull/238))
+- chores(build): run codecov on continuous builds ([#237](https://github.com/googleapis/nodejs-vision/pull/237))
+- chore: update new issue template ([#235](https://github.com/googleapis/nodejs-vision/pull/235))
+- build: fix codecov uploading on Kokoro ([#222](https://github.com/googleapis/nodejs-vision/pull/222))
+- chore: enable --throw-deprecation on mocha config ([#147](https://github.com/googleapis/nodejs-vision/pull/147))
+- Update kokoro config ([#214](https://github.com/googleapis/nodejs-vision/pull/214))
+- Update kokoro config ([#208](https://github.com/googleapis/nodejs-vision/pull/208))
+- test: remove appveyor config ([#207](https://github.com/googleapis/nodejs-vision/pull/207))
+- Update the CI config ([#206](https://github.com/googleapis/nodejs-vision/pull/206))
+
 ## v0.22.1
 
 ### Bug fixes

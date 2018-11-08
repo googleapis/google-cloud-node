@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@google-cloud/automl": "^0.1.1",
-    "@google-cloud/vision": "^0.22.0",
+    "@google-cloud/vision": "^0.23.0",
     "async": "^2.6.1",
     "mathjs": "^5.0.4",
     "natural": "^0.6.1",
