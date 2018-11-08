@@ -12,40 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-"use strict";
+'use strict';
 
-const assert = require("assert");
+const assert = require('assert');
 
-const securitycenterModule = require("../src");
+const securitycenterModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
-describe("SecurityCenterClient", () => {
-  describe("createSource", () => {
-    it("invokes createSource without error", done => {
+describe('SecurityCenterClient', () => {
+  describe('createSource', () => {
+    it('invokes createSource without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const source = {};
       const request = {
         parent: formattedParent,
-        source: source
+        source: source,
       };
 
       // Mock response
-      const name = "name3373707";
-      const displayName = "displayName1615086568";
-      const description = "description-1724546052";
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
       const expectedResponse = {
         name: name,
         displayName: displayName,
-        description: description
+        description: description,
       };
 
       // Mock Grpc layer
@@ -61,18 +61,18 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes createSource with error", done => {
+    it('invokes createSource with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const source = {};
       const request = {
         parent: formattedParent,
-        source: source
+        source: source,
       };
 
       // Mock Grpc layer
@@ -85,41 +85,41 @@ describe("SecurityCenterClient", () => {
       client.createSource(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("createFinding", () => {
-    it("invokes createFinding without error", done => {
+  describe('createFinding', () => {
+    it('invokes createFinding without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
-      const findingId = "findingId728776081";
+      const formattedParent = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
+      const findingId = 'findingId728776081';
       const finding = {};
       const request = {
         parent: formattedParent,
         findingId: findingId,
-        finding: finding
+        finding: finding,
       };
 
       // Mock response
-      const name = "name3373707";
-      const parent2 = "parent21175163357";
-      const resourceName = "resourceName979421212";
-      const category = "category50511102";
-      const externalUri = "externalUri-1385596168";
+      const name = 'name3373707';
+      const parent2 = 'parent21175163357';
+      const resourceName = 'resourceName979421212';
+      const category = 'category50511102';
+      const externalUri = 'externalUri-1385596168';
       const expectedResponse = {
         name: name,
         parent: parent2,
         resourceName: resourceName,
         category: category,
-        externalUri: externalUri
+        externalUri: externalUri,
       };
 
       // Mock Grpc layer
@@ -135,20 +135,20 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes createFinding with error", done => {
+    it('invokes createFinding with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
-      const findingId = "findingId728776081";
+      const formattedParent = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
+      const findingId = 'findingId728776081';
       const finding = {};
       const request = {
         parent: formattedParent,
         findingId: findingId,
-        finding: finding
+        finding: finding,
       };
 
       // Mock Grpc layer
@@ -161,31 +161,31 @@ describe("SecurityCenterClient", () => {
       client.createFinding(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("getIamPolicy", () => {
-    it("invokes getIamPolicy without error", done => {
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedResource = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedResource = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const request = {
-        resource: formattedResource
+        resource: formattedResource,
       };
 
       // Mock response
       const version = 351608024;
-      const etag = "21";
+      const etag = '21';
       const expectedResponse = {
         version: version,
-        etag: etag
+        etag: etag,
       };
 
       // Mock Grpc layer
@@ -201,16 +201,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes getIamPolicy with error", done => {
+    it('invokes getIamPolicy with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedResource = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedResource = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const request = {
-        resource: formattedResource
+        resource: formattedResource,
       };
 
       // Mock Grpc layer
@@ -223,31 +223,31 @@ describe("SecurityCenterClient", () => {
       client.getIamPolicy(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("getOrganizationSettings", () => {
-    it("invokes getOrganizationSettings without error", done => {
+  describe('getOrganizationSettings', () => {
+    it('invokes getOrganizationSettings without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedName = client.organizationSettingsPath("[ORGANIZATION]");
+      const formattedName = client.organizationSettingsPath('[ORGANIZATION]');
       const request = {
-        name: formattedName
+        name: formattedName,
       };
 
       // Mock response
-      const name2 = "name2-1052831874";
+      const name2 = 'name2-1052831874';
       const enableAssetDiscovery = false;
       const expectedResponse = {
         name: name2,
-        enableAssetDiscovery: enableAssetDiscovery
+        enableAssetDiscovery: enableAssetDiscovery,
       };
 
       // Mock Grpc layer
@@ -263,16 +263,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes getOrganizationSettings with error", done => {
+    it('invokes getOrganizationSettings with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedName = client.organizationSettingsPath("[ORGANIZATION]");
+      const formattedName = client.organizationSettingsPath('[ORGANIZATION]');
       const request = {
-        name: formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
@@ -285,33 +285,33 @@ describe("SecurityCenterClient", () => {
       client.getOrganizationSettings(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("getSource", () => {
-    it("invokes getSource without error", done => {
+  describe('getSource', () => {
+    it('invokes getSource without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedName = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedName = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const request = {
-        name: formattedName
+        name: formattedName,
       };
 
       // Mock response
-      const name2 = "name2-1052831874";
-      const displayName = "displayName1615086568";
-      const description = "description-1724546052";
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
       const expectedResponse = {
         name: name2,
         displayName: displayName,
-        description: description
+        description: description,
       };
 
       // Mock Grpc layer
@@ -327,16 +327,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes getSource with error", done => {
+    it('invokes getSource with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedName = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedName = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const request = {
-        name: formattedName
+        name: formattedName,
       };
 
       // Mock Grpc layer
@@ -349,34 +349,34 @@ describe("SecurityCenterClient", () => {
       client.getSource(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("groupAssets", () => {
-    it("invokes groupAssets without error", done => {
+  describe('groupAssets', () => {
+    it('invokes groupAssets without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
-      const groupBy = "groupBy506361367";
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const groupBy = 'groupBy506361367';
       const request = {
         parent: formattedParent,
-        groupBy: groupBy
+        groupBy: groupBy,
       };
 
       // Mock response
-      const nextPageToken = "";
+      const nextPageToken = '';
       const groupByResultsElement = {};
       const groupByResults = [groupByResultsElement];
       const expectedResponse = {
         nextPageToken: nextPageToken,
-        groupByResults: groupByResults
+        groupByResults: groupByResults,
       };
 
       // Mock Grpc layer
@@ -396,18 +396,18 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes groupAssets with error", done => {
+    it('invokes groupAssets with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
-      const groupBy = "groupBy506361367";
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
+      const groupBy = 'groupBy506361367';
       const request = {
         parent: formattedParent,
-        groupBy: groupBy
+        groupBy: groupBy,
       };
 
       // Mock Grpc layer
@@ -420,34 +420,34 @@ describe("SecurityCenterClient", () => {
       client.groupAssets(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("groupFindings", () => {
-    it("invokes groupFindings without error", done => {
+  describe('groupFindings', () => {
+    it('invokes groupFindings without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
-      const groupBy = "groupBy506361367";
+      const formattedParent = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
+      const groupBy = 'groupBy506361367';
       const request = {
         parent: formattedParent,
-        groupBy: groupBy
+        groupBy: groupBy,
       };
 
       // Mock response
-      const nextPageToken = "";
+      const nextPageToken = '';
       const groupByResultsElement = {};
       const groupByResults = [groupByResultsElement];
       const expectedResponse = {
         nextPageToken: nextPageToken,
-        groupByResults: groupByResults
+        groupByResults: groupByResults,
       };
 
       // Mock Grpc layer
@@ -467,18 +467,18 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes groupFindings with error", done => {
+    it('invokes groupFindings with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
-      const groupBy = "groupBy506361367";
+      const formattedParent = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
+      const groupBy = 'groupBy506361367';
       const request = {
         parent: formattedParent,
-        groupBy: groupBy
+        groupBy: groupBy,
       };
 
       // Mock Grpc layer
@@ -491,34 +491,34 @@ describe("SecurityCenterClient", () => {
       client.groupFindings(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("listAssets", () => {
-    it("invokes listAssets without error", done => {
+  describe('listAssets', () => {
+    it('invokes listAssets without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock response
-      const nextPageToken = "";
+      const nextPageToken = '';
       const totalSize = 705419236;
       const listAssetsResultsElement = {};
       const listAssetsResults = [listAssetsResultsElement];
       const expectedResponse = {
         nextPageToken: nextPageToken,
         totalSize: totalSize,
-        listAssetsResults: listAssetsResults
+        listAssetsResults: listAssetsResults,
       };
 
       // Mock Grpc layer
@@ -534,16 +534,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes listAssets with error", done => {
+    it('invokes listAssets with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock Grpc layer
@@ -556,34 +556,34 @@ describe("SecurityCenterClient", () => {
       client.listAssets(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("listFindings", () => {
-    it("invokes listFindings without error", done => {
+  describe('listFindings', () => {
+    it('invokes listFindings without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedParent = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock response
-      const nextPageToken = "";
+      const nextPageToken = '';
       const totalSize = 705419236;
       const findingsElement = {};
       const findings = [findingsElement];
       const expectedResponse = {
         nextPageToken: nextPageToken,
         totalSize: totalSize,
-        findings: findings
+        findings: findings,
       };
 
       // Mock Grpc layer
@@ -603,16 +603,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes listFindings with error", done => {
+    it('invokes listFindings with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedParent = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock Grpc layer
@@ -625,32 +625,32 @@ describe("SecurityCenterClient", () => {
       client.listFindings(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("listSources", () => {
-    it("invokes listSources without error", done => {
+  describe('listSources', () => {
+    it('invokes listSources without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock response
-      const nextPageToken = "";
+      const nextPageToken = '';
       const sourcesElement = {};
       const sources = [sourcesElement];
       const expectedResponse = {
         nextPageToken: nextPageToken,
-        sources: sources
+        sources: sources,
       };
 
       // Mock Grpc layer
@@ -670,16 +670,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes listSources with error", done => {
+    it('invokes listSources with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock Grpc layer
@@ -692,23 +692,23 @@ describe("SecurityCenterClient", () => {
       client.listSources(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("runAssetDiscovery", function() {
-    it("invokes runAssetDiscovery without error", done => {
+  describe('runAssetDiscovery', function() {
+    it('invokes runAssetDiscovery without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock response
@@ -735,16 +735,16 @@ describe("SecurityCenterClient", () => {
         });
     });
 
-    it("invokes runAssetDiscovery with error", done => {
+    it('invokes runAssetDiscovery with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedParent = client.organizationPath("[ORGANIZATION]");
+      const formattedParent = client.organizationPath('[ORGANIZATION]');
       const request = {
-        parent: formattedParent
+        parent: formattedParent,
       };
 
       // Mock Grpc layer
@@ -770,10 +770,10 @@ describe("SecurityCenterClient", () => {
         });
     });
 
-    it("has longrunning decoder functions", () => {
+    it('has longrunning decoder functions', () => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
       assert(
         client._descriptors.longrunning.runAssetDiscovery
@@ -786,39 +786,39 @@ describe("SecurityCenterClient", () => {
     });
   });
 
-  describe("setFindingState", () => {
-    it("invokes setFindingState without error", done => {
+  describe('setFindingState', () => {
+    it('invokes setFindingState without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const formattedName = client.findingPath(
-        "[ORGANIZATION]",
-        "[SOURCE]",
-        "[FINDING]"
+        '[ORGANIZATION]',
+        '[SOURCE]',
+        '[FINDING]'
       );
-      const state = "STATE_UNSPECIFIED";
+      const state = 'STATE_UNSPECIFIED';
       const startTime = {};
       const request = {
         name: formattedName,
         state: state,
-        startTime: startTime
+        startTime: startTime,
       };
 
       // Mock response
-      const name2 = "name2-1052831874";
-      const parent = "parent-995424086";
-      const resourceName = "resourceName979421212";
-      const category = "category50511102";
-      const externalUri = "externalUri-1385596168";
+      const name2 = 'name2-1052831874';
+      const parent = 'parent-995424086';
+      const resourceName = 'resourceName979421212';
+      const category = 'category50511102';
+      const externalUri = 'externalUri-1385596168';
       const expectedResponse = {
         name: name2,
         parent: parent,
         resourceName: resourceName,
         category: category,
-        externalUri: externalUri
+        externalUri: externalUri,
       };
 
       // Mock Grpc layer
@@ -834,24 +834,24 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes setFindingState with error", done => {
+    it('invokes setFindingState with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const formattedName = client.findingPath(
-        "[ORGANIZATION]",
-        "[SOURCE]",
-        "[FINDING]"
+        '[ORGANIZATION]',
+        '[SOURCE]',
+        '[FINDING]'
       );
-      const state = "STATE_UNSPECIFIED";
+      const state = 'STATE_UNSPECIFIED';
       const startTime = {};
       const request = {
         name: formattedName,
         state: state,
-        startTime: startTime
+        startTime: startTime,
       };
 
       // Mock Grpc layer
@@ -864,33 +864,33 @@ describe("SecurityCenterClient", () => {
       client.setFindingState(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("setIamPolicy", () => {
-    it("invokes setIamPolicy without error", done => {
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedResource = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedResource = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const policy = {};
       const request = {
         resource: formattedResource,
-        policy: policy
+        policy: policy,
       };
 
       // Mock response
       const version = 351608024;
-      const etag = "21";
+      const etag = '21';
       const expectedResponse = {
         version: version,
-        etag: etag
+        etag: etag,
       };
 
       // Mock Grpc layer
@@ -906,18 +906,18 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes setIamPolicy with error", done => {
+    it('invokes setIamPolicy with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedResource = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedResource = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const policy = {};
       const request = {
         resource: formattedResource,
-        policy: policy
+        policy: policy,
       };
 
       // Mock Grpc layer
@@ -930,25 +930,25 @@ describe("SecurityCenterClient", () => {
       client.setIamPolicy(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("testIamPermissions", () => {
-    it("invokes testIamPermissions without error", done => {
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedResource = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedResource = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const permissions = [];
       const request = {
         resource: formattedResource,
-        permissions: permissions
+        permissions: permissions,
       };
 
       // Mock response
@@ -967,18 +967,18 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes testIamPermissions with error", done => {
+    it('invokes testIamPermissions with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
-      const formattedResource = client.sourcePath("[ORGANIZATION]", "[SOURCE]");
+      const formattedResource = client.sourcePath('[ORGANIZATION]', '[SOURCE]');
       const permissions = [];
       const request = {
         resource: formattedResource,
-        permissions: permissions
+        permissions: permissions,
       };
 
       // Mock Grpc layer
@@ -991,37 +991,37 @@ describe("SecurityCenterClient", () => {
       client.testIamPermissions(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("updateFinding", () => {
-    it("invokes updateFinding without error", done => {
+  describe('updateFinding', () => {
+    it('invokes updateFinding without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const finding = {};
       const request = {
-        finding: finding
+        finding: finding,
       };
 
       // Mock response
-      const name = "name3373707";
-      const parent = "parent-995424086";
-      const resourceName = "resourceName979421212";
-      const category = "category50511102";
-      const externalUri = "externalUri-1385596168";
+      const name = 'name3373707';
+      const parent = 'parent-995424086';
+      const resourceName = 'resourceName979421212';
+      const category = 'category50511102';
+      const externalUri = 'externalUri-1385596168';
       const expectedResponse = {
         name: name,
         parent: parent,
         resourceName: resourceName,
         category: category,
-        externalUri: externalUri
+        externalUri: externalUri,
       };
 
       // Mock Grpc layer
@@ -1037,16 +1037,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes updateFinding with error", done => {
+    it('invokes updateFinding with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const finding = {};
       const request = {
-        finding: finding
+        finding: finding,
       };
 
       // Mock Grpc layer
@@ -1059,31 +1059,31 @@ describe("SecurityCenterClient", () => {
       client.updateFinding(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("updateOrganizationSettings", () => {
-    it("invokes updateOrganizationSettings without error", done => {
+  describe('updateOrganizationSettings', () => {
+    it('invokes updateOrganizationSettings without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const organizationSettings = {};
       const request = {
-        organizationSettings: organizationSettings
+        organizationSettings: organizationSettings,
       };
 
       // Mock response
-      const name = "name3373707";
+      const name = 'name3373707';
       const enableAssetDiscovery = false;
       const expectedResponse = {
         name: name,
-        enableAssetDiscovery: enableAssetDiscovery
+        enableAssetDiscovery: enableAssetDiscovery,
       };
 
       // Mock Grpc layer
@@ -1099,16 +1099,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes updateOrganizationSettings with error", done => {
+    it('invokes updateOrganizationSettings with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const organizationSettings = {};
       const request = {
-        organizationSettings: organizationSettings
+        organizationSettings: organizationSettings,
       };
 
       // Mock Grpc layer
@@ -1121,33 +1121,33 @@ describe("SecurityCenterClient", () => {
       client.updateOrganizationSettings(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("updateSource", () => {
-    it("invokes updateSource without error", done => {
+  describe('updateSource', () => {
+    it('invokes updateSource without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const source = {};
       const request = {
-        source: source
+        source: source,
       };
 
       // Mock response
-      const name = "name3373707";
-      const displayName = "displayName1615086568";
-      const description = "description-1724546052";
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
       const expectedResponse = {
         name: name,
         displayName: displayName,
-        description: description
+        description: description,
       };
 
       // Mock Grpc layer
@@ -1163,16 +1163,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes updateSource with error", done => {
+    it('invokes updateSource with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const source = {};
       const request = {
-        source: source
+        source: source,
       };
 
       // Mock Grpc layer
@@ -1185,29 +1185,29 @@ describe("SecurityCenterClient", () => {
       client.updateSource(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
   });
 
-  describe("updateSecurityMarks", () => {
-    it("invokes updateSecurityMarks without error", done => {
+  describe('updateSecurityMarks', () => {
+    it('invokes updateSecurityMarks without error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const securityMarks = {};
       const request = {
-        securityMarks: securityMarks
+        securityMarks: securityMarks,
       };
 
       // Mock response
-      const name = "name3373707";
+      const name = 'name3373707';
       const expectedResponse = {
-        name: name
+        name: name,
       };
 
       // Mock Grpc layer
@@ -1223,16 +1223,16 @@ describe("SecurityCenterClient", () => {
       });
     });
 
-    it("invokes updateSecurityMarks with error", done => {
+    it('invokes updateSecurityMarks with error', done => {
       const client = new securitycenterModule.v1beta1.SecurityCenterClient({
-        credentials: { client_email: "bogus", private_key: "bogus" },
-        projectId: "bogus"
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
       });
 
       // Mock request
       const securityMarks = {};
       const request = {
-        securityMarks: securityMarks
+        securityMarks: securityMarks,
       };
 
       // Mock Grpc layer
@@ -1245,7 +1245,7 @@ describe("SecurityCenterClient", () => {
       client.updateSecurityMarks(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === "undefined");
+        assert(typeof response === 'undefined');
         done();
       });
     });
@@ -1277,7 +1277,7 @@ function mockLongRunningGrpcMethod(expectedRequest, response, error) {
             resolve([response]);
           }
         });
-      }
+      },
     };
     return Promise.resolve([mockOperation]);
   };

@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-"use strict";
+'use strict';
 
-const gapicConfig = require("./security_center_client_config");
-const gax = require("google-gax");
-const merge = require("lodash.merge");
-const path = require("path");
-const protobuf = require("protobufjs");
+const gapicConfig = require('./security_center_client_config');
+const gax = require('google-gax');
+const merge = require('lodash.merge');
+const path = require('path');
+const protobuf = require('protobufjs');
 
-const VERSION = require("../../package.json").version;
+const VERSION = require('../../package.json').version;
 
 /**
  * V1 Beta APIs for Security Center service.
@@ -64,7 +64,7 @@ class SecurityCenterClient {
       {
         clientConfig: {},
         port: this.constructor.port,
-        servicePath: this.constructor.servicePath
+        servicePath: this.constructor.servicePath,
       },
       opts
     );
@@ -82,7 +82,7 @@ class SecurityCenterClient {
       `gl-node/${process.version}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
-      `gapic/${VERSION}`
+      `gapic/${VERSION}`,
     ];
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -92,8 +92,8 @@ class SecurityCenterClient {
     const protos = merge(
       {},
       gaxGrpc.loadProto(
-        path.join(__dirname, "..", "..", "protos"),
-        "google/cloud/securitycenter/v1beta1/securitycenter_service.proto"
+        path.join(__dirname, '..', '..', 'protos'),
+        'google/cloud/securitycenter/v1beta1/securitycenter_service.proto'
       )
     );
 
@@ -102,20 +102,20 @@ class SecurityCenterClient {
     // Create useful helper objects for these.
     this._pathTemplates = {
       organizationPathTemplate: new gax.PathTemplate(
-        "organizations/{organization}"
+        'organizations/{organization}'
       ),
       sourcePathTemplate: new gax.PathTemplate(
-        "organizations/{organization}/sources/{source}"
+        'organizations/{organization}/sources/{source}'
       ),
       organizationSettingsPathTemplate: new gax.PathTemplate(
-        "organizations/{organization}/organizationSettings"
+        'organizations/{organization}/organizationSettings'
       ),
       findingPathTemplate: new gax.PathTemplate(
-        "organizations/{organization}/sources/{source}/findings/{finding}"
+        'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
       assetSecurityMarksPathTemplate: new gax.PathTemplate(
-        "organizations/{organization}/assets/{asset}/securityMarks"
-      )
+        'organizations/{organization}/assets/{asset}/securityMarks'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -123,39 +123,39 @@ class SecurityCenterClient {
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
       groupAssets: new gax.PageDescriptor(
-        "pageToken",
-        "nextPageToken",
-        "groupByResults"
+        'pageToken',
+        'nextPageToken',
+        'groupByResults'
       ),
       groupFindings: new gax.PageDescriptor(
-        "pageToken",
-        "nextPageToken",
-        "groupByResults"
+        'pageToken',
+        'nextPageToken',
+        'groupByResults'
       ),
       listAssets: new gax.PageDescriptor(
-        "pageToken",
-        "nextPageToken",
-        "listAssetsResults"
+        'pageToken',
+        'nextPageToken',
+        'listAssetsResults'
       ),
       listFindings: new gax.PageDescriptor(
-        "pageToken",
-        "nextPageToken",
-        "findings"
+        'pageToken',
+        'nextPageToken',
+        'findings'
       ),
       listSources: new gax.PageDescriptor(
-        "pageToken",
-        "nextPageToken",
-        "sources"
-      )
+        'pageToken',
+        'nextPageToken',
+        'sources'
+      ),
     };
     let protoFilesRoot = new gax.GoogleProtoFilesRoot();
     protoFilesRoot = protobuf.loadSync(
       path.join(
         __dirname,
-        "..",
-        "..",
-        "protos",
-        "google/cloud/securitycenter/v1beta1/securitycenter_service.proto"
+        '..',
+        '..',
+        'protos',
+        'google/cloud/securitycenter/v1beta1/securitycenter_service.proto'
       ),
       protoFilesRoot
     );
@@ -165,14 +165,14 @@ class SecurityCenterClient {
     // rather than holding a request open.
     this.operationsClient = new gax.lro({
       auth: gaxGrpc.auth,
-      grpc: gaxGrpc.grpc
+      grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
     const runAssetDiscoveryResponse = protoFilesRoot.lookup(
-      "google.protobuf.Empty"
+      'google.protobuf.Empty'
     );
     const runAssetDiscoveryMetadata = protoFilesRoot.lookup(
-      "google.protobuf.Empty"
+      'google.protobuf.Empty'
     );
 
     this._descriptors.longrunning = {
@@ -180,15 +180,15 @@ class SecurityCenterClient {
         this.operationsClient,
         runAssetDiscoveryResponse.decode.bind(runAssetDiscoveryResponse),
         runAssetDiscoveryMetadata.decode.bind(runAssetDiscoveryMetadata)
-      )
+      ),
     };
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
-      "google.cloud.securitycenter.v1beta1.SecurityCenter",
+      'google.cloud.securitycenter.v1beta1.SecurityCenter',
       gapicConfig,
       opts.clientConfig,
-      { "x-goog-api-client": clientHeader.join(" ") }
+      {'x-goog-api-client': clientHeader.join(' ')}
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -206,24 +206,24 @@ class SecurityCenterClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const securityCenterStubMethods = [
-      "createSource",
-      "createFinding",
-      "getIamPolicy",
-      "getOrganizationSettings",
-      "getSource",
-      "groupAssets",
-      "groupFindings",
-      "listAssets",
-      "listFindings",
-      "listSources",
-      "runAssetDiscovery",
-      "setFindingState",
-      "setIamPolicy",
-      "testIamPermissions",
-      "updateFinding",
-      "updateOrganizationSettings",
-      "updateSource",
-      "updateSecurityMarks"
+      'createSource',
+      'createFinding',
+      'getIamPolicy',
+      'getOrganizationSettings',
+      'getSource',
+      'groupAssets',
+      'groupFindings',
+      'listAssets',
+      'listFindings',
+      'listSources',
+      'runAssetDiscovery',
+      'setFindingState',
+      'setIamPolicy',
+      'testIamPermissions',
+      'updateFinding',
+      'updateOrganizationSettings',
+      'updateSource',
+      'updateSecurityMarks',
     ];
     for (const methodName of securityCenterStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -245,7 +245,7 @@ class SecurityCenterClient {
    * The DNS address for this API service.
    */
   static get servicePath() {
-    return "securitycenter.googleapis.com";
+    return 'securitycenter.googleapis.com';
   }
 
   /**
@@ -260,7 +260,7 @@ class SecurityCenterClient {
    * in this service.
    */
   static get scopes() {
-    return ["https://www.googleapis.com/auth/cloud-platform"];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -2351,7 +2351,7 @@ class SecurityCenterClient {
    */
   organizationPath(organization) {
     return this._pathTemplates.organizationPathTemplate.render({
-      organization: organization
+      organization: organization,
     });
   }
 
@@ -2365,7 +2365,7 @@ class SecurityCenterClient {
   sourcePath(organization, source) {
     return this._pathTemplates.sourcePathTemplate.render({
       organization: organization,
-      source: source
+      source: source,
     });
   }
 
@@ -2377,7 +2377,7 @@ class SecurityCenterClient {
    */
   organizationSettingsPath(organization) {
     return this._pathTemplates.organizationSettingsPathTemplate.render({
-      organization: organization
+      organization: organization,
     });
   }
 
@@ -2393,7 +2393,7 @@ class SecurityCenterClient {
     return this._pathTemplates.findingPathTemplate.render({
       organization: organization,
       source: source,
-      finding: finding
+      finding: finding,
     });
   }
 
@@ -2407,7 +2407,7 @@ class SecurityCenterClient {
   assetSecurityMarksPath(organization, asset) {
     return this._pathTemplates.assetSecurityMarksPathTemplate.render({
       organization: organization,
-      asset: asset
+      asset: asset,
     });
   }
 

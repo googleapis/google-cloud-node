@@ -25,11 +25,11 @@
  * @namespace google.cloud.securitycenter.v1beta1
  */
 
-"use strict";
+'use strict';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
-  v1beta1: require("./v1beta1")
+  v1beta1: require('./v1beta1'),
 });
 
 /**
