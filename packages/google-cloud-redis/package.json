@@ -28,9 +28,6 @@
     "redis",
     "Google Cloud Memorystore for Redis API"
   ],
-  "contributors": [
-    "Chris Wilcox <crwilcox@google.com>"
-  ],
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all",
