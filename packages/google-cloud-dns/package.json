@@ -29,19 +29,6 @@
     "google dns",
     "dns"
   ],
-  "contributors": [
-    "Ace Nassri <anassri@google.com>",
-    "Alexander Fenster <github@fenster.name>",
-    "Dave Gramlich <callmehiphop@gmail.com>",
-    "Eric Uldall <ericuldall@gmail.com>",
-    "Jason Dobry <jason.dobry@gmail.com>",
-    "Karim <kinotto88@yahoo.it>",
-    "Luke Sneeringer <lukesneeringer@google.com>",
-    "Stephen <stephenplusplus@users.noreply.github.com>",
-    "Stephen Sawchuk <sawchuk@gmail.com>",
-    "Tim Swast <swast@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
-  ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
