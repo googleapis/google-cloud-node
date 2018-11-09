@@ -38,9 +38,6 @@ for version in versions:
 templates = common_templates.node_library()
 s.copy(templates)
 
-#
 # Node.js specific cleanup
-#
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
