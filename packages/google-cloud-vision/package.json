@@ -44,13 +44,11 @@
     "google-gax": "^0.20.0",
     "is": "^3.2.1",
     "lodash.merge": "^4.6.1",
-    "protobufjs": "^6.8.6",
-    "yargs": "^12.0.0"
+    "protobufjs": "^6.8.6"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@google-cloud/storage": "^2.0.0",
-    "async": "^2.6.1",
     "codecov": "^3.0.2",
     "eslint": "^5.0.1",
     "eslint-config-prettier": "^3.0.0",

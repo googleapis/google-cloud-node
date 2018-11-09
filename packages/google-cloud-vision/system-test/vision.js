@@ -17,7 +17,6 @@
 'use strict';
 
 const assert = require('assert');
-const async = require('async');
 const fs = require('fs');
 const path = require('path');
 const {Storage} = require('@google-cloud/storage');
@@ -52,30 +51,13 @@ describe('Vision', function() {
     });
   });
 
-  after(function(done) {
-    storage.getBuckets(
-      {
-        prefix: TESTS_PREFIX,
-      },
-      function(err, buckets) {
-        if (err) {
-          done(err);
-          return;
-        }
-
-        function deleteBucket(bucket, callback) {
-          bucket.deleteFiles(function(err) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            bucket.delete(callback);
-          });
-        }
-
-        async.each(buckets, deleteBucket, done);
-      }
+  after(async () => {
+    const [buckets] = await storage.getBuckets({prefix: TESTS_PREFIX});
+    await Promise.all(
+      buckets.map(async bucket => {
+        await bucket.deleteFiles();
+        await bucket.delete();
+      })
     );
   });
 
