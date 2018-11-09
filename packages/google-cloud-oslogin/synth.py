@@ -17,15 +17,12 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-from pathlib import Path
 import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-
 versions = ['v1beta']
-
 for version in versions:
     library = gapic.node_library(
         'os-login', version,
@@ -38,12 +35,11 @@ for version in versions:
         excludes=['package.json', 'README.md', 'src/index.js'],
     )
 
+# Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
-#
 # Node.js specific cleanup
-#
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
+subprocess.run(['npm', 'run', 'fix'])
