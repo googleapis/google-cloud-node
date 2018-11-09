@@ -28,13 +28,6 @@
     "os login",
     "Google Cloud OS Login API"
   ],
-  "contributors": [
-    "Alexander Fenster <fenster@google.com>",
-    "Dave Gramlich <callmehiphop@gmail.com>",
-    "Jason Dobry <jmdobry@users.noreply.github.com>",
-    "Stephen <stephenplusplus@users.noreply.github.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
-  ],
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all",
