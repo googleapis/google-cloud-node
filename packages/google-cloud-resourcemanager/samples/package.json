@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "repository": "googleapis/nodejs-resource",
+  "files": ["*.js"],
   "engines": {
     "node": ">=8"
   },

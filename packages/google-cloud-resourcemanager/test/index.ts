@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-'use strict';
-
+import {DecorateRequestOptions, Operation, util} from '@google-cloud/common';
 import * as arrify from 'arrify';
 import * as assert from 'assert';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {util, DecorateRequestOptions, Operation} from '@google-cloud/common';
-import {teenyRequest} from 'teeny-request';
-import {Project} from '../src';
 import {Response} from 'request';
+import {teenyRequest} from 'teeny-request';
+
+import {Project} from '../src';
 
 class FakeOperation {
   calledWith_: IArguments;
@@ -78,7 +76,7 @@ const fakePromisify = {
 };
 
 let makeAuthenticatedRequestFactoryOverride: Function|null;
-const fakeUtil = extend({}, util, {
+const fakeUtil = Object.assign({}, util, {
   makeAuthenticatedRequestFactory() {
     if (makeAuthenticatedRequestFactoryOverride) {
       return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
@@ -86,7 +84,7 @@ const fakeUtil = extend({}, util, {
     return util.makeAuthenticatedRequestFactory.apply(null, arguments);
   },
 });
-const originalFakeUtil = extend(true, {}, fakeUtil);
+const originalFakeUtil = Object.assign({}, fakeUtil);
 
 describe('Resource', () => {
   const PROJECT_ID = 'test-project-id';
@@ -111,7 +109,7 @@ describe('Resource', () => {
   });
 
   beforeEach(() => {
-    extend(fakeUtil, originalFakeUtil);
+    Object.assign(fakeUtil, originalFakeUtil);
     makeAuthenticatedRequestFactoryOverride = null;
 
     resource = new Resource({
@@ -151,7 +149,8 @@ describe('Resource', () => {
   describe('createProject', () => {
     const NEW_PROJECT_ID = 'new-project-id';
     const OPTIONS = {a: 'b', c: 'd'};
-    const EXPECTED_BODY = extend({}, OPTIONS, {projectId: NEW_PROJECT_ID});
+    const EXPECTED_BODY =
+        Object.assign({}, OPTIONS, {projectId: NEW_PROJECT_ID});
 
     it('should not require any options', done => {
       const expectedBody = {projectId: NEW_PROJECT_ID};
@@ -295,7 +294,7 @@ describe('Resource', () => {
 
       it('should build a nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken,
         });
         const expectedNextQuery = {
