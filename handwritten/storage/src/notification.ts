@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import {ServiceObject, util, ApiError, GetMetadataCallback} from '@google-cloud/common';
+import {ApiError, GetMetadataCallback, ServiceObject, util} from '@google-cloud/common';
+import {ResponseBody} from '@google-cloud/common/build/src/util';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as request from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
 
 import {Bucket} from './bucket';
-import {ResponseBody} from '@google-cloud/common/build/src/util';
 
 export interface DeleteNotificationOptions {
   userProject?: string;

@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import {ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as request from 'request';  // Only for type declarations.
+import {Response} from 'request';
 import {teenyRequest} from 'teeny-request';
 
 import {Storage} from './storage';
-import {Response} from 'request';
 
 /**
  * @callback StopCallback

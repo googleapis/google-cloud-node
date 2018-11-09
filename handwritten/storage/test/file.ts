@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 
-'use strict';
-
+import {ApiError, DecorateRequestOptions, ServiceObject, ServiceObjectConfig, util} from '@google-cloud/common';
+import {PromisifyAllOptions} from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as crypto from 'crypto';
+import * as duplexify from 'duplexify';
 import * as extend from 'extend';
 import * as fs from 'fs';
+import * as resumableUpload from 'gcs-resumable-upload';
 import * as proxyquire from 'proxyquire';
 import * as stream from 'stream';
+import {Readable} from 'stream';
 import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as url from 'url';
-import {ServiceObject, util, ServiceObjectConfig, DecorateRequestOptions, ApiError} from '@google-cloud/common';
 import * as zlib from 'zlib';
-import {Readable} from 'stream';
-import * as duplexify from 'duplexify';
-import {PromisifyAllOptions} from '@google-cloud/promisify';
-import * as resumableUpload from 'gcs-resumable-upload';
-import {Bucket, File, GetFileMetadataOptions, SetFileMetadataOptions, FileOptions, CopyOptions, Policy, PolicyDocument} from '../src';
+
+import {Bucket, File, FileOptions, GetFileMetadataOptions, PolicyDocument, SetFileMetadataOptions} from '../src';
 
 let promisified = false;
 let makeWritableStreamOverride: Function|null;
 let handleRespOverride: Function|null;
-const fakeUtil = extend({}, util, {
+const fakeUtil = Object.assign({}, util, {
   handleResp() {
     (handleRespOverride || util.handleResp).apply(null, arguments);
   },
@@ -79,7 +78,7 @@ function fakeResumableUpload() {
     return resumableUploadOverride || resumableUpload;
   };
 }
-extend(fakeResumableUpload, {
+Object.assign(fakeResumableUpload, {
   createURI(...args: Array<{}>) {
     let createURI = resumableUpload.createURI;
 
@@ -90,7 +89,7 @@ extend(fakeResumableUpload, {
     return createURI.apply(null, args);
   },
 });
-extend(fakeResumableUpload, {
+Object.assign(fakeResumableUpload, {
   upload(...args: Array<{}>) {
     let upload = resumableUpload.upload;
     if (resumableUploadOverride && resumableUploadOverride.upload) {
@@ -345,7 +344,7 @@ describe('File', () => {
       const options = {
         userProject: 'user-project',
       };
-      const originalOptions = extend({}, options);
+      const originalOptions = Object.assign({}, options);
       const newFile = new File(BUCKET, 'new-file');
 
       file.request = (reqOpts: DecorateRequestOptions) => {
@@ -714,7 +713,7 @@ describe('File', () => {
       handleRespOverride =
           (err: Error, res: {}, body: {}, callback: Function) => {
             const rawResponseStream = through();
-            extend(rawResponseStream, {
+            Object.assign(rawResponseStream, {
               toJSON() {
                 return {headers: {}};
               },
@@ -937,7 +936,7 @@ describe('File', () => {
         handleRespOverride =
             (err: Error, res: {}, body: {}, callback: Function) => {
               const rawResponseStream = through();
-              extend(rawResponseStream, {
+              Object.assign(rawResponseStream, {
                 toJSON() {
                   return {
                     headers: {
@@ -1280,7 +1279,7 @@ describe('File', () => {
     const METADATA = {a: 'b', c: 'd'};
 
     beforeEach(() => {
-      extend(fakeFs, {
+      Object.assign(fakeFs, {
         access(dir: string, check: {}, callback: Function) {
           // Assume that the required config directory is writable.
           callback();
@@ -1348,7 +1347,7 @@ describe('File', () => {
 
       xdgConfigOverride = fakeDir;
 
-      extend(fakeFs, {
+      Object.assign(fakeFs, {
         access(dir: {}) {
           assert.strictEqual(dir, fakeDir);
           done();
@@ -1367,7 +1366,7 @@ describe('File', () => {
         return fakeDir;
       };
 
-      extend(fakeFs, {
+      Object.assign(fakeFs, {
         access(dir: {}) {
           assert.strictEqual(dir, fakeDir);
           done();
@@ -1380,7 +1379,7 @@ describe('File', () => {
     it('should fail if resumable requested but not writable', done => {
       const error = new Error('Error.');
 
-      extend(fakeFs, {
+      Object.assign(fakeFs, {
         access(dir: {}, check: {}, callback: Function) {
           callback(error);
         },
@@ -1418,7 +1417,7 @@ describe('File', () => {
         done();
       };
 
-      extend(fakeFs, {
+      Object.assign(fakeFs, {
         access(dir: {}, check: {}, callback: Function) {
           callback(new Error('Error.'));
         },
@@ -1745,7 +1744,7 @@ describe('File', () => {
 
   describe('delete', () => {
     it('should make the correct request', done => {
-      extend(file.parent, {
+      Object.assign(file.parent, {
         delete (options: {}, callback: Function) {
           assert.strictEqual(this, file);
           assert.deepStrictEqual(options, {});
@@ -1840,7 +1839,7 @@ describe('File', () => {
     });
 
     it('should only execute callback once', done => {
-      extend(fileReadStream, {
+      Object.assign(fileReadStream, {
         _read(this: Readable) {
           this.emit('error', new Error('Error.'));
           this.emit('error', new Error('Error.'));
@@ -1856,7 +1855,7 @@ describe('File', () => {
       it('should buffer a file into memory if no destination', done => {
         const fileContents = 'abcdefghijklmnopqrstuvwxyz';
 
-        extend(fileReadStream, {
+        Object.assign(fileReadStream, {
           _read(this: Readable) {
             this.push(fileContents);
             this.push(null);
@@ -1874,7 +1873,7 @@ describe('File', () => {
       it('should execute callback with error', done => {
         const error = new Error('Error.');
 
-        extend(fileReadStream, {
+        Object.assign(fileReadStream, {
           _read(this: Readable) {
             this.emit('error', error);
           }
@@ -1895,7 +1894,7 @@ describe('File', () => {
 
           const fileContents = 'abcdefghijklmnopqrstuvwxyz';
 
-          extend(fileReadStream, {
+          Object.assign(fileReadStream, {
             _read(this: Readable) {
               this.push(fileContents);
               this.push(null);
@@ -1922,7 +1921,7 @@ describe('File', () => {
 
           const error = new Error('Error.');
 
-          extend(fileReadStream, {
+          Object.assign(fileReadStream, {
             _read(this: Readable) {
               this.emit('error', error);
             },
@@ -2029,7 +2028,7 @@ describe('File', () => {
 
   describe('getMetadata', () => {
     it('should make the correct request', done => {
-      extend(file.parent, {
+      Object.assign(file.parent, {
         getMetadata(options: {}, callback: Function) {
           assert.strictEqual(this, file);
           assert.deepStrictEqual(options, {});
@@ -2110,7 +2109,7 @@ describe('File', () => {
     });
 
     it('should not modify the configuration object', done => {
-      const originalConfig = extend({}, CONFIG);
+      const originalConfig = Object.assign({}, CONFIG);
 
       file.getSignedPolicy(CONFIG, (err: Error) => {
         assert.ifError(err);
@@ -2446,7 +2445,7 @@ describe('File', () => {
     });
 
     it('should not modify the configuration object', done => {
-      const originalConfig = extend({}, CONFIG);
+      const originalConfig = Object.assign({}, CONFIG);
 
       file.getSignedUrl(CONFIG, (err: Error) => {
         assert.ifError(err);
@@ -2456,7 +2455,7 @@ describe('File', () => {
     });
 
     it('should set correct settings if resumable', done => {
-      const config = extend({}, CONFIG, {
+      const config = Object.assign({}, CONFIG, {
         action: 'resumable',
       });
 
@@ -2519,7 +2518,7 @@ describe('File', () => {
     describe('cname', () => {
       it('should use a provided cname', done => {
         const host = 'http://www.example.com';
-        const configWithCname = extend({cname: host}, CONFIG);
+        const configWithCname = Object.assign({cname: host}, CONFIG);
 
         file.getSignedUrl(configWithCname, (err: Error, signedUrl: string) => {
           assert.ifError(err);
@@ -2832,7 +2831,7 @@ describe('File', () => {
         file.copy = (destination: {}, options: {}, callback: Function) => {
           callback(null);
         };
-        extend(file, {
+        Object.assign(file, {
           delete () {
             assert.strictEqual(this, file);
             done();
@@ -2943,7 +2942,7 @@ describe('File', () => {
     it('should call ServiceObject#request correctly', done => {
       const options = {};
 
-      extend(FakeServiceObject.prototype, {
+      Object.assign(FakeServiceObject.prototype, {
         request(reqOpts: DecorateRequestOptions, callback: Function) {
           assert.strictEqual(this, file);
           assert.strictEqual(reqOpts, options);
@@ -3072,7 +3071,7 @@ describe('File', () => {
     it('should make the correct request', done => {
       const metadata = {};
 
-      extend(file.parent, {
+      Object.assign(file.parent, {
         setMetadata(metadata: {}, options: {}, callback: Function) {
           assert.strictEqual(this, file);
           assert.deepStrictEqual(options, {});

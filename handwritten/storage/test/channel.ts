@@ -18,11 +18,9 @@
  * @module storage/channel
  */
 
-'use strict';
-
+import {DecorateRequestOptions, ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
-import {ServiceObject, ServiceObjectConfig, DecorateRequestOptions} from '@google-cloud/common';
 
 let promisified = false;
 const fakePromisify = {

@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import * as arrify from 'arrify';
-import {Service, GoogleAuthOptions, CreateOptions} from '@google-cloud/common';
+import {CreateOptions, GoogleAuthOptions, Service} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as extend from 'extend';
+import * as arrify from 'arrify';
 import * as r from 'request';  // Only for type declarations.
-import {teenyRequest} from 'teeny-request';
 import {Readable} from 'stream';
+import {teenyRequest} from 'teeny-request';
 
 import {Bucket} from './bucket';
 import {Channel} from './channel';
 import {File} from './file';
 import {normalize} from './util';
-import {AccessControlObject} from './acl';
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -477,7 +473,8 @@ export class Storage extends Service {
       metadata = metadataOrCallback as CreateBucketRequest;
     }
 
-    const body = extend({}, metadata, {name}) as {[index: string]: string | {}};
+    const body =
+        Object.assign({}, metadata, {name}) as {[index: string]: string | {}};
 
     const storageClasses = {
       coldline: 'COLDLINE',
@@ -633,7 +630,7 @@ export class Storage extends Service {
           });
 
           const nextQuery = resp.nextPageToken ?
-              extend({}, options, {pageToken: resp.nextPageToken}) :
+              Object.assign({}, options, {pageToken: resp.nextPageToken}) :
               null;
 
           callback(null, buckets, nextQuery, resp);

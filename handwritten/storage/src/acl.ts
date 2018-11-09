@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import * as arrify from 'arrify';
+import {BodyResponseCallback, DecorateRequestOptions} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as extend from 'extend';
-import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common';
+import * as arrify from 'arrify';
 import * as r from 'request';
 
 export interface AclOptions {
@@ -309,7 +306,7 @@ class AclRoleAccessorMethods {
                 callback = entityId;
               }
 
-              options = extend(
+              options = Object.assign(
                   {
                     entity: apiEntity,
                     role,

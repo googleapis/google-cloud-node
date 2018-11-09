@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-'use strict';
-
+import {DecorateRequestOptions, util} from '@google-cloud/common';
 import * as assert from 'assert';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {util, DecorateRequestOptions} from '@google-cloud/common';
-import {Bucket} from '../src';
 
 describe('storage/iam', () => {
   // tslint:disable-next-line:variable-name no-any
@@ -63,7 +59,7 @@ describe('storage/iam', () => {
     });
 
     it('should localize the request function', done => {
-      extend(BUCKET_INSTANCE, {
+      Object.assign(BUCKET_INSTANCE, {
         request(callback: Function) {
           assert.strictEqual(this, BUCKET_INSTANCE);
           callback();  // done()
@@ -123,7 +119,7 @@ describe('storage/iam', () => {
         assert.deepStrictEqual(reqOpts, {
           method: 'PUT',
           uri: '/iam',
-          json: extend(
+          json: Object.assign(
               {
                 resourceId: iam.resourceId_,
               },
@@ -227,7 +223,7 @@ describe('storage/iam', () => {
         userProject: 'grape-spaceship-123',
       };
 
-      const expectedQuery = extend(
+      const expectedQuery = Object.assign(
           {
             permissions,
           },

@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as extend from 'extend';
+import * as arrify from 'arrify';
 import * as r from 'request';
 
 import {Bucket} from './bucket';
@@ -257,7 +254,7 @@ class Iam {
         {
           method: 'PUT',
           uri: '/iam',
-          json: extend(
+          json: Object.assign(
               {
                 resourceId: this.resourceId_,
               },
@@ -343,7 +340,7 @@ class Iam {
 
     const permissionsArray = arrify(permissions);
 
-    const req = extend(
+    const req = Object.assign(
         {
           permissions: permissionsArray,
         },

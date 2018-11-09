@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
 import * as async from 'async';
 import * as crypto from 'crypto';
-import * as extend from 'extend';
 import * as fs from 'fs';
 import fetch from 'node-fetch';
 const normalizeNewline = require('normalize-newline');
@@ -850,7 +847,8 @@ describe('storage', () => {
 
             bucket.getLabels((err, labels) => {
               assert.ifError(err);
-              assert.deepStrictEqual(labels, extend({}, LABELS, newLabels));
+              assert.deepStrictEqual(
+                  labels, Object.assign({}, LABELS, newLabels));
               done();
             });
           });
@@ -874,7 +872,7 @@ describe('storage', () => {
             bucket.getLabels((err, labels) => {
               assert.ifError(err);
 
-              const expectedLabels = extend({}, LABELS);
+              const expectedLabels = Object.assign({}, LABELS);
               delete (
                   expectedLabels as {[index: string]: {}})[labelKeyToDelete];
 
@@ -1596,7 +1594,7 @@ describe('storage', () => {
 
         it('acl#add',
            doubleTest((options: AddAclOptions, done: AddAclCallback) => {
-             options = extend(
+             options = Object.assign(
                  {
                    entity: USER_ACCOUNT,
                    role: storage.acl.OWNER_ROLE,
@@ -1608,7 +1606,7 @@ describe('storage', () => {
 
         it('acl#update',
            doubleTest((options: UpdateAclOptions, done: UpdateAclCallback) => {
-             options = extend(
+             options = Object.assign(
                  {
                    entity: USER_ACCOUNT,
                    role: storage.acl.WRITER_ROLE,
@@ -1620,7 +1618,7 @@ describe('storage', () => {
 
         it('acl#get',
            doubleTest((options: GetAclOptions, done: GetAclCallback) => {
-             options = extend(
+             options = Object.assign(
                  {
                    entity: USER_ACCOUNT,
                  },
@@ -1631,7 +1629,7 @@ describe('storage', () => {
 
         it('acl#delete',
            doubleTest((options: RemoveAclOptions, done: RemoveAclCallback) => {
-             options = extend(
+             options = Object.assign(
                  {
                    entity: USER_ACCOUNT,
                  },
@@ -2940,7 +2938,7 @@ describe('storage', () => {
     // anymore.
     const CONSISTENCY_DELAY_MS = 250;
 
-    options = extend({}, options, {
+    options = Object.assign({}, options, {
       versions: true,
     });
 

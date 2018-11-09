@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import * as arrify from 'arrify';
-import * as async from 'async';
-import {ExistsCallback, ServiceObject, Metadata, util, DeleteCallback, InstanceResponseCallback, GetConfig, GetMetadataCallback, DecorateRequestOptions, BodyResponseCallback, ApiError} from '@google-cloud/common';
+import {ApiError, BodyResponseCallback, DecorateRequestOptions, DeleteCallback, ExistsCallback, GetConfig, GetMetadataCallback, InstanceResponseCallback, Metadata, ServiceObject, util} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
+import * as arrify from 'arrify';
+import * as async from 'async';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as mime from 'mime-types';
 import * as path from 'path';
+
 const snakeize = require('snakeize');
 import * as request from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
@@ -1376,7 +1375,7 @@ class Bucket extends ServiceObject {
         {
           method: 'POST',
           uri: '/o/watch',
-          json: extend(
+          json: Object.assign(
               {
                 id,
                 type: 'web_hook',
@@ -2096,7 +2095,7 @@ class Bucket extends ServiceObject {
     if (!callback) {
       callback = queryOrCallback as GetFilesCallback;
     }
-    query = extend({}, query);
+    query = Object.assign({}, query);
 
     if (query.directory) {
       query.prefix = `${query.directory}/`.replace(/\/*$/, '/');
@@ -2134,7 +2133,7 @@ class Bucket extends ServiceObject {
 
           let nextQuery: object|null = null;
           if (resp.nextPageToken) {
-            nextQuery = extend({}, query, {
+            nextQuery = Object.assign({}, query, {
               pageToken: resp.nextPageToken,
             });
           }
@@ -3129,7 +3128,7 @@ class Bucket extends ServiceObject {
     callback =
         typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
-    options = extend(
+    options = Object.assign(
         {
           metadata: {},
         },
