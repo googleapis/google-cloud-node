@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import * as is from 'is';
-const isFunction = is.fn;
-const isObject = is.object;
-import {RequestInformationContainer} from '../classes/request-information-container';
 import * as express from 'express';
+import * as is from 'is';
+
+import {RequestInformationContainer} from '../classes/request-information-container';
 
 /**
  * This function checks for the presence of an `x-forwarded-for` header on the
@@ -33,7 +32,7 @@ import * as express from 'express';
 function extractRemoteAddressFromRequest(req: express.Request) {
   if (typeof req.header('x-forwarded-for') !== 'undefined') {
     return req.header('x-forwarded-for');
-  } else if (isObject(req.connection)) {
+  } else if (is.object(req.connection)) {
     return req.connection.remoteAddress;
   }
 
@@ -55,16 +54,16 @@ export function expressRequestInformationExtractor(
     req: express.Request, res: express.Response) {
   const returnObject = new RequestInformationContainer();
 
-  if (!isObject(req) || !isFunction(req.header) || !isObject(res)) {
+  if (!is.object(req) || !is.function(req.header) || !is.object(res)) {
+      return returnObject;
+    }
+
+    returnObject.setMethod(req.method)
+        .setUrl(req.url)
+        .setUserAgent(req.header('user-agent'))
+        .setReferrer(req.header('referrer'))
+        .setStatusCode(res.statusCode)
+        .setRemoteAddress(extractRemoteAddressFromRequest(req));
+
     return returnObject;
-  }
-
-  returnObject.setMethod(req.method)
-      .setUrl(req.url)
-      .setUserAgent(req.header('user-agent'))
-      .setReferrer(req.header('referrer'))
-      .setStatusCode(res.statusCode)
-      .setRemoteAddress(extractRemoteAddressFromRequest(req));
-
-  return returnObject;
 }

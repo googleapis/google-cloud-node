@@ -17,9 +17,7 @@
 import * as is from 'is';
 import has = require('lodash.has');
 
-const isObject = is.object;
 import {buildStackTrace} from './build-stack-trace';
-
 import {ErrorMessage} from './classes/error-message';
 
 export interface PopulatedObject {
@@ -48,7 +46,7 @@ export function populateErrorMessage(ob: any, em: ErrorMessage) {
     em.setMessage(buildStackTrace('' + ob));
   } else if ((ob as {stack: {}}).stack) {
     populateFromError(ob as Error, em);
-  } else if (typeof ob === 'object' && isObject(ob)) {
+  } else if (typeof ob === 'object' && is.object(ob)) {
     populateFromObject(ob, em);
   } else {
     em.setMessage(buildStackTrace(ob.toString()));
@@ -77,7 +75,7 @@ function populateFromError(
     errorMessage.setUser(err.user!);
   }
 
-  if (has(err, 'serviceContext') && isObject(err.serviceContext)) {
+  if (has(err, 'serviceContext') && is.object(err.serviceContext)) {
     errorMessage.setServiceContext(
         err.serviceContext!.service!, err.serviceContext!.version);
   }
@@ -130,7 +128,7 @@ function populateFromObject(ob: PopulatedObject, errorMessage: ErrorMessage) {
     errorMessage.setFunctionName(ob.functionName!);
   }
 
-  if (has(ob, 'serviceContext') && isObject(ob.serviceContext)) {
+  if (has(ob, 'serviceContext') && is.object(ob.serviceContext)) {
     errorMessage.setServiceContext(
         ob.serviceContext!.service!, ob.serviceContext!.version);
   }

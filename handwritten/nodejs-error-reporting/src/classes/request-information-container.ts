@@ -15,8 +15,6 @@
  */
 
 import * as is from 'is';
-const isString = is.string;
-const isNumber = is.number;
 
 export class RequestInformationContainer {
   url: string;
@@ -62,7 +60,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setUrl(url: string) {
-    this.url = isString(url) ? url : '';
+    this.url = is.string(url) ? url : '';
 
     return this;
   }
@@ -74,7 +72,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setMethod(method: string) {
-    this.method = isString(method) ? method : '';
+    this.method = is.string(method) ? method : '';
 
     return this;
   }
@@ -86,7 +84,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setReferrer(referrer?: string) {
-    this.referrer = (isString(referrer) ? referrer : '')!;
+    this.referrer = (is.string(referrer) ? referrer : '')!;
 
     return this;
   }
@@ -98,7 +96,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setUserAgent(userAgent?: string) {
-    this.userAgent = (isString(userAgent) ? userAgent : '')!;
+    this.userAgent = (is.string(userAgent) ? userAgent : '')!;
 
     return this;
   }
@@ -110,7 +108,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setRemoteAddress(remoteIp?: string) {
-    this.remoteAddress = (isString(remoteIp) ? remoteIp : '')!;
+    this.remoteAddress = (is.string(remoteIp) ? remoteIp : '')!;
 
     return this;
   }
@@ -122,7 +120,7 @@ export class RequestInformationContainer {
    * @returns {this} - returns the instance for chaining
    */
   setStatusCode(statusCode: number) {
-    this.statusCode = isNumber(statusCode) ? statusCode : 0;
+    this.statusCode = is.number(statusCode) ? statusCode : 0;
 
     return this;
   }

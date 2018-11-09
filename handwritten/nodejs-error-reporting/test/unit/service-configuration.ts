@@ -16,16 +16,13 @@
 
 import * as assert from 'assert';
 import * as is from 'is';
-const isString = is.string;
-const isNumber = is.number;
-import assign = require('lodash.assign');
 import omitBy = require('lodash.omitby');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {deepStrictEqual} from '../util';
 const level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 import {createLogger} from '../../src/logger';
 const logger = createLogger({
-  logLevel: isNumber(level) ? level : 4,
+  logLevel: is.number(level) ? level : 4,
 });
 const serviceConfigEnv = {
   GAE_SERVICE: process.env.GAE_SERVICE,
@@ -42,7 +39,7 @@ function sterilizeServiceConfigEnv() {
 function setEnv(
     serviceName: string|null, serviceVersion: string, moduleName: string|null,
     mv: string, fn: string|null) {
-  assign(
+  Object.assign(
       process.env,
       omitBy(
           {
@@ -53,11 +50,11 @@ function setEnv(
             FUNCTION_NAME: fn,
           },
           val => {
-            return !isString(val);
+            return !is.string(val);
           }));
 }
 function restoreServiceConfigEnv() {
-  assign(process.env, serviceConfigEnv);
+  Object.assign(process.env, serviceConfigEnv);
 }
 
 describe('Testing service configuration', () => {
