@@ -28,14 +28,6 @@
     "cloud-tasks",
     "Cloud Tasks API"
   ],
-  "contributors": [
-    "Averi Kitsch <akitsch@google.com>",
-    "Christopher Wilcox <git@crwilcox.com>",
-    "Jonathan Lui <jonathanlui@google.com>",
-    "Jonathan Lui <kinwa91@msn.com>",
-    "Justin Beckwith <justin.beckwith@gmail.com>",
-    "renovate[bot] <renovate[bot]@users.noreply.github.com>"
-  ],
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all",
