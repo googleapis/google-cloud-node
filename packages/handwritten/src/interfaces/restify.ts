@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-import * as is from 'is';
-const isObject = is.object;
-const isFunction = is.function;
-import {ErrorMessage} from '../classes/error-message';
-import * as expressRequestInformationExtractor from '../request-extractors/express';
-import {populateErrorMessage} from '../populate-error-message';
-import {RequestHandler} from '../google-apis/auth-client';
-import {Configuration} from '../configuration';
-import * as restify from 'restify';
 import * as express from 'express';
+import * as is from 'is';
+import * as restify from 'restify';
+
+import {ErrorMessage} from '../classes/error-message';
+import {Configuration} from '../configuration';
+import {RequestHandler} from '../google-apis/auth-client';
+import {populateErrorMessage} from '../populate-error-message';
+import * as expressRequestInformationExtractor from '../request-extractors/express';
 
 /**
  * The restifyErrorHandler is responsible for taking the captured error, setting
@@ -106,17 +105,17 @@ function restifyRequestHandler(
   // TODO: Address the fact that a cast is needed to use `listener`
   let listener = {};
 
-  if (isObject(res) && isFunction(res.on) && isFunction(res.removeListener)) {
-    listener = () => {
-      restifyRequestFinishHandler(client, config, req, res);
-      res.removeListener(
-          'finish', listener as {} as (...args: Array<{}>) => void);
-    };
+  if (is.object(res) && is.function(res.on) && is.function(res.removeListener)) {
+      listener = () => {
+        restifyRequestFinishHandler(client, config, req, res);
+        res.removeListener(
+            'finish', listener as {} as (...args: Array<{}>) => void);
+      };
 
-    res.on('finish', listener as {} as (...args: Array<{}>) => void);
-  }
+      res.on('finish', listener as {} as (...args: Array<{}>) => void);
+    }
 
-  return next();
+    return next();
 }
 
 /**
@@ -138,15 +137,15 @@ function restifyRequestHandler(
  */
 function serverErrorHandler(
     client: RequestHandler, config: Configuration, server: restify.Server) {
-  server.on('uncaughtException', (req, res, reqConfig, err) => {
-    const em = new ErrorMessage().consumeRequestInformation(
-        expressRequestInformationExtractor.expressRequestInformationExtractor(
-            req, res));
+    server.on('uncaughtException', (req, res, reqConfig, err) => {
+      const em = new ErrorMessage().consumeRequestInformation(
+          expressRequestInformationExtractor.expressRequestInformationExtractor(
+              req, res));
 
-    restifyErrorHandler(client, config, err, em);
-  });
+      restifyErrorHandler(client, config, err, em);
+    });
 
-  return restifyRequestHandler.bind(null, client, config);
+    return restifyRequestHandler.bind(null, client, config);
 }
 
 /**
@@ -161,5 +160,5 @@ function serverErrorHandler(
  *  restify middleware stack
  */
 export function handlerSetup(client: RequestHandler, config: Configuration) {
-  return serverErrorHandler.bind(null, client, config);
+    return serverErrorHandler.bind(null, client, config);
 }

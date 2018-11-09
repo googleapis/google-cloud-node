@@ -18,9 +18,6 @@ import * as boom from 'boom';
 import * as is from 'is';
 import has = require('lodash.has');
 
-const isObject = is.object;
-const isFunction = is.function;
-const isArray = is.array;
 import {RequestInformationContainer} from '../classes/request-information-container';
 import * as hapi from 'hapi';
 

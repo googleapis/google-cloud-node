@@ -15,8 +15,6 @@
  */
 
 import {Response} from 'express';
-import * as extend from 'extend';
-
 import {expressRequestInformationExtractor} from '../../../src/request-extractors/express';
 import {Fuzzer} from '../../../utils/fuzzer';
 import {deepStrictEqual} from '../../util';
@@ -104,7 +102,7 @@ describe('Behaviour under varying input', () => {
     };
     // tslint:disable-next-line:no-any
     const headerFactory = (toDeriveFrom: any) => {
-      const lrn = extend({}, toDeriveFrom);
+      const lrn = Object.assign({}, toDeriveFrom);
       lrn.header = (toRet: string) => {
         if (lrn.hasOwnProperty(toRet)) {
           return lrn[toRet];

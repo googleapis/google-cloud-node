@@ -16,7 +16,6 @@
 
 import * as assert from 'assert';
 import * as is from 'is';
-const isNumber = is.number;
 import merge = require('lodash.merge');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
 import {ConfigurationOptions} from '../../src/configuration';
@@ -25,7 +24,7 @@ import {deepStrictEqual} from '../util';
 const level = process.env.GCLOUD_ERRORS_LOGLEVEL;
 import {createLogger} from '../../src/logger';
 const logger = createLogger({
-  logLevel: isNumber(level) ? level : 4,
+  logLevel: is.number(level) ? level : 4,
 });
 import * as nock from 'nock';
 
