@@ -84,22 +84,21 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
       .annotateVideo(request)
       .then(responses => {
         const operation = responses[0];
-        const initialApiResponse = responses[1];
 
         // Adding a listener for the "complete" event starts polling for the
         // completion of the operation.
-        operation.on('complete', (result, metadata, finalApiResponse) => {
+        operation.on('complete', result => {
           console.log(result);
         });
 
         // Adding a listener for the "progress" event causes the callback to be
         // called on any change in metadata when the operation is polled.
-        operation.on('progress', (metadata, apiResponse) => {
+        operation.on('progress', metadata => {
           console.log(metadata);
         });
 
         // Adding a listener for the "error" event handles any errors found during polling.
-        operation.on('error', err => {
+        operation.on('error', () => {
           // throw(err);
         });
       })
