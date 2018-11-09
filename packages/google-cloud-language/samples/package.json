@@ -7,6 +7,10 @@
   },
   "repository": "googleapis/nodejs-language",
   "private": true,
+  "files": [
+    "*.js",
+    "resources"
+  ],
   "scripts": {
     "test": "mocha"
   },
