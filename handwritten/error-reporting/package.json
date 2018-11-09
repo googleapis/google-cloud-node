@@ -19,18 +19,6 @@
     "build/src",
     "!build/src/**/*.map"
   ],
-  "contributors": [
-    "Ace Nassri <anassri@google.com>",
-    "Ali Ijaz Sheikh <ofrobots@google.com>",
-    "Cristian Cavalli <cristiancavall@google.com>",
-    "Dominic Kramer <DominicDKramer@google.com>",
-    "Eric Uldall <ericuldall@gmail.com>",
-    "Jason Dobry <jdobry@google.com>",
-    "Kelvin Jin <kelvinjin@google.com>",
-    "Luke Sneeringer <lukesneeringer@google.com>",
-    "Stephen Sawchuk <sawchuk@gmail.com>",
-    "Tomoaki Abe <abe@enzou.tokyo>"
-  ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "node node_modules/.bin/repo-tools generate all && node node_modules/.bin/repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
