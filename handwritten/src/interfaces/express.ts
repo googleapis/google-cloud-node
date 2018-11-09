@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-import * as is from 'is';
-const isObject = is.object;
-// TODO: Address the error where `is` does not have a `fn` property
-const isFunction = (is as {} as {fn: Function}).fn;
-import {ErrorMessage} from '../classes/error-message';
-import {expressRequestInformationExtractor} from '../request-extractors/express';
-import {populateErrorMessage} from '../populate-error-message';
-
-import {RequestHandler} from '../google-apis/auth-client';
-import {Configuration} from '../configuration';
 import * as express from 'express';
+import * as is from 'is';
+
+import {ErrorMessage} from '../classes/error-message';
+import {Configuration} from '../configuration';
+import {RequestHandler} from '../google-apis/auth-client';
+import {populateErrorMessage} from '../populate-error-message';
+import {expressRequestInformationExtractor} from '../request-extractors/express';
 
 /**
  * Returns a function that can be used as an express error handling middleware.
@@ -52,7 +49,7 @@ export function makeExpressHandler(
     let ctxService = '';
     let ctxVersion: string|undefined = '';
 
-    if (isObject(config)) {
+    if (is.object(config)) {
       ctxService = config.getServiceContext().service;
       ctxVersion = config.getServiceContext().version;
     }
@@ -65,15 +62,13 @@ export function makeExpressHandler(
 
     populateErrorMessage(err, em);
 
-    if (isObject(client) && isFunction(client.sendError)) {
-      client.sendError(em);
-    }
+    if (is.object(client) && is.function(client.sendError))
+      { client.sendError(em); }
 
-    if (isFunction(next)) {
-      next(err);
-    }
+    if (is.function(next))
+        { next(err); }
 
-    return em;
+        return em;
   }
 
   return expressErrorHandler;

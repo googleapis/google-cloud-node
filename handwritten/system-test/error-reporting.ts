@@ -26,7 +26,6 @@ import {FakeConfiguration as Configuration} from '../test/fixtures/configuration
 import {deepStrictEqual} from '../test/util';
 import {ErrorGroupStats, ErrorsApiTransport} from '../utils/errors-api-transport';
 
-import assign = require('lodash.assign');
 import pick = require('lodash.pick');
 import omitBy = require('lodash.omitby');
 import * as request from 'request';
@@ -49,7 +48,7 @@ class InstancedEnv {
   projectId!: string;
 
   constructor(injectedEnv: {[key: string]: string|undefined}) {
-    assign(this, injectedEnv);
+    Object.assign(this, injectedEnv);
     this.injectedEnv = injectedEnv;
     this._originalEnv = this._captureProcessProperties();
   }
@@ -64,40 +63,40 @@ class InstancedEnv {
   }
 
   setProjectId() {
-    assign(process.env, {
+    Object.assign(process.env, {
       GCLOUD_PROJECT: this.injectedEnv.projectId,
     });
     return this;
   }
 
   setProjectNumber() {
-    assign(process.env, {
+    Object.assign(process.env, {
       GCLOUD_PROJECT: this.injectedEnv.projectNumber,
     });
     return this;
   }
 
   setKeyFilename() {
-    assign(process.env, {
+    Object.assign(process.env, {
       GOOGLE_APPLICATION_CREDENTIALS: this.injectedEnv.keyFilename,
     });
     return this;
   }
 
   setProduction() {
-    assign(process.env, {
+    Object.assign(process.env, {
       NODE_ENV: 'production',
     });
     return this;
   }
 
   restoreProcessToOriginalState() {
-    assign(process.env, this._originalEnv);
+    Object.assign(process.env, this._originalEnv);
     return this;
   }
 
   injected() {
-    return assign({}, this.injectedEnv);
+    return Object.assign({}, this.injectedEnv);
   }
 }
 

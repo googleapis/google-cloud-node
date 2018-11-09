@@ -16,11 +16,6 @@
 
 import * as is from 'is';
 import has = require('lodash.has');
-
-const isObject = is.object;
-const isArray = is.array;
-// TODO: Address the error where `is` does not have a `fn` property
-const isFunction = (is as {} as {fn: Function}).fn;
 import {RequestInformationContainer} from '../classes/request-information-container';
 
 export interface Request {
@@ -53,33 +48,32 @@ export interface Request {
 export function manualRequestInformationExtractor(req: Request) {
   const returnObject = new RequestInformationContainer();
 
-  if (!isObject(req) || isArray(req) || isFunction(req)) {
+  if (!is.object(req) || is.array(req) || is.function(req))
+    { return returnObject; }
+
+    if (has(req, 'method')) {
+      returnObject.setMethod(req.method!);
+    }
+
+    if (has(req, 'url')) {
+      returnObject.setUrl(req.url!);
+    }
+
+    if (has(req, 'userAgent')) {
+      returnObject.setUserAgent(req.userAgent);
+    }
+
+    if (has(req, 'referrer')) {
+      returnObject.setReferrer(req.referrer);
+    }
+
+    if (has(req, 'statusCode')) {
+      returnObject.setStatusCode(req.statusCode!);
+    }
+
+    if (has(req, 'remoteAddress')) {
+      returnObject.setRemoteAddress(req.remoteAddress);
+    }
+
     return returnObject;
-  }
-
-  if (has(req, 'method')) {
-    returnObject.setMethod(req.method!);
-  }
-
-  if (has(req, 'url')) {
-    returnObject.setUrl(req.url!);
-  }
-
-  if (has(req, 'userAgent')) {
-    returnObject.setUserAgent(req.userAgent);
-  }
-
-  if (has(req, 'referrer')) {
-    returnObject.setReferrer(req.referrer);
-  }
-
-  if (has(req, 'statusCode')) {
-    returnObject.setStatusCode(req.statusCode!);
-  }
-
-  if (has(req, 'remoteAddress')) {
-    returnObject.setRemoteAddress(req.remoteAddress);
-  }
-
-  return returnObject;
 }

@@ -17,10 +17,6 @@
 import * as is from 'is';
 import has = require('lodash.has');
 
-const isObject = is.object;
-const isBoolean = is.boolean;
-const isString = is.string;
-const isNumber = is.number;
 const env = process.env;
 
 // The Logger interface defined below matches the interface
@@ -193,7 +189,7 @@ export class Configuration {
      * @type {Object|Null}
      * @defaultvalue null
      */
-    this._givenConfiguration = isObject(givenConfig) ? givenConfig! : {};
+    this._givenConfiguration = is.object(givenConfig) ? givenConfig! : {};
     this._checkLocalServiceContext();
     this._gatherLocalConfiguration();
   }
@@ -244,18 +240,18 @@ export class Configuration {
       version = env.GAE_MODULE_VERSION;
     }
 
-    this._serviceContext.service = (isString(service) ? service : 'node')!;
-    this._serviceContext.version = isString(version) ? version : undefined;
+    this._serviceContext.service = (is.string(service) ? service : 'node')!;
+    this._serviceContext.version = is.string(version) ? version : undefined;
 
-    if (isObject(this._givenConfiguration.serviceContext)) {
-      if (isString(this._givenConfiguration.serviceContext!.service)) {
+    if (is.object(this._givenConfiguration.serviceContext)) {
+      if (is.string(this._givenConfiguration.serviceContext!.service)) {
         this._serviceContext.service =
             this._givenConfiguration.serviceContext!.service!;
       } else if (has(this._givenConfiguration.serviceContext, 'service')) {
         throw new Error('config.serviceContext.service must be a string');
       }
 
-      if (isString(this._givenConfiguration.serviceContext!.version)) {
+      if (is.string(this._givenConfiguration.serviceContext!.version)) {
         this._serviceContext.version =
             this._givenConfiguration.serviceContext!.version;
       } else if (has(this._givenConfiguration.serviceContext, 'version')) {
@@ -281,7 +277,7 @@ export class Configuration {
       this._shouldReportErrorsToAPI = true;
     } else if (
         has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
-        !isBoolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
+        !is.boolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
       throw new Error('config.ignoreEnvironmentCheck must be a boolean');
     } else {
       this._shouldReportErrorsToAPI = env.NODE_ENV === 'production';
@@ -294,22 +290,22 @@ export class Configuration {
         'true in the runtime configuration object',
       ].join(' '));
     }
-    if (isString(this._givenConfiguration.key)) {
+    if (is.string(this._givenConfiguration.key)) {
       this._key = this._givenConfiguration.key!;
     } else if (has(this._givenConfiguration, 'key')) {
       throw new Error('config.key must be a string');
     }
-    if (isString(this._givenConfiguration.keyFilename)) {
+    if (is.string(this._givenConfiguration.keyFilename)) {
       this.keyFilename = this._givenConfiguration.keyFilename!;
     } else if (has(this._givenConfiguration, 'keyFilename')) {
       throw new Error('config.keyFilename must be a string');
     }
-    if (isObject(this._givenConfiguration.credentials)) {
+    if (is.object(this._givenConfiguration.credentials)) {
       this.credentials = this._givenConfiguration.credentials!;
     } else if (has(this._givenConfiguration, 'credentials')) {
       throw new Error('config.credentials must be a valid credentials object');
     }
-    if (isBoolean(this._givenConfiguration.reportUnhandledRejections)) {
+    if (is.boolean(this._givenConfiguration.reportUnhandledRejections)) {
       this._reportUnhandledRejections =
           this._givenConfiguration.reportUnhandledRejections!;
     } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
@@ -339,14 +335,14 @@ export class Configuration {
    * @returns {Undefined} - does not return anything
    */
   _checkLocalProjectId() {
-    if (isString(this._projectId)) {
+    if (is.string(this._projectId)) {
       // already has been set by the metadata service
       return this._projectId;
     }
     if (has(this._givenConfiguration, 'projectId')) {
-      if (isString(this._givenConfiguration.projectId)) {
+      if (is.string(this._givenConfiguration.projectId)) {
         this._projectId = this._givenConfiguration.projectId!;
-      } else if (isNumber(this._givenConfiguration.projectId)) {
+      } else if (is.number(this._givenConfiguration.projectId)) {
         this._projectId = this._givenConfiguration.projectId!.toString();
       }
     }
