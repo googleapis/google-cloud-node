@@ -16,10 +16,11 @@ for version in ['v1', 'v1beta2']:
         library,
         excludes=['package.json', 'README.md', 'src/index.js'])
 
+# Update common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
+subprocess.run(['npm', 'run', 'fix'])
