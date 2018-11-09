@@ -28,9 +28,6 @@
     "kms",
     "Google Cloud Key Management Service (KMS) API"
   ],
-  "contributors": [
-    "Jonathan Lui <jonathanlui@google.com>"
-  ],
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all",
