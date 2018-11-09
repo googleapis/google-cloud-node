@@ -28,12 +28,6 @@
     "container",
     "Google Container Engine API"
   ],
-  "contributors": [
-    "Alexander Fenster <fenster@google.com>",
-    "Ethan Bao <cbao@google.com>",
-    "Google API Publisher <googleapis-publisher@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
-  ],
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all",
