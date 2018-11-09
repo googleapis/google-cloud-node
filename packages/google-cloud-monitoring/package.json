@@ -33,7 +33,6 @@
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "eslint '**/*.js'",
-    "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js --timeout 600000",
     "test-no-cover": "mocha test/*.js",
@@ -41,14 +40,11 @@
     "fix": "eslint '**/*.js' --fix"
   },
   "dependencies": {
-    "extend": "^3.0",
     "google-gax": "^0.20.0",
-    "lodash.merge": "^4.6.0",
-    "lodash.union": "^4.6.0"
+    "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
-    "async": "^2.5.0",
     "codecov": "^3.0.0",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^3.0.0",

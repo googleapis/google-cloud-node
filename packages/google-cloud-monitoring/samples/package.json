@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-monitoring",
+  "files": [ "*.js" ],
   "engines": {
     "node": ">=8"
   },
