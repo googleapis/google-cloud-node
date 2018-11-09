@@ -29,25 +29,6 @@
     "language",
     "Google Cloud Natural Language API"
   ],
-  "contributors": [
-    "Ace Nassri <anassri@google.com>",
-    "Alexander Fenster <github@fenster.name>",
-    "Amy <amy@infosleuth.net>",
-    "Dave Gramlich <callmehiphop@gmail.com>",
-    "Eric Uldall <ericuldall@gmail.com>",
-    "Ernest Landrito <landrito@google.com>",
-    "Gus Class <gguuss@gmail.com>",
-    "Jason Dobry <jason.dobry@gmail.com>",
-    "Jerjou <jerjou@users.noreply.github.com>",
-    "Jun Mukai <jun.mukai@gmail.com>",
-    "Luke Sneeringer <lukesneeringer@google.com>",
-    "Ricky Dunlop <hello@rickydunlop.co.uk>",
-    "Sawyer Hollenshead <sawyerh@users.noreply.github.com>",
-    "Song Wang <songwang@google.com>",
-    "Stephen Sawchuk <sawchuk@gmail.com>",
-    "Tim Swast <swast@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
-  ],
   "scripts": {
     "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
