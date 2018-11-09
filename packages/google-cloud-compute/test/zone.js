@@ -19,7 +19,7 @@
 const arrify = require('arrify');
 const assert = require('assert');
 const extend = require('extend');
-const gceImages = require('gce-images');
+const {GCEImages} = require('gce-images');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
@@ -42,11 +42,6 @@ const fakePromisify = extend({}, promisify, {
     ]);
   },
 });
-
-let gceImagesOverride;
-function fakeGceImages() {
-  return (gceImagesOverride || gceImages).apply(null, arguments);
-}
 
 function FakeAutoscaler() {
   this.calledWith_ = [].slice.call(arguments);
@@ -122,7 +117,6 @@ describe('Zone', function() {
 
   before(function() {
     Zone = proxyquire('../src/zone.js', {
-      'gce-images': fakeGceImages,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
       },
@@ -139,7 +133,6 @@ describe('Zone', function() {
 
   beforeEach(function() {
     formatPortsOverride = null;
-    gceImagesOverride = null;
     zone = new Zone(COMPUTE, ZONE_NAME);
   });
 
@@ -170,15 +163,9 @@ describe('Zone', function() {
     });
 
     it('should create a gceImages instance', function() {
-      const gceVal = 'ok';
-
-      gceImagesOverride = function(authConfig) {
-        assert.strictEqual(authConfig.authClient, COMPUTE.authClient);
-        return gceVal;
-      };
-
       const newZone = new Zone(COMPUTE, ZONE_NAME);
-      assert.strictEqual(newZone.gceImages, gceVal);
+      assert(newZone.gceImages instanceof GCEImages);
+      assert.strictEqual(newZone.gceImages._auth, COMPUTE.authClient);
     });
 
     it('should inherit from ServiceObject', function() {

@@ -21,7 +21,7 @@ const async = require('async');
 const common = require('@google-cloud/common');
 const extend = require('extend');
 const format = require('string-format-obj');
-const gceImages = require('gce-images');
+const {GCEImages} = require('gce-images');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
@@ -151,7 +151,7 @@ class Zone extends common.ServiceObject {
      * @type {string}
      */
     this.name = name;
-    this.gceImages = gceImages({
+    this.gceImages = new GCEImages({
       authClient: compute.authClient,
     });
   }

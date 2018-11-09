@@ -1,4 +1,2 @@
-node_modules/*
-samples/node_modules/*
-src/**/doc/*
+**/node_modules
 build/
