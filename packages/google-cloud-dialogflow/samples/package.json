@@ -4,7 +4,8 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "repository": "dialogflow/dialogflow-nodejs-client-v2",
+  "repository": "googleapis/nodejs-dialogflow",
+  "files": [ "*.js", "resources" ],
   "engines": {
     "node": ">=8.0.0"
   },
@@ -13,7 +14,6 @@
   },
   "dependencies": {
     "dialogflow": "^0.7.0",
-    "grpc": "^1.4.1",
     "pump": "^3.0.0",
     "through2": "^3.0.0",
     "prompt": "^1.0.0",
