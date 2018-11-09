@@ -13,25 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import * as context from '@opencensus/propagation-stackdriver';
+import {HttpRequest, middleware as commonMiddleware} from '@google-cloud/logging';
 import * as bunyan from 'bunyan';
-import * as http from 'http';
-
-export type Request = http.IncomingMessage;
-export type Response = http.ServerResponse;
-export type NextFunction = (err?: Error) => void;
 
 import {LOGGING_TRACE_KEY, LoggingBunyan} from '../index';
 import * as types from '../types/core';
 
+export const APP_LOG_SUFFIX = 'applog';
+
 // @types/bunyan doesn't export Logger. Access it via ReturnType on
 // createLogger.
-type Logger = ReturnType<typeof bunyan.createLogger>;
-
-export interface AnnotatedRequest extends Request {
-  log: Logger;
-}
+export type Logger = ReturnType<typeof bunyan.createLogger>;
 
 export interface MiddlewareOptions extends types.Options {
   level?: types.LogLevel;
@@ -39,8 +31,7 @@ export interface MiddlewareOptions extends types.Options {
 
 export interface MiddlewareReturnType {
   logger: Logger;
-  // tslint:disable-next-line:no-any express middleware.
-  mw: (req: Request, res: Response, next: NextFunction) => any;
+  mw: ReturnType<typeof commonMiddleware.express.makeMiddleware>;
 }
 
 /**
@@ -51,41 +42,28 @@ export async function middleware(options?: MiddlewareOptions):
   const defaultOptions = {logName: 'bunyan_log', level: 'info'};
   options = Object.assign({}, defaultOptions, options);
 
-  const bunyan = require('bunyan');
-  const loggingBunyan = new LoggingBunyan(options);
-  const projectId =
-      await loggingBunyan.stackdriverLog.logging.auth.getProjectId();
-  // Failure to acquire projectId from auth would throw to the user.
+  // TODO: Create a http request logger unless we are running on GAE or GCF.
 
+  const loggingBunyanApp = new LoggingBunyan(Object.assign({}, options, {
+    // For request bundling to work, the parent (request) and child (app) logs
+    // need to have distinct names. For exact requirements see:
+    // https://cloud.google.com/appengine/articles/logging#linking_app_logs_and_requests
+    logName: `${options.logName}_${APP_LOG_SUFFIX}`
+  }));
   const logger = bunyan.createLogger({
-    name: options.logName,
-    streams: [loggingBunyan.stream(options.level as types.LogLevel)]
+    name: `${options.logName}_${APP_LOG_SUFFIX}`,
+    streams: [loggingBunyanApp.stream(options.level as types.LogLevel)]
   });
+
+  const projectId =
+      await loggingBunyanApp.stackdriverLog.logging.auth.getProjectId();
 
   return {
     logger,
-    mw: (req: Request, res: Response, next: NextFunction) => {
-      const wrapper = {
-        setHeader(name: string, value: string) {
-          req.headers[name] = value;
-        },
-        getHeader(name: string) {
-          return req.headers[name];
-        }
-      };
-
-      let spanContext = context.extract(wrapper);
-      if (!spanContext) {
-        // We were the first actor to detect lack of context. Establish context.
-        spanContext = context.generate();
-        context.inject(wrapper, spanContext);
-      }
-
-      const trace = `projects/${projectId}/traces/${spanContext.traceId}`;
-
-      (req as AnnotatedRequest).log =
-          logger.child({[LOGGING_TRACE_KEY]: trace}, true /*simple child */);
-      next();
-    }
+    mw: commonMiddleware.express.makeMiddleware(projectId, makeChildLogger)
   };
+
+  function makeChildLogger(trace: string) {
+    return logger.child({[LOGGING_TRACE_KEY]: trace}, true /* simple child */);
+  }
 }

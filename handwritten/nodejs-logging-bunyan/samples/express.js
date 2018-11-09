@@ -23,7 +23,9 @@ const lb = require('@google-cloud/logging-bunyan');
 const express = require('express');
 
 async function startServer() {
-  const {logger, mw} = await lb.express.middleware();
+  const {logger, mw} = await lb.express.middleware({
+    logName: 'samples_express',
+  });
   const app = express();
 
   // Install the logging middleware. This ensures that a Bunyan-style `log`

@@ -57,7 +57,7 @@ describe('express middleware', () => {
       const next = async () => {
         // At this point fakeRequest.log should have been installed.
         // tslint:disable-next-line:no-any
-        (fakeRequest as any as elb.AnnotatedRequest).log.info(LOG_MESSAGE);
+        (fakeRequest as any).log.info(LOG_MESSAGE);
 
         await delay(WRITE_CONSISTENCY_DELAY_MS);
 

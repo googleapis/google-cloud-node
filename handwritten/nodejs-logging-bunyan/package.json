@@ -60,7 +60,7 @@
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
-    "test": "nyc mocha build/test",
+    "test": "nyc mocha --recursive build/test",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -72,8 +72,7 @@
     "codecov": "nyc report --reporter=json && codecov -f .coverage/*.json"
   },
   "dependencies": {
-    "@google-cloud/logging": "^4.0.1",
-    "@opencensus/propagation-stackdriver": "^0.0.6"
+    "@google-cloud/logging": "^4.1.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
