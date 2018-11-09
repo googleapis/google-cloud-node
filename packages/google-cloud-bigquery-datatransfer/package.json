@@ -28,11 +28,6 @@
     "bigquerydatatransfer",
     "BigQuery Data Transfer API"
   ],
-  "contributors": [
-    "Alexander Fenster <fenster@google.com>",
-    "Ethan Bao <cbao@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
-  ],
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all",
