@@ -19,12 +19,6 @@ import maxBy = require('lodash.maxby');
 import random = require('lodash.random');
 import * as is from 'is';
 
-const isNumber = is.number;
-const isString = is.string;
-const isArray = is.array;
-const isFunction = is.function;
-
-
 export class Fuzzer {
   generate = {
     types() {
@@ -41,7 +35,7 @@ export class Fuzzer {
     },
 
     string(len?: number) {
-      const lenChecked = (isNumber(len) ? len : 10)!;
+      const lenChecked = (is.number(len) ? len : 10)!;
       const chars: string[] = [];
 
       for (let i = 0; i < lenChecked; i++) {
@@ -56,7 +50,7 @@ export class Fuzzer {
     },
 
     alphaNumericString(len?: number) {
-      const lenChecked = (isNumber(len) ? len : 10)!;
+      const lenChecked = (is.number(len) ? len : 10)!;
       const chars: string[] = [];
       let thisRange: number[] = [];
       const ranges = [[48, 57], [65, 90], [97, 122]];
@@ -80,8 +74,8 @@ export class Fuzzer {
     },
 
     number(lower?: number, upper?: number) {
-      const lowerChecked = (isNumber(lower) ? lower : 0)!;
-      const upperChecked = (isNumber(upper) ? upper : 100)!;
+      const lowerChecked = (is.number(lower) ? lower : 0)!;
+      const upperChecked = (is.number(upper) ? upper : 100)!;
 
       return random(lowerChecked, upperChecked);
     },
@@ -97,13 +91,13 @@ export class Fuzzer {
     array(
         len?: number, ofOneType?: string, currentDepth?: number,
         allowedDepth?: number) {
-      const lenChecked = (isNumber(len) ? len : random(1, 10))!;
+      const lenChecked = (is.number(len) ? len : random(1, 10))!;
       let availableTypes =
-          (isString(ofOneType) && this.types().indexOf(ofOneType!) > -1 ?
+          (is.string(ofOneType) && this.types().indexOf(ofOneType!) > -1 ?
                [ofOneType] :
                this.types())!;
-      let currentDepthChecked = (isNumber(currentDepth) ? currentDepth : 0)!;
-      const allowedDepthChecked = (isNumber(allowedDepth) ? allowedDepth : 3)!;
+      let currentDepthChecked = (is.number(currentDepth) ? currentDepth : 0)!;
+      const allowedDepthChecked = (is.number(allowedDepth) ? allowedDepth : 3)!;
       const arr: Array<{}> = [];
       let currentTypeBeingGenerated: string|undefined = '';
       currentDepthChecked += 1;
@@ -135,9 +129,9 @@ export class Fuzzer {
     object(
         numProperties?: number, currentDepth?: number, allowedDepth?: number) {
       const numPropertiesChecked =
-          (isNumber(numProperties) ? numProperties : random(1, 10))!;
-      let currentDepthChecked = (isNumber(currentDepth) ? currentDepth : 0)!;
-      const allowedDepthChecked = (isNumber(allowedDepth) ? allowedDepth : 3)!;
+          (is.number(numProperties) ? numProperties : random(1, 10))!;
+      let currentDepthChecked = (is.number(currentDepth) ? currentDepth : 0)!;
+      const allowedDepthChecked = (is.number(allowedDepth) ? allowedDepth : 3)!;
       const obj: {[key: string]: {}} = {};
       currentDepthChecked += 1;
 
@@ -212,7 +206,7 @@ export class Fuzzer {
     let tmpArray = this.generate.types();
 
     for (let i = 0; i < expectsArgTypes.length; i++) {
-      if (!isArray(expectsArgTypes[i])) {
+      if (!is.array(expectsArgTypes[i])) {
         argsTypesArray.push(without(this.generate.types(), expectsArgTypes[i]));
       } else {
         for (let j = 0; j < expectsArgTypes[i].length; j++) {
@@ -246,7 +240,7 @@ export class Fuzzer {
       fnToFuzz: Function, expectsArgTypes?: string[], cb?: Function,
       withContext?: {}) {
     const expectsArgTypesChecked =
-        (isArray(expectsArgTypes) ? expectsArgTypes : [])!;
+        (is.array(expectsArgTypes) ? expectsArgTypes : [])!;
     const typesToFuzzOnEach =
         this._generateTypesToFuzzWith(expectsArgTypesChecked) as string[][];
 
@@ -256,11 +250,10 @@ export class Fuzzer {
       returnValue = fnToFuzz.apply(
           withContext, this._generateValuesForFuzzTyping(typesToFuzzOnEach, i));
 
-      if (isFunction(cb)) {
-        cb!(returnValue);
-      }
+      if (is.function(cb))
+        { cb!(returnValue); }
     }
 
     return true;
+    }
   }
-}

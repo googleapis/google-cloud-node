@@ -15,11 +15,9 @@
  */
 
 import * as is from 'is';
-const isObject = is.object;
-const isFunction = is.function;
-const isArray = is.array;
-import {RequestInformationContainer} from '../classes/request-information-container';
 import * as koa from 'koa';
+
+import {RequestInformationContainer} from '../classes/request-information-container';
 
 /**
  * The koaRequestInformationExtractor attempts to extract information from a Koa
@@ -35,17 +33,17 @@ export function koaRequestInformationExtractor(
     req: koa.Request, res: koa.Response) {
   const returnObject = new RequestInformationContainer();
 
-  if (!isObject(req) || !isObject(res) || isFunction(req) || isFunction(res) ||
-      isArray(req) || isArray(res) || !isObject(req.headers)) {
+  if (!is.object(req) || !is.object(res) || is.function(req) || is.function(res) ||
+      is.array(req) || is.array(res) || !is.object(req.headers)) {
+      return returnObject;
+    }
+
+    returnObject.setMethod(req.method)
+        .setUrl(req.url)
+        .setUserAgent(req.headers['user-agent'])
+        .setReferrer(req.headers.referrer)
+        .setStatusCode(res.status)
+        .setRemoteAddress(req.ip);
+
     return returnObject;
-  }
-
-  returnObject.setMethod(req.method)
-      .setUrl(req.url)
-      .setUserAgent(req.headers['user-agent'])
-      .setReferrer(req.headers.referrer)
-      .setStatusCode(res.status)
-      .setRemoteAddress(req.ip);
-
-  return returnObject;
 }

@@ -15,12 +15,10 @@
  */
 
 import * as is from 'is';
-const isString = is.string;
-const isNumber = is.number;
-const isObject = is.object;
+
+import {ServiceContext} from '../configuration';
 
 import {RequestInformationContainer} from './request-information-container';
-import {ServiceContext} from '../configuration';
 
 export interface Context {
   httpRequest: {
@@ -124,8 +122,8 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setServiceContext(service?: string, version?: string) {
-    this.serviceContext.service = (isString(service) ? service : 'node')!;
-    this.serviceContext.version = isString(version) ? version : undefined;
+    this.serviceContext.service = (is.string(service) ? service : 'node')!;
+    this.serviceContext.version = is.string(version) ? version : undefined;
 
     return this;
   }
@@ -137,7 +135,7 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setMessage(message?: string) {
-    this.message = (isString(message) ? message : '')!;
+    this.message = (is.string(message) ? message : '')!;
 
     return this;
   }
@@ -150,7 +148,7 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setHttpMethod(method?: string) {
-    this.context.httpRequest.method = (isString(method) ? method : '')!;
+    this.context.httpRequest.method = (is.string(method) ? method : '')!;
 
     return this;
   }
@@ -162,7 +160,7 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setUrl(url?: string) {
-    this.context.httpRequest.url = (isString(url) ? url : '')!;
+    this.context.httpRequest.url = (is.string(url) ? url : '')!;
 
     return this;
   }
@@ -175,7 +173,7 @@ export class ErrorMessage {
    */
   setUserAgent(userAgent?: string) {
     this.context.httpRequest.userAgent =
-        (isString(userAgent) ? userAgent : '')!;
+        (is.string(userAgent) ? userAgent : '')!;
 
     return this;
   }
@@ -187,7 +185,7 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setReferrer(referrer?: string) {
-    this.context.httpRequest.referrer = (isString(referrer) ? referrer : '')!;
+    this.context.httpRequest.referrer = (is.string(referrer) ? referrer : '')!;
 
     return this;
   }
@@ -200,7 +198,7 @@ export class ErrorMessage {
    */
   setResponseStatusCode(responseStatusCode?: number) {
     this.context.httpRequest.responseStatusCode =
-        (isNumber(responseStatusCode) ? responseStatusCode : 0)!;
+        (is.number(responseStatusCode) ? responseStatusCode : 0)!;
 
     return this;
   }
@@ -212,7 +210,7 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setRemoteIp(remoteIp?: string) {
-    this.context.httpRequest.remoteIp = (isString(remoteIp) ? remoteIp : '')!;
+    this.context.httpRequest.remoteIp = (is.string(remoteIp) ? remoteIp : '')!;
 
     return this;
   }
@@ -224,7 +222,7 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setUser(user?: string) {
-    this.context.user = (isString(user) ? user : '')!;
+    this.context.user = (is.string(user) ? user : '')!;
 
     return this;
   }
@@ -237,7 +235,7 @@ export class ErrorMessage {
    */
   setFilePath(filePath?: string) {
     this.context.reportLocation.filePath =
-        (isString(filePath) ? filePath : '')!;
+        (is.string(filePath) ? filePath : '')!;
 
     return this;
   }
@@ -250,7 +248,7 @@ export class ErrorMessage {
    */
   setLineNumber(lineNumber?: number) {
     this.context.reportLocation.lineNumber =
-        (isNumber(lineNumber) ? lineNumber : 0)!;
+        (is.number(lineNumber) ? lineNumber : 0)!;
 
     return this;
   }
@@ -263,7 +261,7 @@ export class ErrorMessage {
    */
   setFunctionName(functionName?: string) {
     this.context.reportLocation.functionName =
-        (isString(functionName) ? functionName : '')!;
+        (is.string(functionName) ? functionName : '')!;
 
     return this;
   }
@@ -277,7 +275,7 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   consumeRequestInformation(requestInformation: RequestInformationContainer) {
-    if (!isObject(requestInformation)) {
+    if (!is.object(requestInformation)) {
       return this;
     }
 

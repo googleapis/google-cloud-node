@@ -17,11 +17,10 @@
 import * as boom from 'boom';
 import * as is from 'is';
 
-const isObject = is.object;
-const isFunction = is.fn;
 import {ErrorMessage} from '../classes/error-message';
-import {hapiRequestInformationExtractor} from '../request-extractors/hapi';
 import {populateErrorMessage} from '../populate-error-message';
+import {hapiRequestInformationExtractor} from '../request-extractors/hapi';
+
 const packageJson = require('../../../package.json');
 
 import {RequestHandler} from '../google-apis/auth-client';
@@ -42,7 +41,7 @@ function hapiErrorHandler(err: {}, req?: hapi.Request, config?: Configuration) {
   let service = '';
   let version: string|undefined = '';
 
-  if (isObject(config)) {
+  if (is.object(config)) {
     service = config!.getServiceContext().service;
     version = config!.getServiceContext().version;
   }
@@ -101,18 +100,20 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
               }
             });
       } else {
-        if (isFunction(server.on)) {
-          server.on('request-error', (req: hapi.Request, err: {}) => {
-            client.sendError(hapiErrorHandler(err, req, config));
-          });
-        }
+        if (is.function(server.on))
+          {
+            server.on('request-error', (req: hapi.Request, err: {}) => {
+              client.sendError(hapiErrorHandler(err, req, config));
+            });
+          }
 
-        if (isFunction(server.ext)) {
+        if (is.function(server.ext))
+            {
           server.ext(
               'onPreResponse',
               (request: hapi.Request,
                reply: any) => {  // tslint:disable-line:no-any
-                if (isObject(request) && request.response &&
+                if (is.object(request) && request.response &&
                     (request.response as boom).isBoom) {
                   // Cast to {} is necessary, as@types/hapi@16 incorrectly types
                   // response as 'Response | null' instead of 'Response | Boom |
@@ -123,17 +124,16 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
                   client.sendError(em);
                 }
 
-                if (reply && isFunction(reply.continue)) {
-                  reply.continue();
-                }
-              });
+                if (reply && is.function(reply.continue))
+                  { reply.continue(); }
+              })
+                  ;
         }
-      }
+            }
     }
 
-    if (isFunction(next)) {
-      return next!();
-    }
+    if (is.function(next))
+            { return next!(); }
   }
 
   const hapiPlugin = {
