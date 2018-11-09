@@ -28,14 +28,6 @@
     "texttospeech",
     "Cloud Text-to-Speech API"
   ],
-  "contributors": [
-    "Alexander Fenster <fenster@google.com>",
-    "Chris Wilcox <crwilcox@google.com>",
-    "Jonathan Lui <jonathanlui@google.com>",
-    "Justin Beckwith <justin.beckwith@gmail.com>",
-    "Rebecca Taylor <rebeccataylor@google.com>",
-    "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>"
-  ],
   "scripts": {
     "test": "npm run cover",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
