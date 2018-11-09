@@ -14,9 +14,7 @@
       "**/*.test.js"
     ]
   },
-  "scripts": {},
   "dependencies": {
     "@google-cloud/iot": "^0.1.0"
-  },
-  "devDependencies": {}
+  }
 }

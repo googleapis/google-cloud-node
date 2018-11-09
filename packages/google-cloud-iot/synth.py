@@ -17,14 +17,11 @@
 import synthtool as s
 import synthtool.gcp as gcp
 import logging
-from pathlib import Path
 import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
-common_templates = gcp.CommonTemplates()
-
 library = gapic.node_library(
     'iot', 'v1',
     config_path="/google/cloud/iot/"
@@ -49,12 +46,11 @@ s.replace(
       parent: request.parent,
     });\n\g<2>''')
 
-templates = common_templates.node_library(package_name="@google-cloud/automl")
+# Copy common templated files
+common_templates = gcp.CommonTemplates()
+templates = common_templates.node_library()
 s.copy(templates)
 
-#
 # Node.js specific cleanup
-#
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
