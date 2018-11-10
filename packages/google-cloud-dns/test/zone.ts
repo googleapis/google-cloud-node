@@ -18,7 +18,6 @@ import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import * as arrify from 'arrify';
 import * as assert from 'assert';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
 import * as uuid from 'uuid';
@@ -27,7 +26,7 @@ import {Change, CreateChangeRequest} from '../src/change';
 import {Record, RecordObject} from '../src/record';
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll(esClass: Function, options: promisify.PromisifyAllOptions) {
     if (esClass.name !== 'Zone') {
       return;
@@ -153,7 +152,7 @@ describe('Zone', () => {
     });
 
     it('should inherit from ServiceObject', done => {
-      const dnsInstance = extend({}, DNS, {
+      const dnsInstance = Object.assign({}, DNS, {
         createZone: {
           bind(context: {}) {
             assert.strictEqual(context, dnsInstance);
@@ -205,7 +204,7 @@ describe('Zone', () => {
 
   describe('createChange', () => {
     function generateRecord(recordJson?: {}) {
-      recordJson = extend(
+      recordJson = Object.assign(
           {
             name: uuid.v1(),
             type: uuid.v1(),
@@ -645,7 +644,7 @@ describe('Zone', () => {
 
       it('should build a nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken,
         });
         const expectedNextQuery = {
@@ -728,7 +727,7 @@ describe('Zone', () => {
 
       it('should execute callback with nextQuery if necessary', done => {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken,
         });
         const expectedNextQuery = {pageToken: nextPageToken};

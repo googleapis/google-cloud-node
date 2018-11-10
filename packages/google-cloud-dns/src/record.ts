@@ -16,8 +16,6 @@
 
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
-import * as extend from 'extend';
-
 import {Change, CreateChangeCallback} from './change';
 import {Zone} from './zone';
 
@@ -103,7 +101,7 @@ export class Record implements RecordObject {
      * @property {number} metadata.ttl
      */
     this.metadata = metadata;
-    extend(this, this.toJSON());
+    Object.assign(this, this.toJSON());
     if (this.rrdatas) {
       /**
        * @name Record#data
@@ -162,7 +160,7 @@ export class Record implements RecordObject {
    * @returns {object}
    */
   toJSON() {
-    const recordObject: RecordObject = extend({}, this.metadata, {
+    const recordObject: RecordObject = Object.assign({}, this.metadata, {
       type: this.type.toUpperCase(),
     });
     if (recordObject.data) {

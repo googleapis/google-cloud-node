@@ -18,7 +18,6 @@ import {DeleteCallback, ServiceObject} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
-import * as extend from 'extend';
 import * as fs from 'fs';
 
 import groupBy = require('lodash.groupby');
@@ -433,7 +432,7 @@ class Zone extends ServiceObject {
         // tslint:disable-next-line:forin
         for (const recordName in recordsByName) {
           const records = recordsByName[recordName];
-          const templateRecord = extend({}, records[0]);
+          const templateRecord = Object.assign({}, records[0]);
           if (records.length > 1) {
             // Combine the `rrdatas` values from all records of the same type.
             templateRecord.rrdatas =
@@ -445,7 +444,7 @@ class Zone extends ServiceObject {
       }
       return recordsOut;
     };
-    const body = extend(
+    const body = Object.assign(
         {
           additions: groupByType(arrify(config.add).map(x => x.toJSON())),
           deletions: groupByType(arrify(config.delete).map(x => x.toJSON())),
@@ -774,7 +773,7 @@ class Zone extends ServiceObject {
           });
           let nextQuery = null;
           if (resp.nextPageToken) {
-            nextQuery = extend({}, query, {
+            nextQuery = Object.assign({}, query, {
               pageToken: resp.nextPageToken,
             });
           }
@@ -899,7 +898,7 @@ class Zone extends ServiceObject {
         filterByTypes_,
       };
     }
-    const requestQuery = extend({}, query) as GetRecordsRequest;
+    const requestQuery = Object.assign({}, query) as GetRecordsRequest;
     delete requestQuery.filterByTypes_;
     this.request(
         {
@@ -921,7 +920,7 @@ class Zone extends ServiceObject {
           }
           let nextQuery: {}|null = null;
           if (resp.nextPageToken) {
-            nextQuery = extend({}, query, {
+            nextQuery = Object.assign({}, query, {
               pageToken: resp.nextPageToken,
             });
           }

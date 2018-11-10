@@ -18,7 +18,6 @@ import {GoogleAuthOptions, Service} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
-import * as extend from 'extend';
 import * as r from 'request';
 import {Stream} from 'stream';
 import {teenyRequest} from 'teeny-request';
@@ -323,7 +322,7 @@ class DNS extends Service {
           });
           let nextQuery: GetZonesRequest|null = null;
           if (resp.nextPageToken) {
-            nextQuery = extend({}, query, {
+            nextQuery = Object.assign({}, query, {
               pageToken: resp.nextPageToken,
             });
           }

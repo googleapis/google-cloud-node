@@ -39,7 +39,7 @@
     "system-test": "mocha build/system-test --timeout 600000",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "eslint --fix 'samples/**/*.js' && gts fix",
+    "fix": "eslint --fix '**/*.js' && gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile"
   },
@@ -49,7 +49,6 @@
     "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",
     "dns-zonefile": "0.2.2",
-    "extend": "^3.0.0",
     "lodash.groupby": "^4.6.0",
     "string-format-obj": "^1.1.1",
     "teeny-request": "^3.6.0"
@@ -57,7 +56,6 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
     "@types/arrify": "^1.0.4",
-    "@types/extend": "^3.0.0",
     "@types/lodash.groupby": "^4.6.4",
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.9.4",

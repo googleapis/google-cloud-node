@@ -18,7 +18,6 @@ import {Service, ServiceConfig, ServiceOptions, util} from '@google-cloud/common
 import * as promisify from '@google-cloud/promisify';
 import * as arrify from 'arrify';
 import * as assert from 'assert';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
 
@@ -50,13 +49,13 @@ class FakeService extends Service {
   }
 }
 
-const fakeUtil = extend({}, util, {
+const fakeUtil = Object.assign({}, util, {
   makeAuthenticatedRequestFactory() {},
 });
-const originalFakeUtil = extend(true, {}, fakeUtil);
+const originalFakeUtil = Object.assign({}, fakeUtil);
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   // tslint:disable-next-line:variable-name
   promisifyAll(esClass: Function, options: promisify.PromisifyAllOptions) {
     if (esClass.name !== 'DNS') {
@@ -96,7 +95,7 @@ describe('DNS', () => {
   });
 
   beforeEach(() => {
-    extend(fakeUtil, originalFakeUtil);
+    Object.assign(fakeUtil, originalFakeUtil);
     dns = new DNS({
       projectId: PROJECT_ID,
     });
@@ -152,7 +151,7 @@ describe('DNS', () => {
     });
 
     it('should use a provided description', done => {
-      const cfg = extend({}, config, {description: 'description'});
+      const cfg = Object.assign({}, config, {description: 'description'});
 
       dns.request = (reqOpts: CoreOptions) => {
         assert.strictEqual(reqOpts.json.description, cfg.description);
@@ -175,7 +174,7 @@ describe('DNS', () => {
       dns.request = (reqOpts: OptionsWithUri) => {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/managedZones');
-        const expectedBody = extend({}, config, {
+        const expectedBody = Object.assign({}, config, {
           name: zoneName,
           description: '',
         });
@@ -327,12 +326,12 @@ describe('DNS', () => {
       });
 
       it('should set a nextQuery if necessary', done => {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         dns.request = (reqOpts: {}, callback: Function) => {
           callback(null, apiResponseWithNextPageToken);
@@ -344,10 +343,9 @@ describe('DNS', () => {
           // Check the original query wasn't modified.
           assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepStrictEqual(
-              nextQuery, extend({}, query, {
-                pageToken: apiResponseWithNextPageToken.nextPageToken,
-              }));
+          assert.deepStrictEqual(nextQuery, Object.assign({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken,
+          }));
 
           done();
         });

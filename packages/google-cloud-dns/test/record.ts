@@ -16,13 +16,12 @@
 
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 
 import {Record} from '../src';
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll(esClass: Function, options: promisify.PromisifyAllOptions) {
     if (esClass.name !== 'Record') {
       return;
@@ -304,7 +303,7 @@ describe('Record', () => {
 
   describe('toJSON', () => {
     it('should format the data for the API', () => {
-      const expectedRecord = extend({}, METADATA, {
+      const expectedRecord = Object.assign({}, METADATA, {
         type: 'A',
         rrdatas: METADATA.data,
       });
@@ -316,7 +315,7 @@ describe('Record', () => {
 
   describe('toString', () => {
     it('should format the data for a zonefile', () => {
-      const jsonRecord = extend({}, METADATA, {
+      const jsonRecord = Object.assign({}, METADATA, {
         type: TYPE,
         rrdatas: ['example.com.', 'example2.com.'],
       });
