@@ -20,6 +20,6 @@
     "@google-cloud/os-login": "^0.3.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.3.0"
+    "@google-cloud/nodejs-repo-tools": "^3.0.0"
   }
 }
