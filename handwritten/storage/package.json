@@ -75,7 +75,7 @@
     "xdg-basedir": "^3.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.2.3",
+    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "@google-cloud/pubsub": "*",
     "@types/arrify": "^1.0.4",
     "@types/async": "^2.0.49",
