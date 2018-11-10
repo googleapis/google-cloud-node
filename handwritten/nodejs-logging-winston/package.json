@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@google-cloud/common": "^0.26.0",
-    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "@types/glob": "^7.0.0",
     "@types/is": "0.0.21",
     "@types/lodash.mapvalues": "^4.6.3",
