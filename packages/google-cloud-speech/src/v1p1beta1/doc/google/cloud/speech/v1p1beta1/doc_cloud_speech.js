@@ -82,7 +82,7 @@ const LongRunningRecognizeRequest = {
  *   `audio_content` data. The audio bytes must be encoded as specified in
  *   `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
  *   pure binary representation (not base64). See
- *   [audio limits](https://cloud.google.com/speech/limits#content).
+ *   [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @typedef StreamingRecognizeRequest
  * @memberof google.cloud.speech.v1p1beta1
@@ -156,36 +156,36 @@ const StreamingRecognitionConfig = {
  *   Valid values for OGG_OPUS are '1'-'254'.
  *   Valid value for MULAW, AMR, AMR_WB and SPEEX_WITH_HEADER_BYTE is only `1`.
  *   If `0` or omitted, defaults to one channel (mono).
- *   NOTE: We only recognize the first channel by default.
+ *   Note: We only recognize the first channel by default.
  *   To perform independent recognition on each channel set
- *   enable_separate_recognition_per_channel to 'true'.
+ *   `enable_separate_recognition_per_channel` to 'true'.
  *
  * @property {boolean} enableSeparateRecognitionPerChannel
- *   This needs to be set to ‘true’ explicitly and audio_channel_count > 1
+ *   This needs to be set to ‘true’ explicitly and `audio_channel_count` > 1
  *   to get each channel recognized separately. The recognition result will
- *   contain a channel_tag field to state which channel that result belongs to.
- *   If this is not ‘true’, we will only recognize the first channel.
- *   NOTE: The request is also billed cumulatively for all channels recognized:
- *       (audio_channel_count times the audio length)
+ *   contain a `channel_tag` field to state which channel that result belongs
+ *   to. If this is not true, we will only recognize the first channel. The
+ *   request is billed cumulatively for all channels recognized:
+ *   `audio_channel_count` multiplied by the length of the audio.
  *
  * @property {string} languageCode
  *   *Required* The language of the supplied audio as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
  *   Example: "en-US".
- *   See [Language Support](https://cloud.google.com/speech/docs/languages)
+ *   See [Language Support](https://cloud.google.com/speech-to-text/docs/languages)
  *   for a list of the currently supported language codes.
  *
  * @property {string[]} alternativeLanguageCodes
  *   *Optional* A list of up to 3 additional
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags,
  *   listing possible alternative languages of the supplied audio.
- *   See [Language Support](https://cloud.google.com/speech/docs/languages)
+ *   See [Language Support](https://cloud.google.com/speech-to-text/docs/languages)
  *   for a list of the currently supported language codes.
  *   If alternative languages are listed, recognition result will contain
  *   recognition in the most likely language detected including the main
  *   language_code. The recognition result will include the language tag
  *   of the language detected in the audio.
- *   NOTE: This feature is only supported for Voice Command and Voice Search
+ *   Note: This feature is only supported for Voice Command and Voice Search
  *   use cases and performance may vary for other use cases (e.g., phone call
  *   transcription).
  *
@@ -204,7 +204,9 @@ const StreamingRecognitionConfig = {
  *   won't be filtered out.
  *
  * @property {Object[]} speechContexts
- *   *Optional* A means to provide context to assist the speech recognition.
+ *   *Optional* array of SpeechContext.
+ *   A means to provide context to assist the speech recognition. For more
+ *   information, see [Phrase Hints](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints).
  *
  *   This object should have the same structure as [SpeechContext]{@link google.cloud.speech.v1p1beta1.SpeechContext}
  *
@@ -224,18 +226,20 @@ const StreamingRecognitionConfig = {
  *   This feature is only available in select languages. Setting this for
  *   requests in other languages has no effect at all.
  *   The default 'false' value does not add punctuation to result hypotheses.
- *   NOTE: "This is currently offered as an experimental service, complimentary
+ *   Note: This is currently offered as an experimental service, complimentary
  *   to all users. In the future this may be exclusively available as a
- *   premium feature."
+ *   premium feature.
  *
  * @property {boolean} enableSpeakerDiarization
  *   *Optional* If 'true', enables speaker detection for each recognized word in
  *   the top alternative of the recognition result using a speaker_tag provided
  *   in the WordInfo.
  *   Note: When this is true, we send all the words from the beginning of the
- *   audio for the top alternative in every consecutive responses.
+ *   audio for the top alternative in every consecutive STREAMING responses.
  *   This is done in order to improve our speaker tags as our models learn to
  *   identify the speakers in the conversation over time.
+ *   For non-streaming requests, the diarization results will be provided only
+ *   in the top alternative of the FINAL SpeechRecognitionResult.
  *
  * @property {number} diarizationSpeakerCount
  *   *Optional*
@@ -284,14 +288,18 @@ const StreamingRecognitionConfig = {
  *
  * @property {boolean} useEnhanced
  *   *Optional* Set to true to use an enhanced model for speech recognition.
- *   You must also set the `model` field to a valid, enhanced model. If
- *   `use_enhanced` is set to true and the `model` field is not set, then
- *   `use_enhanced` is ignored. If `use_enhanced` is true and an enhanced
- *   version of the specified model does not exist, then the speech is
- *   recognized using the standard version of the specified model.
+ *   If `use_enhanced` is set to true and the `model` field is not set, then
+ *   an appropriate enhanced model is chosen if:
+ *   1. project is eligible for requesting enhanced models
+ *   2. an enhanced model exists for the audio
  *
- *   Enhanced speech models require that you opt-in to the audio logging using
- *   instructions in the [alpha documentation](https://cloud.google.com/speech/data-sharing). If you set
+ *   If `use_enhanced` is true and an enhanced version of the specified model
+ *   does not exist, then the speech is recognized using the standard version
+ *   of the specified model.
+ *
+ *   Enhanced speech models require that you opt-in to data logging using
+ *   instructions in the
+ *   [documentation](https://cloud.google.com/speech-to-text/docs/enable-data-logging). If you set
  *   `use_enhanced` to true and you have not enabled audio logging, then you
  *   will receive an error.
  *
@@ -617,7 +625,7 @@ const RecognitionMetadata = {
  *   to improve the accuracy for specific words and phrases, for example, if
  *   specific commands are typically spoken by the user. This can also be used
  *   to add additional words to the vocabulary of the recognizer. See
- *   [usage limits](https://cloud.google.com/speech/limits#content).
+ *   [usage limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @typedef SpeechContext
  * @memberof google.cloud.speech.v1p1beta1
@@ -631,7 +639,7 @@ const SpeechContext = {
  * Contains audio data in the encoding specified in the `RecognitionConfig`.
  * Either `content` or `uri` must be supplied. Supplying both or neither
  * returns google.rpc.Code.INVALID_ARGUMENT. See
- * [audio limits](https://cloud.google.com/speech/limits#content).
+ * [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @property {string} content
  *   The audio data bytes encoded as specified in
@@ -640,7 +648,8 @@ const SpeechContext = {
  *
  * @property {string} uri
  *   URI that points to a file that contains audio data bytes as specified in
- *   `RecognitionConfig`. Currently, only Google Cloud Storage URIs are
+ *   `RecognitionConfig`. The file must not be compressed (for example, gzip).
+ *   Currently, only Google Cloud Storage URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket_name/object_name` (other URI formats return
  *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
@@ -850,6 +859,12 @@ const StreamingRecognizeResponse = {
  *   This field is only provided for interim results (`is_final=false`).
  *   The default of 0.0 is a sentinel value indicating `stability` was not set.
  *
+ * @property {Object} resultEndTime
+ *   Output only. Time offset of the end of this result relative to the
+ *   beginning of the audio.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
  * @property {number} channelTag
  *   For multi-channel audio, this is the channel number corresponding to the
  *   recognized result for the audio from that channel.
@@ -916,7 +931,7 @@ const SpeechRecognitionResult = {
  *
  * @property {Object[]} words
  *   Output only. A list of word-specific information for each recognized word.
- *   Note: When enable_speaker_diarization is true, you will see all the words
+ *   Note: When `enable_speaker_diarization` is true, you will see all the words
  *   from the beginning of the audio.
  *
  *   This object should have the same structure as [WordInfo]{@link google.cloud.speech.v1p1beta1.WordInfo}
