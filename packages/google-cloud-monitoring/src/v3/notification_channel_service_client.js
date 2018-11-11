@@ -680,7 +680,7 @@ class NotificationChannelServiceClient {
 
   /**
    * Creates a new notification channel, representing a single notification
-   * endpoint such as an email address, SMS number, or pagerduty service.
+   * endpoint such as an email address, SMS number, or PagerDuty service.
    *
    * @param {Object} request
    *   The request object that will be sent.
