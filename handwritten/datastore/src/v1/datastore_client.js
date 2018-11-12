@@ -213,7 +213,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -283,7 +283,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -338,7 +338,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -409,7 +409,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -465,7 +465,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -522,7 +522,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
@@ -581,7 +581,7 @@ class DatastoreClient {
    *
    * @example
    *
-   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = require('@google-cloud/datastore');
    *
    * const client = new datastore.v1.DatastoreClient({
    *   // optional auth parameters.
