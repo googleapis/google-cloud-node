@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as arrify from 'arrify';
 import {promisifyAll} from '@google-cloud/promisify';
-const flatten = require('lodash.flatten');
 import * as is from 'is';
 
-const entity = require('./entity');
-const Request = require('./request');
+import {entity} from './entity';
+import {DatastoreRequest} from './request';
 
 /**
  * A transaction is a set of Datastore operations on one or more entities. Each
@@ -42,7 +39,13 @@ const Request = require('./request');
  * const datastore = new Datastore();
  * const transaction = datastore.transaction();
  */
-class Transaction extends Request {
+class Transaction extends DatastoreRequest {
+  projectId: string;
+  namespace: string;
+  readOnly: boolean;
+  request;
+  modifiedEntities_;
+  skipCommit?: boolean;
   constructor(datastore, options) {
     super();
     /**
@@ -120,7 +123,7 @@ class Transaction extends Request {
    *   const apiResponse = data[0];
    * });
    */
-  commit(gaxOptions, callback) {
+  commit(gaxOptions, callback?) {
     if (is.fn(gaxOptions)) {
       callback = gaxOptions;
       gaxOptions = {};
@@ -193,13 +196,13 @@ class Transaction extends Request {
       .forEach(modifiedEntity => {
         const method = modifiedEntity.method;
         const args = modifiedEntity.args.reverse();
-        Request.prototype[method].call(this, args, () => {});
+        DatastoreRequest.prototype[method].call(this, args, () => {});
       });
 
     // Take the `req` array built previously, and merge them into one request to
     // send as the final transactional commit.
     const reqOpts = {
-      mutations: flatten(this.requests_.map(x => x.mutations)),
+      mutations: this.requests_.map(x => x.mutations).reduce((a, b) => a.concat(b), []),
     };
 
     this.request_(
@@ -270,7 +273,7 @@ class Transaction extends Request {
    *   });
    * });
    */
-  createQuery() {
+  createQuery(namespace: string, kind?: string) {
     return this.datastore.createQuery.apply(this, arguments);
   }
 
@@ -422,7 +425,7 @@ class Transaction extends Request {
    *   const apiResponse = data[1];
    * });
    */
-  run(options, callback) {
+  run(options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -624,4 +627,4 @@ promisifyAll(Transaction, {
  * @name module:@google-cloud/datastore.Transaction
  * @see Transaction
  */
-module.exports = Transaction;
+export {Transaction};

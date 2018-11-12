@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
 import * as async from 'async';
-const {Datastore} = require('../src');
-const entity = require('../src/entity.js');
+import {Datastore} from '../src';
+import {entity} from '../src/entity';
 
 describe('Datastore', () => {
   const testKinds: {}[] = [];

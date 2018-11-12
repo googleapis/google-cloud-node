@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
 import * as extend from 'extend';
-
-const Datastore = require('../src').Datastore;
+import {Datastore} from '../src';
 
 describe('entity', function() {
   let entity;
 
   beforeEach(function() {
     delete require.cache[require.resolve('../src/entity.js')];
-    entity = require('../src/entity.js');
+    entity = require('../src/entity.js').entity;
   });
 
   describe('KEY_SYMBOL', function() {

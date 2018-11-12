@@ -36,19 +36,17 @@
  * @namespace google.type
  */
 
-'use strict';
-
 import * as arrify from 'arrify';
-import * as extend from 'extend';
-const gax = require('google-gax');
-const {grpc} = new gax.GrpcClient();
+import {GrpcClient, GrpcClientOptions} from 'google-gax';
 import {GoogleAuth} from 'google-auth-library';
 import * as is from 'is';
 
-const DatastoreRequest = require('./request.js');
-const entity = require('./entity.js');
-const Query = require('./query.js');
-const Transaction = require('./transaction.js');
+import {DatastoreRequest} from './request';
+import {entity} from './entity';
+import {Query} from './query';
+import {Transaction} from './transaction';
+
+const {grpc} = new GrpcClient({} as GrpcClientOptions);
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -380,7 +378,16 @@ const gapic = Object.freeze({
  * });
  */
 class Datastore extends DatastoreRequest {
-  constructor(options) {
+  clients_;
+  namespace;
+  projectId: string;
+  defaultBaseUrl_: string;
+  options;
+  baseUrl_?: string;
+  port_?: number;
+  customEndpoint_?: boolean;
+  auth: GoogleAuth;
+  constructor(options?) {
     super();
     options = options || {};
     this.clients_ = new Map();
@@ -405,7 +412,7 @@ class Datastore extends DatastoreRequest {
     this.defaultBaseUrl_ = 'datastore.googleapis.com';
     this.determineBaseUrl_(options.apiEndpoint);
 
-    this.options = extend(
+    this.options = Object.assign(
       {
         libName: 'gccl',
         libVersion: require('../../package.json').version,
@@ -631,7 +638,7 @@ class Datastore extends DatastoreRequest {
    * const datastore = new Datastore();
    * const query = datastore.createQuery('Company');
    */
-  createQuery(namespace, kind) {
+  createQuery(namespace: string, kind?: string) {
     if (arguments.length < 2) {
       kind = namespace;
       namespace = this.namespace;
@@ -730,7 +737,7 @@ class Datastore extends DatastoreRequest {
    * const datastore = new Datastore();
    * const transaction = datastore.transaction();
    */
-  transaction(options) {
+  transaction(options?) {
     return new Transaction(this, options);
   };
 
@@ -758,7 +765,7 @@ class Datastore extends DatastoreRequest {
     }
 
     if (port.test(baseUrl)) {
-      this.port_ = Number(baseUrl.match(port)[1]);
+      this.port_ = Number(baseUrl.match(port)![1]);
     }
 
     this.baseUrl_ = baseUrl

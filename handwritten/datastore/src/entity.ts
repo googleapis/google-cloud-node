@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as arrify from 'arrify';
 import * as extend from 'extend';
 import * as is from 'is';
 
-const entity = module.exports;
+// tslint:disable-next-line no-any
+const entity: any = {};
 
 class InvalidKeyError extends Error {
   constructor(opts) {
@@ -875,3 +874,5 @@ function queryToQueryProto(query) {
 }
 
 entity.queryToQueryProto = queryToQueryProto;
+
+export {entity};

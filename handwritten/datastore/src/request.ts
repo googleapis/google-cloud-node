@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as arrify from 'arrify';
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisifyAll} from '@google-cloud/promisify';
@@ -31,8 +29,9 @@ const gapic = Object.freeze({
   v1: require('./v1'),
 });
 
-const entity = require('./entity');
-const Query = require('./query');
+import {entity} from './entity';
+import {Query} from './query';
+import { Datastore } from '.';
 
 /**
  * A map of read consistency values to proto codes.
@@ -59,7 +58,7 @@ class DatastoreRequest {
   id;
   requests_;
   requestCallbacks_;
-  datastore;
+  datastore!: Datastore;
 
   /**
    * Format a user's input to mutation methods. This will create a deep clone of
@@ -221,7 +220,7 @@ class DatastoreRequest {
    *     // All entities retrieved.
    *   });
    */
-  createReadStream(keys, options) {
+  createReadStream(keys, options?) {
     options = options || {};
     keys = arrify(keys).map(entity.keyToKeyProto);
     if (keys.length === 0) {
@@ -331,7 +330,7 @@ class DatastoreRequest {
    *   const apiResponse = data[0];
    * });
    */
-  delete(keys, gaxOptions, callback) {
+  delete(keys, gaxOptions, callback?) {
     if (is.fn(gaxOptions)) {
       callback = gaxOptions;
       gaxOptions = {};
@@ -448,7 +447,7 @@ class DatastoreRequest {
    *   const entities = data[0];
    * });
    */
-  get(keys, options, callback) {
+  get(keys, options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -581,7 +580,7 @@ class DatastoreRequest {
    *   const entities = data[0];
    * });
    */
-  runQuery(query, options, callback) {
+  runQuery(query, options, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -634,7 +633,7 @@ class DatastoreRequest {
    *     this.end();
    *   });
    */
-  runQueryStream(query, options) {
+  runQueryStream(query, options?) {
     options = options || {};
     query = extend(true, new Query(), query);
 
@@ -1157,7 +1156,7 @@ class DatastoreRequest {
         );
       }
       const gaxClient = datastore.clients_.get(clientName);
-      reqOpts = replaceProjectIdToken(reqOpts, projectId);
+      reqOpts = replaceProjectIdToken(reqOpts, projectId!);
       const gaxOpts = extend(true, {}, config.gaxOpts, {
         headers: {
           'google-cloud-resource-prefix': `projects/${projectId}`,
@@ -1180,4 +1179,4 @@ promisifyAll(DatastoreRequest);
  * @name module:@google-cloud/datastore.DatastoreRequest
  * @see DatastoreRequest
  */
-module.exports = DatastoreRequest;
+export {DatastoreRequest};

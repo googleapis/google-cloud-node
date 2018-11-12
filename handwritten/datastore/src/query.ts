@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as arrify from 'arrify';
 
 /**
@@ -49,7 +47,7 @@ class Query {
   endVal;
   limitVal;
   offsetVal;
-  constructor(scope, namespace, kinds) {
+  constructor(scope?, namespace?, kinds?) {
     if (!kinds) {
       kinds = namespace;
       namespace = null;
@@ -154,7 +152,7 @@ class Query {
    * const key = datastore.key(['Company', 'Google']);
    * const keyQuery = query.filter('__key__', key);
    */
-  filter(property, operator, value) {
+  filter(property: string, operator: string, value?) {
     if (arguments.length === 2) {
       value = operator;
       operator = '=';
@@ -212,7 +210,7 @@ class Query {
    *   descending: true
    * });
    */
-  order(property, options) {
+  order(property: string, options?) {
     const sign = options && options.descending ? '-' : '+';
     this.orders.push({name: property, sign: sign});
     return this;
@@ -404,9 +402,9 @@ class Query {
    *   const entities = data[0];
    * });
    */
-  run() {
+  run(...argy) {
     const query = this;
-    const args = [query].concat([].slice.call(arguments));
+    const args = [query].concat(argy);
     return this.scope.runQuery.apply(this.scope, args);
   }
 
@@ -455,4 +453,4 @@ class Query {
  * @name module:@google-cloud/datastore.Query
  * @see Query
  */
-module.exports = Query;
+export {Query};

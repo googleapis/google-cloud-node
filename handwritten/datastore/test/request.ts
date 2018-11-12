@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as is from 'is';
 import * as proxyquire from 'proxyquire';
-const sinon = require('sinon');
+import * as sinon from 'sinon';
 import * as through from 'through2';
-const pfy = require('@google-cloud/promisify');
-const pjy = require('@google-cloud/projectify');
+import * as pfy from '@google-cloud/promisify';
+import * as pjy from '@google-cloud/projectify';
 
-const entity = require('../src/entity.js');
-const Query = require('../src/query.js');
+const {entity} = require('../src/entity.js');
+const {Query} = require('../src/query.js');
 
 let promisified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll: function(Class) {
     if (Class.name === 'DatastoreRequest') {
       promisified = true;
@@ -67,10 +65,10 @@ describe('Request', function() {
     Request = proxyquire('../src/request', {
       '@google-cloud/promisify': fakePfy,
       '@google-cloud/projectify': fakePjy,
-      './entity': entity,
-      './query': FakeQuery,
+      './entity': {entity},
+      './query': {Query: FakeQuery},
       './v1': fakeV1,
-    });
+    }).DatastoreRequest;
   });
 
   after(function() {
@@ -190,7 +188,7 @@ describe('Request', function() {
     it('should allow customization of GAX options', function(done) {
       sandbox.stub(entity, 'isKeyComplete');
       sandbox.stub(entity, 'keyToKeyProto');
-      const options = extend({}, OPTIONS, {
+      const options = Object.assign({}, OPTIONS, {
         gaxOptions: {},
       });
 
@@ -676,7 +674,7 @@ describe('Request', function() {
     it('should prepare entity objects', function(done) {
       const entityObject = {};
       const preparedEntityObject = {prepared: true};
-      const expectedEntityObject = extend({}, preparedEntityObject, {
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
         method: 'insert',
       });
 
@@ -1478,7 +1476,7 @@ describe('Request', function() {
     it('should prepare entity objects', function(done) {
       const entityObject = {};
       const preparedEntityObject = {prepared: true};
-      const expectedEntityObject = extend({}, preparedEntityObject, {
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
         method: 'update',
       });
 
@@ -1520,7 +1518,7 @@ describe('Request', function() {
     it('should prepare entity objects', function(done) {
       const entityObject = {};
       const preparedEntityObject = {prepared: true};
-      const expectedEntityObject = extend({}, preparedEntityObject, {
+      const expectedEntityObject = Object.assign({}, preparedEntityObject, {
         method: 'upsert',
       });
 
@@ -1645,7 +1643,7 @@ describe('Request', function() {
       const replacedReqOpts = {};
 
       // tslint:disable-next-line no-any
-      const expectedReqOpts: any = extend({}, CONFIG.reqOpts);
+      const expectedReqOpts: any = Object.assign({}, CONFIG.reqOpts);
       expectedReqOpts.projectId = request.projectId;
 
       pjyOverride = function(reqOpts, projectId) {
@@ -1703,7 +1701,7 @@ describe('Request', function() {
           },
         });
 
-        const config = extend({}, CONFIG, {
+        const config = Object.assign({}, CONFIG, {
           method: 'commit',
         });
 
@@ -1728,7 +1726,7 @@ describe('Request', function() {
           },
         });
 
-        const config = extend({}, CONFIG, {
+        const config = Object.assign({}, CONFIG, {
           method: 'commit',
         });
 
@@ -1744,7 +1742,7 @@ describe('Request', function() {
           },
         });
 
-        const config = extend({}, CONFIG, {
+        const config = Object.assign({}, CONFIG, {
           method: 'rollback',
         });
 
