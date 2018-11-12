@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as arrify from 'arrify';
 import * as assert from 'assert';
-const entity = require('../src/entity.js');
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as pfy from '@google-cloud/promisify';
 
+const {entity} = require('../src/entity');
+
 let promisified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Transaction') {
       return;
@@ -76,8 +74,8 @@ describe('Transaction', function() {
   before(function() {
     Transaction = proxyquire('../src/transaction.js', {
       '@google-cloud/promisify': fakePfy,
-      './request.js': FakeDatastoreRequest,
-    });
+      './request.js': {DatastoreRequest: FakeDatastoreRequest},
+    }).Transaction;
   });
 
   beforeEach(function() {
@@ -347,16 +345,16 @@ describe('Transaction', function() {
       const args = [0, 1, 2, 3];
       const createQueryReturnValue = {};
 
-      transaction.datastore.createQuery = function() {
+      transaction.datastore.createQuery = function(...ags) {
         assert.strictEqual(this, transaction);
-        assert.strictEqual(arguments[0], args[0]);
-        assert.strictEqual(arguments[1], args[1]);
-        assert.strictEqual(arguments[2], args[2]);
-        assert.strictEqual(arguments[3], args[3]);
+        assert.strictEqual(ags[0], args[0]);
+        assert.strictEqual(ags[1], args[1]);
+        assert.strictEqual(ags[2], args[2]);
+        assert.strictEqual(ags[3], args[3]);
         return createQueryReturnValue;
       };
 
-      const query = transaction.createQuery.apply(transaction, args);
+      const query = transaction.createQuery(...args);
       assert.strictEqual(query, createQueryReturnValue);
     });
   });

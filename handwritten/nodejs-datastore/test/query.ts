@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
 
 describe('Query', function() {
@@ -23,7 +21,7 @@ describe('Query', function() {
   const NAMESPACE = 'Namespace';
   const KINDS = 'Kind';
 
-  const Query = require('../src/query.js');
+  const Query = require('../src/query.js').Query;
   let query;
 
   beforeEach(function() {

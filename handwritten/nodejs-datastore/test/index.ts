@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
-import * as extend from 'extend';
 import * as gax from 'google-gax';
 import * as proxyquire from 'proxyquire';
 
@@ -108,9 +105,9 @@ describe('Datastore', function() {
 
   before(function() {
     Datastore = proxyquire('../src', {
-      './entity.js': fakeEntity,
-      './query.js': FakeQuery,
-      './transaction.js': FakeTransaction,
+      './entity.js': {entity: fakeEntity},
+      './query.js': {Query: FakeQuery},
+      './transaction.js': {Transaction: FakeTransaction},
       './v1': FakeV1,
       'google-auth-library': {
         GoogleAuth: fakeGoogleAuth,
@@ -217,7 +214,7 @@ describe('Datastore', function() {
 
       assert.deepStrictEqual(
         datastore.options,
-        extend(
+        Object.assign(
           {
             libName: 'gccl',
             libVersion: require('../../package.json').version,

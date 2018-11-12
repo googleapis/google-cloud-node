@@ -40,7 +40,7 @@
     "system-test": "mocha build/system-test --timeout 600000",
     "fix": "eslint 'samples/*.js' 'samples/**/*.js' --fix",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r src/v1/ build/src/v1/ && cp -r protos build/",
+    "compile": "tsc -p . && cp -r src/v1/ build/src/v1/ && cp -r protos build/ && cp test/*.js build/test",
     "prepare": "npm run compile",
     "pretest": "npm run compile"
   },
@@ -53,7 +53,6 @@
     "google-auth-library": "^2.0.0",
     "google-gax": "^0.20.0",
     "is": "^3.2.1",
-    "lodash.flatten": "^4.4.0",
     "lodash.merge": "^4.6.1",
     "split-array-stream": "^2.0.0",
     "stream-events": "^1.0.4",
