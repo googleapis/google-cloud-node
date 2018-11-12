@@ -11,7 +11,7 @@ version = 'v1'
 library = gapic.node_library(
     'container', version,
     config_path="/google/container/"
-                "artman_container.yaml")
+                "artman_container_v1.yaml")
 s.copy(
     library,
     excludes=['package.json', 'README.md', 'src/index.js'],
