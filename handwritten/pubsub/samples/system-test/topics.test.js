@@ -17,7 +17,7 @@
 
 const path = require(`path`);
 const {PubSub} = require('@google-cloud/pubsub');
-const test = require(`ava`);
+const assert = require(`assert`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
@@ -34,14 +34,14 @@ const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
 const expectedMessage = {data: `Hello, world!`};
 const cmd = `node topics.js`;
 
-test.before(tools.checkCredentials);
-test.before(async () => {
+before(tools.checkCredentials);
+before(async () => {
   try {
     await pubsub.createTopic(topicNameTwo);
   } catch (err) {} // ignore error
 });
 
-test.after.always(async () => {
+after(async () => {
   try {
     await pubsub.subscription(subscriptionNameOne).delete();
   } catch (err) {} // ignore error
@@ -85,10 +85,9 @@ const _pullOneMessage = (subscriptionObj, timeout) => {
   });
 };
 
-test.serial(`should create a topic`, async t => {
-  t.plan(1);
+it(`should create a topic`, async () => {
   const output = await tools.runAsync(`${cmd} create ${topicNameOne}`, cwd);
-  t.is(output, `Topic ${topicNameOne} created.`);
+  assert.strictEqual(output, `Topic ${topicNameOne} created.`);
   await tools
     .tryTest(async assert => {
       const [topics] = await pubsub.getTopics();
@@ -97,18 +96,17 @@ test.serial(`should create a topic`, async t => {
     .start();
 });
 
-test.serial(`should list topics`, async t => {
+it(`should list topics`, async () => {
   await tools
     .tryTest(async () => {
       const output = await tools.runAsync(`${cmd} list`, cwd);
-      t.true(output.includes(`Topics:`));
-      t.true(output.includes(fullTopicNameOne));
+      assert.strictEqual(output.includes(`Topics:`), true);
+      assert.strictEqual(output.includes(fullTopicNameOne), true);
     })
     .start();
 });
 
-test.serial(`should publish a simple message`, async t => {
-  t.plan(1);
+it(`should publish a simple message`, async () => {
   const [subscription] = await pubsub
     .topic(topicNameOne)
     .subscription(subscriptionNameOne)
@@ -118,10 +116,10 @@ test.serial(`should publish a simple message`, async t => {
     cwd
   );
   const receivedMessage = await _pullOneMessage(subscription);
-  t.is(receivedMessage.data.toString(), expectedMessage.data);
+  assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);
 });
 
-test.serial(`should publish a JSON message`, async t => {
+it(`should publish a JSON message`, async () => {
   const [subscription] = await pubsub
     .topic(topicNameOne)
     .subscription(subscriptionNameOne)
@@ -131,11 +129,10 @@ test.serial(`should publish a JSON message`, async t => {
     cwd
   );
   const receivedMessage = await _pullOneMessage(subscription);
-  t.deepEqual(receivedMessage.data.toString(), expectedMessage.data);
+  assert.deepStrictEqual(receivedMessage.data.toString(), expectedMessage.data);
 });
 
-test.serial(`should publish a message with custom attributes`, async t => {
-  t.plan(2);
+it(`should publish a message with custom attributes`, async () => {
   const [subscription] = await pubsub
     .topic(topicNameOne)
     .subscription(subscriptionNameOne)
@@ -145,14 +142,14 @@ test.serial(`should publish a message with custom attributes`, async t => {
     cwd
   );
   const receivedMessage = await _pullOneMessage(subscription);
-  t.is(receivedMessage.data.toString(), expectedMessage.data);
-  t.deepEqual(receivedMessage.attributes, {
+  assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);
+  assert.deepStrictEqual(receivedMessage.attributes, {
     origin: 'nodejs-sample',
     username: 'gcp',
   });
 });
 
-test.serial(`should publish ordered messages`, async t => {
+it(`should publish ordered messages`, async () => {
   const topics = require(`../topics`);
 
   const [subscription] = await pubsub
@@ -165,23 +162,22 @@ test.serial(`should publish ordered messages`, async t => {
     expectedMessage.data
   );
   let message = await _pullOneMessage(subscription);
-  t.is(message.id, messageId);
-  t.is(message.data.toString(), expectedMessage.data);
-  t.is(message.attributes.counterId, '1');
+  assert.strictEqual(message.id, messageId);
+  assert.strictEqual(message.data.toString(), expectedMessage.data);
+  assert.strictEqual(message.attributes.counterId, '1');
 
   messageId = await topics.publishOrderedMessage(
     topicNameTwo,
     expectedMessage.data
   );
   message = await _pullOneMessage(subscription);
-  t.is(message.id, messageId);
-  t.is(message.data.toString(), expectedMessage.data);
-  t.is(message.attributes.counterId, '2');
+  assert.strictEqual(message.id, messageId);
+  assert.strictEqual(message.data.toString(), expectedMessage.data);
+  assert.strictEqual(message.attributes.counterId, '2');
   await topics.publishOrderedMessage(topicNameTwo, expectedMessage.data);
 });
 
-test.serial(`should publish with specific batch settings`, async t => {
-  t.plan(2);
+it(`should publish with specific batch settings`, async () => {
   const expectedWait = 1000;
   const [subscription] = await pubsub
     .topic(topicNameOne)
@@ -196,15 +192,15 @@ test.serial(`should publish with specific batch settings`, async t => {
   );
   const receivedMessage = await _pullOneMessage(subscription);
   const publishTime = Date.parse(receivedMessage.publishTime);
-  t.is(receivedMessage.data.toString(), expectedMessage.data);
-  t.true(publishTime - startTime > expectedWait);
+  assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);
+  assert.strictEqual(publishTime - startTime > expectedWait, true);
 });
 
-test.serial(`should set the IAM policy for a topic`, async t => {
+it(`should set the IAM policy for a topic`, async () => {
   await tools.runAsync(`${cmd} set-policy ${topicNameOne}`, cwd);
   const results = await pubsub.topic(topicNameOne).iam.getPolicy();
   const [policy] = results;
-  t.deepEqual(policy.bindings, [
+  assert.deepStrictEqual(policy.bindings, [
     {
       role: `roles/pubsub.editor`,
       members: [`group:cloud-logs@google.com`],
@@ -216,24 +212,26 @@ test.serial(`should set the IAM policy for a topic`, async t => {
   ]);
 });
 
-test.serial(`should get the IAM policy for a topic`, async t => {
+it(`should get the IAM policy for a topic`, async () => {
   const [policy] = await pubsub.topic(topicNameOne).iam.getPolicy();
   const output = await tools.runAsync(`${cmd} get-policy ${topicNameOne}`, cwd);
-  t.is(output, `Policy for topic: ${JSON.stringify(policy.bindings)}.`);
+  assert.strictEqual(
+    output,
+    `Policy for topic: ${JSON.stringify(policy.bindings)}.`
+  );
 });
 
-test.serial(`should test permissions for a topic`, async t => {
+it(`should test permissions for a topic`, async () => {
   const output = await tools.runAsync(
     `${cmd} test-permissions ${topicNameOne}`,
     cwd
   );
-  t.true(output.includes(`Tested permissions for topic`));
+  assert.strictEqual(output.includes(`Tested permissions for topic`), true);
 });
 
-test.serial(`should delete a topic`, async t => {
-  t.plan(1);
+it(`should delete a topic`, async () => {
   const output = await tools.runAsync(`${cmd} delete ${topicNameOne}`, cwd);
-  t.is(output, `Topic ${topicNameOne} deleted.`);
+  assert.strictEqual(output, `Topic ${topicNameOne} deleted.`);
   await tools
     .tryTest(async assert => {
       const [topics] = await pubsub.getTopics();

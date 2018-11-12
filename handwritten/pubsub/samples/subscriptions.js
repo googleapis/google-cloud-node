@@ -23,7 +23,7 @@
 
 'use strict';
 
-function listSubscriptions() {
+async function listSubscriptions() {
   // [START pubsub_list_subscriptions]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -32,21 +32,14 @@ function listSubscriptions() {
   const pubsub = new PubSub();
 
   // Lists all subscriptions in the current project
-  pubsub
-    .getSubscriptions()
-    .then(results => {
-      const subscriptions = results[0];
+  const [subscriptions] = await pubsub.getSubscriptions();
+  console.log('Subscriptions:');
+  subscriptions.forEach(subscription => console.log(subscription.name));
 
-      console.log('Subscriptions:');
-      subscriptions.forEach(subscription => console.log(subscription.name));
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
   // [END pubsub_list_subscriptions]
 }
 
-function listTopicSubscriptions(topicName) {
+async function listTopicSubscriptions(topicName) {
   // [START pubsub_list_topic_subscriptions]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -60,22 +53,14 @@ function listTopicSubscriptions(topicName) {
   // const topicName = 'my-topic';
 
   // Lists all subscriptions for the topic
-  pubsub
-    .topic(topicName)
-    .getSubscriptions()
-    .then(results => {
-      const subscriptions = results[0];
+  const [subscriptions] = await pubsub.topic(topicName).getSubscriptions();
+  console.log(`Subscriptions for ${topicName}:`);
+  subscriptions.forEach(subscription => console.log(subscription.name));
 
-      console.log(`Subscriptions for ${topicName}:`);
-      subscriptions.forEach(subscription => console.log(subscription.name));
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
   // [END pubsub_list_topic_subscriptions]
 }
 
-function createSubscription(topicName, subscriptionName) {
+async function createSubscription(topicName, subscriptionName) {
   // [START pubsub_create_pull_subscription]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -90,20 +75,13 @@ function createSubscription(topicName, subscriptionName) {
   // const subscriptionName = 'my-sub';
 
   // Creates a new subscription
-  pubsub
-    .topic(topicName)
-    .createSubscription(subscriptionName)
-    .then(results => {
-      const subscription = results[0];
-      console.log(`Subscription ${subscriptionName} created.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await pubsub.topic(topicName).createSubscription(subscriptionName);
+  console.log(`Subscription ${subscriptionName} created.`);
+
   // [END pubsub_create_pull_subscription]
 }
 
-function createFlowControlledSubscription(
+async function createFlowControlledSubscription(
   topicName,
   subscriptionName,
   maxInProgress,
@@ -137,26 +115,19 @@ function createFlowControlledSubscription(
 
   // Creates a new subscription
   // Note that flow control configurations are not persistent
-  subscription
-    .get({
-      autoCreate: true,
-    })
-    .then(results => {
-      const subscription = results[0];
+  const [newSubscription] = await subscription.get({
+    autoCreate: true,
+  });
+  console.log(
+    `Subscription ${
+      newSubscription.name
+    } created with a maximum of ${maxInProgress} unprocessed messages.`
+  );
 
-      console.log(
-        `Subscription ${
-          subscription.name
-        } created with a maximum of ${maxInProgress} unprocessed messages.`
-      );
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
   // [END pubsub_subscriber_flow_settings]
 }
 
-function createPushSubscription(topicName, subscriptionName) {
+async function createPushSubscription(topicName, subscriptionName) {
   // [START pubsub_create_push_subscription]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -178,21 +149,13 @@ function createPushSubscription(topicName, subscriptionName) {
     },
   };
 
-  pubsub
-    .topic(topicName)
-    .createSubscription(subscriptionName, options)
-    .then(results => {
-      const subscription = results[0];
+  await pubsub.topic(topicName).createSubscription(subscriptionName, options);
+  console.log(`Subscription ${subscriptionName} created.`);
 
-      console.log(`Subscription ${subscriptionName} created.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
   // [END pubsub_create_push_subscription]
 }
 
-function modifyPushConfig(topicName, subscriptionName) {
+async function modifyPushConfig(topicName, subscriptionName) {
   // [START pubsub_update_push_configuration]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -212,20 +175,16 @@ function modifyPushConfig(topicName, subscriptionName) {
     pushEndpoint: `https://${pubsub.projectId}.appspot.com/push`,
   };
 
-  pubsub
+  await pubsub
     .topic(topicName)
     .subscription(subscriptionName)
-    .modifyPushConfig(options)
-    .then(() => {
-      console.log(`Modified push config for subscription ${subscriptionName}.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .modifyPushConfig(options);
+  console.log(`Modified push config for subscription ${subscriptionName}.`);
+
   // [END pubsub_update_push_configuration]
 }
 
-function deleteSubscription(subscriptionName) {
+async function deleteSubscription(subscriptionName) {
   // [START pubsub_delete_subscription]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -239,19 +198,13 @@ function deleteSubscription(subscriptionName) {
   // const subscriptionName = 'my-sub';
 
   // Deletes the subscription
-  pubsub
-    .subscription(subscriptionName)
-    .delete()
-    .then(() => {
-      console.log(`Subscription ${subscriptionName} deleted.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await pubsub.subscription(subscriptionName).delete();
+  console.log(`Subscription ${subscriptionName} deleted.`);
+
   // [END pubsub_delete_subscription]
 }
 
-function getSubscription(subscriptionName) {
+async function getSubscription(subscriptionName) {
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
 
@@ -264,20 +217,11 @@ function getSubscription(subscriptionName) {
   // const subscriptionName = 'my-sub';
 
   // Gets the metadata for the subscription
-  pubsub
-    .subscription(subscriptionName)
-    .getMetadata()
-    .then(results => {
-      const metadata = results[0];
-
-      console.log(`Subscription: ${metadata.name}`);
-      console.log(`Topic: ${metadata.topic}`);
-      console.log(`Push config: ${metadata.pushConfig.pushEndpoint}`);
-      console.log(`Ack deadline: ${metadata.ackDeadlineSeconds}s`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  const [metadata] = await pubsub.subscription(subscriptionName).getMetadata();
+  console.log(`Subscription: ${metadata.name}`);
+  console.log(`Topic: ${metadata.topic}`);
+  console.log(`Push config: ${metadata.pushConfig.pushEndpoint}`);
+  console.log(`Ack deadline: ${metadata.ackDeadlineSeconds}s`);
 }
 
 function listenForMessages(subscriptionName, timeout) {
@@ -321,7 +265,7 @@ function listenForMessages(subscriptionName, timeout) {
   // [END pubsub_quickstart_subscriber]
 }
 
-function synchronousPull(projectName, subscriptionName) {
+async function synchronousPull(projectName, subscriptionName) {
   // [START pubsub_subscriber_sync_pull]
   // Imports the Google Cloud client library
   const pubsub = require('@google-cloud/pubsub');
@@ -362,67 +306,49 @@ function synchronousPull(projectName, subscriptionName) {
   }
 
   // The subscriber pulls a specified number of messages.
-  client
-    .pull(request)
-    .then(responses => {
-      // The first element of `responses` is a PullResponse object.
-      const response = responses[0];
-      // Obtain the first message.
-      const message = response.receivedMessages[0];
+  const [response] = await client.pull(request);
+  // Obtain the first message.
+  const message = response.receivedMessages[0];
+  // Send the message to the worker function.
+  worker(message);
 
-      // Send the message to the worker function.
-      worker(message);
+  // setInterval() checks the worker process every 5 sec.
+  // If the pre-set ack deadline is n sec, it is best to
+  // set the interval to be every (n/2) sec.
+  let waiting = true;
+  while (waiting) {
+    await new Promise(r => setTimeout(r, 10000));
+    // If the message has been processed..
+    if (isProcessed) {
+      const ackRequest = {
+        subscription: formattedSubscription,
+        ackIds: [message.ackId],
+      };
 
-      // setInterval() checks the worker process every 5 sec.
-      // If the pre-set ack deadline is n sec, it is best to
-      // set the interval to be every (n/2) sec.
-      const interval = setInterval(function() {
-        // If the message has been processed..
-        if (isProcessed) {
-          const ackRequest = {
-            subscription: formattedSubscription,
-            ackIds: [message.ackId],
-          };
+      //..acknowledges the message.
+      await client.acknowledge(ackRequest);
+      console.log(`Acknowledged: "${message.message.data}".`);
+      // Exit after the message is acknowledged.
+      waiting = false;
+      console.log(`Done.`);
+    } else {
+      // If the message is not yet processed..
+      const modifyAckRequest = {
+        subscription: formattedSubscription,
+        ackIds: [message.ackId],
+        ackDeadlineSeconds: newAckDeadlineSeconds,
+      };
 
-          //..acknowledges the message.
-          client
-            .acknowledge(ackRequest)
-            .then(() => {
-              console.log(`Acknowledged: "${message.message.data}".`);
-              // Exit after the message is acknowledged.
-              clearInterval(interval);
-              console.log(`Done.`);
-            })
-            .catch(err => {
-              console.error(err);
-            });
-        } else {
-          // If the message is not yet processed..
-          const modifyAckRequest = {
-            subscription: formattedSubscription,
-            ackIds: [message.ackId],
-            ackDeadlineSeconds: newAckDeadlineSeconds,
-          };
+      //..reset its ack deadline.
+      await client.modifyAckDeadline(modifyAckRequest);
 
-          //..reset its ack deadline.
-          client
-            .modifyAckDeadline(modifyAckRequest)
-            .then(() => {
-              console.log(
-                `Reset ack deadline for "${
-                  message.message.data
-                }" for ${newAckDeadlineSeconds}s.`
-              );
-            })
-            .catch(err => {
-              console.error(err);
-            });
-        }
-      }, 5000);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+      console.log(
+        `Reset ack deadline for "${
+          message.message.data
+        }" for ${newAckDeadlineSeconds}s.`
+      );
+    }
+  }
   // [END pubsub_subscriber_sync_pull]
 }
 
@@ -439,7 +365,7 @@ function setSubscribeCounterValue(value) {
 // [START pubsub_listen_ordered_messages]
 const outstandingMessages = {};
 
-function listenForOrderedMessages(subscriptionName, timeout) {
+async function listenForOrderedMessages(subscriptionName, timeout) {
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
 
@@ -459,49 +385,45 @@ function listenForOrderedMessages(subscriptionName, timeout) {
   };
 
   // Listen for new messages until timeout is hit
-  return new Promise(resolve => {
-    subscription.on(`message`, messageHandler);
-    setTimeout(() => {
-      subscription.removeListener(`message`, messageHandler);
-      resolve();
-    }, timeout * 1000);
-  }).then(() => {
-    // Pub/Sub messages are unordered, so here we manually order messages by
-    // their "counterId" attribute which was set when they were published.
-    const outstandingIds = Object.keys(outstandingMessages).map(counterId =>
-      parseInt(counterId, 10)
-    );
-    outstandingIds.sort();
+  subscription.on(`message`, messageHandler);
+  await new Promise(r => setTimeout(r, timeout * 1000));
+  subscription.removeListener(`message`, messageHandler);
 
-    outstandingIds.forEach(counterId => {
-      const counter = getSubscribeCounterValue();
-      const message = outstandingMessages[counterId];
+  // Pub/Sub messages are unordered, so here we manually order messages by
+  // their "counterId" attribute which was set when they were published.
+  const outstandingIds = Object.keys(outstandingMessages).map(counterId =>
+    Number(counterId, 10)
+  );
+  outstandingIds.sort();
 
-      if (counterId < counter) {
-        // The message has already been processed
-        message.ack();
-        delete outstandingMessages[counterId];
-      } else if (counterId === counter) {
-        // Process the message
-        console.log(
-          `* %d %j %j`,
-          message.id,
-          message.data.toString(),
-          message.attributes
-        );
-        setSubscribeCounterValue(counterId + 1);
-        message.ack();
-        delete outstandingMessages[counterId];
-      } else {
-        // Have not yet processed the message on which this message is dependent
-        return false;
-      }
-    });
+  outstandingIds.forEach(counterId => {
+    const counter = getSubscribeCounterValue();
+    const message = outstandingMessages[counterId];
+
+    if (counterId < counter) {
+      // The message has already been processed
+      message.ack();
+      delete outstandingMessages[counterId];
+    } else if (counterId === counter) {
+      // Process the message
+      console.log(
+        `* %d %j %j`,
+        message.id,
+        message.data.toString(),
+        message.attributes
+      );
+      setSubscribeCounterValue(counterId + 1);
+      message.ack();
+      delete outstandingMessages[counterId];
+    } else {
+      // Have not yet processed the message on which this message is dependent
+      return false;
+    }
   });
 }
 // [END pubsub_listen_ordered_messages]
 
-function listenForErrors(subscriptionName, timeout) {
+async function listenForErrors(subscriptionName, timeout) {
   // [START pubsub_subscriber_error_listener]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -544,7 +466,7 @@ function listenForErrors(subscriptionName, timeout) {
   // [END pubsub_subscriber_error_listener]
 }
 
-function getSubscriptionPolicy(subscriptionName) {
+async function getSubscriptionPolicy(subscriptionName) {
   // [START pubsub_get_subscription_policy]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -558,20 +480,13 @@ function getSubscriptionPolicy(subscriptionName) {
   // const subscriptionName = 'my-sub';
 
   // Retrieves the IAM policy for the subscription
-  pubsub
-    .subscription(subscriptionName)
-    .iam.getPolicy()
-    .then(results => {
-      const policy = results[0];
-      console.log(`Policy for subscription: %j.`, policy.bindings);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  const [policy] = await pubsub.subscription(subscriptionName).iam.getPolicy();
+  console.log(`Policy for subscription: ${JSON.stringify(policy.bindings)}.`);
+
   // [END pubsub_get_subscription_policy]
 }
 
-function setSubscriptionPolicy(subscriptionName) {
+async function setSubscriptionPolicy(subscriptionName) {
   // [START pubsub_set_subscription_policy]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -601,23 +516,15 @@ function setSubscriptionPolicy(subscriptionName) {
   };
 
   // Updates the IAM policy for the subscription
-  pubsub
+  const [updatedPolicy] = await pubsub
     .subscription(subscriptionName)
-    .iam.setPolicy(newPolicy)
-    .then(results => {
-      const updatedPolicy = results[0];
-      console.log(
-        `Updated policy for subscription: %j`,
-        updatedPolicy.bindings
-      );
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .iam.setPolicy(newPolicy);
+  console.log(`Updated policy for subscription: %j`, updatedPolicy.bindings);
+
   // [END pubsub_set_subscription_policy]
 }
 
-function testSubscriptionPermissions(subscriptionName) {
+async function testSubscriptionPermissions(subscriptionName) {
   // [START pubsub_test_subscription_permissions]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -636,16 +543,11 @@ function testSubscriptionPermissions(subscriptionName) {
   ];
 
   // Tests the IAM policy for the specified subscription
-  pubsub
+  const [permissions] = await pubsub
     .subscription(subscriptionName)
-    .iam.testPermissions(permissionsToTest)
-    .then(results => {
-      const permissions = results[0];
-      console.log(`Tested permissions for subscription: %j`, permissions);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .iam.testPermissions(permissionsToTest);
+  console.log(`Tested permissions for subscription: %j`, permissions);
+
   // [END pubsub_test_subscription_permissions]
 }
 

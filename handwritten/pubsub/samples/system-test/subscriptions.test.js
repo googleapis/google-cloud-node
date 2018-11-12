@@ -17,7 +17,7 @@
 
 const path = require(`path`);
 const {PubSub} = require('@google-cloud/pubsub');
-const test = require(`ava`);
+const assert = require(`assert`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
@@ -37,15 +37,15 @@ const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscript
 const fullSubscriptionNameFour = `projects/${projectId}/subscriptions/${subscriptionNameFour}`;
 const cmd = `node subscriptions.js`;
 
-test.before(tools.checkCredentials);
-test.before(async () => {
+before(tools.checkCredentials);
+before(async () => {
   await Promise.all([
     pubsub.createTopic(topicNameOne),
     pubsub.createTopic(topicNameTwo),
   ]);
 });
 
-test.after.always(async () => {
+after(async () => {
   try {
     await pubsub.subscription(subscriptionNameOne).delete();
   } catch (err) {} // ignore error
@@ -63,16 +63,15 @@ test.after.always(async () => {
   } catch (err) {} // ignore error
 });
 
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
+beforeEach(tools.stubConsole);
+afterEach(tools.restoreConsole);
 
-test.serial(`should create a subscription`, async t => {
-  t.plan(1);
+it(`should create a subscription`, async () => {
   const output = await tools.runAsync(
     `${cmd} create ${topicNameOne} ${subscriptionNameOne}`,
     cwd
   );
-  t.is(output, `Subscription ${subscriptionNameOne} created.`);
+  assert.strictEqual(output, `Subscription ${subscriptionNameOne} created.`);
   await tools
     .tryTest(async assert => {
       const [subscriptions] = await pubsub
@@ -83,12 +82,12 @@ test.serial(`should create a subscription`, async t => {
     .start();
 });
 
-test.serial(`should create a push subscription`, async t => {
+it(`should create a push subscription`, async () => {
   const output = await tools.runAsync(
     `${cmd} create-push ${topicNameOne} ${subscriptionNameTwo}`,
     cwd
   );
-  t.is(output, `Subscription ${subscriptionNameTwo} created.`);
+  assert.strictEqual(output, `Subscription ${subscriptionNameTwo} created.`);
   await tools
     .tryTest(async assert => {
       const [subscriptions] = await pubsub
@@ -99,33 +98,28 @@ test.serial(`should create a push subscription`, async t => {
     .start();
 });
 
-test.serial(
-  `should modify the config of an existing push subscription`,
-  async t => {
-    t.plan(1);
-    const output = await tools.runAsync(
-      `${cmd} modify-config ${topicNameTwo} ${subscriptionNameTwo}`,
-      cwd
-    );
-    t.is(
-      output,
-      `Modified push config for subscription ${subscriptionNameTwo}.`
-    );
-  }
-);
+it(`should modify the config of an existing push subscription`, async () => {
+  const output = await tools.runAsync(
+    `${cmd} modify-config ${topicNameTwo} ${subscriptionNameTwo}`,
+    cwd
+  );
+  assert.strictEqual(
+    output,
+    `Modified push config for subscription ${subscriptionNameTwo}.`
+  );
+});
 
-test.serial(`should get metadata for a subscription`, async t => {
+it(`should get metadata for a subscription`, async () => {
   const output = await tools.runAsync(`${cmd} get ${subscriptionNameOne}`, cwd);
   const expected =
     `Subscription: ${fullSubscriptionNameOne}` +
     `\nTopic: ${fullTopicNameOne}` +
     `\nPush config: ` +
     `\nAck deadline: 10s`;
-  t.is(output, expected);
+  assert.strictEqual(output, expected);
 });
 
-test.serial(`should list all subscriptions`, async t => {
-  t.plan(0);
+it(`should list all subscriptions`, async () => {
   await tools
     .tryTest(async assert => {
       const output = await tools.runAsync(`${cmd} list`, cwd);
@@ -136,8 +130,7 @@ test.serial(`should list all subscriptions`, async t => {
     .start();
 });
 
-test.serial(`should list subscriptions for a topic`, async t => {
-  t.plan(0);
+it(`should list subscriptions for a topic`, async () => {
   await tools
     .tryTest(async assert => {
       const output = await tools.runAsync(`${cmd} list ${topicNameOne}`, cwd);
@@ -148,7 +141,7 @@ test.serial(`should list subscriptions for a topic`, async t => {
     .start();
 });
 
-test.serial(`should listen for messages`, async t => {
+it(`should listen for messages`, async () => {
   const messageIds = await pubsub
     .topic(topicNameOne)
     .publisher()
@@ -157,11 +150,11 @@ test.serial(`should listen for messages`, async t => {
     `${cmd} listen-messages ${subscriptionNameOne}`,
     cwd
   );
-  t.true(output.includes(`Received message ${messageIds}:`));
+  assert.strictEqual(output.includes(`Received message ${messageIds}:`), true);
 });
 
-test.serial(`should listen for messages synchronously`, async t => {
-  await pubsub
+it(`should listen for messages synchronously`, async () => {
+  pubsub
     .topic(topicNameOne)
     .publisher()
     .publish(Buffer.from(`Hello, world!`));
@@ -169,10 +162,10 @@ test.serial(`should listen for messages synchronously`, async t => {
     `${cmd} sync-pull ${projectId} ${subscriptionNameOne}`,
     cwd
   );
-  t.true(output.includes(`Done.`));
+  assert.strictEqual(output.includes(`Done.`), true);
 });
 
-test.serial(`should listen for ordered messages`, async t => {
+it(`should listen for ordered messages`, async () => {
   const timeout = 5;
   const subscriptions = require('../subscriptions');
   const expected = `Hello, world!`;
@@ -187,13 +180,13 @@ test.serial(`should listen for ordered messages`, async t => {
   let [result] = await publisherTwo.publish(expectedBuffer, {counterId: '3'});
   publishedMessageIds.push(result);
   await subscriptions.listenForOrderedMessages(subscriptionNameThree, timeout);
-  t.is(console.log.callCount, 0);
+  assert.strictEqual(console.log.callCount, 0);
 
   result = await publisherTwo.publish(expectedBuffer, {counterId: '1'});
   publishedMessageIds.push(result);
   await subscriptions.listenForOrderedMessages(subscriptionNameThree, timeout);
-  t.is(console.log.callCount, 1);
-  t.deepEqual(console.log.firstCall.args, [
+  assert.strictEqual(console.log.callCount, 1);
+  assert.deepStrictEqual(console.log.firstCall.args, [
     `* %d %j %j`,
     publishedMessageIds[1],
     expected,
@@ -224,21 +217,21 @@ test.serial(`should listen for ordered messages`, async t => {
   });
 });
 
-test.serial(`should listen for error messages`, async t => {
+it(`should listen for error messages`, async () => {
   const output = await tools.runAsyncWithIO(
     `${cmd} listen-errors nonexistent-subscription`,
     cwd
   );
-  t.true(output.stderr.includes(`Resource not found`));
+  assert.strictEqual(output.stderr.includes(`Resource not found`), true);
 });
 
-test.serial(`should set the IAM policy for a subscription`, async t => {
+it(`should set the IAM policy for a subscription`, async () => {
   await tools.runAsync(`${cmd} set-policy ${subscriptionNameOne}`, cwd);
   const results = await pubsub
     .subscription(subscriptionNameOne)
     .iam.getPolicy();
   const policy = results[0];
-  t.deepEqual(policy.bindings, [
+  assert.deepStrictEqual(policy.bindings, [
     {
       role: `roles/pubsub.editor`,
       members: [`group:cloud-logs@google.com`],
@@ -250,7 +243,7 @@ test.serial(`should set the IAM policy for a subscription`, async t => {
   ]);
 });
 
-test.serial(`should get the IAM policy for a subscription`, async t => {
+it(`should get the IAM policy for a subscription`, async () => {
   const results = await pubsub
     .subscription(subscriptionNameOne)
     .iam.getPolicy();
@@ -258,27 +251,29 @@ test.serial(`should get the IAM policy for a subscription`, async t => {
     `${cmd} get-policy ${subscriptionNameOne}`,
     cwd
   );
-  t.is(
+  assert.strictEqual(
     output,
     `Policy for subscription: ${JSON.stringify(results[0].bindings)}.`
   );
 });
 
-test.serial(`should test permissions for a subscription`, async t => {
+it(`should test permissions for a subscription`, async () => {
   const output = await tools.runAsync(
     `${cmd} test-permissions ${subscriptionNameOne}`,
     cwd
   );
-  t.true(output.includes(`Tested permissions for subscription`));
+  assert.strictEqual(
+    output.includes(`Tested permissions for subscription`),
+    true
+  );
 });
 
-test.serial(`should delete a subscription`, async t => {
-  t.plan(1);
+it(`should delete a subscription`, async () => {
   const output = await tools.runAsync(
     `${cmd} delete ${subscriptionNameOne}`,
     cwd
   );
-  t.is(output, `Subscription ${subscriptionNameOne} deleted.`);
+  assert.strictEqual(output, `Subscription ${subscriptionNameOne} deleted.`);
   await tools
     .tryTest(async assert => {
       const [subscriptions] = await pubsub.getSubscriptions();
@@ -288,13 +283,12 @@ test.serial(`should delete a subscription`, async t => {
     .start();
 });
 
-test.serial(`should create a subscription with flow control`, async t => {
-  t.plan(1);
+it(`should create a subscription with flow control`, async () => {
   const output = await tools.runAsync(
     `${cmd} create-flow ${topicNameTwo} ${subscriptionNameFour} -m 5 -b 1024`,
     cwd
   );
-  t.is(
+  assert.strictEqual(
     output,
     `Subscription ${fullSubscriptionNameFour} created with a maximum of 5 unprocessed messages.`
   );

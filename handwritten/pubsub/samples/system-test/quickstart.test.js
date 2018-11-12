@@ -18,7 +18,7 @@
 const proxyquire = require('proxyquire').noPreserveCache();
 const {PubSub} = proxyquire('@google-cloud/pubsub', {});
 const sinon = require('sinon');
-const test = require('ava');
+const assert = require('assert');
 const tools = require('@google-cloud/nodejs-repo-tools');
 const uuid = require('uuid');
 
@@ -28,32 +28,29 @@ const pubsub = new PubSub({projectId});
 const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
 const fullTopicName = `projects/${projectId}/topics/${topicName}`;
 
-test.before(tools.stubConsole);
-test.after.always(() => {
+before(tools.stubConsole);
+after(async () => {
   tools.restoreConsole();
-  return pubsub
+  return await pubsub
     .topic(topicName)
     .delete()
     .catch(() => {});
 });
 
-test.cb(`should create a topic`, t => {
+it(`should create a topic`, async () => {
   const expectedTopicName = `my-topic`;
   const pubsubMock = {
     createTopic: _topicName => {
-      t.is(_topicName, expectedTopicName);
+      assert.strictEqual(_topicName, expectedTopicName);
       return pubsub.createTopic(topicName).then(([topic]) => {
-        t.is(topic.name, fullTopicName);
+        assert.strictEqual(topic.name, fullTopicName);
         setTimeout(() => {
           try {
-            t.is(console.log.callCount, 1);
-            t.deepEqual(console.log.getCall(0).args, [
+            assert.strictEqual(console.log.callCount, 1);
+            assert.deepStrictEqual(console.log.getCall(0).args, [
               `Topic ${topic.name} created.`,
             ]);
-            t.end();
-          } catch (err) {
-            t.end(err);
-          }
+          } catch (err) {}
         }, 200);
         return [topic];
       });

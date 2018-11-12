@@ -23,7 +23,7 @@
 
 'use strict';
 
-function listAllTopics() {
+async function listAllTopics() {
   // [START pubsub_list_topics]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -32,21 +32,13 @@ function listAllTopics() {
   const pubsub = new PubSub();
 
   // Lists all topics in the current project
-  pubsub
-    .getTopics()
-    .then(results => {
-      const topics = results[0];
-
-      console.log('Topics:');
-      topics.forEach(topic => console.log(topic.name));
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  const [topics] = await pubsub.getTopics();
+  console.log('Topics:');
+  topics.forEach(topic => console.log(topic.name));
   // [END pubsub_list_topics]
 }
 
-function createTopic(topicName) {
+async function createTopic(topicName) {
   // [START pubsub_create_topic]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -60,19 +52,13 @@ function createTopic(topicName) {
   // const topicName = 'my-topic';
 
   // Creates a new topic
-  pubsub
-    .createTopic(topicName)
-    .then(results => {
-      const topic = results[0];
-      console.log(`Topic ${topicName} created.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await pubsub.createTopic(topicName);
+  console.log(`Topic ${topicName} created.`);
+
   // [END pubsub_create_topic]
 }
 
-function deleteTopic(topicName) {
+async function deleteTopic(topicName) {
   // [START pubsub_delete_topic]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -86,19 +72,13 @@ function deleteTopic(topicName) {
   // const topicName = 'my-topic';
 
   // Deletes the topic
-  pubsub
-    .topic(topicName)
-    .delete()
-    .then(() => {
-      console.log(`Topic ${topicName} deleted.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await pubsub.topic(topicName).delete();
+  console.log(`Topic ${topicName} deleted.`);
+
   // [END pubsub_delete_topic]
 }
 
-function publishMessage(topicName, data) {
+async function publishMessage(topicName, data) {
   // [START pubsub_publish]
   // [START pubsub_quickstart_publisher]
   // Imports the Google Cloud client library
@@ -116,21 +96,17 @@ function publishMessage(topicName, data) {
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
 
-  pubsub
+  const messageId = await pubsub
     .topic(topicName)
     .publisher()
-    .publish(dataBuffer)
-    .then(messageId => {
-      console.log(`Message ${messageId} published.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .publish(dataBuffer);
+  console.log(`Message ${messageId} published.`);
+
   // [END pubsub_publish]
   // [END pubsub_quickstart_publisher]
 }
 
-function publishMessageWithCustomAttributes(topicName, data) {
+async function publishMessageWithCustomAttributes(topicName, data) {
   // [START pubsub_publish_custom_attributes]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -152,20 +128,21 @@ function publishMessageWithCustomAttributes(topicName, data) {
     username: 'gcp',
   };
 
-  pubsub
+  const messageId = await pubsub
     .topic(topicName)
     .publisher()
-    .publish(dataBuffer, customAttributes)
-    .then(messageId => {
-      console.log(`Message ${messageId} published.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .publish(dataBuffer, customAttributes);
+  console.log(`Message ${messageId} published.`);
+
   // [END pubsub_publish_custom_attributes]
 }
 
-function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
+async function publishBatchedMessages(
+  topicName,
+  data,
+  maxMessages,
+  maxWaitTime
+) {
   // [START pubsub_publisher_batch_settings]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -184,7 +161,7 @@ function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
 
-  pubsub
+  const [messageId] = await pubsub
     .topic(topicName)
     .publisher({
       batching: {
@@ -192,14 +169,9 @@ function publishBatchedMessages(topicName, data, maxMessages, maxWaitTime) {
         maxMilliseconds: maxWaitTime,
       },
     })
-    .publish(dataBuffer)
-    .then(results => {
-      const messageId = results[0];
-      console.log(`Message ${messageId} published.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .publish(dataBuffer);
+  console.log(`Message ${messageId} published.`);
+
   // [END pubsub_publisher_batch_settings]
 }
 
@@ -213,7 +185,7 @@ function setPublishCounterValue(value) {
   publishCounterValue = value;
 }
 
-function publishOrderedMessage(topicName, data) {
+async function publishOrderedMessage(topicName, data) {
   // [START pubsub_publish_ordered_message]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -236,27 +208,18 @@ function publishOrderedMessage(topicName, data) {
   };
 
   // Publishes the message
-  return pubsub
+  const messageId = await pubsub
     .topic(topicName)
     .publisher()
-    .publish(dataBuffer, attributes)
-    .then(results => {
-      const messageId = results;
-
-      // Update the counter value
-      setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
-
-      console.log(`Message ${messageId} published.`);
-
-      return messageId;
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .publish(dataBuffer, attributes);
+  // Update the counter value
+  setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);
+  console.log(`Message ${messageId} published.`);
+  return messageId;
   // [END pubsub_publish_ordered_message]
 }
 
-function getTopicPolicy(topicName) {
+async function getTopicPolicy(topicName) {
   // [START pubsub_get_topic_policy]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -270,20 +233,13 @@ function getTopicPolicy(topicName) {
   // const topicName = 'my-topic';
 
   // Retrieves the IAM policy for the topic
-  pubsub
-    .topic(topicName)
-    .iam.getPolicy()
-    .then(results => {
-      const policy = results[0];
-      console.log(`Policy for topic: %j.`, policy.bindings);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  const [policy] = await pubsub.topic(topicName).iam.getPolicy();
+  console.log(`Policy for topic: %j.`, policy.bindings);
+
   // [END pubsub_get_topic_policy]
 }
 
-function setTopicPolicy(topicName) {
+async function setTopicPolicy(topicName) {
   // [START pubsub_set_topic_policy]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -313,20 +269,15 @@ function setTopicPolicy(topicName) {
   };
 
   // Updates the IAM policy for the topic
-  pubsub
+  const [updatedPolicy] = await pubsub
     .topic(topicName)
-    .iam.setPolicy(newPolicy)
-    .then(results => {
-      const updatedPolicy = results[0];
-      console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .iam.setPolicy(newPolicy);
+  console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
+
   // [END pubsub_set_topic_policy]
 }
 
-function testTopicPermissions(topicName) {
+async function testTopicPermissions(topicName) {
   // [START pubsub_test_topic_permissions]
   // Imports the Google Cloud client library
   const {PubSub} = require('@google-cloud/pubsub');
@@ -346,16 +297,11 @@ function testTopicPermissions(topicName) {
   ];
 
   // Tests the IAM policy for the specified topic
-  pubsub
+  const [permissions] = await pubsub
     .topic(topicName)
-    .iam.testPermissions(permissionsToTest)
-    .then(results => {
-      const permissions = results[0];
-      console.log(`Tested permissions for topic: %j`, permissions);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+    .iam.testPermissions(permissionsToTest);
+  console.log(`Tested permissions for topic: %j`, permissions);
+
   // [END pubsub_test_topic_permissions]
 }
 
