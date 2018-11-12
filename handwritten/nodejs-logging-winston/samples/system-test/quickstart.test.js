@@ -16,15 +16,16 @@
 'use strict';
 
 const path = require(`path`);
-const test = require(`ava`);
+const assert = require(`assert`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
+describe('QuickStart', () => {
+  before(tools.checkCredentials);
 
-test.before(tools.checkCredentials);
-
-test.serial(`should write using winston`, async t => {
-  const output = await tools.runAsync(
-    `node quickstart.js`,
-    path.join(__dirname, `..`)
-  );
-  t.is(output.includes('99%'), true);
+  it(`should write using winston`, async () => {
+    const output = await tools.runAsync(
+      `node quickstart.js`,
+      path.join(__dirname, `..`)
+    );
+    assert.deepStrictEqual(output.includes('99%'), true);
+  });
 });
