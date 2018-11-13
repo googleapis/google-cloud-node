@@ -18,6 +18,7 @@ This client supports the following Google Cloud Platform services at a [General 
 
 This client supports the following Google Cloud Platform services at a [Beta](#versioning) quality level:
 
+* [Cloud Bigtable](https://github.com/googleapis/nodejs-bigtable) (Beta)
 * [Cloud Data Loss Prevention](https://github.com/googleapis/nodejs-dlp) (Beta)
 * [Cloud Firestore](https://github.com/googleapis/nodejs-firestore/) (Beta)
 * [Cloud Pub/Sub](https://github.com/googleapis/nodejs-pubsub/) (Beta)
@@ -26,7 +27,6 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
-* [Cloud Bigtable](https://github.com/googleapis/nodejs-bigtable) (Alpha)
 * [Cloud DNS](https://github.com/googleapis/nodejs-dns) (Alpha)
 * [Cloud Resource Manager](https://github.com/googleapis/nodejs-resource) (Alpha)
 * [Google Compute Engine](https://github.com/googleapis/nodejs-compute) (Alpha)
