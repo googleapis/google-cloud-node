@@ -16,7 +16,7 @@
 'use strict';
 
 const path = require(`path`);
-const PubSub = require('@google-cloud/pubsub');
+const {PubSub} = require('@google-cloud/pubsub');
 const {Storage} = require(`@google-cloud/storage`);
 const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);

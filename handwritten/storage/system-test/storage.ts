@@ -18,7 +18,7 @@ import * as assert from 'assert';
 import * as async from 'async';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import fetch from 'node-fetch';
+import fetch = require('node-fetch');
 const normalizeNewline = require('normalize-newline');
 import * as path from 'path';
 import * as through from 'through2';
@@ -27,15 +27,13 @@ import * as uuid from 'uuid';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
 import {Storage, Bucket, File, AccessControlObject, Notification, GetNotificationOptions, DeleteBucketCallback, CreateNotificationOptions, BucketExistsOptions, BucketExistsCallback, GetBucketOptions, GetBucketCallback, GetNotificationsCallback, MakeBucketPrivateOptions, MakeBucketPrivateCallback, SetBucketMetadataOptions, SetBucketMetadataCallback, DeleteFileCallback, SaveCallback, DownloadOptions, DownloadCallback, FileExistsOptions, FileExistsCallback, CreateReadStreamOptions, CreateResumableUploadOptions, GetFileOptions, GetFileCallback, SetStorageClassOptions, SetStorageClassCallback, UploadOptions, UploadCallback, CopyOptions, CopyCallback, GetFileMetadataOptions, GetFileMetadataCallback, MakeFilePrivateOptions, MakeFilePrivateCallback, SetFileMetadataOptions, SetFileMetadataCallback, AddAclOptions, AddAclCallback, UpdateAclCallback, UpdateAclOptions, GetAclOptions, GetAclCallback, RemoveAclOptions, RemoveAclCallback, GetPolicyOptions, GetPolicyCallback, SetPolicyCallback, TestIamPermissionsOptions, TestIamPermissionsCallback, GetNotificationCallback, GetNotificationMetadataOptions, GetNotificationMetadataCallback, DeleteNotificationOptions, DeleteNotificationCallback} from '../src';
 import * as nock from 'nock';
+const {PubSub} = require('@google-cloud/pubsub');
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
     .get(url => true)
     .replyWithError({code: 'ENOTFOUND'})
     .persist();
-
-// tslint:disable-next-line:variable-name
-const PubSub = require('@google-cloud/pubsub');
 
 describe('storage', () => {
   const USER_ACCOUNT = 'user-spsawchuk@gmail.com';
