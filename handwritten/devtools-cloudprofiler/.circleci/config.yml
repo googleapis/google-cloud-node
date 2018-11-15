@@ -53,9 +53,9 @@ workflows:
            filters: *release_tags
       - node8:
            filters: *release_tags
-      - node9:
-          filters: *release_tags
       - node10:
+          filters: *release_tags
+      - node11:
           filters: *release_tags
       - gocheck:
           filters: *release_tags
@@ -65,7 +65,8 @@ workflows:
           requires:
             - node6
             - node8
-            - node9
+            - node10
+            - node11
             - gocheck
             - npmaudit
           filters:
@@ -84,14 +85,14 @@ jobs:
       - image: node:8
         user: node
     <<: *unit_tests
-  node9:
-    docker:
-      - image: node:9
-        user: node
-    <<: *unit_tests
   node10:
     docker:
       - image: node:10
+        user: node
+    <<: *unit_tests
+  node11:
+    docker:
+      - image: node:11
         user: node
     <<: *unit_tests
   npmaudit:

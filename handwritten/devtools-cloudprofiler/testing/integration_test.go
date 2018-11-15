@@ -228,23 +228,23 @@ func TestAgentIntegration(t *testing.T) {
 			InstanceConfig: proftest.InstanceConfig{
 				ProjectID:   projectID,
 				Zone:        zone,
-				Name:        fmt.Sprintf("profiler-test-node9-%s", runID),
-				MachineType: "n1-standard-1",
-			},
-			name:         fmt.Sprintf("profiler-test-node9-%s-gce", runID),
-			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
-			nodeVersion:  "9",
-		},
-		{
-			InstanceConfig: proftest.InstanceConfig{
-				ProjectID:   projectID,
-				Zone:        zone,
 				Name:        fmt.Sprintf("profiler-test-node10-%s", runID),
 				MachineType: "n1-standard-1",
 			},
 			name:         fmt.Sprintf("profiler-test-node10-%s-gce", runID),
 			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
 			nodeVersion:  "10",
+		},
+		{
+			InstanceConfig: proftest.InstanceConfig{
+				ProjectID:   projectID,
+				Zone:        zone,
+				Name:        fmt.Sprintf("profiler-test-node11-%s", runID),
+				MachineType: "n1-standard-1",
+			},
+			name:         fmt.Sprintf("profiler-test-node11-%s-gce", runID),
+			wantProfiles: []profileSummary{{"WALL", "busyLoop"}, {"HEAP", "benchmark"}},
+			nodeVersion:  "11",
 		},
 	}
 	if *runOnlyV8CanaryTest {
