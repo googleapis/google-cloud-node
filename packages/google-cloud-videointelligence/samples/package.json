@@ -13,8 +13,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js ./system-test/*.test.js && nyc report",
-    "test": "ava -T 10m --serial --verbose system-test/*.test.js"
+    "test": "mocha system-test/*.test.js --timeout=600000"
   },
   "dependencies": {
     "@google-cloud/video-intelligence": "^1.5.0",
