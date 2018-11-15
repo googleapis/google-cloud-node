@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.3.1
+
+11-14-2018 22:15 PST
+
+### Bug fixes
+- fix: fix TypeScript and system tests ([#515](https://github.com/googleapis/nodejs-storage/pull/515))
+- fix(deps): update dependency through2 to v3 ([#507](https://github.com/googleapis/nodejs-storage/pull/507))
+- docs: File#setMetadata in parallel results in unpredictable state ([#504](https://github.com/googleapis/nodejs-storage/pull/504))
+
+### Internal / Testing Changes
+- chore(deps): update dependency gts to ^0.9.0 ([#514](https://github.com/googleapis/nodejs-storage/pull/514))
+- chore: update eslintignore config ([#513](https://github.com/googleapis/nodejs-storage/pull/513))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#512](https://github.com/googleapis/nodejs-storage/pull/512))
+- refactor: use object.assign where possible ([#510](https://github.com/googleapis/nodejs-storage/pull/510))
+- chore: drop contributors from multiple places ([#511](https://github.com/googleapis/nodejs-storage/pull/511))
+- chore: use latest npm on Windows ([#509](https://github.com/googleapis/nodejs-storage/pull/509))
+
 ## v2.3.0
 
 ### Implementation Changes
