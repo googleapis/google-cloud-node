@@ -16,7 +16,7 @@
 'use strict';
 
 const path = require(`path`);
-const test = require(`ava`);
+const assert = require(`assert`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const execa = require(`execa`);
 const delay = require(`delay`);
@@ -24,14 +24,11 @@ const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 const got = require('got');
 
+before(tools.checkCredentials);
 const lb = require('@google-cloud/logging-bunyan');
 const {APP_LOG_SUFFIX} = lb.express;
 
-test.before(tools.checkCredentials);
-
-test.serial(`should write using bunyan`, async t => {
-  t.plan(4);
-
+it(`should write using bunyan`, async () => {
   // Start the express server.
   execa(process.execPath, ['express.js'], {
     cwd: path.join(__dirname, `..`),
@@ -50,9 +47,9 @@ test.serial(`should write using bunyan`, async t => {
   // Make sure the log was written to Stackdriver Logging.
   const log = logging.log(`samples_express_${APP_LOG_SUFFIX}`);
   const entries = (await log.getEntries({pageSize: 1}))[0];
-  t.is(entries.length, 1);
+  assert.strictEqual(entries.length, 1);
   const entry = entries[0];
-  t.is('this is an info log message', entry.data.message);
-  t.truthy(entry.metadata.trace, 'should have a trace property');
-  t.truthy(entry.metadata.trace.match(/projects\/.*\/traces\/.*/));
+  assert.strictEqual('this is an info log message', entry.data.message);
+  assert.ok(entry.metadata.trace, 'should have a trace property');
+  assert.ok(entry.metadata.trace.match(/projects\/.*\/traces\/.*/));
 });

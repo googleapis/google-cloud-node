@@ -16,15 +16,15 @@
 'use strict';
 
 const path = require(`path`);
-const test = require(`ava`);
+const assert = require(`assert`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 
-test.before(tools.checkCredentials);
+before(tools.checkCredentials);
 
-test.serial(`should write using bunyan`, async t => {
+it(`should write using bunyan`, async () => {
   const output = await tools.runAsync(
     `node quickstart.js`,
     path.join(__dirname, `..`)
   );
-  t.is(output.includes('99%'), true);
+  assert.strictEqual(output.includes('99%'), true);
 });
