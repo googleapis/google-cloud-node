@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {CreateOptions, ServiceObject} from '@google-cloud/common';
+import {ServiceObject} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as r from 'request';
 import {teenyRequest} from 'teeny-request';
@@ -22,7 +22,7 @@ import {teenyRequest} from 'teeny-request';
 import {Record} from './record';
 import {Zone} from './zone';
 
-export interface CreateChangeRequest extends CreateOptions {
+export interface CreateChangeRequest {
   add?: Record|Record[];
   delete?: Record|Record[];
 }
