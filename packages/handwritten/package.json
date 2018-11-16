@@ -73,6 +73,7 @@
     "@types/proxyquire": "^1.3.28",
     "@types/request": "^2.47.1",
     "@types/restify": "^7.2.0",
+    "@types/uuid": "^3.4.4",
     "body-parser": "^1.18.3",
     "boom": "^7.2.0",
     "codecov": "^3.0.2",
@@ -106,6 +107,7 @@
     "proxyquire": "^2.0.1",
     "restify": "^7.2.0",
     "source-map-support": "^0.5.9",
-    "typescript": "~3.1.0"
+    "typescript": "~3.1.0",
+    "uuid": "^3.3.2"
   }
 }
