@@ -4,6 +4,48 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## v0.9.0
+
+11-16-2018 14:11 PST
+
+### Bug fixes
+- fix: fix typescript build ([#171](https://github.com/googleapis/nodejs-dns/pull/171))
+- refactor: remove dependency on extend ([#163](https://github.com/googleapis/nodejs-dns/pull/163))
+- refactor: reduce the number of deps ([#161](https://github.com/googleapis/nodejs-dns/pull/161))
+- fix(deps): update dependency @google-cloud/common to ^0.26.0 ([#145](https://github.com/googleapis/nodejs-dns/pull/145))
+- fix(types): A few more promisified method overloads ([#134](https://github.com/googleapis/nodejs-dns/pull/134))
+- fix(types): Consolidate "createChange" wrappers, add overloads ([#133](https://github.com/googleapis/nodejs-dns/pull/133))
+- fix(docs): add missing methods jsdoc declaration ([#129](https://github.com/googleapis/nodejs-dns/pull/129))
+- docs: First argument of Zone#create is required ([#125](https://github.com/googleapis/nodejs-dns/pull/125))
+- fix: Don't publish sourcemaps ([#120](https://github.com/googleapis/nodejs-dns/pull/120))
+
+### Internal / Testing Changes
+- chore(deps): update dependency gts to ^0.9.0 ([#169](https://github.com/googleapis/nodejs-dns/pull/169))
+- chore: update eslintignore config ([#168](https://github.com/googleapis/nodejs-dns/pull/168))
+- refactor(samples):  convert samples test from ava to mocha ([#154](https://github.com/googleapis/nodejs-dns/pull/154))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#165](https://github.com/googleapis/nodejs-dns/pull/165))
+- chore: drop contributors from multiple places ([#164](https://github.com/googleapis/nodejs-dns/pull/164))
+- chore(deps): update dependency @types/is to v0.0.21 ([#162](https://github.com/googleapis/nodejs-dns/pull/162))
+- chore: use latest npm on Windows ([#160](https://github.com/googleapis/nodejs-dns/pull/160))
+- docs(samples): Update samples to use async/await ([#159](https://github.com/googleapis/nodejs-dns/pull/159))
+- chore: update CircleCI config ([#158](https://github.com/googleapis/nodejs-dns/pull/158))
+- chore: include build in eslintignore ([#155](https://github.com/googleapis/nodejs-dns/pull/155))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#150](https://github.com/googleapis/nodejs-dns/pull/150))
+- chore: update issue templates ([#149](https://github.com/googleapis/nodejs-dns/pull/149))
+- chore: remove old issue template ([#147](https://github.com/googleapis/nodejs-dns/pull/147))
+- build: run tests on node11 ([#146](https://github.com/googleapis/nodejs-dns/pull/146))
+- chores(build): do not collect sponge.xml from windows builds ([#144](https://github.com/googleapis/nodejs-dns/pull/144))
+- chores(build): run codecov on continuous builds ([#143](https://github.com/googleapis/nodejs-dns/pull/143))
+- refactor: Use @types/lodash.groupBy ([#136](https://github.com/googleapis/nodejs-dns/pull/136))
+- chore: update new issue template ([#141](https://github.com/googleapis/nodejs-dns/pull/141))
+- chore(deps): update dependency sinon to v7 ([#137](https://github.com/googleapis/nodejs-dns/pull/137))
+- build: fix codecov uploading on Kokoro ([#138](https://github.com/googleapis/nodejs-dns/pull/138))
+- Update kokoro config ([#130](https://github.com/googleapis/nodejs-dns/pull/130))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#128](https://github.com/googleapis/nodejs-dns/pull/128))
+- chore(deps): update dependency typescript to ~3.1.0 ([#123](https://github.com/googleapis/nodejs-dns/pull/123))
+- Update CI config ([#122](https://github.com/googleapis/nodejs-dns/pull/122))
+- build: prevent system/sample-test from leaking credentials
+
 ## v0.8.0
 
 **THIS RELEASE HAS BREAKING CHANGES**.  It also has a few new great features like TypeScript support.  Enjoy 🎉
