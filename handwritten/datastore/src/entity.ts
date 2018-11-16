@@ -51,12 +51,15 @@ entity.KEY_SYMBOL = Symbol('KEY');
  * const datastore = new Datastore();
  * const aDouble = datastore.double(7.3);
  */
-function Double(value) {
-  /**
-   * @name Double#value
-   * @type {number}
-   */
-  this.value = value;
+class Double {
+  value: number;
+  constructor(value: number) {
+    /**
+     * @name Double#value
+     * @type {number}
+     */
+    this.value = value;
+  }
 }
 
 entity.Double = Double;
@@ -85,12 +88,15 @@ entity.isDsDouble = isDsDouble;
  * const datastore = new Datastore();
  * const anInt = datastore.int(7);
  */
-function Int(value) {
-  /**
-   * @name Int#value
-   * @type {string}
-   */
-  this.value = value.toString();
+class Int {
+  value: string;
+  constructor(value: number|string) {
+    /**
+     * @name Int#value
+     * @type {string}
+     */
+    this.value = value.toString();
+  }
 }
 
 entity.Int = Int;
@@ -107,6 +113,11 @@ function isDsInt(value) {
 }
 
 entity.isDsInt = isDsInt;
+
+export interface Coordinates {
+  latitude: number;
+  longitude: number;
+}
 
 /**
  * Build a Datastore Geo Point object.
@@ -126,16 +137,19 @@ entity.isDsInt = isDsInt;
  *
  * const geoPoint = datastore.geoPoint(coordinates);
  */
-function GeoPoint(coordinates) {
-  /**
-   * Coordinate value.
-   *
-   * @name GeoPoint#coordinates
-   * @type {object}
-   * @property {number} latitude Latitudinal value.
-   * @property {number} longitude Longitudinal value.
-   */
-  this.value = coordinates;
+class GeoPoint {
+  value: Coordinates;
+  constructor(coordinates: Coordinates) {
+    /**
+     * Coordinate value.
+     *
+     * @name GeoPoint#coordinates
+     * @type {object}
+     * @property {number} latitude Latitudinal value.
+     * @property {number} longitude Longitudinal value.
+     */
+    this.value = coordinates;
+  }
 }
 
 entity.GeoPoint = GeoPoint;
@@ -169,46 +183,55 @@ entity.isDsGeoPoint = isDsGeoPoint;
  *   path: ['Company', 123]
  * });
  */
-function Key(options) {
-  /**
-   * @name Key#namespace
-   * @type {string}
-   */
-  this.namespace = options.namespace;
+class Key {
 
-  options.path = [].slice.call(options.path);
+  namespace: string;
+  id?: string;
+  name?: string;
+  kind: string;
+  parent?: Key;
 
-  if (options.path.length % 2 === 0) {
-    const identifier = options.path.pop();
+  constructor(options) {
+    /**
+     * @name Key#namespace
+     * @type {string}
+     */
+    this.namespace = options.namespace;
 
-    if (is.number(identifier) || isDsInt(identifier)) {
-      this.id = identifier.value || identifier;
-    } else if (is.string(identifier)) {
-      this.name = identifier;
+    options.path = [].slice.call(options.path);
+
+    if (options.path.length % 2 === 0) {
+      const identifier = options.path.pop();
+
+      if (is.number(identifier) || isDsInt(identifier)) {
+        this.id = identifier.value || identifier;
+      } else if (is.string(identifier)) {
+        this.name = identifier;
+      }
     }
+
+    this.kind = options.path.pop();
+
+    if (options.path.length > 0) {
+      this.parent = new Key(options);
+    }
+
+    // `path` is computed on demand to consider any changes that may have been
+    // made to the key.
+    /**
+     * @name Key#path
+     * @type {array}
+     */
+    Object.defineProperty(this, 'path', {
+      enumerable: true,
+      get: function() {
+        return arrify(this.parent && this.parent.path).concat([
+          this.kind,
+          this.name || this.id,
+        ]);
+      },
+    });
   }
-
-  this.kind = options.path.pop();
-
-  if (options.path.length > 0) {
-    this.parent = new Key(options);
-  }
-
-  // `path` is computed on demand to consider any changes that may have been
-  // made to the key.
-  /**
-   * @name Key#path
-   * @type {array}
-   */
-  Object.defineProperty(this, 'path', {
-    enumerable: true,
-    get: function() {
-      return arrify(this.parent && this.parent.path).concat([
-        this.kind,
-        this.name || this.id,
-      ]);
-    },
-  });
 }
 
 entity.Key = Key;

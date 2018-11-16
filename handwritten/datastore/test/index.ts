@@ -75,12 +75,18 @@ const fakeGoogleGax = {
   },
 };
 
-function FakeQuery() {
-  this.calledWith_ = arguments;
+class FakeQuery {
+  calledWith_: IArguments;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
-function FakeTransaction() {
-  this.calledWith_ = arguments;
+class FakeTransaction {
+  calledWith_: IArguments;
+  constructor() {
+    this.calledWith_ = arguments;
+  }
 }
 
 function FakeV1() {}

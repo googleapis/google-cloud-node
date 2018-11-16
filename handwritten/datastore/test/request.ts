@@ -48,9 +48,7 @@ const fakeV1 = {
   },
 };
 
-function FakeQuery() {
-  this.calledWith_ = arguments;
-}
+class FakeQuery extends Query {}
 
 let pjyOverride;
 
@@ -59,7 +57,7 @@ describe('Request', function() {
   let request;
 
   let key;
-  let sandbox;
+  const sandbox = sinon.createSandbox();
 
   before(function() {
     Request = proxyquire('../src/request', {
@@ -71,25 +69,21 @@ describe('Request', function() {
     }).DatastoreRequest;
   });
 
-  after(function() {
+  after(() => {
     v1FakeClientOverride = null;
   });
 
   beforeEach(function() {
-    sandbox = sinon.createSandbox();
     pjyOverride = null;
     key = new entity.Key({
       namespace: 'namespace',
       path: ['Company', 123],
     });
-    FakeQuery.prototype = new Query();
     v1FakeClientOverride = null;
     request = new Request();
   });
 
-  afterEach(() => {
-    sandbox.restore();
-  });
+  afterEach(() => sandbox.restore());
 
   describe('instantiation', function() {
     it('should promisify all the things', function() {
@@ -474,7 +468,7 @@ describe('Request', function() {
         request
           .createReadStream(key)
           .on('error', done)
-          .on('data', function(entity) {
+          .on('data', entity => {
             assert.deepStrictEqual(entity, expectedResult);
           })
           .on('end', done)
@@ -484,19 +478,18 @@ describe('Request', function() {
       it('should not push more results if stream was ended', function(done) {
         let entitiesEmitted = 0;
 
-        request.request_ = function(config, callback) {
-          setImmediate(function() {
+        request.request_ = (config, callback) => {
+          setImmediate(() => {
             callback(null, apiResponseWithMultiEntities);
           });
         };
 
-        request
-          .createReadStream([key, key])
-          .on('data', function() {
+        const stream = request.createReadStream([key, key]);
+          stream.on('data', () => {
             entitiesEmitted++;
-            this.end();
+            stream.end();
           })
-          .on('end', function() {
+          .on('end', () => {
             assert.strictEqual(entitiesEmitted, 1);
             done();
           })
@@ -513,13 +506,11 @@ describe('Request', function() {
           });
         };
 
-        request
-          .createReadStream(key)
+        const stream = request.createReadStream(key);
+        stream
           .on('error', done)
-          .on('data', function() {
-            this.end();
-          })
-          .on('end', function() {
+          .on('data', () => stream.end())
+          .on('end', () => {
             assert.strictEqual(lookupCount, 1);
             done();
           })
@@ -930,16 +921,16 @@ describe('Request', function() {
           );
           startCalled = true;
           return this;
-        };
+        }
 
-        FakeQuery.prototype.offset = function(offset_) {
+        sandbox.stub(FakeQuery.prototype, 'offset').callsFake(offset_ => {
           const offset = query.offsetVal - apiResponse.batch.skippedResults;
           assert.strictEqual(offset_, offset);
           offsetCalled = true;
           return this;
-        };
+        });
 
-        FakeQuery.prototype.limit = function(limit_) {
+        sandbox.stub(FakeQuery.prototype, 'limit').callsFake(limit_ => {
           if (timesRequestCalled === 1) {
             assert.strictEqual(
               limit_,
@@ -950,7 +941,7 @@ describe('Request', function() {
             assert.strictEqual(limit_, query.limitVal);
           }
           return this;
-        };
+        });
 
         sandbox.stub(entity, 'queryToQueryProto').callsFake(query_ => {
           if (timesRequestCalled > 1) {
@@ -1012,10 +1003,10 @@ describe('Request', function() {
 
         sandbox.stub(entity, 'queryToQueryProto').returns({});
 
-        FakeQuery.prototype.limit = function() {
+        sandbox.stub(FakeQuery.prototype, 'limit').callsFake(() => {
           limitCalled = true;
           return this;
-        };
+        });
 
         request
           .runQueryStream(query)
@@ -1050,13 +1041,13 @@ describe('Request', function() {
           }
         };
 
-        request
+        const stream = request
           .runQueryStream({})
-          .on('data', function() {
+          .on('data', () => {
             entitiesEmitted++;
-            this.end();
+            stream.end();
           })
-          .on('end', function() {
+          .on('end', () => {
             assert.strictEqual(entitiesEmitted, 1);
             done();
           });
@@ -1070,13 +1061,11 @@ describe('Request', function() {
           callback(null, apiResponse);
         };
 
-        request
-          .runQueryStream({})
+        const stream = request.runQueryStream({});
+        stream
           .on('error', done)
-          .on('data', function() {
-            this.end();
-          })
-          .on('end', function() {
+          .on('data', () => stream.end())
+          .on('end', () => {
             assert.strictEqual(timesRequestCalled, 1);
             done();
           });
