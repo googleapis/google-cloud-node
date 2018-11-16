@@ -9,8 +9,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "system-test": "ava -T 1m --verbose system-test/*.test.js",
-    "test": "npm run system-test"
+    "test": "mocha system-test/*.js --timeout 600000"
   },
   "dependencies": {
     "@google-cloud/logging-bunyan": "^0.9.4",
