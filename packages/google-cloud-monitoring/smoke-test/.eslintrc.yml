@@ -1,5 +1,5 @@
 ---
-rules:
-  no-console: off
 env:
   mocha: true
+rules:
+  no-console: off
