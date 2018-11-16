@@ -52,30 +52,19 @@ export class ErrorsApiTransport extends AuthClient {
     super(config, logger);
   }
 
-  deleteAllEvents(cb: (err: Error|null) => void) {
-    this.getProjectId((err, id) => {
-      if (err) {
-        return cb(err);
-      }
-      const options = {uri: [API, id, 'events'].join('/'), method: 'DELETE'};
-      this.request_(options).then(r => {
-        cb(null);
-      }, e => cb);
-    });
+  async deleteAllEvents() {
+    const id = await this.getProjectId();
+    const options = {uri: [API, id, 'events'].join('/'), method: 'DELETE'};
+    return this.request_(options);
   }
 
-  getAllGroups(cb: (err: Error|null, data?: ErrorGroupStats[]) => void) {
-    this.getProjectId((err, id) => {
-      if (err) {
-        return cb(err);
-      }
-      const options = {
-        uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
-        method: 'GET'
-      };
-      this.request_(options).then(r => {
-        cb(null, r.body.errorGroupStats || []);
-      }, cb);
-    });
+  async getAllGroups(): Promise<ErrorGroupStats[]> {
+    const id = await this.getProjectId();
+    const options = {
+      uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
+      method: 'GET'
+    };
+    const r = await this.request_(options);
+    return r.body.errorGroupStats || [];
   }
 }
