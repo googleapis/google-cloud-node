@@ -9,7 +9,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "test": "ava -T 20s --verbose system-test/*.test.js"
+    "test": "mocha system-test/*.test.js --timeout 600000"
   },
   "dependencies": {
     "@google-cloud/speech": "^2.1.1",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "ava": "^0.25.0",
+    "mocha": "^5.2.0",
     "proxyquire": "^2.0.1",
     "sinon": "^7.0.0",
     "uuid": "^3.3.0"
