@@ -51,7 +51,6 @@ export interface StorageOptions extends GoogleAuthOptions {
 }
 
 export interface BucketOptions {
-  location?: string;
   kmsKeyName?: string;
   userProject?: string;
 }
@@ -65,6 +64,7 @@ export interface CreateBucketRequest {
   requesterPays?: boolean;
   retentionPolicy?: object;
   userProject?: string;
+  location?: string;
 }
 
 /**

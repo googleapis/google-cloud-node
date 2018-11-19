@@ -18,7 +18,7 @@ import * as assert from 'assert';
 import * as async from 'async';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
-import fetch = require('node-fetch');
+import fetch from 'node-fetch';
 const normalizeNewline = require('normalize-newline');
 import * as path from 'path';
 import * as through from 'through2';
@@ -2121,7 +2121,8 @@ describe('storage', () => {
       }
 
       before(done => {
-        bucket = storage.bucket(generateName(), {location: BUCKET_LOCATION});
+        bucket = storage.bucket(generateName());
+
         async.series(
             [
               function getProjectId(next) {
@@ -2136,7 +2137,9 @@ describe('storage', () => {
               },
 
               function createBucket(next) {
-                bucket.create(next);
+                bucket.create({location: BUCKET_LOCATION}, err => {
+                  next(err);
+                });
               },
 
               function createKeyRing(next) {
