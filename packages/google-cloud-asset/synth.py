@@ -20,22 +20,19 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
+# run the gapic generator
 gapic = gcp.GAPICGenerator()
-common_templates = gcp.CommonTemplates()
-
 version = 'v1beta1'
-
 library = gapic.node_library(
     'asset', version, config_path="artman_cloudasset_v1beta1.yaml",
     artman_output_name=f"asset-{version}")
 
+# Copy common templates
+common_templates = gcp.CommonTemplates()
 s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
-
 templates = common_templates.node_library()
 s.copy(templates)
 
-'''
-Node.js specific cleanup
-'''
+# Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
+subprocess.run(['npm', 'run', 'fix'])
