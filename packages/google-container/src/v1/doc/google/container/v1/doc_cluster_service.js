@@ -58,8 +58,18 @@
  *   Keys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes
  *   in length. These are reflected as part of a URL in the metadata server.
  *   Additionally, to avoid ambiguity, keys must not conflict with any other
- *   metadata keys for the project or be one of the four reserved keys:
- *   "instance-template", "kube-env", "startup-script", and "user-data"
+ *   metadata keys for the project or be one of the reserved keys:
+ *    "cluster-location"
+ *    "cluster-name"
+ *    "cluster-uid"
+ *    "configure-sh"
+ *    "enable-os-login"
+ *    "gci-update-strategy"
+ *    "gci-ensure-gke-docker"
+ *    "instance-template"
+ *    "kube-env"
+ *    "startup-script"
+ *    "user-data"
  *
  *   Values are free-form strings, and only have meaning as interpreted by
  *   the image running in the instance. The only restriction placed on them is
@@ -107,13 +117,19 @@
  *
  *   This object should have the same structure as [AcceleratorConfig]{@link google.container.v1.AcceleratorConfig}
  *
+ * @property {string} diskType
+ *   Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')
+ *
+ *   If unspecified, the default disk type is 'pd-standard'
+ *
  * @property {string} minCpuPlatform
  *   Minimum CPU platform to be used by this instance. The instance may be
  *   scheduled on the specified or newer CPU platform. Applicable values are the
  *   friendly names of CPU platforms, such as
  *   <code>minCpuPlatform: &quot;Intel Haswell&quot;</code> or
  *   <code>minCpuPlatform: &quot;Intel Sandy Bridge&quot;</code>. For more
- *   information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+ *   information, read [how to specify min CPU
+ *   platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
  *
  * @typedef NodeConfig
  * @memberof google.container.v1
@@ -140,8 +156,9 @@ const NodeConfig = {
  *   must be non-empty.
  *
  * @property {Object} clientCertificateConfig
- *   Configuration for client certificate authentication on the cluster.  If no
- *   configuration is specified, a client certificate is issued.
+ *   Configuration for client certificate authentication on the cluster. For
+ *   clusters before v1.12, if no configuration is specified, a client
+ *   certificate is issued.
  *
  *   This object should have the same structure as [ClientCertificateConfig]{@link google.container.v1.ClientCertificateConfig}
  *
@@ -282,7 +299,37 @@ const NetworkPolicyConfig = {
 };
 
 /**
- * Master authorized networks is a Beta feature.
+ * Configuration options for private clusters.
+ *
+ * @property {boolean} enablePrivateNodes
+ *   Whether nodes have internal IP addresses only. If enabled, all nodes are
+ *   given only RFC 1918 private addresses and communicate with the master via
+ *   private networking.
+ *
+ * @property {boolean} enablePrivateEndpoint
+ *   Whether the master's internal IP address is used as the cluster endpoint.
+ *
+ * @property {string} masterIpv4CidrBlock
+ *   The IP range in CIDR notation to use for the hosted master network. This
+ *   range will be used for assigning internal IP addresses to the master or
+ *   set of masters, as well as the ILB VIP. This range must not overlap with
+ *   any other ranges in use within the cluster's network.
+ *
+ * @property {string} privateEndpoint
+ *   Output only. The internal IP address of this cluster's master endpoint.
+ *
+ * @property {string} publicEndpoint
+ *   Output only. The external IP address of this cluster's master endpoint.
+ *
+ * @typedef PrivateClusterConfig
+ * @memberof google.container.v1
+ * @see [google.container.v1.PrivateClusterConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
+ */
+const PrivateClusterConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Configuration options for the master authorized networks feature. Enabled
  * master authorized networks will disallow all external traffic to access
  * Kubernetes master through HTTPS except traffic from the given CIDR blocks,
@@ -481,7 +528,7 @@ const IPAllocationPolicy = {
 };
 
 /**
- * A Google Container Engine cluster.
+ * A Google Kubernetes Engine cluster.
  *
  * @property {string} name
  *   The name of this cluster. The name must be unique within this project
@@ -604,7 +651,6 @@ const IPAllocationPolicy = {
  *   This object should have the same structure as [IPAllocationPolicy]{@link google.container.v1.IPAllocationPolicy}
  *
  * @property {Object} masterAuthorizedNetworksConfig
- *   Master authorized networks is a Beta feature.
  *   The configuration options for master authorized networks feature.
  *
  *   This object should have the same structure as [MasterAuthorizedNetworksConfig]{@link google.container.v1.MasterAuthorizedNetworksConfig}
@@ -614,6 +660,16 @@ const IPAllocationPolicy = {
  *
  *   This object should have the same structure as [MaintenancePolicy]{@link google.container.v1.MaintenancePolicy}
  *
+ * @property {Object} networkConfig
+ *   Configuration for cluster networking.
+ *
+ *   This object should have the same structure as [NetworkConfig]{@link google.container.v1.NetworkConfig}
+ *
+ * @property {Object} privateClusterConfig
+ *   Configuration for private cluster.
+ *
+ *   This object should have the same structure as [PrivateClusterConfig]{@link google.container.v1.PrivateClusterConfig}
+ *
  * @property {string} selfLink
  *   [Output only] Server-defined URL for the resource.
  *
@@ -621,6 +677,7 @@ const IPAllocationPolicy = {
  *   [Output only] The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field is deprecated, use location instead.
  *
  * @property {string} endpoint
  *   [Output only] The IP address of this cluster's master endpoint.
@@ -636,13 +693,24 @@ const IPAllocationPolicy = {
  *   be upgraded over time; such upgrades are reflected in
  *   currentMasterVersion and currentNodeVersion.
  *
+ *   Users may specify either explicit versions offered by
+ *   Kubernetes Engine or version aliases, which have the following behavior:
+ *
+ *   - "latest": picks the highest valid Kubernetes version
+ *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+ *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+ *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
+ *   - "","-": picks the default Kubernetes version
+ *
  * @property {string} currentMasterVersion
  *   [Output only] The current software version of the master endpoint.
  *
  * @property {string} currentNodeVersion
- *   [Output only] The current version of the node software components.
- *   If they are currently at multiple versions because they're in the process
- *   of being upgraded, this reflects the minimum version of all nodes.
+ *   [Output only] Deprecated, use
+ *   [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool)
+ *   instead. The current version of the node software components. If they are
+ *   currently at multiple versions because they're in the process of being
+ *   upgraded, this reflects the minimum version of all nodes.
  *
  * @property {string} createTime
  *   [Output only] The time the cluster was created, in
@@ -678,6 +746,12 @@ const IPAllocationPolicy = {
  * @property {string} expireTime
  *   [Output only] The time the cluster will be automatically
  *   deleted in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+ *
+ * @property {string} location
+ *   [Output only] The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) or
+ *   [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) in which
+ *   the cluster resides.
  *
  * @typedef Cluster
  * @memberof google.container.v1
@@ -726,7 +800,13 @@ const Cluster = {
      * The ERROR state indicates the cluster may be unusable. Details
      * can be found in the `statusMessage` field.
      */
-    ERROR: 5
+    ERROR: 5,
+
+    /**
+     * The DEGRADED state indicates the cluster requires user action to restore
+     * full functionality. Details can be found in the `statusMessage` field.
+     */
+    DEGRADED: 6
   }
 };
 
@@ -737,8 +817,16 @@ const Cluster = {
  *
  * @property {string} desiredNodeVersion
  *   The Kubernetes version to change the nodes to (typically an
- *   upgrade). Use `-` to upgrade to the latest version supported by
- *   the server.
+ *   upgrade).
+ *
+ *   Users may specify either explicit versions offered by
+ *   Kubernetes Engine or version aliases, which have the following behavior:
+ *
+ *   - "latest": picks the highest valid Kubernetes version
+ *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+ *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+ *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
+ *   - "-": picks the Kubernetes master version
  *
  * @property {string} desiredMonitoringService
  *   The monitoring service the cluster should use to write metrics.
@@ -780,15 +868,21 @@ const Cluster = {
  *   This list must always include the cluster's primary zone.
  *
  * @property {Object} desiredMasterAuthorizedNetworksConfig
- *   Master authorized networks is a Beta feature.
  *   The desired configuration options for master authorized networks feature.
  *
  *   This object should have the same structure as [MasterAuthorizedNetworksConfig]{@link google.container.v1.MasterAuthorizedNetworksConfig}
  *
  * @property {string} desiredMasterVersion
- *   The Kubernetes version to change the master to. The only valid value is the
- *   latest supported version. Use "-" to have the server automatically select
- *   the latest version.
+ *   The Kubernetes version to change the master to.
+ *
+ *   Users may specify either explicit versions offered by
+ *   Kubernetes Engine or version aliases, which have the following behavior:
+ *
+ *   - "latest": picks the highest valid Kubernetes version
+ *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+ *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+ *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
+ *   - "-": picks the default Kubernetes version
  *
  * @typedef ClusterUpdate
  * @memberof google.container.v1
@@ -809,6 +903,7 @@ const ClusterUpdate = {
  *   The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation
  *   is taking place.
+ *   This field is deprecated, use location instead.
  *
  * @property {number} operationType
  *   The operation type.
@@ -831,6 +926,12 @@ const ClusterUpdate = {
  *
  * @property {string} targetLink
  *   Server-defined URL for the target of the operation.
+ *
+ * @property {string} location
+ *   [Output only] The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) or
+ *   [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) in which
+ *   the cluster resides.
  *
  * @property {string} startTime
  *   [Output only] The time the operation started, in
@@ -980,19 +1081,25 @@ const Operation = {
  * CreateClusterRequest creates a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {Object} cluster
  *   A [cluster
  *   resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters)
  *
  *   This object should have the same structure as [Cluster]{@link google.container.v1.Cluster}
+ *
+ * @property {string} parent
+ *   The parent (project and location) where the cluster will be created.
+ *   Specified in the format 'projects/* /locations/*'.
  *
  * @typedef CreateClusterRequest
  * @memberof google.container.v1
@@ -1006,16 +1113,23 @@ const CreateClusterRequest = {
  * GetClusterRequest gets the settings of a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to retrieve.
+ *   Deprecated. The name of the cluster to retrieve.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to retrieve.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef GetClusterRequest
  * @memberof google.container.v1
@@ -1029,21 +1143,28 @@ const GetClusterRequest = {
  * UpdateClusterRequest updates the settings of a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {Object} update
  *   A description of the update.
  *
  *   This object should have the same structure as [ClusterUpdate]{@link google.container.v1.ClusterUpdate}
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to update.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef UpdateClusterRequest
  * @memberof google.container.v1
@@ -1057,27 +1178,44 @@ const UpdateClusterRequest = {
  * UpdateNodePoolRequests update a node pool's image and/or version.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodePoolId
- *   The name of the node pool to upgrade.
+ *   Deprecated. The name of the node pool to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodeVersion
  *   The Kubernetes version to change the nodes to (typically an
- *   upgrade). Use `-` to upgrade to the latest version supported by
- *   the server.
+ *   upgrade).
+ *
+ *   Users may specify either explicit versions offered by Kubernetes Engine or
+ *   version aliases, which have the following behavior:
+ *
+ *   - "latest": picks the highest valid Kubernetes version
+ *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+ *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+ *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
+ *   - "-": picks the Kubernetes master version
  *
  * @property {string} imageType
  *   The desired image type for the node pool.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster, node pool) of the node pool to
+ *   update. Specified in the format
+ *   'projects/* /locations/* /clusters/* /nodePools/*'.
  *
  * @typedef UpdateNodePoolRequest
  * @memberof google.container.v1
@@ -1091,24 +1229,33 @@ const UpdateNodePoolRequest = {
  * SetNodePoolAutoscalingRequest sets the autoscaler settings of a node pool.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodePoolId
- *   The name of the node pool to upgrade.
+ *   Deprecated. The name of the node pool to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {Object} autoscaling
  *   Autoscaling configuration for the node pool.
  *
  *   This object should have the same structure as [NodePoolAutoscaling]{@link google.container.v1.NodePoolAutoscaling}
+ *
+ * @property {string} name
+ *   The name (project, location, cluster, node pool) of the node pool to set
+ *   autoscaler settings. Specified in the format
+ *   'projects/* /locations/* /clusters/* /nodePools/*'.
  *
  * @typedef SetNodePoolAutoscalingRequest
  * @memberof google.container.v1
@@ -1122,16 +1269,19 @@ const SetNodePoolAutoscalingRequest = {
  * SetLoggingServiceRequest sets the logging service of a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} loggingService
  *   The logging service the cluster should use to write metrics.
@@ -1139,6 +1289,10 @@ const SetNodePoolAutoscalingRequest = {
  *
  *   * "logging.googleapis.com" - the Google Cloud Logging service
  *   * "none" - no metrics will be exported from the cluster
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to set logging.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetLoggingServiceRequest
  * @memberof google.container.v1
@@ -1152,16 +1306,19 @@ const SetLoggingServiceRequest = {
  * SetMonitoringServiceRequest sets the monitoring service of a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} monitoringService
  *   The monitoring service the cluster should use to write metrics.
@@ -1169,6 +1326,10 @@ const SetLoggingServiceRequest = {
  *
  *   * "monitoring.googleapis.com" - the Google Cloud Monitoring service
  *   * "none" - no metrics will be exported from the cluster
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to set monitoring.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetMonitoringServiceRequest
  * @memberof google.container.v1
@@ -1182,22 +1343,29 @@ const SetMonitoringServiceRequest = {
  * SetAddonsConfigRequest sets the addons associated with the cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {Object} addonsConfig
  *   The desired configurations for the various addons available to run in the
  *   cluster.
  *
  *   This object should have the same structure as [AddonsConfig]{@link google.container.v1.AddonsConfig}
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to set addons.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetAddonsConfigRequest
  * @memberof google.container.v1
@@ -1211,16 +1379,19 @@ const SetAddonsConfigRequest = {
  * SetLocationsRequest sets the locations of the cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string[]} locations
  *   The desired list of Google Compute Engine
@@ -1230,6 +1401,10 @@ const SetAddonsConfigRequest = {
  *   whether locations are being added or removed.
  *
  *   This list must always include the cluster's primary zone.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to set locations.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetLocationsRequest
  * @memberof google.container.v1
@@ -1243,21 +1418,35 @@ const SetLocationsRequest = {
  * UpdateMasterRequest updates the master of the cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} masterVersion
- *   The Kubernetes version to change the master to. The only valid value is the
- *   latest supported version. Use "-" to have the server automatically select
- *   the latest version.
+ *   The Kubernetes version to change the master to.
+ *
+ *   Users may specify either explicit versions offered by Kubernetes Engine or
+ *   version aliases, which have the following behavior:
+ *
+ *   - "latest": picks the highest valid Kubernetes version
+ *   - "1.X": picks the highest valid patch+gke.N patch in the 1.X version
+ *   - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
+ *   - "1.X.Y-gke.N": picks an explicit Kubernetes version
+ *   - "-": picks the default Kubernetes version
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to update.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef UpdateMasterRequest
  * @memberof google.container.v1
@@ -1271,16 +1460,19 @@ const UpdateMasterRequest = {
  * SetMasterAuthRequest updates the admin password of a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to upgrade.
+ *   Deprecated. The name of the cluster to upgrade.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {number} action
  *   The exact form of action to be taken on the master auth.
@@ -1291,6 +1483,10 @@ const UpdateMasterRequest = {
  *   A description of the update.
  *
  *   This object should have the same structure as [MasterAuth]{@link google.container.v1.MasterAuth}
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to set auth.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetMasterAuthRequest
  * @memberof google.container.v1
@@ -1336,16 +1532,23 @@ const SetMasterAuthRequest = {
  * DeleteClusterRequest deletes a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to delete.
+ *   Deprecated. The name of the cluster to delete.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster) of the cluster to delete.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef DeleteClusterRequest
  * @memberof google.container.v1
@@ -1359,13 +1562,20 @@ const DeleteClusterRequest = {
  * ListClustersRequest lists clusters.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides, or "-" for all zones.
+ *   This field has been deprecated and replaced by the parent field.
+ *
+ * @property {string} parent
+ *   The parent (project and location) where the clusters will be listed.
+ *   Specified in the format 'projects/* /locations/*'.
+ *   Location "-" matches all zones and all regions.
  *
  * @typedef ListClustersRequest
  * @memberof google.container.v1
@@ -1400,16 +1610,23 @@ const ListClustersResponse = {
  * GetOperationRequest gets a single operation.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} operationId
- *   The server-assigned `name` of the operation.
+ *   Deprecated. The server-assigned `name` of the operation.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, operation id) of the operation to get.
+ *   Specified in the format 'projects/* /locations/* /operations/*'.
  *
  * @typedef GetOperationRequest
  * @memberof google.container.v1
@@ -1423,12 +1640,19 @@ const GetOperationRequest = {
  * ListOperationsRequest lists operations.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
- *   to return operations for, or `-` for all zones.
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
+ *   all zones. This field has been deprecated and replaced by the parent field.
+ *
+ * @property {string} parent
+ *   The parent (project and location) where the operations will be listed.
+ *   Specified in the format 'projects/* /locations/*'.
+ *   Location "-" matches all zones and all regions.
  *
  * @typedef ListOperationsRequest
  * @memberof google.container.v1
@@ -1442,15 +1666,22 @@ const ListOperationsRequest = {
  * CancelOperationRequest cancels a single operation.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} operationId
- *   The server-assigned `name` of the operation.
+ *   Deprecated. The server-assigned `name` of the operation.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, operation id) of the operation to cancel.
+ *   Specified in the format 'projects/* /locations/* /operations/*'.
  *
  * @typedef CancelOperationRequest
  * @memberof google.container.v1
@@ -1481,15 +1712,21 @@ const ListOperationsResponse = {
 };
 
 /**
- * Gets the current Container Engine service configuration.
+ * Gets the current Kubernetes Engine service configuration.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available)
- *   to return operations for.
+ *   Deprecated. The name of the Google Compute Engine
+ *   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project and location) of the server config to get
+ *   Specified in the format 'projects/* /locations/*'.
  *
  * @typedef GetServerConfigRequest
  * @memberof google.container.v1
@@ -1500,7 +1737,7 @@ const GetServerConfigRequest = {
 };
 
 /**
- * Container Engine service configuration.
+ * Kubernetes Engine service configuration.
  *
  * @property {string} defaultClusterVersion
  *   Version of Kubernetes the service deploys by default.
@@ -1529,21 +1766,29 @@ const ServerConfig = {
  * CreateNodePoolRequest creates a node pool for a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {Object} nodePool
  *   The node pool to create.
  *
  *   This object should have the same structure as [NodePool]{@link google.container.v1.NodePool}
+ *
+ * @property {string} parent
+ *   The parent (project, location, cluster id) where the node pool will be
+ *   created. Specified in the format
+ *   'projects/* /locations/* /clusters/*'.
  *
  * @typedef CreateNodePoolRequest
  * @memberof google.container.v1
@@ -1557,19 +1802,28 @@ const CreateNodePoolRequest = {
  * DeleteNodePoolRequest deletes a node pool for a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodePoolId
- *   The name of the node pool to delete.
+ *   Deprecated. The name of the node pool to delete.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster, node pool id) of the node pool to
+ *   delete. Specified in the format
+ *   'projects/* /locations/* /clusters/* /nodePools/*'.
  *
  * @typedef DeleteNodePoolRequest
  * @memberof google.container.v1
@@ -1583,16 +1837,23 @@ const DeleteNodePoolRequest = {
  * ListNodePoolsRequest lists the node pool(s) for a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the parent field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the parent field.
+ *
+ * @property {string} parent
+ *   The parent (project, location, cluster id) where the node pools will be
+ *   listed. Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef ListNodePoolsRequest
  * @memberof google.container.v1
@@ -1606,19 +1867,28 @@ const ListNodePoolsRequest = {
  * GetNodePoolRequest retrieves a node pool for a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodePoolId
- *   The name of the node pool.
+ *   Deprecated. The name of the node pool.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster, node pool id) of the node pool to
+ *   get. Specified in the format
+ *   'projects/* /locations/* /clusters/* /nodePools/*'.
  *
  * @typedef GetNodePoolRequest
  * @memberof google.container.v1
@@ -1848,24 +2118,33 @@ const DailyMaintenanceWindow = {
  * pool.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to update.
+ *   Deprecated. The name of the cluster to update.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodePoolId
- *   The name of the node pool to update.
+ *   Deprecated. The name of the node pool to update.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {Object} management
  *   NodeManagement configuration for the node pool.
  *
  *   This object should have the same structure as [NodeManagement]{@link google.container.v1.NodeManagement}
+ *
+ * @property {string} name
+ *   The name (project, location, cluster, node pool id) of the node pool to set
+ *   management properties. Specified in the format
+ *   'projects/* /locations/* /clusters/* /nodePools/*'.
  *
  * @typedef SetNodePoolManagementRequest
  * @memberof google.container.v1
@@ -1880,22 +2159,31 @@ const SetNodePoolManagementRequest = {
  * pool.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to update.
+ *   Deprecated. The name of the cluster to update.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodePoolId
- *   The name of the node pool to update.
+ *   Deprecated. The name of the node pool to update.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {number} nodeCount
  *   The desired node count for the pool.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster, node pool id) of the node pool to set
+ *   size.
+ *   Specified in the format 'projects/* /locations/* /clusters/* /nodePools/*'.
  *
  * @typedef SetNodePoolSizeRequest
  * @memberof google.container.v1
@@ -1911,19 +2199,28 @@ const SetNodePoolSizeRequest = {
  * completed.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to rollback.
+ *   Deprecated. The name of the cluster to rollback.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} nodePoolId
- *   The name of the node pool to rollback.
+ *   Deprecated. The name of the node pool to rollback.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster, node pool id) of the node poll to
+ *   rollback upgrade.
+ *   Specified in the format 'projects/* /locations/* /clusters/* /nodePools/*'.
  *
  * @typedef RollbackNodePoolUpgradeRequest
  * @memberof google.container.v1
@@ -1978,16 +2275,19 @@ const NodePoolAutoscaling = {
  * resources used by that cluster
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {Object.<string, string>} resourceLabels
  *   The labels to set for that cluster.
@@ -1995,10 +2295,14 @@ const NodePoolAutoscaling = {
  * @property {string} labelFingerprint
  *   The fingerprint of the previous set of labels for this resource,
  *   used to detect conflicts. The fingerprint is initially generated by
- *   Container Engine and changes after every request to modify or update
+ *   Kubernetes Engine and changes after every request to modify or update
  *   labels. You must always provide an up-to-date fingerprint hash when
  *   updating or changing labels. Make a <code>get()</code> request to the
  *   resource to get the latest fingerprint.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster id) of the cluster to set labels.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetLabelsRequest
  * @memberof google.container.v1
@@ -2013,19 +2317,26 @@ const SetLabelsRequest = {
  * a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://support.google.com/cloud/answer/6158840).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster to update.
+ *   Deprecated. The name of the cluster to update.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {boolean} enabled
  *   Whether ABAC authorization will be enabled in the cluster.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster id) of the cluster to set legacy abac.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetLegacyAbacRequest
  * @memberof google.container.v1
@@ -2040,16 +2351,26 @@ const SetLegacyAbacRequest = {
  * a node upgrade on each node pool to point to the new IP.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster id) of the cluster to start IP
+ *   rotation. Specified in the format 'projects/* /locations/* /clusters/*'.
+ *
+ * @property {boolean} rotateCredentials
+ *   Whether to rotate credentials during IP rotation.
  *
  * @typedef StartIPRotationRequest
  * @memberof google.container.v1
@@ -2063,16 +2384,23 @@ const StartIPRotationRequest = {
  * CompleteIPRotationRequest moves the cluster master back into single-IP mode.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
+ *
+ * @property {string} name
+ *   The name (project, location, cluster id) of the cluster to complete IP
+ *   rotation. Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef CompleteIPRotationRequest
  * @memberof google.container.v1
@@ -2104,21 +2432,28 @@ const AcceleratorConfig = {
  * SetNetworkPolicyRequest enables/disables network policy for a cluster.
  *
  * @property {string} projectId
- *   The Google Developers Console [project ID or project
+ *   Deprecated. The Google Developers Console [project ID or project
  *   number](https://developers.google.com/console/help/new/#projectnumber).
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} zone
- *   The name of the Google Compute Engine
+ *   Deprecated. The name of the Google Compute Engine
  *   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
  *   resides.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {string} clusterId
- *   The name of the cluster.
+ *   Deprecated. The name of the cluster.
+ *   This field has been deprecated and replaced by the name field.
  *
  * @property {Object} networkPolicy
  *   Configuration options for the NetworkPolicy feature.
  *
  *   This object should have the same structure as [NetworkPolicy]{@link google.container.v1.NetworkPolicy}
+ *
+ * @property {string} name
+ *   The name (project, location, cluster id) of the cluster to set networking
+ *   policy. Specified in the format 'projects/* /locations/* /clusters/*'.
  *
  * @typedef SetNetworkPolicyRequest
  * @memberof google.container.v1
@@ -2149,10 +2484,37 @@ const SetNetworkPolicyRequest = {
  *
  *   This object should have the same structure as [MaintenancePolicy]{@link google.container.v1.MaintenancePolicy}
  *
+ * @property {string} name
+ *   The name (project, location, cluster id) of the cluster to set maintenance
+ *   policy.
+ *   Specified in the format 'projects/* /locations/* /clusters/*'.
+ *
  * @typedef SetMaintenancePolicyRequest
  * @memberof google.container.v1
  * @see [google.container.v1.SetMaintenancePolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
  */
 const SetMaintenancePolicyRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * NetworkConfig reports the relative names of network & subnetwork.
+ *
+ * @property {string} network
+ *   Output only. The relative name of the Google Compute Engine
+ *   network(/compute/docs/networks-and-firewalls#networks) to which
+ *   the cluster is connected.
+ *   Example: projects/my-project/global/networks/my-network
+ *
+ * @property {string} subnetwork
+ *   Output only. The relative name of the Google Compute Engine
+ *   [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the cluster is connected.
+ *   Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
+ *
+ * @typedef NetworkConfig
+ * @memberof google.container.v1
+ * @see [google.container.v1.NetworkConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/container/v1/cluster_service.proto}
+ */
+const NetworkConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

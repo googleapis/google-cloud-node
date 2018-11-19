@@ -124,6 +124,7 @@ describe('ClusterManagerClient', () => {
       const servicesIpv4Cidr = 'servicesIpv4Cidr1966438125';
       const currentNodeCount = 178977560;
       const expireTime = 'expireTime-96179731';
+      const location = 'location1901043637';
       const expectedResponse = {
         name: name,
         description: description,
@@ -147,6 +148,7 @@ describe('ClusterManagerClient', () => {
         servicesIpv4Cidr: servicesIpv4Cidr,
         currentNodeCount: currentNodeCount,
         expireTime: expireTime,
+        location: location,
       };
 
       // Mock Grpc layer
@@ -218,6 +220,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -227,6 +230,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -302,6 +306,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -311,6 +316,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -392,6 +398,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -401,6 +408,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -484,6 +492,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -493,6 +502,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -572,6 +582,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -581,6 +592,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -658,6 +670,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -667,6 +680,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -744,6 +758,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -753,6 +768,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -830,6 +846,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -839,6 +856,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -916,6 +934,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -925,6 +944,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1004,6 +1024,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1013,6 +1034,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1090,6 +1112,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1099,6 +1122,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1233,6 +1257,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1242,6 +1267,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1585,6 +1611,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1594,6 +1621,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1671,6 +1699,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1680,6 +1709,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1757,6 +1787,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1766,6 +1797,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1845,6 +1877,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1854,6 +1887,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -1935,6 +1969,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -1944,6 +1979,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -2023,6 +2059,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -2032,6 +2069,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -2107,6 +2145,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -2116,6 +2155,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -2189,6 +2229,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -2198,6 +2239,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -2275,6 +2317,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -2284,6 +2327,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -2363,6 +2407,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -2372,6 +2417,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
@@ -2449,6 +2495,7 @@ describe('ClusterManagerClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const selfLink = 'selfLink-1691268851';
       const targetLink = 'targetLink-2084812312';
+      const location = 'location1901043637';
       const startTime = 'startTime-1573145462';
       const endTime = 'endTime1725551537';
       const expectedResponse = {
@@ -2458,6 +2505,7 @@ describe('ClusterManagerClient', () => {
         statusMessage: statusMessage,
         selfLink: selfLink,
         targetLink: targetLink,
+        location: location,
         startTime: startTime,
         endTime: endTime,
       };
