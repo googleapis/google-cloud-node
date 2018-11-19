@@ -312,9 +312,6 @@ async function synchronousPull(projectName, subscriptionName) {
   // Send the message to the worker function.
   worker(message);
 
-  // setInterval() checks the worker process every 5 sec.
-  // If the pre-set ack deadline is n sec, it is best to
-  // set the interval to be every (n/2) sec.
   let waiting = true;
   while (waiting) {
     await new Promise(r => setTimeout(r, 10000));
