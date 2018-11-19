@@ -5,12 +5,15 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "repository": "googleapis/nodejs-dialogflow",
-  "files": [ "*.js", "resources" ],
+  "files": [
+    "*.js",
+    "resources"
+  ],
   "engines": {
     "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "ava system-test"
+    "test": "mocha system-test/*.test.js --timeout=600000"
   },
   "dependencies": {
     "dialogflow": "^0.7.0",
@@ -22,6 +25,6 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "ava": "^0.25.0"
+    "mocha": "^5.2.0"
   }
 }
