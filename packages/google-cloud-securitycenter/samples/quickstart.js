@@ -18,4 +18,5 @@
 // [START securitycenter_quickstart]
 // Imports the Google Cloud client library
 const sc = require('@google-cloud/securitycenter');
+console.log(sc);
 // [END securitycenter_quickstart]

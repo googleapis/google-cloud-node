@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-security-center-samples",
+  "main": "quickstart.js",
+  "private": true,
+  "scripts": {
+    "test": "mocha system-test"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/security-center": "^0.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}

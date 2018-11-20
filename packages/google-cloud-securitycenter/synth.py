@@ -19,22 +19,18 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
+# Run the gapic generator
 gapic = gcp.GAPICGenerator()
-common_templates = gcp.CommonTemplates()
-
-
 versions = ['v1beta1']
-
 for version in versions:
     library = gapic.node_library('securitycenter', version)
     s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
+# Copy common templates
+common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
-
-'''
-Node.js specific cleanup
-'''
+# Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
+subprocess.run(['npm', 'run', 'fix'])
