@@ -14,35 +14,32 @@
 
 'use strict';
 
-// [START oslogin_quickstart]
-if (
-  !process.env.GCLOUD_PROJECT ||
-  !process.env.GOOGLE_APPLICATION_CREDENTIALS
-) {
-  throw new Error(
-    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
-  );
+async function main() {
+  // [START oslogin_quickstart]
+  if (
+    !process.env.GCLOUD_PROJECT ||
+    !process.env.GOOGLE_APPLICATION_CREDENTIALS
+  ) {
+    throw new Error(
+      'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
+    );
+  }
+
+  const oslogin = require('@google-cloud/os-login');
+
+  const projectId = process.env.GCLOUD_PROJECT;
+
+  const client = new oslogin.OsLoginServiceClient({
+    projectId: projectId,
+  });
+
+  const request = {
+    name: 'users/1234abcd',
+  };
+
+  const [loginProfile] = await client.getLoginProfile(request);
+  console.log(loginProfile);
+  // [END oslogin_quickstart]
 }
 
-const oslogin = require('@google-cloud/os-login');
-
-const projectId = process.env.GCLOUD_PROJECT;
-
-const client = new oslogin.OsLoginServiceClient({
-  projectId: projectId,
-});
-
-const request = {
-  name: 'users/1234abcd',
-};
-
-client
-  .getLoginProfile(request)
-  .then(responses => {
-    const loginProfile = responses[0];
-    console.log(loginProfile);
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
-// [END oslogin_quickstart]
+main().catch(console.error);
