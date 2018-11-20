@@ -1,5 +1,5 @@
 /**
- * Copyright 2018, Google LLC.
+ * Copyright 2018, Google, LLC.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,14 +15,57 @@
 
 'use strict';
 
-// [START asset_quickstart]
-// Imports the Google Cloud client library
-const asset = require('@google-cloud/asset');
+async function exportAssets(dumpFilePath) {
+  // [START asset_quickstart_exportassets]
+  const asset = require('@google-cloud/asset');
+  const client = new asset.v1beta1.AssetServiceClient({
+    // optional auth parameters.
+  });
 
-// eslint-disable-next-line
-const client = new asset.AssetServiceClient({
-  projectId: 'your-project-id',
-  keyFilename: '/path/to/keyfile.json',
-});
+  // Your Google Cloud Platform project ID
+  const projectId = process.env.GCLOUD_PROJECT;
+  const projectResource = client.projectPath(projectId);
 
-// [END asset_quickstart]
+  // var dumpFilePath = 'Dump file path, e.g.: gs://<my_bucket>/<my_asset_file>'
+  const outputConfig = {
+    gcsDestination: {
+      uri: dumpFilePath,
+    },
+  };
+  const request = {
+    parent: projectResource,
+    outputConfig: outputConfig,
+  };
+
+  // Handle the operation using the promise pattern.
+  const [operation] = await client.exportAssets(request);
+  // Operation#promise starts polling for the completion of the operation.
+  const [result] = await operation.promise();
+  // Do things with with the response.
+  console.log(result);
+  // [END asset_quickstart_exportassets]
+}
+
+const cli = require('yargs')
+  .demand(1)
+  .command(
+    'export-assets <dumpFilePath>',
+    'Export asserts to specified dump file path.',
+    {},
+    opts => exportAssets(opts.dumpFilePath)
+  )
+  .example(
+    'node $0 export-assets gs://my-bucket/my-assets.txt',
+    'Export assets to gs://my-bucket/my-assets.txt.'
+  )
+  .wrap(10)
+  .recommendCommands()
+  .epilogue(
+    'https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview'
+  )
+  .help()
+  .strict();
+
+if (module === require.main) {
+  cli.parse(process.argv.slice(2));
+}
