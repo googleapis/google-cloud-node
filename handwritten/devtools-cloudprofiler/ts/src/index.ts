@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import * as consoleLogLevel from 'console-log-level';
 import delay from 'delay';
 import * as extend from 'extend';
 import * as fs from 'fs';
@@ -23,6 +22,7 @@ import * as semver from 'semver';
 import {SemVer} from 'semver';
 
 import {Config, defaultConfig, ProfilerConfig} from './config';
+import {createLogger} from './logger';
 import {Profiler} from './profiler';
 import * as heapProfiler from './profilers/heap-profiler';
 
@@ -191,26 +191,9 @@ export async function start(config: Config = {}): Promise<void> {
   profiler.start();
 }
 
-const LEVEL_NAMES: consoleLogLevel.LogLevelNames[] =
-    ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
-
-export function logLevelToName(level?: number): consoleLogLevel.LogLevelNames {
-  if (level === undefined) {
-    level = defaultConfig.logLevel;
-  } else if (level < 0) {
-    level = 0;
-  } else if (level > 4) {
-    level = 4;
-  }
-  return LEVEL_NAMES[level];
-}
-
 function logError(msg: string, config: Config) {
-  const logger = consoleLogLevel({
-    stderr: true,
-    prefix: pjson.name,
-    level: logLevelToName(config.logLevel)
-  });
+  // FIXME: do not create a new logger on each error.
+  const logger = createLogger(config.logLevel);
   logger.error(msg);
 }
 
@@ -228,11 +211,7 @@ export async function startLocal(config: Config = {}): Promise<void> {
   }
 
   // Set up periodic logging.
-  const logger = consoleLogLevel({
-    stderr: true,
-    prefix: pjson.name,
-    level: logLevelToName(config.logLevel)
-  });
+  const logger = createLogger(config.logLevel);
 
   let heapProfileCount = 0;
   let timeProfileCount = 0;
