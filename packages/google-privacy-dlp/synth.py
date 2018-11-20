@@ -18,20 +18,18 @@ import synthtool as s
 import synthtool.gcp as gcp
 import subprocess
 
+# Run the gapic generator
 gapic = gcp.GAPICGenerator()
-
 version = 'v2'
 library = gapic.node_library(
     'dlp', version, config_path='/google/privacy/dlp/artman_dlp_v2.yaml')
 s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
+# Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
-'''
-Node.js specific cleanup
-'''
+# Node.js specific cleanup
 subprocess.run(['npm', 'install'])
-subprocess.run(['npm', 'run', 'prettier'])
-subprocess.run(['npm', 'run', 'lint'])
+subprocess.run(['npm', 'run', 'fix'])
