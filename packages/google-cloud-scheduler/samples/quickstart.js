@@ -18,4 +18,5 @@
 // [START scheduler_quickstart]
 // Imports the Google Cloud client library
 const scheduler = require('@google-cloud/scheduler');
+console.log(scheduler);
 // [END scheduler_quickstart]

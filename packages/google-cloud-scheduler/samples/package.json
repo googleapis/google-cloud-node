@@ -1,0 +1,13 @@
+{
+  "name": "nodejs-scheduler-samples",
+  "private": true,
+  "main": "quickstart.js",
+  "files": ["*.js"],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/scheduler": "^0.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
