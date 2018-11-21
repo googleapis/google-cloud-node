@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import * as is from '@sindresorhus/is';
-
 import {LOGGING_TRACE_KEY, LoggingCommon} from './common';
 import * as types from './types/core';
 
@@ -45,7 +43,7 @@ export class LoggingWinston extends winston.Transport {
 
   log(levelName: string, msg: string, metadata: types.Metadata,
       callback: Callback) {
-    if (is.default.function_(metadata)) {
+    if (typeof metadata === 'function') {
       callback = metadata as Callback;
       metadata = {};
     }
