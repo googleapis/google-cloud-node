@@ -20,7 +20,6 @@
 
 import * as arrify from 'arrify';
 import * as extend from 'extend';
-import * as is from 'is';
 import {split} from 'split-array-stream';
 import {Transform, TransformOptions} from 'stream';
 import * as streamEvents from 'stream-events';
@@ -56,7 +55,7 @@ export function createLimiter(
   let requestsMade = 0;
   let requestsToMake = -1;
 
-  if (is.number(options.maxApiCalls)) {
+  if (typeof options.maxApiCalls === 'number') {
     requestsToMake = options.maxApiCalls!;
   }
 
@@ -135,7 +134,7 @@ export class Paginator {
    */
   // tslint:disable-next-line:variable-name
   extend(Class: Function, methodNames: string|string[]) {
-    methodNames = arrify(methodNames) as string[];
+    methodNames = arrify(methodNames);
     methodNames.forEach(methodName => {
       const originalMethod = Class.prototype[methodName];
 
@@ -189,13 +188,13 @@ export class Paginator {
     const firstArgument = args[0];
     const lastArgument = args[args.length - 1];
 
-    if (is.fn(firstArgument)) {
+    if (typeof firstArgument === 'function') {
       callback = firstArgument;
     } else {
       query = firstArgument;
     }
 
-    if (is.fn(lastArgument)) {
+    if (typeof lastArgument === 'function') {
       callback = lastArgument;
     }
 
@@ -203,15 +202,15 @@ export class Paginator {
       query = extend<{}, ParsedArguments>(true, {}, query) as ParsedArguments;
 
       // Check if the user only asked for a certain amount of results.
-      if (query.maxResults && is.number(query.maxResults)) {
+      if (query.maxResults && typeof query.maxResults === 'number') {
         // `maxResults` is used API-wide.
         maxResults = query.maxResults;
-      } else if (is.number(query.pageSize)) {
+      } else if (typeof query.pageSize === 'number') {
         // `pageSize` is Pub/Sub's `maxResults`.
         maxResults = query.pageSize!;
       }
 
-      if (query.maxApiCalls && is.number(query.maxApiCalls)) {
+      if (query.maxApiCalls && typeof query.maxApiCalls === 'number') {
         maxApiCalls = query.maxApiCalls;
         delete query.maxApiCalls;
       }
