@@ -18,7 +18,7 @@ import * as util from 'util';
 import * as types from './types/core';
 
 const {Logging} = require('@google-cloud/logging');
-const mapValues = require('lodash.mapvalues');
+import mapValues = require('lodash.mapvalues');
 
 type Callback = (err: Error, apiResponse: {}) => void;
 
