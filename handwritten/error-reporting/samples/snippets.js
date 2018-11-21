@@ -17,6 +17,7 @@
 
 function setupImplicit() {
   // [START error_reporting_setup_implicit]
+  // [START error_reporting_setup_nodejs_implicit]
   // Imports the Google Cloud client library
   const ErrorReporting = require('@google-cloud/error-reporting')
     .ErrorReporting;
@@ -33,11 +34,13 @@ function setupImplicit() {
 
   // Reports a simple error
   errors.report('Something broke!');
+  // [END error_reporting_setup_nodejs_implicit]
   // [END error_reporting_setup_implicit]
 }
 
 function setupExplicit() {
   // [START error_reporting_setup_explicit]
+  // [START error_reporting_setup_nodejs_explicit]
   // Imports the Google Cloud client library
   const ErrorReporting = require('@google-cloud/error-reporting')
     .ErrorReporting;
@@ -57,11 +60,13 @@ function setupExplicit() {
 
   // Reports a simple error
   errors.report('Something broke!');
+  // [END error_reporting_setup_nodejs_explicit]
   // [END error_reporting_setup_explicit]
 }
 
 function manual() {
   // [START error_reporting_manual]
+  // [START error_reporting_setup_nodejs_manual]
   // Imports the Google Cloud client library
   const ErrorReporting = require('@google-cloud/error-reporting')
     .ErrorReporting;
@@ -97,11 +102,13 @@ function manual() {
   errors.report('My error message', () => {
     console.log('Done reporting error string!');
   });
+  // [END error_reporting_setup_nodejs_manual]
   // [END error_reporting_manual]
 }
 
 function express() {
   // [START error_reporting_express]
+  // [START error_reporting_setup_nodejs_express]
   const express = require('express');
 
   // Imports the Google Cloud client library
@@ -138,6 +145,7 @@ function express() {
     console.log(`App listening on port ${PORT}`);
     console.log('Press Ctrl+C to quit.');
   });
+  // [END error_reporting_setup_nodejs_express]
   // [END error_reporting_express]
 }
 
