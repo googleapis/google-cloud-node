@@ -16,7 +16,7 @@
 'use strict';
 
 const proxyquire = require(`proxyquire`).noPreserveCache();
-const test = require(`ava`);
+const assert = require('assert');
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
@@ -26,35 +26,30 @@ const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 
-test.before(tools.stubConsole);
-test.after.always(async () => {
+before(tools.stubConsole);
+after(async () => {
   tools.restoreConsole();
   try {
     await bucket.delete();
   } catch (err) {} // ignore error
 });
 
-test.cb(`should create a bucket`, t => {
+it(`should create a bucket`, async () => {
   const expectedBucketName = `my-new-bucket`;
 
   const StorageMock = class {
     createBucket(_bucketName) {
-      t.is(_bucketName, expectedBucketName);
+      assert.strictEqual(_bucketName, expectedBucketName);
 
       return bucket.create().then(([bucket]) => {
-        t.not(bucket, undefined);
-        t.is(bucket.name, bucketName);
+        assert.notStrictEqual(bucket, undefined);
+        assert.strictEqual(bucket.name, bucketName);
 
         setTimeout(() => {
-          try {
-            t.true(console.log.calledOnce);
-            t.deepEqual(console.log.firstCall.args, [
-              `Bucket ${expectedBucketName} created.`,
-            ]);
-            t.end();
-          } catch (err) {
-            t.end(err);
-          }
+          assert.strictEqual(console.log.calledOnce, true);
+          assert.deepStrictEqual(console.log.firstCall.args, [
+            `Bucket ${expectedBucketName} created.`,
+          ]);
         }, 200);
 
         return [bucket];

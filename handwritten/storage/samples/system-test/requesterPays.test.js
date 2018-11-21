@@ -18,7 +18,7 @@
 const fs = require(`fs`);
 const path = require(`path`);
 const {Storage} = require(`@google-cloud/storage`);
-const test = require(`ava`);
+const assert = require('assert');
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
@@ -32,14 +32,14 @@ const bucket = storage.bucket(bucketName);
 const uploadFilePath = path.join(cwd, `resources`, fileName);
 const downloadFilePath = path.join(__dirname, `test_${uuid.v4()}.txt`);
 
-test.before(async () => {
+before(async () => {
   tools.checkCredentials();
   await bucket.create();
 
   // Upload a test file (to download later)
   await bucket.upload(uploadFilePath);
 });
-test.after.always(async () => {
+after(async () => {
   try {
     fs.unlinkSync(downloadFilePath);
   } catch (err) {
@@ -57,67 +57,60 @@ test.after.always(async () => {
   } catch (err) {} // ignore error
 });
 
-test.serial.skip(
-  `should error on requester-pays requests if they are disabled`,
-  async t => {
-    const result = await tools.runAsyncWithIO(
-      `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`,
-      cwd
-    );
-    console.log(result);
-    t.truthy(result.stderr);
-    t.regex(
-      result.stderr,
-      /User project prohibited for non requester pays bucket/
-    );
-  }
-);
+it.skip(`should error on requester-pays requests if they are disabled`, async () => {
+  const result = await tools.runAsyncWithIO(
+    `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`,
+    cwd
+  );
+  console.log(result);
+  assert.ok(result.stderr);
+  assert.strictEqual(
+    result.stderr.includes(
+      `User project prohibited for non requester pays bucket`
+    ),
+    true
+  );
+});
 
-test.serial(
-  `should fetch requester-pays status on a default bucket`,
-  async t => {
-    const output = await tools.runAsync(`${cmd} get-status ${bucketName}`, cwd);
-    t.is(
-      output,
-      `Requester-pays requests are disabled for bucket ${bucketName}.`
-    );
-  }
-);
+it(`should fetch requester-pays status on a default bucket`, async () => {
+  const output = await tools.runAsync(`${cmd} get-status ${bucketName}`, cwd);
+  assert.strictEqual(
+    output,
+    `Requester-pays requests are disabled for bucket ${bucketName}.`
+  );
+});
 
-test.serial(`should enable requester-pays requests`, async t => {
+it(`should enable requester-pays requests`, async () => {
   const output = await tools.runAsync(`${cmd} enable ${bucketName}`, cwd);
-  t.is(
+  assert.strictEqual(
     output,
     `Requester-pays requests have been enabled for bucket ${bucketName}.`
   );
 });
 
-test.serial(
-  `should fetch requester-pays status on a modified bucket`,
-  async t => {
-    const output = await tools.runAsync(`${cmd} get-status ${bucketName}`, cwd);
-    t.is(
-      output,
-      `Requester-pays requests are enabled for bucket ${bucketName}.`
-    );
-  }
-);
+it(`should fetch requester-pays status on a modified bucket`, async () => {
+  const output = await tools.runAsync(`${cmd} get-status ${bucketName}`, cwd);
+  assert.strictEqual(
+    output,
+    `Requester-pays requests are enabled for bucket ${bucketName}.`
+  );
+});
 
-test.serial(`should download a file using requester-pays requests`, async t => {
+it(`should download a file using requester-pays requests`, async () => {
   const output = await tools.runAsync(
     `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`,
     cwd
   );
-  t.is(
+  assert.strictEqual(
     output,
     `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} using requester-pays requests.`
   );
-  await t.notThrows(() => fs.statSync(downloadFilePath));
+  fs.statSync(downloadFilePath);
 });
 
-test.serial(`should disable requester-pays requests`, async t => {
+it(`should disable requester-pays requests`, async () => {
   const output = await tools.runAsync(`${cmd} disable ${bucketName}`, cwd);
-  t.is(
+  assert.strictEqual(
     output,
     `Requester-pays requests have been disabled for bucket ${bucketName}.`
   );

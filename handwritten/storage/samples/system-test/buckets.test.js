@@ -17,7 +17,7 @@
 
 const path = require(`path`);
 const {Storage} = require(`@google-cloud/storage`);
-const test = require(`ava`);
+const assert = require('assert');
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
@@ -28,31 +28,30 @@ const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const cmd = `node buckets.js`;
 
-test.before(tools.checkCredentials);
-test.after.always(async () => {
+before(tools.checkCredentials);
+after(async () => {
   try {
     await bucket.delete();
   } catch (err) {} // ignore error
 });
 
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
+beforeEach(tools.stubConsole);
+afterEach(tools.restoreConsole);
 
-test.serial(`should create a bucket`, async t => {
+it(`should create a bucket`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} create ${bucketName}`,
     cwd
   );
-  t.regex(
-    results.stdout + results.stderr,
-    new RegExp(`Bucket ${bucketName} created.`)
+  assert.strictEqual(
+    (results.stdout + results.stderr).includes(`Bucket ${bucketName} created.`),
+    true
   );
   const [exists] = await bucket.exists();
-  t.true(exists);
+  assert.strictEqual(exists, true);
 });
 
-test.serial(`should list buckets`, async t => {
-  t.plan(0);
+it(`should list buckets`, async () => {
   await tools
     .tryTest(async assert => {
       const results = await tools.runAsyncWithIO(`${cmd} list`, cwd);
@@ -69,30 +68,33 @@ test.serial(`should list buckets`, async t => {
     .start();
 });
 
-test.serial(`should set a bucket's default KMS key`, async t => {
+it(`should set a bucket's default KMS key`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} enable-default-kms-key ${bucketName} ${defaultKmsKeyName}`,
     cwd
   );
-  t.regex(
-    results.stdout + results.stderr,
-    new RegExp(
+  assert.strictEqual(
+    (results.stdout + results.stderr).includes(
       `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
-    )
+    ),
+    true
   );
   const metadata = await bucket.getMetadata();
-  t.is(metadata[0].encryption.defaultKmsKeyName, defaultKmsKeyName);
+  assert.strictEqual(
+    metadata[0].encryption.defaultKmsKeyName,
+    defaultKmsKeyName
+  );
 });
 
-test.serial(`should delete a bucket`, async t => {
+it(`should delete a bucket`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} delete ${bucketName}`,
     cwd
   );
-  t.regex(
-    results.stdout + results.stderr,
-    new RegExp(`Bucket ${bucketName} deleted.`)
+  assert.strictEqual(
+    (results.stdout + results.stderr).includes(`Bucket ${bucketName} deleted.`),
+    true
   );
   const [exists] = await bucket.exists();
-  t.false(exists);
+  assert.strictEqual(exists, false);
 });

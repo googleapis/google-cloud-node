@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 const {Storage} = require('@google-cloud/storage');
-const test = require(`ava`);
+const assert = require('assert');
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require('uuid');
 
@@ -34,12 +34,12 @@ const downloadFilePath = path.join(__dirname, `../resources/downloaded.txt`);
 
 let key;
 
-test.before(tools.checkCredentials);
-test.before(async () => {
+before(tools.checkCredentials);
+before(async () => {
   await bucket.create(bucketName);
 });
 
-test.after.always(async () => {
+after(async () => {
   try {
     // Delete the downloaded file
     fs.unlinkSync(downloadFilePath);
@@ -58,55 +58,57 @@ test.after.always(async () => {
   } catch (err) {} // ignore error
 });
 
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
+beforeEach(tools.stubConsole);
+afterEach(tools.restoreConsole);
 
-test.serial(`should generate a key`, async t => {
+it(`should generate a key`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} generate-encryption-key`,
     cwd
   );
   const output = results.stdout + results.stderr;
-  t.regex(output, new RegExp(`Base 64 encoded encryption key:`));
+  assert.strictEqual(output.includes(`Base 64 encoded encryption key:`), true);
   const test = /^Base 64 encoded encryption key: (.+)$/;
   key = output.match(test)[1];
 });
 
-test.serial(`should upload a file`, async t => {
+it(`should upload a file`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} upload ${bucketName} ${filePath} ${fileName} ${key}`,
     cwd
   );
-  t.regex(
-    results.stdout + results.stderr,
-    new RegExp(`File ${filePath} uploaded to gs://${bucketName}/${fileName}.`)
+  assert.strictEqual(
+    (results.stdout + results.stderr).includes(
+      `File ${filePath} uploaded to gs://${bucketName}/${fileName}.`
+    ),
+    true
   );
   const [exists] = await bucket.file(fileName).exists();
-  t.true(exists);
+  assert.strictEqual(exists, true);
 });
 
-test.serial(`should download a file`, async t => {
+it(`should download a file`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} download ${bucketName} ${fileName} ${downloadFilePath} ${key}`,
     cwd
   );
-  t.regex(
-    results.stdout + results.stderr,
-    new RegExp(`File ${fileName} downloaded to ${downloadFilePath}.`)
+  assert.strictEqual(
+    (results.stdout + results.stderr).includes(
+      `File ${fileName} downloaded to ${downloadFilePath}.`
+    ),
+    true
   );
-  t.notThrows(() => {
-    fs.statSync(downloadFilePath);
-  });
+  fs.statSync(downloadFilePath);
 });
 
-test.serial(`should rotate keys`, async t => {
+it(`should rotate keys`, async () => {
   // Generate a new key
   const generateKeyResults = await tools.runAsyncWithIO(
     `${cmd} generate-encryption-key`,
     cwd
   );
   const output = generateKeyResults.stdout + generateKeyResults.stderr;
-  t.regex(output, new RegExp(`Base 64 encoded encryption key:`));
+  assert.strictEqual(output.includes(`Base 64 encoded encryption key:`), true);
   const test = /^Base 64 encoded encryption key: (.+)$/;
   const newKey = output.match(test)[1];
 
@@ -114,5 +116,5 @@ test.serial(`should rotate keys`, async t => {
     `${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`,
     cwd
   );
-  t.is(results.stdout, 'Encryption key rotated successfully.');
+  assert.strictEqual(results.stdout, 'Encryption key rotated successfully.');
 });

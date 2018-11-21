@@ -16,8 +16,8 @@
   },
   "scripts": {
     "cleanup": "node scripts/cleanup",
-    "ava": "ava -T 20s --verbose system-test/*.test.js",
-    "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose system-test/*.test.js && nyc report",
+    "mocha": "mocha system-test/*.js --timeout 600000",
+    "cover": "nyc --reporter=lcov --cache mocha system-test/*.js --timeout 600000 && nyc report",
     "test": "npm run cover"
   },
   "dependencies": {
@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "ava": "^0.25.0",
     "mocha": "^5.2.0",
     "nyc": "^13.0.0",
     "proxyquire": "^2.0.1",

@@ -17,7 +17,7 @@
 
 const path = require(`path`);
 const {Storage} = require(`@google-cloud/storage`);
-const test = require(`ava`);
+const assert = require('assert');
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
@@ -29,66 +29,55 @@ const userEmail = `test@example.com`;
 const cmd = `node iam.js`;
 const roleName = `roles/storage.objectViewer`;
 
-function escape(s) {
-  return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
-}
-
-test.before(tools.checkCredentials);
-test.before(async () => {
+before(tools.checkCredentials);
+before(async () => {
   await bucket.create();
 });
 
-test.after.always(async () => {
+after(async () => {
   try {
     await bucket.delete();
   } catch (err) {} // ignore error
 });
 
-test.serial(`should add multiple members to a role on a bucket`, async t => {
+it(`should add multiple members to a role on a bucket`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} add-members ${bucketName} ${roleName} "user:${userEmail}"`,
     cwd
   );
   const output = results.stdout + results.stderr;
-  t.regex(
-    output,
-    new RegExp(
-      escape(
-        `Added the following member(s) with role ${roleName} to ${bucketName}:`
-      )
-    )
+  assert.strictEqual(
+    output.includes(
+      `Added the following member(s) with role ${roleName} to ${bucketName}:`
+    ),
+    true
   );
-  t.regex(output, new RegExp(`user:${userEmail}`));
+  assert.strictEqual(output.includes(`user:${userEmail}`), true);
 });
 
-test.serial(`should list members of a role on a bucket`, async t => {
+it(`should list members of a role on a bucket`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} view-members ${bucketName} "user:${userEmail}"`,
     cwd
   );
   const output = results.stdout + results.stderr;
-  t.regex(output, new RegExp(`Roles for bucket ${bucketName}:`));
-  t.regex(output, new RegExp(`Role: ${roleName}`));
-  t.regex(output, new RegExp(`Members:`));
-  t.regex(output, new RegExp(`user:${userEmail}`));
+  assert.strictEqual(output.includes(`Roles for bucket ${bucketName}:`), true);
+  assert.strictEqual(output.includes(`Role: ${roleName}`), true);
+  assert.strictEqual(output.includes(`Members:`), true);
+  assert.strictEqual(output.includes(`user:${userEmail}`), true);
 });
 
-test.serial(
-  `should remove multiple members from a role on a bucket`,
-  async t => {
-    const results = await tools.runAsyncWithIO(
-      `${cmd} remove-members ${bucketName} ${roleName} "user:${userEmail}"`,
-      cwd
-    );
-    const output = results.stdout + results.stderr;
-    t.regex(
-      output,
-      new RegExp(
-        escape(
-          `Removed the following member(s) with role ${roleName} from ${bucketName}:`
-        )
-      )
-    );
-    t.regex(output, new RegExp(`user:${userEmail}`));
-  }
-);
+it(`should remove multiple members from a role on a bucket`, async () => {
+  const results = await tools.runAsyncWithIO(
+    `${cmd} remove-members ${bucketName} ${roleName} "user:${userEmail}"`,
+    cwd
+  );
+  const output = results.stdout + results.stderr;
+  assert.strictEqual(
+    output.includes(
+      `Removed the following member(s) with role ${roleName} from ${bucketName}:`
+    ),
+    true
+  );
+  assert.strictEqual(output.includes(`user:${userEmail}`), true);
+});

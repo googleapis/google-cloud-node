@@ -18,7 +18,7 @@
 const path = require(`path`);
 const {PubSub} = require('@google-cloud/pubsub');
 const {Storage} = require(`@google-cloud/storage`);
-const test = require(`ava`);
+const assert = require('assert');
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require(`uuid`);
 
@@ -33,7 +33,7 @@ const pubsub = new PubSub();
 const topic = pubsub.topic(topicName);
 const cmd = `node notifications.js`;
 
-test.before(async () => {
+before(async () => {
   await bucket.create();
   await topic.create();
   await topic.iam.setPolicy({
@@ -46,7 +46,7 @@ test.before(async () => {
   });
 });
 
-test.after.always(async () => {
+after(async () => {
   try {
     await bucket.delete();
   } catch (e) {}
@@ -56,24 +56,25 @@ test.after.always(async () => {
   } catch (e) {}
 });
 
-test.beforeEach(tools.stubConsole);
-test.afterEach(tools.restoreConsole);
+beforeEach(tools.stubConsole);
+afterEach(tools.restoreConsole);
 
-test.serial(`should create a notification`, async t => {
+it(`should create a notification`, async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} create ${bucketName} ${topicName}`,
     cwd
   );
-  t.regex(
-    results.stdout + results.stderr,
-    new RegExp(`Notification subscription created.`)
+  assert.strictEqual(
+    (results.stdout + results.stderr).includes(
+      `Notification subscription created.`
+    ),
+    true
   );
   const [exists] = await notification.exists();
-  t.true(exists);
+  assert.strictEqual(exists, true);
 });
 
-test.serial(`should list notifications`, async t => {
-  t.plan(0);
+it(`should list notifications`, async () => {
   await tools
     .tryTest(async assert => {
       const results = await tools.runAsyncWithIO(
@@ -93,8 +94,7 @@ test.serial(`should list notifications`, async t => {
     .start();
 });
 
-test.serial('should get metadata', async t => {
-  t.plan(0);
+it('should get metadata', async () => {
   await tools
     .tryTest(async assert => {
       const metadata = await notification.getMetadata();
@@ -163,15 +163,17 @@ test.serial('should get metadata', async t => {
     .start();
 });
 
-test.serial('should delete a notification', async t => {
+it('should delete a notification', async () => {
   const results = await tools.runAsyncWithIO(
     `${cmd} delete ${bucketName} ${notificationId}`,
     cwd
   );
-  t.regex(
-    results.stdout + results.stderr,
-    new RegExp(`Notification ${notificationId} deleted.`)
+  assert.strictEqual(
+    (results.stdout + results.stderr).includes(
+      `Notification ${notificationId} deleted.`
+    ),
+    true
   );
   const [exists] = await notification.exists();
-  t.false(exists);
+  assert.strictEqual(exists, false);
 });
