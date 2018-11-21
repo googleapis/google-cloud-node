@@ -17,7 +17,6 @@
 
 const assert = require('assert');
 const path = require('path');
-const test = require('mocha');
 const tools = require('@google-cloud/nodejs-repo-tools');
 const util = require('util');
 const uuid = require('uuid');
@@ -30,17 +29,15 @@ const storage = new Storage();
 const bucketName = `asset-nodejs-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 
-test.describe('quickstart sample tests', () => {
-  test.before(tools.checkCredentials);
-  test.before(async () => {
+describe('Quickstart sample tests', () => {
+  before(async () => {
+    tools.checkCredentials();
     await bucket.create();
   });
 
-  test.after(async () => {
-    await bucket.delete();
-  });
+  after(async () => await bucket.delete());
 
-  test.it('should export assets to specified path', async () => {
+  it('should export assets to specified path', async () => {
     const dumpFilePath = util.format('gs://%s/my-assets.txt', bucketName);
     await tools.runAsyncWithIO(`${cmd} export-assets ${dumpFilePath}`, cwd);
     const file = await bucket.file('my-assets.txt');
