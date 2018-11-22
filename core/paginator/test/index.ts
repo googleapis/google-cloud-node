@@ -21,7 +21,7 @@ import * as stream from 'stream';
 import * as streamEvents from 'stream-events';
 import * as through from 'through2';
 import * as uuid from 'uuid';
-
+import * as P from '../src';
 import {paginator, Paginator, ParsedArguments} from '../src';
 
 const util = {
@@ -29,19 +29,15 @@ const util = {
 };
 
 const p = proxyquire('../src', {
-  'stream-events': fakeStreamEvents,
-});
+            'stream-events': fakeStreamEvents,
+          }) as typeof P;
 
-// tslint:disable-next-line:no-any
-let streamEventsOverride: any;
+let streamEventsOverride: Function|null;
 function fakeStreamEvents() {
   return (streamEventsOverride || streamEvents).apply(null, arguments);
 }
 
-let sandbox: sinon.SinonSandbox;
-beforeEach(() => {
-  sandbox = sinon.createSandbox();
-});
+const sandbox = sinon.createSandbox();
 afterEach(() => {
   sandbox.restore();
   streamEventsOverride = null;
@@ -57,11 +53,6 @@ describe('paginator', () => {
     };
     delete FakeClass.prototype.methodToExtend_;
   });
-
-  // tslint:disable-next-line:no-any
-  function stub(methodName: keyof Paginator, stub: (...args: any[]) => void) {
-    return sandbox.stub(paginator, methodName).callsFake(stub);
-  }
 
   describe('extend', () => {
     it('should overwrite a method on a class', () => {
@@ -88,24 +79,22 @@ describe('paginator', () => {
     });
 
     it('should parse the arguments', (done) => {
-      stub('parseArguments_', args => {
+      sandbox.stub(paginator, 'parseArguments_').callsFake(args => {
         assert.deepStrictEqual([].slice.call(args), [1, 2, 3]);
         done();
+        return args as ParsedArguments;
       });
-      stub('run_', util.noop);
+      sandbox.stub(paginator, 'run_').callsFake(util.noop);
       paginator.extend(FakeClass, 'methodToExtend');
       FakeClass.prototype.methodToExtend(1, 2, 3);
     });
 
     it('should call router when the original method is called', (done) => {
       const expectedReturnValue = FakeClass.prototype.methodToExtend();
-      const parsedArguments = {a: 'b', c: 'd'};
+      const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
 
-      stub('parseArguments_', () => {
-        return parsedArguments;
-      });
-
-      stub('run_', (args, originalMethod) => {
+      sandbox.stub(paginator, 'parseArguments_').returns(parsedArguments);
+      sandbox.stub(paginator, 'run_').callsFake((args, originalMethod) => {
         assert.strictEqual(args, parsedArguments);
         assert.equal(originalMethod(), expectedReturnValue);
         done();
@@ -124,7 +113,7 @@ describe('paginator', () => {
       const cls = new (FakeClass as any)();
       cls.uuid = uuid.v1();
 
-      stub('run_', (args, originalMethod) => {
+      sandbox.stub(paginator, 'run_').callsFake((_, originalMethod) => {
         assert.equal(originalMethod(), cls.uuid);
         done();
       });
@@ -135,10 +124,9 @@ describe('paginator', () => {
 
     it('should return what the router returns', () => {
       const uniqueValue = 234;
-      stub('run_', () => {
+      sandbox.stub(paginator, 'run_').callsFake(() => {
         return uniqueValue;
       });
-
       paginator.extend(FakeClass, 'methodToExtend');
       assert.equal(FakeClass.prototype.methodToExtend(), uniqueValue);
     });
@@ -157,23 +145,21 @@ describe('paginator', () => {
     it('should parse the arguments', (done) => {
       const fakeArgs = [1, 2, 3];
 
-      stub('parseArguments_', args => {
+      sandbox.stub(paginator, 'parseArguments_').callsFake(args => {
         assert.deepStrictEqual(fakeArgs, [].slice.call(args));
         done();
+        return args as ParsedArguments;
       });
-
-      stub('runAsStream_', util.noop);
+      sandbox.stub(paginator, 'runAsStream_').callsFake(util.noop);
       FakeClass.prototype.streamMethod.apply(FakeClass.prototype, fakeArgs);
     });
 
     it('should run the method as a stream', (done) => {
-      const parsedArguments = {a: 'b', c: 'd'};
-
-      stub('parseArguments_', () => {
+      const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
+      sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
         return parsedArguments;
       });
-
-      stub('runAsStream_', (args, callback) => {
+      sandbox.stub(paginator, 'runAsStream_').callsFake((args, callback) => {
         assert.strictEqual(args, parsedArguments);
         assert.strictEqual(callback(), UUID);
         done();
@@ -183,55 +169,46 @@ describe('paginator', () => {
     });
 
     it('should apply the proper context', (done) => {
-      const parsedArguments = {a: 'b', c: 'd'};
-
+      const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
       FakeClass.prototype.methodToExtend = function() {
         return this;
       };
-
-      stub('parseArguments_', () => {
+      sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
         return parsedArguments;
       });
-
-      stub('runAsStream_', (args, callback) => {
+      sandbox.stub(paginator, 'runAsStream_').callsFake((_, callback) => {
         assert.strictEqual(callback(), FakeClass.prototype);
         done();
       });
-
       FakeClass.prototype.streamMethod();
     });
 
     it('should check for a private member', (done) => {
-      const parsedArguments = {a: 'b', c: 'd'};
+      const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
       const fakeValue = 123;
 
       FakeClass.prototype.methodToExtend_ = () => {
         return fakeValue;
       };
-
-      stub('parseArguments_', () => {
+      sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
         return parsedArguments;
       });
-
-      stub('runAsStream_', (args, callback) => {
+      sandbox.stub(paginator, 'runAsStream_').callsFake((_, callback) => {
         assert.strictEqual(callback(), fakeValue);
         done();
       });
-
       FakeClass.prototype.streamMethod();
     });
 
     it('should return a stream', () => {
       const fakeStream = through.obj();
-
-      stub('parseArguments_', util.noop);
-
-      stub('runAsStream_', () => {
+      sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
+        return {};
+      });
+      sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
         return fakeStream;
       });
-
       const stream = FakeClass.prototype.streamMethod();
-
       assert.strictEqual(fakeStream, stream);
     });
   });
@@ -337,11 +314,12 @@ describe('paginator', () => {
           callback: util.noop,
         };
 
-        stub('runAsStream_', (args, originalMethod) => {
-          assert.strictEqual(args, parsedArguments);
-          originalMethod();
-          return through();
-        });
+        sandbox.stub(paginator, 'runAsStream_')
+            .callsFake((args, originalMethod) => {
+              assert.strictEqual(args, parsedArguments);
+              originalMethod();
+              return through();
+            });
 
         paginator.run_(parsedArguments, done);
       });
@@ -357,7 +335,7 @@ describe('paginator', () => {
           },
         };
 
-        stub('runAsStream_', () => {
+        sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
           const stream = through();
           setImmediate(() => {
             stream.emit('error', error);
@@ -379,7 +357,7 @@ describe('paginator', () => {
           },
         };
 
-        stub('runAsStream_', () => {
+        sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
           const stream = through.obj();
           setImmediate(() => {
             results.forEach(result => stream.push(result));
@@ -402,7 +380,7 @@ describe('paginator', () => {
           },
           callback: done,
         } as ParsedArguments;
-        stub('runAsStream_', util.noop);
+        sandbox.stub(paginator, 'runAsStream_').callsFake(util.noop);
         paginator.run_(parsedArguments, (query: {}, callback: () => void) => {
           assert.deepStrictEqual(query, parsedArguments.query);
           callback();
@@ -429,7 +407,7 @@ describe('paginator', () => {
         return {
           makeRequest,
           stream: transformStream,
-        };
+        } as P.Limiter;
       });
     });
 
@@ -483,12 +461,12 @@ describe('paginator', () => {
 
       it('should create a limiter', (done) => {
         limiterStub.restore();
-        sandbox.stub(p, 'createLimiter').callsFake((makeRequest, options) => {
-          assert.strictEqual(options.maxApiCalls, maxApiCalls);
+        sandbox.stub(p, 'createLimiter').callsFake((_, options) => {
+          assert.strictEqual(options!.maxApiCalls, maxApiCalls);
           setImmediate(done);
           return {
             stream: through.obj(),
-          };
+          } as P.Limiter;
         });
         p.paginator.runAsStream_({maxApiCalls}, util.noop);
       });
@@ -501,14 +479,12 @@ describe('paginator', () => {
 
       it('should pass through stream options', (done) => {
         limiterStub.restore();
-        sandbox.stub(p, 'createLimiter').callsFake((makeRequest, options) => {
-          assert.strictEqual(options.streamOptions, streamOptions);
-
+        sandbox.stub(p, 'createLimiter').callsFake((_, options) => {
+          assert.strictEqual(options!.streamOptions, streamOptions);
           setImmediate(done);
-
           return {
             stream: through.obj(),
-          };
+          } as P.Limiter;
         });
 
         p.paginator.runAsStream_(

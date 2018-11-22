@@ -36,6 +36,12 @@ interface CreateLimiterOptions {
   streamOptions?: TransformOptions;
 }
 
+export interface Limiter {
+  // tslint:disable-next-line no-any
+  makeRequest(...args: any[]): Transform|undefined;
+  stream: Transform;
+}
+
 /**
  * Limit requests according to a `maxApiCalls` limit.
  *
@@ -45,7 +51,7 @@ interface CreateLimiterOptions {
  * @param {object} options.streamOptions - Options to pass to the Stream constructor.
  */
 export function createLimiter(
-    makeRequestFn: Function, options?: CreateLimiterOptions) {
+    makeRequestFn: Function, options?: CreateLimiterOptions): Limiter {
   options = options || {};
 
   const streamOptions = options.streamOptions || {};
