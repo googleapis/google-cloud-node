@@ -13,54 +13,55 @@
 // limitations under the License.
 
 'use strict';
+async function main() {
+  // [START bigquerydatatransfer_quickstart]
 
-// [START bigquerydatatransfer_quickstart]
+  if (
+    !process.env.GCLOUD_PROJECT ||
+    !process.env.GOOGLE_APPLICATION_CREDENTIALS
+  ) {
+    throw new Error(
+      'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
+    );
+  }
 
-if (
-  !process.env.GCLOUD_PROJECT ||
-  !process.env.GOOGLE_APPLICATION_CREDENTIALS
-) {
-  throw new Error(
-    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
-  );
+  const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
+
+  const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
+    // optional auth parameters.
+  });
+  const projectId = process.env.GCLOUD_PROJECT;
+
+  // Iterate over all elements.
+  const formattedParent = client.locationPath(projectId, 'us-central1');
+
+  const [resources] = await client.listDataSources({parent: formattedParent});
+  for (let i = 0; i < resources.length; i += 1) {
+    console.log(resources[i]);
+  }
+
+  let nextRequest = {parent: formattedParent};
+  const options = {autoPaginate: false};
+  do {
+    // Fetch the next page.
+    const responses = await client.listDataSources(nextRequest, options);
+    // The actual resources in a response.
+    const resources = responses[0];
+    // The next request if the response shows that there are more responses.
+    nextRequest = responses[1];
+    // The actual response object, if necessary.
+    // const rawResponse = responses[2];
+    for (let i = 0; i < resources.length; i += 1) {
+      console.log(resources[i]);
+    }
+  } while (nextRequest);
+
+  client
+    .listDataSourcesStream({parent: formattedParent})
+    .on('data', element => {
+      console.log(element);
+    });
+  // [END bigquerydatatransfer_quickstart]
 }
 
-const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
-
-const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
-  // optional auth parameters.
-});
-const projectId = process.env.GCLOUD_PROJECT;
-
-// Iterate over all elements.
-const formattedParent = client.locationPath(projectId, 'us-central1');
-
-client.listDataSources({parent: formattedParent}).then(responses => {
-  const resources = responses[0];
-  for (let i = 0; i < resources.length; i += 1) {
-    console.log(resources[i]);
-  }
-});
-
-const options = {autoPaginate: false};
-const callback = responses => {
-  // The actual resources in a response.
-  const resources = responses[0];
-  // The next request if the response shows that there are more responses.
-  const nextRequest = responses[1];
-  // The actual response object, if necessary.
-  // const rawResponse = responses[2];
-  for (let i = 0; i < resources.length; i += 1) {
-    console.log(resources[i]);
-  }
-  if (nextRequest) {
-    // Fetch the next page.
-    return client.listDataSources(nextRequest, options).then(callback);
-  }
-};
-client.listDataSources({parent: formattedParent}, options).then(callback);
-
-client.listDataSourcesStream({parent: formattedParent}).on('data', element => {
-  console.log(element);
-});
-// [END bigquerydatatransfer_quickstart]
+main().catch(console.error);
