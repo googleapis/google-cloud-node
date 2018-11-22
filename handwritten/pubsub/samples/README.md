@@ -89,16 +89,17 @@ __Usage:__ `node topics.js --help`
 topics.js <command>
 
 Commands:
-  topics.js list                                      Lists all topics in the current project.
-  topics.js create <topicName>                        Creates a new topic.
-  topics.js delete <topicName>                        Deletes a topic.
-  topics.js publish <topicName> <message>             Publishes a message to a topic.
-  topics.js publish-attributes <topicName> <message>  Publishes a message with custom attributes to a Topic
-  topics.js publish-batch <topicName> <message>       Publishes messages to a topic using custom batching settings.
-  topics.js publish-ordered <topicName> <message>     Publishes an ordered message to a topic.
-  topics.js get-policy <topicName>                    Gets the IAM policy for a topic.
-  topics.js set-policy <topicName>                    Sets the IAM policy for a topic.
-  topics.js test-permissions <topicName>              Tests the permissions for a topic.
+  topics.js list                                            Lists all topics in the current project.
+  topics.js create <topicName>                              Creates a new topic.
+  topics.js delete <topicName>                              Deletes a topic.
+  topics.js publish <topicName> <message>                   Publishes a message to a topic.
+  topics.js publish-attributes <topicName> <message>        Publishes a message with custom attributes to a Topic
+  topics.js publish-batch <topicName> <message>             Publishes messages to a topic using custom batching settings.
+  topics.js publish-retry <projectId> <topicName> <message> Publishes a message to a topic with retry settings.
+  topics.js publish-ordered <topicName> <message>           Publishes an ordered message to a topic.
+  topics.js get-policy <topicName>                          Gets the IAM policy for a topic.
+  topics.js set-policy <topicName>                          Sets the IAM policy for a topic.
+  topics.js test-permissions <topicName>                    Tests the permissions for a topic.
 
 Options:
   --version  Show version number                                                                               [boolean]
