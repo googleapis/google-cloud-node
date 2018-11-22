@@ -115,6 +115,14 @@
  *
  *   This object should have the same structure as [DeviceState]{@link google.cloud.iot.v1.DeviceState}
  *
+ * @property {number} logLevel
+ *   **Beta Feature**
+ *
+ *   The logging verbosity for device activity. If unspecified,
+ *   DeviceRegistry.log_level will be used.
+ *
+ *   The number should be among the values of [LogLevel]{@link google.cloud.iot.v1.LogLevel}
+ *
  * @property {Object.<string, string>} metadata
  *   The metadata key-value pairs assigned to the device. This metadata is not
  *   interpreted or indexed by Cloud IoT Core. It can be used to add contextual
@@ -129,11 +137,47 @@
  *   The total size of all keys and values must be less than 256 KB, and the
  *   maximum number of key-value pairs is 500.
  *
+ * @property {Object} gatewayConfig
+ *   Gateway-related configuration and state.
+ *
+ *   This object should have the same structure as [GatewayConfig]{@link google.cloud.iot.v1.GatewayConfig}
+ *
  * @typedef Device
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.Device definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
  */
 const Device = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Gateway-related configuration and state.
+ *
+ * @property {number} gatewayType
+ *   Indicates whether the device is a gateway.
+ *
+ *   The number should be among the values of [GatewayType]{@link google.cloud.iot.v1.GatewayType}
+ *
+ * @property {number} gatewayAuthMethod
+ *   Indicates how to authorize and/or authenticate devices to access the
+ *   gateway.
+ *
+ *   The number should be among the values of [GatewayAuthMethod]{@link google.cloud.iot.v1.GatewayAuthMethod}
+ *
+ * @property {string} lastAccessedGatewayId
+ *   [Output only] The ID of the gateway the device accessed most recently.
+ *
+ * @property {Object} lastAccessedGatewayTime
+ *   [Output only] The most recent time at which the device accessed the gateway
+ *   specified in `last_accessed_gateway`.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @typedef GatewayConfig
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.GatewayConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/resources.proto}
+ */
+const GatewayConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -179,6 +223,14 @@ const Device = {
  *   The DeviceService (HTTP) configuration for this device registry.
  *
  *   This object should have the same structure as [HttpConfig]{@link google.cloud.iot.v1.HttpConfig}
+ *
+ * @property {number} logLevel
+ *   **Beta Feature**
+ *
+ *   The default logging verbosity for activity from devices in this registry.
+ *   The verbosity level can be overridden by Device.log_level.
+ *
+ *   The number should be among the values of [LogLevel]{@link google.cloud.iot.v1.LogLevel}
  *
  * @property {Object[]} credentials
  *   The credentials used to verify the device credentials. No more than 10
@@ -506,6 +558,105 @@ const HttpState = {
    * Disables DeviceService (HTTP) service for the registry.
    */
   HTTP_DISABLED: 2
+};
+
+/**
+ * **Beta Feature**
+ *
+ * The logging verbosity for device activity. Specifies which events should be
+ * written to logs. For example, if the LogLevel is ERROR, only events that
+ * terminate in errors will be logged. LogLevel is inclusive; enabling INFO
+ * logging will also enable ERROR logging.
+ *
+ * @enum {number}
+ * @memberof google.cloud.iot.v1
+ */
+const LogLevel = {
+
+  /**
+   * No logging specified. If not specified, logging will be disabled.
+   */
+  LOG_LEVEL_UNSPECIFIED: 0,
+
+  /**
+   * Disables logging.
+   */
+  NONE: 10,
+
+  /**
+   * Error events will be logged.
+   */
+  ERROR: 20,
+
+  /**
+   * Informational events will be logged, such as connections and
+   * disconnections.
+   */
+  INFO: 30,
+
+  /**
+   * All events will be logged.
+   */
+  DEBUG: 40
+};
+
+/**
+ * Gateway type.
+ *
+ * @enum {number}
+ * @memberof google.cloud.iot.v1
+ */
+const GatewayType = {
+
+  /**
+   * If unspecified, the device is considered a non-gateway device.
+   */
+  GATEWAY_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * The device is a gateway.
+   */
+  GATEWAY: 1,
+
+  /**
+   * The device is not a gateway.
+   */
+  NON_GATEWAY: 2
+};
+
+/**
+ * The gateway authorization/authentication method. This setting determines how
+ * Cloud IoT Core authorizes/authenticate devices to access the gateway.
+ *
+ * @enum {number}
+ * @memberof google.cloud.iot.v1
+ */
+const GatewayAuthMethod = {
+
+  /**
+   * No authentication/authorization method specified. No devices are allowed to
+   * access the gateway.
+   */
+  GATEWAY_AUTH_METHOD_UNSPECIFIED: 0,
+
+  /**
+   * The device is authenticated through the gateway association only. Device
+   * credentials are ignored even if provided.
+   */
+  ASSOCIATION_ONLY: 1,
+
+  /**
+   * The device is authenticated through its own credentials. Gateway
+   * association is not checked.
+   */
+  DEVICE_AUTH_TOKEN_ONLY: 2,
+
+  /**
+   * The device is authenticated through both device credentials and gateway
+   * association. The device must be bound to the gateway and must provide its
+   * own credentials.
+   */
+  ASSOCIATION_AND_DEVICE_AUTH_TOKEN: 3
 };
 
 /**

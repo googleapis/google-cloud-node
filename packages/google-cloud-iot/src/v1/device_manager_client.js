@@ -22,8 +22,7 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * Internet of things (IoT) service. Allows to manipulate device registry
- * instances and the registration of devices (Things) to the cloud.
+ * Internet of Things (IoT) service. Securely connect and manage IoT devices.
  *
  * @class
  * @memberof v1
@@ -167,6 +166,9 @@ class DeviceManagerClient {
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
+      'sendCommandToDevice',
+      'bindDeviceToGateway',
+      'unbindDeviceFromGateway',
     ];
     for (const methodName of deviceManagerStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -632,7 +634,7 @@ class DeviceManagerClient {
    *   `projects/example-project/locations/us-central1/registries/my-registry`.
    * @param {Object} request.device
    *   The device registration details. The field `name` must be empty. The server
-   *   will generate that field from the device registry `id` provided and the
+   *   generates `name` from the device registry `id` and the
    *   `parent` field.
    *
    *   This object should have the same structure as [Device]{@link google.cloud.iot.v1.Device}
@@ -753,7 +755,7 @@ class DeviceManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.device
-   *   The new values for the device registry. The `id` and `num_id` fields must
+   *   The new values for the device. The `id` and `num_id` fields must
    *   be empty, and the field `name` must specify the name path. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
@@ -873,18 +875,21 @@ class DeviceManagerClient {
    *   The device registry path. Required. For example,
    *   `projects/my-project/locations/us-central1/registries/my-registry`.
    * @param {number[]} [request.deviceNumIds]
-   *   A list of device numerical ids. If empty, it will ignore this field. This
-   *   field cannot hold more than 10,000 entries.
+   *   A list of device numeric IDs. If empty, this field is ignored. Maximum
+   *   IDs: 10,000.
    * @param {string[]} [request.deviceIds]
-   *   A list of device string identifiers. If empty, it will ignore this field.
-   *   For example, `['device0', 'device12']`. This field cannot hold more than
-   *   10,000 entries.
+   *   A list of device string IDs. For example, `['device0', 'device12']`.
+   *   If empty, this field is ignored. Maximum IDs: 10,000
    * @param {Object} [request.fieldMask]
    *   The fields of the `Device` resource to be returned in the response. The
-   *   fields `id`, and `num_id` are always returned by default, along with any
+   *   fields `id` and `num_id` are always returned, along with any
    *   other fields specified.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [request.gatewayListOptions]
+   *   Options related to gateways.
+   *
+   *   This object should have the same structure as [GatewayListOptions]{@link google.cloud.iot.v1.GatewayListOptions}
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -998,18 +1003,21 @@ class DeviceManagerClient {
    *   The device registry path. Required. For example,
    *   `projects/my-project/locations/us-central1/registries/my-registry`.
    * @param {number[]} [request.deviceNumIds]
-   *   A list of device numerical ids. If empty, it will ignore this field. This
-   *   field cannot hold more than 10,000 entries.
+   *   A list of device numeric IDs. If empty, this field is ignored. Maximum
+   *   IDs: 10,000.
    * @param {string[]} [request.deviceIds]
-   *   A list of device string identifiers. If empty, it will ignore this field.
-   *   For example, `['device0', 'device12']`. This field cannot hold more than
-   *   10,000 entries.
+   *   A list of device string IDs. For example, `['device0', 'device12']`.
+   *   If empty, this field is ignored. Maximum IDs: 10,000
    * @param {Object} [request.fieldMask]
    *   The fields of the `Device` resource to be returned in the response. The
-   *   fields `id`, and `num_id` are always returned by default, along with any
+   *   fields `id` and `num_id` are always returned, along with any
    *   other fields specified.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [request.gatewayListOptions]
+   *   Options related to gateways.
+   *
+   *   This object should have the same structure as [GatewayListOptions]{@link google.cloud.iot.v1.GatewayListOptions}
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1436,6 +1444,226 @@ class DeviceManagerClient {
     });
 
     return this._innerApiCalls.testIamPermissions(request, options, callback);
+  }
+
+  /**
+   * Sends a command to the specified device. In order for a device to be able
+   * to receive commands, it must:
+   * 1) be connected to Cloud IoT Core using the MQTT protocol, and
+   * 2) be subscribed to the group of MQTT topics specified by
+   *    /devices/{device-id}/commands/#. This subscription will receive commands
+   *    at the top-level topic /devices/{device-id}/commands as well as commands
+   *    for subfolders, like /devices/{device-id}/commands/subfolder.
+   *    Note that subscribing to specific subfolders is not supported.
+   * If the command could not be delivered to the device, this method will
+   * return an error; in particular, if the device is not subscribed, this
+   * method will return FAILED_PRECONDITION. Otherwise, this method will
+   * return OK. If the subscription is QoS 1, at least once delivery will be
+   * guaranteed; for QoS 0, no acknowledgment will be expected from the device.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the device. For example,
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+   *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+   * @param {string} request.binaryData
+   *   The command data to send to the device.
+   * @param {string} [request.subfolder]
+   *   Optional subfolder for the command. If empty, the command will be delivered
+   *   to the /devices/{device-id}/commands topic, otherwise it will be delivered
+   *   to the /devices/{device-id}/commands/{subfolder} topic. Multi-level
+   *   subfolders are allowed. This field must not have more than 256 characters,
+   *   and must not contain any MQTT wildcards ("+" or "#") or null characters.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [SendCommandToDeviceResponse]{@link google.cloud.iot.v1.SendCommandToDeviceResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SendCommandToDeviceResponse]{@link google.cloud.iot.v1.SendCommandToDeviceResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const iot = require('@google-cloud/iot');
+   *
+   * const client = new iot.v1.DeviceManagerClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
+   * const binaryData = '';
+   * const request = {
+   *   name: formattedName,
+   *   binaryData: binaryData,
+   * };
+   * client.sendCommandToDevice(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  sendCommandToDevice(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.sendCommandToDevice(request, options, callback);
+  }
+
+  /**
+   * Associates the device with the gateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the registry. For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {string} request.gatewayId
+   *   The value of `gateway_id` can be either the device numeric ID or the
+   *   user-defined device identifier.
+   * @param {string} request.deviceId
+   *   The device to associate with the specified gateway. The value of
+   *   `device_id` can be either the device numeric ID or the user-defined device
+   *   identifier.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [BindDeviceToGatewayResponse]{@link google.cloud.iot.v1.BindDeviceToGatewayResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BindDeviceToGatewayResponse]{@link google.cloud.iot.v1.BindDeviceToGatewayResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const iot = require('@google-cloud/iot');
+   *
+   * const client = new iot.v1.DeviceManagerClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const gatewayId = '';
+   * const deviceId = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   gatewayId: gatewayId,
+   *   deviceId: deviceId,
+   * };
+   * client.bindDeviceToGateway(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  bindDeviceToGateway(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.bindDeviceToGateway(request, options, callback);
+  }
+
+  /**
+   * Deletes the association between the device and the gateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The name of the registry. For example,
+   *   `projects/example-project/locations/us-central1/registries/my-registry`.
+   * @param {string} request.gatewayId
+   *   The value of `gateway_id` can be either the device numeric ID or the
+   *   user-defined device identifier.
+   * @param {string} request.deviceId
+   *   The device to disassociate from the specified gateway. The value of
+   *   `device_id` can be either the device numeric ID or the user-defined device
+   *   identifier.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [UnbindDeviceFromGatewayResponse]{@link google.cloud.iot.v1.UnbindDeviceFromGatewayResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UnbindDeviceFromGatewayResponse]{@link google.cloud.iot.v1.UnbindDeviceFromGatewayResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const iot = require('@google-cloud/iot');
+   *
+   * const client = new iot.v1.DeviceManagerClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.registryPath('[PROJECT]', '[LOCATION]', '[REGISTRY]');
+   * const gatewayId = '';
+   * const deviceId = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   gatewayId: gatewayId,
+   *   deviceId: deviceId,
+   * };
+   * client.unbindDeviceFromGateway(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  unbindDeviceFromGateway(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.unbindDeviceFromGateway(
+      request,
+      options,
+      callback
+    );
   }
 
   // --------------------

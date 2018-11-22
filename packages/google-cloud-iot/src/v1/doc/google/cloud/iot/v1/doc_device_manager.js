@@ -104,13 +104,13 @@ const UpdateDeviceRegistryRequest = {
  * @property {number} pageSize
  *   The maximum number of registries to return in the response. If this value
  *   is zero, the service will select a default size. A call may return fewer
- *   objects than requested, but if there is a non-empty `page_token`, it
- *   indicates that more entries are available.
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
  *
  * @property {string} pageToken
  *   The value returned by the last `ListDeviceRegistriesResponse`; indicates
- *   that this is a continuation of a prior `ListDeviceRegistries` call, and
- *   that the system should return the next page of data.
+ *   that this is a continuation of a prior `ListDeviceRegistries` call and
+ *   the system should return the next page of data.
  *
  * @typedef ListDeviceRegistriesRequest
  * @memberof google.cloud.iot.v1
@@ -151,7 +151,7 @@ const ListDeviceRegistriesResponse = {
  *
  * @property {Object} device
  *   The device registration details. The field `name` must be empty. The server
- *   will generate that field from the device registry `id` provided and the
+ *   generates `name` from the device registry `id` and the
  *   `parent` field.
  *
  *   This object should have the same structure as [Device]{@link google.cloud.iot.v1.Device}
@@ -190,7 +190,7 @@ const GetDeviceRequest = {
  * Request for `UpdateDevice`.
  *
  * @property {Object} device
- *   The new values for the device registry. The `id` and `num_id` fields must
+ *   The new values for the device. The `id` and `num_id` fields must
  *   be empty, and the field `name` must specify the name path. For example,
  *   `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
  *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
@@ -237,37 +237,71 @@ const DeleteDeviceRequest = {
  *   `projects/my-project/locations/us-central1/registries/my-registry`.
  *
  * @property {number[]} deviceNumIds
- *   A list of device numerical ids. If empty, it will ignore this field. This
- *   field cannot hold more than 10,000 entries.
+ *   A list of device numeric IDs. If empty, this field is ignored. Maximum
+ *   IDs: 10,000.
  *
  * @property {string[]} deviceIds
- *   A list of device string identifiers. If empty, it will ignore this field.
- *   For example, `['device0', 'device12']`. This field cannot hold more than
- *   10,000 entries.
+ *   A list of device string IDs. For example, `['device0', 'device12']`.
+ *   If empty, this field is ignored. Maximum IDs: 10,000
  *
  * @property {Object} fieldMask
  *   The fields of the `Device` resource to be returned in the response. The
- *   fields `id`, and `num_id` are always returned by default, along with any
+ *   fields `id` and `num_id` are always returned, along with any
  *   other fields specified.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
+ * @property {Object} gatewayListOptions
+ *   Options related to gateways.
+ *
+ *   This object should have the same structure as [GatewayListOptions]{@link google.cloud.iot.v1.GatewayListOptions}
+ *
  * @property {number} pageSize
  *   The maximum number of devices to return in the response. If this value
  *   is zero, the service will select a default size. A call may return fewer
- *   objects than requested, but if there is a non-empty `page_token`, it
- *   indicates that more entries are available.
+ *   objects than requested. A non-empty `next_page_token` in the response
+ *   indicates that more data is available.
  *
  * @property {string} pageToken
  *   The value returned by the last `ListDevicesResponse`; indicates
- *   that this is a continuation of a prior `ListDevices` call, and
- *   that the system should return the next page of data.
+ *   that this is a continuation of a prior `ListDevices` call and
+ *   the system should return the next page of data.
  *
  * @typedef ListDevicesRequest
  * @memberof google.cloud.iot.v1
  * @see [google.cloud.iot.v1.ListDevicesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
 const ListDevicesRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Options for limiting the list based on gateway type and associations.
+ *
+ * @property {number} gatewayType
+ *   If `GATEWAY` is specified, only gateways are returned. If `NON_GATEWAY`
+ *   is specified, only non-gateway devices are returned. If
+ *   `GATEWAY_TYPE_UNSPECIFIED` is specified, all devices are returned.
+ *
+ *   The number should be among the values of [GatewayType]{@link google.cloud.iot.v1.GatewayType}
+ *
+ * @property {string} associationsGatewayId
+ *   If set, only devices associated with the specified gateway are returned.
+ *   The gateway ID can be numeric (`num_id`) or the user-defined string
+ *   (`id`). For example, if `123` is specified, only devices bound to the
+ *   gateway with `num_id` 123 are returned.
+ *
+ * @property {string} associationsDeviceId
+ *   If set, returns only the gateways with which the specified device is
+ *   associated. The device ID can be numeric (`num_id`) or the user-defined
+ *   string (`id`). For example, if `456` is specified, returns only the
+ *   gateways to which the device with `num_id` 456 is bound.
+ *
+ * @typedef GatewayListOptions
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.GatewayListOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
+ */
+const GatewayListOptions = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -390,5 +424,109 @@ const ListDeviceStatesRequest = {
  * @see [google.cloud.iot.v1.ListDeviceStatesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
  */
 const ListDeviceStatesResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request for `SendCommandToDevice`.
+ *
+ * @property {string} name
+ *   The name of the device. For example,
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+ *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+ *
+ * @property {string} binaryData
+ *   The command data to send to the device.
+ *
+ * @property {string} subfolder
+ *   Optional subfolder for the command. If empty, the command will be delivered
+ *   to the /devices/{device-id}/commands topic, otherwise it will be delivered
+ *   to the /devices/{device-id}/commands/{subfolder} topic. Multi-level
+ *   subfolders are allowed. This field must not have more than 256 characters,
+ *   and must not contain any MQTT wildcards ("+" or "#") or null characters.
+ *
+ * @typedef SendCommandToDeviceRequest
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.SendCommandToDeviceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
+ */
+const SendCommandToDeviceRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response for `SendCommandToDevice`.
+ * @typedef SendCommandToDeviceResponse
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.SendCommandToDeviceResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
+ */
+const SendCommandToDeviceResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request for `BindDeviceToGateway`.
+ *
+ * @property {string} parent
+ *   The name of the registry. For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ *
+ * @property {string} gatewayId
+ *   The value of `gateway_id` can be either the device numeric ID or the
+ *   user-defined device identifier.
+ *
+ * @property {string} deviceId
+ *   The device to associate with the specified gateway. The value of
+ *   `device_id` can be either the device numeric ID or the user-defined device
+ *   identifier.
+ *
+ * @typedef BindDeviceToGatewayRequest
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.BindDeviceToGatewayRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
+ */
+const BindDeviceToGatewayRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response for `BindDeviceToGateway`.
+ * @typedef BindDeviceToGatewayResponse
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.BindDeviceToGatewayResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
+ */
+const BindDeviceToGatewayResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request for `UnbindDeviceFromGateway`.
+ *
+ * @property {string} parent
+ *   The name of the registry. For example,
+ *   `projects/example-project/locations/us-central1/registries/my-registry`.
+ *
+ * @property {string} gatewayId
+ *   The value of `gateway_id` can be either the device numeric ID or the
+ *   user-defined device identifier.
+ *
+ * @property {string} deviceId
+ *   The device to disassociate from the specified gateway. The value of
+ *   `device_id` can be either the device numeric ID or the user-defined device
+ *   identifier.
+ *
+ * @typedef UnbindDeviceFromGatewayRequest
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.UnbindDeviceFromGatewayRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
+ */
+const UnbindDeviceFromGatewayRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response for `UnbindDeviceFromGateway`.
+ * @typedef UnbindDeviceFromGatewayResponse
+ * @memberof google.cloud.iot.v1
+ * @see [google.cloud.iot.v1.UnbindDeviceFromGatewayResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/iot/v1/device_manager.proto}
+ */
+const UnbindDeviceFromGatewayResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

@@ -1131,6 +1131,223 @@ describe('DeviceManagerClient', () => {
       });
     });
   });
+
+  describe('sendCommandToDevice', () => {
+    it('invokes sendCommandToDevice without error', done => {
+      const client = new iotModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
+      const binaryData = '40';
+      const request = {
+        name: formattedName,
+        binaryData: binaryData,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.sendCommandToDevice = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.sendCommandToDevice(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes sendCommandToDevice with error', done => {
+      const client = new iotModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.devicePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]',
+        '[DEVICE]'
+      );
+      const binaryData = '40';
+      const request = {
+        name: formattedName,
+        binaryData: binaryData,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.sendCommandToDevice = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.sendCommandToDevice(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('bindDeviceToGateway', () => {
+    it('invokes bindDeviceToGateway without error', done => {
+      const client = new iotModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
+      const gatewayId = 'gatewayId955798774';
+      const deviceId = 'deviceId25209764';
+      const request = {
+        parent: formattedParent,
+        gatewayId: gatewayId,
+        deviceId: deviceId,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.bindDeviceToGateway = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.bindDeviceToGateway(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes bindDeviceToGateway with error', done => {
+      const client = new iotModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
+      const gatewayId = 'gatewayId955798774';
+      const deviceId = 'deviceId25209764';
+      const request = {
+        parent: formattedParent,
+        gatewayId: gatewayId,
+        deviceId: deviceId,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.bindDeviceToGateway = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.bindDeviceToGateway(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('unbindDeviceFromGateway', () => {
+    it('invokes unbindDeviceFromGateway without error', done => {
+      const client = new iotModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
+      const gatewayId = 'gatewayId955798774';
+      const deviceId = 'deviceId25209764';
+      const request = {
+        parent: formattedParent,
+        gatewayId: gatewayId,
+        deviceId: deviceId,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.unbindDeviceFromGateway = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.unbindDeviceFromGateway(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes unbindDeviceFromGateway with error', done => {
+      const client = new iotModule.v1.DeviceManagerClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.registryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[REGISTRY]'
+      );
+      const gatewayId = 'gatewayId955798774';
+      const deviceId = 'deviceId25209764';
+      const request = {
+        parent: formattedParent,
+        gatewayId: gatewayId,
+        deviceId: deviceId,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.unbindDeviceFromGateway = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.unbindDeviceFromGateway(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
