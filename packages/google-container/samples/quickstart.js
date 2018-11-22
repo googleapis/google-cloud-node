@@ -14,37 +14,33 @@
  */
 
 'use strict';
+async function main() {
+  // [START container_quickstart]
+  const container = require('@google-cloud/container');
 
-// [START container_quickstart]
-const container = require('@google-cloud/container');
+  if (
+    !process.env.GCLOUD_PROJECT ||
+    !process.env.GOOGLE_APPLICATION_CREDENTIALS
+  ) {
+    throw new Error(
+      'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
+    );
+  }
 
-if (
-  !process.env.GCLOUD_PROJECT ||
-  !process.env.GOOGLE_APPLICATION_CREDENTIALS
-) {
-  throw new Error(
-    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
-  );
+  const client = new container.v1.ClusterManagerClient({
+    // optional auth parameters.
+  });
+
+  const projectId = process.env.GCLOUD_PROJECT;
+  const zone = 'us-central1-a';
+  const request = {
+    projectId: projectId,
+    zone: zone,
+  };
+
+  const [response] = await client.listClusters(request);
+  console.log(response);
+  // [END container_quickstart]
 }
 
-const client = new container.v1.ClusterManagerClient({
-  // optional auth parameters.
-});
-
-const projectId = process.env.GCLOUD_PROJECT;
-const zone = 'us-central1-a';
-const request = {
-  projectId: projectId,
-  zone: zone,
-};
-
-client
-  .listClusters(request)
-  .then(responses => {
-    const response = responses[0];
-    console.log(response);
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
-// [END container_quickstart]
+main().catch(console.error);
