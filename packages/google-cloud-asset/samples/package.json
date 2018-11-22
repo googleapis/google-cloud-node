@@ -7,6 +7,9 @@
   "engines": {
     "node": ">=8"
   },
+  "files": [
+    "*.js"
+  ],
   "repository": "googleapis/nodejs-asset",
   "private": true,
   "nyc": {
