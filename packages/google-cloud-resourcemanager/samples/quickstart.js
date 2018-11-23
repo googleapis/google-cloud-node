@@ -15,28 +15,26 @@
 
 'use strict';
 
-// [START resource_quickstart]
-// Imports the Google Cloud client library
-const {Resource} = require('@google-cloud/resource');
+async function main() {
+  // [START resource_quickstart]
+  // Imports the Google Cloud client library
+  const {Resource} = require('@google-cloud/resource');
 
-// Your Google Cloud Platform project ID
-const projectId = 'YOUR_PROJECT_ID';
+  // Your Google Cloud Platform project ID
+  const projectId = 'YOUR_PROJECT_ID';
 
-// Creates a client
-const resourceClient = new Resource({
-  projectId: projectId,
-});
-
-// Lists current projects
-resourceClient
-  .getProjects()
-  .then(results => {
-    const projects = results[0];
-
-    console.log('Projects:');
-    projects.forEach(project => console.log(project.id));
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
+  // Creates a client
+  const resourceClient = new Resource({
+    projectId: projectId,
   });
-// [END resource_quickstart]
+
+  // Lists current projects
+  const [projects] = await resourceClient.getProjects();
+
+  console.log('Projects:');
+  projects.forEach(project => console.log(project.id));
+
+  // [END resource_quickstart]
+}
+
+main().catch(console.error);
