@@ -1,5 +1,5 @@
 /**
- * Copyright 2017, Google, Inc.
+ * Copyright 2018, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,62 +15,61 @@
 
 'use strict';
 
-const proxyquire = require(`proxyquire`).noPreserveCache();
-const sinon = require(`sinon`);
-const test = require(`ava`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
+const proxyquire = require('proxyquire').noPreserveCache();
+const sinon = require('sinon');
+const assert = require('assert');
+const tools = require('@google-cloud/nodejs-repo-tools');
 
-const {Datastore} = proxyquire(`@google-cloud/datastore`, {});
+const {Datastore} = proxyquire('@google-cloud/datastore', {});
 const datastore = new Datastore();
 
-const entity = {description: `Buy milk`};
-const kind = `Task`;
-const name = `sampletask1`;
+const entity = {description: 'Buy milk'};
+const kind = 'Task';
+const name = 'sampletask1';
 const key = datastore.key([kind, name]);
 const datastoreEntity = Object.assign({}, entity);
 datastoreEntity[datastore.KEY] = key;
 
-test.before(async () => {
+before(async () => {
   try {
     await datastore.delete(key);
   } catch (err) {} // ignore error
 });
-test.after.always(async () => {
+after(async () => {
   try {
     await datastore.delete(key);
   } catch (err) {} // ignore error
 });
 
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
+beforeEach(tools.stubConsole);
+afterEach(tools.restoreConsole);
 
-test.cb(`should get a task from Datastore`, t => {
+it('should get a task from Datastore', () => {
   const datastoreMock = {
     key: (...args) => datastore.key(...args),
 
-    save: _task => {
-      t.is(_task.key.kind, kind);
-      t.is(_task.key.name, name);
-      t.deepEqual(_task.data, entity);
+    save: async _task => {
+      assert.strictEqual(_task.key.kind, kind);
+      assert.strictEqual(_task.key.name, name);
+      assert.deepStrictEqual(_task.data, entity);
 
-      return datastore.save(_task).then(() => {
-        setTimeout(() => {
-          datastore
-            .get(key)
-            .then(([task]) => {
-              t.deepEqual(task, datastoreEntity);
-              t.true(
-                console.log.calledWith(`Saved ${name}: ${entity.description}`)
-              );
-              t.end();
-            })
-            .catch(t.end);
-        }, 200);
-      }, t.end);
+      return await datastore.save(_task).then(async () => {
+        await new Promise(r => setTimeout(r, 200));
+        await datastore
+          .get(key)
+          .then(([task]) => {
+            assert.deepStrictEqual(task, datastoreEntity);
+            assert.strictEqual(
+              console.log.calledWith(`Saved ${name}: ${entity.description}`),
+              true
+            );
+          })
+          .catch();
+      });
     },
   };
 
-  proxyquire(`../quickstart`, {
+  proxyquire('../quickstart', {
     '@google-cloud/datastore': {
       Datastore: sinon.stub().returns(datastoreMock),
     },

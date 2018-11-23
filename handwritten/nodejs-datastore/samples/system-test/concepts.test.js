@@ -1,5 +1,5 @@
 /**
- * Copyright 2017, Google, Inc.
+ * Copyright 2018, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,9 +15,9 @@
 
 'use strict';
 
-const concepts = require(`../concepts`);
-const test = require(`ava`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
+const concepts = require('../concepts');
+const assert = require('assert');
+const tools = require('@google-cloud/nodejs-repo-tools');
 
 let transaction;
 let metadata;
@@ -31,10 +31,10 @@ const Index = concepts.Index;
 const Entity = concepts.Entity;
 const Query = concepts.Query;
 
-test.before(tools.checkCredentials);
-test.before(t => {
+before(() => {
+  tools.checkCredentials();
   const projectId = process.env.GCLOUD_PROJECT;
-  t.truthy(projectId, `You must set the GCLOUD_PROJECT env var!`);
+  assert.ok(projectId, 'You must set the GCLOUD_PROJECT env var!');
   transaction = new Transaction(projectId);
   metadata = new Metadata(projectId);
   index = new Index(projectId);
@@ -42,150 +42,114 @@ test.before(t => {
   query = new Query(projectId);
 });
 
-test.after.always(async () => {
+after(async () => {
   const datastore = transaction.datastore;
-  const query = datastore.createQuery(`Task`).select(`__key__`);
+  const query = datastore.createQuery('Task').select('__key__');
   const [entities] = await datastore.runQuery(query);
   await datastore.delete(entities.map(entity => entity[datastore.KEY]));
 });
 
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
+beforeEach(tools.stubConsole);
+afterEach(tools.restoreConsole);
 
 // Transactions
-test.serial(`performs a transactional update`, t =>
-  transaction.testTransactionalUpdate(t)
-);
-test.serial(`performs retries if necessary`, t =>
-  transaction.testTransactionalRetry(t)
-);
-test.serial(`performs a get or create`, t =>
-  transaction.testTransactionalGetOrCreate(t)
-);
-test.serial(`gets a snapshot of task list entities`, t =>
-  transaction.testSingleEntityGroupReadOnly(t)
-);
+it('performs a transactional update', () =>
+  transaction.testTransactionalUpdate());
+it('performs retries if necessary', () => transaction.testTransactionalRetry());
+it('performs a get or create', () =>
+  transaction.testTransactionalGetOrCreate());
+it('gets a snapshot of task list entities', () =>
+  transaction.testSingleEntityGroupReadOnly());
 
 // Metadata
-test.serial(`performs a namespace query`, t =>
-  metadata.testNamespaceRunQuery(t)
-);
-test.serial(`performs a kind query`, t => metadata.testKindRunQuery(t));
-test.serial(`performs a property query`, t => metadata.testPropertyRunQuery(t));
-test.serial(`performs a property by kind query`, t =>
-  metadata.testPropertyByKindRunQuery(t)
-);
+it('performs a namespace query', () => metadata.testNamespaceRunQuery());
+it('performs a kind query', () => metadata.testKindRunQuery());
+it('performs a property query', () => metadata.testPropertyRunQuery());
+it('performs a property by kind query', () =>
+  metadata.testPropertyByKindRunQuery());
 
 // Indexes
-test.serial(`performs a query with a filter on an unindexed property`, t =>
-  index.testUnindexedPropertyQuery(t)
-);
-test.serial(`inserts arrays of data`, t => index.testExplodingProperties(t));
+it('performs a query with a filter on an unindexed property', () =>
+  index.testUnindexedPropertyQuery());
+it('inserts arrays of data', () => index.testExplodingProperties());
 
 // Queries
-test.serial(`performs a basic query`, t => query.testRunQuery(t));
-test.serial(`performs a query with a property filter`, t =>
-  query.testPropertyFilter(t)
-);
-test.serial(`performs a query with a composite filter`, t =>
-  query.testCompositeFilter(t)
-);
-test.serial(`performs a query with a key filter`, t => query.testKeyFilter(t));
-test.serial(`performs a query with ascending sort`, t =>
-  query.testAscendingSort(t)
-);
-test.serial(`performs a query with descending sort`, t =>
-  query.testDescendingSort(t)
-);
-test.serial(`performs a query with multi sort`, t => query.testMultiSort(t));
-test.serial(`performs a kindless query`, t => query.testKindlessQuery(t));
-test.serial('performs a projection query', t => {
+it('performs a basic query', async () => await query.testRunQuery());
+it('performs a query with a property filter', () => query.testPropertyFilter());
+it('performs a query with a composite filter', () =>
+  query.testCompositeFilter());
+it('performs a query with a key filter', () => query.testKeyFilter());
+it('performs a query with ascending sort', () => query.testAscendingSort());
+it('performs a query with descending sort', () => query.testDescendingSort());
+it('performs a query with multi sort', () => query.testMultiSort());
+it('performs a kindless query', () => query.testKindlessQuery());
+it('performs a projection query', () => {
   return entity
-    .testProperties(t)
+    .testProperties()
     .then(() => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          query.testRunQueryProjection(t).then(resolve, reject);
+          query.testRunQueryProjection().then(resolve, reject);
         }, 1000);
       });
     })
     .then(results => {
-      t.deepEqual(results, {
+      assert.deepStrictEqual(results, {
         priorities: [4],
         percentCompletes: [10],
       });
     });
 });
-test.serial(`performs a keys only query`, t => query.testKeysOnlyQuery(t));
-test.serial(`performs a distinct on query`, t => query.testDistinctOnQuery(t));
-test.serial(`performs an array value inequality query`, t =>
-  query.testArrayValueInequalityRange(t)
-);
-test.serial(`performs an array value equality query`, t =>
-  query.testArrayValueEquality(t)
-);
-test.serial(`performs an inequality range query`, t =>
-  query.testInequalityRange(t)
-);
-test.serial(`returns an error from an invalid query`, async t => {
-  await t.throws(query.testInequalityInvalid(t));
+it('performs a keys only query', () => query.testKeysOnlyQuery());
+it('performs a distinct on query', () => query.testDistinctOnQuery());
+it('performs an array value inequality query', () =>
+  query.testArrayValueInequalityRange());
+it('performs an array value equality query', () =>
+  query.testArrayValueEquality());
+it('performs an inequality range query', () => query.testInequalityRange());
+it('returns an error from an invalid query', async () => {
+  await assert.throws(query.testInequalityInvalid);
 });
-test.serial(`performs an equal and inequality range query`, t =>
-  query.testEqualAndInequalityRange(t)
-);
-test.serial(`performs an equality sort query`, t =>
-  query.testInequalitySort(t)
-);
-test.serial(
-  `returns an error when not sorted on filtered property`,
-  async t => {
-    await t.throws(query.testInequalitySortInvalidNotSame(t));
-  }
-);
-test.serial(
-  `returns an error when not sorted on first filter prop`,
-  async t => {
-    await t.throws(query.testInequalitySortInvalidNotFirst(t));
-  }
-);
-test.serial(`performs a query with a limit`, t => query.testLimit(t));
-test.serial(`allows manual pagination through results`, t => {
-  return entity.testBatchUpsert(t).then(() => {
+it('performs an equal and inequality range query', () =>
+  query.testEqualAndInequalityRange());
+it('performs an equality sort query', () => query.testInequalitySort());
+it('returns an error when not sorted on filtered property', async () => {
+  await assert.throws(query.testInequalitySortInvalidNotSame);
+});
+it('returns an error when not sorted on first filter prop', async () => {
+  await assert.throws(query.testInequalitySortInvalidNotFirst);
+});
+it('performs a query with a limit', () => query.testLimit());
+it('allows manual pagination through results', () => {
+  return entity.testBatchUpsert().then(() => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        query.testCursorPaging(t).then(resolve, reject);
+        query.testCursorPaging().then(resolve, reject);
       }, 1000);
     });
   });
 });
-test.serial(`performs an ancestor query`, t =>
-  query.testEventualConsistentQuery(t)
-);
+it('performs an ancestor query', () => query.testEventualConsistentQuery());
 
 // Entities
-test.serial(`saves with an incomplete key`, t => entity.testIncompleteKey(t));
-test.serial(`saves with a named key`, t => entity.testNamedKey(t));
-test.serial(`saves a key with a parent`, t => entity.testKeyWithParent(t));
-test.serial(`saves a key with multiple parents`, t =>
-  entity.testKeyWithMultiLevelParent(t)
-);
-test.serial(`saves an entity with a parent`, t =>
-  entity.testEntityWithParent(t)
-);
-test.serial(`saves an entity with properties`, t => {
-  t.plan(0);
-  return entity.testProperties(t);
+it('saves with an incomplete key', () => entity.testIncompleteKey());
+it('saves with a named key', () => entity.testNamedKey());
+it('saves a key with a parent', () => entity.testKeyWithParent());
+it('saves a key with multiple parents', () =>
+  entity.testKeyWithMultiLevelParent());
+it('saves an entity with a parent', () => entity.testEntityWithParent());
+it('saves an entity with properties', () => {
+  return entity.testProperties();
 });
-test.serial(`saves an entity with arrays`, t => entity.testArrayValue(t));
-test.serial(`saves a basic entity`, t => entity.testBasicEntity(t));
-test.serial(`saves with an upsert`, t => entity.testUpsert(t));
-test.serial(`saves with an insert`, t => entity.testInsert(t));
-test.serial(`performs a lookup`, t => entity.testLookup(t));
-test.serial(`saves with an update`, t => entity.testUpdate(t));
-test.serial(`deletes an entity`, t => entity.testDelete(t));
-test.serial(`performs a batch upsert`, t => {
-  t.plan(0);
-  return entity.testBatchUpsert(t);
+it('saves an entity with arrays', () => entity.testArrayValue());
+it('saves a basic entity', () => entity.testBasicEntity());
+it('saves with an upsert', () => entity.testUpsert());
+it('saves with an insert', () => entity.testInsert());
+it('performs a lookup', () => entity.testLookup());
+it('saves with an update', () => entity.testUpdate());
+it('deletes an entity', () => entity.testDelete());
+it('performs a batch upsert', () => {
+  return entity.testBatchUpsert();
 });
-test.serial(`performs a batch lookup`, t => entity.testBatchLookup(t));
-test.serial(`performs a batch delete`, t => entity.testBatchDelete(t));
+it('performs a batch lookup', () => entity.testBatchLookup());
+it('performs a batch delete', () => entity.testBatchDelete());

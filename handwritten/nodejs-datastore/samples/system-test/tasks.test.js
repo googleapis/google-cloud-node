@@ -1,5 +1,5 @@
 /**
- * Copyright 2017, Google, Inc.
+ * Copyright 2018, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,61 +18,56 @@
 const {Datastore} = require('@google-cloud/datastore');
 const datastore = new Datastore();
 const path = require('path');
-const test = require('ava');
+const assert = require('assert');
 const tools = require('@google-cloud/nodejs-repo-tools');
 
-const cmd = `node tasks.js`;
-const cwd = path.join(__dirname, `..`);
+const cmd = 'node tasks.js';
+const cwd = path.join(__dirname, '..');
 
-const description = `description`;
+const description = 'description';
 let key;
 
-test.after.always(async () => {
+after(async () => {
   try {
     await datastore.delete(key);
   } catch (err) {} // ignore error
 });
 
-test.before(tools.checkCredentials);
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
+before(tools.checkCredentials);
+beforeEach(tools.stubConsole);
+afterEach(tools.restoreConsole);
 
-test.serial(`should add a task`, async t => {
-  t.plan(2);
+it('should add a task', async () => {
   const expected = /^Task (\d+) created successfully.$/;
   const parts = tools.run(`${cmd} new "${description}"`, cwd).match(expected);
-  t.true(expected.test(parts[0]));
+  assert.strictEqual(expected.test(parts[0]), true);
   const [task] = await datastore.get(
     datastore.key([`Task`, parseInt(parts[1], 10)])
   );
   key = task[datastore.KEY];
-  t.is(task.description, description);
+  assert.strictEqual(task.description, description);
 });
 
-test.serial(`should mark a task as done`, async t => {
-  t.plan(2);
+it('should mark a task as done', async () => {
   const expected = `Task ${key.id} updated successfully.`;
   const output = await tools.runAsync(`${cmd} done ${key.id}`, cwd);
-  t.is(output, expected);
+  assert.strictEqual(output, expected);
   const [task] = await datastore.get(key);
-  t.true(task.done);
+  assert.strictEqual(task.done, true);
 });
 
-test.serial(`should list tasks`, async t => {
-  t.plan(0);
+it('should list tasks', async () =>
   await tools
     .tryTest(async assert => {
       const output = await tools.runAsync(`${cmd} list`, cwd);
       assert(output.includes(key.id));
     })
-    .start();
-});
+    .start());
 
-test.serial(`should delete a task`, async t => {
-  t.plan(2);
+it('should delete a task', async () => {
   const expected = `Task ${key.id} deleted successfully.`;
   const output = await tools.runAsync(`${cmd} delete ${key.id}`, cwd);
-  t.is(output, expected);
+  assert.strictEqual(output, expected);
   const [task] = await datastore.get(key);
-  t.is(task, undefined);
+  assert.strictEqual(task, undefined);
 });
