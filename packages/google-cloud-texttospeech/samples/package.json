@@ -9,7 +9,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "test": "ava -T 1m --verbose system-test/*.test.js"
+    "test": "mocha system-test/*.test.js --timeout=600000"
   },
   "dependencies": {
     "@google-cloud/text-to-speech": "^0.3.0",
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "ava": "^0.25.0"
+    "mocha": "^5.2.0"
   },
   "optionalDependencies": {
     "canvas": "^2.0.0"
