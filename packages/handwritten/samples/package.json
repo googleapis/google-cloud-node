@@ -9,13 +9,10 @@
     "node": ">=8"
   },
   "scripts": {
-    "ava": "ava -T 20s --verbose test/*.test.js system-test/*.test.js",
-    "cover": "nyc --reporter=lcov --cache ava -T 20s --verbose test/*.test.js system-test/*.test.js && nyc report",
     "error-test": "samples test app --msg \"Something broke!\" --url \"http://localhost:33332/error\" --port 33332  -- snippets.js express",
     "exception-test": "samples test app --code 500 --msg SyntaxError --url \"http://localhost:33333/exception\" --port 33333  -- snippets.js express",
-    "system-test": "ava -T 1m --verbose system-test/*.test.js",
-    "all-test": "npm run system-test && npm run error-test && npm run exception-test",
-    "test": "npm run cover"
+    "all-test": "npm run test && npm run error-test && npm run exception-test",
+    "test": "mocha system-test/*.test.js --timeout=600000"
   },
   "dependencies": {
     "@google-cloud/error-reporting": "^0.5.0",
@@ -24,8 +21,7 @@
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "ava": "^0.25.0",
-    "nyc": "^13.0.0",
+    "mocha": "^5.2.0",
     "proxyquire": "^2.0.1",
     "sinon": "^7.0.0"
   }
