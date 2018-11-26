@@ -23,9 +23,9 @@ import {teenyRequest} from 'teeny-request';
 import {Project} from './project';
 
 export type CreateProjectCallback =
-    (err: Error|null, project?: Project|null, operation?: Operation,
+    (err: Error|null, project?: Project|null, operation?: Operation<Project>,
      apiResponse?: r.Response) => void;
-export type CreateProjectResponse = [Project, Operation, r.Response];
+export type CreateProjectResponse = [Project, Operation<Project>, r.Response];
 export type GetProjectsResponse = [Project[], r.Response];
 export type GetProjectsCallback =
     (err: Error|null, projects?: Project[]|null, nextQuery?: {}|null,
@@ -384,7 +384,7 @@ class Resource extends Service {
     if (!name) {
       throw new Error('A name must be specified for an operation.');
     }
-    return new Operation(
+    return new Operation<Project>(
         {parent: this, id: name, requestModule: teenyRequest as typeof r});
   }
 

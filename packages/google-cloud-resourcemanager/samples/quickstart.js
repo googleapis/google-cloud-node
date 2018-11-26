@@ -21,15 +21,13 @@ async function main() {
   const {Resource} = require('@google-cloud/resource');
 
   // Your Google Cloud Platform project ID
-  const projectId = 'YOUR_PROJECT_ID';
+  const projectId = process.env.GCLOUD_PROJECT || 'YOUR_PROJECT_ID';
 
   // Creates a client
-  const resourceClient = new Resource({
-    projectId: projectId,
-  });
+  const resource = new Resource({projectId});
 
   // Lists current projects
-  const [projects] = await resourceClient.getProjects();
+  const [projects] = await resource.getProjects();
 
   console.log('Projects:');
   projects.forEach(project => console.log(project.id));

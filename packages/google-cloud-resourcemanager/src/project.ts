@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import {util, ServiceObject} from '@google-cloud/common';
+import {Operation, ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import {Resource} from '.';
 import * as r from 'request';  // Only for type declarations.
 import {teenyRequest} from 'teeny-request';
+
+import {CreateProjectCallback, CreateProjectResponse, Resource} from '.';
 
 export type RestoreCallback = (err: Error|null, apiResonse?: r.Response) =>
     void;
 export type RestoreResponse = [r.Response];
+
+export type ProjectCreateResponse = [Project, Operation<Project>, r.Response];
+export interface ProjectCreateCallback {
+  (err: Error|null, project?: Project, operation?: Operation<Project>,
+   apiResponse?: r.Response): void;
+}
 
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.
@@ -42,6 +47,7 @@ export type RestoreResponse = [r.Response];
  * const project = resource.project('grape-spaceship-123');
  */
 class Project extends ServiceObject {
+  projectId?: string;
   constructor(resource: Resource, id: string) {
     const methods = {
       /**
@@ -269,6 +275,14 @@ class Project extends ServiceObject {
       methods,
     });
   }
+
+  create(): Promise<CreateProjectResponse>;
+  create(callback: CreateProjectCallback): void;
+  create(callback?: CreateProjectCallback):
+      void|Promise<CreateProjectResponse> {
+    super.create(callback);
+  }
+
 
   /**
    * Restore a project.

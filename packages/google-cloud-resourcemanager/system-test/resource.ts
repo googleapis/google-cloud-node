@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import * as assert from 'assert';
 import * as uuid from 'uuid';
-import {Resource, Project} from '../src';
-import {Operation} from '@google-cloud/common';
+import {Project, Resource} from '../src';
 
 if (!process.env.GCLOUD_PROJECT ||
     !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
@@ -33,12 +30,9 @@ describe('Resource', () => {
   const project = resource.project();
 
   describe('resource', () => {
-    it('should get a list of projects', done => {
-      resource.getProjects((err, projects) => {
-        assert.ifError(err);
-        assert(projects!.length > 0);
-        done();
-      });
+    it('should get a list of projects', async () => {
+      const [projects] = await resource.getProjects();
+      assert(projects!.length > 0);
     });
 
     it('should get a list of projects in stream mode', done => {
@@ -54,17 +48,13 @@ describe('Resource', () => {
   });
 
   describe('project', () => {
-    it('should get metadata', done => {
-      project.getMetadata((err, metadata) => {
-        assert.ifError(err);
-        assert.notStrictEqual(metadata.projectId, undefined);
-        done();
-      });
+    it('should get metadata', async () => {
+      const [metadata] = await project.getMetadata();
+      assert.notStrictEqual(metadata.projectId, undefined);
     });
   });
 
   // Auth through the gcloud SDK is required to:
-  //
   //   - Create a project
   //   - Set metadata
   //   - Restore a project
@@ -76,64 +66,41 @@ describe('Resource', () => {
 
     before(async () => {
       await deleteTestProjects();
-      // TODO(beckwith): The TypeScript types for `create` here aren't correct.
-      // This should return [Project, Operation, Response], but the default
-      // signature for `ServiceObject.create` doesn't match.  The fix is to
-      // create an overridden create method on the `Project` object.
-      // https://github.com/googleapis/nodejs-resource/issues/91
-      const res = await project.create();
-      testProjects.push(res[0] as Project);
+      const [p, operation] = await project.create();
+      testProjects.push(p);
       return new Promise((resolve, reject) => {
-        (res[1] as {} as Operation).on('error', reject).on('complete', resolve);
+        operation.on('error', reject).on('complete', resolve);
       });
     });
 
     after(async () => deleteTestProjects());
 
-    it('should have created the project', done => {
-      project.getMetadata((err, metadata) => {
-        assert.ifError(err);
-        assert.strictEqual(metadata.projectId, project.id);
-        done();
-      });
+    it('should have created the project', async () => {
+      const [metadata] = await project.getMetadata();
+      assert.strictEqual(metadata.projectId, project.id);
     });
 
-    it('should run operation as a promise', done => {
+    it('should run operation as a promise', async () => {
       const project = resource.project(generateName('project'));
-      project.create()
-          .then(response => {
-            const operation = response[1] as {} as Operation;
-            return operation.promise();
-          })
-          .then(() => {
-            testProjects.push(project);
-            return project.getMetadata();
-          })
-          .then(response => {
-            const metadata = response[0];
-            assert.strictEqual(metadata.projectId, project.id);
-            done();
-          });
+      const [_, operation] = await project.create();
+      await operation.promise();
+      testProjects.push(project);
+      const [metadata] = await project.getMetadata();
+      assert.strictEqual(metadata.projectId, project.id);
     });
 
-    it('should set metadata', done => {
+    it('should set metadata', async () => {
       const newProjectName = 'gcloud-tests-project-name';
-      project.getMetadata((err, metadata) => {
-        assert.ifError(err);
-        const originalProjectName = metadata.name;
-        assert.notStrictEqual(originalProjectName, newProjectName);
-        project.setMetadata({name: newProjectName}, err => {
-          assert.ifError(err);
-          project.setMetadata({name: originalProjectName}, done);
-        });
-      });
+      const [metadata] = await project.getMetadata();
+      const originalProjectName = metadata.name;
+      assert.notStrictEqual(originalProjectName, newProjectName);
+      await project.setMetadata({name: newProjectName});
+      await project.setMetadata({name: originalProjectName});
     });
 
-    it('should restore the project', done => {
-      project.delete(err => {
-        assert.ifError(err);
-        project.restore(done);
-      });
+    it('should restore the project', async () => {
+      await project.delete();
+      await project.restore();
     });
 
     async function deleteTestProjects() {

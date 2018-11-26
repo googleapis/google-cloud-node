@@ -21,6 +21,7 @@ import * as proxyquire from 'proxyquire';
 import {Response} from 'request';
 import {teenyRequest} from 'teeny-request';
 
+import * as root from '../src';
 import {Project} from '../src';
 
 class FakeOperation {
@@ -90,7 +91,7 @@ describe('Resource', () => {
   const PROJECT_ID = 'test-project-id';
 
   // tslint:disable-next-line variable-name no-any
-  let Resource: any;
+  let Resource: typeof root.Resource;
   // tslint:disable-next-line no-any
   let resource: any;
 
