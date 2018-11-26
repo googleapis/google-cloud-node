@@ -16,12 +16,12 @@
 // to be loaded as the JS file.
 
 /**
- * Security Center's representation of a Google Cloud Platform resource.
+ * Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
+ * Platform (GCP) resource.
  *
- * The Asset is a resource of Security Center that is meant to capture
- * information regarding a single Google Cloud Platform resource. All
- * modifications to an Asset are only within the context of Security Center and
- * do not effect the referenced Google Cloud Platform resource.
+ * The Asset is a Cloud SCC resource that captures information about a single GCP
+ * resource. All modifications to an Asset are only within the context of Cloud
+ * SCC and don't affect the referenced GCP resource.
  *
  * @property {string} name
  *   The relative resource name of this asset. See:
@@ -30,29 +30,29 @@
  *   "organizations/123/assets/456".
  *
  * @property {Object} securityCenterProperties
- *   Security Center managed properties. These properties are managed by
- *   Security Center and cannot be modified by the user.
+ *   Cloud SCC managed properties. These properties are managed by
+ *   Cloud SCC and cannot be modified by the user.
  *
  *   This object should have the same structure as [SecurityCenterProperties]{@link google.cloud.securitycenter.v1beta1.SecurityCenterProperties}
  *
  * @property {Object.<string, Object>} resourceProperties
  *   Resource managed properties. These properties are managed and defined by
- *   the Google Cloud Platform resource and cannot be modified by the user.
+ *   the GCP resource and cannot be modified by the user.
  *
  * @property {Object} securityMarks
  *   User specified security marks. These marks are entirely managed by the user
- *   and come from the SecurityMarks resource belonging to the asset.
+ *   and come from the SecurityMarks resource that belongs to the asset.
  *
  *   This object should have the same structure as [SecurityMarks]{@link google.cloud.securitycenter.v1beta1.SecurityMarks}
  *
  * @property {Object} createTime
- *   The time at which the asset was created in Security Center.
+ *   The time at which the asset was created in Cloud SCC.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   The time at which the asset was last updated, added, or deleted in Security
- *   Center.
+ *   The time at which the asset was last updated, added, or deleted in Cloud
+ *   SCC.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -64,18 +64,18 @@ const Asset = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Security Center managed properties. These properties are managed by
-   * Security Center and cannot be modified by the user.
+   * Cloud SCC managed properties. These properties are managed by Cloud SCC and
+   * cannot be modified by the user.
    *
    * @property {string} resourceName
-   *   The full resource name of the Google Cloud Platform resource this asset
+   *   The full resource name of the GCP resource this asset
    *   represents. This field is immutable after create time. See:
    *   https://cloud.google.com/apis/design/resource_names#full_resource_name
    *
    * @property {string} resourceType
-   *   The type of the Google Cloud resource. Examples include: APPLICATION,
+   *   The type of the GCP resource. Examples include: APPLICATION,
    *   PROJECT, and ORGANIZATION. This is a case insensitive field defined by
-   *   Security Center and/or the producer of the resource and is immutable
+   *   Cloud SCC and/or the producer of the resource and is immutable
    *   after create time.
    *
    * @property {string} resourceParent

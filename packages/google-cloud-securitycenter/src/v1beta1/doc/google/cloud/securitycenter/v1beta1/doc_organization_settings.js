@@ -16,8 +16,8 @@
 // to be loaded as the JS file.
 
 /**
- * User specified settings that are attached to the Security Center
- * organization.
+ * User specified settings that are attached to the Cloud Security Command
+ * Center (Cloud SCC) organization.
  *
  * @property {string} name
  *   The relative resource name of the settings. See:
@@ -26,9 +26,9 @@
  *   "organizations/123/organizationSettings".
  *
  * @property {boolean} enableAssetDiscovery
- *   A flag indicating whether Asset Discovery should be enabled. If the flag is
- *   set to true then discovery of assets will occur. If it is set to false all
- *   historical assets will remain but discovery of future assets will not
+ *   A flag that indicates if Asset Discovery should be enabled. If the flag is
+ *   set to `true`, then discovery of assets will occur. If it is set to `false,
+ *   all historical assets will remain, but discovery of future assets will not
  *   occur.
  *
  * @property {Object} assetDiscoveryConfig
@@ -64,11 +64,12 @@ const OrganizationSettings = {
     /**
      * The mode of inclusion when running Asset Discovery.
      * Asset discovery can be limited by explicitly identifying projects to be
-     * included or excluded. If INCLUDE_ONLY is set then only those projects
-     * (within the organization) and their children are discovered during asset
-     * discovery. If EXCLUDE is set then projects not matching those projects
-     * are discovered during asset discovery. If neither are set then all
-     * projects within the organization are discovered during asset discovery.
+     * included or excluded. If INCLUDE_ONLY is set, then only those projects
+     * within the organization and their children are discovered during asset
+     * discovery. If EXCLUDE is set, then projects that don't match those
+     * projects are discovered during asset discovery. If neither are set, then
+     * all projects within the organization are discovered during asset
+     * discovery.
      *
      * @enum {number}
      * @memberof google.cloud.securitycenter.v1beta1

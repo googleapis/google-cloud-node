@@ -16,10 +16,10 @@
 // to be loaded as the JS file.
 
 /**
- * User specified security marks that are attached to the parent Security Center
- * resource. Security marks are scoped within a Security Center organization --
- * they are modifiable and viewable by all with proper permissions on the
- * organization.
+ * User specified security marks that are attached to the parent Cloud Security
+ * Command Center (Cloud SCC) resource. Security marks are scoped within a Cloud
+ * SCC organization -- they can be modified and viewed by all users who have
+ * proper permissions on the organization.
  *
  * @property {string} name
  *   The relative resource name of the SecurityMarks. See:

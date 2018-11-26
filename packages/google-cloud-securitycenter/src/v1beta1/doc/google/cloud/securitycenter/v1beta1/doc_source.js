@@ -16,8 +16,8 @@
 // to be loaded as the JS file.
 
 /**
- * Security Center's finding source. A finding source is an entity or a
- * mechanism that can produce a finding. A source can also be thought of as a
+ * Cloud Security Command Center's (Cloud SCC) finding source. A finding source
+ * is an entity or a mechanism that can produce a finding. A source is like a
  * container of findings that come from the same scanner, logger, monitor, etc.
  *
  * @property {string} name
@@ -28,10 +28,10 @@
  *
  * @property {string} displayName
  *   The source’s display name.
- *   A source’s display name must be unique amongst its siblings, e.g.
- *   no two sources with the same parent can share the same display name.
+ *   A source’s display name must be unique amongst its siblings, for example,
+ *   two sources with the same parent can't share the same display name.
  *   The display name must start and end with a letter or digit, may contain
- *   letters, digits, spaces, hyphens and underscores and can be no longer
+ *   letters, digits, spaces, hyphens, and underscores, and can be no longer
  *   than 30 characters. This is captured by the regular expression:
  *   [\p{L}\p{N}](https://cloud.google.com{\p{L}\p{N}_- ]{0,28}[\p{L}\p{N}])?.
  *
@@ -39,7 +39,7 @@
  *   The description of the source (max of 1024 characters).
  *   Example:
  *   "Cloud Security Scanner is a web security scanner for common
- *   vulnerabilities in Google App Engine applications. It can automatically
+ *   vulnerabilities in App Engine applications. It can automatically
  *   scan and detect four common vulnerabilities, including cross-site-scripting
  *   (XSS), Flash injection, mixed content (HTTP in HTTPS), and
  *   outdated/insecure libraries."

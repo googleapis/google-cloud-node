@@ -16,12 +16,12 @@
 // to be loaded as the JS file.
 
 /**
- * Security Center's finding.
+ * Cloud Security Command Center (Cloud SCC) finding.
  *
  * A finding is a record of assessment data (security, risk, health or privacy)
- * ingested into Security Center for presentation, notification, analysis,
- * policy testing and enforcement. For example, an XSS vulnerability in an
- * AppEngine application is a finding.
+ * ingested into Cloud SCC for presentation, notification, analysis,
+ * policy testing, and enforcement. For example, an XSS vulnerability in an
+ * App Engine application is a finding.
  *
  * @property {string} name
  *   The relative resource name of this finding. See:
@@ -37,8 +37,8 @@
  *   "organizations/123/sources/456"
  *
  * @property {string} resourceName
- *   The full resource name of the Google Cloud Platform resource this finding
- *   is for. See:
+ *   The full resource name of the Google Cloud Platform (GCP) resource this
+ *   finding is for. See:
  *   https://cloud.google.com/apis/design/resource_names#full_resource_name
  *   This field is immutable after creation time.
  *
@@ -53,18 +53,18 @@
  *   Example: "XSS_FLASH_INJECTION"
  *
  * @property {string} externalUri
- *   The URI that, if available, points to a web page outside of Security Center
+ *   The URI that, if available, points to a web page outside of Cloud SCC
  *   where additional information about the finding can be found. This field is
- *   guaranteed to be either empty or a well formed url.
+ *   guaranteed to be either empty or a well formed URL.
  *
  * @property {Object.<string, Object>} sourceProperties
  *   Source specific properties. These properties are managed by the source
- *   writing the finding.
+ *   that writes the finding.
  *
  * @property {Object} securityMarks
  *   Output only. User specified security marks. These marks are entirely
- *   managed by the user and come from the SecurityMarks resource belonging to
- *   the finding.
+ *   managed by the user and come from the SecurityMarks resource that belongs
+ *   to the finding.
  *
  *   This object should have the same structure as [SecurityMarks]{@link google.cloud.securitycenter.v1beta1.SecurityMarks}
  *
@@ -76,7 +76,7 @@
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} createTime
- *   The time at which the finding was created in Security Center.
+ *   The time at which the finding was created in Cloud SCC.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

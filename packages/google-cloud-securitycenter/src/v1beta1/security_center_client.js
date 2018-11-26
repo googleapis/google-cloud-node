@@ -560,7 +560,6 @@ class SecurityCenterClient {
    *
    *   The following fields are supported when compare_duration is not set:
    *
-   *   * security_center_properties.resource_name
    *   * security_center_properties.resource_project
    *   * security_center_properties.resource_type
    *   * security_center_properties.resource_parent
@@ -613,7 +612,7 @@ class SecurityCenterClient {
    *                compare_duration, but present at reference_time.
    *   * "REMOVED": indicates that the asset was present at the start of
    *                compare_duration, but not present at reference_time.
-   *   * "ACTIVE_AT_BOTH": indicates that the asset was present at both the
+   *   * "ACTIVE": indicates that the asset was present at both the
    *                start and the end of the time period defined by
    *                compare_duration and reference_time.
    *
@@ -750,7 +749,6 @@ class SecurityCenterClient {
    *
    *   The following fields are supported when compare_duration is not set:
    *
-   *   * security_center_properties.resource_name
    *   * security_center_properties.resource_project
    *   * security_center_properties.resource_type
    *   * security_center_properties.resource_parent
@@ -803,7 +801,7 @@ class SecurityCenterClient {
    *                compare_duration, but present at reference_time.
    *   * "REMOVED": indicates that the asset was present at the start of
    *                compare_duration, but not present at reference_time.
-   *   * "ACTIVE_AT_BOTH": indicates that the asset was present at both the
+   *   * "ACTIVE": indicates that the asset was present at both the
    *                start and the end of the time period defined by
    *                compare_duration and reference_time.
    *
@@ -1432,7 +1430,7 @@ class SecurityCenterClient {
   }
 
   /**
-   * Lists an organization or source's assets.
+   * Lists an organization or source's findings.
    *
    * To list across all sources provide a `-` as the source id.
    * Example: /v1beta1/organizations/123/sources/-/findings
