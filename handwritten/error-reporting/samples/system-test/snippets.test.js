@@ -15,24 +15,22 @@
 
 'use strict';
 
-const path = require(`path`);
-const test = require(`ava`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
+const path = require('path');
+const assert = require('assert');
+const tools = require('@google-cloud/nodejs-repo-tools');
 
-const cwd = path.join(__dirname, `..`);
-const cmd = `node snippets.js`;
+const cwd = path.join(__dirname, '..');
+const cmd = 'node snippets.js';
 
-test.before(tools.checkCredentials);
+before(tools.checkCredentials);
 
-test.serial(`should setup using implicit credentials`, async t => {
-  t.plan(0);
+it('should setup using implicit credentials', async () =>
   // There's no output, the command should just succeed
-  await tools.runAsync(`${cmd} setup-implicit`, cwd);
-});
+  await tools.runAsync(`${cmd} setup-implicit`, cwd));
 
-test.serial(`should report errors manually`, async t => {
+it('should report errors manually', async () => {
   const output = await tools.runAsync(`${cmd} manual`, cwd);
-  t.is(output.includes('Done reporting error event!'), true);
-  t.is(output.includes('Done reporting Error object!'), true);
-  t.is(output.includes('Done reporting error string!'), true);
+  assert.strictEqual(output.includes('Done reporting error event!'), true);
+  assert.strictEqual(output.includes('Done reporting Error object!'), true);
+  assert.strictEqual(output.includes('Done reporting error string!'), true);
 });
