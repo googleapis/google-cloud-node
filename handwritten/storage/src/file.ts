@@ -875,7 +875,7 @@ class File extends ServiceObject {
     options = extend(true, {}, options);
     callback = callback || util.noop;
 
-    let destBucket: Bucket|File;
+    let destBucket: Bucket;
     let destName: string;
     let newFile: File;
 
@@ -888,8 +888,7 @@ class File extends ServiceObject {
         destBucket = this.bucket;
         destName = destination;
       }
-    } else if (
-        destination.constructor && destination.constructor.name === 'Bucket') {
+    } else if (destination instanceof Bucket) {
       destBucket = destination;
       destName = this.name;
     } else if (destination instanceof File) {

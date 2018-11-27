@@ -407,7 +407,8 @@ describe('storage', () => {
       });
 
       it('should not expose default api', () => {
-        assert.strictEqual(typeof file.default, 'undefined');
+        // tslint:disable-next-line no-any
+        assert.strictEqual(typeof (file as any).default, 'undefined');
       });
 
       it('should grant an account access', done => {
@@ -2379,9 +2380,9 @@ describe('storage', () => {
                     location: 'ASIA-EAST1',
                     dra: true,
                   },
-                  cb as InstanceResponseCallback);
+                  cb);
             },
-            cb => file.copy(copiedFile, cb as InstanceResponseCallback)
+            cb => file.copy(copiedFile, cb as CopyCallback)
           ],
           err => {
             assert.ifError(err);

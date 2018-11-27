@@ -381,7 +381,7 @@ export type GetBucketResponse = [Bucket, request.Response];
  * @param {Bucket} bucket The {@link Bucket}.
  * @param {object} apiResponse The full API response.
  */
-export interface GetBucketCallback extends InstanceResponseCallback {
+export interface GetBucketCallback {
   (err: ApiError|null, bucket: Bucket|null,
    apiResponse: request.Response): void;
 }

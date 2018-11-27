@@ -26,25 +26,27 @@ const snakeize = require('snakeize');
 import * as stream from 'stream';
 import * as through from 'through2';
 import {Bucket, Channel, Notification} from '../src';
-import {CreateWriteStreamOptions, File, SetFileMetadataOptions} from '../src/file';
+import {CreateWriteStreamOptions, File, SetFileMetadataOptions, FileOptions} from '../src/file';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import * as r from 'request';
 import {GetBucketMetadataCallback, GetFilesOptions, MakeAllFilesPublicPrivateOptions, SetBucketMetadataCallback} from '../src/bucket';
 import {AddAclOptions} from '../src/acl';
 
+
+
 class FakeFile {
   calledWith_: IArguments;
   bucket: Bucket;
   name: string;
-  options?: {};
+  options: FileOptions;
   metadata: {};
   createWriteStream: Function;
-  isSameFile?: () => boolean;
-  constructor(bucket: Bucket, name: string, options?: {}) {
+  isSameFile = () => false;
+  constructor(bucket: Bucket, name: string, options?: FileOptions) {
     this.calledWith_ = arguments;
     this.bucket = bucket;
     this.name = name;
-    this.options = options;
+    this.options = options || {};
     this.metadata = {};
 
     this.createWriteStream = (options: CreateWriteStreamOptions) => {
@@ -1226,7 +1228,7 @@ describe('Bucket', () => {
 
   describe('file', () => {
     const FILE_NAME = 'remote-file-name.jpg';
-    let file: File;
+    let file: FakeFile;
     const options = {a: 'b', c: 'd'};
 
     beforeEach(() => {
@@ -2242,7 +2244,7 @@ describe('Bucket', () => {
         encryptionKey: 'key',
         kmsKeyName: 'kms-key-name',
       };
-      bucket.upload(filepath, options, (err: Error, file: File) => {
+      bucket.upload(filepath, options, (err: Error, file: FakeFile) => {
         assert.ifError(err);
         assert.strictEqual(file.bucket.name, bucket.name);
         assert.deepStrictEqual(file.metadata, metadata);
@@ -2259,7 +2261,7 @@ describe('Bucket', () => {
         encryptionKey: 'key',
         kmsKeyName: 'kms-key-name',
       };
-      bucket.upload(filepath, options, (err: Error, file: File) => {
+      bucket.upload(filepath, options, (err: Error, file: FakeFile) => {
         assert.ifError(err);
         assert.strictEqual(file.bucket.name, bucket.name);
         assert.strictEqual(file.name, newFileName);
@@ -2277,7 +2279,7 @@ describe('Bucket', () => {
         encryptionKey: 'key',
         kmsKeyName: 'kms-key-name',
       };
-      bucket.upload(filepath, options, (err: Error, file: File) => {
+      bucket.upload(filepath, options, (err: Error, file: FakeFile) => {
         assert.ifError(err);
         assert.strictEqual(file.bucket.name, bucket.name);
         assert.strictEqual(file.name, newFileName);
@@ -2294,7 +2296,7 @@ describe('Bucket', () => {
         return true;
       };
       const options = {destination: fakeFile};
-      bucket.upload(filepath, options, (err: Error, file: File) => {
+      bucket.upload(filepath, options, (err: Error, file: FakeFile) => {
         assert.ifError(err);
         assert(file.isSameFile());
         done();
@@ -2307,7 +2309,7 @@ describe('Bucket', () => {
         return true;
       };
       const options = {destination: fakeFile, metadata};
-      bucket.upload(filepath, options, (err: Error, file: File) => {
+      bucket.upload(filepath, options, (err: Error, file: FakeFile) => {
         assert.ifError(err);
         assert(file.isSameFile());
         assert.deepStrictEqual(file.metadata, metadata);
