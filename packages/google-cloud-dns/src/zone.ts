@@ -28,6 +28,7 @@ import {Change, CreateChangeCallback, CreateChangeRequest} from './change';
 import {Record, RecordMetadata, RecordObject} from './record';
 import {DNS} from '.';
 import * as r from 'request';
+import {Readable} from 'stream';
 
 /**
  * Config to set for the change.
@@ -164,6 +165,9 @@ export interface ZoneExportCallback {
  * const zone = dns.zone('zone-id');
  */
 class Zone extends ServiceObject {
+  name: string;
+  getRecordsStream: (query?: GetRecordsRequest|string|string[]) => Readable;
+  getChangesStream: (query?: GetChangesRequest) => Readable;
   constructor(dns: DNS, name: string) {
     const methods = {
       /**
@@ -336,6 +340,8 @@ class Zone extends ServiceObject {
      * @type {string}
      */
     this.name = name;
+    this.getRecordsStream = paginator.streamify('getRecords');
+    this.getChangesStream = paginator.streamify('getChanges');
   }
 
   /**
@@ -1169,7 +1175,6 @@ import(localPath: string, callback?: CreateChangeCallback): void|Promise<CreateC
  *     this.end();
  *   });
  */
-Zone.prototype.getChangesStream = paginator.streamify('getChanges');
 
 /**
  * Get the list of {module:dns/record} objects for this zone as a readable
@@ -1203,7 +1208,6 @@ Zone.prototype.getChangesStream = paginator.streamify('getChanges');
  *     this.end();
  *   });
  */
-Zone.prototype.getRecordsStream = paginator.streamify('getRecords');
 
 /*! Developer Documentation
  *
