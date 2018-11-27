@@ -13,7 +13,7 @@
   },
   "scripts": {
     "mocha": "mocha system-test/*.js --timeout 600000",
-    "cover": "nyc --reporter=lcov --cache mocha test/*.test.js system-test/*.test.js --timeout 600000 && nyc report",
+    "cover": "nyc --reporter=lcov --cache mocha system-test/*.test.js --timeout 600000 && nyc report",
     "test": "npm run cover"
   },
   "dependencies": {
