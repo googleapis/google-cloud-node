@@ -222,7 +222,7 @@ class Entity extends TestHelper {
     });
   }
 
-  testUpsert() {
+  async testUpsert() {
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
@@ -232,9 +232,8 @@ class Entity extends TestHelper {
       data: task,
     };
 
-    datastore.upsert(entity).then(() => {
-      // Task inserted successfully.
-    });
+    await datastore.upsert(entity);
+    // Task inserted successfully.
     // [END datastore_upsert]
 
     return this.datastore.upsert({
@@ -265,34 +264,29 @@ class Entity extends TestHelper {
     });
   }
 
-  testLookup() {
+  async testLookup() {
     const taskKey = this.getIncompleteKey();
 
     // [START datastore_lookup]
-    datastore.get(taskKey).then(results => {
-      // Task found.
-      const entity = results[0];
-
-      // entity = {
-      //   category: 'Personal',
-      //   done: false,
-      //   priority: 4,
-      //   description: 'Learn Cloud Datastore'
-      // };
-      console.log(entity);
-    });
+    const [entity] = await datastore.get(taskKey);
+    // entity = {
+    //   category: 'Personal',
+    //   done: false,
+    //   priority: 4,
+    //   description: 'Learn Cloud Datastore'
+    // };
+    console.log(entity);
     // [END datastore_lookup]
+    await this.datastore.save({
+      method: 'insert',
+      key: taskKey,
+      data: {},
+    });
 
-    return this.datastore
-      .save({
-        method: 'insert',
-        key: taskKey,
-        data: {},
-      })
-      .then(() => this.datastore.get(taskKey));
+    return this.datastore.get(taskKey);
   }
 
-  testUpdate() {
+  async testUpdate() {
     const taskKey = this.getIncompleteKey();
     const task = this.getTask();
 
@@ -302,39 +296,34 @@ class Entity extends TestHelper {
       data: task,
     };
 
-    datastore.update(entity).then(() => {
-      // Task updated successfully.
-    });
+    await datastore.update(entity);
+    // Task updated successfully.
     // [END datastore_update]
 
-    return this.datastore
-      .save({
-        method: 'insert',
-        key: taskKey,
-        data: {},
-      })
-      .then(() => this.datastore.update({key: taskKey, data: task}));
+    await this.datastore.save({
+      method: 'insert',
+      key: taskKey,
+      data: {},
+    });
+    return this.datastore.update({key: taskKey, data: task});
   }
 
-  testDelete() {
+  async testDelete() {
     const taskKey = this.getIncompleteKey();
 
     // [START datastore_delete]
-    datastore.delete(taskKey).then(() => {
-      // Task deleted successfully.
-    });
+    await datastore.delete(taskKey);
+    // Task deleted successfully.
     // [END datastore_delete]
-
-    return this.datastore
-      .save({
-        method: 'insert',
-        key: taskKey,
-        data: {},
-      })
-      .then(() => this.datastore.delete(taskKey));
+    await this.datastore.save({
+      method: 'insert',
+      key: taskKey,
+      data: {},
+    });
+    return this.datastore.delete(taskKey);
   }
 
-  testBatchUpsert() {
+  async testBatchUpsert() {
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -364,9 +353,8 @@ class Entity extends TestHelper {
       },
     ];
 
-    datastore.upsert(entities).then(() => {
-      // Tasks inserted successfully.
-    });
+    await datastore.upsert(entities);
+    // Tasks inserted successfully.
     // [END datastore_batch_upsert]
 
     return this.datastore.upsert([
@@ -381,34 +369,30 @@ class Entity extends TestHelper {
     ]);
   }
 
-  testBatchLookup() {
+  async testBatchLookup() {
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
     // [START datastore_batch_lookup]
     const keys = [taskKey1, taskKey2];
 
-    datastore.get(keys).then(results => {
-      // Tasks retrieved successfully.
-      const tasks = results[0];
-
-      console.log(tasks);
-    });
+    const [tasks] = await datastore.get(keys);
+    // Tasks retrieved successfully.
+    console.log(tasks);
     // [END datastore_batch_lookup]
 
     return this.datastore.get([taskKey1, taskKey2]);
   }
 
-  testBatchDelete() {
+  async testBatchDelete() {
     const taskKey1 = this.datastore.key(['Task', 1]);
     const taskKey2 = this.datastore.key(['Task', 2]);
 
     // [START datastore_batch_delete]
     const keys = [taskKey1, taskKey2];
 
-    datastore.delete(keys).then(() => {
-      // Tasks deleted successfully.
-    });
+    await datastore.delete(keys);
+    // Tasks deleted successfully.
     // [END datastore_batch_delete]
 
     return this.datastore.delete([taskKey1, taskKey2]);
@@ -428,7 +412,7 @@ class Index extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testExplodingProperties() {
+  async testExplodingProperties() {
     const original = datastore.key;
     datastore.key = this.datastore.key;
 
@@ -446,158 +430,137 @@ class Index extends TestHelper {
 
     datastore.key = original;
 
-    return this.datastore.save(task).then(() => {
-      assert.ok(task.key);
-      assert.ok(task.key.id);
-    });
+    await this.datastore.save(task);
+    assert.ok(task.key);
+    assert.ok(task.key.id);
   }
 }
 
 class Metadata extends TestHelper {
-  testNamespaceRunQuery() {
+  async testNamespaceRunQuery() {
     const datastore = this.datastore;
 
     const startNamespace = 'Animals';
     const endNamespace = 'Zoos';
 
-    return datastore
-      .save({
-        key: datastore.key({
-          namespace: 'Animals',
-          path: ['Ant', 1],
-        }),
-        data: {},
-      })
-      .then(() => {
-        // [START datastore_namespace_run_query]
-        function runNamespaceQuery(startNamespace, endNamespace) {
-          const startKey = datastore.key(['__namespace__', startNamespace]);
-          const endKey = datastore.key(['__namespace__', endNamespace]);
+    await datastore.save({
+      key: datastore.key({
+        namespace: 'Animals',
+        path: ['Ant', 1],
+      }),
+      data: {},
+    });
 
-          const query = datastore
-            .createQuery('__namespace__')
-            .select('__key__')
-            .filter('__key__', '>=', startKey)
-            .filter('__key__', '<', endKey);
+    // [START datastore_namespace_run_query]
+    async function runNamespaceQuery(startNamespace, endNamespace) {
+      const startKey = datastore.key(['__namespace__', startNamespace]);
+      const endKey = datastore.key(['__namespace__', endNamespace]);
 
-          return datastore.runQuery(query).then(results => {
-            const entities = results[0];
-            const namespaces = entities.map(
-              entity => entity[datastore.KEY].name
-            );
+      const query = datastore
+        .createQuery('__namespace__')
+        .select('__key__')
+        .filter('__key__', '>=', startKey)
+        .filter('__key__', '<', endKey);
 
-            console.log('Namespaces:');
-            namespaces.forEach(namespace => console.log(namespace));
+      const [entities] = await datastore.runQuery(query);
+      const namespaces = entities.map(entity => entity[datastore.KEY].name);
 
-            return namespaces;
-          });
-        }
-        // [END datastore_namespace_run_query]
+      console.log('Namespaces:');
+      namespaces.forEach(namespace => console.log(namespace));
 
-        return runNamespaceQuery(startNamespace, endNamespace);
-      })
-      .then(namespaces => {
-        assert.strictEqual(namespaces.includes('Animals'), true);
-      });
+      return namespaces;
+    }
+    // [END datastore_namespace_run_query]
+
+    const namespaces = await runNamespaceQuery(startNamespace, endNamespace);
+    assert.strictEqual(namespaces.includes('Animals'), true);
   }
 
-  testKindRunQuery() {
+  async testKindRunQuery() {
     const datastore = this.datastore;
 
     // [START datastore_kind_run_query]
-    function runKindQuery() {
+    async function runKindQuery() {
       const query = datastore.createQuery('__kind__').select('__key__');
 
-      return datastore.runQuery(query).then(results => {
-        const entities = results[0];
-        const kinds = entities.map(entity => entity[datastore.KEY].name);
+      const [entities] = await datastore.runQuery(query);
+      const kinds = entities.map(entity => entity[datastore.KEY].name);
 
-        console.log('Kinds:');
-        kinds.forEach(kind => console.log(kind));
+      console.log('Kinds:');
+      kinds.forEach(kind => console.log(kind));
 
-        return kinds;
-      });
+      return kinds;
     }
     // [END datastore_kind_run_query]
-
-    return runKindQuery().then(kinds => {
-      assert.strictEqual(kinds.includes('Account'), true);
-    });
+    const kinds = await runKindQuery();
+    assert.strictEqual(kinds.includes('Account'), true);
   }
 
-  testPropertyRunQuery() {
+  async testPropertyRunQuery() {
     const datastore = this.datastore;
 
     // [START datastore_property_run_query]
-    function runPropertyQuery() {
+    async function runPropertyQuery() {
       const query = datastore.createQuery('__property__').select('__key__');
+      const [entities] = await datastore.runQuery(query);
+      // @TODO convert below object to map
+      const propertiesByKind = {};
 
-      return datastore.runQuery(query).then(results => {
-        const entities = results[0];
-        const propertiesByKind = {};
+      entities.forEach(entity => {
+        const key = entity[datastore.KEY];
+        const kind = key.path[1];
+        const property = key.path[3];
 
-        entities.forEach(entity => {
-          const key = entity[datastore.KEY];
-          const kind = key.path[1];
-          const property = key.path[3];
-
-          propertiesByKind[kind] = propertiesByKind[kind] || [];
-          propertiesByKind[kind].push(property);
-        });
-
-        console.log('Properties by Kind:');
-        for (const key in propertiesByKind) {
-          console.log(key, propertiesByKind[key]);
-        }
-
-        return propertiesByKind;
+        propertiesByKind[kind] = propertiesByKind[kind] || [];
+        propertiesByKind[kind].push(property);
       });
+
+      console.log('Properties by Kind:');
+      for (const key in propertiesByKind) {
+        console.log(key, propertiesByKind[key]);
+      }
+
+      return propertiesByKind;
     }
     // [END datastore_property_run_query]
-
-    return runPropertyQuery().then(propertiesByKind => {
-      assert.deepStrictEqual(propertiesByKind.Account, ['balance']);
-    });
+    const propertiesByKind = await runPropertyQuery();
+    assert.deepStrictEqual(propertiesByKind.Account, ['balance']);
   }
 
-  testPropertyByKindRunQuery() {
+  async testPropertyByKindRunQuery() {
     const datastore = this.datastore;
 
     // [START datastore_property_by_kind_run_query]
-    function runPropertyByKindQuery() {
+    async function runPropertyByKindQuery() {
       const ancestorKey = datastore.key(['__kind__', 'Account']);
 
       const query = datastore
         .createQuery('__property__')
         .hasAncestor(ancestorKey);
+      const [entities] = await datastore.runQuery(query);
 
-      return datastore.runQuery(query).then(results => {
-        const entities = results[0];
+      const representationsByProperty = {};
 
-        const representationsByProperty = {};
+      entities.forEach(entity => {
+        const key = entity[datastore.KEY];
+        const propertyName = key.name;
+        const propertyType = entity.property_representation;
 
-        entities.forEach(entity => {
-          const key = entity[datastore.KEY];
-          const propertyName = key.name;
-          const propertyType = entity.property_representation;
-
-          representationsByProperty[propertyName] = propertyType;
-        });
-
-        console.log('Task property representations:');
-        for (const key in representationsByProperty) {
-          console.log(key, representationsByProperty[key]);
-        }
-
-        return representationsByProperty;
+        representationsByProperty[propertyName] = propertyType;
       });
+
+      console.log('Task property representations:');
+      for (const key in representationsByProperty) {
+        console.log(key, representationsByProperty[key]);
+      }
+
+      return representationsByProperty;
     }
     // [END datastore_property_by_kind_run_query]
 
-    return runPropertyByKindQuery().then(propertiesByKind => {
-      assert.deepStrictEqual(propertiesByKind, {
-        balance: ['INT64'],
-      });
+    const propertiesByKind = await runPropertyByKindQuery();
+    assert.deepStrictEqual(propertiesByKind, {
+      balance: ['INT64'],
     });
   }
 }
@@ -651,17 +614,13 @@ class Query extends TestHelper {
     return query;
   }
 
-  testRunQuery() {
+  async testRunQuery() {
     const query = this.basicQuery;
 
     // [START datastore_run_query]
-    datastore.runQuery(query).then(results => {
-      // Task entities found.
-      const tasks = results[0];
-
-      console.log('Tasks:');
-      tasks.forEach(task => console.log(task));
-    });
+    const [tasks] = await datastore.runQuery(query);
+    console.log('Tasks:');
+    tasks.forEach(task => console.log(task));
     // [END datastore_run_query]
 
     return this.datastore.runQuery(query);
@@ -753,32 +712,28 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testRunQueryProjection() {
+  async testRunQueryProjection() {
     const datastore = this.datastore;
     const query = this.projectionQuery;
 
     // [START datastore_run_query_projection]
-    function runProjectionQuery() {
+    async function runProjectionQuery() {
       const priorities = [];
       const percentCompletes = [];
-
-      return datastore.runQuery(query).then(results => {
-        const tasks = results[0];
-
-        tasks.forEach(task => {
-          priorities.push(task.priority);
-          percentCompletes.push(task.percent_complete);
-        });
-
-        return {
-          priorities: priorities,
-          percentCompletes: percentCompletes,
-        };
+      const [tasks] = await datastore.runQuery(query);
+      tasks.forEach(task => {
+        priorities.push(task.priority);
+        percentCompletes.push(task.percent_complete);
       });
+
+      return {
+        priorities: priorities,
+        percentCompletes: percentCompletes,
+      };
     }
     // [END datastore_run_query_projection]
 
-    return runProjectionQuery();
+    return await runProjectionQuery();
   }
 
   testKeysOnlyQuery() {
@@ -926,7 +881,7 @@ class Query extends TestHelper {
     return this.datastore.runQuery(query);
   }
 
-  testCursorPaging() {
+  async testCursorPaging() {
     const datastore = this.datastore;
     const pageSize = 1;
 
@@ -934,44 +889,38 @@ class Query extends TestHelper {
     // By default, google-cloud-node will automatically paginate through all of
     // the results that match a query. However, this sample implements manual
     // pagination using limits and cursor tokens.
-    function runPageQuery(pageCursor) {
+    async function runPageQuery(pageCursor) {
       let query = datastore.createQuery('Task').limit(pageSize);
 
       if (pageCursor) {
         query = query.start(pageCursor);
       }
+      const results = await datastore.runQuery(query);
+      const entities = results[0];
+      const info = results[1];
 
-      return datastore.runQuery(query).then(results => {
-        const entities = results[0];
-        const info = results[1];
+      if (info.moreResults !== Datastore.NO_MORE_RESULTS) {
+        // If there are more results to retrieve, the end cursor is
+        // automatically set on `info`. To get this value directly, access
+        // the `endCursor` property.
+        const results = await runPageQuery(info.endCursor);
 
-        if (info.moreResults !== Datastore.NO_MORE_RESULTS) {
-          // If there are more results to retrieve, the end cursor is
-          // automatically set on `info`. To get this value directly, access
-          // the `endCursor` property.
-          return runPageQuery(info.endCursor).then(results => {
-            // Concatenate entities
-            results[0] = entities.concat(results[0]);
-            return results;
-          });
-        }
+        // Concatenate entities
+        results[0] = entities.concat(results[0]);
+        return results;
+      }
 
-        return [entities, info];
-      });
+      return [entities, info];
     }
     // [END datastore_cursor_paging]
-
-    return runPageQuery().then(results => {
-      const entities = results[0];
-      assert.strictEqual(Array.isArray(entities), true);
-      const info = results[1];
-      if (!info || !info.endCursor) {
-        throw new Error('An `info` with an `endCursor` is not present.');
-      }
-    });
+    const [entities, info] = await runPageQuery();
+    assert.strictEqual(Array.isArray(entities), true);
+    if (!info || !info.endCursor) {
+      throw new Error('An `info` with an `endCursor` is not present.');
+    }
   }
 
-  testEventualConsistentQuery() {
+  async testEventualConsistentQuery() {
     const datastoreMock = datastore;
     datastore = this.datastore;
     // [START datastore_eventual_consistent_query]
@@ -980,47 +929,37 @@ class Query extends TestHelper {
 
     query.run({consistency: 'eventual'});
     // [END datastore_eventual_consistent_query]
-    return query
-      .run({consistency: 'eventual'})
-      .then(results => {
-        datastore = datastoreMock;
-        const entities = results[0];
-        return entities;
-      })
-      .catch(err => {
-        datastore = datastoreMock;
-        return Promise.reject(err);
-      });
+    const [entities] = await query.run({consistency: 'eventual'});
+    datastore = datastoreMock;
+    return entities;
   }
 }
 
 // [START datastore_transactional_update]
-function transferFunds(fromKey, toKey, amount) {
+async function transferFunds(fromKey, toKey, amount) {
   const transaction = datastore.transaction();
+  await transaction.run();
+  const results = await Promise.all([
+    transaction.get(fromKey),
+    transaction.get(toKey),
+  ]);
+  const accounts = results.map(result => result[0]);
 
-  return transaction
-    .run()
-    .then(() => Promise.all([transaction.get(fromKey), transaction.get(toKey)]))
-    .then(results => {
-      const accounts = results.map(result => result[0]);
+  accounts[0].balance -= amount;
+  accounts[1].balance += amount;
 
-      accounts[0].balance -= amount;
-      accounts[1].balance += amount;
+  transaction.save([
+    {
+      key: fromKey,
+      data: accounts[0],
+    },
+    {
+      key: toKey,
+      data: accounts[1],
+    },
+  ]);
 
-      transaction.save([
-        {
-          key: fromKey,
-          data: accounts[0],
-        },
-        {
-          key: toKey,
-          data: accounts[1],
-        },
-      ]);
-
-      return transaction.commit();
-    })
-    .catch(() => transaction.rollback());
+  return transaction.commit();
 }
 // [END datastore_transactional_update]
 
@@ -1047,7 +986,7 @@ class Transaction extends TestHelper {
     return this.datastore.save(entities);
   }
 
-  testTransactionalUpdate() {
+  async testTransactionalUpdate() {
     const fromKey = this.fromKey;
     const toKey = this.toKey;
     const originalBalance = this.originalBalance;
@@ -1056,86 +995,76 @@ class Transaction extends TestHelper {
 
     // Overwrite so the real Datastore instance is used in `transferFunds`.
     datastore = this.datastore;
-
-    return this.restoreBankAccountBalances({
-      keys: [fromKey, toKey],
-      balance: originalBalance,
-    })
-      .then(() => transferFunds(fromKey, toKey, amountToTransfer))
-      .then(() =>
-        Promise.all([this.datastore.get(fromKey), this.datastore.get(toKey)])
-      )
-      .then(results => {
-        const accounts = results.map(result => result[0]);
-        // Restore `datastore` to the mock API.
-        datastore = datastoreMock;
-        assert.strictEqual(
-          accounts[0].balance,
-          originalBalance - amountToTransfer
-        );
-        assert.strictEqual(
-          accounts[1].balance,
-          originalBalance + amountToTransfer
-        );
-      })
-      .catch(err => {
-        // Restore `datastore` to the mock API.
-        datastore = datastoreMock;
-        return Promise.reject(err);
+    try {
+      await this.restoreBankAccountBalances({
+        keys: [fromKey, toKey],
+        balance: originalBalance,
       });
+      await transferFunds(fromKey, toKey, amountToTransfer);
+      const results = await Promise.all([
+        this.datastore.get(fromKey),
+        this.datastore.get(toKey),
+      ]);
+      const accounts = results.map(result => result[0]);
+      // Restore `datastore` to the mock API.
+      datastore = datastoreMock;
+      assert.strictEqual(
+        accounts[0].balance,
+        originalBalance - amountToTransfer
+      );
+      assert.strictEqual(
+        accounts[1].balance,
+        originalBalance + amountToTransfer
+      );
+    } catch (err) {
+      datastore = datastoreMock;
+      throw err;
+    }
   }
 
-  testTransactionalRetry() {
+  async testTransactionalRetry() {
     // Overwrite so the real Datastore instance is used in `transferFunds`.
     const datastoreMock = datastore;
     datastore = this.datastore;
 
     const fromKey = this.fromKey;
     const toKey = this.toKey;
-
-    return this.restoreBankAccountBalances({
+    await this.restoreBankAccountBalances({
       keys: [fromKey, toKey],
       balance: this.originalBalance,
-    })
-      .then(() => {
-        // [START datastore_transactional_retry]
-        function transferFundsWithRetry() {
-          const maxTries = 5;
-          let currentAttempt = 1;
-          let delay = 100;
+    });
 
-          function tryRequest() {
-            return transferFunds(fromKey, toKey, 10).catch(err => {
-              if (currentAttempt <= maxTries) {
-                // Use exponential backoff
-                return new Promise((resolve, reject) => {
-                  setTimeout(() => {
-                    currentAttempt++;
-                    delay *= 2;
-                    tryRequest().then(resolve, reject);
-                  }, delay);
-                });
-              }
-              return Promise.reject(err);
-            });
+    // [START datastore_transactional_retry]
+    async function transferFundsWithRetry() {
+      const maxTries = 5;
+      let currentAttempt = 1;
+      let delay = 100;
+
+      async function tryRequest() {
+        try {
+          await transferFunds(fromKey, toKey, 10);
+        } catch (err) {
+          if (currentAttempt <= maxTries) {
+            // Use exponential backoff
+            setTimeout(async () => {
+              currentAttempt++;
+              delay *= 2;
+              await tryRequest();
+            }, delay);
           }
-
-          return tryRequest(1, 5);
+          throw err;
         }
-        // [END datastore_transactional_retry]
-        return transferFundsWithRetry();
-      })
-      .then(() => {
-        // Restore `datastore` to the mock API.
-        datastore = datastoreMock;
-      })
-      .catch(() => {
-        // Restore `datastore` to the mock API.
-        datastore = datastoreMock;
-      });
+      }
+
+      await tryRequest(1, 5);
+    }
+    // [END datastore_transactional_retry]
+    await transferFundsWithRetry();
+    // Restore `datastore` to the mock API.
+    datastore = datastoreMock;
   }
 
-  testTransactionalGetOrCreate() {
+  async testTransactionalGetOrCreate() {
     const taskKey = this.datastore.key(['Task', Date.now()]);
 
     // Overwrite so the real Datastore instance is used in `transferFunds`.
@@ -1143,76 +1072,64 @@ class Transaction extends TestHelper {
     datastore = this.datastore;
 
     // [START datastore_transactional_get_or_create]
-    function getOrCreate(taskKey, taskData) {
+    async function getOrCreate(taskKey, taskData) {
       const taskEntity = {
         key: taskKey,
         data: taskData,
       };
-
       const transaction = datastore.transaction();
 
-      return transaction
-        .run()
-        .then(() => transaction.get(taskKey))
-        .then(results => {
-          const task = results[0];
-          if (task) {
-            // The task entity already exists.
-            return transaction.rollback();
-          } else {
-            // Create the task entity.
-            transaction.save(taskEntity);
-            return transaction.commit();
-          }
-        })
-        .then(() => taskEntity)
-        .catch(() => transaction.rollback());
+      try {
+        await transaction.run();
+        const [task] = await transaction.get(taskKey);
+        if (task) {
+          // The task entity already exists.
+          transaction.rollback();
+        } else {
+          // Create the task entity.
+          transaction.save(taskEntity);
+          transaction.commit();
+        }
+        return taskEntity;
+      } catch (err) {
+        transaction.rollback();
+      }
     }
     // [END datastore_transactional_get_or_create]
-
-    return getOrCreate(taskKey, {})
-      .then(task => {
-        assert.ok(task, 'Should have a task.');
-        return getOrCreate(taskKey, {});
-      })
-      .then(task => {
-        assert.ok(task, 'Should have a task.');
-        // Restore `datastore` to the mock API.
-        datastore = datastoreMock;
-      })
-      .catch(err => {
-        // Restore `datastore` to the mock API.
-        datastore = datastoreMock;
-        return Promise.reject(err);
-      });
+    try {
+      let task = await getOrCreate(taskKey, {});
+      assert.ok(task, 'Should have a task.');
+      task = await getOrCreate(taskKey, {});
+      assert.ok(task, 'Should have a task.');
+      // Restore `datastore` to the mock API.
+      datastore = datastoreMock;
+    } catch (err) {
+      // Restore `datastore` to the mock API.
+      datastore = datastoreMock;
+      throw err;
+    }
   }
 
-  testSingleEntityGroupReadOnly() {
+  async testSingleEntityGroupReadOnly() {
     // Overwrite so the real Datastore instance is used in `transferFunds`.
     const datastoreMock = datastore;
     datastore = this.datastore;
 
     // [START datastore_transactional_single_entity_group_read_only]
-    function getTaskListEntities() {
-      let taskList, taskListEntities;
-
+    async function getTaskListEntities() {
       const transaction = datastore.transaction();
-      const taskListKey = datastore.key(['TaskList', 'default']);
+      try {
+        const taskListKey = datastore.key(['TaskList', 'default']);
 
-      return transaction
-        .run()
-        .then(() => datastore.get(taskListKey))
-        .then(results => {
-          taskList = results[0];
-          const query = datastore.createQuery('Task').hasAncestor(taskListKey);
-          return datastore.runQuery(query);
-        })
-        .then(results => {
-          taskListEntities = results[0];
-          return transaction.commit();
-        })
-        .then(() => [taskList, taskListEntities])
-        .catch(() => transaction.rollback());
+        await transaction.run();
+        const [taskList] = await datastore.get(taskListKey);
+        const query = datastore.createQuery('Task').hasAncestor(taskListKey);
+        const [taskListEntities] = await datastore.runQuery(query);
+        await transaction.commit();
+        return [taskList, taskListEntities];
+      } catch (err) {
+        transaction.rollback();
+      }
     }
     // [END datastore_transactional_single_entity_group_read_only]
 
