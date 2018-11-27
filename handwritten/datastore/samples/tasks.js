@@ -64,7 +64,7 @@ node tasks <command>
 */
 
 // [START datastore_add_entity]
-function addTask(description) {
+async function addTask(description) {
   const taskKey = datastore.key('Task');
   const entity = {
     key: taskKey,
@@ -85,75 +85,55 @@ function addTask(description) {
     ],
   };
 
-  datastore
-    .save(entity)
-    .then(() => {
-      console.log(`Task ${taskKey.id} created successfully.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  try {
+    await datastore.save(entity);
+    console.log(`Task ${taskKey.id} created successfully.`);
+  } catch (err) {
+    console.error('ERROR:', err);
+  }
 }
 // [END datastore_add_entity]
 
 // [START datastore_update_entity]
-function markDone(taskId) {
+async function markDone(taskId) {
   const transaction = datastore.transaction();
   const taskKey = datastore.key(['Task', taskId]);
 
-  transaction
-    .run()
-    .then(() => transaction.get(taskKey))
-    .then(results => {
-      const task = results[0];
-      task.done = true;
-      transaction.save({
-        key: taskKey,
-        data: task,
-      });
-      return transaction.commit();
-    })
-    .then(() => {
-      // The transaction completed successfully.
-      console.log(`Task ${taskId} updated successfully.`);
-    })
-    .catch(() => transaction.rollback());
+  try {
+    await transaction.run();
+    const [task] = await transaction.get(taskKey);
+    task.done = true;
+    transaction.save({
+      key: taskKey,
+      data: task,
+    });
+    await transaction.commit();
+    console.log(`Task ${taskId} updated successfully.`);
+  } catch (err) {
+    transaction.rollback();
+  }
 }
 // [END datastore_update_entity]
 
 // [START datastore_retrieve_entities]
-function listTasks() {
+async function listTasks() {
   const query = datastore.createQuery('Task').order('created');
 
-  datastore
-    .runQuery(query)
-    .then(results => {
-      const tasks = results[0];
-
-      console.log('Tasks:');
-      tasks.forEach(task => {
-        const taskKey = task[datastore.KEY];
-        console.log(taskKey.id, task);
-      });
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  const [tasks] = await datastore.runQuery(query);
+  console.log('Tasks:');
+  tasks.forEach(task => {
+    const taskKey = task[datastore.KEY];
+    console.log(taskKey.id, task);
+  });
 }
 // [END datastore_retrieve_entities]
 
 // [START datastore_delete_entity]
-function deleteTask(taskId) {
+async function deleteTask(taskId) {
   const taskKey = datastore.key(['Task', taskId]);
 
-  datastore
-    .delete(taskKey)
-    .then(() => {
-      console.log(`Task ${taskId} deleted successfully.`);
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
+  await datastore.delete(taskKey);
+  console.log(`Task ${taskId} deleted successfully.`);
 }
 // [END datastore_delete_entity]
 
