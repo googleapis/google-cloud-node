@@ -34,6 +34,7 @@
     "delay": "^4.0.1",
     "extend": "^3.0.1",
     "gcp-metadata": "^0.9.0",
+    "lodash.pickby": "^4.6.0",
     "nan": "^2.11.1",
     "parse-duration": "^0.1.1",
     "pify": "^4.0.0",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
+    "@types/lodash.pickby": "^4.6.4",
     "@types/long": "^4.0.0",
     "@types/mocha": "^5.0.0",
     "@types/nock": "^9.1.0",

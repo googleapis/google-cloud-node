@@ -1,0 +1,20 @@
+URL:https://github.com/googleapis/cloud-debug-nodejs/tree/7bdc2f1f62a3b45b7b53ea79f9444c8ed50e138b
+Version: 7bdc2f1f62a3b45b7b53ea79f9444c8ed50e138b
+License: Apache 2.0
+License File: # LICENSE
+Description:
+       This module provides Stackdriver Debugger support for Node.js
+       applications. Stackdriver Debugger is a feature of Google Cloud Platform
+       that lets you debug your applications in production without stopping or
+       pausing your application.
+Local Modifications:
+       All code except scanner.ts has been removed.
+
+       Imported as a git-subtree.
+
+       $ git remote add -f cloud-debug-nodejs https://github.com/googleapis/cloud-debug-nodejs.git
+       $ git subtree add --prefix ts/third_party/cloud-debug-nodejs cloud-debug-nodejs master --squash
+
+       To update from remote on an ongoing basis:
+       $ git fetch cloud-debug-nodejs
+       $ git subtree pull --prefix ts/third_party/cloud-debug-nodejs cloud-debug-nodejs master --squash
