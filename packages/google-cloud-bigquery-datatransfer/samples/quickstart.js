@@ -33,15 +33,10 @@ async function main() {
   const projectId = process.env.GCLOUD_PROJECT;
 
   // Iterate over all elements.
-  const formattedParent = client.locationPath(projectId, 'us-central1');
-
-  const [resources] = await client.listDataSources({parent: formattedParent});
-  for (let i = 0; i < resources.length; i += 1) {
-    console.log(resources[i]);
-  }
-
+  const formattedParent = client.projectPath(projectId, 'us-central1');
   let nextRequest = {parent: formattedParent};
   const options = {autoPaginate: false};
+  console.log('Data sources:');
   do {
     // Fetch the next page.
     const responses = await client.listDataSources(nextRequest, options);
@@ -51,15 +46,18 @@ async function main() {
     nextRequest = responses[1];
     // The actual response object, if necessary.
     // const rawResponse = responses[2];
-    for (let i = 0; i < resources.length; i += 1) {
-      console.log(resources[i]);
-    }
+    resources.forEach(resource => {
+      console.log(`  ${resource.name}`);
+    });
   } while (nextRequest);
+
+  console.log('\n\n');
+  console.log('Sources via stream:');
 
   client
     .listDataSourcesStream({parent: formattedParent})
     .on('data', element => {
-      console.log(element);
+      console.log(`  ${element.name}`);
     });
   // [END bigquerydatatransfer_quickstart]
 }
