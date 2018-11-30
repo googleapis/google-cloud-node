@@ -70,7 +70,7 @@
     "pumpify": "^1.5.1",
     "snakeize": "^0.1.0",
     "stream-events": "^1.0.1",
-    "teeny-request": "^3.11.0",
+    "teeny-request": "^3.11.3",
     "through2": "^3.0.0",
     "xdg-basedir": "^3.0.0"
   },

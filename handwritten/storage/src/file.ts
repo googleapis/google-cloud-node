@@ -1157,7 +1157,7 @@ class File extends ServiceObject {
       //      applicable, to the user.
       const onResponse =
           (err: Error|null, body: ResponseBody,
-           rawResponseStream: r.Request) => {
+           rawResponseStream: r.Response) => {
             if (err) {
               // Get error message from the body.
               rawResponseStream.pipe(concat(body => {
