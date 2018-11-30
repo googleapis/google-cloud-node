@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-'use strict';
-
-import * as arrify from 'arrify';
 import {Service, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import {GoogleAuthOptions} from 'google-auth-library';
+import * as arrify from 'arrify';
 import * as extend from 'extend';
+import {GoogleAuthOptions} from 'google-auth-library';
 import * as is from 'is';
+
 const isHtml = require('is-html');
 import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common/build/src/util';
 import * as r from 'request';

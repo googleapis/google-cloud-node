@@ -34,7 +34,6 @@
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme  -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "npm run check && eslint samples/",
-    "prettier": "prettier --write samples/*.js samples/*/*.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
     "test-no-cover": "mocha build/test",
@@ -42,7 +41,7 @@
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix && eslint --fix 'samples/**/*.js' && npm run prettier",
+    "fix": "gts fix && eslint --fix 'samples/**/*.js'",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "presystem-test": "npm run compile"
@@ -81,6 +80,6 @@
     "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
     "source-map-support": "^0.5.6",
-    "typescript": "~3.1.0"
+    "typescript": "~3.2.0"
   }
 }

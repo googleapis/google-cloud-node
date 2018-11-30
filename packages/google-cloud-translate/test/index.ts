@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-'use strict';
-
+import {DecorateRequestOptions, util} from '@google-cloud/common';
+import {BodyResponseCallback, MakeRequestConfig} from '@google-cloud/common/build/src/util';
+import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {util} from '@google-cloud/common';
-import * as pfy from '@google-cloud/promisify';
-import * as orig from '../src';
 import * as r from 'request';
+
+import * as orig from '../src';
 
 const pkgJson = require('../../package.json');
 
@@ -38,11 +38,13 @@ const fakePromisify = extend({}, pfy, {
 });
 
 const fakeUtil = extend({}, util, {
-  makeRequest() {
+  makeRequest(
+      opts: DecorateRequestOptions, cfg: MakeRequestConfig,
+      cb: BodyResponseCallback) {
     if (makeRequestOverride) {
-      return makeRequestOverride.apply(null, arguments);
+      return makeRequestOverride(opts, cfg, cb);
     }
-    return util.makeRequest.apply(null, arguments);
+    return util.makeRequest(opts, cfg, cb);
   },
 });
 const originalFakeUtil = extend(true, {}, fakeUtil);
