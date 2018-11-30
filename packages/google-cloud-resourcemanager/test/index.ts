@@ -15,6 +15,7 @@
  */
 
 import {DecorateRequestOptions, Operation, util} from '@google-cloud/common';
+import {MakeAuthenticatedRequestFactoryConfig} from '@google-cloud/common/build/src/util';
 import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
@@ -78,11 +79,11 @@ const fakePromisify = {
 
 let makeAuthenticatedRequestFactoryOverride: Function|null;
 const fakeUtil = Object.assign({}, util, {
-  makeAuthenticatedRequestFactory() {
+  makeAuthenticatedRequestFactory(cfg: MakeAuthenticatedRequestFactoryConfig) {
     if (makeAuthenticatedRequestFactoryOverride) {
-      return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
+      return makeAuthenticatedRequestFactoryOverride(cfg);
     }
-    return util.makeAuthenticatedRequestFactory.apply(null, arguments);
+    return util.makeAuthenticatedRequestFactory(cfg);
   },
 });
 const originalFakeUtil = Object.assign({}, fakeUtil);
