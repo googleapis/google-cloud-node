@@ -251,7 +251,8 @@ export class LoggingBunyan extends Writable {
   write(...args: any[]): boolean {
     let record = args[0];
     let encoding: string|null = null;
-    let callback: Function;
+    type Callback = (error: Error|null|undefined) => void;
+    let callback: Callback|string;
     if (typeof args[1] === 'string') {
       encoding = args[1];
       callback = args[2];
@@ -266,9 +267,9 @@ export class LoggingBunyan extends Writable {
       }
     }
     if (encoding !== null) {
-      return super.write.call(this, record, encoding, callback);
+      return super.write.call(this, record, encoding, callback as Callback);
     } else {
-      return super.write.call(this, record, callback);
+      return super.write.call(this, record, callback as string);
     }
   }
 
