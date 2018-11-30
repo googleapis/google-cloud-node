@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.3.2
+
+This patch release fixed an issue affecting reading from a file on GCS ([#528](https://github.com/googleapis/nodejs-storage/issues/528)).
+
+### Dependencies
+- fix(dep): upgrade teeny-request to v3.11.3 ([#529](https://github.com/googleapis/nodejs-storage/pull/529))
+- fix(deps): update dependency @google-cloud/common to ^0.27.0 ([#525](https://github.com/googleapis/nodejs-storage/pull/525))
+
+### Internal / Testing Changes
+- refactor: convert sample tests from ava to mocha ([#523](https://github.com/googleapis/nodejs-storage/pull/523))
+- docs(samples): updated samples code to use async await ([#521](https://github.com/googleapis/nodejs-storage/pull/521))
+- chore: add synth.metadata
+- fix(ts): Update bucket options types ([#518](https://github.com/googleapis/nodejs-storage/pull/518))
+
 ## v2.3.1
 
 11-14-2018 22:15 PST
