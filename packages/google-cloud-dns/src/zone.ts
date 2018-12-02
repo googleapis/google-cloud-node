@@ -530,7 +530,13 @@ class Zone extends ServiceObject {
     callback =
         typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     if (options.force) {
-      this.empty(this.delete.bind(this, callback));
+      this.empty(err => {
+        if (err) {
+          callback!(err);
+          return;
+        }
+        this.delete(callback!);
+      });
       return;
     }
     super.delete(callback!);
