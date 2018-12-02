@@ -22,9 +22,8 @@ import * as sinon from 'sinon';
 import * as through from 'through2';
 import * as pfy from '@google-cloud/promisify';
 import * as pjy from '@google-cloud/projectify';
-
-const {entity} = require('../src/entity.js');
-const {Query} = require('../src/query.js');
+import {entity} from '../src/entity.js';
+import {Query} from '../src/query.js';
 
 let promisified = false;
 const fakePfy = Object.assign({}, pfy, {
@@ -963,7 +962,7 @@ describe('Request', function() {
             entities.push(entity);
           })
           .on('end', function() {
-            const allResults = [].slice
+            const allResults = ([] as Array<{}>).slice
               .call(entityResultsPerApiCall[1])
               .concat(entityResultsPerApiCall[2]);
 

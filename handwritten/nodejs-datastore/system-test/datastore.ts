@@ -25,8 +25,8 @@ describe('Datastore', () => {
   // Override the Key method so we can track what keys are created during the
     // tests. They are then deleted in the `after` hook.
   const key = datastore.key;
-  datastore.key = function() {
-    const keyObject = key.apply(this, arguments);
+  datastore.key = function(options) {
+    const keyObject = key.call(this, options);
     testKinds.push(keyObject.kind);
     return keyObject;
   };
