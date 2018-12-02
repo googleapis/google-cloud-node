@@ -342,15 +342,13 @@ describe('Transaction', function() {
 
   describe('createQuery', function() {
     it('should return query from datastore.createQuery', function() {
-      const args = [0, 1, 2, 3];
+      const args = [0, 1];
       const createQueryReturnValue = {};
 
       transaction.datastore.createQuery = function(...ags) {
         assert.strictEqual(this, transaction);
         assert.strictEqual(ags[0], args[0]);
         assert.strictEqual(ags[1], args[1]);
-        assert.strictEqual(ags[2], args[2]);
-        assert.strictEqual(ags[3], args[3]);
         return createQueryReturnValue;
       };
 
