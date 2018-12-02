@@ -23,7 +23,7 @@ const {entity} = require('../src/entity');
 
 let promisified = false;
 const fakePfy = Object.assign({}, pfy, {
-  promisifyAll: function(Class, options) {
+  promisifyAll(Class, options) {
     if (Class.name !== 'Transaction') {
       return;
     }
@@ -34,8 +34,8 @@ const fakePfy = Object.assign({}, pfy, {
 
 // tslint:disable-next-line no-any
 const DatastoreRequestOverride: any = {
-  delete: function() {},
-  save: function() {},
+  delete() {},
+  save() {},
 };
 
 class FakeDatastoreRequest {
@@ -62,7 +62,7 @@ describe('Transaction', function() {
   const NAMESPACE = 'a-namespace';
 
   const DATASTORE = {
-    request_: function() {},
+    request_() {},
     projectId: PROJECT_ID,
     namespace: NAMESPACE,
   };
@@ -121,7 +121,7 @@ describe('Transaction', function() {
       // tslint:disable-next-line no-any
       const fakeDataset: any = {
         request_: {
-          bind: function(context) {
+          bind(context) {
             assert.strictEqual(context, fakeDataset);
 
             setImmediate(function() {
@@ -230,7 +230,7 @@ describe('Transaction', function() {
       transaction.delete(deleteArg2);
       transaction.save(saveArg2);
 
-      const args: {}[] = [];
+      const args: Array<{}> = [];
 
       let deleteCalled = 0;
       DatastoreRequestOverride.delete = function() {
@@ -468,7 +468,7 @@ describe('Transaction', function() {
         done();
       };
 
-      transaction.run({gaxOptions: gaxOptions});
+      transaction.run({gaxOptions});
     });
 
     describe('options.readOnly', function() {

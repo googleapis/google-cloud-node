@@ -20,7 +20,7 @@ import {Datastore} from '../src';
 import {entity} from '../src/entity';
 
 describe('Datastore', () => {
-  const testKinds: {}[] = [];
+  const testKinds: Array<{}> = [];
   const datastore = new Datastore();
   // Override the Key method so we can track what keys are created during the
     // tests. They are then deleted in the `after` hook.
@@ -81,23 +81,23 @@ describe('Datastore', () => {
       const postKey = datastore.key(['Post', 'post1']);
 
       const data = {
-        longString: longString,
+        longString,
         notMetadata: true,
         longStringArray: [longString],
         metadata: {
-          longString: longString,
+          longString,
           otherProperty: 'value',
           obj: {
             longStringArray: [
               {
-                longString: longString,
+                longString,
                 nestedLongStringArray: [
                   {
-                    longString: longString,
+                    longString,
                     nestedProperty: true,
                   },
                   {
-                    longString: longString,
+                    longString,
                   },
                 ],
               },
@@ -105,14 +105,14 @@ describe('Datastore', () => {
           },
           longStringArray: [
             {
-              longString: longString,
+              longString,
               nestedLongStringArray: [
                 {
-                  longString: longString,
+                  longString,
                   nestedProperty: true,
                 },
                 {
-                  longString: longString,
+                  longString,
                 },
               ],
             },
@@ -123,7 +123,7 @@ describe('Datastore', () => {
       datastore.save(
         {
           key: postKey,
-          data: data,
+          data,
           excludeFromIndexes: [
             'longString',
             'longStringArray[]',
@@ -189,7 +189,7 @@ describe('Datastore', () => {
         buf: Buffer.from('010100000000000000000059400000000000006940', 'hex'),
       };
 
-      datastore.save({key: postKey, data: data}, err => {
+      datastore.save({key: postKey, data}, err => {
         assert.ifError(err);
 
         const assignedId = postKey.id;
@@ -406,7 +406,7 @@ describe('Datastore', () => {
 
         datastore.save(
           {
-            key: key,
+            key,
             data: {
               year: integerType,
             },
@@ -431,7 +431,7 @@ describe('Datastore', () => {
 
         datastore.save(
           {
-            key: key,
+            key,
             data: {
               nines: doubleType,
             },
@@ -459,7 +459,7 @@ describe('Datastore', () => {
 
         datastore.save(
           {
-            key: key,
+            key,
             data: {
               location: geoPointType,
             },
@@ -549,7 +549,7 @@ describe('Datastore', () => {
     before(done => {
       const keysToSave = keys.map((key, index) => {
         return {
-          key: key,
+          key,
           data: characters[index],
         };
       });
@@ -817,7 +817,7 @@ describe('Datastore', () => {
         assert.ifError(err);
         transaction.get(key, err => {
           assert.ifError(err);
-          transaction.save({key: key, data: obj});
+          transaction.save({key, data: obj});
           transaction.commit(err => {
             assert.ifError(err);
             datastore.get(key, (err, entity) => {
@@ -852,7 +852,7 @@ describe('Datastore', () => {
 
             transaction.save([
               {
-                key: key,
+                key,
                 data: {rating: 10},
               },
               {
@@ -906,7 +906,7 @@ describe('Datastore', () => {
 
         transaction.save([
           {
-            key: key,
+            key,
             data: {
               rating: 10,
             },
@@ -969,7 +969,7 @@ describe('Datastore', () => {
         assert.ifError(err);
         transaction.get(key, err => {
           assert.ifError(err);
-          transaction.save({key: key, data: {}});
+          transaction.save({key, data: {}});
           transaction.commit(err => {
             assert(err instanceof Error);
             done();

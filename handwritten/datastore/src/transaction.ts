@@ -209,7 +209,7 @@ class Transaction extends DatastoreRequest {
       {
         client: 'DatastoreClient',
         method: 'commit',
-        reqOpts: reqOpts,
+        reqOpts,
         gaxOpts: gaxOptions,
       },
       (err, resp) => {
@@ -457,7 +457,7 @@ class Transaction extends DatastoreRequest {
       {
         client: 'DatastoreClient',
         method: 'beginTransaction',
-        reqOpts: reqOpts,
+        reqOpts,
         gaxOpts: options.gaxOptions,
       },
       (err, resp) => {

@@ -230,7 +230,7 @@ class DatastoreRequest {
     const makeRequest = keys => {
       // tslint:disable-next-line no-any
       const reqOpts: any = {
-        keys: keys,
+        keys,
       };
 
       if (options.consistency) {
@@ -245,7 +245,7 @@ class DatastoreRequest {
         {
           client: 'DatastoreClient',
           method: 'lookup',
-          reqOpts: reqOpts,
+          reqOpts,
           gaxOpts: options.gaxOptions,
         },
         (err, resp) => {
@@ -355,7 +355,7 @@ class DatastoreRequest {
       {
         client: 'DatastoreClient',
         method: 'commit',
-        reqOpts: reqOpts,
+        reqOpts,
         gaxOpts: gaxOptions,
       },
       callback
@@ -660,7 +660,7 @@ class DatastoreRequest {
         {
           client: 'DatastoreClient',
           method: 'runQuery',
-          reqOpts: reqOpts,
+          reqOpts,
           gaxOpts: options.gaxOptions,
         },
         onResultSet
@@ -935,7 +935,7 @@ class DatastoreRequest {
     }
 
     const insertIndexes = {};
-    const mutations: {}[] = [];
+    const mutations: Array<{}> = [];
     const methods = {
       insert: true,
       update: true,
@@ -1002,7 +1002,7 @@ class DatastoreRequest {
       });
 
     const reqOpts = {
-      mutations: mutations,
+      mutations,
     };
 
     function onCommit(err, resp) {
@@ -1035,7 +1035,7 @@ class DatastoreRequest {
       {
         client: 'DatastoreClient',
         method: 'commit',
-        reqOpts: reqOpts,
+        reqOpts,
         gaxOpts: gaxOptions,
       },
       onCommit

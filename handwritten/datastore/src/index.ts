@@ -544,7 +544,7 @@ class Datastore extends DatastoreRequest {
    */
   static int(value) {
     return new entity.Int(value);
-  };
+  }
 
   int(value) {
     return Datastore.int(value);
@@ -564,7 +564,7 @@ class Datastore extends DatastoreRequest {
    */
   static isInt(value) {
     return entity.isDsInt(value);
-  };
+  }
 
   isInt(value) {
     return Datastore.isInt(value);
@@ -644,7 +644,7 @@ class Datastore extends DatastoreRequest {
       namespace = this.namespace;
     }
     return new Query(this, namespace, arrify(kind));
-  };
+  }
 
   /**
    * Helper to create a Key object, scoped to the instance's namespace by default.
@@ -702,7 +702,7 @@ class Datastore extends DatastoreRequest {
           path: arrify(options),
         };
     return new entity.Key(options);
-  };
+  }
 
   /**
    * Helper function to check if something is a Datastore Key object.
@@ -718,7 +718,7 @@ class Datastore extends DatastoreRequest {
    */
   static isKey(value) {
     return entity.isDsKey(value);
-  };
+  }
   isKey(value) {
     return Datastore.isKey(value);
   }
@@ -739,7 +739,7 @@ class Datastore extends DatastoreRequest {
    */
   transaction(options?) {
     return new Transaction(this, options);
-  };
+  }
 
   /**
    * Determine the appropriate endpoint to use for API requests. If not explicitly
@@ -772,7 +772,7 @@ class Datastore extends DatastoreRequest {
       .replace(leadingProtocol, '')
       .replace(port, '')
       .replace(trailingSlashes, '');
-  };
+  }
 
   /**
    * {@link DatastoreRequest} class.

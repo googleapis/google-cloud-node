@@ -112,7 +112,7 @@ describe('entity', function() {
   describe('Key', function() {
     it('should assign the namespace', function() {
       const namespace = 'NS';
-      const key = new entity.Key({namespace: namespace, path: []});
+      const key = new entity.Key({namespace, path: []});
       assert.strictEqual(key.namespace, namespace);
     });
 
@@ -295,7 +295,7 @@ describe('entity', function() {
       const valueProto = {
         valueType: 'timestampValue',
         timestampValue: {
-          seconds: seconds,
+          seconds,
           nanos: ms * 1e6,
         },
       };
@@ -1016,7 +1016,7 @@ describe('entity', function() {
       const key = {};
 
       const entityProto = {
-        key: key,
+        key,
       };
 
       const results = [

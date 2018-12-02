@@ -23,28 +23,40 @@ const v1 = require('../src/v1/index.js');
 // tslint:disable-next-line no-any
 const fakeEntity: any = {
   KEY_SYMBOL: Symbol('fake key symbol'),
-  Int: function(value) {
-    this.value = value;
+  Int: class {
+    value: {};
+    constructor(value) {
+      this.value = value;
+    }
   },
-  isDsInt: function() {
+  isDsInt() {
     this.calledWith_ = arguments;
   },
-  Double: function(value) {
-    this.value = value;
+  Double: class {
+    value: {};
+    constructor(value) {
+      this.value = value;
+    }
   },
-  isDsDouble: function() {
+  isDsDouble() {
     this.calledWith_ = arguments;
   },
-  GeoPoint: function(value) {
-    this.value = value;
+  GeoPoint: class {
+    value: {};
+    constructor(value) {
+      this.value = value;
+    }
   },
-  isDsGeoPoint: function() {
+  isDsGeoPoint() {
     this.calledWith_ = arguments;
   },
-  Key: function() {
-    this.calledWith_ = arguments;
+  Key: class {
+    calledWith_: IArguments;
+    constructor() {
+      this.calledWith_ = arguments;
+    }
   },
-  isDsKey: function() {
+  isDsKey() {
     this.calledWith_ = arguments;
   },
 };
