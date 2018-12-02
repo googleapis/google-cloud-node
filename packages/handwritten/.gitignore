@@ -11,4 +11,3 @@ system-test/*key.json
 build
 .vscode
 package-lock.json
-key.json
