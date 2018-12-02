@@ -224,7 +224,7 @@ class Key {
      */
     Object.defineProperty(this, 'path', {
       enumerable: true,
-      get: function() {
+      get() {
         return arrify(this.parent && this.parent.path).concat([
           this.kind,
           this.name || this.id,
@@ -880,14 +880,14 @@ function queryToQueryProto(query) {
             name: filter.name,
           },
           op: OP_TO_OPERATOR[filter.op],
-          value: value,
+          value,
         },
       };
     });
 
     queryProto.filter = {
       compositeFilter: {
-        filters: filters,
+        filters,
         op: 'AND',
       },
     };

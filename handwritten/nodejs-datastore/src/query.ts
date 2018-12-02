@@ -212,7 +212,7 @@ class Query {
    */
   order(property: string, options?) {
     const sign = options && options.descending ? '-' : '+';
-    this.orders.push({name: property, sign: sign});
+    this.orders.push({name: property, sign});
     return this;
   }
 
