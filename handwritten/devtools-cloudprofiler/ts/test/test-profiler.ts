@@ -276,9 +276,7 @@ describe('Profiler', () => {
 
       requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                         .onCall(0)
-                        .returns(new Promise(resolve => {
-                          resolve([{}, {statusCode: 200}]);
-                        }));
+                        .callsArgWith(1, null, {}, {statusCode: 200});
 
       const profiler = new Profiler(testConfig);
       profiler.timeProfiler = instance(mockTimeProfiler);
@@ -304,9 +302,7 @@ describe('Profiler', () => {
 
       requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                         .onCall(0)
-                        .returns(new Promise(resolve => {
-                          resolve([{}, {statusCode: 200}]);
-                        }));
+                        .callsArgWith(1, null, {}, {statusCode: 200});
 
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
@@ -329,9 +325,7 @@ describe('Profiler', () => {
       };
       requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                         .onCall(0)
-                        .returns(new Promise(resolve => {
-                          resolve([{}, {}]);
-                        }));
+                        .callsArgWith(1, null, {}, {});
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
       assert.strictEqual(0, requestStub.callCount);
@@ -344,7 +338,7 @@ describe('Profiler', () => {
         labels: {instance: 'test-instance'}
       };
       requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
-                        .rejects(new Error('Network error'));
+                        .callsArgWith(1, new Error('Network error'), {}, {});
       const profiler = new Profiler(testConfig);
       profiler.timeProfiler = instance(mockTimeProfiler);
       await profiler.profileAndUpload(requestProf);
@@ -358,10 +352,8 @@ describe('Profiler', () => {
       };
       requestStub =
           sinon.stub(common.ServiceObject.prototype, 'request')
-              .returns(new Promise(resolve => {
-                resolve(
-                    [undefined, {statusCode: 500, statusMessage: 'Error 500'}]);
-              }));
+              .callsArgWith(
+                  1, null, {}, {statusCode: 500, statusMessage: 'Error 500'});
       const profiler = new Profiler(testConfig);
       profiler.timeProfiler = instance(mockTimeProfiler);
       await profiler.profileAndUpload(requestProf);

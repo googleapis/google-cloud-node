@@ -15,18 +15,16 @@
  */
 
 import delay from 'delay';
-
 import {perftools} from '../../../proto/profile';
 import {serializeTimeProfile} from './profile-serializer';
-
-const profiler = require('bindings')('time_profiler');
+import {setSamplingInterval, startProfiling, stopProfiling} from './time-profiler-bindings';
 
 export class TimeProfiler {
   /**
    * @param intervalMicros - average time in microseconds between samples
    */
   constructor(private intervalMicros: number) {
-    profiler.setSamplingInterval(this.intervalMicros);
+    setSamplingInterval(this.intervalMicros);
   }
 
   /**
@@ -43,9 +41,9 @@ export class TimeProfiler {
     // tslint:disable-next-line no-any
     (process as any)._startProfilerIdleNotifier();
     const runName = 'stackdriver-profiler-' + Date.now() + '-' + Math.random();
-    profiler.startProfiling(runName);
+    startProfiling(runName);
     await delay(durationMillis);
-    const result = profiler.stopProfiling(runName);
+    const result = stopProfiling(runName);
     // tslint:disable-next-line no-any
     (process as any)._stopProfilerIdleNotifier();
     const profile = serializeTimeProfile(result, this.intervalMicros);

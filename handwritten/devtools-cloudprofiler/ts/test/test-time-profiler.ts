@@ -16,14 +16,12 @@
 
 import delay from 'delay';
 import * as sinon from 'sinon';
-
 import {perftools} from '../../proto/profile';
 import {TimeProfiler} from '../src/profilers/time-profiler';
-
+import * as v8TimeProfiler from '../src/profilers/time-profiler-bindings';
 import {timeProfile, v8TimeProfile} from './profiles-for-tests';
 
 const assert = require('assert');
-const v8TimeProfiler = require('bindings')('time_profiler');
 
 describe('TimeProfiler', () => {
   describe('profile', () => {

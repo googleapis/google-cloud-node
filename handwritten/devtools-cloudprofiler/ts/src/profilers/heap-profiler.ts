@@ -16,10 +16,8 @@
 
 import {perftools} from '../../../proto/profile';
 import {AllocationProfileNode} from '../v8-types';
-
+import {getAllocationProfile, startSamplingHeapProfiler, stopSamplingHeapProfiler} from './heap-profiler-bindings';
 import {serializeHeapProfile} from './profile-serializer';
-
-const profiler = require('bindings')('sampling_heap_profiler');
 
 let enabled = false;
 let heapIntervalBytes = 0;
@@ -35,7 +33,7 @@ export function profile(ignoreSamplePath?: string):
     throw new Error('Heap profiler is not enabled.');
   }
   const startTimeNanos = Date.now() * 1000 * 1000;
-  const result = profiler.getAllocationProfile();
+  const result = getAllocationProfile();
   // Add node for external memory usage.
   // Current type definitions do not have external.
   // TODO: remove any once type definition is updated to include external.
@@ -69,7 +67,7 @@ export function start(intervalBytes: number, stackDepth: number) {
   }
   heapIntervalBytes = intervalBytes;
   heapStackDepth = stackDepth;
-  profiler.startSamplingHeapProfiler(heapIntervalBytes, heapStackDepth);
+  startSamplingHeapProfiler(heapIntervalBytes, heapStackDepth);
   enabled = true;
 }
 
@@ -77,6 +75,6 @@ export function start(intervalBytes: number, stackDepth: number) {
 export function stop() {
   if (enabled) {
     enabled = false;
-    profiler.stopSamplingHeapProfiler();
+    stopSamplingHeapProfiler();
   }
 }

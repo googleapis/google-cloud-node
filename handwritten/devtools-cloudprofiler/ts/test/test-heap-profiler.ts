@@ -15,14 +15,12 @@
  */
 
 import * as sinon from 'sinon';
-
 import * as heapProfiler from '../src/profilers/heap-profiler';
-
+import * as v8HeapProfiler from '../src/profilers/heap-profiler-bindings';
 import {heapProfileExcludePath, heapProfileIncludePath, heapProfileWithExternal, v8HeapProfile, v8HeapWithPathProfile} from './profiles-for-tests';
 
 const copy = require('deep-copy');
 const assert = require('assert');
-const v8HeapProfiler = require('bindings')('sampling_heap_profiler');
 
 describe('HeapProfiler', () => {
   let startStub: sinon.SinonStub;
@@ -53,7 +51,7 @@ describe('HeapProfiler', () => {
            external: 1024,
            rss: 2048,
            heapTotal: 4096,
-           heapUse: 2048,
+           heapUsed: 2048,
          });
          const intervalBytes = 1024 * 512;
          const stackDepth = 32;
@@ -70,7 +68,7 @@ describe('HeapProfiler', () => {
            external: 0,
            rss: 2048,
            heapTotal: 4096,
-           heapUse: 2048,
+           heapUsed: 2048,
          });
          const intervalBytes = 1024 * 512;
          const stackDepth = 32;
@@ -87,7 +85,7 @@ describe('HeapProfiler', () => {
            external: 0,
            rss: 2048,
            heapTotal: 4096,
-           heapUse: 2048,
+           heapUsed: 2048,
          });
          const intervalBytes = 1024 * 512;
          const stackDepth = 32;
