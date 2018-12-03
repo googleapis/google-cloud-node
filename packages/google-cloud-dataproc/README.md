@@ -3,8 +3,7 @@
 # [Google Cloud Dataproc: Node.js Client](https://github.com/googleapis/nodejs-dataproc)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-dataproc.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-dataproc)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-dataproc?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-dataproc)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/dataproc.svg)](https://www.npmjs.org/package/@google-cloud/dataproc)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dataproc/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dataproc)
 
 > Node.js idiomatic client for [Cloud Dataproc][product-docs].
@@ -147,3 +146,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-dataproc/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/dataproc/latest/
 [product-docs]: https://cloud.google.com/dataproc/docs
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+
