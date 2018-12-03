@@ -5,8 +5,7 @@
 # [Google Cloud Text-to-Speech API: Node.js Client](https://github.com/googleapis/nodejs-text-to-speech)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-text-to-speech.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-text-to-speech)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-text-to-speech?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-text-to-speech)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/text-to-speech.svg)](https://www.npmjs.org/package/@google-cloud/text-to-speech)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-text-to-speech/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-text-to-speech)
 
 > Node.js idiomatic client for [Cloud Text-to-Speech API][product-docs].
@@ -141,3 +140,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-text-to-speech/blob/master/LI
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/text-to-speech/latest/
 [product-docs]: https://cloud.google.com/text-to-speech/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
