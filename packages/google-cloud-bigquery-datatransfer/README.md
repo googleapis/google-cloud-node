@@ -3,8 +3,7 @@
 # [Google BigQuery Data Transfer Service: Node.js Client](https://github.com/googleapis/nodejs-bigquery-data-transfer)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-bigquery-data-transfer.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-bigquery-data-transfer)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-bigquery-data-transfer?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-bigquery-data-transfer)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/bigquery-data-transfer.svg)](https://www.npmjs.org/package/@google-cloud/bigquery-data-transfer)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-bigquery-data-transfer/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-bigquery-data-transfer)
 
 > Node.js idiomatic client for [BigQuery Data Transfer Service][product-docs].
@@ -141,3 +140,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-bigquery-data-transfer/blob/m
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest/
 [product-docs]: https://cloud.google.com/bigquery/docs/reference/datatransfer/rest/
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+
