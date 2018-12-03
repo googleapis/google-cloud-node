@@ -5,7 +5,7 @@
 # [Google Cloud Scheduler: Node.js Client](https://github.com/googleapis/nodejs-scheduler)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-scheduler.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-scheduler)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/scheduler.svg)](https://www.npmjs.org/package/@google-cloud/scheduler)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-scheduler/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-scheduler)
 
 [Cloud Scheduler](https://cloud.google.com/scheduler/docs/) is a fully managed enterprise-grade cron job scheduler. It allows you to schedule virtually any job, including batch, big data jobs, cloud infrastructure operations, and more. You can automate everything, including retries in case of failure to reduce manual toil and intervention. Cloud Scheduler even acts as a single pane of glass, allowing you to manage all your automation tasks from one place.
@@ -81,3 +81,4 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=
 [auth]: https://cloud.google.com/docs/authentication/getting-started
+
