@@ -84,7 +84,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/asset/latest/
-[product-docs]: https://cloud.google.com/asset/docs
+[product-docs]: https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
