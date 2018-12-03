@@ -3,8 +3,7 @@
 # [Google Cloud Data Loss Prevention (DLP) API: Node.js Client](https://github.com/googleapis/nodejs-dlp)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-dlp.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-dlp)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-dlp?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-dlp)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/dlp.svg)](https://www.npmjs.org/package/@google-cloud/dlp)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dlp/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dlp)
 
 > Node.js idiomatic client for [Data Loss Prevention (DLP) API][product-docs].
@@ -172,3 +171,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-dlp/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/dlp/latest/
 [product-docs]: https://cloud.google.com/dlp/docs/
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+
