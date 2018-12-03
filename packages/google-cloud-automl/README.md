@@ -5,8 +5,7 @@
 # [Cloud AutoML: Node.js Client](https://github.com/GoogleCloudPlatform/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/GoogleCloudPlatform/google-cloud-node.svg?style=flat)](https://circleci.com/gh/GoogleCloudPlatform/google-cloud-node)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/GoogleCloudPlatform/google-cloud-node?branch=master&svg=true)](https://ci.appveyor.com/project/GoogleCloudPlatform/google-cloud-node)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/automl.svg)](https://www.npmjs.org/package/@google-cloud/automl)
 [![codecov](https://img.shields.io/codecov/c/github/GoogleCloudPlatform/google-cloud-node/master.svg?style=flat)](https://codecov.io/gh/GoogleCloudPlatform/google-cloud-node)
 
 > Node.js idiomatic client for [AutoML][product-docs].
@@ -101,3 +100,4 @@ See [LICENSE](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/mast
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/automl/latest/
 [product-docs]: https://cloud.google.com/automl/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
