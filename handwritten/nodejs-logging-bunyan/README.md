@@ -3,8 +3,7 @@
 # [Stackdriver Logging for Bunyan](https://github.com/googleapis/nodejs-logging-bunyan)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-logging-bunyan.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-logging-bunyan)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-logging-bunyan?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-logging-bunyan)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/logging-bunyan.svg)](https://www.npmjs.org/package/@google-cloud/logging-bunyan)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-logging-bunyan/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-logging-bunyan)
 
 This module provides an easy to use, higher-level layer for working with
@@ -259,3 +258,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/LI
 [trace-agent]: https://www.npmjs.com/package/@google-cloud/trace-agent
 [LogEntry]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
 [trace-viewing-log-entries]: https://cloud.google.com/trace/docs/viewing-details#log_entries
+
