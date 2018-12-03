@@ -5,8 +5,7 @@
 # [Google Cloud Asset API: Node.js Client](https://github.com/googleapis/nodejs-asset)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-asset.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-asset)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-asset?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-asset)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/asset.svg)](https://www.npmjs.org/package/@google-cloud/asset)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-asset/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-asset)
 
 The [Cloud Asset API](https://cloud.google.com/asset/docs) manages the history and inventory of cloud resources.
@@ -90,3 +89,4 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=asset.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
+
