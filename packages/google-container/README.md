@@ -5,8 +5,7 @@
 # [Google Kubernetes Engine: Node.js Client](https://github.com/googleapis/nodejs-cloud-container)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-cloud-container.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-cloud-container)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-cloud-container?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-cloud-container)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/container.svg)](https://www.npmjs.org/package/@google-cloud/container)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-container/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-container)
 
 > Node.js idiomatic client for [Kubernetes Engine][product-docs].
@@ -126,3 +125,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-cloud-container/blob/master/L
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/container/latest/
 [product-docs]: https://cloud.google.com/kubernetes-engine/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
