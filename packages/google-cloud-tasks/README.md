@@ -5,8 +5,7 @@
 # [Google Cloud Tasks: Node.js Client](https://github.com/googleapis/nodejs-tasks)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-tasks.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-tasks)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-tasks?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-tasks)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/tasks.svg)](https://www.npmjs.org/package/@google-cloud/tasks)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-tasks/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-tasks)
 
 > Node.js idiomatic client for [Cloud Tasks][product-docs].
@@ -91,3 +90,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-tasks/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/tasks/latest/
 [product-docs]: https://cloud.google.com/tasks/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
