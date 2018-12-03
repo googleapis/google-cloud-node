@@ -5,8 +5,7 @@
 # [Google Cloud IoT Core: Node.js Client](https://github.com/googleapis/nodejs-iot)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-iot.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-iot)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-iot?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-iot)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/iot.svg)](https://www.npmjs.org/package/@google-cloud/iot)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-iot/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-iot)
 
 > Node.js idiomatic client for [Cloud IoT Core][product-docs].
@@ -91,3 +90,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-iot/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/cloudiot/latest/
 [product-docs]: https://cloud.google.com/iot/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
