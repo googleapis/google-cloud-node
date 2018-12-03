@@ -5,8 +5,7 @@
 # [Stackdriver Monitoring: Node.js Client](https://github.com/googleapis/nodejs-monitoring)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-monitoring.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-monitoring)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-monitoring?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-monitoring)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/monitoring.svg)](https://www.npmjs.org/package/@google-cloud/monitoring)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-monitoring/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-monitoring)
 
 > Node.js idiomatic client for [Monitoring][product-docs].
@@ -161,3 +160,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-monitoring/blob/master/LICENS
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/monitoring/latest/
 [product-docs]: https://cloud.google.com/monitoring/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
