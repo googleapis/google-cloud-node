@@ -3,8 +3,7 @@
 # Stackdriver Error Reporting: Node.js Client
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-error-reporting.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-error-reporting)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-error-reporting?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-error-reporting)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/error-reporting.svg)](https://www.npmjs.org/package/@google-cloud/error-reporting)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-error-reporting/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-error-reporting)
 
 > Node.js idiomatic client for [Error Reporting][product-docs].
@@ -113,3 +112,4 @@ See [LICENSE](LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/error-reporting/latest/
 [product-docs]: https://cloud.google.com/error-reporting/docs/
+
