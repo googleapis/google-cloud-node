@@ -3,8 +3,7 @@
 # [Google Cloud Natural Language API: Node.js Client](https://github.com/googleapis/nodejs-language)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-language.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-language)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-language?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-language)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/language.svg)](https://www.npmjs.org/package/@google-cloud/language)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-language/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-language)
 
 > Node.js idiomatic client for [Natural Language API][product-docs].
@@ -132,3 +131,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-language/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/language/latest/
 [product-docs]: https://cloud.google.com/natural-language/docs
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+
