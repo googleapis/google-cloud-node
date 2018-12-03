@@ -5,8 +5,7 @@
 # [Google Cloud Security Command Center: Node.js Client](https://github.com/googleapis/nodejs-security-center)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-security-center.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-security-center)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-security-center?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-security-center)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/security-center.svg)](https://www.npmjs.org/package/@google-cloud/security-center)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-security-center/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-security-center)
 
 [Cloud Security Command Center](https://cloud.google.com/security-center/docs/) helps security teams gather data, identify threats, and act on them before they result in business damage or loss. It offers deep insight into application and data risk so that you can quickly mitigate threats to your cloud resources and evaluate overall health. With Cloud Security Command Center, you can view and monitor an inventory of your cloud assets, scan storage systems for sensitive data, detect common web vulnerabilities, and review access rights to your critical resources, all from a single, centralized dashboard.
@@ -82,3 +81,4 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=
 [auth]: https://cloud.google.com/docs/authentication/getting-started
+
