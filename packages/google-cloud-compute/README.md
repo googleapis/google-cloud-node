@@ -5,8 +5,7 @@
 # [Google Compute Engine: Node.js Client](https://github.com/googleapis/nodejs-compute)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-compute.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-compute)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-compute?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-compute)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/compute.svg)](https://www.npmjs.org/package/@google-cloud/compute)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-compute/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-compute)
 
 > Node.js idiomatic client for [Compute Engine][product-docs].
@@ -129,3 +128,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-compute/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/compute/latest/
 [product-docs]: https://cloud.google.com/compute/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
