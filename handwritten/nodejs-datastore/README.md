@@ -5,8 +5,7 @@
 # [Google Cloud Datastore: Node.js Client](https://github.com/googleapis/nodejs-datastore)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-datastore.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-datastore)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-datastore?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-datastore)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/datastore.svg)](https://www.npmjs.org/package/@google-cloud/datastore)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-datastore/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-datastore)
 
 > Node.js idiomatic client for [Cloud Datastore][product-docs].
@@ -143,3 +142,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-datastore/blob/master/LICENSE
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/datastore/latest/
 [product-docs]: https://cloud.google.com/datastore/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
