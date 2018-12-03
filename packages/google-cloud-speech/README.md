@@ -5,8 +5,7 @@
 # [Google Cloud Speech API: Node.js Client](https://github.com/googleapis/nodejs-speech)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-speech.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-speech)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-speech?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-speech)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/speech.svg)](https://www.npmjs.org/package/@google-cloud/speech)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-speech/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-speech)
 
 The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy integration of Google speech recognition technologies into developer applications. Send audio and receive a text transcription from the Cloud Speech API service.
@@ -134,3 +133,4 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=speech.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
+
