@@ -47,7 +47,7 @@ library's README.
 
 View the [source code][dialogflow_detect_intent_text_0_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.js,samples/README.md)
 
 __Usage:__ `node detect.js --help`
 
@@ -63,14 +63,14 @@ Commands:
 Options:
   --version              Show version number                                                                   [boolean]
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                         environment variables.                  [string] [required] [default: "gcloud-project-name"]
+                         environment variables.                           [string] [required] [default: "long-door-651"]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6ac7bd60-96a7-11e8-aaf1-2be61153eaa1"]
+                                                              [string] [default: "771eeb10-f741-11e8-94a4-b5ec7b7b0aef"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR16"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -91,7 +91,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_create_knowledge_base_1_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -122,22 +122,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: " "]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6ada8210-96a7-11e8-976d-973c7437ad89"]
+                                                              [string] [default: "773706f0-f741-11e8-a47e-3f6aff6be35a"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -145,12 +148,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -164,7 +167,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_get_knowledge_base_2_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -195,22 +198,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: " "]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6b0896f0-96a7-11e8-887a-616001c324e6"]
+                                                              [string] [default: "775452f0-f741-11e8-aab8-b595388c71f5"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -218,12 +224,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -237,7 +243,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_list_knowledge_base_3_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -268,22 +274,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: " "]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6b343ad0-96a7-11e8-95f2-b7b882c3fcf7"]
+                                                              [string] [default: "77719ef0-f741-11e8-817d-73ea6fdea7fd"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -291,12 +300,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -310,7 +319,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_delete_knowledge_base_4_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -341,22 +350,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: " "]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6b664750-96a7-11e8-964b-33faeef2cfd7"]
+                                                              [string] [default: "778f3910-f741-11e8-b1ce-213df77e3c62"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -364,12 +376,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -383,7 +395,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_create_document_5_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -414,22 +426,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: "gcloud-project-name"]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6b956da0-96a7-11e8-97a8-b54ad1970c87"]
+                                                              [string] [default: "77acfa40-f741-11e8-89ae-6dc7503a2285"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -437,12 +452,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -456,7 +471,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_list_document_6_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -487,22 +502,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: "gcloud-project-name"]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6bc13890-96a7-11e8-8b0b-83307f7cce2b"]
+                                                              [string] [default: "77ca6d50-f741-11e8-9d40-21394701053b"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -510,12 +528,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -529,7 +547,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_get_document_7_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -560,22 +578,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: "gcloud-project-name"]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6beeff50-96a7-11e8-8ef6-8539e2c9d79c"]
+                                                              [string] [default: "77e71d10-f741-11e8-b563-9f48199882cd"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -583,12 +604,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -602,7 +623,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_delete_document_8_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -633,22 +654,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: "gcloud-project-name"]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6c21cf20-96a7-11e8-b88c-7f18dc0d0283"]
+                                                              [string] [default: "78041af0-f741-11e8-a03f-0194732cea0b"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -656,12 +680,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -675,7 +699,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_detect_intent_with_sentiment_analysis_9_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -706,22 +730,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: "gcloud-project-name"]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6c5a6b50-96a7-11e8-ad4b-9132adc141c0"]
+                                                              [string] [default: "7820f1c0-f741-11e8-b3e0-a718ce4e909f"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -729,12 +756,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -748,7 +775,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_detect_intent_with_texttospeech_response_10_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -779,22 +806,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: "gcloud-project-name"]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6c904860-96a7-11e8-b080-efb3798b7965"]
+                                                              [string] [default: "783e3dc0-f741-11e8-bdb1-894d84c3819b"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -802,12 +832,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -821,7 +851,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_detect_intent_knowledge_11_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md)
 
 __Usage:__ `node detect.v2beta1.js --help`
 
@@ -852,22 +882,25 @@ Options:
   --documentName, -m           Name of Document to Create                                  [string] [default: "testDoc"]
   --documentPath, -z           uri of document to be added                                                      [string]
   --encoding, -e               The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
-  --knowledgeBaseName, -k      The name of the knowledge base to search from          [string] [default: "TestKnowBase"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
+  --knowledgeBaseName, -k      The name of the knowledge base to search from     [string] [default: "TestKnowledgeBase"]
   --knowledgeBaseFullName, -n  full path knowledge base                                                         [string]
+  --knowledgeBaseId, -b        specific Id string for knowledge base                                            [string]
+  --knowledgeTypes, -t         The Knowledge type of the Document.                             [string] [default: "FAQ"]
   --languageCode, -l           The language code of the query. Defaults to "en-US".          [string] [default: "en-US"]
+  --mimeType, -y               The mime_type of the Document                             [string] [default: "text/html"]
   --model, -o                  The Speech model to return response: possible models- 'video', 'phone_call',
                                'command_and_search', 'default'                          [string] [default: "phone_call"]
   --outputFile, -f                                                          [string] [default: "./resources/output.wav"]
   --projectId, -p              The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or
-                               GOOGLE_CLOUD_PROJECT environment variables.  [string] [default: "gcloud-project-name"]
-  --queries, -q                An array of text queries              [array] [required] [default: ["How do I sign up?"]]
+                               GOOGLE_CLOUD_PROJECT environment variables.           [string] [default: "long-door-651"]
+  --query, -q                  An array of text queries         [array] [required] [default: "Where is my data stored?"]
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6cca6b30-96a7-11e8-9b46-71f050e4f2cf"]
+                                                              [string] [default: "785b3ba0-f741-11e8-b597-d1212baba1db"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -875,12 +908,12 @@ Examples:
   node detect.v2beta1.js getKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js listKnowledgeBases
   node detect.v2beta1.js deleteKnowledgeBase -n "KNOWLEDGEBASEFULLNAME"
-  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC"
-  node detect.v2beta1.js getDocument -n "KNOWLEDGEBASEFULLNAME" -d "FULLDOCUMENTID"
+  node detect.v2beta1.js createDocument -n "KNOWLEDGEBASEFULLNAME" -p "URIHTMLPATHTODOC" -m "MyDoc"
+  node detect.v2beta1.js getDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js listDocuments -n "KNOWLEDGEBASEFULLNAME"
   node detect.v2beta1.js deleteDocument -d "FULLDOCUMENTID"
   node detect.v2beta1.js detectIntentwithTexttoSpeechResponse "How do I sign up?"
-  node detect.v2beta1.js detectIntentKnowledge "how do i sign up?"
+  node detect.v2beta1.js detectIntentKnowledge -q "how do i sign up?"
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
@@ -894,7 +927,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_detect_intent_audio_12_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.js,samples/README.md)
 
 __Usage:__ `node detect.js --help`
 
@@ -910,14 +943,14 @@ Commands:
 Options:
   --version              Show version number                                                                   [boolean]
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                         environment variables.                  [string] [required] [default: "gcloud-project-name"]
+                         environment variables.                           [string] [required] [default: "long-door-651"]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6d22c460-96a7-11e8-8898-73a768ffb741"]
+                                                              [string] [default: "787e05e0-f741-11e8-b4e5-89608794b500"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -938,7 +971,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_detect_intent_streaming_13_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/detect.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.js,samples/README.md)
 
 __Usage:__ `node detect.js --help`
 
@@ -954,14 +987,14 @@ Commands:
 Options:
   --version              Show version number                                                                   [boolean]
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                         environment variables.                  [string] [required] [default: "gcloud-project-name"]
+                         environment variables.                           [string] [required] [default: "long-door-651"]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "6d5434a0-96a7-11e8-a573-1fed0528f24b"]
+                                                              [string] [default: "789b2ad0-f741-11e8-9262-d55682d3ece0"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
-               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
+              [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
                   "AUDIO_ENCODING_AMR_WB", "AUDIO_ENCODING_OGG_OPUS", "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE"] [default:
-                                                                                              "AUDIO_ENCODING_LINEAR_16"]
+                                                                                             "AUDIO_ENCODING_LINEAR_16"]
   --sampleRateHertz, -r  The sample rate in Hz of the input audio. Only required if the input audio is in raw format.
                                                                                                                 [number]
   --help                 Show help                                                                             [boolean]
@@ -982,7 +1015,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_create_entity_14_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -990,24 +1023,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1033,7 +1068,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_delete_entity_15_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -1041,24 +1076,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1084,7 +1121,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_create_intent_16_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -1092,24 +1129,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1135,7 +1174,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_delete_intent_17_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -1143,24 +1182,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1186,7 +1227,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_create_context_18_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -1194,24 +1235,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1237,7 +1280,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_delete_context_19_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -1245,24 +1288,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1288,7 +1333,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_create_session_entity_type_20_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -1296,24 +1341,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1339,7 +1386,7 @@ For more information, see https://cloud.google.com/conversation/docs
 
 View the [source code][dialogflow_delete_session_entity_type_21_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/resource.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md)
 
 __Usage:__ `node resource.js --help`
 
@@ -1347,24 +1394,26 @@ __Usage:__ `node resource.js --help`
 resource.js <command>
 
 Commands:
-  resource.js setup-agent                                       Create entity types and intent for ordering pizzas.
-  resource.js clear-agent                                       Delete all intents and entity types from an agent.
-  resource.js show-agent                                        Show all intents and entity types from an agent.
-  resource.js update-entity-type <entityTypeId>                 Update an entity type.
-  resource.js update-intent <intentId>                          Update an intent.
-  resource.js setup-session <sessionId>                         Create contexts and session entity types for a session.
-                                                                It assumes the agents is set up by setup-agent command.
-  resource.js show-session <sessionId>                          Show all contexts and session entity types in a session.
-  resource.js clear-session <sessionId>                         Delete all contexts and session entity types.
-  resource.js update-context <sessionId> <contextId>            Update a context.
-  resource.js update-session-entity-type <sessionId>            Update a session entity type.
-  <entityTypeName>
-  resource.js restore-room-agent                                Restore the room booking Dialogflow agent
+  resource.js create-entity-type          Create entity type
+  resource.js list-entity-types           List entity types
+  resource.js delete-entity-type          Delete entity type
+  resource.js create-entity               Create Entity
+  resource.js list-entities               List entities
+  resource.js delete-entity               Delete entity
+  resource.js create-context              Create Context
+  resource.js list-contexts               List Intents
+  resource.js delete-context              Delete Context
+  resource.js create-intent               Create Intent
+  resource.js list-intents                List Intent
+  resource.js delete-intent               Delete Intent
+  resource.js create-session-entity-type  Create entity type
+  resource.js list-session-entity-types   List entity types
+  resource.js delete-session-entity-type  Delete entity type
 
 Options:
   --version        Show version number                                                                         [boolean]
   --projectId, -p  The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
-                   environment variables.                        [string] [required] [default: "gcloud-project-name"]
+                   environment variables.                                 [string] [required] [default: "long-door-651"]
   --force, -f      force operation without a prompt                                                            [boolean]
   --help           Show help                                                                                   [boolean]
 
@@ -1387,4 +1436,4 @@ For more information, see https://cloud.google.com/conversation/docs
 [dialogflow_delete_session_entity_type_21_code]: resource.js
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/dialogflow/dialogflow-nodejs-client-v2&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/README.md
