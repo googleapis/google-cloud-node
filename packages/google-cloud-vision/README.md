@@ -5,8 +5,7 @@
 # [Google Cloud Vision API: Node.js Client](https://github.com/googleapis/nodejs-vision)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-vision.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-vision)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-vision?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-vision)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/vision.svg)](https://www.npmjs.org/package/@google-cloud/vision)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-vision/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-vision)
 
 > Node.js idiomatic client for [Vision API][product-docs].
@@ -124,3 +123,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-vision/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/vision/latest/
 [product-docs]: https://cloud.google.com/vision/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
