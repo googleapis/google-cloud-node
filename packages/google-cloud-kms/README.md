@@ -5,8 +5,7 @@
 # [Cloud Key Management Service: Node.js Client](https://github.com/googleapis/nodejs-kms)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-kms.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-kms)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-kms?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-kms)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/kms.svg)](https://www.npmjs.org/package/@google-cloud/kms)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-kms/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-kms)
 
 > Node.js idiomatic client for [Cloud KMS][product-docs].
@@ -101,3 +100,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-kms/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/kms/latest/
 [product-docs]: https://cloud.google.com/kms/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+
