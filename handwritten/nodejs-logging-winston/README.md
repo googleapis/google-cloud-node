@@ -3,8 +3,7 @@
 # [Stackdriver Logging for Winston](https://github.com/googleapis/nodejs-logging-winston)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-logging-winston.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-logging-winston)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-logging-winston?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-logging-winston)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/logging-winston.svg)](https://www.npmjs.org/package/@google-cloud/logging-winston)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-logging-winston/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-logging-winston)
 
 This module provides a higher-level layer for working with
@@ -253,3 +252,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-logging-winston/blob/master/L
 [trace-agent]: https://www.npmjs.com/package/@google-cloud/trace-agent
 [LogEntry]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
 [trace-viewing-log-entries]: https://cloud.google.com/trace/docs/viewing-details#log_entries
+
