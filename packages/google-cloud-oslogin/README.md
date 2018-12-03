@@ -5,8 +5,7 @@
 # [Google Cloud OS Login API: Node.js Client](https://github.com/googleapis/nodejs-os-login)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-os-login.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-os-login)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-os-login?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-os-login)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/os-login.svg)](https://www.npmjs.org/package/@google-cloud/os-login)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-os-login/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-os-login)
 
 > Node.js idiomatic client for [Cloud OS Login API][product-docs].
@@ -125,3 +124,4 @@ See [LICENSE](https://github.com/googleapis/nodejs-os-login/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/os-login/latest/
 [product-docs]: https://cloud.google.com/compute/docs/oslogin/rest
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+
