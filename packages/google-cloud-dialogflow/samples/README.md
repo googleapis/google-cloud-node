@@ -65,7 +65,7 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                           [string] [required] [default: "long-door-651"]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "771eeb10-f741-11e8-94a4-b5ec7b7b0aef"]
+                                                              [string] [default: "011bb950-f801-11e8-a9f4-eff5965aae41"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
@@ -140,7 +140,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "773706f0-f741-11e8-a47e-3f6aff6be35a"]
+                                                              [string] [default: "01347170-f801-11e8-96a7-959e8a1a0a0b"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -216,7 +216,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "775452f0-f741-11e8-aab8-b595388c71f5"]
+                                                              [string] [default: "01516f50-f801-11e8-a0f9-2f69867f169d"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -292,7 +292,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "77719ef0-f741-11e8-817d-73ea6fdea7fd"]
+                                                              [string] [default: "016d34b0-f801-11e8-b607-35a61abb4809"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -368,7 +368,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "778f3910-f741-11e8-b1ce-213df77e3c62"]
+                                                              [string] [default: "01892120-f801-11e8-bc92-1798e4615087"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -444,7 +444,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "77acfa40-f741-11e8-89ae-6dc7503a2285"]
+                                                              [string] [default: "01a6bb40-f801-11e8-afcf-ad7d4ef936ad"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -520,7 +520,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "77ca6d50-f741-11e8-9d40-21394701053b"]
+                                                              [string] [default: "01c4f1a0-f801-11e8-956d-f70bfd3de32d"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -596,7 +596,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "77e71d10-f741-11e8-b563-9f48199882cd"]
+                                                              [string] [default: "01e37620-f801-11e8-8fee-17a83ab8719b"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -672,7 +672,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "78041af0-f741-11e8-a03f-0194732cea0b"]
+                                                              [string] [default: "01ffb0b0-f801-11e8-83a4-a3ffb1757337"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -748,7 +748,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "7820f1c0-f741-11e8-b3e0-a718ce4e909f"]
+                                                              [string] [default: "021b9d20-f801-11e8-9236-a5dfcfcff2a1"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -824,7 +824,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "783e3dc0-f741-11e8-bdb1-894d84c3819b"]
+                                                              [string] [default: "0237b0a0-f801-11e8-90d3-db2a6245d921"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -900,7 +900,7 @@ Options:
   --sampleRateHertz, -r        The sample rate in Hz of the input audio. Only required if the input audio is in raw
                                format.                                                         [number] [default: 16000]
   --sessionId, -s              The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "785b3ba0-f741-11e8-b597-d1212baba1db"]
+                                                              [string] [default: "02554ac0-f801-11e8-a2e6-8f79fc32be8d"]
   --help                       Show help                                                                       [boolean]
 
 Examples:
@@ -945,7 +945,7 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                           [string] [required] [default: "long-door-651"]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "787e05e0-f741-11e8-b4e5-89608794b500"]
+                                                              [string] [default: "02783c10-f801-11e8-9142-95cd8b25c522"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",
@@ -989,7 +989,7 @@ Options:
   --projectId, -p        The Project ID to use. Defaults to the value of the GCLOUD_PROJECT or GOOGLE_CLOUD_PROJECT
                          environment variables.                           [string] [required] [default: "long-door-651"]
   --sessionId, -s        The identifier of the detect session. Defaults to a random UUID.
-                                                              [string] [default: "789b2ad0-f741-11e8-9262-d55682d3ece0"]
+                                                              [string] [default: "029539f0-f801-11e8-ae44-530f7c0bd1d7"]
   --languageCode, -l     The language code of the query. Defaults to "en-US".                [string] [default: "en-US"]
   --encoding, -e         The encoding of the input audio.
               [choices: "AUDIO_ENCODING_LINEAR_16", "AUDIO_ENCODING_FLAC", "AUDIO_ENCODING_MULAW", "AUDIO_ENCODING_AMR",

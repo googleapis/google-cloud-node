@@ -35,31 +35,35 @@
 1. Try an example:
 
 ```javascript
-// You can find your project ID in your Dialogflow agent settings
-const projectId = 'ENTER_PROJECT_ID_HERE'; //https://dialogflow.com/docs/agents#settings
-const sessionId = 'quickstart-session-id';
-const query = 'hello';
-const languageCode = 'en-US';
 
-// Instantiate a DialogFlow client.
 const dialogflow = require('dialogflow');
-const sessionClient = new dialogflow.SessionsClient();
+const uuid = require('uuid');
 
-// Define session path
-const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+/**
+ * Send a query to the dialogflow agent, and return the query result.
+ * @param {string} projectId The project to be used
+ */
+async function runSample(projectId = 'your-project-id') {
+  // A unique identifier for the given session
+  const sessionId = uuid.v4();
 
-// The text query request.
-const request = {
-  session: sessionPath,
-  queryInput: {
-    text: {
-      text: query,
-      languageCode: languageCode,
+  // Create a new session
+  const sessionClient = new dialogflow.SessionsClient();
+  const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+
+  // The text query request.
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        // The query to send to the dialogflow agent
+        text: 'hello',
+        // The language used by the client (en-US)
+        languageCode: 'en-US',
+      },
     },
-  },
-};
+  };
 
-async function main() {
   // Send request and log result
   const responses = await sessionClient.detectIntent(request);
   console.log('Detected intent');
@@ -72,10 +76,6 @@ async function main() {
     console.log(`  No intent matched.`);
   }
 }
-
-main().catch(err => {
-  console.error('ERROR:', err);
-});
 ```
 
 ## Samples
