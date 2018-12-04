@@ -460,7 +460,7 @@ describe('error-reporting', () => {
     assert.strictEqual(process.listenerCount('unhandledRejection'), 0);
     oldLogger = console.error;
     console.error = function(this) {
-      const text = util.format.apply(null, arguments);
+      const text = util.format.apply(null, arguments as {} as [{}, Array<{}>]);
       oldLogger(text);
       logOutput += text;
     };
