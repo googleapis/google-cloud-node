@@ -15,6 +15,7 @@
  */
 
 import * as common from '@google-cloud/common';
+import delay from 'delay';
 import * as request from 'request';
 
 const packageJson = require('../../package.json');
@@ -33,6 +34,7 @@ export interface ErrorEvent {
 }
 
 export interface ErrorGroupStats {
+  group: {groupId: string};
   representative: ErrorEvent;
   count: string;
   // other fields not used in the tests have been omitted
@@ -70,5 +72,58 @@ export class ErrorsApiTransport extends common.Service {
     };
     const response = await this.request(options);
     return response.body.errorGroupStats || [];
+  }
+
+  async getGroupEvents(groupId: string): Promise<ErrorEvent[]> {
+    const projectId = await this.getProjectId();
+    const options = {
+      uri: [
+        API, projectId,
+        'events?groupId=' + groupId + '&pageSize=10&' + ONE_HOUR_API
+      ].join('/'),
+      method: 'GET'
+    };
+
+    const response = await this.request(options);
+    return response.body.errorEvents || [];
+  }
+
+  async pollForNewEvents(service: string, time: number, timeout: number):
+      Promise<ErrorEvent[]> {
+    const timeLimit = Date.now() + timeout;
+    let groupId;
+    const filteredEvents: ErrorEvent[] = [];
+    // wait for a group
+    while (Date.now() < timeLimit) {
+      await delay(1000);
+
+      if (!groupId) {
+        const groups = await this.getAllGroups();
+        if (!groups.length) continue;
+        // find an error group that matches the service
+        groups.forEach((group) => {
+          try {
+            // example value: logging-winston-system-test
+            if (group.representative.serviceContext.service === service) {
+              groupId = group.group.groupId;
+            }
+          } catch (e) {
+            // keep looking
+          }
+        });
+      }
+
+      // didnt find an error reporting group matching the service.
+      if (!groupId) continue;
+
+      const events = await this.getGroupEvents(groupId);
+      events.forEach((event) => {
+        if (new Date(event.eventTime).getTime() >= time) {
+          filteredEvents.push(event);
+        }
+      });
+      if (filteredEvents.length) break;
+    }
+    return filteredEvents;
   }
 }
