@@ -221,7 +221,7 @@ class PredictionServiceClient {
    * });
    *
    * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
-   * const payload = {};
+   * const payload = {}; // This object has the same structure as ExamplePayload
    * const request = {
    *   name: formattedName,
    *   payload: payload,
