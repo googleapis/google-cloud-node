@@ -55,7 +55,7 @@ describe('logger', () => {
         delete process.env.GCLOUD_ERRORS_LOGLEVEL;
       });
       it('Should thow given logLevel as null', () => {
-        assert.throws(createLogger.bind(null, {logLevel: null}), undefined);
+        assert.throws(createLogger.bind(null, {logLevel: null!}), undefined);
       });
     });
     describe('Default log level', () => {
@@ -67,7 +67,7 @@ describe('logger', () => {
         text = '';
         // eslint-disable-next-line no-console
         console.error = function(this) {
-          oldLog.apply(this, arguments);
+          oldLog.apply(this, arguments as {} as [string]);
           for (let i = 0; i < arguments.length; i++) {
             text += arguments[i];
           }
