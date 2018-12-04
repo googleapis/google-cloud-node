@@ -32,7 +32,8 @@ import * as restifyInterface from './interfaces/restify';
 import {createLogger} from './logger';
 import * as manualRequestExtractor from './request-extractors/manual';
 
-export type RestifyRequestHandler = (req: {}, res: {}, next: {}) => {};
+// tslint:disable-next-line:no-any
+export type RestifyRequestHandler = (req: any, res: any, next: Function) => any;
 
 /**
  * @typedef ConfigurationOptions
@@ -92,25 +93,26 @@ export type RestifyRequestHandler = (req: {}, res: {}, next: {}) => {};
  *     reporting configuration.
  */
 export class ErrorReporting {
-  private _logger: Logger;
-  private _config: Configuration;
-  private _client: AuthClient;
+  private _logger!: Logger;
+  private _config!: Configuration;
+  private _client!: AuthClient;
   // the `err` argument can be anything, including `null` and `undefined`
-  report:
+  report!:
       (err: any,  // tslint:disable-line:no-any
        request?: manualRequestExtractor.Request, additionalMessage?: string|{},
        callback?: manualInterface.Callback|{}|string) => ErrorMessage;
-  event: () => ErrorMessage;
-  hapi: {
+  event!: () => ErrorMessage;
+  hapi!: {
     register: (server: {}, options: {}, next?: Function) => void; name: string;
     version?: string;
   };
-  express: (err: {}, req: {}, res: {}, next: Function) => void;
-  restify: (server: {}) => RestifyRequestHandler | RestifyRequestHandler[];
+  express!: (err: {}, req: {}, res: {}, next: Function) => void;
   // tslint:disable-next-line:no-any
-  koa: (context: any, next: {}) => IterableIterator<{}>;
+  restify!: (server: any) => RestifyRequestHandler | RestifyRequestHandler[];
   // tslint:disable-next-line:no-any
-  koa2: (context: any, next: {}) => Promise<void>;
+  koa!: (context: any, next: {}) => IterableIterator<{}>;
+  // tslint:disable-next-line:no-any
+  koa2!: (context: any, next: {}) => Promise<void>;
 
   constructor(initConfiguration?: ConfigurationOptions) {
     if (!(this instanceof ErrorReporting)) {
