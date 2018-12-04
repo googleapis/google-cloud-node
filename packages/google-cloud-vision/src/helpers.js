@@ -871,7 +871,7 @@ module.exports = apiVersion => {
    * };
    *
    * client
-   *   .webDetection(request)
+   *   .productSearch(request)
    *   .then(response => {
    *     // doThingsWith(response);
    *   })
