@@ -6,6 +6,13 @@
   "release_quality": "ga",
   "samples": [
     {
+      "id": "quickstart",
+      "name": "Quickstart",
+      "file": "quickstart.js",
+      "docs_link": "https://cloud.google.com/natural-language/docs/quickstart-client-libraries",
+      "usage": "node quickstart.js"
+    },
+    {
       "id": "analyze-v1",
       "name": "Analyze v1",
       "file": "analyze.v1.js",
@@ -18,6 +25,27 @@
       "file": "analyze.v1beta2.js",
       "docs_link": "https://cloud.google.com/natural-language/docs/",
       "usage": "node analyze.v1beta2.js --help"
+    },
+    {
+      "id": "automl-nl-dataset",
+      "name": "AutoML Dataset",
+      "file": "automl/automlNaturalLanguageDataset.js",
+      "docs_link": "https://cloud.google.com/natural-language/docs/",
+      "usage": "node automl/automlNaturalLanguageDataset.js --help"
+    },
+    {
+      "id": "automl-nl-model",
+      "name": "AutoML Model",
+      "file": "automl/automlNaturalLanguageModel.js",
+      "docs_link": "https://cloud.google.com/natural-language/docs/",
+      "usage": "node automl/automlNaturalLanguageModel.js --help"
+    },
+    {
+      "id": "automl-nl-predict",
+      "name": "AutoML Predict",
+      "file": "automl/automlNaturalLanguagePredict.js",
+      "docs_link": "https://cloud.google.com/natural-language/docs/",
+      "usage": "node automl/automlNaturalLanguagePredict.js --help"
     }
   ]
 }
