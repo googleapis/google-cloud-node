@@ -19,14 +19,12 @@ import * as sinon from 'sinon';
 import * as util from '../src';
 
 const noop = () => {};
+const sandbox = sinon.createSandbox();
 
-let sandbox: sinon.SinonSandbox;
-beforeEach(() => {
-  sandbox = sinon.createSandbox();
-});
 afterEach(() => {
   sandbox.restore();
 });
+
 describe('promisifyAll', () => {
   const fakeArgs = [null, 1, 2, 3];
   const fakeError = new Error('err.');
@@ -135,7 +133,8 @@ describe('promisify', () => {
     fakeArgs = [null, 1, 2, 3];
 
     func = util.promisify(function(this: {}, callback: () => void) {
-      callback.apply(this, fakeArgs);
+      // tslint:disable-next-line no-any
+      (callback as any).apply(this, fakeArgs);
     });
   });
 
@@ -185,7 +184,8 @@ describe('promisify', () => {
     const fakeArg = 'hi';
 
     func = util.promisify((callback: () => void) => {
-      callback.apply(func, [null, fakeArg]);
+      // tslint:disable-next-line no-any
+      (callback as any).apply(func, [null, fakeArg]);
     }, {
       singular: true,
     });
