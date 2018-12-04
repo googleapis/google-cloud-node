@@ -153,15 +153,13 @@ describe('LoggingBunyan', () => {
   });
 
   describe.only('ErrorReporting', () => {
-    const ERROR_REPORTING_DELAY_MS = 20 * 1000;
+    const ERROR_REPORTING_DELAY_MS = 2 * 60 * 1000;
     const errorsTransport = new ErrorsApiTransport();
 
     beforeEach(async function() {
       this.timeout(2 * ERROR_REPORTING_DELAY_MS);
       await errorsTransport.deleteAllEvents();
-      await new Promise((resolve, reject) => {
-        setTimeout(resolve, ERROR_REPORTING_DELAY_MS);
-      });
+      return delay(ERROR_REPORTING_DELAY_MS);
     });
 
     afterEach(async () => {
@@ -170,19 +168,18 @@ describe('LoggingBunyan', () => {
 
     it('reports errors when logging errors', async function() {
       this.timeout(2 * ERROR_REPORTING_DELAY_MS);
-      const message = `an error at ${Date.now()}`;
+      const start = Date.now();
+      const service = 'logging-bunyan-system-test';
+      const message = `an error at ${start}`;
       // logger does not have index signature.
       // tslint:disable-next-line:no-any
       (logger as any)['error'].call(logger, new Error(message));
-      await delay(ERROR_REPORTING_DELAY_MS);
-      const errors = await errorsTransport.getAllGroups();
+      const errors = await errorsTransport.pollForNewEvents(
+          service, start, ERROR_REPORTING_DELAY_MS);
       assert.strictEqual(errors.length, 1);
       const errEvent = errors[0];
-      assert.strictEqual(errEvent.count, '1');
-      assert.strictEqual(
-          errEvent.representative.serviceContext.service,
-          'logging-bunyan-system-test');
-      assert(errEvent.representative.message.startsWith(`Error: ${message}`));
+      assert.strictEqual(errEvent.serviceContext.service, service);
+      assert(errEvent.message.startsWith(`Error: ${message}`));
     });
   });
 });
