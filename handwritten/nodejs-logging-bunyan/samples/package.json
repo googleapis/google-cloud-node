@@ -1,6 +1,6 @@
 {
   "name": "nodejs-docs-samples-logging-bunyan",
-  "version": "0.0.1",
+  "files": ["*.js"],
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
