@@ -47,11 +47,6 @@
     "fix": "gts fix && eslint --fix samples/**/*.js",
     "prepare": "npm run compile"
   },
-  "nyc": {
-    "exclude": [
-      "build/test"
-    ]
-  },
   "dependencies": {
     "@google-cloud/common": "^0.27.0",
     "@google-cloud/paginator": "^0.1.0",
