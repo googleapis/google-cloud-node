@@ -49,11 +49,6 @@
     "typescript": "^3.0.0",
     "uuid": "^3.3.2"
   },
-  "nyc": {
-    "exclude": [
-      "build/test"
-    ]
-  },
   "dependencies": {
     "arrify": "^1.0.1",
     "extend": "^3.0.1",
