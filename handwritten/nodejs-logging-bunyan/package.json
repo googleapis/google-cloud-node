@@ -40,7 +40,6 @@
     "generate-scaffolding": "repo-tools generate all --except lib_readme",
     "lint": "eslint samples/",
     "presamples-test": "npm run compile",
-    "prettier": "prettier --write samples/*.js samples/*/*.js",
     "presystem-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
