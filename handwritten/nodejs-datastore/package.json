@@ -85,10 +85,5 @@
     "proxyquire": "^2.0.1",
     "sinon": "^7.0.0",
     "typescript": "~3.2.0"
-  },
-  "nyc": {
-    "exclude": [
-      "build/test"
-    ]
   }
 }
