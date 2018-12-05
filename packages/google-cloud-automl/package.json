@@ -34,10 +34,9 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "mocha test/*.js --timeout 600000",
     "lint": "eslint src/ samples/ system-test/ test/",
-    "prettier": "prettier --write src/*.js src/*/*.js samples/*.js samples/*/*.js test/*.js test/*/*.js system-test/*.js system-test/*/*.js",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/*.js --timeout 600000",
-    "fix": "eslint '**/*.js' --fix && npm run prettier"
+    "fix": "eslint '**/*.js' --fix"
   },
   "dependencies": {
     "google-gax": "^0.22.0",
