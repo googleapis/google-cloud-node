@@ -23,7 +23,6 @@
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "node node_modules/.bin/repo-tools generate all && node node_modules/.bin/repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "eslint samples/ && gts check && jsgl --local .",
-    "prettier": "prettier --write samples/*.js samples/*/*.js",
     "presystem-test": "npm run compile",
     "system-test": "nyc --exclude=\"error-message.js\" mocha  build/system-test/**/*.js",
     "cover": "nyc --exclude=\"fuzzer.js\" --reporter=lcov mocha build/test/unit/**/*.js && nyc report",
