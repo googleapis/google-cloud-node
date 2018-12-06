@@ -203,6 +203,10 @@ class Translate extends Service {
     }
   }
 
+  detect(input: string): Promise<[DetectResult, r.Response]>;
+  detect(input: string[]): Promise<[DetectResult[], r.Response]>;
+  detect(input: string, callback: DetectCallback<DetectResult>): void;
+  detect(input: string[], callback: DetectCallback<DetectResult[]>): void;
   /**
    * Detect the language used in a string or multiple strings.
    *
@@ -266,10 +270,6 @@ class Translate extends Service {
    * region_tag:translate_detect_language
    * Here's a full example:
    */
-  detect(input: string): Promise<[DetectResult, r.Response]>;
-  detect(input: string[]): Promise<[DetectResult[], r.Response]>;
-  detect(input: string, callback: DetectCallback<DetectResult>): void;
-  detect(input: string[], callback: DetectCallback<DetectResult[]>): void;
   detect(
       input: string|string[],
       callback?: DetectCallback<DetectResult>|
@@ -312,6 +312,9 @@ class Translate extends Service {
         });
   }
 
+  getLanguages(target?: string): Promise<[LanguageResult[], r.Response]>;
+  getLanguages(target: string, callback: GetLanguagesCallback): void;
+  getLanguages(callback: GetLanguagesCallback): void;
   /**
    * Get an array of all supported languages.
    *
@@ -330,9 +333,6 @@ class Translate extends Service {
    * region_tag:translate_list_language_names
    * Gets the language names in a language other than English:
    */
-  getLanguages(target?: string): Promise<[LanguageResult[], r.Response]>;
-  getLanguages(target: string, callback: GetLanguagesCallback): void;
-  getLanguages(callback: GetLanguagesCallback): void;
   getLanguages(
       targetOrCallback?: string|GetLanguagesCallback,
       callback?: GetLanguagesCallback):
@@ -373,7 +373,22 @@ class Translate extends Service {
     });
   }
 
-
+  translate(input: string, options: TranslateRequest):
+      Promise<[string, r.Response]>;
+  translate(input: string[], options: TranslateRequest):
+      Promise<[string[], r.Response]>;
+  translate(input: string, to: string): Promise<[string, r.Response]>;
+  translate(input: string[], to: string): Promise<[string[], r.Response]>;
+  translate(
+      input: string, options: TranslateRequest,
+      callback: TranslateCallback<string>): void;
+  translate(input: string, to: string, callback: TranslateCallback<string>):
+      void;
+  translate(
+      input: string[], options: TranslateRequest,
+      callback: TranslateCallback<string[]>): void;
+  translate(input: string[], to: string, callback: TranslateCallback<string[]>):
+      void;
   /**
    * Translate a string or multiple strings into another language.
    *
@@ -449,22 +464,6 @@ class Translate extends Service {
    * region_tag:translate_text_with_model
    * Translation using the premium model:
    */
-  translate(input: string, options: TranslateRequest):
-      Promise<[string, r.Response]>;
-  translate(input: string[], options: TranslateRequest):
-      Promise<[string[], r.Response]>;
-  translate(input: string, to: string): Promise<[string, r.Response]>;
-  translate(input: string[], to: string): Promise<[string[], r.Response]>;
-  translate(
-      input: string, options: TranslateRequest,
-      callback: TranslateCallback<string>): void;
-  translate(input: string, to: string, callback: TranslateCallback<string>):
-      void;
-  translate(
-      input: string[], options: TranslateRequest,
-      callback: TranslateCallback<string[]>): void;
-  translate(input: string[], to: string, callback: TranslateCallback<string[]>):
-      void;
   translate(
       inputs: string|string[], optionsOrTo: string|TranslateRequest,
       callback?: TranslateCallback<string>|TranslateCallback<string[]>):
@@ -528,6 +527,9 @@ class Translate extends Service {
         });
   }
 
+  request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
+  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
+      void;
   /**
    * A custom request implementation. Requests to this API may optionally use an
    * API key for an application, not a bearer token from a service account. This
@@ -539,9 +541,6 @@ class Translate extends Service {
    * @param {object} reqOpts - Request options that are passed to `request`.
    * @param {function} callback - The callback function passed to `request`.
    */
-  request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
-  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
-      void;
   request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
       void|Promise<r.Response> {
     if (!this.key) {
