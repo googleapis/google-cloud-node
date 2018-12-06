@@ -59,7 +59,7 @@ describe('Resource', () => {
   //   - Set metadata
   //   - Restore a project
   //   - Delete a project
-  describe('lifecycle', () => {
+  describe.skip('lifecycle', () => {
     const testProjects: Project[] = [];
     const resource = new Resource();
     const project = resource.project(generateName('project'));
