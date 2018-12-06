@@ -15,6 +15,7 @@
  */
 
 import * as assert from 'assert';
+import delay from 'delay';
 import * as is from 'is';
 import * as nock from 'nock';
 
@@ -34,7 +35,7 @@ import * as util from 'util';
 import * as path from 'path';
 
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
-const TIMEOUT = 120000;
+const TIMEOUT = 10 * 60 * 1000;
 
 const envKeys = [
   'GOOGLE_APPLICATION_CREDENTIALS',
@@ -138,12 +139,6 @@ if (!shouldRun()) {
   console.log('Skipping error-reporting system tests');
   // eslint-disable-next-line no-process-exit
   process.exit(1);
-}
-
-function sleep(timeout: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
 }
 
 describe('Request/Response lifecycle mocking', () => {
@@ -445,6 +440,7 @@ describe('error-reporting', () => {
 
   const SERVICE = buildName('service-name');
   const VERSION = buildName('service-version');
+  const PAGE_SIZE = 100;
 
   let errors: ErrorReporting;
   let transport: ErrorsApiTransport;
@@ -465,7 +461,6 @@ describe('error-reporting', () => {
       logOutput += text;
     };
     reinitialize();
-    await transport.deleteAllEvents();
   });
 
   function reinitialize(extraConfig?: {}) {
@@ -487,12 +482,6 @@ describe('error-reporting', () => {
     transport = new ErrorsApiTransport(configuration, logger);
   }
 
-  after(async () => {
-    if (transport) {
-      await transport.deleteAllEvents();
-    }
-  });
-
   afterEach(() => {
     logOutput = '';
   });
@@ -503,7 +492,8 @@ describe('error-reporting', () => {
     const start = Date.now();
     let groups: ErrorGroupStats[] = [];
     while (groups.length < maxCount && (Date.now() - start) <= timeout) {
-      const allGroups = await transport.getAllGroups();
+      const allGroups =
+          await transport.getAllGroups(SERVICE, VERSION, PAGE_SIZE);
       assert.ok(allGroups, 'Failed to get groups from the Error Reporting API');
 
       const filteredGroups = allGroups!.filter(errItem => {
@@ -515,7 +505,7 @@ describe('error-reporting', () => {
             messageTest(errItem.representative.message));
       });
       groups = groups.concat(filteredGroups);
-      await sleep(1000);
+      await delay(5000);
     }
 
     return groups;
@@ -684,9 +674,9 @@ describe('error-reporting', () => {
      });
 
   it('Should report unhandledRejections if enabled', async function(this) {
-    this.timeout(TIMEOUT * 4);
+    this.timeout(TIMEOUT * 5);
     reinitialize({reportUnhandledRejections: true});
-    const rejectValue = buildName('promise-rejection');
+    const rejectValue = buildName('report-promise-rejection');
     function expectedTopOfStack() {
       // An Error is used for the rejection value so that it's stack
       // contains the stack trace at the point the rejection occured and is
@@ -718,11 +708,13 @@ describe('error-reporting', () => {
   it('Should not report unhandledRejections if disabled', async function(this) {
     this.timeout(TIMEOUT * 2);
     reinitialize({reportUnhandledRejections: false});
-    const rejectValue = buildName('promise-rejection');
+    const rejectValue = buildName('do-not-report-promise-rejection');
+    const canaryValue = buildName('canary-value');
     function expectedTopOfStack() {
       Promise.reject(rejectValue);
     }
     expectedTopOfStack();
+    errors.report(new Error(canaryValue));
     await new Promise((resolve, reject) => {
       setImmediate(async () => {
         try {
@@ -734,11 +726,21 @@ describe('error-reporting', () => {
           // all of the groups corresponding to the above rejection (Since the
           // buildName() creates a string unique enough to single out only the
           // above rejection.) and verify that there are no such groups
-          // reported.
+          // reported.  This is done by looking for the canary value.  If the
+          // canary value is found, but the rejection value has not, then the
+          // rejection was not reported to the API.
+          const rejectPrefix = `Error: ${rejectValue}`;
+          const canaryPrefix = `Error: ${canaryValue}`;
           const matchedErrors = await verifyAllGroups(message => {
-            return message.startsWith(rejectValue);
+            return message.startsWith(rejectPrefix) ||
+                message.startsWith(canaryPrefix);
           }, 1, TIMEOUT);
-          assert.strictEqual(matchedErrors.length, 0);
+          assert.strictEqual(matchedErrors.length, 1);
+          const message = matchedErrors[0].representative.message;
+          assert(
+              message.startsWith(canaryPrefix),
+              `Expected the error message to start with ${
+                  canaryPrefix} but found ${message}`);
           resolve();
         } catch (err) {
           reject(err);
