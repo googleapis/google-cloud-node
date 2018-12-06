@@ -273,7 +273,15 @@ class Entity extends TestHelper {
     //   category: 'Personal',
     //   done: false,
     //   priority: 4,
-    //   description: 'Learn Cloud Datastore'
+    //   description: 'Learn Cloud Datastore',
+    //   [Symbol(KEY)]:
+    //    Key {
+    //      namespace: undefined,
+    //      id: '...',
+    //      kind: 'Task',
+    //      path: [Getter]
+    //    }
+    //   }
     // };
     console.log(entity);
     // [END datastore_lookup]
