@@ -52,16 +52,16 @@ export class ErrorsApiTransport extends AuthClient {
     super(config, logger);
   }
 
-  async deleteAllEvents() {
-    const id = await this.getProjectId();
-    const options = {uri: [API, id, 'events'].join('/'), method: 'DELETE'};
-    return this.request_(options);
-  }
-
-  async getAllGroups(): Promise<ErrorGroupStats[]> {
+  async getAllGroups(service: string, version: string, pageSize: number):
+      Promise<ErrorGroupStats[]> {
     const id = await this.getProjectId();
     const options = {
-      uri: [API, id, 'groupStats?' + ONE_HOUR_API].join('/'),
+      uri: [
+        API, id,
+        'groupStats?' + ONE_HOUR_API +
+            `&serviceFilter.service=${service}&serviceFilter.version=${
+                version}&pageSize=${pageSize}`
+      ].join('/'),
       method: 'GET'
     };
     const r = await this.request_(options);
