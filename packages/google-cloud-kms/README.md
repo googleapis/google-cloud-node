@@ -8,59 +8,58 @@
 [![npm version](https://img.shields.io/npm/v/@google-cloud/kms.svg)](https://www.npmjs.org/package/@google-cloud/kms)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-kms/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-kms)
 
-> Node.js idiomatic client for [Cloud KMS][product-docs].
-
 [Cloud KMS](https://cloud.google.com/kms/docs/) allows you to keep encryption keys in one central cloud service, for direct use by other cloud resources and applications. With Cloud KMS you are the ultimate custodian of your data, you can manage encryption in the cloud the same way you do on-premises, and you have a provable and monitorable root of trust over your data.
 
 
-* [Cloud KMS Node.js Client API Reference][client-docs]
-* [github.com/googleapis/nodejs-kms](https://github.com/googleapis/nodejs-kms)
-* [Cloud KMS Documentation][product-docs]
-
-Read more about the client libraries for Cloud APIs, including the older
-Google APIs Client Libraries, in [Client Libraries Explained][explained].
-
-[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
-
-**Table of contents:**
-
-* [Quickstart](#quickstart)
-  * [Before you begin](#before-you-begin)
-  * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+* [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
-## Quickstart
+## Using the client library
 
-### Before you begin
+1.  [Select or create a Cloud Platform project][projects].
 
-1.  Select or create a Cloud Platform project.
+1.  [Enable billing for your project][billing].
 
-    [Go to the projects page][projects]
-
-1.  Enable billing for your project.
-
-    [Enable billing][billing]
-
-1.  Enable the Cloud Key Management Service API.
-
-    [Enable the API][enable_api]
+1.  [Enable the Cloud Key Management Service API][enable_api].
 
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-[projects]: https://console.cloud.google.com/project
-[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+1. Install the client library:
 
-### Installing the client library
+        npm install --save @google-cloud/kms
 
-    npm install --save @google-cloud/kms
+1. Try an example:
 
+```javascript
+async function quickstart(
+  projectId = 'your-project-id' // Your GCP projectId
+) {
+  // Imports the @google-cloud/kms client library
+  const kms = require('@google-cloud/kms');
+
+  // Instantiates an authorized client
+  const client = new kms.KeyManagementServiceClient();
+
+  // Lists keys in the "global" location.
+  const locationId = 'global';
+
+  // Lists key rings
+  const parent = client.locationPath(projectId, locationId);
+  const [keyRings] = await client.listKeyRings({parent});
+
+  // Display the results
+  if (keyRings.length) {
+    console.log('Key rings:');
+    keyRings.forEach(keyRing => console.log(keyRing.name));
+  } else {
+    console.log(`No key rings found.`);
+  }
+}
+```
 
 ## Samples
 
@@ -97,7 +96,21 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-kms/blob/master/LICENSE)
 
+## What's Next
+
+* [Cloud KMS Documentation][product-docs]
+* [Cloud KMS Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-kms](https://github.com/googleapis/nodejs-kms)
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/kms/latest/
 [product-docs]: https://cloud.google.com/kms/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
