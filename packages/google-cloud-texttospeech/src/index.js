@@ -19,10 +19,10 @@
  * @namespace google.cloud
  */
 /**
- * @namespace google.cloud.text-to-speech
+ * @namespace google.cloud.texttospeech.v1
  */
 /**
- * @namespace google.cloud.text-to-speech.v1beta1
+ * @namespace google.cloud.texttospeech.v1beta1
  */
 
 'use strict';
