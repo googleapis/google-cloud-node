@@ -28,10 +28,9 @@ import {ProfilerConfig} from '../src/config';
 import {parseBackoffDuration, Profiler, Retryer} from '../src/profiler';
 import * as heapProfiler from '../src/profilers/heap-profiler';
 import {TimeProfiler} from '../src/profilers/time-profiler';
-
+import * as v8TimeProfiler from '../src/profilers/time-profiler-bindings';
 import {decodedHeapProfile, decodedTimeProfile, heapProfile, timeProfile} from './profiles-for-tests';
 
-const v8TimeProfiler = require('bindings')('time_profiler');
 const parseDuration: (str: string) => number = require('parse-duration');
 
 const fakeCredentials =

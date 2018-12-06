@@ -13,21 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import * as path from 'path';
 import {TimeProfile} from '../v8-types';
 
-const profiler = require('bindings')('time_profiler');
+const binary = require('node-pre-gyp');
+const bindingPath =
+    binary.find(path.resolve(path.join(__dirname, '../../../package.json')));
+const profiler = require(bindingPath);
+
 
 // Wrappers around native time profiler functions.
 
 export function startProfiling(runName: string) {
-  profiler.startProfiling(runName);
+  profiler.timeProfiler.startProfiling(runName);
 }
 
 export function stopProfiling(runName: string): TimeProfile {
-  return profiler.stopProfiling(runName);
+  return profiler.timeProfiler.stopProfiling(runName);
 }
 
 export function setSamplingInterval(intervalMicros: number) {
-  profiler.setSamplingInterval(intervalMicros);
+  profiler.timeProfiler.setSamplingInterval(intervalMicros);
 }

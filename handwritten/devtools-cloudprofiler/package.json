@@ -6,7 +6,7 @@
   "main": "out/src/index.js",
   "types": "out/src/index.d.ts",
   "scripts": {
-    "install": "node-gyp rebuild",
+    "install": "node-pre-gyp install --build-from-source",
     "test": "nyc mocha  out/test/test-*.js && nyc --no-clean mocha   out/system-test/test-*.js --timeout=60000",
     "check": "gts check",
     "clean": "gts clean",
@@ -36,6 +36,7 @@
     "gcp-metadata": "^0.9.0",
     "lodash.pickby": "^4.6.0",
     "nan": "^2.11.1",
+    "node-pre-gyp": "^0.12.0",
     "p-limit": "^2.0.0",
     "parse-duration": "^0.1.1",
     "pify": "^4.0.0",
@@ -88,5 +89,11 @@
   },
   "engines": {
     "node": ">=6.12.3 <8.0.0 || >=8.9.4 <10.0.0 || >=10.4.1"
+  },
+  "binary": {
+    "module_name": "profiler",
+    "module_path": "./build/{node_abi}-{platform}-{arch}-{libc}",
+    "host": "https://storage.googleapis.com/cloud-profiler-e2e/cprof-e2e-artifacts/nodejs/release",
+    "package_name": "{node_abi}-{platform}-{arch}-{libc}.tar.gz"
   }
 }

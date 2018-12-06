@@ -21,8 +21,8 @@ import * as sinon from 'sinon';
 import {createProfiler, nodeVersionOkay} from '../src/index';
 import {Profiler} from '../src/profiler';
 import * as heapProfiler from '../src/profilers/heap-profiler';
+import * as v8HeapProfiler from '../src/profilers/heap-profiler-bindings';
 
-const v8HeapProfiler = require('bindings')('sampling_heap_profiler');
 
 describe('nodeVersionOkay', () => {
   it('should accept alpha versions', () => {

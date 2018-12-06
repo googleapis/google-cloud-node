@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
+import * as path from 'path';
+
 import {AllocationProfileNode} from '../v8-types';
-const profiler = require('bindings')('sampling_heap_profiler');
+
+const binary = require('node-pre-gyp');
+const bindingPath =
+    binary.find(path.resolve(path.join(__dirname, '../../../package.json')));
+const profiler = require(bindingPath);
 
 // Wrappers around native heap profiler functions.
 
 export function startSamplingHeapProfiler(
     heapIntervalBytes: number, heapStackDepth: number) {
-  profiler.startSamplingHeapProfiler(heapIntervalBytes, heapStackDepth);
+  profiler.heapProfiler.startSamplingHeapProfiler(
+      heapIntervalBytes, heapStackDepth);
 }
 
 export function stopSamplingHeapProfiler() {
-  profiler.stopSamplingHeapProfiler();
+  profiler.heapProfiler.stopSamplingHeapProfiler();
 }
 
 export function getAllocationProfile(): AllocationProfileNode {
-  return profiler.getAllocationProfile();
+  return profiler.heapProfiler.getAllocationProfile();
 }
