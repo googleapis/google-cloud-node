@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.3.3
+
+12-06-2018 17:09 PST
+
+### Dependencies
+- chore(deps): update dependency @types/configstore to v4 ([#537](https://github.com/googleapis/nodejs-storage/pull/537))
+- chore(deps): update dependency @google-cloud/pubsub to ^0.22.0 ([#535](https://github.com/googleapis/nodejs-storage/pull/535))
+
+### Documentation
+- fix(docs): place doc comment above the last overload ([#544](https://github.com/googleapis/nodejs-storage/pull/544))
+- docs: update readme badges ([#536](https://github.com/googleapis/nodejs-storage/pull/536))
+
+### Internal / Testing Changes
+- chore: always nyc report before calling codecov ([#543](https://github.com/googleapis/nodejs-storage/pull/543))
+- chore: nyc ignore build/test by default ([#542](https://github.com/googleapis/nodejs-storage/pull/542))
+- chore: update license file ([#539](https://github.com/googleapis/nodejs-storage/pull/539))
+
 ## v2.3.2
 
 This patch release fixed an issue affecting reading from a file on GCS ([#528](https://github.com/googleapis/nodejs-storage/issues/528)).
