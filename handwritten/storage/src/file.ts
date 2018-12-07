@@ -743,6 +743,11 @@ class File extends ServiceObject {
     });
   }
 
+  copy(destination: string|Bucket|File): Promise<CopyResponse>;
+  copy(destination: string|Bucket|File, callback: CopyCallback): void;
+  copy(
+      destination: string|Bucket|File, options: CopyOptions,
+      callback: CopyCallback): void;
   /**
    * @callback CopyCallback
    * @param {?Error} err Request error, if any.
@@ -849,11 +854,6 @@ class File extends ServiceObject {
    * region_tag:storage_copy_file
    * Another example:
    */
-  copy(destination: string|Bucket|File): Promise<CopyResponse>;
-  copy(destination: string|Bucket|File, callback: CopyCallback): void;
-  copy(
-      destination: string|Bucket|File, options: CopyOptions,
-      callback: CopyCallback): void;
   copy(
       destination: string|Bucket|File,
       optionsOrCallback?: CopyOptions|CopyCallback,
@@ -1265,6 +1265,12 @@ class File extends ServiceObject {
     return throughStream as Readable;
   }
 
+  createResumableUpload(options?: CreateResumableUploadOptions):
+      Promise<CreateResumableUploadResponse>;
+  createResumableUpload(
+      options: CreateResumableUploadOptions,
+      callback: CreateResumableUploadCallback): void;
+  createResumableUpload(callback: CreateResumableUploadCallback): void;
   /**
    * Create a unique resumable upload session URI. This is the first step when
    * performing a resumable upload.
@@ -1332,12 +1338,6 @@ class File extends ServiceObject {
    *   const uri = data[0];
    * });
    */
-  createResumableUpload(options?: CreateResumableUploadOptions):
-      Promise<CreateResumableUploadResponse>;
-  createResumableUpload(
-      options: CreateResumableUploadOptions,
-      callback: CreateResumableUploadCallback): void;
-  createResumableUpload(callback: CreateResumableUploadCallback): void;
   createResumableUpload(
       optionsOrCallback?: CreateResumableUploadOptions|
       CreateResumableUploadCallback,
@@ -1622,6 +1622,9 @@ class File extends ServiceObject {
     return stream as Writable;
   }
 
+  delete(options?: DeleteFileOptions): Promise<DeleteFileResponse>;
+  delete(options: DeleteFileOptions, callback: DeleteFileCallback): void;
+  delete(callback: DeleteFileCallback): void;
   /**
    * Delete the file.
    *
@@ -1652,9 +1655,6 @@ class File extends ServiceObject {
    * region_tag:storage_delete_file
    * Another example:
    */
-  delete(options?: DeleteFileOptions): Promise<DeleteFileResponse>;
-  delete(options: DeleteFileOptions, callback: DeleteFileCallback): void;
-  delete(callback: DeleteFileCallback): void;
   delete(
       optionsOrCallback?: DeleteFileOptions|DeleteFileCallback,
       callback?: DeleteFileCallback): void|Promise<DeleteFileResponse> {
@@ -1666,6 +1666,9 @@ class File extends ServiceObject {
     (this.parent as ServiceObject).delete.call(this, options, callback);
   }
 
+  download(options?: DownloadOptions): Promise<DownloadResponse>;
+  download(options: DownloadOptions, callback: DownloadCallback): void;
+  download(callback: DownloadCallback): void;
   /**
    * Convenience method to download a file into memory or to a local
    * destination.
@@ -1719,9 +1722,6 @@ class File extends ServiceObject {
    * region_tag:storage_download_file_requester_pays
    * Example of downloading a file where the requester pays:
    */
-  download(options?: DownloadOptions): Promise<DownloadResponse>;
-  download(options: DownloadOptions, callback: DownloadCallback): void;
-  download(callback: DownloadCallback): void;
   download(
       optionsOrCallback?: DownloadOptions|DownloadCallback,
       callback?: DownloadCallback): Promise<DownloadResponse>|void {
@@ -1750,6 +1750,9 @@ class File extends ServiceObject {
     }
   }
 
+  exists(options?: FileExistsOptions): Promise<FileExistsResponse>;
+  exists(options: FileExistsOptions, callback: FileExistsCallback): void;
+  exists(callback: FileExistsCallback): void;
   /**
    * Check if the file exists.
    *
@@ -1775,9 +1778,6 @@ class File extends ServiceObject {
    *   const exists = data[0];
    * });
    */
-  exists(options?: FileExistsOptions): Promise<FileExistsResponse>;
-  exists(options: FileExistsOptions, callback: FileExistsCallback): void;
-  exists(callback: FileExistsCallback): void;
   exists(
       optionsOrCallback?: FileExistsOptions|FileExistsCallback,
       callback?: FileExistsCallback): Promise<FileExistsResponse>|void {
@@ -1858,6 +1858,9 @@ class File extends ServiceObject {
     return this;
   }
 
+  get(options?: GetFileOptions): Promise<GetFileResponse>;
+  get(options: GetFileOptions, callback: GetFileCallback): void;
+  get(callback: GetFileCallback): void;
   /**
    * Get a file object and its metadata if it exists.
    *
@@ -1886,9 +1889,6 @@ class File extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  get(options?: GetFileOptions): Promise<GetFileResponse>;
-  get(options: GetFileOptions, callback: GetFileCallback): void;
-  get(callback: GetFileCallback): void;
   get(optionsOrCallback?: GetFileOptions|GetFileCallback,
       callback?: GetFileCallback): void|Promise<GetFileResponse> {
     const options =
@@ -1898,6 +1898,8 @@ class File extends ServiceObject {
     (this.parent as ServiceObject).get.call(this, options, callback);
   }
 
+  getExpirationDate(): Promise<GetExpirationDateResponse>;
+  getExpirationDate(callback: GetExpirationDateCallback): void;
   /**
    * @typedef {array} GetExpirationDateResponse
    * @property {date} 0 A Date object representing the earliest time this file's
@@ -1926,8 +1928,6 @@ class File extends ServiceObject {
    *   // expirationDate is a Date object.
    * });
    */
-  getExpirationDate(): Promise<GetExpirationDateResponse>;
-  getExpirationDate(callback: GetExpirationDateCallback): void;
   getExpirationDate(callback?: GetExpirationDateCallback):
       void|Promise<GetExpirationDateResponse> {
     this.getMetadata((err, metadata, apiResponse) => {
@@ -1946,6 +1946,11 @@ class File extends ServiceObject {
     });
   }
 
+  getMetadata(options?: GetFileMetadataOptions):
+      Promise<GetFileMetadataResponse>;
+  getMetadata(
+      options: GetFileMetadataOptions, callback: GetFileMetadataCallback): void;
+  getMetadata(callback: GetFileMetadataCallback): void;
   /**
    * @typedef {array} GetFileMetadataResponse
    * @property {object} 0 The {@link File} metadata.
@@ -1989,11 +1994,6 @@ class File extends ServiceObject {
    * region_tag:storage_get_metadata
    * Another example:
    */
-  getMetadata(options?: GetFileMetadataOptions):
-      Promise<GetFileMetadataResponse>;
-  getMetadata(
-      options: GetFileMetadataOptions, callback: GetFileMetadataCallback): void;
-  getMetadata(callback: GetFileMetadataCallback): void;
   getMetadata(
       optionsOrCallback?: GetFileMetadataOptions|GetFileMetadataCallback,
       callback?: GetFileMetadataCallback):
@@ -2006,6 +2006,11 @@ class File extends ServiceObject {
     (this.parent as ServiceObject).getMetadata.call(this, options, callback);
   }
 
+  getSignedPolicy(options: GetSignedPolicyOptions):
+      Promise<GetSignedPolicyResponse>;
+  getSignedPolicy(
+      options: GetSignedPolicyOptions, callback: GetSignedPolicyCallback): void;
+  getSignedPolicy(callback: GetSignedPolicyCallback): void;
   /**
    * @typedef {array} GetSignedPolicyResponse
    * @property {object} 0 The document policy.
@@ -2094,11 +2099,6 @@ class File extends ServiceObject {
    *   const policy = data[0];
    * });
    */
-  getSignedPolicy(options: GetSignedPolicyOptions):
-      Promise<GetSignedPolicyResponse>;
-  getSignedPolicy(
-      options: GetSignedPolicyOptions, callback: GetSignedPolicyCallback): void;
-  getSignedPolicy(callback: GetSignedPolicyCallback): void;
   getSignedPolicy(
       optionsOrCallback?: GetSignedPolicyOptions|GetSignedPolicyCallback,
       cb?: GetSignedPolicyCallback): void|Promise<GetSignedPolicyResponse> {
@@ -2195,6 +2195,8 @@ class File extends ServiceObject {
             });
   }
 
+  getSignedUrl(cfg: GetSignedUrlConfig): Promise<GetSignedUrlResponse>;
+  getSignedUrl(cfg: GetSignedUrlConfig, callback: GetSignedUrlCallback): void;
   /**
    * Get a signed URL to allow limited time access to the file.
    *
@@ -2309,8 +2311,6 @@ class File extends ServiceObject {
    * region_tag:storage_generate_signed_url
    * Another example:
    */
-  getSignedUrl(cfg: GetSignedUrlConfig): Promise<GetSignedUrlResponse>;
-  getSignedUrl(cfg: GetSignedUrlConfig, callback: GetSignedUrlCallback): void;
   getSignedUrl(cfg: GetSignedUrlConfig, callback?: GetSignedUrlCallback):
       void|Promise<GetSignedUrlResponse> {
     const expiresInMSeconds = new Date(cfg.expires).valueOf();
@@ -2401,6 +2401,11 @@ class File extends ServiceObject {
         });
   }
 
+  makePrivate(options?: MakeFilePrivateOptions):
+      Promise<MakeFilePrivateResponse>;
+  makePrivate(callback: MakeFilePrivateCallback): void;
+  makePrivate(
+      options: MakeFilePrivateOptions, callback: MakeFilePrivateCallback): void;
   /**
    * Make a file private to the project and remove all other permissions.
    * Set `options.strict` to true to make the file private to only the owner.
@@ -2435,11 +2440,6 @@ class File extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  makePrivate(options?: MakeFilePrivateOptions):
-      Promise<MakeFilePrivateResponse>;
-  makePrivate(callback: MakeFilePrivateCallback): void;
-  makePrivate(
-      options: MakeFilePrivateOptions, callback: MakeFilePrivateCallback): void;
   makePrivate(
       optionsOrCallback?: MakeFilePrivateOptions|MakeFilePrivateCallback,
       callback?: MakeFilePrivateCallback): Promise<MakeFilePrivateResponse>|
@@ -2468,6 +2468,8 @@ class File extends ServiceObject {
         query, callback!);
   }
 
+  makePublic(): Promise<MakeFilePublicResponse>;
+  makePublic(callback: MakeFilePublicCallback): void;
   /**
    * @callback MakeFilePublicCallback
    * @param {?Error} err Request error, if any.
@@ -2501,8 +2503,6 @@ class File extends ServiceObject {
    * region_tag:storage_make_public
    * Another example:
    */
-  makePublic(): Promise<MakeFilePublicResponse>;
-  makePublic(callback: MakeFilePublicCallback): void;
   makePublic(callback?: MakeFilePublicCallback):
       Promise<MakeFilePublicResponse>|void {
     callback = callback || util.noop;
@@ -2516,6 +2516,12 @@ class File extends ServiceObject {
         });
   }
 
+  move(destination: string|Bucket|File, options?: MoveOptions):
+      Promise<MoveResponse>;
+  move(destination: string|Bucket|File, callback: MoveCallback): void;
+  move(
+      destination: string|Bucket|File, options: MoveOptions,
+      callback: MoveCallback): void;
   /**
    * Move this file to another location. By default, this will rename the file
    * and keep it in the same bucket, but you can choose to move it to another
@@ -2626,12 +2632,6 @@ class File extends ServiceObject {
    * region_tag:storage_move_file
    * Another example:
    */
-  move(destination: string|Bucket|File, options?: MoveOptions):
-      Promise<MoveResponse>;
-  move(destination: string|Bucket|File, callback: MoveCallback): void;
-  move(
-      destination: string|Bucket|File, options: MoveOptions,
-      callback: MoveCallback): void;
   move(
       destination: string|Bucket|File,
       optionsOrCallback?: MoveOptions|MoveCallback,
@@ -2655,6 +2655,9 @@ class File extends ServiceObject {
     });
   }
 
+  request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
+  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
+      void;
   /**
    * Makes request and applies userProject query parameter if necessary.
    *
@@ -2663,9 +2666,6 @@ class File extends ServiceObject {
    * @param {object} reqOpts - The request options.
    * @param {function} callback - The callback function.
    */
-  request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
-  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
-      void;
   request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
       void|Promise<r.Response> {
     if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
@@ -2674,6 +2674,12 @@ class File extends ServiceObject {
     return super.request(reqOpts, callback!);
   }
 
+  rotateEncryptionKey(options?: RotateEncryptionKeyOptions):
+      Promise<RotateEncryptionKeyResponse>;
+  rotateEncryptionKey(callback: RotateEncryptionKeyCallback): void;
+  rotateEncryptionKey(
+      options: RotateEncryptionKeyOptions,
+      callback: RotateEncryptionKeyCallback): void;
   /**
    * This method allows you to update the encryption key associated with this
    * file.
@@ -2688,12 +2694,6 @@ class File extends ServiceObject {
    * region_tag:storage_rotate_encryption_key
    * Example of rotating the encryption key for this file:
    */
-  rotateEncryptionKey(options?: RotateEncryptionKeyOptions):
-      Promise<RotateEncryptionKeyResponse>;
-  rotateEncryptionKey(callback: RotateEncryptionKeyCallback): void;
-  rotateEncryptionKey(
-      options: RotateEncryptionKeyOptions,
-      callback: RotateEncryptionKeyCallback): void;
   rotateEncryptionKey(
       optionsOrCallback?: RotateEncryptionKeyOptions|
       RotateEncryptionKeyCallback,
@@ -2715,6 +2715,10 @@ class File extends ServiceObject {
     this.copy(newFile, callback!);
   }
 
+  // tslint:disable:no-any
+  save(data: any, options?: SaveOptions): Promise<void>;
+  save(data: any, callback: SaveCallback): void;
+  save(data: any, options: SaveOptions, callback: SaveCallback): void;
   /**
    * Write arbitrary data to a file.
    *
@@ -2755,10 +2759,6 @@ class File extends ServiceObject {
    * //-
    * file.save(contents).then(function() {});
    */
-  // tslint:disable:no-any
-  save(data: any, options?: SaveOptions): Promise<void>;
-  save(data: any, callback: SaveCallback): void;
-  save(data: any, options: SaveOptions, callback: SaveCallback): void;
   save(
       data: any, optionsOrCallback?: SaveOptions|SaveCallback,
       callback?: SaveCallback): Promise<void>|void {
@@ -2774,6 +2774,12 @@ class File extends ServiceObject {
         .end(data);
   }
 
+  setMetadata(metadata: Metadata, options?: SetFileMetadataOptions):
+      Promise<SetFileMetadataResponse>;
+  setMetadata(metadata: Metadata, callback: SetFileMetadataCallback): void;
+  setMetadata(
+      metadata: Metadata, options: SetFileMetadataOptions,
+      callback: SetFileMetadataCallback): void;
   /**
    * Merge the given metadata with the current remote file's metadata. This
    * will set metadata if it was previously unset or update previously set
@@ -2849,12 +2855,6 @@ class File extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  setMetadata(metadata: Metadata, options?: SetFileMetadataOptions):
-      Promise<SetFileMetadataResponse>;
-  setMetadata(metadata: Metadata, callback: SetFileMetadataCallback): void;
-  setMetadata(
-      metadata: Metadata, options: SetFileMetadataOptions,
-      callback: SetFileMetadataCallback): void;
   setMetadata(
       metadata: Metadata,
       optionsOrCallback?: SetFileMetadataOptions|SetFileMetadataCallback,
@@ -2871,6 +2871,13 @@ class File extends ServiceObject {
     (this.parent as any).setMetadata.call(this, metadata, options, callback!);
   }
 
+  setStorageClass(storageClass: string, options?: SetStorageClassOptions):
+      Promise<SetStorageClassResponse>;
+  setStorageClass(
+      storageClass: string, options: SetStorageClassOptions,
+      callback: SetStorageClassCallback): void;
+  setStorageClass(storageClass: string, callback?: SetStorageClassCallback):
+      void;
   /**
    * Set the storage class for this file.
    *
@@ -2899,13 +2906,6 @@ class File extends ServiceObject {
    * //-
    * file.setStorageClass('regional').then(function() {});
    */
-  setStorageClass(storageClass: string, options?: SetStorageClassOptions):
-      Promise<SetStorageClassResponse>;
-  setStorageClass(
-      storageClass: string, options: SetStorageClassOptions,
-      callback: SetStorageClassCallback): void;
-  setStorageClass(storageClass: string, callback?: SetStorageClassCallback):
-      void;
   setStorageClass(
       storageClass: string,
       optionsOrCallback?: SetStorageClassOptions|SetStorageClassCallback,

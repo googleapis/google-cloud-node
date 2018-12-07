@@ -55,6 +55,23 @@ export interface BucketOptions {
   userProject?: string;
 }
 
+/**
+ * Metadata to set for the bucket.
+ *
+ * @typedef {object} CreateBucketRequest
+ * @property {boolean} [coldline=false] Specify the storage class as Coldline.
+ * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
+ *     Availability.
+ * @property {boolean} [multiRegional=false] Specify the storage class as
+ *     Multi-Regional.
+ * @property {boolean} [nearline=false] Specify the storage class as Nearline.
+ * @property {boolean} [regional=false] Specify the storage class as Regional.
+ * @property {boolean} [requesterPays=false] **Early Access Testers Only**
+ *     Force the use of the User Project metadata field to assign operational
+ *     costs when an operation is made on a Bucket and its objects.
+ * @property {string} [userProject] The ID of the project which will be billed
+ *     for the request.
+ */
 export interface CreateBucketRequest {
   coldline?: boolean;
   dra?: boolean;
@@ -68,12 +85,18 @@ export interface CreateBucketRequest {
 }
 
 /**
- * @typedef {object} CreateBucketResponse
- * @property {Bucket} bucket The newly created Bucket object.
- * @property {object} apiResponse The full API response.
+ * @typedef {array} CreateBucketResponse
+ * @property {Bucket} 0 The new {@link Bucket}.
+ * @property {object} 1 The full API response.
  */
 export type CreateBucketResponse = [Bucket, r.Response];
 
+/**
+ * @callback CreateBucketCallback
+ * @param {?Error} err Request error, if any.
+ * @param {Bucket} bucket The new {@link Bucket}.
+ * @param {object} apiResponse The full API response.
+ */
 export interface BucketCallback {
   (err: Error|null, bucket?: Bucket|null, apiResponse?: r.Response): void;
 }
@@ -350,34 +373,11 @@ export class Storage extends Service {
     return new Channel(this, id, resourceId);
   }
 
-  /**
-   * Metadata to set for the bucket.
-   *
-   * @typedef {object} CreateBucketRequest
-   * @property {boolean} [coldline=false] Specify the storage class as Coldline.
-   * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
-   *     Availability.
-   * @property {boolean} [multiRegional=false] Specify the storage class as
-   *     Multi-Regional.
-   * @property {boolean} [nearline=false] Specify the storage class as Nearline.
-   * @property {boolean} [regional=false] Specify the storage class as Regional.
-   * @property {boolean} [requesterPays=false] **Early Access Testers Only**
-   *     Force the use of the User Project metadata field to assign operational
-   *     costs when an operation is made on a Bucket and its objects.
-   * @property {string} [userProject] The ID of the project which will be billed
-   *     for the request.
-   */
-  /**
-   * @typedef {array} CreateBucketResponse
-   * @property {Bucket} 0 The new {@link Bucket}.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback CreateBucketCallback
-   * @param {?Error} err Request error, if any.
-   * @param {Bucket} bucket The new {@link Bucket}.
-   * @param {object} apiResponse The full API response.
-   */
+  createBucket(name: string): Promise<CreateBucketResponse>;
+  createBucket(name: string, callback: BucketCallback): void;
+  createBucket(
+      name: string, metadata: CreateBucketRequest,
+      callback: BucketCallback): void;
   /**
    * Create a bucket.
    *
@@ -453,11 +453,6 @@ export class Storage extends Service {
    * region_tag:storage_create_bucket
    * Another example:
    */
-  createBucket(name: string): Promise<CreateBucketResponse>;
-  createBucket(name: string, callback: BucketCallback): void;
-  createBucket(
-      name: string, metadata: CreateBucketRequest,
-      callback: BucketCallback): void;
   createBucket(
       name: string, metadataOrCallback?: BucketCallback|CreateBucketRequest,
       callback?: BucketCallback): Promise<CreateBucketResponse>|void {
@@ -527,6 +522,9 @@ export class Storage extends Service {
         });
   }
 
+  getBuckets(options?: GetBucketsRequest): Promise<GetBucketsResponse>;
+  getBuckets(options: GetBucketsRequest, callback: GetBucketsCallback): void;
+  getBuckets(callback: GetBucketsCallback): void;
   /**
    * Query object for listing buckets.
    *
@@ -602,9 +600,6 @@ export class Storage extends Service {
    * region_tag:storage_list_buckets
    * Another example:
    */
-  getBuckets(options?: GetBucketsRequest): Promise<GetBucketsResponse>;
-  getBuckets(options: GetBucketsRequest, callback: GetBucketsCallback): void;
-  getBuckets(callback: GetBucketsCallback): void;
   getBuckets(
       optionsOrCallback?: GetBucketsRequest|GetBucketsCallback,
       cb?: GetBucketsCallback): void|Promise<GetBucketsResponse> {
@@ -637,12 +632,18 @@ export class Storage extends Service {
         });
   }
 
+  getServiceAccount(options?: GetServiceAccountOptions):
+      Promise<GetServiceAccountResponse>;
+  getServiceAccount(
+      options: GetServiceAccountOptions,
+      callback: GetServiceAccountCallback): void;
+  getServiceAccount(callback: GetServiceAccountCallback): void;
   /**
    * @typedef {array} GetServiceAccountResponse
    * @property {object} 0 The service account resource.
    * @property {object} 1 The full
    * [API
-   * response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   * response](https//cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
    */
   /**
    * @callback GetServiceAccountCallback
@@ -685,12 +686,6 @@ export class Storage extends Service {
    *   const apiResponse = data[1];
    * });
    */
-  getServiceAccount(options?: GetServiceAccountOptions):
-      Promise<GetServiceAccountResponse>;
-  getServiceAccount(
-      options: GetServiceAccountOptions,
-      callback: GetServiceAccountCallback): void;
-  getServiceAccount(callback: GetServiceAccountCallback): void;
   getServiceAccount(
       optionsOrCallback?: GetServiceAccountOptions|GetServiceAccountCallback,
       cb?: GetServiceAccountCallback): void|Promise<GetServiceAccountResponse> {
