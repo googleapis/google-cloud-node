@@ -4,6 +4,57 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## v2.1.3
+
+12-06-2018 17:12 PST
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/common to ^0.27.0 ([#176](https://github.com/googleapis/nodejs-translate/pull/176))
+- chore(deps): update dependency typescript to ~3.2.0 ([#177](https://github.com/googleapis/nodejs-translate/pull/177))
+- chore(deps): update dependency gts to ^0.9.0 ([#170](https://github.com/googleapis/nodejs-translate/pull/170))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#168](https://github.com/googleapis/nodejs-translate/pull/168))
+- chore(deps): update dependency @types/is to v0.0.21 ([#166](https://github.com/googleapis/nodejs-translate/pull/166))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#157](https://github.com/googleapis/nodejs-translate/pull/157))
+- fix(deps): update dependency @google-cloud/common to ^0.26.0 ([#149](https://github.com/googleapis/nodejs-translate/pull/149))
+- chore(deps): update dependency sinon to v7 ([#142](https://github.com/googleapis/nodejs-translate/pull/142))
+- fix(deps): update dependency @google-cloud/translate to v2 ([#137](https://github.com/googleapis/nodejs-translate/pull/137))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#139](https://github.com/googleapis/nodejs-translate/pull/139))
+- chore(deps): update dependency typescript to ~3.1.0 ([#136](https://github.com/googleapis/nodejs-translate/pull/136))
+
+### Documentation
+- fix(docs): place doc comment above the last overload ([#186](https://github.com/googleapis/nodejs-translate/pull/186))
+- docs: update readme badges ([#180](https://github.com/googleapis/nodejs-translate/pull/180))
+- docs(samples): updated samples code to use async await ([#154](https://github.com/googleapis/nodejs-translate/pull/154))
+
+### Internal / Testing Changes
+- chore: always nyc report before calling codecov ([#185](https://github.com/googleapis/nodejs-translate/pull/185))
+- chore: nyc ignore build/test by default ([#184](https://github.com/googleapis/nodejs-translate/pull/184))
+- chore: update license file ([#182](https://github.com/googleapis/nodejs-translate/pull/182))
+- fix(build): fix system key decryption ([#178](https://github.com/googleapis/nodejs-translate/pull/178))
+- chore: add a synth.metadata
+- refactor(samples): convert sample tests from ava to mocha ([#171](https://github.com/googleapis/nodejs-translate/pull/171))
+- chore: update eslintignore config ([#169](https://github.com/googleapis/nodejs-translate/pull/169))
+- chore: drop contributors from multiple places ([#167](https://github.com/googleapis/nodejs-translate/pull/167))
+- chore: use latest npm on Windows ([#165](https://github.com/googleapis/nodejs-translate/pull/165))
+- chore(build): ignore build dir with eslint
+- chore: update CircleCI config ([#163](https://github.com/googleapis/nodejs-translate/pull/163))
+- fix: fix the sample tests ([#156](https://github.com/googleapis/nodejs-translate/pull/156))
+- chore: update issue templates ([#155](https://github.com/googleapis/nodejs-translate/pull/155))
+- chore: remove old issue template ([#151](https://github.com/googleapis/nodejs-translate/pull/151))
+- build: run tests on node11 ([#150](https://github.com/googleapis/nodejs-translate/pull/150))
+- chores(build): do not collect sponge.xml from windows builds ([#148](https://github.com/googleapis/nodejs-translate/pull/148))
+- chores(build): run codecov on continuous builds ([#147](https://github.com/googleapis/nodejs-translate/pull/147))
+- chore: update new issue template ([#146](https://github.com/googleapis/nodejs-translate/pull/146))
+- build: fix codecov uploading on Kokoro ([#143](https://github.com/googleapis/nodejs-translate/pull/143))
+- Update kokoro config ([#140](https://github.com/googleapis/nodejs-translate/pull/140))
+- Update CI config ([#135](https://github.com/googleapis/nodejs-translate/pull/135))
+- samples: fixed incorrect end tag ([#134](https://github.com/googleapis/nodejs-translate/pull/134))
+- Update CI config ([#130](https://github.com/googleapis/nodejs-translate/pull/130))
+- Translate Automl samples ([#131](https://github.com/googleapis/nodejs-translate/pull/131))
+- Don't publish sourcemaps ([#132](https://github.com/googleapis/nodejs-translate/pull/132))
+- test: remove appveyor config ([#129](https://github.com/googleapis/nodejs-translate/pull/129))
+- build: update CI configs ([#127](https://github.com/googleapis/nodejs-translate/pull/127))
+
 ## v2.1.2
 
 ### Bug fixes
