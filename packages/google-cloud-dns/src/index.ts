@@ -161,6 +161,11 @@ class DNS extends Service {
      */
     this.getZonesStream = paginator.streamify('getZones');
   }
+
+  createZone(name: string, config: CreateZoneRequest):
+      Promise<CreateZoneResponse>;
+  createZone(
+      name: string, config: CreateZoneRequest, callback: GetZoneCallback): void;
   /**
    * Config to set for the zone.
    *
@@ -218,10 +223,6 @@ class DNS extends Service {
    *   const apiResponse = data[1];
    * });
    */
-  createZone(name: string, config: CreateZoneRequest):
-      Promise<CreateZoneResponse>;
-  createZone(
-      name: string, config: CreateZoneRequest, callback: GetZoneCallback): void;
   createZone(
       name: string, config: CreateZoneRequest,
       callback?: GetZoneCallback): void|Promise<CreateZoneResponse> {
@@ -250,6 +251,10 @@ class DNS extends Service {
           callback!(null, zone, resp);
         });
   }
+
+  getZones(query?: GetZonesRequest): Promise<GetZonesResponse>;
+  getZones(callback: GetZonesCallback): void;
+  getZones(query: GetZonesRequest, callback: GetZonesCallback): void;
   /**
    * Query object for listing zones.
    *
@@ -296,9 +301,6 @@ class DNS extends Service {
    *   const zones = data[0];
    * });
    */
-  getZones(query?: GetZonesRequest): Promise<GetZonesResponse>;
-  getZones(callback: GetZonesCallback): void;
-  getZones(query: GetZonesRequest, callback: GetZonesCallback): void;
   getZones(
       queryOrCallback?: GetZonesRequest|GetZonesCallback,
       callback?: GetZonesCallback): void|Promise<GetZonesResponse> {
@@ -329,6 +331,7 @@ class DNS extends Service {
           callback!(null, zones, nextQuery, resp);
         });
   }
+
   /**
    * Get a reference to a Zone.
    *

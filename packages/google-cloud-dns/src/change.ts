@@ -197,6 +197,10 @@ export class Change extends ServiceObject {
       requestModule: teenyRequest as typeof r,
     });
   }
+
+  create(config?: CreateChangeRequest): Promise<CreateChangeResponse>;
+  create(config: CreateChangeRequest, callback: CreateChangeCallback): void;
+  create(callback: CreateChangeCallback): void;
   /**
    * Create a change.
    *
@@ -231,9 +235,6 @@ export class Change extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
-  create(config?: CreateChangeRequest): Promise<CreateChangeResponse>;
-  create(config: CreateChangeRequest, callback: CreateChangeCallback): void;
-  create(callback: CreateChangeCallback): void;
   create(
       configOrCallback?: CreateChangeRequest|CreateChangeCallback,
       callback?: CreateChangeCallback): void|Promise<CreateChangeResponse> {

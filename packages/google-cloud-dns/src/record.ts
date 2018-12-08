@@ -112,6 +112,8 @@ export class Record implements RecordObject {
     }
   }
 
+  delete(): Promise<DeleteRecordResponse>;
+  delete(callback: CreateChangeCallback): void;
   /**
    * Delete this record by creating a change on your zone. This is a convenience
    * method for:
@@ -149,8 +151,6 @@ export class Record implements RecordObject {
    *   const apiResponse = data[1];
    * });
    */
-  delete(): Promise<DeleteRecordResponse>;
-  delete(callback: CreateChangeCallback): void;
   delete(callback?: CreateChangeCallback): void|Promise<DeleteRecordResponse> {
     this.zone_.deleteRecords(this, callback!);
   }
