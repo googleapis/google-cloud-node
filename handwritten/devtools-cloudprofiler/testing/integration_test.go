@@ -107,7 +107,7 @@ retry npm install --nodedir="$NODEDIR" "$PROFILER" typescript gts >/dev/null
 npm run compile
 
 # Run benchmark with agent
-GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --trace-warnings --require @google-cloud/profiler build/src/busybench.js 600
+GCLOUD_PROFILER_LOGLEVEL=5 GAE_SERVICE={{.Service}} node --trace-warnings build/src/busybench.js 600
 
 # Indicate to test that script has finished running
 echo "{{.FinishString}}"
