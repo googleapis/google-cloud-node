@@ -1,0 +1,19 @@
+{
+  "name": "cloud-profiler-samples",
+  "version": "0.1.0",
+  "description": "Google Cloud Profiler samples",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo 'no test yet'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googleapis/cloud-profiler-nodejs.git"
+  },
+  "author": "Google LLC.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/googleapis/cloud-profiler-nodejs/issues"
+  },
+  "homepage": "https://github.com/googleapis/cloud-profiler-nodejs#readme"
+}
