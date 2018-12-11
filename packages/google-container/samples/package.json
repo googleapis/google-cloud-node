@@ -11,7 +11,7 @@
     "test": "echo no sample tests 👻"
   },
   "dependencies": {
-    "@google-cloud/container": "^0.2.0"
+    "@google-cloud/container": "^0.3.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0"
