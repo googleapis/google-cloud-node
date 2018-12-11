@@ -58,7 +58,7 @@
     "@types/node": "^10.0.3",
     "@types/p-limit": "^2.0.0",
     "@types/pify": "^3.0.0",
-    "@types/pretty-ms": "^3.0.0",
+    "@types/pretty-ms": "^4.0.0",
     "@types/request": "^2.47.1",
     "@types/sinon": "5.0.5",
     "codecov": "^3.0.0",
