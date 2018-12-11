@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## v0.9.1
+
+### Dependencies
+- chore(deps): update dependency typescript to ~3.2.0 ([#177](https://github.com/googleapis/nodejs-dns/pull/177))
+- fix(deps): update dependency @google-cloud/common to ^0.27.0 ([#176](https://github.com/googleapis/nodejs-dns/pull/176))
+
+### Documentation
+- fix(docs): place doc comment above the last overload ([#187](https://github.com/googleapis/nodejs-dns/pull/187))
+- docs: update readme badges ([#180](https://github.com/googleapis/nodejs-dns/pull/180))
+
+### Internal / Testing Changes
+- chore: always nyc report before calling codecov ([#185](https://github.com/googleapis/nodejs-dns/pull/185))
+- chore: nyc ignore build/test by default ([#184](https://github.com/googleapis/nodejs-dns/pull/184))
+- chore: update license file ([#182](https://github.com/googleapis/nodejs-dns/pull/182))
+- fix(build): fix system key decryption ([#178](https://github.com/googleapis/nodejs-dns/pull/178))
+- chore: add synth.metadata
+
 ## v0.9.0
 
 11-16-2018 14:11 PST
