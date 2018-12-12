@@ -1,7 +1,6 @@
 {
   "name": "appengine-cloudtasks",
   "description": "Google App Engine Cloud Tasks example.",
-  "version": "0.2.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "private": true,
@@ -9,9 +8,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "unit-test": "mocha system-test/*.test.js --timeout=600000",
-    "system-test": "repo-tools test app --config package.json --config-key cloud-repo-tools",
-    "test": "npm run unit-test && npm run system-test"
+    "test": "mocha system-test"
   },
   "dependencies": {
     "@google-cloud/tasks": "^0.2.2",
@@ -20,21 +17,8 @@
     "yargs": "^12.0.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
+    "execa": "^1.0.0",
     "mocha": "^5.2.0",
-    "proxyquire": "^2.0.1",
-    "sinon": "^7.0.0"
-  },
-  "cloud-repo-tools": {
-    "requiresKeyFile": true,
-    "requiresProjectId": true,
-    "test": {
-      "app": {
-        "msg": "Hello, World!",
-        "args": [
-          "server.js"
-        ]
-      }
-    }
+    "uuid": "^3.3.2"
   }
 }
