@@ -25,6 +25,8 @@ const logging = new Logging();
 const got = require('got');
 
 before(tools.checkCredentials);
+after(() => got('http://localhost:8080/shutdown'));
+
 const lb = require('@google-cloud/logging-bunyan');
 const {APP_LOG_SUFFIX} = lb.express;
 

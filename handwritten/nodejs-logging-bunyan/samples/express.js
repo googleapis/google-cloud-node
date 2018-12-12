@@ -48,8 +48,13 @@ async function startServer() {
   logger.info({port: 8080}, 'bonjour');
 
   // Start listening on the http server.
-  app.listen(8080, () => {
+  const server = app.listen(8080, () => {
     console.log('http server listening on port 8080');
+  });
+
+  app.get('/shutdown', (req, res) => {
+    res.sendStatus(200);
+    server.close();
   });
 }
 
