@@ -4,6 +4,62 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## v0.9.5
+
+12-12-2018 19:50 PST
+
+### Bug Fixes
+- fix(middleware): use bunyan log.child ([#163](https://github.com/googleapis/nodejs-logging-bunyan/pull/163))
+- fix: Don't publish sourcemaps ([#166](https://github.com/googleapis/nodejs-logging-bunyan/pull/166))
+
+### Dependencies
+- fix(deps): update dependency @opencensus/propagation-stackdriver to ^0.0.6 ([#192](https://github.com/googleapis/nodejs-logging-bunyan/pull/192))
+- fix(deps): update dependency @opencensus/propagation-stackdriver to ^0.0.5 ([#177](https://github.com/googleapis/nodejs-logging-bunyan/pull/177))
+
+### Docs & Samples
+- docs: update readme badges ([#213](https://github.com/googleapis/nodejs-logging-bunyan/pull/213))
+- refactor: convert samples test from ava to mocha ([#190](https://github.com/googleapis/nodejs-logging-bunyan/pull/190))
+
+### Internal / Testing Changes
+- chore: the sample tests complete correctly ([#232](https://github.com/googleapis/nodejs-logging-bunyan/pull/232))
+- chore(build): inject yoshi automation key ([#231](https://github.com/googleapis/nodejs-logging-bunyan/pull/231))
+- chore: update nyc and eslint configs ([#230](https://github.com/googleapis/nodejs-logging-bunyan/pull/230))
+- chore: fix publish.sh permission +x ([#228](https://github.com/googleapis/nodejs-logging-bunyan/pull/228))
+- fix(build): fix Kokoro release script ([#227](https://github.com/googleapis/nodejs-logging-bunyan/pull/227))
+- build: add Kokoro configs for autorelease ([#226](https://github.com/googleapis/nodejs-logging-bunyan/pull/226))
+- chore: always nyc report before calling codecov ([#222](https://github.com/googleapis/nodejs-logging-bunyan/pull/222))
+- chore: nyc ignore build/test by default ([#220](https://github.com/googleapis/nodejs-logging-bunyan/pull/220))
+- refactor: reduce the number of dependencies ([#206](https://github.com/googleapis/nodejs-logging-bunyan/pull/206))
+- chore: clean up usage of prettier and eslint ([#219](https://github.com/googleapis/nodejs-logging-bunyan/pull/219))
+- chore: update system tests key ([#216](https://github.com/googleapis/nodejs-logging-bunyan/pull/216))
+- chore: add polling to system tests ([#217](https://github.com/googleapis/nodejs-logging-bunyan/pull/217))
+- chore: update license file ([#215](https://github.com/googleapis/nodejs-logging-bunyan/pull/215))
+- fix(build): fix system key decryption ([#211](https://github.com/googleapis/nodejs-logging-bunyan/pull/211))
+- chore(deps): update dependency typescript to ~3.2.0 ([#209](https://github.com/googleapis/nodejs-logging-bunyan/pull/209))
+- chore: update system tests key ([#210](https://github.com/googleapis/nodejs-logging-bunyan/pull/210))
+- chore: add synth.metadata
+- chore(deps): update dependency gts to ^0.9.0 ([#202](https://github.com/googleapis/nodejs-logging-bunyan/pull/202))
+- chore: update eslintignore config ([#201](https://github.com/googleapis/nodejs-logging-bunyan/pull/201))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#200](https://github.com/googleapis/nodejs-logging-bunyan/pull/200))
+- chore: drop contributors from multiple places ([#199](https://github.com/googleapis/nodejs-logging-bunyan/pull/199))
+- refactor(middleware): use common code from logging ([#197](https://github.com/googleapis/nodejs-logging-bunyan/pull/197))
+- cleanup: remove unnecessary deps and files ([#198](https://github.com/googleapis/nodejs-logging-bunyan/pull/198))
+- chore: use latest npm on Windows ([#196](https://github.com/googleapis/nodejs-logging-bunyan/pull/196))
+- chore: update CircleCI config ([#195](https://github.com/googleapis/nodejs-logging-bunyan/pull/195))
+- chore: include build in eslintignore ([#191](https://github.com/googleapis/nodejs-logging-bunyan/pull/191))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#186](https://github.com/googleapis/nodejs-logging-bunyan/pull/186))
+- fix(deps): update dependency @google-cloud/common to ^0.26.0 ([#181](https://github.com/googleapis/nodejs-logging-bunyan/pull/181))
+- chore: update issue templates ([#185](https://github.com/googleapis/nodejs-logging-bunyan/pull/185))
+- chore: remove old issue template ([#183](https://github.com/googleapis/nodejs-logging-bunyan/pull/183))
+- build: run tests on node11 ([#182](https://github.com/googleapis/nodejs-logging-bunyan/pull/182))
+- chores(build): do not collect sponge.xml from windows builds ([#180](https://github.com/googleapis/nodejs-logging-bunyan/pull/180))
+- chores(build): run codecov on continuous builds ([#179](https://github.com/googleapis/nodejs-logging-bunyan/pull/179))
+- chore: update new issue template ([#178](https://github.com/googleapis/nodejs-logging-bunyan/pull/178))
+- build: fix codecov uploading on Kokoro ([#174](https://github.com/googleapis/nodejs-logging-bunyan/pull/174))
+- Update kokoro config ([#171](https://github.com/googleapis/nodejs-logging-bunyan/pull/171))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#170](https://github.com/googleapis/nodejs-logging-bunyan/pull/170))
+- chore(deps): update dependency typescript to ~3.1.0 ([#169](https://github.com/googleapis/nodejs-logging-bunyan/pull/169))
+
 ## v0.9.4
 
 ### Documentation
