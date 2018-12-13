@@ -1,7 +1,6 @@
 {
   "name": "@google-cloud/asset-samples",
   "description": "Samples for the Cloud Asset API Client Library for Node.js.",
-  "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -12,24 +11,18 @@
   ],
   "repository": "googleapis/nodejs-asset",
   "private": true,
-  "nyc": {
-    "exclude": [
-      "**/*.test.js"
-    ]
-  },
   "scripts": {
     "test": "mocha system-test --timeout 20000"
   },
   "dependencies": {
     "@google-cloud/asset": "^0.1.1",
     "@google-cloud/storage": "^2.3.0",
-    "express": "^4.16.4",
     "uuid": "^3.3.2",
     "yargs": "^12.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "mocha": "^5.2.0",
-    "sinon": "^7.0.0"
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
+    "mocha": "^5.2.0"
   }
 }
