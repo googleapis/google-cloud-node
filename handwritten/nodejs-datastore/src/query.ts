@@ -384,7 +384,8 @@ class Query {
    * });
    *
    * //-
-   * // A keys-only query returns just the keys of the result entities instead of
+   * // A keys-only query returns just the keys of the result entities instead
+   * of
    * // the entities themselves, at lower latency and cost.
    * //-
    * query.select('__key__');

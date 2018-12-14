@@ -184,7 +184,6 @@ entity.isDsGeoPoint = isDsGeoPoint;
  * });
  */
 class Key {
-
   namespace: string;
   id?: string;
   name?: string;
@@ -294,7 +293,7 @@ function decodeValueProto(valueProto) {
     }
 
     case 'integerValue': {
-      return parseInt(value, 10);
+      return Number(value);
     }
 
     case 'entityValue': {
@@ -306,13 +305,11 @@ function decodeValueProto(valueProto) {
     }
 
     case 'timestampValue': {
-      const milliseconds = parseInt(value.nanos, 10) / 1e6;
-      return new Date(parseInt(value.seconds, 10) * 1000 + milliseconds);
+      const milliseconds = Number(value.nanos) / 1e6;
+      return new Date(Number(value.seconds) * 1000 + milliseconds);
     }
 
-    default: {
-      return value;
-    }
+    default: { return value; }
   }
 }
 
@@ -455,6 +452,7 @@ function entityFromEntityProto(entityProto) {
 
   const properties = entityProto.properties || {};
 
+  // tslint:disable-next-line forin
   for (const property in properties) {
     const value = properties[property];
     entityObject[property] = entity.decodeValueProto(value);
@@ -502,10 +500,13 @@ function entityToEntityProto(entityObject) {
   const entityProto = {
     key: null,
 
-    properties: Object.keys(properties).reduce((encoded, key) => {
-      encoded[key] = entity.encodeValue(properties[key]);
-      return encoded;
-    }, {}),
+    properties: Object.keys(properties)
+                    .reduce(
+                        (encoded, key) => {
+                          encoded[key] = entity.encodeValue(properties[key]);
+                          return encoded;
+                        },
+                        {}),
   };
 
   if (excludeFromIndexes && excludeFromIndexes.length > 0) {
@@ -526,11 +527,9 @@ function entityToEntityProto(entityObject) {
     if (!hasArrayPath && !hasEntityPath) {
       // This is the path end node. Traversal ends here in either case.
       if (entity.properties) {
-        if (
-          entity.properties[path] &&
-          // array properties should be excluded with [] syntax:
-          !entity.properties[path].arrayValue
-        ) {
+        if (entity.properties[path] &&
+            // array properties should be excluded with [] syntax:
+            !entity.properties[path].arrayValue) {
           // This is the property to exclude!
           entity.properties[path].excludeFromIndexes = true;
         }
@@ -561,11 +560,9 @@ function entityToEntityProto(entityObject) {
       return;
     }
 
-    if (
-      firstPathPartIsArray &&
-      // check also if the property in question is actually an array value.
-      entity.properties[firstPathPart].arrayValue
-    ) {
+    if (firstPathPartIsArray &&
+        // check also if the property in question is actually an array value.
+        entity.properties[firstPathPart].arrayValue) {
       const array = entity.properties[firstPathPart].arrayValue;
       array.values.forEach(value => {
         if (remainderPath === '') {
@@ -573,15 +570,15 @@ function entityToEntityProto(entityObject) {
           // equivalent with excluding all its values
           // (including entity values at their roots):
           excludePathFromEntity(
-            value,
-            remainderPath // === ''
+              value,
+              remainderPath  // === ''
           );
         } else {
           // Path traversal continues at value.entityValue,
           // if it is an entity, or must end at value.
           excludePathFromEntity(
-            value.entityValue || value,
-            remainderPath // !== ''
+              value.entityValue || value,
+              remainderPath  // !== ''
           );
         }
       });
@@ -758,6 +755,7 @@ function keyToKeyProto(key) {
     }
 
     keyProto.path.unshift(pathElement);
+    // tslint:disable-next-line no-conditional-assignment
   } while ((key = key.parent) && ++numKeysWalked);
 
   return keyProto;

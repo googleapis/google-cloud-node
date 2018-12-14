@@ -16,7 +16,7 @@
 
 import * as assert from 'assert';
 
-describe('Query', function() {
+describe('Query', () => {
   const SCOPE = {};
   const NAMESPACE = 'Namespace';
   const KINDS = 'Kind';
@@ -24,38 +24,37 @@ describe('Query', function() {
   const Query = require('../src/query.js').Query;
   let query;
 
-  beforeEach(function() {
+  beforeEach(() => {
     query = new Query(SCOPE, NAMESPACE, KINDS);
   });
 
-  describe('instantiation', function() {
-    it('should localize the scope', function() {
+  describe('instantiation', () => {
+    it('should localize the scope', () => {
       assert.strictEqual(query.scope, SCOPE);
     });
 
-    it('should localize the namespace', function() {
+    it('should localize the namespace', () => {
       assert.strictEqual(query.namespace, NAMESPACE);
     });
 
-    it('should localize the kind', function() {
+    it('should localize the kind', () => {
       assert.strictEqual(query.kinds, KINDS);
     });
 
-    it('should use null for all falsy namespace values', function() {
-      [
-        new Query(SCOPE, '', KINDS),
-        new Query(SCOPE, null, KINDS),
-        new Query(SCOPE, undefined, KINDS),
-        new Query(SCOPE, 0, KINDS),
-        new Query(SCOPE, KINDS),
-      ].forEach(function(query) {
+    it('should use null for all falsy namespace values', () => {
+      [new Query(SCOPE, '', KINDS),
+       new Query(SCOPE, null, KINDS),
+       new Query(SCOPE, undefined, KINDS),
+       new Query(SCOPE, 0, KINDS),
+       new Query(SCOPE, KINDS),
+      ].forEach((query) => {
         assert.strictEqual(query.namespace, null);
       });
     });
   });
 
-  describe('filter', function() {
-    it('should support filtering', function() {
+  describe('filter', () => {
+    it('should support filtering', () => {
       const now = new Date();
       const query = new Query(['kind1']).filter('date', '<=', now);
       const filter = query.filters[0];
@@ -65,14 +64,14 @@ describe('Query', function() {
       assert.strictEqual(filter.val, now);
     });
 
-    it('should recognize all the different operators', function() {
+    it('should recognize all the different operators', () => {
       const now = new Date();
       const query = new Query(['kind1'])
-        .filter('date', '<=', now)
-        .filter('name', '=', 'Title')
-        .filter('count', '>', 20)
-        .filter('size', '<', 10)
-        .filter('something', '>=', 11);
+                        .filter('date', '<=', now)
+                        .filter('name', '=', 'Title')
+                        .filter('count', '>', 20)
+                        .filter('size', '<', 10)
+                        .filter('something', '>=', 11);
 
       assert.strictEqual(query.filters[0].name, 'date');
       assert.strictEqual(query.filters[0].op, '<=');
@@ -95,30 +94,27 @@ describe('Query', function() {
       assert.strictEqual(query.filters[4].val, 11);
     });
 
-    it('should remove any whitespace surrounding the filter name', function() {
+    it('should remove any whitespace surrounding the filter name', () => {
       const query = new Query(['kind1']).filter('   count    ', '>', 123);
 
       assert.strictEqual(query.filters[0].name, 'count');
     });
 
-    it('should remove any whitespace surrounding the operator', function() {
-      const query = new Query(['kind1']).filter(
-        'count',
-        '       <        ',
-        123
-      );
+    it('should remove any whitespace surrounding the operator', () => {
+      const query =
+          new Query(['kind1']).filter('count', '       <        ', 123);
 
       assert.strictEqual(query.filters[0].op, '<');
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.filter('count', '<', 5);
 
       assert.strictEqual(query, nextQuery);
     });
 
-    it('should default the operator to "="', function() {
+    it('should default the operator to "="', () => {
       const query = new Query(['kind1']).filter('name', 'Stephen');
       const filter = query.filters[0];
 
@@ -128,8 +124,8 @@ describe('Query', function() {
     });
   });
 
-  describe('hasAncestor', function() {
-    it('should support ancestor filtering', function() {
+  describe('hasAncestor', () => {
+    it('should support ancestor filtering', () => {
       const query = new Query(['kind1']).hasAncestor(['kind2', 123]);
 
       assert.strictEqual(query.filters[0].name, '__key__');
@@ -137,7 +133,7 @@ describe('Query', function() {
       assert.deepStrictEqual(query.filters[0].val, ['kind2', 123]);
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.hasAncestor(['kind2', 123]);
 
@@ -145,32 +141,31 @@ describe('Query', function() {
     });
   });
 
-  describe('order', function() {
-    it('should default ordering to ascending', function() {
+  describe('order', () => {
+    it('should default ordering to ascending', () => {
       const query = new Query(['kind1']).order('name');
 
       assert.strictEqual(query.orders[0].name, 'name');
       assert.strictEqual(query.orders[0].sign, '+');
     });
 
-    it('should support ascending order', function() {
+    it('should support ascending order', () => {
       const query = new Query(['kind1']).order('name');
 
       assert.strictEqual(query.orders[0].name, 'name');
       assert.strictEqual(query.orders[0].sign, '+');
     });
 
-    it('should support descending order', function() {
+    it('should support descending order', () => {
       const query = new Query(['kind1']).order('count', {descending: true});
 
       assert.strictEqual(query.orders[0].name, 'count');
       assert.strictEqual(query.orders[0].sign, '-');
     });
 
-    it('should support both ascending and descending', function() {
-      const query = new Query(['kind1'])
-        .order('name')
-        .order('count', {descending: true});
+    it('should support both ascending and descending', () => {
+      const query =
+          new Query(['kind1']).order('name').order('count', {descending: true});
 
       assert.strictEqual(query.orders[0].name, 'name');
       assert.strictEqual(query.orders[0].sign, '+');
@@ -178,7 +173,7 @@ describe('Query', function() {
       assert.strictEqual(query.orders[1].sign, '-');
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.order('name');
 
@@ -186,20 +181,20 @@ describe('Query', function() {
     });
   });
 
-  describe('groupBy', function() {
-    it('should store an array of properties to group by', function() {
+  describe('groupBy', () => {
+    it('should store an array of properties to group by', () => {
       const query = new Query(['kind1']).groupBy(['name', 'size']);
 
       assert.deepStrictEqual(query.groupByVal, ['name', 'size']);
     });
 
-    it('should convert a single property into an array', function() {
+    it('should convert a single property into an array', () => {
       const query = new Query(['kind1']).groupBy('name');
 
       assert.deepStrictEqual(query.groupByVal, ['name']);
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.groupBy(['name', 'size']);
 
@@ -207,20 +202,20 @@ describe('Query', function() {
     });
   });
 
-  describe('select', function() {
-    it('should store an array of properties to select', function() {
+  describe('select', () => {
+    it('should store an array of properties to select', () => {
       const query = new Query(['kind1']).select(['name', 'size']);
 
       assert.deepStrictEqual(query.selectVal, ['name', 'size']);
     });
 
-    it('should convert a single property into an array', function() {
+    it('should convert a single property into an array', () => {
       const query = new Query(['kind1']).select('name');
 
       assert.deepStrictEqual(query.selectVal, ['name']);
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.select(['name', 'size']);
 
@@ -228,14 +223,14 @@ describe('Query', function() {
     });
   });
 
-  describe('start', function() {
-    it('should capture the starting cursor value', function() {
+  describe('start', () => {
+    it('should capture the starting cursor value', () => {
       const query = new Query(['kind1']).start('X');
 
       assert.strictEqual(query.startVal, 'X');
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.start('X');
 
@@ -243,14 +238,14 @@ describe('Query', function() {
     });
   });
 
-  describe('end', function() {
-    it('should capture the ending cursor value', function() {
+  describe('end', () => {
+    it('should capture the ending cursor value', () => {
       const query = new Query(['kind1']).end('Z');
 
       assert.strictEqual(query.endVal, 'Z');
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.end('Z');
 
@@ -258,14 +253,14 @@ describe('Query', function() {
     });
   });
 
-  describe('limit', function() {
-    it('should capture the number of results to limit to', function() {
+  describe('limit', () => {
+    it('should capture the number of results to limit to', () => {
       const query = new Query(['kind1']).limit(20);
 
       assert.strictEqual(query.limitVal, 20);
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.limit(20);
 
@@ -273,14 +268,14 @@ describe('Query', function() {
     });
   });
 
-  describe('offset', function() {
-    it('should capture the number of results to offset by', function() {
+  describe('offset', () => {
+    it('should capture the number of results to offset by', () => {
       const query = new Query(['kind1']).offset(100);
 
       assert.strictEqual(query.offsetVal, 100);
     });
 
-    it('should return the query instance', function() {
+    it('should return the query instance', () => {
       const query = new Query(['kind1']);
       const nextQuery = query.offset(100);
 
@@ -288,8 +283,8 @@ describe('Query', function() {
     });
   });
 
-  describe('run', function() {
-    it('should call the parent instance runQuery correctly', function(done) {
+  describe('run', () => {
+    it('should call the parent instance runQuery correctly', (done) => {
       const args = [0, 1, 2];
 
       query.scope.runQuery = function() {
@@ -305,8 +300,8 @@ describe('Query', function() {
     });
   });
 
-  describe('runStream', function() {
-    it('should call the parent instance runQueryStream correctly', function() {
+  describe('runStream', () => {
+    it('should call the parent instance runQueryStream correctly', () => {
       const args = [0, 1, 2];
       const runQueryReturnValue = {};
 
