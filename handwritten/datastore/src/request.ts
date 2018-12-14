@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import * as arrify from 'arrify';
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisifyAll} from '@google-cloud/promisify';
+import * as arrify from 'arrify';
+
 const concat = require('concat-stream');
 import * as extend from 'extend';
 import * as is from 'is';
@@ -31,7 +32,7 @@ const gapic = Object.freeze({
 
 import {entity} from './entity';
 import {Query} from './query';
-import { Datastore } from '.';
+import {Datastore} from '.';
 
 /**
  * A map of read consistency values to proto codes.
@@ -54,7 +55,6 @@ const CONSISTENCY_PROTO_CODE = {
  * @class
  */
 class DatastoreRequest {
-
   id;
   requests_;
   requestCallbacks_;
@@ -143,9 +143,12 @@ class DatastoreRequest {
    * });
    *
    * //-
-   * // You may prefer to create IDs from a non-default namespace by providing an
-   * // incomplete key with a namespace. Similar to the previous example, the call
-   * // below will create 100 new IDs, but from the Company kind that exists under
+   * // You may prefer to create IDs from a non-default namespace by providing
+   * an
+   * // incomplete key with a namespace. Similar to the previous example, the
+   * call
+   * // below will create 100 new IDs, but from the Company kind that exists
+   * under
    * // the "ns-test" namespace.
    * //-
    * const incompleteKey = datastore.key({
@@ -177,23 +180,23 @@ class DatastoreRequest {
     }
 
     this.request_(
-      {
-        client: 'DatastoreClient',
-        method: 'allocateIds',
-        reqOpts: {
-          keys: new Array(options.allocations).fill(entity.keyToKeyProto(key)),
+        {
+          client: 'DatastoreClient',
+          method: 'allocateIds',
+          reqOpts: {
+            keys:
+                new Array(options.allocations).fill(entity.keyToKeyProto(key)),
+          },
+          gaxOpts: options.gaxOptions,
         },
-        gaxOpts: options.gaxOptions,
-      },
-      (err, resp) => {
-        if (err) {
-          callback(err, null, resp);
-          return;
-        }
-        const keys = arrify(resp.keys).map(entity.keyFromKeyProto);
-        callback(null, keys, resp);
-      }
-    );
+        (err, resp) => {
+          if (err) {
+            callback(err, null, resp);
+            return;
+          }
+          const keys = arrify(resp.keys).map(entity.keyFromKeyProto);
+          callback(null, keys, resp);
+        });
   }
 
   /**
@@ -242,37 +245,36 @@ class DatastoreRequest {
       }
 
       this.request_(
-        {
-          client: 'DatastoreClient',
-          method: 'lookup',
-          reqOpts,
-          gaxOpts: options.gaxOptions,
-        },
-        (err, resp) => {
-          if (err) {
-            stream.destroy(err);
-            return;
-          }
-
-          const entities = entity.formatArray(resp.found);
-          const nextKeys = (resp.deferred || [])
-            .map(entity.keyFromKeyProto)
-            .map(entity.keyToKeyProto);
-
-          split(entities, stream).then(streamEnded => {
-            if (streamEnded) {
+          {
+            client: 'DatastoreClient',
+            method: 'lookup',
+            reqOpts,
+            gaxOpts: options.gaxOptions,
+          },
+          (err, resp) => {
+            if (err) {
+              stream.destroy(err);
               return;
             }
 
-            if (nextKeys.length > 0) {
-              makeRequest(nextKeys);
-              return;
-            }
+            const entities = entity.formatArray(resp.found);
+            const nextKeys = (resp.deferred || [])
+                                 .map(entity.keyFromKeyProto)
+                                 .map(entity.keyToKeyProto);
 
-            stream.push(null);
+            split(entities, stream).then(streamEnded => {
+              if (streamEnded) {
+                return;
+              }
+
+              if (nextKeys.length > 0) {
+                makeRequest(nextKeys);
+                return;
+              }
+
+              stream.push(null);
+            });
           });
-        }
-      );
     };
 
     const stream = streamEvents(through.obj());
@@ -352,14 +354,13 @@ class DatastoreRequest {
     }
 
     this.request_(
-      {
-        client: 'DatastoreClient',
-        method: 'commit',
-        reqOpts,
-        gaxOpts: gaxOptions,
-      },
-      callback
-    );
+        {
+          client: 'DatastoreClient',
+          method: 'commit',
+          reqOpts,
+          gaxOpts: gaxOptions,
+        },
+        callback);
   }
 
   /**
@@ -456,13 +457,11 @@ class DatastoreRequest {
     options = options || {};
 
     this.createReadStream(keys, options)
-      .on('error', callback)
-      .pipe(
-        concat(results => {
+        .on('error', callback)
+        .pipe(concat(results => {
           const isSingleLookup = !is.array(keys);
           callback(null, isSingleLookup ? results[0] : results);
-        })
-      );
+        }));
   }
 
   /**
@@ -480,26 +479,25 @@ class DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    */
   insert(entities, callback) {
-    entities = arrify(entities)
-      .map(DatastoreRequest.prepareEntityObject_)
-      .map(x => {
-        x.method = 'insert';
-        return x;
-      });
+    entities =
+        arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
+          x.method = 'insert';
+          return x;
+        });
 
     this.save(entities, callback);
   }
 
   /**
    * Datastore allows you to query entities by kind, filter them by property
-   * filters, and sort them by a property name. Projection and pagination are also
-   * supported.
+   * filters, and sort them by a property name. Projection and pagination are
+   * also supported.
    *
-   * The query is run, and the results are returned as the second argument to your
-   * callback. A third argument may also exist, which is a query object that uses
-   * the end cursor from the previous query as the starting cursor for the next
-   * query. You can pass that object back to this method to see if more results
-   * exist.
+   * The query is run, and the results are returned as the second argument to
+   * your callback. A third argument may also exist, which is a query object
+   * that uses the end cursor from the previous query as the starting cursor for
+   * the next query. You can pass that object back to this method to see if more
+   * results exist.
    *
    * @param {Query} query Query object.
    * @param {object} [options] Optional configuration.
@@ -526,7 +524,8 @@ class DatastoreRequest {
    *
    * @example
    * //-
-   * // Where you see `transaction`, assume this is the context that's relevant to
+   * // Where you see `transaction`, assume this is the context that's relevant
+   * to
    * // your use, whether that be a Datastore or a Transaction object.
    * //-
    * const query = datastore.createQuery('Lion');
@@ -562,7 +561,8 @@ class DatastoreRequest {
    * });
    *
    * //-
-   * // A keys-only query returns just the keys of the result entities instead of
+   * // A keys-only query returns just the keys of the result entities instead
+   * of
    * // the entities themselves, at lower latency and cost.
    * //-
    * const keysOnlyQuery = datastore.createQuery('Lion').select('__key__');
@@ -591,15 +591,14 @@ class DatastoreRequest {
     let info;
 
     this.runQueryStream(query, options)
-      .on('error', callback)
-      .on('info', info_ => {
-        info = info_;
-      })
-      .pipe(
-        concat(results => {
+        .on('error', callback)
+        .on('info',
+            info_ => {
+              info = info_;
+            })
+        .pipe(concat(results => {
           callback(null, results, info);
-        })
-      );
+        }));
   }
 
   /**
@@ -657,14 +656,13 @@ class DatastoreRequest {
       }
 
       this.request_(
-        {
-          client: 'DatastoreClient',
-          method: 'runQuery',
-          reqOpts,
-          gaxOpts: options.gaxOptions,
-        },
-        onResultSet
-      );
+          {
+            client: 'DatastoreClient',
+            method: 'runQuery',
+            reqOpts,
+            gaxOpts: options.gaxOptions,
+          },
+          onResultSet);
     };
 
     function onResultSet(err, resp) {
@@ -726,15 +724,15 @@ class DatastoreRequest {
    * associated object is inserted and the original Key object is updated to
    * contain the generated ID.
    *
-   * This method will determine the correct Datastore method to execute (`upsert`,
-   * `insert`, or `update`) by using the key(s) provided. For example, if you
-   * provide an incomplete key (one without an ID), the request will create a new
-   * entity and have its ID automatically assigned. If you provide a complete key,
-   * the entity will be updated with the data specified.
+   * This method will determine the correct Datastore method to execute
+   * (`upsert`, `insert`, or `update`) by using the key(s) provided. For
+   * example, if you provide an incomplete key (one without an ID), the request
+   * will create a new entity and have its ID automatically assigned. If you
+   * provide a complete key, the entity will be updated with the data specified.
    *
    * By default, all properties are indexed. To prevent a property from being
-   * included in *all* indexes, you must supply an `excludeFromIndexes` array. See
-   * below for an example.
+   * included in *all* indexes, you must supply an `excludeFromIndexes` array.
+   * See below for an example.
    *
    * @borrows {@link Transaction#save} as save
    *
@@ -743,8 +741,8 @@ class DatastoreRequest {
    * @param {object|object[]} entities Datastore key object(s).
    * @param {Key} entities.key Datastore key object.
    * @param {string[]} [entities.excludeFromIndexes] Exclude properties from
-   *     indexing using a simple JSON path notation. See the example below to see
-   *     how to target properties at different levels of nesting within your
+   *     indexing using a simple JSON path notation. See the example below to
+   * see how to target properties at different levels of nesting within your
    * @param {string} [entities.method] Explicit method to use, either 'insert',
    *     'update', or 'upsert'.
    * @param {object} entities.data Data to save with the provided key.
@@ -759,7 +757,8 @@ class DatastoreRequest {
    * //-
    * // Save a single entity.
    * //
-   * // Notice that we are providing an incomplete key. After saving, the original
+   * // Notice that we are providing an incomplete key. After saving, the
+   * original
    * // Key object used to save will be updated to contain the path with its
    * // generated ID.
    * //-
@@ -779,8 +778,10 @@ class DatastoreRequest {
    * //-
    * // Save a single entity using a provided name instead of auto-generated ID.
    * //
-   * // Here we are providing a key with name instead of an ID. After saving, the
-   * // original Key object used to save will be updated to contain the path with
+   * // Here we are providing a key with name instead of an ID. After saving,
+   * the
+   * // original Key object used to save will be updated to contain the path
+   * with
    * // the name instead of a generated ID.
    * //-
    * const key = datastore.key(['Company', 'donutshack']);
@@ -826,7 +827,8 @@ class DatastoreRequest {
    * // Save different types of data, including ints, doubles, dates, booleans,
    * // blobs, and lists.
    * //
-   * // Notice that we are providing an incomplete key. After saving, the original
+   * // Notice that we are providing an incomplete key. After saving, the
+   * original
    * // Key object used to save will be updated to contain the path with its
    * // generated ID.
    * //-
@@ -944,62 +946,60 @@ class DatastoreRequest {
 
     // Iterate over the entity objects, build a proto from all keys and values,
     // then place in the correct mutation array (insert, update, etc).
-    entities
-      .map(DatastoreRequest.prepareEntityObject_)
-      .forEach((entityObject, index) => {
-        const mutation = {};
-        // tslint:disable-next-line no-any
-        let entityProto: any = {};
-        let method = 'upsert';
+    entities.map(DatastoreRequest.prepareEntityObject_)
+        .forEach((entityObject, index) => {
+          const mutation = {};
+          // tslint:disable-next-line no-any
+          let entityProto: any = {};
+          let method = 'upsert';
 
-        if (entityObject.method) {
-          if (methods[entityObject.method]) {
-            method = entityObject.method;
-          } else {
-            throw new Error(
-              'Method ' + entityObject.method + ' not recognized.'
-            );
-          }
-        }
-
-        if (!entity.isKeyComplete(entityObject.key)) {
-          insertIndexes[index] = true;
-        }
-
-        // @TODO remove in @google-cloud/datastore@2.0.0
-        // This was replaced with a more efficient mechanism in the top-level
-        // `excludeFromIndexes` option.
-        if (is.array(entityObject.data)) {
-          entityProto.properties = entityObject.data.reduce((acc, data) => {
-            const value = entity.encodeValue(data.value);
-
-            if (is.boolean(data.excludeFromIndexes)) {
-              const excluded = data.excludeFromIndexes;
-              let values = value.arrayValue && value.arrayValue.values;
-
-              if (values) {
-                values = values.map(x => {
-                  x.excludeFromIndexes = excluded;
-                  return x;
-                });
-              } else {
-                value.excludeFromIndexes = data.excludeFromIndexes;
-              }
+          if (entityObject.method) {
+            if (methods[entityObject.method]) {
+              method = entityObject.method;
+            } else {
+              throw new Error(
+                  'Method ' + entityObject.method + ' not recognized.');
             }
+          }
 
-            acc[data.name] = value;
+          if (!entity.isKeyComplete(entityObject.key)) {
+            insertIndexes[index] = true;
+          }
 
-            return acc;
-          }, {});
-        } else {
-          entityProto = entity.entityToEntityProto(entityObject);
-        }
+          // @TODO remove in @google-cloud/datastore@2.0.0
+          // This was replaced with a more efficient mechanism in the top-level
+          // `excludeFromIndexes` option.
+          if (is.array(entityObject.data)) {
+            entityProto.properties = entityObject.data.reduce((acc, data) => {
+              const value = entity.encodeValue(data.value);
 
-        entityProto.key = entity.keyToKeyProto(entityObject.key);
+              if (is.boolean(data.excludeFromIndexes)) {
+                const excluded = data.excludeFromIndexes;
+                let values = value.arrayValue && value.arrayValue.values;
 
-        mutation[method] = entityProto;
-        mutations.push(mutation);
-      });
+                if (values) {
+                  values = values.map(x => {
+                    x.excludeFromIndexes = excluded;
+                    return x;
+                  });
+                } else {
+                  value.excludeFromIndexes = data.excludeFromIndexes;
+                }
+              }
+
+              acc[data.name] = value;
+
+              return acc;
+            }, {});
+          } else {
+            entityProto = entity.entityToEntityProto(entityObject);
+          }
+
+          entityProto.key = entity.keyToKeyProto(entityObject.key);
+
+          mutation[method] = entityProto;
+          mutations.push(mutation);
+        });
 
     const reqOpts = {
       mutations,
@@ -1032,14 +1032,13 @@ class DatastoreRequest {
     }
 
     this.request_(
-      {
-        client: 'DatastoreClient',
-        method: 'commit',
-        reqOpts,
-        gaxOpts: gaxOptions,
-      },
-      onCommit
-    );
+        {
+          client: 'DatastoreClient',
+          method: 'commit',
+          reqOpts,
+          gaxOpts: gaxOptions,
+        },
+        onCommit);
   }
 
   /**
@@ -1057,12 +1056,11 @@ class DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    */
   update(entities, callback) {
-    entities = arrify(entities)
-      .map(DatastoreRequest.prepareEntityObject_)
-      .map(x => {
-        x.method = 'update';
-        return x;
-      });
+    entities =
+        arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
+          x.method = 'update';
+          return x;
+        });
 
     this.save(entities, callback);
   }
@@ -1082,19 +1080,18 @@ class DatastoreRequest {
    * @param {object} callback.apiResponse The full API response.
    */
   upsert(entities, callback) {
-    entities = arrify(entities)
-      .map(DatastoreRequest.prepareEntityObject_)
-      .map(x => {
-        x.method = 'upsert';
-        return x;
-      });
+    entities =
+        arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
+          x.method = 'upsert';
+          return x;
+        });
 
     this.save(entities, callback);
   }
 
   /**
-   * Make a request to the API endpoint. Properties to indicate a transactional or
-   * non-transactional operation are added automatically.
+   * Make a request to the API endpoint. Properties to indicate a transactional
+   * or non-transactional operation are added automatically.
    *
    * @param {object} config Configuration object.
    * @param {object} config.gaxOpts GAX options.
@@ -1132,8 +1129,7 @@ class DatastoreRequest {
     if (isTransaction && (method === 'lookup' || method === 'runQuery')) {
       if (reqOpts.readOptions && reqOpts.readOptions.readConsistency) {
         throw new Error(
-          'Read consistency cannot be specified in a transaction.'
-        );
+            'Read consistency cannot be specified in a transaction.');
       }
 
       reqOpts.readOptions = {
@@ -1151,9 +1147,7 @@ class DatastoreRequest {
 
       if (!datastore.clients_.has(clientName)) {
         datastore.clients_.set(
-          clientName,
-          new gapic.v1[clientName](datastore.options)
-        );
+            clientName, new gapic.v1[clientName](datastore.options));
       }
       const gaxClient = datastore.clients_.get(clientName);
       reqOpts = replaceProjectIdToken(reqOpts, projectId!);

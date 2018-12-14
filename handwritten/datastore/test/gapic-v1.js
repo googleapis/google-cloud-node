@@ -69,11 +69,7 @@ describe('DatastoreClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.lookup = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.lookup = mockSimpleGrpcMethod(request, null, error);
 
       client.lookup(request, (err, response) => {
         assert(err instanceof Error);
@@ -258,11 +254,7 @@ describe('DatastoreClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.commit = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
+      client._innerApiCalls.commit = mockSimpleGrpcMethod(request, null, error);
 
       client.commit(request, (err, response) => {
         assert(err instanceof Error);
@@ -455,7 +447,6 @@ describe('DatastoreClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

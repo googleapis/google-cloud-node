@@ -18,22 +18,22 @@ import * as assert from 'assert';
 import * as extend from 'extend';
 import {Datastore} from '../src';
 
-describe('entity', function() {
+describe('entity', () => {
   let entity;
 
-  beforeEach(function() {
+  beforeEach(() => {
     delete require.cache[require.resolve('../src/entity.js')];
     entity = require('../src/entity.js').entity;
   });
 
-  describe('KEY_SYMBOL', function() {
-    it('should export the symbol', function() {
+  describe('KEY_SYMBOL', () => {
+    it('should export the symbol', () => {
       assert.strictEqual(entity.KEY_SYMBOL.toString(), 'Symbol(KEY)');
     });
   });
 
-  describe('Double', function() {
-    it('should store the value', function() {
+  describe('Double', () => {
+    it('should store the value', () => {
       const value = 8.3;
 
       const double = new entity.Double(value);
@@ -41,25 +41,25 @@ describe('entity', function() {
     });
   });
 
-  describe('isDsDouble', function() {
-    it('should correctly identify a Double', function() {
+  describe('isDsDouble', () => {
+    it('should correctly identify a Double', () => {
       const double = new entity.Double(0.42);
       assert.strictEqual(entity.isDsDouble(double), true);
     });
 
-    it('should correctly identify a homomorphic non-Double', function() {
+    it('should correctly identify a homomorphic non-Double', () => {
       const nonDouble = Object.assign({}, new entity.Double(42));
       assert.strictEqual(entity.isDsDouble(nonDouble), false);
     });
 
-    it('should correctly identify a primitive', function() {
+    it('should correctly identify a primitive', () => {
       const primitiveDouble = 0.42;
       assert.strictEqual(entity.isDsDouble(primitiveDouble), false);
     });
   });
 
-  describe('Int', function() {
-    it('should store the stringified value', function() {
+  describe('Int', () => {
+    it('should store the stringified value', () => {
       const value = 8;
 
       const int = new entity.Int(value);
@@ -67,25 +67,25 @@ describe('entity', function() {
     });
   });
 
-  describe('isDsInt', function() {
-    it('should correctly identify an Int', function() {
+  describe('isDsInt', () => {
+    it('should correctly identify an Int', () => {
       const int = new entity.Int(42);
       assert.strictEqual(entity.isDsInt(int), true);
     });
 
-    it('should correctly identify homomorphic non-Int', function() {
+    it('should correctly identify homomorphic non-Int', () => {
       const nonInt = Object.assign({}, new entity.Int(42));
       assert.strictEqual(entity.isDsInt(nonInt), false);
     });
 
-    it('should correctly identify a primitive', function() {
+    it('should correctly identify a primitive', () => {
       const primitiveInt = 42;
       assert.strictEqual(entity.isDsInt(primitiveInt), false);
     });
   });
 
-  describe('GeoPoint', function() {
-    it('should store the value', function() {
+  describe('GeoPoint', () => {
+    it('should store the value', () => {
       const value = {
         latitude: 24,
         longitude: 88,
@@ -96,62 +96,62 @@ describe('entity', function() {
     });
   });
 
-  describe('isDsGeoPoint', function() {
-    it('should correctly identify a GeoPoint', function() {
+  describe('isDsGeoPoint', () => {
+    it('should correctly identify a GeoPoint', () => {
       const geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
       assert.strictEqual(entity.isDsGeoPoint(geoPoint), true);
     });
 
-    it('should correctly identify a homomorphic non-GeoPoint', function() {
+    it('should correctly identify a homomorphic non-GeoPoint', () => {
       const geoPoint = new entity.GeoPoint({latitude: 24, longitude: 88});
       const nonGeoPoint = Object.assign({}, geoPoint);
       assert.strictEqual(entity.isDsGeoPoint(nonGeoPoint), false);
     });
   });
 
-  describe('Key', function() {
-    it('should assign the namespace', function() {
+  describe('Key', () => {
+    it('should assign the namespace', () => {
       const namespace = 'NS';
       const key = new entity.Key({namespace, path: []});
       assert.strictEqual(key.namespace, namespace);
     });
 
-    it('should assign the kind', function() {
+    it('should assign the kind', () => {
       const kind = 'kind';
       const key = new entity.Key({path: [kind]});
       assert.strictEqual(key.kind, kind);
     });
 
-    it('should assign the ID', function() {
+    it('should assign the ID', () => {
       const id = 11;
       const key = new entity.Key({path: ['Kind', id]});
       assert.strictEqual(key.id, id);
     });
 
-    it('should assign the ID from an Int', function() {
+    it('should assign the ID from an Int', () => {
       const id = new entity.Int(11);
       const key = new entity.Key({path: ['Kind', id]});
       assert.strictEqual(key.id, id.value);
     });
 
-    it('should assign the name', function() {
+    it('should assign the name', () => {
       const name = 'name';
       const key = new entity.Key({path: ['Kind', name]});
       assert.strictEqual(key.name, name);
     });
 
-    it('should assign a parent', function() {
+    it('should assign a parent', () => {
       const key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
       assert(key.parent instanceof entity.Key);
     });
 
-    it('should not modify input path', function() {
+    it('should not modify input path', () => {
       const inputPath = ['ParentKind', 1, 'Kind', 1];
-      new entity.Key({path: inputPath});
+      const key = new entity.Key({path: inputPath});
       assert.deepStrictEqual(inputPath, ['ParentKind', 1, 'Kind', 1]);
     });
 
-    it('should always compute the correct path', function() {
+    it('should always compute the correct path', () => {
       const key = new entity.Key({path: ['ParentKind', 1, 'Kind', 1]});
       assert.deepStrictEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
 
@@ -162,20 +162,20 @@ describe('entity', function() {
     });
   });
 
-  describe('isDsKey', function() {
-    it('should correctly identify a Key', function() {
+  describe('isDsKey', () => {
+    it('should correctly identify a Key', () => {
       const key = new entity.Key({path: ['Kind', 1]});
       assert.strictEqual(entity.isDsKey(key), true);
     });
 
-    it('should correctly identify a homomorphic non-Key', function() {
+    it('should correctly identify a homomorphic non-Key', () => {
       const notKey = Object.assign({}, new entity.Key({path: ['Kind', 1]}));
       assert.strictEqual(entity.isDsKey(notKey), false);
     });
   });
 
-  describe('decodeValueProto', function() {
-    it('should decode arrays', function() {
+  describe('decodeValueProto', () => {
+    it('should decode arrays', () => {
       const expectedValue = [{}];
 
       const valueProto = {
@@ -188,10 +188,10 @@ describe('entity', function() {
       let run = false;
 
       const decodeValueProto = entity.decodeValueProto;
-      entity.decodeValueProto = function(valueProto) {
+      entity.decodeValueProto = (valueProto) => {
         if (!run) {
           run = true;
-          return decodeValueProto.apply(null, arguments);
+          return decodeValueProto(valueProto);
         }
 
         assert.strictEqual(valueProto, expectedValue[0]);
@@ -199,12 +199,10 @@ describe('entity', function() {
       };
 
       assert.deepStrictEqual(
-        entity.decodeValueProto(valueProto),
-        expectedValue
-      );
+          entity.decodeValueProto(valueProto), expectedValue);
     });
 
-    it('should decode blobs', function() {
+    it('should decode blobs', () => {
       const expectedValue = Buffer.from('Hi');
 
       const valueProto = {
@@ -213,12 +211,10 @@ describe('entity', function() {
       };
 
       assert.deepStrictEqual(
-        entity.decodeValueProto(valueProto),
-        expectedValue
-      );
+          entity.decodeValueProto(valueProto), expectedValue);
     });
 
-    it('should decode null', function() {
+    it('should decode null', () => {
       const expectedValue = null;
 
       const valueProto = {
@@ -230,7 +226,7 @@ describe('entity', function() {
       assert.deepStrictEqual(decodedValue, expectedValue);
     });
 
-    it('should decode doubles', function() {
+    it('should decode doubles', () => {
       const expectedValue = 8.3;
 
       const valueProto = {
@@ -241,7 +237,7 @@ describe('entity', function() {
       assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
     });
 
-    it('should decode ints', function() {
+    it('should decode ints', () => {
       const expectedValue = 8;
 
       const valueProto = {
@@ -252,7 +248,7 @@ describe('entity', function() {
       assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
     });
 
-    it('should decode entities', function() {
+    it('should decode entities', () => {
       const expectedValue = {};
 
       const valueProto = {
@@ -260,7 +256,7 @@ describe('entity', function() {
         entityValue: expectedValue,
       };
 
-      entity.entityFromEntityProto = function(entityProto) {
+      entity.entityFromEntityProto = (entityProto) => {
         assert.strictEqual(entityProto, expectedValue);
         return expectedValue;
       };
@@ -268,7 +264,7 @@ describe('entity', function() {
       assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
     });
 
-    it('should decode keys', function() {
+    it('should decode keys', () => {
       const expectedValue = {};
 
       const valueProto = {
@@ -276,7 +272,7 @@ describe('entity', function() {
         keyValue: expectedValue,
       };
 
-      entity.keyFromKeyProto = function(keyProto) {
+      entity.keyFromKeyProto = (keyProto) => {
         assert.strictEqual(keyProto, expectedValue);
         return expectedValue;
       };
@@ -284,7 +280,7 @@ describe('entity', function() {
       assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
     });
 
-    it('should decode timestamps', function() {
+    it('should decode timestamps', () => {
       const date = new Date();
 
       const seconds = Math.floor(date.getTime() / 1000);
@@ -301,12 +297,10 @@ describe('entity', function() {
       };
 
       assert.deepStrictEqual(
-        entity.decodeValueProto(valueProto),
-        expectedValue
-      );
+          entity.decodeValueProto(valueProto), expectedValue);
     });
 
-    it('should return the value if no conversions are necessary', function() {
+    it('should return the value if no conversions are necessary', () => {
       const expectedValue = false;
 
       const valueProto = {
@@ -318,8 +312,8 @@ describe('entity', function() {
     });
   });
 
-  describe('encodeValue', function() {
-    it('should encode a boolean', function() {
+  describe('encodeValue', () => {
+    it('should encode a boolean', () => {
       const value = true;
 
       const expectedValueProto = {
@@ -329,7 +323,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode null', function() {
+    it('should encode null', () => {
       const value = null;
 
       const expectedValueProto = {
@@ -339,7 +333,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode an int', function() {
+    it('should encode an int', () => {
       const value = 8;
 
       const expectedValueProto = {
@@ -354,7 +348,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode an Int object', function() {
+    it('should encode an Int object', () => {
       const value = new entity.Int(3);
 
       const expectedValueProto = {
@@ -364,7 +358,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode a double', function() {
+    it('should encode a double', () => {
       const value = 8.3;
 
       const expectedValueProto = {
@@ -379,7 +373,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode a Double object', function() {
+    it('should encode a Double object', () => {
       const value = new entity.Double(3);
 
       const expectedValueProto = {
@@ -389,7 +383,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode a GeoPoint object', function() {
+    it('should encode a GeoPoint object', () => {
       const value = new entity.GeoPoint();
 
       const expectedValueProto = {
@@ -399,7 +393,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode a date', function() {
+    it('should encode a date', () => {
       const value = new Date();
       const seconds = value.getTime() / 1000;
 
@@ -413,7 +407,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode a string', function() {
+    it('should encode a string', () => {
       const value = 'Hi';
 
       const expectedValueProto = {
@@ -423,7 +417,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode a buffer', function() {
+    it('should encode a buffer', () => {
       const value = Buffer.from('Hi');
 
       const expectedValueProto = {
@@ -433,7 +427,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode an array', function() {
+    it('should encode an array', () => {
       const value = [{}];
 
       const expectedValueProto = {
@@ -445,10 +439,10 @@ describe('entity', function() {
       let run = false;
 
       const encodeValue = entity.encodeValue;
-      entity.encodeValue = function(value_) {
+      entity.encodeValue = (value_) => {
         if (!run) {
           run = true;
-          return encodeValue.apply(null, arguments);
+          return encodeValue(value_);
         }
 
         assert.strictEqual(value_, value[0]);
@@ -458,7 +452,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode a Key', function() {
+    it('should encode a Key', () => {
       const value = new entity.Key({
         namespace: 'ns',
         path: ['Kind', 1],
@@ -468,7 +462,7 @@ describe('entity', function() {
         keyValue: value,
       };
 
-      entity.keyToKeyProto = function(key) {
+      entity.keyToKeyProto = (key) => {
         assert.strictEqual(key, value);
         return value;
       };
@@ -476,7 +470,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should encode an object', function() {
+    it('should encode an object', () => {
       const value = {
         key: 'value',
       };
@@ -492,10 +486,10 @@ describe('entity', function() {
       let run = false;
 
       const encodeValue = entity.encodeValue;
-      entity.encodeValue = function(value_) {
+      entity.encodeValue = (value_) => {
         if (!run) {
           run = true;
-          return encodeValue.apply(null, arguments);
+          return encodeValue(value_);
         }
 
         assert.strictEqual(value_, value.key);
@@ -505,7 +499,7 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should clone an object', function() {
+    it('should clone an object', () => {
       const value = {
         a: {
           b: {
@@ -522,7 +516,7 @@ describe('entity', function() {
       assert.notStrictEqual(value, encodedValue);
     });
 
-    it('should encode an empty object', function() {
+    it('should encode an empty object', () => {
       const value = {};
 
       const expectedValueProto = {
@@ -534,15 +528,15 @@ describe('entity', function() {
       assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
     });
 
-    it('should throw if an invalid value was provided', function() {
-      assert.throws(function() {
+    it('should throw if an invalid value was provided', () => {
+      assert.throws(() => {
         entity.encodeValue();
       }, /Unsupported field value/);
     });
   });
 
-  describe('entityFromEntityProto', function() {
-    it('should convert entity proto to entity', function() {
+  describe('entityFromEntityProto', () => {
+    it('should convert entity proto to entity', () => {
       const expectedEntity = {
         name: 'Stephen',
       };
@@ -557,14 +551,12 @@ describe('entity', function() {
       };
 
       assert.deepStrictEqual(
-        entity.entityFromEntityProto(entityProto),
-        expectedEntity
-      );
+          entity.entityFromEntityProto(entityProto), expectedEntity);
     });
   });
 
-  describe('entityToEntityProto', function() {
-    it('should format an entity', function() {
+  describe('entityToEntityProto', () => {
+    it('should format an entity', () => {
       const value = 'Stephen';
 
       const entityObject = {
@@ -578,18 +570,16 @@ describe('entity', function() {
         properties: entityObject.data,
       };
 
-      entity.encodeValue = function(value_) {
+      entity.encodeValue = (value_) => {
         assert.strictEqual(value_, value);
         return value;
       };
 
       assert.deepStrictEqual(
-        entity.entityToEntityProto(entityObject),
-        expectedEntityProto
-      );
+          entity.entityToEntityProto(entityObject), expectedEntityProto);
     });
 
-    it('should respect excludeFromIndexes', function() {
+    it('should respect excludeFromIndexes', () => {
       const value1 = 'Stephen';
       const value2 = 'Stephen2';
       const value3 = 'Stephen3';
@@ -948,8 +938,12 @@ describe('entity', function() {
                               entityValue: {
                                 properties: {
                                   b: {
-                                    // excludeFromIndexes: ['nestedArrayVariants[].a[].b'] does not apply here,
-                                    // To exclude this array (= all its elements), we would use ['nestedArrayVariants[].a[].b[]']
+                                    // excludeFromIndexes:
+                                    // ['nestedArrayVariants[].a[].b'] does not
+                                    // apply here,
+                                    // To exclude this array (= all its
+                                    // elements), we would use
+                                    // ['nestedArrayVariants[].a[].b[]']
                                     arrayValue: {
                                       values: [
                                         {
@@ -974,7 +968,8 @@ describe('entity', function() {
             },
           },
           alpha: {
-            // `excludeFromIndexes: ['alpha[]']` results in exclusion of all array elements
+            // `excludeFromIndexes: ['alpha[]']` results in exclusion of all
+            // array elements
             arrayValue: {
               values: [
                 {
@@ -989,7 +984,8 @@ describe('entity', function() {
             },
           },
           omega: {
-            // `excludeFromIndexes: ['omega']` is not applied, because 'omega' is an array.
+            // `excludeFromIndexes: ['omega']` is not applied, because 'omega'
+            // is an array.
             arrayValue: {
               values: [
                 {
@@ -1005,14 +1001,12 @@ describe('entity', function() {
       };
 
       assert.deepStrictEqual(
-        entity.entityToEntityProto(entityObject),
-        expectedEntityProto
-      );
+          entity.entityToEntityProto(entityObject), expectedEntityProto);
     });
   });
 
-  describe('formatArray', function() {
-    it('should convert protos to key/data entity array', function() {
+  describe('formatArray', () => {
+    it('should convert protos to key/data entity array', () => {
       const key = {};
 
       const entityProto = {
@@ -1027,12 +1021,12 @@ describe('entity', function() {
 
       const expectedResults = entityProto;
 
-      entity.keyFromKeyProto = function(key_) {
+      entity.keyFromKeyProto = (key_) => {
         assert.strictEqual(key_, key);
         return key;
       };
 
-      entity.entityFromEntityProto = function(entityProto_) {
+      entity.entityFromEntityProto = (entityProto_) => {
         assert.strictEqual(entityProto_, entityProto);
         return entityProto;
       };
@@ -1044,13 +1038,13 @@ describe('entity', function() {
     });
   });
 
-  describe('isKeyComplete', function() {
-    it('should convert key to key proto', function(done) {
+  describe('isKeyComplete', () => {
+    it('should convert key to key proto', (done) => {
       const key = new entity.Key({
         path: ['Kind', 123],
       });
 
-      entity.keyToKeyProto = function(key_) {
+      entity.keyToKeyProto = (key_) => {
         assert.strictEqual(key_, key);
         setImmediate(done);
         return key;
@@ -1059,7 +1053,7 @@ describe('entity', function() {
       entity.isKeyComplete(key);
     });
 
-    it('should return true if key has id', function() {
+    it('should return true if key has id', () => {
       const key = new entity.Key({
         path: ['Kind', 123],
       });
@@ -1067,7 +1061,7 @@ describe('entity', function() {
       assert.strictEqual(entity.isKeyComplete(key), true);
     });
 
-    it('should return true if key has name', function() {
+    it('should return true if key has name', () => {
       const key = new entity.Key({
         path: ['Kind', 'name'],
       });
@@ -1075,7 +1069,7 @@ describe('entity', function() {
       assert.strictEqual(entity.isKeyComplete(key), true);
     });
 
-    it('should return false if key does not have name or ID', function() {
+    it('should return false if key does not have name or ID', () => {
       const key = new entity.Key({
         path: ['Kind'],
       });
@@ -1084,7 +1078,7 @@ describe('entity', function() {
     });
   });
 
-  describe('keyFromKeyProto', function() {
+  describe('keyFromKeyProto', () => {
     const NAMESPACE = 'Namespace';
 
     const keyProto = {
@@ -1106,39 +1100,42 @@ describe('entity', function() {
       ],
     };
 
-    it('should set the namespace', function(done) {
-      entity.Key = function(keyOptions) {
-        assert.strictEqual(keyOptions.namespace, NAMESPACE);
-        done();
+    it('should set the namespace', (done) => {
+      entity.Key = class {
+        constructor(keyOptions) {
+          assert.strictEqual(keyOptions.namespace, NAMESPACE);
+          done();
+        }
       };
-
       entity.keyFromKeyProto(keyProto);
     });
 
-    it('should create a proper Key', function(done) {
-      entity.Key = function(keyOptions) {
-        assert.deepStrictEqual(keyOptions, {
-          namespace: NAMESPACE,
-          path: ['Kind', new entity.Int(111), 'Kind2', 'name'],
-        });
-
-        done();
+    it('should create a proper Key', (done) => {
+      entity.Key = class {
+        constructor(keyOptions) {
+          assert.deepStrictEqual(keyOptions, {
+            namespace: NAMESPACE,
+            path: ['Kind', new entity.Int(111), 'Kind2', 'name'],
+          });
+          done();
+        }
       };
-
       entity.keyFromKeyProto(keyProto);
     });
 
-    it('should return the created Key', function() {
+    it('should return the created Key', () => {
       const expectedValue = {};
 
-      entity.Key = function() {
-        return expectedValue;
+      entity.Key = class {
+        constructor() {
+          return expectedValue;
+        }
       };
 
       assert.strictEqual(entity.keyFromKeyProto(keyProto), expectedValue);
     });
 
-    it('should throw if path is invalid', function(done) {
+    it('should throw if path is invalid', (done) => {
       const keyProtoInvalid = {
         partitionId: {
           namespaceId: 'Namespace',
@@ -1164,8 +1161,8 @@ describe('entity', function() {
     });
   });
 
-  describe('keyToKeyProto', function() {
-    it('should handle hierarchical key definitions', function() {
+  describe('keyToKeyProto', () => {
+    it('should handle hierarchical key definitions', () => {
       const key = new entity.Key({
         path: ['Kind1', 1, 'Kind2', 'name', 'Kind3', new entity.Int(3)],
       });
@@ -1187,7 +1184,7 @@ describe('entity', function() {
       assert.strictEqual(keyProto.path[2].name, undefined);
     });
 
-    it('should detect the namespace of the hierarchical keys', function() {
+    it('should detect the namespace of the hierarchical keys', () => {
       const key = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind1', 1, 'Kind2', 'name'],
@@ -1206,7 +1203,7 @@ describe('entity', function() {
       assert.strictEqual(keyProto.path[1].name, 'name');
     });
 
-    it('should handle incomplete keys with & without namespaces', function() {
+    it('should handle incomplete keys with & without namespaces', () => {
       const incompleteKey = new entity.Key({
         path: ['Kind'],
       });
@@ -1230,7 +1227,7 @@ describe('entity', function() {
       assert.strictEqual(keyProtoWithNs.path[0].name, undefined);
     });
 
-    it('should throw if key contains 0 items', function(done) {
+    it('should throw if key contains 0 items', (done) => {
       const key = new entity.Key({
         path: [],
       });
@@ -1244,7 +1241,7 @@ describe('entity', function() {
       }
     });
 
-    it('should throw if key path contains null ids', function(done) {
+    it('should throw if key path contains null ids', (done) => {
       const key = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind1', null, 'Company'],
@@ -1259,19 +1256,19 @@ describe('entity', function() {
       }
     });
 
-    it('should not throw if key is incomplete', function() {
+    it('should not throw if key is incomplete', () => {
       const key = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind1', 123, 'Company', null],
       });
 
-      assert.doesNotThrow(function() {
+      assert.doesNotThrow(() => {
         entity.keyToKeyProto(key);
       });
     });
   });
 
-  describe('queryToQueryProto', function() {
+  describe('queryToQueryProto', () => {
     const queryProto = {
       distinctOn: [
         {
@@ -1342,37 +1339,33 @@ describe('entity', function() {
       },
     };
 
-    it('should support all configurations of a query', function() {
+    it('should support all configurations of a query', () => {
       const ancestorKey = new entity.Key({
         path: ['Kind2', 'somename'],
       });
 
       const ds = new Datastore({projectId: 'project-id'});
 
-      const query = ds
-        .createQuery('Kind1')
-        .filter('name', 'John')
-        .start('start')
-        .end('end')
-        .groupBy(['name'])
-        .order('name')
-        .select('name')
-        .limit(1)
-        .offset(1)
-        .hasAncestor(ancestorKey);
+      const query = ds.createQuery('Kind1')
+                        .filter('name', 'John')
+                        .start('start')
+                        .end('end')
+                        .groupBy(['name'])
+                        .order('name')
+                        .select('name')
+                        .limit(1)
+                        .offset(1)
+                        .hasAncestor(ancestorKey);
 
       assert.deepStrictEqual(entity.queryToQueryProto(query), queryProto);
     });
 
-    it('should handle buffer start and end values', function() {
+    it('should handle buffer start and end values', () => {
       const ds = new Datastore({projectId: 'project-id'});
       const startVal = Buffer.from('start');
       const endVal = Buffer.from('end');
 
-      const query = ds
-        .createQuery('Kind1')
-        .start(startVal)
-        .end(endVal);
+      const query = ds.createQuery('Kind1').start(startVal).end(endVal);
 
       const queryProto = entity.queryToQueryProto(query);
       assert.strictEqual(queryProto.endCursor, endVal);

@@ -37,13 +37,13 @@
  */
 
 import * as arrify from 'arrify';
-import {GrpcClient, GrpcClientOptions} from 'google-gax';
 import {GoogleAuth} from 'google-auth-library';
+import {GrpcClient, GrpcClientOptions} from 'google-gax';
 import * as is from 'is';
 
-import {DatastoreRequest} from './request';
 import {entity} from './entity';
 import {Query} from './query';
+import {DatastoreRequest} from './request';
 import {Transaction} from './transaction';
 
 const {grpc} = new GrpcClient({} as GrpcClientOptions);
@@ -88,7 +88,7 @@ const gapic = Object.freeze({
  *
  * Additionally, `DATASTORE_PROJECT_ID` is recognized. If you have this set,
  * you don't need to provide a `projectId`.
- *-
+ *
  *
  * @class
  * @extends {DatastoreRequest}
@@ -104,13 +104,14 @@ const gapic = Object.freeze({
  * @example <caption>Import the client library</caption>
  * const {Datastore} = require('@google-cloud/datastore');
  *
- * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * const datastore = new Datastore();
+ * @example <caption>Create a client that uses <a
+ * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
+ * Default Credentials (ADC)</a>:</caption> const datastore = new Datastore();
  *
- * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * const datastore = new Datastore({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
+ * @example <caption>Create a client with <a
+ * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
+ * credentials</a>:</caption> const datastore = new Datastore({ projectId:
+ * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  *
  * @example <caption>Retrieving Records</caption>
@@ -312,9 +313,11 @@ const gapic = Object.freeze({
  * const customerId2 = 4993882;
  * const customerKey1 = datastore.key(['Customer', customerId1]);
  * const customerKey2 = datastore.key(['Customer', customerId2]);
- * const cookieKey1 = datastore.key(['Customer', customerId1, 'Cookie', 'cookie28839']); // child entity
- * const cookieKey2 = datastore.key(['Customer', customerId1, 'Cookie', 'cookie78984']); // child entity
- * const cookieKey3 = datastore.key(['Customer', customerId2, 'Cookie', 'cookie93911']); // child entity
+ * const cookieKey1 = datastore.key(['Customer', customerId1, 'Cookie',
+ * 'cookie28839']); // child entity const cookieKey2 =
+ * datastore.key(['Customer', customerId1, 'Cookie', 'cookie78984']); // child
+ * entity const cookieKey3 = datastore.key(['Customer', customerId2, 'Cookie',
+ * 'cookie93911']); // child entity
  *
  * const entities = [];
  *
@@ -400,7 +403,7 @@ class Datastore extends DatastoreRequest {
     this.namespace = options.namespace;
 
     const userProvidedProjectId =
-      options.projectId || process.env.DATASTORE_PROJECT_ID;
+        options.projectId || process.env.DATASTORE_PROJECT_ID;
     const defaultProjectId = '{{projectId}}';
 
     /**
@@ -413,16 +416,15 @@ class Datastore extends DatastoreRequest {
     this.determineBaseUrl_(options.apiEndpoint);
 
     this.options = Object.assign(
-      {
-        libName: 'gccl',
-        libVersion: require('../../package.json').version,
-        scopes: gapic.v1.DatastoreClient.scopes,
-        servicePath: this.baseUrl_,
-        port: is.number(this.port_) ? this.port_ : 443,
-        projectId: userProvidedProjectId,
-      },
-      options
-    );
+        {
+          libName: 'gccl',
+          libVersion: require('../../package.json').version,
+          scopes: gapic.v1.DatastoreClient.scopes,
+          servicePath: this.baseUrl_,
+          port: is.number(this.port_) ? this.port_ : 443,
+          projectId: userProvidedProjectId,
+        },
+        options);
     if (this.customEndpoint_) {
       this.options.sslCreds = grpc.credentials.createInsecure();
     }
@@ -647,7 +649,8 @@ class Datastore extends DatastoreRequest {
   }
 
   /**
-   * Helper to create a Key object, scoped to the instance's namespace by default.
+   * Helper to create a Key object, scoped to the instance's namespace by
+   * default.
    *
    * You may also specify a configuration object to define a namespace and path.
    *
@@ -664,15 +667,15 @@ class Datastore extends DatastoreRequest {
    * const key = datastore.key('Company');
    *
    * @example
-   * <caption>Create a complete key with a kind value of `Company` and id `123`.</caption>
-   * const {Datastore} = require('@google-cloud/datastore');
+   * <caption>Create a complete key with a kind value of `Company` and id
+   * `123`.</caption> const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key(['Company', 123]);
    *
    * @example
-   * <caption>If the ID integer is outside the bounds of a JavaScript Number object, create an Int.</caption>
-   * const {Datastore} = require('@google-cloud/datastore');
-   * const datastore = new Datastore();
+   * <caption>If the ID integer is outside the bounds of a JavaScript Number
+   * object, create an Int.</caption> const {Datastore} =
+   * require('@google-cloud/datastore'); const datastore = new Datastore();
    * const key = datastore.key([
    *   'Company',
    *   datastore.int('100000000000001234')
@@ -686,8 +689,8 @@ class Datastore extends DatastoreRequest {
    * const key = datastore.key(['Company', 'Google']);
    *
    * @example
-   * <caption>Create a complete key from a provided namespace and path.</caption>
-   * const {Datastore} = require('@google-cloud/datastore');
+   * <caption>Create a complete key from a provided namespace and
+   * path.</caption> const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key({
    *   namespace: 'My-NS',
@@ -695,12 +698,10 @@ class Datastore extends DatastoreRequest {
    * });
    */
   key(options) {
-    options = is.object(options)
-      ? options
-      : {
-          namespace: this.namespace,
-          path: arrify(options),
-        };
+    options = is.object(options) ? options : {
+      namespace: this.namespace,
+      path: arrify(options),
+    };
     return new entity.Key(options);
   }
 
@@ -742,9 +743,9 @@ class Datastore extends DatastoreRequest {
   }
 
   /**
-   * Determine the appropriate endpoint to use for API requests. If not explicitly
-   * defined, check for the "DATASTORE_EMULATOR_HOST" environment variable, used
-   * to connect to a local Datastore server.
+   * Determine the appropriate endpoint to use for API requests. If not
+   * explicitly defined, check for the "DATASTORE_EMULATOR_HOST" environment
+   * variable, used to connect to a local Datastore server.
    *
    * @private
    *
@@ -768,10 +769,9 @@ class Datastore extends DatastoreRequest {
       this.port_ = Number(baseUrl.match(port)![1]);
     }
 
-    this.baseUrl_ = baseUrl
-      .replace(leadingProtocol, '')
-      .replace(port, '')
-      .replace(trailingSlashes, '');
+    this.baseUrl_ = baseUrl.replace(leadingProtocol, '')
+                        .replace(port, '')
+                        .replace(trailingSlashes, '');
   }
 
   /**
@@ -813,19 +813,21 @@ export {Datastore};
  * @module {Datastore} @google-cloud/datastore
  * @alias nodejs-datastore
  *
- * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save @google-cloud/datastore
+ * @example <caption>Install the client library with <a
+ * href="https://www.npmjs.com/">npm</a>:</caption> npm install --save
+ * @google-cloud/datastore
  *
  * @example <caption>Import the client library</caption>
  * const {Datastore} = require('@google-cloud/datastore');
  *
- * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
- * const datastore = new Datastore();
+ * @example <caption>Create a client that uses <a
+ * href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application
+ * Default Credentials (ADC)</a>:</caption> const datastore = new Datastore();
  *
- * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
- * const datastore = new Datastore({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
+ * @example <caption>Create a client with <a
+ * href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit
+ * credentials</a>:</caption> const datastore = new Datastore({ projectId:
+ * 'your-project-id', keyFilename: '/path/to/keyfile.json'
  * });
  *
  * @example <caption>include:samples/quickstart.js</caption>
