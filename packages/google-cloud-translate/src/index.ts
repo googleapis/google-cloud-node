@@ -155,8 +155,8 @@ export interface TranslateConfig extends GoogleAuthOptions {
  * With [Google Translate](https://cloud.google.com/translate), you can
  * dynamically translate text between thousands of language pairs.
  *
- * The Google Translate API lets websites and programs integrate with Google
- * Translate programmatically.
+ * The Google Cloud Translation API lets websites and programs integrate with
+ * Google Translate programmatically.
  *
  * @class
  *
@@ -167,7 +167,7 @@ export interface TranslateConfig extends GoogleAuthOptions {
  *
  * @example
  * //-
- * // <h3>Custom Translate API</h3>
+ * // <h3>Custom Translation API</h3>
  * //
  * // The environment variable, `GOOGLE_CLOUD_TRANSLATE_ENDPOINT`, is honored as
  * // a custom backend which our library will send requests to.
