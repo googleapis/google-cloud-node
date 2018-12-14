@@ -186,4 +186,4 @@ NAN_MODULE_INIT(InitAll) {
   target->Set(Nan::New<String>("heapProfiler").ToLocalChecked(), heapProfiler);
 }
 
-NODE_MODULE(profiler, InitAll);
+NODE_MODULE(google_cloud_profiler, InitAll);
