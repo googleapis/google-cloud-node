@@ -95,7 +95,7 @@
     "node": ">=6.12.3 <8.0.0 || >=8.9.4 <10.0.0 || >=10.4.1"
   },
   "binary": {
-    "module_name": "profiler",
+    "module_name": "google_cloud_profiler",
     "module_path": "./build/{node_abi}-{platform}-{arch}-{libc}",
     "host": "https://storage.googleapis.com/cloud-profiler-e2e/cprof-e2e-artifacts/nodejs/release",
     "package_name": "{node_abi}-{platform}-{arch}-{libc}.tar.gz"
