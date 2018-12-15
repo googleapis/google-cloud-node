@@ -226,7 +226,7 @@ describe('Request', () => {
       });
 
       it('should create and return Keys & API response', done => {
-        const key = {};
+        const key = {} as entity.Key;
         sandbox.stub(entity, 'isKeyComplete');
         sandbox.stub(entity, 'keyToKeyProto');
         sandbox.stub(entity, 'keyFromKeyProto').callsFake(keyProto => {
@@ -873,6 +873,7 @@ describe('Request', () => {
           const offset = query.offsetVal - apiResponse.batch.skippedResults;
           assert.strictEqual(offset_, offset);
           offsetCalled = true;
+          return {} as FakeQuery;
         });
 
         sandbox.stub(FakeQuery.prototype, 'limit').callsFake(limit_ => {
@@ -883,6 +884,7 @@ describe('Request', () => {
             // Should restore the original limit.
             assert.strictEqual(limit_, query.limitVal);
           }
+          return {} as FakeQuery;
         });
 
         sandbox.stub(entity, 'queryToQueryProto').callsFake(query_ => {
@@ -923,13 +925,12 @@ describe('Request', () => {
 
       it('should handle large limitless queries', done => {
         let timesRequestCalled = 0;
-        let limitCalled = false;
 
         const query = {
           limitVal: -1,
         };
 
-        request.request_ = (config, callback) => {
+        request.request_ = (_, callback) => {
           let batch;
           if (++timesRequestCalled === 2) {
             batch = {};
@@ -943,16 +944,14 @@ describe('Request', () => {
         };
 
         sandbox.stub(entity, 'queryToQueryProto').returns({});
-        sandbox.stub(FakeQuery.prototype, 'limit').callsFake(() => {
-          limitCalled = true;
-        });
+        const limitStub = sandbox.stub(FakeQuery.prototype, 'limit');
 
         request.runQueryStream(query)
             .on('error', done)
             .on('data', () => {})
             .on('end', () => {
               assert.strictEqual(timesRequestCalled, 2);
-              assert.strictEqual(limitCalled, false);
+              assert.strictEqual(limitStub.called, false);
               done();
             });
       });
@@ -1345,7 +1344,7 @@ describe('Request', () => {
         keyProtos.push(keyProto);
         return {
           id: ids[keyProtos.length - 1],
-        };
+        } as {} as entity.Key;
       });
 
       request.save(
