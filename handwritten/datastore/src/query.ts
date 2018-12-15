@@ -152,7 +152,7 @@ class Query {
    * const key = datastore.key(['Company', 'Google']);
    * const keyQuery = query.filter('__key__', key);
    */
-  filter(property: string, operator: string, value?) {
+  filter(property: string, operator, value?) {
     if (arguments.length === 2) {
       value = operator;
       operator = '=';
