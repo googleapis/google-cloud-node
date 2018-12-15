@@ -27,7 +27,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/GoogleCloudPlatform/google-cloud-go/profiler/proftest"
+	"cloud.google.com/go/profiler/proftest"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2/google"
 	compute "google.golang.org/api/compute/v1"
