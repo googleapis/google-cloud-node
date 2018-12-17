@@ -1,6 +1,8 @@
 {
   "name": "nodejs-docs-samples-logging-winston",
-  "files": ["*.js"],
+  "files": [
+    "*.js"
+  ],
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
@@ -13,16 +15,11 @@
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^0.10.2",
-    "winston": "^3.1.0",
-    "yargs": "^12.0.0"
+    "winston": "^3.1.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "ava": "^0.25.0"
-  },
-  "ava": {
-    "require": [
-      "source-map-support/register"
-    ]
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
+    "mocha": "^5.2.0"
   }
 }
