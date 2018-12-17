@@ -39,7 +39,7 @@
     "extend": "^3.0.1",
     "gcp-metadata": "^0.9.0",
     "lodash.pickby": "^4.6.0",
-    "nan": "^2.11.1",
+    "nan": "^2.12.0",
     "node-pre-gyp": "^0.12.0",
     "p-limit": "^2.0.0",
     "parse-duration": "^0.1.1",
