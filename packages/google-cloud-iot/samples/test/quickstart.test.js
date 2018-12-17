@@ -14,15 +14,12 @@
 
 'use strict';
 
-async function quickstart() {
-  const iot = require('@google-cloud/iot');
-  const client = new iot.v1.DeviceManagerClient();
-  const projectId = process.env.GCLOUD_PROJECT || 'YOUR_PROJECT_ID';
-  const parent = client.locationPath(projectId, 'us-central1');
-  const [resources] = await client.listDeviceRegistries({parent});
-  console.log(`${resources.length} resource(s) found.`);
-  for (const resource of resources) {
-    console.log(resource);
-  }
-}
-quickstart().catch(console.error);
+const {assert} = require('chai');
+const execa = require('execa');
+
+describe('iot samples', () => {
+  it('should run the quickstart', async () => {
+    const {stdout} = await execa.shell('node quickstart');
+    assert.match(stdout, /\d resource\(s\) found./);
+  });
+});
