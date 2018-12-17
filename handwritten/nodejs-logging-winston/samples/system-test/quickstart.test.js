@@ -15,17 +15,15 @@
 
 'use strict';
 
-const path = require(`path`);
-const assert = require(`assert`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-describe('QuickStart', () => {
-  before(tools.checkCredentials);
+const path = require('path');
+const {assert} = require('chai');
+const execa = require('execa');
 
-  it(`should write using winston`, async () => {
-    const output = await tools.runAsync(
-      `node quickstart.js`,
-      path.join(__dirname, `..`)
-    );
-    assert.deepStrictEqual(output.includes('99%'), true);
+describe('QuickStart', () => {
+  it('should write using winston', async () => {
+    const {stdout} = await execa.shell('node quickstart.js', {
+      cwd: path.join(__dirname, '..'),
+    });
+    assert.match(stdout, /99%/);
   });
 });
