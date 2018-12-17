@@ -15,43 +15,43 @@
 
 'use strict';
 
-const path = require(`path`);
-const assert = require(`assert`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const execa = require(`execa`);
-const delay = require(`delay`);
+const path = require('path');
+const {assert} = require('chai');
+const execa = require('execa');
+const delay = require('delay');
+const got = require('got');
 const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
-const got = require('got');
 
-before(tools.checkCredentials);
 after(() => got('http://localhost:8080/shutdown'));
 
 const lb = require('@google-cloud/logging-bunyan');
 const {APP_LOG_SUFFIX} = lb.express;
 
-it(`should write using bunyan`, async () => {
-  // Start the express server.
-  execa(process.execPath, ['express.js'], {
-    cwd: path.join(__dirname, `..`),
-    cleanup: true, // kill child process when parent exits.
-  }).stdout.pipe(process.stdout);
+describe('express samples', () => {
+  it('should write using bunyan', async () => {
+    // Start the express server.
+    execa(process.execPath, ['express.js'], {
+      cwd: path.join(__dirname, '..'),
+      cleanup: true, // kill child process when parent exits.
+    }).stdout.pipe(process.stdout);
 
-  // Wait 10 seconds for initialization and for server to start listening.
-  await delay(10 * 1000);
+    // Wait 10 seconds for initialization and for server to start listening.
+    await delay(10 * 1000);
 
-  // Make an HTTP request to exercise a request logging path.
-  await got('http://localhost:8080/');
+    // Make an HTTP request to exercise a request logging path.
+    await got('http://localhost:8080/');
 
-  // Wait 10 seconds for logs to be written to stackdriver service.
-  await delay(10 * 1000);
+    // Wait 10 seconds for logs to be written to stackdriver service.
+    await delay(10 * 1000);
 
-  // Make sure the log was written to Stackdriver Logging.
-  const log = logging.log(`samples_express_${APP_LOG_SUFFIX}`);
-  const entries = (await log.getEntries({pageSize: 1}))[0];
-  assert.strictEqual(entries.length, 1);
-  const entry = entries[0];
-  assert.strictEqual('this is an info log message', entry.data.message);
-  assert.ok(entry.metadata.trace, 'should have a trace property');
-  assert.ok(entry.metadata.trace.match(/projects\/.*\/traces\/.*/));
+    // Make sure the log was written to Stackdriver Logging.
+    const log = logging.log(`samples_express_${APP_LOG_SUFFIX}`);
+    const entries = (await log.getEntries({pageSize: 1}))[0];
+    assert.strictEqual(entries.length, 1);
+    const entry = entries[0];
+    assert.strictEqual('this is an info log message', entry.data.message);
+    assert.ok(entry.metadata.trace, 'should have a trace property');
+    assert.match(entry.metadata.trace, /projects\/.*\/traces\/.*/);
+  });
 });

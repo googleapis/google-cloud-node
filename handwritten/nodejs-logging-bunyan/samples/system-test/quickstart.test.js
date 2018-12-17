@@ -15,16 +15,15 @@
 
 'use strict';
 
-const path = require(`path`);
-const assert = require(`assert`);
-const tools = require(`@google-cloud/nodejs-repo-tools`);
+const path = require('path');
+const {assert} = require('chai');
+const execa = require('execa');
 
-before(tools.checkCredentials);
+const cwd = path.join(__dirname, '..');
 
-it(`should write using bunyan`, async () => {
-  const output = await tools.runAsync(
-    `node quickstart.js`,
-    path.join(__dirname, `..`)
-  );
-  assert.strictEqual(output.includes('99%'), true);
+describe('quickstart samples', () => {
+  it('should write using bunyan', async () => {
+    const {stdout} = await execa.shell('node quickstart.js', {cwd});
+    assert.match(stdout, /99%/);
+  });
 });
