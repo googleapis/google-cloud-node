@@ -39,6 +39,7 @@ async function main() {
   };
 
   const [response] = await client.listClusters(request);
+  console.log('Clusters:');
   console.log(response);
   // [END container_quickstart]
 }
