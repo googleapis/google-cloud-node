@@ -5,7 +5,9 @@
   "engines": {
     "node": ">=8"
   },
-  "files": ["*.js"],
+  "files": [
+    "*.js"
+  ],
   "repository": "googleapis/nodejs-bigquery-data-transfer",
   "private": true,
   "scripts": {
@@ -15,7 +17,8 @@
     "@google-cloud/bigquery-data-transfer": "^0.4.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
     "mocha": "^5.2.0"
   }
 }
