@@ -16,32 +16,27 @@
 'use strict';
 
 // [START translate_quickstart]
-// Imports the Google Cloud client library
-const {Translate} = require('@google-cloud/translate');
+async function quickstart(
+  projectId = 'YOUR_PROJECT_ID' // Your GCP Project Id
+) {
+  // Imports the Google Cloud client library
+  const {Translate} = require('@google-cloud/translate');
 
-// Your Google Cloud Platform project ID
-const projectId = 'YOUR_PROJECT_ID';
+  // Instantiates a client
+  const translate = new Translate({projectId});
 
-// Instantiates a client
-const translate = new Translate({
-  projectId: projectId,
-});
+  // The text to translate
+  const text = 'Hello, world!';
 
-// The text to translate
-const text = 'Hello, world!';
-// The target language
-const target = 'ru';
+  // The target language
+  const target = 'ru';
 
-// Translates some text into Russian
-translate
-  .translate(text, target)
-  .then(results => {
-    const translation = results[0];
-
-    console.log(`Text: ${text}`);
-    console.log(`Translation: ${translation}`);
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
+  // Translates some text into Russian
+  const [translation] = await translate.translate(text, target);
+  console.log(`Text: ${text}`);
+  console.log(`Translation: ${translation}`);
+}
 // [END translate_quickstart]
+
+const args = process.argv.slice(2);
+quickstart(...args).catch(console.error);
