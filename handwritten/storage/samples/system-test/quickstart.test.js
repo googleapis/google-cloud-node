@@ -15,51 +15,23 @@
 
 'use strict';
 
-const proxyquire = require(`proxyquire`).noPreserveCache();
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
-
-const {Storage} = proxyquire(`@google-cloud/storage`, {});
+const {assert} = require('chai');
+const execa = require('execa');
+const uuid = require('uuid');
+const {Storage} = require('@google-cloud/storage');
 
 const storage = new Storage();
+const projectId = process.env.GCLOUD_PROJECT;
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
-const bucket = storage.bucket(bucketName);
 
-before(tools.stubConsole);
 after(async () => {
-  tools.restoreConsole();
-  try {
-    await bucket.delete();
-  } catch (err) {} // ignore error
+  const bucket = storage.bucket(bucketName);
+  await bucket.delete().catch(console.error);
 });
 
-it(`should create a bucket`, async () => {
-  const expectedBucketName = `my-new-bucket`;
-
-  const StorageMock = class {
-    createBucket(_bucketName) {
-      assert.strictEqual(_bucketName, expectedBucketName);
-
-      return bucket.create().then(([bucket]) => {
-        assert.notStrictEqual(bucket, undefined);
-        assert.strictEqual(bucket.name, bucketName);
-
-        setTimeout(() => {
-          assert.strictEqual(console.log.calledOnce, true);
-          assert.deepStrictEqual(console.log.firstCall.args, [
-            `Bucket ${expectedBucketName} created.`,
-          ]);
-        }, 200);
-
-        return [bucket];
-      });
-    }
-  };
-
-  proxyquire(`../quickstart`, {
-    '@google-cloud/storage': {
-      Storage: StorageMock,
-    },
-  });
+it('should run the quickstart', async () => {
+  const {stdout} = await execa.shell(
+    `node quickstart ${projectId} ${bucketName}`
+  );
+  assert.match(stdout, /Bucket .* created./);
 });

@@ -1,7 +1,6 @@
 {
   "name": "@google-cloud/storage-samples",
   "description": "Samples for the Cloud Storage Client Library for Node.js.",
-  "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -9,28 +8,22 @@
   },
   "repository": "googleapis/nodejs-storage",
   "private": true,
-  "nyc": {
-    "exclude": [
-      "**/*.test.js"
-    ]
-  },
+  "files": [
+    "*.js"
+  ],
   "scripts": {
     "cleanup": "node scripts/cleanup",
-    "mocha": "mocha system-test/*.js --timeout 600000",
-    "cover": "nyc --reporter=lcov --cache mocha system-test/*.js --timeout 600000 && nyc report",
-    "test": "npm run cover"
+    "test": "mocha system-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "*",
+    "@google-cloud/pubsub": "^0.22.2",
     "@google-cloud/storage": "^2.3.3",
     "uuid": "^3.3.2",
     "yargs": "^12.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.0.0",
-    "proxyquire": "^2.0.1",
-    "sinon": "^7.0.0"
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
+    "mocha": "^5.2.0"
   }
 }

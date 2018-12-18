@@ -15,15 +15,14 @@
 
 'use strict';
 
-const path = require(`path`);
 const {PubSub} = require('@google-cloud/pubsub');
-const {Storage} = require(`@google-cloud/storage`);
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
+const {Storage} = require('@google-cloud/storage');
+const {assert} = require('chai');
+const execa = require('execa');
+const uuid = require('uuid');
 
+const exec = async cmd => (await execa.shell(cmd)).stdout;
 const storage = new Storage();
-const cwd = path.join(__dirname, `..`);
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 const notificationId = '1';
@@ -31,7 +30,7 @@ const notification = bucket.notification(notificationId);
 const topicName = `nodejs-storage-samples-${uuid.v4()}`;
 const pubsub = new PubSub();
 const topic = pubsub.topic(topicName);
-const cmd = `node notifications.js`;
+const cmd = 'node notifications.js';
 
 before(async () => {
   await bucket.create();
@@ -47,133 +46,50 @@ before(async () => {
 });
 
 after(async () => {
-  try {
-    await bucket.delete();
-  } catch (e) {}
-
-  try {
-    await topic.delete();
-  } catch (e) {}
+  await bucket.delete().catch(console.error);
+  await topic.delete().catch(console.error);
 });
 
-beforeEach(tools.stubConsole);
-afterEach(tools.restoreConsole);
-
-it(`should create a notification`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} create ${bucketName} ${topicName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Notification subscription created.`
-    ),
-    true
-  );
+it('should create a notification', async () => {
+  const output = await exec(`${cmd} create ${bucketName} ${topicName}`);
+  assert.match(output, /Notification subscription created./);
   const [exists] = await notification.exists();
   assert.strictEqual(exists, true);
 });
 
-it(`should list notifications`, async () => {
-  await tools
-    .tryTest(async assert => {
-      const results = await tools.runAsyncWithIO(
-        `${cmd} list ${bucketName}`,
-        cwd
-      );
-      const output = results.stdout + results.stderr;
-      assert(
-        output.includes(`Notifications:`),
-        `"${output}" should include "Notifications:"`
-      );
-      assert(
-        output.includes(notificationId),
-        `"${output}" should include "${notificationId}"`
-      );
-    })
-    .start();
+it('should list notifications', async () => {
+  const output = await exec(`${cmd} list ${bucketName}`);
+  assert.match(output, /Notifications:/);
+  assert.match(output, new RegExp(notificationId));
 });
 
 it('should get metadata', async () => {
-  await tools
-    .tryTest(async assert => {
-      const metadata = await notification.getMetadata();
-      const results = await tools.runAsyncWithIO(
-        `${cmd} get-metadata ${bucketName} ${notificationId}`,
-        cwd
-      );
-      const output = results.stdout + results.stderr;
-      assert(output.includes(`ID:`), `"${output}" should include "ID:"`);
-      assert(
-        output.includes(metadata.id),
-        `"${output}" should include "${metadata.id}"`
-      );
-      assert(output.includes(`Topic:`), `"${output}" should include "Topic:"`);
-      assert(
-        output.includes(metadata.topic),
-        `"${output}" should include "${metadata.topic}"`
-      );
-      assert(
-        output.includes(`Event Types:`),
-        `"${output}" should include "Event Types:"`
-      );
-      assert(
-        output.includes(metadata.event_types),
-        `"${output}" should include "${metadata.event_types}"`
-      );
-      assert(
-        output.includes(`Custom Attributes:`),
-        `"${output}" should include "Custom Attributes:"`
-      );
-      assert(
-        output.includes(metadata.custom_attributes),
-        `"${output}" should include "${metadata.custom_attributes}"`
-      );
-      assert(
-        output.includes(`Payload Format:`),
-        `"${output}" should include "Payload Format:"`
-      );
-      assert(
-        output.includes(metadata.payload_format),
-        `"${output}" should include "${metadata.payload_format}"`
-      );
-      assert(
-        output.includes(`Object Name Prefix:`),
-        `"${output}" should include "Object Name Prefix:"`
-      );
-      assert(
-        output.includes(metadata.object_name_prefix),
-        `"${output}" should include "${metadata.object_name_prefix}"`
-      );
-      assert(output.includes(`Etag:`), `"${output}" should include "Etag:"`);
-      assert(
-        output.includes(`Self Link:`),
-        `"${output}" should include "Self Link:"`
-      );
-      assert(
-        output.includes(metadata.selfLink),
-        `"${output}" should include "${metadata.selfLink}"`
-      );
-      assert(output.includes(`Kind:`), `"${output}" should include "Kind:"`);
-      assert(
-        output.includes(metadata.kind),
-        `"${output}" should include "${metadata.kind}"`
-      );
-    })
-    .start();
+  const metadata = await notification.getMetadata();
+  const output = await exec(
+    `${cmd} get-metadata ${bucketName} ${notificationId}`
+  );
+  assert.match(output, /ID:/);
+  assert.match(output, new RegExp(metadata.id));
+  assert.match(output, /Topic:/);
+  assert.match(output, new RegExp(metadata.topic));
+  assert.match(output, /Event Types:/);
+  assert.match(output, new RegExp(metadata.event_types));
+  assert.match(output, /Custom Attributes:/);
+  assert.match(output, new RegExp(metadata.custom_attributes));
+  assert.match(output, /Payload Format:/);
+  assert.match(output, new RegExp(metadata.payload_format));
+  assert.match(output, /Object Name Prefix:/);
+  assert.match(output, new RegExp(metadata.object_name_prefix));
+  assert.match(output, /Etag:/);
+  assert.match(output, /Self Link:/);
+  assert.match(output, new RegExp(metadata.selfLink));
+  assert.match(output, /Kind:/);
+  assert.match(output, new RegExp(metadata.kind));
 });
 
 it('should delete a notification', async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} delete ${bucketName} ${notificationId}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Notification ${notificationId} deleted.`
-    ),
-    true
-  );
+  const output = await exec(`${cmd} delete ${bucketName} ${notificationId}`);
+  assert.match(output, new RegExp(`Notification ${notificationId} deleted.`));
   const [exists] = await notification.exists();
   assert.strictEqual(exists, false);
 });

@@ -15,69 +15,57 @@
 
 'use strict';
 
-const path = require(`path`);
-const {Storage} = require(`@google-cloud/storage`);
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
+const {Storage} = require('@google-cloud/storage');
+const {assert} = require('chai');
+const execa = require('execa');
+const uuid = require('uuid');
 
+const exec = async cmd => (await execa.shell(cmd)).stdout;
 const storage = new Storage();
-const cwd = path.join(__dirname, `..`);
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
-const userEmail = `test@example.com`;
-const cmd = `node iam.js`;
-const roleName = `roles/storage.objectViewer`;
+const userEmail = 'test@example.com';
+const cmd = 'node iam.js';
+const roleName = 'roles/storage.objectViewer';
 
-before(tools.checkCredentials);
 before(async () => {
   await bucket.create();
 });
 
 after(async () => {
-  try {
-    await bucket.delete();
-  } catch (err) {} // ignore error
+  await bucket.delete().catch(console.error);
 });
 
-it(`should add multiple members to a role on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} add-members ${bucketName} ${roleName} "user:${userEmail}"`,
-    cwd
+it('should add multiple members to a role on a bucket', async () => {
+  const output = await exec(
+    `${cmd} add-members ${bucketName} ${roleName} "user:${userEmail}"`
   );
-  const output = results.stdout + results.stderr;
-  assert.strictEqual(
+  assert.ok(
     output.includes(
       `Added the following member(s) with role ${roleName} to ${bucketName}:`
-    ),
-    true
+    )
   );
-  assert.strictEqual(output.includes(`user:${userEmail}`), true);
+  assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
-it(`should list members of a role on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} view-members ${bucketName} "user:${userEmail}"`,
-    cwd
+it('should list members of a role on a bucket', async () => {
+  const output = await exec(
+    `${cmd} view-members ${bucketName} "user:${userEmail}"`
   );
-  const output = results.stdout + results.stderr;
-  assert.strictEqual(output.includes(`Roles for bucket ${bucketName}:`), true);
-  assert.strictEqual(output.includes(`Role: ${roleName}`), true);
-  assert.strictEqual(output.includes(`Members:`), true);
-  assert.strictEqual(output.includes(`user:${userEmail}`), true);
+  assert.match(output, new RegExp(`Roles for bucket ${bucketName}:`));
+  assert.match(output, new RegExp(`Role: ${roleName}`));
+  assert.match(output, new RegExp(`Members:`));
+  assert.match(output, new RegExp(`user:${userEmail}`));
 });
 
-it(`should remove multiple members from a role on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} remove-members ${bucketName} ${roleName} "user:${userEmail}"`,
-    cwd
+it('should remove multiple members from a role on a bucket', async () => {
+  const output = await exec(
+    `${cmd} remove-members ${bucketName} ${roleName} "user:${userEmail}"`
   );
-  const output = results.stdout + results.stderr;
-  assert.strictEqual(
+  assert.ok(
     output.includes(
       `Removed the following member(s) with role ${roleName} from ${bucketName}:`
-    ),
-    true
+    )
   );
-  assert.strictEqual(output.includes(`user:${userEmail}`), true);
+  assert.match(output, new RegExp(`user:${userEmail}`));
 });

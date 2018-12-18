@@ -15,179 +15,131 @@
 
 'use strict';
 
-const path = require(`path`);
-const {Storage} = require(`@google-cloud/storage`);
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
+const {Storage} = require('@google-cloud/storage');
+const {assert} = require('chai');
+const execa = require('execa');
+const uuid = require('uuid');
+const path = require('path');
 
 const storage = new Storage();
-
-const cwd = path.join(__dirname, `..`);
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
-const userEmail = `jdobry@google.com`;
-const fileName = `test.txt`;
-const filePath = path.join(__dirname, `../resources`, fileName);
-const cmd = `node acl.js`;
+const userEmail = 'jdobry@google.com';
+const fileName = 'test.txt';
+const filePath = path.join(__dirname, '..', 'resources', fileName);
+const cmd = 'node acl.js';
 
-before(tools.checkCredentials);
+const exec = async cmd => (await execa.shell(cmd)).stdout;
+
 before(async () => {
   await bucket.create();
   await bucket.upload(filePath);
 });
 
 after(async () => {
-  // Try deleting all files twice
   try {
     await bucket.deleteFiles({force: true});
-  } catch (err) {} // ignore error
+  } catch (err) {
+    // ignore error
+  }
   try {
     await bucket.deleteFiles({force: true});
-  } catch (err) {} // ignore error
+  } catch (err) {
+    // ignore error
+  }
   try {
     await bucket.delete();
-  } catch (err) {} // ignore error
+  } catch (err) {
+    // ignore error
+  }
 });
 
-it(`should print acl for a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} print-bucket-acl ${bucketName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`OWNER: project-editors-`),
-    true
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`OWNER: project-owners-`),
-    true
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`READER: project-viewers-`),
-    true
-  );
+it('should print acl for a bucket', async () => {
+  const out = await exec(`${cmd} print-bucket-acl ${bucketName}`);
+  assert.match(out, /OWNER: project-editors-/);
+  assert.match(out, /OWNER: project-owners-/);
+  assert.match(out, /READER: project-viewers-/);
 });
 
-it(`should print acl for a file`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} print-file-acl ${bucketName} ${fileName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`OWNER: project-editors-`),
-    true
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`OWNER: project-owners-`),
-    true
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`READER: project-viewers-`),
-    true
-  );
+it('should print acl for a file', async () => {
+  const out = await exec(`${cmd} print-file-acl ${bucketName} ${fileName}`);
+  assert.match(out, /OWNER: project-editors-/);
+  assert.match(out, /OWNER: project-owners-/);
+  assert.match(out, /READER: project-viewers-/);
 });
 
-it(`should print a user's acl for a bucket`, async () => {
+it('should print a users acl for a bucket', async () => {
   await bucket.acl.readers.addUser(userEmail);
-  const results = await tools.runAsyncWithIO(
-    `${cmd} print-bucket-acl-for-user ${bucketName} ${userEmail}`,
-    cwd
+  const out = await exec(
+    `${cmd} print-bucket-acl-for-user ${bucketName} ${userEmail}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`READER: user-${userEmail}`),
-    true
-  );
+  assert.match(out, new RegExp(`READER: user-${userEmail}`));
   await bucket.acl.readers.deleteUser(userEmail);
 });
 
-it(`should add a user as an owner on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} add-bucket-owner ${bucketName} ${userEmail}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Added user ${userEmail} as an owner on bucket ${bucketName}.`
-    ),
-    true
+it('should add a user as an owner on a bucket', async () => {
+  const out = await exec(`${cmd} add-bucket-owner ${bucketName} ${userEmail}`);
+  assert.match(
+    out,
+    new RegExp(`Added user ${userEmail} as an owner on bucket ${bucketName}.`)
   );
 });
 
-it(`should remove a user from a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} remove-bucket-owner ${bucketName} ${userEmail}`,
-    cwd
+it('should remove a user from a bucket', async () => {
+  const out = await exec(
+    `${cmd} remove-bucket-owner ${bucketName} ${userEmail}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Removed user ${userEmail} from bucket ${bucketName}.`
-    ),
-    true
+  assert.match(
+    out,
+    new RegExp(`Removed user ${userEmail} from bucket ${bucketName}.`)
   );
 });
 
-it(`should add a user as a default owner on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} add-bucket-default-owner ${bucketName} ${userEmail}`,
-    cwd
+it('should add a user as a default owner on a bucket', async () => {
+  const out = await exec(
+    `${cmd} add-bucket-default-owner ${bucketName} ${userEmail}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Added user ${userEmail} as an owner on bucket ${bucketName}.`
-    ),
-    true
+  assert.match(
+    out,
+    new RegExp(`Added user ${userEmail} as an owner on bucket ${bucketName}.`)
   );
 });
 
-it(`should remove a default user from a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} remove-bucket-default-owner ${bucketName} ${userEmail}`,
-    cwd
+it('should remove a default user from a bucket', async () => {
+  const out = await exec(
+    `${cmd} remove-bucket-default-owner ${bucketName} ${userEmail}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Removed user ${userEmail} from bucket ${bucketName}.`
-    ),
-    true
+  assert.match(
+    out,
+    new RegExp(`Removed user ${userEmail} from bucket ${bucketName}.`)
   );
 });
 
-it(`should print a user's acl for a file`, async () => {
+it('should print a users acl for a file', async () => {
   await bucket.file(fileName).acl.readers.addUser(userEmail);
-  const results = await tools.runAsyncWithIO(
-    `${cmd} print-file-acl-for-user ${bucketName} ${fileName} ${userEmail}`,
-    cwd
+  const out = await exec(
+    `${cmd} print-file-acl-for-user ${bucketName} ${fileName} ${userEmail}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`READER: user-${userEmail}`),
-    true
-  );
+  assert.match(out, new RegExp(`READER: user-${userEmail}`));
   await bucket.file(fileName).acl.readers.deleteUser(userEmail);
 });
 
-it(`should add a user as an owner on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} add-file-owner ${bucketName} ${fileName} ${userEmail}`,
-    cwd
+it('should add a user as an owner on a bucket', async () => {
+  const out = await exec(
+    `${cmd} add-file-owner ${bucketName} ${fileName} ${userEmail}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Added user ${userEmail} as an owner on file ${fileName}.`
-    ),
-    true
+  assert.match(
+    out,
+    new RegExp(`Added user ${userEmail} as an owner on file ${fileName}.`)
   );
 });
 
-it(`should remove a user from a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} remove-file-owner ${bucketName} ${fileName} ${userEmail}`,
-    cwd
+it('should remove a user from a bucket', async () => {
+  const out = await exec(
+    `${cmd} remove-file-owner ${bucketName} ${fileName} ${userEmail}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Removed user ${userEmail} from file ${fileName}.`
-    ),
-    true
+  assert.match(
+    out,
+    new RegExp(`Removed user ${userEmail} from file ${fileName}.`)
   );
 });

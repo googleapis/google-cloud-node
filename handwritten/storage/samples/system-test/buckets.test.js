@@ -15,69 +15,44 @@
 
 'use strict';
 
-const path = require(`path`);
 const {Storage} = require(`@google-cloud/storage`);
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
+const {assert} = require('chai');
+const execa = require('execa');
+const uuid = require('uuid');
 
 const storage = new Storage();
-const cwd = path.join(__dirname, `..`);
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
-const cmd = `node buckets.js`;
+const cmd = 'node buckets.js';
+const exec = async cmd => (await execa.shell(cmd)).stdout;
 
-before(tools.checkCredentials);
 after(async () => {
-  try {
-    await bucket.delete();
-  } catch (err) {} // ignore error
+  return bucket.delete().catch(console.error);
 });
 
-beforeEach(tools.stubConsole);
-afterEach(tools.restoreConsole);
-
-it(`should create a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} create ${bucketName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`Bucket ${bucketName} created.`),
-    true
-  );
+it('should create a bucket', async () => {
+  const output = await exec(`${cmd} create ${bucketName}`);
+  assert.match(output, new RegExp(`Bucket ${bucketName} created.`));
   const [exists] = await bucket.exists();
   assert.strictEqual(exists, true);
 });
 
-it(`should list buckets`, async () => {
-  await tools
-    .tryTest(async assert => {
-      const results = await tools.runAsyncWithIO(`${cmd} list`, cwd);
-      const output = results.stdout + results.stderr;
-      assert(
-        output.includes(`Buckets:`),
-        `"${output}" should include "Buckets:"`
-      );
-      assert(
-        output.includes(bucketName),
-        `"${output}" should include "${bucketName}"`
-      );
-    })
-    .start();
+it('should list buckets', async () => {
+  const output = await exec(`${cmd} list`);
+  assert.match(output, /Buckets:/);
+  assert.match(output, new RegExp(bucketName));
 });
 
-it(`should set a bucket's default KMS key`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} enable-default-kms-key ${bucketName} ${defaultKmsKeyName}`,
-    cwd
+it('should set a buckets default KMS key', async () => {
+  const output = await exec(
+    `${cmd} enable-default-kms-key ${bucketName} ${defaultKmsKeyName}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
+  assert.match(
+    output,
+    new RegExp(
       `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
-    ),
-    true
+    )
   );
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
@@ -86,15 +61,9 @@ it(`should set a bucket's default KMS key`, async () => {
   );
 });
 
-it(`should delete a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} delete ${bucketName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`Bucket ${bucketName} deleted.`),
-    true
-  );
+it('should delete a bucket', async () => {
+  const output = await exec(`${cmd} delete ${bucketName}`);
+  assert.match(output, new RegExp(`Bucket ${bucketName} deleted.`));
   const [exists] = await bucket.exists();
   assert.strictEqual(exists, false);
 });

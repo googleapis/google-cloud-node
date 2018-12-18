@@ -18,12 +18,13 @@
 const fs = require('fs');
 const path = require('path');
 const {Storage} = require('@google-cloud/storage');
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
+const {assert} = require('chai');
+const execa = require('execa');
 const uuid = require('uuid');
+const {promisify} = require('util');
 
+const exec = async cmd => (await execa.shell(cmd)).stdout;
 const storage = new Storage();
-const cwd = path.join(__dirname, `..`);
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
 const cmd = `node encryption.js`;
@@ -34,87 +35,56 @@ const downloadFilePath = path.join(__dirname, `../resources/downloaded.txt`);
 
 let key;
 
-before(tools.checkCredentials);
 before(async () => {
   await bucket.create(bucketName);
 });
 
 after(async () => {
-  try {
-    // Delete the downloaded file
-    fs.unlinkSync(downloadFilePath);
-  } catch (err) {
-    // Swallow error
-  }
+  promisify(fs.unlink)(downloadFilePath).catch(console.error);
   // Try deleting all files twice, just to make sure
-  try {
-    await bucket.deleteFiles({force: true});
-  } catch (err) {} // ignore error
-  try {
-    await bucket.deleteFiles({force: true});
-  } catch (err) {} // ignore error
-  try {
-    await bucket.delete();
-  } catch (err) {} // ignore error
+  await bucket.deleteFiles({force: true}).catch(console.error);
+  await bucket.deleteFiles({force: true}).catch(console.error);
+  await bucket.delete().catch(console.error);
 });
 
-beforeEach(tools.stubConsole);
-afterEach(tools.restoreConsole);
-
-it(`should generate a key`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} generate-encryption-key`,
-    cwd
-  );
-  const output = results.stdout + results.stderr;
-  assert.strictEqual(output.includes(`Base 64 encoded encryption key:`), true);
+it('should generate a key', async () => {
+  const output = await exec(`${cmd} generate-encryption-key`);
+  assert.match(output, /Base 64 encoded encryption key:/);
   const test = /^Base 64 encoded encryption key: (.+)$/;
   key = output.match(test)[1];
 });
 
-it(`should upload a file`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} upload ${bucketName} ${filePath} ${fileName} ${key}`,
-    cwd
+it('should upload a file', async () => {
+  const output = await exec(
+    `${cmd} upload ${bucketName} ${filePath} ${fileName} ${key}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `File ${filePath} uploaded to gs://${bucketName}/${fileName}.`
-    ),
-    true
+  assert.match(
+    output,
+    new RegExp(`File ${filePath} uploaded to gs://${bucketName}/${fileName}.`)
   );
   const [exists] = await bucket.file(fileName).exists();
   assert.strictEqual(exists, true);
 });
 
-it(`should download a file`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} download ${bucketName} ${fileName} ${downloadFilePath} ${key}`,
-    cwd
+it('should download a file', async () => {
+  const output = await exec(
+    `${cmd} download ${bucketName} ${fileName} ${downloadFilePath} ${key}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `File ${fileName} downloaded to ${downloadFilePath}.`
-    ),
-    true
+  assert.match(
+    output,
+    new RegExp(`File ${fileName} downloaded to ${downloadFilePath}.`)
   );
   fs.statSync(downloadFilePath);
 });
 
-it(`should rotate keys`, async () => {
+it('should rotate keys', async () => {
   // Generate a new key
-  const generateKeyResults = await tools.runAsyncWithIO(
-    `${cmd} generate-encryption-key`,
-    cwd
-  );
-  const output = generateKeyResults.stdout + generateKeyResults.stderr;
-  assert.strictEqual(output.includes(`Base 64 encoded encryption key:`), true);
+  let output = await exec(`${cmd} generate-encryption-key`);
+  assert.match(output, /Base 64 encoded encryption key:/);
   const test = /^Base 64 encoded encryption key: (.+)$/;
   const newKey = output.match(test)[1];
-
-  const results = await tools.runAsyncWithIO(
-    `${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`,
-    cwd
+  output = await exec(
+    `${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`
   );
-  assert.strictEqual(results.stdout, 'Encryption key rotated successfully.');
+  assert.strictEqual(output, 'Encryption key rotated successfully.');
 });

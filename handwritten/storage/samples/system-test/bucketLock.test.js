@@ -15,184 +15,133 @@
 
 'use strict';
 
-const path = require(`path`);
-const {Storage} = require(`@google-cloud/storage`);
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
-const uuid = require(`uuid`);
+const path = require('path');
+const {Storage} = require('@google-cloud/storage');
+const {assert} = require('chai');
+const execa = require('execa');
+const uuid = require('uuid');
 
 const storage = new Storage();
-const cwd = path.join(__dirname, `..`);
-const cmd = `node bucketLock.js`;
+const cwd = path.join(__dirname, '..');
+const cmd = 'node bucketLock.js';
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
-const fileName = `test.txt`;
+const fileName = 'test.txt';
 
-const uploadFilePath = path.join(cwd, `resources`, fileName);
+const uploadFilePath = path.join(cwd, 'resources', fileName);
+const exec = async cmd => (await execa.shell(cmd)).stdout;
 
-before(tools.checkCredentials);
 before(async () => {
   await bucket.create();
-});
-before(async () => {
   await bucket.upload(uploadFilePath);
 });
 
 after(async () => {
   try {
     await bucket.deleteFiles({force: true});
-  } catch (err) {} // ignore error
+  } catch (err) {
+    // ignore error
+  }
   try {
     await bucket.delete();
-  } catch (err) {} // ignore error
+  } catch (err) {
+    // ignore error
+  }
 });
 
-beforeEach(tools.stubConsole);
-afterEach(tools.restoreConsole);
-
-it(`should set a retention policy on a bucket`, async () => {
+it('should set a retention policy on a bucket', async () => {
   const retentionPeriod = 5;
-  const results = await tools.runAsyncWithIO(
-    `${cmd} set-retention-policy ${bucketName} ${retentionPeriod}`,
-    cwd
+  const output = await exec(
+    `${cmd} set-retention-policy ${bucketName} ${retentionPeriod}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
+  assert.match(
+    output,
+    new RegExp(
       `Bucket ${bucketName} retention period set for ${retentionPeriod} seconds.`
-    ),
-    true
+    )
   );
 });
 
-it(`should get a retention policy on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} get-retention-policy ${bucketName}`,
-    cwd
+it('should get a retention policy on a bucket', async () => {
+  const output = await exec(`${cmd} get-retention-policy ${bucketName}`);
+  assert.match(output, /A retention policy exists!/);
+});
+
+it('should enable default event-based hold on a bucket', async () => {
+  const output = await exec(
+    `${cmd} enable-default-event-based-hold ${bucketName}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(`A retention policy exists!`),
-    true
+  assert.match(
+    output,
+    new RegExp(`Default event-based hold was enabled for ${bucketName}.`)
   );
 });
 
-it(`should enable default event-based hold on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} enable-default-event-based-hold ${bucketName}`,
-    cwd
+it('should get default event-based hold on a bucket', async () => {
+  const output = await exec(
+    `${cmd} get-default-event-based-hold ${bucketName}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Default event-based hold was enabled for ${bucketName}.`
-    ),
-    true
+  assert.match(output, /Default event-based hold: true./);
+});
+
+it('should disable default event-based hold on a bucket', async () => {
+  const output = await exec(
+    `${cmd} disable-default-event-based-hold ${bucketName}`
+  );
+  assert.match(
+    output,
+    new RegExp(`Default event-based hold was disabled for ${bucketName}.`)
   );
 });
 
-it(`should get default event-based hold on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} get-default-event-based-hold ${bucketName}`,
-    cwd
+it('should set an event-based hold on a file', async () => {
+  const output = await exec(
+    `${cmd} set-event-based-hold ${bucketName} ${fileName}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Default event-based hold: true.`
-    ),
-    true
+  assert.match(output, new RegExp(`Event-based hold was set for ${fileName}.`));
+});
+
+it('should release an event-based hold on a file', async () => {
+  const output = await exec(
+    `${cmd} release-event-based-hold ${bucketName} ${fileName}`
+  );
+  assert.match(
+    output,
+    new RegExp(`Event-based hold was released for ${fileName}.`)
   );
 });
 
-it(`should disable default event-based hold on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} disable-default-event-based-hold ${bucketName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Default event-based hold was disabled for ${bucketName}.`
-    ),
-    true
+it('should remove a retention policy on a bucket', async () => {
+  const output = await exec(`${cmd} remove-retention-policy ${bucketName}`);
+  assert.match(
+    output,
+    new RegExp(`Removed bucket ${bucketName} retention policy.`)
   );
 });
 
-it(`should set an event-based hold on a file`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} set-event-based-hold ${bucketName} ${fileName}`,
-    cwd
+it('should set an temporary hold on a file', async () => {
+  const output = await exec(
+    `${cmd} set-temporary-hold ${bucketName} ${fileName}`
   );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Event-based hold was set for ${fileName}.`
-    ),
-    true
+  assert.match(output, new RegExp(`Temporary hold was set for ${fileName}.`));
+});
+
+it('should release an temporary hold on a file', async () => {
+  const output = await exec(
+    `${cmd} release-temporary-hold ${bucketName} ${fileName}`
+  );
+  assert.match(
+    output,
+    new RegExp(`Temporary hold was released for ${fileName}.`)
   );
 });
 
-it(`should release an event-based hold on a file`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} release-event-based-hold ${bucketName} ${fileName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Event-based hold was released for ${fileName}.`
-    ),
-    true
-  );
-});
-
-it(`should remove a retention policy on a bucket`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} remove-retention-policy ${bucketName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Removed bucket ${bucketName} retention policy.`
-    ),
-    true
-  );
-});
-
-it(`should set an temporary hold on a file`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} set-temporary-hold ${bucketName} ${fileName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Temporary hold was set for ${fileName}.`
-    ),
-    true
-  );
-});
-
-it(`should release an temporary hold on a file`, async () => {
-  const results = await tools.runAsyncWithIO(
-    `${cmd} release-temporary-hold ${bucketName} ${fileName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Temporary hold was released for ${fileName}.`
-    ),
-    true
-  );
-});
-
-it(`should lock a bucket with a retention policy`, async () => {
+it('should lock a bucket with a retention policy', async () => {
   const retentionPeriod = 5;
-  await tools.runAsyncWithIO(
-    `${cmd} set-retention-policy ${bucketName} ${retentionPeriod}`,
-    cwd
-  );
-  const results = await tools.runAsyncWithIO(
-    `${cmd} lock-retention-policy ${bucketName}`,
-    cwd
-  );
-  assert.strictEqual(
-    (results.stdout + results.stderr).includes(
-      `Retention policy for ${bucketName} is now locked.`
-    ),
-    true
+  await exec(`${cmd} set-retention-policy ${bucketName} ${retentionPeriod}`);
+  const output = await exec(`${cmd} lock-retention-policy ${bucketName}`);
+  assert.match(
+    output,
+    new RegExp(`Retention policy for ${bucketName} is now locked.`)
   );
 });

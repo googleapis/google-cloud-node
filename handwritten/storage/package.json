@@ -30,21 +30,19 @@
     "storage"
   ],
   "scripts": {
-    "codecov": "nyc report --reporter=json && codecov -f .coverage/*.json",
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "system-test": "mocha build/system-test --timeout 600000",
     "presystem-test": "npm run compile",
-    "test-only": "nyc mocha build/test",
-    "test": "npm run test-only",
-    "pretest-only": "npm run compile",
+    "test": "nyc mocha build/test",
+    "pretest": "npm run compile",
     "lint": "eslint samples/ && gts check",
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "all-test": "npm test && npm run system-test && npm run samples-test",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix && eslint --fix samples/**/*.js",
+    "fix": "gts fix && eslint --fix '**/*.js'",
     "prepare": "npm run compile"
   },
   "dependencies": {
