@@ -129,7 +129,7 @@ export interface GetFileMetadataOptions {
  * @property {object} 0 The {@link File} metadata.
  * @property {object} 1 The full API response.
  */
-export type GetFileMetadataResponse = [File, r.Response];
+export type GetFileMetadataResponse = [Metadata, r.Response];
 
 /**
  * @callback GetFileMetadataCallback
