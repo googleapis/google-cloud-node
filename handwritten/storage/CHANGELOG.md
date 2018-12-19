@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.3.4
+
+12-19-2018 14:21 PST
+
+### Implementation Changes
+- fix(types): file.getMetadata should resolves to Metadata, not File ([#560](https://github.com/googleapis/nodejs-storage/pull/560))
+
+### Internal / Testing Changes
+- refactor: modernize the sample tests ([#558](https://github.com/googleapis/nodejs-storage/pull/558))
+- chore(build): inject yoshi automation key ([#555](https://github.com/googleapis/nodejs-storage/pull/555))
+- chore: update nyc and eslint configs ([#554](https://github.com/googleapis/nodejs-storage/pull/554))
+- chore: fix publish.sh permission +x ([#552](https://github.com/googleapis/nodejs-storage/pull/552))
+- fix(build): fix Kokoro release script ([#551](https://github.com/googleapis/nodejs-storage/pull/551))
+- build: add Kokoro configs for autorelease ([#550](https://github.com/googleapis/nodejs-storage/pull/550))
+
 ## v2.3.3
 
 12-06-2018 17:09 PST
