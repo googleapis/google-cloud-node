@@ -25,7 +25,7 @@
     "lint": "eslint samples/ && gts check && jsgl --local .",
     "presystem-test": "npm run compile",
     "system-test": "nyc --exclude=\"error-message.js\" mocha  build/system-test/**/*.js",
-    "cover": "nyc --exclude=\"fuzzer.js\" --reporter=lcov mocha build/test/unit/**/*.js && nyc report",
+    "cover": "nyc --exclude=\"fuzzer.js\" --reporter=lcov mocha build/test/unit/*.js build/test/unit/**/*.js && nyc report",
     "presamples-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "test-no-cover": "mocha build/test/unit/**/*.js --timeout 20000",
