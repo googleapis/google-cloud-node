@@ -35,7 +35,7 @@ import * as util from 'util';
 import * as path from 'path';
 
 const ERR_TOKEN = '_@google_STACKDRIVER_INTEGRATION_TEST_ERROR__';
-const TIMEOUT = 10 * 60 * 1000;
+const TIMEOUT = 20 * 60 * 1000;
 
 const envKeys = [
   'GOOGLE_APPLICATION_CREDENTIALS',
@@ -440,7 +440,7 @@ describe('error-reporting', () => {
 
   const SERVICE = buildName('service-name');
   const VERSION = buildName('service-version');
-  const PAGE_SIZE = 100;
+  const PAGE_SIZE = 1000;
 
   let errors: ErrorReporting;
   let transport: ErrorsApiTransport;
@@ -491,21 +491,31 @@ describe('error-reporting', () => {
       timeout: number) {
     const start = Date.now();
     let groups: ErrorGroupStats[] = [];
-    while (groups.length < maxCount && (Date.now() - start) <= timeout) {
-      const allGroups =
-          await transport.getAllGroups(SERVICE, VERSION, PAGE_SIZE);
-      assert.ok(allGroups, 'Failed to get groups from the Error Reporting API');
+    const shouldContinue = () =>
+        groups.length < maxCount && (Date.now() - start) <= timeout;
+    while (shouldContinue()) {
+      let prevPageToken: string|undefined;
+      let allGroups: ErrorGroupStats[]|undefined;
+      const page = 1;
+      while (shouldContinue() && (!allGroups || allGroups.length > 0)) {
+        const response = await transport.getAllGroups(
+            SERVICE, VERSION, PAGE_SIZE, prevPageToken);
+        prevPageToken = response.nextPageToken;
+        allGroups = response.errorGroupStats || [];
+        assert.ok(
+            allGroups, 'Failed to get groups from the Error Reporting API');
 
-      const filteredGroups = allGroups!.filter(errItem => {
-        return (
-            errItem && errItem.representative &&
-            errItem.representative.serviceContext &&
-            errItem.representative.serviceContext.service === SERVICE &&
-            errItem.representative.serviceContext.version === VERSION &&
-            messageTest(errItem.representative.message));
-      });
-      groups = groups.concat(filteredGroups);
-      await delay(5000);
+        const filteredGroups = allGroups!.filter(errItem => {
+          return (
+              errItem && errItem.representative &&
+              errItem.representative.serviceContext &&
+              errItem.representative.serviceContext.service === SERVICE &&
+              errItem.representative.serviceContext.version === VERSION &&
+              messageTest(errItem.representative.message));
+        });
+        groups = groups.concat(filteredGroups);
+        await delay(5000);
+      }
     }
 
     return groups;
@@ -581,7 +591,7 @@ describe('error-reporting', () => {
 
   it('Should correctly publish an error that is an Error object',
      async function verifyErrors() {
-       this.timeout(TIMEOUT * 2);
+       this.timeout(TIMEOUT);
        const errorId = buildName('with-error-constructor');
        function expectedTopOfStack() {
          return new Error(errorId);
@@ -594,7 +604,7 @@ describe('error-reporting', () => {
 
   it('Should correctly publish an error that is a string',
      async function(this) {
-       this.timeout(TIMEOUT * 2);
+       this.timeout(TIMEOUT);
        const errorId = buildName('with-string');
        await verifyReporting(errorId, message => {
          return message.startsWith(errorId + '\n');
@@ -603,14 +613,14 @@ describe('error-reporting', () => {
 
   it('Should correctly publish an error that is undefined',
      async function(this) {
-       this.timeout(TIMEOUT * 2);
+       this.timeout(TIMEOUT);
        await verifyReporting(undefined, message => {
          return message.startsWith('undefined\n');
        }, 1, TIMEOUT);
      });
 
   it('Should correctly publish an error that is null', async function(this) {
-    this.timeout(TIMEOUT * 2);
+    this.timeout(TIMEOUT);
     await verifyReporting(null, message => {
       return message.startsWith('null\n');
     }, 1, TIMEOUT);
@@ -618,7 +628,7 @@ describe('error-reporting', () => {
 
   it('Should correctly publish an error that is a plain object',
      async function(this) {
-       this.timeout(TIMEOUT * 2);
+       this.timeout(TIMEOUT);
        await verifyReporting({someKey: 'someValue'}, message => {
          return message.startsWith('[object Object]\n');
        }, 1, TIMEOUT);
@@ -626,7 +636,7 @@ describe('error-reporting', () => {
 
   it('Should correctly publish an error that is a number',
      async function(this) {
-       this.timeout(TIMEOUT * 2);
+       this.timeout(TIMEOUT);
        const num = new Date().getTime();
        await verifyReporting(num, message => {
          return message.startsWith('' + num + '\n');
@@ -635,7 +645,7 @@ describe('error-reporting', () => {
 
   it('Should correctly publish an error that is of an unknown type',
      async function(this) {
-       this.timeout(TIMEOUT * 2);
+       this.timeout(TIMEOUT);
        const bool = true;
        await verifyReporting(bool, message => {
          return message.startsWith('true\n');
@@ -644,7 +654,7 @@ describe('error-reporting', () => {
 
   it('Should correctly publish errors using an error builder',
      async function(this) {
-       this.timeout(TIMEOUT * 2);
+       this.timeout(TIMEOUT);
        const errorId = buildName('with-error-builder');
        // Use an IIFE with the name `definitionSiteFunction` to use later to
        // ensure the stack trace of the point where the error message was
@@ -674,7 +684,7 @@ describe('error-reporting', () => {
      });
 
   it('Should report unhandledRejections if enabled', async function(this) {
-    this.timeout(TIMEOUT * 5);
+    this.timeout(TIMEOUT);
     reinitialize({reportUnhandledRejections: true});
     const rejectValue = buildName('report-promise-rejection');
     function expectedTopOfStack() {
@@ -686,66 +696,32 @@ describe('error-reporting', () => {
     }
     expectedTopOfStack();
     const rejectText = 'Error: ' + rejectValue;
-    await new Promise((resolve, reject) => {
-      setImmediate(async () => {
-        try {
-          const expected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
-              'promise rejection: ' + rejectText +
-              '.  This rejection has been reported to the ' +
-              'Google Cloud Platform error-reporting console.';
-          assert.notStrictEqual(logOutput.indexOf(expected), -1);
-          await verifyServerResponse(message => {
-            return message.startsWith(rejectText);
-          }, 1, TIMEOUT);
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      });
-    });
+    const expected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
+        'promise rejection: ' + rejectText +
+        '.  This rejection has been reported to the ' +
+        'Google Cloud Platform error-reporting console.';
+    await delay(10000);
+    assert.notStrictEqual(logOutput.indexOf(expected), -1);
   });
 
   it('Should not report unhandledRejections if disabled', async function(this) {
-    this.timeout(TIMEOUT * 2);
+    this.timeout(TIMEOUT);
     reinitialize({reportUnhandledRejections: false});
     const rejectValue = buildName('do-not-report-promise-rejection');
-    const canaryValue = buildName('canary-value');
     function expectedTopOfStack() {
-      Promise.reject(rejectValue);
+      // An Error is used for the rejection value so that it's stack
+      // contains the stack trace at the point the rejection occured and is
+      // rejected within a function named `expectedTopOfStack` so that the
+      // test can verify that the collected stack is correct.
+      Promise.reject(new Error(rejectValue));
     }
     expectedTopOfStack();
-    errors.report(new Error(canaryValue));
-    await new Promise((resolve, reject) => {
-      setImmediate(async () => {
-        try {
-          const notExpected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
-              'promise rejection: ' + rejectValue +
-              '.  This rejection has been reported to the error-reporting console.';
-          assert.strictEqual(logOutput.indexOf(notExpected), -1);
-          // Get all groups that that start with the rejection value and hence
-          // all of the groups corresponding to the above rejection (Since the
-          // buildName() creates a string unique enough to single out only the
-          // above rejection.) and verify that there are no such groups
-          // reported.  This is done by looking for the canary value.  If the
-          // canary value is found, but the rejection value has not, then the
-          // rejection was not reported to the API.
-          const rejectPrefix = `Error: ${rejectValue}`;
-          const canaryPrefix = `Error: ${canaryValue}`;
-          const matchedErrors = await verifyAllGroups(message => {
-            return message.startsWith(rejectPrefix) ||
-                message.startsWith(canaryPrefix);
-          }, 1, TIMEOUT);
-          assert.strictEqual(matchedErrors.length, 1);
-          const message = matchedErrors[0].representative.message;
-          assert(
-              message.startsWith(canaryPrefix),
-              `Expected the error message to start with ${
-                  canaryPrefix} but found ${message}`);
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      });
-    });
+    const rejectText = 'Error: ' + rejectValue;
+    const expected = 'UnhandledPromiseRejectionWarning: Unhandled ' +
+        'promise rejection: ' + rejectText +
+        '.  This rejection has been reported to the ' +
+        'Google Cloud Platform error-reporting console.';
+    await delay(10000);
+    assert.strictEqual(logOutput.indexOf(expected), -1);
   });
 });

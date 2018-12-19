@@ -37,8 +37,8 @@ export interface ErrorGroupStats {
 }
 
 export interface GroupStatesResponse {
-  errorGroupStats: ErrorGroupStats[];
-  nextPageToken: string;
+  errorGroupStats?: ErrorGroupStats[];
+  nextPageToken?: string;
   timeRangeBegin: string;
 }
 
@@ -52,19 +52,21 @@ export class ErrorsApiTransport extends AuthClient {
     super(config, logger);
   }
 
-  async getAllGroups(service: string, version: string, pageSize: number):
-      Promise<ErrorGroupStats[]> {
+  async getAllGroups(
+      service: string, version: string, pageSize: number,
+      pageToken?: string): Promise<GroupStatesResponse> {
     const id = await this.getProjectId();
     const options = {
       uri: [
         API, id,
         'groupStats?' + ONE_HOUR_API +
             `&serviceFilter.service=${service}&serviceFilter.version=${
-                version}&pageSize=${pageSize}`
+                version}&pageSize=${pageSize}&order=LAST_SEEN_DESC` +
+            (pageToken ? `&pageToken=${pageToken}` : '')
       ].join('/'),
       method: 'GET'
     };
-    const r = await this.request_(options);
-    return r.body.errorGroupStats || [];
+    const response = await this.request_(options);
+    return response.body;
   }
 }
