@@ -18,9 +18,10 @@
 // [START monitoring_quickstart]
 // Imports the Google Cloud client library
 const monitoring = require('@google-cloud/monitoring');
-async function quickStart() {
+
+async function quickstart() {
   // Your Google Cloud Platform project ID
-  const projectId = 'YOUR_PROJECT_ID';
+  const projectId = process.env.GCLOUD_PROJECT || 'YOUR_PROJECT_ID';
 
   // Creates a client
   const client = new monitoring.MetricServiceClient();
@@ -65,6 +66,6 @@ async function quickStart() {
   const [result] = await client.createTimeSeries(request);
   console.log(`Done writing time series data.`, result);
 }
-
-quickStart().catch(console.error);
 // [END monitoring_quickstart]
+
+quickstart().catch(console.error);
