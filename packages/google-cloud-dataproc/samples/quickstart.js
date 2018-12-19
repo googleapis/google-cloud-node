@@ -14,19 +14,10 @@
  */
 
 'use strict';
-async function main() {
-  // [START dataproc_quickstart]
-  if (
-    !process.env.GCLOUD_PROJECT ||
-    !process.env.GOOGLE_APPLICATION_CREDENTIALS
-  ) {
-    throw new Error(
-      'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to json key> node #{$0}'
-    );
-  }
 
+// [START dataproc_quickstart]
+async function quickstart() {
   const dataproc = require('@google-cloud/dataproc');
-
   const client = new dataproc.v1.ClusterControllerClient({
     // optional auth parameters.
   });
@@ -35,15 +26,12 @@ async function main() {
 
   // Iterate over all elements.
   const region = 'global';
-  const request = {
-    projectId: projectId,
-    region: region,
-  };
+  const request = {projectId, region};
 
   const [resources] = await client.listClusters(request);
   console.log('Total resources:', resources.length);
-  for (let i = 0; i < resources.length; i += 1) {
-    console.log(resources[i]);
+  for (const resource of resources) {
+    console.log(resource);
   }
 
   let nextRequest = request;
@@ -57,15 +45,15 @@ async function main() {
     nextRequest = responses[1];
     // The actual response object, if necessary.
     // const rawResponse = responses[2];
-    for (let i = 0; i < resources.length; i += 1) {
-      console.log(resources[i]);
+    for (const resource of resources) {
+      console.log(resource);
     }
   } while (nextRequest);
 
   client.listClustersStream(request).on('data', element => {
     console.log(element);
   });
-  // [END dataproc_quickstart]
 }
+// [END dataproc_quickstart]
 
-main().catch(console.error);
+quickstart().catch(console.error);
