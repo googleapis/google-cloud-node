@@ -4,6 +4,52 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## v0.24.0
+
+12-19-2018 13:36 PST
+
+### Implementation Changes
+**This release contains breaking change**
+- BREAKING: rename method imagePath => referenceImagePath ([#296](https://github.com/googleapis/nodejs-vision/pull/296))
+The method `ProductSearchClient.imagePath` was renamed `referenceImagePath`:
+```
+// old code
+const formattedName = client.imagePath(...);
+
+// new code
+const formattedName = client.referenceImagePath(...);
+```
+- fix: Param "scoreThreshold" should be "score_threshold" ([#234](https://github.com/googleapis/nodejs-vision/pull/234))
+
+### New Features
+- ProductSearch GA ([#280](https://github.com/googleapis/nodejs-vision/pull/280))
+
+### Dependencies
+- refactor: remove unused deps ([#261](https://github.com/googleapis/nodejs-vision/pull/261))
+- fix(deps): update dependency google-gax to ^0.22.0 ([#265](https://github.com/googleapis/nodejs-vision/pull/265))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#263](https://github.com/googleapis/nodejs-vision/pull/263))
+- fix(deps): update dependency @google-cloud/vision to ^0.23.0 ([#260](https://github.com/googleapis/nodejs-vision/pull/260))
+
+### Documentation
+- docs: fix productSearch example ([#285](https://github.com/googleapis/nodejs-vision/pull/285))
+- docs: update readme badges ([#283](https://github.com/googleapis/nodejs-vision/pull/283))
+- docs(samples): updated samples code to use async/await and tests to use mocha ([#241](https://github.com/googleapis/nodejs-vision/pull/241))
+
+### Internal / Testing Changes
+- chore: modernize the samples and sample tests ([#297](https://github.com/googleapis/nodejs-vision/pull/297))
+- chore(build): inject yoshi automation key ([#294](https://github.com/googleapis/nodejs-vision/pull/294))
+- chore: update nyc and eslint configs ([#293](https://github.com/googleapis/nodejs-vision/pull/293))
+- chore: fix publish.sh permission +x ([#292](https://github.com/googleapis/nodejs-vision/pull/292))
+- fix(build): fix Kokoro release script ([#291](https://github.com/googleapis/nodejs-vision/pull/291))
+- build: add Kokoro configs for autorelease ([#290](https://github.com/googleapis/nodejs-vision/pull/290))
+- chore: always nyc report before calling codecov ([#288](https://github.com/googleapis/nodejs-vision/pull/288))
+- chore: nyc ignore build/test by default ([#287](https://github.com/googleapis/nodejs-vision/pull/287))
+- chore: update license file ([#284](https://github.com/googleapis/nodejs-vision/pull/284))
+- fix(build): fix system key decryption ([#282](https://github.com/googleapis/nodejs-vision/pull/282))
+- test: make product search tests run ([#269](https://github.com/googleapis/nodejs-vision/pull/269))
+- chore: update eslintignore config ([#264](https://github.com/googleapis/nodejs-vision/pull/264))
+- chore: drop contributors from multiple places ([#262](https://github.com/googleapis/nodejs-vision/pull/262))
+
 ## v0.23.0
 
 ### New Features
