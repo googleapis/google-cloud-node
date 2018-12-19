@@ -442,11 +442,11 @@ describe('ProductSearchClient', () => {
       });
 
       // Mock request
-      const formattedName = client.imagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
-        '[IMAGE]'
+        '[REFERENCE_IMAGE]'
       );
       const request = {
         name: formattedName,
@@ -480,11 +480,11 @@ describe('ProductSearchClient', () => {
       });
 
       // Mock request
-      const formattedName = client.imagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
-        '[IMAGE]'
+        '[REFERENCE_IMAGE]'
       );
       const request = {
         name: formattedName,
@@ -514,11 +514,11 @@ describe('ProductSearchClient', () => {
       });
 
       // Mock request
-      const formattedName = client.imagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
-        '[IMAGE]'
+        '[REFERENCE_IMAGE]'
       );
       const request = {
         name: formattedName,
@@ -542,11 +542,11 @@ describe('ProductSearchClient', () => {
       });
 
       // Mock request
-      const formattedName = client.imagePath(
+      const formattedName = client.referenceImagePath(
         '[PROJECT]',
         '[LOCATION]',
         '[PRODUCT]',
-        '[IMAGE]'
+        '[REFERENCE_IMAGE]'
       );
       const request = {
         name: formattedName,

@@ -117,14 +117,14 @@ class ProductSearchClient {
       locationPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      productPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/products/{product}'
-      ),
       productSetPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/productSets/{product_set}'
       ),
-      imagePathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/products/{product}/referenceImages/{image}'
+      productPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/products/{product}'
+      ),
+      referenceImagePathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}'
       ),
     };
 
@@ -881,7 +881,7 @@ class ProductSearchClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.imagePath('[PROJECT]', '[LOCATION]', '[PRODUCT]', '[IMAGE]');
+   * const formattedName = client.referenceImagePath('[PROJECT]', '[LOCATION]', '[PRODUCT]', '[REFERENCE_IMAGE]');
    * client.getReferenceImage({name: formattedName})
    *   .then(responses => {
    *     const response = responses[0];
@@ -938,7 +938,7 @@ class ProductSearchClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.imagePath('[PROJECT]', '[LOCATION]', '[PRODUCT]', '[IMAGE]');
+   * const formattedName = client.referenceImagePath('[PROJECT]', '[LOCATION]', '[PRODUCT]', '[REFERENCE_IMAGE]');
    * client.deleteReferenceImage({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -1376,8 +1376,8 @@ class ProductSearchClient {
   }
 
   /**
-   * Permanently deletes a ProductSet. All Products and ReferenceImages in the
-   * ProductSet will be deleted.
+   * Permanently deletes a ProductSet. Products and ReferenceImages in the
+   * ProductSet are not deleted.
    *
    * The actual image files are not deleted from Google Cloud Storage.
    *
@@ -1844,22 +1844,6 @@ class ProductSearchClient {
   }
 
   /**
-   * Return a fully-qualified product resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} product
-   * @returns {String}
-   */
-  productPath(project, location, product) {
-    return this._pathTemplates.productPathTemplate.render({
-      project: project,
-      location: location,
-      product: product,
-    });
-  }
-
-  /**
    * Return a fully-qualified product_set resource name string.
    *
    * @param {String} project
@@ -1876,20 +1860,36 @@ class ProductSearchClient {
   }
 
   /**
-   * Return a fully-qualified image resource name string.
+   * Return a fully-qualified product resource name string.
    *
    * @param {String} project
    * @param {String} location
    * @param {String} product
-   * @param {String} image
    * @returns {String}
    */
-  imagePath(project, location, product, image) {
-    return this._pathTemplates.imagePathTemplate.render({
+  productPath(project, location, product) {
+    return this._pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
       product: product,
-      image: image,
+    });
+  }
+
+  /**
+   * Return a fully-qualified reference_image resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} product
+   * @param {String} referenceImage
+   * @returns {String}
+   */
+  referenceImagePath(project, location, product, referenceImage) {
+    return this._pathTemplates.referenceImagePathTemplate.render({
+      project: project,
+      location: location,
+      product: product,
+      reference_image: referenceImage,
     });
   }
 
@@ -1914,39 +1914,6 @@ class ProductSearchClient {
   matchLocationFromLocationName(locationName) {
     return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
-  }
-
-  /**
-   * Parse the productName from a product resource.
-   *
-   * @param {String} productName
-   *   A fully-qualified path representing a product resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromProductName(productName) {
-    return this._pathTemplates.productPathTemplate.match(productName).project;
-  }
-
-  /**
-   * Parse the productName from a product resource.
-   *
-   * @param {String} productName
-   *   A fully-qualified path representing a product resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromProductName(productName) {
-    return this._pathTemplates.productPathTemplate.match(productName).location;
-  }
-
-  /**
-   * Parse the productName from a product resource.
-   *
-   * @param {String} productName
-   *   A fully-qualified path representing a product resources.
-   * @returns {String} - A string representing the product.
-   */
-  matchProductFromProductName(productName) {
-    return this._pathTemplates.productPathTemplate.match(productName).product;
   }
 
   /**
@@ -1986,47 +1953,88 @@ class ProductSearchClient {
   }
 
   /**
-   * Parse the imageName from a image resource.
+   * Parse the productName from a product resource.
    *
-   * @param {String} imageName
-   *   A fully-qualified path representing a image resources.
+   * @param {String} productName
+   *   A fully-qualified path representing a product resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromImageName(imageName) {
-    return this._pathTemplates.imagePathTemplate.match(imageName).project;
+  matchProjectFromProductName(productName) {
+    return this._pathTemplates.productPathTemplate.match(productName).project;
   }
 
   /**
-   * Parse the imageName from a image resource.
+   * Parse the productName from a product resource.
    *
-   * @param {String} imageName
-   *   A fully-qualified path representing a image resources.
+   * @param {String} productName
+   *   A fully-qualified path representing a product resources.
    * @returns {String} - A string representing the location.
    */
-  matchLocationFromImageName(imageName) {
-    return this._pathTemplates.imagePathTemplate.match(imageName).location;
+  matchLocationFromProductName(productName) {
+    return this._pathTemplates.productPathTemplate.match(productName).location;
   }
 
   /**
-   * Parse the imageName from a image resource.
+   * Parse the productName from a product resource.
    *
-   * @param {String} imageName
-   *   A fully-qualified path representing a image resources.
+   * @param {String} productName
+   *   A fully-qualified path representing a product resources.
    * @returns {String} - A string representing the product.
    */
-  matchProductFromImageName(imageName) {
-    return this._pathTemplates.imagePathTemplate.match(imageName).product;
+  matchProductFromProductName(productName) {
+    return this._pathTemplates.productPathTemplate.match(productName).product;
   }
 
   /**
-   * Parse the imageName from a image resource.
+   * Parse the referenceImageName from a reference_image resource.
    *
-   * @param {String} imageName
-   *   A fully-qualified path representing a image resources.
-   * @returns {String} - A string representing the image.
+   * @param {String} referenceImageName
+   *   A fully-qualified path representing a reference_image resources.
+   * @returns {String} - A string representing the project.
    */
-  matchImageFromImageName(imageName) {
-    return this._pathTemplates.imagePathTemplate.match(imageName).image;
+  matchProjectFromReferenceImageName(referenceImageName) {
+    return this._pathTemplates.referenceImagePathTemplate.match(
+      referenceImageName
+    ).project;
+  }
+
+  /**
+   * Parse the referenceImageName from a reference_image resource.
+   *
+   * @param {String} referenceImageName
+   *   A fully-qualified path representing a reference_image resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromReferenceImageName(referenceImageName) {
+    return this._pathTemplates.referenceImagePathTemplate.match(
+      referenceImageName
+    ).location;
+  }
+
+  /**
+   * Parse the referenceImageName from a reference_image resource.
+   *
+   * @param {String} referenceImageName
+   *   A fully-qualified path representing a reference_image resources.
+   * @returns {String} - A string representing the product.
+   */
+  matchProductFromReferenceImageName(referenceImageName) {
+    return this._pathTemplates.referenceImagePathTemplate.match(
+      referenceImageName
+    ).product;
+  }
+
+  /**
+   * Parse the referenceImageName from a reference_image resource.
+   *
+   * @param {String} referenceImageName
+   *   A fully-qualified path representing a reference_image resources.
+   * @returns {String} - A string representing the reference_image.
+   */
+  matchReferenceImageFromReferenceImageName(referenceImageName) {
+    return this._pathTemplates.referenceImagePathTemplate.match(
+      referenceImageName
+    ).reference_image;
   }
 }
 
