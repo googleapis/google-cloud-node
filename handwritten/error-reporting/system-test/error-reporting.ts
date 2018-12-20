@@ -630,7 +630,7 @@ describe('error-reporting', () => {
      async function(this) {
        this.timeout(TIMEOUT);
        await verifyReporting({someKey: 'someValue'}, message => {
-         return message.startsWith('[object Object]\n');
+         return message.startsWith('{ someKey: \'someValue\' }\n');
        }, 1, TIMEOUT);
      });
 

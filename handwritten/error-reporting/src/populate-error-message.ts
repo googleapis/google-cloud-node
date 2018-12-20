@@ -16,6 +16,7 @@
 
 import * as is from 'is';
 import has = require('lodash.has');
+import * as util from 'util';
 
 import {buildStackTrace} from './build-stack-trace';
 import {ErrorMessage} from './classes/error-message';
@@ -109,7 +110,7 @@ function populateFromObject(ob: PopulatedObject, errorMessage: ErrorMessage) {
   if (has(ob, 'message')) {
     errorMessage.setMessage(ob.message!);
   } else {
-    errorMessage.setMessage(buildStackTrace('' + ob));
+    errorMessage.setMessage(buildStackTrace(util.inspect(ob)));
   }
 
   if (has(ob, 'user')) {
