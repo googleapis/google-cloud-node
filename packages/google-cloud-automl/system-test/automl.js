@@ -12,4 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-console.warn('No system tests available 😧');
+const automl = require('../src');
+const assert = require('assert');
+
+const client = new automl.AutoMlClient();
+const location = 'us-central1';
+const projectId = process.env.GCLOUD_PROJECT;
+
+describe('automl system tests', () => {
+  it('should list all datasets', async () => {
+    const parent = client.locationPath(projectId, location);
+    const [datasets] = await client.listDatasets({parent});
+    assert.ok(Array.isArray(datasets));
+  });
+});
