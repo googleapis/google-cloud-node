@@ -496,7 +496,6 @@ describe('error-reporting', () => {
     while (shouldContinue()) {
       let prevPageToken: string|undefined;
       let allGroups: ErrorGroupStats[]|undefined;
-      const page = 1;
       while (shouldContinue() && (!allGroups || allGroups.length > 0)) {
         const response = await transport.getAllGroups(
             SERVICE, VERSION, PAGE_SIZE, prevPageToken);
@@ -514,7 +513,7 @@ describe('error-reporting', () => {
               messageTest(errItem.representative.message));
         });
         groups = groups.concat(filteredGroups);
-        await delay(5000);
+        await delay(15000);
       }
     }
 
