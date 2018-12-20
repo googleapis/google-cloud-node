@@ -1,0 +1,119 @@
+# Changelog
+
+[npm history][1]
+
+[1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
+
+## v0.5.2
+
+12-20-2018 11:49 PST
+
+### Implementation Changes
+
+- fix: improve error item message for plain objects ([#286](https://github.com/googleapis/nodejs-error-reporting/pull/286))
+
+### Dependencies
+
+- chore(deps): update dependency typescript to ~3.2.0 ([#266](https://github.com/googleapis/nodejs-error-reporting/pull/266))
+- fix(deps): update dependency @google-cloud/common to ^0.27.0 ([#264](https://github.com/googleapis/nodejs-error-reporting/pull/264))
+- chore(deps): update dependency gts to ^0.9.0 ([#255](https://github.com/googleapis/nodejs-error-reporting/pull/255))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#250](https://github.com/googleapis/nodejs-error-reporting/pull/250))
+- chore(deps): update dependency @types/is to v0.0.21 ([#247](https://github.com/googleapis/nodejs-error-reporting/pull/247))
+- fix(deps): update dependency @google-cloud/common to ^0.26.0 ([#230](https://github.com/googleapis/nodejs-error-reporting/pull/230))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#235](https://github.com/googleapis/nodejs-error-reporting/pull/235))
+- chore(deps): update dependency typescript to ~3.1.0 ([#218](https://github.com/googleapis/nodejs-error-reporting/pull/218))
+- chore(deps): update dependency sinon to v7 ([#223](https://github.com/googleapis/nodejs-error-reporting/pull/223))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#219](https://github.com/googleapis/nodejs-error-reporting/pull/219))
+- chore(deps): update dependency @types/glob to v7 ([#212](https://github.com/googleapis/nodejs-error-reporting/pull/212))
+- fix(deps): update dependency @google-cloud/common to ^0.25.0 ([#210](https://github.com/googleapis/nodejs-error-reporting/pull/210))
+- chore(deps): update dependency nock to v10 ([#208](https://github.com/googleapis/nodejs-error-reporting/pull/208))
+- fix(deps): update dependency @google-cloud/common to ^0.24.0 ([#206](https://github.com/googleapis/nodejs-error-reporting/pull/206))
+- fix(deps): update dependency @google-cloud/common to ^0.23.0 ([#198](https://github.com/googleapis/nodejs-error-reporting/pull/198))
+- chore(deps): update dependency nyc to v13 ([#200](https://github.com/googleapis/nodejs-error-reporting/pull/200))
+- chore(deps): update dependency eslint-config-prettier to v3 ([#195](https://github.com/googleapis/nodejs-error-reporting/pull/195))
+- chore(deps): update dependency pify to v4 ([#194](https://github.com/googleapis/nodejs-error-reporting/pull/194))
+- fix(deps): update dependency @google-cloud/common to ^0.21.0 ([#192](https://github.com/googleapis/nodejs-error-reporting/pull/192))
+- chore(deps): lock file maintenance ([#191](https://github.com/googleapis/nodejs-error-reporting/pull/191))
+- chore(deps): lock file maintenance ([#181](https://github.com/googleapis/nodejs-error-reporting/pull/181))
+- chore(deps): update dependency typescript to v3 ([#180](https://github.com/googleapis/nodejs-error-reporting/pull/180))
+- chore(deps): lock file maintenance ([#175](https://github.com/googleapis/nodejs-error-reporting/pull/175))
+- chore(deps): lock file maintenance ([#174](https://github.com/googleapis/nodejs-error-reporting/pull/174))
+- chore(deps): lock file maintenance ([#173](https://github.com/googleapis/nodejs-error-reporting/pull/173))
+- chore(deps): lock file maintenance ([#172](https://github.com/googleapis/nodejs-error-reporting/pull/172))
+- chore(deps): update dependency eslint-plugin-node to v7 ([#170](https://github.com/googleapis/nodejs-error-reporting/pull/170))
+- chore(deps): lock file maintenance ([#169](https://github.com/googleapis/nodejs-error-reporting/pull/169))
+- chore(deps): update dependency gts to ^0.8.0 ([#167](https://github.com/googleapis/nodejs-error-reporting/pull/167))
+- chore(deps): lock file maintenance ([#165](https://github.com/googleapis/nodejs-error-reporting/pull/165))
+- chore(deps): lock file maintenance ([#164](https://github.com/googleapis/nodejs-error-reporting/pull/164))
+- chore(deps): lock file maintenance ([#163](https://github.com/googleapis/nodejs-error-reporting/pull/163))
+- chore(deps): lock file maintenance ([#160](https://github.com/googleapis/nodejs-error-reporting/pull/160))
+
+
+### Documentation
+
+- docs: update readme badges ([#269](https://github.com/googleapis/nodejs-error-reporting/pull/269))
+
+### Internal / Testing Changes
+
+- chore: increase the system test delay ([#291](https://github.com/googleapis/nodejs-error-reporting/pull/291))
+- chore: fix test config to include skipped tests ([#287](https://github.com/googleapis/nodejs-error-reporting/pull/287))
+- chore: change sort order for retrieving err items ([#289](https://github.com/googleapis/nodejs-error-reporting/pull/289))
+- chore(build): inject yoshi automation key ([#285](https://github.com/googleapis/nodejs-error-reporting/pull/285))
+- chore: update nyc and eslint configs ([#284](https://github.com/googleapis/nodejs-error-reporting/pull/284))
+- chore: fix publish.sh permission +x ([#282](https://github.com/googleapis/nodejs-error-reporting/pull/282))
+- fix(build): fix Kokoro release script ([#281](https://github.com/googleapis/nodejs-error-reporting/pull/281))
+- build: add Kokoro configs for autorelease ([#280](https://github.com/googleapis/nodejs-error-reporting/pull/280))
+- chore: address system test flakiness ([#275](https://github.com/googleapis/nodejs-error-reporting/pull/275))
+- chore: always nyc report before calling codecov ([#277](https://github.com/googleapis/nodejs-error-reporting/pull/277))
+- chore: nyc ignore build/test by default ([#276](https://github.com/googleapis/nodejs-error-reporting/pull/276))
+- chore: clean up usage of prettier and eslint ([#274](https://github.com/googleapis/nodejs-error-reporting/pull/274))
+- chore: update system tests key ([#272](https://github.com/googleapis/nodejs-error-reporting/pull/272))
+- chore: update license file ([#271](https://github.com/googleapis/nodejs-error-reporting/pull/271))
+- fix(build): fix system key decryption ([#267](https://github.com/googleapis/nodejs-error-reporting/pull/267))
+- chore: update key for system tests ([#265](https://github.com/googleapis/nodejs-error-reporting/pull/265))
+- refactor(samples): convert sample tests from ava to mocha ([#257](https://github.com/googleapis/nodejs-error-reporting/pull/257))
+- Update region tags in samples ([#259](https://github.com/googleapis/nodejs-error-reporting/pull/259))
+- chore: add a synth.metadata
+- fix: sys tests use async/await to allow a fix ([#253](https://github.com/googleapis/nodejs-error-reporting/pull/253))
+- chore: update eslintignore config ([#254](https://github.com/googleapis/nodejs-error-reporting/pull/254))
+- refactor: remove unused deps and simplify ([#248](https://github.com/googleapis/nodejs-error-reporting/pull/248))
+- chore: drop contributors from multiple places ([#249](https://github.com/googleapis/nodejs-error-reporting/pull/249))
+- chore: use latest npm on Windows ([#246](https://github.com/googleapis/nodejs-error-reporting/pull/246))
+- chore: increase system test timeout ([#245](https://github.com/googleapis/nodejs-error-reporting/pull/245))
+- chore: update CircleCI config ([#244](https://github.com/googleapis/nodejs-error-reporting/pull/244))
+- chore: include build in eslintignore ([#241](https://github.com/googleapis/nodejs-error-reporting/pull/241))
+- chore: update issue templates ([#234](https://github.com/googleapis/nodejs-error-reporting/pull/234))
+- chore: remove old issue template ([#232](https://github.com/googleapis/nodejs-error-reporting/pull/232))
+- build: run tests on node11 ([#231](https://github.com/googleapis/nodejs-error-reporting/pull/231))
+- chores(build): do not collect sponge.xml from windows builds ([#229](https://github.com/googleapis/nodejs-error-reporting/pull/229))
+- chore: update nock path in system tests ([#216](https://github.com/googleapis/nodejs-error-reporting/pull/216))
+- chores(build): run codecov on continuous builds ([#228](https://github.com/googleapis/nodejs-error-reporting/pull/228))
+- chore: update new issue template ([#227](https://github.com/googleapis/nodejs-error-reporting/pull/227))
+- build: fix codecov uploading on Kokoro ([#224](https://github.com/googleapis/nodejs-error-reporting/pull/224))
+- Update kokoro config ([#220](https://github.com/googleapis/nodejs-error-reporting/pull/220))
+- Don't publish sourcemaps ([#217](https://github.com/googleapis/nodejs-error-reporting/pull/217))
+- test: remove appveyor config ([#215](https://github.com/googleapis/nodejs-error-reporting/pull/215))
+- Enable prefer-const in the eslint config ([#211](https://github.com/googleapis/nodejs-error-reporting/pull/211))
+- Enable no-var in eslint ([#209](https://github.com/googleapis/nodejs-error-reporting/pull/209))
+- Update CI config ([#207](https://github.com/googleapis/nodejs-error-reporting/pull/207))
+- Add a synth file and update CI ([#204](https://github.com/googleapis/nodejs-error-reporting/pull/204))
+- Retry npm install in CI ([#203](https://github.com/googleapis/nodejs-error-reporting/pull/203))
+- feat: use small HTTP dependency ([#201](https://github.com/googleapis/nodejs-error-reporting/pull/201))
+- chore: assert.deepEqual => assert.deepStrictEqual ([#179](https://github.com/googleapis/nodejs-error-reporting/pull/179))
+- test: fix a node 10 test failure ([#199](https://github.com/googleapis/nodejs-error-reporting/pull/199))
+- chore: ignore package-lock.json ([#193](https://github.com/googleapis/nodejs-error-reporting/pull/193))
+- feat: add Koa2 support ([#117](https://github.com/googleapis/nodejs-error-reporting/pull/117))
+- chore: fix sys test failure caused by a type error ([#188](https://github.com/googleapis/nodejs-error-reporting/pull/188))
+- chore: update renovate config ([#189](https://github.com/googleapis/nodejs-error-reporting/pull/189))
+- chore: do not target `es5` ([#187](https://github.com/googleapis/nodejs-error-reporting/pull/187))
+- chore: fix `lodash.has` usage ([#185](https://github.com/googleapis/nodejs-error-reporting/pull/185))
+- chore: delete an unused file ([#184](https://github.com/googleapis/nodejs-error-reporting/pull/184))
+- fix: fix installation tests ([#183](https://github.com/googleapis/nodejs-error-reporting/pull/183))
+- chore: move mocha options to mocha.opts ([#177](https://github.com/googleapis/nodejs-error-reporting/pull/177))
+- chore: require node 8 for samples ([#178](https://github.com/googleapis/nodejs-error-reporting/pull/178))
+- chore: switch to console-log-level for logging ([#176](https://github.com/googleapis/nodejs-error-reporting/pull/176))
+- test: use strictEqual in tests ([#171](https://github.com/googleapis/nodejs-error-reporting/pull/171))
+- chore: use post-install-check ([#166](https://github.com/googleapis/nodejs-error-reporting/pull/166))
+- test: fix system tests ([#162](https://github.com/googleapis/nodejs-error-reporting/pull/162))
+- fix: drop support for nodejs 9.x ([#161](https://github.com/googleapis/nodejs-error-reporting/pull/161))
+
