@@ -40,7 +40,7 @@
     "fix": "eslint --fix '**/*.js'"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.27.0",
+    "@google-cloud/common": "^0.29.0",
     "google-gax": "^0.22.0",
     "lodash.merge": "^4.6.1",
     "protobufjs": "^6.8.6",
