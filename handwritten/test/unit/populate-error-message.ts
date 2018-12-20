@@ -114,9 +114,9 @@ describe('populate-error-message', () => {
   it('Message Field: Should default the field given lack-of input given ' +
          'an object',
      () => {
-       const err = {};
+       const err = {error: 'some error message'};
        populateErrorMessage(err, em);
-       assert(em.message.startsWith('[object Object]'));
+       assert(em.message.startsWith('{ error: \'some error message\' }'));
      });
 
   it('User Field: Should set the field given valid input given an Error',
