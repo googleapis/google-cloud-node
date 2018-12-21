@@ -267,7 +267,7 @@ class Firewall extends common.ServiceObject {
     callback = callback || common.util.noop;
     metadata = metadata || {};
     metadata.name = this.name;
-    metadata.network = this.metadata.network;
+    metadata.network = metadata.network || this.metadata.network;
     this.request(
       {
         method: 'PATCH',
