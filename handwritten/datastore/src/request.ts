@@ -34,6 +34,10 @@ import {entity} from './entity';
 import {Query} from './query';
 import {Datastore} from '.';
 
+export interface EntityDataObj {
+  [key: string]: string;
+}
+
 /**
  * A map of read consistency values to proto codes.
  *
@@ -161,7 +165,7 @@ class DatastoreRequest {
    * datastore.allocateIds(incompleteKey, 100, callback);
    *
    * //-
-   * // If the callback is omitted, we'll return a Promise.
+   * // Returns a Promise if callback is omitted.
    * //-
    * datastore.allocateIds(incompleteKey, 100).then((data) => {
    *   const keys = data[0];
@@ -326,13 +330,13 @@ class DatastoreRequest {
    * ], (err, apiResponse) => {});
    *
    * //-
-   * // If the callback is omitted, we'll return a Promise.
+   * // Returns a Promise if callback is omitted.
    * //-
    * datastore.delete().then((data) => {
    *   const apiResponse = data[0];
    * });
    */
-  delete(keys, gaxOptions, callback?) {
+  delete(keys, gaxOptions?, callback?) {
     if (is.fn(gaxOptions)) {
       callback = gaxOptions;
       gaxOptions = {};
@@ -425,7 +429,7 @@ class DatastoreRequest {
    * datastore.get(keys, (err, entities) => {});
    *
    * //-
-   * // Here's how you would update the value of an entity with the help of the
+   * // Below is how to update the value of an entity with the help of the
    * // `save` method.
    * //-
    * datastore.get(key, (err, entity) => {
@@ -442,13 +446,14 @@ class DatastoreRequest {
    * });
    *
    * //-
-   * // If the callback is omitted, we'll return a Promise.
+   * // Returns a Promise if callback is omitted.
    * //-
    * datastore.get(keys).then((data) => {
    *   const entities = data[0];
    * });
    */
-  get(keys, options, callback?) {
+  get(keys, options?): Promise<EntityDataObj[]>;
+  get(keys, options?, callback?): void|Promise<EntityDataObj[]> {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -574,13 +579,14 @@ class DatastoreRequest {
    * });
    *
    * //-
-   * // If the callback is omitted, we'll return a Promise.
+   * // Returns a Promise if callback is omitted.
    * //-
    * datastore.runQuery(query).then((data) => {
    *   const entities = data[0];
    * });
    */
-  runQuery(query, options, callback?) {
+  runQuery(query, options?): Promise<Array<Array<{}>>>;
+  runQuery(query, options?, callback?): void|Promise<Array<Array<{}>>> {
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -922,13 +928,13 @@ class DatastoreRequest {
    * datastore.save(entity, (err, apiResponse) => {});
    *
    * //-
-   * // If the callback is omitted, we'll return a Promise.
+   * // Returns a Promise if callback is omitted.
    * //-
    * datastore.save(entity).then((data) => {
    *   const apiResponse = data[0];
    * });
    */
-  save(entities, gaxOptions, callback?) {
+  save(entities, gaxOptions?, callback?) {
     entities = arrify(entities);
 
     if (is.fn(gaxOptions)) {
@@ -1036,7 +1042,7 @@ class DatastoreRequest {
           client: 'DatastoreClient',
           method: 'commit',
           reqOpts,
-          gaxOpts: gaxOptions,
+          gaxOpts: gaxOptions || {},
         },
         onCommit);
   }
