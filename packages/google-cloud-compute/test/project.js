@@ -17,12 +17,11 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const proxyquire = require('proxyquire');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Project') {
       promisified = true;

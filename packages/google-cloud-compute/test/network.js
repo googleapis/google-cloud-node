@@ -17,14 +17,13 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const format = require('string-format-obj');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Network') {
       return;
@@ -107,7 +106,7 @@ describe('Network', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      const computeInstance = extend({}, COMPUTE, {
+      const computeInstance = Object.assign({}, COMPUTE, {
         createNetwork: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
@@ -144,7 +143,7 @@ describe('Network', function() {
     it('should make the correct call to Compute', function(done) {
       const name = 'firewall-name';
       const config = {a: 'b', c: 'd'};
-      const expectedConfig = extend({}, config, {
+      const expectedConfig = Object.assign({}, config, {
         network: network.formattedName,
       });
 
@@ -168,7 +167,7 @@ describe('Network', function() {
         region: REGION_NAME,
       };
 
-      const expectedConfig = extend({}, config, {
+      const expectedConfig = Object.assign({}, config, {
         network: network.formattedName,
       });
       delete expectedConfig.region;
@@ -281,7 +280,7 @@ describe('Network', function() {
   describe('getFirewalls', function() {
     it('should make the correct call to Compute', function(done) {
       const options = {a: 'b', c: 'd'};
-      const expectedOptions = extend({}, options, {
+      const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 
@@ -305,7 +304,7 @@ describe('Network', function() {
   describe('getFirewallsStream', function() {
     it('should call to getFirewallsStream correctly', function(done) {
       const options = {a: 'b', c: 'd'};
-      const expectedOptions = extend({}, options, {
+      const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 
@@ -341,7 +340,7 @@ describe('Network', function() {
   describe('getSubnetworks', function() {
     it('should call to compute.getSubnetworks correctly', function(done) {
       const options = {a: 'b', c: 'd'};
-      const expectedOptions = extend({}, options, {
+      const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 
@@ -365,7 +364,7 @@ describe('Network', function() {
   describe('getSubnetworksStream', function() {
     it('should call to getSubnetworksStream correctly', function(done) {
       const options = {a: 'b', c: 'd'};
-      const expectedOptions = extend({}, options, {
+      const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 

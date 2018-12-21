@@ -27,12 +27,12 @@ const promisify = require('@google-cloud/promisify');
 
 const slice = Array.prototype.slice;
 
-const fakeUtil = extend({}, util, {
+const fakeUtil = Object.assign({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
 });
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Compute') {
       return;
@@ -196,7 +196,7 @@ describe('Compute', function() {
   });
 
   beforeEach(function() {
-    extend(fakeUtil, originalFakeUtil);
+    Object.assign(fakeUtil, originalFakeUtil);
     compute = new Compute({
       projectId: PROJECT_ID,
     });
@@ -450,7 +450,7 @@ describe('Compute', function() {
     it('should make the correct default API request', function(done) {
       const name = 'new-health-check-name';
       const options = {a: 'b'};
-      const originalOptions = extend({}, options);
+      const originalOptions = Object.assign({}, options);
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -754,8 +754,8 @@ describe('Compute', function() {
 
     it('should make the correct API request', function(done) {
       const config = {a: 'b'};
-      const originalConfig = extend({}, config);
-      const expectedConfig = extend({}, config, {name: NAME});
+      const originalConfig = Object.assign({}, config);
+      const expectedConfig = Object.assign({}, config, {name: NAME});
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -1044,12 +1044,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1062,7 +1062,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1177,14 +1177,14 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         delete apiResponseWithNextPageToken.items;
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1197,7 +1197,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1289,12 +1289,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1307,7 +1307,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1385,12 +1385,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1403,7 +1403,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1439,7 +1439,7 @@ describe('Compute', function() {
     describe('options.https', function() {
       it('should make the correct API request', function(done) {
         const options = {https: true};
-        const originalOptions = extend({}, options);
+        const originalOptions = Object.assign({}, options);
 
         compute.request = function(reqOpts) {
           assert.strictEqual(reqOpts.uri, '/global/httpsHealthChecks');
@@ -1507,12 +1507,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1525,7 +1525,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1603,12 +1603,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1621,7 +1621,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1713,14 +1713,14 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         delete apiResponseWithNextPageToken.items;
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1733,7 +1733,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1831,12 +1831,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1849,7 +1849,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -1927,12 +1927,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1945,7 +1945,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2023,12 +2023,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2041,7 +2041,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2119,12 +2119,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2137,7 +2137,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2220,7 +2220,7 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
@@ -2228,7 +2228,7 @@ describe('Compute', function() {
           a: 'b',
           c: 'd',
         };
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2241,7 +2241,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2321,7 +2321,7 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
@@ -2329,7 +2329,7 @@ describe('Compute', function() {
           a: 'b',
           c: 'd',
         };
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2342,7 +2342,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2420,12 +2420,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2438,7 +2438,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2540,12 +2540,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2558,7 +2558,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2650,12 +2650,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2668,7 +2668,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );
@@ -2746,12 +2746,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         const query = {a: 'b', c: 'd'};
-        const originalQuery = extend({}, query);
+        const originalQuery = Object.assign({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2764,7 +2764,7 @@ describe('Compute', function() {
 
           assert.deepStrictEqual(
             nextQuery,
-            extend({}, query, {
+            Object.assign({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
             })
           );

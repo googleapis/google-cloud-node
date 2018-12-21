@@ -362,7 +362,7 @@ class Zone extends common.ServiceObject {
   createDisk(name, config, callback) {
     const self = this;
     const query = {};
-    const body = extend({}, config, {
+    const body = Object.assign({}, config, {
       name: name,
     });
     if (body.image) {
@@ -448,7 +448,7 @@ class Zone extends common.ServiceObject {
       callback = options;
       options = {};
     }
-    const body = extend({}, options, {
+    const body = Object.assign({}, options, {
       name: name,
     });
     if (body.ports) {
@@ -581,7 +581,7 @@ class Zone extends common.ServiceObject {
    */
   createVM(name, config, callback) {
     const self = this;
-    const body = extend(
+    const body = Object.assign(
       {
         name: name,
         machineType: 'n1-standard-1',
@@ -773,7 +773,7 @@ class Zone extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -861,7 +861,7 @@ class Zone extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -951,7 +951,7 @@ class Zone extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1021,7 +1021,7 @@ class Zone extends common.ServiceObject {
       callback = options;
       options = {};
     }
-    options = extend({}, options, {
+    options = Object.assign({}, options, {
       filter: 'zone eq .*' + this.name,
     });
     return this.compute.getMachineTypes(options, callback);
@@ -1102,7 +1102,7 @@ class Zone extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1188,7 +1188,7 @@ class Zone extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }

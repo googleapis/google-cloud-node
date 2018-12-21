@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const extend = require('extend');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
@@ -218,7 +217,7 @@ class Region extends common.ServiceObject {
       {
         method: 'POST',
         uri: '/addresses',
-        json: extend({}, options, {
+        json: Object.assign({}, options, {
           name: name,
         }),
       },
@@ -288,7 +287,7 @@ class Region extends common.ServiceObject {
    */
   createSubnetwork(name, config, callback) {
     const self = this;
-    const body = extend({}, config, {
+    const body = Object.assign({}, config, {
       name: name,
     });
     if (body.network instanceof Network) {
@@ -456,7 +455,7 @@ class Region extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -545,7 +544,7 @@ class Region extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -633,7 +632,7 @@ class Region extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -722,7 +721,7 @@ class Region extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }

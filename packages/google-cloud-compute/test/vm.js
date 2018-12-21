@@ -24,7 +24,7 @@ const promisify = require('@google-cloud/promisify');
 const {replaceProjectIdToken} = require('@google-cloud/projectify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'VM') {
       promisified = true;
@@ -135,7 +135,7 @@ describe('VM', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      const zoneInstance = extend({}, ZONE, {
+      const zoneInstance = Object.assign({}, ZONE, {
         createVM: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
@@ -195,7 +195,9 @@ describe('VM', function() {
       const CONFIG = {readOnly: true};
 
       it('should set the correct mode', function(done) {
-        const expectedBody = extend({}, EXPECTED_BODY, {mode: 'READ_ONLY'});
+        const expectedBody = Object.assign({}, EXPECTED_BODY, {
+          mode: 'READ_ONLY',
+        });
 
         vm.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, expectedBody);

@@ -17,13 +17,12 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Firewall') {
       promisified = true;
@@ -82,7 +81,7 @@ describe('Firewall', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      const computeInstance = extend({}, COMPUTE, {
+      const computeInstance = Object.assign({}, COMPUTE, {
         createFirewall: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);

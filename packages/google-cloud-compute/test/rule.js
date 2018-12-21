@@ -17,13 +17,12 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const proxyquire = require('proxyquire');
 const {util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Rule') {
       promisified = true;
@@ -67,7 +66,7 @@ describe('Rule', function() {
       const computeInstance = new Compute();
       const bindMethod = {};
 
-      extend(computeInstance, {
+      Object.assign(computeInstance, {
         createRule: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);

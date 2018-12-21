@@ -18,13 +18,12 @@
 
 const arrify = require('arrify');
 const assert = require('assert');
-const extend = require('extend');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'InstanceGroup') {
       promisified = true;
@@ -82,7 +81,7 @@ describe('InstanceGroup', function() {
   });
 
   beforeEach(function() {
-    extend(InstanceGroup, staticMethods);
+    Object.assign(InstanceGroup, staticMethods);
     instanceGroup = new InstanceGroup(ZONE, NAME);
   });
 
@@ -108,7 +107,7 @@ describe('InstanceGroup', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      const zoneInstance = extend({}, ZONE, {
+      const zoneInstance = Object.assign({}, ZONE, {
         createInstanceGroup: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
@@ -375,7 +374,7 @@ describe('InstanceGroup', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {

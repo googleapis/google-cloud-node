@@ -17,7 +17,6 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const proxyquire = require('proxyquire').noPreserveCache();
 const {util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
@@ -36,7 +35,7 @@ class FakeServiceObject {
 
 let parseHttpRespBodyOverride = null;
 let promisified = false;
-const fakeUtil = extend({}, util, {
+const fakeUtil = Object.assign({}, util, {
   parseHttpRespBody: function() {
     if (parseHttpRespBodyOverride) {
       return parseHttpRespBodyOverride.apply(null, arguments);
@@ -45,7 +44,7 @@ const fakeUtil = extend({}, util, {
   },
 });
 
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'Operation') {
       promisified = true;

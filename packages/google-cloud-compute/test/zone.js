@@ -18,14 +18,13 @@
 
 const arrify = require('arrify');
 const assert = require('assert');
-const extend = require('extend');
 const {GCEImages} = require('gce-images');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Zone') {
       return;
@@ -1006,7 +1005,7 @@ describe('Zone', function() {
           selfLink: 'http://selflink',
         };
 
-        const expectedConfig = extend({}, EXPECTED_CONFIG, {
+        const expectedConfig = Object.assign({}, EXPECTED_CONFIG, {
           disks: [
             {
               autoDelete: true,
@@ -1175,7 +1174,7 @@ describe('Zone', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {
@@ -1274,7 +1273,7 @@ describe('Zone', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {
@@ -1373,7 +1372,7 @@ describe('Zone', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {
@@ -1418,7 +1417,7 @@ describe('Zone', function() {
   describe('getMachineTypes', function() {
     it('should make the correct call to Compute', function(done) {
       const options = {a: 'b', c: 'd'};
-      const expectedOptions = extend({}, options, {
+      const expectedOptions = Object.assign({}, options, {
         filter: 'zone eq .*' + zone.name,
       });
 
@@ -1517,7 +1516,7 @@ describe('Zone', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {
@@ -1615,7 +1614,7 @@ describe('Zone', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {

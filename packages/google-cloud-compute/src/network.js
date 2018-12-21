@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
@@ -245,7 +244,7 @@ class Network extends common.ServiceObject {
    * });
    */
   createFirewall(name, config, callback) {
-    config = extend({}, config, {
+    config = Object.assign({}, config, {
       network: this.formattedName,
     });
     this.compute.createFirewall(name, config, callback);
@@ -304,7 +303,7 @@ class Network extends common.ServiceObject {
    * });
    */
   createSubnetwork(name, config, callback) {
-    config = extend({}, config, {
+    config = Object.assign({}, config, {
       network: this.formattedName,
     });
     let region = config.region;
@@ -376,7 +375,7 @@ class Network extends common.ServiceObject {
       callback = options;
       options = {};
     }
-    options = extend({}, options, {
+    options = Object.assign({}, options, {
       filter: 'network eq .*' + this.formattedName,
     });
     this.compute.getSubnetworks(options, callback);
@@ -413,7 +412,7 @@ class Network extends common.ServiceObject {
    *   });
    */
   getSubnetworksStream(options) {
-    options = extend({}, options, {
+    options = Object.assign({}, options, {
       filter: 'network eq .*' + this.formattedName,
     });
     return this.compute.getSubnetworksStream(options);
@@ -535,7 +534,7 @@ class Network extends common.ServiceObject {
       callback = options;
       options = {};
     }
-    options = extend({}, options, {
+    options = Object.assign({}, options, {
       filter: 'network eq .*' + this.formattedName,
     });
     this.compute.getFirewalls(options, callback);
@@ -572,7 +571,7 @@ class Network extends common.ServiceObject {
    *   });
    */
   getFirewallsStream(options) {
-    options = extend({}, options, {
+    options = Object.assign({}, options, {
       filter: 'network eq .*' + this.formattedName,
     });
     return this.compute.getFirewallsStream(options);

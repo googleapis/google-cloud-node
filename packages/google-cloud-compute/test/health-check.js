@@ -17,13 +17,12 @@
 'use strict';
 
 const assert = require('assert');
-const extend = require('extend');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'HealthCheck') {
       promisified = true;
@@ -88,24 +87,20 @@ describe('HealthCheck', function() {
     describe('http', function() {
       it('should set the correct baseUrl', function() {
         const calledWith = healthCheck.calledWith_[0];
-
         assert.strictEqual(calledWith.baseUrl, '/global/httpHealthChecks');
       });
 
       it('should not set options.https when created', function(done) {
         const createMethod = healthCheck.calledWith_[0].createMethod;
-
         const NAME = 'name';
         const OPTIONS = {a: 'b'};
-        const originalOptions = extend({}, OPTIONS);
-
+        const originalOptions = Object.assign({}, OPTIONS);
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
           assert.deepStrictEqual(opts, OPTIONS);
           assert.deepStrictEqual(OPTIONS, originalOptions);
           callback(); // done()
         };
-
         createMethod(NAME, OPTIONS, done);
       });
 
@@ -141,11 +136,11 @@ describe('HealthCheck', function() {
 
         const NAME = 'name';
         const OPTIONS = {a: 'b'};
-        const originalOptions = extend({}, OPTIONS);
+        const originalOptions = Object.assign({}, OPTIONS);
 
         COMPUTE.createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
-          assert.deepStrictEqual(opts, extend({https: true}, OPTIONS));
+          assert.deepStrictEqual(opts, Object.assign({https: true}, OPTIONS));
           assert.deepStrictEqual(OPTIONS, originalOptions);
           callback(); // done()
         };

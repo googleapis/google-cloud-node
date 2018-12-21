@@ -18,7 +18,6 @@
 
 const arrify = require('arrify');
 const common = require('@google-cloud/common');
-const extend = require('extend');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
@@ -378,7 +377,7 @@ class InstanceGroup extends common.ServiceObject {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }

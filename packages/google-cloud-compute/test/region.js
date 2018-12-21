@@ -19,13 +19,12 @@
 const arrify = require('arrify');
 const assert = require('assert');
 const {ServiceObject} = require('@google-cloud/common');
-const extend = require('extend');
 const is = require('is');
 const proxyquire = require('proxyquire');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakePromisify = extend({}, promisify, {
+const fakePromisify = Object.assign({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Region') {
       return;
@@ -200,7 +199,7 @@ describe('Region', function() {
   describe('createAddress', function() {
     const NAME = 'address-name';
     const OPTIONS = {a: 'b', c: 'd'};
-    const EXPECTED_BODY = extend({}, OPTIONS, {name: NAME});
+    const EXPECTED_BODY = Object.assign({}, OPTIONS, {name: NAME});
 
     it('should not require any options', function(done) {
       const expectedBody = {name: NAME};
@@ -307,7 +306,7 @@ describe('Region', function() {
       c: 'd',
       network: 'network-name',
     };
-    const EXPECTED_BODY = extend({}, CONFIG, {name: NAME});
+    const EXPECTED_BODY = Object.assign({}, CONFIG, {name: NAME});
 
     it('should make the correct API request', function(done) {
       region.request = function(reqOpts) {
@@ -326,7 +325,7 @@ describe('Region', function() {
         const network = new FakeNetwork();
         network.formattedName = 'formatted-name';
 
-        const config = extend({}, CONFIG, {
+        const config = Object.assign({}, CONFIG, {
           network: network,
         });
 
@@ -341,7 +340,7 @@ describe('Region', function() {
 
     describe('config.range', function() {
       it('should accept and delete a range property', function(done) {
-        const config = extend({}, CONFIG, {
+        const config = Object.assign({}, CONFIG, {
           range: '...',
         });
 
@@ -471,7 +470,7 @@ describe('Region', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {
@@ -570,7 +569,7 @@ describe('Region', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {
@@ -669,7 +668,7 @@ describe('Region', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {
@@ -768,7 +767,7 @@ describe('Region', function() {
 
       it('should build a nextQuery if necessary', function(done) {
         const nextPageToken = 'next-page-token';
-        const apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
         const expectedNextQuery = {

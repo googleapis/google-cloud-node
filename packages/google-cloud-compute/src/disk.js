@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
@@ -246,7 +245,7 @@ class Disk extends common.ServiceObject {
       {
         method: 'POST',
         uri: '/createSnapshot',
-        json: extend({}, options, {
+        json: Object.assign({}, options, {
           name: name,
         }),
       },

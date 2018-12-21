@@ -18,7 +18,6 @@
 
 const arrify = require('arrify');
 const common = require('@google-cloud/common');
-const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
@@ -156,7 +155,7 @@ class Compute extends common.Service {
     if (!is.object(config)) {
       throw new Error('A firewall configuration object must be provided.');
     }
-    const body = extend({}, config, {
+    const body = Object.assign({}, config, {
       name: name,
     });
     if (body.protocols) {
@@ -257,7 +256,7 @@ class Compute extends common.Service {
     if (!is.string(name)) {
       throw new Error('A health check name must be provided.');
     }
-    const body = extend({}, options, {
+    const body = Object.assign({}, options, {
       name: name,
     });
     const https = options.https;
@@ -333,7 +332,7 @@ class Compute extends common.Service {
       callback = options;
       options = {};
     }
-    const body = extend(
+    const body = Object.assign(
       {
         name: name,
         sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
@@ -409,7 +408,7 @@ class Compute extends common.Service {
    */
   createNetwork(name, config, callback) {
     const self = this;
-    const body = extend({}, config, {
+    const body = Object.assign({}, config, {
       name: name,
     });
     if (body.range) {
@@ -498,7 +497,7 @@ class Compute extends common.Service {
    */
   createRule(name, config, callback) {
     const self = this;
-    const body = extend({}, config, {
+    const body = Object.assign({}, config, {
       name: name,
     });
     if (body.ip) {
@@ -580,7 +579,7 @@ class Compute extends common.Service {
    */
   createService(name, config, callback) {
     const self = this;
-    const body = extend({}, config, {
+    const body = Object.assign({}, config, {
       name: name,
     });
     this.request(
@@ -691,7 +690,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -788,7 +787,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -882,7 +881,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -974,7 +973,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1066,7 +1065,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1138,7 +1137,7 @@ class Compute extends common.Service {
       callback = options;
       options = {};
     }
-    options = extend({}, options);
+    options = Object.assign({}, options);
     const https = options.https;
     delete options.https;
     this.request(
@@ -1153,7 +1152,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1236,7 +1235,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1323,7 +1322,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1414,7 +1413,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1499,7 +1498,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1583,7 +1582,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1667,7 +1666,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1752,7 +1751,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1837,7 +1836,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -1922,7 +1921,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -2016,7 +2015,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }
@@ -2106,7 +2105,7 @@ class Compute extends common.Service {
         }
         let nextQuery = null;
         if (resp.nextPageToken) {
-          nextQuery = extend({}, options, {
+          nextQuery = Object.assign({}, options, {
             pageToken: resp.nextPageToken,
           });
         }

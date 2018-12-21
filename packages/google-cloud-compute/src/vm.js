@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const createErrorClass = require('create-error-class');
-const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
@@ -311,7 +310,7 @@ class VM extends common.ServiceObject {
       callback = options;
       options = {};
     }
-    const body = extend(
+    const body = Object.assign(
       {
         // Default the deviceName to the name of the disk, like the Console does.
         deviceName: disk.name,
