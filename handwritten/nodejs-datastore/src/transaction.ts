@@ -125,7 +125,7 @@ class Transaction extends DatastoreRequest {
    *   const apiResponse = data[0];
    * });
    */
-  commit(gaxOptions, callback?) {
+  commit(gaxOptions?, callback?) {
     if (is.fn(gaxOptions)) {
       callback = gaxOptions;
       gaxOptions = {};
@@ -215,7 +215,7 @@ class Transaction extends DatastoreRequest {
           client: 'DatastoreClient',
           method: 'commit',
           reqOpts,
-          gaxOpts: gaxOptions,
+          gaxOpts: gaxOptions || {},
         },
         (err, resp) => {
           if (err) {
@@ -429,7 +429,7 @@ class Transaction extends DatastoreRequest {
    *   const apiResponse = data[1];
    * });
    */
-  run(options, callback?) {
+  run(options?, callback?) {
     if (is.fn(options)) {
       callback = options;
       options = {};
