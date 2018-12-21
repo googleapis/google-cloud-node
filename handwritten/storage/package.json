@@ -52,7 +52,7 @@
     "arrify": "^1.0.0",
     "async": "^2.0.1",
     "compressible": "^2.0.12",
-    "concat-stream": "^1.5.0",
+    "concat-stream": "^2.0.0",
     "duplexify": "^3.5.0",
     "extend": "^3.0.0",
     "gcs-resumable-upload": "^0.13.0",
