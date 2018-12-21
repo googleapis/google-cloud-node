@@ -15,19 +15,14 @@
 
 'use strict';
 
-const path = require(`path`);
-const assert = require('assert');
-const tools = require(`@google-cloud/nodejs-repo-tools`);
+const {assert} = require('chai');
+const execa = require('execa');
 
-const cmd = `node quickstart.js`;
-const cwd = path.join(__dirname, `..`);
-
-beforeEach(async () => tools.stubConsole);
-afterEach(async () => tools.restoreConsole);
-
-it(`should analyze sentiment in text`, async () => {
-  const output = await tools.runAsync(cmd, cwd);
-  assert(RegExp('Text: Hello, world!').test(output));
-  assert(RegExp('Sentiment score: ').test(output));
-  assert(RegExp('Sentiment magnitude: ').test(output));
+describe('quickstart', () => {
+  it('should analyze sentiment in text', async () => {
+    const {stdout} = await execa.shell('node quickstart.js');
+    assert(stdout, /Text: Hello, world!/);
+    assert(stdout, /Sentiment score: /);
+    assert(stdout, /Sentiment magnitude: /);
+  });
 });

@@ -16,7 +16,7 @@
 'use strict';
 
 // [START language_quickstart]
-async function main() {
+async function quickstart() {
   // Imports the Google Cloud client library
   const language = require('@google-cloud/language');
 
@@ -39,6 +39,6 @@ async function main() {
   console.log(`Sentiment score: ${sentiment.score}`);
   console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
 }
-
-main().catch(console.error);
 // [END language_quickstart]
+
+quickstart().catch(console.error);
