@@ -418,38 +418,41 @@ class VM extends common.ServiceObject {
         callback(new DetachDiskError(err.message));
         return;
       }
-      const diskName = replaceProjectIdToken(
-        disk.formattedName,
-        self.zone.compute.authClient.projectId
-      );
-      let deviceName;
-      const baseUrl = 'https://www.googleapis.com/compute/v1/';
-      const disks = metadata.disks || [];
-      // Try to find the deviceName by matching the source of the attached disks
-      // to the name of the disk provided by the user.
-      for (let i = 0; !deviceName && i < disks.length; i++) {
-        const attachedDisk = disks[i];
-        const source = attachedDisk.source.replace(baseUrl, '');
-        if (source === diskName) {
-          deviceName = attachedDisk.deviceName;
+      self.zone.compute.authClient.getProjectId((err, projectId) => {
+        if (err) {
+          callback(err);
+          return;
         }
-      }
-      if (!deviceName) {
-        callback(
-          new DetachDiskError('Device name for this disk was not found.')
-        );
-        return;
-      }
-      self.request(
-        {
-          method: 'POST',
-          uri: '/detachDisk',
-          qs: {
-            deviceName: deviceName,
+        const diskName = replaceProjectIdToken(disk.formattedName, projectId);
+        let deviceName;
+        const baseUrl = 'https://www.googleapis.com/compute/v1/';
+        const disks = metadata.disks || [];
+        // Try to find the deviceName by matching the source of the attached disks
+        // to the name of the disk provided by the user.
+        for (let i = 0; !deviceName && i < disks.length; i++) {
+          const attachedDisk = disks[i];
+          const source = attachedDisk.source.replace(baseUrl, '');
+          if (source === diskName) {
+            deviceName = attachedDisk.deviceName;
+          }
+        }
+        if (!deviceName) {
+          callback(
+            new DetachDiskError('Device name for this disk was not found.')
+          );
+          return;
+        }
+        self.request(
+          {
+            method: 'POST',
+            uri: '/detachDisk',
+            qs: {
+              deviceName: deviceName,
+            },
           },
-        },
-        callback || common.util.noop
-      );
+          callback || common.util.noop
+        );
+      });
     });
   }
   /**

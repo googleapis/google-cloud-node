@@ -17,15 +17,13 @@
 'use strict';
 
 const assert = require('assert');
-const async = require('async');
 const concat = require('concat-stream');
-const is = require('is');
-const prop = require('propprop');
 const uuid = require('uuid');
+const {promisify} = require('util');
 
 const Compute = require('../');
 
-describe('Compute', function() {
+describe('Compute', () => {
   // Since the Compute Engine API is rather large and involves long-running
   // tasks for nearly every request, our system tests follow a pattern designed
   // to create a minimal amount of resources.
@@ -40,7 +38,9 @@ describe('Compute', function() {
   // deleted. This will also pick up any previously-created objects that were
   // unable to be removed if a prior test run had unexpectedly quit.
 
-  const TESTS_PREFIX = 'gcloud-tests-';
+  const TESTS_PREFIX = 'gcloud';
+  const TEST_ID = uuid.v4().split('-')[0];
+  const FULL_PREFIX = `${TESTS_PREFIX}-${TEST_ID}`;
   const REGION_NAME = 'us-central1';
   const ZONE_NAME = 'us-central1-a';
 
@@ -48,52 +48,48 @@ describe('Compute', function() {
   const region = compute.region(REGION_NAME);
   const zone = compute.zone(ZONE_NAME);
 
-  before(deleteAllTestObjects);
-  after(deleteAllTestObjects);
+  const computeRequest = promisify(compute.request).bind(compute);
+  const zoneRequest = promisify(zone.request).bind(zone);
 
-  describe('addresses', function() {
+  before(() => deleteAllTestObjects({expiredOnly: true}));
+  after(() => deleteAllTestObjects({expiredOnly: false}));
+
+  describe('addresses', async () => {
     const ADDRESS_NAME = generateName('address');
     const address = region.address(ADDRESS_NAME);
 
-    before(create(address));
+    before(() => create(address));
 
-    it('should have created the address', function(done) {
-      address.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.strictEqual(metadata.name, ADDRESS_NAME);
-        done();
-      });
+    it('should have created the address', async () => {
+      const [metadata] = await address.getMetadata();
+      assert.strictEqual(metadata.name, ADDRESS_NAME);
     });
 
-    it('should get a list of addresses', function(done) {
-      compute.getAddresses(function(err, addresses) {
-        assert.ifError(err);
-        assert(addresses.length > 0);
-        done();
-      });
+    it('should get a list of addresses', async () => {
+      const [addresses] = await compute.getAddresses();
+      assert(addresses.length > 0);
     });
 
-    it('should get a list of addresses in stream mode', function(done) {
+    it('should get a list of addresses in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getAddressesStream()
         .on('error', done)
-        .on('data', function() {
+        .on('data', () => {
           resultsMatched++;
         })
-        .on('end', function() {
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should access an address through a Region', function(done) {
-      region.address(ADDRESS_NAME).getMetadata(done);
+    it('should access an address through a Region', async () => {
+      return region.address(ADDRESS_NAME).getMetadata();
     });
   });
 
-  describe('autoscalers', function() {
+  describe('autoscalers', () => {
     const AUTOSCALER_NAME = generateName('autoscaler');
     const autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
@@ -103,176 +99,129 @@ describe('Compute', function() {
     const INSTANCE_TEMPLATE_NAME = generateName('instance-template');
     const INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
 
-    before(function(done) {
-      async.series(
-        [
-          create(network, {
-            range: '10.240.0.0/16',
-          }),
-
-          function(callback) {
-            createInstanceTemplate(
-              INSTANCE_TEMPLATE_NAME,
-              network.formattedName,
-              callback
-            );
-          },
-
-          function(callback) {
-            createInstanceGroupManager(
-              INSTANCE_GROUP_MANAGER_NAME,
-              [
-                'https://www.googleapis.com/compute/v1/projects',
-                compute.projectId,
-                'global/instanceTemplates',
-                INSTANCE_TEMPLATE_NAME,
-              ].join('/'),
-              callback
-            );
-          },
-
-          create(autoscaler, {
-            coolDown: 30,
-            cpu: 80,
-            loadBalance: 40,
-            maxReplicas: 5,
-            minReplicas: 1,
-            target: INSTANCE_GROUP_MANAGER_NAME,
-          }),
-        ],
-        done
+    before(async () => {
+      await create(network, {range: '10.240.0.0/16'});
+      await createInstanceTemplate(
+        INSTANCE_TEMPLATE_NAME,
+        network.formattedName
       );
-    });
-
-    it('should have created the autoscaler', function(done) {
-      autoscaler.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-
-        assert.strictEqual(metadata.name, AUTOSCALER_NAME);
-
-        assert.deepStrictEqual(metadata.autoscalingPolicy, {
-          coolDownPeriodSec: 30,
-          cpuUtilization: {
-            utilizationTarget: 0.8,
-          },
-          loadBalancingUtilization: {
-            utilizationTarget: 0.4,
-          },
-          maxNumReplicas: 5,
-          minNumReplicas: 1,
-        });
-
-        done();
+      await createInstanceGroupManager(
+        INSTANCE_GROUP_MANAGER_NAME,
+        [
+          'https://www.googleapis.com/compute/v1/projects',
+          compute.projectId,
+          'global/instanceTemplates',
+          INSTANCE_TEMPLATE_NAME,
+        ].join('/')
+      );
+      await create(autoscaler, {
+        coolDown: 30,
+        cpu: 80,
+        loadBalance: 40,
+        maxReplicas: 5,
+        minReplicas: 1,
+        target: INSTANCE_GROUP_MANAGER_NAME,
       });
     });
 
-    it('should get a list of autoscalers', function(done) {
-      compute.getAutoscalers(function(err, autoscalers) {
-        assert.ifError(err);
-        assert(autoscalers.length > 0);
-        done();
+    it('should have created the autoscaler', async () => {
+      const [metadata] = await autoscaler.getMetadata();
+      assert.strictEqual(metadata.name, AUTOSCALER_NAME);
+
+      assert.deepStrictEqual(metadata.autoscalingPolicy, {
+        coolDownPeriodSec: 30,
+        cpuUtilization: {
+          utilizationTarget: 0.8,
+        },
+        loadBalancingUtilization: {
+          utilizationTarget: 0.4,
+        },
+        maxNumReplicas: 5,
+        minNumReplicas: 1,
       });
     });
 
-    it('should get a list of autoscalers in stream mode', function(done) {
+    it('should get a list of autoscalers', async () => {
+      const [autoscalers] = await compute.getAutoscalers();
+      assert(autoscalers.length > 0);
+    });
+
+    it('should get a list of autoscalers in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getAutoscalersStream()
         .on('error', done)
-        .on('data', function() {
+        .on('data', () => {
           resultsMatched++;
         })
-        .on('end', function() {
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should set & get metadata', function(done) {
+    it('should set & get metadata', async () => {
       const description = 'description';
-
-      autoscaler.setMetadata(
-        {
+      await awaitResult(
+        autoscaler.setMetadata({
           description: description,
-        },
-        compute.execAfterOperation_(function(err) {
-          assert.ifError(err);
-
-          autoscaler.getMetadata(function(err, metadata) {
-            assert.ifError(err);
-            assert.strictEqual(metadata.description, description);
-            done();
-          });
         })
       );
+      const [metadata] = await autoscaler.getMetadata();
+      assert.strictEqual(metadata.description, description);
     });
   });
 
-  describe('disks', function() {
+  describe('disks', () => {
     const DISK_NAME = generateName('disk');
     const disk = zone.disk(DISK_NAME);
 
-    before(create(disk, {os: 'ubuntu'}));
+    before(() => create(disk, {os: 'ubuntu'}));
 
-    it('should have created the disk', function(done) {
-      disk.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.strictEqual(metadata.name, DISK_NAME);
-        done();
-      });
+    it('should have created the disk', async () => {
+      const [metadata] = await disk.getMetadata();
+      assert.strictEqual(metadata.name, DISK_NAME);
     });
 
-    it('should get a list of disks', function(done) {
-      compute.getDisks(function(err, disks) {
-        assert.ifError(err);
-        assert(disks.length > 0);
-        done();
-      });
+    it('should get a list of disks', async () => {
+      const [disks] = await compute.getDisks();
+      assert(disks.length > 0);
     });
 
-    it('should get a list of disks in stream mode', function(done) {
+    it('should get a list of disks in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getDisksStream()
         .on('error', done)
-        .on('data', function() {
+        .on('data', () => {
           resultsMatched++;
         })
-        .on('end', function() {
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should access a disk through a Zone', function(done) {
-      zone.disk(DISK_NAME).getMetadata(done);
+    it('should access a disk through a Zone', async () => {
+      return zone.disk(DISK_NAME).getMetadata();
     });
 
-    it('should take a snapshot', function(done) {
-      disk
+    it('should take a snapshot', async () => {
+      const [snapshot, operation] = await disk
         .snapshot(generateName('snapshot'))
-        .create(function(err, snapshot, operation) {
-          assert.ifError(err);
-
-          operation.on('error', done).on('complete', function() {
-            snapshot.getMetadata(done);
-          });
-        });
+        .create();
+      await operation.promise();
+      await snapshot.getMetadata();
     });
 
-    it('should run operation as a promise', function() {
+    it('should run operation as a promise', async () => {
       const snapshot = disk.snapshot(generateName('snapshot'));
-
-      return snapshot.create().then(function(response) {
-        const operation = response[1];
-        return operation.promise();
-      });
+      const [, operation] = await snapshot.create();
+      return operation.promise();
     });
   });
 
-  describe('firewalls', function() {
+  describe('firewalls', () => {
     const FIREWALL_NAME = generateName('firewall');
     const firewall = compute.firewall(FIREWALL_NAME);
 
@@ -300,45 +249,38 @@ describe('Compute', function() {
       sourceRanges: CONFIG.ranges,
     };
 
-    before(create(firewall, CONFIG));
+    before(() => create(firewall, CONFIG));
 
-    it('should have opened the correct connections', function(done) {
-      firewall.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.deepStrictEqual(metadata.allowed, expectedMetadata.allowed);
-        assert.deepStrictEqual(
-          metadata.sourceRanges,
-          expectedMetadata.sourceRanges
-        );
-        done();
-      });
+    it('should have opened the correct connections', async () => {
+      const [metadata] = await firewall.getMetadata();
+      assert.deepStrictEqual(metadata.allowed, expectedMetadata.allowed);
+      assert.deepStrictEqual(
+        metadata.sourceRanges,
+        expectedMetadata.sourceRanges
+      );
     });
 
-    it('should get a list of firewalls', function(done) {
-      compute.getFirewalls(function(err, firewalls) {
-        assert.ifError(err);
-        assert(firewalls.length > 0);
-        done();
-      });
+    it('should get a list of firewalls', async () => {
+      const [firewalls] = await compute.getFirewalls();
+      assert(firewalls.length > 0);
     });
 
-    it('should get a list of firewalls in stream mode', function(done) {
+    it('should get a list of firewalls in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getFirewallsStream()
         .on('error', done)
-        .on('data', function() {
+        .on('data', () => {
           resultsMatched++;
         })
-        .on('end', function() {
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('health checks', function() {
+  describe('health checks', () => {
     const HEALTH_CHECK_NAME = generateName('health-check');
     const healthCheck = compute.healthCheck(HEALTH_CHECK_NAME);
 
@@ -348,72 +290,43 @@ describe('Compute', function() {
       timeout: 25,
     };
 
-    before(create(healthCheck, OPTIONS));
+    before(() => create(healthCheck, OPTIONS));
 
-    it('should have created the correct health check', function(done) {
-      healthCheck.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-
-        assert.strictEqual(metadata.description, OPTIONS.description);
-        assert.strictEqual(metadata.checkIntervalSec, OPTIONS.interval);
-        assert.strictEqual(metadata.timeoutSec, OPTIONS.timeout);
-
-        done();
-      });
+    it('should have created the correct health check', async () => {
+      const [metadata] = await healthCheck.getMetadata();
+      assert.strictEqual(metadata.description, OPTIONS.description);
+      assert.strictEqual(metadata.checkIntervalSec, OPTIONS.interval);
+      assert.strictEqual(metadata.timeoutSec, OPTIONS.timeout);
     });
 
-    it('should set metadata', function(done) {
+    it('should set metadata', async () => {
       const description = 'The best description. Possibly ever.';
-
-      healthCheck.setMetadata(
-        {
-          description: description,
-        },
-        compute.execAfterOperation_(function(err) {
-          if (err) {
-            done(err);
-            return;
-          }
-
-          healthCheck.getMetadata(function(err, metadata) {
-            if (err) {
-              done(err);
-              return;
-            }
-
-            assert.strictEqual(metadata.description, description);
-
-            done();
-          });
-        })
-      );
+      await awaitResult(healthCheck.setMetadata({description}));
+      const [metadata] = await healthCheck.getMetadata();
+      assert.strictEqual(metadata.description, description);
     });
 
-    it('should get a list of health checks', function(done) {
-      compute.getHealthChecks(function(err, healthChecks) {
-        assert.ifError(err);
-        assert(healthChecks.length > 0);
-        done();
-      });
+    it('should get a list of health checks', async () => {
+      const [healthChecks] = await compute.getHealthChecks();
+      assert(healthChecks.length > 0);
     });
 
-    it('should get a list of health checks in stream mode', function(done) {
+    it('should get a list of health checks in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getHealthChecksStream()
         .on('error', done)
-        .on('data', function() {
+        .on('data', () => {
           resultsMatched++;
         })
-        .on('end', function() {
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('health checks (https)', function() {
+  describe('health checks (https)', () => {
     const HEALTH_CHECK_NAME = generateName('health-check');
     const healthCheck = compute.healthCheck(HEALTH_CHECK_NAME, {
       https: true,
@@ -425,111 +338,71 @@ describe('Compute', function() {
       timeout: 25,
     };
 
-    before(create(healthCheck, OPTIONS));
+    before(() => create(healthCheck, OPTIONS));
 
-    it('should have created the correct health check', function(done) {
-      healthCheck.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-
-        assert.strictEqual(metadata.description, OPTIONS.description);
-        assert.strictEqual(metadata.checkIntervalSec, OPTIONS.interval);
-        assert.strictEqual(metadata.timeoutSec, OPTIONS.timeout);
-
-        done();
-      });
+    it('should have created the correct health check', async () => {
+      const [metadata] = await healthCheck.getMetadata();
+      assert.strictEqual(metadata.description, OPTIONS.description);
+      assert.strictEqual(metadata.checkIntervalSec, OPTIONS.interval);
+      assert.strictEqual(metadata.timeoutSec, OPTIONS.timeout);
     });
 
-    it('should set metadata', function(done) {
+    it('should set metadata', async () => {
       const description = 'The best description. Possibly ever.';
-
-      healthCheck.setMetadata(
-        {
-          description: description,
-        },
-        compute.execAfterOperation_(function(err) {
-          if (err) {
-            done(err);
-            return;
-          }
-
-          healthCheck.getMetadata(function(err, metadata) {
-            if (err) {
-              done(err);
-              return;
-            }
-
-            assert.strictEqual(metadata.description, description);
-
-            done();
-          });
-        })
-      );
+      await awaitResult(healthCheck.setMetadata({description}));
+      const [metadata] = await healthCheck.getMetadata();
+      assert.strictEqual(metadata.description, description);
     });
 
-    it('should get a list of health checks', function(done) {
-      compute.getHealthChecks({https: true}, function(err, healthChecks) {
-        assert.ifError(err);
-        assert(healthChecks.length > 0);
-        done();
-      });
+    it('should get a list of health checks', async () => {
+      const [healthChecks] = await compute.getHealthChecks({https: true});
+      assert(healthChecks.length > 0);
     });
 
-    it('should get a list of health checks in stream mode', function(done) {
+    it('should get a list of health checks in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getHealthChecksStream({https: true})
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('images', function() {
+  describe('images', () => {
     const DISK = zone.disk(generateName('disk'));
     const IMAGE = compute.image(generateName('image'));
 
-    before(create(DISK, {os: 'ubuntu'}));
-    before(create(IMAGE, DISK));
+    before(() => create(DISK, {os: 'ubuntu'}));
+    before(() => create(IMAGE, DISK));
 
-    it('should create an image', function(done) {
-      IMAGE.exists(function(err, exists) {
-        assert.ifError(err);
-        assert.strictEqual(exists, true);
-        done();
-      });
+    it('should create an image', async () => {
+      const [exists] = await IMAGE.exists();
+      assert.strictEqual(exists, true);
     });
 
-    it('should list images', function(done) {
-      compute.getImages(function(err, images) {
-        assert.ifError(err);
-        assert(images.length > 0);
-        done();
-      });
+    it('should list images', async () => {
+      const [images] = await compute.getImages();
+      assert(images.length > 0);
     });
 
-    it('should list images in stream mode', function(done) {
+    it('should list images in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getImagesStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('instance groups', function() {
+  describe('instance groups', () => {
     const INSTANCE_GROUP_NAME = generateName('instance-group');
     const instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
 
@@ -540,164 +413,124 @@ describe('Compute', function() {
       },
     };
 
-    before(create(instanceGroup, OPTIONS));
+    before(() => create(instanceGroup, OPTIONS));
 
-    it('should have created an instance group', function(done) {
-      instanceGroup.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-
-        assert.strictEqual(metadata.name, INSTANCE_GROUP_NAME);
-        assert.strictEqual(metadata.description, OPTIONS.description);
-        assert.deepStrictEqual(metadata.namedPorts, [
-          {
-            name: 'http',
-            port: 80,
-          },
-        ]);
-
-        done();
-      });
+    it('should have created an instance group', async () => {
+      const [metadata] = await instanceGroup.getMetadata();
+      assert.strictEqual(metadata.name, INSTANCE_GROUP_NAME);
+      assert.strictEqual(metadata.description, OPTIONS.description);
+      assert.deepStrictEqual(metadata.namedPorts, [
+        {
+          name: 'http',
+          port: 80,
+        },
+      ]);
     });
 
-    it('should list project instance groups', function(done) {
-      compute.getInstanceGroups(function(err, instanceGroups) {
-        assert.ifError(err);
-        assert(instanceGroups.length > 0);
-        done();
-      });
+    it('should list project instance groups', async () => {
+      const [instanceGroups] = await compute.getInstanceGroups();
+      assert(instanceGroups.length > 0);
     });
 
-    it('should list project instance groups in stream mode', function(done) {
+    it('should list project instance groups in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getInstanceGroupsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should list zonal instance groups', function(done) {
-      zone.getInstanceGroups(function(err, instanceGroups) {
-        assert.ifError(err);
-        assert(instanceGroups.length > 0);
-        done();
-      });
+    it('should list zonal instance groups', async () => {
+      const [instanceGroups] = await zone.getInstanceGroups();
+      assert(instanceGroups.length > 0);
     });
 
-    it('should list zonal instance groups in stream mode', function(done) {
+    it('should list zonal instance groups in stream mode', done => {
       let resultsMatched = 0;
-
       zone
         .getInstanceGroupsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should set named ports', function(done) {
+    it('should set named ports', async () => {
       const ports = OPTIONS.ports;
-
-      instanceGroup.setPorts(
-        ports,
-        compute.execAfterOperation_(function(err) {
-          assert.ifError(err);
-
-          instanceGroup.getMetadata(function(err, metadata) {
-            assert.ifError(err);
-            assert.deepStrictEqual(metadata.namedPorts, [
-              {
-                name: 'http',
-                port: 80,
-              },
-            ]);
-            done();
-          });
-        })
-      );
+      await awaitResult(instanceGroup.setPorts(ports));
+      const [metadata] = await instanceGroup.getMetadata();
+      assert.deepStrictEqual(metadata.namedPorts, [
+        {
+          name: 'http',
+          port: 80,
+        },
+      ]);
     });
 
-    describe('adding and removing VMs', function() {
+    describe('adding and removing VMs', () => {
       const vm = zone.vm(generateName('vm'));
 
-      before(create(vm, {os: 'ubuntu'}));
+      before(() => create(vm, {os: 'ubuntu'}));
 
-      it('should add a VM to the instance group', function(done) {
-        instanceGroup.add(vm, compute.execAfterOperation_(done));
+      it('should add a VM to the instance group', async () => {
+        return awaitResult(instanceGroup.add(vm));
       });
 
-      it('should list the VMs', function(done) {
-        instanceGroup.getVMs(function(err, vms) {
-          assert.ifError(err);
-
-          const vmNamesInGroup = vms.map(prop('name'));
-          assert(vmNamesInGroup.indexOf(vm.name) > -1);
-
-          done();
-        });
+      it('should list the VMs', async () => {
+        const [vms] = await instanceGroup.getVMs();
+        const vmNamesInGroup = vms.map(x => x.name);
+        assert(vmNamesInGroup.indexOf(vm.name) > -1);
       });
 
-      it('should list the VMs in stream mode', function(done) {
+      it('should list the VMs in stream mode', done => {
         instanceGroup
           .getVMsStream()
           .on('error', done)
           .pipe(
-            concat(function(vms) {
-              const vmNamesInGroup = vms.map(prop('name'));
+            concat(vms => {
+              const vmNamesInGroup = vms.map(x => x.name);
               assert(vmNamesInGroup.indexOf(vm.name) > -1);
-
               done();
             })
           );
       });
 
-      it('should remove a VM from the instance group', function(done) {
-        instanceGroup.remove(vm, compute.execAfterOperation_(done));
+      it('should remove a VM from the instance group', async () => {
+        return awaitResult(instanceGroup.remove(vm));
       });
     });
   });
 
-  describe('machine types', function() {
-    it('should get a list of machine types', function(done) {
-      compute.getMachineTypes(function(err, machineTypes) {
-        assert.ifError(err);
-        assert(machineTypes.length > 0);
-        done();
-      });
+  describe('machine types', () => {
+    it('should get a list of machine types', async () => {
+      const [machineTypes] = await compute.getMachineTypes();
+      assert(machineTypes.length > 0);
     });
 
-    it('should get a list of machine types in stream mode', function(done) {
+    it('should get a list of machine types in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getMachineTypesStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get the metadata', function(done) {
+    it('should get the metadata', done => {
       compute
         .getMachineTypesStream()
         .on('error', done)
-        .once('data', function(machineType) {
-          machineType.getMetadata(function(err, metadata) {
-            assert.ifError(err);
+        .once('data', machineType => {
+          machineType.getMetadata((err, metadata) => {
             assert.strictEqual(metadata.kind, 'compute#machineType');
             done();
           });
@@ -705,37 +538,30 @@ describe('Compute', function() {
     });
   });
 
-  describe('machine types (zonal)', function() {
-    it('should get a list of machine types', function(done) {
-      zone.getMachineTypes(function(err, machineTypes) {
-        assert.ifError(err);
-        assert(machineTypes.length > 0);
-        done();
-      });
+  describe('machine types (zonal)', () => {
+    it('should get a list of machine types', async () => {
+      const [machineTypes] = await zone.getMachineTypes();
+      assert(machineTypes.length > 0);
     });
 
-    it('should get a list of machine types in stream mode', function(done) {
+    it('should get a list of machine types in stream mode', done => {
       let resultsMatched = 0;
-
       zone
         .getMachineTypesStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get the metadata', function(done) {
+    it('should get the metadata', done => {
       zone
         .getMachineTypesStream()
         .on('error', done)
-        .once('data', function(machineType) {
-          machineType.getMetadata(function(err, metadata) {
-            assert.ifError(err);
+        .once('data', machineType => {
+          machineType.getMetadata((err, metadata) => {
             assert.strictEqual(metadata.kind, 'compute#machineType');
             done();
           });
@@ -743,7 +569,7 @@ describe('Compute', function() {
     });
   });
 
-  describe('networks', function() {
+  describe('networks', () => {
     const NETWORK_NAME = generateName('network');
     const network = compute.network(NETWORK_NAME);
 
@@ -751,166 +577,124 @@ describe('Compute', function() {
       range: '10.240.0.0/16',
     };
 
-    before(create(network, CONFIG));
+    before(() => create(network, CONFIG));
 
-    it('should have opened the correct range', function(done) {
-      network.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.strictEqual(metadata.IPv4Range, CONFIG.range);
-        done();
-      });
+    it('should have opened the correct range', async () => {
+      const [metadata] = await network.getMetadata();
+      assert.strictEqual(metadata.IPv4Range, CONFIG.range);
     });
 
-    it('should get a list of networks', function(done) {
-      compute.getNetworks(function(err, networks) {
-        assert.ifError(err);
-        assert(networks.length > 0);
-        done();
-      });
+    it('should get a list of networks', async () => {
+      const [networks] = await compute.getNetworks();
+      assert(networks.length > 0);
     });
 
-    it('should get a list of networks in stream mode', function(done) {
+    it('should get a list of networks in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getNetworksStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('operations', function() {
-    it('should get a list of operations', function(done) {
-      compute.getOperations(function(err, operations) {
-        assert.ifError(err);
-        assert(operations.length > 0);
-        done();
-      });
+  describe('operations', () => {
+    it('should get a list of operations', async () => {
+      const [operations] = await compute.getOperations();
+      assert(operations.length > 0);
     });
 
-    it('should get a list of operations in stream mode', function(done) {
+    it('should get a list of operations in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getOperationsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('project', function() {
+  describe('project', () => {
     let project;
-
-    beforeEach(function() {
+    beforeEach(() => {
       project = compute.project();
     });
 
-    it('should get the project', function(done) {
-      project.get(function(err, project) {
-        assert.ifError(err);
-        assert(project.metadata);
-        done();
-      });
+    it('should get the project', async () => {
+      const [p] = await project.get();
+      assert.ok(p.metadata);
     });
 
-    it('should get metadata about the project', function(done) {
-      project.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert(metadata);
-        done();
-      });
+    it('should get metadata about the project', async () => {
+      const [metadata] = await project.getMetadata();
+      assert.ok(metadata);
     });
   });
 
-  describe('regions', function() {
-    it('should get a list of regions', function(done) {
-      compute.getRegions(function(err, regions) {
-        assert.ifError(err);
-        assert(regions.length > 0);
-        done();
-      });
+  describe('regions', () => {
+    it('should get a list of regions', async () => {
+      const [regions] = await compute.getRegions();
+      assert(regions.length > 0);
     });
 
-    it('should get a list of regions in stream mode', function(done) {
+    it('should get a list of regions in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getRegionsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get a list of addresses', function(done) {
-      region.getOperations(function(err, addresses) {
-        assert.ifError(err);
-        assert(addresses.length > 0);
-        done();
-      });
+    it('should get a list of addresses', async () => {
+      const [addresses] = await region.getOperations();
+      assert(addresses.length > 0);
     });
 
-    it('should get a list of addresses in stream mode', function(done) {
+    it('should get a list of addresses in stream mode', done => {
       let resultsMatched = 0;
-
       region
         .getOperationsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get a list of operations', function(done) {
-      region.getOperations(function(err, operations) {
-        assert.ifError(err);
-        assert(operations.length > 0);
-        done();
-      });
+    it('should get a list of operations', async () => {
+      const [operations] = await region.getOperations();
+      assert(operations.length > 0);
     });
 
-    it('should get a list of operations in stream mode', function(done) {
+    it('should get a list of operations in stream mode', done => {
       let resultsMatched = 0;
-
       region
         .getOperationsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('rules', function() {
+  describe('rules', () => {
     const RULE_NAME = generateName('rule');
     const rule = compute.rule(RULE_NAME);
-
     const service = compute.service(generateName('service'));
-
     const INSTANCE_GROUP_NAME = generateName('instance-group');
     const HEALTH_CHECK_NAME = generateName('health-check');
 
@@ -920,625 +704,403 @@ describe('Compute', function() {
     const TARGET_PROXY_NAME = generateName('target-proxy');
     const URL_MAP_NAME = generateName('url-map');
 
-    before(function(done) {
-      async.series(
-        [
-          function(callback) {
-            createService(
-              service.name,
-              INSTANCE_GROUP_NAME,
-              HEALTH_CHECK_NAME,
-              callback
-            );
-          },
-
-          function(callback) {
-            createUrlMap(
-              {
-                name: URL_MAP_NAME,
-                defaultService: 'global/backendServices/' + service.name,
-              },
-              callback
-            );
-          },
-
-          function(callback) {
-            createTargetProxy(
-              {
-                name: TARGET_PROXY_NAME,
-                urlMap: 'global/urlMaps/' + URL_MAP_NAME,
-              },
-              callback
-            );
-          },
-
-          create(rule, {
-            target: 'global/targetHttpProxies/' + TARGET_PROXY_NAME,
-            portRange: '8080',
-            IPProtocol: 'TCP',
-          }),
-        ],
-        done
-      );
-    });
-
-    it('should get a list of rules', function(done) {
-      compute.getRules(function(err, rules) {
-        assert.ifError(err);
-        assert(rules.length > 0);
-        done();
+    before(async () => {
+      await createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME);
+      await createUrlMap({
+        name: URL_MAP_NAME,
+        defaultService: 'global/backendServices/' + service.name,
+      });
+      await createTargetProxy({
+        name: TARGET_PROXY_NAME,
+        urlMap: 'global/urlMaps/' + URL_MAP_NAME,
+      });
+      await create(rule, {
+        target: 'global/targetHttpProxies/' + TARGET_PROXY_NAME,
+        portRange: '8080',
+        IPProtocol: 'TCP',
       });
     });
 
-    it('should have created the right rule', function(done) {
+    it('should get a list of rules', async () => {
+      const [rules] = await compute.getRules();
+      assert(rules.length > 0);
+    });
+
+    it('should have created the right rule', async () => {
       const target = [
         'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
         TARGET_PROXY_NAME,
       ].join('');
 
-      rule.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.strictEqual(metadata.name, RULE_NAME);
-        assert.strictEqual(metadata.IPProtocol, 'TCP');
-        assert.strictEqual(metadata.portRange, '8080-8080');
+      const [metadata] = await rule.getMetadata();
+      assert.strictEqual(metadata.name, RULE_NAME);
+      assert.strictEqual(metadata.IPProtocol, 'TCP');
+      assert.strictEqual(metadata.portRange, '8080-8080');
 
-        // The projectId may have been replaced depending on how the system
-        // tests are being run, so let's not care about that.
-        metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
-        assert.strictEqual(metadata.target, target);
-
-        done();
-      });
+      // The projectId may have been replaced depending on how the system
+      // tests are being run, so let's not care about that.
+      metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
+      assert.strictEqual(metadata.target, target);
     });
 
-    it('should set a new target', function(done) {
+    it('should set a new target', async () => {
       let target = [
         'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
         '/global/targetHttpProxies/' + TARGET_PROXY_NAME,
       ].join('');
 
-      rule.setTarget(
-        target,
-        compute.execAfterOperation_(function(err) {
-          assert.ifError(err);
+      await awaitResult(rule.setTarget(target));
+      const [metadata] = await rule.getMetadata();
 
-          rule.getMetadata(function(err, metadata) {
-            assert.ifError(err);
-
-            // The projectId may have been replaced depending on how the system
-            // tests are being run, so let's not care about that.
-            target = target.replace(/projects\/[^/]*\//, '');
-            metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
-            assert.strictEqual(metadata.target, target);
-
-            done();
-          });
-        })
-      );
+      // The projectId may have been replaced depending on how the system
+      // tests are being run, so let's not care about that.
+      target = target.replace(/projects\/[^/]*\//, '');
+      metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
+      assert.strictEqual(metadata.target, target);
     });
   });
 
-  describe('rules (regional)', function() {
+  describe('rules (regional)', () => {
     const RULE_NAME = generateName('rule');
     const rule = region.rule(RULE_NAME);
-
     const TARGET_INSTANCE_NAME = generateName('target-instance');
-
     const VM_NAME = generateName('vm');
     const vm = zone.vm(VM_NAME);
 
-    before(function(done) {
-      async.series(
-        [
-          create(vm, {
-            os: 'ubuntu',
-            http: true,
-          }),
-
-          function(callback) {
-            createTargetInstance(TARGET_INSTANCE_NAME, VM_NAME, callback);
-          },
-
-          create(rule, {
-            target: [
-              'zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME,
-            ].join(''),
-            range: '8000-9000',
-          }),
-        ],
-        done
-      );
-    });
-
-    it('should get a list of rules', function(done) {
-      region.getRules(function(err, rules) {
-        assert.ifError(err);
-        assert(rules.length > 0);
-        done();
+    before(async () => {
+      await create(vm, {
+        os: 'ubuntu',
+        http: true,
+      });
+      await createTargetInstance(TARGET_INSTANCE_NAME, VM_NAME);
+      await create(rule, {
+        target: [
+          'zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME,
+        ].join(''),
+        range: '8000-9000',
       });
     });
 
-    it('should have created the right rule', function(done) {
+    it('should get a list of rules', async () => {
+      const [rules] = await region.getRules();
+      assert(rules.length > 0);
+    });
+
+    it('should have created the right rule', async () => {
       let target = [
         'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
         '/zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME,
       ].join('');
 
-      rule.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.strictEqual(metadata.name, RULE_NAME);
-        assert.strictEqual(metadata.IPProtocol, 'TCP');
-        assert.strictEqual(metadata.portRange, '8000-9000');
+      const [metadata] = await rule.getMetadata();
+      assert.strictEqual(metadata.name, RULE_NAME);
+      assert.strictEqual(metadata.IPProtocol, 'TCP');
+      assert.strictEqual(metadata.portRange, '8000-9000');
 
-        // The projectId may have been replaced depending on how the system
-        // tests are being run, so let's not care about that.
-        target = target.replace(/projects\/[^/]*\//, '');
-        metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
-        assert.strictEqual(metadata.target, target);
-        done();
-      });
+      // The projectId may have been replaced depending on how the system
+      // tests are being run, so let's not care about that.
+      target = target.replace(/projects\/[^/]*\//, '');
+      metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
+      assert.strictEqual(metadata.target, target);
     });
   });
 
-  describe('services', function() {
+  describe('services', () => {
     const service = compute.service(generateName('service'));
 
     const INSTANCE_GROUP_NAME = generateName('instance-group');
     const HEALTH_CHECK_NAME = generateName('health-check');
 
-    before(function(done) {
-      createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME, done);
+    before(
+      async () =>
+        await createService(
+          service.name,
+          INSTANCE_GROUP_NAME,
+          HEALTH_CHECK_NAME
+        )
+    );
+
+    it('should get a list of services', async () => {
+      const [services] = await compute.getServices();
+      assert(services.length > 0);
     });
 
-    it('should get a list of services', function(done) {
-      compute.getServices(function(err, services) {
-        assert.ifError(err);
-        assert(services.length > 0);
-        done();
-      });
-    });
-
-    it('should get a list of services in stream mode', function(done) {
+    it('should get a list of services in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getServicesStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get the results of a health check', function(done) {
-      service.getHealth(
-        {
-          name: INSTANCE_GROUP_NAME,
-          zone: zone,
-        },
-        function(err, status) {
-          assert.ifError(err);
-          assert.strictEqual(is.array(status), true);
-          done();
-        }
-      );
+    it('should get the results of a health check', async () => {
+      const [status] = await service.getHealth({
+        name: INSTANCE_GROUP_NAME,
+        zone: zone,
+      });
+      assert.strictEqual(Array.isArray(status), true);
     });
 
-    it('should set metadata', function(done) {
+    it('should set metadata', async () => {
       const description = 'The best description. Possibly ever.';
-
-      service.setMetadata(
-        {
-          description: description,
-        },
-        compute.execAfterOperation_(function(err) {
-          if (err) {
-            done(err);
-            return;
-          }
-
-          service.getMetadata(function(err, metadata) {
-            if (err) {
-              done(err);
-              return;
-            }
-
-            assert.strictEqual(metadata.description, description);
-
-            done();
-          });
-        })
-      );
+      await awaitResult(service.setMetadata({description}));
+      const [metadata] = await service.getMetadata();
+      assert.strictEqual(metadata.description, description);
     });
   });
 
-  describe('snapshots', function() {
-    it('should get a list of snapshots', function(done) {
-      compute.getSnapshots(function(err, snapshots) {
-        assert.ifError(err);
-        assert(snapshots.length > 0);
-        done();
-      });
+  describe('snapshots', () => {
+    it('should get a list of snapshots', async () => {
+      const [snapshots] = await compute.getSnapshots();
+      assert(snapshots.length > 0);
     });
 
-    it('should get a list of snapshots in stream mode', function(done) {
+    it('should get a list of snapshots in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getSnapshotsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
   });
 
-  describe('subnetworks', function() {
+  describe('subnetworks', () => {
     const NETWORK_NAME = generateName('network');
     const network = compute.network(NETWORK_NAME);
-
     const SUBNETWORK_NAME = generateName('subnetwork');
     const subnetwork = region.subnetwork(SUBNETWORK_NAME);
-
     const NETWORK_CONFIG = {
       autoCreateSubnetworks: false,
     };
-
     const SUBNETWORK_CONFIG = {
       network: 'global/networks/' + NETWORK_NAME,
       range: '10.0.1.0/24',
     };
 
-    before(function(done) {
-      async.series(
-        [
-          create(network, NETWORK_CONFIG),
-          create(subnetwork, SUBNETWORK_CONFIG),
-        ],
-        done
-      );
+    before(async () => {
+      await create(network, NETWORK_CONFIG);
+      await create(subnetwork, SUBNETWORK_CONFIG);
     });
 
-    it('should have created the subnetwork', function(done) {
-      subnetwork.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.strictEqual(metadata.name, SUBNETWORK_NAME);
-        done();
-      });
+    it('should have created the subnetwork', async () => {
+      const [metadata] = await subnetwork.getMetadata();
+      assert.strictEqual(metadata.name, SUBNETWORK_NAME);
     });
 
-    it('should get a list of subnetworks', function(done) {
-      compute.getSubnetworks(function(err, subnetworks) {
-        assert.ifError(err);
-        assert(subnetworks.length > 0);
-        done();
-      });
+    it('should get a list of subnetworks', async () => {
+      const [subnetworks] = await compute.getSubnetworks();
+      assert(subnetworks.length > 0);
     });
 
-    it('should get a list of subnetworks in stream mode', function(done) {
+    it('should get a list of subnetworks in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getSubnetworksStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get a list of regional subnetworks', function(done) {
-      region.getSubnetworks(function(err, subnetworks) {
-        assert.ifError(err);
-        assert(subnetworks.length > 0);
-        done();
-      });
+    it('should get a list of regional subnetworks', async () => {
+      const [subnetworks] = await region.getSubnetworks();
+      assert(subnetworks.length > 0);
     });
 
-    it('should get a list of regional subnetworks in stream', function(done) {
+    it('should get a list of regional subnetworks in stream', done => {
       let resultsMatched = 0;
-
       region
         .getSubnetworksStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should access a subnetwork through a Region', function(done) {
-      region.subnetwork(SUBNETWORK_NAME).getMetadata(done);
+    it('should access a subnetwork through a Region', async () => {
+      return region.subnetwork(SUBNETWORK_NAME).getMetadata();
     });
   });
 
-  describe('vms', function() {
+  describe('vms', () => {
     const VM_NAME = generateName('vm');
     const vm = zone.vm(VM_NAME);
 
-    before(create(vm, {os: 'ubuntu', http: true}));
-
-    it('should have enabled HTTP connections', function(done) {
-      vm.getTags(function(err, tags) {
-        assert.ifError(err);
-        assert.deepStrictEqual(tags, ['http-server']);
-        done();
-      });
+    before(async () => {
+      await create(vm, {os: 'ubuntu', http: true});
     });
 
-    it('should get a list of vms', function(done) {
-      compute.getVMs(function(err, vms) {
-        assert.ifError(err);
-        assert(vms.length > 0);
-        done();
-      });
+    it('should have enabled HTTP connections', async () => {
+      const [tags] = await vm.getTags();
+      assert.deepStrictEqual(tags, ['http-server']);
     });
 
-    it('should get a list of vms in stream mode', function(done) {
+    it('should get a list of vms', async () => {
+      const [vms] = await compute.getVMs();
+      assert(vms.length > 0);
+    });
+
+    it('should get a list of vms in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getVMsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should access a VM through a Zone', function(done) {
-      zone.vm(VM_NAME).getMetadata(done);
+    it('should access a VM through a Zone', async () => {
+      await zone.vm(VM_NAME).getMetadata();
     });
 
-    it('should attach and detach a disk', function(done) {
+    it('should attach and detach a disk', async () => {
       const disk = zone.disk(generateName('disk'));
-
-      async.series([createDisk, attachDisk, detachDisk], done);
-
-      function createDisk(callback) {
-        const config = {
-          os: 'ubuntu',
-        };
-
-        disk.create(config, compute.execAfterOperation_(callback));
-      }
-
-      function attachDisk(callback) {
-        vm.attachDisk(disk, compute.execAfterOperation_(callback));
-      }
-
-      function detachDisk(callback) {
-        vm.detachDisk(disk, compute.execAfterOperation_(callback));
-      }
+      await awaitResult(disk.create({os: 'ubuntu'}));
+      await awaitResult(vm.attachDisk(disk));
+      await awaitResult(vm.detachDisk(disk));
     });
 
-    it('should get serial port output', function(done) {
-      vm.getSerialPortOutput(done);
+    it('should get serial port output', async () => {
+      return vm.getSerialPortOutput();
     });
 
-    it('should set tags', function(done) {
+    it('should set tags', async () => {
       const newTagName = 'new-tag';
-
-      vm.getTags(function(err, tags, fingerprint) {
-        assert.ifError(err);
-
-        tags.push(newTagName);
-
-        vm.setTags(
-          tags,
-          fingerprint,
-          compute.execAfterOperation_(function(e) {
-            assert.ifError(e);
-
-            vm.getTags(function(err, tags) {
-              assert.ifError(err);
-              assert(tags.indexOf(newTagName) > -1);
-              done();
-            });
-          })
-        );
-      });
+      const [tags, fingerprint] = await vm.getTags();
+      tags.push(newTagName);
+      await awaitResult(vm.setTags(tags, fingerprint));
+      const [t2] = await vm.getTags();
+      assert(t2.indexOf(newTagName) > -1);
     });
 
-    it('should reset', function(done) {
-      vm.reset(compute.execAfterOperation_(done));
+    it('should reset', async () => {
+      return awaitResult(vm.reset());
     });
 
-    it('should resize the machine', function(done) {
+    it('should resize the machine', async () => {
       const machineType = 'n1-standard-2';
+      await vm.resize(machineType);
+      const [metadata] = await vm.getMetadata();
+      const expectedMachineType = [
+        'https://www.googleapis.com/compute/v1',
+        'zones',
+        zone.id,
+        'machineTypes',
+        machineType,
+      ].join('/');
 
-      vm.resize(machineType, function(err) {
-        assert.ifError(err);
-
-        vm.getMetadata(function(err, metadata) {
-          assert.ifError(err);
-
-          const expectedMachineType = [
-            'https://www.googleapis.com/compute/v1',
-            'zones',
-            zone.id,
-            'machineTypes',
-            machineType,
-          ].join('/');
-
-          // The projectId may have been replaced depending on how the system
-          // tests are being run, so let's not care about that.
-          metadata.machineType = metadata.machineType.replace(
-            /projects\/[^/]*\//,
-            ''
-          );
-          assert.strictEqual(metadata.machineType, expectedMachineType);
-
-          done();
-        });
-      });
+      // The projectId may have been replaced depending on how the system
+      // tests are being run, so let's not care about that.
+      metadata.machineType = metadata.machineType.replace(
+        /projects\/[^/]*\//,
+        ''
+      );
+      assert.strictEqual(metadata.machineType, expectedMachineType);
     });
 
-    it('should set metadata', function(done) {
+    it('should set metadata', async () => {
       const key = 'newKey';
       const value = 'newValue';
-
-      async.series(
-        [
-          next =>
-            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
-          next => vm.getMetadata(next),
-        ],
-        err => {
-          assert.ifError(err);
-          assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
-          done();
-        }
-      );
+      await awaitResult(vm.setMetadata({[key]: value}));
+      await vm.getMetadata();
+      assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
     });
 
-    it('should allow updating old metadata', function(done) {
+    it('should allow updating old metadata', async () => {
       const key = 'newKey';
       const value = 'newValue';
       const overriddenValue = `${value}${value}`;
-
-      async.series(
-        [
-          next =>
-            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
-          next =>
-            vm.setMetadata(
-              {[key]: overriddenValue},
-              compute.execAfterOperation_(next)
-            ),
-          next => vm.getMetadata(next),
-        ],
-        err => {
-          assert.ifError(err);
-          assert.deepStrictEqual(vm.metadata.metadata.items, [
-            {key, value: overriddenValue},
-          ]);
-          done();
-        }
-      );
+      await awaitResult(vm.setMetadata({[key]: value}));
+      await awaitResult(vm.setMetadata({[key]: overriddenValue}));
+      await vm.getMetadata();
+      assert.deepStrictEqual(vm.metadata.metadata.items, [
+        {key, value: overriddenValue},
+      ]);
     });
 
-    it('should allow removing old metadata', function(done) {
+    it('should allow removing old metadata', async () => {
       const key = 'newKey';
       const value = 'newValue';
-
-      async.series(
-        [
-          next =>
-            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
-          next =>
-            vm.setMetadata({[key]: null}, compute.execAfterOperation_(next)),
-          next => vm.getMetadata(next),
-        ],
-        err => {
-          assert.ifError(err);
-          assert.strictEqual(vm.metadata.metadata.items, undefined);
-          done();
-        }
-      );
+      await awaitResult(vm.setMetadata({[key]: value}));
+      await awaitResult(vm.setMetadata({[key]: null}));
+      await vm.getMetadata();
+      assert.strictEqual(vm.metadata.metadata.items, undefined);
     });
 
-    it('should start', function(done) {
-      vm.start(compute.execAfterOperation_(done));
+    it('should start', async () => {
+      return awaitResult(vm.start());
     });
 
-    it('should stop and trigger STOPPING `waitFor` event', function(done) {
-      async.parallel(
-        [
-          function(callback) {
-            vm.waitFor('STOPPING', {timeout: 600}, callback);
-          },
-
-          function(callback) {
-            vm.stop(compute.execAfterOperation_(callback));
-          },
-        ],
-        done
-      );
+    it('should stop and trigger STOPPING `waitFor` event', async () => {
+      await Promise.all([
+        vm.waitFor('STOPPING', {timeout: 600}),
+        awaitResult(vm.stop()),
+      ]);
     });
   });
 
-  describe('zones', function() {
-    it('should get a list of zones', function(done) {
-      compute.getZones(function(err, zones) {
-        assert.ifError(err);
-        assert(zones.length > 0);
-        done();
-      });
+  describe('zones', () => {
+    it('should get a list of zones', async () => {
+      const [zones] = await compute.getZones();
+      assert(zones.length > 0);
     });
 
-    it('should get a list of zones in stream mode', function(done) {
+    it('should get a list of zones in stream mode', done => {
       let resultsMatched = 0;
-
       compute
         .getZonesStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get a list of disks', function(done) {
-      zone.getDisks(function(err, disks) {
-        assert.ifError(err);
-        assert(disks.length > 0);
-        done();
-      });
+    it('should get a list of disks', async () => {
+      const [disks] = await zone.getDisks();
+      assert(disks.length > 0);
     });
 
-    it('should get a list of disks in stream mode', function(done) {
+    it('should get a list of disks in stream mode', done => {
       let resultsMatched = 0;
-
       zone
         .getDisksStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
     });
 
-    it('should get a list of operations', function(done) {
-      zone.getOperations(function(err, operations) {
-        assert.ifError(err);
-        assert(operations.length > 0);
-        done();
-      });
+    it('should get a list of operations', async () => {
+      const [operations] = await zone.getOperations();
+      assert(operations.length > 0);
     });
 
-    it('should get a list of operations in stream mode', function(done) {
+    it('should get a list of operations in stream mode', done => {
       let resultsMatched = 0;
-
       zone
         .getOperationsStream()
         .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
           assert(resultsMatched > 0);
           done();
         });
@@ -1546,601 +1108,364 @@ describe('Compute', function() {
   });
 
   function generateName(customPrefix) {
-    return [TESTS_PREFIX, customPrefix + '-', uuid.v4().replace('-', '')]
-      .join('')
-      .substr(0, 61);
+    const resourceId = uuid.v4().split('-')[0];
+    return `${TESTS_PREFIX}-${TEST_ID}-${customPrefix}-${resourceId}`;
   }
 
-  function deleteAllTestObjects(callback) {
-    async.series(
-      [
-        deleteGlobalRules,
-        deleteRegionalRules,
-        deleteTargetProxies,
-        deleteUrlMaps,
-        deleteServices,
-        deleteHttpsHealthChecks,
-        deleteInstanceGroupManagers,
-        deleteInstanceTemplates,
-        deleteTargetInstances,
-        deleteAllGcloudTestObjects,
-      ],
-      callback
+  async function deleteAllTestObjects(opts) {
+    opts.name = opts.expiredOnly ? TESTS_PREFIX : FULL_PREFIX;
+    await deleteGlobalRules(opts);
+    await deleteRegionalRules(opts);
+    await deleteTargetProxies(opts);
+    await deleteUrlMaps(opts);
+    await deleteServices(opts);
+    await deleteHttpsHealthChecks(opts);
+    await deleteInstanceGroupManagers(opts);
+    await deleteInstanceTemplates(opts);
+    await deleteTargetInstances(opts);
+    await deleteAllGcloudTestObjects(opts);
+  }
+
+  async function deleteAllGcloudTestObjects(opts) {
+    const objectTypes = [
+      'VMs',
+      'Addresses',
+      'Autoscalers',
+      'Disks',
+      'Images',
+      'InstanceGroups',
+      'Firewalls',
+      'Subnetworks',
+      'HealthChecks',
+      'Networks',
+      'Rules',
+      'Snapshots',
+    ];
+    for (const type of objectTypes) {
+      await callAndDeleteGcloudTestObject(type, opts);
+    }
+  }
+
+  async function callAndDeleteGcloudTestObject(type, opts) {
+    let [objects] = await compute[`get${type}`]({
+      filter: `name eq ${opts.name}.*`,
+    });
+    objects = filterExpired(opts, objects);
+    console.log(`deleting ${objects.length} ${type}...`);
+    await Promise.all(
+      objects.map(async o => {
+        console.log(`Deleting ${type} '${o.name}'...`);
+        await awaitResult(o.delete());
+        console.log(`${type} '${o.name}' deleted!`);
+      })
     );
   }
 
-  function deleteAllGcloudTestObjects(callback) {
-    async.eachSeries(
-      [
-        'getVMs',
-        'getAddresses',
-        'getAutoscalers',
-        'getDisks',
-        'getImages',
-        'getInstanceGroups',
-        'getFirewalls',
-        'getSubnetworks',
-        'getHealthChecks',
-        'getNetworks',
-        'getRules',
-        'getSnapshots',
-      ],
-      callAndDeleteGcloudTestObject,
-      callback
+  async function create(object, cfg) {
+    return awaitResult(object.create(cfg));
+  }
+
+  async function deleteGlobalRules(opts) {
+    const [rules] = await compute.getRules({
+      filter: `name eq ${opts.name}.*`,
+    });
+    await Promise.all(
+      filterExpired(opts, rules).map(rule => awaitResult(rule.delete()))
     );
   }
 
-  function callAndDeleteGcloudTestObject(methodName, callback) {
-    compute[methodName](
-      {
-        filter: 'name eq ' + TESTS_PREFIX + '.*',
-      },
-      function(err, objects) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        async.each(
-          objects,
-          function(object, callback) {
-            object.delete(compute.execAfterOperation_(callback));
-          },
-          callback
-        );
-      }
+  async function deleteRegionalRules(opts) {
+    const [rules] = await region.getRules({
+      filter: `name eq ${opts.name}.*`,
+    });
+    return Promise.all(
+      filterExpired(opts, rules).map(rule => awaitResult(rule.delete()))
     );
   }
 
-  function create(object, cfg) {
-    return function(callback) {
-      object.create(cfg, compute.execAfterOperation_(callback));
-    };
-  }
-
-  function deleteGlobalRules(callback) {
-    compute.getRules(
-      {
-        filter: 'name eq ' + TESTS_PREFIX + '.*',
-      },
-      function(err, rules) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        async.each(
-          rules,
-          function(rule, callback) {
-            rule.delete(compute.execAfterOperation_(callback));
-          },
-          callback
-        );
-      }
+  async function deleteServices(opts) {
+    const [services] = await compute.getServices({
+      filter: `name eq ${opts.name}.*`,
+    });
+    return Promise.all(
+      filterExpired(opts, services).map(service =>
+        awaitResult(service.delete())
+      )
     );
   }
 
-  function deleteRegionalRules(callback) {
-    region.getRules(
-      {
-        filter: 'name eq ' + TESTS_PREFIX + '.*',
-      },
-      function(err, rules) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        async.each(
-          rules,
-          function(rule, callback) {
-            rule.delete(compute.execAfterOperation_(callback));
-          },
-          callback
-        );
-      }
-    );
-  }
-
-  function deleteServices(callback) {
-    compute.getServices(
-      {
-        filter: 'name eq ' + TESTS_PREFIX + '.*',
-      },
-      function(err, services) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        async.each(
-          services,
-          function(service, callback) {
-            service.delete(compute.execAfterOperation_(callback));
-          },
-          callback
-        );
-      }
-    );
-  }
-
-  function createService(name, instanceGroupName, healthCheckName, callback) {
+  async function createService(name, instanceGroupName, healthCheckName) {
     const service = compute.service(name);
     const group = zone.instanceGroup(instanceGroupName);
     const healthCheck = compute.healthCheck(healthCheckName);
-    let groupUrl;
-    let healthCheckUrl;
-
-    async.series(
-      [
-        create(group),
-
-        function(callback) {
-          group.getMetadata(function(err, metadata) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            groupUrl = metadata.selfLink;
-            callback();
-          });
-        },
-
-        create(healthCheck),
-
-        function(callback) {
-          healthCheck.getMetadata(function(err, metadata) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            healthCheckUrl = metadata.selfLink;
-            callback();
-          });
-        },
-
-        function(callback) {
-          create(service, {
-            backends: [
-              {
-                group: groupUrl,
-              },
-            ],
-            healthChecks: [healthCheckUrl],
-          })(callback);
+    await create(group);
+    const [metadata] = await group.getMetadata();
+    const groupUrl = metadata.selfLink;
+    await create(healthCheck);
+    const [metadata2] = await healthCheck.getMetadata();
+    const healthCheckUrl = metadata2.selfLink;
+    await create(service, {
+      backends: [
+        {
+          group: groupUrl,
         },
       ],
-      callback
-    );
-  }
-
-  function deleteHttpsHealthChecks(callback) {
-    compute.getHealthChecks(
-      {
-        filter: 'name eq ' + TESTS_PREFIX + '.*',
-        https: true,
-      },
-      function(err, healthChecks) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        async.each(
-          healthChecks,
-          function(healthCheck, callback) {
-            healthCheck.delete(compute.execAfterOperation_(callback));
-          },
-          callback
-        );
-      }
-    );
-  }
-
-  function getUrlMaps(callback) {
-    compute.request(
-      {
-        uri: '/global/urlMaps',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function deleteUrlMaps(callback) {
-    getUrlMaps(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      async.each(resp.items.map(prop('name')), deleteUrlMap, callback);
+      healthChecks: [healthCheckUrl],
     });
   }
 
-  function createUrlMap(config, callback) {
-    compute.request(
-      {
-        method: 'POST',
-        uri: '/global/urlMaps',
-        json: config,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function deleteUrlMap(name, callback) {
-    compute.request(
-      {
-        method: 'DELETE',
-        uri: '/global/urlMaps/' + name,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function getTargetProxies(callback) {
-    compute.request(
-      {
-        uri: '/global/targetHttpProxies',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function deleteTargetProxies(callback) {
-    getTargetProxies(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      async.each(resp.items.map(prop('name')), deleteTargetProxy, callback);
+  async function deleteHttpsHealthChecks(opts) {
+    const [healthChecks] = await compute.getHealthChecks({
+      filter: `name eq ${opts.name}.*`,
+      https: true,
     });
-  }
-
-  function createTargetProxy(config, callback) {
-    compute.request(
-      {
-        method: 'POST',
-        uri: '/global/targetHttpProxies',
-        json: config,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
+    return Promise.all(
+      filterExpired(opts, healthChecks).map(healthCheck =>
+        awaitResult(healthCheck.delete())
+      )
     );
   }
 
-  function deleteTargetProxy(name, callback) {
-    compute.request(
-      {
-        method: 'DELETE',
-        uri: '/global/targetHttpProxies/' + name,
+  async function deleteUrlMaps(opts) {
+    const resp = await computeRequest({
+      uri: '/global/urlMaps',
+      qs: {
+        filter: `name eq ${opts.name}.*`,
       },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function getTargetInstances(callback) {
-    zone.request(
-      {
-        uri: '/targetInstances',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function deleteTargetInstances(callback) {
-    getTargetInstances(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      async.each(resp.items.map(prop('name')), deleteTargetInstance, callback);
     });
-  }
-
-  function createTargetInstance(name, instanceName, callback) {
-    zone.request(
-      {
-        method: 'POST',
-        uri: '/targetInstances',
-        json: {
-          name: name,
-          instance: 'zones/' + zone.name + '/instances/' + instanceName,
-        },
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = zone.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
+    if (!resp.items) {
+      return;
+    }
+    return Promise.all(
+      filterExpired(opts, resp.items)
+        .map(x => x.name)
+        .map(deleteUrlMap)
     );
   }
 
-  function deleteTargetInstance(name, callback) {
-    zone.request(
-      {
-        method: 'DELETE',
-        uri: '/targetInstances/' + name,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = zone.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function getInstanceTemplates(callback) {
-    compute.request(
-      {
-        uri: '/global/instanceTemplates',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function deleteInstanceTemplates(callback) {
-    getInstanceTemplates(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      const names = resp.items.map(prop('name'));
-      async.each(names, deleteInstanceTemplate, callback);
+  async function createUrlMap(config) {
+    const resp = await computeRequest({
+      method: 'POST',
+      uri: '/global/urlMaps',
+      json: config,
     });
+    const operation = compute.operation(resp.name);
+    await operation.promise();
   }
 
-  function createInstanceTemplate(name, networkName, callback) {
-    compute.request(
-      {
-        method: 'POST',
-        uri: '/global/instanceTemplates',
-        json: {
-          name: name,
-          properties: {
-            disks: [
-              {
-                boot: true,
-                mode: 'READ_ONLY',
-                initializeParams: {
-                  diskName: generateName('disk'),
-                  diskSizeGb: 10,
-                  diskType: 'pd-standard',
-                  sourceImage: [
-                    'projects/centos-cloud/global/images/centos-6-v20150710',
-                  ].join(''),
+  async function deleteUrlMap(name) {
+    const resp = await computeRequest({
+      method: 'DELETE',
+      uri: '/global/urlMaps/' + name,
+    });
+    const operation = compute.operation(resp.name);
+    await operation.promise();
+  }
+
+  async function deleteTargetProxies(opts) {
+    const resp = await computeRequest({
+      uri: '/global/targetHttpProxies',
+      qs: {
+        filter: `name eq ${opts.name}.*`,
+      },
+    });
+    if (!resp.items) {
+      return;
+    }
+    return Promise.all(
+      filterExpired(opts, resp.items)
+        .map(x => x.name)
+        .map(deleteTargetProxy)
+    );
+  }
+
+  async function createTargetProxy(config) {
+    const resp = await computeRequest({
+      method: 'POST',
+      uri: '/global/targetHttpProxies',
+      json: config,
+    });
+    const operation = compute.operation(resp.name);
+    await operation.promise();
+  }
+
+  async function deleteTargetProxy(name) {
+    const resp = await computeRequest({
+      method: 'DELETE',
+      uri: '/global/targetHttpProxies/' + name,
+    });
+    const operation = compute.operation(resp.name);
+    await operation.promise();
+  }
+
+  async function deleteTargetInstances(opts) {
+    const resp = await zoneRequest({
+      uri: '/targetInstances',
+      qs: {
+        filter: `name eq ${opts.name}.*`,
+      },
+    });
+    if (!resp.items) {
+      return;
+    }
+    return Promise.all(
+      filterExpired(opts, resp.items)
+        .map(x => x.name)
+        .map(x => deleteTargetInstance(x))
+    );
+  }
+
+  async function createTargetInstance(name, instanceName) {
+    const resp = await zoneRequest({
+      method: 'POST',
+      uri: '/targetInstances',
+      json: {
+        name: name,
+        instance: 'zones/' + zone.name + '/instances/' + instanceName,
+      },
+    });
+    const operation = zone.operation(resp.name);
+    await operation.promise();
+  }
+
+  async function deleteTargetInstance(name) {
+    const resp = await zoneRequest({
+      method: 'DELETE',
+      uri: '/targetInstances/' + name,
+    });
+    const operation = zone.operation(resp.name);
+    await operation.promise();
+  }
+
+  async function deleteInstanceTemplates(opts) {
+    const resp = await computeRequest({
+      uri: '/global/instanceTemplates',
+      qs: {
+        filter: `name eq ${opts.name}.*`,
+      },
+    });
+    if (!resp.items) {
+      return;
+    }
+    const names = filterExpired(opts, resp.items).map(x => x.name);
+    return Promise.all(names.map(x => deleteInstanceTemplate(x)));
+  }
+
+  async function createInstanceTemplate(name, networkName) {
+    const resp = await computeRequest({
+      method: 'POST',
+      uri: '/global/instanceTemplates',
+      json: {
+        name: name,
+        properties: {
+          disks: [
+            {
+              boot: true,
+              mode: 'READ_ONLY',
+              initializeParams: {
+                diskName: generateName('disk'),
+                diskSizeGb: 10,
+                diskType: 'pd-standard',
+                sourceImage: [
+                  'projects/centos-cloud/global/images/centos-6-v20150710',
+                ].join(''),
+              },
+            },
+          ],
+          machineType: 'n1-standard-1',
+          networkInterfaces: [
+            {
+              network: networkName,
+              accessConfigs: [
+                {
+                  name: generateName('access_config'),
+                  type: 'ONE_TO_ONE_NAT',
                 },
-              },
-            ],
-            machineType: 'n1-standard-1',
-            networkInterfaces: [
-              {
-                network: networkName,
-                accessConfigs: [
-                  {
-                    name: generateName('access_config'),
-                    type: 'ONE_TO_ONE_NAT',
-                  },
-                ],
-              },
-            ],
-          },
+              ],
+            },
+          ],
         },
       },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function deleteInstanceTemplate(name, callback) {
-    compute.request(
-      {
-        method: 'DELETE',
-        uri: '/global/instanceTemplates/' + name,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function getInstanceGroupManagers(callback) {
-    zone.request(
-      {
-        uri: '/instanceGroupManagers',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function deleteInstanceGroupManagers(callback) {
-    getInstanceGroupManagers(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      const names = resp.items.map(prop('name'));
-      async.each(names, deleteInstanceGroupManager, callback);
     });
+    const operation = compute.operation(resp.name);
+    await operation.promise();
   }
 
-  function createInstanceGroupManager(name, instanceTemplateName, callback) {
-    zone.request(
-      {
-        method: 'POST',
-        uri: '/instanceGroupManagers',
-        json: {
-          baseInstanceName: name.replace(/\W/g, ''),
-          name: name,
-          targetSize: 1,
-          instanceTemplate: instanceTemplateName,
-        },
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        const operation = zone.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
+  async function deleteInstanceTemplate(name) {
+    const resp = await computeRequest({
+      method: 'DELETE',
+      uri: '/global/instanceTemplates/' + name,
+    });
+    const operation = compute.operation(resp.name);
+    await operation.promise();
   }
 
-  function deleteInstanceGroupManager(name, callback) {
-    zone.request(
-      {
-        method: 'DELETE',
-        uri: '/instanceGroupManagers/' + name,
+  async function deleteInstanceGroupManagers(opts) {
+    const resp = await zoneRequest({
+      uri: '/instanceGroupManagers',
+      qs: {
+        filter: `name eq ${opts.name}.*`,
       },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
+    });
+    if (!resp.items) {
+      return;
+    }
+    const names = filterExpired(opts, resp.items).map(x => x.name);
+    await Promise.all(names.map(name => deleteInstanceGroupManager(name)));
+  }
 
-        const operation = zone.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
+  async function createInstanceGroupManager(name, instanceTemplateName) {
+    const resp = await zoneRequest({
+      method: 'POST',
+      uri: '/instanceGroupManagers',
+      json: {
+        baseInstanceName: name.replace(/\W/g, ''),
+        name: name,
+        targetSize: 1,
+        instanceTemplate: instanceTemplateName,
+      },
+    });
+    const operation = zone.operation(resp.name);
+    await operation.promise();
+  }
+
+  async function deleteInstanceGroupManager(name) {
+    const resp = await zoneRequest({
+      method: 'DELETE',
+      uri: '/instanceGroupManagers/' + name,
+    });
+    const operation = zone.operation(resp.name);
+    await operation.promise();
   }
 });
+
+async function awaitResult(promise) {
+  const result = await promise;
+  const operation = result[result.length - 2];
+  await operation.promise();
+}
+
+function filterExpired(opts, resources) {
+  if (opts.expiredOnly) {
+    return resources.filter(isExpired);
+  } else {
+    return resources;
+  }
+}
+
+function isExpired(resource) {
+  if (
+    resource &&
+    (resource.creationTimestamp ||
+      (resource.metadata && resource.metadata.creationTimestamp))
+  ) {
+    const created = new Date(
+      resource.creationTimestamp || resource.metadata.creationTimestamp
+    );
+    const age = Date.now() - created.getTime();
+    return age > 1000 * 60 * 60;
+  } else {
+    console.log(resource);
+    throw new Error('No Creation Timestamp found!');
+  }
+}

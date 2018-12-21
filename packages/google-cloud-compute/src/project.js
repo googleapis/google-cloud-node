@@ -98,11 +98,6 @@ class Project extends common.ServiceObject {
       methods: methods,
       requestModule: teenyRequest,
     });
-    /**
-     * @name Project#id
-     * @type {string}
-     */
-    this.id = compute.projectId;
   }
 }
 

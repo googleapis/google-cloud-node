@@ -64,10 +64,6 @@ describe('Project', function() {
       assert(promisified);
     });
 
-    it('should localize the ID', function() {
-      assert.strictEqual(project.id, PROJECT_ID);
-    });
-
     it('should inherit from ServiceObject', function() {
       assert(project instanceof FakeServiceObject);
 
