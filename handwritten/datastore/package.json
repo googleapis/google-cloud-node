@@ -46,7 +46,7 @@
     "@google-cloud/projectify": "^0.3.0",
     "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",
-    "concat-stream": "^1.6.2",
+    "concat-stream": "^2.0.0",
     "extend": "^3.0.1",
     "google-auth-library": "^2.0.0",
     "google-gax": "^0.22.0",
