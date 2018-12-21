@@ -19,21 +19,18 @@
 // Imports the Google Cloud client library
 const {PubSub} = require('@google-cloud/pubsub');
 
-async function quickstart() {
-  // Your Google Cloud Platform project ID
-  const projectId = process.env.GCLOUD_PROJECT || 'YOUR_PROJECT_ID';
-
+async function quickstart(
+  projectId = 'your-project-id', // Your Google Cloud Platform project ID
+  topicName = 'my-topic' // Name for the new topic to create
+) {
   // Instantiates a client
-  const pubsubClient = new PubSub({
-    projectId: projectId,
-  });
-
-  // The name for the new topic
-  const topicName = 'my-topic';
+  const pubsub = new PubSub({projectId});
 
   // Creates the new topic
-  const [topic] = await pubsubClient.createTopic(topicName);
+  const [topic] = await pubsub.createTopic(topicName);
   console.log(`Topic ${topic.name} created.`);
 }
-quickstart().catch(console.error);
 // [END pubsub_quickstart_create_topic]
+
+const args = process.argv.slice(2);
+quickstart(...args).catch(console.error);

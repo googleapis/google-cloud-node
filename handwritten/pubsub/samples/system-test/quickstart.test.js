@@ -15,51 +15,24 @@
 
 'use strict';
 
-const proxyquire = require('proxyquire').noPreserveCache();
-const {PubSub} = proxyquire('@google-cloud/pubsub', {});
-const sinon = require('sinon');
-const assert = require('assert');
-const tools = require('@google-cloud/nodejs-repo-tools');
+const {PubSub} = require('@google-cloud/pubsub');
+const {assert} = require('chai');
+const execa = require('execa');
 const uuid = require('uuid');
 
-const projectId = process.env.GCLOUD_PROJECT;
-const pubsub = new PubSub({projectId});
+describe('quickstart', () => {
+  const projectId = process.env.GCLOUD_PROJECT;
+  const pubsub = new PubSub({projectId});
+  const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
 
-const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
-const fullTopicName = `projects/${projectId}/topics/${topicName}`;
+  after(async () => {
+    await pubsub.topic(topicName).delete();
+  });
 
-before(tools.stubConsole);
-after(async () => {
-  tools.restoreConsole();
-  return await pubsub
-    .topic(topicName)
-    .delete()
-    .catch(() => {});
-});
-
-it(`should create a topic`, async () => {
-  const expectedTopicName = `my-topic`;
-  const pubsubMock = {
-    createTopic: _topicName => {
-      assert.strictEqual(_topicName, expectedTopicName);
-      return pubsub.createTopic(topicName).then(([topic]) => {
-        assert.strictEqual(topic.name, fullTopicName);
-        setTimeout(() => {
-          try {
-            assert.strictEqual(console.log.callCount, 1);
-            assert.deepStrictEqual(console.log.getCall(0).args, [
-              `Topic ${topic.name} created.`,
-            ]);
-          } catch (err) {}
-        }, 200);
-        return [topic];
-      });
-    },
-  };
-
-  proxyquire(`../quickstart`, {
-    '@google-cloud/pubsub': {
-      PubSub: sinon.stub().returns(pubsubMock),
-    },
+  it('should run the quickstart', async () => {
+    const {stdout} = await execa.shell(
+      `node quickstart ${projectId} ${topicName}`
+    );
+    assert.match(stdout, /^Topic .* created.$/);
   });
 });
