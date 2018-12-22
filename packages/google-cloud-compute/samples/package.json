@@ -11,22 +11,20 @@
     "node": ">=8"
   },
   "scripts": {
-    "system-test": "mocha system-test/*.js --timeout 600000",
-    "startup-test": "mocha startup-script/system-test/*.test.js --timeout 600000",
-    "test": "npm run system-test && npm run startup-test"
+    "test": "mocha --timeout 1200000"
   },
   "dependencies": {
+    "node-fetch": "^2.3.0",
     "@google-cloud/compute": "^0.11.0",
-    "googleapis": "^36.0.0",
     "nodemailer": "^4.3.1",
     "nodemailer-smtp-transport": "^2.7.4",
-    "sendgrid": "^5.2.3",
-    "uuid": "^3.2.1"
+    "sendgrid": "^5.2.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "execa": "^1.0.0",
     "mocha": "^5.0.0",
-    "proxyquire": "^2.0.1"
+    "proxyquire": "^2.0.1",
+    "uuid": "^3.2.1"
   }
 }

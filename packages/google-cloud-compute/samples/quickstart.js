@@ -11,32 +11,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* eslint-disable no-unused-vars */
-
 'use strict';
 
 // [START compute_engine_quickstart]
-// Imports the Google Cloud client library
-const Compute = require('@google-cloud/compute');
-const uuid = require('uuid');
-// Creates a client
-const compute = new Compute();
+async function createVM(
+  vmName = 'new_virtual_machine' // VM name of your choice
+) {
+  // Imports the Google Cloud client library
+  const Compute = require('@google-cloud/compute');
 
-// Create a new VM using the latest OS image of your choice.
-const zone = compute.zone('us-central1-a');
-const name = `ubuntu-http-${uuid().split('-')[0]}`;
+  // Creates a client
+  const compute = new Compute();
 
-async function createVM() {
-  const data = await zone.createVM(name, {os: 'ubuntu'});
+  // Create a new VM using the latest OS image of your choice.
+  const zone = compute.zone('us-central1-c');
+
+  // Start the VM create task
+  const [vm, operation] = await zone.createVM(vmName, {os: 'ubuntu'});
+  console.log(vm);
 
   // `operation` lets you check the status of long-running tasks.
-  const vm = data[0];
-  const operation = data[1];
-
   await operation.promise();
-  // Virtual machine created!
+
+  // Complete!
+  console.log('Virtual machine created!');
 }
-
-createVM().catch(console.error);
-
 // [END compute_engine_quickstart]
+
+createVM(...process.argv.slice(2)).catch(console.error);
