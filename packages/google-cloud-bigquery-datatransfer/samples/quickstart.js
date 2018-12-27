@@ -13,24 +13,12 @@
 // limitations under the License.
 
 'use strict';
-async function main() {
-  // [START bigquerydatatransfer_quickstart]
 
-  if (
-    !process.env.GCLOUD_PROJECT ||
-    !process.env.GOOGLE_APPLICATION_CREDENTIALS
-  ) {
-    throw new Error(
-      'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
-    );
-  }
-
+// [START bigquerydatatransfer_quickstart]
+async function quickstart() {
   const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
-
-  const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
-    // optional auth parameters.
-  });
-  const projectId = process.env.GCLOUD_PROJECT;
+  const client = new bigqueryDataTransfer.v1.DataTransferServiceClient();
+  const projectId = await client.getProjectId();
 
   // Iterate over all elements.
   const formattedParent = client.projectPath(projectId, 'us-central1');
@@ -59,7 +47,6 @@ async function main() {
     .on('data', element => {
       console.log(`  ${element.name}`);
     });
-  // [END bigquerydatatransfer_quickstart]
 }
-
-main().catch(console.error);
+quickstart().catch(console.error);
+// [END bigquerydatatransfer_quickstart]
