@@ -61,22 +61,12 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Using the client library
 
 ```javascript
-
-if (
-  !process.env.GCLOUD_PROJECT ||
-  !process.env.GOOGLE_APPLICATION_CREDENTIALS
-) {
-  throw new Error(
-    'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
-  );
-}
-
 const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
 
 const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
   // optional auth parameters.
 });
-const projectId = process.env.GCLOUD_PROJECT;
+const projectId = await client.getProjectId();
 
 // Iterate over all elements.
 const formattedParent = client.locationPath(projectId, 'us-central1');
