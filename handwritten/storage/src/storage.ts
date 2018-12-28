@@ -55,23 +55,6 @@ export interface BucketOptions {
   userProject?: string;
 }
 
-/**
- * Metadata to set for the bucket.
- *
- * @typedef {object} CreateBucketRequest
- * @property {boolean} [coldline=false] Specify the storage class as Coldline.
- * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
- *     Availability.
- * @property {boolean} [multiRegional=false] Specify the storage class as
- *     Multi-Regional.
- * @property {boolean} [nearline=false] Specify the storage class as Nearline.
- * @property {boolean} [regional=false] Specify the storage class as Regional.
- * @property {boolean} [requesterPays=false] **Early Access Testers Only**
- *     Force the use of the User Project metadata field to assign operational
- *     costs when an operation is made on a Bucket and its objects.
- * @property {string} [userProject] The ID of the project which will be billed
- *     for the request.
- */
 export interface CreateBucketRequest {
   coldline?: boolean;
   dra?: boolean;
@@ -84,19 +67,8 @@ export interface CreateBucketRequest {
   location?: string;
 }
 
-/**
- * @typedef {array} CreateBucketResponse
- * @property {Bucket} 0 The new {@link Bucket}.
- * @property {object} 1 The full API response.
- */
 export type CreateBucketResponse = [Bucket, r.Response];
 
-/**
- * @callback CreateBucketCallback
- * @param {?Error} err Request error, if any.
- * @param {Bucket} bucket The new {@link Bucket}.
- * @param {object} apiResponse The full API response.
- */
 export interface BucketCallback {
   (err: Error|null, bucket?: Bucket|null, apiResponse?: r.Response): void;
 }
@@ -115,32 +87,6 @@ export interface GetBucketsRequest {
   userProject?: string;
 }
 
-/**
- * @typedef {object} ClientConfig
- * @property {string} [projectId] The project ID from the Google Developer's
- *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
- *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
- *     an environment which supports {@link
- * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
- * Application Default Credentials}, your project ID will be detected
- * automatically.
- * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
- *     downloaded from the Google Developers Console. If you provide a path to a
- *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
- *     .p12 require you to specify the `email` option as well.
- * @property {string} [email] Account email address. Required when using a .pem
- *     or .p12 keyFilename.
- * @property {object} [credentials] Credentials object.
- * @property {string} [credentials.client_email]
- * @property {string} [credentials.private_key]
- * @property {boolean} [autoRetry=true] Automatically retry requests if the
- *     response is related to rate limits or certain intermittent server errors.
- *     We will exponentially backoff subsequent requests by default.
- * @property {number} [maxRetries=3] Maximum number of automatic retries
- *     attempted before returning the error.
- * @property {Constructor} [promise] Custom promise module to use instead of
- *     native Promises.
- */
 
 /*! Developer Documentation
  *
@@ -162,20 +108,6 @@ export interface GetBucketsRequest {
  * @see [Access Control]{@link https://cloud.google.com/storage/docs/access-control}
  *
  * @class
- * @hideconstructor
- *
- * @example <caption>Create a client that uses Application Default Credentials
- * (ADC)</caption> const {Storage} = require('@google-cloud/storage'); const
- * storage = new Storage();
- *
- * @example <caption>Create a client with explicit credentials</caption>
- * storage');/storage');
- * const storage = new Storage({
- *   projectId: 'your-project-id',
- *   keyFilename: '/path/to/keyfile.json'
- * });
- *
- * @param {ClientConfig} [options] Configuration options.
  */
 export class Storage extends Service {
   /**
@@ -304,6 +236,48 @@ export class Storage extends Service {
    */
   getBucketsStream: () => Readable;
 
+  /**
+   * @typedef {object} StorageOptions
+   * @property {string} [projectId] The project ID from the Google Developer's
+   *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
+   *     variable `GCLOUD_PROJECT` for your project ID. If your app is running
+   * in an environment which supports {@link
+   * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
+   * Application Default Credentials}, your project ID will be detected
+   * automatically.
+   * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
+   *     downloaded from the Google Developers Console. If you provide a path to
+   * a JSON file, the `projectId` option above is not necessary. NOTE: .pem and
+   *     .p12 require you to specify the `email` option as well.
+   * @property {string} [email] Account email address. Required when using a .pem
+   *     or .p12 keyFilename.
+   * @property {object} [credentials] Credentials object.
+   * @property {string} [credentials.client_email]
+   * @property {string} [credentials.private_key]
+   * @property {boolean} [autoRetry=true] Automatically retry requests if the
+   *     response is related to rate limits or certain intermittent server
+   * errors. We will exponentially backoff subsequent requests by default.
+   * @property {number} [maxRetries=3] Maximum number of automatic retries
+   *     attempted before returning the error.
+   * @property {Constructor} [promise] Custom promise module to use instead of
+   *     native Promises.
+   */
+  /**
+   * Constructs the Storage client.
+   *
+   * @example <caption>Create a client that uses Application Default Credentials
+   * (ADC)</caption> const {Storage} = require('@google-cloud/storage'); const
+   * storage = new Storage();
+   *
+   * @example <caption>Create a client with explicit credentials</caption>
+   * storage');/storage');
+   * const storage = new Storage({
+   *   projectId: 'your-project-id',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   *
+   * @param {StorageOptions} [options] Configuration options.
+   */
   constructor(options: StorageOptions = {}) {
     const config = {
       baseUrl: 'https://www.googleapis.com/storage/v1',
@@ -378,6 +352,34 @@ export class Storage extends Service {
   createBucket(
       name: string, metadata: CreateBucketRequest,
       callback: BucketCallback): void;
+  /**
+   * @typedef {array} CreateBucketResponse
+   * @property {Bucket} 0 The new {@link Bucket}.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback CreateBucketCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Bucket} bucket The new {@link Bucket}.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * Metadata to set for the bucket.
+   *
+   * @typedef {object} CreateBucketRequest
+   * @property {boolean} [coldline=false] Specify the storage class as Coldline.
+   * @property {boolean} [dra=false] Specify the storage class as Durable Reduced
+   *     Availability.
+   * @property {boolean} [multiRegional=false] Specify the storage class as
+   *     Multi-Regional.
+   * @property {boolean} [nearline=false] Specify the storage class as Nearline.
+   * @property {boolean} [regional=false] Specify the storage class as Regional.
+   * @property {boolean} [requesterPays=false] **Early Access Testers Only**
+   *     Force the use of the User Project metadata field to assign operational
+   *     costs when an operation is made on a Bucket and its objects.
+   * @property {string} [userProject] The ID of the project which will be billed
+   *     for the request.
+   */
   /**
    * Create a bucket.
    *

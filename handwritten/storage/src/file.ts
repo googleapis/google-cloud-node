@@ -74,17 +74,8 @@ interface GetSignedUrlConfigInternal {
   cname?: string;
 }
 
-/**
- * @typedef {array} GetSignedUrlResponse
- * @property {object} 0 The signed URL.
- */
 export type GetSignedUrlResponse = [string];
 
-/**
- * @callback GetSignedUrlCallback
- * @param {?Error} err Request error, if any.
- * @param {object} url The signed URL.
- */
 export interface GetSignedUrlCallback {
   (err: Error|null, url?: string): void;
 }
@@ -95,17 +86,8 @@ export interface PolicyDocument {
   string: string;
 }
 
-/**
- * @typedef {array} GetSignedPolicyResponse
- * @property {object} 0 The document policy.
- */
 export type GetSignedPolicyResponse = [PolicyDocument];
 
-/**
- * @callback GetSignedPolicyCallback
- * @param {?Error} err Request error, if any.
- * @param {object} policy The document policy.
- */
 export interface GetSignedPolicyCallback {
   (err: Error|null, policy?: PolicyDocument): void;
 }
@@ -124,19 +106,8 @@ export interface GetFileMetadataOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} GetFileMetadataResponse
- * @property {object} 0 The {@link File} metadata.
- * @property {object} 1 The full API response.
- */
 export type GetFileMetadataResponse = [Metadata, r.Response];
 
-/**
- * @callback GetFileMetadataCallback
- * @param {?Error} err Request error, if any.
- * @param {object} metadata The {@link File} metadata.
- * @param {object} apiResponse The full API response.
- */
 export interface GetFileMetadataCallback {
   (err: Error|null, metadata?: Metadata, apiResponse?: r.Response): void;
 }
@@ -145,19 +116,8 @@ export interface GetFileOptions extends GetConfig {
   userProject?: string;
 }
 
-/**
- * @typedef {array} GetFileResponse
- * @property {File} 0 The {@link File}.
- * @property {object} 1 The full API response.
- */
 export type GetFileResponse = [File, r.Response];
 
-/**
- * @callback GetFileCallback
- * @param {?Error} err Request error, if any.
- * @param {File} file The {@link File}.
- * @param {object} apiResponse The full API response.
- */
 export interface GetFileCallback {
   (err: Error|null, file?: File, apiResponse?: r.Response): void;
 }
@@ -166,17 +126,8 @@ export interface FileExistsOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} FileExistsResponse
- * @property {boolean} 0 Whether the {@link File} exists.
- */
 export type FileExistsResponse = [boolean];
 
-/**
- * @callback FileExistsCallback
- * @param {?Error} err Request error, if any.
- * @param {boolean} exists Whether the {@link File} exists.
- */
 export interface FileExistsCallback {
   (err: Error|null, exists?: boolean): void;
 }
@@ -185,17 +136,8 @@ export interface DeleteFileOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} DeleteFileResponse
- * @property {object} 0 The full API response.
- */
 export type DeleteFileResponse = [r.Response];
 
-/**
- * @callback DeleteFileCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface DeleteFileCallback {
   (err: Error|null, apiResponse?: r.Response): void;
 }
@@ -214,75 +156,12 @@ export interface CreateResumableUploadOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} CreateResumableUploadResponse
- * @property {string} 0 The resumable upload's unique session URI.
- */
 export type CreateResumableUploadResponse = [string];
 
-/**
- * @callback CreateResumableUploadCallback
- * @param {?Error} err Request error, if any.
- * @param {string} uri The resumable upload's unique session URI.
- */
 export interface CreateResumableUploadCallback {
   (err: Error|null, uri?: string): void;
 }
 
-/**
- * @typedef {object} CreateWriteStreamOptions Configuration options for File#createWriteStream().
- * @property {string} [contentType] Alias for
- *     `options.metadata.contentType`. If set to `auto`, the file name is used
- *     to determine the contentType.
- * @property {string|boolean} [gzip] If true, automatically gzip the file.
- *     If set to `auto`, the contentType is used to determine if the file
- * should be gzipped. This will set `options.metadata.contentEncoding` to
- * `gzip` if necessary.
- * @property {object} [metadata] See the examples below or
- *     [Objects: insert request
- * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON)
- *     for more details.
- * @property {number} [offset] The starting byte of the upload stream, for
- *     resuming an interrupted upload. Defaults to 0.
- * @property {string} [predefinedAcl] Apply a predefined set of access
- *     controls to this object.
- *
- *     Acceptable values are:
- *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
- *       `allAuthenticatedUsers` get `READER` access.
- *
- *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
- *       project team owners get `OWNER` access.
- *
- *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
- *       team owners get `READER` access.
- *
- *     - **`private`** - Object owner gets `OWNER` access.
- *
- *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
- *       team members get access according to their roles.
- *
- *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
- * get `READER` access.
- * @property {boolean} [private] Make the uploaded file private. (Alias for
- *     `options.predefinedAcl = 'private'`)
- * @property {boolean} [public] Make the uploaded file public. (Alias for
- *     `options.predefinedAcl = 'publicRead'`)
- * @property {boolean} [resumable] Force a resumable upload. NOTE: When
- *     working with streams, the file format and size is unknown until it's
- *     completely consumed. Because of this, it's best for you to be explicit
- *     for what makes sense given your input.
- * @property {string} [uri] The URI for an already-created resumable
- *     upload. See {@link File#createResumableUpload}.
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- * @property {string|boolean} [validation] Possible values: `"md5"`,
- *     `"crc32c"`, or `false`. By default, data integrity is validated with a
- *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
- *     supported for composite objects. An error will be raised if MD5 is
- *     specified but is not available. You may also choose to skip validation
- *     completely, however this is **not recommended**.
- */
 export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
   contentType?: string;
   gzip?: string|boolean;
@@ -290,83 +169,32 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
   validation?: string|boolean;
 }
 
-/**
- * @typedef {object} MakeFilePrivateOptions Configuration options for File#makePrivate().
- * @property {boolean} [strict] If true, set the file to be private to
- *     only the owner user. Otherwise, it will be private to the project.
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface MakeFilePrivateOptions {
   strict?: boolean;
   userProject?: string;
 }
 
-/**
- * @typedef {array} MakeFilePrivateResponse
- * @property {object} 0 The full API response.
- */
 export type MakeFilePrivateResponse = [r.Response];
 
-/**
- * @callback MakeFilePrivateCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface MakeFilePrivateCallback extends SetFileMetadataCallback {}
 
-/**
- * @typedef {array} MakeFilePublicResponse
- * @property {object} 0 The full API response.
- */
 export type MakeFilePublicResponse = [r.Response];
 
-/**
- * @callback MakeFilePublicCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface MakeFilePublicCallback {
   (err?: Error|null, apiResponse?: r.Response): void;
 }
 
-/**
- * @typedef {array} MoveResponse
- * @property {File} 0 The destination File.
- * @property {object} 1 The full API response.
- */
 export type MoveResponse = [r.Response];
 
-/**
- * @callback MoveCallback
- * @param {?Error} err Request error, if any.
- * @param {?File} destinationFile The destination File.
- * @param {object} apiResponse The full API response.
- */
 export interface MoveCallback {
   (err: Error|null, destinationFile?: File|null,
    apiResponse?: r.Response): void;
 }
-/**
- * @typedef {object} MoveOptions Configuration options for File#move(). See an
- *     [Object
- * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
- * @param {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
+
 export interface MoveOptions {
   userProject?: string;
 }
 
-/**
- * @param {string|buffer|object} RotateEncryptionKeyOptions Configuration options
- *     for File#rotateEncryptionKey().
- * If a string or Buffer is provided, it is interpreted as an AES-256,
- * customer-supplied encryption key. If you'd like to use a Cloud KMS key name,
- * you must specify an options object with the property name: `kmsKeyName`.
- * @param {string|buffer} [options.encryptionKey] An AES-256 encryption key.
- * @param {string} [options.kmsKeyName] A Cloud KMS key name.
- */
 export type RotateEncryptionKeyOptions = string|Buffer|EncryptionKeyOptions;
 
 export interface EncryptionKeyOptions {
@@ -374,16 +202,8 @@ export interface EncryptionKeyOptions {
   kmsKeyName?: string;
 }
 
-/**
- * @callback RotateEncryptionKeyCallback
- * @extends CopyCallback
- */
 export interface RotateEncryptionKeyCallback extends CopyCallback {}
 
-/**
- * @typedef RotateEncryptionKeyResponse
- * @extends CopyResponse
- */
 export type RotateEncryptionKeyResponse = CopyResponse;
 
 /**
@@ -423,16 +243,6 @@ const STORAGE_UPLOAD_BASE_URL =
  */
 const GS_URL_REGEXP = /^gs:\/\/([a-z0-9_.-]+)\/(.+)$/;
 
-/**
- * Options passed to the File constructor.
- * @param {string} [encryptionKey] A custom encryption key.
- * @param {number} [generation] Generation to scope the file to.
- * @param {string} [kmsKeyName] Cloud KMS Key used to encrypt this
- *     object, if the object is encrypted by such a key. Limited availability;
- *     usable only by enabled projects.
- * @param {string} [userProject] The ID of the project which will be
- *     billed for all requests made from File object.
- */
 export interface FileOptions {
   encryptionKey?: string|Buffer;
   generation?: number|string;
@@ -440,22 +250,6 @@ export interface FileOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {object} CopyOptions Configuration options for File#copy(). See an
- *     [Object
- * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
- * @property {string} [destinationKmsKeyName] Resource name of the Cloud
- *     KMS key, of the form
- *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
- *     that will be used to encrypt the object. Overwrites the object metadata's
- *     `kms_key_name` value, if any.
- * @property {string} [keepAcl] Retain the ACL for the new file.
- * @property {string} [predefinedAcl] Set the ACL for the new file.
- * @property {string} [token] A previously-returned `rewriteToken` from an
- *     unfinished rewrite request.
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface CopyOptions {
   destinationKmsKeyName?: string;
   keepAcl?: string;
@@ -464,28 +258,14 @@ export interface CopyOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} CopyResponse
- * @property {File} 0 The copied {@link File}.
- * @property {object} 1 The full API response.
- */
 export type CopyResponse = [File, r.Response];
 
 export interface CopyCallback {
   (err: Error|null, file?: File|null, apiResponse?: r.Response): void;
 }
 
-/**
- * @typedef {array} DownloadResponse
- * @property [0] The contents of a File.
- */
 export type DownloadResponse = [Buffer];
 
-/**
- * @callback DownloadCallback
- * @param err Request error, if any.
- * @param contents The contents of a File.
- */
 export type DownloadCallback = (err: RequestError|null, contents: Buffer) =>
     void;
 
@@ -516,83 +296,30 @@ interface SignedUrlQuery {
 }
 
 export interface CreateReadStreamOptions {
-  /**
-   * The ID of the project which will be billed for the request.
-   */
   userProject?: string;
-  /**
-   * By default, data integrity is validated with a
-   * CRC32c checksum. You may use MD5 if preferred, but that hash is not
-   * supported for composite objects. An error will be raised if MD5 is
-   * specified but is not available. You may also choose to skip validation
-   * completely, however this is **not recommended**.
-   */
   validation?: 'md5'|'crc32c'|false|true;
-  /**
-   * A byte offset to begin the file's download
-   * from. Default is 0. NOTE: Byte ranges are inclusive; that is,
-   * `options.start = 0` and `options.end = 999` represent the first 1000
-   * bytes in a file or object. NOTE: when specifying a byte range, data
-   * integrity is not available.
-   */
   start?: number;
-  /**
-   * A byte offset to stop reading the file at.
-   * NOTE: Byte ranges are inclusive; that is, `options.start = 0` and
-   * `options.end = 999` represent the first 1000 bytes in a file or object.
-   * NOTE: when specifying a byte range, data integrity is not available.
-   */
   end?: number;
 }
 
-/**
- * @typedef {object} SaveOptions
- * @extends CreateWriteStreamOptions
- */
 export interface SaveOptions extends CreateWriteStreamOptions {}
 
-/**
- * @callback SaveCallback
- * @param {?Error} err Request error, if any.
- */
 export interface SaveCallback {
   (err?: Error|null): void;
 }
 
-/**
- * @typedef {object} SetFileMetadataOptions Configuration options for File#setMetadata().
- * @param {string} [userProject] The ID of the project which will be billed for the request.
- */
 export interface SetFileMetadataOptions {
   userProject?: string;
 }
 
-/**
- * @callback SetFileMetadataCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface SetFileMetadataCallback {
   (err?: Error|null, apiResponse?: r.Response): void;
 }
 
-/**
- * @typedef {array} SetFileMetadataResponse
- * @property {object} 0 The full API response.
- */
 export type SetFileMetadataResponse = [r.Response];
 
-/**
- * @typedef {array} SetStorageClassResponse
- * @property {object} 0 The full API response.
- */
 export type SetStorageClassResponse = [r.Response];
 
-/**
- * @typedef {object} SetStorageClassOptions Configuration options for File#setStorageClass().
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface SetStorageClassOptions {
   userProject?: string;
 }
@@ -601,11 +328,6 @@ interface SetStorageClassRequest extends SetStorageClassOptions {
   storageClass?: string;
 }
 
-/**
- * @callback SetStorageClassCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface SetStorageClassCallback {
   (err?: Error|null, apiResponse?: r.Response): void;
 }
@@ -620,23 +342,6 @@ class RequestError extends Error {
  * {@link Bucket#file}.
  *
  * @class
- * @param {Bucket} bucket The Bucket instance this file is
- *     attached to.
- * @param {string} name The name of the remote file.
- * @param {object} [options] Configuration options.
- * @param {string} [options.encryptionKey] A custom encryption key.
- * @param {number} [options.generation] Generation to scope the file to.
- * @param {string} [options.kmsKeyName] Cloud KMS Key used to encrypt this
- *     object, if the object is encrypted by such a key. Limited availability;
- *     usable only by enabled projects.
- * @param {string} [options.userProject] The ID of the project which will be
- *     billed for all requests made from File object.
- * @example
- * const {Storage} = require('@google-cloud/storage');
- * const storage = new Storage();
- * const myBucket = storage.bucket('my-bucket');
- *
- * const file = myBucket.file('my-file');
  */
 class File extends ServiceObject {
   /**
@@ -698,6 +403,30 @@ class File extends ServiceObject {
   private encryptionKeyInterceptor?:
       {request: (reqOpts: r.OptionsWithUri) => r.OptionsWithUri;};
 
+  /**
+   * @typedef {object} FileOptions Options passed to the File constructor.
+   * @property {string} [encryptionKey] A custom encryption key.
+   * @property {number} [generation] Generation to scope the file to.
+   * @property {string} [kmsKeyName] Cloud KMS Key used to encrypt this
+   *     object, if the object is encrypted by such a key. Limited availability;
+   *     usable only by enabled projects.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for all requests made from File object.
+   */
+  /**
+   * Constructs a file object.
+   *
+   * @param {Bucket} bucket The Bucket instance this file is
+   *     attached to.
+   * @param {string} name The name of the remote file.
+   * @param {FileOptions} [options] Configuration options.
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const myBucket = storage.bucket('my-bucket');
+   *
+   * const file = myBucket.file('my-file');
+   */
   constructor(bucket: Bucket, name: string, options: FileOptions = {}) {
     name = name.replace(/^\/+/, '');
 
@@ -749,10 +478,31 @@ class File extends ServiceObject {
       destination: string|Bucket|File, options: CopyOptions,
       callback: CopyCallback): void;
   /**
+   * @typedef {array} CopyResponse
+   * @property {File} 0 The copied {@link File}.
+   * @property {object} 1 The full API response.
+   */
+  /**
    * @callback CopyCallback
    * @param {?Error} err Request error, if any.
    * @param {File} copiedFile The copied {@link File}.
    * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {object} CopyOptions Configuration options for File#copy(). See an
+   *     [Object
+   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+   * @property {string} [destinationKmsKeyName] Resource name of the Cloud
+   *     KMS key, of the form
+   *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
+   *     that will be used to encrypt the object. Overwrites the object
+   * metadata's `kms_key_name` value, if any.
+   * @property {string} [keepAcl] Retain the ACL for the new file.
+   * @property {string} [predefinedAcl] Set the ACL for the new file.
+   * @property {string} [token] A previously-returned `rewriteToken` from an
+   *     unfinished rewrite request.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
    */
   /**
    * Copy this file to another file. By default, this will copy the file to the
@@ -978,6 +728,26 @@ class File extends ServiceObject {
   }
 
   /**
+   * @typedef {object} CreateReadStreamOptions Configuration options for File#createReadStream.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   * @property {string|boolean} [validation] Possible values: `"md5"`,
+   *     `"crc32c"`, or `false`. By default, data integrity is validated with a
+   *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
+   *     supported for composite objects. An error will be raised if MD5 is
+   *     specified but is not available. You may also choose to skip validation
+   *     completely, however this is **not recommended**.
+   * @property {number} [start] A byte offset to begin the file's download
+   *     from. Default is 0. NOTE: Byte ranges are inclusive; that is,
+   *     `options.start = 0` and `options.end = 999` represent the first 1000
+   *     bytes in a file or object. NOTE: when specifying a byte range, data
+   *     integrity is not available.
+   * @property {number} [end] A byte offset to stop reading the file at.
+   *     NOTE: Byte ranges are inclusive; that is, `options.start = 0` and
+   *     `options.end = 999` represent the first 1000 bytes in a file or object.
+   *     NOTE: when specifying a byte range, data integrity is not available.
+   */
+  /**
    * Create a readable stream to read the contents of the remote file. It can be
    * piped to a writable stream or listened to for 'data' events to read a
    * file's contents.
@@ -995,24 +765,7 @@ class File extends ServiceObject {
    * NOTE: Readable streams will emit the `end` event when the file is fully
    * downloaded.
    *
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {string|boolean} [options.validation] Possible values: `"md5"`,
-   *     `"crc32c"`, or `false`. By default, data integrity is validated with a
-   *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
-   *     supported for composite objects. An error will be raised if MD5 is
-   *     specified but is not available. You may also choose to skip validation
-   *     completely, however this is **not recommended**.
-   * @param {number} [options.start] A byte offset to begin the file's download
-   *     from. Default is 0. NOTE: Byte ranges are inclusive; that is,
-   *     `options.start = 0` and `options.end = 999` represent the first 1000
-   *     bytes in a file or object. NOTE: when specifying a byte range, data
-   *     integrity is not available.
-   * @param {number} [options.end] A byte offset to stop reading the file at.
-   *     NOTE: Byte ranges are inclusive; that is, `options.start = 0` and
-   *     `options.end = 999` represent the first 1000 bytes in a file or object.
-   *     NOTE: when specifying a byte range, data integrity is not available.
+   * @param {CreateReadStreamOptions} [options] Configuration options.
    * @returns {ReadableStream}
    *
    * @example
@@ -1272,25 +1025,19 @@ class File extends ServiceObject {
       callback: CreateResumableUploadCallback): void;
   createResumableUpload(callback: CreateResumableUploadCallback): void;
   /**
-   * Create a unique resumable upload session URI. This is the first step when
-   * performing a resumable upload.
-   *
-   * See the [Resumable upload
-   * guide](https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload)
-   * for more on how the entire process works.
-   *
-   * <h4>Note</h4>
-   *
-   * If you are just looking to perform a resumable upload without worrying
-   * about any of the details, see {@link File#createWriteStream}. Resumable
-   * uploads are performed by default.
-   *
-   * @see [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload}
-   *
-   * @param {object} [options] Configuration options.
-   * @param {object} [options.metadata] Metadata to set on the file.
-   * @param {string} [options.origin] Origin header to set for the upload.
-   * @param {string} [options.predefinedAcl] Apply a predefined set of access
+   * @callback CreateResumableUploadCallback
+   * @param {?Error} err Request error, if any.
+   * @param {string} uri The resumable upload's unique session URI.
+   */
+  /**
+   * @typedef {array} CreateResumableUploadResponse
+   * @property {string} 0 The resumable upload's unique session URI.
+   */
+  /**
+   * @typedef {object} CreateResumableUploadOptions
+   * @property {object} [metadata] Metadata to set on the file.
+   * @property {string} [origin] Origin header to set for the upload.
+   * @property {string} [predefinedAcl] Apply a predefined set of access
    *     controls to this object.
    *
    *     Acceptable values are:
@@ -1310,12 +1057,30 @@ class File extends ServiceObject {
    *
    *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
    * get `READER` access.
-   * @param {boolean} [options.private] Make the uploaded file private. (Alias for
+   * @property {boolean} [private] Make the uploaded file private. (Alias for
    *     `options.predefinedAcl = 'private'`)
-   * @param {boolean} [options.public] Make the uploaded file public. (Alias for
+   * @property {boolean} [public] Make the uploaded file public. (Alias for
    *     `options.predefinedAcl = 'publicRead'`)
-   * @param {string} [options.userProject] The ID of the project which will be
+   * @property {string} [userProject] The ID of the project which will be
    *     billed for the request.
+   */
+  /**
+   * Create a unique resumable upload session URI. This is the first step when
+   * performing a resumable upload.
+   *
+   * See the [Resumable upload
+   * guide](https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload)
+   * for more on how the entire process works.
+   *
+   * <h4>Note</h4>
+   *
+   * If you are just looking to perform a resumable upload without worrying
+   * about any of the details, see {@link File#createWriteStream}. Resumable
+   * uploads are performed by default.
+   *
+   * @see [Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/resumable-upload}
+   *
+   * @param {CreateResumableUploadOptions} [options] Configuration options.
    * @param {CreateResumableUploadCallback} [callback] Callback function.
    * @returns {Promise<CreateResumableUploadResponse>}
    *
@@ -1367,6 +1132,60 @@ class File extends ServiceObject {
         callback!);
   }
 
+  /**
+   * @typedef {object} CreateWriteStreamOptions Configuration options for File#createWriteStream().
+   * @property {string} [contentType] Alias for
+   *     `options.metadata.contentType`. If set to `auto`, the file name is used
+   *     to determine the contentType.
+   * @property {string|boolean} [gzip] If true, automatically gzip the file.
+   *     If set to `auto`, the contentType is used to determine if the file
+   * should be gzipped. This will set `options.metadata.contentEncoding` to
+   * `gzip` if necessary.
+   * @property {object} [metadata] See the examples below or
+   *     [Objects: insert request
+   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON)
+   *     for more details.
+   * @property {number} [offset] The starting byte of the upload stream, for
+   *     resuming an interrupted upload. Defaults to 0.
+   * @property {string} [predefinedAcl] Apply a predefined set of access
+   *     controls to this object.
+   *
+   *     Acceptable values are:
+   *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
+   *       `allAuthenticatedUsers` get `READER` access.
+   *
+   *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
+   *       project team owners get `OWNER` access.
+   *
+   *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
+   *       team owners get `READER` access.
+   *
+   *     - **`private`** - Object owner gets `OWNER` access.
+   *
+   *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
+   *       team members get access according to their roles.
+   *
+   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+   * get `READER` access.
+   * @property {boolean} [private] Make the uploaded file private. (Alias for
+   *     `options.predefinedAcl = 'private'`)
+   * @property {boolean} [public] Make the uploaded file public. (Alias for
+   *     `options.predefinedAcl = 'publicRead'`)
+   * @property {boolean} [resumable] Force a resumable upload. NOTE: When
+   *     working with streams, the file format and size is unknown until it's
+   *     completely consumed. Because of this, it's best for you to be explicit
+   *     for what makes sense given your input.
+   * @property {string} [uri] The URI for an already-created resumable
+   *     upload. See {@link File#createResumableUpload}.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   * @property {string|boolean} [validation] Possible values: `"md5"`,
+   *     `"crc32c"`, or `false`. By default, data integrity is validated with a
+   *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
+   *     supported for composite objects. An error will be raised if MD5 is
+   *     specified but is not available. You may also choose to skip validation
+   *     completely, however this is **not recommended**.
+   */
   /**
    * Create a writable stream to overwrite the contents of the file in your
    * bucket.
@@ -1438,8 +1257,7 @@ class File extends ServiceObject {
    *
    * //-
    * // Downloading the file with `createReadStream` will automatically decode
-   * the
-   * // file.
+   * // the file.
    * //-
    *
    * //-
@@ -1626,6 +1444,15 @@ class File extends ServiceObject {
   delete(options: DeleteFileOptions, callback: DeleteFileCallback): void;
   delete(callback: DeleteFileCallback): void;
   /**
+   * @typedef {array} DeleteFileResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback DeleteFileCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
    * Delete the file.
    *
    * @see [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
@@ -1669,6 +1496,15 @@ class File extends ServiceObject {
   download(options?: DownloadOptions): Promise<DownloadResponse>;
   download(options: DownloadOptions, callback: DownloadCallback): void;
   download(callback: DownloadCallback): void;
+  /**
+   * @typedef {array} DownloadResponse
+   * @property [0] The contents of a File.
+   */
+  /**
+   * @callback DownloadCallback
+   * @param err Request error, if any.
+   * @param contents The contents of a File.
+   */
   /**
    * Convenience method to download a file into memory or to a local
    * destination.
@@ -1753,6 +1589,15 @@ class File extends ServiceObject {
   exists(options?: FileExistsOptions): Promise<FileExistsResponse>;
   exists(options: FileExistsOptions, callback: FileExistsCallback): void;
   exists(callback: FileExistsCallback): void;
+  /**
+   * @typedef {array} FileExistsResponse
+   * @property {boolean} 0 Whether the {@link File} exists.
+   */
+  /**
+   * @callback FileExistsCallback
+   * @param {?Error} err Request error, if any.
+   * @param {boolean} exists Whether the {@link File} exists.
+   */
   /**
    * Check if the file exists.
    *
@@ -1861,6 +1706,17 @@ class File extends ServiceObject {
   get(options?: GetFileOptions): Promise<GetFileResponse>;
   get(options: GetFileOptions, callback: GetFileCallback): void;
   get(callback: GetFileCallback): void;
+  /**
+   * @typedef {array} GetFileResponse
+   * @property {File} 0 The {@link File}.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback GetFileCallback
+   * @param {?Error} err Request error, if any.
+   * @param {File} file The {@link File}.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * Get a file object and its metadata if it exists.
    *
@@ -2198,6 +2054,15 @@ class File extends ServiceObject {
   getSignedUrl(cfg: GetSignedUrlConfig): Promise<GetSignedUrlResponse>;
   getSignedUrl(cfg: GetSignedUrlConfig, callback: GetSignedUrlCallback): void;
   /**
+   * @typedef {array} GetSignedUrlResponse
+   * @property {object} 0 The signed URL.
+   */
+  /**
+   * @callback GetSignedUrlCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} url The signed URL.
+   */
+  /**
    * Get a signed URL to allow limited time access to the file.
    *
    * In Google Cloud Platform environments, such as Cloud Functions and App
@@ -2407,6 +2272,22 @@ class File extends ServiceObject {
   makePrivate(
       options: MakeFilePrivateOptions, callback: MakeFilePrivateCallback): void;
   /**
+   * @typedef {object} MakeFilePrivateOptions Configuration options for File#makePrivate().
+   * @property {boolean} [strict] If true, set the file to be private to
+   *     only the owner user. Otherwise, it will be private to the project.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @callback MakeFilePrivateCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {array} MakeFilePrivateResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
    * Make a file private to the project and remove all other permissions.
    * Set `options.strict` to true to make the file private to only the owner.
    *
@@ -2471,6 +2352,10 @@ class File extends ServiceObject {
   makePublic(): Promise<MakeFilePublicResponse>;
   makePublic(callback: MakeFilePublicCallback): void;
   /**
+   * @typedef {array} MakeFilePublicResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
    * @callback MakeFilePublicCallback
    * @param {?Error} err Request error, if any.
    * @param {object} apiResponse The full API response.
@@ -2522,6 +2407,24 @@ class File extends ServiceObject {
   move(
       destination: string|Bucket|File, options: MoveOptions,
       callback: MoveCallback): void;
+  /**
+   * @typedef {array} MoveResponse
+   * @property {File} 0 The destination File.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback MoveCallback
+   * @param {?Error} err Request error, if any.
+   * @param {?File} destinationFile The destination File.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {object} MoveOptions Configuration options for File#move(). See an
+   *     [Object
+   * resource](https://cloud.google.com/storage/docs/json_api/v1/objects#resource).
+   * @param {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
   /**
    * Move this file to another location. By default, this will rename the file
    * and keep it in the same bucket, but you can choose to move it to another
@@ -2681,6 +2584,24 @@ class File extends ServiceObject {
       options: RotateEncryptionKeyOptions,
       callback: RotateEncryptionKeyCallback): void;
   /**
+   * @callback RotateEncryptionKeyCallback
+   * @extends CopyCallback
+   */
+  /**
+   * @typedef RotateEncryptionKeyResponse
+   * @extends CopyResponse
+   */
+  /**
+   * @param {string|buffer|object} RotateEncryptionKeyOptions Configuration options
+   *     for File#rotateEncryptionKey().
+   * If a string or Buffer is provided, it is interpreted as an AES-256,
+   * customer-supplied encryption key. If you'd like to use a Cloud KMS key
+   * name, you must specify an options object with the property name:
+   * `kmsKeyName`.
+   * @param {string|buffer} [options.encryptionKey] An AES-256 encryption key.
+   * @param {string} [options.kmsKeyName] A Cloud KMS key name.
+   */
+  /**
    * This method allows you to update the encryption key associated with this
    * file.
    *
@@ -2719,6 +2640,14 @@ class File extends ServiceObject {
   save(data: any, options?: SaveOptions): Promise<void>;
   save(data: any, callback: SaveCallback): void;
   save(data: any, options: SaveOptions, callback: SaveCallback): void;
+  /**
+   * @typedef {object} SaveOptions
+   * @extends CreateWriteStreamOptions
+   */
+  /**
+   * @callback SaveCallback
+   * @param {?Error} err Request error, if any.
+   */
   /**
    * Write arbitrary data to a file.
    *
@@ -2780,6 +2709,19 @@ class File extends ServiceObject {
   setMetadata(
       metadata: Metadata, options: SetFileMetadataOptions,
       callback: SetFileMetadataCallback): void;
+  /**
+   * @typedef {object} SetFileMetadataOptions Configuration options for File#setMetadata().
+   * @param {string} [userProject] The ID of the project which will be billed for the request.
+   */
+  /**
+   * @callback SetFileMetadataCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {array} SetFileMetadataResponse
+   * @property {object} 0 The full API response.
+   */
   /**
    * Merge the given metadata with the current remote file's metadata. This
    * will set metadata if it was previously unset or update previously set
@@ -2878,6 +2820,20 @@ class File extends ServiceObject {
       callback: SetStorageClassCallback): void;
   setStorageClass(storageClass: string, callback?: SetStorageClassCallback):
       void;
+  /**
+   * @typedef {array} SetStorageClassResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @typedef {object} SetStorageClassOptions Configuration options for File#setStorageClass().
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @callback SetStorageClassCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * Set the storage class for this file.
    *

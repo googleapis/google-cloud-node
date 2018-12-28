@@ -22,11 +22,6 @@ import {teenyRequest} from 'teeny-request';
 
 import {Storage} from './storage';
 
-/**
- * @callback StopCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface StopCallback {
   (err: Error|null, apiResponse?: request.Response): void;
 }
@@ -78,6 +73,11 @@ class Channel extends ServiceObject {
   /**
    * @typedef {array} StopResponse
    * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback StopCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
    */
   /**
    * Stop this channel.

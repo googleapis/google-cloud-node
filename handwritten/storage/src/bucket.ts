@@ -53,21 +53,11 @@ interface BucketOptions {
   userProject?: string;
 }
 
-/**
- * @callback GetFilesCallback
- * @param {?Error} err Request error, if any.
- * @param {File[]} files Array of {@link File} instances.
- */
 export interface GetFilesCallback {
   (err: Error|null, files?: File[], nextQuery?: {},
    apiResponse?: request.Response): void;
 }
 
-/**
- * See a [Objects:
- * watchAll request
- * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
- */
 interface WatchAllOptions {
   delimiter?: string;
   maxResults?: number;
@@ -78,11 +68,6 @@ interface WatchAllOptions {
   versions?: boolean;
 }
 
-/**
- * @typedef {object} AddLifecycleRuleOptions Configuration options for Bucket#addLifecycleRule().
- * @property {string} [append=true] The new rules will be appended to any
- *     pre-existing rules.
- */
 export interface AddLifecycleRuleOptions {
   append?: boolean;
 }
@@ -93,31 +78,6 @@ export type LifecycleRule = {
   storageClass?: string;
 };
 
-/**
- * Query object for listing files.
- *
- * @typedef {object} GetFilesOptions
- * @property {boolean} [autoPaginate=true] Have pagination handled
- *     automatically.
- * @property {string} [delimiter] Results will contain only objects whose
- *     names, aside from the prefix, do not contain delimiter. Objects whose
- *     names, aside from the prefix, contain delimiter will have their name
- *     truncated after the delimiter, returned in `apiResponse.prefixes`.
- *     Duplicate prefixes are omitted.
- * @property {string} [directory] Filter results based on a directory name, or
- *     more technically, a "prefix".
- * @property {string} [prefix] Filter results to objects whose names begin
- *     with this prefix.
- * @property {number} [maxApiCalls] Maximum number of API calls to make.
- * @property {number} [maxResults] Maximum number of items plus prefixes to
- *     return.
- * @property {string} [pageToken] A previously-returned page token
- *     representing part of the larger set of results to view.
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- * @property {boolean} [versions] If true, returns File objects scoped to
- *     their versions.
- */
 export interface GetFilesOptions {
   autoPaginate?: boolean;
   delimiter?: string;
@@ -130,98 +90,31 @@ export interface GetFilesOptions {
   versions?: boolean;
 }
 
-/**
- * @typedef {object} CombineOptions
- * @property {string} [kmsKeyName] Resource name of the Cloud KMS key, of
- *     the form
- *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
- *     that will be used to encrypt the object. Overwrites the object
- * metadata's `kms_key_name` value, if any.
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface CombineOptions {
   kmsKeyName?: string;
   userProject?: string;
 }
 
-/**
- * @callback CombineCallback
- * @param {?Error} err Request error, if any.
- * @param {File} newFile The new {@link File}.
- * @param {object} apiResponse The full API response.
- */
 export interface CombineCallback {
   (err: Error|null, newFile: File|null, apiResponse: request.Response): void;
 }
 
-/**
- * @typedef {array} CombineResponse
- * @property {File} 0 The new {@link File}.
- * @property {object} 1 The full API response.
- */
 export type CombineResponse = [File, request.Response];
 
-/**
- * See a [Objects:
- * watchAll request
- * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
- *
- * @typedef {object} CreateChannelConfig
- * @property {string} address The address where notifications are
- *     delivered for this channel.
- */
 export interface CreateChannelConfig extends WatchAllOptions {
   address: string;
 }
 
-/**
- * @typedef {object} CreateChannelOptions
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface CreateChannelOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} CreateChannelResponse
- * @property {Channel} 0 The new {@link Channel}.
- * @property {object} 1 The full API response.
- */
 export type CreateChannelResponse = [Channel, request.Response];
 
-/**
- * @callback CreateChannelCallback
- * @param {?Error} err Request error, if any.
- * @param {Channel} channel The new {@link Channel}.
- * @param {object} apiResponse The full API response.
- */
 export interface CreateChannelCallback {
   (err: Error|null, channel: Channel|null, apiResponse: request.Response): void;
 }
 
-/**
- * Metadata to set for the Notification.
- *
- * @typedef {object} CreateNotificationOptions
- * @property {object} [customAttributes] An optional list of additional
- *     attributes to attach to each Cloud PubSub message published for this
- *     notification subscription.
- * @property {string[]} [eventTypes] If present, only send notifications about
- *     listed event types. If empty, sent notifications for all event types.
- * @property {string} [objectNamePrefix] If present, only apply this
- *     notification configuration to object names that begin with this prefix.
- * @property {string} [payloadFormat] The desired content of the Payload.
- *     Defaults to `JSON_API_V1`.
- *
- *     Acceptable values are:
- *     - `JSON_API_V1`
- *
- *     - `NONE`
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface CreateNotificationOptions {
   customAttributes?: {[key: string]: string};
   eventTypes?: string[];
@@ -230,250 +123,98 @@ export interface CreateNotificationOptions {
   userProject?: string;
 }
 
-/**
- * @callback CreateNotificationCallback
- * @param {?Error} err Request error, if any.
- * @param {Notification} notification The new {@link Notification}.
- * @param {object} apiResponse The full API response.
- */
 export interface CreateNotificationCallback {
   (err: Error|null, notification: Notification|null,
    apiResponse: request.Response): void;
 }
 
-/**
- * @typedef {array} CreateNotificationResponse
- * @property {Notification} 0 The new {@link Notification}.
- * @property {object} 1 The full API response.
- */
 export type CreateNotificationResponse = [Notification, request.Response];
 
-/**
- * @typedef {object} DeleteBucketOptions Configuration options.
- * @param {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface DeleteBucketOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} DeleteBucketResponse
- * @property {object} 0 The full API response.
- */
 export type DeleteBucketResponse = [request.Response];
 
-/**
- * @callback DeleteBucketCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface DeleteBucketCallback extends DeleteCallback {
   (err: Error|null, apiResponse: request.Response): void;
 }
 
-/**
- * @typedef {object} DeleteFilesOptions Query object. See {@link Bucket#getFiles}
- *     for all of the supported properties.
- * @property {boolean} [force] Suppress errors until all files have been
- *     processed.
- */
 export interface DeleteFilesOptions extends GetFilesOptions {
   force?: boolean;
 }
 
-/**
- * @callback DeleteFilesCallback
- * @param {?Error|?Error[]} err Request error, if any, or array of errors from
- *     files that were not able to be deleted.
- * @param {object} [apiResponse] The full API response.
- */
 export interface DeleteFilesCallback {
   (err: Error|Error[]|null, apiResponse?: object): void;
 }
 
-/**
- * @typedef {array} DeleteLabelsResponse
- * @property {object} 0 The full API response.
- */
 export type DeleteLabelsResponse = [request.Response];
 
-/**
- * @callback DeleteLabelsCallback
- * @param {?Error} err Request error, if any.
- * @param {object} metadata Bucket's metadata.
- */
 export interface DeleteLabelsCallback extends SetLabelsCallback {}
 
-/**
- * @typedef {array} DisableRequesterPaysResponse
- * @property {object} 0 The full API response.
- */
 export type DisableRequesterPaysResponse = [request.Response];
 
-/**
- * @callback DisableRequesterPaysCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface DisableRequesterPaysCallback {
   (err?: Error|null, apiResponse?: object): void;
 }
 
-/**
- * @typedef {array} EnableRequesterPaysResponse
- * @property {object} 0 The full API response.
- */
 export type EnableRequesterPaysResponse = [request.Response];
 
-/**
- * @callback EnableRequesterPaysCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface EnableRequesterPaysCallback {
   (err?: Error|null, apiResponse?: request.Response): void;
 }
 
-/**
- * @typedef {object} BucketExistsOptions Configuration options for Bucket#exists().
- * @param {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface BucketExistsOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} BucketExistsResponse
- * @property {boolean} 0 Whether the {@link Bucket} exists.
- */
 export type BucketExistsResponse = [boolean];
 
-/**
- * @callback BucketExistsCallback
- * @param {?Error} err Request error, if any.
- * @param {boolean} exists Whether the {@link Bucket} exists.
- */
 export interface BucketExistsCallback extends ExistsCallback {}
 
-/**
- * @typedef {object} [GetBucketOptions] Configuration options for Bucket#get()
- * @property {boolean} [autoCreate] Automatically create the object if
- *     it does not exist. Default: `false`
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface GetBucketOptions extends GetConfig {
   userProject?: string;
 }
 
-/**
- * @typedef {array} GetBucketResponse
- * @property {Bucket} 0 The {@link Bucket}.
- * @property {object} 1 The full API response.
- */
 export type GetBucketResponse = [Bucket, request.Response];
 
-/**
- * @callback GetBucketCallback
- * @param {?Error} err Request error, if any.
- * @param {Bucket} bucket The {@link Bucket}.
- * @param {object} apiResponse The full API response.
- */
 export interface GetBucketCallback {
   (err: ApiError|null, bucket: Bucket|null,
    apiResponse: request.Response): void;
 }
 
-/**
- * @typedef {object} GetLabelsOptions Configuration options for Bucket#getLabels().
- * @param {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface GetLabelsOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} GetLabelsResponse
- * @property {object} 0 Object of labels currently set on this bucket.
- */
 export type GetLabelsResponse = [request.Response];
 
-/**
- * @callback GetLabelsCallback
- * @param {?Error} err Request error, if any.
- * @param {object} labels Object of labels currently set on this bucket.
- */
 export interface GetLabelsCallback {
   (err: Error|null, labels: object|null): void;
 }
 
-/**
- * @typedef {array} GetBucketMetadataResponse
- * @property {object} 0 The bucket metadata.
- * @property {object} 1 The full API response.
- */
 export type GetBucketMetadataResponse = [Metadata, request.Response];
 
-/**
- * @callback GetBucketMetadataCallback
- * @param {?Error} err Request error, if any.
- * @param {object} metadata The bucket metadata.
- * @param {object} apiResponse The full API response.
- */
 export interface GetBucketMetadataCallback {
   (err: ApiError|null, metadata: Metadata|null,
    apiResponse: request.Response): void;
 }
 
-/**
- * @typedef {object} GetBucketMetadataOptions Configuration options for Bucket#getMetadata().
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface GetBucketMetadataOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {object} GetNotificationOptions Configuration options for Bucket#getNotification().
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface GetNotificationsOptions {
   userProject?: string;
 }
 
-/**
- * @callback GetNotificationsCallback
- * @param {?Error} err Request error, if any.
- * @param {Notification[]} notifications Array of {@link Notification}
- *     instances.
- * @param {object} apiResponse The full API response.
- */
 export interface GetNotificationsCallback {
   (err: Error|null, notifications: Notification[]|null,
    apiResponse: request.Response): void;
 }
 
-/**
- * @typedef {array} GetNotificationsResponse
- * @property {Notification[]} 0 Array of {@link Notification} instances.
- * @property {object} 1 The full API response.
- */
 export type GetNotificationsResponse = [Notification[], request.Response];
 
-/**
- * @typedef {object} MakeBucketPrivateOptions
- * @param {boolean} [includeFiles=false] Make each file in the bucket
- *     private.
- * @param {boolean} [force] Queue errors occurred while making files
- *     private until all files have been processed.
- * @param {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface MakeBucketPrivateOptions {
   includeFiles?: boolean;
   force?: boolean;
@@ -484,206 +225,67 @@ interface MakeBucketPrivateRequest extends MakeBucketPrivateOptions {
   private?: boolean;
 }
 
-/**
- * @typedef {array} MakeBucketPrivateResponse
- * @property {File[]} 0 List of files made private.
- */
 export type MakeBucketPrivateResponse = [File[]];
 
-/**
- * @callback MakeBucketPrivateCallback
- * @param {?Error} err Request error, if any.
- * @param {File[]} files List of files made private.
- */
 export interface MakeBucketPrivateCallback {
   (err?: Error|null, files?: File[]): void;
 }
 
-/**
- * @typedef {object} MakeBucketPublicOptions
- * @param {boolean} [includeFiles=false] Make each file in the bucket
- *     private.
- * @param {boolean} [force] Queue errors occurred while making files
- *     private until all files have been processed.
- */
 export interface MakeBucketPublicOptions {
   includeFiles?: boolean;
   force?: boolean;
 }
 
-/**
- * @callback MakeBucketPublicCallback
- * @param {?Error} err Request error, if any.
- * @param {File[]} files List of files made public.
- */
 export interface MakeBucketPublicCallback {
   (err?: Error|null, files?: File[]): void;
 }
 
-/**
- * @typedef {array} MakeBucketPublicResponse
- * @property {File[]} 0 List of files made public.
- */
 export type MakeBucketPublicResponse = [File[]];
 
-/**
- * @typedef {object} SetBucketMetadataOptions Configuration options for Bucket#setMetadata().
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface SetBucketMetadataOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} SetBucketMetadataResponse
- * @property {object} apiResponse The full API response.
- */
 export type SetBucketMetadataResponse = [request.Response];
 
-/**
- * @callback SetBucketMetadataCallback
- * @param {?Error} err Request error, if any.
- * @param {object} metadata The bucket metadata.
- */
 export interface SetBucketMetadataCallback {
   (err?: Error|null, metadata?: Metadata): void;
 }
 
-/**
- * @callback BucketLockCallback
- * @param {?Error} err Request error, if any.
- * @param {object} apiResponse The full API response.
- */
 export interface BucketLockCallback {
   (err?: Error|null, apiResponse?: request.Response): void;
 }
 
-/**
- * @typedef {array} SetBucketMetadataResponse
- * @property {object} apiResponse The full API response.
- */
 export type BucketLockResponse = [request.Response];
 
 export type Labels = {
   [key: string]: string;
 };
 
-/**
- * @typedef {object} SetLabelsOptions Configuration options for Bucket#setLabels().
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface SetLabelsOptions {
   userProject?: string;
 }
 
-/**
- * @typedef {array} SetLabelsResponse
- * @property {object} 0 The bucket metadata.
- */
 export type SetLabelsResponse = [request.Response];
 
-/**
- * @callback SetLabelsCallback
- * @param {?Error} err Request error, if any.
- * @param {object} metadata The bucket metadata.
- */
 export interface SetLabelsCallback {
   (err?: Error|null, metadata?: Metadata): void;
 }
 
-/**
- * @typedef {object} SetBucketStorageClassOptions
- * @param {string} [userProject] - The ID of the project which will be
- *     billed for the request.
- */
 export interface SetBucketStorageClassOptions {
   userProject?: string;
 }
 
-/**
- * @callback SetBucketStorageClassCallback
- * @param {?Error} err Request error, if any.
- */
 export interface SetBucketStorageClassCallback {
   (err?: Error|null): void;
 }
 
-/**
- * @typedef {array} UploadResponse
- * @property {object} 0 The uploaded {@link File}.
- * @property {object} 1 The full API response.
- */
 export type UploadResponse = [File, request.Response];
 
-/**
- * @callback UploadCallback
- * @param {?Error} err Request error, if any.
- * @param {object} file The uploaded {@link File}.
- * @param {object} apiResponse The full API response.
- */
 export interface UploadCallback {
   (err: Error|null, file?: File|null, apiResponse?: request.Response): void;
 }
 
-/**
- * @typedef {object} UploadOptions Configuration options for Bucket#upload().
- * @param {string|File} [options.destination] The place to save
- *     your file. If given a string, the file will be uploaded to the bucket
- *     using the string as a filename. When given a File object, your local
- * file will be uploaded to the File object's bucket and under the File
- * object's name. Lastly, when this argument is omitted, the file is uploaded
- * to your bucket using the name of the local file.
- * @param {string} [options.encryptionKey] A custom encryption key. See
- *     [Customer-supplied Encryption
- * Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
- * @param {boolean} [options.gzip] Automatically gzip the file. This will set
- *     `options.metadata.contentEncoding` to `gzip`.
- * @param {string} [options.kmsKeyName] The name of the Cloud KMS key that will
- *     be used to encrypt the object. Must be in the format:
- *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`.
- * @param {object} [options.metadata] See an
- *     [Objects: insert request
- * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON).
- * @param {string} [options.offset] The starting byte of the upload stream, for
- *     resuming an interrupted upload. Defaults to 0.
- * @param {string} [options.predefinedAcl] Apply a predefined set of access
- *     controls to this object.
- *
- *     Acceptable values are:
- *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
- *       `allAuthenticatedUsers` get `READER` access.
- *
- *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
- *       project team owners get `OWNER` access.
- *
- *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
- *       team owners get `READER` access.
- *
- *     - **`private`** - Object owner gets `OWNER` access.
- *
- *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
- *       team members get access according to their roles.
- *
- *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
- * get `READER` access.
- * @param {boolean} [options.private] Make the uploaded file private. (Alias for
- *     `options.predefinedAcl = 'private'`)
- * @param {boolean} [options.public] Make the uploaded file public. (Alias for
- *     `options.predefinedAcl = 'publicRead'`)
- * @param {boolean} [options.resumable] Force a resumable upload. (default:
- *     true for files larger than 5 MB).
- * @param {string} [options.uri] The URI for an already-created resumable
- *     upload. See {@link File#createResumableUpload}.
- * @param {string} [options.userProject] The ID of the project which will be
- *     billed for the request.
- * @param {string|boolean} [options.validation] Possible values: `"md5"`,
- *     `"crc32c"`, or `false`. By default, data integrity is validated with an
- *     MD5 checksum for maximum reliability. CRC32c will provide better
- *     performance with less reliability. You may also choose to skip
- * validation completely, however this is **not recommended**.
- */
 export interface UploadOptions extends CreateResumableUploadOptions,
                                        CreateWriteStreamOptions {
   destination?: string|File;
@@ -692,18 +294,6 @@ export interface UploadOptions extends CreateResumableUploadOptions,
   resumable?: boolean;
 }
 
-
-/**
- * @private
- *
- * @typedef {object} MakeAllFilesPublicPrivateOptions
- * @property {boolean} [force] Suppress errors until all files have been
- *     processed.
- * @property {boolean} [private] Make files private.
- * @property {boolean} [public] Make files public.
- * @property {string} [userProject] The ID of the project which will be
- *     billed for the request.
- */
 export interface MakeAllFilesPublicPrivateOptions {
   force?: boolean;
   private?: boolean;
@@ -711,21 +301,10 @@ export interface MakeAllFilesPublicPrivateOptions {
   userProject?: string;
 }
 
-/**
- * @private
- *
- * @callback SetBucketMetadataCallback
- * @param {?Error} err Request error, if any.
- * @param {File[]} files Files that were updated.
- */
 interface MakeAllFilesPublicPrivateCallback {
   (err?: Error|Error[]|null, files?: File[]): void;
 }
 
-/**
- * @typedef {array} MakeAllFilesPublicPrivateResponse
- * @property {File[]} 0 List of files affected.
- */
 type MakeAllFilesPublicPrivateResponse = [File[]];
 
 /**
@@ -1011,6 +590,11 @@ class Bucket extends ServiceObject {
   addLifecycleRule(rule: LifecycleRule, callback: SetBucketMetadataCallback):
       void;
   /**
+   * @typedef {object} AddLifecycleRuleOptions Configuration options for Bucket#addLifecycleRule().
+   * @property {string} [append=true] The new rules will be appended to any
+   *     pre-existing rules.
+   */
+  /**
    * Add an object lifecycle management rule to the bucket.
    *
    * By default, an Object Lifecycle Management rule provided to this method
@@ -1195,6 +779,27 @@ class Bucket extends ServiceObject {
       sources: string[]|File[], destination: string|File,
       callback: CombineCallback): void;
   /**
+   * @typedef {object} CombineOptions
+   * @property {string} [kmsKeyName] Resource name of the Cloud KMS key, of
+   *     the form
+   *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
+   *     that will be used to encrypt the object. Overwrites the object
+   * metadata's `kms_key_name` value, if any.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @callback CombineCallback
+   * @param {?Error} err Request error, if any.
+   * @param {File} newFile The new {@link File}.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {array} CombineResponse
+   * @property {File} 0 The new {@link File}.
+   * @property {object} 1 The full API response.
+   */
+  /**
    * Combine multiple files into one new file.
    *
    * @see [Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose}
@@ -1315,6 +920,32 @@ class Bucket extends ServiceObject {
       id: string, config: CreateChannelConfig, options: CreateChannelOptions,
       callback: CreateChannelCallback): void;
   /**
+   * See a [Objects:
+   * watchAll request
+   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).
+   *
+   * @typedef {object} CreateChannelConfig
+   * @property {string} address The address where notifications are
+   *     delivered for this channel.
+   * @extends WatchAllOptions
+   */
+  /**
+   * @typedef {object} CreateChannelOptions
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @typedef {array} CreateChannelResponse
+   * @property {Channel} 0 The new {@link Channel}.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback CreateChannelCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Channel} channel The new {@link Channel}.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
    * Create a channel that will be notified when objects in this bucket changes.
    *
    * @throws {Error} If an ID is not provided.
@@ -1404,6 +1035,38 @@ class Bucket extends ServiceObject {
       topic: string, options: CreateNotificationOptions,
       callback: CreateNotificationCallback): void;
   createNotification(topic: string, callback: CreateNotificationCallback): void;
+  /**
+   * Metadata to set for the Notification.
+   *
+   * @typedef {object} CreateNotificationOptions
+   * @property {object} [customAttributes] An optional list of additional
+   *     attributes to attach to each Cloud PubSub message published for this
+   *     notification subscription.
+   * @property {string[]} [eventTypes] If present, only send notifications about
+   *     listed event types. If empty, sent notifications for all event types.
+   * @property {string} [objectNamePrefix] If present, only apply this
+   *     notification configuration to object names that begin with this prefix.
+   * @property {string} [payloadFormat] The desired content of the Payload.
+   *     Defaults to `JSON_API_V1`.
+   *
+   *     Acceptable values are:
+   *     - `JSON_API_V1`
+   *
+   *     - `NONE`
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @callback CreateNotificationCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Notification} notification The new {@link Notification}.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {array} CreateNotificationResponse
+   * @property {Notification} 0 The new {@link Notification}.
+   * @property {object} 1 The full API response.
+   */
   /**
    * Creates a notification subscription for the bucket.
    *
@@ -1524,6 +1187,20 @@ class Bucket extends ServiceObject {
   delete(callback: DeleteBucketCallback): void;
   delete(options: DeleteBucketOptions, callback: DeleteBucketCallback): void;
   /**
+   * @typedef {object} DeleteBucketOptions Configuration options.
+   * @param {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @typedef {array} DeleteBucketResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback DeleteBucketCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
    * Delete the bucket.
    *
    * @see [Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}
@@ -1572,6 +1249,18 @@ class Bucket extends ServiceObject {
   deleteFiles(callback: DeleteFilesCallback): void;
   deleteFiles(query: DeleteFilesOptions, callback: DeleteFilesCallback): void;
   /**
+   * @typedef {object} DeleteFilesOptions Query object. See {@link Bucket#getFiles}
+   *     for all of the supported properties.
+   * @property {boolean} [force] Suppress errors until all files have been
+   *     processed.
+   */
+  /**
+   * @callback DeleteFilesCallback
+   * @param {?Error|?Error[]} err Request error, if any, or array of errors from
+   *     files that were not able to be deleted.
+   * @param {object} [apiResponse] The full API response.
+   */
+  /**
    * Iterate over the bucket's files, calling `file.delete()` on each.
    *
    * <strong>This is not an atomic request.</strong> A delete attempt will be
@@ -1605,7 +1294,7 @@ class Bucket extends ServiceObject {
    * //-
    * // By default, if a file cannot be deleted, this method will stop deleting
    * // files from your bucket. You can override this setting with `force:
-   * true`.
+   * // true`.
    * //-
    * bucket.deleteFiles({
    *   force: true
@@ -1682,6 +1371,15 @@ class Bucket extends ServiceObject {
   deleteLabels(callback: DeleteLabelsCallback): void;
   deleteLabels(labels: string|string[], callback: DeleteLabelsCallback): void;
   /**
+   * @typedef {array} DeleteLabelsResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback DeleteLabelsCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} metadata Bucket's metadata.
+   */
+  /**
    * Delete one or more labels from this bucket.
    *
    * @param {string|string[]} labels The labels to delete. If no labels are
@@ -1754,6 +1452,15 @@ class Bucket extends ServiceObject {
   disableRequesterPays(): Promise<DisableRequesterPaysResponse>;
   disableRequesterPays(callback: DisableRequesterPaysCallback): void;
   /**
+   * @typedef {array} DisableRequesterPaysResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback DisableRequesterPaysCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
    * <div class="notice">
    *   <strong>Early Access Testers Only</strong>
    *   <p>
@@ -1801,6 +1508,15 @@ class Bucket extends ServiceObject {
 
   enableRequesterPays(): Promise<EnableRequesterPaysResponse>;
   enableRequesterPays(callback: EnableRequesterPaysCallback): void;
+  /**
+   * @typedef {array} EnableRequesterPaysResponse
+   * @property {object} 0 The full API response.
+   */
+  /**
+   * @callback EnableRequesterPaysCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * <div class="notice">
    *   <strong>Early Access Testers Only</strong>
@@ -1852,6 +1568,20 @@ class Bucket extends ServiceObject {
   exists(options?: BucketExistsOptions): Promise<BucketExistsResponse>;
   exists(callback: BucketExistsCallback): void;
   exists(options: BucketExistsOptions, callback: BucketExistsCallback): void;
+  /**
+   * @typedef {object} BucketExistsOptions Configuration options for Bucket#exists().
+   * @param {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @typedef {array} BucketExistsResponse
+   * @property {boolean} 0 Whether the {@link Bucket} exists.
+   */
+  /**
+   * @callback BucketExistsCallback
+   * @param {?Error} err Request error, if any.
+   * @param {boolean} exists Whether the {@link Bucket} exists.
+   */
   /**
    * Check if the bucket exists.
    *
@@ -1934,6 +1664,24 @@ class Bucket extends ServiceObject {
   get(options?: GetBucketOptions): Promise<GetBucketResponse>;
   get(callback: GetBucketCallback): void;
   get(options: GetBucketOptions, callback: GetBucketCallback): void;
+  /**
+   * @typedef {object} [GetBucketOptions] Configuration options for Bucket#get()
+   * @property {boolean} [autoCreate] Automatically create the object if
+   *     it does not exist. Default: `false`
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @typedef {array} GetBucketResponse
+   * @property {Bucket} 0 The {@link Bucket}.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback GetBucketCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Bucket} bucket The {@link Bucket}.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * Get a bucket if it exists.
    *
@@ -2019,6 +1767,36 @@ class Bucket extends ServiceObject {
   /**
    * @typedef {array} GetFilesResponse
    * @property {File[]} 0 Array of {@link File} instances.
+   */
+  /**
+   * @callback GetFilesCallback
+   * @param {?Error} err Request error, if any.
+   * @param {File[]} files Array of {@link File} instances.
+   */
+  /**
+   * Query object for listing files.
+   *
+   * @typedef {object} GetFilesOptions
+   * @property {boolean} [autoPaginate=true] Have pagination handled
+   *     automatically.
+   * @property {string} [delimiter] Results will contain only objects whose
+   *     names, aside from the prefix, do not contain delimiter. Objects whose
+   *     names, aside from the prefix, contain delimiter will have their name
+   *     truncated after the delimiter, returned in `apiResponse.prefixes`.
+   *     Duplicate prefixes are omitted.
+   * @property {string} [directory] Filter results based on a directory name, or
+   *     more technically, a "prefix".
+   * @property {string} [prefix] Filter results to objects whose names begin
+   *     with this prefix.
+   * @property {number} [maxApiCalls] Maximum number of API calls to make.
+   * @property {number} [maxResults] Maximum number of items plus prefixes to
+   *     return.
+   * @property {string} [pageToken] A previously-returned page token
+   *     representing part of the larger set of results to view.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   * @property {boolean} [versions] If true, returns File objects scoped to
+   *     their versions.
    */
   /**
    * Get {@link File} objects for the files currently in the bucket.
@@ -2146,6 +1924,20 @@ class Bucket extends ServiceObject {
   getLabels(callback: GetLabelsCallback): void;
   getLabels(options: GetLabelsOptions, callback: GetLabelsCallback): void;
   /**
+   * @typedef {object} GetLabelsOptions Configuration options for Bucket#getLabels().
+   * @param {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @typedef {array} GetLabelsResponse
+   * @property {object} 0 Object of labels currently set on this bucket.
+   */
+  /**
+   * @callback GetLabelsCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} labels Object of labels currently set on this bucket.
+   */
+  /**
    * Get the labels currently set on this bucket.
    *
    * @param {object} [options] Configuration options.
@@ -2203,6 +1995,22 @@ class Bucket extends ServiceObject {
   getMetadata(
       options: GetBucketMetadataOptions,
       callback: GetBucketMetadataCallback): void;
+  /**
+   * @typedef {array} GetBucketMetadataResponse
+   * @property {object} 0 The bucket metadata.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback GetBucketMetadataCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} metadata The bucket metadata.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {object} GetBucketMetadataOptions Configuration options for Bucket#getMetadata().
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
   /**
    * Get the bucket's metadata.
    *
@@ -2267,6 +2075,23 @@ class Bucket extends ServiceObject {
   getNotifications(
       options: GetNotificationsOptions,
       callback: GetNotificationsCallback): void;
+  /**
+   * @typedef {object} GetNotificationOptions Configuration options for Bucket#getNotification().
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @callback GetNotificationsCallback
+   * @param {?Error} err Request error, if any.
+   * @param {Notification[]} notifications Array of {@link Notification}
+   *     instances.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {array} GetNotificationsResponse
+   * @property {Notification[]} 0 Array of {@link Notification} instances.
+   * @property {object} 1 The full API response.
+   */
   /**
    * Retrieves a list of notification subscriptions for a given bucket.
    *
@@ -2334,6 +2159,11 @@ class Bucket extends ServiceObject {
   lock(metageneration: number|string): Promise<BucketLockResponse>;
   lock(metageneration: number|string, callback: BucketLockCallback): void;
   /**
+   * @callback BucketLockCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
    * Lock a previously-defined retention policy. This will prevent changes to
    * the policy.
    *
@@ -2383,6 +2213,24 @@ class Bucket extends ServiceObject {
   makePrivate(
       options: MakeBucketPrivateOptions,
       callback: MakeBucketPrivateCallback): void;
+  /**
+   * @typedef {array} MakeBucketPrivateResponse
+   * @property {File[]} 0 List of files made private.
+   */
+  /**
+   * @callback MakeBucketPrivateCallback
+   * @param {?Error} err Request error, if any.
+   * @param {File[]} files List of files made private.
+   */
+  /**
+   * @typedef {object} MakeBucketPrivateOptions
+   * @param {boolean} [includeFiles=false] Make each file in the bucket
+   *     private.
+   * @param {boolean} [force] Queue errors occurred while making files
+   *     private until all files have been processed.
+   * @param {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
   /**
    * Make the bucket listing private.
    *
@@ -2501,6 +2349,22 @@ class Bucket extends ServiceObject {
   makePublic(
       options: MakeBucketPublicOptions,
       callback: MakeBucketPublicCallback): void;
+  /**
+   * @typedef {object} MakeBucketPublicOptions
+   * @param {boolean} [includeFiles=false] Make each file in the bucket
+   *     private.
+   * @param {boolean} [force] Queue errors occurred while making files
+   *     private until all files have been processed.
+   */
+  /**
+   * @callback MakeBucketPublicCallback
+   * @param {?Error} err Request error, if any.
+   * @param {File[]} files List of files made public.
+   */
+  /**
+   * @typedef {array} MakeBucketPublicResponse
+   * @property {File[]} 0 List of files made public.
+   */
   /**
    * Make the bucket publicly readable.
    *
@@ -2696,6 +2560,20 @@ class Bucket extends ServiceObject {
       labels: Labels, options: SetLabelsOptions,
       callback: SetLabelsCallback): void;
   /**
+   * @typedef {array} SetLabelsResponse
+   * @property {object} 0 The bucket metadata.
+   */
+  /**
+   * @callback SetLabelsCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} metadata The bucket metadata.
+   */
+  /**
+   * @typedef {object} SetLabelsOptions Configuration options for Bucket#setLabels().
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
    * Set labels on the bucket.
    *
    * This makes an underlying call to {@link Bucket#setMetadata}, which
@@ -2749,6 +2627,20 @@ class Bucket extends ServiceObject {
       metadata: Metadata, options: SetBucketMetadataOptions,
       callback: SetBucketMetadataCallback): void;
   setMetadata(metadata: Metadata, callback: SetBucketMetadataCallback): void;
+  /**
+   * @typedef {object} SetBucketMetadataOptions Configuration options for Bucket#setMetadata().
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @typedef {array} SetBucketMetadataResponse
+   * @property {object} apiResponse The full API response.
+   */
+  /**
+   * @callback SetBucketMetadataCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} metadata The bucket metadata.
+   */
   /**
    * Set the bucket's metadata.
    *
@@ -2903,6 +2795,15 @@ class Bucket extends ServiceObject {
       storageClass: string, options: SetBucketStorageClassOptions,
       callback: SetBucketStorageClassCallback): void;
   /**
+   * @typedef {object} SetBucketStorageClassOptions
+   * @param {string} [userProject] - The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @callback SetBucketStorageClassCallback
+   * @param {?Error} err Request error, if any.
+   */
+  /**
    * Set the default storage class for new files in this bucket.
    *
    * @see [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
@@ -2978,6 +2879,74 @@ class Bucket extends ServiceObject {
   upload(pathString: string, options: UploadOptions, callback: UploadCallback):
       void;
   upload(pathString: string, callback: UploadCallback): void;
+  /**
+   * @typedef {object} UploadOptions Configuration options for Bucket#upload().
+   * @param {string|File} [options.destination] The place to save
+   *     your file. If given a string, the file will be uploaded to the bucket
+   *     using the string as a filename. When given a File object, your local
+   * file will be uploaded to the File object's bucket and under the File
+   * object's name. Lastly, when this argument is omitted, the file is uploaded
+   * to your bucket using the name of the local file.
+   * @param {string} [options.encryptionKey] A custom encryption key. See
+   *     [Customer-supplied Encryption
+   * Keys](https://cloud.google.com/storage/docs/encryption#customer-supplied).
+   * @param {boolean} [options.gzip] Automatically gzip the file. This will set
+   *     `options.metadata.contentEncoding` to `gzip`.
+   * @param {string} [options.kmsKeyName] The name of the Cloud KMS key that will
+   *     be used to encrypt the object. Must be in the format:
+   *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`.
+   * @param {object} [options.metadata] See an
+   *     [Objects: insert request
+   * body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON).
+   * @param {string} [options.offset] The starting byte of the upload stream, for
+   *     resuming an interrupted upload. Defaults to 0.
+   * @param {string} [options.predefinedAcl] Apply a predefined set of access
+   *     controls to this object.
+   *
+   *     Acceptable values are:
+   *     - **`authenticatedRead`** - Object owner gets `OWNER` access, and
+   *       `allAuthenticatedUsers` get `READER` access.
+   *
+   *     - **`bucketOwnerFullControl`** - Object owner gets `OWNER` access, and
+   *       project team owners get `OWNER` access.
+   *
+   *     - **`bucketOwnerRead`** - Object owner gets `OWNER` access, and project
+   *       team owners get `READER` access.
+   *
+   *     - **`private`** - Object owner gets `OWNER` access.
+   *
+   *     - **`projectPrivate`** - Object owner gets `OWNER` access, and project
+   *       team members get access according to their roles.
+   *
+   *     - **`publicRead`** - Object owner gets `OWNER` access, and `allUsers`
+   * get `READER` access.
+   * @param {boolean} [options.private] Make the uploaded file private. (Alias for
+   *     `options.predefinedAcl = 'private'`)
+   * @param {boolean} [options.public] Make the uploaded file public. (Alias for
+   *     `options.predefinedAcl = 'publicRead'`)
+   * @param {boolean} [options.resumable] Force a resumable upload. (default:
+   *     true for files larger than 5 MB).
+   * @param {string} [options.uri] The URI for an already-created resumable
+   *     upload. See {@link File#createResumableUpload}.
+   * @param {string} [options.userProject] The ID of the project which will be
+   *     billed for the request.
+   * @param {string|boolean} [options.validation] Possible values: `"md5"`,
+   *     `"crc32c"`, or `false`. By default, data integrity is validated with an
+   *     MD5 checksum for maximum reliability. CRC32c will provide better
+   *     performance with less reliability. You may also choose to skip
+   * validation completely, however this is **not recommended**.
+   */
+  /**
+   * @typedef {array} UploadResponse
+   * @property {object} 0 The uploaded {@link File}.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback UploadCallback
+   * @param {?Error} err Request error, if any.
+   * @param {object} file The uploaded {@link File}.
+   * @param {object} apiResponse The full API response.
+   */
   /**
    * Upload a file to the bucket. This is a convenience method that wraps
    * {@link File#createWriteStream}.
@@ -3193,6 +3162,28 @@ class Bucket extends ServiceObject {
   makeAllFilesPublicPrivate_(
       options: MakeAllFilesPublicPrivateOptions,
       callback: MakeAllFilesPublicPrivateCallback): void;
+  /**
+   * @private
+   *
+   * @typedef {object} MakeAllFilesPublicPrivateOptions
+   * @property {boolean} [force] Suppress errors until all files have been
+   *     processed.
+   * @property {boolean} [private] Make files private.
+   * @property {boolean} [public] Make files public.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   */
+  /**
+   * @private
+   *
+   * @callback SetBucketMetadataCallback
+   * @param {?Error} err Request error, if any.
+   * @param {File[]} files Files that were updated.
+   */
+  /**
+   * @typedef {array} MakeAllFilesPublicPrivateResponse
+   * @property {File[]} 0 List of files affected.
+   */
   /**
    * Iterate over all of a bucket's files, calling `file.makePublic()` (public)
    * or `file.makePrivate()` (private) on each.
