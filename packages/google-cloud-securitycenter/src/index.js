@@ -24,6 +24,18 @@
 /**
  * @namespace google.cloud.securitycenter.v1beta1
  */
+/**
+ * @namespace google.iam.v1
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.longrunning
+ */
+/**
+ * @namespace google.rpc
+ */
 
 'use strict';
 
