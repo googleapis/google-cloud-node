@@ -285,14 +285,12 @@ describe('Query', () => {
 
   describe('run', () => {
     it('should call the parent instance runQuery correctly', (done) => {
-      const args = [0, 1, 2];
+      const args = [{}, () => {}];
 
       query.scope.runQuery = function() {
         assert.strictEqual(this, query.scope);
         assert.strictEqual(arguments[0], query);
         assert.strictEqual(arguments[1], args[0]);
-        assert.strictEqual(arguments[2], args[1]);
-        assert.strictEqual(arguments[3], args[2]);
         done();
       };
 

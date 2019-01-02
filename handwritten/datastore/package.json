@@ -38,7 +38,7 @@
     "system-test": "mocha build/system-test --timeout 600000",
     "fix": "gts fix && eslint '**/*.js' --fix",
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r src/v1/ build/src/v1/ && cp -r protos build/ && cp test/*.js build/test",
+    "compile": "tsc -p . && cp -r src/v1 build/src && cp -r protos build && cp test/*.js build/test",
     "prepare": "npm run compile",
     "pretest": "npm run compile"
   },

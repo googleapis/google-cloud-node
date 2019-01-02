@@ -23,8 +23,8 @@ import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import * as through from 'through2';
 
-import {entity} from '../src/entity.js';
-import {Query} from '../src/query.js';
+import {entity, KeyProto} from '../src/entity.js';
+import {Query, QueryProto} from '../src/query.js';
 
 let promisified = false;
 const fakePfy = Object.assign({}, pfy, {
@@ -144,7 +144,7 @@ describe('Request', () => {
     });
 
     it('should make the correct request', done => {
-      const keyProto = {};
+      const keyProto = {} as KeyProto;
       sandbox.stub(entity, 'isKeyComplete');
       sandbox.stub(entity, 'keyToKeyProto').callsFake(key => {
         assert.strictEqual(key, INCOMPLETE_KEY);
@@ -258,6 +258,7 @@ describe('Request', () => {
       sandbox.stub(entity, 'keyToKeyProto').callsFake(key_ => {
         assert.strictEqual(key_, key);
         done();
+        return {} as KeyProto;
       });
 
       request.createReadStream(key).on('error', done);
@@ -391,7 +392,8 @@ describe('Request', () => {
         ],
       };
 
-      const expectedResult = entity.formatArray(apiResponse.found)[0];
+      // tslint:disable-next-line no-any
+      const expectedResult = entity.formatArray(apiResponse.found as any)[0];
 
       const apiResponseWithMultiEntities = extend(true, {}, apiResponse);
       const entities = apiResponseWithMultiEntities.found;
@@ -688,6 +690,7 @@ describe('Request', () => {
         assert.notStrictEqual(query_, query);
         assert.deepStrictEqual(query_, query);
         done();
+        return {} as QueryProto;
       });
 
       request.runQueryStream(query).on('error', done).emit('reading');
@@ -695,7 +698,7 @@ describe('Request', () => {
 
     it('should make correct request when the stream is ready', done => {
       const query = {namespace: 'namespace'};
-      const queryProto = {};
+      const queryProto = {} as QueryProto;
 
       sandbox.stub(entity, 'queryToQueryProto').returns(queryProto);
 
@@ -828,7 +831,7 @@ describe('Request', () => {
           limit: {
             value: query.limitVal,
           },
-        };
+        } as {} as QueryProto;
 
         let timesRequestCalled = 0;
         let startCalled = false;
@@ -943,7 +946,7 @@ describe('Request', () => {
           callback(null, {batch});
         };
 
-        sandbox.stub(entity, 'queryToQueryProto').returns({});
+        sandbox.stub(entity, 'queryToQueryProto').returns({} as QueryProto);
         const limitStub = sandbox.stub(FakeQuery.prototype, 'limit');
 
         request.runQueryStream(query)
@@ -1061,7 +1064,7 @@ describe('Request', () => {
           assert.ifError(err);
 
           const spy = request.runQueryStream.getCall(0);
-          assert.deepStrictEqual(spy.args[1], {});
+          assert.deepStrictEqual(spy.args[0], {});
           done();
         });
       });

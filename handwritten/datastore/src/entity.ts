@@ -17,15 +17,20 @@
 import * as arrify from 'arrify';
 import * as extend from 'extend';
 import * as is from 'is';
+import {Query, QueryProto} from './query';
 
 // tslint:disable-next-line no-namespace
 export namespace entity {
+  export interface InvalidKeyErrorOptions {
+    code: string;
+  }
+
   export class InvalidKeyError extends Error {
-    constructor(opts) {
+    constructor(opts: InvalidKeyErrorOptions) {
       const errorMessages = {
         MISSING_KIND: 'A key should contain at least a kind.',
         MISSING_ANCESTOR_ID: 'Ancestor keys require an id or name.',
-      };
+      } as {[index: string]: string};
       super(errorMessages[opts.code]);
       this.name = 'InvalidKey';
     }
@@ -69,7 +74,7 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsDouble(value) {
+  export function isDsDouble(value?: {}) {
     return value instanceof entity.Double;
   }
 
@@ -102,7 +107,7 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsInt(value) {
+  export function isDsInt(value?: {}) {
     return value instanceof entity.Int;
   }
 
@@ -151,8 +156,13 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsGeoPoint(value) {
+  export function isDsGeoPoint(value?: {}) {
     return value instanceof entity.GeoPoint;
+  }
+
+  export interface KeyOptions {
+    namespace?: string;
+    path: Array<string|number>;
   }
 
   /**
@@ -172,14 +182,14 @@ export namespace entity {
    * });
    */
   export class Key {
-    namespace: string;
+    namespace?: string;
     id?: string;
     name?: string;
     kind: string;
     parent?: Key;
-    path;
+    path!: Array<string|number>;
 
-    constructor(options) {
+    constructor(options: KeyOptions) {
       /**
        * @name Key#namespace
        * @type {string}
@@ -192,13 +202,13 @@ export namespace entity {
         const identifier = options.path.pop();
 
         if (is.number(identifier) || isDsInt(identifier)) {
-          this.id = identifier.value || identifier;
+          this.id = ((identifier as {} as Int).value || identifier) as string;
         } else if (is.string(identifier)) {
-          this.name = identifier;
+          this.name = identifier as string;
         }
       }
 
-      this.kind = options.path.pop();
+      this.kind = options.path.pop() as string;
 
       if (options.path.length > 0) {
         this.parent = new Key(options);
@@ -229,7 +239,7 @@ export namespace entity {
    * @param {*} value
    * @returns {boolean}
    */
-  export function isDsKey(value) {
+  export function isDsKey(value?: {}) {
     return value instanceof entity.Key;
   }
 
@@ -256,8 +266,8 @@ export namespace entity {
    * });
    * // <Buffer 68 65 6c 6c 6f>
    */
-  export function decodeValueProto(valueProto) {
-    const valueType = valueProto.valueType;
+  export function decodeValueProto(valueProto: ValueProto) {
+    const valueType = valueProto.valueType!;
     const value = valueProto[valueType];
 
     switch (valueType) {
@@ -311,9 +321,9 @@ export namespace entity {
    * //   stringValue: 'Hi'
    * // }
    */
-  export function encodeValue(value) {
-    // tslint:disable-next-line no-any
-    const valueProto: any = {};
+  // tslint:disable-next-line no-any
+  export function encodeValue(value?: any): ValueProto {
+    const valueProto: ValueProto = {};
 
     if (is.boolean(value)) {
       valueProto.booleanValue = value;
@@ -325,7 +335,7 @@ export namespace entity {
       return valueProto;
     }
 
-    if (is.number(value)) {
+    if (typeof value === 'number') {
       if (value % 1 === 0) {
         value = new entity.Int(value);
       } else {
@@ -334,17 +344,17 @@ export namespace entity {
     }
 
     if (isDsInt(value)) {
-      valueProto.integerValue = value.value;
+      valueProto.integerValue = (value as Int).value;
       return valueProto;
     }
 
     if (isDsDouble(value)) {
-      valueProto.doubleValue = value.value;
+      valueProto.doubleValue = (value as Double).value;
       return valueProto;
     }
 
     if (isDsGeoPoint(value)) {
-      valueProto.geoPointValue = value.value;
+      valueProto.geoPointValue = (value as GeoPoint).value;
       return valueProto;
     }
 
@@ -369,7 +379,7 @@ export namespace entity {
       return valueProto;
     }
 
-    if (is.array(value)) {
+    if (Array.isArray(value)) {
       valueProto.arrayValue = {
         values: value.map(entity.encodeValue),
       };
@@ -428,9 +438,10 @@ export namespace entity {
    * //   name: 'Stephen'
    * // }
    */
-  export function entityFromEntityProto(entityProto) {
-    const entityObject = {};
-
+  // tslint:disable-next-line no-any
+  export function entityFromEntityProto(entityProto: EntityProto): any {
+    // tslint:disable-next-line no-any
+    const entityObject: any = {};
     const properties = entityProto.properties || {};
 
     // tslint:disable-next-line forin
@@ -472,11 +483,11 @@ export namespace entity {
    * //   }
    * // }
    */
-  export function entityToEntityProto(entityObject) {
+  export function entityToEntityProto(entityObject: Entity): EntityProto {
     const properties = entityObject.data;
     const excludeFromIndexes = entityObject.excludeFromIndexes;
 
-    const entityProto = {
+    const entityProto: EntityProto = {
       key: null,
 
       properties: Object.keys(properties)
@@ -485,7 +496,8 @@ export namespace entity {
                             encoded[key] = entity.encodeValue(properties[key]);
                             return encoded;
                           },
-                          {}),
+                          // tslint:disable-next-line no-any
+                          {} as any),
     };
 
     if (excludeFromIndexes && excludeFromIndexes.length > 0) {
@@ -496,7 +508,7 @@ export namespace entity {
 
     return entityProto;
 
-    function excludePathFromEntity(entity, path) {
+    function excludePathFromEntity(entity: EntityProto, path: string) {
       const arrayIndex = path.indexOf('[]');
       const entityIndex = path.indexOf('.');
 
@@ -531,7 +543,7 @@ export namespace entity {
 
       const delimiter = firstPathPartIsArray ? '[]' : '.';
       const splitPath = path.split(delimiter);
-      const firstPathPart = splitPath.shift();
+      const firstPathPart = splitPath.shift()!;
       const remainderPath = splitPath.join(delimiter).replace(/^(\.|\[\])/, '');
 
       if (!(entity.properties && entity.properties[firstPathPart])) {
@@ -543,7 +555,8 @@ export namespace entity {
           // check also if the property in question is actually an array value.
           entity.properties[firstPathPart].arrayValue) {
         const array = entity.properties[firstPathPart].arrayValue;
-        array.values.forEach(value => {
+        // tslint:disable-next-line no-any
+        array.values.forEach((value: any) => {
           if (remainderPath === '') {
             // We want to exclude *this* array property, which is
             // equivalent with excluding all its values
@@ -589,10 +602,10 @@ export namespace entity {
    *   //
    * });
    */
-  export function formatArray(results) {
+  export function formatArray(results: ResponseResult[]) {
     return results.map(result => {
       const ent = entity.entityFromEntityProto(result.entity);
-      ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity.key);
+      ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity.key!);
       return ent;
     });
   }
@@ -608,8 +621,8 @@ export namespace entity {
    * isKeyComplete(new Key(['Company', 'Google'])); // true
    * isKeyComplete(new Key('Company')); // false
    */
-  export function isKeyComplete(key) {
-    const lastPathElement = entity.keyToKeyProto(key).path.pop();
+  export function isKeyComplete(key: Key) {
+    const lastPathElement = entity.keyToKeyProto(key).path.pop()!;
     return !!(lastPathElement.id || lastPathElement.name);
   }
 
@@ -634,7 +647,7 @@ export namespace entity {
    *   ]
    * });
    */
-  export function keyFromKeyProto(keyProto) {
+  export function keyFromKeyProto(keyProto: KeyProto): Key {
     // tslint:disable-next-line no-any
     const keyOptions: any = {
       path: [],
@@ -647,7 +660,7 @@ export namespace entity {
     keyProto.path.forEach((path, index) => {
       keyOptions.path.push(path.kind);
 
-      let id = path[path.idType];
+      let id = path[path.idType!];
 
       if (path.idType === 'id') {
         id = new entity.Int(id);
@@ -683,7 +696,7 @@ export namespace entity {
    * //   ]
    * // }
    */
-  export function keyToKeyProto(key) {
+  export function keyToKeyProto(key: Key): KeyProto {
     if (is.undefined(key.kind)) {
       throw new InvalidKeyError({
         code: 'MISSING_KIND',
@@ -691,7 +704,7 @@ export namespace entity {
     }
 
     // tslint:disable-next-line no-any
-    const keyProto: any = {
+    const keyProto: KeyProto = {
       path: [],
     };
 
@@ -727,7 +740,7 @@ export namespace entity {
 
       keyProto.path.unshift(pathElement);
       // tslint:disable-next-line no-conditional-assignment
-    } while ((key = key.parent) && ++numKeysWalked);
+    } while ((key = key.parent!) && ++numKeysWalked);
 
     return keyProto;
   }
@@ -765,7 +778,7 @@ export namespace entity {
    * //   groupBy: []
    * // }
    */
-  export function queryToQueryProto(query) {
+  export function queryToQueryProto(query: Query): QueryProto {
     const OP_TO_OPERATOR = {
       '=': 'EQUAL',
       '>': 'GREATER_THAN',
@@ -780,8 +793,7 @@ export namespace entity {
       '+': 'ASCENDING',
     };
 
-    // tslint:disable-next-line no-any
-    const queryProto: any = {
+    const queryProto: QueryProto = {
       distinctOn: query.groupByVal.map(groupBy => {
         return {
           name: groupBy,
@@ -862,4 +874,37 @@ export namespace entity {
 
     return queryProto;
   }
+}
+
+export interface ValueProto {
+  // tslint:disable-next-line no-any
+  [index: string]: any;
+  valueType?: string;
+  values?: ValueProto[];
+  // tslint:disable-next-line no-any
+  value?: any;
+}
+
+export interface EntityProto {
+  key: KeyProto|null;
+  // tslint:disable-next-line no-any
+  properties: any;
+  excludeFromIndexes?: boolean;
+}
+
+// tslint:disable-next-line no-any
+export type Entity = any;
+
+export interface KeyProto {
+  path: Array<{
+    // tslint:disable-next-line no-any
+    [index: string]: any; id: string; name: string;
+    kind?: string;
+    idType?: string;
+  }>;
+  partitionId?: {namespaceId: {}};
+}
+
+export interface ResponseResult {
+  entity: EntityProto;
 }
