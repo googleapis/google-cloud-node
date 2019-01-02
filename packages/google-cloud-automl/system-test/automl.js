@@ -17,9 +17,13 @@ const assert = require('assert');
 
 const client = new automl.AutoMlClient();
 const location = 'us-central1';
-const projectId = process.env.GCLOUD_PROJECT;
 
 describe('automl system tests', () => {
+  let projectId;
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
+
   it('should list all datasets', async () => {
     const parent = client.locationPath(projectId, location);
     const [datasets] = await client.listDatasets({parent});
