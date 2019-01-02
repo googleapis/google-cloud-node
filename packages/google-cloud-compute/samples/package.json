@@ -14,11 +14,11 @@
     "test": "mocha --timeout 1200000"
   },
   "dependencies": {
-    "node-fetch": "^2.3.0",
     "@google-cloud/compute": "^0.11.0",
+    "@sendgrid/mail": "^6.3.1",
+    "node-fetch": "^2.3.0",
     "nodemailer": "^4.3.1",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "sendgrid": "^5.2.3"
+    "nodemailer-smtp-transport": "^2.7.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
