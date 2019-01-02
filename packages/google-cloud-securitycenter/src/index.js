@@ -42,7 +42,7 @@ const gapic = Object.freeze({
  *     - `SecurityCenterClient` - Reference to
  *       {@link v1beta1.SecurityCenterClient}
  *
- * @module {object} securitycenter
+ * @module {object} @google-cloud/securitycenter
  * @alias nodejs-securitycenter
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>

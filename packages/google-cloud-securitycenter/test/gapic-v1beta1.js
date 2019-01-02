@@ -16,7 +16,7 @@
 
 const assert = require('assert');
 
-const securitycenterModule = require('../src');
+const securityCenterModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 const error = new Error();
@@ -25,7 +25,7 @@ error.code = FAKE_STATUS_CODE;
 describe('SecurityCenterClient', () => {
   describe('createSource', () => {
     it('invokes createSource without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -62,7 +62,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes createSource with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -93,7 +93,7 @@ describe('SecurityCenterClient', () => {
 
   describe('createFinding', () => {
     it('invokes createFinding without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -136,7 +136,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes createFinding with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -169,7 +169,7 @@ describe('SecurityCenterClient', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -202,7 +202,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes getIamPolicy with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -231,7 +231,7 @@ describe('SecurityCenterClient', () => {
 
   describe('getOrganizationSettings', () => {
     it('invokes getOrganizationSettings without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -264,7 +264,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes getOrganizationSettings with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -293,7 +293,7 @@ describe('SecurityCenterClient', () => {
 
   describe('getSource', () => {
     it('invokes getSource without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -328,7 +328,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes getSource with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -357,7 +357,7 @@ describe('SecurityCenterClient', () => {
 
   describe('groupAssets', () => {
     it('invokes groupAssets without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -397,7 +397,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes groupAssets with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -428,7 +428,7 @@ describe('SecurityCenterClient', () => {
 
   describe('groupFindings', () => {
     it('invokes groupFindings without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -468,7 +468,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes groupFindings with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -499,7 +499,7 @@ describe('SecurityCenterClient', () => {
 
   describe('listAssets', () => {
     it('invokes listAssets without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -535,7 +535,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes listAssets with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -564,7 +564,7 @@ describe('SecurityCenterClient', () => {
 
   describe('listFindings', () => {
     it('invokes listFindings without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -604,7 +604,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes listFindings with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -633,7 +633,7 @@ describe('SecurityCenterClient', () => {
 
   describe('listSources', () => {
     it('invokes listSources without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -671,7 +671,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes listSources with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -700,7 +700,7 @@ describe('SecurityCenterClient', () => {
 
   describe('runAssetDiscovery', function() {
     it('invokes runAssetDiscovery without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -736,7 +736,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes runAssetDiscovery with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -771,7 +771,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('has longrunning decoder functions', () => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -788,7 +788,7 @@ describe('SecurityCenterClient', () => {
 
   describe('setFindingState', () => {
     it('invokes setFindingState without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -835,7 +835,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes setFindingState with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -872,7 +872,7 @@ describe('SecurityCenterClient', () => {
 
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -907,7 +907,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes setIamPolicy with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -938,7 +938,7 @@ describe('SecurityCenterClient', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -968,7 +968,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes testIamPermissions with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -999,7 +999,7 @@ describe('SecurityCenterClient', () => {
 
   describe('updateFinding', () => {
     it('invokes updateFinding without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1038,7 +1038,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes updateFinding with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1067,7 +1067,7 @@ describe('SecurityCenterClient', () => {
 
   describe('updateOrganizationSettings', () => {
     it('invokes updateOrganizationSettings without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1100,7 +1100,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes updateOrganizationSettings with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1129,7 +1129,7 @@ describe('SecurityCenterClient', () => {
 
   describe('updateSource', () => {
     it('invokes updateSource without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1164,7 +1164,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes updateSource with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1193,7 +1193,7 @@ describe('SecurityCenterClient', () => {
 
   describe('updateSecurityMarks', () => {
     it('invokes updateSecurityMarks without error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -1224,7 +1224,7 @@ describe('SecurityCenterClient', () => {
     });
 
     it('invokes updateSecurityMarks with error', done => {
-      const client = new securitycenterModule.v1beta1.SecurityCenterClient({
+      const client = new securityCenterModule.v1beta1.SecurityCenterClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });

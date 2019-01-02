@@ -302,9 +302,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -364,9 +364,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -419,9 +419,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -466,9 +466,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -517,9 +517,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -657,9 +657,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -829,9 +829,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -948,9 +948,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1093,9 +1093,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1239,9 +1239,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1405,9 +1405,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1522,9 +1522,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1661,9 +1661,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1724,9 +1724,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1812,9 +1812,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1862,9 +1862,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -1963,9 +1963,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -2025,9 +2025,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -2083,9 +2083,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -2147,9 +2147,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -2199,9 +2199,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -2255,9 +2255,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
@@ -2311,9 +2311,9 @@ class SecurityCenterClient {
    *
    * @example
    *
-   * const securitycenter = require('securitycenter.v1beta1');
+   * const securityCenter = require('@google-cloud/security-center');
    *
-   * const client = new securitycenter.v1beta1.SecurityCenterClient({
+   * const client = new securityCenter.v1beta1.SecurityCenterClient({
    *   // optional auth parameters.
    * });
    *
