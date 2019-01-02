@@ -24,6 +24,12 @@
 /**
  * @namespace google.cloud.scheduler.v1beta1
  */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
 
 'use strict';
 
