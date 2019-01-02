@@ -42,7 +42,7 @@ const gapic = Object.freeze({
  *     - `CloudSchedulerClient` - Reference to
  *       {@link v1beta1.CloudSchedulerClient}
  *
- * @module {object} scheduler
+ * @module {object} @google-cloud/scheduler
  * @alias nodejs-scheduler
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>

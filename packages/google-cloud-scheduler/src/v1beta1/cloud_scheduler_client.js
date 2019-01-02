@@ -240,7 +240,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -330,7 +330,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -377,7 +377,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -436,7 +436,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -506,7 +506,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -552,7 +552,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -602,7 +602,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -656,7 +656,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
@@ -708,7 +708,7 @@ class CloudSchedulerClient {
    *
    * @example
    *
-   * const scheduler = require('scheduler.v1beta1');
+   * const scheduler = require('@google-cloud/scheduler');
    *
    * const client = new scheduler.v1beta1.CloudSchedulerClient({
    *   // optional auth parameters.
