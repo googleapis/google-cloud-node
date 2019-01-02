@@ -30,8 +30,8 @@ const gapic = Object.freeze({
   v1: require('./v1'),
 });
 
-import {entity} from './entity';
-import {Query} from './query';
+import {entity, Entity} from './entity';
+import {Query, RunQueryInfo, RunQueryOptions, RunQueryResponse, RunQueryCallback} from './query';
 import {Datastore} from '.';
 
 export interface EntityDataObj {
@@ -585,16 +585,19 @@ class DatastoreRequest {
    *   const entities = data[0];
    * });
    */
-  runQuery(query, options?): Promise<Array<Array<{}>>>;
-  runQuery(query, options?, callback?): void|Promise<Array<Array<{}>>> {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
+  runQuery(query: Query, options?: RunQueryOptions): Promise<RunQueryResponse>;
+  runQuery(query: Query, options: RunQueryOptions, callback: RunQueryCallback):
+      void;
+  runQuery(query: Query, callback: RunQueryCallback): void;
+  runQuery(
+      query: Query, optionsOrCallback?: RunQueryOptions|RunQueryCallback,
+      cb?: RunQueryCallback): void|Promise<RunQueryResponse> {
+    const options =
+        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+    const callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
 
-    options = options || {};
-
-    let info;
+    let info: RunQueryInfo;
 
     this.runQueryStream(query, options)
         .on('error', callback)
@@ -602,7 +605,7 @@ class DatastoreRequest {
             info_ => {
               info = info_;
             })
-        .pipe(concat(results => {
+        .pipe(concat((results: Entity[]) => {
           callback(null, results, info);
         }));
   }
@@ -638,7 +641,7 @@ class DatastoreRequest {
    *     this.end();
    *   });
    */
-  runQueryStream(query, options?) {
+  runQueryStream(query: Query, options?) {
     options = options || {};
     query = extend(true, new Query(), query);
 
@@ -686,7 +689,8 @@ class DatastoreRequest {
         info.endCursor = resp.batch.endCursor.toString('base64');
       }
 
-      let entities = [];
+      // tslint:disable-next-line no-any
+      let entities: any[] = [];
 
       if (resp.batch.entityResults) {
         entities = entity.formatArray(resp.batch.entityResults);
@@ -1162,7 +1166,7 @@ class DatastoreRequest {
           'google-cloud-resource-prefix': `projects/${projectId}`,
         },
       });
-      gaxClient[method](reqOpts, gaxOpts, callback);
+      gaxClient![method](reqOpts, gaxOpts, callback);
     });
   }
 }

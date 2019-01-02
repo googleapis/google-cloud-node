@@ -19,7 +19,7 @@ import {Datastore} from '../src';
 import {entity} from '../src/entity';
 
 describe('Datastore', () => {
-  const testKinds: Array<{}> = [];
+  const testKinds: string[] = [];
   const datastore = new Datastore();
   // Override the Key method so we can track what keys are created during the
   // tests. They are then deleted in the `after` hook.
@@ -373,8 +373,8 @@ describe('Datastore', () => {
 
             datastore.runQuery(query, (err, results) => {
               assert.ifError(err);
-              assert.strictEqual(results[0].fullName, 'Full name');
-              assert.deepStrictEqual(results[0].linkedTo, personKey);
+              assert.strictEqual(results![0].fullName, 'Full name');
+              assert.deepStrictEqual(results![0].linkedTo, personKey);
               datastore.delete(personKey, done);
             });
           });
@@ -547,15 +547,15 @@ describe('Datastore', () => {
 
       datastore.runQuery(q, (err, firstEntities, info) => {
         assert.ifError(err);
-        assert.strictEqual(firstEntities.length, 5);
+        assert.strictEqual(firstEntities!.length, 5);
 
         const secondQ = datastore.createQuery('Character')
                             .hasAncestor(ancestor)
-                            .start(info.endCursor);
+                            .start(info!.endCursor!);
 
         datastore.runQuery(secondQ, (err, secondEntities) => {
           assert.ifError(err);
-          assert.strictEqual(secondEntities.length, 3);
+          assert.strictEqual(secondEntities!.length, 3);
           done();
         });
       });
@@ -569,7 +569,7 @@ describe('Datastore', () => {
 
       datastore.runQuery(q, (err, results) => {
         assert.ifError(err);
-        assert.strictEqual(results.length, limit);
+        assert.strictEqual(results!.length, limit);
         done();
       });
     });
@@ -615,7 +615,7 @@ describe('Datastore', () => {
 
       datastore.runQuery(q, (err, entities) => {
         assert.ifError(err);
-        assert.strictEqual(entities.length, 6);
+        assert.strictEqual(entities!.length, 6);
         done();
       });
     });
@@ -628,7 +628,7 @@ describe('Datastore', () => {
 
       datastore.runQuery(q, (err, entities) => {
         assert.ifError(err);
-        assert.strictEqual(entities.length, 6);
+        assert.strictEqual(entities!.length, 6);
         done();
       });
     });
@@ -638,7 +638,7 @@ describe('Datastore', () => {
 
       datastore.runQuery(q, (err, entities) => {
         assert.ifError(err);
-        assert.strictEqual(entities.length, characters.length);
+        assert.strictEqual(entities!.length, characters.length);
         done();
       });
     });
@@ -652,7 +652,7 @@ describe('Datastore', () => {
 
       datastore.runQuery(q, (err, entities) => {
         assert.ifError(err);
-        assert.strictEqual(entities.length, 1);
+        assert.strictEqual(entities!.length, 1);
         done();
       });
     });
@@ -665,8 +665,8 @@ describe('Datastore', () => {
       datastore.runQuery(q, (err, entities) => {
         assert.ifError(err);
 
-        assert.strictEqual(entities[0].name, characters[0].name);
-        assert.strictEqual(entities[7].name, characters[3].name);
+        assert.strictEqual(entities![0].name, characters[0].name);
+        assert.strictEqual(entities![7].name, characters[3].name);
 
         done();
       });
@@ -681,12 +681,12 @@ describe('Datastore', () => {
       datastore.runQuery(q, (err, entities) => {
         assert.ifError(err);
 
-        assert.deepStrictEqual(entities[0], {
+        assert.deepStrictEqual(entities![0], {
           name: 'Arya',
           family: 'Stark',
         });
 
-        assert.deepStrictEqual(entities[8], {
+        assert.deepStrictEqual(entities![8], {
           name: 'Sansa',
           family: 'Stark',
         });
@@ -705,20 +705,20 @@ describe('Datastore', () => {
       datastore.runQuery(q, (err, entities, info) => {
         assert.ifError(err);
 
-        assert.strictEqual(entities.length, 3);
-        assert.strictEqual(entities[0].name, 'Robb');
-        assert.strictEqual(entities[2].name, 'Catelyn');
+        assert.strictEqual(entities!.length, 3);
+        assert.strictEqual(entities![0].name, 'Robb');
+        assert.strictEqual(entities![2].name, 'Catelyn');
 
         const secondQ = datastore.createQuery('Character')
                             .hasAncestor(ancestor)
                             .order('appearances')
-                            .start(info.endCursor);
+                            .start(info!.endCursor!);
 
         datastore.runQuery(secondQ, (err, secondEntities) => {
           assert.ifError(err);
-          assert.strictEqual(secondEntities.length, 3);
-          assert.strictEqual(secondEntities[0].name, 'Sansa');
-          assert.strictEqual(secondEntities[2].name, 'Arya');
+          assert.strictEqual(secondEntities!.length, 3);
+          assert.strictEqual(secondEntities![0].name, 'Sansa');
+          assert.strictEqual(secondEntities![2].name, 'Arya');
           done();
         });
       });
@@ -737,14 +737,14 @@ describe('Datastore', () => {
         const secondQ = datastore.createQuery('Character')
                             .hasAncestor(ancestor)
                             .order('appearances')
-                            .start(info.endCursor);
+                            .start(info!.endCursor!);
 
         datastore.runQuery(secondQ, (err, secondEntities) => {
           assert.ifError(err);
 
-          assert.strictEqual(secondEntities.length, 4);
-          assert.strictEqual(secondEntities[0].name, 'Catelyn');
-          assert.strictEqual(secondEntities[3].name, 'Arya');
+          assert.strictEqual(secondEntities!.length, 4);
+          assert.strictEqual(secondEntities![0].name, 'Catelyn');
+          assert.strictEqual(secondEntities![3].name, 'Arya');
 
           done();
         });
@@ -758,7 +758,7 @@ describe('Datastore', () => {
 
       datastore.runQuery(q, (err, entities) => {
         assert.ifError(err);
-        assert.strictEqual(entities.length, characters.length - 1);
+        assert.strictEqual(entities!.length, characters.length - 1);
         done();
       });
     });
@@ -886,7 +886,7 @@ describe('Datastore', () => {
             transaction.rollback(done);
             return;
           }
-          assert(entities.length > 0);
+          assert(entities!.length > 0);
           transaction.commit(done);
         });
       });
