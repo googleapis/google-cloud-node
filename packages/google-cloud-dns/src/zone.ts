@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {DeleteCallback, ServiceObject} from '@google-cloud/common';
+import {DeleteCallback, GetConfig, ServiceObject} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
@@ -26,9 +26,10 @@ const zonefile = require('dns-zonefile');
 
 import {Change, CreateChangeCallback, CreateChangeRequest} from './change';
 import {Record, RecordMetadata, RecordObject} from './record';
-import {DNS} from '.';
+import {DNS, CreateZoneRequest} from '.';
 import * as r from 'request';
 import {Readable} from 'stream';
+import {GetResponse, InstanceResponseCallback} from '@google-cloud/common/build/src/service-object';
 
 /**
  * Config to set for the change.
@@ -94,6 +95,8 @@ export interface GetRecordsRequest {
   type?: string;
   filterByTypes_?: {[index: string]: boolean};
 }
+
+export interface GetZoneRequest extends CreateZoneRequest, GetConfig {}
 
 /**
  * Query object for listing changes.
@@ -164,7 +167,7 @@ export interface ZoneExportCallback {
  *
  * const zone = dns.zone('zone-id');
  */
-class Zone extends ServiceObject {
+class Zone extends ServiceObject<Zone> {
   name: string;
   getRecordsStream: (query?: GetRecordsRequest|string|string[]) => Readable;
   getChangesStream: (query?: GetChangesRequest) => Readable;
@@ -342,6 +345,18 @@ class Zone extends ServiceObject {
     this.name = name;
     this.getRecordsStream = paginator.streamify('getRecords');
     this.getChangesStream = paginator.streamify('getChanges');
+  }
+
+  get(config?: GetZoneRequest): Promise<GetResponse<Zone>>;
+  get(callback: InstanceResponseCallback<Zone>): void;
+  get(config: GetZoneRequest, callback: InstanceResponseCallback<Zone>): void;
+  get(configOrCallback?: GetZoneRequest|InstanceResponseCallback<Zone>,
+      callback?: InstanceResponseCallback<Zone>):
+      void|Promise<GetResponse<Zone>> {
+    const config = typeof configOrCallback === 'object' ? configOrCallback : {};
+    callback =
+        typeof configOrCallback === 'function' ? configOrCallback : callback;
+    super.get(config, callback!);
   }
 
   addRecords(records: Record|Record[]): Promise<CreateChangeResponse>;
