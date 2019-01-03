@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## v0.1.2
+
+01-02-2019 14:57 PST
+
+### Documentation
+- fix(docs): fix missing namespace ([#28](https://github.com/googleapis/nodejs-scheduler/pull/28))
+- fix(docs): run generator to fix code samples require module ([#27](https://github.com/googleapis/nodejs-scheduler/pull/27))
+
+### Internal / Testing Changes
+- chore: add a synth.metadata ([#25](https://github.com/googleapis/nodejs-scheduler/pull/25))
+- chore(build): inject yoshi automation key ([#24](https://github.com/googleapis/nodejs-scheduler/pull/24))
+- chore: update nyc and eslint configs ([#23](https://github.com/googleapis/nodejs-scheduler/pull/23))
+
 ## v0.1.1
 
 12-07-2018 14:21 PST
