@@ -52,10 +52,10 @@ const gapic = Object.freeze({
  * @alias nodejs-scheduler
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save scheduler
+ * npm install --save @google-cloud/scheduler
  *
  * @example <caption>Import the client library:</caption>
- * const scheduler = require('scheduler');
+ * const scheduler = require('@google-cloud/scheduler');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new scheduler.CloudSchedulerClient();
