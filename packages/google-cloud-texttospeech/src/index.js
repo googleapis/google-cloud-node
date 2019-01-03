@@ -43,14 +43,14 @@ const gapic = Object.freeze({
  *     - `TextToSpeechClient` - Reference to
  *       {@link v1.TextToSpeechClient}
  *
- * @module {object} text-to-speech
+ * @module {object} @google-cloud/text-to-speech
  * @alias nodejs-text-to-speech
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save text-to-speech
+ * npm install --save @google-cloud/text-to-speech
  *
  * @example <caption>Import the client library:</caption>
- * const text-to-speech = require('text-to-speech');
+ * const text-to-speech = require('@google-cloud/text-to-speech');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new text-to-speech.TextToSpeechClient();

@@ -197,7 +197,7 @@ class TextToSpeechClient {
    *
    * @example
    *
-   * const textToSpeech = require('text-to-speech.v1beta1');
+   * const textToSpeech = require('@google-cloud/text-to-speech');
    *
    * const client = new textToSpeech.v1beta1.TextToSpeechClient({
    *   // optional auth parameters.
@@ -254,7 +254,7 @@ class TextToSpeechClient {
    *
    * @example
    *
-   * const textToSpeech = require('text-to-speech.v1beta1');
+   * const textToSpeech = require('@google-cloud/text-to-speech');
    *
    * const client = new textToSpeech.v1beta1.TextToSpeechClient({
    *   // optional auth parameters.
