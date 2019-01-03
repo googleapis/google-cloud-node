@@ -214,7 +214,7 @@ class PredictionServiceClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.PredictionServiceClient({
    *   // optional auth parameters.

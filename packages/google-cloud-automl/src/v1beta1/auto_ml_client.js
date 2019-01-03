@@ -325,7 +325,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -376,7 +376,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -449,7 +449,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -545,7 +545,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -593,7 +593,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -690,7 +690,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -796,7 +796,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -904,7 +904,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1004,7 +1004,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1080,7 +1080,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1179,7 +1179,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1230,7 +1230,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1322,7 +1322,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1370,7 +1370,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1416,7 +1416,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1494,7 +1494,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
@@ -1595,7 +1595,7 @@ class AutoMlClient {
    *
    * @example
    *
-   * const automl = require('automl.v1beta1');
+   * const automl = require('@google-cloud/automl');
    *
    * const client = new automl.v1beta1.AutoMlClient({
    *   // optional auth parameters.
