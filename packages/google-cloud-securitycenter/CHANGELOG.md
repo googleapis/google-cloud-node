@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## v0.1.1
+
+01-02-2019 14:54 PST
+
+### Documentation
+- fix(docs): require stmt (#29)
+- add missing namespaces ([#27](https://github.com/googleapis/nodejs-security-center/pull/27))
+- fix(docs): fix require module in samples ([#26](https://github.com/googleapis/nodejs-security-center/pull/26))
+
+### Internal / Testing Changes
+- chore(build): inject yoshi automation key ([#23](https://github.com/googleapis/nodejs-security-center/pull/23))
+- chore: update nyc and eslint configs ([#22](https://github.com/googleapis/nodejs-security-center/pull/22))
+- chore: fix publish.sh permission +x ([#20](https://github.com/googleapis/nodejs-security-center/pull/20))
+- fix(build): fix Kokoro release script ([#19](https://github.com/googleapis/nodejs-security-center/pull/19))
+- build: add Kokoro configs for autorelease ([#18](https://github.com/googleapis/nodejs-security-center/pull/18))
+- chore: add synth.metadata ([#17](https://github.com/googleapis/nodejs-security-center/pull/17))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#12](https://github.com/googleapis/nodejs-security-center/pull/12))
+- chore: always nyc report before calling codecov ([#15](https://github.com/googleapis/nodejs-security-center/pull/15))
+- chore: nyc ignore build/test by default ([#14](https://github.com/googleapis/nodejs-security-center/pull/14))
+- docs: update readme badges ([#11](https://github.com/googleapis/nodejs-security-center/pull/11))
+
 ## v0.1.0
 
 This is the initial release of the Cloud Security Center API Node.js client library.

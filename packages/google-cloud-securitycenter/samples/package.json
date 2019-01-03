@@ -7,7 +7,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/security-center": "^0.1.0"
+    "@google-cloud/security-center": "^0.1.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
