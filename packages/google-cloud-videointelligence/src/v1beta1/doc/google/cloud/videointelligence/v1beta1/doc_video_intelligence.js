@@ -429,6 +429,35 @@ const Feature = {
 };
 
 /**
+ * Label detection mode.
+ *
+ * @enum {number}
+ * @memberof google.cloud.videointelligence.v1beta1
+ */
+const LabelDetectionMode = {
+
+  /**
+   * Unspecified.
+   */
+  LABEL_DETECTION_MODE_UNSPECIFIED: 0,
+
+  /**
+   * Detect shot-level labels.
+   */
+  SHOT_MODE: 1,
+
+  /**
+   * Detect frame-level labels.
+   */
+  FRAME_MODE: 2,
+
+  /**
+   * Detect both shot-level and frame-level labels.
+   */
+  SHOT_AND_FRAME_MODE: 3
+};
+
+/**
  * Label level (scope).
  *
  * @enum {number}
@@ -461,35 +490,6 @@ const LabelLevel = {
    * Frame-level. Corresponds to a single video frame.
    */
   FRAME_LEVEL: 4
-};
-
-/**
- * Label detection mode.
- *
- * @enum {number}
- * @memberof google.cloud.videointelligence.v1beta1
- */
-const LabelDetectionMode = {
-
-  /**
-   * Unspecified.
-   */
-  LABEL_DETECTION_MODE_UNSPECIFIED: 0,
-
-  /**
-   * Detect shot-level labels.
-   */
-  SHOT_MODE: 1,
-
-  /**
-   * Detect frame-level labels.
-   */
-  FRAME_MODE: 2,
-
-  /**
-   * Detect both shot-level and frame-level labels.
-   */
-  SHOT_AND_FRAME_MODE: 3
 };
 
 /**
