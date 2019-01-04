@@ -76,6 +76,28 @@ const EntityType = {
   },
 
   /**
+   * Represents different entity type expansion modes. Automated expansion
+   * allows an agent to recognize values that have not been explicitly listed in
+   * the entity (for example, new kinds of shopping list items).
+   *
+   * @enum {number}
+   * @memberof google.cloud.dialogflow.v2beta1
+   */
+  AutoExpansionMode: {
+
+    /**
+     * Auto expansion disabled for the entity.
+     */
+    AUTO_EXPANSION_MODE_UNSPECIFIED: 0,
+
+    /**
+     * Allows an agent to recognize values that have not been explicitly
+     * listed in the entity.
+     */
+    AUTO_EXPANSION_MODE_DEFAULT: 1
+  },
+
+  /**
    * Represents kinds of entities.
    *
    * @enum {number}
@@ -100,28 +122,6 @@ const EntityType = {
      * types (with or without aliases).
      */
     KIND_LIST: 2
-  },
-
-  /**
-   * Represents different entity type expansion modes. Automated expansion
-   * allows an agent to recognize values that have not been explicitly listed in
-   * the entity (for example, new kinds of shopping list items).
-   *
-   * @enum {number}
-   * @memberof google.cloud.dialogflow.v2beta1
-   */
-  AutoExpansionMode: {
-
-    /**
-     * Auto expansion disabled for the entity.
-     */
-    AUTO_EXPANSION_MODE_UNSPECIFIED: 0,
-
-    /**
-     * Allows an agent to recognize values that have not been explicitly
-     * listed in the entity.
-     */
-    AUTO_EXPANSION_MODE_DEFAULT: 1
   }
 };
 

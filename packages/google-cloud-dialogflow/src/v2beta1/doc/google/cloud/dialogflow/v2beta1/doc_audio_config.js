@@ -110,37 +110,6 @@ const OutputAudioConfig = {
 };
 
 /**
- * Gender of the voice as described in
- * [SSML voice element](https://www.w3.org/TR/speech-synthesis11/#edef_voice).
- *
- * @enum {number}
- * @memberof google.cloud.dialogflow.v2beta1
- */
-const SsmlVoiceGender = {
-
-  /**
-   * An unspecified gender, which means that the client doesn't care which
-   * gender the selected voice will have.
-   */
-  SSML_VOICE_GENDER_UNSPECIFIED: 0,
-
-  /**
-   * A male voice.
-   */
-  SSML_VOICE_GENDER_MALE: 1,
-
-  /**
-   * A female voice.
-   */
-  SSML_VOICE_GENDER_FEMALE: 2,
-
-  /**
-   * A gender-neutral voice.
-   */
-  SSML_VOICE_GENDER_NEUTRAL: 3
-};
-
-/**
  * Audio encoding of the output audio format in Text-To-Speech.
  *
  * @enum {number}
@@ -171,4 +140,35 @@ const OutputAudioEncoding = {
    * than MP3 while using approximately the same bitrate.
    */
   OUTPUT_AUDIO_ENCODING_OGG_OPUS: 3
+};
+
+/**
+ * Gender of the voice as described in
+ * [SSML voice element](https://www.w3.org/TR/speech-synthesis11/#edef_voice).
+ *
+ * @enum {number}
+ * @memberof google.cloud.dialogflow.v2beta1
+ */
+const SsmlVoiceGender = {
+
+  /**
+   * An unspecified gender, which means that the client doesn't care which
+   * gender the selected voice will have.
+   */
+  SSML_VOICE_GENDER_UNSPECIFIED: 0,
+
+  /**
+   * A male voice.
+   */
+  SSML_VOICE_GENDER_MALE: 1,
+
+  /**
+   * A female voice.
+   */
+  SSML_VOICE_GENDER_FEMALE: 2,
+
+  /**
+   * A gender-neutral voice.
+   */
+  SSML_VOICE_GENDER_NEUTRAL: 3
 };
