@@ -510,28 +510,62 @@ const DeviceState = {
 };
 
 /**
- * Indicates whether an MQTT connection is enabled or disabled. See the field
- * description for details.
+ * The gateway authorization/authentication method. This setting determines how
+ * Cloud IoT Core authorizes/authenticate devices to access the gateway.
  *
  * @enum {number}
  * @memberof google.cloud.iot.v1
  */
-const MqttState = {
+const GatewayAuthMethod = {
 
   /**
-   * No MQTT state specified. If not specified, MQTT will be enabled by default.
+   * No authentication/authorization method specified. No devices are allowed to
+   * access the gateway.
    */
-  MQTT_STATE_UNSPECIFIED: 0,
+  GATEWAY_AUTH_METHOD_UNSPECIFIED: 0,
 
   /**
-   * Enables a MQTT connection.
+   * The device is authenticated through the gateway association only. Device
+   * credentials are ignored even if provided.
    */
-  MQTT_ENABLED: 1,
+  ASSOCIATION_ONLY: 1,
 
   /**
-   * Disables a MQTT connection.
+   * The device is authenticated through its own credentials. Gateway
+   * association is not checked.
    */
-  MQTT_DISABLED: 2
+  DEVICE_AUTH_TOKEN_ONLY: 2,
+
+  /**
+   * The device is authenticated through both device credentials and gateway
+   * association. The device must be bound to the gateway and must provide its
+   * own credentials.
+   */
+  ASSOCIATION_AND_DEVICE_AUTH_TOKEN: 3
+};
+
+/**
+ * Gateway type.
+ *
+ * @enum {number}
+ * @memberof google.cloud.iot.v1
+ */
+const GatewayType = {
+
+  /**
+   * If unspecified, the device is considered a non-gateway device.
+   */
+  GATEWAY_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * The device is a gateway.
+   */
+  GATEWAY: 1,
+
+  /**
+   * The device is not a gateway.
+   */
+  NON_GATEWAY: 2
 };
 
 /**
@@ -601,62 +635,28 @@ const LogLevel = {
 };
 
 /**
- * Gateway type.
+ * Indicates whether an MQTT connection is enabled or disabled. See the field
+ * description for details.
  *
  * @enum {number}
  * @memberof google.cloud.iot.v1
  */
-const GatewayType = {
+const MqttState = {
 
   /**
-   * If unspecified, the device is considered a non-gateway device.
+   * No MQTT state specified. If not specified, MQTT will be enabled by default.
    */
-  GATEWAY_TYPE_UNSPECIFIED: 0,
+  MQTT_STATE_UNSPECIFIED: 0,
 
   /**
-   * The device is a gateway.
+   * Enables a MQTT connection.
    */
-  GATEWAY: 1,
+  MQTT_ENABLED: 1,
 
   /**
-   * The device is not a gateway.
+   * Disables a MQTT connection.
    */
-  NON_GATEWAY: 2
-};
-
-/**
- * The gateway authorization/authentication method. This setting determines how
- * Cloud IoT Core authorizes/authenticate devices to access the gateway.
- *
- * @enum {number}
- * @memberof google.cloud.iot.v1
- */
-const GatewayAuthMethod = {
-
-  /**
-   * No authentication/authorization method specified. No devices are allowed to
-   * access the gateway.
-   */
-  GATEWAY_AUTH_METHOD_UNSPECIFIED: 0,
-
-  /**
-   * The device is authenticated through the gateway association only. Device
-   * credentials are ignored even if provided.
-   */
-  ASSOCIATION_ONLY: 1,
-
-  /**
-   * The device is authenticated through its own credentials. Gateway
-   * association is not checked.
-   */
-  DEVICE_AUTH_TOKEN_ONLY: 2,
-
-  /**
-   * The device is authenticated through both device credentials and gateway
-   * association. The device must be bound to the gateway and must provide its
-   * own credentials.
-   */
-  ASSOCIATION_AND_DEVICE_AUTH_TOKEN: 3
+  MQTT_DISABLED: 2
 };
 
 /**
