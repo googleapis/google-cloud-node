@@ -303,6 +303,35 @@ const UptimeCheckIp = {
 };
 
 /**
+ * The supported resource types that can be used as values of
+ * `group_resource.resource_type`.
+ * `INSTANCE` includes `gce_instance` and `aws_ec2_instance` resource types.
+ * The resource types `gae_app` and `uptime_url` are not valid here because
+ * group checks on App Engine modules and URLs are not allowed.
+ *
+ * @enum {number}
+ * @memberof google.monitoring.v3
+ */
+const GroupResourceType = {
+
+  /**
+   * Default value (not valid).
+   */
+  RESOURCE_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * A group of instances from Google Cloud Platform (GCP) or
+   * Amazon Web Services (AWS).
+   */
+  INSTANCE: 1,
+
+  /**
+   * A group of Amazon ELB load balancers.
+   */
+  AWS_ELB_LOAD_BALANCER: 2
+};
+
+/**
  * The regions from which an uptime check can be run.
  *
  * @enum {number}
@@ -337,33 +366,4 @@ const UptimeCheckRegion = {
    * Singapore).
    */
   ASIA_PACIFIC: 4
-};
-
-/**
- * The supported resource types that can be used as values of
- * `group_resource.resource_type`.
- * `INSTANCE` includes `gce_instance` and `aws_ec2_instance` resource types.
- * The resource types `gae_app` and `uptime_url` are not valid here because
- * group checks on App Engine modules and URLs are not allowed.
- *
- * @enum {number}
- * @memberof google.monitoring.v3
- */
-const GroupResourceType = {
-
-  /**
-   * Default value (not valid).
-   */
-  RESOURCE_TYPE_UNSPECIFIED: 0,
-
-  /**
-   * A group of instances from Google Cloud Platform (GCP) or
-   * Amazon Web Services (AWS).
-   */
-  INSTANCE: 1,
-
-  /**
-   * A group of Amazon ELB load balancers.
-   */
-  AWS_ELB_LOAD_BALANCER: 2
 };

@@ -326,27 +326,3 @@ const ListTimeSeriesResponse = {
 const CreateTimeSeriesRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
-
-/**
- * Describes the result of a failed request to write data to a time series.
- *
- * @property {Object} timeSeries
- *   The time series, including the `Metric`, `MonitoredResource`,
- *   and `Point`s (including timestamp and value) that resulted
- *   in the error. This field provides all of the context that
- *   would be needed to retry the operation.
- *
- *   This object should have the same structure as [TimeSeries]{@link google.monitoring.v3.TimeSeries}
- *
- * @property {Object} status
- *   The status of the requested write operation.
- *
- *   This object should have the same structure as [Status]{@link google.rpc.Status}
- *
- * @typedef CreateTimeSeriesError
- * @memberof google.monitoring.v3
- * @see [google.monitoring.v3.CreateTimeSeriesError definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/metric_service.proto}
- */
-const CreateTimeSeriesError = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
