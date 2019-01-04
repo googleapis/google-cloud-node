@@ -905,6 +905,35 @@ const EntityId = {
 };
 
 /**
+ * Definitions of file type groups to scan.
+ *
+ * @enum {number}
+ * @memberof google.privacy.dlp.v2
+ */
+const FileType = {
+
+  /**
+   * Includes all files.
+   */
+  FILE_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * Includes all file extensions not covered by text file types.
+   */
+  BINARY_FILE: 1,
+
+  /**
+   * Included file extensions:
+   *   asc, brf, c, cc, cpp, csv, cxx, c++, cs, css, dart, eml, go, h, hh, hpp,
+   *   hxx, h++, hs, html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json,
+   *   ocaml, md, mkd, markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw,
+   *   rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,
+   *   xml, xsl, xsd, yml, yaml.
+   */
+  TEXT_FILE: 2
+};
+
+/**
  * Categorization of results based on how likely they are to represent a match,
  * based on the number of elements they contain which imply a match.
  *
@@ -934,33 +963,4 @@ const Likelihood = {
    * Many matching elements.
    */
   VERY_LIKELY: 5
-};
-
-/**
- * Definitions of file type groups to scan.
- *
- * @enum {number}
- * @memberof google.privacy.dlp.v2
- */
-const FileType = {
-
-  /**
-   * Includes all files.
-   */
-  FILE_TYPE_UNSPECIFIED: 0,
-
-  /**
-   * Includes all file extensions not covered by text file types.
-   */
-  BINARY_FILE: 1,
-
-  /**
-   * Included file extensions:
-   *   asc, brf, c, cc, cpp, csv, cxx, c++, cs, css, dart, eml, go, h, hh, hpp,
-   *   hxx, h++, hs, html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json,
-   *   ocaml, md, mkd, markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw,
-   *   rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,
-   *   xml, xsl, xsd, yml, yaml.
-   */
-  TEXT_FILE: 2
 };

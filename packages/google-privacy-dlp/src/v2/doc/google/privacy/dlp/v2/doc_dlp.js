@@ -4247,6 +4247,46 @@ const ContentOption = {
 };
 
 /**
+ * An enum to represent the various type of DLP jobs.
+ *
+ * @enum {number}
+ * @memberof google.privacy.dlp.v2
+ */
+const DlpJobType = {
+  DLP_JOB_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * The job inspected Google Cloud for sensitive data.
+   */
+  INSPECT_JOB: 1,
+
+  /**
+   * The job executed a Risk Analysis computation.
+   */
+  RISK_ANALYSIS_JOB: 2
+};
+
+/**
+ * Parts of the APIs which use certain infoTypes.
+ *
+ * @enum {number}
+ * @memberof google.privacy.dlp.v2
+ */
+const InfoTypeSupportedBy = {
+  ENUM_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * Supported by the inspect operations.
+   */
+  INSPECT: 1,
+
+  /**
+   * Supported by the risk analysis operations.
+   */
+  RISK_ANALYSIS: 2
+};
+
+/**
  * Type of the match which can be applied to different ways of matching, like
  * Dictionary, regular expression and intersecting with findings of another
  * info type.
@@ -4287,26 +4327,6 @@ const MatchingType = {
    * - Exclude info type: no intersection with affecting info types findings
    */
   MATCHING_TYPE_INVERSE_MATCH: 3
-};
-
-/**
- * Parts of the APIs which use certain infoTypes.
- *
- * @enum {number}
- * @memberof google.privacy.dlp.v2
- */
-const InfoTypeSupportedBy = {
-  ENUM_TYPE_UNSPECIFIED: 0,
-
-  /**
-   * Supported by the inspect operations.
-   */
-  INSPECT: 1,
-
-  /**
-   * Supported by the risk analysis operations.
-   */
-  RISK_ANALYSIS: 2
 };
 
 /**
@@ -4352,26 +4372,6 @@ const RelationalOperator = {
    * Exists
    */
   EXISTS: 7
-};
-
-/**
- * An enum to represent the various type of DLP jobs.
- *
- * @enum {number}
- * @memberof google.privacy.dlp.v2
- */
-const DlpJobType = {
-  DLP_JOB_TYPE_UNSPECIFIED: 0,
-
-  /**
-   * The job inspected Google Cloud for sensitive data.
-   */
-  INSPECT_JOB: 1,
-
-  /**
-   * The job executed a Risk Analysis computation.
-   */
-  RISK_ANALYSIS_JOB: 2
 };
 
 /**
