@@ -27,8 +27,8 @@
  *   "organizations/123/sources/456"
  *
  * @property {string} displayName
- *   The source’s display name.
- *   A source’s display name must be unique amongst its siblings, for example,
+ *   The source's display name.
+ *   A source's display name must be unique amongst its siblings, for example,
  *   two sources with the same parent can't share the same display name.
  *   The display name must start and end with a letter or digit, may contain
  *   letters, digits, spaces, hyphens, and underscores, and can be no longer
