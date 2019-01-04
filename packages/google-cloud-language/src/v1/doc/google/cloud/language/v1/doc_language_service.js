@@ -321,85 +321,6 @@ const PartOfSpeech = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * The part of speech tags enum.
-   *
-   * @enum {number}
-   * @memberof google.cloud.language.v1
-   */
-  Tag: {
-
-    /**
-     * Unknown
-     */
-    UNKNOWN: 0,
-
-    /**
-     * Adjective
-     */
-    ADJ: 1,
-
-    /**
-     * Adposition (preposition and postposition)
-     */
-    ADP: 2,
-
-    /**
-     * Adverb
-     */
-    ADV: 3,
-
-    /**
-     * Conjunction
-     */
-    CONJ: 4,
-
-    /**
-     * Determiner
-     */
-    DET: 5,
-
-    /**
-     * Noun (common and proper)
-     */
-    NOUN: 6,
-
-    /**
-     * Cardinal number
-     */
-    NUM: 7,
-
-    /**
-     * Pronoun
-     */
-    PRON: 8,
-
-    /**
-     * Particle or other function word
-     */
-    PRT: 9,
-
-    /**
-     * Punctuation
-     */
-    PUNCT: 10,
-
-    /**
-     * Verb (all tenses and modes)
-     */
-    VERB: 11,
-
-    /**
-     * Other: foreign words, typos, abbreviations
-     */
-    X: 12,
-
-    /**
-     * Affix
-     */
-    AFFIX: 13
-  },
-
-  /**
    * The characteristic of a verb that expresses time flow during an event.
    *
    * @enum {number}
@@ -769,6 +690,85 @@ const PartOfSpeech = {
      * Non-reciprocal
      */
     NON_RECIPROCAL: 2
+  },
+
+  /**
+   * The part of speech tags enum.
+   *
+   * @enum {number}
+   * @memberof google.cloud.language.v1
+   */
+  Tag: {
+
+    /**
+     * Unknown
+     */
+    UNKNOWN: 0,
+
+    /**
+     * Adjective
+     */
+    ADJ: 1,
+
+    /**
+     * Adposition (preposition and postposition)
+     */
+    ADP: 2,
+
+    /**
+     * Adverb
+     */
+    ADV: 3,
+
+    /**
+     * Conjunction
+     */
+    CONJ: 4,
+
+    /**
+     * Determiner
+     */
+    DET: 5,
+
+    /**
+     * Noun (common and proper)
+     */
+    NOUN: 6,
+
+    /**
+     * Cardinal number
+     */
+    NUM: 7,
+
+    /**
+     * Pronoun
+     */
+    PRON: 8,
+
+    /**
+     * Particle or other function word
+     */
+    PRT: 9,
+
+    /**
+     * Punctuation
+     */
+    PUNCT: 10,
+
+    /**
+     * Verb (all tenses and modes)
+     */
+    VERB: 11,
+
+    /**
+     * Other: foreign words, typos, abbreviations
+     */
+    X: 12,
+
+    /**
+     * Affix
+     */
+    AFFIX: 13
   },
 
   /**
