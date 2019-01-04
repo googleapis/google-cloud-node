@@ -238,31 +238,6 @@ const TransferMessage = {
 };
 
 /**
- * DEPRECATED. Represents data transfer type.
- *
- * @enum {number}
- * @memberof google.cloud.bigquery.datatransfer.v1
- */
-const TransferType = {
-
-  /**
-   * Invalid or Unknown transfer type placeholder.
-   */
-  TRANSFER_TYPE_UNSPECIFIED: 0,
-
-  /**
-   * Batch data transfer.
-   */
-  BATCH: 1,
-
-  /**
-   * Streaming data transfer. Streaming data source currently doesn't
-   * support multiple transfer configs per project.
-   */
-  STREAMING: 2
-};
-
-/**
  * Represents data transfer run state.
  *
  * @enum {number}
@@ -300,4 +275,29 @@ const TransferState = {
    * Data transfer is cancelled.
    */
   CANCELLED: 6
+};
+
+/**
+ * DEPRECATED. Represents data transfer type.
+ *
+ * @enum {number}
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ */
+const TransferType = {
+
+  /**
+   * Invalid or Unknown transfer type placeholder.
+   */
+  TRANSFER_TYPE_UNSPECIFIED: 0,
+
+  /**
+   * Batch data transfer.
+   */
+  BATCH: 1,
+
+  /**
+   * Streaming data transfer. Streaming data source currently doesn't
+   * support multiple transfer configs per project.
+   */
+  STREAMING: 2
 };
