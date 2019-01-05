@@ -115,6 +115,7 @@ class Notification extends ServiceObject {
        * Creates a notification subscription for the bucket.
        *
        * @see [Notifications: insert]{@link https://cloud.google.com/storage/docs/json_api/v1/notifications/insert}
+       * @method Notification#exists
        *
        * @param {Topic|string} topic The Cloud PubSub topic to which this
        *     subscription publishes. If the project ID is omitted, the current
@@ -164,6 +165,7 @@ class Notification extends ServiceObject {
       /**
        * Check if the notification exists.
        *
+       * @method Notification#exists
        * @param {NotificationExistsCallback} [callback] Callback function.
        * @returns {Promise<NotificationExistsResponse>}
        *

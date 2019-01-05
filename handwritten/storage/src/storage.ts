@@ -645,7 +645,7 @@ export class Storage extends Service {
    * @property {object} 0 The service account resource.
    * @property {object} 1 The full
    * [API
-   * response](https//cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
+   * response](https://cloud.google.com/storage/docs/json_api/v1/projects/serviceAccount#resource).
    */
   /**
    * @callback GetServiceAccountCallback
