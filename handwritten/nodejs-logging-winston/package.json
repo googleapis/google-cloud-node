@@ -52,7 +52,7 @@
   "dependencies": {
     "@google-cloud/logging": "^4.0.1",
     "lodash.mapvalues": "^4.6.0",
-    "logform": "^1.10.0",
+    "logform": "^2.0.0",
     "semver": "^5.5.1",
     "winston-transport": "^4.2.0"
   },
