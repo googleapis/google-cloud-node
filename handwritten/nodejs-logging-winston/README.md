@@ -190,7 +190,7 @@ logger.debug('test msg', {
 
 The `labels` will be on the Log Viewer.
 
-![Request log with labels](doc/images/request-log-with-labels.png)
+![Request log with labels](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/request-log-with-labels.png)
 
 ### Add a prefix to easily identify logs
 
@@ -205,7 +205,7 @@ const loggingWinston = new LoggingWinston({
 logger.debug('test msg');
 ```
 
-![Request log with prefix](doc/images/request-log-with-prefix.png)
+![Request log with prefix](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/request-log-with-prefix.png)
 
 ## Samples
 
