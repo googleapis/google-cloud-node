@@ -93,6 +93,13 @@ retry git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pul
 git checkout pull_branch
 git reset --hard {{.Commit}}
 retry npm install --nodedir="$NODEDIR" >/dev/null
+
+# TODO: remove this workaround.
+# For v8-canary tests, we need to use the version of NAN on github, which 
+# contains unreleased fixes which allows the native component to be compiled
+# with Node 11.
+{{if .NVMMirror}} retry npm install https://github.com/nodejs/nan.git {{end}}
+
 npm run compile 
 npm pack --nodedir="$NODEDIR" >/dev/null
 VERSION=$(node -e "console.log(require('./package.json').version);")
