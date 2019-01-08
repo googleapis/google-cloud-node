@@ -17,7 +17,7 @@
 
 /**
  * Describes the identifying information, config, and status of
- * a cluster of Google Compute Engine instances.
+ * a cluster of Compute Engine instances.
  *
  * @property {string} projectId
  *   Required. The Google Cloud Platform project ID that the cluster belongs to.
@@ -41,17 +41,17 @@
  *   No more than 32 labels can be associated with a cluster.
  *
  * @property {Object} status
- *   Output-only. Cluster status.
+ *   Output only. Cluster status.
  *
  *   This object should have the same structure as [ClusterStatus]{@link google.cloud.dataproc.v1.ClusterStatus}
  *
  * @property {Object[]} statusHistory
- *   Output-only. The previous cluster status.
+ *   Output only. The previous cluster status.
  *
  *   This object should have the same structure as [ClusterStatus]{@link google.cloud.dataproc.v1.ClusterStatus}
  *
  * @property {string} clusterUuid
- *   Output-only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc
+ *   Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc
  *   generates this value when it creates the cluster.
  *
  * @property {Object} metrics
@@ -74,7 +74,7 @@ const Cluster = {
  * The cluster config.
  *
  * @property {string} configBucket
- *   Optional. A Google Cloud Storage staging bucket used for sharing generated
+ *   Optional. A Cloud Storage staging bucket used for sharing generated
  *   SSH keys and config. If you do not specify a staging bucket, Cloud
  *   Dataproc will determine an appropriate Cloud Storage location (US,
  *   ASIA, or EU) for your cluster's staging bucket according to the Google
@@ -82,25 +82,25 @@ const Cluster = {
  *   and manage this project-level, per-location bucket for you.
  *
  * @property {Object} gceClusterConfig
- *   Required. The shared Google Compute Engine config settings for
+ *   Required. The shared Compute Engine config settings for
  *   all instances in a cluster.
  *
  *   This object should have the same structure as [GceClusterConfig]{@link google.cloud.dataproc.v1.GceClusterConfig}
  *
  * @property {Object} masterConfig
- *   Optional. The Google Compute Engine config settings for
+ *   Optional. The Compute Engine config settings for
  *   the master instance in a cluster.
  *
  *   This object should have the same structure as [InstanceGroupConfig]{@link google.cloud.dataproc.v1.InstanceGroupConfig}
  *
  * @property {Object} workerConfig
- *   Optional. The Google Compute Engine config settings for
+ *   Optional. The Compute Engine config settings for
  *   worker instances in a cluster.
  *
  *   This object should have the same structure as [InstanceGroupConfig]{@link google.cloud.dataproc.v1.InstanceGroupConfig}
  *
  * @property {Object} secondaryWorkerConfig
- *   Optional. The Google Compute Engine config settings for
+ *   Optional. The Compute Engine config settings for
  *   additional worker instances in a cluster.
  *
  *   This object should have the same structure as [InstanceGroupConfig]{@link google.cloud.dataproc.v1.InstanceGroupConfig}
@@ -125,6 +125,11 @@ const Cluster = {
  *
  *   This object should have the same structure as [NodeInitializationAction]{@link google.cloud.dataproc.v1.NodeInitializationAction}
  *
+ * @property {Object} encryptionConfig
+ *   Optional. Encryption settings for the cluster.
+ *
+ *   This object should have the same structure as [EncryptionConfig]{@link google.cloud.dataproc.v1.EncryptionConfig}
+ *
  * @typedef ClusterConfig
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.ClusterConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
@@ -134,11 +139,26 @@ const ClusterConfig = {
 };
 
 /**
- * Common config settings for resources of Google Compute Engine cluster
+ * Encryption settings for the cluster.
+ *
+ * @property {string} gcePdKmsKeyName
+ *   Optional. The Cloud KMS key name to use for PD disk encryption for all
+ *   instances in the cluster.
+ *
+ * @typedef EncryptionConfig
+ * @memberof google.cloud.dataproc.v1
+ * @see [google.cloud.dataproc.v1.EncryptionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
+ */
+const EncryptionConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Common config settings for resources of Compute Engine cluster
  * instances, applicable to all instances in the cluster.
  *
  * @property {string} zoneUri
- *   Optional. The zone where the Google Compute Engine cluster will be located.
+ *   Optional. The zone where the Compute Engine cluster will be located.
  *   On a create request, it is required in the "global" region. If omitted
  *   in a non-global Cloud Dataproc region, the service will pick a zone in the
  *   corresponding Compute Engine region. On a get request, zone will
@@ -151,7 +171,7 @@ const ClusterConfig = {
  *   * `us-central1-f`
  *
  * @property {string} networkUri
- *   Optional. The Google Compute Engine network to be used for machine
+ *   Optional. The Compute Engine network to be used for machine
  *   communications. Cannot be specified with subnetwork_uri. If neither
  *   `network_uri` nor `subnetwork_uri` is specified, the "default" network of
  *   the project is used, if it exists. Cannot be a "Custom Subnet Network" (see
@@ -164,7 +184,7 @@ const ClusterConfig = {
  *   * `default`
  *
  * @property {string} subnetworkUri
- *   Optional. The Google Compute Engine subnetwork to be used for machine
+ *   Optional. The Compute Engine subnetwork to be used for machine
  *   communications. Cannot be specified with network_uri.
  *
  *   A full URL, partial URI, or short name are valid. Examples:
@@ -183,8 +203,8 @@ const ClusterConfig = {
  *
  * @property {string} serviceAccount
  *   Optional. The service account of the instances. Defaults to the default
- *   Google Compute Engine service account. Custom service accounts need
- *   permissions equivalent to the folloing IAM roles:
+ *   Compute Engine service account. Custom service accounts need
+ *   permissions equivalent to the following IAM roles:
  *
  *   * roles/logging.logWriter
  *   * roles/storage.objectAdmin
@@ -194,7 +214,7 @@ const ClusterConfig = {
  *   Example: `[account_id]@[project_id].iam.gserviceaccount.com`
  *
  * @property {string[]} serviceAccountScopes
- *   Optional. The URIs of service account scopes to be included in Google
+ *   Optional. The URIs of service account scopes to be included in
  *   Compute Engine instances. The following base set of scopes is always
  *   included:
  *
@@ -210,11 +230,11 @@ const ClusterConfig = {
  *   * https://www.googleapis.com/auth/devstorage.full_control
  *
  * @property {string[]} tags
- *   The Google Compute Engine tags to add to all instances (see
+ *   The Compute Engine tags to add to all instances (see
  *   [Tagging instances](https://cloud.google.com/compute/docs/label-or-tag-resources#tags)).
  *
  * @property {Object.<string, string>} metadata
- *   The Google Compute Engine metadata entries to add to all instances (see
+ *   The Compute Engine metadata entries to add to all instances (see
  *   [Project and instance metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
  *
  * @typedef GceClusterConfig
@@ -226,7 +246,7 @@ const GceClusterConfig = {
 };
 
 /**
- * Optional. The config settings for Google Compute Engine resources in
+ * Optional. The config settings for Compute Engine resources in
  * an instance group, such as a master or worker group.
  *
  * @property {number} numInstances
@@ -234,22 +254,27 @@ const GceClusterConfig = {
  *   For master instance groups, must be set to 1.
  *
  * @property {string[]} instanceNames
- *   Optional. The list of instance names. Cloud Dataproc derives the names from
- *   `cluster_name`, `num_instances`, and the instance group if not set by user
- *   (recommended practice is to let Cloud Dataproc derive the name).
+ *   Output only. The list of instance names. Cloud Dataproc derives the names
+ *   from `cluster_name`, `num_instances`, and the instance group.
  *
  * @property {string} imageUri
- *   Output-only. The Google Compute Engine image resource used for cluster
- *   instances. Inferred from `SoftwareConfig.image_version`.
+ *   Optional. The Compute Engine image resource used for cluster
+ *   instances. It can be specified or may be inferred from
+ *   `SoftwareConfig.image_version`.
  *
  * @property {string} machineTypeUri
- *   Optional. The Google Compute Engine machine type used for cluster instances.
+ *   Optional. The Compute Engine machine type used for cluster instances.
  *
  *   A full URL, partial URI, or short name are valid. Examples:
  *
  *   * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
  *   * `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
  *   * `n1-standard-2`
+ *
+ *   **Auto Zone Exception**: If you are using the Cloud Dataproc
+ *   [Auto Zone Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
+ *   feature, you must use the short name of the machine type
+ *   resource, for example, `n1-standard-2`.
  *
  * @property {Object} diskConfig
  *   Optional. Disk option config settings.
@@ -260,14 +285,14 @@ const GceClusterConfig = {
  *   Optional. Specifies that this instance group contains preemptible instances.
  *
  * @property {Object} managedGroupConfig
- *   Output-only. The config for Google Compute Engine Instance Group
+ *   Output only. The config for Compute Engine Instance Group
  *   Manager that manages this group.
  *   This is only used for preemptible instance groups.
  *
  *   This object should have the same structure as [ManagedGroupConfig]{@link google.cloud.dataproc.v1.ManagedGroupConfig}
  *
  * @property {Object[]} accelerators
- *   Optional. The Google Compute Engine accelerator configuration for these
+ *   Optional. The Compute Engine accelerator configuration for these
  *   instances.
  *
  *   **Beta Feature**: This feature is still under development. It may be
@@ -287,11 +312,11 @@ const InstanceGroupConfig = {
  * Specifies the resources used to actively manage an instance group.
  *
  * @property {string} instanceTemplateName
- *   Output-only. The name of the Instance Template used for the Managed
+ *   Output only. The name of the Instance Template used for the Managed
  *   Instance Group.
  *
  * @property {string} instanceGroupManagerName
- *   Output-only. The name of the Instance Group Manager for this group.
+ *   Output only. The name of the Instance Group Manager for this group.
  *
  * @typedef ManagedGroupConfig
  * @memberof google.cloud.dataproc.v1
@@ -303,17 +328,23 @@ const ManagedGroupConfig = {
 
 /**
  * Specifies the type and number of accelerator cards attached to the instances
- * of an instance group (see [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus/)).
+ * of an instance. See [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus/).
  *
  * @property {string} acceleratorTypeUri
  *   Full URL, partial URI, or short name of the accelerator type resource to
- *   expose to this instance. See [Google Compute Engine AcceleratorTypes](https://cloud.google.com
- *   /compute/docs/reference/beta/acceleratorTypes)
+ *   expose to this instance. See
+ *   [Compute Engine AcceleratorTypes](https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes).
  *
- *   Examples
+ *   Examples:
+ *
  *   * `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
  *   * `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
  *   * `nvidia-tesla-k80`
+ *
+ *   **Auto Zone Exception**: If you are using the Cloud Dataproc
+ *   [Auto Zone Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
+ *   feature, you must use the short name of the accelerator type
+ *   resource, for example, `nvidia-tesla-k80`.
  *
  * @property {number} acceleratorCount
  *   The number of the accelerator cards of this type exposed to this instance.
@@ -328,6 +359,11 @@ const AcceleratorConfig = {
 
 /**
  * Specifies the config of disk options for a group of VM instances.
+ *
+ * @property {string} bootDiskType
+ *   Optional. Type of the boot disk (default is "pd-standard").
+ *   Valid values: "pd-ssd" (Persistent Disk Solid State Drive) or
+ *   "pd-standard" (Persistent Disk Hard Disk Drive).
  *
  * @property {number} bootDiskSizeGb
  *   Optional. Size in GB of the boot disk (default is 500GB).
@@ -353,7 +389,7 @@ const DiskConfig = {
  * timeout period for executable completion.
  *
  * @property {string} executableFile
- *   Required. Google Cloud Storage URI of executable file.
+ *   Required. Cloud Storage URI of executable file.
  *
  * @property {Object} executionTimeout
  *   Optional. Amount of time executable has to complete. Default is
@@ -375,20 +411,20 @@ const NodeInitializationAction = {
  * The status of a cluster and its instances.
  *
  * @property {number} state
- *   Output-only. The cluster's state.
+ *   Output only. The cluster's state.
  *
  *   The number should be among the values of [State]{@link google.cloud.dataproc.v1.State}
  *
  * @property {string} detail
- *   Output-only. Optional details of cluster's state.
+ *   Output only. Optional details of cluster's state.
  *
  * @property {Object} stateStartTime
- *   Output-only. Time when this state was entered.
+ *   Output only. Time when this state was entered.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {number} substate
- *   Output-only. Additional state information that includes
+ *   Output only. Additional state information that includes
  *   status reported by the agent.
  *
  *   The number should be among the values of [Substate]{@link google.cloud.dataproc.v1.Substate}
@@ -440,10 +476,16 @@ const ClusterStatus = {
   },
 
   /**
+   * The cluster substate.
+   *
    * @enum {number}
    * @memberof google.cloud.dataproc.v1
    */
   Substate: {
+
+    /**
+     * The cluster substate is unknown.
+     */
     UNSPECIFIED: 0,
 
     /**
@@ -469,9 +511,11 @@ const ClusterStatus = {
  * Specifies the selection and config of software inside the cluster.
  *
  * @property {string} imageVersion
- *   Optional. The version of software inside the cluster. It must match the
- *   regular expression `[0-9]+\.[0-9]+`. If unspecified, it defaults to the
- *   latest version (see [Cloud Dataproc Versioning](https://cloud.google.com/dataproc/versioning)).
+ *   Optional. The version of software inside the cluster. It must be one of the supported
+ *   [Cloud Dataproc Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
+ *   such as "1.2" (including a subminor version, such as "1.2.29"), or the
+ *   ["preview" version](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
+ *   If unspecified, it defaults to the latest version.
  *
  * @property {Object.<string, string>} properties
  *   Optional. The properties to set on daemon config files.
@@ -536,6 +580,19 @@ const ClusterMetrics = {
  *
  *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1.Cluster}
  *
+ * @property {string} requestId
+ *   Optional. A unique id used to identify the request. If the server
+ *   receives two CreateClusterRequest requests  with the same
+ *   id, then the second request will be ignored and the
+ *   first google.longrunning.Operation created and stored in the backend
+ *   is returned.
+ *
+ *   It is recommended to always set this value to a
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+ *
+ *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+ *
  * @typedef CreateClusterRequest
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.CreateClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
@@ -561,6 +618,18 @@ const CreateClusterRequest = {
  *   Required. The changes to the cluster.
  *
  *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1.Cluster}
+ *
+ * @property {Object} gracefulDecommissionTimeout
+ *   Optional. Timeout for graceful YARN decomissioning. Graceful
+ *   decommissioning allows removing nodes from the cluster without
+ *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
+ *   in progress to finish before forcefully removing nodes (and potentially
+ *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
+ *   the maximum allowed timeout is 1 day.
+ *
+ *   Only supported on Dataproc image versions 1.2 and higher.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} updateMask
  *   Required. Specifies the path, relative to `Cluster`, of
@@ -613,6 +682,19 @@ const CreateClusterRequest = {
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
+ * @property {string} requestId
+ *   Optional. A unique id used to identify the request. If the server
+ *   receives two UpdateClusterRequest requests  with the same
+ *   id, then the second request will be ignored and the
+ *   first google.longrunning.Operation created and stored in the
+ *   backend is returned.
+ *
+ *   It is recommended to always set this value to a
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+ *
+ *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+ *
  * @typedef UpdateClusterRequest
  * @memberof google.cloud.dataproc.v1
  * @see [google.cloud.dataproc.v1.UpdateClusterRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dataproc/v1/clusters.proto}
@@ -633,6 +715,23 @@ const UpdateClusterRequest = {
  *
  * @property {string} clusterName
  *   Required. The cluster name.
+ *
+ * @property {string} clusterUuid
+ *   Optional. Specifying the `cluster_uuid` means the RPC should fail
+ *   (with error NOT_FOUND) if cluster with specified UUID does not exist.
+ *
+ * @property {string} requestId
+ *   Optional. A unique id used to identify the request. If the server
+ *   receives two DeleteClusterRequest requests  with the same
+ *   id, then the second request will be ignored and the
+ *   first google.longrunning.Operation created and stored in the
+ *   backend is returned.
+ *
+ *   It is recommended to always set this value to a
+ *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+ *
+ *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+ *   underscores (_), and hyphens (-). The maximum length is 40 characters.
  *
  * @typedef DeleteClusterRequest
  * @memberof google.cloud.dataproc.v1
@@ -712,12 +811,12 @@ const ListClustersRequest = {
  * The list of all clusters in a project.
  *
  * @property {Object[]} clusters
- *   Output-only. The clusters in the project.
+ *   Output only. The clusters in the project.
  *
  *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1.Cluster}
  *
  * @property {string} nextPageToken
- *   Output-only. This token is included in the response if there are more
+ *   Output only. This token is included in the response if there are more
  *   results to fetch. To fetch additional results, provide this value as the
  *   `page_token` in a subsequent `ListClustersRequest`.
  *
@@ -754,7 +853,7 @@ const DiagnoseClusterRequest = {
  * The location of diagnostic output.
  *
  * @property {string} outputUri
- *   Output-only. The Google Cloud Storage URI of the diagnostic output.
+ *   Output only. The Cloud Storage URI of the diagnostic output.
  *   The output report is a plain text file with a summary of collected
  *   diagnostics.
  *

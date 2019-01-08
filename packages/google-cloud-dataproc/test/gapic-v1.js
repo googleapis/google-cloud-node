@@ -593,9 +593,11 @@ describe('JobControllerClient', () => {
       // Mock response
       const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
       const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const jobUuid = 'jobUuid-1615012099';
       const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
+        jobUuid: jobUuid,
       };
 
       // Mock Grpc layer
@@ -663,9 +665,11 @@ describe('JobControllerClient', () => {
       // Mock response
       const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
       const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const jobUuid = 'jobUuid-1615012099';
       const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
+        jobUuid: jobUuid,
       };
 
       // Mock Grpc layer
@@ -800,9 +804,11 @@ describe('JobControllerClient', () => {
       // Mock response
       const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
       const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const jobUuid = 'jobUuid-1615012099';
       const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
+        jobUuid: jobUuid,
       };
 
       // Mock Grpc layer
@@ -874,9 +880,11 @@ describe('JobControllerClient', () => {
       // Mock response
       const driverOutputResourceUri = 'driverOutputResourceUri-542229086';
       const driverControlFilesUri = 'driverControlFilesUri207057643';
+      const jobUuid = 'jobUuid-1615012099';
       const expectedResponse = {
         driverOutputResourceUri: driverOutputResourceUri,
         driverControlFilesUri: driverControlFilesUri,
+        jobUuid: jobUuid,
       };
 
       // Mock Grpc layer
@@ -974,6 +982,525 @@ describe('JobControllerClient', () => {
       );
 
       client.deleteJob(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+});
+describe('WorkflowTemplateServiceClient', () => {
+  describe('createWorkflowTemplate', () => {
+    it('invokes createWorkflowTemplate without error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const template = {};
+      const request = {
+        parent: formattedParent,
+        template: template,
+      };
+
+      // Mock response
+      const id = 'id3355';
+      const name = 'name3373707';
+      const version = 351608024;
+      const expectedResponse = {
+        id: id,
+        name: name,
+        version: version,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createWorkflowTemplate = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createWorkflowTemplate(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createWorkflowTemplate with error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const template = {};
+      const request = {
+        parent: formattedParent,
+        template: template,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createWorkflowTemplate = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createWorkflowTemplate(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getWorkflowTemplate', () => {
+    it('invokes getWorkflowTemplate without error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.workflowTemplatePath(
+        '[PROJECT]',
+        '[REGION]',
+        '[WORKFLOW_TEMPLATE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const id = 'id3355';
+      const name2 = 'name2-1052831874';
+      const version = 351608024;
+      const expectedResponse = {
+        id: id,
+        name: name2,
+        version: version,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getWorkflowTemplate = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getWorkflowTemplate(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getWorkflowTemplate with error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.workflowTemplatePath(
+        '[PROJECT]',
+        '[REGION]',
+        '[WORKFLOW_TEMPLATE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getWorkflowTemplate = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getWorkflowTemplate(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('instantiateWorkflowTemplate', function() {
+    it('invokes instantiateWorkflowTemplate without error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.workflowTemplatePath(
+        '[PROJECT]',
+        '[REGION]',
+        '[WORKFLOW_TEMPLATE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.instantiateWorkflowTemplate = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .instantiateWorkflowTemplate(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes instantiateWorkflowTemplate with error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.workflowTemplatePath(
+        '[PROJECT]',
+        '[REGION]',
+        '[WORKFLOW_TEMPLATE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.instantiateWorkflowTemplate = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .instantiateWorkflowTemplate(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.instantiateWorkflowTemplate
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.instantiateWorkflowTemplate
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
+
+  describe('instantiateInlineWorkflowTemplate', function() {
+    it('invokes instantiateInlineWorkflowTemplate without error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const template = {};
+      const request = {
+        parent: formattedParent,
+        template: template,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.instantiateInlineWorkflowTemplate = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .instantiateInlineWorkflowTemplate(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes instantiateInlineWorkflowTemplate with error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const template = {};
+      const request = {
+        parent: formattedParent,
+        template: template,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.instantiateInlineWorkflowTemplate = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .instantiateInlineWorkflowTemplate(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.instantiateInlineWorkflowTemplate
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.instantiateInlineWorkflowTemplate
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
+
+  describe('updateWorkflowTemplate', () => {
+    it('invokes updateWorkflowTemplate without error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const template = {};
+      const request = {
+        template: template,
+      };
+
+      // Mock response
+      const id = 'id3355';
+      const name = 'name3373707';
+      const version = 351608024;
+      const expectedResponse = {
+        id: id,
+        name: name,
+        version: version,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateWorkflowTemplate = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateWorkflowTemplate(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateWorkflowTemplate with error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const template = {};
+      const request = {
+        template: template,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateWorkflowTemplate = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateWorkflowTemplate(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listWorkflowTemplates', () => {
+    it('invokes listWorkflowTemplates without error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const templatesElement = {};
+      const templates = [templatesElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        templates: templates,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listWorkflowTemplates = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.templates);
+      };
+
+      client.listWorkflowTemplates(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.templates);
+        done();
+      });
+    });
+
+    it('invokes listWorkflowTemplates with error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listWorkflowTemplates = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listWorkflowTemplates(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteWorkflowTemplate', () => {
+    it('invokes deleteWorkflowTemplate without error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.workflowTemplatePath(
+        '[PROJECT]',
+        '[REGION]',
+        '[WORKFLOW_TEMPLATE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteWorkflowTemplate = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteWorkflowTemplate(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteWorkflowTemplate with error', done => {
+      const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.workflowTemplatePath(
+        '[PROJECT]',
+        '[REGION]',
+        '[WORKFLOW_TEMPLATE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteWorkflowTemplate = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteWorkflowTemplate(request, err => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();

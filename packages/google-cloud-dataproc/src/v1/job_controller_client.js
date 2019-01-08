@@ -197,6 +197,18 @@ class JobControllerClient {
    *   Required. The job resource.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.dataproc.v1.Job}
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two SubmitJobRequest requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first Job created and stored in the backend
+   *   is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

@@ -24,7 +24,7 @@ const VERSION = require('../../package.json').version;
 
 /**
  * The ClusterControllerService provides methods to manage clusters
- * of Google Compute Engine instances.
+ * of Compute Engine instances.
  *
  * @class
  * @memberof v1
@@ -271,6 +271,18 @@ class ClusterControllerClient {
    *   Required. The cluster to create.
    *
    *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1.Cluster}
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two CreateClusterRequest requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first google.longrunning.Operation created and stored in the backend
+   *   is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -434,6 +446,29 @@ class ClusterControllerClient {
    *    </table>
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [request.gracefulDecommissionTimeout]
+   *   Optional. Timeout for graceful YARN decomissioning. Graceful
+   *   decommissioning allows removing nodes from the cluster without
+   *   interrupting jobs in progress. Timeout specifies how long to wait for jobs
+   *   in progress to finish before forcefully removing nodes (and potentially
+   *   interrupting jobs). Default timeout is 0 (for forceful decommission), and
+   *   the maximum allowed timeout is 1 day.
+   *
+   *   Only supported on Dataproc image versions 1.2 and higher.
+   *
+   *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two UpdateClusterRequest requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first google.longrunning.Operation created and stored in the
+   *   backend is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -551,6 +586,21 @@ class ClusterControllerClient {
    *   Required. The Cloud Dataproc region in which to handle the request.
    * @param {string} request.clusterName
    *   Required. The cluster name.
+   * @param {string} [request.clusterUuid]
+   *   Optional. Specifying the `cluster_uuid` means the RPC should fail
+   *   (with error NOT_FOUND) if cluster with specified UUID does not exist.
+   * @param {string} [request.requestId]
+   *   Optional. A unique id used to identify the request. If the server
+   *   receives two DeleteClusterRequest requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first google.longrunning.Operation created and stored in the
+   *   backend is returned.
+   *
+   *   It is recommended to always set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The id must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

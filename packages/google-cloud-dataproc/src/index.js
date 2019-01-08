@@ -39,12 +39,16 @@ const gapic = Object.freeze({
  *   {@link v1.ClusterControllerClient}
  * - `JobControllerClient` - Reference to
  *   {@link v1.JobControllerClient}
+ * - `WorkflowTemplateServiceClient` - Reference to
+ *   {@link v1.WorkflowTemplateServiceClient}
  * - `v1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `ClusterControllerClient` - Reference to
  *       {@link v1.ClusterControllerClient}
  *     - `JobControllerClient` - Reference to
  *       {@link v1.JobControllerClient}
+ *     - `WorkflowTemplateServiceClient` - Reference to
+ *       {@link v1.WorkflowTemplateServiceClient}
  *
  * @module {object} @google-cloud/dataproc
  * @alias nodejs-dataproc
@@ -71,6 +75,8 @@ const gapic = Object.freeze({
  *   Reference to {@link v1.ClusterControllerClient}
  * @property {constructor} JobControllerClient
  *   Reference to {@link v1.JobControllerClient}
+ * @property {constructor} WorkflowTemplateServiceClient
+ *   Reference to {@link v1.WorkflowTemplateServiceClient}
  */
 module.exports = gapic.v1;
 
@@ -80,6 +86,8 @@ module.exports = gapic.v1;
  *   Reference to {@link v1.ClusterControllerClient}
  * @property {constructor} JobControllerClient
  *   Reference to {@link v1.JobControllerClient}
+ * @property {constructor} WorkflowTemplateServiceClient
+ *   Reference to {@link v1.WorkflowTemplateServiceClient}
  */
 module.exports.v1 = gapic.v1;
 
