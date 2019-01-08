@@ -4,6 +4,51 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## v0.4.0
+
+01-07-2019 16:37 PST
+
+### New Features
+- feat: support WorkflowTemplate and gracefulDecommissionTimeout options for createCluster ([#145](https://github.com/googleapis/nodejs-dataproc/pull/145))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.22.0 ([#115](https://github.com/googleapis/nodejs-dataproc/pull/115))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#113](https://github.com/googleapis/nodejs-dataproc/pull/113))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#103](https://github.com/googleapis/nodejs-dataproc/pull/103))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#90](https://github.com/googleapis/nodejs-dataproc/pull/90))
+
+### Documentation
+- docs: update readme badges ([#126](https://github.com/googleapis/nodejs-dataproc/pull/126))
+- docs(samples): updated samples code to use async await ([#120](https://github.com/googleapis/nodejs-dataproc/pull/120))
+
+### Internal / Testing Changes
+- test: add a sample test ([#143](https://github.com/googleapis/nodejs-dataproc/pull/143))
+- chore(build): inject yoshi automation key ([#141](https://github.com/googleapis/nodejs-dataproc/pull/141))
+- chore: update nyc and eslint configs ([#140](https://github.com/googleapis/nodejs-dataproc/pull/140))
+- chore: fix publish.sh permission +x ([#139](https://github.com/googleapis/nodejs-dataproc/pull/139))
+- fix(build): fix Kokoro release script ([#138](https://github.com/googleapis/nodejs-dataproc/pull/138))
+- build: add Kokoro configs for autorelease ([#137](https://github.com/googleapis/nodejs-dataproc/pull/137))
+- chore: always nyc report before calling codecov ([#132](https://github.com/googleapis/nodejs-dataproc/pull/132))
+- chore: nyc ignore build/test by default ([#131](https://github.com/googleapis/nodejs-dataproc/pull/131))
+- chore: clean up usage of prettier and eslint ([#130](https://github.com/googleapis/nodejs-dataproc/pull/130))
+- chore: update license file ([#127](https://github.com/googleapis/nodejs-dataproc/pull/127))
+- fix(build): fix system key decryption ([#124](https://github.com/googleapis/nodejs-dataproc/pull/124))
+- chore: add a synth.metadata
+- chore: update eslintignore config ([#114](https://github.com/googleapis/nodejs-dataproc/pull/114))
+- chore: drop contributors from multiple places ([#112](https://github.com/googleapis/nodejs-dataproc/pull/112))
+- chore: use latest npm on Windows ([#111](https://github.com/googleapis/nodejs-dataproc/pull/111))
+- chore: update CircleCI config ([#110](https://github.com/googleapis/nodejs-dataproc/pull/110))
+- chore: include build in eslintignore ([#107](https://github.com/googleapis/nodejs-dataproc/pull/107))
+- chore: update issue templates ([#102](https://github.com/googleapis/nodejs-dataproc/pull/102))
+- chore: remove old issue template ([#100](https://github.com/googleapis/nodejs-dataproc/pull/100))
+- build: run tests on node11 ([#99](https://github.com/googleapis/nodejs-dataproc/pull/99))
+- chores(build): do not collect sponge.xml from windows builds ([#98](https://github.com/googleapis/nodejs-dataproc/pull/98))
+- chores(build): run codecov on continuous builds ([#97](https://github.com/googleapis/nodejs-dataproc/pull/97))
+- chore: update new issue template ([#96](https://github.com/googleapis/nodejs-dataproc/pull/96))
+- build: fix codecov uploading on Kokoro ([#93](https://github.com/googleapis/nodejs-dataproc/pull/93))
+- Update kokoro config ([#91](https://github.com/googleapis/nodejs-dataproc/pull/91))
+- build: prevent system/sample-test from leaking credentials
+
 ## v0.3.0
 
 ### Breaking changes

@@ -12,7 +12,7 @@
     "test": "mocha system-test --timeout 60000"
   },
   "dependencies": {
-    "@google-cloud/dataproc": "^0.3.0"
+    "@google-cloud/dataproc": "^0.4.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
