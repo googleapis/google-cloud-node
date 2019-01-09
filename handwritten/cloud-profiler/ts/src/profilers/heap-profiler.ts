@@ -15,6 +15,7 @@
  */
 
 import {perftools} from '../../../proto/profile';
+import {SourceMapper} from '../sourcemapper/sourcemapper';
 import {AllocationProfileNode} from '../v8-types';
 import {getAllocationProfile, startSamplingHeapProfiler, stopSamplingHeapProfiler} from './heap-profiler-bindings';
 import {serializeHeapProfile} from './profile-serializer';
@@ -27,7 +28,7 @@ let heapStackDepth = 0;
  * Collects a heap profile when heapProfiler is enabled. Otherwise throws
  * an error.
  */
-export function profile(ignoreSamplePath?: string):
+export function profile(ignoreSamplePath?: string, sourceMapper?: SourceMapper):
     perftools.profiles.IProfile {
   if (!enabled) {
     throw new Error('Heap profiler is not enabled.');
@@ -49,7 +50,8 @@ export function profile(ignoreSamplePath?: string):
     result.children.push(externalNode);
   }
   return serializeHeapProfile(
-      result, startTimeNanos, heapIntervalBytes, ignoreSamplePath);
+      result, startTimeNanos, heapIntervalBytes, ignoreSamplePath,
+      sourceMapper);
 }
 
 /**

@@ -115,16 +115,35 @@ export interface Config extends GoogleAuthOptions {
   // For testing with startLocal() only.
   localProfilingPeriodMillis?: number;
 
-
   // Debugging information for startLocal will be recorded every
   // localLogPeriodMillis milliseconds.
   // For testing with startLocal() only.
   localLogPeriodMillis?: number;
 
-
   // Duration of time profiles collected when using startLocal().
   // For testing with startLocal() only.
   localTimeDurationMillis?: number;
+
+  // List of directories recursively searched for *.js.map files. Defaults to
+  // process.cwd().
+  //
+  // The profiler uses these files to re-map the source file paths in the
+  // profiles. The most common use case of having a source map is an application
+  // written in TypeScript: the source file paths that the profiler observes in
+  // the profiling data are the transpiled *.js files; to attribute the data
+  // back to the TypeScript source that the developer wrote source map needs to
+  // be generated, distribute and used.
+  //
+  // The source map of the application typically resides directly in
+  // process.cwd(), so the default value should work well pretty much always.
+  // The node_modules directory is not searched for source maps, so
+  // source maps for dependencies will not be used.
+  sourceMapSearchPath?: string[];
+
+  // When true, source map support will be disabled.
+  // All locations in profiles will reference locations in the running
+  // JavaScript.
+  disableSourceMaps?: boolean;
 }
 
 // Interface for an initialized config.
@@ -148,6 +167,8 @@ export interface ProfilerConfig extends GoogleAuthOptions {
   localProfilingPeriodMillis: number;
   localLogPeriodMillis: number;
   localTimeDurationMillis: number;
+  sourceMapSearchPath: string[];
+  disableSourceMaps: boolean;
 }
 
 // Default values for configuration for a profiler.
@@ -172,5 +193,7 @@ export const defaultConfig = {
 
   localProfilingPeriodMillis: 1000,
   localLogPeriodMillis: 10000,
-  localTimeDurationMillis: 1000
+  localTimeDurationMillis: 1000,
+  sourceMapSearchPath: [process.cwd()],
+  disableSourceMaps: false,
 };

@@ -81,8 +81,16 @@ function initConfigLocal(config: Config): ProfilerConfig {
     }
   }
 
-  const mergedConfig =
-      extend(true, {}, defaultConfig, envSetConfig, envConfig, config);
+  const mergedUserConfigs = extend(true, {}, envSetConfig, envConfig, config);
+  if (Array.isArray(mergedUserConfigs.sourceMapSearchPath) &&
+      mergedUserConfigs.sourceMapSearchPath.length === 0 &&
+      !mergedUserConfigs.disableSourceMaps) {
+    throw new Error(
+        'serviceMapSearchPath is an empty array. Use disableSourceMaps to' +
+        ' disable source map support instead.');
+  }
+
+  const mergedConfig = extend(true, {}, defaultConfig, mergedUserConfigs);
 
   if (!hasService(mergedConfig)) {
     throw new Error('Service must be specified in the configuration');
