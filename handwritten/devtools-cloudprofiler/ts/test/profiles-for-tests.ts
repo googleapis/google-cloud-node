@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import {SourceMapGenerator} from 'source-map';
+
 import {perftools} from '../../proto/profile';
 import {TimeProfile} from '../src/v8-types';
 
@@ -614,3 +616,227 @@ const encodedHeapProfileExcludePath =
     perftools.profiles.Profile.encode(heapProfileExcludePath).finish();
 export const decodedHeapProfileExcludePath = Object.freeze(
     perftools.profiles.Profile.decode(encodedHeapProfileExcludePath));
+
+
+export const mapFoo = new SourceMapGenerator({file: '/dir/foo.js'});
+mapFoo.addMapping({
+  source: '/foo.ts',
+  name: 'foo1',
+  generated: {line: 1, column: 3},
+  original: {line: 10, column: 0}
+});
+mapFoo.addMapping({
+  source: '/foo.ts',
+  name: 'foo2',
+  generated: {line: 5, column: 5},
+  original: {line: 20, column: 0}
+});
+
+export const mapBaz = new SourceMapGenerator({file: '/dir/baz.js'});
+mapBaz.addMapping({
+  source: '/baz.ts',
+  name: 'baz',
+  generated: {line: 3, column: 0},
+  original: {line: 5, column: 0}
+});
+
+const heapGeneratedLeaf1 = {
+  name: 'foo2',
+  scriptName: '/dir/foo.js',
+  scriptId: 1,
+  lineNumber: 5,
+  columnNumber: 5,
+  allocations: [{count: 3, sizeBytes: 2}],
+  children: []
+};
+
+const heapGeneratedLeaf2 = {
+  name: 'baz',
+  scriptName: '/dir/baz.js',
+  scriptId: 3,
+  lineNumber: 3,
+  columnNumber: 0,
+  allocations: [{count: 5, sizeBytes: 5}],
+  children: []
+};
+
+const heapGeneratedNode2 = {
+  name: 'bar',
+  scriptName: '/dir/bar.js',
+  scriptId: 2,
+  lineNumber: 10,
+  columnNumber: 0,
+  allocations: [],
+  children: [heapGeneratedLeaf2]
+};
+
+const heapGeneratedNode1 = {
+  name: 'foo1',
+  scriptName: '/dir/foo.js',
+  scriptId: 1,
+  lineNumber: 1,
+  columnNumber: 3,
+  allocations: [],
+  children: [heapGeneratedNode2, heapGeneratedLeaf1]
+};
+
+export const v8HeapGeneratedProfile = Object.freeze({
+  name: '(root)',
+  scriptName: '(root)',
+  scriptId: 10000,
+  lineNumber: 0,
+  columnNumber: 0,
+  allocations: [],
+  children: [heapGeneratedNode1]
+});
+
+const heapSourceFunctions = [
+  new perftools.profiles.Function({id: 1, name: 5, systemName: 5, filename: 6}),
+  new perftools.profiles.Function({id: 2, name: 7, systemName: 7, filename: 6}),
+  new perftools.profiles.Function({id: 3, name: 8, systemName: 8, filename: 9}),
+  new perftools.profiles.Function(
+      {id: 4, name: 10, systemName: 10, filename: 11}),
+];
+
+const heapSourceLocations = [
+  new perftools.profiles.Location({line: [{functionId: 1, line: 10}], id: 1}),
+  new perftools.profiles.Location({line: [{functionId: 2, line: 20}], id: 2}),
+  new perftools.profiles.Location({line: [{functionId: 3, line: 10}], id: 3}),
+  new perftools.profiles.Location({line: [{functionId: 4, line: 5}], id: 4}),
+];
+
+export const heapSourceProfile: perftools.profiles.IProfile = Object.freeze({
+  sampleType: [
+    new perftools.profiles.ValueType({type: 1, unit: 2}),
+    new perftools.profiles.ValueType({type: 3, unit: 4}),
+  ],
+  sample: [
+    new perftools.profiles.Sample(
+        {locationId: [2, 1], value: [3, 6], label: []}),
+    new perftools.profiles.Sample(
+        {locationId: [4, 3, 1], value: [5, 25], label: []}),
+  ],
+  location: heapSourceLocations,
+  function: heapSourceFunctions,
+  stringTable: [
+    '',
+    'objects',
+    'count',
+    'space',
+    'bytes',
+    'foo1',
+    '/foo.ts',
+    'foo2',
+    'bar',
+    '/dir/bar.js',
+    'baz',
+    '/baz.ts',
+  ],
+  timeNanos: 0,
+  periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
+  period: 524288
+});
+
+const timeGeneratedLeaf1 = {
+  name: 'foo',
+  scriptName: '/dir/foo.js',
+  scriptId: 1,
+  lineNumber: 5,
+  columnNumber: 5,
+  hitCount: 5,
+  children: []
+};
+
+const timeGeneratedLeaf2 = {
+  name: 'baz',
+  scriptName: '/dir/baz.js',
+  scriptId: 3,
+  lineNumber: 3,
+  columnNumber: 0,
+  hitCount: 10,
+  children: []
+};
+
+const timeGeneratedNode2 = {
+  name: 'bar',
+  scriptName: '/dir/bar.js',
+  scriptId: 2,
+  lineNumber: 10,
+  columnNumber: 0,
+  children: [timeGeneratedLeaf2]
+};
+
+const timeGeneratedNode1 = {
+  name: 'foo1',
+  scriptName: '/dir/foo.js',
+  scriptId: 1,
+  lineNumber: 1,
+  columnNumber: 3,
+  hitCount: 0,
+  children: [timeGeneratedNode2, timeGeneratedLeaf1]
+};
+
+export const timeGeneratedProfileRoot = Object.freeze({
+  name: '(root)',
+  scriptName: '(root)',
+  scriptId: 10000,
+  lineNumber: 0,
+  columnNumber: 0,
+  hitCount: 0,
+  children: [timeGeneratedNode1]
+});
+
+export const v8TimeGeneratedProfile: TimeProfile = Object.freeze({
+  startTime: 0,
+  endTime: 10 * 1000 * 1000,
+  topDownRoot: timeGeneratedProfileRoot,
+});
+
+
+const timeSourceFunctions = [
+  new perftools.profiles.Function({id: 1, name: 5, systemName: 5, filename: 6}),
+  new perftools.profiles.Function({id: 2, name: 7, systemName: 7, filename: 6}),
+  new perftools.profiles.Function({id: 3, name: 8, systemName: 8, filename: 9}),
+  new perftools.profiles.Function(
+      {id: 4, name: 10, systemName: 10, filename: 11}),
+];
+
+const timeSourceLocations = [
+  new perftools.profiles.Location({line: [{functionId: 1, line: 10}], id: 1}),
+  new perftools.profiles.Location({line: [{functionId: 2, line: 20}], id: 2}),
+  new perftools.profiles.Location({line: [{functionId: 3, line: 10}], id: 3}),
+  new perftools.profiles.Location({line: [{functionId: 4, line: 5}], id: 4}),
+];
+
+export const timeSourceProfile: perftools.profiles.IProfile = Object.freeze({
+  sampleType: [
+    new perftools.profiles.ValueType({type: 1, unit: 2}),
+    new perftools.profiles.ValueType({type: 3, unit: 4}),
+  ],
+  sample: [
+    new perftools.profiles.Sample(
+        {locationId: [2, 1], value: [5, 5000], label: []}),
+    new perftools.profiles.Sample(
+        {locationId: [4, 3, 1], value: [10, 10000], label: []}),
+  ],
+  location: timeSourceLocations,
+  function: timeSourceFunctions,
+  stringTable: [
+    '',
+    'sample',
+    'count',
+    'wall',
+    'microseconds',
+    'foo1',
+    '/foo.ts',
+    'foo2',
+    'bar',
+    '/dir/bar.js',
+    'baz',
+    '/baz.ts',
+  ],
+  timeNanos: 0,
+  durationNanos: 10 * 1000 * 1000 * 1000,
+  periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
+  period: 1000,
+});

@@ -16,6 +16,8 @@
 
 import delay from 'delay';
 import {perftools} from '../../../proto/profile';
+import {SourceMapper} from '../sourcemapper/sourcemapper';
+
 import {serializeTimeProfile} from './profile-serializer';
 import {setSamplingInterval, startProfiling, stopProfiling} from './time-profiler-bindings';
 
@@ -32,7 +34,8 @@ export class TimeProfiler {
    *
    * @param durationMillis - time in milliseconds for which to collect profile.
    */
-  async profile(durationMillis: number): Promise<perftools.profiles.IProfile> {
+  async profile(durationMillis: number, sourceMapper?: SourceMapper):
+      Promise<perftools.profiles.IProfile> {
     // Node.js contains an undocumented API for reporting idle status to V8.
     // This lets the profiler distinguish idle time from time spent in native
     // code. Ideally this should be default behavior. Until then, use the
@@ -46,7 +49,8 @@ export class TimeProfiler {
     const result = stopProfiling(runName);
     // tslint:disable-next-line no-any
     (process as any)._stopProfilerIdleNotifier();
-    const profile = serializeTimeProfile(result, this.intervalMicros);
+    const profile =
+        serializeTimeProfile(result, this.intervalMicros, sourceMapper);
     return profile;
   }
 }

@@ -59,7 +59,9 @@ const testConfig: ProfilerConfig = {
   baseApiUrl: API,
   localProfilingPeriodMillis: 1000,
   localTimeDurationMillis: 1000,
-  localLogPeriodMillis: 1000
+  localLogPeriodMillis: 1000,
+  sourceMapSearchPath: [],
+  disableSourceMaps: true,
 };
 
 const mockTimeProfiler = mock(TimeProfiler);
@@ -96,7 +98,7 @@ describe('Retryer', () => {
 describe('Profiler', () => {
   const sinonStubs: sinon.SinonStub[] = new Array();
   beforeEach(() => {
-    when(mockTimeProfiler.profile(10 * 1000))
+    when(mockTimeProfiler.profile(10 * 1000, undefined))
         .thenReturn(new Promise((resolve) => {
           resolve(timeProfile);
         }));

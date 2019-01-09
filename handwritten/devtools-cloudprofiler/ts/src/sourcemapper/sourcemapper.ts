@@ -16,54 +16,63 @@
 
 // Originally copied from cloud-debug-nodejs's sourcemapper.ts from
 // https://github.com/googleapis/cloud-debug-nodejs/blob/7bdc2f1f62a3b45b7b53ea79f9444c8ed50e138b/src/agent/io/sourcemapper.ts
-// Modified to remove imports that will not be used after this file is modified
-// for the profiling agent.
+// Modified to map from generated code to source code, rather than from source
+// code to generated code.
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as promisify from 'pify';
 import * as sourceMap from 'source-map';
+import * as util from 'util';
 
-import pLimit = require('p-limit');
+import * as scanner from '../../third_party/cloud-debug-nodejs/src/agent/io/scanner';
+
+const pify = require('pify');
+const pLimit = require('p-limit');
+const readFile = pify(fs.readFile);
 
 const CONCURRENCY = 10;
-const readFilep = promisify(fs.readFile);
+const MAP_EXT = '.map';
 
-/** @define {string} */ const MAP_EXT = '.map';
-
-export interface MapInfoInput {
-  outputFile: string;
-  mapFile: string;
+export interface MapInfoCompiled {
+  mapFileDir: string;
   mapConsumer: sourceMap.RawSourceMap;
 }
 
-export interface MapInfoOutput {
+export interface GeneratedLocation {
   file: string;
+  name?: string;
   line: number;
+  column: number;
+}
+
+export interface SourceLocation {
+  file?: string;
+  name?: string;
+  line?: number;
   column?: number;
 }
 
 /**
  * @param {!Map} infoMap The map that maps input source files to
  *  SourceMapConsumer objects that are used to calculate mapping information
- * @param {string} mapPath The path to the sourcemap file to process.  The
+ * @param {string} mapPath The path to the source map file to process.  The
  *  path should be relative to the process's current working directory
  * @private
  */
-async function processSourcemap(
-    infoMap: Map<string, MapInfoInput>, mapPath: string) {
+async function processSourceMap(
+    infoMap: Map<string, MapInfoCompiled>, mapPath: string): Promise<void> {
   // this handles the case when the path is undefined, null, or
   // the empty string
   if (!mapPath || !mapPath.endsWith(MAP_EXT)) {
-    throw new Error(`The path ${mapPath} does not specify a sourcemap file`);
+    throw new Error(`The path "${mapPath}" does not specify a source map file`);
   }
   mapPath = path.normalize(mapPath);
 
   let contents;
   try {
-    contents = await readFilep(mapPath, 'utf8');
+    contents = await readFile(mapPath, 'utf8');
   } catch (e) {
-    throw new Error('Could not read sourcemap file ' + mapPath + ': ' + e);
+    throw new Error('Could not read source map file ' + mapPath + ': ' + e);
   }
 
   let consumer: sourceMap.RawSourceMap;
@@ -80,52 +89,32 @@ async function processSourcemap(
   } catch (e) {
     throw new Error(
         'An error occurred while reading the ' +
-        'sourcemap file ' + mapPath + ': ' + e);
+        'sourceMap file ' + mapPath + ': ' + e);
   }
 
   /*
-   * If the sourcemap file defines a "file" attribute, use it as
+   * If the source map file defines a "file" attribute, use it as
    * the output file where the path is relative to the directory
    * containing the map file.  Otherwise, use the name of the output
    * file (with the .map extension removed) as the output file.
    */
-  const outputBase =
-      consumer.file ? consumer.file : path.basename(mapPath, '.map');
-  const parentDir = path.dirname(mapPath);
-  const outputPath = path.normalize(path.join(parentDir, outputBase));
+  const dir = path.dirname(mapPath);
+  const generatedBase =
+      consumer.file ? consumer.file : path.basename(mapPath, MAP_EXT);
+  const generatedPath = path.resolve(dir, generatedBase);
 
-  const sources = Array.prototype.slice.call(consumer.sources)
-                      .filter((value: string) => {
-                        // filter out any empty string, null, or undefined
-                        // sources
-                        return !!value;
-                      })
-                      .map((relPath: string) => {
-                        // resolve the paths relative to the map file so that
-                        // they are relative to the process's current working
-                        // directory
-                        return path.normalize(path.join(parentDir, relPath));
-                      });
-
-  if (sources.length === 0) {
-    throw new Error('No sources listed in the sourcemap file ' + mapPath);
-  }
-  sources.forEach((src: string) => {
-    infoMap.set(
-        path.normalize(src),
-        {outputFile: outputPath, mapFile: mapPath, mapConsumer: consumer});
-  });
+  infoMap.set(generatedPath, {mapFileDir: dir, mapConsumer: consumer});
 }
 
 export class SourceMapper {
-  infoMap: Map<string, MapInfoInput>;
+  infoMap: Map<string, MapInfoCompiled>;
 
   /**
-   * @param {Array.<string>} sourcemapPaths An array of paths to .map sourcemap
+   * @param {Array.<string>} sourceMapPaths An array of paths to .map source map
    *  files that should be processed.  The paths should be relative to the
    *  current process's current working directory
    * @param {Logger} logger A logger that reports errors that occurred while
-   *  processing the given sourcemap files
+   *  processing the given source map files
    * @constructor
    */
   constructor() {
@@ -138,16 +127,15 @@ export class SourceMapper {
    * path to exactly one output transpiled file.
    *
    * @param inputPath The (possibly relative) path to the original source file.
-   * @return The `MapInfoInput` object that describes the transpiled file
+   * @return The `MapInfoCompiled` object that describes the transpiled file
    *  associated with the specified input path.  `null` is returned if either
    *  zero files are associated with the input path or if more than one file
    *  could possibly be associated with the given input path.
    */
-  private getMappingInfo(inputPath: string): MapInfoInput|null {
+  private getMappingInfo(inputPath: string): MapInfoCompiled|null {
     if (this.infoMap.has(path.normalize(inputPath))) {
-      return this.infoMap.get(inputPath) as MapInfoInput;
+      return this.infoMap.get(inputPath) as MapInfoCompiled;
     }
-
     return null;
   }
 
@@ -185,56 +173,65 @@ export class SourceMapper {
    *   and line information.
    *
    *   If the given input file does not have mapping information associated
-   *   with it then null is returned.
+   *   with it then the input location is returned.
    */
-  mappingInfo(inputPath: string, lineNumber: number, colNumber: number):
-      MapInfoOutput|null {
-    inputPath = path.normalize(inputPath);
+  mappingInfo(location: GeneratedLocation): SourceLocation {
+    const inputPath = path.normalize(location.file);
     const entry = this.getMappingInfo(inputPath);
     if (entry === null) {
-      return null;
+      return location;
     }
 
-    const sourcePos = {
-      source: path.relative(path.dirname(entry.mapFile), inputPath)
-                  .replace(/\\/g, '/'),
-      line: lineNumber + 1,  // the SourceMapConsumer expects the line number
-                             // to be one-based but expects the column number
-      column: colNumber      // to be zero-based
-    };
+    const generatedPos = {line: location.line, column: location.column};
 
     // TODO: Determine how to remove the explicit cast here.
     const consumer: sourceMap.SourceMapConsumer =
         entry.mapConsumer as {} as sourceMap.SourceMapConsumer;
-    const allPos = consumer.allGeneratedPositionsFor(sourcePos);
 
-    const mappedPos: sourceMap.LineRange =
-        consumer.generatedPositionFor(sourcePos);
-
+    const pos = consumer.originalPositionFor(generatedPos);
+    if (pos.source === null) {
+      return location;
+    }
     return {
-      file: entry.outputFile,
-      line: mappedPos.line - 1,  // convert the one-based line numbers returned
-                                 // by the SourceMapConsumer to the expected
-                                 // zero-based output.
-      column: mappedPos.column   // SourceMapConsumer uses
-                                 // zero-based column
-                                 // numbers which is the
-                                 // same as the expected
-                                 // output
+      file: path.resolve(entry.mapFileDir, pos.source),
+      line: pos.line || undefined,
+      name: pos.name || location.name,
+      column: pos.column,
     };
   }
 }
 
-export async function create(sourcemapPaths: string[]): Promise<SourceMapper> {
+export async function create(searchDirs: string[]): Promise<SourceMapper> {
+  const mapFiles: string[] = [];
+  for (const dir of searchDirs) {
+    try {
+      const mf = await getMapFiles(dir);
+      mf.forEach((mapFile) => {
+        mapFiles.push(path.resolve(dir, mapFile));
+      });
+    } catch (e) {
+      throw new Error(`failed to get source maps from ${dir}: ${e}`);
+    }
+  }
+  return createFromMapFiles(mapFiles);
+}
+
+async function createFromMapFiles(mapFiles: string[]): Promise<SourceMapper> {
   const limit = pLimit(CONCURRENCY);
   const mapper = new SourceMapper();
-  const promises = sourcemapPaths.map(
-      path => limit(() => processSourcemap(mapper.infoMap, path)));
+  const promises: Array<Promise<void>> = mapFiles.map(
+      mapPath => limit(() => processSourceMap(mapper.infoMap, mapPath)));
   try {
     await Promise.all(promises);
   } catch (err) {
     throw new Error(
-        'An error occurred while processing the sourcemap files' + err);
+        'An error occurred while processing the source map files' + err);
   }
   return mapper;
+}
+
+async function getMapFiles(baseDir: string): Promise<string[]> {
+  const fileStats = await scanner.scan(false, baseDir, /.js.map$/);
+  const mapFiles = fileStats.selectFiles(/.js.map$/, process.cwd());
+  return mapFiles;
 }

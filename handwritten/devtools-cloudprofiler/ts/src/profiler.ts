@@ -27,6 +27,7 @@ import {ProfilerConfig} from './config';
 import {createLogger} from './logger';
 import * as heapProfiler from './profilers/heap-profiler';
 import {TimeProfiler} from './profilers/time-profiler';
+import {create as createSourceMapper, SourceMapper} from './sourcemapper/sourcemapper';
 
 const parseDuration: (str: string) => number = require('parse-duration');
 const pjson = require('../../package.json');
@@ -251,6 +252,7 @@ export class Profiler extends ServiceObject {
   private deployment: Deployment;
   private profileTypes: string[];
   private retryer: Retryer;
+  private sourceMapper: SourceMapper|undefined;
 
   // Public for testing.
   timeProfiler: TimeProfiler|undefined;
@@ -317,7 +319,17 @@ export class Profiler extends ServiceObject {
    * on the type of profile to be collected, this problem will be logged at the
    * error level and getting profile type will be retried.
    */
-  start() {
+  async start(): Promise<void> {
+    if (!this.config.disableSourceMaps) {
+      try {
+        this.sourceMapper =
+            await createSourceMapper(this.config.sourceMapSearchPath);
+      } catch (err) {
+        this.logger.error(
+            `Failed to initialize source maps and start profiler: ${err}`);
+        return;
+      }
+    }
     this.runLoop();
   }
 
@@ -486,7 +498,8 @@ export class Profiler extends ServiceObject {
           `Cannot collect time profile, duration "${prof.duration}" cannot` +
           ` be parsed.`);
     }
-    const p = await this.timeProfiler.profile(durationMillis);
+    const p =
+        await this.timeProfiler.profile(durationMillis, this.sourceMapper);
     prof.profileBytes = await profileBytes(p);
     return prof;
   }
@@ -501,7 +514,8 @@ export class Profiler extends ServiceObject {
     if (this.config.disableHeap) {
       throw Error('Cannot collect heap profile, heap profiler not enabled.');
     }
-    const p = heapProfiler.profile();
+    const p = heapProfiler.profile(
+        this.config.ignoreHeapSamplesPath, this.sourceMapper);
     prof.profileBytes = await profileBytes(p);
     return prof;
   }
