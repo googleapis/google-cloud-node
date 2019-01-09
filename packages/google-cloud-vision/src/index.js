@@ -13,19 +13,19 @@
 // limitations under the License.
 
 /**
- * @namespace google
- */
-/**
- * @namespace google.cloud
- */
-/**
- * @namespace google.cloud.vision
- */
-/**
  * @namespace google.cloud.vision.v1
  */
 /**
  * @namespace google.cloud.vision.v1p1beta1
+ */
+/**
+ * @namespace google.cloud.vision.v1p2beta1
+ */
+/**
+ * @namespace google.cloud.vision.v1p3beta1
+ */
+/**
+ * @namespace google.longrunning
  */
 /**
  * @namespace google.protobuf
