@@ -13,16 +13,13 @@
 // limitations under the License.
 
 /**
- * @namespace google
- */
-/**
  * @namespace google.protobuf
  */
 /**
  * @namespace google.rpc
  */
 /**
- * @namespace google.cloud
+ * @namespace google.longrunning
  */
 /**
  * @namespace google.cloud.videointelligence
