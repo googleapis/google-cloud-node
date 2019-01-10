@@ -36,6 +36,9 @@
 /**
  * @namespace google.rpc
  */
+/**
+ * @namespace google.longrunning
+ */
 
 'use strict';
 
