@@ -2,7 +2,7 @@
   "requiresKeyFile": true,
   "requiresProjectId": true,
   "product": "security-center",
-  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/securitycenter/latest/",
+  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/security-center/latest/",
   "release_quality": "beta",
   "samples": []
 }
