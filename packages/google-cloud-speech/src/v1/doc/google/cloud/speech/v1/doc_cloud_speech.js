@@ -149,6 +149,14 @@ const StreamingRecognitionConfig = {
  *   This field is optional for `FLAC` and `WAV` audio files and required
  *   for all other audio formats. For details, see AudioEncoding.
  *
+ * @property {boolean} enableSeparateRecognitionPerChannel
+ *   This needs to be set to `true` explicitly and `audio_channel_count` > 1
+ *   to get each channel recognized separately. The recognition result will
+ *   contain a `channel_tag` field to state which channel that result belongs
+ *   to. If this is not true, we will only recognize the first channel. The
+ *   request is billed cumulatively for all channels recognized:
+ *   `audio_channel_count` multiplied by the length of the audio.
+ *
  * @property {string} languageCode
  *   *Required* The language of the supplied audio as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
@@ -228,16 +236,20 @@ const StreamingRecognitionConfig = {
  *
  * @property {boolean} useEnhanced
  *   *Optional* Set to true to use an enhanced model for speech recognition.
- *   You must also set the `model` field to a valid, enhanced model. If
- *   `use_enhanced` is set to true and the `model` field is not set, then
- *   `use_enhanced` is ignored. If `use_enhanced` is true and an enhanced
- *   version of the specified model does not exist, then the speech is
- *   recognized using the standard version of the specified model.
+ *   If `use_enhanced` is set to true and the `model` field is not set, then
+ *   an appropriate enhanced model is chosen if:
+ *   1. project is eligible for requesting enhanced models
+ *   2. an enhanced model exists for the audio
+ *
+ *   If `use_enhanced` is true and an enhanced version of the specified model
+ *   does not exist, then the speech is recognized using the standard version
+ *   of the specified model.
  *
  *   Enhanced speech models require that you opt-in to data logging using
- *   instructions in the [documentation](https://cloud.google.com/speech-to-text/enable-data-logging).
- *   If you set `use_enhanced` to true and you have not enabled audio logging,
- *   then you will receive an error.
+ *   instructions in the
+ *   [documentation](https://cloud.google.com/speech-to-text/docs/enable-data-logging). If you set
+ *   `use_enhanced` to true and you have not enabled audio logging, then you
+ *   will receive an error.
  *
  * @typedef RecognitionConfig
  * @memberof google.cloud.speech.v1
@@ -578,6 +590,11 @@ const StreamingRecognizeResponse = {
  *   This field is only provided for interim results (`is_final=false`).
  *   The default of 0.0 is a sentinel value indicating `stability` was not set.
  *
+ * @property {number} channelTag
+ *   For multi-channel audio, this is the channel number corresponding to the
+ *   recognized result for the audio from that channel.
+ *   For audio_channel_count = N, its output values can range from '1' to 'N'.
+ *
  * @typedef StreamingRecognitionResult
  * @memberof google.cloud.speech.v1
  * @see [google.cloud.speech.v1.StreamingRecognitionResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
@@ -596,6 +613,11 @@ const StreamingRecognitionResult = {
  *   alternative being the most probable, as ranked by the recognizer.
  *
  *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.speech.v1.SpeechRecognitionAlternative}
+ *
+ * @property {number} channelTag
+ *   For multi-channel audio, this is the channel number corresponding to the
+ *   recognized result for the audio from that channel.
+ *   For audio_channel_count = N, its output values can range from '1' to 'N'.
  *
  * @typedef SpeechRecognitionResult
  * @memberof google.cloud.speech.v1
@@ -622,6 +644,8 @@ const SpeechRecognitionResult = {
  *
  * @property {Object[]} words
  *   Output only. A list of word-specific information for each recognized word.
+ *   Note: When `enable_speaker_diarization` is true, you will see all the words
+ *   from the beginning of the audio.
  *
  *   This object should have the same structure as [WordInfo]{@link google.cloud.speech.v1.WordInfo}
  *
