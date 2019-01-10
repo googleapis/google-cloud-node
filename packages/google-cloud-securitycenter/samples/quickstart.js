@@ -16,7 +16,27 @@
 'use strict';
 
 // [START securitycenter_quickstart]
-// Imports the Google Cloud client library
-const sc = require('@google-cloud/securitycenter');
-console.log(sc);
+async function quickstart(
+  organization = 'YOUR_ORGANIZATION' // Your GCP organization
+) {
+  const sc = require('@google-cloud/security-center');
+
+  // Create a client
+  const client = new sc.SecurityCenterClient();
+
+  const formattedParent = client.organizationPath(organization);
+  const reqSource = {};
+  const request = {
+    parent: formattedParent,
+    source: reqSource,
+  };
+
+  const [source] = await client.createSource(request);
+  // The newly created source.
+  console.log('Source created.');
+  console.log(source);
+}
 // [END securitycenter_quickstart]
+
+const args = process.argv.slice(2);
+quickstart(...args).catch(console.error);

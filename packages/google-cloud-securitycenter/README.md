@@ -32,8 +32,26 @@
 1. Try an example:
 
 ```javascript
-// Imports the Google Cloud client library
-const sc = require('@google-cloud/securitycenter');
+async function quickstart(
+  organization = 'YOUR_ORGANIZATION', // Your GCP organization
+) {
+  const sc = require('@google-cloud/security-center');
+
+  // Create a client
+  const client = new sc.SecurityCenterClient();
+
+  const formattedParent = client.organizationPath(organization);
+  const reqSource = {};
+  const request = {
+    parent: formattedParent,
+    source: reqSource,
+  };
+
+  const [source] = await client.createSource(request);
+  // The newly created source.
+  console.log('Source created.');
+  console.log(source);
+}
 ```
 
 
@@ -81,4 +99,3 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=
 [auth]: https://cloud.google.com/docs/authentication/getting-started
-
