@@ -5,8 +5,5 @@ import subprocess
 
 logging.basicConfig(level=logging.DEBUG)
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(
-  package_name="@google-cloud/translate",
-  repo_name="googleapis/translate"
-)
+templates = common_templates.node_library(source_location='build/src')
 s.copy(templates)
