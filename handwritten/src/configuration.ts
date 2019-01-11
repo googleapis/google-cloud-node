@@ -35,6 +35,8 @@ export interface Logger {
   fatal(...args: Array<{}>): void;
 }
 
+export type ReportMode = 'production'|'always'|'never';
+
 export interface ConfigurationOptions {
   projectId?: string;
   keyFilename?: string;
@@ -42,6 +44,7 @@ export interface ConfigurationOptions {
   key?: string;
   serviceContext?: {service?: string; version?: string;};
   ignoreEnvironmentCheck?: boolean;
+  reportMode?: ReportMode;
   credentials?: {};
   reportUnhandledRejections?: boolean;
 }
@@ -74,7 +77,7 @@ export interface ServiceContext {
  */
 export class Configuration {
   _logger: Logger;
-  _shouldReportErrorsToAPI: boolean;
+  _reportMode: ReportMode;
   _projectId: string|null;
   _key: string|null;
   keyFilename: string|null;
@@ -89,23 +92,7 @@ export class Configuration {
      * for configuration logging purposes.
      */
     this._logger = logger;
-    /**
-     * The _shouldReportErrorsToAPI property is meant to denote whether or not
-     * the Stackdriver error reporting library will actually try to report
-     * Errors to the Stackdriver Error API. The value of this property is
-     * derived from the `NODE_ENV` environmental variable or the value of
-     * ignoreEnvironmentChec property if present in the runtime configuration.
-     * If either the `NODE_ENV` variable is set to 'production' or the
-     * ignoreEnvironmentCheck propery on the runtime configuration is set to
-     * true then the error reporting library attempt to send errors to the Error
-     * API. Otherwise the value will remain false and errors will not be
-     * reported to the API.
-     * @memberof Configuration
-     * @private
-     * @type {Boolean}
-     * @defaultvalue false
-     */
-    this._shouldReportErrorsToAPI = false;
+    this._reportMode = 'production';
     /**
      * The _projectId property is meant to contain the string project id that
      * the hosting application is running under. The project id is a unique
@@ -259,6 +246,12 @@ export class Configuration {
       }
     }
   }
+  _determineReportMode() {
+    if (this._givenConfiguration.reportMode) {
+      this._reportMode =
+          this._givenConfiguration.reportMode.toLowerCase() as ReportMode;
+    }
+  }
   /**
    * The _gatherLocalConfiguration function is responsible for determining
    * directly determing whether the properties `reportUncaughtExceptions` and
@@ -273,23 +266,56 @@ export class Configuration {
    * @returns {Undefined} - does not return anything
    */
   _gatherLocalConfiguration() {
-    if (this._givenConfiguration.ignoreEnvironmentCheck === true) {
-      this._shouldReportErrorsToAPI = true;
-    } else if (
-        has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
-        !is.boolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
-      throw new Error('config.ignoreEnvironmentCheck must be a boolean');
-    } else {
-      this._shouldReportErrorsToAPI = env.NODE_ENV === 'production';
+    let isReportModeValid = true;
+    if (has(this._givenConfiguration, 'reportMode')) {
+      const reportMode = this._givenConfiguration.reportMode;
+      isReportModeValid = is.string(reportMode) &&
+          (reportMode === 'production' || reportMode === 'always' ||
+           reportMode === 'never');
     }
-    if (!this._shouldReportErrorsToAPI) {
+
+    if (!isReportModeValid) {
+      throw new Error(
+          'config.reportMode must a string that is one ' +
+          'of "production", "always", or "never".');
+    }
+
+    const hasEnvCheck = has(this._givenConfiguration, 'ignoreEnvironmentCheck');
+    const hasReportMode = has(this._givenConfiguration, 'reportMode');
+    if (hasEnvCheck) {
+      this._logger.warn(
+          'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+          'Use the "reportMode" config option instead.');
+    }
+    if (hasEnvCheck && hasReportMode) {
       this._logger.warn([
-        'Stackdriver error reporting client has not been configured to send',
-        'errors, please check the NODE_ENV environment variable and make sure it',
-        'is set to "production" or the ignoreEnvironmentCheck property is set to',
-        'true in the runtime configuration object',
+        'Both the "ignoreEnvironmentCheck" and "reportMode" configuration options',
+        'have been specified.  The "reportMode" option will take precedence.'
+      ].join(' '));
+      this._determineReportMode();
+    } else if (hasEnvCheck) {
+      if (this._givenConfiguration.ignoreEnvironmentCheck === true) {
+        this._reportMode = 'always';
+      } else if (
+          has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
+          !is.boolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
+        throw new Error('config.ignoreEnvironmentCheck must be a boolean');
+      } else {
+        this._reportMode = 'production';
+      }
+    } else if (hasReportMode) {
+      this._determineReportMode();
+    }
+
+    if (this.isReportingEnabled() && !this.getShouldReportErrorsToAPI()) {
+      this._logger.warn([
+        'The stackdriver error reporting client is configured to report errors',
+        'if and only if the NODE_ENV environment variable is set to "production".',
+        'Errors will not be reported.  To have errors always reported, regardless of the',
+        'value of NODE_ENV, set the reportMode configuration option to "always".'
       ].join(' '));
     }
+
     if (is.string(this._givenConfiguration.key)) {
       this._key = this._givenConfiguration.key!;
     } else if (has(this._givenConfiguration, 'key')) {
@@ -349,14 +375,22 @@ export class Configuration {
     return this._projectId;
   }
   /**
-   * Returns the _shouldReportErrorsToAPI property on the instance.
+   * Returns whether this configuration specifies that errors should be
+   * reported to the error reporting API.  That is, "reportMode" is
+   * either set to "always" or it is set to "production" and the value
+   * of the NODE_ENV environment variable is "production".
    * @memberof Configuration
    * @public
    * @function getShouldReportErrorsToAPI
-   * @returns {Boolean} - returns the _shouldReportErrorsToAPI property
+   * @returns {Boolean} - whether errors should be reported to the API
    */
   getShouldReportErrorsToAPI() {
-    return this._shouldReportErrorsToAPI;
+    return this._reportMode === 'always' ||
+        (this._reportMode === 'production' &&
+         (process.env.NODE_ENV || '').toLowerCase() === 'production');
+  }
+  isReportingEnabled() {
+    return this._reportMode !== 'never';
   }
   /**
    * Returns the _projectId property on the instance.

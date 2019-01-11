@@ -161,7 +161,7 @@ describe('Request/Response lifecycle mocking', () => {
             .post('/events:report?');
     logger = createLogger({logLevel: 5});
     client = new RequestHandler(
-        new Configuration({ignoreEnvironmentCheck: true}, logger), logger);
+        new Configuration({reportMode: 'always'}, logger), logger);
   });
 
   afterEach(() => {
@@ -207,8 +207,7 @@ describe('Request/Response lifecycle mocking', () => {
        const key = env.apiKey;
        const logger = createLogger({logLevel: 5});
        const client = new RequestHandler(
-           new Configuration({key, ignoreEnvironmentCheck: true}, logger),
-           logger);
+           new Configuration({key, reportMode: 'always'}, logger), logger);
        fakeService.query({key}).reply(200, (uri: string) => {
          assert(uri.indexOf('key=' + key) > -1);
          return {};
@@ -242,7 +241,7 @@ describe('Client creation', () => {
        const cfg = new Configuration(
            {
              projectId: env.injected().projectId,
-             ignoreEnvironmentCheck: true,
+             reportMode: 'always',
            },
            logger);
        this.timeout(10000);
@@ -262,7 +261,7 @@ describe('Client creation', () => {
      function(this, done) {
        env.sterilizeProcess().setProjectId().setKeyFilename();
        const logger = createLogger({logLevel: 5});
-       const cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
+       const cfg = new Configuration({reportMode: 'always'}, logger);
        this.timeout(10000);
        assert.doesNotThrow(() => {
          new RequestHandler(cfg, logger)
@@ -283,7 +282,7 @@ describe('Client creation', () => {
        const cfg = new Configuration(
            {
              projectId: '' + Number(env.injected().projectNumber),
-             ignoreEnvironmentCheck: true,
+             reportMode: 'always',
            },
            logger);
        this.timeout(10000);
@@ -303,7 +302,7 @@ describe('Client creation', () => {
      function(this, done) {
        env.sterilizeProcess().setKeyFilename().setProjectNumber();
        const logger = createLogger({logLevel: 5});
-       const cfg = new Configuration({ignoreEnvironmentCheck: true}, logger);
+       const cfg = new Configuration({reportMode: 'always'}, logger);
        this.timeout(10000);
        assert.doesNotThrow(() => {
          new RequestHandler(cfg, logger)
@@ -319,10 +318,10 @@ describe('Client creation', () => {
 
 describe('Expected Behavior', () => {
   const ERROR_STRING = [
-    'Stackdriver error reporting client has not been configured to send',
-    'errors, please check the NODE_ENV environment variable and make',
-    'sure it is set to "production" or set the ignoreEnvironmentCheck',
-    'property to true in the runtime configuration object',
+    'The stackdriver error reporting client is configured to report errors',
+    'if and only if the NODE_ENV environment variable is set to "production".',
+    'Errors will not be reported.  To have errors always reported, regardless of the',
+    'value of NODE_ENV, set the reportMode configuration option to "always".'
   ].join(' ');
 
   const er = new Error(ERR_TOKEN);
@@ -332,11 +331,11 @@ describe('Expected Behavior', () => {
     env.sterilizeProcess();
   });
 
-  it('Should callback with an error with a configuration to not report errors',
+  it('Should callback with an error with a configuration that cannot report errors',
      done => {
        env.sterilizeProcess().setKeyFilename().setProjectId();
        process.env.NODE_ENV = 'null';
-       const logger = createLogger({logLevel: 5});
+       const logger = createLogger({logLevel: 5, reportMode: 'production'});
        const client =
            new RequestHandler(new Configuration(undefined, logger), logger);
        client.sendError({} as ErrorMessage, (err, response) => {
@@ -353,7 +352,7 @@ describe('Expected Behavior', () => {
     const cfg = new Configuration(
         {
           projectId: env.injected().projectId,
-          ignoreEnvironmentCheck: true,
+          reportMode: 'always',
         },
         logger);
     const client = new RequestHandler(cfg, logger);
@@ -373,7 +372,7 @@ describe('Expected Behavior', () => {
     const cfg = new Configuration(
         {
           projectId: '' + Number(env.injected().projectNumber),
-          ignoreEnvironmentCheck: true,
+          reportMode: 'always',
         },
         logger);
     const client = new RequestHandler(cfg, logger);
@@ -467,7 +466,7 @@ describe('error-reporting', () => {
     process.removeAllListeners('unhandledRejection');
     const initConfiguration = Object.assign(
         {
-          ignoreEnvironmentCheck: true,
+          reportMode: 'always' as 'always',
           serviceContext: {
             service: SERVICE,
             version: VERSION,

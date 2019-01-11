@@ -18,7 +18,7 @@ import * as assert from 'assert';
 import * as is from 'is';
 import merge = require('lodash.merge');
 import {FakeConfiguration as Configuration} from '../fixtures/configuration';
-import {ConfigurationOptions} from '../../src/configuration';
+import {ConfigurationOptions, Logger} from '../../src/configuration';
 import {Fuzzer} from '../../utils/fuzzer';
 import {deepStrictEqual} from '../util';
 const level = process.env.GCLOUD_ERRORS_LOGLEVEL;
@@ -73,7 +73,7 @@ describe('Configuration class', () => {
     });
     describe('valid config and default values', () => {
       let c: Configuration;
-      const validConfig = {ignoreEnvironmentCheck: true};
+      const validConfig = {reportMode: 'always'} as {reportMode: 'always'};
       before(() => {
         process.env.NODE_ENV = 'development';
       });
@@ -104,6 +104,138 @@ describe('Configuration class', () => {
         assert.strictEqual(c.getReportUnhandledRejections(), false);
       });
     });
+    describe('reportMode', () => {
+      let nodeEnv: string|undefined;
+      beforeEach(() => {
+        nodeEnv = process.env.NODE_ENV;
+      });
+
+      afterEach(() => {
+        if (nodeEnv === undefined) {
+          delete process.env.NODE_ENV;
+        } else {
+          process.env.NODE_ENV = nodeEnv;
+        }
+      });
+
+      it('Should print a deprecation warning if "ignoreEvnironmentCheck" is used',
+         () => {
+           let warnText = '';
+           const logger = {
+             warn: (text) => {
+               warnText += text + '\n';
+             }
+           } as Logger;
+           // tslint:disable-next-line:no-unused-expression
+           new Configuration({ignoreEnvironmentCheck: true}, logger);
+           assert.strictEqual(
+               warnText,
+               'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+                   'Use the "reportMode" config option instead.\n');
+         });
+
+      it('Should print a warning if both "ignoreEnvironmentCheck" and "reportMode" are specified',
+         () => {
+           let warnText = '';
+           const logger = {
+             warn: (text) => {
+               warnText += text + '\n';
+             }
+           } as Logger;
+           // tslint:disable-next-line:no-unused-expression
+           new Configuration(
+               {ignoreEnvironmentCheck: true, reportMode: 'never'}, logger);
+           assert.strictEqual(
+               warnText,
+               'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+                   'Use the "reportMode" config option instead.\nBoth the "ignoreEnvironmentCheck" ' +
+                   'and "reportMode" configuration options have been specified.  The "reportMode" ' +
+                   'option will take precedence.\n');
+         });
+
+      it('Should set "reportMode" to "always" if "ignoreEnvironmentCheck" is true',
+         () => {
+           const conf =
+               new Configuration({ignoreEnvironmentCheck: true}, logger);
+           assert.strictEqual(conf._reportMode, 'always');
+         });
+
+      it('Should set "reportMode" to "production" if "ignoreEnvironmentCheck" is false',
+         () => {
+           const conf =
+               new Configuration({ignoreEnvironmentCheck: false}, logger);
+           assert.strictEqual(conf._reportMode, 'production');
+         });
+
+      it('Should prefer "reportMode" config if "ignoreEnvironmentCheck" is also set',
+         () => {
+           const conf = new Configuration(
+               {ignoreEnvironmentCheck: true, reportMode: 'never'}, logger);
+           assert.strictEqual(conf._reportMode, 'never');
+         });
+
+      it('Should be set to "production" by default', () => {
+        const conf = new Configuration({}, logger);
+        assert.strictEqual(conf._reportMode, 'production');
+      });
+
+      it('Should state reporting is enabled with mode "production"', () => {
+        const conf = new Configuration({reportMode: 'production'}, logger);
+        assert.strictEqual(conf.isReportingEnabled(), true);
+      });
+
+      it('Should state reporting is enabled with mode "always"', () => {
+        const conf = new Configuration({reportMode: 'always'}, logger);
+        assert.strictEqual(conf.isReportingEnabled(), true);
+      });
+
+      it('Should state reporting is not enabled with mode "never"', () => {
+        const conf = new Configuration({reportMode: 'never'}, logger);
+        assert.strictEqual(conf.isReportingEnabled(), false);
+      });
+
+      it('Should state reporting should proceed with mode "production" and env "production"',
+         () => {
+           process.env.NODE_ENV = 'production';
+           const conf = new Configuration({reportMode: 'production'}, logger);
+           assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
+         });
+
+      it('Should state reporting should not proceed with mode "production" and env not "production"',
+         () => {
+           process.env.NODE_ENV = 'dev';
+           const conf = new Configuration({reportMode: 'production'}, logger);
+           assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
+         });
+
+      it('Should state reporting should proceed with mode "always" and env "production"',
+         () => {
+           process.env.NODE_ENV = 'production';
+           const conf = new Configuration({reportMode: 'always'}, logger);
+           assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
+         });
+
+      it('Should state reporting should proceed with mode "always" and env not "production"',
+         () => {
+           process.env.NODE_ENV = 'dev';
+           const conf = new Configuration({reportMode: 'always'}, logger);
+           assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
+         });
+
+      it('Should state reporting should not proceed with mode "never" and env "production"',
+         () => {
+           process.env.NODE_ENV = 'production';
+           const conf = new Configuration({reportMode: 'never'}, logger);
+           assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
+         });
+
+      it('Should state reporting should not proceed with mode "never" and env not "production"',
+         () => {
+           process.env.NODE_ENV = 'dev';
+           const conf = new Configuration({reportMode: 'never'}, logger);
+           assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
+         });
+    });
     describe('with ignoreEnvironmentCheck', () => {
       const conf =
           merge({}, {projectId: 'some-id'}, {ignoreEnvironmentCheck: true});
@@ -127,230 +259,244 @@ describe('Configuration class', () => {
           assert.strictEqual(c.getShouldReportErrorsToAPI(), true);
         });
       });
-      describe('exception behaviour', () => {
-        it('Should throw if invalid type for key', () => {
-          assert.throws(() => {
-            // we are intentionally providing an invalid configuration
-            // thus an explicit cast is needed
-            // tslint:disable-next-line:no-unused-expression
-            new Configuration(
-                {key: null} as {} as ConfigurationOptions, logger);
-          });
-        });
-        it('Should throw if invalid for ignoreEnvironmentCheck', () => {
-          assert.throws(() => {
-            // we are intentionally providing an invalid configuration
-            // thus an explicit cast is needed
-            // tslint:disable-next-line:no-unused-expression
-            new Configuration(
-                {ignoreEnvironmentCheck: null} as {} as ConfigurationOptions,
-                logger);
-          });
-        });
-        it('Should throw if invalid for serviceContext.service', () => {
-          assert.throws(() => {
-            // we are intentionally providing an invalid configuration
-            // thus an explicit cast is needed
-            // tslint:disable-next-line:no-unused-expression
-            new Configuration(
-                {serviceContext: {service: false}} as {} as
-                    ConfigurationOptions,
-                logger);
-          });
-        });
-        it('Should throw if invalid for serviceContext.version', () => {
-          assert.throws(() => {
-            // we are intentionally providing an invalid configuration
-            // thus an explicit cast is needed
-            // tslint:disable-next-line:no-unused-expression
-            new Configuration(
-                {serviceContext: {version: true}} as {} as ConfigurationOptions,
-                logger);
-          });
-        });
-        it('Should throw if invalid for reportUnhandledRejections', () => {
-          assert.throws(() => {
-            // we are intentionally providing an invalid configuration
-            // thus an explicit cast is needed
-            // tslint:disable-next-line:no-unused-expression
-            new Configuration(
-                {reportUnhandledRejections: 'INVALID'} as {} as
-                    ConfigurationOptions,
-                logger);
-          });
-        });
-        it('Should not throw given an empty object for serviceContext', () => {
-          assert.doesNotThrow(() => {
-            // tslint:disable-next-line:no-unused-expression
-            new Configuration({serviceContext: {}}, logger);
-          });
+    });
+    describe('exception behaviour', () => {
+      it('Should throw if invalid type for reportMode', () => {
+        assert.throws(() => {
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration(
+              {reportMode: new Date()} as {} as ConfigurationOptions, logger);
         });
       });
-    });
-  });
-  describe('Configuration resource aquisition', () => {
-    before(() => {
-      sterilizeConfigEnv();
-    });
-    describe('project id from configuration instance', () => {
-      const pi = 'test';
-      let c: Configuration;
-      before(() => {
-        c = new Configuration({projectId: pi}, logger);
+      it('Should throw if invalid value for reportMode', () => {
+        assert.throws(() => {
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration(
+              {reportMode: 'invalid-mode'} as {} as ConfigurationOptions,
+              logger);
+        });
       });
-      after(() => {
-        nock.cleanAll();
+      it('Should throw if invalid type for key', () => {
+        assert.throws(() => {
+          // we are intentionally providing an invalid configuration
+          // thus an explicit cast is needed
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration({key: null} as {} as ConfigurationOptions, logger);
+        });
       });
-      it('Should return the project id', () => {
-        assert.strictEqual(c.getProjectId(), pi);
+      it('Should throw if invalid for ignoreEnvironmentCheck', () => {
+        assert.throws(() => {
+          // we are intentionally providing an invalid configuration
+          // thus an explicit cast is needed
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration(
+              {ignoreEnvironmentCheck: null} as {} as ConfigurationOptions,
+              logger);
+        });
       });
-    });
-    describe('project number from configuration instance', () => {
-      const pn = 1234;
-      let c: Configuration;
-      before(() => {
-        sterilizeConfigEnv();
-        c = new Configuration(
-            {projectId: pn} as {} as ConfigurationOptions, logger);
+      it('Should throw if invalid for serviceContext.service', () => {
+        assert.throws(() => {
+          // we are intentionally providing an invalid configuration
+          // thus an explicit cast is needed
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration(
+              {serviceContext: {service: false}} as {} as ConfigurationOptions,
+              logger);
+        });
       });
-      after(() => {
-        nock.cleanAll();
-        sterilizeConfigEnv();
+      it('Should throw if invalid for serviceContext.version', () => {
+        assert.throws(() => {
+          // we are intentionally providing an invalid configuration
+          // thus an explicit cast is needed
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration(
+              {serviceContext: {version: true}} as {} as ConfigurationOptions,
+              logger);
+        });
       });
-      it('Should return the project number', () => {
-        assert.strictEqual(c.getProjectId(), pn.toString());
+      it('Should throw if invalid for reportUnhandledRejections', () => {
+        assert.throws(() => {
+          // we are intentionally providing an invalid configuration
+          // thus an explicit cast is needed
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration(
+              {reportUnhandledRejections: 'INVALID'} as {} as
+                  ConfigurationOptions,
+              logger);
+        });
       });
-    });
-  });
-  describe('Exception behaviour', () => {
-    describe('While lacking a project id', () => {
-      let c: Configuration;
-      before(() => {
-        sterilizeConfigEnv();
-        createDeadMetadataService();
-        c = new Configuration(undefined, logger);
-      });
-      after(() => {
-        nock.cleanAll();
-        sterilizeConfigEnv();
-      });
-      it('Should return null', () => {
-        assert.strictEqual(c.getProjectId(), null);
-      });
-    });
-    describe('Invalid type for projectId in runtime config', () => {
-      let c: Configuration;
-      before(() => {
-        sterilizeConfigEnv();
-        createDeadMetadataService();
-        // we are intentionally providing an invalid configuration
-        // thus an explicit cast is needed
-        c = new Configuration(
-            {projectId: null} as {} as ConfigurationOptions, logger);
-      });
-      after(() => {
-        nock.cleanAll();
-        sterilizeConfigEnv();
-      });
-      it('Should return null', () => {
-        assert.strictEqual(c.getProjectId(), null);
+      it('Should not throw given an empty object for serviceContext', () => {
+        assert.doesNotThrow(() => {
+          // tslint:disable-next-line:no-unused-expression
+          new Configuration({serviceContext: {}}, logger);
+        });
       });
     });
-  });
-  describe('Resource aquisition', () => {
-    after(() => {
-      /*
-       * !! IMPORTANT !!
-       * THE restoreConfigEnv FUNCTION SHOULD BE CALLED LAST AS THIS TEST FILE
-       * EXITS AND SHOULD THEREFORE BE THE LAST THING TO EXECUTE FROM THIS FILE.
-       * !! IMPORTANT !!
-       */
-      restoreConfigEnv();
-    });
-    describe('via env', () => {
+    describe('Configuration resource aquisition', () => {
       before(() => {
         sterilizeConfigEnv();
       });
-      afterEach(() => {
-        sterilizeConfigEnv();
-      });
-      describe('no longer tests env itself', () => {
+      describe('project id from configuration instance', () => {
+        const pi = 'test';
         let c: Configuration;
-        const projectId = 'test-xyz';
         before(() => {
-          process.env.GCLOUD_PROJECT = projectId;
+          c = new Configuration({projectId: pi}, logger);
+        });
+        after(() => {
+          nock.cleanAll();
+        });
+        it('Should return the project id', () => {
+          assert.strictEqual(c.getProjectId(), pi);
+        });
+      });
+      describe('project number from configuration instance', () => {
+        const pn = 1234;
+        let c: Configuration;
+        before(() => {
+          sterilizeConfigEnv();
+          c = new Configuration(
+              {projectId: pn} as {} as ConfigurationOptions, logger);
+        });
+        after(() => {
+          nock.cleanAll();
+          sterilizeConfigEnv();
+        });
+        it('Should return the project number', () => {
+          assert.strictEqual(c.getProjectId(), pn.toString());
+        });
+      });
+    });
+    describe('Exception behaviour', () => {
+      describe('While lacking a project id', () => {
+        let c: Configuration;
+        before(() => {
+          sterilizeConfigEnv();
+          createDeadMetadataService();
           c = new Configuration(undefined, logger);
         });
-        it('Should assign', () => {
+        after(() => {
+          nock.cleanAll();
+          sterilizeConfigEnv();
+        });
+        it('Should return null', () => {
           assert.strictEqual(c.getProjectId(), null);
         });
       });
-      describe('serviceContext', () => {
+      describe('Invalid type for projectId in runtime config', () => {
         let c: Configuration;
-        const projectId = 'test-abc';
-        const serviceContext = {
-          service: 'test',
-          version: '1.x',
-        };
         before(() => {
-          process.env.GCLOUD_PROJECT = projectId;
-          process.env.GAE_MODULE_NAME = serviceContext.service;
-          process.env.GAE_MODULE_VERSION = serviceContext.version;
-          c = new Configuration(undefined, logger);
+          sterilizeConfigEnv();
+          createDeadMetadataService();
+          // we are intentionally providing an invalid configuration
+          // thus an explicit cast is needed
+          c = new Configuration(
+              {projectId: null} as {} as ConfigurationOptions, logger);
         });
-        it('Should assign', () => {
-          deepStrictEqual(c.getServiceContext(), serviceContext);
+        after(() => {
+          nock.cleanAll();
+          sterilizeConfigEnv();
+        });
+        it('Should return null', () => {
+          assert.strictEqual(c.getProjectId(), null);
         });
       });
     });
-    describe('via runtime configuration', () => {
-      before(() => {
-        sterilizeConfigEnv();
+    describe('Resource aquisition', () => {
+      after(() => {
+        /*
+         * !! IMPORTANT !!
+         * THE restoreConfigEnv FUNCTION SHOULD BE CALLED LAST AS THIS TEST FILE
+         * EXITS AND SHOULD THEREFORE BE THE LAST THING TO EXECUTE FROM THIS
+         * FILE.
+         * !! IMPORTANT !!
+         */
+        restoreConfigEnv();
       });
-      describe('serviceContext', () => {
-        let c: Configuration;
-        const projectId = 'xyz123';
-        const serviceContext = {
-          service: 'evaluation',
-          version: '2.x',
-        };
+      describe('via env', () => {
         before(() => {
-          c = new Configuration({
-            projectId,
-            serviceContext,
+          sterilizeConfigEnv();
+        });
+        afterEach(() => {
+          sterilizeConfigEnv();
+        });
+        describe('no longer tests env itself', () => {
+          let c: Configuration;
+          const projectId = 'test-xyz';
+          before(() => {
+            process.env.GCLOUD_PROJECT = projectId;
+            c = new Configuration(undefined, logger);
+          });
+          it('Should assign', () => {
+            assert.strictEqual(c.getProjectId(), null);
           });
         });
-        it('Should assign', () => {
-          deepStrictEqual(c.getServiceContext(), serviceContext);
-        });
-      });
-      describe('api key', () => {
-        let c: Configuration;
-        const projectId = '987abc';
-        const key = '1337-api-key';
-        before(() => {
-          c = new Configuration(
-              {
-                key,
-                projectId,
-              },
-              logger);
-        });
-        it('Should assign', () => {
-          assert.strictEqual(c.getKey(), key);
-        });
-      });
-      describe('reportUnhandledRejections', () => {
-        let c: Configuration;
-        const reportRejections = false;
-        before(() => {
-          c = new Configuration({
-            reportUnhandledRejections: reportRejections,
+        describe('serviceContext', () => {
+          let c: Configuration;
+          const projectId = 'test-abc';
+          const serviceContext = {
+            service: 'test',
+            version: '1.x',
+          };
+          before(() => {
+            process.env.GCLOUD_PROJECT = projectId;
+            process.env.GAE_MODULE_NAME = serviceContext.service;
+            process.env.GAE_MODULE_VERSION = serviceContext.version;
+            c = new Configuration(undefined, logger);
+          });
+          it('Should assign', () => {
+            deepStrictEqual(c.getServiceContext(), serviceContext);
           });
         });
-        it('Should assign', () => {
-          assert.strictEqual(
-              c.getReportUnhandledRejections(), reportRejections);
+      });
+      describe('via runtime configuration', () => {
+        before(() => {
+          sterilizeConfigEnv();
+        });
+        describe('serviceContext', () => {
+          let c: Configuration;
+          const projectId = 'xyz123';
+          const serviceContext = {
+            service: 'evaluation',
+            version: '2.x',
+          };
+          before(() => {
+            c = new Configuration({
+              projectId,
+              serviceContext,
+            });
+          });
+          it('Should assign', () => {
+            deepStrictEqual(c.getServiceContext(), serviceContext);
+          });
+        });
+        describe('api key', () => {
+          let c: Configuration;
+          const projectId = '987abc';
+          const key = '1337-api-key';
+          before(() => {
+            c = new Configuration(
+                {
+                  key,
+                  projectId,
+                },
+                logger);
+          });
+          it('Should assign', () => {
+            assert.strictEqual(c.getKey(), key);
+          });
+        });
+        describe('reportUnhandledRejections', () => {
+          let c: Configuration;
+          const reportRejections = false;
+          before(() => {
+            c = new Configuration({
+              reportUnhandledRejections: reportRejections,
+            });
+          });
+          it('Should assign', () => {
+            assert.strictEqual(
+                c.getReportUnhandledRejections(), reportRejections);
+          });
         });
       });
     });
