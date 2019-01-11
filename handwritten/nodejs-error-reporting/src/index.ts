@@ -55,6 +55,14 @@ export type RestifyRequestHandler = (req: any, res: any, next: Function) => any;
  * @property {Boolean} [ignoreEnvironmentCheck] - flag indicating whether or not
  *  to communicate errors to the Stackdriver service even if NODE_ENV is not set
  *  to production
+ * @property {String} [reportMode] - flag indicating whether or not
+ *  to communicate errors to the Stackdriver service.  Possible values are:
+ *  -> 'production' (default)
+ *     -> Only report errors if NODE_ENV is set to "production".
+ *  -> 'always'
+ *     -> Always report errors regardless of the value of NODE_ENV.
+ *  -> 'never'
+ *     -> Never report errors regardless of the value of NODE_ENV.
  */
 
 /**

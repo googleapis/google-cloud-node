@@ -21,14 +21,18 @@ import {deepStrictEqual} from '../../util';
 
 function verifyReportedMessage(
     config1: ConfigurationOptions, errToReturn: Error|null|undefined,
-    expectedLogs: {error?: string; info?: string;}, done: () => void) {
+    expectedLogs: {error?: string; info?: string; warn?: string;},
+    done: () => void) {
   class ServiceStub {
     authClient: {};
     request: {};
     constructor() {
       this.authClient = {
         async getAccessToken() {
-          throw errToReturn;
+          if (errToReturn) {
+            throw errToReturn;
+          }
+          return 'some-token';
         },
       };
       this.request = () => {};
@@ -41,7 +45,7 @@ function verifyReportedMessage(
                            },
                          }).RequestHandler;
 
-  const logs: {error?: string; info?: string;} = {};
+  const logs: {error?: string; info?: string; warn?: string} = {};
   const logger = {
     error(text: string) {
       if (!logs.error) {
@@ -55,6 +59,12 @@ function verifyReportedMessage(
       }
       logs.info += text;
     },
+    warn(text: string) {
+      if (!logs.warn) {
+        logs.warn = '';
+      }
+      logs.warn += text;
+    }
   } as {} as Logger;
   const config2 = new Configuration(config1, logger);
   // tslint:disable-next-line:no-unused-expression
@@ -65,9 +75,22 @@ function verifyReportedMessage(
   });
 }
 describe('RequestHandler', () => {
+  let nodeEnv: string|undefined;
+  beforeEach(() => {
+    nodeEnv = process.env.NODE_ENV;
+  });
+
+  afterEach(() => {
+    if (nodeEnv === undefined) {
+      delete process.env.NODE_ENV;
+    } else {
+      process.env.NODE_ENV = nodeEnv;
+    }
+  });
+
   it('should not request OAuth2 token if key is provided', done => {
-    const config = {
-      ignoreEnvironmentCheck: true,
+    const config: ConfigurationOptions = {
+      reportMode: 'always',
       key: 'key',
     };
     const message = 'Made OAuth2 Token Request';
@@ -78,6 +101,91 @@ describe('RequestHandler', () => {
         done);
   }).timeout(8000);
 
+
+  it('should not issue a warning if disabled and can communicate with the API',
+     (done) => {
+       process.env.NODE_ENV = 'production';
+       verifyReportedMessage(
+           {reportMode: 'never'},
+           null,  // no access token error
+           {},    // no expected logs
+           done);
+     });
+
+  it('should not issue a warning if disabled and cannot communicate with the API',
+     (done) => {
+       process.env.NODE_ENV = 'dev';
+       verifyReportedMessage(
+           {reportMode: 'never'},
+           null,  // no access token error
+           {},    // no expected logs
+           done);
+     });
+
+  it('should not issue a warning if enabled and can communicate with the API',
+     (done) => {
+       process.env.NODE_ENV = 'production';
+       verifyReportedMessage(
+           {reportMode: 'production'},
+           null,  // no access token error
+           {},    // no expected logs
+           done);
+     });
+
+  it('should not issue a warning with a default config and can communicate with the API',
+     (done) => {
+       process.env.NODE_ENV = 'production';
+       verifyReportedMessage(
+           {},
+           null,  // no access token error
+           {},    // no expected logs
+           done);
+     });
+
+  it('should not issue a warning if it can communicate with the API',
+     (done: () => void) => {
+       const config = {ignoreEnvironmentCheck: true};
+       const warn =
+           'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+           'Use the "reportMode" config option instead.';
+       verifyReportedMessage(config, null, {warn}, () => {
+         verifyReportedMessage(config, undefined, {warn}, done);
+       });
+     });
+
+  it('should issue a warning if enabled and cannot communicate with the API', (done) => {
+    process.env.NODE_ENV = 'dev';
+    verifyReportedMessage(
+        {reportMode: 'production'},
+        null,  // no access token error
+        {
+          warn:
+              'The stackdriver error reporting client is configured to report ' +
+              'errors if and only if the NODE_ENV environment variable is set to ' +
+              '"production". Errors will not be reported.  To have errors always ' +
+              'reported, regardless of the value of NODE_ENV, set the reportMode ' +
+              'configuration option to "always".'
+        },
+        done);
+  });
+
+  it('should issue a warning with a default config and cannot communicate with the API',
+     (done) => {
+       process.env.NODE_ENV = 'dev';
+       verifyReportedMessage(
+           {},
+           null,  // no access token error
+           {
+             warn:
+                 'The stackdriver error reporting client is configured to report ' +
+                 'errors if and only if the NODE_ENV environment variable is set to ' +
+                 '"production". Errors will not be reported.  To have errors always ' +
+                 'reported, regardless of the value of NODE_ENV, set the reportMode ' +
+                 'configuration option to "always".'
+           },
+           done);
+     });
+
   it('should issue a warning if it cannot communicate with the API',
      (done: () => void) => {
        const config = {ignoreEnvironmentCheck: true};
@@ -87,15 +195,10 @@ describe('RequestHandler', () => {
              error: 'Unable to find credential information on instance. This ' +
                  'library will be unable to communicate with the Stackdriver API to ' +
                  'save errors.  Message: ' + message,
+             warn:
+                 'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+                 'Use the "reportMode" config option instead.'
            },
            done);
-     });
-
-  it('should not issue a warning if it can communicate with the API',
-     (done: () => void) => {
-       const config = {ignoreEnvironmentCheck: true};
-       verifyReportedMessage(config, null, {}, () => {
-         verifyReportedMessage(config, undefined, {}, done);
-       });
      });
 });
