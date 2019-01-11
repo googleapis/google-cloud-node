@@ -40,7 +40,7 @@
   });
 
   // Your Google Cloud Platform project ID
-  const projectId = process.env.GCLOUD_PROJECT;
+  const projectId = await client.getProjectId();
   const projectResource = client.projectPath(projectId);
 
   // var dumpFilePath = 'Dump file path, e.g.: gs://<my_bucket>/<my_asset_file>'
@@ -99,7 +99,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 [explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
-[client-docs]: 
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/asset/latest/
 [product-docs]: https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
