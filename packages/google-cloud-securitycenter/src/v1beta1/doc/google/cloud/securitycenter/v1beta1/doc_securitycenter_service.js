@@ -741,8 +741,8 @@ const RunAssetDiscoveryRequest = {
  *   This object should have the same structure as [Finding]{@link google.cloud.securitycenter.v1beta1.Finding}
  *
  * @property {Object} updateMask
- *   The FieldMask to use when updating the finding resource. This field is
- *   ignored if the finding does not already exist and the finding is created.
+ *   The FieldMask to use when updating the finding resource. This field should
+ *   not be specified when creating a finding.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *

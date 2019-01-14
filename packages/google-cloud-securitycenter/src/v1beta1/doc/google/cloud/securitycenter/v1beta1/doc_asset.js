@@ -19,9 +19,9 @@
  * Cloud Security Command Center's (Cloud SCC) representation of a Google Cloud
  * Platform (GCP) resource.
  *
- * The Asset is a Cloud SCC resource that captures information about a single GCP
- * resource. All modifications to an Asset are only within the context of Cloud
- * SCC and don't affect the referenced GCP resource.
+ * The Asset is a Cloud SCC resource that captures information about a single
+ * GCP resource. All modifications to an Asset are only within the context of
+ * Cloud SCC and don't affect the referenced GCP resource.
  *
  * @property {string} name
  *   The relative resource name of this asset. See:

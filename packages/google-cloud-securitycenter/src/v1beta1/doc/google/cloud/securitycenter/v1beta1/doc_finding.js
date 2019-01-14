@@ -48,7 +48,7 @@
  *   The number should be among the values of [State]{@link google.cloud.securitycenter.v1beta1.State}
  *
  * @property {string} category
- *   The additional taxonomy group within findings from a give source.
+ *   The additional taxonomy group within findings from a given source.
  *   This field is immutable after creation time.
  *   Example: "XSS_FLASH_INJECTION"
  *
@@ -59,7 +59,9 @@
  *
  * @property {Object.<string, Object>} sourceProperties
  *   Source specific properties. These properties are managed by the source
- *   that writes the finding.
+ *   that writes the finding. The key names in the source_properties map must be
+ *   between 1 and 255 characters, and must start with a letter and contain
+ *   alphanumeric characters or underscores only.
  *
  * @property {Object} securityMarks
  *   Output only. User specified security marks. These marks are entirely
