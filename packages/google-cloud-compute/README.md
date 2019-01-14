@@ -97,7 +97,7 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Create Virtual Machine with Apache and Custom Homepage | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/startup-script/index.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startup-script/index.js,samples/README.md) |
+| Create Virtual Machine with Apache and Custom Homepage | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/startupScript.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startupScript.js,samples/README.md) |
 | List Virtual Machines | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md) |
 
 The [Compute Engine Node.js Client API Reference][client-docs] documentation

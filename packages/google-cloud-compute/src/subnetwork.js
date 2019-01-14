@@ -135,8 +135,8 @@ class Subnetwork extends common.ServiceObject {
       /**
        * Get the metadata of this subnetwork.
        *
-       * @see [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetwork}
-       * @see [Subnetwork: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetwork/get}
+       * @see [Subnetwork Resource]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
+       * @see [Subnetwork: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks/get}
        *
        * @method Subnetwork#getMetadata
        * @param {function=} callback - The callback function.

@@ -120,7 +120,7 @@ class Image extends common.ServiceObject {
       /**
        * Get the image's metadata.
        *
-       * @see [Images: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/image/get}
+       * @see [Images: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/images/get}
        * @see [Image Resource]{@link https://cloud.google.com/compute/docs/reference/v1/images}
        *
        * @method Image#getMetadata

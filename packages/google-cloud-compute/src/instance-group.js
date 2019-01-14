@@ -28,7 +28,7 @@ const {teenyRequest} = require('teeny-request');
  * don't have to individually control each instance in your project.
  *
  * @see [Creating Groups of Instances]{@link https://cloud.google.com/compute/docs/instance-groups}
- * @see [Unmanaged Instance Groups]{@link https://cloud.google.com/compute/docs/instance-groups/unmanaged-groups}
+ * @see [Unmanaged Instance Groups]{@link https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-unmanaged-instances}
  *
  * @class
  * @param {Zone} zone
