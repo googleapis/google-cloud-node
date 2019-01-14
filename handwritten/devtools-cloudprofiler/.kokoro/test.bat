@@ -12,16 +12,7 @@
 @rem See the License for the specific language governing permissions and
 @rem limitations under the License.
 
-@echo "Starting Windows build"
-
-cd /d %~dp0
+cd /d %~dp0	
 cd ..
 
-call npm install -g npm@latest || goto :error
-call npm install || goto :error
-call npm run test || goto :error
-
-goto :EOF
-
-:error
-exit /b 1
+"C:\Program Files\Git\bin\bash.exe" .kokoro/test.sh --windows

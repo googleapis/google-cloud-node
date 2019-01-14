@@ -14,32 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -xeo pipefail
+set -eo pipefail
 
 export NPM_CONFIG_PREFIX=/home/node/.npm-global
 
+# Start the releasetool reporter
+python3 -m pip install gcp-releasetool
+python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
+
 cd $(dirname $0)/..
 
+NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google_cloud_npm_token)
+echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+
 npm install
-npm test
-./node_modules/nyc/bin/nyc.js report
-
-
-WINDOWS="false"
-
- case $1 in
-  --windows)
-    WINDOWS="true"
-    ;;
-  "")
-    ;;
-  *)
-    echo "Unknown parameter: $1"
-    exit 1
-    ;;
-  esac
-
-if [ "$WINDOWS" -ne "true" ]; then
-  bash $KOKORO_GFILE_DIR/codecov.sh  
-fi
-
+npm publish --access=public
