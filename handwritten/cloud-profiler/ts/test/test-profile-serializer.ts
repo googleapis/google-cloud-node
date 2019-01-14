@@ -24,7 +24,7 @@ import {serializeHeapProfile, serializeTimeProfile} from '../src/profilers/profi
 import {create as createSourceMapper, SourceMapper} from '../src/sourcemapper/sourcemapper';
 import {TimeProfile, TimeProfileNode} from '../src/v8-types';
 
-import {anonymousFunctionHeapProfile, anonymousFunctionTimeProfile, heapProfile, heapSourceProfile, mapBaz, mapFoo, timeProfile, timeSourceProfile, v8AnonymousFunctionHeapProfile, v8AnonymousFunctionTimeProfile, v8HeapGeneratedProfile, v8HeapProfile, v8TimeGeneratedProfile, v8TimeProfile,} from './profiles-for-tests';
+import {anonymousFunctionHeapProfile, anonymousFunctionTimeProfile, heapProfile, heapSourceProfile, mapDirPath, timeProfile, timeSourceProfile, v8AnonymousFunctionHeapProfile, v8AnonymousFunctionTimeProfile, v8HeapGeneratedProfile, v8HeapProfile, v8TimeGeneratedProfile, v8TimeProfile,} from './profiles-for-tests';
 
 const assert = require('assert');
 const tmpFile = pify(tmp.file);
@@ -70,12 +70,7 @@ describe('profile-serializer', () => {
   describe('source map specified', () => {
     let sourceMapper: SourceMapper;
     before(async () => {
-      const mapDir: string = await tmpDir();
-
-      await writeFile(path.join(mapDir, 'foo.js.map'), mapFoo.toString());
-      await writeFile(path.join(mapDir, 'baz.js.map'), mapBaz.toString());
-
-      const sourceMapFiles = [mapDir];
+      const sourceMapFiles = [mapDirPath];
       sourceMapper = await createSourceMapper(sourceMapFiles);
     });
 
