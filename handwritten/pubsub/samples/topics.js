@@ -208,18 +208,23 @@ async function publishWithRetrySettings(projectId, topicName, data) {
   // Retry settings control how the publisher handles retryable failures
   // Default values are shown
   const retrySettings = {
-    retryCodes: {
-      idempotent: ['UNAVAILABLE', 'DEADLINE_EXCEEDED'],
-      non_idempotent: [],
-    },
+    retryCodes: [
+      'ABORTED',
+      'CANCELLED',
+      'DEADLINE_EXCEEDED',
+      'INTERNAL',
+      'RESOURCE_EXHAUSTED',
+      'UNAVAILABLE',
+      'UNKNOWN',
+    ],
     backoffSettings: {
       initialRetryDelayMillis: 100,
-      retryDelayMultiplier: 1.2,
-      maxRetryDelayMillis: 1000,
-      initialRpcTimeoutMillis: 2000,
-      rpcTimeoutMultiplier: 1.5,
+      retryDelayMultiplier: 1.3,
+      maxRetryDelayMillis: 60000,
+      initialRpcTimeoutMillis: 12000,
+      rpcTimeoutMultiplier: 1.0,
       maxRpcTimeoutMillis: 30000,
-      totalTimeoutMillis: 45000,
+      totalTimeoutMillis: 600000,
     },
   };
 
