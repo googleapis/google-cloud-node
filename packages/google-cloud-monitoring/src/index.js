@@ -28,7 +28,7 @@
  * @namespace google.rpc
  */
 /**
- * @namespace google.type
+ * @namespace google.api
  */
 
 'use strict';

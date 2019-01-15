@@ -44,7 +44,7 @@
  *   The sum of squared deviations from the mean of the values in the
  *   population. For values x_i this is:
  *
- *       Sum[i=1..n](https://cloud.google.com(x_i - mean)^2)
+ *       Sum\[i=1..n](x_1 - mean)^2
  *
  *   Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition
  *   describes Welford's method for accumulating this sum in one pass.
