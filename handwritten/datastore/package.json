@@ -10,11 +10,8 @@
   "repository": "googleapis/nodejs-datastore",
   "main": "./build/src/index.js",
   "files": [
-    "protos",
-    "src",
-    "AUTHORS",
-    "CONTRIBUTORS",
-    "LICENSE"
+    "build/protos",
+    "build/src"
   ],
   "keywords": [
     "google apis client",
