@@ -27,6 +27,18 @@
 /**
  * @namespace google.cloud.dialogflow.v2beta1
  */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
+/**
+ * @namespace google.longrunning
+ */
 
 'use strict';
 
