@@ -105,7 +105,7 @@ Logging: request bundling. Any application logs emitted on behalf of a specific
 request will be shown nested inside the request log as you see in this
 screenshot:
 
-![Request Bundling Example](doc/images/request-bundling.png)
+![Request Bundling Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-bunyan/master/doc/images/request-bundling.png)
 
 The middleware adds a `bunyan`-style log function to the `request` object. You
 can use this wherever you have access to the `request` object (`req` in the
@@ -176,7 +176,7 @@ You may also want to see the [@google-cloud/error-reporting][@google-cloud/error
 
 To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
 
-![Request Log Example](doc/images/request-log.png)
+![Request Log Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-bunyan/master/doc/images/request-log.png)
 
 ```js
 logger.info({
@@ -196,7 +196,7 @@ The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-req
 
 If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Stackdriver Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Stackdriver Trace Viewer. Example:
 
-![Logs in Trace Example](doc/images/bunyan-logs-in-trace.png)
+![Logs in Trace Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-bunyan/master/doc/images/bunyan-logs-in-trace.png)
 
 If you wish to set the Stackdriver LogEntry `trace` property with a custom value, then write a Bunyan log entry property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
 
