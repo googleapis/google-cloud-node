@@ -36,6 +36,9 @@
 /**
  * @namespace google.type
  */
+/**
+ * @namespace google.longrunning
+ */
 
 'use strict';
 
