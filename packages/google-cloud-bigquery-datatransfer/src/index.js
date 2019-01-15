@@ -19,10 +19,13 @@
  * @namespace google.cloud
  */
 /**
- * @namespace google.cloud.bigquery-data-transfer
+ * @namespace google.cloud.bigquery.datatransfer.v1
  */
 /**
- * @namespace google.cloud.bigquery-data-transfer.v1
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
  */
 
 'use strict';
