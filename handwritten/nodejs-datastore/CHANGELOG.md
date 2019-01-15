@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## v3.0.1
+
+01-15-2019 13:20 PST
+
+### Bug fixes
+- fix: ship the build directory ([#300](https://github.com/googleapis/nodejs-datastore/pull/300))
+
+### Internal / Testing Changes
+- build: check broken links in generated docs ([#292](https://github.com/googleapis/nodejs-datastore/pull/292))
+
 ## v3.0.0
 
 01-14-2019 20:31 PST
