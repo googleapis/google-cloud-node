@@ -698,13 +698,13 @@ const PublicKeyFormat = {
   /**
    * An RSA public key encoded in base64, and wrapped by
    * `-----BEGIN PUBLIC KEY-----` and `-----END PUBLIC KEY-----`. This can be
-   * used to verify `RS256` signatures in JWT tokens ([RFC7518](https://cloud.google.com
+   * used to verify `RS256` signatures in JWT tokens ([RFC7518](
    * https://www.ietf.org/rfc/rfc7518.txt)).
    */
   RSA_PEM: 3,
 
   /**
-   * As RSA_PEM, but wrapped in an X.509v3 certificate ([RFC5280](https://cloud.google.com
+   * As RSA_PEM, but wrapped in an X.509v3 certificate ([RFC5280](
    * https://www.ietf.org/rfc/rfc5280.txt)), encoded in base64, and wrapped by
    * `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`.
    */
@@ -720,7 +720,7 @@ const PublicKeyFormat = {
   ES256_PEM: 2,
 
   /**
-   * As ES256_PEM, but wrapped in an X.509v3 certificate ([RFC5280](https://cloud.google.com
+   * As ES256_PEM, but wrapped in an X.509v3 certificate ([RFC5280](
    * https://www.ietf.org/rfc/rfc5280.txt)), encoded in base64, and wrapped by
    * `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----`.
    */
