@@ -132,6 +132,7 @@ class Project extends ServiceObject {
       /**
        * Check if the project exists.
        *
+       * @method Project#exists
        * @param {function} callback The callback function.
        * @param {?error} callback.err An error returned while making this
        *     request.
