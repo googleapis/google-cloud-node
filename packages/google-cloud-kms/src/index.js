@@ -24,6 +24,9 @@
 /**
  * @namespace google.cloud.kms.v1
  */
+/**
+ * @namespace google.protobuf
+ */
 
 'use strict';
 

@@ -68,7 +68,7 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| KMS | [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/kms.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/kms.js,samples/README.md) |
+| KMS | [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 The [Cloud KMS Node.js Client API Reference][client-docs] documentation
 also contains samples.
