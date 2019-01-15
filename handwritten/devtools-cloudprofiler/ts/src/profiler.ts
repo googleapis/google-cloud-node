@@ -76,11 +76,15 @@ export interface RequestProfile {
 }
 
 /**
- * @return the message of the response body, if that field exists. Otherwise,
- * returns the response status message.
+ * @return the error's message, if present. Otherwise returns the
+ * message of the response body, if that field exists, or the response status
+ * message.
  */
-function getResponseErrorMessage(response: http.IncomingMessage): string|
-    undefined {
+function getResponseErrorMessage(
+    response: http.IncomingMessage, err: Error|null): string|undefined {
+  if (err && err.message) {
+    return err.message;
+  }
   // tslint:disable-next-line: no-any
   const body = (response as any).body;
   if (body && body.message && typeof body.message === 'string') {
@@ -93,14 +97,14 @@ function getResponseErrorMessage(response: http.IncomingMessage): string|
  * @return number indicated by backoff if the response indicates a backoff and
  * that backoff is greater than 0. Otherwise returns undefined.
  */
-function getServerResponseBackoff(response: http.IncomingMessage): number|
-    undefined {
+function getServerResponseBackoff(
+    response: http.IncomingMessage, err: Error|null): number|undefined {
   // The response currently does not have field containing the server-specified
   // backoff. As a workaround, response body's message is parsed to get the
   // backoff.
   // TODO (issue #250): Remove this workaround and get the retry delay from
   // body.error.details.
-  const message = getResponseErrorMessage(response);
+  const message = getResponseErrorMessage(response, err);
   if (message) {
     return parseBackoffDuration(message);
   }
@@ -223,8 +227,8 @@ function responseToProfileOrError(
     response?: http.IncomingMessage): RequestProfile {
   // response.statusCode is guaranteed to exist on client requests.
   if (response && isErrorResponseStatusCode(response.statusCode!)) {
-    const message = getResponseErrorMessage(response);
-    const delayMillis = getServerResponseBackoff(response);
+    const message = getResponseErrorMessage(response, err);
+    const delayMillis = getServerResponseBackoff(response, err);
     if (delayMillis) {
       throw new BackoffResponseError(message, delayMillis);
     }
@@ -445,7 +449,7 @@ export class Profiler extends ServiceObject {
     };
 
     try {
-      const res = await this.request(options);
+      const [, res] = await this.request(options);
       if (isErrorResponseStatusCode(res.statusCode)) {
         let message: number|string = res.statusCode;
         if (res.statusMessage) {
