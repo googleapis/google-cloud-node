@@ -19,10 +19,13 @@
  * @namespace google.cloud
  */
 /**
- * @namespace google.cloud.container
+ * @namespace google.container
  */
 /**
- * @namespace google.cloud.container.v1
+ * @namespace google.container.v1
+ */
+/**
+ * @namespace google.protobuf
  */
 
 'use strict';

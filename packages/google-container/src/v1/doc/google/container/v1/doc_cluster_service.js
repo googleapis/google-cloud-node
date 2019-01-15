@@ -543,7 +543,7 @@ const IPAllocationPolicy = {
  *
  * @property {number} initialNodeCount
  *   The number of nodes to create in this cluster. You must ensure that your
- *   Compute Engine <a href="/compute/docs/resource-quotas">resource quota</a>
+ *   Compute Engine [resource quota](https://cloud.google.com/compute/docs/resource-quotas)
  *   is sufficient for this number of instances. You must also have available
  *   firewall and routes quota.
  *   For requests, this field should only be used in lieu of a
@@ -707,7 +707,7 @@ const IPAllocationPolicy = {
  *
  * @property {string} currentNodeVersion
  *   [Output only] Deprecated, use
- *   [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool)
+ *   [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePools#resource-nodepool)
  *   instead. The current version of the node software components. If they are
  *   currently at multiple versions because they're in the process of being
  *   upgraded, this reflects the minimum version of all nodes.
@@ -1916,7 +1916,7 @@ const GetNodePoolRequest = {
  *
  * @property {number} initialNodeCount
  *   The initial node count for the pool. You must ensure that your
- *   Compute Engine <a href="/compute/docs/resource-quotas">resource quota</a>
+ *   Compute Engine [resource quota](https://cloud.google.com/compute/docs/resource-quotas)
  *   is sufficient for this number of instances. You must also have available
  *   firewall and routes quota.
  *
