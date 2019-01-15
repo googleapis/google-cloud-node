@@ -8,7 +8,7 @@
 [![npm version](https://img.shields.io/npm/v/@google-cloud/security-center.svg)](https://www.npmjs.org/package/@google-cloud/security-center)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-security-center/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-security-center)
 
-[Cloud Security Command Center](https://cloud.google.com/security-center/docs/) helps security teams gather data, identify threats, and act on them before they result in business damage or loss. It offers deep insight into application and data risk so that you can quickly mitigate threats to your cloud resources and evaluate overall health. With Cloud Security Command Center, you can view and monitor an inventory of your cloud assets, scan storage systems for sensitive data, detect common web vulnerabilities, and review access rights to your critical resources, all from a single, centralized dashboard.
+[Cloud Security Command Center](https://cloud.google.com/security-command-center/docs/) helps security teams gather data, identify threats, and act on them before they result in business damage or loss. It offers deep insight into application and data risk so that you can quickly mitigate threats to your cloud resources and evaluate overall health. With Cloud Security Command Center, you can view and monitor an inventory of your cloud assets, scan storage systems for sensitive data, detect common web vulnerabilities, and review access rights to your critical resources, all from a single, centralized dashboard.
 
 
 * [Using the client library](#using-the-client-library)
@@ -33,7 +33,7 @@
 
 ```javascript
 async function quickstart(
-  organization = 'YOUR_ORGANIZATION', // Your GCP organization
+  organization = 'YOUR_ORGANIZATION' // Your GCP organization
 ) {
   const sc = require('@google-cloud/security-center');
 
@@ -93,7 +93,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/security-center/latest/
-[product-docs]: https://cloud.google.com/security-center/docs/
+[product-docs]: https://cloud.google.com/security-command-center/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
