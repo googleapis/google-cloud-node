@@ -61,7 +61,51 @@ it('should set a buckets default KMS key', async () => {
   );
 });
 
-it('should delete a bucket', async () => {
+it(`should enable a bucket's Bucket Policy Only`, async () => {
+  const output = await exec(`${cmd} enable-bucket-policy-only ${bucketName}`);
+  assert.match(
+    output,
+    new RegExp(`Bucket Policy Only was enabled for ${bucketName}.`)
+  );
+
+  const metadata = await bucket.getMetadata();
+  assert.strictEqual(
+    metadata[0].iamConfiguration.bucketPolicyOnly.enabled,
+    true
+  );
+});
+
+it(`should get a bucket's Bucket Policy Only metadata`, async () => {
+  const output = await exec(`${cmd} get-bucket-policy-only ${bucketName}`);
+
+  assert.match(
+    output,
+    new RegExp(`Bucket Policy Only is enabled for ${bucketName}.`)
+  );
+
+  const [metadata] = await bucket.getMetadata();
+  assert.ok(metadata.iamConfiguration.bucketPolicyOnly.enabled);
+  assert.strictEqual(
+    metadata.iamConfiguration.bucketPolicyOnly.lockedTime !== null,
+    true
+  );
+});
+
+it(`should disable a bucket's Bucket Policy Only`, async () => {
+  const output = await exec(`${cmd} disable-bucket-policy-only ${bucketName}`);
+  assert.match(
+    output,
+    new RegExp(`Bucket Policy Only was disabled for ${bucketName}.`)
+  );
+
+  const metadata = await bucket.getMetadata();
+  assert.strictEqual(
+    metadata[0].iamConfiguration.bucketPolicyOnly.enabled,
+    false
+  );
+});
+
+it(`should delete a bucket`, async () => {
   const output = await exec(`${cmd} delete ${bucketName}`);
   assert.match(output, new RegExp(`Bucket ${bucketName} deleted.`));
   const [exists] = await bucket.exists();
