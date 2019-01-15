@@ -24,6 +24,12 @@
 /**
  * @namespace google.cloud.oslogin.v1beta
  */
+/**
+ * @namespace google.cloud.oslogin.common
+ */
+/**
+ * @namespace google.protobuf
+ */
 
 'use strict';
 
