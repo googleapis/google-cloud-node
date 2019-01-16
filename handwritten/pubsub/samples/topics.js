@@ -96,10 +96,7 @@ async function publishMessage(topicName, data) {
   // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
 
-  const messageId = await pubsub
-    .topic(topicName)
-    .publisher()
-    .publish(dataBuffer);
+  const messageId = await pubsub.topic(topicName).publish(dataBuffer);
   console.log(`Message ${messageId} published.`);
 
   // [END pubsub_publish]
@@ -130,7 +127,6 @@ async function publishMessageWithCustomAttributes(topicName, data) {
 
   const messageId = await pubsub
     .topic(topicName)
-    .publisher()
     .publish(dataBuffer, customAttributes);
   console.log(`Message ${messageId} published.`);
 
@@ -162,8 +158,7 @@ async function publishBatchedMessages(
   const dataBuffer = Buffer.from(data);
 
   const [messageId] = await pubsub
-    .topic(topicName)
-    .publisher({
+    .topic(topicName, {
       batching: {
         maxMessages: maxMessages,
         maxMilliseconds: maxWaitTime,
@@ -269,7 +264,6 @@ async function publishOrderedMessage(topicName, data) {
   // Publishes the message
   const messageId = await pubsub
     .topic(topicName)
-    .publisher()
     .publish(dataBuffer, attributes);
   // Update the counter value
   setPublishCounterValue(parseInt(attributes.counterId, 10) + 1);

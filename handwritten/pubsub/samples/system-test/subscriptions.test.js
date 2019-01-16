@@ -109,17 +109,13 @@ describe('subscriptions', () => {
   it('should listen for messages', async () => {
     const messageIds = await pubsub
       .topic(topicNameOne)
-      .publisher()
       .publish(Buffer.from(`Hello, world!`));
     const output = await exec(`${cmd} listen-messages ${subscriptionNameOne}`);
     assert.match(output, new RegExp(`Received message ${messageIds}:`));
   });
 
   it('should listen for messages synchronously', async () => {
-    pubsub
-      .topic(topicNameOne)
-      .publisher()
-      .publish(Buffer.from(`Hello, world!`));
+    pubsub.topic(topicNameOne).publish(Buffer.from(`Hello, world!`));
     const output = await exec(
       `${cmd} sync-pull ${projectId} ${subscriptionNameOne}`
     );
@@ -138,13 +134,11 @@ describe('subscriptions', () => {
     const expected = `Hello, world!`;
     const expectedBuffer = Buffer.from(expected);
     const publishedMessageIds = [];
-    const publisherTwo = pubsub.topic(topicNameTwo).publisher();
+    const topicTwo = pubsub.topic(topicNameTwo);
 
-    await pubsub
-      .topic(topicNameTwo)
-      .subscription(subscriptionNameThree)
-      .get({autoCreate: true});
-    let result = await publisherTwo.publish(expectedBuffer, {counterId: '3'});
+    await topicTwo.subscription(subscriptionNameThree).get({autoCreate: true});
+
+    let result = await topicTwo.publish(expectedBuffer, {counterId: '3'});
     publishedMessageIds.push(result);
     await subscriptions.listenForOrderedMessages(
       subscriptionNameThree,
@@ -152,7 +146,7 @@ describe('subscriptions', () => {
     );
     assert.strictEqual(spy.calls.length, 0);
 
-    result = await publisherTwo.publish(expectedBuffer, {counterId: '1'});
+    result = await topicTwo.publish(expectedBuffer, {counterId: '1'});
     publishedMessageIds.push(result);
     await subscriptions.listenForOrderedMessages(
       subscriptionNameThree,
@@ -166,8 +160,8 @@ describe('subscriptions', () => {
       {counterId: '1'},
     ]);
 
-    result = await publisherTwo.publish(expectedBuffer, {counterId: '1'});
-    result = await publisherTwo.publish(expectedBuffer, {counterId: '2'});
+    result = await topicTwo.publish(expectedBuffer, {counterId: '1'});
+    result = await topicTwo.publish(expectedBuffer, {counterId: '2'});
     publishedMessageIds.push(result);
     await subscriptions.listenForOrderedMessages(
       subscriptionNameThree,
