@@ -16,6 +16,7 @@
 
 # nodejs-storage's system tests require additional project and
 # system test key
+export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/storage-key.json
 export GCN_STORAGE_2ND_PROJECT_ID=gcloud-node-whitelist-ci-tests
 export GCN_STORAGE_2ND_PROJECT_KEY=${KOKORO_GFILE_DIR}/no-whitelist-key.json
 

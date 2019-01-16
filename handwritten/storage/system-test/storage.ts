@@ -25,7 +25,7 @@ import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
 import {util, ApiError, InstanceResponseCallback, BodyResponseCallback} from '@google-cloud/common';
-import {Storage, Bucket, File, AccessControlObject, Notification, GetNotificationOptions, DeleteBucketCallback, CreateNotificationOptions, BucketExistsOptions, BucketExistsCallback, GetBucketOptions, GetBucketCallback, GetNotificationsCallback, MakeBucketPrivateOptions, MakeBucketPrivateCallback, SetBucketMetadataOptions, SetBucketMetadataCallback, DeleteFileCallback, SaveCallback, DownloadOptions, DownloadCallback, FileExistsOptions, FileExistsCallback, CreateReadStreamOptions, CreateResumableUploadOptions, GetFileOptions, GetFileCallback, SetStorageClassOptions, SetStorageClassCallback, UploadOptions, UploadCallback, CopyOptions, CopyCallback, GetFileMetadataOptions, GetFileMetadataCallback, MakeFilePrivateOptions, MakeFilePrivateCallback, SetFileMetadataOptions, SetFileMetadataCallback, AddAclOptions, AddAclCallback, UpdateAclCallback, UpdateAclOptions, GetAclOptions, GetAclCallback, RemoveAclOptions, RemoveAclCallback, GetPolicyOptions, GetPolicyCallback, SetPolicyCallback, TestIamPermissionsOptions, TestIamPermissionsCallback, GetNotificationCallback, GetNotificationMetadataOptions, GetNotificationMetadataCallback, DeleteNotificationOptions, DeleteNotificationCallback} from '../src';
+import {Storage, Bucket, File, AccessControlObject, Notification, GetNotificationOptions, DeleteBucketCallback, CreateNotificationOptions, BucketExistsOptions, BucketExistsCallback, GetBucketOptions, GetBucketCallback, GetNotificationsCallback, MakeBucketPrivateOptions, MakeBucketPrivateCallback, SetBucketMetadataOptions, SetBucketMetadataCallback, DeleteFileCallback, SaveCallback, DownloadOptions, DownloadCallback, FileExistsOptions, FileExistsCallback, CreateReadStreamOptions, CreateResumableUploadOptions, GetFileOptions, GetFileCallback, SetStorageClassOptions, SetStorageClassCallback, UploadOptions, UploadCallback, CopyOptions, CopyCallback, GetFileMetadataOptions, GetFileMetadataCallback, MakeFilePrivateOptions, MakeFilePrivateCallback, SetFileMetadataOptions, SetFileMetadataCallback, AddAclOptions, AddAclCallback, UpdateAclCallback, UpdateAclOptions, GetAclOptions, GetAclCallback, RemoveAclOptions, RemoveAclCallback, GetPolicyOptions, GetPolicyCallback, SetPolicyCallback, TestIamPermissionsOptions, TestIamPermissionsCallback, GetNotificationCallback, GetNotificationMetadataOptions, GetNotificationMetadataCallback, DeleteNotificationOptions, DeleteNotificationCallback, Iam} from '../src';
 import * as nock from 'nock';
 const {PubSub} = require('@google-cloud/pubsub');
 
@@ -669,6 +669,98 @@ describe('storage', () => {
 
           done();
         });
+      });
+    });
+  });
+
+  describe('bucket policy only', () => {
+    let bucket: Bucket;
+
+    const customAcl = {
+      entity: USER_ACCOUNT,
+      role: storage.acl.OWNER_ROLE,
+    };
+
+    const createBucket = () => {
+      bucket = storage.bucket(generateName());
+      return bucket.create();
+    };
+
+    const setBucketPolicyOnly = (bucket: Bucket, enabled: boolean) =>
+        bucket.setMetadata({
+          iamConfiguration: {
+            bucketPolicyOnly: {
+              enabled,
+            },
+          },
+        });
+
+    describe('files', () => {
+      before(createBucket);
+
+      it('can be written to the bucket by project owner w/o configuration',
+         async () => {
+           await setBucketPolicyOnly(bucket, true);
+           const file = bucket.file('file');
+           return assert.doesNotReject(() => file.save('data'));
+         });
+    });
+
+    describe('disables file ACL', () => {
+      let file: File;
+
+      const validateBucketPolicyOnlyEnabledError = (err: ApiError) => {
+        assert(err.message.match(/Bucket Policy Only is enabled/));
+        assert.strictEqual(err.code, 400);
+        return true;
+      };
+
+      before(async () => {
+        await createBucket();
+        await setBucketPolicyOnly(bucket, true);
+
+        file = bucket.file('file');
+        await file.save('data');
+      });
+
+      it('should fail to get file ACL', () => {
+        return assert.rejects(
+            () => file.acl.get(), validateBucketPolicyOnlyEnabledError);
+      });
+
+      it('should fail to update file ACL', () => {
+        return assert.rejects(
+            () => file.acl.update(customAcl),
+            validateBucketPolicyOnlyEnabledError);
+      });
+    });
+
+    describe('preserves bucket/file ACL over bucket policy only on/off', () => {
+      beforeEach(createBucket);
+
+      it('should preserve default bucket ACL', async () => {
+        await bucket.acl.default.update(customAcl);
+        const [aclBefore] = await bucket.acl.default.get();
+
+        await setBucketPolicyOnly(bucket, true);
+        await setBucketPolicyOnly(bucket, false);
+
+        const [aclAfter] = await bucket.acl.default.get();
+        assert.deepStrictEqual(aclAfter, aclBefore);
+      });
+
+      it('should preserve file ACL', async () => {
+        const file = bucket.file('file');
+        await file.save('data');
+
+        await file.acl.update(customAcl);
+        const [aclBefore] = await file.acl.get();
+
+        await setBucketPolicyOnly(bucket, true);
+        await setBucketPolicyOnly(bucket, false);
+
+        const [aclAfter] = await file.acl.get();
+        assert.deepStrictEqual(aclAfter, aclBefore);
       });
     });
   });
