@@ -102,7 +102,7 @@ const Asset = {
  * @property {string} discoveryDocumentUri
  *   The URL of the discovery document containing the resource's JSON schema.
  *   For example:
- *   `"https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"`.
+ *   [`"https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"`](https://www.googleapis.com/discovery/v1/apis/compute/v1/rest).
  *   It will be left unspecified for resources without a discovery-based API,
  *   such as Cloud Bigtable.
  *
