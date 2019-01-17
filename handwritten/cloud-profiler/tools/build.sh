@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copyright 2018 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,5 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Location of the build script in this repository.
-build_file: "cloud-profiler-nodejs/tools/linux_build_and_test.sh"
+# Fail on any error.
+set -e pipefail
+
+# Display commands
+set -x
+
+cd $(dirname $0)/..
+BASE_DIR=$(pwd)
+
+ARTIFACTS_OUT="${BASE_DIR}/artifacts"
+mkdir -p "$ARTIFACTS_OUT"
+
+npm install
+
+for version in 6.0.0 8.0.0 10.0.0 11.0.0
+do
+  ./node_modules/.bin/node-pre-gyp configure rebuild package \
+      --target=$version --target_arch="x64"
+  cp -r build/stage/* "${ARTIFACTS_OUT}/"
+  rm -rf build
+done
