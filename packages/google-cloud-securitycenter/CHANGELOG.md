@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## v0.1.2
+
+01-16-2019 16:03 PST
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.23.0 ([#34](https://github.com/googleapis/nodejs-security-center/pull/34))
+
+### Documentation
+- docs: update jsdoc comments ([#36](https://github.com/googleapis/nodejs-security-center/pull/36))
+- build: check broken links in generated docs ([#25](https://github.com/googleapis/nodejs-security-center/pull/25))
+- docs: various doc changes in protos and generated source ([#31](https://github.com/googleapis/nodejs-security-center/pull/31))
+- fix(docs): broken link to API ref docs ([#32](https://github.com/googleapis/nodejs-security-center/pull/32))
+- docs: update the comments in the protos ([#30](https://github.com/googleapis/nodejs-security-center/pull/30))
+- samples: add quickstart ([#33](https://github.com/googleapis/nodejs-security-center/pull/33))
+
 ## v0.1.1
 
 01-02-2019 14:54 PST
