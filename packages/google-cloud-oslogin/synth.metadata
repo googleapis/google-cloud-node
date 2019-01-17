@@ -1,26 +1,38 @@
 {
+  "updateTime": "2019-01-17T12:48:15.193053Z",
   "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.16.6",
+        "dockerImage": "googleapis/artman@sha256:12722f2ca3fbc3b53cc6aa5f0e569d7d221b46bd876a2136497089dec5e3634e"
+      }
+    },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "5a57f0c13a358b2b15452bf2d67453774a5f6d4f",
-        "internalRef": "221837528"
+        "sha": "0ac60e21a1aa86c07c1836865b35308ba8178b05",
+        "internalRef": "229626798"
       }
     },
     {
-      "git": {
-        "name": "googleapis-private",
-        "remote": "https://github.com/googleapis/googleapis-private.git",
-        "sha": "6aa8e1a447bb8d0367150356a28cb4d3f2332641",
-        "internalRef": "221340946"
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.1.16"
       }
-    },
+    }
+  ],
+  "destinations": [
     {
-      "generator": {
-        "name": "artman",
-        "version": "0.16.0",
-        "dockerImage": "googleapis/artman@sha256:90f9d15e9bad675aeecd586725bce48f5667ffe7d5fc4d1e96d51ff34304815b"
+      "client": {
+        "source": "googleapis",
+        "apiName": "os-login",
+        "apiVersion": "v1beta",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/oslogin/artman_oslogin_v1beta.yaml"
       }
     }
   ]
