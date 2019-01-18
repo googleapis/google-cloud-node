@@ -20,7 +20,7 @@ set -e pipefail
 set -x
 
 case $KOKORO_JOB_TYPE in
-  CONTINUOUS_GITHUB)
+  CONTINUOUS_INTEGRATION)
     BUILD_TYPE=continuous
     ;;
   PRESUBMIT_GITHUB)
