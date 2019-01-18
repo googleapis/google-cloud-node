@@ -16,6 +16,10 @@
 import {HttpRequest, middleware as commonMiddleware} from '@google-cloud/logging';
 import * as bunyan from 'bunyan';
 
+// FIXME(ofrobots): use a proper export once the following is released:
+// https://github.com/googleapis/google-auth-library-nodejs/pull/569.
+import envDetect = require('google-auth-library/build/src/auth/envDetect');
+
 import {LOGGING_TRACE_KEY, LoggingBunyan} from '../index';
 import * as types from '../types/core';
 
@@ -42,8 +46,6 @@ export async function middleware(options?: MiddlewareOptions):
   const defaultOptions = {logName: 'bunyan_log', level: 'info'};
   options = Object.assign({}, defaultOptions, options);
 
-  // TODO: Create a http request logger unless we are running on GAE or GCF.
-
   const loggingBunyanApp = new LoggingBunyan(Object.assign({}, options, {
     // For request bundling to work, the parent (request) and child (app) logs
     // need to have distinct names. For exact requirements see:
@@ -55,12 +57,31 @@ export async function middleware(options?: MiddlewareOptions):
     streams: [loggingBunyanApp.stream(options.level as types.LogLevel)]
   });
 
-  const projectId =
-      await loggingBunyanApp.stackdriverLog.logging.auth.getProjectId();
+  const auth = loggingBunyanApp.stackdriverLog.logging.auth;
+  const [env, projectId] =
+      await Promise.all([auth.getEnv(), auth.getProjectId()]);
+
+  // Unless we are running on Google App Engine or Cloud Functions, generate a
+  // parent request log entry that all the request-specific logs ("app logs")
+  // will nest under. GAE and GCF generate the parent request logs
+  // automatically.
+  let emitRequestLog;
+  if (env !== envDetect.GCPEnv.APP_ENGINE &&
+      env !== envDetect.GCPEnv.CLOUD_FUNCTIONS) {
+    const loggingBunyanReq = new LoggingBunyan(options);
+    const requestLogger = bunyan.createLogger({
+      name: options.logName!,
+      streams: [loggingBunyanReq.stream(options.level as types.LogLevel)]
+    });
+    emitRequestLog = (httpRequest: HttpRequest, trace: string) => {
+      requestLogger.info({[LOGGING_TRACE_KEY]: trace, httpRequest});
+    };
+  }
 
   return {
     logger,
-    mw: commonMiddleware.express.makeMiddleware(projectId, makeChildLogger)
+    mw: commonMiddleware.express.makeMiddleware(
+        projectId, makeChildLogger, emitRequestLog)
   };
 
   function makeChildLogger(trace: string) {
