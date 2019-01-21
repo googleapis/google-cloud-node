@@ -36,7 +36,7 @@ s.copy(templates)
 # [START fix-dead-link]
 discovery_url = 'https://www.googleapis.com/discovery/v1/apis/compute/v1/rest'
 s.replace('**/doc/google/cloud/asset/v1beta1/doc_assets.js',
-        f'`"{discovery_url}"`'
+        f'`"{discovery_url}"`',
         f'[`"{discovery_url}"`]({discovery_url})')
 
 s.replace('**/doc/google/protobuf/doc_timestamp.js',
