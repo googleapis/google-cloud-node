@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,22 +19,26 @@
  * Export asset request.
  *
  * @property {string} parent
- *   Required. The relative name of the root asset. This can only be an organization
- *   number (such as "organizations/123"), a project ID (such as
- *   "projects/my-project-id"), or a project number (such as "projects/12345").
+ *   Required. The relative name of the root asset. This can only be an
+ *   organization number (such as "organizations/123"), a project ID (such as
+ *   "projects/my-project-id"), a project number (such as "projects/12345"), or
+ *   a folder number (such as "folders/123").
  *
  * @property {Object} readTime
- *   Timestamp to take an asset snapshot. This can only be set to a timestamp in
- *   the past or of the current time. If not specified, the current time will be
- *   used. Due to delays in resource data collection and indexing, there is a
- *   volatile window during which running the same query may get different
- *   results.
+ *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+ *   between 2018-10-02 UTC (inclusive) and the current time. If not specified,
+ *   the current time will be used. Due to delays in resource data collection
+ *   and indexing, there is a volatile window during which running the same
+ *   query may get different results.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {string[]} assetTypes
  *   A list of asset types of which to take a snapshot for. For example:
- *   "google.compute.disk". If specified, only matching assets will be returned.
+ *   "google.compute.Disk". If specified, only matching assets will be returned.
+ *   See [Introduction to Cloud Asset
+ *   Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
+ *   for all supported asset types.
  *
  * @property {number} contentType
  *   Asset content type. If not specified, no content but the asset name will be
@@ -103,9 +107,12 @@ const ExportAssetsResponse = {
  *   The number should be among the values of [ContentType]{@link google.cloud.asset.v1beta1.ContentType}
  *
  * @property {Object} readTimeWindow
- *   Required. The time window for the asset history. The start time is
- *   required. The returned results contain all temporal assets whose time
- *   window overlap with read_time_window.
+ *   Optional. The time window for the asset history. Both start_time and
+ *   end_time are optional and if set, it must be after 2018-10-02 UTC. If
+ *   end_time is not set, it is default to current timestamp. If start_time is
+ *   not set, the snapshot of the assets at end_time will be returned. The
+ *   returned results contain all temporal assets whose time window overlap with
+ *   read_time_window.
  *
  *   This object should have the same structure as [TimeWindow]{@link google.cloud.asset.v1beta1.TimeWindow}
  *
@@ -153,8 +160,10 @@ const OutputConfig = {
  * A Cloud Storage location.
  *
  * @property {string} uri
- *   The path of the Cloud Storage objects. It's the same path that is used by
- *    gsutil. For example: "gs://bucket_name/object_path". See [Viewing and Editing Object Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
+ *   The uri of the Cloud Storage object. It's the same uri that is used by
+ *   gsutil. For example: "gs://bucket_name/object_name". See [Viewing and
+ *   Editing Object
+ *   Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
  *   for more information.
  *
  * @typedef GcsDestination

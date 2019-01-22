@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,15 +41,15 @@ const TemporalAsset = {
 };
 
 /**
- * A time window of [start_time, end_time).
+ * A time window of (start_time, end_time].
  *
  * @property {Object} startTime
- *   Start time of the time window (inclusive).
+ *   Start time of the time window (exclusive).
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} endTime
- *   End time of the time window (exclusive).
+ *   End time of the time window (inclusive).
  *   Current timestamp if not specified.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
@@ -72,7 +72,7 @@ const TimeWindow = {
  *   for more information.
  *
  * @property {string} assetType
- *   Type of the asset. Example: "google.compute.disk".
+ *   Type of the asset. Example: "google.compute.Disk".
  *
  * @property {Object} resource
  *   Representation of the resource.
