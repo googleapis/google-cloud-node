@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## v0.6.0
+
+01-22-2019 09:59 PST
+
+### New Features
+- feat: add a new `reportMode` configuration option ([#295](https://github.com/googleapis/nodejs-error-reporting/pull/295))
+
 ## v0.5.2
 
 12-20-2018 11:49 PST
