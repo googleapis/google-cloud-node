@@ -30,7 +30,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/common": "^0.29.1",
+    "@google-cloud/common": "^0.30.0",
     "@types/console-log-level": "^1.4.0",
     "@types/semver": "^5.5.0",
     "bindings": "^1.2.1",
