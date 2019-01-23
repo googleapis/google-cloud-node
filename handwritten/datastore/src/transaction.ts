@@ -360,7 +360,7 @@ class Transaction extends DatastoreRequest {
    *   const apiResponse = data[0];
    * });
    */
-  rollback(gaxOptions, callback?) {
+  rollback(gaxOptions?, callback?) {
     if (is.fn(gaxOptions)) {
       callback = gaxOptions;
       gaxOptions = {};
@@ -372,7 +372,7 @@ class Transaction extends DatastoreRequest {
         {
           client: 'DatastoreClient',
           method: 'rollback',
-          gaxOpts: gaxOptions,
+          gaxOpts: gaxOptions || {},
         },
         (err, resp) => {
           this.skipCommit = true;
