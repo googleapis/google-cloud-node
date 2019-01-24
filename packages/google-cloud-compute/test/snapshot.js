@@ -95,10 +95,15 @@ describe('Snapshot', function() {
           assert.strictEqual(this, scope);
           done();
         },
+        zone: {
+          compute: COMPUTE,
+        },
       };
 
       const snapshot = new Snapshot(scope, SNAPSHOT_NAME);
       assert(snapshot instanceof ServiceObject);
+
+      assert.strictEqual(snapshot.compute, scope.zone.compute);
 
       const calledWith = snapshot.calledWith_[0];
       assert.strictEqual(calledWith.methods.create, true);

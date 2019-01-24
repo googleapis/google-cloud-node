@@ -176,7 +176,7 @@ class Snapshot extends common.ServiceObject {
      * @name Snapshot#compute
      * @type {Compute}
      */
-    this.compute = isDisk ? scope.compute : scope;
+    this.compute = isDisk ? scope.zone.compute : scope;
     /**
      * @name Snapshot#name
      * @type {string}

@@ -206,12 +206,13 @@ describe('Compute', () => {
       return zone.disk(DISK_NAME).getMetadata();
     });
 
-    it('should take a snapshot', async () => {
+    it('should take and delete a snapshot', async () => {
       const [snapshot, operation] = await disk
         .snapshot(generateName('snapshot'))
         .create();
       await operation.promise();
       await snapshot.getMetadata();
+      await snapshot.delete();
     });
 
     it('should run operation as a promise', async () => {
