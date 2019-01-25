@@ -2,12 +2,26 @@
   "name": "nodejs-scheduler-samples",
   "private": true,
   "main": "quickstart.js",
-  "files": ["*.js"],
+  "engines": {
+    "node": ">=8"
+  },
+  "files": [
+    "*.js"
+  ],
   "license": "Apache-2.0",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha system-test --timeout 10000 --exit"
+  },
   "dependencies": {
-    "@google-cloud/scheduler": "^0.1.2"
+    "@google-cloud/scheduler": "^0.1.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
   }
 }
