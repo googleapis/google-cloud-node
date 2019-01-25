@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@google-cloud/common": "^0.30.0",
-    "google-gax": "^0.23.0",
+    "google-gax": "^0.24.0",
     "lodash.merge": "^4.6.1",
     "protobufjs": "^6.8.6",
     "pumpify": "^1.5.1",
