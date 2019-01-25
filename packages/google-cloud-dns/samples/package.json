@@ -7,6 +7,9 @@
   "engines": {
     "node": ">=8"
   },
+  "files": [
+    "*.js"
+  ],
   "scripts": {
     "test": "mocha system-test --timeout 600000"
   },

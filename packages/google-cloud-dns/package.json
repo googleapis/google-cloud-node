@@ -32,7 +32,7 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "lint": "gts check && eslint samples/",
+    "lint": "gts check && eslint '**/*.js'",
     "test": "nyc mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
@@ -44,7 +44,7 @@
     "pretest": "npm run compile"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.29.0",
+    "@google-cloud/common": "^0.30.0",
     "@google-cloud/paginator": "^0.1.0",
     "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",

@@ -24,6 +24,7 @@ import * as uuid from 'uuid';
 const format = require('string-format-obj');
 
 import {DNS, Record} from '../src';
+import {Metadata} from '@google-cloud/common';
 
 const dns = new DNS();
 const DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN || 'gitnpm.com.';
@@ -128,7 +129,7 @@ describe('dns', () => {
 
   describe('Zones', () => {
     it('should get the metadata for a zone', done => {
-      ZONE.getMetadata((err, metadata) => {
+      ZONE.getMetadata((err: Error, metadata: Metadata) => {
         assert.ifError(err);
         assert.strictEqual(metadata.name, ZONE_NAME);
         done();
@@ -236,7 +237,7 @@ describe('dns', () => {
           assert.ifError(err);
           const change = changes![0];
           const expectedMetadata = change.metadata;
-          change.getMetadata((err, metadata) => {
+          change.getMetadata((err: Error, metadata: Metadata) => {
             assert.ifError(err);
             delete metadata.status;
             delete expectedMetadata.status;
