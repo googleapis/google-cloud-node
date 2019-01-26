@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -201,6 +201,15 @@ const VoiceSelectionParams = {
  *   result in worse audio quality), unless the specified sample rate is not
  *   supported for the encoding chosen, in which case it will fail the request
  *   and return google.rpc.Code.INVALID_ARGUMENT.
+ *
+ * @property {string[]} effectsProfileId
+ *   An identifier which selects 'audio effects' profiles that are applied on
+ *   (post synthesized) text to speech.
+ *   Effects are applied on top of each other in the order they are given.
+ *   See
+ *
+ *   [audio-profiles](https://cloud.google.com/text-to-speech/docs/audio-profiles)
+ *   for current supported profile ids.
  *
  * @typedef AudioConfig
  * @memberof google.cloud.texttospeech.v1
