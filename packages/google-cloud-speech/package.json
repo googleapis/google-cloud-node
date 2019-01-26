@@ -52,7 +52,7 @@
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "codecov": "^3.0.2",
     "eslint": "^5.0.0",
-    "eslint-config-prettier": "^3.0.0",
+    "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-prettier": "^3.0.0",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
