@@ -19,7 +19,7 @@ import subprocess
 gapic = gcp.GAPICGenerator()
 version = 'v1'
 library = gapic.node_library('dataproc', version)
-s.copy(library, excludes=['README.md', 'package.json'])
+s.copy(library, excludes=['README.md', 'package.json', 'src/index.js'])
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
