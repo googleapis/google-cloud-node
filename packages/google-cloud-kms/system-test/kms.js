@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,4 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-console.warn('TODO: add system-tests');
+const kms = require('../src');
+const assert = require('assert');
+
+const client = new kms.v1.KeyManagementServiceClient();
+
+describe('KMS system tests', () => {
+  it('should list global key rings', async () => {
+    const projectId = await client.getProjectId();
+    const parent = client.locationPath(projectId, 'global');
+
+    const [keyRings] = await client.listKeyRings({parent});
+    assert(keyRings);
+    assert(Array.isArray(keyRings));
+  });
+});
