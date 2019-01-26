@@ -66,7 +66,14 @@ export class ErrorsApiTransport extends AuthClient {
       ].join('/'),
       method: 'GET'
     };
-    const response = await this.request_(options);
-    return response.body;
+    return new Promise((resolve, reject) => {
+      this.request(options, (err, body, res) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(body);
+      });
+    });
   }
 }
