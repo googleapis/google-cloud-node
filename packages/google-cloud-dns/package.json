@@ -65,7 +65,7 @@
     "@types/uuid": "^3.4.4",
     "codecov": "^3.0.2",
     "eslint": "^5.0.0",
-    "eslint-config-prettier": "^3.0.0",
+    "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-prettier": "^3.0.0",
     "gts": "^0.9.0",
