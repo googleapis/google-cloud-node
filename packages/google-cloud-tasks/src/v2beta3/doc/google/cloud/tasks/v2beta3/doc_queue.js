@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,19 +41,17 @@
  *     hyphens (-). The maximum length is 100 characters.
  *
  * @property {Object} appEngineHttpQueue
- *   App Engine HTTP queue.
- *
- *   An App Engine queue is a queue that has an AppEngineHttpQueue type.
+ *   AppEngineHttpQueue settings apply only to
+ *   App Engine tasks in this queue.
  *
  *   This object should have the same structure as [AppEngineHttpQueue]{@link google.cloud.tasks.v2beta3.AppEngineHttpQueue}
  *
  * @property {Object} rateLimits
  *   Rate limits for task dispatches.
  *
- *   rate_limits and
- *   retry_config are related because they both
- *   control task attempts however they control how tasks are
- *   attempted in different ways:
+ *   rate_limits and retry_config are
+ *   related because they both control task attempts. However they control task
+ *   attempts in different ways:
  *
  *   * rate_limits controls the total rate of
  *     dispatches from a queue (i.e. all traffic dispatched from the
@@ -63,6 +61,16 @@
  *     particular a task after its first attempt fails. That is,
  *     retry_config controls task retries (the
  *     second attempt, third attempt, etc).
+ *
+ *   The queue's actual dispatch rate is the result of:
+ *
+ *   * Number of tasks in the queue
+ *   * User-specified throttling: rate limits
+ *     retry configuration, and the
+ *     queue's state.
+ *   * System throttling due to `429` (Too Many Requests) or `503` (Service
+ *     Unavailable) responses from the worker, high error rates, or to smooth
+ *     sudden large traffic spikes.
  *
  *   This object should have the same structure as [RateLimits]{@link google.cloud.tasks.v2beta3.RateLimits}
  *
@@ -147,9 +155,11 @@ const Queue = {
      * The queue is disabled.
      *
      * A queue becomes `DISABLED` when
-     * [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref) or
-     * [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref) is uploaded
-     * which does not contain the queue. You cannot directly disable a queue.
+     * [queue.yaml](https://cloud.google.com/appengine/docs/python/config/queueref)
+     * or
+     * [queue.xml](https://cloud.google.com/appengine/docs/standard/java/config/queueref)
+     * is uploaded which does not contain the queue. You cannot directly disable
+     * a queue.
      *
      * When a queue is disabled, tasks can still be added to a queue
      * but the tasks are not dispatched.

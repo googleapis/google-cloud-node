@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,10 +40,7 @@
  *     hyphens (-), or underscores (_). The maximum length is 500 characters.
  *
  * @property {Object} appEngineHttpRequest
- *   App Engine HTTP request that is sent to the task's target. Can
- *   be set only if
- *   app_engine_http_queue is set
- *   on the queue.
+ *   HTTP request that is sent to the App Engine app handler.
  *
  *   An App Engine task is a task that has AppEngineHttpRequest set.
  *
@@ -64,6 +61,38 @@
  *   `create_time` will be truncated to the nearest second.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} dispatchDeadline
+ *   The deadline for requests sent to the worker. If the worker does not
+ *   respond by this deadline then the request is cancelled and the attempt
+ *   is marked as a `DEADLINE_EXCEEDED` failure. Cloud Tasks will retry the
+ *   task according to the RetryConfig.
+ *
+ *   Note that when the request is cancelled, Cloud Tasks will stop listing for
+ *   the response, but whether the worker stops processing depends on the
+ *   worker. For example, if the worker is stuck, it may not react to cancelled
+ *   requests.
+ *
+ *   The default and maximum values depend on the type of request:
+ *
+ *
+ *   * For App Engine tasks, 0 indicates that the
+ *     request has the default deadline. The default deadline depends on the
+ *     [scaling type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
+ *     of the service: 10 minutes for standard apps with automatic scaling, 24
+ *     hours for standard apps with manual and basic scaling, and 60 minutes for
+ *     flex apps. If the request deadline is set, it must be in the interval [15
+ *     seconds, 24 hours 15 seconds]. Regardless of the task's
+ *     `dispatch_deadline`, the app handler will not run for longer than than
+ *     the service's timeout. We recommend setting the `dispatch_deadline` to
+ *     at most a few seconds more than the app handler's timeout. For more
+ *     information see
+ *     [Timeouts](https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts).
+ *
+ *   `dispatch_deadline` will be truncated to the nearest millisecond. The
+ *   deadline is an approximate deadline.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {number} dispatchCount
  *   Output only. The number of attempts dispatched.
@@ -167,7 +196,7 @@ const Task = {
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} responseStatus
- *   Output only. The response from the target for this attempt.
+ *   Output only. The response from the worker for this attempt.
  *
  *   If `response_time` is unset, then the task has not been attempted or is
  *   currently running and the `response_status` field is meaningless.
