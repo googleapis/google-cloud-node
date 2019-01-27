@@ -10,7 +10,6 @@
 
 [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
 
-* [Error Reporting Node.js Client API Reference][client-docs]
 * [Error Reporting Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -84,9 +83,6 @@ has instructions for running the samples.
 | --------------------------- | --------------------------------- |
 | Examples | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/snippets.js) |
 
-The [Error Reporting Node.js Client API Reference][client-docs] documentation
-also contains samples.
-
 ## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
@@ -102,14 +98,13 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-error-reporting/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-error-reporting/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/error-reporting/latest/
 [product-docs]: https://cloud.google.com/error-reporting/docs/
 
