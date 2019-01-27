@@ -66,14 +66,20 @@ describe('Vision', function() {
       'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
     return client.logoDetection(url).then(responses => {
       const response = responses[0];
-      assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
+      assert.strictEqual(
+        response.logoAnnotations[0].description.toLowerCase(),
+        'google'
+      );
     });
   });
 
   it('should detect from a filename', () => {
     return client.logoDetection(IMAGES.logo).then(responses => {
       const response = responses[0];
-      assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
+      assert.deepStrictEqual(
+        response.logoAnnotations[0].description.toLowerCase(),
+        'google'
+      );
     });
   });
 
@@ -81,7 +87,10 @@ describe('Vision', function() {
     const buffer = fs.readFileSync(IMAGES.logo);
     return client.logoDetection(buffer).then(responses => {
       const response = responses[0];
-      assert.deepStrictEqual(response.logoAnnotations[0].description, 'Google');
+      assert.deepStrictEqual(
+        response.logoAnnotations[0].description.toLowerCase(),
+        'google'
+      );
     });
   });
 
