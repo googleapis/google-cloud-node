@@ -225,7 +225,7 @@ has instructions for running the samples.
 
 ## Versioning
 
-This library follows [Semantic Versioning](http://semver.org/).
+This library follows [Semantic Versioning](https://semver.org/).
 
 This library is considered to be in **beta**. This means it is expected to be
 mostly stable while we work toward a general availability release; however,
@@ -248,7 +248,7 @@ See [LICENSE](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/LI
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/logging-bunyan/latest/
 [product-docs]: https://cloud.google.com/logging/docs
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 
 [http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.type#google.logging.type.HttpRequest
 [error-reporting]: https://cloud.google.com/error-reporting/
