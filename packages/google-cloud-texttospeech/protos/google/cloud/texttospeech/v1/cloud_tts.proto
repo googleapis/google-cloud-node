@@ -179,7 +179,8 @@ message AudioConfig {
   // Effects are applied on top of each other in the order they are given.
   // See
   //
-  // [audio-profiles](https://cloud.google.com/text-to-speech/docs/audio-profiles)
+  // [audio-profiles](https:
+  // //cloud.google.com/text-to-speech/docs/audio-profiles)
   // for current supported profile ids.
   repeated string effects_profile_id = 6;
 }
