@@ -78,14 +78,14 @@ const gapic = Object.freeze({
  *     - `SessionsClient` - Reference to
  *       {@link v2.SessionsClient}
  *
- * @module {object} @google-cloud/dialogflow
+ * @module {object} dialogflow
  * @alias nodejs-dialogflow
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save @google-cloud/dialogflow
+ * npm install --save dialogflow
  *
  * @example <caption>Import the client library:</caption>
- * const dialogflow = require('@google-cloud/dialogflow');
+ * const dialogflow = require('dialogflow');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new dialogflow.AgentsClient();

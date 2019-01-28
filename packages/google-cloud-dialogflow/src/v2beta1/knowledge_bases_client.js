@@ -236,7 +236,7 @@ class KnowledgeBasesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
@@ -324,7 +324,7 @@ class KnowledgeBasesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
@@ -369,7 +369,7 @@ class KnowledgeBasesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
@@ -420,7 +420,7 @@ class KnowledgeBasesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.
@@ -472,7 +472,7 @@ class KnowledgeBasesClient {
    *
    * @example
    *
-   * const dialogflow = require('@google-cloud/dialogflow');
+   * const dialogflow = require('dialogflow');
    *
    * const client = new dialogflow.v2beta1.KnowledgeBasesClient({
    *   // optional auth parameters.

@@ -29,5 +29,10 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
+# dialogflow publishes to npm with no scope.
+s.replace("src/**/*",
+        "@google-cloud\/dialogflow",
+        "dialogflow")
+
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
