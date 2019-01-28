@@ -215,13 +215,6 @@ describe('File', () => {
       assert.strictEqual(file.generation, 2);
     });
 
-    it('should build a requestQueryObject from generation', () => {
-      const file = new File(BUCKET, 'name', {generation: 2});
-      assert.deepStrictEqual(file.requestQueryObject, {
-        generation: 2,
-      });
-    });
-
     it('should inherit from ServiceObject', () => {
       assert(file instanceof ServiceObject);
 
@@ -230,6 +223,43 @@ describe('File', () => {
       assert.strictEqual(calledWith.parent, BUCKET);
       assert.strictEqual(calledWith.baseUrl, '/o');
       assert.strictEqual(calledWith.id, encodeURIComponent(FILE_NAME));
+      assert.deepStrictEqual(calledWith.methods, {
+        delete: {reqOpts: {qs: {}}},
+        exists: {reqOpts: {qs: {}}},
+        get: {reqOpts: {qs: {}}},
+        getMetadata: {reqOpts: {qs: {}}},
+        setMetadata: {reqOpts: {qs: {}}},
+      });
+    });
+
+    it('should set the correct query string with a generation', () => {
+      const options = {generation: 2};
+      const file = new File(BUCKET, 'name', options);
+
+      const calledWith = file.calledWith_[0];
+
+      assert.deepStrictEqual(calledWith.methods, {
+        delete: {reqOpts: {qs: options}},
+        exists: {reqOpts: {qs: options}},
+        get: {reqOpts: {qs: options}},
+        getMetadata: {reqOpts: {qs: options}},
+        setMetadata: {reqOpts: {qs: options}},
+      });
+    });
+
+    it('should set the correct query string with a userProject', () => {
+      const options = {userProject: 'user-project'};
+      const file = new File(BUCKET, 'name', options);
+
+      const calledWith = file.calledWith_[0];
+
+      assert.deepStrictEqual(calledWith.methods, {
+        delete: {reqOpts: {qs: options}},
+        exists: {reqOpts: {qs: options}},
+        get: {reqOpts: {qs: options}},
+        getMetadata: {reqOpts: {qs: options}},
+        setMetadata: {reqOpts: {qs: options}},
+      });
     });
 
     it('should use stripped leading slash name in ServiceObject', () => {
@@ -1742,58 +1772,6 @@ describe('File', () => {
     });
   });
 
-  describe('delete', () => {
-    it('should make the correct request', done => {
-      Object.assign(file.parent, {
-        delete (options: {}, callback: Function) {
-          assert.strictEqual(this, file);
-          assert.deepStrictEqual(options, {});
-          callback();  // done()
-        },
-      });
-
-      file.delete(done);
-    });
-
-    it('should accept options', done => {
-      const options = {
-        a: 'b',
-        c: 'd',
-      };
-
-      file.parent.delete = (options_: {}) => {
-        assert.deepStrictEqual(options_, options);
-        done();
-      };
-
-      file.delete(options, assert.ifError);
-    });
-
-    it('should use requestQueryObject', done => {
-      const options = {
-        a: 'b',
-        c: 'd',
-      };
-
-      file.requestQueryObject = {
-        generation: 2,
-      };
-
-      const expectedOptions = {
-        a: 'b',
-        c: 'd',
-        generation: 2,
-      };
-
-      file.parent.delete = (options: {}) => {
-        assert.deepStrictEqual(options, expectedOptions);
-        done();
-      };
-
-      file.delete(options, assert.ifError);
-    });
-  });
-
   describe('download', () => {
     let fileReadStream: Readable;
 
@@ -1936,32 +1914,6 @@ describe('File', () => {
     });
   });
 
-  describe('exists', () => {
-    it('should call parent exists function', done => {
-      const options = {};
-
-      file.parent.exists = (options_: {}, callback: Function) => {
-        assert.strictEqual(options_, options);
-        callback();  // done()
-      };
-
-      file.exists(options, done);
-    });
-  });
-
-  describe('get', () => {
-    it('should call parent get function', done => {
-      const options = {};
-
-      file.parent.get = (options_: {}, callback: Function) => {
-        assert.strictEqual(options_, options);
-        callback();  // done()
-      };
-
-      file.get(options, done);
-    });
-  });
-
   describe('getExpirationDate', () => {
     it('should refresh metadata', done => {
       file.getMetadata = () => {
@@ -2023,58 +1975,6 @@ describe('File', () => {
             assert.strictEqual(apiResponse_, apiResponse);
             done();
           });
-    });
-  });
-
-  describe('getMetadata', () => {
-    it('should make the correct request', done => {
-      Object.assign(file.parent, {
-        getMetadata(options: {}, callback: Function) {
-          assert.strictEqual(this, file);
-          assert.deepStrictEqual(options, {});
-          callback();  // done()
-        },
-      });
-
-      file.getMetadata(done);
-    });
-
-    it('should accept options', done => {
-      const options = {
-        a: 'b',
-        c: 'd',
-      };
-
-      file.parent.getMetadata = (options_: {}) => {
-        assert.deepStrictEqual(options_, options);
-        done();
-      };
-
-      file.getMetadata(options, assert.ifError);
-    });
-
-    it('should use requestQueryObject', done => {
-      const options = {
-        a: 'b',
-        c: 'd',
-      };
-
-      file.requestQueryObject = {
-        generation: 2,
-      };
-
-      const expectedOptions = {
-        a: 'b',
-        c: 'd',
-        generation: 2,
-      };
-
-      file.parent.getMetadata = (options: {}) => {
-        assert.deepStrictEqual(options, expectedOptions);
-        done();
-      };
-
-      file.getMetadata(options, assert.ifError);
     });
   });
 
@@ -2886,71 +2786,21 @@ describe('File', () => {
   });
 
   describe('request', () => {
-    const USER_PROJECT = 'grape-spaceship-123';
-
-    beforeEach(() => {
-      file.userProject = USER_PROJECT;
-    });
-
-    it('should set the userProject if qs is undefined', done => {
-      FakeServiceObject.prototype.request =
-          ((reqOpts: DecorateRequestOptions) => {
-            assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-            done();
-            // tslint:disable-next-line:no-any
-          }) as any;
-
-      file.request({}, assert.ifError);
-    });
-
-    it('should set the userProject if field is undefined', done => {
-      const options = {
-        qs: {
-          foo: 'bar',
-        },
-      };
-
-      FakeServiceObject.prototype.request =
-          ((reqOpts: DecorateRequestOptions) => {
-            assert.strictEqual(reqOpts.qs, options.qs);
-            assert.strictEqual(reqOpts.qs.userProject, USER_PROJECT);
-            done();
-            // tslint:disable-next-line:no-any
-          }) as any;
-
-      file.request(options, assert.ifError);
-    });
-
-    it('should not overwrite the userProject', done => {
-      const fakeUserProject = 'not-grape-spaceship-123';
-      const options = {
-        qs: {
-          userProject: fakeUserProject,
-        },
-      };
-
-      FakeServiceObject.prototype.request =
-          ((reqOpts: DecorateRequestOptions) => {
-            assert.strictEqual(reqOpts.qs.userProject, fakeUserProject);
-            done();
-            // tslint:disable-next-line:no-any
-          }) as any;
-
-      file.request(options, assert.ifError);
-    });
-
-    it('should call ServiceObject#request correctly', done => {
+    it('should call the parent request function', () => {
       const options = {};
+      const callback = () => {};
+      const expectedReturnValue = {};
 
-      Object.assign(FakeServiceObject.prototype, {
-        request(reqOpts: DecorateRequestOptions, callback: Function) {
-          assert.strictEqual(this, file);
-          assert.strictEqual(reqOpts, options);
-          callback();  // done fn
-        },
-      });
+      file.parent.request = function(
+          reqOpts: DecorateRequestOptions, callback_: Function) {
+        assert.strictEqual(this, file);
+        assert.strictEqual(reqOpts, options);
+        assert.strictEqual(callback_, callback);
+        return expectedReturnValue;
+      };
 
-      file.request(options, done);
+      const returnedValue = file.request(options, callback);
+      assert.strictEqual(returnedValue, expectedReturnValue);
     });
   });
 
@@ -3064,60 +2914,6 @@ describe('File', () => {
       };
 
       file.save(DATA, assert.ifError);
-    });
-  });
-
-  describe('setMetadata', () => {
-    it('should make the correct request', done => {
-      const metadata = {};
-
-      Object.assign(file.parent, {
-        setMetadata(metadata: {}, options: {}, callback: Function) {
-          assert.strictEqual(this, file);
-          assert.deepStrictEqual(options, {});
-          callback();  // done()
-        },
-      });
-
-      file.setMetadata(metadata, done);
-    });
-
-    it('should accept options', done => {
-      const options = {
-        a: 'b',
-        c: 'd',
-      };
-
-      file.parent.setMetadata = (metadata: {}, options_: {}) => {
-        assert.deepStrictEqual(options_, options);
-        done();
-      };
-
-      file.setMetadata({}, options, assert.ifError);
-    });
-
-    it('should use requestQueryObject', done => {
-      const options = {
-        a: 'b',
-        c: 'd',
-      };
-
-      file.requestQueryObject = {
-        generation: 2,
-      };
-
-      const expectedOptions = {
-        a: 'b',
-        c: 'd',
-        generation: 2,
-      };
-
-      file.parent.setMetadata = (metadata: {}, options: {}) => {
-        assert.deepStrictEqual(options, expectedOptions);
-        done();
-      };
-
-      file.setMetadata({}, options, assert.ifError);
     });
   });
 
@@ -3559,11 +3355,16 @@ describe('File', () => {
   });
 
   describe('setUserProject', () => {
-    it('should set the userProject property', () => {
+    it('should call the parent setUserProject function', done => {
       const userProject = 'grape-spaceship-123';
 
+      file.parent.setUserProject = function(userProject_: string) {
+        assert.strictEqual(this, file);
+        assert.strictEqual(userProject_, userProject);
+        done();
+      };
+
       file.setUserProject(userProject);
-      assert.strictEqual(file.userProject, userProject);
     });
   });
 });

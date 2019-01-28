@@ -257,7 +257,27 @@ describe('Bucket', () => {
       assert.strictEqual(calledWith.baseUrl, '/b');
       assert.strictEqual(calledWith.id, BUCKET_NAME);
       assert.deepStrictEqual(calledWith.methods, {
-        create: true,
+        create: {reqOpts: {qs: {}}},
+        delete: {reqOpts: {qs: {}}},
+        exists: {reqOpts: {qs: {}}},
+        get: {reqOpts: {qs: {}}},
+        getMetadata: {reqOpts: {qs: {}}},
+        setMetadata: {reqOpts: {qs: {}}},
+      });
+    });
+
+    it('should set the correct query string with a userProject', () => {
+      const options = {userProject: 'user-project'};
+      const bucket = new Bucket(STORAGE, BUCKET_NAME, options);
+      const calledWith = bucket.calledWith_[0];
+
+      assert.deepStrictEqual(calledWith.methods, {
+        create: {reqOpts: {qs: options}},
+        delete: {reqOpts: {qs: options}},
+        exists: {reqOpts: {qs: options}},
+        get: {reqOpts: {qs: options}},
+        getMetadata: {reqOpts: {qs: options}},
+        setMetadata: {reqOpts: {qs: options}},
       });
     });
 
@@ -895,41 +915,6 @@ describe('Bucket', () => {
     });
   });
 
-  describe('delete', () => {
-    it('should make the correct request', done => {
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            assert.strictEqual(reqOpts.method, 'DELETE');
-            assert.strictEqual(reqOpts.uri, '');
-            assert.deepStrictEqual(reqOpts.qs, {});
-            callback();  // done()
-          };
-
-      bucket.delete(done);
-    });
-
-    it('should accept options', done => {
-      const options = {};
-
-      bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs, options);
-        done();
-      };
-
-      bucket.delete(options, assert.ifError);
-    });
-
-    it('should not require a callback', done => {
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            assert.doesNotThrow(callback);
-            done();
-          };
-
-      bucket.delete();
-    });
-  });
-
   describe('deleteFiles', () => {
     it('should accept only a callback', done => {
       bucket.getFiles = (query: {}, callback: Function) => {
@@ -1167,65 +1152,6 @@ describe('Bucket', () => {
     });
   });
 
-  describe('exists', () => {
-    it('should call get', done => {
-      bucket.get = () => {
-        done();
-      };
-
-      bucket.exists(assert.ifError);
-    });
-
-    it('should accept and pass options to get', done => {
-      const options = {};
-
-      bucket.get = (options_: {}) => {
-        assert.strictEqual(options_, options);
-        done();
-      };
-
-      bucket.exists(options, assert.ifError);
-    });
-
-    it('should execute callback with false if 404', done => {
-      bucket.get = (options: {}, callback: Function) => {
-        callback({code: 404});
-      };
-
-      bucket.exists((err: Error, exists: boolean) => {
-        assert.ifError(err);
-        assert.strictEqual(exists, false);
-        done();
-      });
-    });
-
-    it('should execute callback with error if not 404', done => {
-      const error = {code: 500};
-
-      bucket.get = (options: {}, callback: Function) => {
-        callback(error);
-      };
-
-      bucket.exists((err: Error, exists: boolean) => {
-        assert.strictEqual(err, error);
-        assert.strictEqual(exists, undefined);
-        done();
-      });
-    });
-
-    it('should execute callback with true if no error', done => {
-      bucket.get = (options: {}, callback: Function) => {
-        callback();
-      };
-
-      bucket.exists((err: Error, exists: boolean) => {
-        assert.ifError(err);
-        assert.strictEqual(exists, true);
-        done();
-      });
-    });
-  });
-
   describe('file', () => {
     const FILE_NAME = 'remote-file-name.jpg';
     let file: FakeFile;
@@ -1255,139 +1181,6 @@ describe('Bucket', () => {
 
     it('should pass configuration object to File', () => {
       assert.deepStrictEqual(file.calledWith_[2], options);
-    });
-  });
-
-  describe('get', () => {
-    it('should get the metadata', done => {
-      bucket.getMetadata = () => {
-        done();
-      };
-
-      bucket.get(assert.ifError);
-    });
-
-    it('should accept an options object', done => {
-      const options = {};
-
-      bucket.getMetadata = (options_: {}) => {
-        assert.strictEqual(options_, options);
-        done();
-      };
-
-      bucket.get(options, assert.ifError);
-    });
-
-    it('should execute callback with error & metadata', done => {
-      const error = new Error('Error.');
-      const metadata = {};
-
-      bucket.getMetadata = (options: {}, callback: Function) => {
-        callback(error, metadata);
-      };
-
-      bucket.get((err: Error, instance: {}, metadata_: {}) => {
-        assert.strictEqual(err, error);
-        assert.strictEqual(instance, null);
-        assert.strictEqual(metadata_, metadata);
-
-        done();
-      });
-    });
-
-    it('should execute callback with instance & metadata', done => {
-      const metadata = {};
-
-      bucket.getMetadata = (options: {}, callback: Function) => {
-        callback(null, metadata);
-      };
-
-      bucket.get((err: Error, instance: {}, metadata_: {}) => {
-        assert.ifError(err);
-
-        assert.strictEqual(instance, bucket);
-        assert.strictEqual(metadata_, metadata);
-
-        done();
-      });
-    });
-
-    describe('autoCreate', () => {
-      let AUTO_CREATE_CONFIG: {};
-
-      const ERROR = {code: 404};
-      const METADATA = {};
-
-      beforeEach(() => {
-        AUTO_CREATE_CONFIG = {
-          autoCreate: true,
-        };
-
-        bucket.getMetadata = (options: {}, callback: Function) => {
-          callback(ERROR, METADATA);
-        };
-      });
-
-      it('should pass config to create if it was provided', done => {
-        const config = Object.assign({}, AUTO_CREATE_CONFIG, {
-          maxResults: 5,
-        });
-
-        bucket.create = (config_: {}) => {
-          assert.strictEqual(config_, config);
-          done();
-        };
-
-        bucket.get(config, assert.ifError);
-      });
-
-      it('should pass only a callback to create if no config', done => {
-        bucket.create = (callback: Function) => {
-          callback();  // done()
-        };
-
-        bucket.get(AUTO_CREATE_CONFIG, done);
-      });
-
-      describe('error', () => {
-        it('should execute callback with error & API response', done => {
-          const error = new Error('Error.');
-          const apiResponse = {};
-
-          bucket.create = (callback: Function) => {
-            bucket.get = (config: {}, callback: Function) => {
-              assert.deepStrictEqual(config, {});
-              callback();  // done()
-            };
-
-            callback(error, null, apiResponse);
-          };
-
-          bucket.get(
-              AUTO_CREATE_CONFIG, (err: Error, instance: {}, resp: {}) => {
-                assert.strictEqual(err, error);
-                assert.strictEqual(instance, null);
-                assert.strictEqual(resp, apiResponse);
-                done();
-              });
-        });
-
-        it('should refresh the metadata after a 409', done => {
-          const error = {
-            code: 409,
-          };
-
-          bucket.create = (callback: Function) => {
-            bucket.get = (config: {}, callback: Function) => {
-              assert.deepStrictEqual(config, {});
-              callback();  // done()
-            };
-            callback(error);
-          };
-
-          bucket.get(AUTO_CREATE_CONFIG, done);
-        });
-      });
     });
   });
 
@@ -1623,76 +1416,6 @@ describe('Bucket', () => {
     });
   });
 
-  describe('getMetadata', () => {
-    it('should make the correct request', done => {
-      bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepStrictEqual(reqOpts.qs, {});
-        done();
-      };
-
-      bucket.getMetadata(assert.ifError);
-    });
-
-    it('should accept options', done => {
-      const options = {};
-
-      bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs, options);
-        done();
-      };
-
-      bucket.getMetadata(options, assert.ifError);
-    });
-
-    it('should execute callback with error & apiResponse', done => {
-      const error = new Error('Error.');
-      const apiResponse = {};
-
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(error, apiResponse);
-          };
-
-      bucket.getMetadata((err: Error, metadata: {}, apiResponse_: {}) => {
-        assert.strictEqual(err, error);
-        assert.strictEqual(metadata, null);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should update metadata', done => {
-      const apiResponse = {};
-
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(null, apiResponse);
-          };
-
-      bucket.getMetadata((err: Error) => {
-        assert.ifError(err);
-        assert.strictEqual(bucket.metadata, apiResponse);
-        done();
-      });
-    });
-
-    it('should execute callback with metadata & API response', done => {
-      const apiResponse = {};
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(null, apiResponse);
-          };
-
-      bucket.getMetadata((err: Error, metadata: {}, apiResponse_: {}) => {
-        assert.ifError(err);
-        assert.strictEqual(metadata, apiResponse);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-  });
-
   describe('getNotifications', () => {
     it('should make the correct request', done => {
       const options = {};
@@ -1834,7 +1557,7 @@ describe('Bucket', () => {
     });
 
     it('should not make files private by default', done => {
-      bucket.request =
+      bucket.parent.request =
           (reqOpts: DecorateRequestOptions, callback: Function) => {
             callback();
           };
@@ -1849,7 +1572,7 @@ describe('Bucket', () => {
     it('should execute callback with error', done => {
       const error = new Error('Error.');
 
-      bucket.request =
+      bucket.parent.request =
           (reqOpts: DecorateRequestOptions, callback: Function) => {
             callback(error);
           };
@@ -2062,83 +1785,6 @@ describe('Bucket', () => {
     });
   });
 
-  describe('setMetadata', () => {
-    it('should make the correct request', done => {
-      const metadata = {};
-      bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.method, 'PATCH');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.json, metadata);
-        assert.deepStrictEqual(reqOpts.qs, {});
-        done();
-      };
-      bucket.setMetadata(metadata, assert.ifError);
-    });
-
-    it('should not require a callback', done => {
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            assert.doesNotThrow(callback);
-            done();
-          };
-      bucket.setMetadata({});
-    });
-
-    it('should accept options', done => {
-      const options = {};
-      bucket.request = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.qs, options);
-        done();
-      };
-      bucket.setMetadata({}, options, assert.ifError);
-    });
-
-    it('should execute callback with error & apiResponse', done => {
-      const error = new Error('Error.');
-      const apiResponse = {};
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(error, apiResponse);
-          };
-
-      bucket.setMetadata({}, (err: Error, apiResponse_: {}) => {
-        assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should update metadata', done => {
-      const apiResponse = {};
-
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(null, apiResponse);
-          };
-
-      bucket.setMetadata({}, (err: Error) => {
-        assert.ifError(err);
-        assert.strictEqual(bucket.metadata, apiResponse);
-        done();
-      });
-    });
-
-    it('should execute callback with metadata & API response', done => {
-      const apiResponse = {};
-
-      bucket.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(null, apiResponse);
-          };
-
-      bucket.setMetadata({}, (err: Error, apiResponse_: {}) => {
-        assert.ifError(err);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-  });
-
   describe('setRetentionPeriod', () => {
     it('should call setMetadata correctly', done => {
       const duration = 90000;
@@ -2194,11 +1840,25 @@ describe('Bucket', () => {
   });
 
   describe('setUserProject', () => {
-    it('should set the userProject property', () => {
-      const userProject = 'grape-spaceship-123';
+    const USER_PROJECT = 'grape-spaceship-123';
 
-      bucket.setUserProject(userProject);
-      assert.strictEqual(bucket.userProject, userProject);
+    it('should set the userProject property', () => {
+      bucket.setUserProject(USER_PROJECT);
+      assert.strictEqual(bucket.userProject, USER_PROJECT);
+    });
+
+    it('should set the userProject on the global request options', () => {
+      const methods =
+          ['create', 'delete', 'exists', 'get', 'getMetadata', 'setMetadata'];
+      methods.forEach(method => {
+        assert.strictEqual(
+            bucket.methods[method].reqOpts.qs.userProject, undefined);
+      });
+      bucket.setUserProject(USER_PROJECT);
+      methods.forEach(method => {
+        assert.strictEqual(
+            bucket.methods[method].reqOpts.qs.userProject, USER_PROJECT);
+      });
     });
   });
 

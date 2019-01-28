@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {BodyResponseCallback, DecorateRequestOptions} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
 import * as r from 'request';
@@ -134,7 +135,8 @@ export interface TestIamPermissionsOptions {
  * // bucket.iam
  */
 class Iam {
-  private request_: typeof Bucket.prototype.request;
+  private request_:
+      (reqOpts: DecorateRequestOptions, callback: BodyResponseCallback) => void;
   private resourceId_: string;
 
   constructor(bucket: Bucket) {

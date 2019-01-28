@@ -47,7 +47,7 @@
     "prepare": "npm run compile"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.27.0",
+    "@google-cloud/common": "^0.30.2",
     "@google-cloud/paginator": "^0.1.0",
     "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.0",
@@ -56,7 +56,7 @@
     "concat-stream": "^2.0.0",
     "duplexify": "^3.5.0",
     "extend": "^3.0.0",
-    "gcs-resumable-upload": "^0.13.0",
+    "gcs-resumable-upload": "^0.14.1",
     "hash-stream-validation": "^0.2.1",
     "mime": "^2.2.0",
     "mime-types": "^2.0.8",
@@ -96,9 +96,9 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-prettier": "^3.0.0",
     "gts": "^0.9.0",
-    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.4",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "mocha": "^5.0.0",
     "nock": "^10.0.1",
     "node-fetch": "^2.2.0",

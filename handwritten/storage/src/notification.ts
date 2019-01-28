@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {ApiError, GetMetadataCallback, ServiceObject, util} from '@google-cloud/common';
+import {ApiError, MetadataCallback, ServiceObject, util} from '@google-cloud/common';
 import {ResponseBody} from '@google-cloud/common/build/src/util';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as request from 'request';  // Only for type declarations.
@@ -325,7 +325,8 @@ class Notification extends ServiceObject {
 
           args.push(onCreate);
 
-          this.create.apply(this, args);
+          // tslint:disable-next-line no-any
+          this.create.apply(this, args as any);
           return;
         }
 
@@ -341,8 +342,8 @@ class Notification extends ServiceObject {
       Promise<GetNotificationMetadataResponse>;
   getMetadata(
       options: GetNotificationMetadataOptions,
-      callback: GetMetadataCallback): void;
-  getMetadata(callback: GetMetadataCallback): void;
+      callback: MetadataCallback): void;
+  getMetadata(callback: MetadataCallback): void;
   /**
    * Get the notification's metadata.
    *
@@ -375,8 +376,8 @@ class Notification extends ServiceObject {
    * Another example:
    */
   getMetadata(
-      optionsOrCallback?: GetNotificationMetadataOptions|GetMetadataCallback,
-      callback?: GetMetadataCallback):
+      optionsOrCallback?: GetNotificationMetadataOptions|MetadataCallback,
+      callback?: MetadataCallback):
       void|Promise<GetNotificationMetadataResponse> {
     const options =
         typeof optionsOrCallback === 'object' ? optionsOrCallback : {};

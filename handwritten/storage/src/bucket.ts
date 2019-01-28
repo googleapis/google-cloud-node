@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {ApiError, BodyResponseCallback, DecorateRequestOptions, DeleteCallback, ExistsCallback, GetConfig, GetMetadataCallback, InstanceResponseCallback, Metadata, ServiceObject, util} from '@google-cloud/common';
+import {ApiError, BodyResponseCallback, DecorateRequestOptions, DeleteCallback, ExistsCallback, GetConfig, Metadata, MetadataResponse, ResponseBody, ServiceObject, util} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
@@ -164,7 +164,7 @@ export interface EnableRequesterPaysCallback {
   (err?: Error|null, apiResponse?: request.Response): void;
 }
 
-export interface BucketExistsOptions {
+export interface BucketExistsOptions extends GetConfig {
   userProject?: string;
 }
 
@@ -522,6 +522,13 @@ class Bucket extends ServiceObject {
     // Allow for "gs://"-style input, and strip any trailing slashes.
     name = name.replace(/^gs:\/\//, '').replace(/\/+$/, '');
 
+    const requestQueryObject: {userProject?: string} = {};
+
+    const userProject = options.userProject;
+    if (typeof userProject === 'string') {
+      requestQueryObject.userProject = userProject;
+    }
+
     const methods = {
       /**
        * Create a bucket.
@@ -549,7 +556,290 @@ class Bucket extends ServiceObject {
        *   const apiResponse = data[1];
        * });
        */
-      create: true,
+      create: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {object} DeleteBucketOptions Configuration options.
+       * @param {string} [userProject] The ID of the project which will be
+       *     billed for the request.
+       */
+      /**
+       * @typedef {array} DeleteBucketResponse
+       * @property {object} 0 The full API response.
+       */
+      /**
+       * @callback DeleteBucketCallback
+       * @param {?Error} err Request error, if any.
+       * @param {object} apiResponse The full API response.
+       */
+      /**
+       * Delete the bucket.
+       *
+       * @see [Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}
+       *
+       * @method Bucket#delete
+       * @param {DeleteBucketOptions} [options] Configuration options.
+       * @param {DeleteBucketCallback} [callback] Callback function.
+       * @returns {Promise<DeleteBucketResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const bucket = storage.bucket('albums');
+       * bucket.delete(function(err, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * bucket.delete().then(function(data) {
+       *   const apiResponse = data[0];
+       * });
+       *
+       * @example <caption>include:samples/buckets.js</caption>
+       * region_tag:storage_delete_bucket
+       * Another example:
+       */
+      delete: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {object} BucketExistsOptions Configuration options for Bucket#exists().
+       * @param {string} [userProject] The ID of the project which will be
+       *     billed for the request.
+       */
+      /**
+       * @typedef {array} BucketExistsResponse
+       * @property {boolean} 0 Whether the {@link Bucket} exists.
+       */
+      /**
+       * @callback BucketExistsCallback
+       * @param {?Error} err Request error, if any.
+       * @param {boolean} exists Whether the {@link Bucket} exists.
+       */
+      /**
+       * Check if the bucket exists.
+       *
+       * @method Bucket#exists
+       * @param {BucketExistsOptions} [options] Configuration options.
+       * @param {BucketExistsCallback} [callback] Callback function.
+       * @returns {Promise<BucketExistsResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const bucket = storage.bucket('albums');
+       *
+       * bucket.exists(function(err, exists) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * bucket.exists().then(function(data) {
+       *   const exists = data[0];
+       * });
+       */
+      exists: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {object} [GetBucketOptions] Configuration options for Bucket#get()
+       * @property {boolean} [autoCreate] Automatically create the object if
+       *     it does not exist. Default: `false`
+       * @property {string} [userProject] The ID of the project which will be
+       *     billed for the request.
+       */
+      /**
+       * @typedef {array} GetBucketResponse
+       * @property {Bucket} 0 The {@link Bucket}.
+       * @property {object} 1 The full API response.
+       */
+      /**
+       * @callback GetBucketCallback
+       * @param {?Error} err Request error, if any.
+       * @param {Bucket} bucket The {@link Bucket}.
+       * @param {object} apiResponse The full API response.
+       */
+      /**
+       * Get a bucket if it exists.
+       *
+       * You may optionally use this to "get or create" an object by providing
+       * an object with `autoCreate` set to `true`. Any extra configuration that
+       * is normally required for the `create` method must be contained within
+       * this object as well.
+       *
+       * @method Bucket#get
+       * @param {GetBucketOptions} [options] Configuration options.
+       * @param {GetBucketCallback} [callback] Callback function.
+       * @returns {Promise<GetBucketResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const bucket = storage.bucket('albums');
+       *
+       * bucket.get(function(err, bucket, apiResponse) {
+       *   // `bucket.metadata` has been populated.
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * bucket.get().then(function(data) {
+       *   const bucket = data[0];
+       *   const apiResponse = data[1];
+       * });
+       */
+      get: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {array} GetBucketMetadataResponse
+       * @property {object} 0 The bucket metadata.
+       * @property {object} 1 The full API response.
+       */
+      /**
+       * @callback GetBucketMetadataCallback
+       * @param {?Error} err Request error, if any.
+       * @param {object} metadata The bucket metadata.
+       * @param {object} apiResponse The full API response.
+       */
+      /**
+       * @typedef {object} GetBucketMetadataOptions Configuration options for Bucket#getMetadata().
+       * @property {string} [userProject] The ID of the project which will be
+       *     billed for the request.
+       */
+      /**
+       * Get the bucket's metadata.
+       *
+       * To set metadata, see {@link Bucket#setMetadata}.
+       *
+       * @see [Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}
+       *
+       * @method Bucket#getMetadata
+       * @param {GetBucketMetadataOptions} [options] Configuration options.
+       * @param {GetBucketMetadataCallback} [callback] Callback function.
+       * @returns {Promise<GetBucketMetadataResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const bucket = storage.bucket('albums');
+       *
+       * bucket.getMetadata(function(err, metadata, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * bucket.getMetadata().then(function(data) {
+       *   const metadata = data[0];
+       *   const apiResponse = data[1];
+       * });
+       *
+       * @example <caption>include:samples/requesterPays.js</caption>
+       * region_tag:storage_get_requester_pays_status
+       * Example of retrieving the requester pays status of a bucket:
+       */
+      getMetadata: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {object} SetBucketMetadataOptions Configuration options for Bucket#setMetadata().
+       * @property {string} [userProject] The ID of the project which will be
+       *     billed for the request.
+       */
+      /**
+       * @typedef {array} SetBucketMetadataResponse
+       * @property {object} apiResponse The full API response.
+       */
+      /**
+       * @callback SetBucketMetadataCallback
+       * @param {?Error} err Request error, if any.
+       * @param {object} metadata The bucket metadata.
+       */
+      /**
+       * Set the bucket's metadata.
+       *
+       * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
+       *
+       * @method Bucket#setMetadata
+       * @param {object<string, *>} metadata The metadata you wish to set.
+       * @param {SetBucketMetadataOptions} [options] Configuration options.
+       * @param {SetBucketMetadataCallback} [callback] Callback function.
+       * @returns {Promise<SetBucketMetadataResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const bucket = storage.bucket('albums');
+       *
+       * //-
+       * // Set website metadata field on the bucket.
+       * //-
+       * const metadata = {
+       *   website: {
+       *     mainPageSuffix: 'http://example.com',
+       *     notFoundPage: 'http://example.com/404.html'
+       *   }
+       * };
+       *
+       * bucket.setMetadata(metadata, function(err, apiResponse) {});
+       *
+       * //-
+       * // Enable versioning for your bucket.
+       * //-
+       * bucket.setMetadata({
+       *   versioning: {
+       *     enabled: true
+       *   }
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // Enable KMS encryption for objects within this bucket.
+       * //-
+       * bucket.setMetadata({
+       *   encryption: {
+       *     defaultKmsKeyName: 'projects/grape-spaceship-123/...'
+       *   }
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // Set the default event-based hold value for new objects in this
+       * // bucket.
+       * //-
+       * bucket.setMetadata({
+       *   defaultEventBasedHold: true
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // Remove object lifecycle rules.
+       * //-
+       * bucket.setMetadata({
+       *   lifecycle: null
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * bucket.setMetadata(metadata).then(function(data) {
+       *   const apiResponse = data[0];
+       * });
+       */
+      setMetadata: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
     };
 
     super({
@@ -750,7 +1040,7 @@ class Bucket extends ServiceObject {
 
     // The default behavior appends the previously-defined lifecycle rules with
     // the new ones just passed in by the user.
-    this.getMetadata((err, metadata) => {
+    this.getMetadata((err: ApiError|null, metadata: Metadata) => {
       if (err) {
         callback!(err);
         return;
@@ -1183,68 +1473,6 @@ class Bucket extends ServiceObject {
         });
   }
 
-  delete(options?: DeleteBucketOptions): Promise<DeleteBucketResponse>;
-  delete(callback: DeleteBucketCallback): void;
-  delete(options: DeleteBucketOptions, callback: DeleteBucketCallback): void;
-  /**
-   * @typedef {object} DeleteBucketOptions Configuration options.
-   * @param {string} [userProject] The ID of the project which will be
-   *     billed for the request.
-   */
-  /**
-   * @typedef {array} DeleteBucketResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback DeleteBucketCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
-   * Delete the bucket.
-   *
-   * @see [Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}
-   *
-   * @param {DeleteBucketOptions} [options] Configuration options.
-   * @param {DeleteBucketCallback} [callback] Callback function.
-   * @returns {Promise<DeleteBucketResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const bucket = storage.bucket('albums');
-   * bucket.delete(function(err, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * bucket.delete().then(function(data) {
-   *   const apiResponse = data[0];
-   * });
-   *
-   * @example <caption>include:samples/buckets.js</caption>
-   * region_tag:storage_delete_bucket
-   * Another example:
-   */
-  delete(
-      optionsOrCallback?: DeleteBucketOptions|DeleteBucketCallback,
-      callback?: DeleteBucketCallback): Promise<DeleteBucketResponse>|void {
-    let options: DeleteBucketOptions = {};
-    if (typeof optionsOrCallback === 'function') {
-      callback = optionsOrCallback;
-    } else if (optionsOrCallback) {
-      options = optionsOrCallback;
-    }
-
-    this.request(
-        {
-          method: 'DELETE',
-          uri: '',
-          qs: options,
-        },
-        callback || util.noop);
-  }
-
   deleteFiles(query?: DeleteFilesOptions): Promise<void>;
   deleteFiles(callback: DeleteFilesCallback): void;
   deleteFiles(query: DeleteFilesOptions, callback: DeleteFilesCallback): void;
@@ -1565,71 +1793,6 @@ class Bucket extends ServiceObject {
         callback || util.noop);
   }
 
-  exists(options?: BucketExistsOptions): Promise<BucketExistsResponse>;
-  exists(callback: BucketExistsCallback): void;
-  exists(options: BucketExistsOptions, callback: BucketExistsCallback): void;
-  /**
-   * @typedef {object} BucketExistsOptions Configuration options for Bucket#exists().
-   * @param {string} [userProject] The ID of the project which will be
-   *     billed for the request.
-   */
-  /**
-   * @typedef {array} BucketExistsResponse
-   * @property {boolean} 0 Whether the {@link Bucket} exists.
-   */
-  /**
-   * @callback BucketExistsCallback
-   * @param {?Error} err Request error, if any.
-   * @param {boolean} exists Whether the {@link Bucket} exists.
-   */
-  /**
-   * Check if the bucket exists.
-   *
-   * @param {BucketExistsOptions} [options] Configuration options.
-   * @param {BucketExistsCallback} [callback] Callback function.
-   * @returns {Promise<BucketExistsResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const bucket = storage.bucket('albums');
-   *
-   * bucket.exists(function(err, exists) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * bucket.exists().then(function(data) {
-   *   const exists = data[0];
-   * });
-   */
-  exists(
-      optionsOrCallback?: BucketExistsOptions|BucketExistsCallback,
-      callback?: BucketExistsCallback): Promise<BucketExistsResponse>|void {
-    let options: BucketExistsOptions = {};
-    if (typeof optionsOrCallback === 'function') {
-      callback = optionsOrCallback;
-    } else if (optionsOrCallback) {
-      options = optionsOrCallback;
-    }
-
-    options = options || {} as BucketExistsOptions;
-
-    this.get(options, (err: ApiError|null) => {
-      if (err) {
-        if (err.code === 404) {
-          callback!(null, false);
-        } else {
-          callback!(err);
-        }
-
-        return;
-      }
-
-      callback!(null, true);
-    });
-  }
-
   /**
    * Create a {@link File} object. See {@link File} to see how to handle
    * the different use cases you may have.
@@ -1659,106 +1822,6 @@ class Bucket extends ServiceObject {
     }
 
     return new File(this, name, options);
-  }
-
-  get(options?: GetBucketOptions): Promise<GetBucketResponse>;
-  get(callback: GetBucketCallback): void;
-  get(options: GetBucketOptions, callback: GetBucketCallback): void;
-  /**
-   * @typedef {object} [GetBucketOptions] Configuration options for Bucket#get()
-   * @property {boolean} [autoCreate] Automatically create the object if
-   *     it does not exist. Default: `false`
-   * @property {string} [userProject] The ID of the project which will be
-   *     billed for the request.
-   */
-  /**
-   * @typedef {array} GetBucketResponse
-   * @property {Bucket} 0 The {@link Bucket}.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetBucketCallback
-   * @param {?Error} err Request error, if any.
-   * @param {Bucket} bucket The {@link Bucket}.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
-   * Get a bucket if it exists.
-   *
-   * You may optionally use this to "get or create" an object by providing an
-   * object with `autoCreate` set to `true`. Any extra configuration that is
-   * normally required for the `create` method must be contained within this
-   * object as well.
-   *
-   * @param {GetBucketOptions} [options] Configuration options.
-   * @param {GetBucketCallback} [callback] Callback function.
-   * @returns {Promise<GetBucketResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const bucket = storage.bucket('albums');
-   *
-   * bucket.get(function(err, bucket, apiResponse) {
-   *   // `bucket.metadata` has been populated.
-   * });
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * bucket.get().then(function(data) {
-   *   const bucket = data[0];
-   *   const apiResponse = data[1];
-   * });
-   */
-  get(optionsOrCallback?: GetBucketOptions|GetBucketCallback,
-      callback?: GetBucketCallback): Promise<GetBucketResponse>|void {
-    let options: GetBucketOptions = {};
-    if (typeof optionsOrCallback === 'function') {
-      callback = optionsOrCallback;
-    } else if (optionsOrCallback) {
-      options = optionsOrCallback;
-    }
-
-    const autoCreate = options.autoCreate;
-    delete options.autoCreate;
-
-    const onCreate =
-        (err: ApiError, bucket: Bucket, apiResponse: request.Response) => {
-          if (err) {
-            if (err.code === 409) {
-              this.get(options, callback!);
-              return;
-            }
-
-            callback!(err, null, apiResponse);
-            return;
-          }
-
-          callback!(null, bucket, apiResponse);
-        };
-
-    this.getMetadata(options, (err: ApiError|null, metadata: Metadata|null) => {
-      if (err) {
-        if (err.code === 404 && autoCreate) {
-          const args = [] as object[];
-
-          if (Object.keys(options).length > 0) {
-            args.push(options);
-          }
-
-          args.push(onCreate);
-
-          this.create.apply(this, args);
-          return;
-        }
-
-        callback!(err, null, metadata);
-        return;
-      }
-
-      callback!(null, this, metadata);
-    });
   }
 
   getFiles(query?: GetFilesOptions): Promise<[File[]]>;
@@ -1987,86 +2050,6 @@ class Bucket extends ServiceObject {
 
       callback!(null, metadata.labels || {});
     });
-  }
-
-  getMetadata(options?: GetBucketMetadataOptions):
-      Promise<GetBucketMetadataResponse>;
-  getMetadata(callback: GetBucketMetadataCallback): void;
-  getMetadata(
-      options: GetBucketMetadataOptions,
-      callback: GetBucketMetadataCallback): void;
-  /**
-   * @typedef {array} GetBucketMetadataResponse
-   * @property {object} 0 The bucket metadata.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetBucketMetadataCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} metadata The bucket metadata.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
-   * @typedef {object} GetBucketMetadataOptions Configuration options for Bucket#getMetadata().
-   * @property {string} [userProject] The ID of the project which will be
-   *     billed for the request.
-   */
-  /**
-   * Get the bucket's metadata.
-   *
-   * To set metadata, see {@link Bucket#setMetadata}.
-   *
-   * @see [Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}
-   *
-   * @param {GetBucketMetadataOptions} [options] Configuration options.
-   * @param {GetBucketMetadataCallback} [callback] Callback function.
-   * @returns {Promise<GetBucketMetadataResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const bucket = storage.bucket('albums');
-   *
-   * bucket.getMetadata(function(err, metadata, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * bucket.getMetadata().then(function(data) {
-   *   const metadata = data[0];
-   *   const apiResponse = data[1];
-   * });
-   *
-   * @example <caption>include:samples/requesterPays.js</caption>
-   * region_tag:storage_get_requester_pays_status
-   * Example of retrieving the requester pays status of a bucket:
-   */
-  getMetadata(
-      optionsOrCallback?: GetBucketMetadataOptions|GetBucketMetadataCallback,
-      callback?: GetBucketMetadataCallback): Promise<GetBucketMetadataResponse>|
-      void {
-    let options: GetBucketMetadataOptions = {};
-    if (typeof optionsOrCallback === 'function') {
-      callback = optionsOrCallback;
-    } else if (optionsOrCallback) {
-      options = optionsOrCallback;
-    }
-
-    this.request(
-        {
-          uri: '',
-          qs: options,
-        },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, resp);
-            return;
-          }
-
-          this.metadata = resp;
-
-          callback!(null, this.metadata, resp);
-        });
   }
 
   getNotifications(options?: GetNotificationsOptions):
@@ -2340,7 +2323,8 @@ class Bucket extends ServiceObject {
           options, done as MakeAllFilesPublicPrivateCallback);
     };
 
-    async.series([setPredefinedAcl, makeFilesPrivate], callback!);
+    // tslint:disable-next-line no-any
+    async.series([setPredefinedAcl, makeFilesPrivate] as any, callback as any);
   }
 
   makePublic(options?: MakeBucketPublicOptions):
@@ -2534,7 +2518,8 @@ class Bucket extends ServiceObject {
         callback!);
   }
 
-  request(reqOpts: DecorateRequestOptions): Promise<request.Response>;
+  request(reqOpts: DecorateRequestOptions):
+      Promise<[ResponseBody, request.Response]>;
   request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
       void;
   /**
@@ -2546,7 +2531,7 @@ class Bucket extends ServiceObject {
    * @param {function} callback - The callback function.
    */
   request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
-      void|Promise<request.Response> {
+      void|Promise<[ResponseBody, request.Response]> {
     if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
       reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
     }
@@ -2619,123 +2604,6 @@ class Bucket extends ServiceObject {
     callback = callback || util.noop;
 
     this.setMetadata({labels}, options, callback);
-  }
-
-  setMetadata(metadata: Metadata, options?: SetBucketMetadataOptions):
-      Promise<SetBucketMetadataResponse>;
-  setMetadata(
-      metadata: Metadata, options: SetBucketMetadataOptions,
-      callback: SetBucketMetadataCallback): void;
-  setMetadata(metadata: Metadata, callback: SetBucketMetadataCallback): void;
-  /**
-   * @typedef {object} SetBucketMetadataOptions Configuration options for Bucket#setMetadata().
-   * @property {string} [userProject] The ID of the project which will be
-   *     billed for the request.
-   */
-  /**
-   * @typedef {array} SetBucketMetadataResponse
-   * @property {object} apiResponse The full API response.
-   */
-  /**
-   * @callback SetBucketMetadataCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} metadata The bucket metadata.
-   */
-  /**
-   * Set the bucket's metadata.
-   *
-   * @see [Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}
-   *
-   * @param {object<string, *>} metadata The metadata you wish to set.
-   * @param {SetBucketMetadataOptions} [options] Configuration options.
-   * @param {SetBucketMetadataCallback} [callback] Callback function.
-   * @returns {Promise<SetBucketMetadataResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const bucket = storage.bucket('albums');
-   *
-   * //-
-   * // Set website metadata field on the bucket.
-   * //-
-   * const metadata = {
-   *   website: {
-   *     mainPageSuffix: 'http://example.com',
-   *     notFoundPage: 'http://example.com/404.html'
-   *   }
-   * };
-   *
-   * bucket.setMetadata(metadata, function(err, apiResponse) {});
-   *
-   * //-
-   * // Enable versioning for your bucket.
-   * //-
-   * bucket.setMetadata({
-   *   versioning: {
-   *     enabled: true
-   *   }
-   * }, function(err, apiResponse) {});
-   *
-   * //-
-   * // Enable KMS encryption for objects within this bucket.
-   * //-
-   * bucket.setMetadata({
-   *   encryption: {
-   *     defaultKmsKeyName: 'projects/grape-spaceship-123/...'
-   *   }
-   * }, function(err, apiResponse) {});
-   *
-   * //-
-   * // Set the default event-based hold value for new objects in this bucket.
-   * //-
-   * bucket.setMetadata({
-   *   defaultEventBasedHold: true
-   * }, function(err, apiResponse) {});
-   *
-   * //-
-   * // Remove object lifecycle rules.
-   * //-
-   * bucket.setMetadata({
-   *   lifecycle: null
-   * }, function(err, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * bucket.setMetadata(metadata).then(function(data) {
-   *   const apiResponse = data[0];
-   * });
-   */
-  setMetadata(
-      metadata: Metadata,
-      optionsOrCallback?: SetBucketMetadataOptions|SetBucketMetadataCallback,
-      callback?: SetBucketMetadataCallback): Promise<SetBucketMetadataResponse>|
-      void {
-    const options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-
-    callback = callback || util.noop;
-
-    this.request(
-        {
-          method: 'PATCH',
-          uri: '',
-          json: metadata,
-          qs: options,
-        },
-        (err, resp) => {
-          if (err) {
-            callback!(err, resp);
-            return;
-          }
-
-          this.metadata = resp;
-
-          callback!(null, resp);
-        });
   }
 
   setRetentionPeriod(duration: number): Promise<SetBucketMetadataResponse>;
@@ -2873,6 +2741,21 @@ class Bucket extends ServiceObject {
    */
   setUserProject(userProject: string) {
     this.userProject = userProject;
+
+    const methods =
+        ['create', 'delete', 'exists', 'get', 'getMetadata', 'setMetadata'];
+    methods.forEach(method => {
+      const methodConfig = this.methods[method];
+      if (typeof methodConfig === 'object') {
+        if (typeof methodConfig.reqOpts === 'object') {
+          extend(methodConfig.reqOpts.qs, {userProject});
+        } else {
+          methodConfig.reqOpts = {
+            qs: {userProject},
+          };
+        }
+      }
+    });
   }
 
   upload(pathString: string, options?: UploadOptions): Promise<UploadResponse>;

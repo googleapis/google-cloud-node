@@ -21,7 +21,8 @@ import * as r from 'request';
 
 export interface AclOptions {
   pathPrefix: string;
-  request: typeof r;
+  request:
+      (reqOpts: DecorateRequestOptions, callback: BodyResponseCallback) => void;
 }
 
 export type GetAclResponse =
@@ -378,7 +379,8 @@ class AclRoleAccessorMethods {
 class Acl extends AclRoleAccessorMethods {
   default !: Acl;
   pathPrefix: string;
-  request_: typeof r;
+  request_:
+      (reqOpts: DecorateRequestOptions, callback: BodyResponseCallback) => void;
 
   constructor(options: AclOptions) {
     super();

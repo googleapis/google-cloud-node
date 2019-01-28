@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {BodyResponseCallback, DecorateRequestOptions, GetConfig, Metadata, ServiceObject, util} from '@google-cloud/common';
+import {BodyResponseCallback, DecorateRequestOptions, GetConfig, Interceptor, Metadata, ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 
 import compressible = require('compressible');
@@ -42,7 +42,7 @@ import {teenyRequest} from 'teeny-request';
 import {Storage} from './storage';
 import {Bucket} from './bucket';
 import {Acl} from './acl';
-import {ResponseBody} from '@google-cloud/common/build/src/util';
+import {ResponseBody, ApiError} from '@google-cloud/common/build/src/util';
 import {normalize} from './util';
 
 export type GetExpirationDateResponse = [Date];
@@ -343,7 +343,7 @@ class RequestError extends Error {
  *
  * @class
  */
-class File extends ServiceObject {
+class File extends ServiceObject<File> {
   /**
    * Cloud Storage uses access control lists (ACLs) to manage object and
    * bucket access. ACLs are the mechanism you use to share objects with other
@@ -395,13 +395,12 @@ class File extends ServiceObject {
   userProject?: string;
   name: string;
   generation?: number;
-  requestQueryObject?: {generation: number};
+  parent!: Bucket;
 
   private encryptionKey?: string|Buffer;
   private encryptionKeyBase64?: string;
   private encryptionKeyHash?: string;
-  private encryptionKeyInterceptor?:
-      {request: (reqOpts: r.OptionsWithUri) => r.OptionsWithUri;};
+  private encryptionKeyInterceptor?: Interceptor;
 
   /**
    * @typedef {object} FileOptions Options passed to the File constructor.
@@ -430,22 +429,314 @@ class File extends ServiceObject {
   constructor(bucket: Bucket, name: string, options: FileOptions = {}) {
     name = name.replace(/^\/+/, '');
 
+    const requestQueryObject: {generation?: number, userProject?: string} = {};
+
+    let generation: number;
+    if (options.generation != null) {
+      if (typeof options.generation === 'string') {
+        generation = Number(options.generation);
+      } else {
+        generation = options.generation;
+      }
+      if (!isNaN(generation)) {
+        requestQueryObject.generation = generation;
+      }
+    }
+
+    const userProject = options.userProject || bucket.userProject;
+    if (typeof userProject === 'string') {
+      requestQueryObject.userProject = userProject;
+    }
+
+    const methods = {
+      /**
+       * @typedef {array} DeleteFileResponse
+       * @property {object} 0 The full API response.
+       */
+      /**
+       * @callback DeleteFileCallback
+       * @param {?Error} err Request error, if any.
+       * @param {object} apiResponse The full API response.
+       */
+      /**
+       * Delete the file.
+       *
+       * @see [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
+       *
+       * @method File#delete
+       * @param {object} [options] Configuration options.
+       * @param {string} [options.userProject] The ID of the project which will be
+       *     billed for the request.
+       * @param {DeleteFileCallback} [callback] Callback function.
+       * @returns {Promise<DeleteFileResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       *
+       * const file = myBucket.file('my-file');
+       * file.delete(function(err, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * file.delete().then(function(data) {
+       *   const apiResponse = data[0];
+       * });
+       *
+       * @example <caption>include:samples/files.js</caption>
+       * region_tag:storage_delete_file
+       * Another example:
+       */
+      delete: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {array} FileExistsResponse
+       * @property {boolean} 0 Whether the {@link File} exists.
+       */
+      /**
+       * @callback FileExistsCallback
+       * @param {?Error} err Request error, if any.
+       * @param {boolean} exists Whether the {@link File} exists.
+       */
+      /**
+       * Check if the file exists.
+       *
+       * @method File#exists
+       * @param {options} [options] Configuration options.
+       * @param {string} [options.userProject] The ID of the project which will be
+       *     billed for the request.
+       * @param {FileExistsCallback} [callback] Callback function.
+       * @returns {Promise<FileExistsResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       *
+       * const file = myBucket.file('my-file');
+       *
+       * file.exists(function(err, exists) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * file.exists().then(function(data) {
+       *   const exists = data[0];
+       * });
+       */
+      exists: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {array} GetFileResponse
+       * @property {File} 0 The {@link File}.
+       * @property {object} 1 The full API response.
+       */
+      /**
+       * @callback GetFileCallback
+       * @param {?Error} err Request error, if any.
+       * @param {File} file The {@link File}.
+       * @param {object} apiResponse The full API response.
+       */
+      /**
+       * Get a file object and its metadata if it exists.
+       *
+       * @method File#get
+       * @param {options} [options] Configuration options.
+       * @param {string} [options.userProject] The ID of the project which will be
+       *     billed for the request.
+       * @param {GetFileCallback} [callback] Callback function.
+       * @returns {Promise<GetFileResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       *
+       * const file = myBucket.file('my-file');
+       *
+       * file.get(function(err, file, apiResponse) {
+       *   // file.metadata` has been populated.
+       * });
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * file.get().then(function(data) {
+       *   const file = data[0];
+       *   const apiResponse = data[1];
+       * });
+       */
+      get: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {array} GetFileMetadataResponse
+       * @property {object} 0 The {@link File} metadata.
+       * @property {object} 1 The full API response.
+       */
+      /**
+       * @callback GetFileMetadataCallback
+       * @param {?Error} err Request error, if any.
+       * @param {object} metadata The {@link File} metadata.
+       * @param {object} apiResponse The full API response.
+       */
+      /**
+       * Get the file's metadata.
+       *
+       * @see [Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}
+       *
+       * @method File#getMetadata
+       * @param {object} [options] Configuration options.
+       * @param {string} [options.userProject] The ID of the project which will be
+       *     billed for the request.
+       * @param {GetFileMetadataCallback} [callback] Callback function.
+       * @returns {Promise<GetFileMetadataResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       *
+       * const file = myBucket.file('my-file');
+       *
+       * file.getMetadata(function(err, metadata, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * file.getMetadata().then(function(data) {
+       *   const metadata = data[0];
+       *   const apiResponse = data[1];
+       * });
+       *
+       * @example <caption>include:samples/files.js</caption>
+       * region_tag:storage_get_metadata
+       * Another example:
+       */
+      getMetadata: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+      /**
+       * @typedef {object} SetFileMetadataOptions Configuration options for File#setMetadata().
+       * @param {string} [userProject] The ID of the project which will be billed for the request.
+       */
+      /**
+       * @callback SetFileMetadataCallback
+       * @param {?Error} err Request error, if any.
+       * @param {object} apiResponse The full API response.
+       */
+      /**
+       * @typedef {array} SetFileMetadataResponse
+       * @property {object} 0 The full API response.
+       */
+      /**
+       * Merge the given metadata with the current remote file's metadata. This
+       * will set metadata if it was previously unset or update previously set
+       * metadata. To unset previously set metadata, set its value to null.
+       *
+       * You can set custom key/value pairs in the metadata key of the given
+       * object, however the other properties outside of this object must adhere
+       * to the [official API documentation](https://goo.gl/BOnnCK).
+       *
+       * NOTE: multiple calls to setMetadata in parallel might result in
+       * unpredictable results. See [issue]{@link
+       * https://github.com/googleapis/nodejs-storage/issues/274}.
+       *
+       * See the examples below for more information.
+       *
+       * @see [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
+       *
+       * @method File#setMetadata
+       * @param {object} [metadata] The metadata you wish to update.
+       * @param {SetFileMetadataOptions} [options] Configuration options.
+       * @param {SetFileMetadataCallback} [callback] Callback function.
+       * @returns {Promise<SetFileMetadataResponse>}
+       *
+       * @example
+       * const {Storage} = require('@google-cloud/storage');
+       * const storage = new Storage();
+       * const myBucket = storage.bucket('my-bucket');
+       *
+       * const file = myBucket.file('my-file');
+       *
+       * const metadata = {
+       *   contentType: 'application/x-font-ttf',
+       *   metadata: {
+       *     my: 'custom',
+       *     properties: 'go here'
+       *   }
+       * };
+       *
+       * file.setMetadata(metadata, function(err, apiResponse) {});
+       *
+       * // Assuming current metadata = { hello: 'world', unsetMe: 'will do' }
+       * file.setMetadata({
+       *   metadata: {
+       *     abc: '123', // will be set.
+       *     unsetMe: null, // will be unset (deleted).
+       *     hello: 'goodbye' // will be updated from 'world' to 'goodbye'.
+       *   }
+       * }, function(err, apiResponse) {
+       *   // metadata should now be { abc: '123', hello: 'goodbye' }
+       * });
+       *
+       * //-
+       * // Set a temporary hold on this file from its bucket's retention period
+       * // configuration.
+       * //
+       * file.setMetadata({
+       *   temporaryHold: true
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // Alternatively, you may set a temporary hold. This will follow the
+       * // same behavior as an event-based hold, with the exception that the
+       * // bucket's retention policy will not renew for this file from the time
+       * // the hold is released.
+       * //-
+       * file.setMetadata({
+       *   eventBasedHold: true
+       * }, function(err, apiResponse) {});
+       *
+       * //-
+       * // If the callback is omitted, we'll return a Promise.
+       * //-
+       * file.setMetadata(metadata).then(function(data) {
+       *   const apiResponse = data[0];
+       * });
+       */
+      setMetadata: {
+        reqOpts: {
+          qs: requestQueryObject,
+        },
+      },
+    };
+
     super({
       parent: bucket,
       baseUrl: '/o',
       id: encodeURIComponent(name),
       requestModule: teenyRequest as typeof r,
+      methods,
     });
 
     this.bucket = bucket;
     // tslint:disable-next-line:no-any
     this.storage = (bucket as any).parent as Storage;
 
-    this.kmsKeyName = options.kmsKeyName;
-    this.userProject = options.userProject || bucket.userProject;
-
-    this.name = name;
-
+    // @TODO Can this duplicate code from above be avoided?
     if (options.generation != null) {
       let generation: number;
       if (typeof options.generation === 'string') {
@@ -453,14 +744,14 @@ class File extends ServiceObject {
       } else {
         generation = options.generation;
       }
-
       if (!isNaN(generation)) {
         this.generation = generation;
-        this.requestQueryObject = {
-          generation: this.generation,
-        };
       }
     }
+    this.kmsKeyName = options.kmsKeyName;
+    this.userProject = userProject;
+
+    this.name = name;
 
     if (options.encryptionKey) {
       this.setEncryptionKey(options.encryptionKey);
@@ -1127,7 +1418,7 @@ class File extends ServiceObject {
           predefinedAcl: options.predefinedAcl,
           private: options.private,
           public: options.public,
-          userProject: options.userProject,
+          userProject: options.userProject || this.userProject,
         },
         callback!);
   }
@@ -1395,7 +1686,7 @@ class File extends ServiceObject {
       }
 
       if (failed) {
-        this.delete(err => {
+        this.delete((err: ApiError) => {
           let code;
           let message;
 
@@ -1438,59 +1729,6 @@ class File extends ServiceObject {
     });
 
     return stream as Writable;
-  }
-
-  delete(options?: DeleteFileOptions): Promise<DeleteFileResponse>;
-  delete(options: DeleteFileOptions, callback: DeleteFileCallback): void;
-  delete(callback: DeleteFileCallback): void;
-  /**
-   * @typedef {array} DeleteFileResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * @callback DeleteFileCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
-   * Delete the file.
-   *
-   * @see [Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}
-   *
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {DeleteFileCallback} [callback] Callback function.
-   * @returns {Promise<DeleteFileResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   *
-   * const file = myBucket.file('my-file');
-   * file.delete(function(err, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * file.delete().then(function(data) {
-   *   const apiResponse = data[0];
-   * });
-   *
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_delete_file
-   * Another example:
-   */
-  delete(
-      optionsOrCallback?: DeleteFileOptions|DeleteFileCallback,
-      callback?: DeleteFileCallback): void|Promise<DeleteFileResponse> {
-    let options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    options = Object.assign({}, this.requestQueryObject, options);
-    callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-    (this.parent as ServiceObject).delete.call(this, options, callback);
   }
 
   download(options?: DownloadOptions): Promise<DownloadResponse>;
@@ -1586,53 +1824,6 @@ class File extends ServiceObject {
     }
   }
 
-  exists(options?: FileExistsOptions): Promise<FileExistsResponse>;
-  exists(options: FileExistsOptions, callback: FileExistsCallback): void;
-  exists(callback: FileExistsCallback): void;
-  /**
-   * @typedef {array} FileExistsResponse
-   * @property {boolean} 0 Whether the {@link File} exists.
-   */
-  /**
-   * @callback FileExistsCallback
-   * @param {?Error} err Request error, if any.
-   * @param {boolean} exists Whether the {@link File} exists.
-   */
-  /**
-   * Check if the file exists.
-   *
-   * @param {options} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {FileExistsCallback} [callback] Callback function.
-   * @returns {Promise<FileExistsResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   *
-   * const file = myBucket.file('my-file');
-   *
-   * file.exists(function(err, exists) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * file.exists().then(function(data) {
-   *   const exists = data[0];
-   * });
-   */
-  exists(
-      optionsOrCallback?: FileExistsOptions|FileExistsCallback,
-      callback?: FileExistsCallback): Promise<FileExistsResponse>|void {
-    const options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-    (this.parent as ServiceObject).exists.call(this, options, callback);
-  }
-
   /**
    * The Storage API allows you to use a custom key for server-side encryption.
    *
@@ -1694,64 +1885,13 @@ class File extends ServiceObject {
         reqOpts.headers['x-goog-encryption-key'] = this.encryptionKeyBase64;
         reqOpts.headers['x-goog-encryption-key-sha256'] =
             this.encryptionKeyHash;
-        return reqOpts;
+        return reqOpts as DecorateRequestOptions;
       },
     };
 
     this.interceptors.push(this.encryptionKeyInterceptor!);
 
     return this;
-  }
-
-  get(options?: GetFileOptions): Promise<GetFileResponse>;
-  get(options: GetFileOptions, callback: GetFileCallback): void;
-  get(callback: GetFileCallback): void;
-  /**
-   * @typedef {array} GetFileResponse
-   * @property {File} 0 The {@link File}.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetFileCallback
-   * @param {?Error} err Request error, if any.
-   * @param {File} file The {@link File}.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
-   * Get a file object and its metadata if it exists.
-   *
-   * @param {options} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {GetFileCallback} [callback] Callback function.
-   * @returns {Promise<GetFileResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   *
-   * const file = myBucket.file('my-file');
-   *
-   * file.get(function(err, file, apiResponse) {
-   *   // file.metadata` has been populated.
-   * });
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * file.get().then(function(data) {
-   *   const file = data[0];
-   *   const apiResponse = data[1];
-   * });
-   */
-  get(optionsOrCallback?: GetFileOptions|GetFileCallback,
-      callback?: GetFileCallback): void|Promise<GetFileResponse> {
-    const options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-    (this.parent as ServiceObject).get.call(this, options, callback);
   }
 
   getExpirationDate(): Promise<GetExpirationDateResponse>;
@@ -1786,80 +1926,22 @@ class File extends ServiceObject {
    */
   getExpirationDate(callback?: GetExpirationDateCallback):
       void|Promise<GetExpirationDateResponse> {
-    this.getMetadata((err, metadata, apiResponse) => {
-      if (err) {
-        callback!(err, null, apiResponse);
-        return;
-      }
+    this.getMetadata(
+        (err: ApiError|null, metadata: Metadata, apiResponse: r.Response) => {
+          if (err) {
+            callback!(err, null, apiResponse);
+            return;
+          }
 
-      if (!metadata.retentionExpirationTime) {
-        const error = new Error('An expiration time is not available.');
-        callback!(error, null, apiResponse);
-        return;
-      }
+          if (!metadata.retentionExpirationTime) {
+            const error = new Error('An expiration time is not available.');
+            callback!(error, null, apiResponse);
+            return;
+          }
 
-      callback!(null, new Date(metadata.retentionExpirationTime), apiResponse);
-    });
-  }
-
-  getMetadata(options?: GetFileMetadataOptions):
-      Promise<GetFileMetadataResponse>;
-  getMetadata(
-      options: GetFileMetadataOptions, callback: GetFileMetadataCallback): void;
-  getMetadata(callback: GetFileMetadataCallback): void;
-  /**
-   * @typedef {array} GetFileMetadataResponse
-   * @property {object} 0 The {@link File} metadata.
-   * @property {object} 1 The full API response.
-   */
-  /**
-   * @callback GetFileMetadataCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} metadata The {@link File} metadata.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
-   * Get the file's metadata.
-   *
-   * @see [Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}
-   *
-   * @param {object} [options] Configuration options.
-   * @param {string} [options.userProject] The ID of the project which will be
-   *     billed for the request.
-   * @param {GetFileMetadataCallback} [callback] Callback function.
-   * @returns {Promise<GetFileMetadataResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   *
-   * const file = myBucket.file('my-file');
-   *
-   * file.getMetadata(function(err, metadata, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * file.getMetadata().then(function(data) {
-   *   const metadata = data[0];
-   *   const apiResponse = data[1];
-   * });
-   *
-   * @example <caption>include:samples/files.js</caption>
-   * region_tag:storage_get_metadata
-   * Another example:
-   */
-  getMetadata(
-      optionsOrCallback?: GetFileMetadataOptions|GetFileMetadataCallback,
-      callback?: GetFileMetadataCallback):
-      void|Promise<GetFileMetadataResponse> {
-    let options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-    options = Object.assign({}, this.requestQueryObject, options);
-    (this.parent as ServiceObject).getMetadata.call(this, options, callback);
+          callback!
+              (null, new Date(metadata.retentionExpirationTime), apiResponse);
+        });
   }
 
   getSignedPolicy(options: GetSignedPolicyOptions):
@@ -2558,7 +2640,7 @@ class File extends ServiceObject {
     });
   }
 
-  request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
+  request(reqOpts: DecorateRequestOptions): Promise<[ResponseBody, r.Response]>;
   request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
       void;
   /**
@@ -2570,11 +2652,8 @@ class File extends ServiceObject {
    * @param {function} callback - The callback function.
    */
   request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
-      void|Promise<r.Response> {
-    if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
-      reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
-    }
-    return super.request(reqOpts, callback!);
+      void|Promise<[ResponseBody, r.Response]> {
+    return this.parent.request.call(this, reqOpts, callback!);
   }
 
   rotateEncryptionKey(options?: RotateEncryptionKeyOptions):
@@ -2702,117 +2781,6 @@ class File extends ServiceObject {
         .on('finish', callback!)
         .end(data);
   }
-
-  setMetadata(metadata: Metadata, options?: SetFileMetadataOptions):
-      Promise<SetFileMetadataResponse>;
-  setMetadata(metadata: Metadata, callback: SetFileMetadataCallback): void;
-  setMetadata(
-      metadata: Metadata, options: SetFileMetadataOptions,
-      callback: SetFileMetadataCallback): void;
-  /**
-   * @typedef {object} SetFileMetadataOptions Configuration options for File#setMetadata().
-   * @param {string} [userProject] The ID of the project which will be billed for the request.
-   */
-  /**
-   * @callback SetFileMetadataCallback
-   * @param {?Error} err Request error, if any.
-   * @param {object} apiResponse The full API response.
-   */
-  /**
-   * @typedef {array} SetFileMetadataResponse
-   * @property {object} 0 The full API response.
-   */
-  /**
-   * Merge the given metadata with the current remote file's metadata. This
-   * will set metadata if it was previously unset or update previously set
-   * metadata. To unset previously set metadata, set its value to null.
-   *
-   * You can set custom key/value pairs in the metadata key of the given
-   * object, however the other properties outside of this object must adhere
-   * to the [official API documentation](https://goo.gl/BOnnCK).
-   *
-   * NOTE: multiple calls to setMetadata in parallel might result in
-   * unpredictable results. See [issue]{@link
-   * https://github.com/googleapis/nodejs-storage/issues/274}.
-   *
-   * See the examples below for more information.
-   *
-   * @see [Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}
-   *
-   * @param {object} [metadata] The metadata you wish to update.
-   * @param {SetFileMetadataOptions} [options] Configuration options.
-   * @param {SetFileMetadataCallback} [callback] Callback function.
-   * @returns {Promise<SetFileMetadataResponse>}
-   *
-   * @example
-   * const {Storage} = require('@google-cloud/storage');
-   * const storage = new Storage();
-   * const myBucket = storage.bucket('my-bucket');
-   *
-   * const file = myBucket.file('my-file');
-   *
-   * const metadata = {
-   *   contentType: 'application/x-font-ttf',
-   *   metadata: {
-   *     my: 'custom',
-   *     properties: 'go here'
-   *   }
-   * };
-   *
-   * file.setMetadata(metadata, function(err, apiResponse) {});
-   *
-   * // Assuming current metadata = { hello: 'world', unsetMe: 'will do' }
-   * file.setMetadata({
-   *   metadata: {
-   *     abc: '123', // will be set.
-   *     unsetMe: null, // will be unset (deleted).
-   *     hello: 'goodbye' // will be updated from 'world' to 'goodbye'.
-   *   }
-   * }, function(err, apiResponse) {
-   *   // metadata should now be { abc: '123', hello: 'goodbye' }
-   * });
-   *
-   * //-
-   * // Set a temporary hold on this file from its bucket's retention period
-   * // configuration.
-   * //
-   * file.setMetadata({
-   *   temporaryHold: true
-   * }, function(err, apiResponse) {});
-   *
-   * //-
-   * // Alternatively, you may set a temporary hold. This will follow the same
-   * // behavior as an event-based hold, with the exception that the bucket's
-   * // retention policy will not renew for this file from the time the hold is
-   * // released.
-   * //-
-   * file.setMetadata({
-   *   eventBasedHold: true
-   * }, function(err, apiResponse) {});
-   *
-   * //-
-   * // If the callback is omitted, we'll return a Promise.
-   * //-
-   * file.setMetadata(metadata).then(function(data) {
-   *   const apiResponse = data[0];
-   * });
-   */
-  setMetadata(
-      metadata: Metadata,
-      optionsOrCallback?: SetFileMetadataOptions|SetFileMetadataCallback,
-      callback?: SetFileMetadataCallback): Promise<SetFileMetadataResponse>|
-      void {
-    callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
-    let options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-
-    options = Object.assign({}, this.requestQueryObject, options);
-
-    // tslint:disable-next-line:no-any
-    (this.parent as any).setMetadata.call(this, metadata, options, callback!);
-  }
-
   setStorageClass(storageClass: string, options?: SetStorageClassOptions):
       Promise<SetStorageClassResponse>;
   setStorageClass(
@@ -2910,7 +2878,7 @@ class File extends ServiceObject {
    * file.setUserProject('grape-spaceship-123');
    */
   setUserProject(userProject: string): void {
-    this.userProject = userProject;
+    this.bucket.setUserProject.call(this, userProject);
   }
 
   /**
@@ -2944,7 +2912,7 @@ class File extends ServiceObject {
       private: options.private,
       public: options.public,
       uri: options.uri,
-      userProject: options.userProject,
+      userProject: options.userProject || this.userProject,
     });
 
     uploadStream
@@ -2996,8 +2964,8 @@ class File extends ServiceObject {
       reqOpts.qs.kmsKeyName = this.kmsKeyName;
     }
 
-    if (options.userProject) {
-      reqOpts.qs.userProject = options.userProject;
+    if (options.userProject || this.userProject) {
+      reqOpts.qs.userProject = options.userProject || this.userProject;
     }
 
     if (options.predefinedAcl) {
