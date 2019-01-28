@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.4.0
+
+01-28-2019 12:13 PST
+
+### New Features
+- fix: `expires` can be a Date, string, or number ([#548](https://github.com/googleapis/nodejs-storage/pull/548))
+
+### Dependencies
+- deps: upgrade nodejs-common ([#582](https://github.com/googleapis/nodejs-storage/pull/582))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#586](https://github.com/googleapis/nodejs-storage/pull/586))
+- fix(deps): update dependency @google-cloud/pubsub to ^0.23.0 ([#583](https://github.com/googleapis/nodejs-storage/pull/583))
+- fix(deps): update dependency concat-stream to v2 ([#563](https://github.com/googleapis/nodejs-storage/pull/563))
+
+### Documentation
+- docs(samples): Bucket Policy Only Samples ([#557](https://github.com/googleapis/nodejs-storage/pull/557))
+- fix(docs): move jsdoc away from interface ([#565](https://github.com/googleapis/nodejs-storage/pull/565))
+
+### Internal / Testing Changes
+- test: Bucket Policy Only related system test ([#579](https://github.com/googleapis/nodejs-storage/pull/579))
+- build: check broken links in generated docs ([#567](https://github.com/googleapis/nodejs-storage/pull/567))
+- build: include only build/src in compiled source ([#572](https://github.com/googleapis/nodejs-storage/pull/572))
+
 ## v2.3.4
 
 12-19-2018 14:21 PST
