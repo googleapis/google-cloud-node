@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## v0.8.1
+
+01-28-2019 13:24 PST
+
+### Documentation
+- fix(docs): dialogflow isnt published under @google-cloud scope ([#266](https://github.com/googleapis/nodejs-dialogflow/pull/266))
+
 ## v0.8.0
 
 01-28-2019 11:05 PST
