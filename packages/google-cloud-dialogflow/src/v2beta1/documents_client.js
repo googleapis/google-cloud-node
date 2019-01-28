@@ -283,7 +283,7 @@ class DocumentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
@@ -371,7 +371,7 @@ class DocumentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
@@ -417,7 +417,7 @@ class DocumentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
@@ -471,7 +471,7 @@ class DocumentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.
@@ -576,7 +576,7 @@ class DocumentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.DocumentsClient({
    *   // optional auth parameters.

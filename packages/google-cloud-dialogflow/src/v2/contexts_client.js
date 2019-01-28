@@ -254,7 +254,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
@@ -342,7 +342,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
@@ -387,7 +387,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
@@ -438,7 +438,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
@@ -495,7 +495,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
@@ -539,7 +539,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.
@@ -578,7 +578,7 @@ class ContextsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.ContextsClient({
    *   // optional auth parameters.

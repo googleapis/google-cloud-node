@@ -258,7 +258,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -354,7 +354,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -403,7 +403,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -458,7 +458,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -524,7 +524,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.
@@ -576,7 +576,7 @@ class SessionEntityTypesClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.SessionEntityTypesClient({
    *   // optional auth parameters.

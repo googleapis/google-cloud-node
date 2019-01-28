@@ -296,7 +296,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
@@ -367,7 +367,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
@@ -455,7 +455,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
@@ -503,7 +503,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
@@ -601,7 +601,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
@@ -717,7 +717,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.
@@ -832,7 +832,7 @@ class AgentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.AgentsClient({
    *   // optional auth parameters.

@@ -235,7 +235,7 @@ class SessionsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.SessionsClient({
    *   // optional auth parameters.
@@ -281,7 +281,7 @@ class SessionsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2.SessionsClient({
    *   // optional auth parameters.

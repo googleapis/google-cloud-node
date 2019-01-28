@@ -326,7 +326,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -424,7 +424,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -479,7 +479,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -540,7 +540,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -608,7 +608,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -657,7 +657,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -723,7 +723,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
@@ -831,7 +831,7 @@ class IntentsClient {
    *
    * @example
    *
-   * const dialogflow = require('dialogflow.v2beta1');
+   * const dialogflow = require('@google-cloud/dialogflow');
    *
    * const client = new dialogflow.v2beta1.IntentsClient({
    *   // optional auth parameters.
