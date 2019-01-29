@@ -347,8 +347,12 @@ export class Storage extends Service {
     return new Channel(this, id, resourceId);
   }
 
-  createBucket(name: string): Promise<CreateBucketResponse>;
+  createBucket(name: string, metadata?: CreateBucketRequest):
+      Promise<CreateBucketResponse>;
   createBucket(name: string, callback: BucketCallback): void;
+  createBucket(
+      name: string, metadata: CreateBucketRequest,
+      callback: BucketCallback): void;
   createBucket(
       name: string, metadata: CreateBucketRequest,
       callback: BucketCallback): void;
