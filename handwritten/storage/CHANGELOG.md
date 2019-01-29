@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.4.1
+
+01-29-2019 13:05 PST
+
+### Implementation Changes
+- fix(ts): fix Storage.createBucket overloaded signature ([#589](https://github.com/googleapis/nodejs-storage/pull/589))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/pubsub to ^0.24.0 ([#588](https://github.com/googleapis/nodejs-storage/pull/588))
+
 ## v2.4.0
 
 01-28-2019 12:13 PST
