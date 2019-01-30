@@ -14,8 +14,8 @@
 
 'use strict';
 
-const PredictionServiceClient = require('./prediction_service_client');
 const AutoMlClient = require('./auto_ml_client');
+const PredictionServiceClient = require('./prediction_service_client');
 
-module.exports.PredictionServiceClient = PredictionServiceClient;
 module.exports.AutoMlClient = AutoMlClient;
+module.exports.PredictionServiceClient = PredictionServiceClient;

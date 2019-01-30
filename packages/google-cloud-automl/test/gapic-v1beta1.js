@@ -22,76 +22,6 @@ const FAKE_STATUS_CODE = 1;
 const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
-describe('PredictionServiceClient', () => {
-  describe('predict', () => {
-    it('invokes predict without error', done => {
-      const client = new automlModule.v1beta1.PredictionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.modelPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[MODEL]'
-      );
-      const payload = {};
-      const request = {
-        name: formattedName,
-        payload: payload,
-      };
-
-      // Mock response
-      const expectedResponse = {};
-
-      // Mock Grpc layer
-      client._innerApiCalls.predict = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.predict(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes predict with error', done => {
-      const client = new automlModule.v1beta1.PredictionServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.modelPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[MODEL]'
-      );
-      const payload = {};
-      const request = {
-        name: formattedName,
-        payload: payload,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.predict = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.predict(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-});
 describe('AutoMlClient', () => {
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
@@ -1207,6 +1137,76 @@ describe('AutoMlClient', () => {
       );
 
       client.listModelEvaluations(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+});
+describe('PredictionServiceClient', () => {
+  describe('predict', () => {
+    it('invokes predict without error', done => {
+      const client = new automlModule.v1beta1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const payload = {};
+      const request = {
+        name: formattedName,
+        payload: payload,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.predict = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.predict(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes predict with error', done => {
+      const client = new automlModule.v1beta1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.modelPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[MODEL]'
+      );
+      const payload = {};
+      const request = {
+        name: formattedName,
+        payload: payload,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.predict = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.predict(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
