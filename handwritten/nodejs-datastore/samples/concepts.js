@@ -1125,7 +1125,7 @@ class Transaction extends TestHelper {
 
     // [START datastore_transactional_single_entity_group_read_only]
     async function getTaskListEntities() {
-      const transaction = datastore.transaction();
+      const transaction = datastore.transaction({readOnly: true});
       try {
         const taskListKey = datastore.key(['TaskList', 'default']);
 
