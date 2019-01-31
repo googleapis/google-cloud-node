@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## v0.2.0
+
+01-31-2019 10:32 PST
+
+### Implementation Changes
+- refactor: remove unused IAM protobuf objects ([#83](https://github.com/googleapis/nodejs-asset/pull/83))
+- refactor: drop requirement of setting GCLOUD_PROJECT ([#81](https://github.com/googleapis/nodejs-asset/pull/81))
+
+### New Features
+- fix(proto): add support for folders ([#90](https://github.com/googleapis/nodejs-asset/pull/90))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#94](https://github.com/googleapis/nodejs-asset/pull/94))
+
+### Documentation
+- fix(docs): www discovery link ([#87](https://github.com/googleapis/nodejs-asset/pull/87))
+- fix(docs): broken links in README.md ([#84](https://github.com/googleapis/nodejs-asset/pull/84))
+
 ## v0.1.1
 
 12-04-2018 14:41 PST
