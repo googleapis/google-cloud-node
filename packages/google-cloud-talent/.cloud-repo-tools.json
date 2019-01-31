@@ -1,0 +1,8 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "talent",
+  "client_reference_url": "https://cloud.google.com/talent-solution/job-search/docs",
+  "release_quality": "alpha",
+  "samples": []
+}

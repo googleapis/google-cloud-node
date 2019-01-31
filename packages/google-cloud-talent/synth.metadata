@@ -1,0 +1,39 @@
+{
+  "updateTime": "2019-01-31T22:29:39.001614Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.16.7",
+        "dockerImage": "googleapis/artman@sha256:d6c8ced606eb49973ca95d2af7c55a681acc042db0f87d135968349e7bf6dd80"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "acb5253cd11cd43cab93eb153d6e48ba0fa5303d",
+        "internalRef": "231786007"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.1.16"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "talent",
+        "apiVersion": "v4beta1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/talent/artman_jobs_v4beta1.yaml"
+      }
+    }
+  ]
+}

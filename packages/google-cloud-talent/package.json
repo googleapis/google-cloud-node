@@ -1,0 +1,65 @@
+{
+  "name": "@google-cloud/talent",
+  "description": "Cloud Talent Solution API client for Node.js",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": "googleapis/nodejs-talent",
+  "main": "src/index.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google jobs",
+    "jobs",
+    "Cloud Talent Solution API"
+  ],
+  "scripts": {
+    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
+    "docs": "jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "eslint '**/*.js'",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
+    "test-no-cover": "mocha test/*.js",
+    "test": "npm run cover",
+    "fix": "eslint --fix '**/*.js'"
+  },
+  "dependencies": {
+    "google-gax": "^0.23.0",
+    "lodash.merge": "^4.6.1",
+    "lodash.union": "^4.6.0"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^3.0.0",
+    "@google-cloud/storage": "^2.0.0",
+    "codecov": "^3.0.2",
+    "eslint": "^5.0.1",
+    "eslint-config-prettier": "^3.0.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "intelli-espower-loader": "^1.0.1",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.0",
+    "power-assert": "^1.6.0",
+    "prettier": "^1.13.6",
+    "sinon": "^7.0.0",
+    "uuid": "^3.3.0"
+  }
+}
