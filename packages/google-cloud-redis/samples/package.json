@@ -11,7 +11,7 @@
     "test": "mocha system-test"
   },
   "dependencies": {
-    "@google-cloud/redis": "^0.2.0"
+    "@google-cloud/redis": "^0.2.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
