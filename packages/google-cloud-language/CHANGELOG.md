@@ -4,6 +4,59 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## v2.0.1
+
+01-31-2019 23:11 PST
+
+### Implementation Changes
+- refactor: reordered gRPC message types
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#195](https://github.com/googleapis/nodejs-language/pull/195))
+- fix(deps): update dependency google-gax to ^0.24.0 ([#193](https://github.com/googleapis/nodejs-language/pull/193))
+- fix(deps): update dependency google-gax to ^0.23.0 ([#189](https://github.com/googleapis/nodejs-language/pull/189))
+- fix(deps): update dependency google-gax to ^0.22.0 ([#162](https://github.com/googleapis/nodejs-language/pull/162))
+
+### Documentation
+- docs: update the readme ([#172](https://github.com/googleapis/nodejs-language/pull/172))
+- docs: update readme badges ([#171](https://github.com/googleapis/nodejs-language/pull/171))
+- docs(samples): updated samples code to use async await ([#154](https://github.com/googleapis/nodejs-language/pull/154))
+- Language Automl samples ([#126](https://github.com/googleapis/nodejs-language/pull/126))
+
+### Internal / Testing Changes
+- chore(deps): update dependency eslint-config-prettier to v4 ([#194](https://github.com/googleapis/nodejs-language/pull/194))
+- build: ignore googleapis.com in doc link check ([#192](https://github.com/googleapis/nodejs-language/pull/192))
+- chore: sync gapic files
+- build: check broken links in generated docs ([#187](https://github.com/googleapis/nodejs-language/pull/187))
+- refactor: modernize the sample tests ([#185](https://github.com/googleapis/nodejs-language/pull/185))
+- chore(build): inject yoshi automation key ([#183](https://github.com/googleapis/nodejs-language/pull/183))
+- chore: update nyc and eslint configs ([#182](https://github.com/googleapis/nodejs-language/pull/182))
+- chore: fix publish.sh permission +x ([#180](https://github.com/googleapis/nodejs-language/pull/180))
+- fix(build): fix Kokoro release script ([#179](https://github.com/googleapis/nodejs-language/pull/179))
+- build: add Kokoro configs for autorelease ([#178](https://github.com/googleapis/nodejs-language/pull/178))
+- chore: always nyc report before calling codecov ([#175](https://github.com/googleapis/nodejs-language/pull/175))
+- chore: nyc ignore build/test by default ([#174](https://github.com/googleapis/nodejs-language/pull/174))
+- fix(build): fix system key decryption ([#169](https://github.com/googleapis/nodejs-language/pull/169))
+- chore: add synth.metadata
+- chore: update eslintignore config ([#161](https://github.com/googleapis/nodejs-language/pull/161))
+- chore(deps): update @google-cloud/nodejs-repo-tools to v3 ([#160](https://github.com/googleapis/nodejs-language/pull/160))
+- chore: udpate lint configs ([#158](https://github.com/googleapis/nodejs-language/pull/158))
+- chore: drop contributors from multiple places ([#159](https://github.com/googleapis/nodejs-language/pull/159))
+- chore: use latest npm on Windows ([#156](https://github.com/googleapis/nodejs-language/pull/156))
+- chore: update CircleCI config ([#155](https://github.com/googleapis/nodejs-language/pull/155))
+- chore: include build in eslintignore ([#151](https://github.com/googleapis/nodejs-language/pull/151))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#147](https://github.com/googleapis/nodejs-language/pull/147))
+- chore: update issue templates ([#146](https://github.com/googleapis/nodejs-language/pull/146))
+- chore: remove old issue template ([#144](https://github.com/googleapis/nodejs-language/pull/144))
+- build: run tests on node11 ([#143](https://github.com/googleapis/nodejs-language/pull/143))
+- chores(build): do not collect sponge.xml from windows builds ([#142](https://github.com/googleapis/nodejs-language/pull/142))
+- chores(build): run codecov on continuous builds ([#141](https://github.com/googleapis/nodejs-language/pull/141))
+- chore: update new issue template ([#140](https://github.com/googleapis/nodejs-language/pull/140))
+- chore(deps): update dependency sinon to v7 ([#134](https://github.com/googleapis/nodejs-language/pull/134))
+- build: fix codecov uploading on Kokoro ([#135](https://github.com/googleapis/nodejs-language/pull/135))
+- Update kokoro config ([#132](https://github.com/googleapis/nodejs-language/pull/132))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#131](https://github.com/googleapis/nodejs-language/pull/131))
+
 ## v2.0.0
 
 ### Breaking changes
