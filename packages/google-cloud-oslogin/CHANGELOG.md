@@ -4,6 +4,55 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## v0.3.1
+
+01-31-2019 23:16 PST
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#139](https://github.com/googleapis/nodejs-os-login/pull/139))
+- fix(deps): update dependency google-gax to ^0.24.0 ([#137](https://github.com/googleapis/nodejs-os-login/pull/137))
+- fix(deps): update dependency google-gax to ^0.23.0 ([#133](https://github.com/googleapis/nodejs-os-login/pull/133))
+- fix(deps): update dependency google-gax to ^0.22.0 ([#109](https://github.com/googleapis/nodejs-os-login/pull/109))
+
+### Documentation
+- docs: update readme badges ([#118](https://github.com/googleapis/nodejs-os-login/pull/118))
+- refactor(samples): replace promise with await async ([#114](https://github.com/googleapis/nodejs-os-login/pull/114))
+
+### Internal / Testing Changes
+- chore(deps): update dependency eslint-config-prettier to v4 ([#138](https://github.com/googleapis/nodejs-os-login/pull/138))
+- build: ignore googleapis.com in doc link check ([#136](https://github.com/googleapis/nodejs-os-login/pull/136))
+- chore: sync gapic files
+- build: check broken links in generated docs ([#132](https://github.com/googleapis/nodejs-os-login/pull/132))
+- chore(build): inject yoshi automation key ([#131](https://github.com/googleapis/nodejs-os-login/pull/131))
+- chore: update nyc and eslint configs ([#130](https://github.com/googleapis/nodejs-os-login/pull/130))
+- chore: fix publish.sh permission +x ([#128](https://github.com/googleapis/nodejs-os-login/pull/128))
+- fix(build): fix Kokoro release script ([#127](https://github.com/googleapis/nodejs-os-login/pull/127))
+- build: add Kokoro configs for autorelease ([#126](https://github.com/googleapis/nodejs-os-login/pull/126))
+- chore: always nyc report before calling codecov ([#123](https://github.com/googleapis/nodejs-os-login/pull/123))
+- chore: nyc ignore build/test by default ([#122](https://github.com/googleapis/nodejs-os-login/pull/122))
+- chore: update license file ([#120](https://github.com/googleapis/nodejs-os-login/pull/120))
+- fix(build): fix system key decryption ([#116](https://github.com/googleapis/nodejs-os-login/pull/116))
+- chore: add a synth.metadata
+- chore: update eslintignore config ([#108](https://github.com/googleapis/nodejs-os-login/pull/108))
+- chore(deps): dependency @google-cloud/nodejs-repo-tools to v3 ([#107](https://github.com/googleapis/nodejs-os-login/pull/107))
+- refactor: drop a few deps ([#105](https://github.com/googleapis/nodejs-os-login/pull/105))
+- chore: drop contributors from multiple places ([#106](https://github.com/googleapis/nodejs-os-login/pull/106))
+- chore: use latest npm on Windows ([#104](https://github.com/googleapis/nodejs-os-login/pull/104))
+- chore(deps): update dependency through2 to v3 ([#103](https://github.com/googleapis/nodejs-os-login/pull/103))
+- chore: update CircleCI config ([#102](https://github.com/googleapis/nodejs-os-login/pull/102))
+- chore: include build in eslintignore ([#99](https://github.com/googleapis/nodejs-os-login/pull/99))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#95](https://github.com/googleapis/nodejs-os-login/pull/95))
+- chore: update issue templates ([#94](https://github.com/googleapis/nodejs-os-login/pull/94))
+- chore: remove old issue template ([#92](https://github.com/googleapis/nodejs-os-login/pull/92))
+- build: run tests on node11 ([#91](https://github.com/googleapis/nodejs-os-login/pull/91))
+- chores(build): do not collect sponge.xml from windows builds ([#90](https://github.com/googleapis/nodejs-os-login/pull/90))
+- chores(build): run codecov on continuous builds ([#89](https://github.com/googleapis/nodejs-os-login/pull/89))
+- chore: update new issue template ([#88](https://github.com/googleapis/nodejs-os-login/pull/88))
+- build: fix codecov uploading on Kokoro ([#85](https://github.com/googleapis/nodejs-os-login/pull/85))
+- Update kokoro config ([#83](https://github.com/googleapis/nodejs-os-login/pull/83))
+- chore(deps): update dependency eslint-plugin-prettier to v3 ([#82](https://github.com/googleapis/nodejs-os-login/pull/82))
+- Update kokoro config ([#79](https://github.com/googleapis/nodejs-os-login/pull/79))
+
 ## v0.3.0
 
 ### Breaking changes
