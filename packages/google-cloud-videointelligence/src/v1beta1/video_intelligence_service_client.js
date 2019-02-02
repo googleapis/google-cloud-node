@@ -275,20 +275,14 @@ class VideoIntelligenceServiceClient {
    * // Handle the operation using the promise pattern.
    * client.annotateVideo(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -306,8 +300,7 @@ class VideoIntelligenceServiceClient {
    * // Handle the operation using the event emitter pattern.
    * client.annotateVideo(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
