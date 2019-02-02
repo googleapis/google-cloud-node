@@ -674,7 +674,7 @@ class SecurityCenterClient {
    * client.groupAssets(request)
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
+   *     for (const resource of resources) {
    *       // doThingsWith(resources[i])
    *     }
    *   })
@@ -699,7 +699,7 @@ class SecurityCenterClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
+   *   for (const resource of resources) {
    *     // doThingsWith(resources[i]);
    *   }
    *   if (nextRequest) {
@@ -965,7 +965,7 @@ class SecurityCenterClient {
    * client.groupFindings(request)
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
+   *     for (const resource of resources) {
    *       // doThingsWith(resources[i])
    *     }
    *   })
@@ -990,7 +990,7 @@ class SecurityCenterClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
+   *   for (const resource of resources) {
    *     // doThingsWith(resources[i]);
    *   }
    *   if (nextRequest) {
@@ -1251,7 +1251,7 @@ class SecurityCenterClient {
    * client.listAssets({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
+   *     for (const resource of resources) {
    *       // doThingsWith(resources[i])
    *     }
    *   })
@@ -1271,7 +1271,7 @@ class SecurityCenterClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
+   *   for (const resource of resources) {
    *     // doThingsWith(resources[i]);
    *   }
    *   if (nextRequest) {
@@ -1534,7 +1534,7 @@ class SecurityCenterClient {
    * client.listFindings({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
+   *     for (const resource of resources) {
    *       // doThingsWith(resources[i])
    *     }
    *   })
@@ -1554,7 +1554,7 @@ class SecurityCenterClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
+   *   for (const resource of resources) {
    *     // doThingsWith(resources[i]);
    *   }
    *   if (nextRequest) {
@@ -1736,7 +1736,7 @@ class SecurityCenterClient {
    * client.listSources({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
+   *     for (const resource of resources) {
    *       // doThingsWith(resources[i])
    *     }
    *   })
@@ -1756,7 +1756,7 @@ class SecurityCenterClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
+   *   for (const resource of resources) {
    *     // doThingsWith(resources[i]);
    *   }
    *   if (nextRequest) {
@@ -1873,20 +1873,14 @@ class SecurityCenterClient {
    * // Handle the operation using the promise pattern.
    * client.runAssetDiscovery({parent: formattedParent})
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -1898,8 +1892,7 @@ class SecurityCenterClient {
    * // Handle the operation using the event emitter pattern.
    * client.runAssetDiscovery({parent: formattedParent})
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
