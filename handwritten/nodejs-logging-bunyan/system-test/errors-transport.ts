@@ -41,6 +41,10 @@ export interface ErrorGroupStats {
   // other fields not used in the tests have been omitted
 }
 
+export interface ApiResponse {
+  body: {errorGroupStats: ErrorGroupStats[]; errorEvents: ErrorEvent[];};
+}
+
 /* @const {String} Base Error Reporting API */
 const API = 'https://clouderrorreporting.googleapis.com/v1beta1/projects';
 
@@ -53,6 +57,14 @@ export class ErrorsApiTransport extends common.Service {
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson
+    });
+  }
+
+  async request(options: common.DecorateRequestOptions) {
+    return new Promise<ApiResponse>((resolve, reject) => {
+      super.request(options, (err, _, res) => {
+        return err ? reject(err) : resolve(res);
+      });
     });
   }
 
