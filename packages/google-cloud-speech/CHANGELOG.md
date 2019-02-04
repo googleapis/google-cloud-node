@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## v2.3.0
+
+02-04-2019 14:07 PST
+
+### New Features
+- feat: support audioChannelCount ([#289](https://github.com/googleapis/nodejs-speech/pull/289))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#287](https://github.com/googleapis/nodejs-speech/pull/287))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#286](https://github.com/googleapis/nodejs-speech/pull/286))
+- fix(deps): update dependency google-gax to ^0.24.0 ([#283](https://github.com/googleapis/nodejs-speech/pull/283))
+- fix(deps): update dependency @google-cloud/common to ^0.30.0 ([#282](https://github.com/googleapis/nodejs-speech/pull/282))
+
+### Documentation
+- build: ignore googleapis.com in doc link check ([#281](https://github.com/googleapis/nodejs-speech/pull/281))
+- chore: update the generated doc comments ([#279](https://github.com/googleapis/nodejs-speech/pull/279))
+
+### Internal / Testing Changes
+- chore: update year in the license headers ([#280](https://github.com/googleapis/nodejs-speech/pull/280))
+
 ## v2.2.0
 
 01-14-2019 12:45 PST
