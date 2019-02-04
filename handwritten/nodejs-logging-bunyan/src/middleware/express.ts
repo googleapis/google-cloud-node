@@ -15,10 +15,7 @@
  */
 import {HttpRequest, middleware as commonMiddleware} from '@google-cloud/logging';
 import * as bunyan from 'bunyan';
-
-// FIXME(ofrobots): use a proper export once the following is released:
-// https://github.com/googleapis/google-auth-library-nodejs/pull/569.
-import envDetect = require('google-auth-library/build/src/auth/envDetect');
+import {GCPEnv} from 'google-auth-library';
 
 import {LOGGING_TRACE_KEY, LoggingBunyan} from '../index';
 import * as types from '../types/core';
@@ -66,8 +63,7 @@ export async function middleware(options?: MiddlewareOptions):
   // will nest under. GAE and GCF generate the parent request logs
   // automatically.
   let emitRequestLog;
-  if (env !== envDetect.GCPEnv.APP_ENGINE &&
-      env !== envDetect.GCPEnv.CLOUD_FUNCTIONS) {
+  if (env !== GCPEnv.APP_ENGINE && env !== GCPEnv.CLOUD_FUNCTIONS) {
     const loggingBunyanReq = new LoggingBunyan(options);
     const requestLogger = bunyan.createLogger({
       name: options.logName!,
