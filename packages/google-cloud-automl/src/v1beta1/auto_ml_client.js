@@ -462,7 +462,7 @@ class AutoMlClient {
    *   .then(responses => {
    *     const resources = responses[0];
    *     for (const resource of resources) {
-   *       // doThingsWith(resources[i])
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -482,7 +482,7 @@ class AutoMlClient {
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
    *   for (const resource of resources) {
-   *     // doThingsWith(resources[i]);
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
@@ -1065,7 +1065,7 @@ class AutoMlClient {
    *   .then(responses => {
    *     const resources = responses[0];
    *     for (const resource of resources) {
-   *       // doThingsWith(resources[i])
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -1085,7 +1085,7 @@ class AutoMlClient {
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
    *   for (const resource of resources) {
-   *     // doThingsWith(resources[i]);
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
@@ -1472,7 +1472,7 @@ class AutoMlClient {
    *   .then(responses => {
    *     const resources = responses[0];
    *     for (const resource of resources) {
-   *       // doThingsWith(resources[i])
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -1492,7 +1492,7 @@ class AutoMlClient {
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
    *   for (const resource of resources) {
-   *     // doThingsWith(resources[i]);
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
