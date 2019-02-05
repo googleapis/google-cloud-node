@@ -118,9 +118,9 @@ const fakePaginator = {
 };
 
 class FakeAcl {
-  calledWith_: IArguments;
-  constructor() {
-    this.calledWith_ = [].slice.call(arguments);
+  calledWith_: Array<{}>;
+  constructor(...args: Array<{}>) {
+    this.calledWith_ = args;
   }
 }
 

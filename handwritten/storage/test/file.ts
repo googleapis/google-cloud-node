@@ -79,7 +79,9 @@ function fakeResumableUpload() {
   };
 }
 Object.assign(fakeResumableUpload, {
-  createURI(...args: Array<{}>) {
+  createURI(
+      ...args:
+          [resumableUpload.UploadConfig, resumableUpload.CreateUriCallback]) {
     let createURI = resumableUpload.createURI;
 
     if (resumableUploadOverride && resumableUploadOverride.createURI) {
@@ -90,7 +92,7 @@ Object.assign(fakeResumableUpload, {
   },
 });
 Object.assign(fakeResumableUpload, {
-  upload(...args: Array<{}>) {
+  upload(...args: [resumableUpload.UploadConfig]) {
     let upload = resumableUpload.upload;
     if (resumableUploadOverride && resumableUploadOverride.upload) {
       upload = resumableUploadOverride.upload;
