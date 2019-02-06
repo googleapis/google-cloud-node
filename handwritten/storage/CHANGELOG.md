@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.4.2
+
+02-05-2019 16:55 PST
+  
+### Dependencies
+
+- deps: update @google-cloud/common ([#596](https://github.com/googleapis/nodejs-storage/pull/596))
+- chore(deps): update dependency typescript to ~3.3.0 ([#591](https://github.com/googleapis/nodejs-storage/pull/591))
+
+### Documentation
+
+- docs: add lint/fix example to contributing guide ([#594](https://github.com/googleapis/nodejs-storage/pull/594))
+
+### Internal / Testing Changes
+
+- test: skip public bucket system tests running under VPCSC ([#595](https://github.com/googleapis/nodejs-storage/pull/595))
+
 ## v2.4.1
 
 01-29-2019 13:05 PST
