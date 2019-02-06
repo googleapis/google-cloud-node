@@ -718,7 +718,6 @@ describe('storage', () => {
       let file: File;
 
       const validateBucketPolicyOnlyEnabledError = (err: ApiError) => {
-        console.log('err', err);
         assert(err.message.match(/Bucket Policy Only is enabled/));
         assert.strictEqual(err.code, 400);
         return true;
