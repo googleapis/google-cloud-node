@@ -54,7 +54,7 @@
     "@google-cloud/logging": "^4.1.0"
   },
   "devDependencies": {
-    "@google-cloud/common": "^0.30.2",
+    "@google-cloud/common": "^0.31.0",
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "@types/bunyan": "^1.8.4",
     "@types/express": "^4.16.0",
