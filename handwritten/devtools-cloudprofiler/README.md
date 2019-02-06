@@ -221,7 +221,7 @@ the service when starting the profiler:
 
    * You can provide credentials via
    [Application Default Credentials][app-default-credentials]. This is the
-   reccomended method.
+   recommended method.
          1. [Create a new JSON service account key][service-account].
          2. Copy the key somewhere your application can access it. Be sure not
          to expose the key publicly.
