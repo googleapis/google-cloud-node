@@ -4,6 +4,35 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## v0.5.0
+
+02-05-2019 13:22 PST
+
+ ### New Features
+- feat: add the effects_profile_id property. ([#173](https://github.com/googleapis/nodejs-text-to-speech/pull/173))
+
+ ### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#178](https://github.com/googleapis/nodejs-text-to-speech/pull/178))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#176](https://github.com/googleapis/nodejs-text-to-speech/pull/176))
+- fix(deps): update dependency google-gax to ^0.24.0 ([#175](https://github.com/googleapis/nodejs-text-to-speech/pull/175))
+- fix(deps): update dependency google-gax to ^0.23.0 ([#170](https://github.com/googleapis/nodejs-text-to-speech/pull/170))
+
+ ### Documentation
+- build: ignore googleapis.com in doc link check ([#174](https://github.com/googleapis/nodejs-text-to-speech/pull/174))
+- docs: fix dead link to audio profiles ([#177](https://github.com/googleapis/nodejs-text-to-speech/pull/177))
+- fix(docs): fix require stmt ([#166](https://github.com/googleapis/nodejs-text-to-speech/pull/166))
+- build: check broken links in generated docs ([#165](https://github.com/googleapis/nodejs-text-to-speech/pull/165))
+
+ ### Internal / Testing Changes
+- test: add a smoke test ([#172](https://github.com/googleapis/nodejs-text-to-speech/pull/172))
+- refactor: modernize the sample tests ([#164](https://github.com/googleapis/nodejs-text-to-speech/pull/164))
+- chore(build): inject yoshi automation key ([#161](https://github.com/googleapis/nodejs-text-to-speech/pull/161))
+- chore: update nyc and eslint configs ([#160](https://github.com/googleapis/nodejs-text-to-speech/pull/160))
+- chore: fix publish.sh permission +x ([#158](https://github.com/googleapis/nodejs-text-to-speech/pull/158))
+- fix(build): fix Kokoro release script ([#157](https://github.com/googleapis/nodejs-text-to-speech/pull/157))
+- build: add Kokoro configs for autorelease ([#156](https://github.com/googleapis/nodejs-text-to-speech/pull/156))
+- chore: always nyc report before calling codecov ([#152](https://github.com/googleapis/nodejs-text-to-speech/pull/152))
+
 ## v0.4.0
 
 12-05-2018 16:31 PST
