@@ -314,20 +314,14 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.createCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -346,8 +340,7 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.createCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -504,20 +497,14 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.updateCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -540,8 +527,7 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.updateCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -632,20 +618,14 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.deleteCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -664,8 +644,7 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.deleteCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -834,8 +813,8 @@ class ClusterControllerClient {
    * client.listClusters(request)
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
-   *       // doThingsWith(resources[i])
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -859,8 +838,8 @@ class ClusterControllerClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
-   *     // doThingsWith(resources[i]);
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
@@ -1011,20 +990,14 @@ class ClusterControllerClient {
    * // Handle the operation using the promise pattern.
    * client.diagnoseCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -1043,8 +1016,7 @@ class ClusterControllerClient {
    * // Handle the operation using the event emitter pattern.
    * client.diagnoseCluster(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.

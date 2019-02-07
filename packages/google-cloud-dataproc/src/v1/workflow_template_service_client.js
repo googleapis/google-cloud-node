@@ -443,20 +443,14 @@ class WorkflowTemplateServiceClient {
    * // Handle the operation using the promise pattern.
    * client.instantiateWorkflowTemplate({name: formattedName})
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -468,8 +462,7 @@ class WorkflowTemplateServiceClient {
    * // Handle the operation using the event emitter pattern.
    * client.instantiateWorkflowTemplate({name: formattedName})
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -579,20 +572,14 @@ class WorkflowTemplateServiceClient {
    * // Handle the operation using the promise pattern.
    * client.instantiateInlineWorkflowTemplate(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Operation#promise starts polling for the completion of the LRO.
    *     return operation.promise();
    *   })
    *   .then(responses => {
-   *     // The final result of the operation.
    *     const result = responses[0];
-   *
-   *     // The metadata value of the completed operation.
    *     const metadata = responses[1];
-   *
-   *     // The response of the api call returning the complete operation.
    *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
@@ -609,8 +596,7 @@ class WorkflowTemplateServiceClient {
    * // Handle the operation using the event emitter pattern.
    * client.instantiateInlineWorkflowTemplate(request)
    *   .then(responses => {
-   *     const operation = responses[0];
-   *     const initialApiResponse = responses[1];
+   *     const [operation, initialApiResponse] = responses;
    *
    *     // Adding a listener for the "complete" event starts polling for the
    *     // completion of the operation.
@@ -754,8 +740,8 @@ class WorkflowTemplateServiceClient {
    * client.listWorkflowTemplates({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
-   *       // doThingsWith(resources[i])
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -774,8 +760,8 @@ class WorkflowTemplateServiceClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
-   *     // doThingsWith(resources[i]);
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.

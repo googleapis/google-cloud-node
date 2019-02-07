@@ -39,8 +39,8 @@ describe('ClusterControllerSmokeTest', () => {
       .listClusters(request)
       .then(responses => {
         const resources = responses[0];
-        for (let i = 0; i < resources.length; i += 1) {
-          console.log(resources[i]);
+        for (const resource of resources) {
+          console.log(resource);
         }
       })
       .then(done)
@@ -70,8 +70,8 @@ describe('ClusterControllerSmokeTest', () => {
       const nextRequest = responses[1];
       // The actual response object, if necessary.
       // const rawResponse = responses[2];
-      for (let i = 0; i < resources.length; i += 1) {
-        console.log(resources[i]);
+      for (const resource of resources) {
+        console.log(resource);
       }
       if (nextRequest) {
         // Fetch the next page.
