@@ -509,8 +509,8 @@ class DeviceManagerClient {
    * client.listDeviceRegistries({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
-   *       // doThingsWith(resources[i])
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -529,8 +529,8 @@ class DeviceManagerClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
-   *     // doThingsWith(resources[i]);
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
@@ -933,8 +933,8 @@ class DeviceManagerClient {
    * client.listDevices({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
-   *       // doThingsWith(resources[i])
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -953,8 +953,8 @@ class DeviceManagerClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
-   *     // doThingsWith(resources[i]);
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
