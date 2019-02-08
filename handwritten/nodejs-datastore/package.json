@@ -37,10 +37,12 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r src/v1 build/src && cp -r protos build && cp test/*.js build/test",
     "prepare": "npm run compile",
-    "pretest": "npm run compile"
+    "pretest": "npm run compile",
+    "proto": "npm run proto:datastore",
+    "proto:datastore": "mkdir -p proto && pbjs -t static-module -w commonjs -p node_modules/google-proto-files google/datastore/v1/datastore.proto | pbts -o proto/datastore.d.ts -"
   },
   "dependencies": {
-    "@google-cloud/projectify": "^0.3.0",
+    "@google-cloud/projectify": "^0.3.2",
     "@google-cloud/promisify": "^0.3.0",
     "arrify": "^1.0.1",
     "concat-stream": "^2.0.0",
@@ -68,6 +70,7 @@
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "google-proto-files": "^0.18.0",
     "gts": "^0.9.0",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "intelli-espower-loader": "^1.0.1",

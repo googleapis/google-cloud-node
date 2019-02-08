@@ -20,23 +20,21 @@ import * as arrify from 'arrify';
 
 const concat = require('concat-stream');
 import * as extend from 'extend';
-import * as is from 'is';
 import {split} from 'split-array-stream';
 import * as streamEvents from 'stream-events';
 import * as through from 'through2';
+import {google} from '../proto/datastore';
+import {CallOptions} from 'google-gax';
+import {Stream} from 'stream';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
   v1: require('./v1'),
 });
 
-import {entity, Entity} from './entity';
+import {entity, Entity, KeyProto, ValueProto} from './entity';
 import {Query, RunQueryInfo, RunQueryOptions, RunQueryResponse, RunQueryCallback} from './query';
 import {Datastore} from '.';
-
-export interface EntityDataObj {
-  [key: string]: string;
-}
 
 /**
  * A map of read consistency values to proto codes.
@@ -44,7 +42,7 @@ export interface EntityDataObj {
  * @type {object}
  * @private
  */
-const CONSISTENCY_PROTO_CODE = {
+const CONSISTENCY_PROTO_CODE: ConsistencyProtoCode = {
   eventual: 2,
   strong: 1,
 };
@@ -59,10 +57,13 @@ const CONSISTENCY_PROTO_CODE = {
  * @class
  */
 class DatastoreRequest {
-  id;
-  requests_;
-  requestCallbacks_;
+  id: string|number|undefined;
+  requests_: Entity|{
+    mutations: Array<{}>;
+  };
+  requestCallbacks_: Array<(err: Error|null, resp: Entity|null) => void>|Entity;
   datastore!: Datastore;
+  [key: string]: Entity;
 
   /**
    * Format a user's input to mutation methods. This will create a deep clone of
@@ -86,7 +87,7 @@ class DatastoreRequest {
    *
    * @param {object} obj The user's input object.
    */
-  static prepareEntityObject_(obj) {
+  static prepareEntityObject_(obj: Entity): PrepareEntityObjectResponse {
     const entityObject = extend(true, {}, obj);
 
     // Entity objects are also supported.
@@ -172,16 +173,19 @@ class DatastoreRequest {
    *   const apiResponse = data[1];
    * });
    */
-  allocateIds(key, options, callback) {
+  allocateIds(key: entity.Key, options: AllocateIdsOptions|number):
+      Promise<google.datastore.v1.AllocateIdsResponse>;
+  allocateIds(
+      key: entity.Key, options: AllocateIdsOptions|number,
+      callback: AllocateIdsCallback): void;
+  allocateIds(
+      key: entity.Key, options: AllocateIdsOptions|number,
+      callback?: AllocateIdsCallback):
+      void|Promise<google.datastore.v1.AllocateIdsResponse> {
     if (entity.isKeyComplete(key)) {
       throw new Error('An incomplete key should be provided.');
     }
-
-    if (is.number(options)) {
-      options = {
-        allocations: options,
-      };
-    }
+    options = typeof options === 'number' ? {allocations: options} : options;
 
     this.request_(
         {
@@ -193,13 +197,13 @@ class DatastoreRequest {
           },
           gaxOpts: options.gaxOptions,
         },
-        (err, resp) => {
+        (err: Error, resp: AllocateIdsRequestResponse) => {
           if (err) {
-            callback(err, null, resp);
+            callback!(err, null, resp);
             return;
           }
           const keys = arrify(resp.keys).map(entity.keyFromKeyProto);
-          callback(null, keys, resp);
+          callback!(null, keys, resp);
         });
   }
 
@@ -227,16 +231,15 @@ class DatastoreRequest {
    *     // All entities retrieved.
    *   });
    */
-  createReadStream(keys, options?) {
-    options = options || {};
+  createReadStream(keys: Entities, options: CreateReadStreamOptions = {}):
+      Stream {
     keys = arrify(keys).map(entity.keyToKeyProto);
     if (keys.length === 0) {
       throw new Error('At least one Key object is required.');
     }
 
-    const makeRequest = keys => {
-      // tslint:disable-next-line no-any
-      const reqOpts: any = {
+    const makeRequest = (keys: entity.Key[]|KeyProto[]) => {
+      const reqOpts: RequestOptions = {
         keys,
       };
 
@@ -255,7 +258,7 @@ class DatastoreRequest {
             reqOpts,
             gaxOpts: options.gaxOptions,
           },
-          (err, resp) => {
+          (err: Error, resp: Entity) => {
             if (err) {
               stream.destroy(err);
               return;
@@ -336,13 +339,24 @@ class DatastoreRequest {
    *   const apiResponse = data[0];
    * });
    */
-  delete(keys, gaxOptions?, callback?) {
-    if (is.fn(gaxOptions)) {
-      callback = gaxOptions;
-      gaxOptions = {};
-    }
-
-    callback = callback || (() => {});
+  delete(keys: Entities):
+      void|Promise<google.datastore.v1.Datastore.CommitCallback>;
+  delete(
+      keys: Entities,
+      callback: google.datastore.v1.Datastore.CommitCallback): void;
+  delete(
+      keys: Entities, gaxOptions: CallOptions,
+      callback: google.datastore.v1.Datastore.CommitCallback): void;
+  delete(
+      keys: Entities,
+      gaxOptionsOrCallback?: CallOptions|
+      google.datastore.v1.Datastore.CommitCallback,
+      cb?: google.datastore.v1.Datastore.CommitCallback):
+      void|Promise<google.datastore.v1.Datastore.CommitCallback> {
+    const gaxOptions =
+        typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
+    const callback =
+        typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
 
     const reqOpts = {
       mutations: arrify(keys).map(key => {
@@ -452,19 +466,24 @@ class DatastoreRequest {
    *   const entities = data[0];
    * });
    */
-  get(keys, options?): Promise<EntityDataObj[]>;
-  get(keys, options?, callback?): void|Promise<EntityDataObj[]> {
-    if (is.fn(options)) {
-      callback = options;
-      options = {};
-    }
-
-    options = options || {};
+  get(keys: Entities,
+      options?: CreateReadStreamOptions): Promise<Entity|Stream>;
+  get(keys: Entities, callback: GetCallback): void;
+  get(keys: Entities, options: CreateReadStreamOptions,
+      callback: GetCallback): void;
+  get(keys: Entities, optionsOrCallback?: CreateReadStreamOptions|GetCallback,
+      cb?: GetCallback): void|Promise<Entity|Stream> {
+    const options =
+        typeof optionsOrCallback === 'object' && optionsOrCallback !== null ?
+        optionsOrCallback :
+        {};
+    const callback =
+        typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
 
     this.createReadStream(keys, options)
         .on('error', callback)
-        .pipe(concat(results => {
-          const isSingleLookup = !is.array(keys);
+        .pipe(concat((results: Entity[]) => {
+          const isSingleLookup = !Array.isArray(keys);
           callback(null, isSingleLookup ? results[0] : results);
         }));
   }
@@ -483,7 +502,10 @@ class DatastoreRequest {
    * @param {?error} callback.err An error returned while making this request
    * @param {object} callback.apiResponse The full API response.
    */
-  insert(entities, callback) {
+  insert(entities: Entities): Promise<google.datastore.v1.ICommitResponse>;
+  insert(entities: Entities, callback: CallOptions): void;
+  insert(entities: Entities, callback?: CallOptions):
+      void|Promise<google.datastore.v1.ICommitResponse> {
     entities =
         arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
           x.method = 'insert';
@@ -641,11 +663,10 @@ class DatastoreRequest {
    *     this.end();
    *   });
    */
-  runQueryStream(query: Query, options?) {
-    options = options || {};
+  runQueryStream(query: Query, options: RunQueryStreamOptions = {}): Stream {
     query = extend(true, new Query(), query);
 
-    const makeRequest = query => {
+    const makeRequest = (query: Query) => {
       // tslint:disable-next-line no-any
       const reqOpts: any = {
         query: entity.queryToQueryProto(query),
@@ -674,7 +695,7 @@ class DatastoreRequest {
           onResultSet);
     };
 
-    function onResultSet(err, resp) {
+    function onResultSet(err: Error, resp: Entity) {
       if (err) {
         stream.destroy(err);
         return;
@@ -938,17 +959,21 @@ class DatastoreRequest {
    *   const apiResponse = data[0];
    * });
    */
-  save(entities, gaxOptions?, callback?) {
+  save(entities: Entities, gaxOptions?: CallOptions):
+      void|Promise<google.datastore.v1.ICommitResponse>;
+  save(entities: Entities, callback: SaveCallback): void;
+  save(
+      entities: Entities, gaxOptionsOrCallback?: CallOptions|SaveCallback,
+      cb?: SaveCallback): void|Promise<google.datastore.v1.ICommitResponse> {
     entities = arrify(entities);
+    const gaxOptions =
+        typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
+    const callback =
+        typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
 
-    if (is.fn(gaxOptions)) {
-      callback = gaxOptions;
-      gaxOptions = {};
-    }
-
-    const insertIndexes = {};
-    const mutations: Array<{}> = [];
-    const methods = {
+    const insertIndexes: BooleanObject = {};
+    const mutations: google.datastore.v1.IMutation[] = [];
+    const methods: BooleanObject = {
       insert: true,
       update: true,
       upsert: true,
@@ -957,10 +982,9 @@ class DatastoreRequest {
     // Iterate over the entity objects, build a proto from all keys and values,
     // then place in the correct mutation array (insert, update, etc).
     entities.map(DatastoreRequest.prepareEntityObject_)
-        .forEach((entityObject, index) => {
-          const mutation = {};
-          // tslint:disable-next-line no-any
-          let entityProto: any = {};
+        .forEach((entityObject: Entity, index: number) => {
+          const mutation: Mutation = {};
+          let entityProto: EntityProtoObject = {};
           let method = 'upsert';
 
           if (entityObject.method) {
@@ -979,28 +1003,31 @@ class DatastoreRequest {
           // @TODO remove in @google-cloud/datastore@2.0.0
           // This was replaced with a more efficient mechanism in the top-level
           // `excludeFromIndexes` option.
-          if (is.array(entityObject.data)) {
-            entityProto.properties = entityObject.data.reduce((acc, data) => {
-              const value = entity.encodeValue(data.value);
+          if (Array.isArray(entityObject.data)) {
+            entityProto.properties = entityObject.data.reduce(
+                (acc: EntityProtoReduceAccumulator,
+                 data: EntityProtoReduceData) => {
+                  const value = entity.encodeValue(data.value);
 
-              if (is.boolean(data.excludeFromIndexes)) {
-                const excluded = data.excludeFromIndexes;
-                let values = value.arrayValue && value.arrayValue.values;
+                  if (typeof data.excludeFromIndexes === 'boolean') {
+                    const excluded = data.excludeFromIndexes;
+                    let values = value.arrayValue && value.arrayValue.values;
 
-                if (values) {
-                  values = values.map(x => {
-                    x.excludeFromIndexes = excluded;
-                    return x;
-                  });
-                } else {
-                  value.excludeFromIndexes = data.excludeFromIndexes;
-                }
-              }
+                    if (values) {
+                      values = values.map((x: ValueProto) => {
+                        x.excludeFromIndexes = excluded;
+                        return x;
+                      });
+                    } else {
+                      value.excludeFromIndexes = data.excludeFromIndexes;
+                    }
+                  }
 
-              acc[data.name] = value;
+                  acc[data.name] = value;
 
-              return acc;
-            }, {});
+                  return acc;
+                },
+                {});
           } else {
             entityProto = entity.entityToEntityProto(entityObject);
           }
@@ -1015,22 +1042,23 @@ class DatastoreRequest {
       mutations,
     };
 
-    function onCommit(err, resp) {
+    function onCommit(err: Error|null, resp: {mutationResults: Entity;}) {
       if (err || !resp) {
         callback(err, resp);
         return;
       }
 
-      arrify(resp.mutationResults).forEach((result, index) => {
-        if (!result.key) {
-          return;
-        }
+      arrify(resp.mutationResults)
+          .forEach((result: Entity, index: number) => {  //! Entity malo
+            if (!result.key) {
+              return;
+            }
 
-        if (insertIndexes[index]) {
-          const id = entity.keyFromKeyProto(result.key).id;
-          entities[index].key.id = id;
-        }
-      });
+            if (insertIndexes[index]) {
+              const id = entity.keyFromKeyProto(result.key).id;
+              entities[index].key.id = id;
+            }
+          });
 
       callback(null, resp);
     }
@@ -1065,7 +1093,10 @@ class DatastoreRequest {
    * @param {?error} callback.err An error returned while making this request
    * @param {object} callback.apiResponse The full API response.
    */
-  update(entities, callback) {
+  update(entities: Entities): Promise<google.datastore.v1.ICommitResponse>;
+  update(entities: Entities, callback: CallOptions): void;
+  update(entities: Entities, callback?: CallOptions):
+      void|Promise<google.datastore.v1.ICommitResponse> {
     entities =
         arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
           x.method = 'update';
@@ -1089,7 +1120,10 @@ class DatastoreRequest {
    * @param {?error} callback.err An error returned while making this request
    * @param {object} callback.apiResponse The full API response.
    */
-  upsert(entities, callback) {
+  upsert(entities: Entities): Promise<google.datastore.v1.ICommitResponse>;
+  upsert(entities: Entities, callback: CallOptions): void;
+  upsert(entities: Entities, callback?: CallOptions):
+      void|Promise<google.datastore.v1.ICommitResponse> {
     entities =
         arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
           x.method = 'upsert';
@@ -1111,12 +1145,11 @@ class DatastoreRequest {
    *
    * @private
    */
-  request_(config, callback) {
+  request_(config: RequestConfig, callback: RequestCallback): void;
+  request_(config: RequestConfig, callback?: RequestCallback): void {
     const datastore = this.datastore;
 
-    callback = callback || (() => {});
-
-    const isTransaction = is.defined(this.id);
+    const isTransaction = this.id ? true : false;
     const method = config.method;
     let reqOpts = extend(true, {}, config.reqOpts);
 
@@ -1147,28 +1180,115 @@ class DatastoreRequest {
       };
     }
 
-    datastore.auth.getProjectId((err, projectId) => {
-      if (err) {
-        callback(err);
-        return;
-      }
+    datastore.auth.getProjectId(
+        (err: GetProjectIdErr, projectId: ProjectId) => {
+          if (err) {
+            callback!(err);
+            return;
+          }
 
-      const clientName = config.client;
+          const clientName = config.client;
 
-      if (!datastore.clients_.has(clientName)) {
-        datastore.clients_.set(
-            clientName, new gapic.v1[clientName](datastore.options));
-      }
-      const gaxClient = datastore.clients_.get(clientName);
-      reqOpts = replaceProjectIdToken(reqOpts, projectId!);
-      const gaxOpts = extend(true, {}, config.gaxOpts, {
-        headers: {
-          'google-cloud-resource-prefix': `projects/${projectId}`,
-        },
-      });
-      gaxClient![method](reqOpts, gaxOpts, callback);
-    });
+          if (!datastore.clients_.has(clientName)) {
+            datastore.clients_.set(
+                clientName, new gapic.v1[clientName](datastore.options));
+          }
+          const gaxClient: Entities|undefined =
+              datastore.clients_.get(clientName);
+          reqOpts = replaceProjectIdToken(reqOpts, projectId!);
+          const gaxOpts = extend(true, {}, config.gaxOpts, {
+            headers: {
+              'google-cloud-resource-prefix': `projects/${projectId}`,
+            },
+          });
+          gaxClient![method](reqOpts, gaxOpts, callback);
+        });
   }
+}
+
+export interface BooleanObject {
+  [key: string]: boolean;
+}
+export interface ConsistencyProtoCode {
+  [key: string]: number;
+}
+export type Entities = Entity|Entity[];
+export interface EntityProtoObject {
+  method?: string;
+  properties?: {[key: string]: ValueProto};
+  key?: Keys;
+}
+export interface EntityProtoReduceAccumulator {
+  [key: string]: ValueProto;
+}
+export interface EntityProtoReduceData {
+  value: ValueProto;
+  excludeFromIndexes: ValueProto;
+  name: string|number;
+}
+
+export interface AllocateIdsRequestResponse {
+  keys: KeyProto[];
+  mutationResults?: Entities;
+}
+export interface AllocateIdsCallback {
+  (a: Error|null, b: entity.Key[]|null, c: AllocateIdsRequestResponse): void;
+}
+export interface AllocateIdsOptions {
+  allocations?: number;
+  gaxOptions?: CallOptions;
+}
+export interface CreateReadStreamOptions {
+  consistency?: string;
+  gaxOptions?: CallOptions;
+}
+export interface GetCallback {
+  (...args: Entity[]): void;
+}
+export type GetProjectIdErr = Error|null|undefined;
+export type Keys = Entity|Entity[];
+export interface Mutation extends google.datastore.v1.IMutation {
+  [key: string]: Entity;
+}
+export interface PrepareEntityObject {
+  [key: string]: google.datastore.v1.Key|
+      undefined;  // TODO: Fix "Symbol cannot be key" TS error
+}
+export interface PrepareEntityObjectResponse {
+  key?: google.datastore.v1.Key;
+  data?: google.datastore.v1.Entity;
+  method?: string;
+}
+export type ProjectId = string|null|undefined;
+export interface RequestCallback {
+  (a: Error,
+   b?: AllocateIdsRequestResponse&google.datastore.v1.ILookupResponse&
+   Entities): void;
+}
+export interface RequestConfig {
+  client: string;
+  gaxOpts?: number|CallOptions|KeyProto|undefined;
+  method: string;
+  prepared?: boolean;
+  reqOpts?: RequestOptions;
+}
+export interface RequestOptions {
+  mutations?: []|Array<{delete: KeyProto;}>|Array<{}>;
+  keys?: Entity;
+  readOptions?: {readConsistency?: number
+    transaction?: string|number;
+  };
+    transaction?: string|number;
+    mode?: string;
+    projectId?: string;
+}
+export interface RequestResponse extends google.datastore.v1.ICommitResponse {}
+export interface RunQueryStreamOptions {
+  gaxOptions?: CallOptions;
+  consistency?: 'strong'|'eventual';
+}
+export interface SaveCallback {
+  (a?: Error|null, b?: Entity): void;
 }
 
 /*! Developer Documentation

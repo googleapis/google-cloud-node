@@ -579,7 +579,6 @@ class Datastore extends DatastoreRequest {
   static KEY = entity.KEY_SYMBOL;
   KEY = Datastore.KEY;
 
-
   /**
    * This is one of three values which may be returned from
    * {@link Datastore#runQuery}, {@link Transaction#runQuery}, and
