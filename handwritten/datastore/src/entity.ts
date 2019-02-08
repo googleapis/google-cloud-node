@@ -42,7 +42,7 @@ export namespace entity {
    * @type {symbol}
    * @private
    */
-  export const KEY_SYMBOL = Symbol('KEY');
+  export const KEY_SYMBOL: unique symbol = Symbol('KEY');
 
   /**
    * Build a Datastore Double object. For long doubles, a string can be
@@ -530,7 +530,7 @@ export namespace entity {
     };
 
     if (excludeFromIndexes && excludeFromIndexes.length > 0) {
-      excludeFromIndexes.forEach(excludePath => {
+      excludeFromIndexes.forEach((excludePath: string) => {
         excludePathFromEntity(entityProto, excludePath);
       });
     }

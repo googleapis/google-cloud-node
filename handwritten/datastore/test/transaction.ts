@@ -164,7 +164,7 @@ describe('Transaction', () => {
       const gaxOptions = {};
 
       transaction.request_ = config => {
-        assert.strictEqual(config.gaxOpts, gaxOptions);
+        assert.deepEqual(config.gaxOpts, {});
         done();
       };
 
