@@ -31,7 +31,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googlecloudplatform/google-cloud-node/blob/master/.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googlecloudplatform/google-cloud-node/blob/master/CONTRIBUTING.md).
 
 ## License
 
