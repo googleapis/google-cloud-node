@@ -1199,6 +1199,6 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [stackdriver-errors-hapi]: https://github.com/GoogleCloudPlatform/google-cloud-node/tree/master/packages/error-reporting#using-hapi
 [stackdriver-errors-module]: https://github.com/GoogleCloudPlatform/google-cloud-node/tree/master/packages/error-reporting
 
-[contributing]: .github/CONTRIBUTING.md
+[contributing]: CONTRIBUTING.md
 
 [license]: LICENSE
