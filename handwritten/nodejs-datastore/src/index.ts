@@ -35,7 +35,7 @@ import {Query} from './query';
 import {DatastoreRequest} from './request';
 import {Transaction} from './transaction';
 
-const {grpc} = new GrpcClient({} as GrpcClientOptions);
+const {grpc} = new GrpcClient();
 
 // tslint:disable-next-line: no-any
 export type PathType = any;
