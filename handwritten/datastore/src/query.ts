@@ -16,7 +16,6 @@
 
 import * as arrify from 'arrify';
 import {Key} from 'readline';
-
 import {Datastore} from '.';
 import {Entity} from './entity';
 import {Transaction} from './transaction';

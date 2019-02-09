@@ -17,14 +17,14 @@
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
 import {CallOptions} from 'google-gax';
-import * as r from 'request';
-
 import {google} from '../proto/datastore';
-
 import {Datastore, TransactionOptions} from '.';
 import {entity, Entity} from './entity';
 import {Query} from './query';
 import {DatastoreRequest} from './request';
+
+type RollbackCallback = google.datastore.v1.Datastore.RollbackCallback;
+type RollbackResponse = google.datastore.v1.RollbackResponse;
 
 /**
  * A transaction is a set of Datastore operations on one or more entities. Each
@@ -235,7 +235,7 @@ class Transaction extends DatastoreRequest {
           reqOpts,
           gaxOpts: gaxOptions || {},
         },
-        (err: Error, resp: r.Response) => {
+        (err, resp) => {
           if (err) {
             // Rollback automatically for the user.
             this.rollback(() => {
@@ -378,14 +378,12 @@ class Transaction extends DatastoreRequest {
    *   const apiResponse = data[0];
    * });
    */
-  rollback(gaxOptions: CallOptions):
-      Promise<google.datastore.v1.RollbackResponse>;
-  rollback(callback: google.datastore.v1.Datastore.RollbackCallback): void;
+  rollback(gaxOptions?: CallOptions): Promise<RollbackResponse>;
+  rollback(callback: RollbackCallback): void;
+  rollback(gaxOptions: CallOptions, callback: RollbackCallback): void;
   rollback(
-      gaxOptionsOrCallback: CallOptions|
-      google.datastore.v1.Datastore.RollbackCallback,
-      cb?: google.datastore.v1.Datastore.RollbackCallback):
-      void|Promise<google.datastore.v1.RollbackResponse> {
+      gaxOptionsOrCallback?: CallOptions|RollbackCallback,
+      cb?: RollbackCallback): void|Promise<RollbackResponse> {
     const gaxOptions =
         typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
     const callback =
@@ -397,7 +395,7 @@ class Transaction extends DatastoreRequest {
           method: 'rollback',
           gaxOpts: gaxOptions || {},
         },
-        (err: Error, resp: r.Response) => {
+        (err, resp) => {
           this.skipCommit = true;
           callback(err || null, resp);
         });
@@ -490,7 +488,7 @@ class Transaction extends DatastoreRequest {
           reqOpts,
           gaxOpts: options.gaxOptions,
         },
-        (err: Error, resp: r.Response) => {
+        (err, resp) => {
           if (err) {
             callback(err, null, resp);
             return;
@@ -629,7 +627,8 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    */
-  save(entities: Entities): void {
+  // tslint:disable-next-line no-any
+  save(entities: Entities): any {
     arrify(entities).forEach(ent => {
       this.modifiedEntities_.push({
         entity: {

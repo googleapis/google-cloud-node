@@ -197,7 +197,7 @@ class DatastoreRequest {
           },
           gaxOpts: options.gaxOptions,
         },
-        (err: Error, resp: AllocateIdsRequestResponse) => {
+        (err, resp) => {
           if (err) {
             callback!(err, null, resp);
             return;
@@ -960,7 +960,9 @@ class DatastoreRequest {
    * });
    */
   save(entities: Entities, gaxOptions?: CallOptions):
-      void|Promise<google.datastore.v1.ICommitResponse>;
+      Promise<google.datastore.v1.ICommitResponse>;
+  save(entities: Entities, gaxOptions: CallOptions, callback: SaveCallback):
+      void;
   save(entities: Entities, callback: SaveCallback): void;
   save(
       entities: Entities, gaxOptionsOrCallback?: CallOptions|SaveCallback,
