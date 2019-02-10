@@ -24,14 +24,15 @@ describe('Datastore', () => {
   // Override the Key method so we can track what keys are created during the
   // tests. They are then deleted in the `after` hook.
   const key = datastore.key;
-  datastore.key = function(options) {
+  // tslint:disable-next-line no-any
+  datastore.key = function(options: any) {
     const keyObject = key.call(this, options);
     testKinds.push(keyObject.kind);
     return keyObject;
   };
 
   after(async () => {
-    async function deleteEntities(kind) {
+    async function deleteEntities(kind: string) {
       const query = datastore.createQuery(kind).select('__key__');
       const [entities] = await datastore.runQuery(query);
       const keys = entities.map(entity => {

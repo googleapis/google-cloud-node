@@ -22,13 +22,13 @@ import * as is from 'is';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import * as through from 'through2';
-
+import * as ds from '../src';
 import {entity, KeyProto} from '../src/entity.js';
 import {Query, QueryProto} from '../src/query.js';
 
 let promisified = false;
 const fakePfy = Object.assign({}, pfy, {
-  promisifyAll(klass) {
+  promisifyAll(klass: Function) {
     if (klass.name === 'DatastoreRequest') {
       promisified = true;
     }
@@ -41,7 +41,7 @@ const fakePjy = {
   },
 };
 
-let v1FakeClientOverride;
+let v1FakeClientOverride: Function|null;
 const fakeV1 = {
   FakeClient: class {
     constructor() {
@@ -52,13 +52,14 @@ const fakeV1 = {
 
 class FakeQuery extends Query {}
 
-let pjyOverride;
+let pjyOverride: Function|null;
 
 describe('Request', () => {
   // tslint:disable-next-line variable-name
-  let Request;
-  let request;
-  let key;
+  let Request: typeof ds.DatastoreRequest;
+  // tslint:disable-next-line no-any
+  let request: any;
+  let key: entity.Key;
   const sandbox = sinon.createSandbox();
 
   before(() => {
@@ -104,7 +105,8 @@ describe('Request', () => {
         method: 'insert',
       };
       const expectedPreparedEntityObject = extend(true, {}, obj);
-      const preparedEntityObject = Request.prepareEntityObject_(obj);
+      // tslint:disable-next-line no-any
+      const preparedEntityObject = Request.prepareEntityObject_(obj) as any;
       assert.notStrictEqual(preparedEntityObject, obj);
       assert.notStrictEqual(preparedEntityObject.data.nested, obj.data.nested);
       assert.deepStrictEqual(
@@ -115,17 +117,16 @@ describe('Request', () => {
       const key = {};
       const entityObject = {data: true};
       entityObject[entity.KEY_SYMBOL] = key;
-
-      const preparedEntityObject = Request.prepareEntityObject_(entityObject);
-
+      const preparedEntityObject =
+          // tslint:disable-next-line no-any
+          Request.prepareEntityObject_(entityObject) as any;
       assert.strictEqual(preparedEntityObject.key, key);
       assert.strictEqual(preparedEntityObject.data.data, entityObject.data);
     });
   });
 
   describe('allocateIds', () => {
-    const INCOMPLETE_KEY = {};
-
+    const INCOMPLETE_KEY = {} as entity.Key;
     const ALLOCATIONS = 2;
     const OPTIONS = {
       allocations: ALLOCATIONS,
@@ -158,7 +159,7 @@ describe('Request', () => {
         const expectedKeys: Array<{}> = [];
         expectedKeys.length = ALLOCATIONS;
         expectedKeys.fill(keyProto);
-        assert.deepStrictEqual(config.reqOpts.keys, expectedKeys);
+        assert.deepStrictEqual(config.reqOpts!.keys, expectedKeys);
         assert.strictEqual(config.gaxOpts, undefined);
         done();
       };
@@ -170,7 +171,7 @@ describe('Request', () => {
       sandbox.stub(entity, 'isKeyComplete');
       sandbox.stub(entity, 'keyToKeyProto');
       request.request_ = config => {
-        assert.strictEqual(config.reqOpts.keys.length, ALLOCATIONS);
+        assert.strictEqual(config.reqOpts!.keys.length, ALLOCATIONS);
         done();
       };
       request.allocateIds(INCOMPLETE_KEY, ALLOCATIONS, assert.ifError);
@@ -221,7 +222,7 @@ describe('Request', () => {
 
       beforeEach(() => {
         request.request_ = (_, callback) => {
-          callback(null, API_RESPONSE);
+          callback(null!, API_RESPONSE);
         };
       });
 
@@ -250,7 +251,7 @@ describe('Request', () => {
 
     it('should throw if no keys are provided', () => {
       assert.throws(() => {
-        request.createReadStream();
+        request.createReadStream(null!);
       }, /At least one Key object is required/);
     });
 
@@ -269,7 +270,7 @@ describe('Request', () => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'lookup');
         assert.deepStrictEqual(
-            config.reqOpts.keys[0], entity.keyToKeyProto(key));
+            config.reqOpts!.keys[0], entity.keyToKeyProto(key));
         done();
       };
       const stream = request.createReadStream(key);
@@ -291,7 +292,7 @@ describe('Request', () => {
 
     it('should allow setting strong read consistency', done => {
       request.request_ = config => {
-        assert.strictEqual(config.reqOpts.readOptions.readConsistency, 1);
+        assert.strictEqual(config.reqOpts!.readOptions!.readConsistency, 1);
         done();
       };
 
@@ -302,7 +303,7 @@ describe('Request', () => {
 
     it('should allow setting strong eventual consistency', done => {
       request.request_ = config => {
-        assert.strictEqual(config.reqOpts.readOptions.readConsistency, 2);
+        assert.strictEqual(config.reqOpts!.readOptions!.readConsistency, 2);
         done();
       };
 
@@ -335,7 +336,8 @@ describe('Request', () => {
 
         stream.on('data', () => {}).on('error', () => {
           setImmediate(() => {
-            assert.strictEqual(stream._destroyed, true);
+            // tslint:disable-next-line no-any
+            assert.strictEqual((stream as any)._destroyed, true);
             done();
           });
         });
@@ -407,7 +409,7 @@ describe('Request', () => {
 
       beforeEach(() => {
         request.request_ = (_, callback) => {
-          callback(null, apiResponse);
+          callback(null!, apiResponse);
         };
       });
 
@@ -428,7 +430,7 @@ describe('Request', () => {
           numTimesCalled++;
 
           if (numTimesCalled === 1) {
-            callback(null, apiResponseWithDeferred);
+            callback(null!, apiResponseWithDeferred);
             return;
           }
 
@@ -436,7 +438,7 @@ describe('Request', () => {
               apiResponseWithDeferred.deferred.map(entity.keyFromKeyProto)
                   .map(entity.keyToKeyProto);
 
-          assert.deepStrictEqual(config.reqOpts.keys, expectedKeys);
+          assert.deepStrictEqual(config.reqOpts!.keys, expectedKeys);
           done();
         };
 
@@ -459,7 +461,7 @@ describe('Request', () => {
 
         request.request_ = (config, callback) => {
           setImmediate(() => {
-            callback(null, apiResponseWithMultiEntities);
+            callback(null!, apiResponseWithMultiEntities);
           });
         };
 
@@ -484,7 +486,7 @@ describe('Request', () => {
         request.request_ = (config, callback) => {
           lookupCount++;
           setImmediate(() => {
-            callback(null, apiResponseWithDeferred);
+            callback(null!, apiResponseWithDeferred);
           });
         };
 
@@ -506,8 +508,9 @@ describe('Request', () => {
       request.request_ = (config, callback) => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'commit');
-        assert(is.object(config.reqOpts.mutations[0].delete));
-        callback();
+        // tslint:disable-next-line no-any
+        assert(is.object((config.reqOpts as any).mutations[0].delete));
+        callback(null!);
       };
       request.delete(key, done);
     });
@@ -515,7 +518,7 @@ describe('Request', () => {
     it('should return apiResponse in callback', done => {
       const resp = {success: true};
       request.request_ = (config, callback) => {
-        callback(null, resp);
+        callback(null!, resp);
       };
       request.delete(key, (err, apiResponse) => {
         assert.ifError(err);
@@ -526,20 +529,18 @@ describe('Request', () => {
 
     it('should multi delete by keys', done => {
       request.request_ = (config, callback) => {
-        assert.strictEqual(config.reqOpts.mutations.length, 2);
-        callback();
+        assert.strictEqual(config.reqOpts!.mutations!.length, 2);
+        callback(null!);
       };
       request.delete([key, key], done);
     });
 
     it('should allow customization of GAX options', done => {
       const gaxOptions = {};
-
       request.request_ = config => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
-
       request.delete(key, gaxOptions, assert.ifError);
     });
 
@@ -552,7 +553,6 @@ describe('Request', () => {
 
       it('should queue request', () => {
         request.delete(key);
-
         assert(is.object(request.requests_[0].mutations[0].delete));
       });
     });
@@ -580,7 +580,8 @@ describe('Request', () => {
         request.get(keys, options, (err, entities) => {
           assert.ifError(err);
           assert.deepStrictEqual(entities, fakeEntities);
-          const spy = request.createReadStream.getCall(0);
+          // tslint:disable-next-line no-any
+          const spy = (request.createReadStream as any).getCall(0);
           assert.strictEqual(spy.args[0], keys);
           assert.strictEqual(spy.args[1], options);
           done();
@@ -603,10 +604,10 @@ describe('Request', () => {
       });
 
       it('should default options to an object', done => {
-        request.get(keys, null, err => {
+        request.get(keys, null!, err => {
           assert.ifError(err);
-
-          const spy = request.createReadStream.getCall(0);
+          // tslint:disable-next-line no-any
+          const spy = (request.createReadStream as any).getCall(0);
           assert.deepStrictEqual(spy.args[1], {});
           done();
         });
@@ -645,7 +646,7 @@ describe('Request', () => {
 
       sandbox.stub(Request, 'prepareEntityObject_').callsFake(obj => {
         assert.strictEqual(obj, entityObject);
-        return preparedEntityObject;
+        return preparedEntityObject as {};
       });
 
       request.save = entities => {
@@ -998,7 +999,7 @@ describe('Request', () => {
         sandbox.stub(entity, 'queryToQueryProto');
         request.request_ = (config, callback) => {
           timesRequestCalled++;
-          callback(null, apiResponse);
+          callback(null!, apiResponse);
         };
 
         const stream = request.runQueryStream({});
@@ -1180,7 +1181,7 @@ describe('Request', () => {
           key,
           method: 'insert',
           data: {k: 'v'},
-        };
+        } as {};
       });
 
       request.request_ = () => {
@@ -1400,7 +1401,7 @@ describe('Request', () => {
 
       sandbox.stub(Request, 'prepareEntityObject_').callsFake(obj => {
         assert.strictEqual(obj, entityObject);
-        return preparedEntityObject;
+        return preparedEntityObject as {};
       });
 
       request.save = entities => {
@@ -1442,7 +1443,7 @@ describe('Request', () => {
 
       sandbox.stub(Request, 'prepareEntityObject_').callsFake(obj => {
         assert.strictEqual(obj, entityObject);
-        return preparedEntityObject;
+        return preparedEntityObject as {};
       });
 
       request.save = entities => {

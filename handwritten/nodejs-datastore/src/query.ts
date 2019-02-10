@@ -70,11 +70,11 @@ class Query {
   limitVal: number;
   offsetVal: number;
 
-  constructor(scope?: Datastore|Transaction, kinds?: string[]);
+  constructor(scope?: Datastore|Transaction, kinds?: string[]|null);
   constructor(
-      scope?: Datastore|Transaction, namespace?: string, kinds?: string[]);
+      scope?: Datastore|Transaction, namespace?: string|null, kinds?: string[]);
   constructor(
-      scope?: Datastore|Transaction, namespaceOrKinds?: string|string[],
+      scope?: Datastore|Transaction, namespaceOrKinds?: string|string[]|null,
       kinds?: string[]) {
     let namespace = namespaceOrKinds as string | null;
     if (!kinds) {

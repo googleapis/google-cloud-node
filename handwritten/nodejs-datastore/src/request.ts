@@ -25,7 +25,7 @@ import * as streamEvents from 'stream-events';
 import * as through from 'through2';
 import {google} from '../proto/datastore';
 import {CallOptions} from 'google-gax';
-import {Stream} from 'stream';
+import {Transform} from 'stream';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -232,7 +232,7 @@ class DatastoreRequest {
    *   });
    */
   createReadStream(keys: Entities, options: CreateReadStreamOptions = {}):
-      Stream {
+      Transform {
     keys = arrify(keys).map(entity.keyToKeyProto);
     if (keys.length === 0) {
       throw new Error('At least one Key object is required.');
@@ -467,12 +467,12 @@ class DatastoreRequest {
    * });
    */
   get(keys: Entities,
-      options?: CreateReadStreamOptions): Promise<Entity|Stream>;
+      options?: CreateReadStreamOptions): Promise<Entity|Transform>;
   get(keys: Entities, callback: GetCallback): void;
   get(keys: Entities, options: CreateReadStreamOptions,
       callback: GetCallback): void;
   get(keys: Entities, optionsOrCallback?: CreateReadStreamOptions|GetCallback,
-      cb?: GetCallback): void|Promise<Entity|Stream> {
+      cb?: GetCallback): void|Promise<Entity|Transform> {
     const options =
         typeof optionsOrCallback === 'object' && optionsOrCallback !== null ?
         optionsOrCallback :
@@ -663,7 +663,7 @@ class DatastoreRequest {
    *     this.end();
    *   });
    */
-  runQueryStream(query: Query, options: RunQueryStreamOptions = {}): Stream {
+  runQueryStream(query: Query, options: RunQueryStreamOptions = {}): Transform {
     query = extend(true, new Query(), query);
 
     const makeRequest = (query: Query) => {

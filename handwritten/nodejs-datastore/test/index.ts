@@ -18,6 +18,10 @@ import * as assert from 'assert';
 import * as gax from 'google-gax';
 import * as proxyquire from 'proxyquire';
 
+import * as ds from '../src';
+import {Datastore, DatastoreOptions} from '../src';
+import {entity} from '../src/entity';
+
 const v1 = require('../src/v1/index.js');
 
 // tslint:disable-next-line no-any
@@ -25,7 +29,7 @@ const fakeEntity: any = {
   KEY_SYMBOL: Symbol('fake key symbol'),
   Int: class {
     value: {};
-    constructor(value) {
+    constructor(value: {}) {
       this.value = value;
     }
   },
@@ -34,7 +38,7 @@ const fakeEntity: any = {
   },
   Double: class {
     value: {};
-    constructor(value) {
+    constructor(value: {}) {
       this.value = value;
     }
   },
@@ -43,7 +47,7 @@ const fakeEntity: any = {
   },
   GeoPoint: class {
     value: {};
-    constructor(value) {
+    constructor(value: {}) {
       this.value = value;
     }
   },
@@ -61,16 +65,16 @@ const fakeEntity: any = {
   },
 };
 
-let googleAuthOverride;
+let googleAuthOverride: Function|null;
 function fakeGoogleAuth() {
   return (googleAuthOverride || (() => {})).apply(null, arguments);
 }
 
-let createInsecureOverride;
+let createInsecureOverride: Function|null;
 
 const fakeGoogleGax = {
   GrpcClient: class extends gax.GrpcClient{
-    constructor(opts) {
+    constructor(opts: gax.GrpcClientOptions) {
       // super constructor must be called first!
       super(opts);
       this.grpc = {
@@ -103,8 +107,8 @@ function FakeV1() {}
 
 describe('Datastore', () => {
   // tslint:disable-next-line variable-name
-  let Datastore;
-  let datastore;
+  let Datastore: typeof ds.Datastore;
+  let datastore: Datastore;
 
   const PROJECT_ID = 'project-id';
   const NAMESPACE = 'namespace';
@@ -223,7 +227,7 @@ describe('Datastore', () => {
       const options = {
         a: 'b',
         c: 'd',
-      };
+      } as DatastoreOptions;
 
       const datastore = new Datastore(options);
 
@@ -245,16 +249,14 @@ describe('Datastore', () => {
 
     it('should set port if detected', () => {
       const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
-
       const port = 99;
       Datastore.prototype.determineBaseUrl_ = function() {
         Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
         this.port_ = port;
       };
-
       const datastore = new Datastore(OPTIONS);
-
-      assert.strictEqual(datastore.options.port, port);
+      // tslint:disable-next-line no-any
+      assert.strictEqual((datastore.options as any).port, port);
     });
 
     it('should set grpc ssl credentials if custom endpoint', () => {
@@ -334,7 +336,7 @@ describe('Datastore', () => {
       const value = 0.42;
       let called = false;
       const saved = fakeEntity.isDsDouble;
-      fakeEntity.isDsDouble = (arg) => {
+      fakeEntity.isDsDouble = (arg: {}) => {
         assert.strictEqual(arg, value);
         called = true;
         return false;
@@ -356,7 +358,7 @@ describe('Datastore', () => {
       const value = {fakeLatitude: 1, fakeLongitude: 2};
       let called = false;
       const saved = fakeEntity.isDsGeoPoint;
-      fakeEntity.isDsGeoPoint = (arg) => {
+      fakeEntity.isDsGeoPoint = (arg: {}) => {
         assert.strictEqual(arg, value);
         called = true;
         return false;
@@ -378,7 +380,7 @@ describe('Datastore', () => {
       const value = 42;
       let called = false;
       const saved = fakeEntity.isDsInt;
-      fakeEntity.isDsInt = (arg) => {
+      fakeEntity.isDsInt = (arg: {}) => {
         assert.strictEqual(arg, value);
         called = true;
         return false;
@@ -400,7 +402,7 @@ describe('Datastore', () => {
       const value = {zz: true};
       let called = false;
       const saved = fakeEntity.isDsKey;
-      fakeEntity.isDsKey = (arg) => {
+      fakeEntity.isDsKey = (arg: {}) => {
         assert.strictEqual(arg, value);
         called = true;
         return false;
@@ -468,7 +470,8 @@ describe('Datastore', () => {
       const namespace = 'namespace';
       const kind = ['Kind'];
 
-      const query = datastore.createQuery(namespace, kind);
+      // tslint:disable-next-line no-any
+      const query: any = datastore.createQuery(namespace, kind);
       assert(query instanceof FakeQuery);
 
       assert.strictEqual(query.calledWith_[0], datastore);
@@ -478,16 +481,16 @@ describe('Datastore', () => {
 
     it('should include the default namespace', () => {
       const kind = ['Kind'];
-      const query = datastore.createQuery(kind);
-
+      // tslint:disable-next-line no-any
+      const query: any = datastore.createQuery(kind);
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
       assert.deepStrictEqual(query.calledWith_[2], kind);
     });
 
     it('should include the default namespace in a kindless query', () => {
-      const query = datastore.createQuery();
-
+      // tslint:disable-next-line no-any
+      const query: any = datastore.createQuery();
       assert.strictEqual(query.calledWith_[0], datastore);
       assert.strictEqual(query.calledWith_[1], datastore.namespace);
       assert.deepStrictEqual(query.calledWith_[2], []);
@@ -496,16 +499,16 @@ describe('Datastore', () => {
 
   describe('key', () => {
     it('should return a Key object', () => {
-      const options = {};
-      const key = datastore.key(options);
-
+      const options = {} as entity.KeyOptions;
+      // tslint:disable-next-line no-any
+      const key: any = datastore.key(options);
       assert.strictEqual(key.calledWith_[0], options);
     });
 
     it('should use a non-object argument as the path', () => {
       const options = 'path';
-      const key = datastore.key(options);
-
+      // tslint:disable-next-line no-any
+      const key: any = datastore.key(options);
       assert.strictEqual(key.calledWith_[0].namespace, datastore.namespace);
       assert.deepStrictEqual(key.calledWith_[0].path, [options]);
     });
@@ -525,7 +528,7 @@ describe('Datastore', () => {
   });
 
   describe('determineBaseUrl_', () => {
-    function setHost(host) {
+    function setHost(host: string) {
       process.env.DATASTORE_EMULATOR_HOST = host;
     }
 

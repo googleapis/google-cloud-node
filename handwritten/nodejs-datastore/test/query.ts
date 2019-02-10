@@ -15,13 +15,15 @@
  */
 
 import * as assert from 'assert';
+const {Query} = require('../src/query');
+import {Datastore} from '../src';
 
 describe('Query', () => {
-  const SCOPE = {};
+  const SCOPE = {} as Datastore;
   const NAMESPACE = 'Namespace';
-  const KINDS = 'Kind';
+  const KINDS = ['Kind'];
 
-  const Query = require('../src/query.js').Query;
+
   let query;
 
   beforeEach(() => {
@@ -45,7 +47,7 @@ describe('Query', () => {
       [new Query(SCOPE, '', KINDS),
        new Query(SCOPE, null, KINDS),
        new Query(SCOPE, undefined, KINDS),
-       new Query(SCOPE, 0, KINDS),
+       new Query(SCOPE, 0 as {} as string, KINDS),
        new Query(SCOPE, KINDS),
       ].forEach((query) => {
         assert.strictEqual(query.namespace, null);

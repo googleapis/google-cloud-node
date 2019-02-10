@@ -17,9 +17,10 @@
 import * as assert from 'assert';
 import * as extend from 'extend';
 import {Datastore} from '../src';
+import {Entity, entity} from '../src/entity';
 
 describe('entity', () => {
-  let entity;
+  let entity: Entity;
 
   beforeEach(() => {
     delete require.cache[require.resolve('../src/entity.js')];
@@ -188,7 +189,7 @@ describe('entity', () => {
       let run = false;
 
       const decodeValueProto = entity.decodeValueProto;
-      entity.decodeValueProto = (valueProto) => {
+      entity.decodeValueProto = (valueProto: {}) => {
         if (!run) {
           run = true;
           return decodeValueProto(valueProto);
@@ -256,7 +257,7 @@ describe('entity', () => {
         entityValue: expectedValue,
       };
 
-      entity.entityFromEntityProto = (entityProto) => {
+      entity.entityFromEntityProto = (entityProto: {}) => {
         assert.strictEqual(entityProto, expectedValue);
         return expectedValue;
       };
@@ -272,7 +273,7 @@ describe('entity', () => {
         keyValue: expectedValue,
       };
 
-      entity.keyFromKeyProto = (keyProto) => {
+      entity.keyFromKeyProto = (keyProto: {}) => {
         assert.strictEqual(keyProto, expectedValue);
         return expectedValue;
       };
@@ -340,7 +341,7 @@ describe('entity', () => {
         integerValue: value,
       };
 
-      entity.Int = function(value_) {
+      entity.Int = function(value_: {}) {
         assert.strictEqual(value_, value);
         this.value = value_;
       };
@@ -365,7 +366,7 @@ describe('entity', () => {
         doubleValue: value,
       };
 
-      entity.Double = function(value_) {
+      entity.Double = function(value_: {}) {
         assert.strictEqual(value_, value);
         this.value = value_;
       };
@@ -439,7 +440,7 @@ describe('entity', () => {
       let run = false;
 
       const encodeValue = entity.encodeValue;
-      entity.encodeValue = (value_) => {
+      entity.encodeValue = (value_: {}) => {
         if (!run) {
           run = true;
           return encodeValue(value_);
@@ -462,7 +463,7 @@ describe('entity', () => {
         keyValue: value,
       };
 
-      entity.keyToKeyProto = (key) => {
+      entity.keyToKeyProto = (key: {}) => {
         assert.strictEqual(key, value);
         return value;
       };
@@ -486,7 +487,7 @@ describe('entity', () => {
       let run = false;
 
       const encodeValue = entity.encodeValue;
-      entity.encodeValue = (value_) => {
+      entity.encodeValue = (value_: {}) => {
         if (!run) {
           run = true;
           return encodeValue(value_);
@@ -570,7 +571,7 @@ describe('entity', () => {
         properties: entityObject.data,
       };
 
-      entity.encodeValue = (value_) => {
+      entity.encodeValue = (value_: {}) => {
         assert.strictEqual(value_, value);
         return value;
       };
@@ -1021,12 +1022,12 @@ describe('entity', () => {
 
       const expectedResults = entityProto;
 
-      entity.keyFromKeyProto = (key_) => {
+      entity.keyFromKeyProto = (key_: {}) => {
         assert.strictEqual(key_, key);
         return key;
       };
 
-      entity.entityFromEntityProto = (entityProto_) => {
+      entity.entityFromEntityProto = (entityProto_: {}) => {
         assert.strictEqual(entityProto_, entityProto);
         return entityProto;
       };
@@ -1044,7 +1045,7 @@ describe('entity', () => {
         path: ['Kind', 123],
       });
 
-      entity.keyToKeyProto = (key_) => {
+      entity.keyToKeyProto = (key_: {}) => {
         assert.strictEqual(key_, key);
         setImmediate(done);
         return key;
@@ -1102,7 +1103,7 @@ describe('entity', () => {
 
     it('should set the namespace', (done) => {
       entity.Key = class {
-        constructor(keyOptions) {
+        constructor(keyOptions: entity.KeyOptions) {
           assert.strictEqual(keyOptions.namespace, NAMESPACE);
           done();
         }
@@ -1112,7 +1113,7 @@ describe('entity', () => {
 
     it('should create a proper Key', (done) => {
       entity.Key = class {
-        constructor(keyOptions) {
+        constructor(keyOptions: entity.KeyOptions) {
           assert.deepStrictEqual(keyOptions, {
             namespace: NAMESPACE,
             path: ['Kind', new entity.Int(111), 'Kind2', 'name'],

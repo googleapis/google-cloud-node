@@ -584,7 +584,6 @@ describe('Transaction', () => {
 
       it('should set transaction id', done => {
         delete transaction.id;
-
         transaction.run((err) => {
           assert.ifError(err);
           assert.strictEqual(transaction.id, TRANSACTION_ID);
@@ -610,18 +609,13 @@ describe('Transaction', () => {
         {key: key('Product234'), data: 234},
         {key: key('Product345'), data: 345},
       ];
-
       transaction.save(entities);
-
       assert.strictEqual(transaction.modifiedEntities_.length, entities.length);
-
       transaction.modifiedEntities_.forEach((queuedEntity) => {
         assert.strictEqual(queuedEntity.method, 'save');
-
         const match = entities.filter((ent) => {
           return ent.key === queuedEntity.entity.key;
         })[0];
-
         assert.deepStrictEqual(queuedEntity.args, [match]);
       });
     });
