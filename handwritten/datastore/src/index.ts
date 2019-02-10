@@ -26,7 +26,7 @@
 
 import * as arrify from 'arrify';
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
-import {GrpcClient, GrpcClientOptions} from 'google-gax';
+import {GrpcClient} from 'google-gax';
 import {ChannelCredentials} from 'grpc';
 import * as is from 'is';
 
@@ -631,9 +631,15 @@ class Datastore extends DatastoreRequest {
    * const datastore = new Datastore();
    * const query = datastore.createQuery('Company');
    */
-  createQuery(namespace: string, kind?: string) {
+  createQuery(kind?: string): Query;
+  createQuery(kind?: string[]): Query;
+  createQuery(namespace: string, kind: string): Query;
+  createQuery(namespace: string, kind: string[]): Query;
+  createQuery(namespaceOrKind?: string|string[], kind?: string|string[]):
+      Query {
+    let namespace = namespaceOrKind as string;
     if (arguments.length < 2) {
-      kind = namespace;
+      kind = namespaceOrKind;
       namespace = this.namespace!;
     }
     return new Query(this, namespace, arrify(kind));
@@ -850,6 +856,8 @@ export interface TransactionOptions {
   id?: string;
   readOnly?: boolean;
 }
+
+export {DatastoreRequest, Query, Transaction};
 
 export interface DatastoreOptions extends GoogleAuthOptions {
   namespace?: string;

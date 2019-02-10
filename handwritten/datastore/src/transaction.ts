@@ -296,8 +296,8 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    */
-  createQuery(namespace: string, kind?: string): Query {
-    return this.datastore.createQuery.call(this, namespace, kind);
+  createQuery(namespace: string, kind?: string|string[]): Query {
+    return this.datastore.createQuery.call(this, namespace, kind as string[]);
   }
 
   /**
