@@ -93,6 +93,199 @@ describe('InstanceGroupManager', function() {
     });
   });
 
+  describe('deleteInstances', function() {
+    const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
+
+    it('should make the correct API request', function(done) {
+      instanceGroupManager.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/deleteInstances');
+        assert.deepStrictEqual(reqOpts.json, {
+          instances: VMS.map(function(vm) {
+            return vm.url;
+          }),
+        });
+
+        done();
+      };
+
+      instanceGroupManager.deleteInstances(VMS, assert.ifError);
+    });
+
+    describe('error', function() {
+      const apiResponse = {};
+      const error = new Error('Error.');
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should return an error and API response', function(done) {
+        instanceGroupManager.deleteInstances(VMS, function(
+          err,
+          operation,
+          apiResponse_
+        ) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(operation, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      const apiResponse = {name: 'op-name'};
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should return an Operation and API response', function(done) {
+        const operation = {};
+
+        instanceGroupManager.zone.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        instanceGroupManager.deleteInstances(VMS, function(
+          err,
+          operation_,
+          apiResponse_
+        ) {
+          assert.ifError(err);
+          assert.strictEqual(operation_, operation);
+          assert.strictEqual(operation.metadata, apiResponse);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('getManagedInstances', function() {
+    beforeEach(function() {
+      instanceGroupManager.zone.vm = function() {
+        return {};
+      };
+    });
+
+    it('should accept only a callback', function(done) {
+      instanceGroupManager.request = function(reqOpts) {
+        assert.deepStrictEqual(reqOpts.qs, {});
+        done();
+      };
+
+      instanceGroupManager.getManagedInstances(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      const query = {a: 'b', c: 'd'};
+
+      instanceGroupManager.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/listManagedInstances');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      instanceGroupManager.getManagedInstances(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        instanceGroupManager.getManagedInstances({}, function(
+          err,
+          vms,
+          nextQuery,
+          apiResponse_
+        ) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      const apiResponse = {
+        managedInstances: [{instance: 'vm-name'}],
+      };
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        const nextPageToken = 'next-page-token';
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
+          nextPageToken: nextPageToken,
+        });
+        const expectedNextQuery = {
+          pageToken: nextPageToken,
+        };
+
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        instanceGroupManager.getManagedInstances({}, function(
+          err,
+          vms,
+          nextQuery
+        ) {
+          assert.ifError(err);
+
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with VMs & API response', function(done) {
+        const vm = {};
+
+        instanceGroupManager.zone.vm = function(name) {
+          assert.strictEqual(name, apiResponse.managedInstances[0].instance);
+          return vm;
+        };
+
+        instanceGroupManager.getManagedInstances({}, function(
+          err,
+          vms,
+          nextQuery,
+          apiResponse_
+        ) {
+          assert.ifError(err);
+
+          assert.strictEqual(vms[0], vm);
+          assert.strictEqual(vms[0].metadata, apiResponse.managedInstances[0]);
+
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('resize', function() {
     const query = {size: 1};
 

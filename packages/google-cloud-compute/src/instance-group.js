@@ -295,7 +295,7 @@ class InstanceGroup extends common.ServiceObject {
   /**
    * Get a list of VM instances in this instance group.
    *
-   * @see [InstaceGroups: listInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/listInstances}
+   * @see [InstanceGroups: listInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/listInstances}
    *
    * @param {object=} options - Instance search options.
    * @param {boolean} options.autoPaginate - Have pagination handled

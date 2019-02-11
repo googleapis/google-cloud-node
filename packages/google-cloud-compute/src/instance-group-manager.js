@@ -16,7 +16,9 @@
 
 'use strict';
 
+const arrify = require('arrify');
 const common = require('@google-cloud/common');
+const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {teenyRequest} = require('teeny-request');
 
@@ -153,7 +155,154 @@ class InstanceGroupManager extends common.ServiceObject {
      */
     this.name = name;
   }
-
+  /**
+   * Flags the specified instances in the managed instance group for immediate deletion.
+   * @see [InstanceGroupManagers: deleteInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/deleteInstances}
+   * @param {VM|VM[]} vms - VM instances to delete from
+   *     this instance group manager.
+   * @param {function} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {Operation} callback.operation - An operation object
+   *     that can be used to check the status of the request.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('us-central1-a');
+   * const instanceGroupManager = zone.instanceGroupManager('web-servers');
+   *
+   * const vms = [
+   *   gce.zone('us-central1-a').vm('http-server'),
+   *   gce.zone('us-central1-a').vm('https-server')
+   * ];
+   *
+   * instanceGroupManager.deleteInstances(vms, function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the status
+   *   // of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * instanceGroupManager.deleteInstances(vms).then(function(data) {
+   *   const operation = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  deleteInstances(vms, callback) {
+    const self = this;
+    this.request(
+      {
+        method: 'POST',
+        uri: '/deleteInstances',
+        json: {
+          instances: arrify(vms).map(function(vm) {
+            return vm.url;
+          }),
+        },
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err, null, resp);
+          return;
+        }
+        const operation = self.zone.operation(resp.name);
+        operation.metadata = resp;
+        callback(null, operation, resp);
+      }
+    );
+  }
+  /**
+   * Get a list of managed VM instances in this instance group manager.
+   *
+   * @see [InstanceGroupManagers: listManagedInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/listManagedInstances}
+   *
+   * @param {object=} options - Instance search options.
+   * @param {boolean} options.autoPaginate - Have pagination handled
+   *     automatically. Default: true.
+   * @param {string} options.filter - Search filter in the format of
+   *     `{name} {comparison} {filterString}`.
+   *     - **`name`**: the name of the field to compare
+   *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+   *       (not equal)
+   *     - **`filterString`**: the string to filter to. For string fields, this
+   *       can be a regular expression.
+   * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+   * @param {number} options.maxResults - Maximum number of VMs to return.
+   * @param {string} options.pageToken - A previously-returned page token
+   *     representing part of the larger set of results to view.
+   * @param {function} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {VM[]} callback.vms - VM objects from this instance
+   *     group.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('us-central1-a');
+   * const instanceGroupManager = zone.instanceGroupManager('web-servers');
+   *
+   * instanceGroupManager.getManagedInstances(function(err, vms) {
+   *   // `vms` is an array of `VM` objects.
+   * });
+   *
+   * //-
+   * // To control how many API requests are made and page through the results
+   * // manually, set `autoPaginate` to `false`.
+   * //-
+   * function callback(err, vms, nextQuery, apiResponse) {
+   *   if (nextQuery) {
+   *     // More results exist.
+   *     instanceGroupManager.getManagedInstances(nextQuery, callback);
+   *   }
+   * }
+   *
+   * instanceGroupManager.getManagedInstances({
+   *   autoPaginate: false
+   * }, callback);
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * instanceGroupManager.getManagedInstances().then(function(data) {
+   *   const vms = data[0];
+   * });
+   */
+  getManagedInstances(options, callback) {
+    const self = this;
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    this.request(
+      {
+        method: 'POST',
+        uri: '/listManagedInstances',
+        qs: options,
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err, null, null, resp);
+          return;
+        }
+        let nextQuery = null;
+        if (resp.nextPageToken) {
+          nextQuery = Object.assign({}, options, {
+            pageToken: resp.nextPageToken,
+          });
+        }
+        const vms = arrify(resp.managedInstances).map(function(vm) {
+          const vmInstance = self.zone.vm(vm.instance);
+          vmInstance.metadata = vm;
+          return vmInstance;
+        });
+        callback(null, vms, nextQuery, resp);
+      }
+    );
+  }
   /**
    * Resizes the managed instance group.
    *
