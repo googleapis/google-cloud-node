@@ -27,6 +27,7 @@ const config = new Configuration({});
 import {ErrorMessage} from '../../../src/classes/error-message';
 import {RequestHandler} from '../../../src/google-apis/auth-client';
 import {RequestInformationContainer} from '../../../src/classes/request-information-container';
+import {Request} from '../../../src/request-extractors/manual';
 
 describe('Manual handler', () => {
   // nock.disableNetConnect();
@@ -117,17 +118,21 @@ describe('Manual handler', () => {
       assert.strictEqual(r.context.httpRequest.method, 'TACKEY');
     });
     it('Should ignore arguments', done => {
-      const r = report('hockey', () => {
-        done();
-      }, 'field');
+      const r = report(
+          'hockey', (() => {
+                      done();
+                    }) as unknown as string,
+          'field' as unknown as manual.Callback);
       assert(
           r.message.match('hockey') && !r.message.match('field'),
           'string after callback should be ignored');
     });
     it('Should ignore arguments', done => {
-      const r = report('passkey', () => {
-        done();
-      }, {method: 'HONK'});
+      const r = report(
+          'passkey', (() => {
+                       done();
+                     }) as unknown as string,
+          {method: 'HONK'} as unknown as manual.Callback);
       assert.notEqual(r.context.httpRequest.method, 'HONK');
     });
     it('Should allow null arguments as placeholders', done => {
@@ -137,21 +142,25 @@ describe('Manual handler', () => {
       assert(r.message.match(/pokey/), 'string error should propagate');
     });
     it('Should allow explicit undefined', done => {
-      const r = report('Turkey', undefined, undefined, () => {
-        done();
-      });
+      const r = report(
+          'Turkey', undefined as unknown as Request,
+          undefined as unknown as string, () => {
+            done();
+          });
       assert(r.message.match(/Turkey/), 'string error should propagate');
     });
     it('Should allow request to be supplied as undefined', done => {
-      const r = report('turnkey', undefined, 'solution', () => {
-        done();
-      });
+      const r =
+          report('turnkey', undefined as unknown as Request, 'solution', () => {
+            done();
+          });
       assert.strictEqual(r.message, 'solution', 'error should propagate');
     });
     it('Should allow additional message', done => {
-      const r = report('Mickey', {method: 'SNIFF'}, undefined, () => {
-        done();
-      });
+      const r = report(
+          'Mickey', {method: 'SNIFF'}, undefined as unknown as string, () => {
+            done();
+          });
       assert(
           r.message.match(/Mickey/) && !r.message.match(/SNIFF/),
           'string error should propagate');
