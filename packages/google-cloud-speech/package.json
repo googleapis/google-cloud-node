@@ -37,7 +37,9 @@
     "system-test": "mocha system-test/*.js --timeout 600000",
     "test-no-cover": "mocha test/*.js",
     "test": "npm run cover",
-    "fix": "eslint --fix '**/*.js'"
+    "fix": "eslint --fix '**/*.js'",
+    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "predocs-test": "npm run docs"
   },
   "dependencies": {
     "@google-cloud/common": "^0.31.0",
@@ -63,6 +65,7 @@
     "power-assert": "^1.6.0",
     "prettier": "^1.13.5",
     "proxyquire": "^2.1.0",
-    "sinon": "^7.0.0"
+    "sinon": "^7.0.0",
+    "broken-link-checker-local": "^0.2.0"
   }
 }
