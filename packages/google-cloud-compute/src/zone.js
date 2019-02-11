@@ -30,6 +30,7 @@ const {teenyRequest} = require('teeny-request');
 const Autoscaler = require('./autoscaler.js');
 const Disk = require('./disk.js');
 const InstanceGroup = require('./instance-group.js');
+const InstanceGroupManager = require('./instance-group-manager.js');
 const MachineType = require('./machine-type.js');
 const Operation = require('./operation.js');
 const VM = require('./vm.js');
@@ -965,6 +966,100 @@ class Zone extends common.ServiceObject {
     );
   }
   /**
+   * Get a list of instance group managers for this zone.
+   *
+   * @see [InstanceGroupManagers Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers}
+   * @see [InstanceGroupManagers: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/list}
+   *
+   * @param {object=} options - Instance group manager search options.
+   * @param {boolean} options.autoPaginate - Have pagination handled
+   *     automatically. Default: true.
+   * @param {string} options.filter - Search filter in the format of
+   *     `{name} {comparison} {filterString}`.
+   *     - **`name`**: the name of the field to compare
+   *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+   *       (not equal)
+   *     - **`filterString`**: the string to filter to. For string fields, this
+   *       can be a regular expression.
+   * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+   * @param {number} options.maxResults - Maximum number of instance groups to
+   *     return.
+   * @param {string} options.pageToken - A previously-returned page token
+   *     representing part of the larger set of results to view.
+   * @param {function} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {InstanceGroupManager[]} callback.instanceGroupManagers -
+   *     InstanceGroupManager objects from this zone.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('us-central1-a');
+   *
+   * zone.getInstanceGroupManagers(function(err, instanceGroupManagers) {
+   *   // `instanceGroupManagers` is an array of `InstanceGroupManager` objects.
+   * });
+   *
+   * //-
+   * // To control how many API requests are made and page through the results
+   * // manually, set `autoPaginate` to `false`.
+   * //-
+   * function callback(err, instanceGroupManagers, nextQuery, apiResponse) {
+   *   if (nextQuery) {
+   *     // More results exist.
+   *     zone.getInstanceGroupManagers(nextQuery, callback);
+   *   }
+   * }
+   *
+   * zone.getInstanceGroupManagers({
+   *   autoPaginate: false
+   * }, callback);
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * zone.getInstanceGroupManagers().then(function(data) {
+   *   const instanceGroupManagerss = data[0];
+   * });
+   */
+  getInstanceGroupManagers(options, callback) {
+    const self = this;
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    this.request(
+      {
+        uri: '/instanceGroupManagers',
+        qs: options,
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err, null, null, resp);
+          return;
+        }
+        let nextQuery = null;
+        if (resp.nextPageToken) {
+          nextQuery = Object.assign({}, options, {
+            pageToken: resp.nextPageToken,
+          });
+        }
+        const instanceGroupManagers = (resp.items || []).map(function(
+          instanceGroupManager
+        ) {
+          const instanceGroupManagerInstance = self.instanceGroupManager(
+            instanceGroupManager.name
+          );
+          instanceGroupManagerInstance.metadata = instanceGroupManager;
+          return instanceGroupManagerInstance;
+        });
+        callback(null, instanceGroupManagers, nextQuery, resp);
+      }
+    );
+  }
+  /**
    * Get a list of machine types for this zone.
    *
    * @see [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/list}
@@ -1218,6 +1313,24 @@ class Zone extends common.ServiceObject {
    */
   instanceGroup(name) {
     return new InstanceGroup(this, name);
+  }
+  /**
+   * Get a reference to a Google Compute Engine instance group manager.
+   *
+   * @see [InstanceGroupManagers Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers}
+   *
+   * @param {string} name - Name of the existing instance group manager.
+   * @returns {InstanceGroupManager}
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('us-central1-a');
+   *
+   * const instanceGroupManager = zone.instanceGroupManager('my-instance-group-manager');
+   */
+  instanceGroupManager(name) {
+    return new InstanceGroupManager(this, name);
   }
   /**
    * Get a reference to a Google Compute Engine machine type.
@@ -1534,6 +1647,7 @@ paginator.extend(Zone, [
   'getAutoscalers',
   'getDisks',
   'getInstanceGroups',
+  'getInstanceGroupManagers',
   'getMachineTypes',
   'getOperations',
   'getVMs',
@@ -1549,6 +1663,7 @@ promisifyAll(Zone, {
     'autoscaler',
     'disk',
     'instanceGroup',
+    'instanceGroupManager',
     'machineType',
     'operation',
     'vm',

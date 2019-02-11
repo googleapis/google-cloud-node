@@ -35,6 +35,7 @@ const fakePromisify = Object.assign({}, promisify, {
       'autoscaler',
       'disk',
       'instanceGroup',
+      'instanceGroupManager',
       'machineType',
       'operation',
       'vm',
@@ -56,6 +57,10 @@ FakeInstanceGroup.formatPorts_ = function() {
 };
 
 function FakeInstanceGroup() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
+function FakeInstanceGroupManager() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
@@ -93,6 +98,7 @@ const fakePaginator = {
         'getAutoscalers',
         'getDisks',
         'getInstanceGroups',
+        'getInstanceGroupManagers',
         'getMachineTypes',
         'getOperations',
         'getVMs',
@@ -124,6 +130,7 @@ describe('Zone', function() {
       './autoscaler.js': FakeAutoscaler,
       './disk.js': FakeDisk,
       './instance-group.js': FakeInstanceGroup,
+      './instance-group-manager.js': FakeInstanceGroupManager,
       './machine-type.js': FakeMachineType,
       './operation.js': FakeOperation,
       './vm.js': FakeVM,
@@ -1414,6 +1421,115 @@ describe('Zone', function() {
     });
   });
 
+  describe('getInstanceGroupManagers', function() {
+    it('should accept only a callback', function(done) {
+      zone.request = function(reqOpts) {
+        assert.deepStrictEqual(reqOpts.qs, {});
+        done();
+      };
+
+      zone.getInstanceGroupManagers(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      const query = {a: 'b', c: 'd'};
+
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/instanceGroupManagers');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      zone.getInstanceGroupManagers(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        zone.getInstanceGroupManagers({}, function(
+          err,
+          groups,
+          nextQuery,
+          apiResp
+        ) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(groups, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      const apiResponse = {
+        items: [{name: 'operation-name'}],
+      };
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        const nextPageToken = 'next-page-token';
+        const apiResponseWithNextPageToken = Object.assign({}, apiResponse, {
+          nextPageToken: nextPageToken,
+        });
+        const expectedNextQuery = {
+          pageToken: nextPageToken,
+        };
+
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        zone.getInstanceGroupManagers({}, function(err, groups, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with Groups & API resp', function(done) {
+        const group = {};
+
+        zone.instanceGroupManager = function(name) {
+          assert.strictEqual(name, apiResponse.items[0].name);
+          return group;
+        };
+
+        zone.getInstanceGroupManagers({}, function(
+          err,
+          groups,
+          nextQuery,
+          apiResp
+        ) {
+          assert.ifError(err);
+
+          assert.strictEqual(groups[0], group);
+          assert.strictEqual(groups[0].metadata, apiResponse.items[0]);
+
+          assert.strictEqual(apiResp, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getMachineTypes', function() {
     it('should make the correct call to Compute', function(done) {
       const options = {a: 'b', c: 'd'};
@@ -1664,6 +1780,17 @@ describe('Zone', function() {
       assert(instanceGroup instanceof FakeInstanceGroup);
       assert.strictEqual(instanceGroup.calledWith_[0], zone);
       assert.strictEqual(instanceGroup.calledWith_[1], NAME);
+    });
+  });
+
+  describe('instanceGroupManager', function() {
+    const NAME = 'instance-group-manager';
+
+    it('should return an InstanceGroupManager object', function() {
+      const instanceGroupManager = zone.instanceGroupManager(NAME);
+      assert(instanceGroupManager instanceof FakeInstanceGroupManager);
+      assert.strictEqual(instanceGroupManager.calledWith_[0], zone);
+      assert.strictEqual(instanceGroupManager.calledWith_[1], NAME);
     });
   });
 
