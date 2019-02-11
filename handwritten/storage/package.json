@@ -44,7 +44,9 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "fix": "gts fix && eslint --fix '**/*.js'",
-    "prepare": "npm run compile"
+    "prepare": "npm run compile",
+    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "predocs-test": "npm run docs"
   },
   "dependencies": {
     "@google-cloud/common": "^0.31.0",
@@ -110,6 +112,7 @@
     "source-map-support": "^0.5.6",
     "tmp": "^0.0.33",
     "typescript": "~3.3.0",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "broken-link-checker-local": "^0.2.0"
   }
 }
