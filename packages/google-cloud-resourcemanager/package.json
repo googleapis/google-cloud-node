@@ -38,7 +38,9 @@
     "fix": "eslint '**/*.js' --fix && gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "presystem-test": "npm run compile"
+    "presystem-test": "npm run compile",
+    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "predocs-test": "npm run docs"
   },
   "dependencies": {
     "@google-cloud/common": "^0.31.0",
@@ -70,6 +72,7 @@
     "proxyquire": "^2.0.0",
     "source-map-support": "^0.5.6",
     "typescript": "~3.3.0",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "broken-link-checker-local": "^0.2.0"
   }
 }
