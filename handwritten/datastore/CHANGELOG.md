@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## v3.1.0
+
+02-09-2019 17:57 PST
+
+This one's coming hot with fresh new TypeScript types 🔥
+
+### New Features
+- feat: typings for gapic files ([#307](https://github.com/googleapis/nodejs-datastore/pull/307))
+
+### Bug fixes
+- fix(types): Make gaxOptions optional in Transaction.rollback() ([#310](https://github.com/googleapis/nodejs-datastore/pull/310))
+
+### Dependencies
+- fix(deps): update dependency google-auth-library to v3 ([#302](https://github.com/googleapis/nodejs-datastore/pull/302))
+- fix(deps): update dependency google-gax to ^0.25.0 ([#316](https://github.com/googleapis/nodejs-datastore/pull/316))
+- fix(deps): update dependency google-gax to ^0.24.0 ([#312](https://github.com/googleapis/nodejs-datastore/pull/312))
+
+### Documentation
+- docs: update contributing path in README ([#322](https://github.com/googleapis/nodejs-datastore/pull/322))
+- chore: move CONTRIBUTING.md to root ([#321](https://github.com/googleapis/nodejs-datastore/pull/321))
+- docs: add lint/fix example to contributing guide ([#319](https://github.com/googleapis/nodejs-datastore/pull/319))
+- docs(samples): Update Datastore snippet for read only transaction
+- docs(key): copy Datastore#key examples to Key ctor ([#306](https://github.com/googleapis/nodejs-datastore/pull/306))
+
+### Internal / Testing Changes
+- refactor: clean up types for tests ([#325](https://github.com/googleapis/nodejs-datastore/pull/325))
+- refactor: asyncify the system test ([#324](https://github.com/googleapis/nodejs-datastore/pull/324))
+- build: test using @grpc/grpc-js in CI ([#323](https://github.com/googleapis/nodejs-datastore/pull/323))
+- refactor(types): enable noImplicitAny for transaction.ts & request.ts ([#305](https://github.com/googleapis/nodejs-datastore/pull/305))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#313](https://github.com/googleapis/nodejs-datastore/pull/313))
+- build: ignore googleapis.com in doc link check ([#311](https://github.com/googleapis/nodejs-datastore/pull/311))
+- chore: update year in the license headers. ([#304](https://github.com/googleapis/nodejs-datastore/pull/304))
+
 ## v3.0.1
 
 01-15-2019 13:20 PST
