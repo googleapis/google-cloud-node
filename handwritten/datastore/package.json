@@ -39,7 +39,9 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "proto": "npm run proto:datastore",
-    "proto:datastore": "mkdir -p proto && pbjs -t static-module -w commonjs -p node_modules/google-proto-files google/datastore/v1/datastore.proto | pbts -o proto/datastore.d.ts -"
+    "proto:datastore": "mkdir -p proto && pbjs -t static-module -w commonjs -p node_modules/google-proto-files google/datastore/v1/datastore.proto | pbts -o proto/datastore.d.ts -",
+    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "predocs-test": "npm run docs"
   },
   "dependencies": {
     "@google-cloud/projectify": "^0.3.2",
@@ -82,6 +84,7 @@
     "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
     "sinon": "^7.0.0",
-    "typescript": "~3.3.0"
+    "typescript": "~3.3.0",
+    "broken-link-checker-local": "^0.2.0"
   }
 }
