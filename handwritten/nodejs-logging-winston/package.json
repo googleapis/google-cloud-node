@@ -47,7 +47,9 @@
     "fix": "gts fix && eslint --fix '**/*.js'",
     "prepare": "npm run compile",
     "pretest": "npm run compile && node ./bin/install-winston2.js",
-    "posttest": "npm run check"
+    "posttest": "npm run check",
+    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "predocs-test": "npm run docs"
   },
   "dependencies": {
     "@google-cloud/logging": "^4.0.1",
@@ -84,7 +86,8 @@
     "teeny-request": "^3.6.0",
     "typescript": "^3.0.0",
     "uuid": "^3.3.2",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "broken-link-checker-local": "^0.2.0"
   },
   "peerDependencies": {
     "winston": ">=2.x <=3.x"
