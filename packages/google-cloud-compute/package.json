@@ -31,7 +31,9 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js --timeout 600000",
     "test": "nyc mocha",
-    "fix": "eslint --fix '**/*.js'"
+    "fix": "eslint --fix '**/*.js'",
+    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "predocs-test": "npm run docs"
   },
   "dependencies": {
     "@google-cloud/common": "^0.31.0",
@@ -63,6 +65,7 @@
     "power-assert": "^1.5.0",
     "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "broken-link-checker-local": "^0.2.0"
   }
 }
