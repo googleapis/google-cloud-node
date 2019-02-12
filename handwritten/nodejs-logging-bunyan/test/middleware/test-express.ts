@@ -15,11 +15,8 @@
  */
 
 import * as assert from 'assert';
+import {GCPEnv} from 'google-auth-library';
 import * as proxyquire from 'proxyquire';
-
-// FIXME(ofrobots): use a proper export once the following is released:
-// https://github.com/googleapis/google-auth-library-nodejs/pull/569.
-import envDetect = require('google-auth-library/build/src/auth/envDetect');
 
 // types-only import. Actual require is done through proxyquire below.
 import {MiddlewareOptions} from '../../src/middleware/express';
@@ -116,15 +113,14 @@ describe('middleware/express', () => {
     assert.strictEqual(passedProjectId, FAKE_PROJECT_ID);
   });
 
-  [envDetect.GCPEnv.APP_ENGINE, envDetect.GCPEnv.CLOUD_FUNCTIONS].forEach(
-      env => {
-        it(`should not generate the request logger on ${env}`, async () => {
-          authEnvironment = env;
-          await middleware();
-          assert.ok(passedOptions);
-          assert.strictEqual(passedOptions.length, 1);
-          // emitRequestLog parameter to makeChildLogger should be undefined.
-          assert.strictEqual(passedEmitRequestLog, undefined);
-        });
-      });
+  [GCPEnv.APP_ENGINE, GCPEnv.CLOUD_FUNCTIONS].forEach(env => {
+    it(`should not generate the request logger on ${env}`, async () => {
+      authEnvironment = env;
+      await middleware();
+      assert.ok(passedOptions);
+      assert.strictEqual(passedOptions.length, 1);
+      // emitRequestLog parameter to makeChildLogger should be undefined.
+      assert.strictEqual(passedEmitRequestLog, undefined);
+    });
+  });
 });
