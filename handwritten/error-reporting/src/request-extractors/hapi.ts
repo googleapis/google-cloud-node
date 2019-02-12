@@ -81,10 +81,15 @@ export function hapiRequestInformationExtractor(req?: hapi.Request) {
         return returnObject;
       }
 
-      returnObject
-          .setMethod(req!.method)
-          // TODO: Address the type conflict that requires a cast to string
-          .setUrl(req!.url as {} as string)
+      let urlString: string;
+      if (is.string(req!.url)) {
+        urlString = req!.url as {} as string;
+      } else {
+        urlString = req!.url.pathname;
+      }
+
+      returnObject.setMethod(req!.method)
+          .setUrl(urlString)
           .setUserAgent(req!.headers['user-agent'])
           .setReferrer(req!.headers.referrer)
           .setStatusCode(attemptToExtractStatusCode(req!))
