@@ -19,6 +19,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
+* [Overview](#overview)
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
@@ -27,6 +28,38 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
+
+## Overview
+
+This module provides custom Stackdriver Error Reporting support for Node.js applications.
+[Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) is a feature of
+Google Cloud Platform that allows in-depth monitoring and viewing of errors reported by
+applications running in almost any environment.
+
+However, note that [@google-cloud/logging-winston](https://github.com/googleapis/nodejs-logging-winston) and [@google-cloud/logging-bunyan](https://github.com/googleapis/nodejs-logging-bunyan) automatically integrate with the Error Reporting service for Error objects logged at severity `error` or higher, for applications running on Google Cloud Platform.
+
+Thus, if you are already using Winston or Bunyan in your application, and don't need custom error reporting capabilities, you do not need to use the `@google-cloud/error-reporting` library directly to report errors to the Error Reporting Console.
+
+![Stackdriver Error Reporting overview](https://raw.githubusercontent.com/googleapis/nodejs-error-reporting/master/doc/images/errors-overview.png)
+
+Here's an introductory video that provides some more details:
+
+[![Learn about Error Reporting in Stackdriver](https://img.youtube.com/vi/cVpWVD75Hs8/0.jpg)](https://www.youtube.com/watch?v=cVpWVD75Hs8)
+
+# When Errors Are Reported
+
+The `reportMode` configuration option is used to specify when errors are reported to the Error Reporting Console.  It can have one of three values:
+* `'production'` (default): Only report errors if the NODE_ENV environment variable is set to "production".
+* `'always'`: Always report errors regardless of the value of NODE_ENV.
+* `'never'`: Never report errors regardless of the value of NODE_ENV.
+
+The `reportMode` configuration option replaces the deprecated `ignoreEnvironmentCheck` configuration option.  If both the `reportMode` and `ignoreEnvironmentCheck` options are specified, the `reportMode` configuration option takes precedence.
+
+The `ignoreEnvironmentCheck` option should not be used.  However, if it is used, and the `reportMode` option is not specified, it can have the values:
+* `false` (default): Only report errors if the NODE_ENV environment variable is set to "production".
+* `true`: Always report errors regardless of the value of NODE_ENV.
+
+See the [Configuration](#configuration) section to learn how to specify configuration options.
 
 ## Quickstart
 
@@ -82,6 +115,247 @@ has instructions for running the samples.
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | Examples | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/snippets.js) |
+
+## Configuration
+
+The following code snippet lists available configuration options.  All configuration options are optional.
+
+```js
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting({
+    projectId: 'my-project-id',
+    keyFilename: '/path/to/keyfile.json',
+    credentials: require('./path/to/keyfile.json'),
+    // Specifies when errors are reported to the Error Reporting Console.
+    // See the "When Errors Are Reported" section for more information.
+    // Defaults to 'production'
+    reportMode: 'production',
+    // Determines the logging level internal to the library; levels range 0-5
+    // where 0 indicates no logs should be reported and 5 indicates all logs
+    // should be reported.
+    // Defaults to 2 (warnings)
+    logLevel: 2,
+    serviceContext: {
+        service: 'my-service',
+        version: 'my-service-version'
+    }
+  });
+```
+
+## Examples
+
+### Reporting Manually
+
+```js
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting();
+
+  // Use the error message builder to customize all fields ...
+  const errorEvt = errors.event()
+                       .setMessage('My error message')
+                       .setUser('root@nexus');
+  errors.report(errorEvt, () => console.log('done!'));
+
+  // or just use a regular error ...
+  errors.report(new Error('My error message'), () => console.log('done!'));
+
+  // or one can even just use a string.
+  errors.report('My error message');
+```
+
+The stack trace associated with an error can be viewed in the error reporting console.
+* If the `errors.report` method is given an `ErrorMessage` object built using the `errors.event` method, the stack trace at the point where the error event was constructed will be used.
+* If the `errors.report` method is given an `Error` object, the stack trace where the error was instantiated will be used.
+* If the `errors.report` method is given a string, the stack trace at the point where `errors.report` is invoked will be used.
+
+### Using Express
+
+```js
+  const express = require('express');
+
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting();
+
+  const app = express();
+
+  app.get('/error', (req, res, next) => {
+    res.send('Something broke!');
+    next(new Error('Custom error message'));
+  });
+
+  app.get('/exception', () => {
+    JSON.parse('{\"malformedJson\": true');
+  });
+
+  // Note that express error handling middleware should be attached after all
+  // the other routes and use() calls. See [express docs][express-error-docs].
+  app.use(errors.express);
+
+  app.listen(3000);
+```
+
+### Using Hapi
+
+```js
+  const hapi = require('hapi');
+
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting();
+
+  const server = new hapi.Server();
+  server.connection({ port: 3000 });
+  server.start();
+
+  server.route({
+    method: 'GET',
+    path: '/error',
+    handler: (request, reply) => {
+      reply('Something broke!');
+      throw new Error('Custom error message');
+    }
+  });
+
+  server.register(errors.hapi);
+```
+
+### Using Koa
+
+```js
+  const Koa = require('koa');
+
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting();
+
+  const app = new Koa();
+
+  app.use(errors.koa);
+
+  app.use(function *(next) {
+    //This will set status and message
+    this.throw('Error Message', 500);
+  });
+
+  // response
+  app.use(function *(){
+    this.body = 'Hello World';
+  });
+
+  app.listen(3000);
+```
+
+### Using Restify
+
+```js
+  const restify = require('restify');
+
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting();
+
+  function respond(req, res, next) {
+    next(new Error('this is a restify error'));
+  }
+
+  const server = restify.createServer();
+
+  server.use(errors.restify(server));
+  server.get('/hello/:name', respond);
+  server.head('/hello/:name', respond);
+
+  server.listen(3000);
+```
+
+## Unhandled Rejections
+
+Unhandled Rejections are not reported by default.  The reporting of unhandled rejections can be enabled using the `reportUnhandledRejections` configuration option.  See the [Configuration](#configuration) section for more details.
+
+If unhandled rejections are set to be reported, then, when an unhandled rejection occurs, a message is printed to standard out indicated that an unhandled rejection had occurred and is being reported, and the value causing the rejection is reported to the error-reporting console.
+
+## Catching and Reporting Application-wide Uncaught Errors
+
+Uncaught exceptions are not reported by default.  *It is recommended to process `uncaughtException`s for production-deployed applications.*
+
+Note that uncaught exceptions are not reported by default because to do so would require adding a listener to the `uncaughtException` event.  Adding such a listener without knowledge of other `uncaughtException` listeners can cause interference between the event handlers or prevent the process from terminating cleanly.  As such, it is necessary for `uncaughtException`s to be reported manually.
+
+```js
+  // Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting();
+
+  process.on('uncaughtException', (e) => {
+    // Write the error to stderr.
+    console.error(e);
+    // Report that same error the Stackdriver Error Service
+    errors.report(e);
+  });
+```
+
+More information about uncaught exception handling in Node.js and what it means for your application can be found [here](https://nodejs.org/api/process.html#process_event_uncaughtexception).
+
+### Using an API Key
+
+You may use an API key in lieu of locally-stored credentials. Please see [this document](https://support.google.com/cloud/answer/6158862) on how to set up an API key if you do not already have one.
+
+Once you have obtained an API key, you may provide it as part of the Error Reporting instance configuration:
+
+```js
+// Node 6+
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Using ES6 style imports via TypeScript or Babel
+  // import {ErrorReporting} from '@google-cloud/error-reporting';
+
+  // Instantiates a client
+  const errors = new ErrorReporting({
+    projectId: '{your project ID}',
+    key: '{your api key}'
+  });
+```
+
+If a key is provided, the module will not attempt to authenticate using the methods associated with locally-stored credentials.  We recommend using a file, environment variable, or another mechanism to store the API key rather than hard-coding it into your application's source.
+
+**Note:** The Error Reporting instance will check if the provided API key is invalid shortly after it is instantiated. If the key is invalid, an error-level message will be logged to stdout.
+
 
 ## Versioning
 
