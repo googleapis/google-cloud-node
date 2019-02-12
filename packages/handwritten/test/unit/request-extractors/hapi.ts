@@ -15,6 +15,7 @@
  */
 
 import * as hapi from 'hapi';
+import {URL} from 'url';
 
 import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
 import {Fuzzer} from '../../../utils/fuzzer';
@@ -119,6 +120,17 @@ describe('hapiRequestInformationExtractor behaviour', () => {
           hapiRequestInformationExtractor(
               ANOTHER_PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
           ANOTHER_PARTIAL_REQ_EXPECTED_VALUE);
+    });
+    it('Should deal with hapi v16+ URL objects', () => {
+      const PATH = '/foo/bar';
+      const REQUEST = {
+        ...FULL_REQ_DERIVATION_VALUE,
+        url: new URL(`https://www.SUPER-TEST.com${PATH}`)
+      };
+      const EXPECTED = {...FULL_REQ_EXPECTED_VALUE, url: PATH};
+      deepStrictEqual(
+          hapiRequestInformationExtractor(REQUEST as {} as hapi.Request),
+          EXPECTED);
     });
   });
 });
