@@ -16,31 +16,38 @@
 
 import * as assert from 'assert';
 import * as bunyan from 'bunyan';
-import delay from 'delay';
-
+import * as uuid from 'uuid';
 import * as types from '../src/types/core';
 import {ErrorsApiTransport} from './errors-transport';
 
 const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 import {LoggingBunyan} from '../src/index';
+import delay from 'delay';
 
-const LOG_NAME = 'bunyan_log_system_tests';
+const WRITE_CONSISTENCY_DELAY_MS = 90000;
 
-describe('LoggingBunyan', () => {
-  const WRITE_CONSISTENCY_DELAY_MS = 90000;
+const UUID = uuid.v4();
+function logName(name: string) {
+  return `${UUID}_${name}`;
+}
 
-  const loggingBunyan = new LoggingBunyan({
-    logName: LOG_NAME,
-    serviceContext: {service: 'logging-bunyan-system-test', version: 'none'}
-  });
+describe('LoggingBunyan', function() {
+  this.timeout(WRITE_CONSISTENCY_DELAY_MS);
+
+  const SERVICE = `logging-bunyan-system-test-${UUID}`;
+  const LOG_NAME = logName('logging-bunyan-system-test');
+  const loggingBunyan = new LoggingBunyan(
+      {logName: LOG_NAME, serviceContext: {service: SERVICE, version: 'none'}});
   const logger = bunyan.createLogger({
     name: 'google-cloud-node-system-test',
     streams: [loggingBunyan.stream('info')],
   });
 
-  it('should properly write log entries', (done) => {
+  it('should properly write log entries', async () => {
     const timestamp = new Date();
+    const start = Date.now();
+
     // Type of circular.circular cannot be determined..
     // tslint:disable-next-line:no-any
     const circular: {circular?: any} = {};
@@ -112,74 +119,91 @@ describe('LoggingBunyan', () => {
 
     // Forcibly insert a delay to cause 'third' to have a deterministically
     // earlier timestamp.
-    setTimeout(() => {
-      testData.forEach((test) => {
-        // logger does not have index signature.
-        // tslint:disable-next-line:no-any
-        (logger as any)[test.level].apply(logger, test.args);
-      });
+    await delay(10);
 
-      // `earliest` is sent last, but it should show up as the earliest entry.
+    testData.forEach(test => {
       // logger does not have index signature.
       // tslint:disable-next-line:no-any
-      (logger as any)[earliest.level].apply(logger, earliest.args);
+      (logger as any)[test.level].apply(logger, test.args);
+    });
+    // `earliest` is sent last, but it should show up as the earliest entry.
+    // logger does not have index signature.
+    // tslint:disable-next-line:no-any
+    (logger as any)[earliest.level].apply(logger, earliest.args);
+    // insert into list as the earliest entry.
+    // TODO: identify the correct type for testData and earliest
+    // tslint:disable-next-line:no-any
+    testData.unshift(earliest as any);
 
-      // insert into list as the earliest entry.
-      // TODO: identify the correct type for testData and earliest
-      // tslint:disable-next-line:no-any
-      testData.unshift(earliest as any);
-    }, 10);
-
-    setTimeout(() => {
-      const log = logging.log(LOG_NAME);
-
-      log.getEntries(
-          {
-            pageSize: testData.length,
-          },
-          (err: Error, entries: types.StackdriverEntry[]) => {
-            assert.ifError(err);
-            assert.strictEqual(entries.length, testData.length);
-
-            // Make sure entries are valid and are in the correct order.
-            entries.reverse().forEach((entry, index) => {
-              const test = testData[index];
-              test.verify(entry);
-            });
-
-            done();
-          });
-    }, WRITE_CONSISTENCY_DELAY_MS);
+    const entries = await pollLogs(
+        LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS);
+    assert.strictEqual(entries.length, testData.length);
+    entries.reverse().forEach((entry, index) => {
+      const test = testData[index];
+      test.verify(entry);
+    });
   });
 
-  describe.only('ErrorReporting', () => {
-    const ERROR_REPORTING_DELAY_MS = 2 * 60 * 1000;
+  describe('ErrorReporting', () => {
+    const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
-    beforeEach(async function() {
-      this.timeout(2 * ERROR_REPORTING_DELAY_MS);
-      await errorsTransport.deleteAllEvents();
-      return delay(ERROR_REPORTING_DELAY_MS);
-    });
-
-    afterEach(async () => {
+    after(async () => {
       await errorsTransport.deleteAllEvents();
     });
 
-    it('reports errors when logging errors', async function() {
-      this.timeout(2 * ERROR_REPORTING_DELAY_MS);
+    it('reports errors when logging errors', async () => {
       const start = Date.now();
-      const service = 'logging-bunyan-system-test';
-      const message = `an error at ${start}`;
-      // logger does not have index signature.
-      // tslint:disable-next-line:no-any
-      (logger as any)['error'].call(logger, new Error(message));
+
+      const message = `an error at ${Date.now()}`;
+      logger.error(new Error(message));
+
       const errors = await errorsTransport.pollForNewEvents(
-          service, start, ERROR_REPORTING_DELAY_MS);
+          SERVICE, start, ERROR_REPORTING_POLL_TIMEOUT);
+
       assert.strictEqual(errors.length, 1);
       const errEvent = errors[0];
-      assert.strictEqual(errEvent.serviceContext.service, service);
+
+      assert.strictEqual(errEvent.serviceContext.service, SERVICE);
       assert(errEvent.message.startsWith(`Error: ${message}`));
     });
   });
 });
+
+// polls for the entire array of entries to be greater than logTime.
+function pollLogs(
+    logName: string, logTime: number, size: number, timeout: number) {
+  const p = new Promise<types.StackdriverEntry[]>((resolve, reject) => {
+    const end = Date.now() + timeout;
+    loop();
+
+    function loop() {
+      setTimeout(() => {
+        logging.log(logName).getEntries(
+            {
+              pageSize: size,
+            },
+            (err: Error, entries: types.StackdriverEntry[]) => {
+              if (!entries || entries.length < size) return loop();
+
+              const {receiveTimestamp} =
+                  (entries[entries.length - 1].metadata || {}) as
+                  {receiveTimestamp: {seconds: number, nanos: number}};
+              const timeMilliseconds = (receiveTimestamp.seconds * 1000) +
+                  (receiveTimestamp.nanos * 1e-6);
+
+              if (timeMilliseconds >= logTime) {
+                return resolve(entries);
+              }
+
+              if (Date.now() > end) {
+                return reject(new Error('timeout'));
+              }
+              loop();
+            });
+      }, 500);
+    }
+  });
+
+  return p;
+}

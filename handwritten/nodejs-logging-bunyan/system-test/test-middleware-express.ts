@@ -18,6 +18,7 @@
 
 import * as assert from 'assert';
 import delay from 'delay';
+import * as uuid from 'uuid';
 
 import {express as elb} from '../src/index';
 
@@ -26,23 +27,24 @@ const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
 const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + (10 * 1000);
+const LOG_NAME = `bunyan-system-test-${uuid.v4()}`;
 
 describe('express middleware', () => {
   let logger: elb.MiddlewareReturnType['logger'];
   let mw: elb.MiddlewareReturnType['mw'];
 
   before(async () => {
-    ({logger, mw} = await elb.middleware({level: 'info'}));
+    ({logger, mw} = await elb.middleware({logName: LOG_NAME, level: 'info'}));
   });
 
   describe('global logger', () => {
     it('should properly write log entries', async () => {
-      const LOG_MESSAGE = 'test log message';
+      const LOG_MESSAGE = `unique log message ${uuid.v4()}`;
       logger.info(LOG_MESSAGE);
 
       await delay(WRITE_CONSISTENCY_DELAY_MS);
 
-      const log = logging.log('bunyan_log');
+      const log = logging.log(`${LOG_NAME}_applog`);
       const entries = (await log.getEntries({pageSize: 1}))[0];
       assert.strictEqual(entries.length, 1);
       assert.strictEqual(LOG_MESSAGE, entries[0].data.message);
@@ -51,7 +53,7 @@ describe('express middleware', () => {
 
   describe('request logging middleware', () => {
     it('should write request correlated log entries', (done) => {
-      const LOG_MESSAGE = 'test request log message';
+      const LOG_MESSAGE = `correlated log message ${uuid.v4()}`;
       const fakeRequest = {headers: {fake: 'header'}};
       const fakeResponse = {};
       const next = async () => {
@@ -61,7 +63,7 @@ describe('express middleware', () => {
 
         await delay(WRITE_CONSISTENCY_DELAY_MS);
 
-        const log = logging.log('bunyan_log');
+        const log = logging.log(`${LOG_NAME}_applog`);
         const entries = (await log.getEntries({pageSize: 1}))[0];
         assert.strictEqual(entries.length, 1);
         const entry = entries[0];

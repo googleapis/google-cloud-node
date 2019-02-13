@@ -111,7 +111,7 @@ async function main() {
   app.use(mw);
 }`,
     description: 'can be used with express',
-    dependencies: ['express'],
+    dependencies: ['express', 'bunyan'],
     devDependencies: ['@types/bunyan', '@types/express']
   }
 ];
@@ -200,7 +200,7 @@ async function main() {
   });
 }`,
     description: 'can be used with express',
-    dependencies: ['express'],
+    dependencies: ['express', 'bunyan'],
     devDependencies: []
   }
 ];
