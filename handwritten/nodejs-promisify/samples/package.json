@@ -11,7 +11,7 @@
     "test": "mocha system-test"
   },
   "dependencies": {
-    "@google-cloud/promisify": "*"
+    "@google-cloud/promisify": "^0.4.0"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
