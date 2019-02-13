@@ -37,7 +37,8 @@ function logName(name: string) {
   return `${UUID}_${name}`;
 }
 
-describe('LoggingWinston', () => {
+describe('LoggingWinston', function() {
+  this.timeout(WRITE_CONSISTENCY_DELAY_MS);
   const testTimestamp = new Date();
 
   // type TestData
@@ -193,17 +194,13 @@ describe('LoggingWinston', () => {
     const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
-    beforeEach(async function() {
-      this.timeout(WRITE_CONSISTENCY_DELAY_MS);
-    });
-
     after(async () => {
       await errorsTransport.deleteAllEvents();
     });
 
     it('reports errors when logging errors with winston2', async () => {
       const start = Date.now();
-      const service = 'logging-winston-system-test';
+      const service = `logging-winston-system-test-winston2-${UUID}`;
       const LoggingWinston = inject('../src/index', {
                                winston: winston2,
                                'winston/package.json': {version: '2.2.0'}
@@ -224,14 +221,13 @@ describe('LoggingWinston', () => {
       assert.strictEqual(errors.length, 1);
       const errEvent = errors[0];
 
-      assert.strictEqual(
-          errEvent.serviceContext.service, 'logging-winston-system-test');
+      assert.strictEqual(errEvent.serviceContext.service, service);
       assert(errEvent.message.startsWith(`an error Error: ${message}`));
     });
 
     it('reports errors when logging errors with winston3', async () => {
       const start = Date.now();
-      const service = 'logging-winston-system-test-winston3';
+      const service = `logging-winston-system-test-winston3-${UUID}`;
       const LoggingWinston = inject('../src/index', {
                                winston: winston3,
                                'winston/package.json': {version: '3.0.0'}
@@ -252,9 +248,7 @@ describe('LoggingWinston', () => {
       assert.strictEqual(errors.length, 1);
       const errEvent = errors[0];
 
-      assert.strictEqual(
-          errEvent.serviceContext.service,
-          'logging-winston-system-test-winston3');
+      assert.strictEqual(errEvent.serviceContext.service, service);
 
       assert(errEvent.message.startsWith(message));
     });
