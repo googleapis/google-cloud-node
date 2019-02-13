@@ -160,6 +160,10 @@ class JobServiceClient {
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
+            },
+          err =>
+            function() {
+              throw err;
             }
         ),
         defaults[methodName],
@@ -240,7 +244,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -297,7 +301,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -361,7 +365,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -412,7 +416,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -501,7 +505,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -518,8 +522,8 @@ class JobServiceClient {
    * client.listJobs(request)
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
-   *       // doThingsWith(resources[i])
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -543,8 +547,8 @@ class JobServiceClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
-   *     // doThingsWith(resources[i]);
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
@@ -628,7 +632,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -693,7 +697,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -1013,7 +1017,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -1030,8 +1034,8 @@ class JobServiceClient {
    * client.searchJobs(request)
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
-   *       // doThingsWith(resources[i])
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -1055,8 +1059,8 @@ class JobServiceClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
-   *     // doThingsWith(resources[i]);
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
@@ -1362,7 +1366,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -1690,7 +1694,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -1707,8 +1711,8 @@ class JobServiceClient {
    * client.searchJobsForAlert(request)
    *   .then(responses => {
    *     const resources = responses[0];
-   *     for (let i = 0; i < resources.length; i += 1) {
-   *       // doThingsWith(resources[i])
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
    *     }
    *   })
    *   .catch(err => {
@@ -1732,8 +1736,8 @@ class JobServiceClient {
    *   const nextRequest = responses[1];
    *   // The actual response object, if necessary.
    *   // const rawResponse = responses[2];
-   *   for (let i = 0; i < resources.length; i += 1) {
-   *     // doThingsWith(resources[i]);
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
@@ -2039,7 +2043,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.

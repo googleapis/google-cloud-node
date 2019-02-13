@@ -133,6 +133,10 @@ class EventServiceClient {
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
+            },
+          err =>
+            function() {
+              throw err;
             }
         ),
         defaults[methodName],
@@ -212,7 +216,7 @@ class EventServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.EventServiceClient({
    *   // optional auth parameters.

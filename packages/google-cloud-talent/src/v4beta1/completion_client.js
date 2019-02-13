@@ -133,6 +133,10 @@ class CompletionClient {
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
+            },
+          err =>
+            function() {
+              throw err;
             }
         ),
         defaults[methodName],
@@ -256,7 +260,7 @@ class CompletionClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.CompletionClient({
    *   // optional auth parameters.

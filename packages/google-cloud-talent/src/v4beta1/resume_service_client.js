@@ -133,6 +133,10 @@ class ResumeServiceClient {
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
               return stub[methodName].apply(stub, args);
+            },
+          err =>
+            function() {
+              throw err;
             }
         ),
         defaults[methodName],
@@ -256,7 +260,7 @@ class ResumeServiceClient {
    *
    * @example
    *
-   * const talent = require('@google-cloud/talent');
+   * const talent = require('talent.v4beta1');
    *
    * const client = new talent.v4beta1.ResumeServiceClient({
    *   // optional auth parameters.
