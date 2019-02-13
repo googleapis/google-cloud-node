@@ -39,7 +39,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run pretest",
     "system-test": "mocha build/system-test --timeout 600000",
-    "test": "nyc mocha build/test",
+    "test": "nyc mocha --recursive build/test",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -52,7 +52,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "@google-cloud/logging": "^4.0.1",
+    "@google-cloud/logging": "^4.4.0",
     "lodash.mapvalues": "^4.6.0",
     "logform": "^2.0.0",
     "semver": "^5.5.1",
