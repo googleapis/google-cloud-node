@@ -1,7 +1,7 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # @google-cloud/promisify
-> A simple utility for promisifying functions and classes.
+> A simple utility for promisifying and callbackifying functions and classes.
 
 Google Cloud Common node.js module contains stuff used by other Cloud API modules.
 
@@ -31,7 +31,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googlecloudplatform/google-cloud-node/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-promisify/blob/master/CONTRIBUTING.md).
 
 ## License
 

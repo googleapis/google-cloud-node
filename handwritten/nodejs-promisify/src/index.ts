@@ -36,6 +36,17 @@ export interface WithPromise {
   Promise?: PromiseConstructor;
 }
 
+export interface CallbackifyAllOptions {
+  /**
+   * Array of methods to ignore when callbackifying.
+   */
+  exclude?: string[];
+}
+
+export interface CallbackMethod extends Function {
+  callbackified_?: boolean;
+}
+
 /**
  * Wraps a callback style function to conditionally return a promise.
  *
@@ -136,6 +147,70 @@ export function promisifyAll(Class: Function, options?: PromisifyAllOptions) {
     const originalMethod = Class.prototype[methodName];
     if (!originalMethod.promisified_) {
       Class.prototype[methodName] = exports.promisify(originalMethod, options);
+    }
+  });
+}
+
+/**
+ * Wraps a promisy type function to conditionally call a callback function.
+ *
+ * @param {function} originalMethod - The method to callbackify.
+ * @param {object=} options - Callback options.
+ * @param {boolean} options.singular - Pass to the callback a single arg instead of an array.
+ * @return {function} wrapped
+ */
+export function callbackify(originalMethod: CallbackMethod) {
+  if (originalMethod.callbackified_) {
+    return originalMethod;
+  }
+
+  // tslint:disable-next-line:no-any
+  const wrapper = function(this: any) {
+    const context = this;
+
+    if (typeof arguments[arguments.length - 1] !== 'function') {
+      return originalMethod.apply(context, arguments);
+    }
+
+    const cb = Array.prototype.pop.call(arguments);
+
+    originalMethod
+        .apply(context, arguments)
+        // tslint:disable-next-line:no-any
+        .then((res: any) => {
+          res = Array.isArray(res) ? res : [res];
+          cb(null, ...res);
+        }, (err: Error) => cb(err));
+  };
+  wrapper.callbackified_ = true;
+  return wrapper;
+}
+
+/**
+ * Callbackifies certain Class methods. This will not callbackify private or
+ * streaming methods.
+ *
+ * @param {module:common/service} Class - Service class.
+ * @param {object=} options - Configuration object.
+ */
+export function callbackifyAll(
+    // tslint:disable-next-line:variable-name
+    Class: Function, options?: CallbackifyAllOptions) {
+  const exclude = (options && options.exclude) || [];
+  const ownPropertyNames = Object.getOwnPropertyNames(Class.prototype);
+  const methods = ownPropertyNames.filter((methodName) => {
+    // clang-format off
+    return (typeof Class.prototype[methodName] === 'function' && // is it a function?
+      !/^_|(Stream|_)|^constructor$/.test(methodName) && // is it callbackifyable?
+      exclude.indexOf(methodName) === -1
+    ); // is it blacklisted?
+    // clang-format on
+  });
+
+  methods.forEach((methodName) => {
+    const originalMethod = Class.prototype[methodName];
+    if (!originalMethod.callbackified_) {
+      Class.prototype[methodName] = exports.callbackify(originalMethod);
     }
   });
 }
