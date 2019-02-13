@@ -77,7 +77,7 @@ function getCurrentTraceFromAgent(): string|null {
 export class LoggingCommon {
   private inspectMetadata: boolean;
   private levels: {[name: string]: number};
-  private stackdriverLog:
+  stackdriverLog:
       types.StackdriverLog;  // TODO: add type for @google-cloud/logging
   private resource: types.MonitoredResource|undefined;
   private serviceContext: types.ServiceContext|undefined;
