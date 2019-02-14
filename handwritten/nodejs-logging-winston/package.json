@@ -48,7 +48,7 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile && node ./bin/install-winston2.js",
     "posttest": "npm run check",
-    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -87,7 +87,7 @@
     "typescript": "^3.0.0",
     "uuid": "^3.3.2",
     "winston": "^3.1.0",
-    "broken-link-checker-local": "^0.2.0"
+    "linkinator": "^1.1.2"
   },
   "peerDependencies": {
     "winston": ">=2.x <=3.x"
