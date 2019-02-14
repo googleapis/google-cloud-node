@@ -15,14 +15,14 @@
 
 'use strict';
 
+// [START tts_quickstart]
+// Imports the Google Cloud client library
+const textToSpeech = require('@google-cloud/text-to-speech');
+
+// Import other required libraries
+const fs = require('fs');
+const util = require('util');
 async function main() {
-  // [START tts_quickstart]
-  const fs = require('fs');
-  const util = require('util');
-
-  // Imports the Google Cloud client library
-  const textToSpeech = require('@google-cloud/text-to-speech');
-
   // Creates a client
   const client = new textToSpeech.TextToSpeechClient();
 
@@ -44,7 +44,6 @@ async function main() {
   const writeFile = util.promisify(fs.writeFile);
   await writeFile('output.mp3', response.audioContent, 'binary');
   console.log('Audio content written to file: output.mp3');
-  // [END tts_quickstart]
 }
-
+// [END tts_quickstart]
 main().catch(console.error);
