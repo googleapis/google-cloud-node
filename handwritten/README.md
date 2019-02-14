@@ -93,8 +93,6 @@ See the [Configuration](#configuration) section to learn how to specify configur
 
 ```javascript
   // Imports the Google Cloud client library
-
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -121,7 +119,6 @@ has instructions for running the samples.
 The following code snippet lists available configuration options.  All configuration options are optional.
 
 ```js
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -153,7 +150,6 @@ The following code snippet lists available configuration options.  All configura
 ### Reporting Manually
 
 ```js
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -185,7 +181,6 @@ The stack trace associated with an error can be viewed in the error reporting co
 ```js
   const express = require('express');
 
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -216,8 +211,6 @@ The stack trace associated with an error can be viewed in the error reporting co
 
 ```js
   const hapi = require('hapi');
-
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -246,8 +239,6 @@ The stack trace associated with an error can be viewed in the error reporting co
 
 ```js
   const Koa = require('koa');
-
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -277,8 +268,6 @@ The stack trace associated with an error can be viewed in the error reporting co
 
 ```js
   const restify = require('restify');
-
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -313,7 +302,6 @@ Uncaught exceptions are not reported by default.  *It is recommended to process 
 Note that uncaught exceptions are not reported by default because to do so would require adding a listener to the `uncaughtException` event.  Adding such a listener without knowledge of other `uncaughtException` listeners can cause interference between the event handlers or prevent the process from terminating cleanly.  As such, it is necessary for `uncaughtException`s to be reported manually.
 
 ```js
-  // Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -339,7 +327,6 @@ You may use an API key in lieu of locally-stored credentials. Please see [this d
 Once you have obtained an API key, you may provide it as part of the Error Reporting instance configuration:
 
 ```js
-// Node 6+
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Using ES6 style imports via TypeScript or Babel
@@ -356,6 +343,25 @@ If a key is provided, the module will not attempt to authenticate using the meth
 
 **Note:** The Error Reporting instance will check if the provided API key is invalid shortly after it is instantiated. If the key is invalid, an error-level message will be logged to stdout.
 
+### Long Stack Traces
+
+The [longjohn](https://www.npmjs.com/package/longjohn) module can be used with this library to enable [long-stack-traces](https://github.com/tlrobinson/long-stack-traces) and updates an `Error` object's stack trace, by adding special line, to indicate an async jump.  In `longjohn` version `0.2.12`, for example, a single line of dashes is included in a stack trace, by default, to indicate an async jump.
+
+Before reporting an `Error` object using the `report` method of the `@google-cloud/error-reporting` module, the stack trace needs to modified to remove this special line added by `longjohn`.  Since the `longjohn` module can be configured to have a custom line indicating an async jump, the process of removing the custom line should be handled by the user of the `longjohn` module.
+
+The following code illustrates how to update an `Error`'s stack trace, to remove the default line of dashes added by `longjohn` to indicate an async jump, before reporting the error.
+```js
+  const {ErrorReporting} = require('@google-cloud/error-reporting');
+
+  // Instantiates a client
+  const errors = new ErrorReporting();
+
+  const err = new Error('Some Error');
+  err.stack = (err.stack || '').split('\n')
+                               .filter(line => !!line.replace(/-/g, '').trim())
+                               .join('\n');
+  errors.report(err);
+```
 
 ## Versioning
 
