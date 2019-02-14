@@ -38,7 +38,7 @@
     "test-no-cover": "mocha test/*.js",
     "test": "npm run cover",
     "fix": "eslint --fix '**/*.js'",
-    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -65,6 +65,6 @@
     "prettier": "^1.13.6",
     "sinon": "^7.0.0",
     "uuid": "^3.3.0",
-    "broken-link-checker-local": "^0.2.0"
+    "linkinator": "^1.1.2"
   }
 }
