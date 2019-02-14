@@ -42,7 +42,7 @@
     "fix": "eslint --fix '**/*.js' && gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -82,6 +82,6 @@
     "tmp": "^0.0.33",
     "typescript": "~3.3.0",
     "uuid": "^3.2.1",
-    "broken-link-checker-local": "^0.2.0"
+    "linkinator": "^1.1.2"
   }
 }
