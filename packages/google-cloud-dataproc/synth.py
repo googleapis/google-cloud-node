@@ -17,9 +17,13 @@ import synthtool.gcp as gcp
 import subprocess
 
 gapic = gcp.GAPICGenerator()
-version = 'v1'
-library = gapic.node_library('dataproc', version)
-s.copy(library, excludes=['README.md', 'package.json', 'src/index.js'])
+versions = ['v1', 'v1beta2']
+for version in versions:
+  library = gapic.node_library('dataproc', version)
+  s.copy(
+    library,
+    excludes=['package.json', 'README.md', 'src/index.js',]
+  )
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()

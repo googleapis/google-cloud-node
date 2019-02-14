@@ -27,7 +27,7 @@ const VERSION = require('../../package.json').version;
  * of Compute Engine instances.
  *
  * @class
- * @memberof v1
+ * @memberof v1beta2
  */
 class ClusterControllerClient {
   /**
@@ -94,7 +94,7 @@ class ClusterControllerClient {
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/dataproc/v1/clusters.proto'
+        'google/cloud/dataproc/v1beta2/clusters.proto'
       )
     );
 
@@ -115,7 +115,7 @@ class ClusterControllerClient {
         '..',
         '..',
         'protos',
-        'google/cloud/dataproc/v1/clusters.proto'
+        'google/cloud/dataproc/v1beta2/clusters.proto'
       ),
       protoFilesRoot
     );
@@ -129,28 +129,28 @@ class ClusterControllerClient {
     }).operationsClient(opts);
 
     const createClusterResponse = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.Cluster'
+      'google.cloud.dataproc.v1beta2.Cluster'
     );
     const createClusterMetadata = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.ClusterOperationMetadata'
+      'google.cloud.dataproc.v1beta2.ClusterOperationMetadata'
     );
     const updateClusterResponse = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.Cluster'
+      'google.cloud.dataproc.v1beta2.Cluster'
     );
     const updateClusterMetadata = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.ClusterOperationMetadata'
+      'google.cloud.dataproc.v1beta2.ClusterOperationMetadata'
     );
     const deleteClusterResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
     const deleteClusterMetadata = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.ClusterOperationMetadata'
+      'google.cloud.dataproc.v1beta2.ClusterOperationMetadata'
     );
     const diagnoseClusterResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
     const diagnoseClusterMetadata = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.DiagnoseClusterResults'
+      'google.cloud.dataproc.v1beta2.DiagnoseClusterResults'
     );
 
     this._descriptors.longrunning = {
@@ -178,7 +178,7 @@ class ClusterControllerClient {
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
-      'google.cloud.dataproc.v1.ClusterController',
+      'google.cloud.dataproc.v1beta2.ClusterController',
       gapicConfig,
       opts.clientConfig,
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -190,9 +190,9 @@ class ClusterControllerClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.cloud.dataproc.v1.ClusterController.
+    // google.cloud.dataproc.v1beta2.ClusterController.
     const clusterControllerStub = gaxGrpc.createStub(
-      protos.google.cloud.dataproc.v1.ClusterController,
+      protos.google.cloud.dataproc.v1beta2.ClusterController,
       opts
     );
 
@@ -274,7 +274,7 @@ class ClusterControllerClient {
    * @param {Object} request.cluster
    *   Required. The cluster to create.
    *
-   *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1.Cluster}
+   *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
    *   receives two CreateClusterRequest requests  with the same
@@ -302,7 +302,7 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1beta2.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -392,7 +392,7 @@ class ClusterControllerClient {
    * @param {Object} request.cluster
    *   Required. The changes to the cluster.
    *
-   *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1.Cluster}
+   *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}
    * @param {Object} request.updateMask
    *   Required. Specifies the path, relative to `Cluster`, of
    *   the field to update. For example, to change the number of workers
@@ -407,10 +407,10 @@ class ClusterControllerClient {
    *           }
    *         }
    *       }
-   *   Similarly, to change the number of preemptible workers in a cluster to 5,
-   *   the `update_mask` parameter would be
-   *   `config.secondary_worker_config.num_instances`, and the `PATCH` request
-   *   body would be set as follows:
+   *
+   *   Similarly, to change the number of preemptible workers in a cluster to 5, the
+   *   `update_mask` parameter would be `config.secondary_worker_config.num_instances`,
+   *   and the `PATCH` request body would be set as follows:
    *
    *       {
    *         "config":{
@@ -419,28 +419,31 @@ class ClusterControllerClient {
    *           }
    *         }
    *       }
-   *   <strong>Note:</strong> Currently, only the following fields can be updated:
+   *   <strong>Note:</strong> currently only the following fields can be updated:
    *
-   *    <table>
-   *    <tbody>
-   *    <tr>
-   *    <td><strong>Mask</strong></td>
-   *    <td><strong>Purpose</strong></td>
-   *    </tr>
-   *    <tr>
-   *    <td><strong><em>labels</em></strong></td>
-   *    <td>Update labels</td>
-   *    </tr>
-   *    <tr>
-   *    <td><strong><em>config.worker_config.num_instances</em></strong></td>
-   *    <td>Resize primary worker group</td>
-   *    </tr>
-   *    <tr>
-   *    <td><strong><em>config.secondary_worker_config.num_instances</em></strong></td>
-   *    <td>Resize secondary worker group</td>
-   *    </tr>
-   *    </tbody>
-   *    </table>
+   *   <table>
+   *   <tr>
+   *   <td><strong>Mask</strong></td><td><strong>Purpose</strong></td>
+   *   </tr>
+   *   <tr>
+   *   <td>labels</td><td>Updates labels</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.worker_config.num_instances</td><td>Resize primary worker group</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.secondary_worker_config.num_instances</td><td>Resize secondary worker group</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.lifecycle_config.auto_delete_ttl</td><td>Reset MAX TTL duration</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.lifecycle_config.auto_delete_time</td><td>Update MAX TTL deletion timestamp</td>
+   *   </tr>
+   *   <tr>
+   *   <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL duration</td>
+   *   </tr>
+   *   </table>
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [request.gracefulDecommissionTimeout]
@@ -481,7 +484,7 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1beta2.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -606,7 +609,7 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1beta2.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -699,16 +702,16 @@ class ClusterControllerClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Cluster]{@link google.cloud.dataproc.v1.Cluster}.
+   *   The second parameter to the callback is an object representing [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Cluster]{@link google.cloud.dataproc.v1.Cluster}.
+   *   The first element of the array is an object representing [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1beta2.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -781,20 +784,20 @@ class ClusterControllerClient {
    * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [Cluster]{@link google.cloud.dataproc.v1.Cluster}.
+   *   The second parameter to the callback is Array of [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListClustersResponse]{@link google.cloud.dataproc.v1.ListClustersResponse}.
+   *   the raw response object of an object representing [ListClustersResponse]{@link google.cloud.dataproc.v1beta2.ListClustersResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Cluster]{@link google.cloud.dataproc.v1.Cluster}.
+   *   The first element of the array is Array of [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Cluster]{@link google.cloud.dataproc.v1.Cluster} in a single response.
+   *   The first element is Array of [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListClustersResponse]{@link google.cloud.dataproc.v1.ListClustersResponse}.
+   *   an object representing [ListClustersResponse]{@link google.cloud.dataproc.v1beta2.ListClustersResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
@@ -802,7 +805,7 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1beta2.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -916,13 +919,13 @@ class ClusterControllerClient {
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Cluster]{@link google.cloud.dataproc.v1.Cluster} on 'data' event.
+   *   An object stream which emits an object representing [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster} on 'data' event.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1beta2.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -978,7 +981,7 @@ class ClusterControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.ClusterControllerClient({
+   * const client = new dataproc.v1beta2.ClusterControllerClient({
    *   // optional auth parameters.
    * });
    *

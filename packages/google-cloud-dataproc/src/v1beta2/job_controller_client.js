@@ -25,7 +25,7 @@ const VERSION = require('../../package.json').version;
  * The JobController provides methods to manage jobs.
  *
  * @class
- * @memberof v1
+ * @memberof v1beta2
  */
 class JobControllerClient {
   /**
@@ -92,7 +92,7 @@ class JobControllerClient {
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/dataproc/v1/jobs.proto'
+        'google/cloud/dataproc/v1beta2/jobs.proto'
       )
     );
 
@@ -105,7 +105,7 @@ class JobControllerClient {
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
-      'google.cloud.dataproc.v1.JobController',
+      'google.cloud.dataproc.v1beta2.JobController',
       gapicConfig,
       opts.clientConfig,
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -117,9 +117,9 @@ class JobControllerClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.cloud.dataproc.v1.JobController.
+    // google.cloud.dataproc.v1beta2.JobController.
     const jobControllerStub = gaxGrpc.createStub(
-      protos.google.cloud.dataproc.v1.JobController,
+      protos.google.cloud.dataproc.v1beta2.JobController,
       opts
     );
 
@@ -200,7 +200,7 @@ class JobControllerClient {
    * @param {Object} request.job
    *   Required. The job resource.
    *
-   *   This object should have the same structure as [Job]{@link google.cloud.dataproc.v1.Job}
+   *   This object should have the same structure as [Job]{@link google.cloud.dataproc.v1beta2.Job}
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
    *   receives two SubmitJobRequest requests  with the same
@@ -219,16 +219,16 @@ class JobControllerClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1beta2.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -277,16 +277,16 @@ class JobControllerClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1beta2.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -342,7 +342,7 @@ class JobControllerClient {
    *
    *   If `filter` is provided, `jobStateMatcher` will be ignored.
    *
-   *   The number should be among the values of [JobStateMatcher]{@link google.cloud.dataproc.v1.JobStateMatcher}
+   *   The number should be among the values of [JobStateMatcher]{@link google.cloud.dataproc.v1beta2.JobStateMatcher}
    * @param {string} [request.filter]
    *   Optional. A filter constraining the jobs to list. Filters are
    *   case-sensitive and have the following syntax:
@@ -364,20 +364,20 @@ class JobControllerClient {
    * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The second parameter to the callback is Array of [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListJobsResponse]{@link google.cloud.dataproc.v1.ListJobsResponse}.
+   *   the raw response object of an object representing [ListJobsResponse]{@link google.cloud.dataproc.v1beta2.ListJobsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The first element of the array is Array of [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Job]{@link google.cloud.dataproc.v1.Job} in a single response.
+   *   The first element is Array of [Job]{@link google.cloud.dataproc.v1beta2.Job} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListJobsResponse]{@link google.cloud.dataproc.v1.ListJobsResponse}.
+   *   an object representing [ListJobsResponse]{@link google.cloud.dataproc.v1beta2.ListJobsResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
@@ -385,7 +385,7 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1beta2.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -484,7 +484,7 @@ class JobControllerClient {
    *
    *   If `filter` is provided, `jobStateMatcher` will be ignored.
    *
-   *   The number should be among the values of [JobStateMatcher]{@link google.cloud.dataproc.v1.JobStateMatcher}
+   *   The number should be among the values of [JobStateMatcher]{@link google.cloud.dataproc.v1beta2.JobStateMatcher}
    * @param {string} [request.filter]
    *   Optional. A filter constraining the jobs to list. Filters are
    *   case-sensitive and have the following syntax:
@@ -504,13 +504,13 @@ class JobControllerClient {
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Job]{@link google.cloud.dataproc.v1.Job} on 'data' event.
+   *   An object stream which emits an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job} on 'data' event.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1beta2.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -552,7 +552,7 @@ class JobControllerClient {
    * @param {Object} request.job
    *   Required. The changes to the job.
    *
-   *   This object should have the same structure as [Job]{@link google.cloud.dataproc.v1.Job}
+   *   This object should have the same structure as [Job]{@link google.cloud.dataproc.v1beta2.Job}
    * @param {Object} request.updateMask
    *   Required. Specifies the path, relative to <code>Job</code>, of
    *   the field to update. For example, to update the labels of a Job the
@@ -568,16 +568,16 @@ class JobControllerClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1beta2.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -615,8 +615,8 @@ class JobControllerClient {
   /**
    * Starts a job cancellation request. To access the job resource
    * after cancellation, call
-   * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/list) or
-   * [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1/projects.regions.jobs/get).
+   * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list) or
+   * [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -633,16 +633,16 @@ class JobControllerClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The second parameter to the callback is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1.Job}.
+   *   The first element of the array is an object representing [Job]{@link google.cloud.dataproc.v1beta2.Job}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1beta2.JobControllerClient({
    *   // optional auth parameters.
    * });
    *
@@ -698,7 +698,7 @@ class JobControllerClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.JobControllerClient({
+   * const client = new dataproc.v1beta2.JobControllerClient({
    *   // optional auth parameters.
    * });
    *

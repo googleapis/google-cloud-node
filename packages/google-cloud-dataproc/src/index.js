@@ -25,6 +25,9 @@
  * @namespace google.cloud.dataproc.v1
  */
 /**
+ * @namespace google.cloud.dataproc.v1beta2
+ */
+/**
  * @namespace google.protobuf
  */
 /**
@@ -39,6 +42,7 @@
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
   v1: require('./v1'),
+  v1beta2: require('./v1beta2'),
 });
 
 /**
@@ -99,6 +103,17 @@ module.exports = gapic.v1;
  *   Reference to {@link v1.WorkflowTemplateServiceClient}
  */
 module.exports.v1 = gapic.v1;
+
+/**
+ * @type {object}
+ * @property {constructor} ClusterControllerClient
+ *   Reference to {@link v1beta2.ClusterControllerClient}
+ * @property {constructor} JobControllerClient
+ *   Reference to {@link v1beta2.JobControllerClient}
+ * @property {constructor} WorkflowTemplateServiceClient
+ *   Reference to {@link v1beta2.WorkflowTemplateServiceClient}
+ */
+module.exports.v1beta2 = gapic.v1beta2;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);

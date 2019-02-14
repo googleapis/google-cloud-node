@@ -27,7 +27,7 @@ const VERSION = require('../../package.json').version;
  * Cloud Dataproc API.
  *
  * @class
- * @memberof v1
+ * @memberof v1beta2
  */
 class WorkflowTemplateServiceClient {
   /**
@@ -94,7 +94,7 @@ class WorkflowTemplateServiceClient {
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/dataproc/v1/workflow_templates.proto'
+        'google/cloud/dataproc/v1beta2/workflow_templates.proto'
       )
     );
 
@@ -127,7 +127,7 @@ class WorkflowTemplateServiceClient {
         '..',
         '..',
         'protos',
-        'google/cloud/dataproc/v1/workflow_templates.proto'
+        'google/cloud/dataproc/v1beta2/workflow_templates.proto'
       ),
       protoFilesRoot
     );
@@ -144,13 +144,13 @@ class WorkflowTemplateServiceClient {
       'google.protobuf.Empty'
     );
     const instantiateWorkflowTemplateMetadata = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.WorkflowMetadata'
+      'google.cloud.dataproc.v1beta2.WorkflowMetadata'
     );
     const instantiateInlineWorkflowTemplateResponse = protoFilesRoot.lookup(
       'google.protobuf.Empty'
     );
     const instantiateInlineWorkflowTemplateMetadata = protoFilesRoot.lookup(
-      'google.cloud.dataproc.v1.WorkflowMetadata'
+      'google.cloud.dataproc.v1beta2.WorkflowMetadata'
     );
 
     this._descriptors.longrunning = {
@@ -176,7 +176,7 @@ class WorkflowTemplateServiceClient {
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
-      'google.cloud.dataproc.v1.WorkflowTemplateService',
+      'google.cloud.dataproc.v1beta2.WorkflowTemplateService',
       gapicConfig,
       opts.clientConfig,
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -188,9 +188,9 @@ class WorkflowTemplateServiceClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.cloud.dataproc.v1.WorkflowTemplateService.
+    // google.cloud.dataproc.v1beta2.WorkflowTemplateService.
     const workflowTemplateServiceStub = gaxGrpc.createStub(
-      protos.google.cloud.dataproc.v1.WorkflowTemplateService,
+      protos.google.cloud.dataproc.v1beta2.WorkflowTemplateService,
       opts
     );
 
@@ -272,23 +272,23 @@ class WorkflowTemplateServiceClient {
    * @param {Object} request.template
    *   Required. The Dataproc workflow template to create.
    *
-   *   This object should have the same structure as [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}
+   *   This object should have the same structure as [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The second parameter to the callback is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The first element of the array is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -344,16 +344,16 @@ class WorkflowTemplateServiceClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The second parameter to the callback is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The first element of the array is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -410,6 +410,8 @@ class WorkflowTemplateServiceClient {
    *
    *   This option cannot be used to instantiate a previous version of
    *   workflow template.
+   * @param {string} [request.instanceId]
+   *   Deprecated. Please use `request_id` field instead.
    * @param {string} [request.requestId]
    *   Optional. A tag that prevents multiple concurrent workflow
    *   instances with the same tag from running. This mitigates risk of
@@ -438,7 +440,7 @@ class WorkflowTemplateServiceClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -536,7 +538,9 @@ class WorkflowTemplateServiceClient {
    * @param {Object} request.template
    *   Required. The workflow template to instantiate.
    *
-   *   This object should have the same structure as [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}
+   *   This object should have the same structure as [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}
+   * @param {string} [request.instanceId]
+   *   Deprecated. Please use `request_id` field instead.
    * @param {string} [request.requestId]
    *   Optional. A tag that prevents multiple concurrent workflow
    *   instances with the same tag from running. This mitigates risk of
@@ -562,7 +566,7 @@ class WorkflowTemplateServiceClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -648,23 +652,23 @@ class WorkflowTemplateServiceClient {
    *
    *   The `template.version` field must match the current version.
    *
-   *   This object should have the same structure as [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}
+   *   This object should have the same structure as [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The second parameter to the callback is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The first element of the array is an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -713,20 +717,20 @@ class WorkflowTemplateServiceClient {
    * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The second parameter to the callback is Array of [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListWorkflowTemplatesResponse]{@link google.cloud.dataproc.v1.ListWorkflowTemplatesResponse}.
+   *   the raw response object of an object representing [ListWorkflowTemplatesResponse]{@link google.cloud.dataproc.v1beta2.ListWorkflowTemplatesResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate}.
+   *   The first element of the array is Array of [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate} in a single response.
+   *   The first element is Array of [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListWorkflowTemplatesResponse]{@link google.cloud.dataproc.v1.ListWorkflowTemplatesResponse}.
+   *   an object representing [ListWorkflowTemplatesResponse]{@link google.cloud.dataproc.v1beta2.ListWorkflowTemplatesResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
@@ -734,7 +738,7 @@ class WorkflowTemplateServiceClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -821,13 +825,13 @@ class WorkflowTemplateServiceClient {
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1.WorkflowTemplate} on 'data' event.
+   *   An object stream which emits an object representing [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate} on 'data' event.
    *
    * @example
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
@@ -874,7 +878,7 @@ class WorkflowTemplateServiceClient {
    *
    * const dataproc = require('@google-cloud/dataproc');
    *
-   * const client = new dataproc.v1.WorkflowTemplateServiceClient({
+   * const client = new dataproc.v1beta2.WorkflowTemplateServiceClient({
    *   // optional auth parameters.
    * });
    *
