@@ -49,7 +49,7 @@
     "pretest": "npm run compile",
     "posttest": "npm run check",
     "codecov": "nyc report --reporter=json && codecov -f .coverage/*.json",
-    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -65,7 +65,7 @@
     "@types/proxyquire": "^1.3.28",
     "@types/request": "^2.48.1",
     "@types/uuid": "^3.4.4",
-    "broken-link-checker-local": "^0.2.0",
+    "linkinator": "^1.1.2",
     "bunyan": "^1.8.12",
     "codecov": "^3.0.2",
     "cpy-cli": "^2.0.0",
