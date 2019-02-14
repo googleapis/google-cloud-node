@@ -24,7 +24,7 @@
     "proto:profile": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profile.js third_party/proto/profile.proto && pbts -o proto/profile.d.ts proto/profile.js",
     "proto:profiler": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o proto/profiler.d.ts proto/profiler.js",
     "license-check": "jsgl --local .",
-    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
   },
   "author": {
@@ -80,7 +80,7 @@
     "tmp": "0.0.33",
     "ts-mockito": "^2.2.5",
     "typescript": "~3.3.0",
-    "broken-link-checker-local": "^0.2.0"
+    "linkinator": "^1.1.2"
   },
   "files": [
     "out/src",
