@@ -39,7 +39,7 @@
     "system-test": "mocha system-test/ --timeout 600000",
     "all-test": "npm test && npm run system-test && npm run samples-test",
     "fix": "eslint '**/*.js' --fix",
-    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -62,6 +62,6 @@
     "power-assert": "^1.4.4",
     "prettier": "^1.7.4",
     "through2": "^3.0.0",
-    "broken-link-checker-local": "^0.2.0"
+    "linkinator": "^1.1.2"
   }
 }
