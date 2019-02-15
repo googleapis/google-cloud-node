@@ -24,12 +24,14 @@ describe('logging-common', () => {
   let fakeLogInstance: types.StackdriverLogging;
   let fakeLoggingOptions_: types.Options|null;
   let fakeLogName_: string|null;
+  let fakeLogOptions_: object|null;
 
   function fakeLogging(options: types.Options) {
     fakeLoggingOptions_ = options;
     return {
-      log: (logName: string) => {
+      log: (logName: string, logOptions: object) => {
         fakeLogName_ = logName;
+        fakeLogOptions_ = logOptions;
         return fakeLogInstance;
       },
     };
@@ -146,6 +148,12 @@ describe('logging-common', () => {
 
       assert.deepEqual(loggingOptions, optionsWithLogName);
       assert.strictEqual(fakeLogName_, logName);
+    });
+
+    it('should set removeCircular to true', () => {
+      const loggingCommon = new loggingCommonLib.LoggingCommon(OPTIONS);
+
+      assert.deepStrictEqual(fakeLogOptions_, {removeCircular: true});
     });
 
     it('should localize the provided resource', () => {
