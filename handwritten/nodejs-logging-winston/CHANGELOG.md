@@ -4,6 +4,73 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## v0.11.0
+
+02-15-2019 10:42 PST
+
+### Features
+- feature: request logging middleware for express ([#182](https://github.com/googleapis/nodejs-logging-winston/pull/182))
+
+### Bug Fixes
+- fix: remove circular references ([#264](https://github.com/googleapis/nodejs-logging-winston/pull/264))
+
+### Dependencies
+- fix(deps): update dependency logform to v2 ([#247](https://github.com/googleapis/nodejs-logging-winston/pull/247))
+- fix(deps): update dependency @sindresorhus/is to ^0.13.0 ([#213](https://github.com/googleapis/nodejs-logging-winston/pull/213))
+- fix(deps): update dependency @sindresorhus/is to ^0.12.0 ([#126](https://github.com/googleapis/nodejs-logging-winston/pull/126))
+
+### Documentation
+- docs: update links in contrib guide ([#267](https://github.com/googleapis/nodejs-logging-winston/pull/267))
+- docs: update contributing path in README ([#260](https://github.com/googleapis/nodejs-logging-winston/pull/260))
+- docs: add lint/fix example to contributing guide ([#255](https://github.com/googleapis/nodejs-logging-winston/pull/255))
+- docs: update readme badges ([#229](https://github.com/googleapis/nodejs-logging-winston/pull/229))
+
+### Internal / Testing Changes
+- build: use linkinator for docs test ([#266](https://github.com/googleapis/nodejs-logging-winston/pull/266))
+- fix: de-flake system tests ([#265](https://github.com/googleapis/nodejs-logging-winston/pull/265))
+- build: create docs test npm scripts ([#263](https://github.com/googleapis/nodejs-logging-winston/pull/263))
+- build: test using @grpc/grpc-js in CI ([#261](https://github.com/googleapis/nodejs-logging-winston/pull/261))
+- chore: move CONTRIBUTING.md to root ([#259](https://github.com/googleapis/nodejs-logging-winston/pull/259))
+- chore(deps): update dependency @google-cloud/common to ^0.31.0 ([#256](https://github.com/googleapis/nodejs-logging-winston/pull/256))
+- chore: update @google-cloud/common to 0.30.2 ([#254](https://github.com/googleapis/nodejs-logging-winston/pull/254))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#253](https://github.com/googleapis/nodejs-logging-winston/pull/253))
+- build: ignore googleapis.com in doc link check ([#251](https://github.com/googleapis/nodejs-logging-winston/pull/251))
+- chore(build): check for 404s when publishing docs ([#248](https://github.com/googleapis/nodejs-logging-winston/pull/248))
+- refactor: update sample test dependencies ([#246](https://github.com/googleapis/nodejs-logging-winston/pull/246))
+- chore(build): inject yoshi automation key ([#243](https://github.com/googleapis/nodejs-logging-winston/pull/243))
+- chore: update nyc and eslint configs ([#242](https://github.com/googleapis/nodejs-logging-winston/pull/242))
+- chore: fix publish.sh permission +x ([#240](https://github.com/googleapis/nodejs-logging-winston/pull/240))
+- fix(build): fix Kokoro release script ([#239](https://github.com/googleapis/nodejs-logging-winston/pull/239))
+- build: add Kokoro configs for autorelease ([#238](https://github.com/googleapis/nodejs-logging-winston/pull/238))
+- chore: update system tests key ([#232](https://github.com/googleapis/nodejs-logging-winston/pull/232))
+- chore: always nyc report before calling codecov ([#235](https://github.com/googleapis/nodejs-logging-winston/pull/235))
+- chore: nyc ignore build/test by default ([#234](https://github.com/googleapis/nodejs-logging-winston/pull/234))
+- chore: update license file ([#231](https://github.com/googleapis/nodejs-logging-winston/pull/231))
+- fix(build): fix system key decryption ([#227](https://github.com/googleapis/nodejs-logging-winston/pull/227))
+- chore: update key for system tests ([#226](https://github.com/googleapis/nodejs-logging-winston/pull/226))
+- chore(deps): update dependency @google-cloud/common to ^0.27.0 ([#225](https://github.com/googleapis/nodejs-logging-winston/pull/225))
+- refactor: reduce the number of dependencies ([#222](https://github.com/googleapis/nodejs-logging-winston/pull/222))
+- chore: add a synth.metadata
+- chore(deps): update dependency gts to ^0.9.0 ([#219](https://github.com/googleapis/nodejs-logging-winston/pull/219))
+- chore: update eslintignore config ([#218](https://github.com/googleapis/nodejs-logging-winston/pull/218))
+- docs(samples): convert samples test from ava to mocha ([#207](https://github.com/googleapis/nodejs-logging-winston/pull/207))
+- chore(deps): update dependency @google-cloud/nodejs-repo-tools to v3 ([#217](https://github.com/googleapis/nodejs-logging-winston/pull/217))
+- chore: drop contributors from multiple places ([#216](https://github.com/googleapis/nodejs-logging-winston/pull/216))
+- chore(deps): update dependency @types/is to v0.0.21 ([#215](https://github.com/googleapis/nodejs-logging-winston/pull/215))
+- chore: use latest npm on Windows ([#214](https://github.com/googleapis/nodejs-logging-winston/pull/214))
+- chore: use unique UUID per system test ([#212](https://github.com/googleapis/nodejs-logging-winston/pull/212))
+- chore: update CircleCI config ([#211](https://github.com/googleapis/nodejs-logging-winston/pull/211))
+- chore: include build in eslintignore ([#208](https://github.com/googleapis/nodejs-logging-winston/pull/208))
+- chore(deps): update dependency eslint-plugin-node to v8 ([#203](https://github.com/googleapis/nodejs-logging-winston/pull/203))
+- chore: update issue templates ([#202](https://github.com/googleapis/nodejs-logging-winston/pull/202))
+- chore: remove old issue template ([#200](https://github.com/googleapis/nodejs-logging-winston/pull/200))
+- build: run tests on node11 ([#199](https://github.com/googleapis/nodejs-logging-winston/pull/199))
+- chore(deps): update dependency @google-cloud/common to ^0.26.0 ([#198](https://github.com/googleapis/nodejs-logging-winston/pull/198))
+- chores(build): do not collect sponge.xml from windows builds ([#197](https://github.com/googleapis/nodejs-logging-winston/pull/197))
+- chores(build): run codecov on continuous builds ([#196](https://github.com/googleapis/nodejs-logging-winston/pull/196))
+- chore: update new issue template ([#195](https://github.com/googleapis/nodejs-logging-winston/pull/195))
+- build: fix codecov uploading on Kokoro ([#192](https://github.com/googleapis/nodejs-logging-winston/pull/192))
+
 ## v0.10.2
 
 ### Fixes
