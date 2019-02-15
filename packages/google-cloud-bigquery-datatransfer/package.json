@@ -35,7 +35,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
     "fix": "eslint --fix '**/*.js'",
-    "docs-test": "blcl docs -r --exclude www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip 'www.googleapis.com www.gstatic.com/bigquerydatatransfer'",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -56,6 +56,6 @@
     "nyc": "^13.0.0",
     "power-assert": "^1.5.0",
     "prettier": "^1.13.4",
-    "broken-link-checker-local": "^0.2.0"
+    "linkinator": "^1.1.2"
   }
 }

@@ -36,11 +36,5 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'toISOString)')
 # [END fix-dead-link]
 
-s.replace('.kokoro/docs.sh',
-        'blc http:\/\/localhost:8080',
-        'blc http:\/\/localhost:8080 --exclude www.gstatic.com/bigquerydatatransfer')
-
-
-# Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
