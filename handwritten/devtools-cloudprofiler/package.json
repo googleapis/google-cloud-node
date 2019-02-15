@@ -40,7 +40,7 @@
     "delay": "^4.0.1",
     "extend": "^3.0.1",
     "findit2": "^2.2.3",
-    "gcp-metadata": "^0.9.0",
+    "gcp-metadata": "^1.0.0",
     "lodash.pickby": "^4.6.0",
     "nan": "^2.12.1",
     "node-pre-gyp": "^0.12.0",
