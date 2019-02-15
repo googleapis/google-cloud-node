@@ -96,7 +96,9 @@ export class LoggingCommon {
 
     this.inspectMetadata = options.inspectMetadata === true;
     this.levels = options.levels || NPM_LEVEL_NAME_TO_CODE;
-    this.stackdriverLog = new Logging(options).log(logName);
+    this.stackdriverLog = new Logging(options).log(logName, {
+      removeCircular: true,
+    });
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
     this.prefix = options.prefix;
