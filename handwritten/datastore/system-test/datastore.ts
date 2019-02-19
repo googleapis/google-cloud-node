@@ -565,7 +565,7 @@ describe('Datastore', () => {
     });
   });
 
-  describe('transactions', async () => {
+  describe('transactions', () => {
     it('should run in a transaction', async () => {
       const key = datastore.key(['Company', 'Google']);
       const obj = {
