@@ -100,7 +100,7 @@
     "lodash.pick": "^4.4.0",
     "lodash.random": "^3.2.0",
     "lodash.without": "^4.4.0",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "nock": "^10.0.0",
     "nyc": "^13.0.1",
     "post-install-check": "0.0.1",
