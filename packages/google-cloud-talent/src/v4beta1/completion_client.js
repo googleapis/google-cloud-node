@@ -260,7 +260,7 @@ class CompletionClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.CompletionClient({
    *   // optional auth parameters.

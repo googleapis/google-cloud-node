@@ -234,7 +234,7 @@ class CompanyServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.CompanyServiceClient({
    *   // optional auth parameters.
@@ -290,7 +290,7 @@ class CompanyServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.CompanyServiceClient({
    *   // optional auth parameters.
@@ -353,7 +353,7 @@ class CompanyServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.CompanyServiceClient({
    *   // optional auth parameters.
@@ -402,7 +402,7 @@ class CompanyServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.CompanyServiceClient({
    *   // optional auth parameters.
@@ -475,7 +475,7 @@ class CompanyServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.CompanyServiceClient({
    *   // optional auth parameters.
@@ -576,7 +576,7 @@ class CompanyServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.CompanyServiceClient({
    *   // optional auth parameters.

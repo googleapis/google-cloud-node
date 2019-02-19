@@ -260,7 +260,7 @@ class ResumeServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ResumeServiceClient({
    *   // optional auth parameters.

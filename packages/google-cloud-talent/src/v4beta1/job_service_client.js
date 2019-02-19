@@ -244,7 +244,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -301,7 +301,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -365,7 +365,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -416,7 +416,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -505,7 +505,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -632,7 +632,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -697,7 +697,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -1017,7 +1017,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -1366,7 +1366,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -1694,7 +1694,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.
@@ -2043,7 +2043,7 @@ class JobServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.JobServiceClient({
    *   // optional auth parameters.

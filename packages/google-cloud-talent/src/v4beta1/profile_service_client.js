@@ -266,7 +266,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
@@ -369,7 +369,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
@@ -424,7 +424,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
@@ -481,7 +481,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
@@ -565,7 +565,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
@@ -614,7 +614,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
@@ -829,7 +829,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
@@ -1077,7 +1077,7 @@ class ProfileServiceClient {
    *
    * @example
    *
-   * const talent = require('talent.v4beta1');
+   * const talent = require('@google-cloud/talent');
    *
    * const client = new talent.v4beta1.ProfileServiceClient({
    *   // optional auth parameters.
