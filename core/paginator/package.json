@@ -41,7 +41,7 @@
     "codecov": "^3.0.4",
     "gts": "^0.9.0",
     "intelli-espower-loader": "^1.0.1",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "nyc": "^13.0.0",
     "proxyquire": "^2.0.1",
     "sinon": "^7.0.0",
