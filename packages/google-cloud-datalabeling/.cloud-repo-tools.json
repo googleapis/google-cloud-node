@@ -1,0 +1,8 @@
+{
+  "requiresKeyFile": true,
+  "requiresProjectId": true,
+  "product": "datalabeling",
+  "client_reference_url": "https://cloud.google.com/datalabeling/docs",
+  "release_quality": "alpha",
+  "samples": []
+}
