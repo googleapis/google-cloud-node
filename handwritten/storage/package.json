@@ -101,7 +101,7 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.4",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
-    "mocha": "^5.0.0",
+    "mocha": "^6.0.0",
     "nock": "^10.0.1",
     "node-fetch": "^2.2.0",
     "normalize-newline": "^3.0.0",
