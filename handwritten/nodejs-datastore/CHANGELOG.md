@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## v3.1.1
+
+02-18-2019 22:46 PST
+
+### Bug fixes
+- fix: include proto d.ts in the build ([#335](https://github.com/googleapis/nodejs-datastore/pull/335))
+- fix(deps): update dependency @google-cloud/promisify to ^0.4.0 ([#333](https://github.com/googleapis/nodejs-datastore/pull/333))
+- fix: throw on invalid credentials ([#331](https://github.com/googleapis/nodejs-datastore/pull/331))
+- fix(deps): update dependency yargs to v13 ([#329](https://github.com/googleapis/nodejs-datastore/pull/329))
+
+### Documentation
+- build: use linkinator for docs test ([#332](https://github.com/googleapis/nodejs-datastore/pull/332))
+- docs: update links in contrib guide ([#334](https://github.com/googleapis/nodejs-datastore/pull/334))
+
 ## v3.1.0
 
 02-09-2019 17:57 PST
