@@ -54,7 +54,7 @@ describe('Compute', () => {
   before(() => deleteAllTestObjects({expiredOnly: true}));
   after(() => deleteAllTestObjects({expiredOnly: false}));
 
-  describe('addresses', async () => {
+  describe('addresses', () => {
     const ADDRESS_NAME = generateName('address');
     const address = region.address(ADDRESS_NAME);
 
