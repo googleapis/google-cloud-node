@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## v0.5.1
+
+02-14-2019 17:36 PST
+
+### Bug Fixes
+- fix: throw on invalid credentials ([#189](https://github.com/googleapis/nodejs-text-to-speech/pull/189))
+
+### Documentation
+- docs: update sample to show method inside of async function ([#188](https://github.com/googleapis/nodejs-text-to-speech/pull/188))
+- docs: update links in contrib guide ([#191](https://github.com/googleapis/nodejs-text-to-speech/pull/191))
+- docs: update contributing path in README ([#184](https://github.com/googleapis/nodejs-text-to-speech/pull/184))
+
+### Internal / Testing Changes
+- build: use linkinator for docs test ([#190](https://github.com/googleapis/nodejs-text-to-speech/pull/190))
+- fix(deps): update dependency yargs to v13 ([#187](https://github.com/googleapis/nodejs-text-to-speech/pull/187))
+- build: create docs test npm scripts ([#186](https://github.com/googleapis/nodejs-text-to-speech/pull/186))
+- build: test using @grpc/grpc-js in CI ([#185](https://github.com/googleapis/nodejs-text-to-speech/pull/185))
+- chore: move CONTRIBUTING.md to root ([#183](https://github.com/googleapis/nodejs-text-to-speech/pull/183))
+
 ## v0.5.0
 
 02-05-2019 13:22 PST
