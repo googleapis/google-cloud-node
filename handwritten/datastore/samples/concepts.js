@@ -1045,26 +1045,22 @@ class Transaction extends TestHelper {
     // [START datastore_transactional_retry]
     async function transferFundsWithRetry() {
       const maxTries = 5;
-      let currentAttempt = 1;
-      let delay = 100;
 
-      async function tryRequest() {
+      async function tryRequest(currentAttempt, delay) {
         try {
           await transferFunds(fromKey, toKey, 10);
         } catch (err) {
           if (currentAttempt <= maxTries) {
             // Use exponential backoff
             setTimeout(async () => {
-              currentAttempt++;
-              delay *= 2;
-              await tryRequest();
+              await tryRequest(currentAttempt + 1, delay * 2);
             }, delay);
           }
           throw err;
         }
       }
 
-      await tryRequest(1, 5);
+      await tryRequest(1, 100);
     }
     // [END datastore_transactional_retry]
     await transferFundsWithRetry();
