@@ -79,7 +79,7 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "nyc": "^13.0.0",
     "post-install-check": "0.0.1",
     "power-assert": "^1.6.0",
