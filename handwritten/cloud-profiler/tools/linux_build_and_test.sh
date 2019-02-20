@@ -54,6 +54,6 @@ gsutil cp -r "${BASE_DIR}/artifacts/." "gs://${GCS_LOCATION}/"
 export BINARY_HOST="https://storage.googleapis.com/${GCS_LOCATION}"
 "${BASE_DIR}/testing/integration_test.sh"
 
-if [ "$BUILD_TYPE" -eq "release" ]; then
+if [ "$BUILD_TYPE" == "release" ]; then
   gsutil cp -r "${BASE_DIR}/artifacts/." "gs://cloud-profiler/nodejs/release"
 fi
