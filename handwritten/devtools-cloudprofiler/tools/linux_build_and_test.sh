@@ -19,21 +19,23 @@ set -e pipefail
 # Display commands
 set -x
 
-case $KOKORO_JOB_TYPE in
-  CONTINUOUS_INTEGRATION)
-    BUILD_TYPE=continuous
-    ;;
-  PRESUBMIT_GITHUB)
-    BUILD_TYPE=presubmit
-    ;;
-  RELEASE)
-    BUILD_TYPE=release
-    ;;
-  *)
-    echo "Unknown build type: ${KOKORO_JOB_TYPE}"
-    exit 1
-    ;;
-esac
+if [[ -z "$BUILD_TYPE" ]]; then
+  case $KOKORO_JOB_TYPE in
+    CONTINUOUS_INTEGRATION)
+      BUILD_TYPE=continuous
+      ;;
+    PRESUBMIT_GITHUB)
+      BUILD_TYPE=presubmit
+      ;;
+    RELEASE)
+      BUILD_TYPE=release
+      ;;
+    *)
+      echo "Unknown build type: ${KOKORO_JOB_TYPE}"
+      exit 1
+      ;;
+  esac
+fi
 
 cd $(dirname $0)/..
 BASE_DIR=$(pwd)
