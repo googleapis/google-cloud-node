@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## v1.6.0
+
+02-21-2019 13:46 PST
+
+### Implementation Changes
+- fix: throw on invalid credentials
+
+### New Features
+- feat: generate v1p3beta1 with streaming support ([#198](https://github.com/googleapis/nodejs-video-intelligence/pull/198))
+- feat: add text detection and object mapping support ([#197](https://github.com/googleapis/nodejs-video-intelligence/pull/197))
+
+### Dependencies
+- chore(deps): update dependency mocha to v6
+- fix(deps): update dependency yargs to v13 ([#192](https://github.com/googleapis/nodejs-video-intelligence/pull/192))
+
+### Documentation
+- docs: update links in contrib guide ([#195](https://github.com/googleapis/nodejs-video-intelligence/pull/195))
+- build: create docs test npm scripts ([#191](https://github.com/googleapis/nodejs-video-intelligence/pull/191))
+- docs: update contributing path in README ([#189](https://github.com/googleapis/nodejs-video-intelligence/pull/189))
+
+### Internal / Testing Changes
+- build: use linkinator for docs test ([#194](https://github.com/googleapis/nodejs-video-intelligence/pull/194))
+- build: test using @grpc/grpc-js in CI ([#190](https://github.com/googleapis/nodejs-video-intelligence/pull/190))
+- chore: move CONTRIBUTING.md to root ([#188](https://github.com/googleapis/nodejs-video-intelligence/pull/188))
+
 ## v1.5.1
 
 02-05-2019 15:05 PST
