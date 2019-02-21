@@ -607,7 +607,7 @@ describe('JobServiceClient', () => {
       });
 
       // Mock request
-      const formattedName = client.jobPath('[PROJECT]', '[JOB]');
+      const formattedName = client.jobPath('[PROJECT]', '[JOBS]');
       const request = {
         name: formattedName,
       };
@@ -660,7 +660,7 @@ describe('JobServiceClient', () => {
       });
 
       // Mock request
-      const formattedName = client.jobPath('[PROJECT]', '[JOB]');
+      const formattedName = client.jobPath('[PROJECT]', '[JOBS]');
       const request = {
         name: formattedName,
       };
@@ -767,7 +767,7 @@ describe('JobServiceClient', () => {
       });
 
       // Mock request
-      const formattedName = client.jobPath('[PROJECT]', '[JOB]');
+      const formattedName = client.jobPath('[PROJECT]', '[JOBS]');
       const request = {
         name: formattedName,
       };
@@ -788,7 +788,7 @@ describe('JobServiceClient', () => {
       });
 
       // Mock request
-      const formattedName = client.jobPath('[PROJECT]', '[JOB]');
+      const formattedName = client.jobPath('[PROJECT]', '[JOBS]');
       const request = {
         name: formattedName,
       };

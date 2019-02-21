@@ -27,7 +27,7 @@ versions = ["v4beta1"]
 for version in versions:
     library = gapic.node_library(
         "talent", version, config_path="/google/cloud/talent/"
-        f"artman_jobs_{version}.yaml",
+        f"artman_talent_{version}.yaml",
         artman_output_name=f"jobs-v4beta1")
     s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
@@ -35,6 +35,16 @@ for version in versions:
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
+
+# [START fix-dead-link]
+s.replace('**/doc/google/protobuf/doc_timestamp.js',
+        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
+        r"https://\1)")
+
+s.replace('**/doc/google/protobuf/doc_timestamp.js',
+        'toISOString\]',
+        'toISOString)')
+# [END fix-dead-link]
 
 # Node.js specific cleanup
 subprocess.run(["npm", "install"])

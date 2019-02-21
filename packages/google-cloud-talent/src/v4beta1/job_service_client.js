@@ -101,7 +101,7 @@ class JobServiceClient {
     // Create useful helper objects for these.
     this._pathTemplates = {
       projectPathTemplate: new gax.PathTemplate('projects/{project}'),
-      jobPathTemplate: new gax.PathTemplate('projects/{project}/jobs/{job}'),
+      jobPathTemplate: new gax.PathTemplate('projects/{project}/jobs/{jobs}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -307,7 +307,7 @@ class JobServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.jobPath('[PROJECT]', '[JOB]');
+   * const formattedName = client.jobPath('[PROJECT]', '[JOBS]');
    * client.getJob({name: formattedName})
    *   .then(responses => {
    *     const response = responses[0];
@@ -422,7 +422,7 @@ class JobServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.jobPath('[PROJECT]', '[JOB]');
+   * const formattedName = client.jobPath('[PROJECT]', '[JOBS]');
    * client.deleteJob({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -2092,13 +2092,13 @@ class JobServiceClient {
    * Return a fully-qualified job resource name string.
    *
    * @param {String} project
-   * @param {String} job
+   * @param {String} jobs
    * @returns {String}
    */
-  jobPath(project, job) {
+  jobPath(project, jobs) {
     return this._pathTemplates.jobPathTemplate.render({
       project: project,
-      job: job,
+      jobs: jobs,
     });
   }
 
@@ -2129,10 +2129,10 @@ class JobServiceClient {
    *
    * @param {String} jobName
    *   A fully-qualified path representing a job resources.
-   * @returns {String} - A string representing the job.
+   * @returns {String} - A string representing the jobs.
    */
-  matchJobFromJobName(jobName) {
-    return this._pathTemplates.jobPathTemplate.match(jobName).job;
+  matchJobsFromJobName(jobName) {
+    return this._pathTemplates.jobPathTemplate.match(jobName).jobs;
   }
 }
 

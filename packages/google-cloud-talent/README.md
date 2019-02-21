@@ -8,7 +8,7 @@
 [![npm version](https://img.shields.io/npm/v/@google-cloud/talent.svg)](https://www.npmjs.org/package/@google-cloud/talent)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-talent/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-talent)
 
-[Cloud Talent Solution](({docs_url})) is a service that brings machine learning to the job search experience, returning high quality results to job seekers far beyond the limitations of typical keyword-based methods. Once integrated with your job content, Cloud Talent Solution automatically detects and infers various kinds of data, such as related titles, seniority, and industry.
+[Cloud Talent Solution](https://cloud.google.com/talent-solution/docs/) is a service that brings machine learning to the job search experience, returning high quality results to job seekers far beyond the limitations of typical keyword-based methods. Once integrated with your job content, Cloud Talent Solution automatically detects and infers various kinds of data, such as related titles, seniority, and industry.
 
 
 * [Using the client library](#using-the-client-library)
@@ -70,7 +70,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
 [client-docs]: https://cloud.google.com/talent-solution/job-search/docs
-[product-docs]: https://cloud.google.com/talent-solution/job-search/docs/
+[product-docs]: https://cloud.google.com/talent-solution/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
