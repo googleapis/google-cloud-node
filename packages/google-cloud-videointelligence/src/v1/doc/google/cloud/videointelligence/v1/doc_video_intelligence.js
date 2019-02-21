@@ -101,6 +101,11 @@ const AnnotateVideoRequest = {
  *
  *   This object should have the same structure as [SpeechTranscriptionConfig]{@link google.cloud.videointelligence.v1.SpeechTranscriptionConfig}
  *
+ * @property {Object} textDetectionConfig
+ *   Config for TEXT_DETECTION.
+ *
+ *   This object should have the same structure as [TextDetectionConfig]{@link google.cloud.videointelligence.v1.TextDetectionConfig}
+ *
  * @typedef VideoContext
  * @memberof google.cloud.videointelligence.v1
  * @see [google.cloud.videointelligence.v1.VideoContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
@@ -185,6 +190,24 @@ const ExplicitContentDetectionConfig = {
  * @see [google.cloud.videointelligence.v1.FaceDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
  */
 const FaceDetectionConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Config for TEXT_DETECTION.
+ *
+ * @property {string[]} languageHints
+ *   Language hint can be specified if the language to be detected is known a
+ *   priori. It can increase the accuracy of the detection. Language hint must
+ *   be language code in BCP-47 format.
+ *
+ *   Automatic language detection is performed if no hint is provided.
+ *
+ * @typedef TextDetectionConfig
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.TextDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const TextDetectionConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -480,6 +503,18 @@ const FaceAnnotation = {
  *
  *   This object should have the same structure as [SpeechTranscription]{@link google.cloud.videointelligence.v1.SpeechTranscription}
  *
+ * @property {Object[]} textAnnotations
+ *   OCR text detection and tracking.
+ *   Annotations for list of detected text snippets. Each will have list of
+ *   frame information associated with it.
+ *
+ *   This object should have the same structure as [TextAnnotation]{@link google.cloud.videointelligence.v1.TextAnnotation}
+ *
+ * @property {Object[]} objectAnnotations
+ *   Annotations for list of objects detected and tracked in video.
+ *
+ *   This object should have the same structure as [ObjectTrackingAnnotation]{@link google.cloud.videointelligence.v1.ObjectTrackingAnnotation}
+ *
  * @property {Object} error
  *   If set, indicates an error. Note that for a single `AnnotateVideoRequest`
  *   some videos may succeed and some may fail.
@@ -746,6 +781,189 @@ const WordInfo = {
 };
 
 /**
+ * A vertex represents a 2D point in the image.
+ * NOTE: the normalized vertex coordinates are relative to the original image
+ * and range from 0 to 1.
+ *
+ * @property {number} x
+ *   X coordinate.
+ *
+ * @property {number} y
+ *   Y coordinate.
+ *
+ * @typedef NormalizedVertex
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.NormalizedVertex definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const NormalizedVertex = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Normalized bounding polygon for text (that might not be aligned with axis).
+ * Contains list of the corner points in clockwise order starting from
+ * top-left corner. For example, for a rectangular bounding box:
+ * When the text is horizontal it might look like:
+ *         0----1
+ *         |    |
+ *         3----2
+ *
+ * When it's clockwise rotated 180 degrees around the top-left corner it
+ * becomes:
+ *         2----3
+ *         |    |
+ *         1----0
+ *
+ * and the vertex order will still be (0, 1, 2, 3). Note that values can be less
+ * than 0, or greater than 1 due to trignometric calculations for location of
+ * the box.
+ *
+ * @property {Object[]} vertices
+ *   Normalized vertices of the bounding polygon.
+ *
+ *   This object should have the same structure as [NormalizedVertex]{@link google.cloud.videointelligence.v1.NormalizedVertex}
+ *
+ * @typedef NormalizedBoundingPoly
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.NormalizedBoundingPoly definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const NormalizedBoundingPoly = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Video segment level annotation results for text detection.
+ *
+ * @property {Object} segment
+ *   Video segment where a text snippet was detected.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1.VideoSegment}
+ *
+ * @property {number} confidence
+ *   Confidence for the track of detected text. It is calculated as the highest
+ *   over all frames where OCR detected text appears.
+ *
+ * @property {Object[]} frames
+ *   Information related to the frames where OCR detected text appears.
+ *
+ *   This object should have the same structure as [TextFrame]{@link google.cloud.videointelligence.v1.TextFrame}
+ *
+ * @typedef TextSegment
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.TextSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const TextSegment = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Video frame level annotation results for text annotation (OCR).
+ * Contains information regarding timestamp and bounding box locations for the
+ * frames containing detected OCR text snippets.
+ *
+ * @property {Object} rotatedBoundingBox
+ *   Bounding polygon of the detected text for this frame.
+ *
+ *   This object should have the same structure as [NormalizedBoundingPoly]{@link google.cloud.videointelligence.v1.NormalizedBoundingPoly}
+ *
+ * @property {Object} timeOffset
+ *   Timestamp of this frame.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @typedef TextFrame
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.TextFrame definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const TextFrame = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Annotations related to one detected OCR text snippet. This will contain the
+ * corresponding text, confidence value, and frame level information for each
+ * detection.
+ *
+ * @property {string} text
+ *   The detected text.
+ *
+ * @property {Object[]} segments
+ *   All video segments where OCR detected text appears.
+ *
+ *   This object should have the same structure as [TextSegment]{@link google.cloud.videointelligence.v1.TextSegment}
+ *
+ * @typedef TextAnnotation
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.TextAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const TextAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Video frame level annotations for object detection and tracking. This field
+ * stores per frame location, time offset, and confidence.
+ *
+ * @property {Object} normalizedBoundingBox
+ *   The normalized bounding box location of this object track for the frame.
+ *
+ *   This object should have the same structure as [NormalizedBoundingBox]{@link google.cloud.videointelligence.v1.NormalizedBoundingBox}
+ *
+ * @property {Object} timeOffset
+ *   The timestamp of the frame in microseconds.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @typedef ObjectTrackingFrame
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.ObjectTrackingFrame definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const ObjectTrackingFrame = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Annotations corresponding to one tracked object.
+ *
+ * @property {Object} segment
+ *   Non-streaming batch mode ONLY.
+ *   Each object track corresponds to one video segment where it appears.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1.VideoSegment}
+ *
+ * @property {number} trackId
+ *   Streaming mode ONLY.
+ *   In streaming mode, we do not know the end time of a tracked object
+ *   before it is completed. Hence, there is no VideoSegment info returned.
+ *   Instead, we provide a unique identifiable integer track_id so that
+ *   the customers can correlate the results of the ongoing
+ *   ObjectTrackAnnotation of the same track_id over time.
+ *
+ * @property {Object} entity
+ *   Entity to specify the object category that this track is labeled as.
+ *
+ *   This object should have the same structure as [Entity]{@link google.cloud.videointelligence.v1.Entity}
+ *
+ * @property {number} confidence
+ *   Object category's labeling confidence of this track.
+ *
+ * @property {Object[]} frames
+ *   Information corresponding to all frames where this object track appears.
+ *   Non-streaming batch mode: it may be one or multiple ObjectTrackingFrame
+ *   messages in frames.
+ *   Streaming mode: it can only be one ObjectTrackingFrame message in frames.
+ *
+ *   This object should have the same structure as [ObjectTrackingFrame]{@link google.cloud.videointelligence.v1.ObjectTrackingFrame}
+ *
+ * @typedef ObjectTrackingAnnotation
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.ObjectTrackingAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const ObjectTrackingAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Video annotation feature.
  *
  * @enum {number}
@@ -781,7 +999,17 @@ const Feature = {
   /**
    * Speech transcription.
    */
-  SPEECH_TRANSCRIPTION: 6
+  SPEECH_TRANSCRIPTION: 6,
+
+  /**
+   * OCR text detection and tracking.
+   */
+  TEXT_DETECTION: 7,
+
+  /**
+   * Object detection and tracking.
+   */
+  OBJECT_TRACKING: 9
 };
 
 /**
