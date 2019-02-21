@@ -18,10 +18,6 @@ set -eo pipefail
 
 export NPM_CONFIG_PREFIX=/home/node/.npm-global
 
-# Start the releasetool reporter
-python3 -m pip install gcp-releasetool
-python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
-
 cd $(dirname $0)/..
 
 NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google_cloud_npm_token)
