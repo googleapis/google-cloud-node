@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-02-21T12:20:49.083829Z",
+  "updateTime": "2019-02-21T19:19:06.179395Z",
   "sources": [
     {
       "generator": {
@@ -73,6 +73,16 @@
         "language": "nodejs",
         "generator": "gapic",
         "config": "google/cloud/videointelligence/artman_videointelligence_v1p2beta1.yaml"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "video-intelligence",
+        "apiVersion": "v1p3beta1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/videointelligence/artman_videointelligence_v1p3beta1.yaml"
       }
     }
   ]
