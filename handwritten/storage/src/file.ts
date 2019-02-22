@@ -2045,6 +2045,10 @@ class File extends ServiceObject<File> {
     const callback = args.callback;
     const expires = new Date((options as GetSignedPolicyOptions).expires);
 
+    if (isNaN(expires.getTime())) {
+      throw new Error('The expiration date provided was invalid.');
+    }
+
     if (expires.valueOf() < Date.now()) {
       throw new Error('An expiration date cannot be in the past.');
     }
@@ -2261,6 +2265,10 @@ class File extends ServiceObject<File> {
   getSignedUrl(cfg: GetSignedUrlConfig, callback?: GetSignedUrlCallback):
       void|Promise<GetSignedUrlResponse> {
     const expiresInMSeconds = new Date(cfg.expires).valueOf();
+
+    if (isNaN(expiresInMSeconds)) {
+      throw new Error('The expiration date provided was invalid.');
+    }
 
     if (expiresInMSeconds < Date.now()) {
       throw new Error('An expiration date cannot be in the past.');

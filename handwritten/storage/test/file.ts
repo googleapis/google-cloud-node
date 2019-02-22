@@ -2146,6 +2146,18 @@ describe('File', () => {
             });
       });
 
+      it('should throw if a date is invalid', () => {
+        const expires = new Date('31-12-2019');
+
+        assert.throws(() => {
+          file.getSignedPolicy(
+              {
+                expires,
+              },
+              () => {});
+        }, /The expiration date provided was invalid\./);
+      });
+
       it('should throw if a date from the past is given', () => {
         const expires = Date.now() - 5;
 
@@ -2552,6 +2564,19 @@ describe('File', () => {
               assert.strictEqual(expires_, expectedExpires.toString());
               done();
             });
+      });
+
+      it('should throw if a date is invalid', () => {
+        const expires = new Date('31-12-2019');
+
+        assert.throws(() => {
+          file.getSignedUrl(
+              {
+                action: 'read',
+                expires,
+              },
+              () => {});
+        }, /The expiration date provided was invalid\./);
       });
 
       it('should throw if a date from the past is given', () => {
