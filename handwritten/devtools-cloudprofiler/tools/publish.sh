@@ -13,15 +13,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+retry() {
+  for i in {1..3}; do
+    "${@}" && return 0
+  done
+  return 1
+}
 
 set -eo pipefail
 
-export NPM_CONFIG_PREFIX=/home/node/.npm-global
+# Install desired version of Node.js
+retry curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash >/dev/null
+export NVM_DIR="$HOME/.nvm" >/dev/null
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" >/dev/null
+
+retry nvm install 10 &>/dev/null
 
 cd $(dirname $0)/..
 
-NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google-cloud-profiler-npm-token)
+NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google_cloud_npm_token)
 echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
-npm install
+retry npm install
 npm publish --access=public
