@@ -20,7 +20,11 @@ const {assert} = require('chai');
 const execa = require('execa');
 const uuid = require('uuid');
 
-const exec = async cmd => (await execa.shell(cmd)).stdout;
+async function exec(cmd) {
+  const promise = execa.shell(cmd);
+  promise.stdout.pipe(process.stdout);
+  return (await promise).stdout;
+}
 
 describe('subscriptions', () => {
   const projectId = process.env.GCLOUD_PROJECT;

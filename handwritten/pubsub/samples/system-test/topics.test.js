@@ -20,8 +20,13 @@ const {assert} = require('chai');
 const execa = require('execa');
 const uuid = require('uuid');
 
+async function exec(cmd) {
+  const promise = execa.shell(cmd);
+  promise.stdout.pipe(process.stdout);
+  return (await promise).stdout;
+}
+
 describe('topics', () => {
-  const exec = async cmd => (await execa.shell(cmd)).stdout;
   const projectId = process.env.GCLOUD_PROJECT;
   const pubsub = new PubSub({projectId});
   const topicNameOne = `nodejs-docs-samples-test-${uuid.v4()}`;
@@ -166,17 +171,12 @@ describe('topics', () => {
         expectedMessage.data
       }" -w ${waitTime}`
     );
-    const receivedMessage = await _pullOneMessage(subscription);
 
-    const publishTime = Date.parse(receivedMessage.publishTime);
-    // publishTime contains whole seconds (ends with 000),
-    // so we allow the difference to be up to 1 second less
-    // than we expect.
-    const actualWait = publishTime - startTime;
-    const expectedWait = waitTime - 1000;
+    const {data, publishTime} = await _pullOneMessage(subscription);
+    const actualWait = publishTime.getTime() - startTime;
 
-    assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);
-    assert(actualWait >= expectedWait);
+    assert.strictEqual(data.toString(), expectedMessage.data);
+    assert(actualWait >= waitTime);
   });
 
   it('should publish with retry settings', async () => {
