@@ -171,6 +171,24 @@ class CloudRedisClient {
     const deleteInstanceMetadata = protoFilesRoot.lookup(
       'google.cloud.redis.v1.OperationMetadata'
     );
+    const importInstanceResponse = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.Instance'
+    );
+    const importInstanceMetadata = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.OperationMetadata'
+    );
+    const exportInstanceResponse = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.Instance'
+    );
+    const exportInstanceMetadata = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.OperationMetadata'
+    );
+    const failoverInstanceResponse = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.Instance'
+    );
+    const failoverInstanceMetadata = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.OperationMetadata'
+    );
 
     this._descriptors.longrunning = {
       createInstance: new gax.LongrunningDescriptor(
@@ -187,6 +205,21 @@ class CloudRedisClient {
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
         deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
+      ),
+      importInstance: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        importInstanceResponse.decode.bind(importInstanceResponse),
+        importInstanceMetadata.decode.bind(importInstanceMetadata)
+      ),
+      exportInstance: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        exportInstanceResponse.decode.bind(exportInstanceResponse),
+        exportInstanceMetadata.decode.bind(exportInstanceMetadata)
+      ),
+      failoverInstance: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        failoverInstanceResponse.decode.bind(failoverInstanceResponse),
+        failoverInstanceMetadata.decode.bind(failoverInstanceMetadata)
       ),
     };
 
@@ -218,6 +251,9 @@ class CloudRedisClient {
       'createInstance',
       'updateInstance',
       'deleteInstance',
+      'importInstance',
+      'exportInstance',
+      'failoverInstance',
     ];
     for (const methodName of cloudRedisStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -830,6 +866,317 @@ class CloudRedisClient {
     options = options || {};
 
     return this._innerApiCalls.deleteInstance(request, options, callback);
+  }
+
+  /**
+   * Import a Redis RDB snapshot file from GCS into a Redis instance.
+   *
+   * Redis may stop serving during this operation. Instance state will be
+   * IMPORTING for entire operation. When complete, the instance will contain
+   * only data from the imported file.
+   *
+   * The returned operation is automatically deleted after a few hours, so
+   * there is no need to call DeleteOperation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region
+   * @param {Object} request.inputConfig
+   *   Required. Specify data to be imported.
+   *
+   *   This object should have the same structure as [InputConfig]{@link google.cloud.redis.v1.InputConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('redis.v1');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.importInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.importInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  importInstance(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.importInstance(request, options, callback);
+  }
+
+  /**
+   * Export Redis instance data into a Redis RDB format file in GCS.
+   *
+   * Redis will continue serving during this operation.
+   *
+   * The returned operation is automatically deleted after a few hours, so
+   * there is no need to call DeleteOperation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region
+   * @param {Object} request.outputConfig
+   *   Required. Specify data to be exported.
+   *
+   *   This object should have the same structure as [OutputConfig]{@link google.cloud.redis.v1.OutputConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('redis.v1');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.exportInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.exportInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  exportInstance(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.exportInstance(request, options, callback);
+  }
+
+  /**
+   * Failover the master role to current replica node against a specific
+   * STANDARD tier redis instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region
+   * @param {number} request.dataProtectionMode
+   *   Optional. Available data protection modes that the user can choose. If it's
+   *   unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
+   *
+   *   The number should be among the values of [DataProtectionMode]{@link google.cloud.redis.v1.DataProtectionMode}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('redis.v1');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+   * const request = {
+   *   name: formattedName,
+   *   dataProtectionMode: dataProtectionMode,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.failoverInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+   * const request = {
+   *   name: formattedName,
+   *   dataProtectionMode: dataProtectionMode,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.failoverInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  failoverInstance(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.failoverInstance(request, options, callback);
   }
 
   // --------------------
