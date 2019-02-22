@@ -155,7 +155,7 @@ describe('topics', () => {
   });
 
   it('should publish with specific batch settings', async () => {
-    const waitTime = 1000;
+    const waitTime = 5000;
     const [subscription] = await pubsub
       .topic(topicNameOne)
       .subscription(subscriptionNameThree)
@@ -169,10 +169,11 @@ describe('topics', () => {
     const receivedMessage = await _pullOneMessage(subscription);
 
     const publishTime = Date.parse(receivedMessage.publishTime);
+    // publishTime contains whole seconds (ends with 000),
+    // so we allow the difference to be up to 1 second less
+    // than we expect.
     const actualWait = publishTime - startTime;
-    // setTimeout isn't so reliable to publish messages EXACTLY at 1000ms,
-    // so we should consider anything above 900 as passing.
-    const expectedWait = waitTime - 100;
+    const expectedWait = waitTime - 1000;
 
     assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);
     assert(actualWait >= expectedWait);
