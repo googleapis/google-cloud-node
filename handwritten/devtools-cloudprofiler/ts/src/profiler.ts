@@ -97,16 +97,19 @@ function getResponseErrorMessage(
  * @return number indicated by backoff if the response indicates a backoff and
  * that backoff is greater than 0. Otherwise returns undefined.
  */
-function getServerResponseBackoff(
-    response: http.IncomingMessage, err: Error|null): number|undefined {
-  // The response currently does not have field containing the server-specified
-  // backoff. As a workaround, response body's message is parsed to get the
-  // backoff.
-  // TODO (issue #250): Remove this workaround and get the retry delay from
-  // body.error.details.
-  const message = getResponseErrorMessage(response, err);
-  if (message) {
-    return parseBackoffDuration(message);
+function getServerResponseBackoff(body: object): number|undefined {
+  // tslint:disable-next-line: no-any
+  const b = body as any;
+  if (b.error && b.error.details && Array.isArray(b.error.details)) {
+    for (const item of b.error.details) {
+      if (typeof item === 'object' && item.retryDelay &&
+          typeof item.retryDelay === 'string') {
+        const backoffMillis = parseDuration(item.retryDelay);
+        if (backoffMillis > 0) {
+          return backoffMillis;
+        }
+      }
+    }
   }
   return undefined;
 }
@@ -228,11 +231,13 @@ function responseToProfileOrError(
   // response.statusCode is guaranteed to exist on client requests.
   if (response && isErrorResponseStatusCode(response.statusCode!)) {
     const message = getResponseErrorMessage(response, err);
-    const delayMillis = getServerResponseBackoff(response, err);
-    if (delayMillis) {
-      throw new BackoffResponseError(message, delayMillis);
+    if (body) {
+      const delayMillis = getServerResponseBackoff(body);
+      if (delayMillis) {
+        throw new BackoffResponseError(message, delayMillis);
+      }
     }
-    throw new Error(response.statusMessage);
+    throw new Error(message);
   }
   if (err) {
     throw err;

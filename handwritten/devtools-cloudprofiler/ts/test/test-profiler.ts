@@ -629,14 +629,12 @@ describe('Profiler', () => {
            duration: '10s',
            labels: {version: config.serviceContext.version}
          };
-         requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
-                           .onCall(0)
-                           .callsArgWith(1, undefined, undefined, {
-                             statusCode: 409,
-                             body: {
-                               message: 'action throttled, backoff for 50s',
-                             }
-                           });
+         requestStub =
+             sinon.stub(common.ServiceObject.prototype, 'request')
+                 .onCall(0)
+                 .callsArgWith(
+                     1, undefined, {error: {details: [{retryDelay: '50s'}]}},
+                     {statusCode: 409});
 
          const profiler = new Profiler(testConfig);
          try {
@@ -793,10 +791,9 @@ describe('Profiler', () => {
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
                  .onCall(0)
-                 .callsArgWith(1, undefined, undefined, {
-                   statusCode: 409,
-                   body: {message: 'action throttled, backoff for 50s'}
-                 });
+                 .callsArgWith(
+                     1, undefined, {error: {details: [{retryDelay: '50s'}]}},
+                     {statusCode: 409});
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
@@ -812,12 +809,13 @@ describe('Profiler', () => {
            duration: '10s',
            labels: {instance: config.instance}
          };
-         requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
-                           .onCall(0)
-                           .callsArgWith(1, undefined, undefined, {
-                             statusCode: 409,
-                             body: {message: 'some message'},
-                           });
+         requestStub =
+             sinon.stub(common.ServiceObject.prototype, 'request')
+                 .onCall(0)
+                 .callsArgWith(1, undefined, {message: 'some message'}, {
+                   statusCode: 409,
+                   body: {message: 'some message'},
+                 });
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
@@ -836,10 +834,9 @@ describe('Profiler', () => {
          requestStub =
              sinon.stub(common.ServiceObject.prototype, 'request')
                  .onCall(0)
-                 .callsArgWith(1, undefined, undefined, {
-                   statusCode: 409,
-                   body: {message: 'action throttled, backoff for 1000h0s'},
-                 });
+                 .callsArgWith(
+                     1, undefined, {error: {details: [{retryDelay: '1000h'}]}},
+                     {statusCode: 409});
          const profiler = new Profiler(testConfig);
          profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
