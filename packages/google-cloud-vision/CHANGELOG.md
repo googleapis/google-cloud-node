@@ -4,6 +4,52 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## v0.25.0
+
+02-22-2019 17:39 PST
+
+### New Features
+This release contains a new version (v1p4beta1) of the Vision API. To use this version, construct the client liks this:
+
+```javascript
+const vision = require('@google-cloud/vision');
+const client = new vision.v1p4beta1.ImageAnnotatorClient();
+```
+
+- feat: gen v1p4beta1: online PDF, async batch image annotate ([#331](https://github.com/googleapis/nodejs-vision/pull/331))
+
+### Implementation Changes
+- fix: throw on invalid credentials in v1p4beta1  ([#334](https://github.com/googleapis/nodejs-vision/pull/334))
+- fix: throw on invalid credentials ([#326](https://github.com/googleapis/nodejs-vision/pull/326))
+
+### Dependencies
+- chore(deps): update dependency mocha to v6 ([#330](https://github.com/googleapis/nodejs-vision/pull/330))
+- fix(deps): update dependency @google-cloud/promisify to ^0.4.0 ([#328](https://github.com/googleapis/nodejs-vision/pull/328))
+- fix(deps): update dependency yargs to v13 ([#325](https://github.com/googleapis/nodejs-vision/pull/325))
+- fix(deps): update dependency google-gax to ^0.25.0 ([#315](https://github.com/googleapis/nodejs-vision/pull/315))
+- fix(deps): update dependency google-gax to ^0.24.0 ([#312](https://github.com/googleapis/nodejs-vision/pull/312))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#313](https://github.com/googleapis/nodejs-vision/pull/313))
+- fix(deps): update dependency google-gax to ^0.23.0 ([#307](https://github.com/googleapis/nodejs-vision/pull/307))
+
+### Documentation / Samples
+- docs: update contributing path in README ([#321](https://github.com/googleapis/nodejs-vision/pull/321))
+- docs: update links in contrib guide ([#329](https://github.com/googleapis/nodejs-vision/pull/329))
+- docs: add lint/fix example to contributing guide ([#318](https://github.com/googleapis/nodejs-vision/pull/318))
+- docs: fix example comments ([#317](https://github.com/googleapis/nodejs-vision/pull/317))
+- fix(docs): remove unused long running operations types
+- docs: improve detect.js samples ([#300](https://github.com/googleapis/nodejs-vision/pull/300))
+
+### Internal / Testing Changes
+- build: use linkinator for docs test ([#327](https://github.com/googleapis/nodejs-vision/pull/327))
+- build: create docs test npm scripts ([#324](https://github.com/googleapis/nodejs-vision/pull/324))
+- build: test using @grpc/grpc-js in CI ([#322](https://github.com/googleapis/nodejs-vision/pull/322))
+- chore: move CONTRIBUTING.md to root ([#320](https://github.com/googleapis/nodejs-vision/pull/320))
+- refactor: improve generated code style. ([#316](https://github.com/googleapis/nodejs-vision/pull/316))
+- fix: ignore case in system test assertions ([#314](https://github.com/googleapis/nodejs-vision/pull/314))
+- build: ignore googleapis.com in doc link check ([#310](https://github.com/googleapis/nodejs-vision/pull/310))
+- chore: update year in the license headers. ([#309](https://github.com/googleapis/nodejs-vision/pull/309))
+- build: check broken links in generated docs ([#301](https://github.com/googleapis/nodejs-vision/pull/301))
+
 ## v0.24.0
 
 12-19-2018 13:36 PST
