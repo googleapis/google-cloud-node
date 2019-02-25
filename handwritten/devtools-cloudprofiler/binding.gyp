@@ -5,7 +5,8 @@
       "sources": [ 
         "bindings/profiler.cc",
       ],
-      "include_dirs": [ "<!(node -e \"require('nan')\")" ]
+      "include_dirs": [ "<!(node -e \"require('nan')\")" ],
+      "cflags": [ "-Wno-cast-function-type" ]
     },
     {
       "target_name": "action_after_build",
