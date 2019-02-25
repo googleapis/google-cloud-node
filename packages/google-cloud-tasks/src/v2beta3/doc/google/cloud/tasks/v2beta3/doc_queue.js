@@ -43,6 +43,7 @@
  * @property {Object} appEngineHttpQueue
  *   AppEngineHttpQueue settings apply only to
  *   App Engine tasks in this queue.
+ *   Http tasks are not affected by this proto.
  *
  *   This object should have the same structure as [AppEngineHttpQueue]{@link google.cloud.tasks.v2beta3.AppEngineHttpQueue}
  *
