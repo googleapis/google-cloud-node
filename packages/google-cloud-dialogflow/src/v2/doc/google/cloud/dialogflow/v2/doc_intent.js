@@ -843,7 +843,8 @@ const Intent = {
 };
 
 /**
- * The request message for Intents.ListIntents.
+ * The request message for
+ * Intents.ListIntents.
  *
  * @property {string} parent
  *   Required. The agent to list all intents from.
@@ -877,7 +878,8 @@ const ListIntentsRequest = {
 };
 
 /**
- * The response message for Intents.ListIntents.
+ * The response message for
+ * Intents.ListIntents.
  *
  * @property {Object[]} intents
  *   The list of agent intents. There will be a maximum number of items
@@ -898,7 +900,8 @@ const ListIntentsResponse = {
 };
 
 /**
- * The request message for Intents.GetIntent.
+ * The request message for
+ * Intents.GetIntent.
  *
  * @property {string} name
  *   Required. The name of the intent.
@@ -925,7 +928,8 @@ const GetIntentRequest = {
 };
 
 /**
- * The request message for Intents.CreateIntent.
+ * The request message for
+ * Intents.CreateIntent.
  *
  * @property {string} parent
  *   Required. The agent to create a intent for.
@@ -957,7 +961,8 @@ const CreateIntentRequest = {
 };
 
 /**
- * The request message for Intents.UpdateIntent.
+ * The request message for
+ * Intents.UpdateIntent.
  *
  * @property {Object} intent
  *   Required. The intent to update.
@@ -991,7 +996,8 @@ const UpdateIntentRequest = {
 };
 
 /**
- * The request message for Intents.DeleteIntent.
+ * The request message for
+ * Intents.DeleteIntent.
  *
  * @property {string} name
  *   Required. The name of the intent to delete.
@@ -1006,7 +1012,8 @@ const DeleteIntentRequest = {
 };
 
 /**
- * The request message for Intents.BatchUpdateIntents.
+ * The request message for
+ * Intents.BatchUpdateIntents.
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create intents in.
@@ -1048,7 +1055,8 @@ const BatchUpdateIntentsRequest = {
 };
 
 /**
- * The response message for Intents.BatchUpdateIntents.
+ * The response message for
+ * Intents.BatchUpdateIntents.
  *
  * @property {Object[]} intents
  *   The collection of updated or created intents.
@@ -1064,7 +1072,8 @@ const BatchUpdateIntentsResponse = {
 };
 
 /**
- * The request message for Intents.BatchDeleteIntents.
+ * The request message for
+ * Intents.BatchDeleteIntents.
  *
  * @property {string} parent
  *   Required. The name of the agent to delete all entities types for. Format:

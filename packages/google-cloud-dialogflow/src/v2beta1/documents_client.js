@@ -451,7 +451,8 @@ class DocumentsClient {
    * Creates a new document.
    *
    * Operation <response: Document,
-   *            metadata: KnowledgeOperationMetadata>
+   *            metadata:
+   *            KnowledgeOperationMetadata>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -552,7 +553,8 @@ class DocumentsClient {
    * Deletes the specified document.
    *
    * Operation <response: google.protobuf.Empty,
-   *            metadata: KnowledgeOperationMetadata>
+   *            metadata:
+   *            KnowledgeOperationMetadata>
    *
    * @param {Object} request
    *   The request object that will be sent.

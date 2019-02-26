@@ -31,11 +31,11 @@ const VERSION = require('../../package.json').version;
  *
  * You can include contexts as input parameters of a
  * DetectIntent (or
- * StreamingDetectIntent) request,
- * or as output contexts included in the returned intent.
- * Contexts expire when an intent is matched, after the number of `DetectIntent`
- * requests specified by the `lifespan_count` parameter, or after 10 minutes
- * if no intents are matched for a `DetectIntent` request.
+ * StreamingDetectIntent)
+ * request, or as output contexts included in the returned intent. Contexts
+ * expire when an intent is matched, after the number of `DetectIntent` requests
+ * specified by the `lifespan_count` parameter, or after 10 minutes if no
+ * intents are matched for a `DetectIntent` request.
  *
  * For more information about contexts, see the
  * [Dialogflow documentation](https://dialogflow.com/docs/contexts).

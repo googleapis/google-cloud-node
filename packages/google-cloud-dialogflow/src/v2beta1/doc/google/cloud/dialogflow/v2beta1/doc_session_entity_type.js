@@ -84,7 +84,8 @@ const SessionEntityType = {
 };
 
 /**
- * The request message for SessionEntityTypes.ListSessionEntityTypes.
+ * The request message for
+ * SessionEntityTypes.ListSessionEntityTypes.
  *
  * @property {string} parent
  *   Required. The session to list all session entity types from.
@@ -110,7 +111,8 @@ const ListSessionEntityTypesRequest = {
 };
 
 /**
- * The response message for SessionEntityTypes.ListSessionEntityTypes.
+ * The response message for
+ * SessionEntityTypes.ListSessionEntityTypes.
  *
  * @property {Object[]} sessionEntityTypes
  *   The list of session entity types. There will be a maximum number of items
@@ -131,7 +133,8 @@ const ListSessionEntityTypesResponse = {
 };
 
 /**
- * The request message for SessionEntityTypes.GetSessionEntityType.
+ * The request message for
+ * SessionEntityTypes.GetSessionEntityType.
  *
  * @property {string} name
  *   Required. The name of the session entity type. Format:
@@ -150,7 +153,8 @@ const GetSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for SessionEntityTypes.CreateSessionEntityType.
+ * The request message for
+ * SessionEntityTypes.CreateSessionEntityType.
  *
  * @property {string} parent
  *   Required. The session to create a session entity type for.
@@ -174,7 +178,8 @@ const CreateSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for SessionEntityTypes.UpdateSessionEntityType.
+ * The request message for
+ * SessionEntityTypes.UpdateSessionEntityType.
  *
  * @property {Object} sessionEntityType
  *   Required. The entity type to update. Format:
@@ -200,7 +205,8 @@ const UpdateSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for SessionEntityTypes.DeleteSessionEntityType.
+ * The request message for
+ * SessionEntityTypes.DeleteSessionEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type to delete. Format:

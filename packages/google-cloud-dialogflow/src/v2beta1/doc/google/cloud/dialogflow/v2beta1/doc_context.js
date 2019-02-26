@@ -49,7 +49,8 @@ const Context = {
 };
 
 /**
- * The request message for Contexts.ListContexts.
+ * The request message for
+ * Contexts.ListContexts.
  *
  * @property {string} parent
  *   Required. The session to list all contexts from.
@@ -75,7 +76,8 @@ const ListContextsRequest = {
 };
 
 /**
- * The response message for Contexts.ListContexts.
+ * The response message for
+ * Contexts.ListContexts.
  *
  * @property {Object[]} contexts
  *   The list of contexts. There will be a maximum number of items
@@ -96,7 +98,8 @@ const ListContextsResponse = {
 };
 
 /**
- * The request message for Contexts.GetContext.
+ * The request message for
+ * Contexts.GetContext.
  *
  * @property {string} name
  *   Required. The name of the context. Format:
@@ -115,7 +118,8 @@ const GetContextRequest = {
 };
 
 /**
- * The request message for Contexts.CreateContext.
+ * The request message for
+ * Contexts.CreateContext.
  *
  * @property {string} parent
  *   Required. The session to create a context for.
@@ -139,7 +143,8 @@ const CreateContextRequest = {
 };
 
 /**
- * The request message for Contexts.UpdateContext.
+ * The request message for
+ * Contexts.UpdateContext.
  *
  * @property {Object} context
  *   Required. The context to update.
@@ -160,7 +165,8 @@ const UpdateContextRequest = {
 };
 
 /**
- * The request message for Contexts.DeleteContext.
+ * The request message for
+ * Contexts.DeleteContext.
  *
  * @property {string} name
  *   Required. The name of the context to delete. Format:
@@ -179,7 +185,8 @@ const DeleteContextRequest = {
 };
 
 /**
- * The request message for Contexts.DeleteAllContexts.
+ * The request message for
+ * Contexts.DeleteAllContexts.
  *
  * @property {string} parent
  *   Required. The name of the session to delete all contexts from. Format:

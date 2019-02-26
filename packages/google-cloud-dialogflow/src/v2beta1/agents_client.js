@@ -28,8 +28,11 @@ const VERSION = require('../../package.json').version;
  * in your app, product, or service to determine user intent and respond to the
  * user in a natural way.
  *
- * After you create an agent, you can add Intents, Contexts,
- * Entity Types, Webhooks, and so on to
+ * After you create an agent, you can add
+ * Intents,
+ * Contexts, Entity
+ * Types,
+ * Webhooks, and so on to
  * manage the flow of a conversation and match user input to predefined intents
  * and actions.
  *
@@ -39,8 +42,9 @@ const VERSION = require('../../package.json').version;
  * Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
  *
  * You can save your agent for backup or versioning by exporting the agent by
- * using the ExportAgent method. You can import a saved
- * agent by using the ImportAgent method.
+ * using the ExportAgent
+ * method. You can import a saved agent by using the
+ * ImportAgent method.
  *
  * Dialogflow provides several
  * [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
@@ -576,7 +580,8 @@ class AgentsClient {
    * Exports the specified agent to a ZIP file.
    *
    *
-   * Operation <response: ExportAgentResponse,
+   * Operation <response:
+   * ExportAgentResponse,
    *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request

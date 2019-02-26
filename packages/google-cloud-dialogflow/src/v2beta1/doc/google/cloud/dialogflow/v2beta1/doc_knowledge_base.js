@@ -36,7 +36,8 @@ const KnowledgeBase = {
 };
 
 /**
- * Request message for KnowledgeBases.ListKnowledgeBases.
+ * Request message for
+ * KnowledgeBases.ListKnowledgeBases.
  *
  * @property {string} parent
  *   Required. The agent to list of knowledge bases for.
@@ -58,7 +59,8 @@ const ListKnowledgeBasesRequest = {
 };
 
 /**
- * Response message for KnowledgeBases.ListKnowledgeBases.
+ * Response message for
+ * KnowledgeBases.ListKnowledgeBases.
  *
  * @property {Object[]} knowledgeBases
  *   The list of knowledge bases.
@@ -93,7 +95,8 @@ const GetKnowledgeBaseRequest = {
 };
 
 /**
- * Request message for KnowledgeBases.CreateKnowledgeBase.
+ * Request message for
+ * KnowledgeBases.CreateKnowledgeBase.
  *
  * @property {string} parent
  *   Required. The agent to create a knowledge base for.
@@ -113,7 +116,8 @@ const CreateKnowledgeBaseRequest = {
 };
 
 /**
- * Request message for KnowledgeBases.DeleteKnowledgeBase.
+ * Request message for
+ * KnowledgeBases.DeleteKnowledgeBase.
  *
  * @property {string} name
  *   Required. The name of the knowledge base to delete.

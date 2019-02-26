@@ -91,7 +91,8 @@ const Document = {
 };
 
 /**
- * Request message for Documents.ListDocuments.
+ * Request message for
+ * Documents.ListDocuments.
  *
  * @property {string} parent
  *   Required. The knowledge base to list all documents for.
@@ -113,7 +114,8 @@ const ListDocumentsRequest = {
 };
 
 /**
- * Response message for Documents.ListDocuments.
+ * Response message for
+ * Documents.ListDocuments.
  *
  * @property {Object[]} documents
  *   The list of documents.
@@ -133,7 +135,8 @@ const ListDocumentsResponse = {
 };
 
 /**
- * Request message for Documents.GetDocument.
+ * Request message for
+ * Documents.GetDocument.
  *
  * @property {string} name
  *   Required. The name of the document to retrieve.
@@ -149,7 +152,8 @@ const GetDocumentRequest = {
 };
 
 /**
- * Request message for Documents.CreateDocument.
+ * Request message for
+ * Documents.CreateDocument.
  *
  * @property {string} parent
  *   Required. The knoweldge base to create a document for.
@@ -169,7 +173,8 @@ const CreateDocumentRequest = {
 };
 
 /**
- * Request message for Documents.DeleteDocument.
+ * Request message for
+ * Documents.DeleteDocument.
  *
  * @property {string} name
  *   The name of the document to delete.

@@ -126,7 +126,8 @@ const EntityType = {
 };
 
 /**
- * The request message for EntityTypes.ListEntityTypes.
+ * The request message for
+ * EntityTypes.ListEntityTypes.
  *
  * @property {string} parent
  *   Required. The agent to list all entity types from.
@@ -155,7 +156,8 @@ const ListEntityTypesRequest = {
 };
 
 /**
- * The response message for EntityTypes.ListEntityTypes.
+ * The response message for
+ * EntityTypes.ListEntityTypes.
  *
  * @property {Object[]} entityTypes
  *   The list of agent entity types. There will be a maximum number of items
@@ -176,7 +178,8 @@ const ListEntityTypesResponse = {
 };
 
 /**
- * The request message for EntityTypes.GetEntityType.
+ * The request message for
+ * EntityTypes.GetEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type.
@@ -198,7 +201,8 @@ const GetEntityTypeRequest = {
 };
 
 /**
- * The request message for EntityTypes.CreateEntityType.
+ * The request message for
+ * EntityTypes.CreateEntityType.
  *
  * @property {string} parent
  *   Required. The agent to create a entity type for.
@@ -225,7 +229,8 @@ const CreateEntityTypeRequest = {
 };
 
 /**
- * The request message for EntityTypes.UpdateEntityType.
+ * The request message for
+ * EntityTypes.UpdateEntityType.
  *
  * @property {Object} entityType
  *   Required. The entity type to update.
@@ -254,7 +259,8 @@ const UpdateEntityTypeRequest = {
 };
 
 /**
- * The request message for EntityTypes.DeleteEntityType.
+ * The request message for
+ * EntityTypes.DeleteEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type to delete.
@@ -269,7 +275,8 @@ const DeleteEntityTypeRequest = {
 };
 
 /**
- * The request message for EntityTypes.BatchUpdateEntityTypes.
+ * The request message for
+ * EntityTypes.BatchUpdateEntityTypes.
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create entity types in.
@@ -307,7 +314,8 @@ const BatchUpdateEntityTypesRequest = {
 };
 
 /**
- * The response message for EntityTypes.BatchUpdateEntityTypes.
+ * The response message for
+ * EntityTypes.BatchUpdateEntityTypes.
  *
  * @property {Object[]} entityTypes
  *   The collection of updated or created entity types.
@@ -323,7 +331,8 @@ const BatchUpdateEntityTypesResponse = {
 };
 
 /**
- * The request message for EntityTypes.BatchDeleteEntityTypes.
+ * The request message for
+ * EntityTypes.BatchDeleteEntityTypes.
  *
  * @property {string} parent
  *   Required. The name of the agent to delete all entities types for. Format:
@@ -342,7 +351,8 @@ const BatchDeleteEntityTypesRequest = {
 };
 
 /**
- * The request message for EntityTypes.BatchCreateEntities.
+ * The request message for
+ * EntityTypes.BatchCreateEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to create entities in. Format:
@@ -369,7 +379,8 @@ const BatchCreateEntitiesRequest = {
 };
 
 /**
- * The response message for EntityTypes.BatchCreateEntities.
+ * The response message for
+ * EntityTypes.BatchCreateEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to update the entities in. Format:
@@ -401,7 +412,8 @@ const BatchUpdateEntitiesRequest = {
 };
 
 /**
- * The request message for EntityTypes.BatchDeleteEntities.
+ * The request message for
+ * EntityTypes.BatchDeleteEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to delete entries for. Format:

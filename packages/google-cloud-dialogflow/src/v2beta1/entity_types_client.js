@@ -46,7 +46,9 @@ const VERSION = require('../../package.json').version;
  *
  * *   **User** - entities that are built for an individual user such as
  *     favorites, preferences, playlists, and so on. A user entity is
- *     represented by the SessionEntityType type.
+ *     represented by the
+ *     SessionEntityType
+ *     type.
  *
  * For more information about entity types, see the
  * [Dialogflow documentation](https://dialogflow.com/docs/entities).
@@ -700,7 +702,8 @@ class EntityTypesClient {
   /**
    * Updates/Creates multiple entity types in the specified agent.
    *
-   * Operation <response: BatchUpdateEntityTypesResponse,
+   * Operation <response:
+   * BatchUpdateEntityTypesResponse,
    *            metadata: google.protobuf.Struct>
    *
    * @param {Object} request

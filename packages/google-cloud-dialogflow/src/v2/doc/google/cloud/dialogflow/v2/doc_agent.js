@@ -101,7 +101,8 @@ const Agent = {
 };
 
 /**
- * The request message for Agents.GetAgent.
+ * The request message for
+ * Agents.GetAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to fetch is associated with.
@@ -116,7 +117,8 @@ const GetAgentRequest = {
 };
 
 /**
- * The request message for Agents.SearchAgents.
+ * The request message for
+ * Agents.SearchAgents.
  *
  * @property {string} parent
  *   Required. The project to list agents from.
@@ -138,7 +140,8 @@ const SearchAgentsRequest = {
 };
 
 /**
- * The response message for Agents.SearchAgents.
+ * The response message for
+ * Agents.SearchAgents.
  *
  * @property {Object[]} agents
  *   The list of agents. There will be a maximum number of items returned based
@@ -159,7 +162,8 @@ const SearchAgentsResponse = {
 };
 
 /**
- * The request message for Agents.TrainAgent.
+ * The request message for
+ * Agents.TrainAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to train is associated with.
@@ -174,7 +178,8 @@ const TrainAgentRequest = {
 };
 
 /**
- * The request message for Agents.ExportAgent.
+ * The request message for
+ * Agents.ExportAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to export is associated with.
@@ -194,7 +199,8 @@ const ExportAgentRequest = {
 };
 
 /**
- * The response message for Agents.ExportAgent.
+ * The response message for
+ * Agents.ExportAgent.
  *
  * @property {string} agentUri
  *   The URI to a file containing the exported agent. This field is populated
@@ -225,7 +231,8 @@ const ExportAgentResponse = {
 };
 
 /**
- * The request message for Agents.ImportAgent.
+ * The request message for
+ * Agents.ImportAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to import is associated with.
@@ -260,7 +267,8 @@ const ImportAgentRequest = {
 };
 
 /**
- * The request message for Agents.RestoreAgent.
+ * The request message for
+ * Agents.RestoreAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to restore is associated with.

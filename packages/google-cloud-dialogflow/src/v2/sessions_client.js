@@ -23,9 +23,10 @@ const VERSION = require('../../package.json').version;
 
 /**
  * A session represents an interaction with a user. You retrieve user input
- * and pass it to the DetectIntent (or
- * StreamingDetectIntent) method to determine
- * user intent and respond.
+ * and pass it to the
+ * DetectIntent (or
+ * StreamingDetectIntent)
+ * method to determine user intent and respond.
  *
  * @class
  * @memberof v2
