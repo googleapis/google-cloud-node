@@ -109,7 +109,8 @@ const RunQueryRequest = {
 };
 
 /**
- * The response for Datastore.RunQuery.
+ * The response for
+ * Datastore.RunQuery.
  *
  * @property {Object} batch
  *   A batch of query results (always present).
@@ -130,7 +131,8 @@ const RunQueryResponse = {
 };
 
 /**
- * The request for Datastore.BeginTransaction.
+ * The request for
+ * Datastore.BeginTransaction.
  *
  * @property {string} projectId
  *   The ID of the project against which to make the request.
@@ -149,7 +151,8 @@ const BeginTransactionRequest = {
 };
 
 /**
- * The response for Datastore.BeginTransaction.
+ * The response for
+ * Datastore.BeginTransaction.
  *
  * @property {string} transaction
  *   The transaction identifier (always present).
@@ -181,8 +184,9 @@ const RollbackRequest = {
 };
 
 /**
- * The response for Datastore.Rollback.
- * (an empty message).
+ * The response for
+ * Datastore.Rollback. (an empty
+ * message).
  * @typedef RollbackResponse
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.RollbackResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
@@ -246,7 +250,8 @@ const CommitRequest = {
 
     /**
      * Transactional: The mutations are either all applied, or none are applied.
-     * Learn about transactions [here](https://cloud.google.com/datastore/docs/concepts/transactions).
+     * Learn about transactions
+     * [here](https://cloud.google.com/datastore/docs/concepts/transactions).
      */
     TRANSACTIONAL: 1,
 
@@ -279,7 +284,8 @@ const CommitResponse = {
 };
 
 /**
- * The request for Datastore.AllocateIds.
+ * The request for
+ * Datastore.AllocateIds.
  *
  * @property {string} projectId
  *   The ID of the project against which to make the request.
@@ -299,7 +305,8 @@ const AllocateIdsRequest = {
 };
 
 /**
- * The response for Datastore.AllocateIds.
+ * The response for
+ * Datastore.AllocateIds.
  *
  * @property {Object[]} keys
  *   The keys specified in the request (in the same order), each with
@@ -316,7 +323,8 @@ const AllocateIdsResponse = {
 };
 
 /**
- * The request for Datastore.ReserveIds.
+ * The request for
+ * Datastore.ReserveIds.
  *
  * @property {string} projectId
  *   The ID of the project against which to make the request.
@@ -339,7 +347,8 @@ const ReserveIdsRequest = {
 };
 
 /**
- * The response for Datastore.ReserveIds.
+ * The response for
+ * Datastore.ReserveIds.
  * @typedef ReserveIdsResponse
  * @memberof google.datastore.v1
  * @see [google.datastore.v1.ReserveIdsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/datastore/v1/datastore.proto}
@@ -465,8 +474,10 @@ const ReadOptions = {
  * Options for beginning a new transaction.
  *
  * Transactions can be created explicitly with calls to
- * Datastore.BeginTransaction or implicitly by setting
- * ReadOptions.new_transaction in read requests.
+ * Datastore.BeginTransaction
+ * or implicitly by setting
+ * ReadOptions.new_transaction
+ * in read requests.
  *
  * @property {Object} readWrite
  *   The transaction should allow both reads and writes.
