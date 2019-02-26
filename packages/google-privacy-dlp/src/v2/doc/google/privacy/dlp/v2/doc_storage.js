@@ -186,6 +186,10 @@ const CustomInfoType = {
    *   (https://github.com/google/re2/wiki/Syntax) can be found under the
    *   google/re2 repository on GitHub.
    *
+   * @property {number[]} groupIndexes
+   *   The index of the submatch to extract as findings. When not
+   *   specified, the entire match is returned. No more than 3 may be included.
+   *
    * @typedef Regex
    * @memberof google.privacy.dlp.v2
    * @see [google.privacy.dlp.v2.CustomInfoType.Regex definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
@@ -512,8 +516,15 @@ const CloudStorageOptions = {
    *
    * @property {string} url
    *   The Cloud Storage url of the file(s) to scan, in the format
-   *   `gs://<bucket>/<path>`. Trailing wildcard in the path is allowed. Exactly
-   *   one of `url` or `regex_file_set` must be set.
+   *   `gs://<bucket>/<path>`. Trailing wildcard in the path is allowed.
+   *
+   *   If the url ends in a trailing slash, the bucket or directory represented
+   *   by the url will be scanned non-recursively (content in sub-directories
+   *   will not be scanned). This means that `gs://mybucket/` is equivalent to
+   *   `gs://mybucket/*`, and `gs://mybucket/directory/` is equivalent to
+   *   `gs://mybucket/directory/*`.
+   *
+   *   Exactly one of `url` or `regex_file_set` must be set.
    *
    * @property {Object} regexFileSet
    *   The regex-filtered set of files to scan. Exactly one of `url` or
@@ -628,8 +639,8 @@ const BigQueryOptions = {
 
   /**
    * How to sample rows if not all rows are scanned. Meaningful only when used
-   * in conjunction with rows_limit. If not specified, scanning would start
-   * from the top.
+   * in conjunction with either rows_limit or rows_limit_percent. If not
+   * specified, scanning would start from the top.
    *
    * @enum {number}
    * @memberof google.privacy.dlp.v2
@@ -830,6 +841,10 @@ const Key = {
  * @property {Object} bigQueryKey
  *   This object should have the same structure as [BigQueryKey]{@link google.privacy.dlp.v2.BigQueryKey}
  *
+ * @property {string[]} idValues
+ *   Values of identifying columns in the given row. Order of values matches
+ *   the order of field identifiers specified in the scanning request.
+ *
  * @typedef RecordKey
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.RecordKey definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/storage.proto}
@@ -930,7 +945,14 @@ const FileType = {
    *   rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,
    *   xml, xsl, xsd, yml, yaml.
    */
-  TEXT_FILE: 2
+  TEXT_FILE: 2,
+
+  /**
+   * Included file extensions:
+   *   bmp, gif, jpg, jpeg, jpe, png.
+   * bytes_limit_per_file has no effect on image files.
+   */
+  IMAGE: 3
 };
 
 /**

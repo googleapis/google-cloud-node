@@ -182,12 +182,12 @@ const InspectConfig = {
    * @property {number} maxFindingsPerItem
    *   Max number of findings that will be returned for each item scanned.
    *   When set within `InspectDataSourceRequest`,
-   *   the maximum returned is 1000 regardless if this is set higher.
+   *   the maximum returned is 2000 regardless if this is set higher.
    *   When set within `InspectContentRequest`, this field is ignored.
    *
    * @property {number} maxFindingsPerRequest
    *   Max number of findings that will be returned per request/job.
-   *   When set within `InspectContentRequest`, the maximum returned is 1000
+   *   When set within `InspectContentRequest`, the maximum returned is 2000
    *   regardless if this is set higher.
    *
    * @property {Object[]} maxFindingsPerInfoType
@@ -1047,6 +1047,10 @@ const InspectDataSourceDetails = {
  *   Which parts of the API supports this InfoType.
  *
  *   The number should be among the values of [InfoTypeSupportedBy]{@link google.privacy.dlp.v2.InfoTypeSupportedBy}
+ *
+ * @property {string} description
+ *   Description of the infotype. Translated when language is provided in the
+ *   request.
  *
  * @typedef InfoTypeDescription
  * @memberof google.privacy.dlp.v2
@@ -2129,9 +2133,10 @@ const TimePartConfig = {
  * Pseudonymization method that generates surrogates via cryptographic hashing.
  * Uses SHA-256.
  * The key size must be either 32 or 64 bytes.
- * Outputs a 32 byte digest as an uppercase hex string
- * (for example, 41D1567F7F99F1DC2A5FAB886DEE5BEE).
+ * Outputs a base64 encoded representation of the hashed output
+ * (for example, L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=).
  * Currently, only string and integer values can be hashed.
+ * See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
  *
  * @property {Object} cryptoKey
  *   The key used by the hash function.
@@ -2759,7 +2764,8 @@ const RecordCondition = {
   /**
    * The field type of `value` and `field` do not need to match to be
    * considered equal, but not all comparisons are possible.
-   *
+   * EQUAL_TO and NOT_EQUAL_TO attempt to compare even with incompatible types,
+   * but all other comparisons are invalid with incompatible types.
    * A `value` of type:
    *
    * - `string` can be compared against all other types
@@ -2868,7 +2874,7 @@ const TransformationOverview = {
  * will be set.
  *
  * @property {Object} infoType
- *   Set if the transformation was limited to a specific info_type.
+ *   Set if the transformation was limited to a specific InfoType.
  *
  *   This object should have the same structure as [InfoType]{@link google.privacy.dlp.v2.InfoType}
  *
@@ -3191,6 +3197,12 @@ const JobTrigger = {
  *
  *   This object should have the same structure as [PublishSummaryToCscc]{@link google.privacy.dlp.v2.PublishSummaryToCscc}
  *
+ * @property {Object} jobNotificationEmails
+ *   Enable email notification to project owners and editors on job‘s
+ *   completion/failure.
+ *
+ *   This object should have the same structure as [JobNotificationEmails]{@link google.privacy.dlp.v2.JobNotificationEmails}
+ *
  * @typedef Action
  * @memberof google.privacy.dlp.v2
  * @see [google.privacy.dlp.v2.Action definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
@@ -3249,6 +3261,17 @@ const Action = {
    * @see [google.privacy.dlp.v2.Action.PublishSummaryToCscc definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
    */
   PublishSummaryToCscc: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
+   * Enable email notification to project owners and editors on jobs's
+   * completion/failure.
+   * @typedef JobNotificationEmails
+   * @memberof google.privacy.dlp.v2
+   * @see [google.privacy.dlp.v2.Action.JobNotificationEmails definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+   */
+  JobNotificationEmails: {
     // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };
@@ -3421,6 +3444,21 @@ const CreateJobTriggerRequest = {
 };
 
 /**
+ * Request message for ActivateJobTrigger.
+ *
+ * @property {string} name
+ *   Resource name of the trigger to activate, for example
+ *   `projects/dlp-test-project/jobTriggers/53234423`.
+ *
+ * @typedef ActivateJobTriggerRequest
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.ActivateJobTriggerRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+const ActivateJobTriggerRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Request message for UpdateJobTrigger.
  *
  * @property {string} name
@@ -3514,9 +3552,36 @@ const CreateDlpJobRequest = {
  *
  *   - `create_time`: corresponds to time the JobTrigger was created.
  *   - `update_time`: corresponds to time the JobTrigger was last updated.
+ *   - `last_run_time`: corresponds to the last time the JobTrigger ran.
  *   - `name`: corresponds to JobTrigger's name.
  *   - `display_name`: corresponds to JobTrigger's display name.
  *   - `status`: corresponds to JobTrigger's status.
+ *
+ * @property {string} filter
+ *   Optional. Allows filtering.
+ *
+ *   Supported syntax:
+ *
+ *   * Filter expressions are made up of one or more restrictions.
+ *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+ *   sequence of restrictions implicitly uses `AND`.
+ *   * A restriction has the form of `<field> <operator> <value>`.
+ *   * Supported fields/values for inspect jobs:
+ *       - `status` - HEALTHY|PAUSED|CANCELLED
+ *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+ *       - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+ *       quotation marks. Nanoseconds are ignored.
+ *       - 'error_count' - Number of errors that have occurred while running.
+ *   * The operator must be `=` or `!=` for status and inspected_storage.
+ *
+ *   Examples:
+ *
+ *   * inspected_storage = cloud_storage AND status = HEALTHY
+ *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+ *   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+ *   * last_run_time > \"2017-12-12T00:00:00+00:00\"
+ *
+ *   The length of this field should be no more than 500 characters.
  *
  * @typedef ListJobTriggersRequest
  * @memberof google.privacy.dlp.v2
@@ -4339,12 +4404,12 @@ const RelationalOperator = {
   RELATIONAL_OPERATOR_UNSPECIFIED: 0,
 
   /**
-   * Equal.
+   * Equal. Attempts to match even with incompatible types.
    */
   EQUAL_TO: 1,
 
   /**
-   * Not equal to.
+   * Not equal to. Attempts to match even with incompatible types.
    */
   NOT_EQUAL_TO: 2,
 
