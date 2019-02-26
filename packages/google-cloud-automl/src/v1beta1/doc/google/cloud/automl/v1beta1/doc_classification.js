@@ -93,7 +93,10 @@ const ClassificationEvaluationMetrics = {
    *   example.
    *
    * @property {number} f1ScoreAt1
-   *   Output only. The harmonic mean of recall_at1 and precision_at1.
+   *   Output only. The harmonic mean of
+   *   recall_at1
+   *   and
+   *   precision_at1.
    *
    * @typedef ConfidenceMetricsEntry
    * @memberof google.cloud.automl.v1beta1

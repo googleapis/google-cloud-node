@@ -34,11 +34,12 @@
  *   ancestor dataset, or the dataset that was used to train the model in use.
  *
  * @property {string} displayName
- *   Output only. The value of AnnotationSpec.display_name when the model
- *   was trained. Because this field returns a value at model training time,
- *   for different models trained using the same dataset, the returned value
- *   could be different as model owner could update the display_name between
- *   any two model training.
+ *   Output only. The value of
+ *   AnnotationSpec.display_name
+ *   when the model was trained. Because this field returns a value at model
+ *   training time, for different models trained using the same dataset, the
+ *   returned value could be different as model owner could update the
+ *   display_name between any two model training.
  *
  * @typedef AnnotationPayload
  * @memberof google.cloud.automl.v1beta1

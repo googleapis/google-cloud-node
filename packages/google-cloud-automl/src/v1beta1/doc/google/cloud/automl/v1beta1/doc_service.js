@@ -16,7 +16,8 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for AutoMl.CreateDataset.
+ * Request message for
+ * AutoMl.CreateDataset.
  *
  * @property {string} parent
  *   The resource name of the project to create the dataset for.
@@ -35,7 +36,8 @@ const CreateDatasetRequest = {
 };
 
 /**
- * Request message for AutoMl.GetDataset.
+ * Request message for
+ * AutoMl.GetDataset.
  *
  * @property {string} name
  *   The resource name of the dataset to retrieve.
@@ -49,7 +51,8 @@ const GetDatasetRequest = {
 };
 
 /**
- * Request message for AutoMl.ListDatasets.
+ * Request message for
+ * AutoMl.ListDatasets.
  *
  * @property {string} parent
  *   The resource name of the project from which to list datasets.
@@ -71,8 +74,10 @@ const GetDatasetRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return
  *   Typically obtained via
- *   ListDatasetsResponse.next_page_token of the previous
- *   AutoMl.ListDatasets call.
+ *   ListDatasetsResponse.next_page_token
+ *   of the previous
+ *   AutoMl.ListDatasets
+ *   call.
  *
  * @typedef ListDatasetsRequest
  * @memberof google.cloud.automl.v1beta1
@@ -83,7 +88,8 @@ const ListDatasetsRequest = {
 };
 
 /**
- * Response message for AutoMl.ListDatasets.
+ * Response message for
+ * AutoMl.ListDatasets.
  *
  * @property {Object[]} datasets
  *   The datasets read.
@@ -92,7 +98,9 @@ const ListDatasetsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results.
- *   Pass to ListDatasetsRequest.page_token to obtain that page.
+ *   Pass to
+ *   ListDatasetsRequest.page_token
+ *   to obtain that page.
  *
  * @typedef ListDatasetsResponse
  * @memberof google.cloud.automl.v1beta1
@@ -103,7 +111,8 @@ const ListDatasetsResponse = {
 };
 
 /**
- * Request message for AutoMl.DeleteDataset.
+ * Request message for
+ * AutoMl.DeleteDataset.
  *
  * @property {string} name
  *   The resource name of the dataset to delete.
@@ -117,7 +126,8 @@ const DeleteDatasetRequest = {
 };
 
 /**
- * Request message for AutoMl.ImportData.
+ * Request message for
+ * AutoMl.ImportData.
  *
  * @property {string} name
  *   Required. Dataset name. Dataset must already exist. All imported
@@ -137,7 +147,8 @@ const ImportDataRequest = {
 };
 
 /**
- * Request message for AutoMl.ExportData.
+ * Request message for
+ * AutoMl.ExportData.
  *
  * @property {string} name
  *   Required. The resource name of the dataset.
@@ -156,7 +167,8 @@ const ExportDataRequest = {
 };
 
 /**
- * Request message for AutoMl.CreateModel.
+ * Request message for
+ * AutoMl.CreateModel.
  *
  * @property {string} parent
  *   Resource name of the parent project where the model is being created.
@@ -175,7 +187,8 @@ const CreateModelRequest = {
 };
 
 /**
- * Request message for AutoMl.GetModel.
+ * Request message for
+ * AutoMl.GetModel.
  *
  * @property {string} name
  *   Resource name of the model.
@@ -189,7 +202,8 @@ const GetModelRequest = {
 };
 
 /**
- * Request message for AutoMl.ListModels.
+ * Request message for
+ * AutoMl.ListModels.
  *
  * @property {string} parent
  *   Resource name of the project, from which to list the models.
@@ -213,7 +227,8 @@ const GetModelRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return
  *   Typically obtained via
- *   ListModelsResponse.next_page_token of the previous
+ *   ListModelsResponse.next_page_token
+ *   of the previous
  *   AutoMl.ListModels call.
  *
  * @typedef ListModelsRequest
@@ -225,7 +240,8 @@ const ListModelsRequest = {
 };
 
 /**
- * Response message for AutoMl.ListModels.
+ * Response message for
+ * AutoMl.ListModels.
  *
  * @property {Object[]} model
  *   List of models in the requested page.
@@ -245,7 +261,8 @@ const ListModelsResponse = {
 };
 
 /**
- * Request message for AutoMl.DeleteModel.
+ * Request message for
+ * AutoMl.DeleteModel.
  *
  * @property {string} name
  *   Resource name of the model being deleted.
@@ -259,7 +276,8 @@ const DeleteModelRequest = {
 };
 
 /**
- * Request message for AutoMl.DeployModel.
+ * Request message for
+ * AutoMl.DeployModel.
  *
  * @property {string} name
  *   Resource name of the model to deploy.
@@ -273,7 +291,8 @@ const DeployModelRequest = {
 };
 
 /**
- * Request message for AutoMl.UndeployModel.
+ * Request message for
+ * AutoMl.UndeployModel.
  *
  * @property {string} name
  *   Resource name of the model to undeploy.
@@ -287,7 +306,8 @@ const UndeployModelRequest = {
 };
 
 /**
- * Request message for AutoMl.GetModelEvaluation.
+ * Request message for
+ * AutoMl.GetModelEvaluation.
  *
  * @property {string} name
  *   Resource name for the model evaluation.
@@ -301,7 +321,8 @@ const GetModelEvaluationRequest = {
 };
 
 /**
- * Request message for AutoMl.ListModelEvaluations.
+ * Request message for
+ * AutoMl.ListModelEvaluations.
  *
  * @property {string} parent
  *   Resource name of the model to list the model evaluations for.
@@ -328,7 +349,8 @@ const GetModelEvaluationRequest = {
  *   A token identifying a page of results for the server to return.
  *   Typically obtained via
  *   `ListModelEvaluationsResponse.next_page_token` of the previous
- *   AutoMl.ListModelEvaluations call.
+ *   AutoMl.ListModelEvaluations
+ *   call.
  *
  * @typedef ListModelEvaluationsRequest
  * @memberof google.cloud.automl.v1beta1
@@ -339,7 +361,8 @@ const ListModelEvaluationsRequest = {
 };
 
 /**
- * Response message for AutoMl.ListModelEvaluations.
+ * Response message for
+ * AutoMl.ListModelEvaluations.
  *
  * @property {Object[]} modelEvaluation
  *   List of model evaluations in the requested page.
