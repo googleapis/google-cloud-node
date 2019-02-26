@@ -186,7 +186,8 @@ const Instance = {
 };
 
 /**
- * Request for ListInstances.
+ * Request for
+ * ListInstances.
  *
  * @property {string} parent
  *   Required. The resource name of the instance location using the form:
@@ -215,7 +216,8 @@ const ListInstancesRequest = {
 };
 
 /**
- * Response for ListInstances.
+ * Response for
+ * ListInstances.
  *
  * @property {Object[]} instances
  *   A list of Redis instances in the project in the specified location,
@@ -260,7 +262,8 @@ const GetInstanceRequest = {
 };
 
 /**
- * Request for CreateInstance.
+ * Request for
+ * CreateInstance.
  *
  * @property {string} parent
  *   Required. The resource name of the instance location using the form:
@@ -291,7 +294,8 @@ const CreateInstanceRequest = {
 };
 
 /**
- * Request for UpdateInstance.
+ * Request for
+ * UpdateInstance.
  *
  * @property {Object} updateMask
  *   Required. Mask of fields to update. At least one path must be supplied in
@@ -319,7 +323,8 @@ const UpdateInstanceRequest = {
 };
 
 /**
- * Request for DeleteInstance.
+ * Request for
+ * DeleteInstance.
  *
  * @property {string} name
  *   Required. Redis instance resource name using the form:
