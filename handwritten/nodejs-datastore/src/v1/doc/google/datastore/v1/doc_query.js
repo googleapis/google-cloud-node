@@ -27,12 +27,12 @@
  *   The version of the entity, a strictly positive number that monotonically
  *   increases with changes to the entity.
  *
- *   This field is set for `FULL` entity
- *   results.
+ *   This field is set for
+ *   `FULL` entity results.
  *
- *   For missing entities in `LookupResponse`, this
- *   is the version of the snapshot that was used to look up the entity, and it
- *   is always set except for eventually consistent reads.
+ *   For missing entities in
+ *   `LookupResponse`, this is the version of the snapshot that was used to look
+ *   up the entity, and it is always set except for eventually consistent reads.
  *
  * @property {string} cursor
  *   A cursor that points to the position after the result entity.
@@ -113,12 +113,14 @@ const EntityResult = {
  * @property {string} startCursor
  *   A starting point for the query results. Query cursors are
  *   returned in query result batches and
- *   [can only be used to continue the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
+ *   [can only be used to continue the same
+ *   query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
  *
  * @property {string} endCursor
  *   An ending point for the query results. Query cursors are
  *   returned in query result batches and
- *   [can only be used to limit the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
+ *   [can only be used to limit the same
+ *   query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
  *
  * @property {number} offset
  *   The number of results to skip. Applies before limit, but after all other
@@ -363,7 +365,8 @@ const PropertyFilter = {
 };
 
 /**
- * A [GQL query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
+ * A [GQL
+ * query](https://cloud.google.com/datastore/docs/apis/gql/gql_reference).
  *
  * @property {string} queryString
  *   A string of the format described

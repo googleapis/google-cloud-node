@@ -34,7 +34,8 @@
  *
  * Foreign partition IDs (in which the project ID does
  * not match the context project ID ) are discouraged.
- * Reads and writes of foreign partition IDs may fail if the project is not in an active state.
+ * Reads and writes of foreign partition IDs may fail if the project is not in
+ * an active state.
  *
  * @property {string} projectId
  *   The ID of the project to which the entities belong.
@@ -172,8 +173,8 @@ const ArrayValue = {
  *
  * @property {string} stringValue
  *   A UTF-8 encoded string value.
- *   When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes.
- *   Otherwise, may be set to at least 1,000,000 bytes.
+ *   When `exclude_from_indexes` is false (it is indexed) , may have at most
+ *   1500 bytes. Otherwise, may be set to at least 1,000,000 bytes.
  *
  * @property {string} blobValue
  *   A blob value.
