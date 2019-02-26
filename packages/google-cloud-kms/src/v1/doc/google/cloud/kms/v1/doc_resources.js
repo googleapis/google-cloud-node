@@ -16,14 +16,17 @@
 // to be loaded as the JS file.
 
 /**
- * A KeyRing is a toplevel logical grouping of CryptoKeys.
+ * A KeyRing is a toplevel logical grouping of
+ * CryptoKeys.
  *
  * @property {string} name
- *   Output only. The resource name for the KeyRing in the format
+ *   Output only. The resource name for the
+ *   KeyRing in the format
  *   `projects/* /locations/* /keyRings/*`.
  *
  * @property {Object} createTime
- *   Output only. The time at which this KeyRing was created.
+ *   Output only. The time at which this KeyRing
+ *   was created.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -36,27 +39,32 @@ const KeyRing = {
 };
 
 /**
- * A CryptoKey represents a logical key that can be used for cryptographic
- * operations.
+ * A CryptoKey represents a logical key that
+ * can be used for cryptographic operations.
  *
- * A CryptoKey is made up of one or more versions, which
- * represent the actual key material used in cryptographic operations.
+ * A CryptoKey is made up of one or more
+ * versions, which represent the actual
+ * key material used in cryptographic operations.
  *
  * @property {string} name
- *   Output only. The resource name for this CryptoKey in the format
+ *   Output only. The resource name for this
+ *   CryptoKey in the format
  *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
  *
  * @property {Object} primary
- *   Output only. A copy of the "primary" CryptoKeyVersion that will be used
- *   by Encrypt when this CryptoKey is given
- *   in EncryptRequest.name.
+ *   Output only. A copy of the "primary"
+ *   CryptoKeyVersion that will be used
+ *   by Encrypt when this
+ *   CryptoKey is given in
+ *   EncryptRequest.name.
  *
- *   The CryptoKey's primary version can be updated via
+ *   The CryptoKey's primary version can be
+ *   updated via
  *   UpdateCryptoKeyPrimaryVersion.
  *
  *   All keys with purpose
- *   ENCRYPT_DECRYPT have a
- *   primary. For other keys, this field will be omitted.
+ *   ENCRYPT_DECRYPT
+ *   have a primary. For other keys, this field will be omitted.
  *
  *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
  *
@@ -66,44 +74,54 @@ const KeyRing = {
  *   The number should be among the values of [CryptoKeyPurpose]{@link google.cloud.kms.v1.CryptoKeyPurpose}
  *
  * @property {Object} createTime
- *   Output only. The time at which this CryptoKey was created.
+ *   Output only. The time at which this
+ *   CryptoKey was created.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} nextRotationTime
- *   At next_rotation_time, the Key Management Service will automatically:
+ *   At next_rotation_time,
+ *   the Key Management Service will automatically:
  *
  *   1. Create a new version of this CryptoKey.
  *   2. Mark the new version as primary.
  *
  *   Key rotations performed manually via
- *   CreateCryptoKeyVersion and
+ *   CreateCryptoKeyVersion
+ *   and
  *   UpdateCryptoKeyPrimaryVersion
- *   do not affect next_rotation_time.
+ *   do not affect
+ *   next_rotation_time.
  *
  *   Keys with purpose
- *   ENCRYPT_DECRYPT support
- *   automatic rotation. For other keys, this field must be omitted.
+ *   ENCRYPT_DECRYPT
+ *   support automatic rotation. For other keys, this field must be omitted.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} rotationPeriod
- *   next_rotation_time will be advanced by this period when the service
- *   automatically rotates a key. Must be at least one day.
+ *   next_rotation_time
+ *   will be advanced by this period when the service automatically rotates a
+ *   key. Must be at least one day.
  *
- *   If rotation_period is set, next_rotation_time must also be set.
+ *   If rotation_period is
+ *   set,
+ *   next_rotation_time
+ *   must also be set.
  *
  *   Keys with purpose
- *   ENCRYPT_DECRYPT support
- *   automatic rotation. For other keys, this field must be omitted.
+ *   ENCRYPT_DECRYPT
+ *   support automatic rotation. For other keys, this field must be omitted.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} versionTemplate
- *   A template describing settings for new CryptoKeyVersion instances.
- *   The properties of new CryptoKeyVersion instances created by either
- *   CreateCryptoKeyVersion or
- *   auto-rotation are controlled by this template.
+ *   A template describing settings for new
+ *   CryptoKeyVersion instances. The
+ *   properties of new CryptoKeyVersion
+ *   instances created by either
+ *   CreateCryptoKeyVersion
+ *   or auto-rotation are controlled by this template.
  *
  *   This object should have the same structure as [CryptoKeyVersionTemplate]{@link google.cloud.kms.v1.CryptoKeyVersionTemplate}
  *
@@ -119,9 +137,10 @@ const CryptoKey = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * CryptoKeyPurpose describes the cryptographic capabilities of a
-   * CryptoKey. A given key can only be used for the operations allowed by
-   * its purpose.
+   * CryptoKeyPurpose
+   * describes the cryptographic capabilities of a
+   * CryptoKey. A given key can only be used
+   * for the operations allowed by its purpose.
    *
    * @enum {number}
    * @memberof google.cloud.kms.v1
@@ -134,22 +153,26 @@ const CryptoKey = {
     CRYPTO_KEY_PURPOSE_UNSPECIFIED: 0,
 
     /**
-     * CryptoKeys with this purpose may be used with
-     * Encrypt and
+     * CryptoKeys with this purpose may be used
+     * with Encrypt and
      * Decrypt.
      */
     ENCRYPT_DECRYPT: 1,
 
     /**
-     * CryptoKeys with this purpose may be used with
-     * AsymmetricSign and
+     * CryptoKeys with this purpose may be used
+     * with
+     * AsymmetricSign
+     * and
      * GetPublicKey.
      */
     ASYMMETRIC_SIGN: 5,
 
     /**
-     * CryptoKeys with this purpose may be used with
-     * AsymmetricDecrypt and
+     * CryptoKeys with this purpose may be used
+     * with
+     * AsymmetricDecrypt
+     * and
      * GetPublicKey.
      */
     ASYMMETRIC_DECRYPT: 6
@@ -157,23 +180,31 @@ const CryptoKey = {
 };
 
 /**
- * A CryptoKeyVersionTemplate specifies the properties to use when creating
- * a new CryptoKeyVersion, either manually with
- * CreateCryptoKeyVersion or
- * automatically as a result of auto-rotation.
+ * A CryptoKeyVersionTemplate
+ * specifies the properties to use when creating a new
+ * CryptoKeyVersion, either manually
+ * with
+ * CreateCryptoKeyVersion
+ * or automatically as a result of auto-rotation.
  *
  * @property {number} protectionLevel
- *   ProtectionLevel to use when creating a CryptoKeyVersion based on
- *   this template. Immutable. Defaults to SOFTWARE.
+ *   ProtectionLevel to use when creating
+ *   a CryptoKeyVersion based on this
+ *   template. Immutable. Defaults to
+ *   SOFTWARE.
  *
  *   The number should be among the values of [ProtectionLevel]{@link google.cloud.kms.v1.ProtectionLevel}
  *
  * @property {number} algorithm
- *   Required. Algorithm to use
- *   when creating a CryptoKeyVersion based on this template.
+ *   Required.
+ *   Algorithm
+ *   to use when creating a
+ *   CryptoKeyVersion based on this
+ *   template.
  *
  *   For backwards compatibility, GOOGLE_SYMMETRIC_ENCRYPTION is implied if both
- *   this field is omitted and CryptoKey.purpose is
+ *   this field is omitted and
+ *   CryptoKey.purpose is
  *   ENCRYPT_DECRYPT.
  *
  *   The number should be among the values of [CryptoKeyVersionAlgorithm]{@link google.cloud.kms.v1.CryptoKeyVersionAlgorithm}
@@ -229,35 +260,41 @@ const KeyOperationAttestation = {
 };
 
 /**
- * A CryptoKeyVersion represents an individual cryptographic key, and the
- * associated key material.
+ * A CryptoKeyVersion represents an
+ * individual cryptographic key, and the associated key material.
  *
- * An ENABLED version can be
- * used for cryptographic operations.
+ * An
+ * ENABLED
+ * version can be used for cryptographic operations.
  *
  * For security reasons, the raw cryptographic key material represented by a
- * CryptoKeyVersion can never be viewed or exported. It can only be used to
- * encrypt, decrypt, or sign data when an authorized user or application invokes
- * Cloud KMS.
+ * CryptoKeyVersion can never be viewed
+ * or exported. It can only be used to encrypt, decrypt, or sign data when an
+ * authorized user or application invokes Cloud KMS.
  *
  * @property {string} name
- *   Output only. The resource name for this CryptoKeyVersion in the format
+ *   Output only. The resource name for this
+ *   CryptoKeyVersion in the format
  *   `projects/* /locations/* /keyRings/* /cryptoKeys/* /cryptoKeyVersions/*`.
  *
  * @property {number} state
- *   The current state of the CryptoKeyVersion.
+ *   The current state of the
+ *   CryptoKeyVersion.
  *
  *   The number should be among the values of [CryptoKeyVersionState]{@link google.cloud.kms.v1.CryptoKeyVersionState}
  *
  * @property {number} protectionLevel
- *   Output only. The ProtectionLevel describing how crypto operations are
- *   performed with this CryptoKeyVersion.
+ *   Output only. The ProtectionLevel
+ *   describing how crypto operations are performed with this
+ *   CryptoKeyVersion.
  *
  *   The number should be among the values of [ProtectionLevel]{@link google.cloud.kms.v1.ProtectionLevel}
  *
  * @property {number} algorithm
- *   Output only. The CryptoKeyVersionAlgorithm that this
- *   CryptoKeyVersion supports.
+ *   Output only. The
+ *   CryptoKeyVersionAlgorithm
+ *   that this CryptoKeyVersion
+ *   supports.
  *
  *   The number should be among the values of [CryptoKeyVersionAlgorithm]{@link google.cloud.kms.v1.CryptoKeyVersionAlgorithm}
  *
@@ -265,31 +302,37 @@ const KeyOperationAttestation = {
  *   Output only. Statement that was generated and signed by the HSM at key
  *   creation time. Use this statement to verify attributes of the key as stored
  *   on the HSM, independently of Google. Only provided for key versions with
- *   protection_level HSM.
+ *   protection_level
+ *   HSM.
  *
  *   This object should have the same structure as [KeyOperationAttestation]{@link google.cloud.kms.v1.KeyOperationAttestation}
  *
  * @property {Object} createTime
- *   Output only. The time at which this CryptoKeyVersion was created.
+ *   Output only. The time at which this
+ *   CryptoKeyVersion was created.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} generateTime
- *   Output only. The time this CryptoKeyVersion's key material was
+ *   Output only. The time this
+ *   CryptoKeyVersion's key material was
  *   generated.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} destroyTime
- *   Output only. The time this CryptoKeyVersion's key material is scheduled
- *   for destruction. Only present if state is
+ *   Output only. The time this
+ *   CryptoKeyVersion's key material is
+ *   scheduled for destruction. Only present if
+ *   state is
  *   DESTROY_SCHEDULED.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} destroyEventTime
  *   Output only. The time this CryptoKeyVersion's key material was
- *   destroyed. Only present if state is
+ *   destroyed. Only present if
+ *   state is
  *   DESTROYED.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
@@ -302,15 +345,18 @@ const CryptoKeyVersion = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * The algorithm of the CryptoKeyVersion, indicating what
+   * The algorithm of the
+   * CryptoKeyVersion, indicating what
    * parameters must be used for each cryptographic operation.
    *
    * The
    * GOOGLE_SYMMETRIC_ENCRYPTION
-   * algorithm is usable with CryptoKey.purpose
+   * algorithm is usable with
+   * CryptoKey.purpose
    * ENCRYPT_DECRYPT.
    *
-   * Algorithms beginning with "RSA_SIGN_" are usable with CryptoKey.purpose
+   * Algorithms beginning with "RSA_SIGN_" are usable with
+   * CryptoKey.purpose
    * ASYMMETRIC_SIGN.
    *
    * The fields in the name after "RSA_SIGN_" correspond to the following
@@ -328,7 +374,8 @@ const CryptoKeyVersion = {
    * The fields in the name after "RSA_DECRYPT_" correspond to the following
    * parameters: padding algorithm, modulus bit length, and digest algorithm.
    *
-   * Algorithms beginning with "EC_SIGN_" are usable with CryptoKey.purpose
+   * Algorithms beginning with "EC_SIGN_" are usable with
+   * CryptoKey.purpose
    * ASYMMETRIC_SIGN.
    *
    * The fields in the name after "EC_SIGN_" correspond to the following
@@ -406,7 +453,8 @@ const CryptoKeyVersion = {
   },
 
   /**
-   * The state of a CryptoKeyVersion, indicating if it can be used.
+   * The state of a CryptoKeyVersion,
+   * indicating if it can be used.
    *
    * @enum {number}
    * @memberof google.cloud.kms.v1
@@ -421,7 +469,9 @@ const CryptoKeyVersion = {
     /**
      * This version is still being generated. It may not be used, enabled,
      * disabled, or destroyed yet. Cloud KMS will automatically mark this
-     * version ENABLED as soon as the version is ready.
+     * version
+     * ENABLED
+     * as soon as the version is ready.
      */
     PENDING_GENERATION: 5,
 
@@ -432,7 +482,9 @@ const CryptoKeyVersion = {
 
     /**
      * This version may not be used, but the key material is still available,
-     * and the version can be placed back into the ENABLED state.
+     * and the version can be placed back into the
+     * ENABLED
+     * state.
      */
     DISABLED: 2,
 
@@ -446,15 +498,19 @@ const CryptoKeyVersion = {
      * This version is scheduled for destruction, and will be destroyed soon.
      * Call
      * RestoreCryptoKeyVersion
-     * to put it back into the DISABLED state.
+     * to put it back into the
+     * DISABLED
+     * state.
      */
     DESTROY_SCHEDULED: 4
   },
 
   /**
-   * A view for CryptoKeyVersions. Controls the level of detail returned
-   * for CryptoKeyVersions in
-   * KeyManagementService.ListCryptoKeyVersions and
+   * A view for CryptoKeyVersions.
+   * Controls the level of detail returned for
+   * CryptoKeyVersions in
+   * KeyManagementService.ListCryptoKeyVersions
+   * and
    * KeyManagementService.ListCryptoKeys.
    *
    * @enum {number}
@@ -463,13 +519,16 @@ const CryptoKeyVersion = {
   CryptoKeyVersionView: {
 
     /**
-     * Default view for each CryptoKeyVersion. Does not include
-     * the attestation field.
+     * Default view for each
+     * CryptoKeyVersion. Does not
+     * include the
+     * attestation field.
      */
     CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED: 0,
 
     /**
-     * Provides all fields in each CryptoKeyVersion, including the
+     * Provides all fields in each
+     * CryptoKeyVersion, including the
      * attestation.
      */
     FULL: 1
@@ -477,7 +536,8 @@ const CryptoKeyVersion = {
 };
 
 /**
- * The public key for a given CryptoKeyVersion. Obtained via
+ * The public key for a given
+ * CryptoKeyVersion. Obtained via
  * GetPublicKey.
  *
  * @property {string} pem
@@ -488,8 +548,9 @@ const CryptoKeyVersion = {
  *   (https://tools.ietf.org/html/rfc7468#section-13).
  *
  * @property {number} algorithm
- *   The Algorithm associated
- *   with this key.
+ *   The
+ *   Algorithm
+ *   associated with this key.
  *
  *   The number should be among the values of [CryptoKeyVersionAlgorithm]{@link google.cloud.kms.v1.CryptoKeyVersionAlgorithm}
  *
@@ -502,7 +563,8 @@ const PublicKey = {
 };
 
 /**
- * ProtectionLevel specifies how cryptographic operations are performed.
+ * ProtectionLevel specifies how
+ * cryptographic operations are performed.
  *
  * @enum {number}
  * @memberof google.cloud.kms.v1

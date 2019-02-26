@@ -288,7 +288,8 @@ class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   KeyRings, in the format `projects/* /locations/*`.
+   *   KeyRings, in the format
+   *   `projects/* /locations/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -400,7 +401,8 @@ class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   KeyRings, in the format `projects/* /locations/*`.
+   *   KeyRings, in the format
+   *   `projects/* /locations/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -445,8 +447,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the KeyRing to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the KeyRing
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -561,8 +563,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the KeyRing to list, in the format
-   *   `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the KeyRing
+   *   to list, in the format `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -611,7 +613,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the CryptoKey to list, in the format
+   *   Required. The resource name of the
+   *   CryptoKey to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -731,7 +734,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the CryptoKey to list, in the format
+   *   Required. The resource name of the
+   *   CryptoKey to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -781,7 +785,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the KeyRing to get.
+   *   The name of the
+   *   KeyRing to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -829,13 +834,15 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Returns metadata for a given CryptoKey, as well as its
-   * primary CryptoKeyVersion.
+   * Returns metadata for a given CryptoKey, as
+   * well as its primary
+   * CryptoKeyVersion.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the CryptoKey to get.
+   *   The name of the
+   *   CryptoKey to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -883,12 +890,14 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Returns metadata for a given CryptoKeyVersion.
+   * Returns metadata for a given
+   * CryptoKeyVersion.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the CryptoKeyVersion to get.
+   *   The name of the
+   *   CryptoKeyVersion to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -936,13 +945,15 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Create a new KeyRing in a given Project and Location.
+   * Create a new KeyRing in a given Project and
+   * Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   KeyRings, in the format `projects/* /locations/*`.
+   *   KeyRings, in the format
+   *   `projects/* /locations/*`.
    * @param {string} request.keyRingId
    *   Required. It must be unique within a location and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
@@ -1004,7 +1015,8 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Create a new CryptoKey within a KeyRing.
+   * Create a new CryptoKey within a
+   * KeyRing.
    *
    * CryptoKey.purpose and
    * CryptoKey.version_template.algorithm
@@ -1013,8 +1025,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the KeyRing associated with the
-   *   CryptoKeys.
+   *   Required. The name of the KeyRing
+   *   associated with the CryptoKeys.
    * @param {string} request.cryptoKeyId
    *   Required. It must be unique within a KeyRing and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
@@ -1089,7 +1101,8 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Create a new CryptoKeyVersion in a CryptoKey.
+   * Create a new CryptoKeyVersion in a
+   * CryptoKey.
    *
    * The server will assign the next sequential id. If unset,
    * state will be set to
@@ -1098,10 +1111,12 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the CryptoKey associated with
-   *   the CryptoKeyVersions.
+   *   Required. The name of the
+   *   CryptoKey associated with the
+   *   CryptoKeyVersions.
    * @param {Object} request.cryptoKeyVersion
-   *   A CryptoKeyVersion with initial field values.
+   *   A CryptoKeyVersion with initial
+   *   field values.
    *
    *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
    * @param {Object} [options]
@@ -1224,18 +1239,24 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Update a CryptoKeyVersion's metadata.
+   * Update a CryptoKeyVersion's
+   * metadata.
    *
    * state may be changed between
-   * ENABLED and
-   * DISABLED using this
-   * method. See DestroyCryptoKeyVersion and RestoreCryptoKeyVersion to
-   * move between other states.
+   * ENABLED
+   * and
+   * DISABLED
+   * using this method. See
+   * DestroyCryptoKeyVersion
+   * and
+   * RestoreCryptoKeyVersion
+   * to move between other states.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.cryptoKeyVersion
-   *   CryptoKeyVersion with updated values.
+   *   CryptoKeyVersion with updated
+   *   values.
    *
    *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
    * @param {Object} request.updateMask
@@ -1298,37 +1319,43 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Encrypts data, so that it can only be recovered by a call to Decrypt.
-   * The CryptoKey.purpose must be
+   * Encrypts data, so that it can only be recovered by a call to
+   * Decrypt. The
+   * CryptoKey.purpose must be
    * ENCRYPT_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the CryptoKey or CryptoKeyVersion
-   *   to use for encryption.
+   *   Required. The resource name of the
+   *   CryptoKey or
+   *   CryptoKeyVersion to use for
+   *   encryption.
    *
-   *   If a CryptoKey is specified, the server will use its
-   *   primary version.
+   *   If a CryptoKey is specified, the server
+   *   will use its primary version.
    * @param {string} request.plaintext
    *   Required. The data to encrypt. Must be no larger than 64KiB.
    *
    *   The maximum size depends on the key version's
-   *   protection_level. For
-   *   SOFTWARE keys, the plaintext must be no larger
-   *   than 64KiB. For HSM keys, the combined length of the
-   *   plaintext and additional_authenticated_data fields must be no larger than
-   *   8KiB.
+   *   protection_level.
+   *   For SOFTWARE keys, the
+   *   plaintext must be no larger than 64KiB. For
+   *   HSM keys, the combined length of
+   *   the plaintext and additional_authenticated_data fields must be no larger
+   *   than 8KiB.
    * @param {string} [request.additionalAuthenticatedData]
    *   Optional data that, if specified, must also be provided during decryption
-   *   through DecryptRequest.additional_authenticated_data.
+   *   through
+   *   DecryptRequest.additional_authenticated_data.
    *
    *   The maximum size depends on the key version's
-   *   protection_level. For
-   *   SOFTWARE keys, the AAD must be no larger than
-   *   64KiB. For HSM keys, the combined length of the
-   *   plaintext and additional_authenticated_data fields must be no larger than
-   *   8KiB.
+   *   protection_level.
+   *   For SOFTWARE keys, the AAD
+   *   must be no larger than 64KiB. For
+   *   HSM keys, the combined length of
+   *   the plaintext and additional_authenticated_data fields must be no larger
+   *   than 8KiB.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1381,14 +1408,17 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Decrypts data that was protected by Encrypt. The CryptoKey.purpose
-   * must be ENCRYPT_DECRYPT.
+   * Decrypts data that was protected by
+   * Encrypt. The
+   * CryptoKey.purpose must be
+   * ENCRYPT_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the CryptoKey to use for decryption.
-   *   The server will choose the appropriate version.
+   *   Required. The resource name of the
+   *   CryptoKey to use for decryption. The
+   *   server will choose the appropriate version.
    * @param {string} request.ciphertext
    *   Required. The encrypted data originally returned in
    *   EncryptResponse.ciphertext.
@@ -1447,16 +1477,20 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Update the version of a CryptoKey that will be used in Encrypt.
+   * Update the version of a CryptoKey that
+   * will be used in
+   * Encrypt.
    *
    * Returns an error if called on an asymmetric key.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the CryptoKey to update.
+   *   The resource name of the CryptoKey to
+   *   update.
    * @param {string} request.cryptoKeyVersionId
-   *   The id of the child CryptoKeyVersion to use as primary.
+   *   The id of the child
+   *   CryptoKeyVersion to use as primary.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1513,23 +1547,30 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Schedule a CryptoKeyVersion for destruction.
+   * Schedule a CryptoKeyVersion for
+   * destruction.
    *
-   * Upon calling this method, CryptoKeyVersion.state will be set to
+   * Upon calling this method,
+   * CryptoKeyVersion.state will
+   * be set to
    * DESTROY_SCHEDULED
-   * and destroy_time will be set to a time 24
-   * hours in the future, at which point the state
-   * will be changed to
-   * DESTROYED, and the key
-   * material will be irrevocably destroyed.
+   * and destroy_time will
+   * be set to a time 24 hours in the future, at which point the
+   * state will be changed to
+   * DESTROYED,
+   * and the key material will be irrevocably destroyed.
    *
-   * Before the destroy_time is reached,
-   * RestoreCryptoKeyVersion may be called to reverse the process.
+   * Before the
+   * destroy_time is
+   * reached,
+   * RestoreCryptoKeyVersion
+   * may be called to reverse the process.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the CryptoKeyVersion to destroy.
+   *   The resource name of the
+   *   CryptoKeyVersion to destroy.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1585,14 +1626,17 @@ class KeyManagementServiceClient {
    * DESTROY_SCHEDULED
    * state.
    *
-   * Upon restoration of the CryptoKeyVersion, state
-   * will be set to DISABLED,
-   * and destroy_time will be cleared.
+   * Upon restoration of the CryptoKeyVersion,
+   * state will be set to
+   * DISABLED,
+   * and destroy_time will
+   * be cleared.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the CryptoKeyVersion to restore.
+   *   The resource name of the
+   *   CryptoKeyVersion to restore.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1644,16 +1688,18 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Returns the public key for the given CryptoKeyVersion. The
+   * Returns the public key for the given
+   * CryptoKeyVersion. The
    * CryptoKey.purpose must be
-   * ASYMMETRIC_SIGN or
+   * ASYMMETRIC_SIGN
+   * or
    * ASYMMETRIC_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the CryptoKeyVersion public key to
-   *   get.
+   *   The name of the
+   *   CryptoKeyVersion public key to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1702,17 +1748,21 @@ class KeyManagementServiceClient {
 
   /**
    * Decrypts data that was encrypted with a public key retrieved from
-   * GetPublicKey corresponding to a CryptoKeyVersion with
-   * CryptoKey.purpose ASYMMETRIC_DECRYPT.
+   * GetPublicKey
+   * corresponding to a CryptoKeyVersion
+   * with CryptoKey.purpose
+   * ASYMMETRIC_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the CryptoKeyVersion to use for
+   *   Required. The resource name of the
+   *   CryptoKeyVersion to use for
    *   decryption.
    * @param {string} request.ciphertext
-   *   Required. The data encrypted with the named CryptoKeyVersion's public
-   *   key using OAEP.
+   *   Required. The data encrypted with the named
+   *   CryptoKeyVersion's public key using
+   *   OAEP.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1765,14 +1815,18 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Signs data using a CryptoKeyVersion with CryptoKey.purpose
+   * Signs data using a CryptoKeyVersion
+   * with CryptoKey.purpose
    * ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-   * key retrieved from GetPublicKey.
+   * key retrieved from
+   * GetPublicKey.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the CryptoKeyVersion to use for signing.
+   *   Required. The resource name of the
+   *   CryptoKeyVersion to use for
+   *   signing.
    * @param {Object} request.digest
    *   Required. The digest of the data to sign. The digest must be produced with
    *   the same digest algorithm as specified by the key version's
