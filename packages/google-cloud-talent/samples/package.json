@@ -1,0 +1,23 @@
+{
+  "name": "@google-cloud/talent-samples",
+  "description": "Samples for the Cloud Talent Solution client library for Node.js",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": "googleapis/nodejs-talent",
+  "private": true,
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "mocha --timeout 600000"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
+    "mocha": "^6.0.0"
+  }
+}

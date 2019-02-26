@@ -46,6 +46,10 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'toISOString)')
 # [END fix-dead-link]
 
+s.replace('src/v4beta1/doc/google/cloud/talent/v4beta1/doc_company.js',
+        '"https:\/\/www\.google\.com"',
+        '`https://www.google.com`')
+
 # Node.js specific cleanup
 subprocess.run(["npm", "install"])
 subprocess.run(["npm", "run", "fix"])

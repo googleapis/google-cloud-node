@@ -78,7 +78,7 @@
  *   Optional.
  *
  *   The URI representing the company's primary web site or home page,
- *   for example, "https://www.google.com".
+ *   for example, `https://www.google.com`.
  *
  *   The maximum number of allowed characters is 255.
  *
