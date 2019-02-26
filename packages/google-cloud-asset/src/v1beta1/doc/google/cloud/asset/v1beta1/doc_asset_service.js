@@ -62,8 +62,10 @@ const ExportAssetsRequest = {
 
 /**
  * The export asset response. This message is returned by the
- * google.longrunning.Operations.GetOperation method in the returned
- * google.longrunning.Operation.response field.
+ * google.longrunning.Operations.GetOperation
+ * method in the returned
+ * google.longrunning.Operation.response
+ * field.
  *
  * @property {Object} readTime
  *   Time the snapshot was taken.
@@ -95,7 +97,8 @@ const ExportAssetsResponse = {
  * @property {string[]} assetNames
  *   A list of the full names of the assets. For example:
  *   `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
- *   See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+ *   See [Resource
+ *   Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
  *   for more info.
  *
  *   The request becomes a no-op if the asset name list is empty, and the max
