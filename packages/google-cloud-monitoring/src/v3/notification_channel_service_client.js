@@ -449,7 +449,8 @@ class NotificationChannelServiceClient {
    *   in which to look for the notification channels; it does not name a
    *   specific channel. To query a specific channel by REST resource name, use
    *   the
-   *   `GetNotificationChannel` operation.
+   *   `GetNotificationChannel`
+   *   operation.
    * @param {string} [request.filter]
    *   If provided, this field specifies the criteria that must be met by
    *   notification channels to be included in the response.
@@ -575,7 +576,8 @@ class NotificationChannelServiceClient {
    *   in which to look for the notification channels; it does not name a
    *   specific channel. To query a specific channel by REST resource name, use
    *   the
-   *   `GetNotificationChannel` operation.
+   *   `GetNotificationChannel`
+   *   operation.
    * @param {string} [request.filter]
    *   If provided, this field specifies the criteria that must be met by
    *   notification channels to be included in the response.

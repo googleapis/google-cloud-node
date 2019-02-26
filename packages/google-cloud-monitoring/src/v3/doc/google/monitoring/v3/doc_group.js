@@ -59,7 +59,8 @@
  *   For groups with no parent, `parentName` is the empty string, `""`.
  *
  * @property {string} filter
- *   The filter used to determine which monitored resources belong to this group.
+ *   The filter used to determine which monitored resources belong to this
+ *   group.
  *
  * @property {boolean} isCluster
  *   If true, the members of this group are considered to be a cluster.

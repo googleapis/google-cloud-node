@@ -234,8 +234,10 @@ const AlertPolicy = {
      *   are applied in the order specified.
      *
      *   This field is similar to the one in the
-     *   [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-     *   It is advisable to use the `ListTimeSeries` method when debugging this field.
+     *   [`MetricService.ListTimeSeries`
+     *   request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
+     *   is advisable to use the `ListTimeSeries` method when debugging this
+     *   field.
      *
      *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
      *
@@ -347,8 +349,10 @@ const AlertPolicy = {
      *   are applied in the order specified.
      *
      *   This field is similar to the
-     *   one in the [`MetricService.ListTimeSeries` request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
-     *   It is advisable to use the `ListTimeSeries` method when debugging this field.
+     *   one in the [`MetricService.ListTimeSeries`
+     *   request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
+     *   is advisable to use the `ListTimeSeries` method when debugging this
+     *   field.
      *
      *   This object should have the same structure as [Aggregation]{@link google.monitoring.v3.Aggregation}
      *
