@@ -24,43 +24,69 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-* [Quickstart](#quickstart)
-  * [Before you begin](#before-you-begin)
-  * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+* [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
-## Quickstart
+## Using the client library
 
-### Before you begin
+1.  [Select or create a Cloud Platform project][projects].
 
-1.  Select or create a Cloud Platform project.
+1.  [Enable billing for your project][billing].
 
-    [Go to the projects page][projects]
-
-1.  Enable billing for your project.
-
-    [Enable billing][billing]
-
-1.  Enable the Google Cloud Tasks API.
-
-    [Enable the API][enable_api]
+1.  [Enable the Google Cloud Tasks API][enable_api].
 
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-[projects]: https://console.cloud.google.com/project
-[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=tasks.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+1. Install the client library:
 
-### Installing the client library
+        npm install --save @google-cloud/tasks
 
-    npm install --save @google-cloud/tasks
+1. Try an example:
 
+```js
+// Imports the Google Cloud client library
+const {CloudTasksClient} = require('@google-cloud/tasks');
 
+async function quickstart(
+  projectId = 'your-project-id', // Your Google Cloud Platform project ID
+  queue = 'my-appengine-queue', // Name of the Queue to create
+  location = 'us-central-1' // The region in which to create the queue
+) {
+  // Instantiates a client
+  const client = new CloudTasksClient();
+
+  // Send create queue request.
+  const [response] = await client.createQueue({
+    // The fully qualified path to the location where the queue is created
+    parent: client.locationPath(projectId, location),
+    queue: {
+      // The fully qualified path to the queue
+      name: client.queuePath(projectId, location, queue),
+      appEngineHttpQueue: {
+        appEngineRoutingOverride: {
+          // The App Engine service that will receive the tasks.
+          service: 'default',
+        },
+      },
+    },
+  });
+  console.log(`Created queue ${response.name}`);
+}
+```
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-tasks/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Queues | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createQueue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createQueue.js,samples/README.md) |
+| Tasks | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createTask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createTask.js,samples/README.md) |
 
 The [Cloud Tasks Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -90,4 +116,7 @@ See [LICENSE](https://github.com/googleapis/nodejs-tasks/blob/master/LICENSE)
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/tasks/latest/
 [product-docs]: https://cloud.google.com/tasks/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=tasks.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
