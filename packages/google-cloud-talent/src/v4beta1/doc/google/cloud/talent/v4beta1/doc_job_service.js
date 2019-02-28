@@ -177,12 +177,16 @@ const BatchDeleteJobsRequest = {
  *
  *   * `companyName` (Required)
  *   * `requisitionId` (Optional)
+ *   * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+ *   OPEN if no value is specified.
  *
  *   Sample Query:
  *
  *   * companyName = "projects/api-test-project/companies/123"
  *   * companyName = "projects/api-test-project/companies/123" AND requisitionId
  *   = "req-1"
+ *   * companyName = "projects/api-test-project/companies/123" AND status =
+ *   "EXPIRED"
  *
  * @property {string} pageToken
  *   Optional.

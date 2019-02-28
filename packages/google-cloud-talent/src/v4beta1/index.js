@@ -20,6 +20,7 @@ const EventServiceClient = require('./event_service_client');
 const JobServiceClient = require('./job_service_client');
 const ProfileServiceClient = require('./profile_service_client');
 const ResumeServiceClient = require('./resume_service_client');
+const TenantServiceClient = require('./tenant_service_client');
 
 module.exports.CompanyServiceClient = CompanyServiceClient;
 module.exports.CompletionClient = CompletionClient;
@@ -27,3 +28,4 @@ module.exports.EventServiceClient = EventServiceClient;
 module.exports.JobServiceClient = JobServiceClient;
 module.exports.ProfileServiceClient = ProfileServiceClient;
 module.exports.ResumeServiceClient = ResumeServiceClient;
+module.exports.TenantServiceClient = TenantServiceClient;

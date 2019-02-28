@@ -101,11 +101,11 @@ class ProfileServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      companyPathTemplate: new gax.PathTemplate(
-        'projects/{project}/companies/{company}'
+      tenantPathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}'
       ),
       profilePathTemplate: new gax.PathTemplate(
-        'projects/{project}/companies/{company}/profiles/{profile}'
+        'projects/{project}/tenants/{tenant}/profiles/{profile}'
       ),
     };
 
@@ -220,10 +220,10 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required.
    *
-   *   The resource name of the company under which the job is created.
+   *   The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/companies/{company_id}", for example,
-   *   "projects/api-test-project/companies/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenants/foo".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -273,7 +273,7 @@ class ProfileServiceClient {
    * });
    *
    * // Iterate over all elements.
-   * const formattedParent = client.companyPath('[PROJECT]', '[COMPANY]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    *
    * client.listProfiles({parent: formattedParent})
    *   .then(responses => {
@@ -287,7 +287,7 @@ class ProfileServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * const formattedParent = client.companyPath('[PROJECT]', '[COMPANY]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    *
    *
    * const options = {autoPaginate: false};
@@ -340,10 +340,10 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required.
    *
-   *   The resource name of the company under which the job is created.
+   *   The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/companies/{company_id}", for example,
-   *   "projects/api-test-project/companies/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenants/foo".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -375,7 +375,7 @@ class ProfileServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.companyPath('[PROJECT]', '[COMPANY]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    * client.listProfilesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
@@ -401,10 +401,10 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required.
    *
-   *   The name of the company this profile belongs to.
+   *   The name of the tenant this profile belongs to.
    *
-   *   The format is "projects/{project_id}/companies/{company_id}", for example,
-   *   "projects/api-test-project/companies/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenants/foo".
    * @param {Object} request.profile
    *   Required.
    *
@@ -430,7 +430,7 @@ class ProfileServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.companyPath('[PROJECT]', '[COMPANY]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    * const profile = {};
    * const request = {
    *   parent: formattedParent,
@@ -466,8 +466,8 @@ class ProfileServiceClient {
    *   Resource name of the profile to get.
    *
    *   The format is
-   *   "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
-   *   for example, "projects/api-test-project/companies/foo/profiles/bar".
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+   *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -487,7 +487,7 @@ class ProfileServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.profilePath('[PROJECT]', '[COMPANY]', '[PROFILE]');
+   * const formattedName = client.profilePath('[PROJECT]', '[TENANT]', '[PROFILE]');
    * client.getProfile({name: formattedName})
    *   .then(responses => {
    *     const response = responses[0];
@@ -602,8 +602,8 @@ class ProfileServiceClient {
    *   Resource name of the profile to be deleted.
    *
    *   The format is
-   *   "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
-   *   for example, "projects/api-test-project/companies/foo/profiles/bar".
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+   *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -620,7 +620,7 @@ class ProfileServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.profilePath('[PROJECT]', '[COMPANY]', '[PROFILE]');
+   * const formattedName = client.profilePath('[PROJECT]', '[TENANT]', '[PROFILE]');
    * client.deleteProfile({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -636,7 +636,7 @@ class ProfileServiceClient {
   }
 
   /**
-   * Searches for profiles within a company.
+   * Searches for profiles within a tenant.
    *
    * For example, search by raw queries "software engineer in Mountain View" or
    * search by structured filters (location filter, education filter, etc.).
@@ -648,10 +648,10 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required.
    *
-   *   The resource name of the company to search within.
+   *   The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/companies/{company_id}", for example,
-   *   "projects/api-test-project/companies/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenants/foo".
    * @param {Object} request.requestMetadata
    *   Required.
    *
@@ -836,7 +836,7 @@ class ProfileServiceClient {
    * });
    *
    * // Iterate over all elements.
-   * const formattedParent = client.companyPath('[PROJECT]', '[COMPANY]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    * const requestMetadata = {};
    * const request = {
    *   parent: formattedParent,
@@ -855,7 +855,7 @@ class ProfileServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * const formattedParent = client.companyPath('[PROJECT]', '[COMPANY]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    * const requestMetadata = {};
    * const request = {
    *   parent: formattedParent,
@@ -913,10 +913,10 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required.
    *
-   *   The resource name of the company to search within.
+   *   The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/companies/{company_id}", for example,
-   *   "projects/api-test-project/companies/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenants/foo".
    * @param {Object} request.requestMetadata
    *   Required.
    *
@@ -1083,7 +1083,7 @@ class ProfileServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.companyPath('[PROJECT]', '[COMPANY]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    * const requestMetadata = {};
    * const request = {
    *   parent: formattedParent,
@@ -1111,16 +1111,16 @@ class ProfileServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified company resource name string.
+   * Return a fully-qualified tenant resource name string.
    *
    * @param {String} project
-   * @param {String} company
+   * @param {String} tenant
    * @returns {String}
    */
-  companyPath(project, company) {
-    return this._pathTemplates.companyPathTemplate.render({
+  tenantPath(project, tenant) {
+    return this._pathTemplates.tenantPathTemplate.render({
       project: project,
-      company: company,
+      tenant: tenant,
     });
   }
 
@@ -1128,38 +1128,38 @@ class ProfileServiceClient {
    * Return a fully-qualified profile resource name string.
    *
    * @param {String} project
-   * @param {String} company
+   * @param {String} tenant
    * @param {String} profile
    * @returns {String}
    */
-  profilePath(project, company, profile) {
+  profilePath(project, tenant, profile) {
     return this._pathTemplates.profilePathTemplate.render({
       project: project,
-      company: company,
+      tenant: tenant,
       profile: profile,
     });
   }
 
   /**
-   * Parse the companyName from a company resource.
+   * Parse the tenantName from a tenant resource.
    *
-   * @param {String} companyName
-   *   A fully-qualified path representing a company resources.
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromCompanyName(companyName) {
-    return this._pathTemplates.companyPathTemplate.match(companyName).project;
+  matchProjectFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
   }
 
   /**
-   * Parse the companyName from a company resource.
+   * Parse the tenantName from a tenant resource.
    *
-   * @param {String} companyName
-   *   A fully-qualified path representing a company resources.
-   * @returns {String} - A string representing the company.
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
+   * @returns {String} - A string representing the tenant.
    */
-  matchCompanyFromCompanyName(companyName) {
-    return this._pathTemplates.companyPathTemplate.match(companyName).company;
+  matchTenantFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 
   /**
@@ -1178,10 +1178,10 @@ class ProfileServiceClient {
    *
    * @param {String} profileName
    *   A fully-qualified path representing a profile resources.
-   * @returns {String} - A string representing the company.
+   * @returns {String} - A string representing the tenant.
    */
-  matchCompanyFromProfileName(profileName) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).company;
+  matchTenantFromProfileName(profileName) {
+    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
   }
 
   /**

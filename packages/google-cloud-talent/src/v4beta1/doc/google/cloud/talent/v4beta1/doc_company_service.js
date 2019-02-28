@@ -16,8 +16,6 @@
 // to be loaded as the JS file.
 
 /**
- * Input only.
- *
  * The Request of the CreateCompany method.
  *
  * @property {string} parent
@@ -44,8 +42,6 @@ const CreateCompanyRequest = {
 };
 
 /**
- * Input only.
- *
  * Request for getting a company by name.
  *
  * @property {string} name
@@ -65,8 +61,6 @@ const GetCompanyRequest = {
 };
 
 /**
- * Input only.
- *
  * Request for updating a specified company.
  *
  * @property {Object} company
@@ -97,8 +91,6 @@ const UpdateCompanyRequest = {
 };
 
 /**
- * Input only.
- *
  * Request to delete a company.
  *
  * @property {string} name
@@ -118,8 +110,6 @@ const DeleteCompanyRequest = {
 };
 
 /**
- * Input only.
- *
  * List companies for which the client has ACL visibility.
  *
  * @property {string} parent

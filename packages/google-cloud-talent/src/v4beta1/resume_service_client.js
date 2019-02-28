@@ -203,15 +203,15 @@ class ResumeServiceClient {
    * resume, clients need to call the CreateProfile method again with the
    * profile returned.
    *
-   * This API supports the following list of formats:
+   * The following list of formats are supported:
    *
    * * PDF
    * * TXT
    * * DOC
    * * RTF
    * * DOCX
-   *
-   * An error is thrown if the input format is not supported.
+   * * PNG (only when ParseResumeRequest.enable_ocr is set to `true`,
+   * otherwise an error is thrown)
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -225,9 +225,9 @@ class ResumeServiceClient {
    * @param {string} request.resume
    *   Required.
    *
-   *   The bytes of the resume file in common format. Currently the API supports
-   *   the following formats:
-   *   PDF, TXT, DOC, RTF and DOCX.
+   *   The bytes of the resume file in common format, for example, PDF, TXT.
+   *   UTF-8 encoding is required if the resume is text-based, otherwise an error
+   *   is thrown.
    * @param {string} [request.regionCode]
    *   Optional.
    *
@@ -247,6 +247,12 @@ class ResumeServiceClient {
    *   For more information, see
    *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47){:
    *   class="external" target="_blank" }.
+   * @param {Object} [request.options]
+   *   Optional.
+   *
+   *   Options that change how the resume parse is performed.
+   *
+   *   This object should have the same structure as [ParseResumeOptions]{@link google.cloud.talent.v4beta1.ParseResumeOptions}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

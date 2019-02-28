@@ -17,8 +17,8 @@
 
 /**
  * A resource that represents the profile for a job candidate (also referred to
- * as a "single-source profile"). A profile belongs to a Company, which is
- * the company/organization that owns the profile.
+ * as a "single-source profile"). A profile belongs to a Tenant, which is
+ * an isolated instance of the customer that owns the profile.
  *
  * @property {string} name
  *   Required during profile update.
@@ -26,8 +26,8 @@
  *   Resource name assigned to a profile by the API.
  *
  *   The format is
- *   "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/companies/foo/profiles/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+ *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
  *
  * @property {string} externalId
  *   Optional.

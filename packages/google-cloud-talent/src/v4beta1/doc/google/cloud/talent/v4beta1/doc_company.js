@@ -113,16 +113,6 @@
  *   public availability by the service when job content appears suspicious,
  *   abusive, or spammy.
  *
- * @property {number} learningType
- *   Optional.
- *
- *   Indicates whether data owned by this company may be used to provide product
- *   improvements across other companies.
- *
- *   Defaults behavior is DataLearningType.ISOLATED if it's unset.
- *
- *   The number should be among the values of [DataLearningType]{@link google.cloud.talent.v4beta1.DataLearningType}
- *
  * @typedef Company
  * @memberof google.cloud.talent.v4beta1
  * @see [google.cloud.talent.v4beta1.Company definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/company.proto}
@@ -145,31 +135,5 @@ const Company = {
    */
   DerivedInfo: {
     // This is for documentation. Actual contents will be loaded by gRPC.
-  },
-
-  /**
-   * Enum that represents how user data owned by the company is used.
-   *
-   * @enum {number}
-   * @memberof google.cloud.talent.v4beta1
-   */
-  DataLearningType: {
-
-    /**
-     * Default value.
-     */
-    DATA_LEARNING_TYPE_UNSPECIFIED: 0,
-
-    /**
-     * Data owned by this company is used to improve search/recommendation
-     * quality across companies.
-     */
-    AGGREGATED: 1,
-
-    /**
-     * Data owned by this company is used to improve search/recommendation
-     * quality for this company only.
-     */
-    ISOLATED: 2
   }
 };

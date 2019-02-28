@@ -21,10 +21,10 @@
  * @property {string} parent
  *   Required.
  *
- *   The resource name of the company under which the job is created.
+ *   The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}/companies/{company_id}", for example,
- *   "projects/api-test-project/companies/foo".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenants/foo".
  *
  * @property {string} pageToken
  *   Optional.
@@ -65,7 +65,7 @@ const ListProfilesRequest = {
  * The List profiles response object.
  *
  * @property {Object[]} profiles
- *   Profiles for the specific company.
+ *   Profiles for the specific tenant.
  *
  *   This object should have the same structure as [Profile]{@link google.cloud.talent.v4beta1.Profile}
  *
@@ -87,10 +87,10 @@ const ListProfilesResponse = {
  * @property {string} parent
  *   Required.
  *
- *   The name of the company this profile belongs to.
+ *   The name of the tenant this profile belongs to.
  *
- *   The format is "projects/{project_id}/companies/{company_id}", for example,
- *   "projects/api-test-project/companies/foo".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenants/foo".
  *
  * @property {Object} profile
  *   Required.
@@ -116,8 +116,8 @@ const CreateProfileRequest = {
  *   Resource name of the profile to get.
  *
  *   The format is
- *   "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/companies/foo/profiles/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+ *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
  *
  * @typedef GetProfileRequest
  * @memberof google.cloud.talent.v4beta1
@@ -189,8 +189,8 @@ const UpdateProfileRequest = {
  *   Resource name of the profile to be deleted.
  *
  *   The format is
- *   "projects/{project_id}/companies/{company_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/companies/foo/profiles/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+ *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
  *
  * @typedef DeleteProfileRequest
  * @memberof google.cloud.talent.v4beta1
@@ -206,10 +206,10 @@ const DeleteProfileRequest = {
  * @property {string} parent
  *   Required.
  *
- *   The resource name of the company to search within.
+ *   The resource name of the tenant to search within.
  *
- *   The format is "projects/{project_id}/companies/{company_id}", for example,
- *   "projects/api-test-project/companies/foo".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenants/foo".
  *
  * @property {Object} requestMetadata
  *   Required.

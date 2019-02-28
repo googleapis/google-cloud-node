@@ -527,12 +527,12 @@ const CompensationInfo = {
    * describe the compensation scheme in the CompensationEntry.description.
    *
    * For example, tipping format is described in
-   * CompensationEntry.description (for example, “expect 15-20% tips based
-   * on customer bill.”) and an estimate of the tips provided in
+   * CompensationEntry.description (for example, "expect 15-20% tips based
+   * on customer bill.") and an estimate of the tips provided in
    * CompensationEntry.amount or CompensationEntry.range ($10 per hour).
    *
    * For example, equity is described in CompensationEntry.description
-   * (for example, “1% - 2% equity vesting over 4 years, 1 year cliff”) and
+   * (for example, "1% - 2% equity vesting over 4 years, 1 year cliff") and
    * value estimated in CompensationEntry.amount or
    * CompensationEntry.range. If no value estimate is possible, units are
    * CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED and then further
@@ -640,6 +640,47 @@ const CompensationInfo = {
      */
     OTHER_COMPENSATION_UNIT: 7
   }
+};
+
+/**
+ * Method for commute.
+ *
+ * @enum {number}
+ * @memberof google.cloud.talent.v4beta1
+ */
+const CommuteMethod = {
+
+  /**
+   * Commute method isn't specified.
+   */
+  COMMUTE_METHOD_UNSPECIFIED: 0,
+
+  /**
+   * Commute time is calculated based on driving time.
+   */
+  DRIVING: 1,
+
+  /**
+   * Commute time is calculated based on public transit including bus, metro,
+   * subway, etc.
+   */
+  TRANSIT: 2,
+
+  /**
+   * Commute time is calculated based on walking time.
+   */
+  WALKING: 3,
+
+  /**
+   * Commute time is calculated based on biking time.
+   */
+  CYCLING: 4,
+
+  /**
+   * Commute time is calculated based on public transit that is wheelchair
+   * accessible.
+   */
+  TRANSIT_ACCESSIBLE: 5
 };
 
 /**

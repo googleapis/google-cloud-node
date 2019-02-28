@@ -653,47 +653,6 @@ const CommuteFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Method for commute.
-   *
-   * @enum {number}
-   * @memberof google.cloud.talent.v4beta1
-   */
-  CommuteMethod: {
-
-    /**
-     * Commute method isn't specified.
-     */
-    COMMUTE_METHOD_UNSPECIFIED: 0,
-
-    /**
-     * Commute time is calculated based on driving time.
-     */
-    DRIVING: 1,
-
-    /**
-     * Commute time is calculated based on public transit including bus, metro,
-     * subway, etc.
-     */
-    TRANSIT: 2,
-
-    /**
-     * Commute time is calculated based on walking time.
-     */
-    WALKING: 3,
-
-    /**
-     * Commute time is calculated based on biking time.
-     */
-    BICYCLING: 4,
-
-    /**
-     * Commute time is calculated based on public transit that is wheelchair
-     * accessible.
-     */
-    TRANSIT_ACCESSIBLE: 5
-  },
-
-  /**
    * The traffic density to use when calculating commute time.
    *
    * @enum {number}

@@ -460,12 +460,16 @@ class JobServiceClient {
    *
    *   * `companyName` (Required)
    *   * `requisitionId` (Optional)
+   *   * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+   *   OPEN if no value is specified.
    *
    *   Sample Query:
    *
    *   * companyName = "projects/api-test-project/companies/123"
    *   * companyName = "projects/api-test-project/companies/123" AND requisitionId
    *   = "req-1"
+   *   * companyName = "projects/api-test-project/companies/123" AND status =
+   *   "EXPIRED"
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -604,12 +608,16 @@ class JobServiceClient {
    *
    *   * `companyName` (Required)
    *   * `requisitionId` (Optional)
+   *   * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+   *   OPEN if no value is specified.
    *
    *   Sample Query:
    *
    *   * companyName = "projects/api-test-project/companies/123"
    *   * companyName = "projects/api-test-project/companies/123" AND requisitionId
    *   = "req-1"
+   *   * companyName = "projects/api-test-project/companies/123" AND status =
+   *   "EXPIRED"
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
