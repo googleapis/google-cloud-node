@@ -39,7 +39,7 @@ WINDOWS="false"
     ;;
   esac
 
-if [ "$WINDOWS" -ne "true" ]; then
+if [ "$WINDOWS" != "true" ]; then
   bash $KOKORO_GFILE_DIR/codecov.sh  
 fi
 
