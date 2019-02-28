@@ -1212,6 +1212,8 @@ class File extends ServiceObject<File> {
               return;
             }
 
+            rawResponseStream.on('error', onComplete);
+
             const headers = rawResponseStream.toJSON().headers;
             const isCompressed = headers['content-encoding'] === 'gzip';
             const shouldRunValidation = !rangeRequest && (crc32c || md5);
@@ -1235,21 +1237,24 @@ class File extends ServiceObject<File> {
                   rawResponseStream.pipe(pumpify.obj(throughStreams));
             }
 
-            rawResponseStream.on('end', onComplete).pipe(throughStream, {
-              end: false
-            });
+            rawResponseStream.on('error', onComplete)
+                .on('end', onComplete)
+                .pipe(throughStream, {end: false});
           };
 
       // This is hooked to the `complete` event from the request stream. This is
       // our chance to validate the data and let the user know if anything went
       // wrong.
+      let onCompleteCalled = false;
       const onComplete = (err: Error|null) => {
         if (err) {
+          onCompleteCalled = true;
           throughStream.destroy(err);
           return;
         }
 
         if (rangeRequest) {
+          onCompleteCalled = true;
           throughStream.end();
           return;
         }
@@ -1259,6 +1264,12 @@ class File extends ServiceObject<File> {
           this.getMetadata({userProject: options.userProject}, onComplete);
           return;
         }
+
+        if (onCompleteCalled) {
+          return;
+        }
+
+        onCompleteCalled = true;
 
         const hashes = {
           crc32c: this.metadata.crc32c,
