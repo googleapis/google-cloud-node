@@ -17,6 +17,7 @@
 import {Service, ServiceConfig, ServiceObject} from '@google-cloud/common';
 import * as http from 'http';
 import * as pify from 'pify';
+import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
 import * as msToStr from 'pretty-ms';
 import {teenyRequest as request} from 'teeny-request';
 import * as zlib from 'zlib';
@@ -25,9 +26,6 @@ import {perftools} from '../../proto/profile';
 
 import {ProfilerConfig} from './config';
 import {createLogger} from './logger';
-import * as heapProfiler from './profilers/heap-profiler';
-import {TimeProfiler} from './profilers/time-profiler';
-import {create as createSourceMapper, SourceMapper} from './sourcemapper/sourcemapper';
 
 const parseDuration: (str: string) => number = require('parse-duration');
 const pjson = require('../../package.json');
@@ -264,7 +262,6 @@ export class Profiler extends ServiceObject {
   private sourceMapper: SourceMapper|undefined;
 
   // Public for testing.
-  timeProfiler: TimeProfiler|undefined;
   config: ProfilerConfig;
 
   constructor(config: ProfilerConfig) {
@@ -308,7 +305,6 @@ export class Profiler extends ServiceObject {
     this.profileTypes = [];
     if (!this.config.disableTime) {
       this.profileTypes.push(ProfileTypes.Wall);
-      this.timeProfiler = new TimeProfiler(this.config.timeIntervalMicros);
     }
     if (!this.config.disableHeap) {
       this.profileTypes.push(ProfileTypes.Heap);
@@ -332,7 +328,7 @@ export class Profiler extends ServiceObject {
     if (!this.config.disableSourceMaps) {
       try {
         this.sourceMapper =
-            await createSourceMapper(this.config.sourceMapSearchPath);
+            await SourceMapper.create(this.config.sourceMapSearchPath);
       } catch (err) {
         this.logger.error(
             `Failed to initialize source maps and start profiler: ${err}`);
@@ -495,7 +491,7 @@ export class Profiler extends ServiceObject {
    * Public to allow for testing.
    */
   async writeTimeProfile(prof: RequestProfile): Promise<RequestProfile> {
-    if (!this.timeProfiler) {
+    if (this.config.disableTime) {
       throw Error('Cannot collect time profile, time profiler not enabled.');
     }
     if (prof.duration === undefined) {
@@ -507,8 +503,13 @@ export class Profiler extends ServiceObject {
           `Cannot collect time profile, duration "${prof.duration}" cannot` +
           ` be parsed.`);
     }
-    const p =
-        await this.timeProfiler.profile(durationMillis, this.sourceMapper);
+    const options = {
+      durationMillis,
+      intervalMicros: this.config.timeIntervalMicros,
+      sourceMapper: this.sourceMapper
+    };
+
+    const p = await timeProfiler.profile(options);
     prof.profileBytes = await profileBytes(p);
     return prof;
   }

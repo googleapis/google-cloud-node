@@ -16,13 +16,11 @@
 
 import * as assert from 'assert';
 import * as gcpMetadata from 'gcp-metadata';
+import {heap as heapProfiler} from 'pprof';
 import * as sinon from 'sinon';
 
 import {createProfiler, nodeVersionOkay} from '../src/index';
 import {Profiler} from '../src/profiler';
-import * as heapProfiler from '../src/profilers/heap-profiler';
-import * as v8HeapProfiler from '../src/profilers/heap-profiler-bindings';
-
 
 describe('nodeVersionOkay', () => {
   it('should accept alpha versions', () => {
@@ -92,7 +90,7 @@ describe('createProfiler', () => {
   before(async () => {
     process.env = {};
     defaultConfig = internalConfigParams || {};
-    startStub = sinon.stub(v8HeapProfiler, 'startSamplingHeapProfiler');
+    startStub = sinon.stub(heapProfiler, 'start');
     savedEnv = process.env;
   });
 

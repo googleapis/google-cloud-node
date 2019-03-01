@@ -6,7 +6,6 @@
   "main": "out/src/index.js",
   "types": "out/src/index.d.ts",
   "scripts": {
-    "install": "node-pre-gyp install --fallback-to-build",
     "test": "nyc mocha  out/test/test-*.js",
     "system-test": "nyc --no-clean mocha out/system-test/test-*.js --timeout=60000",
     "samples-test": "echo 'no sample tests'",
@@ -21,7 +20,6 @@
     "pretest": "npm run compile",
     "posttest": "npm run check && npm run license-check",
     "proto": "npm run proto:profile && npm run proto:profiler",
-    "proto:profile": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profile.js third_party/proto/profile.proto && pbts -o proto/profile.d.ts proto/profile.js",
     "proto:profiler": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o proto/profiler.d.ts proto/profiler.js",
     "license-check": "jsgl --local .",
     "docs-test": "linkinator docs -r --skip www.googleapis.com",
@@ -42,11 +40,10 @@
     "findit2": "^2.2.3",
     "gcp-metadata": "^1.0.0",
     "lodash.pickby": "^4.6.0",
-    "nan": "^2.12.1",
-    "node-pre-gyp": "^0.12.0",
     "p-limit": "^2.0.0",
     "parse-duration": "^0.1.1",
     "pify": "^4.0.0",
+    "pprof": "^0.1.0",
     "pretty-ms": "^4.0.0",
     "protobufjs": "~6.8.6",
     "semver": "^5.5.1",
@@ -78,7 +75,6 @@
     "sinon": "^7.0.0",
     "source-map-support": "^0.5.6",
     "tmp": "0.0.33",
-    "ts-mockito": "^2.2.5",
     "typescript": "~3.3.0",
     "linkinator": "^1.1.2"
   },
@@ -87,7 +83,6 @@
     "out/third_party/cloud-debug-nodejs",
     "bindings",
     "proto",
-    "binding.gyp",
     "package-lock.json",
     "package.json",
     "README.md"
@@ -101,12 +96,5 @@
   },
   "engines": {
     "node": ">=6.12.3 <8.0.0 || >=8.9.4 <10.0.0 || >=10.4.1"
-  },
-  "binary": {
-    "module_name": "google_cloud_profiler",
-    "module_path": "./build/{node_abi}-{platform}-{arch}-{libc}",
-    "host": "https://storage.googleapis.com/cloud-profiler/nodejs/release",
-    "remote_path": "v{version}",
-    "package_name": "{node_abi}-{platform}-{arch}-{libc}.tar.gz"
   }
 }

@@ -19,16 +19,14 @@ import * as assert from 'assert';
 import * as extend from 'extend';
 import * as nock from 'nock';
 import * as pify from 'pify';
+import {heap as heapProfiler, time as timeProfiler} from 'pprof';
 import * as sinon from 'sinon';
-import {instance, mock, reset, when} from 'ts-mockito';
 import * as zlib from 'zlib';
 
 import {perftools} from '../../proto/profile';
 import {ProfilerConfig} from '../src/config';
 import {parseBackoffDuration, Profiler, Retryer} from '../src/profiler';
-import * as heapProfiler from '../src/profilers/heap-profiler';
-import {TimeProfiler} from '../src/profilers/time-profiler';
-import * as v8TimeProfiler from '../src/profilers/time-profiler-bindings';
+
 import {decodedHeapProfile, decodedTimeProfile, heapProfile, timeProfile} from './profiles-for-tests';
 
 const parseDuration: (str: string) => number = require('parse-duration');
@@ -64,8 +62,6 @@ const testConfig: ProfilerConfig = {
   disableSourceMaps: true,
 };
 
-const mockTimeProfiler = mock(TimeProfiler);
-
 nock.disableNetConnect();
 function nockOauth2(): nock.Scope {
   return nock('https://oauth2.googleapis.com')
@@ -98,17 +94,15 @@ describe('Retryer', () => {
 describe('Profiler', () => {
   const sinonStubs: sinon.SinonStub[] = new Array();
   beforeEach(() => {
-    when(mockTimeProfiler.profile(10 * 1000, undefined))
-        .thenReturn(new Promise((resolve) => {
-          resolve(timeProfile);
-        }));
+    sinonStubs.push(sinon.stub(timeProfiler, 'start'));
+    sinonStubs.push(sinon.stub(timeProfiler, 'profile')
+                        .returns(Promise.resolve(timeProfile)));
 
     sinonStubs.push(sinon.stub(heapProfiler, 'stop'));
     sinonStubs.push(sinon.stub(heapProfiler, 'start'));
     sinonStubs.push(sinon.stub(heapProfiler, 'profile').returns(heapProfile));
   });
   afterEach(() => {
-    reset(mockTimeProfiler);
     nock.cleanAll();
     sinonStubs.forEach((stub) => {
       stub.restore();
@@ -118,7 +112,6 @@ describe('Profiler', () => {
     it('should return expected profile when profile type is WALL.',
        async () => {
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const requestProf = {
            name: 'projects/12345678901/test-projectId',
            profileType: 'WALL',
@@ -150,7 +143,6 @@ describe('Profiler', () => {
     it('should throw error when unexpected profile type is requested.',
        async () => {
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const requestProf = {
            name: 'projects/12345678901/test-projectId',
            profileType: 'UNKNOWN',
@@ -170,7 +162,6 @@ describe('Profiler', () => {
            ' enabled',
        async () => {
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
 
          const requestProf = {
            name: 'projects/12345678901/test-projectId',
@@ -280,7 +271,6 @@ describe('Profiler', () => {
                         .callsArgWith(1, null, {}, {statusCode: 200});
 
       const profiler = new Profiler(testConfig);
-      profiler.timeProfiler = instance(mockTimeProfiler);
       await profiler.profileAndUpload(requestProf);
 
       const uploaded = requestStub.firstCall.args[0].body;
@@ -341,7 +331,6 @@ describe('Profiler', () => {
       requestStub = sinon.stub(common.ServiceObject.prototype, 'request')
                         .callsArgWith(1, new Error('Network error'), {}, {});
       const profiler = new Profiler(testConfig);
-      profiler.timeProfiler = instance(mockTimeProfiler);
       await profiler.profileAndUpload(requestProf);
     });
     it('should ignore when non-200 status code returned.', async () => {
@@ -356,7 +345,6 @@ describe('Profiler', () => {
               .callsArgWith(
                   1, null, {}, {statusCode: 500, statusMessage: 'Error 500'});
       const profiler = new Profiler(testConfig);
-      profiler.timeProfiler = instance(mockTimeProfiler);
       await profiler.profileAndUpload(requestProf);
     });
     it('should send request to upload profile to default API without error.',
@@ -701,7 +689,6 @@ describe('Profiler', () => {
 
 
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
          assert.strictEqual(
              0, delayMillis, 'No delay before asking to collect next profile');
@@ -722,7 +709,6 @@ describe('Profiler', () => {
                  .callsArgWith(1, undefined, undefined, {statusCode: 404});
 
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
          assert.deepEqual(500, delayMillis);
        });
@@ -766,7 +752,6 @@ describe('Profiler', () => {
               .callsArgWith(
                   1, new Error('error creating profile'), undefined, undefined);
       const profiler = new Profiler(config);
-      profiler.timeProfiler = instance(mockTimeProfiler);
       let delayMillis = await profiler.collectProfile();
       assert.deepEqual(500, delayMillis);
       delayMillis = await profiler.collectProfile();
@@ -795,7 +780,6 @@ describe('Profiler', () => {
                      1, undefined, {error: {details: [{retryDelay: '50s'}]}},
                      {statusCode: 409});
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
          assert.strictEqual(50000, delayMillis);
        });
@@ -817,7 +801,6 @@ describe('Profiler', () => {
                    body: {message: 'some message'},
                  });
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
          assert.strictEqual(500, delayMillis);
        });
@@ -838,7 +821,6 @@ describe('Profiler', () => {
                      1, undefined, {error: {details: [{retryDelay: '1000h'}]}},
                      {statusCode: 409});
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
          assert.strictEqual(parseDuration('7d'), delayMillis);
        });
@@ -862,7 +844,6 @@ describe('Profiler', () => {
                      1, new Error('Error uploading'), undefined, undefined);
 
          const profiler = new Profiler(testConfig);
-         profiler.timeProfiler = instance(mockTimeProfiler);
          const delayMillis = await profiler.collectProfile();
          assert.strictEqual(0, delayMillis);
        });
