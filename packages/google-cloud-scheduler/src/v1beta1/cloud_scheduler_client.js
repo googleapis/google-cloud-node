@@ -421,7 +421,8 @@ class CloudSchedulerClient {
    *   Required.
    *
    *   The job to add. The user can optionally specify a name for the
-   *   job in name. name cannot be the same as an
+   *   job in name.
+   *   name cannot be the same as an
    *   existing job. If a name is not specified then the system will
    *   generate a random unique name that will be returned
    *   (name) in the response.
@@ -474,20 +475,22 @@ class CloudSchedulerClient {
   /**
    * Updates a job.
    *
-   * If successful, the updated Job is returned. If the job does
-   * not exist, `NOT_FOUND` is returned.
+   * If successful, the updated Job is
+   * returned. If the job does not exist, `NOT_FOUND` is returned.
    *
    * If UpdateJob does not successfully return, it is possible for the
-   * job to be in an Job.State.UPDATE_FAILED state. A job in this state may
-   * not be executed. If this happens, retry the UpdateJob request
-   * until a successful response is received.
+   * job to be in an
+   * Job.State.UPDATE_FAILED
+   * state. A job in this state may not be executed. If this happens, retry the
+   * UpdateJob request until a successful response is received.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.job
    *   Required.
    *
-   *   The new job properties. name must be specified.
+   *   The new job properties. name
+   *   must be specified.
    *
    *   Output only fields cannot be modified using UpdateJob.
    *   Any value specified for an output only field will be ignored.
@@ -581,10 +584,14 @@ class CloudSchedulerClient {
    * Pauses a job.
    *
    * If a job is paused then the system will stop executing the job
-   * until it is re-enabled via ResumeJob. The
-   * state of the job is stored in state; if paused it
-   * will be set to Job.State.PAUSED. A job must be in Job.State.ENABLED
-   * to be paused.
+   * until it is re-enabled via
+   * ResumeJob. The
+   * state of the job is stored in
+   * state; if paused it will be set
+   * to Job.State.PAUSED. A
+   * job must be in
+   * Job.State.ENABLED to be
+   * paused.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -635,10 +642,15 @@ class CloudSchedulerClient {
   /**
    * Resume a job.
    *
-   * This method reenables a job after it has been Job.State.PAUSED. The
-   * state of a job is stored in Job.state; after calling this method it
-   * will be set to Job.State.ENABLED. A job must be in
-   * Job.State.PAUSED to be resumed.
+   * This method reenables a job after it has been
+   * Job.State.PAUSED. The
+   * state of a job is stored in
+   * Job.state; after calling this
+   * method it will be set to
+   * Job.State.ENABLED. A
+   * job must be in
+   * Job.State.PAUSED to be
+   * resumed.
    *
    * @param {Object} request
    *   The request object that will be sent.
