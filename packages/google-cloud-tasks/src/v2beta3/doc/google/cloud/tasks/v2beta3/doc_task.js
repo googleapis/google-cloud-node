@@ -19,7 +19,8 @@
  * A unit of scheduled work.
  *
  * @property {string} name
- *   Optionally caller-specified in CreateTask.
+ *   Optionally caller-specified in
+ *   CreateTask.
  *
  *   The task name.
  *
@@ -43,7 +44,9 @@
  * @property {Object} appEngineHttpRequest
  *   HTTP request that is sent to the App Engine app handler.
  *
- *   An App Engine task is a task that has AppEngineHttpRequest set.
+ *   An App Engine task is a task that has
+ *   AppEngineHttpRequest
+ *   set.
  *
  *   This object should have the same structure as [AppEngineHttpRequest]{@link google.cloud.tasks.v2beta3.AppEngineHttpRequest}
  *
@@ -54,7 +57,8 @@
  *   feature. If you haven't already joined, you can [use this form to sign
  *   up](https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform?usp=sf_link).
  *
- *   An HTTP task is a task that has HttpRequest set.
+ *   An HTTP task is a task that has
+ *   HttpRequest set.
  *
  *   This object should have the same structure as [HttpRequest]{@link google.cloud.tasks.v2beta3.HttpRequest}
  *
@@ -78,7 +82,8 @@
  *   The deadline for requests sent to the worker. If the worker does not
  *   respond by this deadline then the request is cancelled and the attempt
  *   is marked as a `DEADLINE_EXCEEDED` failure. Cloud Tasks will retry the
- *   task according to the RetryConfig.
+ *   task according to the
+ *   RetryConfig.
  *
  *   Note that when the request is cancelled, Cloud Tasks will stop listing for
  *   the response, but whether the worker stops processing depends on the
@@ -91,9 +96,11 @@
  *     10 minutes.
  *     The deadline must be in the interval [15 seconds, 30 minutes].
  *
- *   * For App Engine tasks, 0 indicates that the
+ *   * For App Engine tasks,
+ *   0 indicates that the
  *     request has the default deadline. The default deadline depends on the
- *     [scaling type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
+ *     [scaling
+ *     type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
  *     of the service: 10 minutes for standard apps with automatic scaling, 24
  *     hours for standard apps with manual and basic scaling, and 60 minutes for
  *     flex apps. If the request deadline is set, it must be in the interval [15
@@ -121,8 +128,9 @@
  * @property {Object} firstAttempt
  *   Output only. The status of the task's first attempt.
  *
- *   Only dispatch_time will be set.
- *   The other Attempt information is not retained by Cloud Tasks.
+ *   Only dispatch_time will
+ *   be set. The other Attempt information
+ *   is not retained by Cloud Tasks.
  *
  *   This object should have the same structure as [Attempt]{@link google.cloud.tasks.v2beta3.Attempt}
  *
@@ -132,8 +140,8 @@
  *   This object should have the same structure as [Attempt]{@link google.cloud.tasks.v2beta3.Attempt}
  *
  * @property {number} view
- *   Output only. The view specifies which subset of the Task has
- *   been returned.
+ *   Output only. The view specifies which subset of the
+ *   Task has been returned.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta3.View}
  *
@@ -145,7 +153,8 @@ const Task = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * The view specifies a subset of Task data.
+   * The view specifies a subset of Task
+   * data.
    *
    * When a task is returned in a response, not all
    * information is retrieved by default because some data, such as
@@ -168,7 +177,8 @@ const Task = {
      * sensitive data.
      *
      * This view does not include the
-     * body in AppEngineHttpRequest.
+     * body in
+     * AppEngineHttpRequest.
      * Bodies are desirable to return only when needed, because they
      * can be large and because of the sensitivity of the data that you
      * choose to store in it.
@@ -178,9 +188,10 @@ const Task = {
     /**
      * All information is returned.
      *
-     * Authorization for FULL requires
-     * `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-     * permission on the Queue resource.
+     * Authorization for FULL
+     * requires `cloudtasks.tasks.fullView` [Google
+     * IAM](https://cloud.google.com/iam/) permission on the
+     * Queue resource.
      */
     FULL: 2
   }
