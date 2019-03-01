@@ -15,7 +15,9 @@
  */
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
+import {inspect} from 'util';
 
+import {LoggingBunyan} from '../src';
 import * as types from '../src/types/core';
 
 describe('logging-bunyan', () => {
@@ -154,6 +156,33 @@ describe('logging-bunyan', () => {
     });
   });
 
+  describe('properLabels', () => {
+    it('should validate labels correctly', () => {
+      const properLabels = [
+        {}, [], {key: 'value'}, ['a', 'b'], {a: 'b', c: 'd'}, {
+          key: 'value',
+          [Symbol('symbolKey')]: 'value2'
+        },  // symbol gets ignored.
+      ];
+      const improperLabels = [
+        true, false, undefined, -1, NaN, () => {}, 'a string',
+        Symbol('a symbol'), {key: {nested: 'object'}}, {key: -1}, {key: false},
+        {key: Symbol('another symbol')}
+      ];
+
+      for (const labels of properLabels) {
+        assert.strictEqual(
+            true, LoggingBunyan.properLabels(labels),
+            `expected ${inspect(labels)} to be proper`);
+      }
+      for (const labels of improperLabels) {
+        assert.strictEqual(
+            false, LoggingBunyan.properLabels(labels),
+            `expected ${inspect(labels)} to be improper`);
+      }
+    });
+  });
+
   describe('formatEntry_', () => {
     it('should throw an error if record is a string', () => {
       assert.throws(
@@ -269,6 +298,32 @@ describe('logging-bunyan', () => {
           };
 
       loggingBunyan.formatEntry_(recordWithRequest);
+    });
+
+    it('should promote properly formatted labels to metadata', (done) => {
+      const labels = {key: 'value', 0: 'value2'};
+      const recordWithLabels = {...RECORD, labels};
+      loggingBunyan.stackdriverLog.entry =
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record: string|types.BunyanLogRecord) => {
+            assert.deepStrictEqual(entryMetadata.labels, labels);
+            assert.deepStrictEqual(record, RECORD);
+            done();
+          };
+      loggingBunyan.formatEntry_(recordWithLabels);
+    });
+
+    it('should not promote ill-formatted labels to metadata', (done) => {
+      const labels = {key: -1};  // values must be strings.
+      const recordWithLabels = {...RECORD, labels};
+      loggingBunyan.stackdriverLog.entry =
+          (entryMetadata: types.StackdriverEntryMetadata,
+           record: string|types.BunyanLogRecord) => {
+            assert(entryMetadata.labels === undefined);
+            assert.deepStrictEqual(record, recordWithLabels);
+            done();
+          };
+      loggingBunyan.formatEntry_(recordWithLabels);
     });
 
     it('should promote prefixed trace property to metadata', (done) => {
