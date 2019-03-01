@@ -18,13 +18,13 @@ import delay from 'delay';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
+import {heap as heapProfiler} from 'pprof';
 import * as semver from 'semver';
 import {SemVer} from 'semver';
 
 import {Config, defaultConfig, ProfilerConfig} from './config';
 import {createLogger} from './logger';
 import {Profiler} from './profiler';
-import * as heapProfiler from './profilers/heap-profiler';
 
 const pjson = require('../../package.json');
 const serviceRegex = /^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/;
