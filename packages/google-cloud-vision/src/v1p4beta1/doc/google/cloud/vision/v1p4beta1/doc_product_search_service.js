@@ -653,15 +653,17 @@ const ListProductsInProductSetResponse = {
  *   `product-display-name` column refers to
  *   display_name, the
  *   `product-category` column refers to
- *   product_category, and the
- *   `labels` column refers to product_labels.
+ *   product_category,
+ *   and the `labels` column refers to
+ *   product_labels.
  *
  *   The `image-id` column is optional but must be unique if provided. If it is
  *   empty, the system will automatically assign a unique id to the image.
  *
  *   The `product-display-name` column is optional. If it is empty, the system
- *   sets the display_name field for the product to a
- *   space (" "). You can update the `display_name` later by using the API.
+ *   sets the display_name
+ *   field for the product to a space (" "). You can update the `display_name`
+ *   later by using the API.
  *
  *   If a `Product` with the specified `product-id` already exists, then the
  *   system ignores the `product-display-name`, `product-category`, and `labels`
@@ -740,8 +742,10 @@ const ImportProductSetsRequest = {
  * Response message for the `ImportProductSets` method.
  *
  * This message is returned by the
- * google.longrunning.Operations.GetOperation method in the returned
- * google.longrunning.Operation.response field.
+ * google.longrunning.Operations.GetOperation
+ * method in the returned
+ * google.longrunning.Operation.response
+ * field.
  *
  * @property {Object[]} referenceImages
  *   The list of reference_images that are imported successfully.
@@ -784,7 +788,8 @@ const ImportProductSetsResponse = {
  *
  * @property {Object} endTime
  *   The time when the batch request is finished and
- *   google.longrunning.Operation.done is set to true.
+ *   google.longrunning.Operation.done is
+ *   set to true.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

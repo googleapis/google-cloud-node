@@ -26,16 +26,20 @@ const VERSION = require('../../package.json').version;
  * Manages Products and ProductSets of reference images for use in product
  * search. It uses the following resource model:
  *
- * - The API has a collection of ProductSet resources, named
+ * - The API has a collection of
+ * ProductSet resources, named
  * `projects/* /locations/* /productSets/*`, which acts as a way to put different
  * products into groups to limit identification.
  *
  * In parallel,
  *
- * - The API has a collection of Product resources, named
+ * - The API has a collection of
+ * Product resources, named
  *   `projects/* /locations/* /products/*`
  *
- * - Each Product has a collection of ReferenceImage resources, named
+ * - Each Product has a collection of
+ * ReferenceImage resources,
+ * named
  *   `projects/* /locations/* /products/* /referenceImages/*`
  *
  * @class
@@ -1732,8 +1736,8 @@ class ProductSearchClient {
    * Asynchronous API that imports a list of reference images to specified
    * product sets based on a list of image information.
    *
-   * The google.longrunning.Operation API can be used to keep track of the
-   * progress and results of the request.
+   * The google.longrunning.Operation API can be
+   * used to keep track of the progress and results of the request.
    * `Operation.metadata` contains `BatchOperationMetadata`. (progress)
    * `Operation.response` contains `ImportProductSetsResponse`. (results)
    *

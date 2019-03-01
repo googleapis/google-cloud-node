@@ -21,8 +21,9 @@
  *     TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol
  * Each structural component, starting from Page, may further have their own
  * properties. Properties describe detected languages, breaks etc.. Please refer
- * to the TextAnnotation.TextProperty message definition below for more
- * detail.
+ * to the
+ * TextAnnotation.TextProperty
+ * message definition below for more detail.
  *
  * @property {Object[]} pages
  *   List of pages detected by OCR.

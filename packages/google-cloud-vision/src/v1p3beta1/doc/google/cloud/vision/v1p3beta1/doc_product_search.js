@@ -56,7 +56,9 @@
  *   The number should be among the values of [ProductSearchResultsView]{@link google.cloud.vision.v1p3beta1.ProductSearchResultsView}
  *
  * @property {string} productSet
- *   The resource name of a ProductSet to be searched for similar images.
+ *   The resource name of a
+ *   ProductSet to be searched for
+ *   similar images.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`.

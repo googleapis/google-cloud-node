@@ -502,7 +502,8 @@ const Property = {
  *
  * @property {string} mid
  *   Opaque entity ID. Some IDs may be available in
- *   [Google Knowledge Graph Search API](https://developers.google.com/knowledge-graph/).
+ *   [Google Knowledge Graph Search
+ *   API](https://developers.google.com/knowledge-graph/).
  *
  * @property {string} locale
  *   The language code for the locale in which the entity textual

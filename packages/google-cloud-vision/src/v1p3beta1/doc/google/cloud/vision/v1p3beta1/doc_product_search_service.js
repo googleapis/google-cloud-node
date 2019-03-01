@@ -658,9 +658,11 @@ const ListProductsInProductSetResponse = {
  *   product_display_name, product_category and labels are ignored.
  *
  *   If a Product doesn't exist and needs to be created on the fly, the
- *   product_display_name field refers to Product.display_name, the
- *   product_category field refers to Product.product_category, and the
- *   labels field refers to Product.labels.
+ *   product_display_name field refers to
+ *   Product.display_name,
+ *   the product_category field refers to
+ *   Product.product_category,
+ *   and the labels field refers to Product.labels.
  *
  *   Labels (optional) should be a line containing a list of comma-separated
  *   key-value pairs, with the format
@@ -733,8 +735,10 @@ const ImportProductSetsRequest = {
  * Response message for the `ImportProductSets` method.
  *
  * This message is returned by the
- * google.longrunning.Operations.GetOperation method in the returned
- * google.longrunning.Operation.response field.
+ * google.longrunning.Operations.GetOperation
+ * method in the returned
+ * google.longrunning.Operation.response
+ * field.
  *
  * @property {Object[]} referenceImages
  *   The list of reference_images that are imported successfully.
@@ -777,7 +781,8 @@ const ImportProductSetsResponse = {
  *
  * @property {Object} endTime
  *   The time when the batch request is finished and
- *   google.longrunning.Operation.done is set to true.
+ *   google.longrunning.Operation.done is
+ *   set to true.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

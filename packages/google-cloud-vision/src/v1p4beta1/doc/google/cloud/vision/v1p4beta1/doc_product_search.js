@@ -25,7 +25,9 @@
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1p4beta1.BoundingPoly}
  *
  * @property {string} productSet
- *   The resource name of a ProductSet to be searched for similar images.
+ *   The resource name of a
+ *   ProductSet to be searched for
+ *   similar images.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`.
