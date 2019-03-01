@@ -289,8 +289,10 @@ class LanguageServiceClient {
   }
 
   /**
-   * Finds entities, similar to AnalyzeEntities in the text and analyzes
-   * sentiment associated with each entity and its mentions.
+   * Finds entities, similar to
+   * AnalyzeEntities
+   * in the text and analyzes sentiment associated with each entity and its
+   * mentions.
    *
    * @param {Object} request
    *   The request object that will be sent.

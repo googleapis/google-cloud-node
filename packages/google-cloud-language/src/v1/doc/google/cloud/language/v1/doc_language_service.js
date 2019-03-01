@@ -87,8 +87,8 @@ const Document = {
  *
  * @property {Object} sentiment
  *   For calls to AnalyzeSentiment or if
- *   AnnotateTextRequest.Features.extract_document_sentiment is set to
- *   true, this field will contain the sentiment for the sentence.
+ *   AnnotateTextRequest.Features.extract_document_sentiment
+ *   is set to true, this field will contain the sentiment for the sentence.
  *
  *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1.Sentiment}
  *
@@ -135,9 +135,9 @@ const Sentence = {
  *
  * @property {Object} sentiment
  *   For calls to AnalyzeEntitySentiment or if
- *   AnnotateTextRequest.Features.extract_entity_sentiment is set to
- *   true, this field will contain the aggregate sentiment expressed for this
- *   entity in the provided document.
+ *   AnnotateTextRequest.Features.extract_entity_sentiment
+ *   is set to true, this field will contain the aggregate sentiment expressed
+ *   for this entity in the provided document.
  *
  *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1.Sentiment}
  *
@@ -1311,9 +1311,9 @@ const DependencyEdge = {
  *
  * @property {Object} sentiment
  *   For calls to AnalyzeEntitySentiment or if
- *   AnnotateTextRequest.Features.extract_entity_sentiment is set to
- *   true, this field will contain the sentiment expressed for this mention of
- *   the entity in the provided document.
+ *   AnnotateTextRequest.Features.extract_entity_sentiment
+ *   is set to true, this field will contain the sentiment expressed for this
+ *   mention of the entity in the provided document.
  *
  *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1.Sentiment}
  *
@@ -1357,7 +1357,9 @@ const EntityMention = {
  *
  * @property {number} beginOffset
  *   The API calculates the beginning offset of the content in the original
- *   document according to the EncodingType specified in the API request.
+ *   document according to the
+ *   EncodingType specified in the API
+ *   request.
  *
  * @typedef TextSpan
  * @memberof google.cloud.language.v1
@@ -1417,7 +1419,8 @@ const AnalyzeSentimentRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field for more details.
+ *   See Document.language field
+ *   for more details.
  *
  * @property {Object[]} sentences
  *   The sentiment for all the sentences in the document.
@@ -1464,7 +1467,8 @@ const AnalyzeEntitySentimentRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field for more details.
+ *   See Document.language field
+ *   for more details.
  *
  * @typedef AnalyzeEntitySentimentResponse
  * @memberof google.cloud.language.v1
@@ -1506,7 +1510,8 @@ const AnalyzeEntitiesRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field for more details.
+ *   See Document.language field
+ *   for more details.
  *
  * @typedef AnalyzeEntitiesResponse
  * @memberof google.cloud.language.v1
@@ -1553,7 +1558,8 @@ const AnalyzeSyntaxRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field for more details.
+ *   See Document.language field
+ *   for more details.
  *
  * @typedef AnalyzeSyntaxResponse
  * @memberof google.cloud.language.v1
@@ -1681,7 +1687,8 @@ const AnnotateTextRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field for more details.
+ *   See Document.language field
+ *   for more details.
  *
  * @property {Object[]} categories
  *   Categories identified in the input document.
