@@ -221,7 +221,8 @@ export class LoggingBunyan extends Writable {
     // If the record contains a labels property, promote it to the entry
     // metadata.
     // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
-    if (record.labels) {
+    const proper = LoggingBunyan.properLabels(record.labels);
+    if (record.labels && proper) {
       entryMetadata.labels = record.labels;
       delete record.labels;
     }
@@ -232,6 +233,17 @@ export class LoggingBunyan extends Writable {
     }
 
     return this.stackdriverLog.entry(entryMetadata, record);
+  }
+
+  // tslint:disable-next-line:no-any
+  static properLabels(labels: any) {
+    if (typeof labels !== 'object') return false;
+    for (const prop in labels) {
+      if (typeof labels[prop] !== 'string') {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**

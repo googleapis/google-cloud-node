@@ -172,6 +172,18 @@ Make sure to add logs to your [uncaught exception][uncaught] and [unhandled reje
 
 You may also want to see the [@google-cloud/error-reporting][@google-cloud/error-reporting] module which provides direct access to the Error Reporting API.
 
+### LogEntry Labels
+
+If the bunyan log record contains a label property where all the values are strings, we automatically promote that
+property to be the [`LogEntry.labels`](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry) value rather
+than being one of the properties in the `payload` fields. This makes it easier to filter the logs in the UI using the labels.
+
+```javascript
+logger.info({labels: {someKey: 'some value'}}, 'test log message');
+```
+
+All the label values must be strings for this automatic promotion to work. Otherwise the labels are left in the payload.
+
 ### Formatting Request Logs
 
 To format your request logs you can provide a `httpRequest` property on the bunyan metadata you provide along with the log message. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
