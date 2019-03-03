@@ -8,80 +8,46 @@
 [![npm version](https://img.shields.io/npm/v/@google-cloud/vision.svg)](https://www.npmjs.org/package/@google-cloud/vision)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-vision/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-vision)
 
-> Node.js idiomatic client for [Vision API][product-docs].
-
 The [Cloud Vision API](https://cloud.google.com/vision/docs) allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
 
 
-* [Vision API Node.js Client API Reference][client-docs]
-* [github.com/googleapis/nodejs-vision](https://github.com/googleapis/nodejs-vision)
-* [Vision API Documentation][product-docs]
-
-Read more about the client libraries for Cloud APIs, including the older
-Google APIs Client Libraries, in [Client Libraries Explained][explained].
-
-[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
-
-**Table of contents:**
-
-* [Quickstart](#quickstart)
-  * [Before you begin](#before-you-begin)
-  * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+* [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
-## Quickstart
+## Using the client library
 
-### Before you begin
+1.  [Select or create a Cloud Platform project][projects].
 
-1.  Select or create a Cloud Platform project.
+1.  [Enable billing for your project][billing].
 
-    [Go to the projects page][projects]
-
-1.  Enable billing for your project.
-
-    [Enable billing][billing]
-
-1.  Enable the Google Cloud Vision API API.
-
-    [Enable the API][enable_api]
+1.  [Enable the Google Cloud Vision API API][enable_api].
 
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-[projects]: https://console.cloud.google.com/project
-[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+1. Install the client library:
 
-### Installing the client library
+        npm install --save @google-cloud/vision
 
-    npm install --save @google-cloud/vision
-
-### Using the client library
+1. Try an example:
 
 ```javascript
-// Imports the Google Cloud client library
-const vision = require('@google-cloud/vision');
+async function quickstart() {
+  // Imports the Google Cloud client library
+  const vision = require('@google-cloud/vision');
 
-// Creates a client
-const client = new vision.ImageAnnotatorClient();
+  // Creates a client
+  const client = new vision.ImageAnnotatorClient();
 
-// Performs label detection on the image file
-client
-  .labelDetection('./resources/wakeupcat.jpg')
-  .then(results => {
-    const labels = results[0].labelAnnotations;
-
-    console.log('Labels:');
-    labels.forEach(label => console.log(label.description));
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
+  // Performs label detection on the image file
+  const [result] = await client.labelDetection('./resources/wakeupcat.jpg');
+  const labels = result.labelAnnotations;
+  console.log('Labels:');
+  labels.forEach(label => console.log(label.description));
+}
 ```
 
 ## Samples
@@ -120,7 +86,21 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-vision/blob/master/LICENSE)
 
+## What's Next
+
+* [Vision API Documentation][product-docs]
+* [Vision API Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-vision](https://github.com/googleapis/nodejs-vision)
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/vision/latest/
 [product-docs]: https://cloud.google.com/vision/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=vision.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
