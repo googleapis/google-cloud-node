@@ -136,7 +136,8 @@ const StreamingRecognitionConfig = {
  * @property {number} encoding
  *   Encoding of audio data sent in all `RecognitionAudio` messages.
  *   This field is optional for `FLAC` and `WAV` audio files and required
- *   for all other audio formats. For details, see AudioEncoding.
+ *   for all other audio formats. For details, see
+ *   AudioEncoding.
  *
  *   The number should be among the values of [AudioEncoding]{@link google.cloud.speech.v1p1beta1.AudioEncoding}
  *
@@ -147,7 +148,8 @@ const StreamingRecognitionConfig = {
  *   source to 16000 Hz. If that's not possible, use the native sample rate of
  *   the audio source (instead of re-sampling).
  *   This field is optional for `FLAC` and `WAV` audio files and required
- *   for all other audio formats. For details, see AudioEncoding.
+ *   for all other audio formats. For details, see
+ *   AudioEncoding.
  *
  * @property {number} audioChannelCount
  *   *Optional* The number of channels in the input audio data.
@@ -204,9 +206,10 @@ const StreamingRecognitionConfig = {
  *   won't be filtered out.
  *
  * @property {Object[]} speechContexts
- *   *Optional* array of SpeechContext.
- *   A means to provide context to assist the speech recognition. For more
- *   information, see [Phrase Hints](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints).
+ *   *Optional* array of
+ *   SpeechContext. A means to
+ *   provide context to assist the speech recognition. For more information, see
+ *   [Phrase Hints](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints).
  *
  *   This object should have the same structure as [SpeechContext]{@link google.cloud.speech.v1p1beta1.SpeechContext}
  *
@@ -330,7 +333,8 @@ const RecognitionConfig = {
    * an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
    * encoding configuration must match the encoding described in the audio
    * header; otherwise the request returns an
-   * google.rpc.Code.INVALID_ARGUMENT error code.
+   * google.rpc.Code.INVALID_ARGUMENT error
+   * code.
    *
    * @enum {number}
    * @memberof google.cloud.speech.v1p1beta1
@@ -638,8 +642,8 @@ const SpeechContext = {
 /**
  * Contains audio data in the encoding specified in the `RecognitionConfig`.
  * Either `content` or `uri` must be supplied. Supplying both or neither
- * returns google.rpc.Code.INVALID_ARGUMENT. See
- * [content limits](https://cloud.google.com/speech-to-text/quotas#content).
+ * returns google.rpc.Code.INVALID_ARGUMENT.
+ * See [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
  * @property {string} content
  *   The audio data bytes encoded as specified in
@@ -652,8 +656,9 @@ const SpeechContext = {
  *   Currently, only Google Cloud Storage URIs are
  *   supported, which must be specified in the following format:
  *   `gs://bucket_name/object_name` (other URI formats return
- *   google.rpc.Code.INVALID_ARGUMENT). For more information, see
- *   [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+ *   google.rpc.Code.INVALID_ARGUMENT).
+ *   For more information, see [Request
+ *   URIs](https://cloud.google.com/storage/docs/reference-uris).
  *
  * @typedef RecognitionAudio
  * @memberof google.cloud.speech.v1p1beta1
@@ -782,8 +787,8 @@ const LongRunningRecognizeMetadata = {
  *     one or more (repeated) `results`.
  *
  * @property {Object} error
- *   Output only. If set, returns a google.rpc.Status message that
- *   specifies the error for the operation.
+ *   Output only. If set, returns a google.rpc.Status
+ *   message that specifies the error for the operation.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
