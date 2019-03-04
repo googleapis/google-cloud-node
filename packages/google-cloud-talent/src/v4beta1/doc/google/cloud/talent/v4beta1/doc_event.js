@@ -56,8 +56,8 @@
  *   Optional.
  *
  *   Extra information about this event. Used for storing information with no
- *   matching field in event payload, for example, user application specific
- *   context or details.
+ *   matching field in event payload, for
+ *   example, user application specific context or details.
  *
  *   At most 20 keys are supported. The maximum total size of all keys and
  *   values is 2 KB.
@@ -77,18 +77,21 @@ const ClientEvent = {
  * @property {number} type
  *   Required.
  *
- *   The type of the event (see JobEventType).
+ *   The type of the event (see
+ *   JobEventType).
  *
  *   The number should be among the values of [JobEventType]{@link google.cloud.talent.v4beta1.JobEventType}
  *
  * @property {string[]} jobs
  *   Required.
  *
- *   The job name(s) associated with this event.
- *   For example, if this is an impression event,
- *   this field contains the identifiers of all jobs shown to the job seeker.
- *   If this was a view event, this field contains the
- *   identifier of the viewed job.
+ *   The job name(s) associated with
+ *   this event. For example, if this is an
+ *   impression
+ *   event, this field contains the identifiers of all jobs shown to the job
+ *   seeker. If this was a
+ *   view event, this
+ *   field contains the identifier of the viewed job.
  *
  * @typedef JobEvent
  * @memberof google.cloud.talent.v4beta1
@@ -152,7 +155,9 @@ const JobEvent = {
      * submitted an application for a job with a single click without
      * entering information. If a job seeker performs this action, send only
      * this event to the service. Do not also send
-     * JobEventType.APPLICATION_START or JobEventType.APPLICATION_FINISH
+     * JobEventType.APPLICATION_START
+     * or
+     * JobEventType.APPLICATION_FINISH
      * events.
      */
     APPLICATION_QUICK_SUBMISSION: 6,
@@ -178,8 +183,12 @@ const JobEvent = {
      * (without viewing the details of the job posting), and is redirected
      * to a different website to complete the application. If a candidate
      * performs this action, send only this event to the service. Do not also
-     * send JobEventType.APPLICATION_START,
-     * JobEventType.APPLICATION_FINISH or JobEventType.VIEW events.
+     * send
+     * JobEventType.APPLICATION_START,
+     * JobEventType.APPLICATION_FINISH
+     * or
+     * JobEventType.VIEW
+     * events.
      */
     APPLICATION_REDIRECT_FROM_SEARCH: 9,
 
@@ -250,7 +259,8 @@ const JobEvent = {
  * @property {string[]} profiles
  *   Required.
  *
- *   The profile name(s) associated with this client event.
+ *   The profile name(s) associated
+ *   with this client event.
  *
  * @property {string} jobId
  *   Optional.

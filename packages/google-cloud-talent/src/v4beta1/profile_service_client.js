@@ -641,7 +641,9 @@ class ProfileServiceClient {
    * For example, search by raw queries "software engineer in Mountain View" or
    * search by structured filters (location filter, education filter, etc.).
    *
-   * See SearchProfilesRequest for more information.
+   * See
+   * SearchProfilesRequest
+   * for more information.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -663,7 +665,8 @@ class ProfileServiceClient {
    * @param {Object} [request.profileQuery]
    *   Optional.
    *
-   *   Search query to execute. See ProfileQuery for more details.
+   *   Search query to execute. See
+   *   ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
    * @param {number} [request.pageSize]
@@ -676,7 +679,9 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   An integer that specifies the current offset (that is, starting result) in
-   *   search results. This field is only considered if page_token is unset.
+   *   search results. This field is only considered if
+   *   page_token
+   *   is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -722,7 +727,8 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   A list of expressions specifies histogram requests against matching
-   *   profiles for SearchProfilesRequest.
+   *   profiles for
+   *   SearchProfilesRequest.
    *
    *   The expression syntax looks like a function definition with optional
    *   parameters.
@@ -775,19 +781,29 @@ class ProfileServiceClient {
    *   * experience_in_months: experience in months. 0 means 0 month to 1 month
    *   (exclusive).
    *   * application_date: The application date specifies application start dates.
-   *   See [ApplicationDateFilter for more details.
+   *   See
+   *   [ApplicationDateFilter
+   *   for more details.
    *   * application_outcome_reason: The application outcome reason specifies the
    *   outcome reasons of job application.
-   *   See ApplicationOutcomeReasonFilter for more details.
+   *   See
+   *   ApplicationOutcomeReasonFilter
+   *   for more details.
    *   * application_last_stage: The application last stage specifies the last
    *   stage of job application.
-   *   See ApplicationLastStageFilter for more details.
+   *   See
+   *   ApplicationLastStageFilter
+   *   for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
-   *   See ApplicationJobFilter for more details.
+   *   See
+   *   ApplicationJobFilter
+   *   for more details.
    *   * application_status: The application status specifies the status of job
    *   application.
-   *   See ApplicationStatusFilter for more details.
+   *   See
+   *   ApplicationStatusFilter
+   *   for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].
@@ -928,7 +944,8 @@ class ProfileServiceClient {
    * @param {Object} [request.profileQuery]
    *   Optional.
    *
-   *   Search query to execute. See ProfileQuery for more details.
+   *   Search query to execute. See
+   *   ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
    * @param {number} [request.pageSize]
@@ -941,7 +958,9 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   An integer that specifies the current offset (that is, starting result) in
-   *   search results. This field is only considered if page_token is unset.
+   *   search results. This field is only considered if
+   *   page_token
+   *   is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -987,7 +1006,8 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   A list of expressions specifies histogram requests against matching
-   *   profiles for SearchProfilesRequest.
+   *   profiles for
+   *   SearchProfilesRequest.
    *
    *   The expression syntax looks like a function definition with optional
    *   parameters.
@@ -1040,19 +1060,29 @@ class ProfileServiceClient {
    *   * experience_in_months: experience in months. 0 means 0 month to 1 month
    *   (exclusive).
    *   * application_date: The application date specifies application start dates.
-   *   See [ApplicationDateFilter for more details.
+   *   See
+   *   [ApplicationDateFilter
+   *   for more details.
    *   * application_outcome_reason: The application outcome reason specifies the
    *   outcome reasons of job application.
-   *   See ApplicationOutcomeReasonFilter for more details.
+   *   See
+   *   ApplicationOutcomeReasonFilter
+   *   for more details.
    *   * application_last_stage: The application last stage specifies the last
    *   stage of job application.
-   *   See ApplicationLastStageFilter for more details.
+   *   See
+   *   ApplicationLastStageFilter
+   *   for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
-   *   See ApplicationJobFilter for more details.
+   *   See
+   *   ApplicationJobFilter
+   *   for more details.
    *   * application_status: The application status specifies the status of job
    *   application.
-   *   See ApplicationStatusFilter for more details.
+   *   See
+   *   ApplicationStatusFilter
+   *   for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].

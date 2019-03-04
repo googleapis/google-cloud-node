@@ -24,8 +24,11 @@
  *   An expression specifies a histogram request against matching resources
  *   (for example, jobs, profiles) for searches.
  *
- *   See SearchJobsRequest.histogram_queries and
- *   SearchProfilesRequest.histogram_queries for details about syntax.
+ *   See
+ *   SearchJobsRequest.histogram_queries
+ *   and
+ *   SearchProfilesRequest.histogram_queries
+ *   for details about syntax.
  *
  * @typedef HistogramQuery
  * @memberof google.cloud.talent.v4beta1

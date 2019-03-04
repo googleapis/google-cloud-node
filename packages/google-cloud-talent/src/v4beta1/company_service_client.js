@@ -331,11 +331,15 @@ class CompanyServiceClient {
    *   Optional but strongly recommended for the best service
    *   experience.
    *
-   *   If update_mask is provided, only the specified fields in
-   *   company are updated. Otherwise all the fields are updated.
+   *   If
+   *   update_mask
+   *   is provided, only the specified fields in
+   *   company are
+   *   updated. Otherwise all the fields are updated.
    *
    *   A field mask to specify the company fields to be updated. Only
-   *   top level fields of Company are supported.
+   *   top level fields of Company are
+   *   supported.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -446,8 +450,9 @@ class CompanyServiceClient {
    *
    *   Defaults to false.
    *
-   *   If true, at most page_size of companies are fetched, among which
-   *   only those with open jobs are returned.
+   *   If true, at most
+   *   page_size of
+   *   companies are fetched, among which only those with open jobs are returned.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -564,8 +569,9 @@ class CompanyServiceClient {
    *
    *   Defaults to false.
    *
-   *   If true, at most page_size of companies are fetched, among which
-   *   only those with open jobs are returned.
+   *   If true, at most
+   *   page_size of
+   *   companies are fetched, among which only those with open jobs are returned.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

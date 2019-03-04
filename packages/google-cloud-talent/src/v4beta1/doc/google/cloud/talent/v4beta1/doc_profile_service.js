@@ -31,8 +31,9 @@
  *
  *   The token that specifies the current offset (that is, starting result).
  *
- *   Please set the value to ListProfilesResponse.next_page_token to
- *   continue the list.
+ *   Please set the value to
+ *   ListProfilesResponse.next_page_token
+ *   to continue the list.
  *
  * @property {number} pageSize
  *   Optional.
@@ -223,7 +224,8 @@ const DeleteProfileRequest = {
  * @property {Object} profileQuery
  *   Optional.
  *
- *   Search query to execute. See ProfileQuery for more details.
+ *   Search query to execute. See
+ *   ProfileQuery for more details.
  *
  *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
  *
@@ -241,16 +243,18 @@ const DeleteProfileRequest = {
  *   The pageToken, similar to offset enables users of the API to paginate
  *   through the search results. To retrieve the first page of results, set the
  *   pageToken to empty. The search response includes a
- *   nextPageToken field that can be
- *   used to populate the pageToken field for the next page of results. Using
- *   pageToken instead of offset increases the performance of the API,
- *   especially compared to larger offset values.
+ *   nextPageToken
+ *   field that can be used to populate the pageToken field for the next page of
+ *   results. Using pageToken instead of offset increases the performance of the
+ *   API, especially compared to larger offset values.
  *
  * @property {number} offset
  *   Optional.
  *
  *   An integer that specifies the current offset (that is, starting result) in
- *   search results. This field is only considered if page_token is unset.
+ *   search results. This field is only considered if
+ *   page_token
+ *   is unset.
  *
  *   The maximum allowed value is 5000. Otherwise an error is thrown.
  *
@@ -300,7 +304,8 @@ const DeleteProfileRequest = {
  *   Optional.
  *
  *   A list of expressions specifies histogram requests against matching
- *   profiles for SearchProfilesRequest.
+ *   profiles for
+ *   SearchProfilesRequest.
  *
  *   The expression syntax looks like a function definition with optional
  *   parameters.
@@ -353,19 +358,29 @@ const DeleteProfileRequest = {
  *   * experience_in_months: experience in months. 0 means 0 month to 1 month
  *   (exclusive).
  *   * application_date: The application date specifies application start dates.
- *   See [ApplicationDateFilter for more details.
+ *   See
+ *   [ApplicationDateFilter
+ *   for more details.
  *   * application_outcome_reason: The application outcome reason specifies the
  *   outcome reasons of job application.
- *   See ApplicationOutcomeReasonFilter for more details.
+ *   See
+ *   ApplicationOutcomeReasonFilter
+ *   for more details.
  *   * application_last_stage: The application last stage specifies the last
  *   stage of job application.
- *   See ApplicationLastStageFilter for more details.
+ *   See
+ *   ApplicationLastStageFilter
+ *   for more details.
  *   * application_job_title: The application job title specifies the job
  *   applied for in the application.
- *   See ApplicationJobFilter for more details.
+ *   See
+ *   ApplicationJobFilter
+ *   for more details.
  *   * application_status: The application status specifies the status of job
  *   application.
- *   See ApplicationStatusFilter for more details.
+ *   See
+ *   ApplicationStatusFilter
+ *   for more details.
  *   * hirable_status: Hirable status specifies the profile's hirable status.
  *   * string_custom_attribute: String custom attributes. Values can be accessed
  *   via square bracket notation like string_custom_attribute["key1"].
@@ -421,7 +436,8 @@ const SearchProfilesRequest = {
  *   This object should have the same structure as [HistogramQueryResult]{@link google.cloud.talent.v4beta1.HistogramQueryResult}
  *
  * @property {Object[]} summarizedProfiles
- *   The profile entities that match the specified SearchProfilesRequest.
+ *   The profile entities that match the specified
+ *   SearchProfilesRequest.
  *
  *   This object should have the same structure as [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile}
  *
@@ -436,7 +452,8 @@ const SearchProfilesResponse = {
 /**
  * Output only.
  *
- * Profile entry with metadata inside SearchProfilesResponse.
+ * Profile entry with metadata inside
+ * SearchProfilesResponse.
  *
  * @property {Object[]} profiles
  *   A list of profiles that are linked by Profile.cluster_id.

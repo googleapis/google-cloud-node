@@ -28,7 +28,7 @@ for version in versions:
     library = gapic.node_library(
         "talent", version, config_path="/google/cloud/talent/"
         f"artman_talent_{version}.yaml",
-        artman_output_name=f"jobs-v4beta1")
+        artman_output_name=f"talent-v4beta1")
     s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
 # Copy common templates

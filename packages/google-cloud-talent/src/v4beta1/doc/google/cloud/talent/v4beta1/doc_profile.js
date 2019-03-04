@@ -17,8 +17,9 @@
 
 /**
  * A resource that represents the profile for a job candidate (also referred to
- * as a "single-source profile"). A profile belongs to a Tenant, which is
- * an isolated instance of the customer that owns the profile.
+ * as a "single-source profile"). A profile belongs to a
+ * Tenant, which is an isolated instance
+ * of the customer that owns the profile.
  *
  * @property {string} name
  *   Required during profile update.
@@ -59,17 +60,22 @@
  *   The cluster id of the profile to associate with other profile(s) for the
  *   same candidate.
  *
- *   A random UUID is assigned if group_id isn't provided. To ensure
- *   global uniqueness, customized group_id isn't supported. If
- *   group_id is set, there must be at least one other profile with the
- *   same system generated group_id, otherwise an error is thrown.
+ *   A random UUID is assigned if
+ *   group_id isn't provided. To
+ *   ensure global uniqueness, customized
+ *   group_id isn't supported.
+ *   If group_id is set, there
+ *   must be at least one other profile with the same system generated
+ *   group_id, otherwise an
+ *   error is thrown.
  *
  *   This is used to link multiple profiles to the same candidate. For example,
  *   a client has a candidate with two profiles, where one was created recently
  *   and the other one was created 5 years ago. These two profiles may be very
  *   different. The clients can create the first profile and get a generated
- *   group_id, and assign it when the second profile is created,
- *   indicating these two profiles are referring to the same candidate.
+ *   group_id, and assign it
+ *   when the second profile is created, indicating these two profiles are
+ *   referring to the same candidate.
  *
  * @property {Object} isHirable
  *   Optional.
@@ -99,15 +105,21 @@
  *   See http://schemas.liquid-technologies.com/hr-xml/2007-04-15/ for more
  *   information about Human Resources XML.
  *
- *   Users can create a profile with only resume_hrxml field. For example,
- *   the API parses the resume_hrxml and creates a profile with all
- *   structured fields populated, for example. EmploymentRecord,
- *   EducationRecord, etc. An error is thrown if the resume_hrxml can't
- *   be parsed.
+ *   Users can create a profile with only
+ *   resume_hrxml field. For
+ *   example, the API parses the
+ *   resume_hrxml and
+ *   creates a profile with all structured fields populated, for example.
+ *   EmploymentRecord,
+ *   EducationRecord, etc. An
+ *   error is thrown if the
+ *   resume_hrxml can't be
+ *   parsed.
  *
- *   If the resume_hrxml is provided during profile creation or update,
- *   any other structured data provided in the profile is ignored. The
- *   API populates these fields by parsing the HR-XML.
+ *   If the resume_hrxml is
+ *   provided during profile creation or update, any other structured data
+ *   provided in the profile is ignored. The API populates these fields by
+ *   parsing the HR-XML.
  *
  * @property {Object[]} personNames
  *   Optional.
@@ -149,8 +161,12 @@
  * @property {Object[]} additionalContactInfo
  *   Optional.
  *
- *   Available contact information besides addresses, email_addresses,
- *   phone_numbers and personal_uris. For example, Hang-out, Skype.
+ *   Available contact information besides
+ *   addresses,
+ *   email_addresses,
+ *   phone_numbers and
+ *   personal_uris. For
+ *   example, Hang-out, Skype.
  *
  *   This object should have the same structure as [AdditionalContactInfo]{@link google.cloud.talent.v4beta1.AdditionalContactInfo}
  *
@@ -166,8 +182,10 @@
  *   change is.
  *   For example, only job title is changed from "software engineer" to "senior
  *   software engineer".
- *   * Provide EmploymentRecord.is_current for the current employment if
- *   possible. If not, it's inferred from user inputs.
+ *   * Provide
+ *   EmploymentRecord.is_current
+ *   for the current employment if possible. If not, it's inferred from user
+ *   inputs.
  *
  *   This object should have the same structure as [EmploymentRecord]{@link google.cloud.talent.v4beta1.EmploymentRecord}
  *
@@ -182,8 +200,10 @@
  *   * List each education type separately, no matter how minor the change is.
  *   For example, the profile contains the education experience from the same
  *   school but different degrees.
- *   * Provide EducationRecord.is_current for the current education if
- *   possible. If not, it's inferred from user inputs.
+ *   * Provide
+ *   EducationRecord.is_current
+ *   for the current education if possible. If not, it's inferred from user
+ *   inputs.
  *
  *   This object should have the same structure as [EducationRecord]{@link google.cloud.talent.v4beta1.EducationRecord}
  *
@@ -200,7 +220,8 @@
  *
  *   The individual or collaborative activities which the candidate has
  *   participated in, for example, open-source projects, class assignments that
- *   aren't listed in employment_records.
+ *   aren't listed in
+ *   employment_records.
  *
  *   This object should have the same structure as [Activity]{@link google.cloud.talent.v4beta1.Activity}
  *
@@ -247,7 +268,8 @@
  *
  *   A map of fields to hold both filterable and non-filterable custom profile
  *   attributes that aren't covered by the provided structured fields. See
- *   CustomAttribute for more details.
+ *   CustomAttribute for more
+ *   details.
  *
  *   At most 100 filterable and at most 100 unfilterable keys are supported. If
  *   limit is exceeded, an error is thrown.
@@ -316,7 +338,9 @@ const PersonName = {
    *
    *   Given/first name.
    *
-   *   It's derived from formatted_name if not provided.
+   *   It's derived from
+   *   formatted_name
+   *   if not provided.
    *
    *   Number of characters allowed is 100.
    *
@@ -325,7 +349,9 @@ const PersonName = {
    *
    *   Middle initial.
    *
-   *   It's derived from formatted_name if not provided.
+   *   It's derived from
+   *   formatted_name
+   *   if not provided.
    *
    *   Number of characters allowed is 20.
    *
@@ -334,7 +360,9 @@ const PersonName = {
    *
    *   Family/last name.
    *
-   *   It's derived from formatted_name if not provided.
+   *   It's derived from
+   *   formatted_name
+   *   if not provided.
    *
    *   Number of characters allowed is 100.
    *
@@ -684,19 +712,25 @@ const AdditionalContactInfo = {
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
  * @property {string} jobTitleSnippet
- *   Output only. The job title snippet shows how the job_title is related
- *   to a search query. It's empty if the job_title isn't related to the
- *   search query.
+ *   Output only. The job title snippet shows how the
+ *   job_title is
+ *   related to a search query. It's empty if the
+ *   job_title isn't
+ *   related to the search query.
  *
  * @property {string} jobDescriptionSnippet
- *   Output only. The job description snippet shows how the job_description
- *   is related to a search query. It's empty if the job_description isn't
- *   related to the search query.
+ *   Output only. The job description snippet shows how the
+ *   job_description
+ *   is related to a search query. It's empty if the
+ *   job_description
+ *   isn't related to the search query.
  *
  * @property {string} employerNameSnippet
- *   Output only. The employer name snippet shows how the employer_name is
- *   related to a search query. It's empty if the employer_name isn't
- *   related to the search query.
+ *   Output only. The employer name snippet shows how the
+ *   employer_name
+ *   is related to a search query. It's empty if the
+ *   employer_name
+ *   isn't related to the search query.
  *
  * @typedef EmploymentRecord
  * @memberof google.cloud.talent.v4beta1
@@ -777,14 +811,18 @@ const EmploymentRecord = {
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
  * @property {string} schoolNameSnippet
- *   Output only. The school name snippet shows how the school_name is
+ *   Output only. The school name snippet shows how the
+ *   school_name is
  *   related to a search query in search result. It's empty if the
- *   school_name isn't related to the search query.
+ *   school_name
+ *   isn't related to the search query.
  *
  * @property {string} degreeSnippet
- *   Output only. The job description snippet shows how the degree is
- *   related to a search query in search result. It's empty if the degree
- *   isn't related to the search query.
+ *   Output only. The job description snippet shows how the
+ *   degree is related to a search query
+ *   in search result. It's empty if the
+ *   degree isn't related to the search
+ *   query.
  *
  * @typedef EducationRecord
  * @memberof google.cloud.talent.v4beta1
@@ -865,9 +903,11 @@ const Degree = {
  *   Number of characters allowed is 100,000.
  *
  * @property {string} skillNameSnippet
- *   Output only. Skill name snippet shows how the display_name is related
- *   to a search query. It's empty if the display_name isn't related to the
- *   search query.
+ *   Output only. Skill name snippet shows how the
+ *   display_name is related
+ *   to a search query. It's empty if the
+ *   display_name isn't
+ *   related to the search query.
  *
  * @typedef Skill
  * @memberof google.cloud.talent.v4beta1
@@ -975,19 +1015,25 @@ const Skill = {
  *   This object should have the same structure as [Skill]{@link google.cloud.talent.v4beta1.Skill}
  *
  * @property {string} activityNameSnippet
- *   Output only. Activity name snippet shows how the display_name is
- *   related to a search query. It's empty if the display_name isn't related
- *   to the search query.
+ *   Output only. Activity name snippet shows how the
+ *   display_name is
+ *   related to a search query. It's empty if the
+ *   display_name isn't
+ *   related to the search query.
  *
  * @property {string} activityDescriptionSnippet
  *   Output only. Activity description snippet shows how the
- *   description is related to a search query. It's empty if the
- *   description isn't related to the search query.
+ *   description is related
+ *   to a search query. It's empty if the
+ *   description isn't
+ *   related to the search query.
  *
  * @property {string[]} skillsUsedSnippet
  *   Output only. Skill used snippet shows how the corresponding
- *   skills_used are related to a search query. It's empty if the
- *   corresponding skills_used are not related to the search query.
+ *   skills_used are related
+ *   to a search query. It's empty if the corresponding
+ *   skills_used are not
+ *   related to the search query.
  *
  * @typedef Activity
  * @memberof google.cloud.talent.v4beta1
@@ -1153,11 +1199,16 @@ const Patent = {
  *
  *   The information of job which the candidate applied for.
  *
- *   If Job.name is provided, the corresponding Job must be created.
+ *   If Job.name is provided, the
+ *   corresponding Job must be created.
  *
- *   Otherwise, only Job.requisition_id, Job.title,
- *   Job.description and Job.addresses provided here are persisted
- *   in the application. No Job entity is created in this case.
+ *   Otherwise, only
+ *   Job.requisition_id,
+ *   Job.title,
+ *   Job.description and
+ *   Job.addresses provided here
+ *   are persisted in the application. No Job
+ *   entity is created in this case.
  *
  *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
  *

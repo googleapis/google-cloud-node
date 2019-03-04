@@ -184,8 +184,9 @@ class ResumeServiceClient {
   // -------------------
 
   /**
-   * Parses a resume into a Profile. The API attempts to fill out the
-   * following profile fields if present within the resume:
+   * Parses a resume into a Profile. The
+   * API attempts to fill out the following profile fields if present within the
+   * resume:
    *
    * * personNames
    * * addresses

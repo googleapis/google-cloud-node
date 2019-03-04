@@ -11,9 +11,7 @@
   "main": "src/index.js",
   "files": [
     "protos",
-    "src",
-    "AUTHORS",
-    "COPYING"
+    "src"
   ],
   "keywords": [
     "google apis client",
@@ -29,26 +27,22 @@
     "Cloud Talent Solution API"
   ],
   "scripts": {
-    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "eslint '**/*.js'",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
-    "test-no-cover": "mocha test/*.js",
-    "test": "npm run cover",
+    "system-test": "mocha system-test --timeout 600000",
+    "test": "nyc mocha",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "fix": "eslint --fix '**/*.js'"
   },
   "dependencies": {
     "google-gax": "^0.25.0",
-    "lodash.merge": "^4.6.1",
-    "lodash.union": "^4.6.0"
+    "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "@google-cloud/storage": "^2.0.0",
     "codecov": "^3.0.2",
     "eslint": "^5.14.1",
     "eslint-config-prettier": "^4.0.0",
@@ -61,8 +55,6 @@
     "mocha": "^6.0.0",
     "nyc": "^13.0.0",
     "power-assert": "^1.6.0",
-    "prettier": "^1.13.6",
-    "sinon": "^7.0.0",
-    "uuid": "^3.3.0"
+    "prettier": "^1.13.6"
   }
 }

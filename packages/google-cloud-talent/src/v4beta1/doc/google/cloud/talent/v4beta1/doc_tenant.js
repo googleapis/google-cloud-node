@@ -43,7 +43,9 @@
  *   Indicates whether data owned by this tenant may be used to provide product
  *   improvements across other tenants.
  *
- *   Defaults behavior is DataUsageType.ISOLATED if it's unset.
+ *   Defaults behavior is
+ *   DataUsageType.ISOLATED
+ *   if it's unset.
  *
  *   The number should be among the values of [DataUsageType]{@link google.cloud.talent.v4beta1.DataUsageType}
  *
