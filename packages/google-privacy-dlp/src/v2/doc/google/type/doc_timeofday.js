@@ -18,7 +18,8 @@
 /**
  * Represents a time of day. The date and time zone are either not significant
  * or are specified elsewhere. An API may chose to allow leap seconds. Related
- * types are google.type.Date and `google.protobuf.Timestamp`.
+ * types are google.type.Date and
+ * `google.protobuf.Timestamp`.
  *
  * @property {number} hours
  *   Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
