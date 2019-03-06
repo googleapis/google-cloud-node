@@ -14,6 +14,7 @@
     "build/protos",
     "build/src"
   ],
+  "types": "build/src/index.d.ts",
   "keywords": [
     "google apis client",
     "google api client",
@@ -62,7 +63,6 @@
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "@types/arrify": "^1.0.4",
-    "@types/async": "^2.0.50",
     "@types/execa": "^0.9.0",
     "@types/extend": "^3.0.0",
     "@types/is": "0.0.21",
@@ -88,7 +88,7 @@
     "linkinator": "^1.1.2",
     "mocha": "^6.0.0",
     "mv": "^2.1.1",
-    "npc": "0.0.1",
+    "ncp": "^2.0.0",
     "nyc": "^13.0.0",
     "power-assert": "^1.5.0",
     "prettier": "^1.13.5",
