@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## v3.1.2
+
+03-06-2019 12:24 PST
+
+### Bug fixes
+- fix: make an explicit dependency on long ([#352](https://github.com/googleapis/nodejs-datastore/pull/352))
+- fix: include types in package ([#351](https://github.com/googleapis/nodejs-datastore/pull/351))
+- fix: add missing package, and add install test ([#346](https://github.com/googleapis/nodejs-datastore/pull/346))
+
+### Documentation
+- docs(samples): Update datastore_transaction_retry sample to use function arguments rather than closed variables. ([#339](https://github.com/googleapis/nodejs-datastore/pull/339))
+
+### Internal / Testing Changes
+- refactor(ts): enable noImplicitAny on test/request.ts ([#343](https://github.com/googleapis/nodejs-datastore/pull/343))
+- refactor(ts): enable noImplicitAny on test/query.ts ([#342](https://github.com/googleapis/nodejs-datastore/pull/342))
+- build: update release configuration
+- chore: update proto docs and code style
+- chore(deps): update dependency mocha to v6 ([#338](https://github.com/googleapis/nodejs-datastore/pull/338))
+
 ## v3.1.1
 
 02-18-2019 22:46 PST
