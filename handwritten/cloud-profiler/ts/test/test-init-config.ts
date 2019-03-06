@@ -63,8 +63,8 @@ describe('nodeVersionOkay', () => {
 
 describe('createProfiler', () => {
   let savedEnv: NodeJS.ProcessEnv;
-  let metadataStub: sinon.SinonStub|undefined;
-  let startStub: sinon.SinonStub;
+  let metadataStub: sinon.SinonStub<[(string | gcpMetadata.Options | undefined)?], Promise<{}>>|undefined;
+  let startStub: sinon.SinonStub<[number, number], void>;
 
   const internalConfigParams = {
     timeIntervalMicros: 1000,

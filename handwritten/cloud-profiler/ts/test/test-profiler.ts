@@ -15,6 +15,7 @@
  */
 
 import * as common from '@google-cloud/common';
+import {BodyResponseCallback, DecorateRequestOptions} from '@google-cloud/common';
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as nock from 'nock';
@@ -92,7 +93,8 @@ describe('Retryer', () => {
 });
 
 describe('Profiler', () => {
-  const sinonStubs: sinon.SinonStub[] = new Array();
+  // tslint:disable-next-line: no-any
+  const sinonStubs: Array<sinon.SinonStub<any, any>> = new Array();
   beforeEach(() => {
     sinonStubs.push(sinon.stub(timeProfiler, 'start'));
     sinonStubs.push(sinon.stub(timeProfiler, 'profile')
@@ -252,7 +254,8 @@ describe('Profiler', () => {
     });
   });
   describe('profileAndUpload', () => {
-    let requestStub: undefined|sinon.SinonStub;
+    let requestStub: undefined|
+        sinon.SinonStub<[DecorateRequestOptions, BodyResponseCallback], void>;
     afterEach(() => {
       if (requestStub) {
         requestStub.restore();
@@ -383,7 +386,8 @@ describe('Profiler', () => {
        });
   });
   describe('createProfile', () => {
-    let requestStub: undefined|sinon.SinonStub;
+    let requestStub: undefined|
+        sinon.SinonStub<[DecorateRequestOptions, BodyResponseCallback], void>;
     afterEach(() => {
       if (requestStub) {
         requestStub.restore();
@@ -654,8 +658,9 @@ describe('Profiler', () => {
     });
   });
   describe('collectProfile', () => {
-    let requestStub: undefined|sinon.SinonStub;
-    let randomStub: sinon.SinonStub|undefined;
+    let requestStub: undefined|
+        sinon.SinonStub<[DecorateRequestOptions, BodyResponseCallback], void>;
+    let randomStub: sinon.SinonStub<[], number>|undefined;
     before(() => {
       randomStub = sinon.stub(Math, 'random').returns(0.5);
     });
