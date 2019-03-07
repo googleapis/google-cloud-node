@@ -22,7 +22,7 @@ import * as streamEvents from 'stream-events';
 import * as through from 'through2';
 import * as uuid from 'uuid';
 import * as P from '../src';
-import {paginator, Paginator, ParsedArguments} from '../src';
+import {paginator, ParsedArguments} from '../src';
 
 const util = {
   noop: () => {}
@@ -394,7 +394,7 @@ describe('paginator', () => {
       query: {maxApiCalls: 12345, pageSize: 23456},
     };
 
-    let limiterStub: sinon.SinonStub;
+    let limiterStub: sinon.SinonStub<[Function, (P.CreateLimiterOptions | undefined)?], P.Limiter>;
     beforeEach(() => {
       limiterStub = sandbox.stub(p, 'createLimiter').callsFake(makeRequest => {
         const transformStream = new stream.Transform({objectMode: true});

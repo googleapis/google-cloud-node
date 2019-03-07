@@ -24,7 +24,7 @@ import {split} from 'split-array-stream';
 import {Transform, TransformOptions} from 'stream';
 import * as streamEvents from 'stream-events';
 
-interface CreateLimiterOptions {
+export interface CreateLimiterOptions {
   /**
    * The maximum number of API calls to make.
    */
@@ -328,16 +328,13 @@ export class Paginator {
         if (streamEnded) {
           return;
         }
-
         if (nextQuery && resultsToSend !== 0) {
           limiter.makeRequest(nextQuery);
           return;
         }
-
         stream.push(null);
       });
     }
-
     return limiter.stream;
   }
 }
