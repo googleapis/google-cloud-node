@@ -143,6 +143,8 @@ class Query {
     this.offsetVal = -1;
   }
 
+  filter(property: string, value: {}): Query;
+  filter(property: string, operator: Operator, value: {}): Query;
   /**
    * Datastore allows querying on properties. Supported comparison operators
    * are `=`, `<`, `>`, `<=`, and `>=`. "Not equal" and `IN` operators are
@@ -181,8 +183,6 @@ class Query {
    * const key = datastore.key(['Company', 'Google']);
    * const keyQuery = query.filter('__key__', key);
    */
-  filter(property: string, value: {}): Query;
-  filter(property: string, operator: Operator, value: {}): Query;
   filter(property: string, operatorOrValue: Operator, value?: {}): Query {
     let operator = operatorOrValue as Operator;
     if (arguments.length === 2) {
@@ -380,6 +380,9 @@ class Query {
     return this;
   }
 
+  run(options?: RunQueryOptions): Promise<RunQueryResponse>;
+  run(options: RunQueryOptions, callback: RunQueryCallback): void;
+  run(callback: RunQueryCallback): void;
   /**
    * Run the query.
    *
@@ -435,9 +438,6 @@ class Query {
    *   const entities = data[0];
    * });
    */
-  run(options?: RunQueryOptions): Promise<RunQueryResponse>;
-  run(options: RunQueryOptions, callback: RunQueryCallback): void;
-  run(callback: RunQueryCallback): void;
   run(optionsOrCallback?: RunQueryOptions|RunQueryCallback,
       cb?: RunQueryCallback): void|Promise<RunQueryResponse> {
     const query = this as Query;
