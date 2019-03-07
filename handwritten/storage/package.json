@@ -58,7 +58,7 @@
     "concat-stream": "^2.0.0",
     "duplexify": "^3.5.0",
     "extend": "^3.0.0",
-    "gcs-resumable-upload": "^0.14.1",
+    "gcs-resumable-upload": "^1.0.0",
     "hash-stream-validation": "^0.2.1",
     "mime": "^2.2.0",
     "mime-types": "^2.0.8",
