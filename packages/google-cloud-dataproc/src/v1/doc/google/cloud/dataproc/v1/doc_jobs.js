@@ -90,8 +90,10 @@ const LoggingConfig = {
 
 /**
  * A Cloud Dataproc job for running
- * [Apache Hadoop MapReduce](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
- * jobs on [Apache Hadoop YARN](https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
+ * [Apache Hadoop
+ * MapReduce](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
+ * jobs on [Apache Hadoop
+ * YARN](https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
  *
  * @property {string} mainJarFileUri
  *   The HCFS URI of the jar file containing the main class.
@@ -106,8 +108,8 @@ const LoggingConfig = {
  *
  * @property {string[]} args
  *   Optional. The arguments to pass to the driver. Do not
- *   include arguments, such as `-libjars` or `-Dfoo=bar`, that can be set as job
- *   properties, since a collision may occur that causes an incorrect job
+ *   include arguments, such as `-libjars` or `-Dfoo=bar`, that can be set as
+ *   job properties, since a collision may occur that causes an incorrect job
  *   submission.
  *
  * @property {string[]} jarFileUris
@@ -193,7 +195,8 @@ const SparkJob = {
 
 /**
  * A Cloud Dataproc job for running
- * [Apache PySpark](https://spark.apache.org/docs/0.9.0/python-programming-guide.html)
+ * [Apache
+ * PySpark](https://spark.apache.org/docs/0.9.0/python-programming-guide.html)
  * applications on YARN.
  *
  * @property {string} mainPythonFileUri
@@ -281,8 +284,8 @@ const QueryList = {
  *
  * @property {boolean} continueOnFailure
  *   Optional. Whether to continue executing queries if a query fails.
- *   The default value is `false`. Setting to `true` can be useful when executing
- *   independent parallel queries.
+ *   The default value is `false`. Setting to `true` can be useful when
+ *   executing independent parallel queries.
  *
  * @property {Object.<string, string>} scriptVariables
  *   Optional. Mapping of query variable names to values (equivalent to the
@@ -308,8 +311,8 @@ const HiveJob = {
 };
 
 /**
- * A Cloud Dataproc job for running [Apache Spark SQL](http://spark.apache.org/sql/)
- * queries.
+ * A Cloud Dataproc job for running [Apache Spark
+ * SQL](http://spark.apache.org/sql/) queries.
  *
  * @property {string} queryFileUri
  *   The HCFS URI of the script that contains SQL queries.
@@ -358,8 +361,8 @@ const SparkSqlJob = {
  *
  * @property {boolean} continueOnFailure
  *   Optional. Whether to continue executing queries if a query fails.
- *   The default value is `false`. Setting to `true` can be useful when executing
- *   independent parallel queries.
+ *   The default value is `false`. Setting to `true` can be useful when
+ *   executing independent parallel queries.
  *
  * @property {Object.<string, string>} scriptVariables
  *   Optional. Mapping of query variable names to values (equivalent to the Pig
@@ -711,8 +714,8 @@ const YarnApplication = {
  * @property {Object[]} yarnApplications
  *   Output only. The collection of YARN applications spun up by this job.
  *
- *   **Beta** Feature: This report is available for testing purposes only. It may
- *   be changed before final release.
+ *   **Beta** Feature: This report is available for testing purposes only. It
+ *   may be changed before final release.
  *
  *   This object should have the same structure as [YarnApplication]{@link google.cloud.dataproc.v1.YarnApplication}
  *
@@ -730,8 +733,9 @@ const YarnApplication = {
  *   Label **keys** must contain 1 to 63 characters, and must conform to
  *   [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
  *   Label **values** may be empty, but, if present, must contain 1 to 63
- *   characters, and must conform to [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
- *   No more than 32 labels can be associated with a job.
+ *   characters, and must conform to [RFC
+ *   1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
+ *   associated with a job.
  *
  * @property {Object} scheduling
  *   Optional. Job scheduling configuration.
@@ -789,8 +793,8 @@ const JobScheduling = {
  *
  * @property {string} requestId
  *   Optional. A unique id used to identify the request. If the server
- *   receives two SubmitJobRequest requests  with the same
- *   id, then the second request will be ignored and the
+ *   receives two SubmitJobRequest
+ *   requests  with the same id, then the second request will be ignored and the
  *   first Job created and stored in the backend
  *   is returned.
  *

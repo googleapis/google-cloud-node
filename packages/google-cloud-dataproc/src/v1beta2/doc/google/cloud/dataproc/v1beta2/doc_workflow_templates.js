@@ -183,8 +183,8 @@ const ClusterSelector = {
  *
  *   The step id is used as prefix for job id, as job
  *   `goog-dataproc-workflow-step-id` label, and in
- *   prerequisiteStepIds field from other
- *   steps.
+ *   prerequisiteStepIds
+ *   field from other steps.
  *
  *   The id must contain only letters (a-z, A-Z), numbers (0-9),
  *   underscores (_), and hyphens (-). Cannot begin or end with underscore
@@ -271,12 +271,13 @@ const OrderedJob = {
  *
  * @property {string[]} fields
  *   Required. Paths to all fields that the parameter replaces.
- *   A field is allowed to appear in at most one parameter's list of field paths.
+ *   A field is allowed to appear in at most one parameter's list of field
+ *   paths.
  *
- *   A field path is similar in syntax to a google.protobuf.FieldMask.
- *   For example, a field path that references the zone field of a workflow
- *   template's cluster selector would be specified as
- *   `placement.clusterSelector.zone`.
+ *   A field path is similar in syntax to a
+ *   google.protobuf.FieldMask. For example, a
+ *   field path that references the zone field of a workflow template's cluster
+ *   selector would be specified as `placement.clusterSelector.zone`.
  *
  *   Also, field paths can reference fields using the following syntax:
  *
@@ -742,8 +743,8 @@ const ListWorkflowTemplatesRequest = {
  *   This object should have the same structure as [WorkflowTemplate]{@link google.cloud.dataproc.v1beta2.WorkflowTemplate}
  *
  * @property {string} nextPageToken
- *   Output only. This token is included in the response if there are more results
- *   to fetch. To fetch additional results, provide this value as the
+ *   Output only. This token is included in the response if there are more
+ *   results to fetch. To fetch additional results, provide this value as the
  *   page_token in a subsequent <code>ListWorkflowTemplatesRequest</code>.
  *
  * @typedef ListWorkflowTemplatesResponse

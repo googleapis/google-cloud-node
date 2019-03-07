@@ -203,9 +203,10 @@ class JobControllerClient {
    *   This object should have the same structure as [Job]{@link google.cloud.dataproc.v1beta2.Job}
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
-   *   receives two SubmitJobRequest requests  with the same
-   *   id, then the second request will be ignored and the
-   *   first Job created and stored in the backend
+   *   receives two
+   *   SubmitJobRequest requests
+   *   with the same id, then the second request will be ignored and the first
+   *   Job created and stored in the backend
    *   is returned.
    *
    *   It is recommended to always set this value to a
@@ -615,7 +616,8 @@ class JobControllerClient {
   /**
    * Starts a job cancellation request. To access the job resource
    * after cancellation, call
-   * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list) or
+   * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list)
+   * or
    * [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).
    *
    * @param {Object} request

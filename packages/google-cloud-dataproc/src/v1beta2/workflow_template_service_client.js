@@ -509,7 +509,8 @@ class WorkflowTemplateServiceClient {
    * Instantiates a template and begins execution.
    *
    * This method is equivalent to executing the sequence
-   * CreateWorkflowTemplate, InstantiateWorkflowTemplate,
+   * CreateWorkflowTemplate,
+   * InstantiateWorkflowTemplate,
    * DeleteWorkflowTemplate.
    *
    * The returned Operation can be used to track execution of
