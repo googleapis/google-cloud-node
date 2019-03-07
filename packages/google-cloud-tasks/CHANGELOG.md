@@ -4,6 +4,35 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## v0.4.0
+
+03-06-2019 13:30 PST
+
+### New Features
+- feat: add alpha support for HTTP triggers ([#177](https://github.com/googleapis/nodejs-tasks/pull/177))
+
+### Bug fixes
+- fix: throw on invalid credentials
+
+### Documentation
+- docs: update contributing path in README ([#168](https://github.com/googleapis/nodejs-tasks/pull/168))
+- docs: move CONTRIBUTING.md to root ([#167](https://github.com/googleapis/nodejs-tasks/pull/167))
+- docs: add lint/fix example to contributing guide ([#165](https://github.com/googleapis/nodejs-tasks/pull/165))
+- docs: fix example comments ([#164](https://github.com/googleapis/nodejs-tasks/pull/164))
+- docs: update comments on protos ([#180](https://github.com/googleapis/nodejs-tasks/pull/180))
+- docs: sync latest proto docs
+- docs: update README to include samples ([#178](https://github.com/googleapis/nodejs-tasks/pull/178))
+- docs: update links in contrib guide ([#174](https://github.com/googleapis/nodejs-tasks/pull/174))
+
+### Internal / Testing Changes
+- build: update release configuration
+- chore(deps): update dependency mocha to v6 ([#176](https://github.com/googleapis/nodejs-tasks/pull/176))
+- build: use linkinator for docs test ([#173](https://github.com/googleapis/nodejs-tasks/pull/173))
+- fix(deps): update dependency yargs to v13 ([#171](https://github.com/googleapis/nodejs-tasks/pull/171))
+- build: create docs test npm scripts ([#170](https://github.com/googleapis/nodejs-tasks/pull/170))
+- build: test using @grpc/grpc-js in CI ([#169](https://github.com/googleapis/nodejs-tasks/pull/169))
+- refactor: improve generated code style. ([#163](https://github.com/googleapis/nodejs-tasks/pull/163))
+
 ## v0.3.0
 
 01-31-2019 23:06 PST
