@@ -221,8 +221,8 @@ export class Paginator {
         delete query.maxApiCalls;
       }
 
-      // maxResults is the user specified a limit.
-      if (callback && (maxResults !== -1 || query.autoPaginate === false)) {
+      // maxResults is the user specified limit.
+      if (maxResults !== -1 || query.autoPaginate === false) {
         autoPaginate = false;
       }
     }
@@ -263,15 +263,21 @@ export class Paginator {
   run_(parsedArguments: ParsedArguments, originalMethod: Function) {
     const query = parsedArguments.query;
     const callback = parsedArguments.callback!;
-    if (parsedArguments.autoPaginate) {
-      const results = new Array<{}>();
-      paginator.runAsStream_(parsedArguments, originalMethod)
-          .on('error', callback)
-          .on('data', (data: {}) => results.push(data))
-          .on('end', () => callback(null, results));
-    } else {
-      originalMethod(query, callback);
+    if (!parsedArguments.autoPaginate) {
+      return originalMethod(query, callback);
     }
+    const results = new Array<{}>();
+    const promise = new Promise((resolve, reject) => {
+      paginator.runAsStream_(parsedArguments, originalMethod)
+          .on('error', reject)
+          .on('data', (data: {}) => results.push(data))
+          .on('end', () => resolve(results));
+    });
+    if (!callback) {
+      return promise.then(results => [results]);
+    }
+    promise.then(
+        results => callback(null, results), (err: Error) => callback(err));
   }
 
   /**
@@ -312,19 +318,19 @@ export class Paginator {
     }
 
     // tslint:disable-next-line:no-any
-    function onResultSet(err: Error, results: any[], nextQuery: any) {
+    function onResultSet(err: Error|null, results?: any[], nextQuery?: any) {
       if (err) {
         stream.destroy(err);
         return;
       }
 
-      if (resultsToSend >= 0 && results.length > resultsToSend) {
-        results = results.splice(0, resultsToSend);
+      if (resultsToSend >= 0 && results!.length > resultsToSend) {
+        results = results!.splice(0, resultsToSend);
       }
 
-      resultsToSend -= results.length;
+      resultsToSend -= results!.length;
 
-      split(results, stream).then(streamEnded => {
+      split(results!, stream).then(streamEnded => {
         if (streamEnded) {
           return;
         }

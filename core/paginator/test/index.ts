@@ -308,82 +308,151 @@ describe('paginator', () => {
 
   describe('run_', () => {
     describe('autoPaginate', () => {
-      it('should call runAsStream_ when autoPaginate:true', (done) => {
-        const parsedArguments = {
-          autoPaginate: true,
-          callback: util.noop,
-        };
+      describe('originalmethod is callback based', () => {
+        it('should call runAsStream_ when autoPaginate:true', (done) => {
+          const parsedArguments = {
+            autoPaginate: true,
+            callback: util.noop,
+          };
 
-        sandbox.stub(paginator, 'runAsStream_')
-            .callsFake((args, originalMethod) => {
-              assert.strictEqual(args, parsedArguments);
-              originalMethod();
-              return through();
+          sandbox.stub(paginator, 'runAsStream_')
+              .callsFake((args, originalMethod) => {
+                assert.strictEqual(args, parsedArguments);
+                originalMethod();
+                return through();
+              });
+
+          paginator.run_(parsedArguments, done);
+        });
+
+        it('should execute callback on error', (done) => {
+          const error = new Error('Error.');
+
+          const parsedArguments = {
+            autoPaginate: true,
+            callback(err: Error) {
+              assert.strictEqual(err, error);
+              done();
+            },
+          };
+
+          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+            const stream = through();
+            setImmediate(() => {
+              stream.emit('error', error);
             });
-
-        paginator.run_(parsedArguments, done);
-      });
-
-      it('should execute callback on error', (done) => {
-        const error = new Error('Error.');
-
-        const parsedArguments = {
-          autoPaginate: true,
-          callback(err: Error) {
-            assert.strictEqual(err, error);
-            done();
-          },
-        };
-
-        sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
-          const stream = through();
-          setImmediate(() => {
-            stream.emit('error', error);
+            return stream;
           });
-          return stream;
+
+          paginator.run_(parsedArguments, util.noop);
         });
 
-        paginator.run_(parsedArguments, util.noop);
+        it('should return all results on end', (done) => {
+          const results = [{a: 1}, {b: 2}, {c: 3}];
+
+          const parsedArguments = {
+            autoPaginate: true,
+            callback(err: Error, results_: {}) {
+              assert.deepStrictEqual(results_, results);
+              done();
+            },
+          };
+
+          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+            const stream = through.obj();
+            setImmediate(() => {
+              results.forEach(result => stream.push(result));
+              stream.push(null);
+            });
+            return stream;
+          });
+
+          paginator.run_(parsedArguments, util.noop);
+        });
       });
 
-      it('should return all results on end', (done) => {
-        const results = [{a: 1}, {b: 2}, {c: 3}];
-
+      describe('original method is promise based', () => {
         const parsedArguments = {
           autoPaginate: true,
-          callback(err: Error, results_: {}) {
-            assert.deepStrictEqual(results_, results);
-            done();
-          },
         };
+        it('should call runAsStream_ when autoPaginate:true', (done) => {
+          sandbox.stub(paginator, 'runAsStream_')
+              .callsFake((args, originalMethod) => {
+                assert.strictEqual(args, parsedArguments);
+                originalMethod();
+                return through();
+              });
 
-        sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
-          const stream = through.obj();
-          setImmediate(() => {
-            results.forEach(result => stream.push(result));
-            stream.push(null);
-          });
-          return stream;
+          paginator.run_(parsedArguments, done);
         });
 
-        paginator.run_(parsedArguments, util.noop);
+        it('should reject a promise on error', () => {
+          const error = new Error('Error.');
+
+          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+            const stream = through();
+            setImmediate(() => {
+              stream.emit('error', error);
+            });
+            return stream;
+          });
+
+          paginator.run_(parsedArguments, util.noop)
+              .then(util.noop, (err: Error) => assert.strictEqual(err, error));
+        });
+
+        it('should resolve with all results on end', () => {
+          const results = [{a: 1}, {b: 2}, {c: 3}];
+
+          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+            const stream = through.obj();
+            setImmediate(() => {
+              results.forEach(result => stream.push(result));
+              stream.push(null);
+            });
+            return stream;
+          });
+
+          paginator.run_(parsedArguments, util.noop)
+              .then(
+                  ([results_]: [1]) =>
+                      assert.deepStrictEqual(results_, results));
+        });
       });
     });
 
     describe('manual pagination', () => {
-      it('should recoginze autoPaginate: false', (done) => {
-        const parsedArguments = {
-          autoPaginate: false,
-          query: {
-            a: 'b',
-            c: 'd',
-          },
-          callback: done,
-        } as ParsedArguments;
-        sandbox.stub(paginator, 'runAsStream_').callsFake(util.noop);
-        paginator.run_(parsedArguments, (query: {}, callback: () => void) => {
-          assert.deepStrictEqual(query, parsedArguments.query);
-          callback();
+      describe('originalmethod is callback based', () => {
+        it('should recognize autoPaginate: false', (done) => {
+          const parsedArguments = {
+            autoPaginate: false,
+            query: {
+              a: 'b',
+              c: 'd',
+            },
+            callback: done,
+          } as ParsedArguments;
+          sandbox.stub(paginator, 'runAsStream_').callsFake(util.noop);
+          paginator.run_(parsedArguments, (query: {}, callback: () => void) => {
+            assert.deepStrictEqual(query, parsedArguments.query);
+            callback();
+          });
+        });
+      });
+
+      describe('original method is promise based', () => {
+        it('should recognize autoPaginate: false', () => {
+          const parsedArguments = {
+            autoPaginate: false,
+            query: {
+              a: 'b',
+              c: 'd',
+            },
+          } as ParsedArguments;
+          sandbox.stub(paginator, 'runAsStream_').callsFake(util.noop);
+          paginator.run_(parsedArguments, (query: {}) => {
+            assert.deepStrictEqual(query, parsedArguments.query);
+          });
         });
       });
     });
@@ -392,6 +461,7 @@ describe('paginator', () => {
   describe('runAsStream_', () => {
     const PARSED_ARGUMENTS = {
       query: {maxApiCalls: 12345, pageSize: 23456},
+      callback: util.noop
     };
 
     let limiterStub: sinon.SinonStub<[Function, (P.CreateLimiterOptions | undefined)?], P.Limiter>;
@@ -411,48 +481,100 @@ describe('paginator', () => {
       });
     });
 
-    it('should call original method when stream opens', (done) => {
-      function originalMethod(query: {}) {
-        assert.strictEqual(query, PARSED_ARGUMENTS.query);
-        done();
-      }
-      p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-    });
+    describe('originalmethod is callback based', () => {
+      it('should call original method when stream opens', (done) => {
+        function originalMethod(query: {}) {
+          assert.strictEqual(query, PARSED_ARGUMENTS.query);
+          done();
+        }
+        p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      });
 
-    it('should emit an error if one occurs', (done) => {
-      const error = new Error('Error.');
+      it('should emit an error if one occurs', (done) => {
+        const error = new Error('Error.');
 
-      function originalMethod(query: {}, callback: (err: Error) => void) {
-        setImmediate(() => {
-          callback(error);
+        function originalMethod(query: {}, callback: (err: Error) => void) {
+          setImmediate(() => {
+            callback(error);
+          });
+        }
+
+        const rs = p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+        rs.on('error', (err: Error) => {
+          assert.deepStrictEqual(err, error);
+          done();
         });
-      }
+      });
 
-      const rs = p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-      rs.on('error', (err: Error) => {
-        assert.deepStrictEqual(err, error);
-        done();
+      it('should push results onto the stream', (done) => {
+        const results = ['a', 'b', 'c'];
+        const resultsReceived: Array<{}> = [];
+
+        function originalMethod(
+            query: {}, callback: (err: Error|null, results: {}) => void) {
+          setImmediate(() => {
+            callback(null, results);
+          });
+        }
+
+        const rs = p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+        rs.on('data', (result: {}) => {
+          resultsReceived.push(result);
+        });
+        rs.on('end', () => {
+          assert.deepStrictEqual(resultsReceived, ['a', 'b', 'c']);
+          done();
+        });
       });
     });
 
-    it('should push results onto the stream', (done) => {
-      const results = ['a', 'b', 'c'];
-      const resultsReceived: Array<{}> = [];
-
-      function originalMethod(
-          query: {}, callback: (err: Error|null, results: {}) => void) {
-        setImmediate(() => {
-          callback(null, results);
-        });
-      }
-
-      const rs = p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-      rs.on('data', (result: {}) => {
-        resultsReceived.push(result);
+    describe('originalmethod is promise based', () => {
+      before(() => {
+        delete PARSED_ARGUMENTS.callback;
       });
-      rs.on('end', () => {
-        assert.deepStrictEqual(resultsReceived, ['a', 'b', 'c']);
-        done();
+      it('should call original method when stream opens', (done) => {
+        function originalMethod(query: {}) {
+          assert.strictEqual(query, PARSED_ARGUMENTS.query);
+          done();
+        }
+        p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      });
+
+      it('should emit an error if one occurs', (done) => {
+        const error = new Error('Error.');
+
+        function originalMethod(query: {}, callback: (err: Error) => void) {
+          setImmediate(() => {
+            callback(error);
+          });
+        }
+
+        const rs = p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+        rs.on('error', (err: Error) => {
+          assert.deepStrictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should push results onto the stream', (done) => {
+        const results = ['a', 'b', 'c'];
+        const resultsReceived: Array<{}> = [];
+
+        function originalMethod(
+            query: {}, callback: (err: Error|null, results: {}) => void) {
+          setImmediate(() => {
+            callback(null, results);
+          });
+        }
+
+        const rs = p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+        rs.on('data', (result: {}) => {
+          resultsReceived.push(result);
+        });
+        rs.on('end', () => {
+          assert.deepStrictEqual(resultsReceived, ['a', 'b', 'c']);
+          done();
+        });
       });
     });
 
@@ -509,7 +631,9 @@ describe('paginator', () => {
       it('should respect maxResults', (done) => {
         let numResultsReceived = 0;
 
-        p.paginator.runAsStream_({maxResults: limit}, originalMethod)
+        p.paginator
+            .runAsStream_(
+                {maxResults: limit, callback: util.noop}, originalMethod)
             .on('data',
                 () => {
                   numResultsReceived++;
