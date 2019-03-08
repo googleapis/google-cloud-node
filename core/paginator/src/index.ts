@@ -42,6 +42,18 @@ export interface Limiter {
   stream: Transform;
 }
 
+export type ResourceStream<T> = {
+  addListener(event: 'data', listener: (data: T) => void): ResourceStream<T>;
+  emit(event: 'data', data: T): boolean;
+  on(event: 'data', listener: (data: T) => void): ResourceStream<T>;
+  once(event: 'data', listener: (data: T) => void): ResourceStream<T>;
+  prependListener(event: 'data', listener: (data: T) => void):
+      ResourceStream<T>;
+  prependOnceListener(event: 'data', listener: (data: T) => void):
+      ResourceStream<T>;
+  removeListener(event: 'data', listener: (data: T) => void): ResourceStream<T>;
+}&Transform;
+
 /**
  * Limit requests according to a `maxApiCalls` limit.
  *
@@ -168,9 +180,11 @@ export class Paginator {
    * @param {string} methodName - Name of the method to streamify.
    * @return {function} - Wrapped function.
    */
-  streamify(methodName: string) {
-    // tslint:disable-next-line:no-any
-    return function(this: {[index: string]: Function}, ...args: any[]) {
+  // tslint:disable-next-line:no-any
+  streamify<T = any>(methodName: string) {
+    return function(
+        // tslint:disable-next-line:no-any
+        this: {[index: string]: Function}, ...args: any[]): ResourceStream<T> {
       const parsedArguments = paginator.parseArguments_(args);
       const originalMethod = this[methodName + '_'] || this[methodName];
       return paginator.runAsStream_(parsedArguments, originalMethod.bind(this));
