@@ -1,48 +1,18 @@
 {
-  "updateTime": "2019-03-05T12:25:48.657220Z",
+  "updateTime": "2019-03-08T00:45:47.249442Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.16.14",
-        "dockerImage": "googleapis/artman@sha256:f3d61ae45abaeefb6be5f228cda22732c2f1b00fb687c79c4bd4f2c42bb1e1a7"
+        "version": "0.16.15",
+        "dockerImage": "googleapis/artman@sha256:9caadfa59d48224cba5f3217eb9d61a155b78ccf31e628abef385bc5b7ed3bd2"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b4a22569c88f1f0444e889d8139ddacb799f287c",
-        "internalRef": "236712632"
-      }
-    },
-    {
-      "template": {
-        "name": "node_library",
-        "origin": "synthtool.gcp",
-        "version": "2019.2.26"
-      }
-    }
-  ],
-  "destinations": [
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "speech",
-        "apiVersion": "v1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/speech/artman_speech_v1.yaml"
-      }
-    },
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "speech",
-        "apiVersion": "v1p1beta1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/speech/artman_speech_v1p1beta1.yaml"
+        "sha": "c986e1d9618ac41343962b353d136201d72626ae"
       }
     }
   ]
