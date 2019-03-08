@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-03-07T12:10:46.960735Z",
+  "updateTime": "2019-03-08T00:45:38.914249Z",
   "sources": [
     {
       "generator": {
@@ -12,37 +12,7 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b56ebb3c1b798dcfc4b736dda6d80f752367dd41",
-        "internalRef": "237067127"
-      }
-    },
-    {
-      "template": {
-        "name": "node_library",
-        "origin": "synthtool.gcp",
-        "version": "2019.2.26"
-      }
-    }
-  ],
-  "destinations": [
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "dataproc",
-        "apiVersion": "v1",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/dataproc/artman_dataproc_v1.yaml"
-      }
-    },
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "dataproc",
-        "apiVersion": "v1beta2",
-        "language": "nodejs",
-        "generator": "gapic",
-        "config": "google/cloud/dataproc/artman_dataproc_v1beta2.yaml"
+        "sha": "c986e1d9618ac41343962b353d136201d72626ae"
       }
     }
   ]
