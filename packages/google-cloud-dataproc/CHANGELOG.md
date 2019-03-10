@@ -4,6 +4,40 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## v0.5.0
+
+03-08-2019 22:48 PST
+
+### Features
+- feat: add the v1beta2 API ([#164](https://github.com/googleapis/nodejs-dataproc/pull/164))
+
+### New Features
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#154](https://github.com/googleapis/nodejs-dataproc/pull/154))
+- fix(deps): update dependency google-gax to ^0.24.0 ([#151](https://github.com/googleapis/nodejs-dataproc/pull/151))
+- fix(deps): update dependency google-gax to ^0.23.0 ([#148](https://github.com/googleapis/nodejs-dataproc/pull/148))
+
+### Documentation
+- docs: sync proto documentation changes ([#169](https://github.com/googleapis/nodejs-dataproc/pull/169))
+- docs: update links in contrib guide ([#166](https://github.com/googleapis/nodejs-dataproc/pull/166))
+- docs: update contributing path in README ([#160](https://github.com/googleapis/nodejs-dataproc/pull/160))
+- docs: move CONTRIBUTING.md to root ([#159](https://github.com/googleapis/nodejs-dataproc/pull/159))
+- docs: add lint/fix example to contributing guide ([#156](https://github.com/googleapis/nodejs-dataproc/pull/156))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#172](https://github.com/googleapis/nodejs-dataproc/pull/172))
+- chore: sync latest proto docs & kokoro publish config ([#171](https://github.com/googleapis/nodejs-dataproc/pull/171))
+- build: use node10 to run samples-test, system-test etc ([#170](https://github.com/googleapis/nodejs-dataproc/pull/170))
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#165](https://github.com/googleapis/nodejs-dataproc/pull/165))
+- build: create docs test npm scripts ([#162](https://github.com/googleapis/nodejs-dataproc/pull/162))
+- build: test using @grpc/grpc-js in CI ([#161](https://github.com/googleapis/nodejs-dataproc/pull/161))
+- refactor: improve generated code style ([#158](https://github.com/googleapis/nodejs-dataproc/pull/158))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#153](https://github.com/googleapis/nodejs-dataproc/pull/153))
+- chore: update the date in the copyright header ([#152](https://github.com/googleapis/nodejs-dataproc/pull/152))
+- build: check broken links in generated docs ([#144](https://github.com/googleapis/nodejs-dataproc/pull/144))
+
 ## v0.4.0
 
 01-07-2019 16:37 PST
