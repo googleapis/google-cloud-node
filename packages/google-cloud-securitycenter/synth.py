@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # Run the gapic generator
 gapic = gcp.GAPICGenerator()
-versions = ['v1beta1']
+versions = ['v1beta1', 'v1']
 for version in versions:
     library = gapic.node_library('securitycenter', version)
     s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
@@ -31,7 +31,7 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
-s.replace('src/v1beta1/doc/google/cloud/securitycenter/v1beta1/doc_source.js',
+s.replace('src/v1*/doc/google/cloud/securitycenter/v1*/doc_source.js',
         r"\[\\p\{L\}\\p\{N\}\]\(https:\/\/cloud\.google\.com\{\\p\{L\}\\p\{N\}_- \]\{0\,30\}\[\\p\{L\}\\p\{N\}\]\)\?",
         r"`\[\p{L}\p{N}]({\p{L}\p{N}_- ]{0,30}[\p{L}\p{N}])?`")
 
