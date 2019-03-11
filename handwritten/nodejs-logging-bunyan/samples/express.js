@@ -43,13 +43,15 @@ async function startServer() {
     res.send('hello world');
   });
 
+  const port = process.env.PORT || 8080;
+
   // `logger` can be used as a global logger, one not correlated to any specific
   // request.
-  logger.info({port: 8080}, 'bonjour');
+  logger.info({port}, 'bonjour');
 
   // Start listening on the http server.
-  const server = app.listen(8080, () => {
-    console.log('http server listening on port 8080');
+  const server = app.listen(port, () => {
+    console.log(`http server listening on port ${port}`);
   });
 
   app.get('/shutdown', (req, res) => {

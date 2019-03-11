@@ -23,7 +23,9 @@ const got = require('got');
 const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 
-after(() => got('http://localhost:8080/shutdown'));
+const PORT = process.env.PORT || 8080;
+
+after(() => got(`http://localhost:${PORT}/shutdown`));
 
 const lb = require('@google-cloud/logging-bunyan');
 const {APP_LOG_SUFFIX} = lb.express;
@@ -40,7 +42,7 @@ describe('express samples', () => {
     await delay(10 * 1000);
 
     // Make an HTTP request to exercise a request logging path.
-    await got('http://localhost:8080/');
+    await got(`http://localhost:${PORT}/`);
 
     // Wait 10 seconds for logs to be written to stackdriver service.
     await delay(10 * 1000);
