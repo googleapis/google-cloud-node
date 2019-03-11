@@ -25,6 +25,9 @@
  * @namespace google.cloud.scheduler.v1beta1
  */
 /**
+ * @namespace google.cloud.scheduler.v1
+ */
+/**
  * @namespace google.protobuf
  */
 /**
@@ -36,6 +39,7 @@
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
   v1beta1: require('./v1beta1'),
+  v1: require('./v1'),
 });
 
 /**
@@ -70,9 +74,9 @@ const gapic = Object.freeze({
 /**
  * @type {object}
  * @property {constructor} CloudSchedulerClient
- *   Reference to {@link v1beta1.CloudSchedulerClient}
+ *   Reference to {@link v1.CloudSchedulerClient}
  */
-module.exports = gapic.v1beta1;
+module.exports = gapic.v1;
 
 /**
  * @type {object}
@@ -80,6 +84,13 @@ module.exports = gapic.v1beta1;
  *   Reference to {@link v1beta1.CloudSchedulerClient}
  */
 module.exports.v1beta1 = gapic.v1beta1;
+
+/**
+ * @type {object}
+ * @property {constructor} CloudSchedulerClient
+ *   Reference to {@link v1.CloudSchedulerClient}
+ */
+module.exports.v1 = gapic.v1;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);
