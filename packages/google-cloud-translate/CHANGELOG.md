@@ -4,6 +4,42 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## v2.1.4
+
+03-12-2019 12:30 PDT
+
+This patch release has a few dependency bumps and doc updates.  Enjoy!
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/promisify to ^0.4.0 ([#217](https://github.com/googleapis/nodejs-translate/pull/217))
+- fix(deps): update dependency yargs to v13 ([#215](https://github.com/googleapis/nodejs-translate/pull/215))
+- fix(deps): update dependency @google-cloud/common to ^0.31.0 ([#209](https://github.com/googleapis/nodejs-translate/pull/209))
+
+### Documentation
+- docs: update links in contrib guide ([#218](https://github.com/googleapis/nodejs-translate/pull/218))
+- docs: update contributing path in README ([#212](https://github.com/googleapis/nodejs-translate/pull/212))
+- docs: move CONTRIBUTING.md to root ([#211](https://github.com/googleapis/nodejs-translate/pull/211))
+- docs: add lint/fix example to contributing guide ([#208](https://github.com/googleapis/nodejs-translate/pull/208))
+- docs: brand issue - Translate API => Cloud Translation API ([#196](https://github.com/googleapis/nodejs-translate/pull/196))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#222](https://github.com/googleapis/nodejs-translate/pull/222))
+- build: use node10 to run samples-test, system-test etc ([#221](https://github.com/googleapis/nodejs-translate/pull/221))
+- build: update release configuration
+- chore(deps): update dependency mocha to v6 ([#219](https://github.com/googleapis/nodejs-translate/pull/219))
+- build: use linkinator for docs test ([#216](https://github.com/googleapis/nodejs-translate/pull/216))
+- build: create docs test npm scripts ([#214](https://github.com/googleapis/nodejs-translate/pull/214))
+- build: test using @grpc/grpc-js in CI ([#213](https://github.com/googleapis/nodejs-translate/pull/213))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#206](https://github.com/googleapis/nodejs-translate/pull/206))
+- build: ignore googleapis.com in doc link check ([#204](https://github.com/googleapis/nodejs-translate/pull/204))
+- build: check broken links in generated docs ([#202](https://github.com/googleapis/nodejs-translate/pull/202))
+- refactor: modernize sample tests ([#199](https://github.com/googleapis/nodejs-translate/pull/199))
+- chore(build): inject yoshi automation key ([#195](https://github.com/googleapis/nodejs-translate/pull/195))
+- chore: update nyc and eslint configs ([#194](https://github.com/googleapis/nodejs-translate/pull/194))
+- chore: fix publish.sh permission +x ([#192](https://github.com/googleapis/nodejs-translate/pull/192))
+- fix(build): fix Kokoro release script ([#191](https://github.com/googleapis/nodejs-translate/pull/191))
+- build: add Kokoro configs for autorelease ([#190](https://github.com/googleapis/nodejs-translate/pull/190))
+
 ## v2.1.3
 
 12-06-2018 17:12 PST
