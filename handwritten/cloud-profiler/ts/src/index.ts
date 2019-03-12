@@ -53,8 +53,8 @@ function initConfigLocal(config: Config): ProfilerConfig {
   const envConfig: Config = {
     projectId: process.env.GCLOUD_PROJECT,
     serviceContext: {
-      service: process.env.GAE_SERVICE,
-      version: process.env.GAE_VERSION,
+      service: process.env.GAE_SERVICE || process.env.K_SERVICE,
+      version: process.env.GAE_VERSION || process.env.K_REVISION,
     }
   };
 
