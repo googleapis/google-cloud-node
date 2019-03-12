@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./agents_client_config');
+const gapicConfig = require('./agents_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -565,6 +565,13 @@ class AgentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.trainAgent({parent: formattedParent});
+   *
+   * const [response] = await operation.promise();
    */
   trainAgent(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -660,6 +667,13 @@ class AgentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportAgent({parent: formattedParent});
+   *
+   * const [response] = await operation.promise();
    */
   exportAgent(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -770,6 +784,13 @@ class AgentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.importAgent({parent: formattedParent});
+   *
+   * const [response] = await operation.promise();
    */
   importAgent(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -879,6 +900,13 @@ class AgentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.restoreAgent({parent: formattedParent});
+   *
+   * const [response] = await operation.promise();
    */
   restoreAgent(request, options, callback) {
     if (options instanceof Function && callback === undefined) {

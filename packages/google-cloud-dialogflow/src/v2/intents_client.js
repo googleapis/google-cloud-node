@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./intents_client_config');
+const gapicConfig = require('./intents_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -793,6 +793,18 @@ class IntentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const languageCode = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   languageCode: languageCode,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchUpdateIntents(request);
+   *
+   * const [response] = await operation.promise();
    */
   batchUpdateIntents(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -894,6 +906,18 @@ class IntentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const intents = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   intents: intents,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchDeleteIntents(request);
+   *
+   * const [response] = await operation.promise();
    */
   batchDeleteIntents(request, options, callback) {
     if (options instanceof Function && callback === undefined) {

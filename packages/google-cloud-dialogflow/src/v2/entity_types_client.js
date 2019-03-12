@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./entity_types_client_config');
+const gapicConfig = require('./entity_types_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -794,6 +794,13 @@ class EntityTypesClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchUpdateEntityTypes({parent: formattedParent});
+   *
+   * const [response] = await operation.promise();
    */
   batchUpdateEntityTypes(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -898,6 +905,18 @@ class EntityTypesClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectAgentPath('[PROJECT]');
+   * const entityTypeNames = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   entityTypeNames: entityTypeNames,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchDeleteEntityTypes(request);
+   *
+   * const [response] = await operation.promise();
    */
   batchDeleteEntityTypes(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1009,6 +1028,18 @@ class EntityTypesClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entities = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   entities: entities,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchCreateEntities(request);
+   *
+   * const [response] = await operation.promise();
    */
   batchCreateEntities(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1121,6 +1152,18 @@ class EntityTypesClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entities = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   entities: entities,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchUpdateEntities(request);
+   *
+   * const [response] = await operation.promise();
    */
   batchUpdateEntities(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1228,6 +1271,18 @@ class EntityTypesClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.entityTypePath('[PROJECT]', '[ENTITY_TYPE]');
+   * const entityValues = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   entityValues: entityValues,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchDeleteEntities(request);
+   *
+   * const [response] = await operation.promise();
    */
   batchDeleteEntities(request, options, callback) {
     if (options instanceof Function && callback === undefined) {

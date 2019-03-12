@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./knowledge_bases_client_config');
+const gapicConfig = require('./knowledge_bases_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');

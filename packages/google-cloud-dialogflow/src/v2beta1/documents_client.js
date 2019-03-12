@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./documents_client_config');
+const gapicConfig = require('./documents_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -538,6 +538,18 @@ class DocumentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.knowledgeBasePath('[PROJECT]', '[KNOWLEDGE_BASE]');
+   * const document = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   document: document,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.createDocument(request);
+   *
+   * const [response] = await operation.promise();
    */
   createDocument(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -627,6 +639,13 @@ class DocumentsClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.documentPath('[PROJECT]', '[KNOWLEDGE_BASE]', '[DOCUMENT]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deleteDocument({name: formattedName});
+   *
+   * const [response] = await operation.promise();
    */
   deleteDocument(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
