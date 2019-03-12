@@ -369,6 +369,45 @@ describe('createProfiler', () => {
        assert.deepEqual(profiler.config, expConfig);
      });
 
+  it('should get values from Knative environment variables when values not specified in config or other environment variables',
+     async () => {
+       process.env.K_SERVICE = 'k-service';
+       process.env.K_REVISION = 'k-version';
+       metadataStub = sinon.stub(gcpMetadata, 'instance');
+       const config = disableSourceMapParams;
+       const expConfigParams = {
+         serviceContext: {version: 'k-version', service: 'k-service'},
+         disableHeap: false,
+         disableTime: false,
+         logLevel: 2,
+       };
+       const profiler: Profiler = await createProfiler(config);
+       const expConfig =
+           Object.assign({}, config, defaultConfig, expConfigParams);
+       assert.deepEqual(profiler.config, expConfig);
+     });
+
+  it('should get values from GAE environment variables when both GAE and Knative environment variables are specified',
+     async () => {
+       process.env.GAE_SERVICE = 'process-service';
+       process.env.GAE_VERSION = 'process-version';
+       process.env.K_SERVICE = 'k-service';
+       process.env.K_REVISION = 'k-version';
+       metadataStub = sinon.stub(gcpMetadata, 'instance');
+       const config = disableSourceMapParams;
+       const expConfigParams = {
+         serviceContext:
+             {version: 'process-version', service: 'process-service'},
+         disableHeap: false,
+         disableTime: false,
+         logLevel: 2,
+       };
+       const profiler: Profiler = await createProfiler(config);
+       const expConfig =
+           Object.assign({}, config, defaultConfig, expConfigParams);
+       assert.deepEqual(profiler.config, expConfig);
+     });
+
   it('should not get values from from environment variable when values specified in config',
      async () => {
        process.env.GCLOUD_PROJECT = 'process-projectId';
