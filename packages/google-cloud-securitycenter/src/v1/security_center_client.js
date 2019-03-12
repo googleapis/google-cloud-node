@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./security_center_client_config');
+const gapicConfig = require('./security_center_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -2082,6 +2082,13 @@ class SecurityCenterClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.organizationPath('[ORGANIZATION]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.runAssetDiscovery({parent: formattedParent});
+   *
+   * const [response] = await operation.promise();
    */
   runAssetDiscovery(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
