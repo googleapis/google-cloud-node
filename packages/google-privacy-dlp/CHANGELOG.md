@@ -4,6 +4,48 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## v0.11.0
+
+03-12-2019 15:22 PDT
+
+Greetings!  This release has a few new features, bug fixes, and doc updates.  Enjoy!
+
+### New Features
+- feat: add support for triggers and matching types ([#243](https://github.com/googleapis/nodejs-dlp/pull/243))
+
+### Bug Fixes
+- fix: throw on invalid credentials ([#238](https://github.com/googleapis/nodejs-dlp/pull/238))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#226](https://github.com/googleapis/nodejs-dlp/pull/226))
+
+### Documentation
+- docs: update links in contrib guide ([#240](https://github.com/googleapis/nodejs-dlp/pull/240))
+- docs: move CONTRIBUTING.md to root ([#231](https://github.com/googleapis/nodejs-dlp/pull/231))
+- docs: update samples in comments ([#230](https://github.com/googleapis/nodejs-dlp/pull/230))
+- docs: update contributing path in README ([#232](https://github.com/googleapis/nodejs-dlp/pull/232))
+- docs: add lint/fix example to contributing guide ([#228](https://github.com/googleapis/nodejs-dlp/pull/228))
+
+### Internal / Testing Changes
+- fix(deps): update dependency @google-cloud/pubsub to ^0.28.0 ([#253](https://github.com/googleapis/nodejs-dlp/pull/253))
+- refactor: update json import paths ([#254](https://github.com/googleapis/nodejs-dlp/pull/254))
+- build: Add docuploader credentials to node publish jobs ([#251](https://github.com/googleapis/nodejs-dlp/pull/251))
+- build: use node10 to run samples-test, system-test etc ([#250](https://github.com/googleapis/nodejs-dlp/pull/250))
+- chore: update release config and proto formatting
+- chore: sync latest proto docs ([#245](https://github.com/googleapis/nodejs-dlp/pull/245))
+- fix(test): increase minLikelihood option threshold to VERY_LIKELY ([#248](https://github.com/googleapis/nodejs-dlp/pull/248))
+- chore(deps): update dependency mocha to v6
+- fix(deps): update dependency yargs to v13 ([#235](https://github.com/googleapis/nodejs-dlp/pull/235))
+- build: use linkinator for docs test ([#239](https://github.com/googleapis/nodejs-dlp/pull/239))
+- refactor: modernize the sample tests ([#237](https://github.com/googleapis/nodejs-dlp/pull/237))
+- build: create docs test npm scripts ([#234](https://github.com/googleapis/nodejs-dlp/pull/234))
+- build: test using @grpc/grpc-js in CI ([#233](https://github.com/googleapis/nodejs-dlp/pull/233))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#223](https://github.com/googleapis/nodejs-dlp/pull/223))
+- chore: update the copyright date in the header. ([#224](https://github.com/googleapis/nodejs-dlp/pull/224))
+- build: ignore googleapis.com in doc link check ([#220](https://github.com/googleapis/nodejs-dlp/pull/220))
+- build: check broken links in generated docs ([#213](https://github.com/googleapis/nodejs-dlp/pull/213))
+- fix(samples-test): increase likelihood threshold ([#222](https://github.com/googleapis/nodejs-dlp/pull/222))
+
 ## v0.10.0
 
 01-04-2019 15:04 PST
