@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./uptime_check_service_client_config');
+const gapicConfig = require('./uptime_check_service_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
