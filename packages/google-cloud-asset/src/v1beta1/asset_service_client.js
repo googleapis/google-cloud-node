@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./asset_service_client_config');
+const gapicConfig = require('./asset_service_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -328,6 +328,18 @@ class AssetServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const outputConfig = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportAssets(request);
+   *
+   * const [response] = await operation.promise();
    */
   exportAssets(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
