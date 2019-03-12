@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./image_annotator_client_config');
+const gapicConfig = require('./image_annotator_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -347,6 +347,13 @@ class ImageAnnotatorClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const requests = [];
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.asyncBatchAnnotateFiles({requests: requests});
+   *
+   * const [response] = await operation.promise();
    */
   asyncBatchAnnotateFiles(request, options, callback) {
     if (options instanceof Function && callback === undefined) {

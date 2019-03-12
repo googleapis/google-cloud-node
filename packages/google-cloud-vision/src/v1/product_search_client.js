@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./product_search_client_config');
+const gapicConfig = require('./product_search_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -1813,6 +1813,18 @@ class ProductSearchClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const inputConfig = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   inputConfig: inputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.importProductSets(request);
+   *
+   * const [response] = await operation.promise();
    */
   importProductSets(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
