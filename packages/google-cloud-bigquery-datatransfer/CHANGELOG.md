@@ -4,6 +4,43 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## v0.5.1
+
+03-12-2019 13:53 PDT
+
+This patch release contains a few bug fixes, dependency updates, and doc improvements.  Enjoy!
+
+### Bug Fixes
+- fix: throw on invalid credentials ([#167](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/167))
+- fix: do not require projectId for samples ([#147](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/147))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#158](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/158))
+
+### Documentation
+- docs: update comments on protos ([#172](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/172))
+- docs: update API doc comments ([#171](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/171))
+- docs: update links in contrib guide ([#169](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/169))
+- docs: update contributing path in README ([#164](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/164))
+- docs: move CONTRIBUTING.md to root ([#163](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/163))
+- docs: add lint/fix example to contributing guide ([#160](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/160))
+
+### Internal / Testing Changes
+- chore: update require statement code style
+- build: Add docuploader credentials to node publish jobs ([#175](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/175))
+- build: use node10 to run samples-test, system-test etc ([#174](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/174))
+- build: update release configuration
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#168](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/168))
+- build: create docs test npm scripts ([#166](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/166))
+- build: test using @grpc/grpc-js in CI ([#165](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/165))
+- refactor: improve generated code style ([#162](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/162))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#157](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/157))
+- chore: update the date in the copyright header. ([#156](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/156))
+- build(docs): ignore www.gstatic.com/bigquerydatatransfer link ([#152](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/152))
+- build: check broken links in generated docs ([#148](https://github.com/googleapis/nodejs-bigquery-data-transfer/pull/148))
+- nit: reordered message types
+
 ## v0.5.0
 
 12-21-2018 10:19 PST
