@@ -39,6 +39,10 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'toISOString)')
 # [END fix-dead-link]
 
+s.replace('src/**/doc/google/cloud/dataproc/v1beta2/doc_clusters.js',
+        'https:\/\/cloud\.google\.com[\s\*]*\/compute\/',
+        'https://cloud.google.com/compute/')
+
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
