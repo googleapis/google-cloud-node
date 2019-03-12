@@ -4,6 +4,46 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## v0.1.4
+
+03-12-2019 13:50 PDT
+
+This patch release has a few bug fixes and dependency updates. Enjoy!
+
+### Bug fixes
+- fix: throw on invalid credentials ([#130](https://github.com/googleapis/nodejs-automl/pull/130))
+- fix: use credential file to get project id ([#111](https://github.com/googleapis/nodejs-automl/pull/111))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#120](https://github.com/googleapis/nodejs-automl/pull/120))
+
+### Documentation
+- docs(samples): move AutoML vision samples from nodejs-vision ([#134](https://github.com/googleapis/nodejs-automl/pull/134))
+- docs: update proto docs and code style
+- docs: update links in contrib guide ([#132](https://github.com/googleapis/nodejs-automl/pull/132))
+- docs: update contributing path in README ([#127](https://github.com/googleapis/nodejs-automl/pull/127))
+- docs: move CONTRIBUTING.md to root ([#126](https://github.com/googleapis/nodejs-automl/pull/126))
+- docs: add lint/fix example to contributing guide ([#124](https://github.com/googleapis/nodejs-automl/pull/124))
+- docs: update examples in comments ([#123](https://github.com/googleapis/nodejs-automl/pull/123))
+- docs: proper require stmt ([#113](https://github.com/googleapis/nodejs-automl/pull/113))
+
+### Internal / Testing Changes
+- refactor: update json import paths ([#140](https://github.com/googleapis/nodejs-automl/pull/140))
+- build: Add docuploader credentials to node publish jobs ([#138](https://github.com/googleapis/nodejs-automl/pull/138))
+- build: use node10 to run samples-test, system-test etc ([#137](https://github.com/googleapis/nodejs-automl/pull/137))
+- build: update release configuration
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#131](https://github.com/googleapis/nodejs-automl/pull/131))
+- build: create docs test npm scripts ([#129](https://github.com/googleapis/nodejs-automl/pull/129))
+- build: test using @grpc/grpc-js in CI ([#128](https://github.com/googleapis/nodejs-automl/pull/128))
+- refactor: improve generated code style. ([#122](https://github.com/googleapis/nodejs-automl/pull/122))
+- chore: re-arrange exports. ([#121](https://github.com/googleapis/nodejs-automl/pull/121))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#119](https://github.com/googleapis/nodejs-automl/pull/119))
+- build: ignore googleapis.com in doc link check ([#117](https://github.com/googleapis/nodejs-automl/pull/117))
+- chore: sync gapic files
+- build: check broken links in generated docs ([#112](https://github.com/googleapis/nodejs-automl/pull/112))
+- test: add a basic system test ([#106](https://github.com/googleapis/nodejs-automl/pull/106))
+
 ## v0.1.3
 
 12-15-2018 12:46 PST
