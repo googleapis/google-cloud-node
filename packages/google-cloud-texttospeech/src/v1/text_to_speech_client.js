@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./text_to_speech_client_config');
+const gapicConfig = require('./text_to_speech_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
