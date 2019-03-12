@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./auto_ml_client_config');
+const gapicConfig = require('./auto_ml_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -649,6 +649,13 @@ class AutoMlClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deleteDataset({name: formattedName});
+   *
+   * const [response] = await operation.promise();
    */
   deleteDataset(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -749,6 +756,18 @@ class AutoMlClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.importData(request);
+   *
+   * const [response] = await operation.promise();
    */
   importData(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -848,6 +867,18 @@ class AutoMlClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportData(request);
+   *
+   * const [response] = await operation.promise();
    */
   exportData(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -949,6 +980,18 @@ class AutoMlClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const model = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   model: model,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.createModel(request);
+   *
+   * const [response] = await operation.promise();
    */
   createModel(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1258,6 +1301,13 @@ class AutoMlClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deleteModel({name: formattedName});
+   *
+   * const [response] = await operation.promise();
    */
   deleteModel(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
