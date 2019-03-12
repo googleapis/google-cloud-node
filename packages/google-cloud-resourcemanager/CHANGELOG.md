@@ -4,6 +4,42 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+## v0.9.1
+
+03-12-2019 12:22 PDT
+
+Greetings folks!  This is a patch release that just bumps a few dependencies. Enjoy!
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/paginator to ^0.2.0
+- fix(deps): update dependency @google-cloud/promisify to ^0.4.0 ([#179](https://github.com/googleapis/nodejs-resource/pull/179))
+- fix(deps): update dependency @google-cloud/common to ^0.31.0 ([#171](https://github.com/googleapis/nodejs-resource/pull/171))
+
+### Documentation
+- docs: update links in contrib guide ([#180](https://github.com/googleapis/nodejs-resource/pull/180))
+- docs: update contributing path in README ([#174](https://github.com/googleapis/nodejs-resource/pull/174))
+- docs: move CONTRIBUTING.md to root ([#173](https://github.com/googleapis/nodejs-resource/pull/173))
+- docs: add lint/fix example to contributing guide ([#170](https://github.com/googleapis/nodejs-resource/pull/170))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#184](https://github.com/googleapis/nodejs-resource/pull/184))
+- build: use node10 to run samples-test, system-test etc ([#183](https://github.com/googleapis/nodejs-resource/pull/183))
+- build: update release configuration
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#178](https://github.com/googleapis/nodejs-resource/pull/178))
+- fix(deps): update dependency yargs to v13 ([#177](https://github.com/googleapis/nodejs-resource/pull/177))
+- build: create docs test npm scripts ([#176](https://github.com/googleapis/nodejs-resource/pull/176))
+- build: test using @grpc/grpc-js in CI ([#175](https://github.com/googleapis/nodejs-resource/pull/175))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#168](https://github.com/googleapis/nodejs-resource/pull/168))
+- build: ignore googleapis.com in doc link check ([#166](https://github.com/googleapis/nodejs-resource/pull/166))
+- build: check broken links in generated docs ([#164](https://github.com/googleapis/nodejs-resource/pull/164))
+- refactor: modernize the sample tests ([#162](https://github.com/googleapis/nodejs-resource/pull/162))
+- chore(build): inject yoshi automation key ([#160](https://github.com/googleapis/nodejs-resource/pull/160))
+- chore: update nyc and eslint configs ([#159](https://github.com/googleapis/nodejs-resource/pull/159))
+- chore: fix publish.sh permission +x ([#157](https://github.com/googleapis/nodejs-resource/pull/157))
+- fix(build): fix Kokoro release script ([#156](https://github.com/googleapis/nodejs-resource/pull/156))
+- build: add Kokoro configs for autorelease ([#155](https://github.com/googleapis/nodejs-resource/pull/155))
+
 ## v0.9.0
 
 12-06-2018 15:54 PST
