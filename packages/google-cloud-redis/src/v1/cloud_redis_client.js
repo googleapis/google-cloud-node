@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./cloud_redis_client_config');
+const gapicConfig = require('./cloud_redis_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -640,6 +640,25 @@ class CloudRedisClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const instanceId = 'test_instance';
+   * const tier = 'BASIC';
+   * const memorySizeGb = 1;
+   * const instance = {
+   *   tier: tier,
+   *   memorySizeGb: memorySizeGb,
+   * };
+   * const request = {
+   *   parent: formattedParent,
+   *   instanceId: instanceId,
+   *   instance: instance,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.createInstance(request);
+   *
+   * const [response] = await operation.promise();
    */
   createInstance(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -771,6 +790,28 @@ class CloudRedisClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const pathsElement = 'display_name';
+   * const pathsElement2 = 'memory_size_gb';
+   * const paths = [pathsElement, pathsElement2];
+   * const updateMask = {
+   *   paths: paths,
+   * };
+   * const displayName = 'UpdatedDisplayName';
+   * const memorySizeGb = 4;
+   * const instance = {
+   *   displayName: displayName,
+   *   memorySizeGb: memorySizeGb,
+   * };
+   * const request = {
+   *   updateMask: updateMask,
+   *   instance: instance,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.updateInstance(request);
+   *
+   * const [response] = await operation.promise();
    */
   updateInstance(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -857,6 +898,13 @@ class CloudRedisClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deleteInstance({name: formattedName});
+   *
+   * const [response] = await operation.promise();
    */
   deleteInstance(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -963,6 +1011,18 @@ class CloudRedisClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.importInstance(request);
+   *
+   * const [response] = await operation.promise();
    */
   importInstance(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1067,6 +1127,18 @@ class CloudRedisClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportInstance(request);
+   *
+   * const [response] = await operation.promise();
    */
   exportInstance(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1168,6 +1240,18 @@ class CloudRedisClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+   * const request = {
+   *   name: formattedName,
+   *   dataProtectionMode: dataProtectionMode,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.failoverInstance(request);
+   *
+   * const [response] = await operation.promise();
    */
   failoverInstance(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
