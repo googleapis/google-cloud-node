@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## v0.3.1
+
+03-12-2019 13:44 PDT
+
+This patch release has a few bug fixes, dependency updates, and doc fixes.  Enjoy!
+
+### Bug fixes
+- fix: throw on invalid credentials ([#159](https://github.com/googleapis/nodejs-cloud-container/pull/159))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#152](https://github.com/googleapis/nodejs-cloud-container/pull/152))
+
+### Documentation
+- docs: update links in contrib guide ([#161](https://github.com/googleapis/nodejs-cloud-container/pull/161))
+- docs: update contributing path in README ([#156](https://github.com/googleapis/nodejs-cloud-container/pull/156))
+- docs: move CONTRIBUTING.md to root ([#155](https://github.com/googleapis/nodejs-cloud-container/pull/155))
+- docs: add lint/fix example to contributing guide ([#153](https://github.com/googleapis/nodejs-cloud-container/pull/153))
+
+### Internal / Testing Changes
+- refactor: update json import paths ([#167](https://github.com/googleapis/nodejs-cloud-container/pull/167))
+- build: Add docuploader credentials to node publish jobs ([#165](https://github.com/googleapis/nodejs-cloud-container/pull/165))
+- build: update release config ([#163](https://github.com/googleapis/nodejs-cloud-container/pull/163))
+- build: use node10 to run samples-test, system-test etc ([#164](https://github.com/googleapis/nodejs-cloud-container/pull/164))
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#160](https://github.com/googleapis/nodejs-cloud-container/pull/160))
+- build: create docs test npm scripts ([#158](https://github.com/googleapis/nodejs-cloud-container/pull/158))
+- build: test using @grpc/grpc-js in CI ([#157](https://github.com/googleapis/nodejs-cloud-container/pull/157))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#151](https://github.com/googleapis/nodejs-cloud-container/pull/151))
+- chore: update the date in the copyright header ([#150](https://github.com/googleapis/nodejs-cloud-container/pull/150))
+- build: check broken links in generated docs ([#144](https://github.com/googleapis/nodejs-cloud-container/pull/144))
+- test: add sample tests ([#143](https://github.com/googleapis/nodejs-cloud-container/pull/143))
+- chore(build): inject yoshi automation key ([#142](https://github.com/googleapis/nodejs-cloud-container/pull/142))
+
 ## v0.3.0
 
 12-11-2018 10:08 PST
