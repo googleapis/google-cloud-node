@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./video_intelligence_service_client_config');
+const gapicConfig = require('./video_intelligence_service_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -327,6 +327,19 @@ class VideoIntelligenceServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const inputUri = 'gs://demomaker/cat.mp4';
+   * const featuresElement = 'LABEL_DETECTION';
+   * const features = [featuresElement];
+   * const request = {
+   *   inputUri: inputUri,
+   *   features: features,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.annotateVideo(request);
+   *
+   * const [response] = await operation.promise();
    */
   annotateVideo(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
