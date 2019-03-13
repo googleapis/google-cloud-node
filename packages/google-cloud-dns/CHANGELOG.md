@@ -4,6 +4,41 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## v0.9.2
+
+03-12-2019 13:47 PDT
+
+This patch release has a few bug fixes, and dependency updates.  Enjoy!
+
+### Bug Fixes
+- fix: improve types for zone.get ([#201](https://github.com/googleapis/nodejs-dns/pull/201))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/paginator to ^0.2.0
+- fix(deps): update dependency @google-cloud/promisify to ^0.4.0 ([#218](https://github.com/googleapis/nodejs-dns/pull/218))
+- fix(deps): update dependency @google-cloud/common to ^0.31.0 ([#209](https://github.com/googleapis/nodejs-dns/pull/209))
+
+### Documentation
+- docs: update links in contrib guide ([#219](https://github.com/googleapis/nodejs-dns/pull/219))
+- docs: update contributing path in README ([#212](https://github.com/googleapis/nodejs-dns/pull/212))
+- docs: move CONTRIBUTING.md to root ([#211](https://github.com/googleapis/nodejs-dns/pull/211))
+- docs: add lint/fix example to contributing guide ([#208](https://github.com/googleapis/nodejs-dns/pull/208))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#223](https://github.com/googleapis/nodejs-dns/pull/223))
+- build: use node10 to run samples-test, system-test etc ([#222](https://github.com/googleapis/nodejs-dns/pull/222))
+- build: update release configuration
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#216](https://github.com/googleapis/nodejs-dns/pull/216))
+- chore(deps): update dependency @types/tmp to v0.0.34 ([#217](https://github.com/googleapis/nodejs-dns/pull/217))
+- fix(deps): update dependency yargs to v13 ([#215](https://github.com/googleapis/nodejs-dns/pull/215))
+- build: create docs test npm scripts ([#214](https://github.com/googleapis/nodejs-dns/pull/214))
+- build: test using @grpc/grpc-js in CI ([#213](https://github.com/googleapis/nodejs-dns/pull/213))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#206](https://github.com/googleapis/nodejs-dns/pull/206))
+- build: ignore googleapis.com in doc link check ([#204](https://github.com/googleapis/nodejs-dns/pull/204))
+- build: check broken links in generated docs ([#202](https://github.com/googleapis/nodejs-dns/pull/202))
+- refactor: modernize the sample tests ([#199](https://github.com/googleapis/nodejs-dns/pull/199))
+
 ## v0.9.1
 
 ### Dependencies
