@@ -34,7 +34,7 @@
  *
  * @property {boolean} done
  *   If the value is `false`, it means the operation is still in progress.
- *   If true, the operation is completed, and either `error` or `response` is
+ *   If `true`, the operation is completed, and either `error` or `response` is
  *   available.
  *
  * @property {Object} error
