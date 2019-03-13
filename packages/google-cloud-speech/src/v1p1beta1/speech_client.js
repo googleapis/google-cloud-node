@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./speech_client_config');
+const gapicConfig = require('./speech_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -402,6 +402,28 @@ class SpeechClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const encoding = 'FLAC';
+   * const sampleRateHertz = 44100;
+   * const languageCode = 'en-US';
+   * const config = {
+   *   encoding: encoding,
+   *   sampleRateHertz: sampleRateHertz,
+   *   languageCode: languageCode,
+   * };
+   * const uri = 'gs://bucket_name/file_name.flac';
+   * const audio = {
+   *   uri: uri,
+   * };
+   * const request = {
+   *   config: config,
+   *   audio: audio,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.longRunningRecognize(request);
+   *
+   * const [response] = await operation.promise();
    */
   longRunningRecognize(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
