@@ -68,15 +68,6 @@ export class ErrorsApiTransport extends common.Service {
     });
   }
 
-  async deleteAllEvents(): Promise<void> {
-    const projectId = await this.getProjectId();
-    const options = {
-      uri: [API, projectId, 'events'].join('/'),
-      method: 'DELETE'
-    };
-    await this.request(options);
-  }
-
   async getAllGroups(): Promise<ErrorGroupStats[]> {
     const projectId = await this.getProjectId();
     const options = {

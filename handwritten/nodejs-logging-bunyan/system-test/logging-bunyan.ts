@@ -148,10 +148,6 @@ describe('LoggingBunyan', function() {
     const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
-    after(async () => {
-      await errorsTransport.deleteAllEvents();
-    });
-
     it('reports errors when logging errors', async () => {
       const start = Date.now();
 
