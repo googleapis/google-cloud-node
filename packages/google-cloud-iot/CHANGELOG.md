@@ -1,5 +1,37 @@
 # Changelog
 
+## v0.2.1
+
+03-13-2019 14:59 PDT
+
+### Bug Fixes
+- fix: throw on invalid credentials ([#119](https://github.com/googleapis/nodejs-iot/pull/119))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#110](https://github.com/googleapis/nodejs-iot/pull/110))
+
+### Documentation
+- docs: update links in contrib guide ([#121](https://github.com/googleapis/nodejs-iot/pull/121))
+- docs: update contributing path in README ([#116](https://github.com/googleapis/nodejs-iot/pull/116))
+- docs: move CONTRIBUTING.md to root ([#115](https://github.com/googleapis/nodejs-iot/pull/115))
+- docs: add lint/fix example to contributing guide ([#112](https://github.com/googleapis/nodejs-iot/pull/112))
+
+### Internal / Testing Changes
+- chore: update require statement code style
+- build: Add docuploader credentials to node publish jobs ([#126](https://github.com/googleapis/nodejs-iot/pull/126))
+- build: use node10 to run samples-test, system-test etc ([#125](https://github.com/googleapis/nodejs-iot/pull/125))
+- build: update release configuration
+- chore: update proto docs and code style
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#120](https://github.com/googleapis/nodejs-iot/pull/120))
+- build: create docs test npm scripts ([#118](https://github.com/googleapis/nodejs-iot/pull/118))
+- build: test using @grpc/grpc-js in CI ([#117](https://github.com/googleapis/nodejs-iot/pull/117))
+- refactor: improve generated code style. ([#114](https://github.com/googleapis/nodejs-iot/pull/114))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#109](https://github.com/googleapis/nodejs-iot/pull/109))
+- build: ignore googleapis.com in doc link check ([#107](https://github.com/googleapis/nodejs-iot/pull/107))
+- chore: update year in the license headers. ([#106](https://github.com/googleapis/nodejs-iot/pull/106))
+- build: check broken links in generated docs ([#101](https://github.com/googleapis/nodejs-iot/pull/101))
+
 ## v0.2.0
 
 01-14-2019 14:30 PST
