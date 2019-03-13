@@ -4,6 +4,42 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## v0.2.0
+
+03-12-2019 16:11 PDT
+
+### New Features
+- feat: add v1 variant of the API ([#61](https://github.com/googleapis/nodejs-security-center/pull/61))
+
+### Bug Fixes
+- fix: throw on invalid credentials
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#42](https://github.com/googleapis/nodejs-security-center/pull/42))
+
+### Documentation
+- docs: update examples
+- docs: update comments on protos ([#56](https://github.com/googleapis/nodejs-security-center/pull/56))
+- docs: sync latest proto docs
+- docs: update links in contrib guide ([#53](https://github.com/googleapis/nodejs-security-center/pull/53))
+- docs: update contributing path in README ([#48](https://github.com/googleapis/nodejs-security-center/pull/48))
+- docs: move CONTRIBUTING.md to root ([#47](https://github.com/googleapis/nodejs-security-center/pull/47))
+- docs: add lint/fix example to contributing guide ([#45](https://github.com/googleapis/nodejs-security-center/pull/45))
+- docs: fix example comments ([#44](https://github.com/googleapis/nodejs-security-center/pull/44))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#59](https://github.com/googleapis/nodejs-security-center/pull/59))
+- build: use node10 to run samples-test, system-test etc ([#58](https://github.com/googleapis/nodejs-security-center/pull/58))
+- build: update release configuration
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#52](https://github.com/googleapis/nodejs-security-center/pull/52))
+- build: create docs test npm scripts ([#50](https://github.com/googleapis/nodejs-security-center/pull/50))
+- build: test using @grpc/grpc-js in CI ([#49](https://github.com/googleapis/nodejs-security-center/pull/49))
+- refactor: improve generated code style. ([#43](https://github.com/googleapis/nodejs-security-center/pull/43))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#41](https://github.com/googleapis/nodejs-security-center/pull/41))
+- build: ignore googleapis.com in doc link check ([#39](https://github.com/googleapis/nodejs-security-center/pull/39))
+- chore: sync gapic files
+
 ## v0.1.2
 
 01-16-2019 16:03 PST
