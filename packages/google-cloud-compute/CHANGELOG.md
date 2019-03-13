@@ -4,6 +4,44 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## v0.12.0
+
+03-13-2019 14:47 PDT
+
+### New Features
+- feat: Add getManagedInstances and deleteInstances to InstanceGroupManger API ([#265](https://github.com/googleapis/nodejs-compute/pull/265))
+- feat: add basic support for InstanceGroupManager ([#263](https://github.com/googleapis/nodejs-compute/pull/263))
+
+### Bug Fixes
+- fix: snapshot.delete() no longer throws ([#251](https://github.com/googleapis/nodejs-compute/pull/251))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/paginator to ^0.2.0 ([#274](https://github.com/googleapis/nodejs-compute/pull/274))
+- fix(deps): update dependency @google-cloud/promisify to ^0.4.0 ([#267](https://github.com/googleapis/nodejs-compute/pull/267))
+- fix(deps): update dependency @google-cloud/common to ^0.31.0 ([#258](https://github.com/googleapis/nodejs-compute/pull/258))
+
+### Documentation
+- docs: update links in contrib guide ([#268](https://github.com/googleapis/nodejs-compute/pull/268))
+- docs: update contributing path in README ([#261](https://github.com/googleapis/nodejs-compute/pull/261))
+- docs: move CONTRIBUTING.md to root ([#260](https://github.com/googleapis/nodejs-compute/pull/260))
+- docs: add lint/fix example to contributing guide ([#257](https://github.com/googleapis/nodejs-compute/pull/257))
+- docs: use the latest sendgrid npm module ([#246](https://github.com/googleapis/nodejs-compute/pull/246))
+- docs(samples): modernize the samples ([#240](https://github.com/googleapis/nodejs-compute/pull/240))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#272](https://github.com/googleapis/nodejs-compute/pull/272))
+- build: use node10 to run samples-test, system-test etc ([#271](https://github.com/googleapis/nodejs-compute/pull/271))
+- build: update release configuration
+- chore(deps): update dependency mocha to v6 ([#269](https://github.com/googleapis/nodejs-compute/pull/269))
+- build: use linkinator for docs test ([#266](https://github.com/googleapis/nodejs-compute/pull/266))
+- build: create docs test npm scripts ([#264](https://github.com/googleapis/nodejs-compute/pull/264))
+- build: test using @grpc/grpc-js in CI ([#262](https://github.com/googleapis/nodejs-compute/pull/262))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#255](https://github.com/googleapis/nodejs-compute/pull/255))
+- build: ignore googleapis.com in doc link check ([#252](https://github.com/googleapis/nodejs-compute/pull/252))
+- build: check broken links in generated docs ([#248](https://github.com/googleapis/nodejs-compute/pull/248))
+- fix(deps): update dependency nodemailer to v5 ([#247](https://github.com/googleapis/nodejs-compute/pull/247))
+- refactor: use Object.assign where possible ([#245](https://github.com/googleapis/nodejs-compute/pull/245))
+
 ## v0.11.0
 
 12-20-2018 16:17 PST
