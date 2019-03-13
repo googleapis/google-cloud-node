@@ -194,10 +194,6 @@ describe('LoggingWinston', function() {
     const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
-    after(async () => {
-      await errorsTransport.deleteAllEvents();
-    });
-
     it('reports errors when logging errors with winston2', async () => {
       const start = Date.now();
       const service = `logging-winston-system-test-winston2-${UUID}`;
