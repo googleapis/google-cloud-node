@@ -36,6 +36,7 @@ export interface ErrorEvent {
 
 export interface ErrorGroupStats {
   group: {groupId: string};
+  affectedServices: ServiceContext[];
   representative: ErrorEvent;
   count: string;
   // other fields not used in the tests have been omitted
@@ -106,13 +107,10 @@ export class ErrorsApiTransport extends common.Service {
         if (!groups.length) continue;
         // find an error group that matches the service
         groups.forEach((group) => {
-          try {
-            // example value: logging-winston-system-test
-            if (group.representative.serviceContext.service === service) {
-              groupId = group.group.groupId;
-            }
-          } catch (e) {
-            // keep looking
+          const match = group.affectedServices.find(
+              context => context.service === service);
+          if (match) {
+            groupId = group.group.groupId;
           }
         });
       }
