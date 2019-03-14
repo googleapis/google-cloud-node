@@ -4,6 +4,41 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## v0.4.0
+
+03-13-2019 16:16 PDT
+
+### New Features
+- feat: add support for the CAVIUM_V2_COMPRESSED type ([#126](https://github.com/googleapis/nodejs-kms/pull/126))
+
+### Bug Fixes
+- fix: throw on invalid credentials
+- fix(deps): update dependency google-gax to ^0.25.0 ([#113](https://github.com/googleapis/nodejs-kms/pull/113))
+
+### Documentation
+- docs: update links in contrib guide ([#125](https://github.com/googleapis/nodejs-kms/pull/125))
+- docs: update contributing path in README ([#119](https://github.com/googleapis/nodejs-kms/pull/119))
+- docs: move CONTRIBUTING.md to root ([#118](https://github.com/googleapis/nodejs-kms/pull/118))
+- docs: add lint/fix example to contributing guide ([#116](https://github.com/googleapis/nodejs-kms/pull/116))
+- docs: fix example comments ([#115](https://github.com/googleapis/nodejs-kms/pull/115))
+
+### Internal / Testing Changes
+- refactor: update json import paths ([#134](https://github.com/googleapis/nodejs-kms/pull/134))
+- build: Add docuploader credentials to node publish jobs ([#132](https://github.com/googleapis/nodejs-kms/pull/132))
+- build: use node10 to run samples-test, system-test etc ([#131](https://github.com/googleapis/nodejs-kms/pull/131))
+- build: update release configuration
+- chore: sync latest proto docs
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#124](https://github.com/googleapis/nodejs-kms/pull/124))
+- chore(deps): update dependency yargs to v13 ([#122](https://github.com/googleapis/nodejs-kms/pull/122))
+- build: create docs test npm scripts ([#121](https://github.com/googleapis/nodejs-kms/pull/121))
+- build: test using @grpc/grpc-js in CI ([#120](https://github.com/googleapis/nodejs-kms/pull/120))
+- refactor: improve generated code style. ([#114](https://github.com/googleapis/nodejs-kms/pull/114))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#112](https://github.com/googleapis/nodejs-kms/pull/112))
+- test: add a system test to list global keys ([#111](https://github.com/googleapis/nodejs-kms/pull/111))
+- build: ignore googleapis.com in doc link check ([#108](https://github.com/googleapis/nodejs-kms/pull/108))
+- chore: sync gapic files
+
 ## v0.3.0
 
 01-15-2019 10:50 PST
