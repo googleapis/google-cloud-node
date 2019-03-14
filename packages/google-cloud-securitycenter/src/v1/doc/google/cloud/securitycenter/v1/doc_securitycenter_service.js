@@ -183,11 +183,6 @@ const GetSourceRequest = {
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
- * @property {string} having
- *   Filter that specifies what fields to further filter on *after* the query
- *   filter has been executed. Currently only 'state_change' is supported and
- *   requires compare_duration to be specified.
- *
  * @property {string} pageToken
  *   The value returned by the last `GroupAssetsResponse`; indicates
  *   that this is a continuation of a prior `GroupAssets` call, and that the
@@ -321,11 +316,6 @@ const GroupAssetsResponse = {
  *   `group_by`.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @property {string} having
- *   Filter that specifies what fields to further filter on *after* the query
- *   filter has been executed. Currently only 'finding.state' and 'state_change'
- *   are supported and requires compare_duration to be specified.
  *
  * @property {string} pageToken
  *   The value returned by the last `GroupFindingsResponse`; indicates
@@ -517,11 +507,6 @@ const ListSourcesResponse = {
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
- * @property {string} having
- *   Filter that specifies what fields to further filter on *after* the query
- *   filter has been executed. Currently only 'state_change' is supported and
- *   requires compare_duration to be specified.
- *
  * @property {Object} fieldMask
  *   Optional.
  *
@@ -712,11 +697,6 @@ const ListAssetsResponse = {
  *   read_time.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @property {string} having
- *   Filter that specifies what fields to further filter on *after* the query
- *   filter has been executed. Currently only 'finding.state' and 'state_change'
- *   are supported and requires compare_duration to be specified.
  *
  * @property {Object} fieldMask
  *   Optional.

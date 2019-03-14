@@ -642,10 +642,6 @@ class SecurityCenterClient {
    *   NOW.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'state_change' is supported and
-   *   requires compare_duration to be specified.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -841,10 +837,6 @@ class SecurityCenterClient {
    *   NOW.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'state_change' is supported and
-   *   requires compare_duration to be specified.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -976,10 +968,6 @@ class SecurityCenterClient {
    *   `group_by`.
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'finding.state' and 'state_change'
-   *   are supported and requires compare_duration to be specified.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1171,10 +1159,6 @@ class SecurityCenterClient {
    *   `group_by`.
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'finding.state' and 'state_change'
-   *   are supported and requires compare_duration to be specified.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1297,10 +1281,6 @@ class SecurityCenterClient {
    *   read_time.
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'state_change' is supported and
-   *   requires compare_duration to be specified.
    * @param {Object} [request.fieldMask]
    *   Optional.
    *
@@ -1485,10 +1465,6 @@ class SecurityCenterClient {
    *   read_time.
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'state_change' is supported and
-   *   requires compare_duration to be specified.
    * @param {Object} [request.fieldMask]
    *   Optional.
    *
@@ -1617,10 +1593,6 @@ class SecurityCenterClient {
    *   read_time.
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'finding.state' and 'state_change'
-   *   are supported and requires compare_duration to be specified.
    * @param {Object} [request.fieldMask]
    *   Optional.
    *
@@ -1804,10 +1776,6 @@ class SecurityCenterClient {
    *   read_time.
    *
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
-   * @param {string} [request.having]
-   *   Filter that specifies what fields to further filter on *after* the query
-   *   filter has been executed. Currently only 'finding.state' and 'state_change'
-   *   are supported and requires compare_duration to be specified.
    * @param {Object} [request.fieldMask]
    *   Optional.
    *
