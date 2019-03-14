@@ -4,6 +4,43 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## v0.10.0
+
+03-12-2019 16:24 PDT
+
+### New Features
+- feat(middleware): generate parent request logs ([#235](https://github.com/googleapis/nodejs-logging-bunyan/pull/235))
+
+### Bug Fixes
+- fix: do not promote record.labels if improper ([#266](https://github.com/googleapis/nodejs-logging-bunyan/pull/266))
+- fix: remove deep dependency into auth-library ([#251](https://github.com/googleapis/nodejs-logging-bunyan/pull/251))
+
+### Documentation
+- docs: update links in contrib guide ([#263](https://github.com/googleapis/nodejs-logging-bunyan/pull/263))
+- docs: update contributing path in README ([#256](https://github.com/googleapis/nodejs-logging-bunyan/pull/256))
+- docs: move CONTRIBUTING.md to root ([#255](https://github.com/googleapis/nodejs-logging-bunyan/pull/255))
+- docs: add lint/fix example to contributing guide ([#252](https://github.com/googleapis/nodejs-logging-bunyan/pull/252))
+- docs: use https for links ([#246](https://github.com/googleapis/nodejs-logging-bunyan/pull/246))
+
+### Internal / Testing Changes
+- chore: allow custom port in samples tests ([#272](https://github.com/googleapis/nodejs-logging-bunyan/pull/272))
+- build: Add docuploader credentials to node publish jobs ([#270](https://github.com/googleapis/nodejs-logging-bunyan/pull/270))
+- build: update release config ([#268](https://github.com/googleapis/nodejs-logging-bunyan/pull/268))
+- build: use node10 to run samples-test, system-test etc ([#269](https://github.com/googleapis/nodejs-logging-bunyan/pull/269))
+- chore(deps): update dependency mocha to v6 ([#264](https://github.com/googleapis/nodejs-logging-bunyan/pull/264))
+- build: use linkinator for docs test ([#262](https://github.com/googleapis/nodejs-logging-bunyan/pull/262))
+- fix: de-flake system tests ([#261](https://github.com/googleapis/nodejs-logging-bunyan/pull/261))
+- chore: resolve TODO in test ([#259](https://github.com/googleapis/nodejs-logging-bunyan/pull/259))
+- build: create docs test npm scripts ([#258](https://github.com/googleapis/nodejs-logging-bunyan/pull/258))
+- build: test using @grpc/grpc-js in CI ([#257](https://github.com/googleapis/nodejs-logging-bunyan/pull/257))
+- chore(deps): update dependency @google-cloud/common to ^0.31.0 ([#253](https://github.com/googleapis/nodejs-logging-bunyan/pull/253))
+- fix(deps): update dependency yargs to v13 ([#260](https://github.com/googleapis/nodejs-logging-bunyan/pull/260))
+- fix: directly depend on @g-c/common ([#250](https://github.com/googleapis/nodejs-logging-bunyan/pull/250))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#245](https://github.com/googleapis/nodejs-logging-bunyan/pull/245))
+- build: ignore googleapis.com in doc link check ([#242](https://github.com/googleapis/nodejs-logging-bunyan/pull/242))
+- build: check broken links in generated docs ([#239](https://github.com/googleapis/nodejs-logging-bunyan/pull/239))
+- refactor: modernize the sample tests ([#237](https://github.com/googleapis/nodejs-logging-bunyan/pull/237))
+
 ## v0.9.5
 
 12-12-2018 19:50 PST
