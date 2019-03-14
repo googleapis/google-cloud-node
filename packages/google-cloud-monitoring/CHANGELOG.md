@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## v0.7.1
+
+03-13-2019 15:05 PDT
+
+### Bug Fixes
+- fix: throw on invalid credentials ([#216](https://github.com/googleapis/nodejs-monitoring/pull/216))
+
+### Dependencies
+- fix(deps): update dependency google-gax to ^0.25.0 ([#204](https://github.com/googleapis/nodejs-monitoring/pull/204))
+
+### Documentation
+- docs: update links in contrib guide ([#215](https://github.com/googleapis/nodejs-monitoring/pull/215))
+- docs: update contributing path in README ([#210](https://github.com/googleapis/nodejs-monitoring/pull/210))
+- docs: move CONTRIBUTING.md to root ([#209](https://github.com/googleapis/nodejs-monitoring/pull/209))
+- docs: add lint/fix example to contributing guide ([#206](https://github.com/googleapis/nodejs-monitoring/pull/206))
+
+### Internal / Testing Changes
+- refactor: update json import paths ([#224](https://github.com/googleapis/nodejs-monitoring/pull/224))
+- chore(deps): update dependency p-retry to v4 ([#223](https://github.com/googleapis/nodejs-monitoring/pull/223))
+- build: Add docuploader credentials to node publish jobs ([#221](https://github.com/googleapis/nodejs-monitoring/pull/221))
+- build: use node10 to run samples-test, system-test etc ([#220](https://github.com/googleapis/nodejs-monitoring/pull/220))
+- build: update release configuration
+- chore: update proto docs and code style
+- chore(deps): update dependency mocha to v6 ([#217](https://github.com/googleapis/nodejs-monitoring/pull/217))
+- refactor: update the generated code style  ([#208](https://github.com/googleapis/nodejs-monitoring/pull/208))
+- build: use linkinator for docs test ([#214](https://github.com/googleapis/nodejs-monitoring/pull/214))
+- fix(deps): update dependency yargs to v13 ([#213](https://github.com/googleapis/nodejs-monitoring/pull/213))
+- build: create docs test npm scripts ([#212](https://github.com/googleapis/nodejs-monitoring/pull/212))
+- build: test using @grpc/grpc-js in CI ([#211](https://github.com/googleapis/nodejs-monitoring/pull/211))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#203](https://github.com/googleapis/nodejs-monitoring/pull/203))
+- build: ignore googleapis.com in doc link check ([#201](https://github.com/googleapis/nodejs-monitoring/pull/201))
+- chore: update year in the license headers. ([#200](https://github.com/googleapis/nodejs-monitoring/pull/200))
+
 ## v0.7.0
 
 01-15-2019 09:35 PST
