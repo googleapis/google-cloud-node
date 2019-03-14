@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## v0.6.1
+
+03-13-2019 16:21 PDT
+
+### Bug Fixes
+- fix: properly handle hapi v16+ req.url ([#311](https://github.com/googleapis/nodejs-error-reporting/pull/311))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/common to ^0.31.0 ([#304](https://github.com/googleapis/nodejs-error-reporting/pull/304))
+
+### Documentation
+- docs: document how to get async stack traces ([#314](https://github.com/googleapis/nodejs-error-reporting/pull/314))
+- docs: update links in contrib guide ([#316](https://github.com/googleapis/nodejs-error-reporting/pull/316))
+- docs: add custom documentation to the README ([#313](https://github.com/googleapis/nodejs-error-reporting/pull/313))
+- docs: update contributing path in README ([#307](https://github.com/googleapis/nodejs-error-reporting/pull/307))
+- docs: move CONTRIBUTING.md to root ([#306](https://github.com/googleapis/nodejs-error-reporting/pull/306))
+- docs: add lint/fix example to contributing guide ([#303](https://github.com/googleapis/nodejs-error-reporting/pull/303))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#322](https://github.com/googleapis/nodejs-error-reporting/pull/322))
+- build: use node10 to run samples-test, system-test etc ([#321](https://github.com/googleapis/nodejs-error-reporting/pull/321))
+- build: update release configuration
+- chore(deps): update dependency restify to v8 ([#318](https://github.com/googleapis/nodejs-error-reporting/pull/318))
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#315](https://github.com/googleapis/nodejs-error-reporting/pull/315))
+- fix(deps): update dependency yargs to v13 ([#312](https://github.com/googleapis/nodejs-error-reporting/pull/312))
+- refactor: cleanup types for reportManualError ([#310](https://github.com/googleapis/nodejs-error-reporting/pull/310))
+- build: create docs test npm scripts ([#309](https://github.com/googleapis/nodejs-error-reporting/pull/309))
+- build: test using @grpc/grpc-js in CI ([#308](https://github.com/googleapis/nodejs-error-reporting/pull/308))
+- build: check for 404s when generating docs ([#301](https://github.com/googleapis/nodejs-error-reporting/pull/301))
+- chore(deps): update dependency eslint-config-prettier to v4 ([#300](https://github.com/googleapis/nodejs-error-reporting/pull/300))
+- chore(deps): update dependency @types/hapi to v18 ([#297](https://github.com/googleapis/nodejs-error-reporting/pull/297))
+
 ## v0.6.0
 
 01-22-2019 09:59 PST
