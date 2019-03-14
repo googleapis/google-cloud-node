@@ -1120,7 +1120,7 @@ describe('Bucket', () => {
 
     it('should not require a callback', done => {
       bucket.setMetadata = (metadata: {}, callback: Function) => {
-        assert.doesNotThrow(callback);
+        assert.doesNotThrow(() => callback());
         done();
       };
 
@@ -1144,7 +1144,7 @@ describe('Bucket', () => {
 
     it('should not require a callback', done => {
       bucket.setMetadata = (metadata: {}, callback: Function) => {
-        assert.doesNotThrow(callback);
+        assert.doesNotThrow(() => callback());
         done();
       };
 

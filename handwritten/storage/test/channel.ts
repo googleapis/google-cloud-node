@@ -119,7 +119,7 @@ describe('Channel', () => {
     it('should not require a callback', done => {
       channel.request =
           (reqOpts: DecorateRequestOptions, callback: Function) => {
-            assert.doesNotThrow(callback);
+            assert.doesNotThrow(() => callback());
             done();
           };
 
