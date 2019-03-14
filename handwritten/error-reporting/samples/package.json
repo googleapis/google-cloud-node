@@ -15,7 +15,7 @@
     "test": "mocha system-test/*.test.js --timeout=600000"
   },
   "dependencies": {
-    "@google-cloud/error-reporting": "^0.6.0",
+    "@google-cloud/error-reporting": "^0.6.1",
     "express": "^4.16.3",
     "yargs": "^13.0.0"
   },
