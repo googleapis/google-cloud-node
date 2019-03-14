@@ -4,6 +4,39 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.4.3
+
+03-13-2019 17:10 PDT
+
+### Bug Fixes / Implementation Changes
+- fix: getSigned(Policy|Url) throws if expiration is invalid Date ([#614](https://github.com/googleapis/nodejs-storage/pull/614))
+- fix: handle errors from file#createReadStream ([#615](https://github.com/googleapis/nodejs-storage/pull/615))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/paginator to ^0.2.0
+- fix(deps): update dependency gcs-resumable-upload to v1 ([#619](https://github.com/googleapis/nodejs-storage/pull/619))
+- fix(deps): update dependency @google-cloud/pubsub to ^0.27.0 ([#620](https://github.com/googleapis/nodejs-storage/pull/620))
+- fix(deps): update dependency @google-cloud/pubsub to ^0.26.0 ([#618](https://github.com/googleapis/nodejs-storage/pull/618))
+- fix(deps): update dependency @google-cloud/pubsub to ^0.25.0 ([#616](https://github.com/googleapis/nodejs-storage/pull/616))
+- chore(deps): update dependency mocha to v6 ([#611](https://github.com/googleapis/nodejs-storage/pull/611))
+- fix(deps): update dependency @google-cloud/promisify to ^0.4.0 ([#609](https://github.com/googleapis/nodejs-storage/pull/609))
+- chore(deps): update dependency @types/tmp to v0.0.34 ([#608](https://github.com/googleapis/nodejs-storage/pull/608))
+- fix(deps): update dependency yargs to v13 ([#606](https://github.com/googleapis/nodejs-storage/pull/606))
+
+### Documentation
+- docs: update links in contrib guide ([#610](https://github.com/googleapis/nodejs-storage/pull/610))
+- docs: update contributing path in README ([#603](https://github.com/googleapis/nodejs-storage/pull/603))
+- chore: move CONTRIBUTING.md to root ([#601](https://github.com/googleapis/nodejs-storage/pull/601))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#624](https://github.com/googleapis/nodejs-storage/pull/624))
+- build: use node10 to run samples-test, system-test etc ([#623](https://github.com/googleapis/nodejs-storage/pull/623))
+- build: update release configuration
+- build: use linkinator for docs test ([#607](https://github.com/googleapis/nodejs-storage/pull/607))
+- build: create docs test npm scripts ([#605](https://github.com/googleapis/nodejs-storage/pull/605))
+- build: test using @grpc/grpc-js in CI ([#604](https://github.com/googleapis/nodejs-storage/pull/604))
+- chore: remove console.log in system test ([#599](https://github.com/googleapis/nodejs-storage/pull/599))
+
 ## v2.4.2
 
 02-05-2019 16:55 PST
