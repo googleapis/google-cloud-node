@@ -23,7 +23,7 @@ const SKIP = {
   express: false,
   hapi: {sixteen: false, seventeen: false},
   koa: {one: false, two: false},
-  restify: false
+  restify: {seven: false, eight: false}
 };
 
 const TS_CODE_ARRAY: check.CodeSample[] = [
@@ -217,9 +217,30 @@ server.get('/hello/:name', respond);
 server.head('/hello/:name', respond);
 `,
     description: 'uses restify',
-    dependencies: ['restify'],
-    devDependencies: ['@types/restify'],
-    skip: SKIP.restify
+    dependencies: ['restify@7.x.x'],
+    devDependencies: ['@types/restify@7.x.x'],
+    skip: SKIP.restify.seven
+  },
+  {
+    code: `import * as restify from 'restify';
+
+import {ErrorReporting} from '@google-cloud/error-reporting';
+const errors = new ErrorReporting();
+
+function respond(req: {}, res: {}, next: Function) {
+  next(new Error('this is a restify error'));
+}
+
+const server = restify.createServer();
+
+server.use(errors.restify(server));
+server.get('/hello/:name', respond);
+server.head('/hello/:name', respond);
+`,
+    description: 'uses restify',
+    dependencies: ['restify@8.x.x'],
+    devDependencies: ['@types/restify@7.x.x'],
+    skip: SKIP.restify.eight
   },
 ];
 
@@ -411,10 +432,31 @@ server.get('/hello/:name', respond);
 server.head('/hello/:name', respond);
 `,
     description: 'uses restify',
-    dependencies: ['restify'],
+    dependencies: ['restify@7.x.x'],
     devDependencies: [],
-    skip: SKIP.restify
+    skip: SKIP.restify.seven
   },
+  {
+    code: `const restify = require('restify');
+
+const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+const errors = new ErrorReporting();
+
+function respond(req, res, next) {
+  next(new Error('this is a restify error'));
+}
+
+const server = restify.createServer();
+
+server.use(errors.restify(server));
+server.get('/hello/:name', respond);
+server.head('/hello/:name', respond);
+`,
+    description: 'uses restify',
+    dependencies: ['restify@8.x.x'],
+    devDependencies: [],
+    skip: SKIP.restify.eight
+  }
 ];
 
 check.testInstallation(TS_CODE_ARRAY, JS_CODE_ARRAY, {timeout: 2 * 60 * 1000});
