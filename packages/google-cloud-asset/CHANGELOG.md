@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## v0.2.1
+
+03-13-2019 21:45 PDT
+
+### Bug Fixes
+- fix: throw on invalid credentials
+
+### Documentation
+- docs: use backticks for JS values ([#116](https://github.com/googleapis/nodejs-asset/pull/116))
+- docs: update jsdoc samples and json import paths ([#115](https://github.com/googleapis/nodejs-asset/pull/115))
+- docs: update links in contrib guide ([#108](https://github.com/googleapis/nodejs-asset/pull/108))
+- docs: update contributing path in README ([#100](https://github.com/googleapis/nodejs-asset/pull/100))
+- docs: move CONTRIBUTING.md to root ([#99](https://github.com/googleapis/nodejs-asset/pull/99))
+- docs: add lint/fix example to contributing guide ([#97](https://github.com/googleapis/nodejs-asset/pull/97))
+
+### Internal / Testing Changes
+- build: Add docuploader credentials to node publish jobs ([#113](https://github.com/googleapis/nodejs-asset/pull/113))
+- build: use node10 to run samples-test, system-test etc ([#112](https://github.com/googleapis/nodejs-asset/pull/112))
+- build: update release configuration
+- chore: update proto formatting
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#107](https://github.com/googleapis/nodejs-asset/pull/107))
+- fix(deps): update dependency yargs to v13 ([#105](https://github.com/googleapis/nodejs-asset/pull/105))
+- build: create docs test npm scripts ([#104](https://github.com/googleapis/nodejs-asset/pull/104))
+- build: test using @grpc/grpc-js in CI ([#103](https://github.com/googleapis/nodejs-asset/pull/103))
+- chore: ignore cache directories ([#102](https://github.com/googleapis/nodejs-asset/pull/102))
+- refactor: improve generated code style. ([#96](https://github.com/googleapis/nodejs-asset/pull/96))
+
 ## v0.2.0
 
 01-31-2019 10:32 PST
