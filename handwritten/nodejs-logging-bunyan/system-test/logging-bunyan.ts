@@ -157,7 +157,9 @@ describe('LoggingBunyan', function() {
       const errors = await errorsTransport.pollForNewEvents(
           SERVICE, start, ERROR_REPORTING_POLL_TIMEOUT);
 
-      assert.strictEqual(errors.length, 1);
+      assert.strictEqual(
+          errors.length, 1,
+          `expected 1 error but got ${require('util').inspect(errors)}`);
       const errEvent = errors[0];
 
       assert.strictEqual(errEvent.serviceContext.service, SERVICE);
