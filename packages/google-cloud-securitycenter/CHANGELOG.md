@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## v0.3.0
+
+03-14-2019 07:55 PDT
+
+**This release has breaking changes!** The `having` enum value from `GroupFindingsRequest` has been removed.  This field was not supposed to be exposed.
+
+### Bug Fixes
+- fix: remove the `having` enum value from `GroupFindingsRequest` ([#67](https://github.com/googleapis/nodejs-security-center/pull/67))
+
+### Documentation
+- docs: use backticks for JS values
+
 ## v0.2.0
 
 03-12-2019 16:11 PDT
