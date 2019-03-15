@@ -97,7 +97,6 @@ export class ErrorsApiTransport extends common.Service {
       Promise<ErrorEvent[]> {
     const timeLimit = Date.now() + timeout;
     let groupId;
-    const filteredEvents: ErrorEvent[] = [];
     // wait for a group
     while (Date.now() < timeLimit) {
       await delay(1000);
@@ -119,13 +118,13 @@ export class ErrorsApiTransport extends common.Service {
       if (!groupId) continue;
 
       const events = await this.getGroupEvents(groupId);
-      events.forEach((event) => {
-        if (new Date(event.eventTime).getTime() >= time) {
-          filteredEvents.push(event);
-        }
-      });
-      if (filteredEvents.length) break;
+      const filteredEvents = events.filter(
+          event => event.serviceContext.service === service &&
+              (new Date(event.eventTime).getTime() >= time));
+      if (filteredEvents.length) {
+        return filteredEvents;
+      }
     }
-    return filteredEvents;
+    return [];
   }
 }
