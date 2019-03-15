@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## v0.10.1
+
+03-14-2019 14:58 PDT
+
+### Bug Fixes
+- fix: add missing dep on google-auth-library ([#278](https://github.com/googleapis/nodejs-logging-bunyan/pull/278))
+
 ## v0.10.0
 
 03-12-2019 16:24 PDT
