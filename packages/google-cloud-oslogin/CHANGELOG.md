@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## v0.3.2
+
+03-18-2019 13:47 PDT
+
+### Implementation Changes
+- refactor: update json import paths ([#156](https://github.com/googleapis/nodejs-os-login/pull/156))
+- fix: throw on invalid credentials
+
+### Dependencies
+- chore(deps): update dependency mocha to v6
+
+### Documentation
+- docs: update comments on protos ([#151](https://github.com/googleapis/nodejs-os-login/pull/151))
+- build: use linkinator for docs test ([#148](https://github.com/googleapis/nodejs-os-login/pull/148))
+- docs: update links in contrib guide ([#149](https://github.com/googleapis/nodejs-os-login/pull/149))
+- build: create docs test npm scripts ([#146](https://github.com/googleapis/nodejs-os-login/pull/146))
+- docs: update contributing path in README ([#144](https://github.com/googleapis/nodejs-os-login/pull/144))
+- chore: move CONTRIBUTING.md to root ([#143](https://github.com/googleapis/nodejs-os-login/pull/143))
+- docs: add lint/fix example to contributing guide ([#141](https://github.com/googleapis/nodejs-os-login/pull/141))
+
+### Internal / Testing Changes
+- chore: use per-repo npm publish ([#158](https://github.com/googleapis/nodejs-os-login/pull/158))
+- build: use per-repo publish token ([#157](https://github.com/googleapis/nodejs-os-login/pull/157))
+- build: Add docuploader credentials to node publish jobs ([#154](https://github.com/googleapis/nodejs-os-login/pull/154))
+- build: use node10 to run samples-test, system-test etc ([#153](https://github.com/googleapis/nodejs-os-login/pull/153))
+- build: update release configuration
+- build: test using @grpc/grpc-js in CI ([#145](https://github.com/googleapis/nodejs-os-login/pull/145))
+
 ## v0.3.1
 
 01-31-2019 23:16 PST
