@@ -22,20 +22,23 @@ logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
 gapic = gcp.GAPICGenerator()
-version = 'v1beta1'
-library = gapic.node_library(
-    'asset', version, config_path="artman_cloudasset_v1beta1.yaml",
+versions = ['v1beta1', 'v1']
+for version in versions:
+  library = gapic.node_library(
+    'asset',
+    version,
+    config_path=f"artman_cloudasset_{version}.yaml",
     artman_output_name=f"asset-{version}")
+  s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
-s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
 templates = common_templates.node_library()
 s.copy(templates)
 
 # [START fix-dead-link]
 discovery_url = 'https://www.googleapis.com/discovery/v1/apis/compute/v1/rest'
-s.replace('**/doc/google/cloud/asset/v1beta1/doc_assets.js',
+s.replace('**/doc/google/cloud/asset/*/doc_assets.js',
         f'`"{discovery_url}"`',
         f'[`"{discovery_url}"`]({discovery_url})')
 

@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-03-13T11:07:41.841569Z",
+  "updateTime": "2019-03-16T02:43:47.980703Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e340f4a01ec287f7bb86e2331b5e98c473d10afd",
-        "internalRef": "238151361"
+        "sha": "dab002e28c81adcc5601278c36d4302c2624c8e2",
+        "internalRef": "238726437"
       }
     },
     {
@@ -33,6 +33,16 @@
         "language": "nodejs",
         "generator": "gapic",
         "config": "google/cloud/asset/artman_cloudasset_v1beta1.yaml"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "asset",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/asset/artman_cloudasset_v1.yaml"
       }
     }
   ]

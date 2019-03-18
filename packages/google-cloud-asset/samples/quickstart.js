@@ -17,8 +17,8 @@
 
 async function exportAssets(dumpFilePath) {
   // [START asset_quickstart_export_assets]
-  const asset = require('@google-cloud/asset');
-  const client = new asset.v1beta1.AssetServiceClient({
+  const {AssetServiceClient} = require('@google-cloud/asset');
+  const client = new AssetServiceClient({
     // optional auth parameters.
   });
 
@@ -49,8 +49,8 @@ async function exportAssets(dumpFilePath) {
 async function batchGetAssetsHistory(assetNames) {
   // [START asset_quickstart_batch_get_assets_history]
   const util = require('util');
-  const asset = require('@google-cloud/asset');
-  const client = new asset.v1beta1.AssetServiceClient({
+  const {AssetServiceClient} = require('@google-cloud/asset');
+  const client = new AssetServiceClient({
     // optional auth parameters.
   });
 
