@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./cluster_controller_client_config');
+const gapicConfig = require('./cluster_controller_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -367,6 +367,20 @@ class ClusterControllerClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const projectId = '';
+   * const region = '';
+   * const cluster = {};
+   * const request = {
+   *   projectId: projectId,
+   *   region: region,
+   *   cluster: cluster,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.createCluster(request);
+   *
+   * const [response] = await operation.promise();
    */
   createCluster(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -555,6 +569,24 @@ class ClusterControllerClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const cluster = {};
+   * const updateMask = {};
+   * const request = {
+   *   projectId: projectId,
+   *   region: region,
+   *   clusterName: clusterName,
+   *   cluster: cluster,
+   *   updateMask: updateMask,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.updateCluster(request);
+   *
+   * const [response] = await operation.promise();
    */
   updateCluster(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -673,6 +705,20 @@ class ClusterControllerClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const request = {
+   *   projectId: projectId,
+   *   region: region,
+   *   clusterName: clusterName,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deleteCluster(request);
+   *
+   * const [response] = await operation.promise();
    */
   deleteCluster(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1045,6 +1091,20 @@ class ClusterControllerClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const projectId = '';
+   * const region = '';
+   * const clusterName = '';
+   * const request = {
+   *   projectId: projectId,
+   *   region: region,
+   *   clusterName: clusterName,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.diagnoseCluster(request);
+   *
+   * const [response] = await operation.promise();
    */
   diagnoseCluster(request, options, callback) {
     if (options instanceof Function && callback === undefined) {

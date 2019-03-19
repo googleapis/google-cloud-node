@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./workflow_template_service_client_config');
+const gapicConfig = require('./workflow_template_service_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -490,6 +490,13 @@ class WorkflowTemplateServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.workflowTemplatePath('[PROJECT]', '[REGION]', '[WORKFLOW_TEMPLATE]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.instantiateWorkflowTemplate({name: formattedName});
+   *
+   * const [response] = await operation.promise();
    */
   instantiateWorkflowTemplate(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -627,6 +634,18 @@ class WorkflowTemplateServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+   * const template = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   template: template,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.instantiateInlineWorkflowTemplate(request);
+   *
+   * const [response] = await operation.promise();
    */
   instantiateInlineWorkflowTemplate(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
