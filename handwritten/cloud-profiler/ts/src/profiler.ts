@@ -331,8 +331,9 @@ export class Profiler extends ServiceObject {
             await SourceMapper.create(this.config.sourceMapSearchPath);
       } catch (err) {
         this.logger.error(
-            `Failed to initialize source maps and start profiler: ${err}`);
-        return;
+            `Failed to initialize SourceMapper. Source map support has been disabled: ${
+                err}`);
+        this.config.disableSourceMaps = true;
       }
     }
     this.runLoop();
