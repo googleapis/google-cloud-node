@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## v0.3.0
+
+03-19-2019 11:42 PDT
+
+This release ships the v1 version of the backend API.
+
+Create the v1 client:
+
+```javascript
+const asset = require('@google-cloud/asset');
+const client = new asset.v1.AssetServiceClient();
+```
+
+### New Features
+- feat: add the v1 version of the API ([#120](https://github.com/googleapis/nodejs-asset/pull/120))
+
+### Internal / Testing Changes
+- build: use per-repo publish token ([#119](https://github.com/googleapis/nodejs-asset/pull/119))
+
 ## v0.2.1
 
 03-13-2019 21:45 PDT
