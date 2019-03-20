@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./data_labeling_service_client_config');
+const gapicConfig = require('./data_labeling_service_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -384,7 +384,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -436,7 +436,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -503,7 +503,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -593,7 +593,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -635,7 +635,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -685,7 +685,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -747,6 +747,18 @@ class DataLabelingServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.datasetPath('[PROJECT]', '[DATASET]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.importData(request);
+   *
+   * const [response] = await operation.promise();
    */
   importData(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -791,7 +803,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -857,6 +869,20 @@ class DataLabelingServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.datasetPath('[PROJECT]', '[DATASET]');
+   * const annotatedDataset = '';
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   annotatedDataset: annotatedDataset,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportData(request);
+   *
+   * const [response] = await operation.promise();
    */
   exportData(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -890,7 +916,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -958,7 +984,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1048,7 +1074,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1094,7 +1120,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1161,7 +1187,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1255,7 +1281,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1333,7 +1359,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1399,6 +1425,20 @@ class DataLabelingServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
+   * const basicConfig = {};
+   * const feature = 'FEATURE_UNSPECIFIED';
+   * const request = {
+   *   parent: formattedParent,
+   *   basicConfig: basicConfig,
+   *   feature: feature,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.labelImage(request);
+   *
+   * const [response] = await operation.promise();
    */
   labelImage(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1464,7 +1504,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1530,6 +1570,20 @@ class DataLabelingServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
+   * const basicConfig = {};
+   * const feature = 'FEATURE_UNSPECIFIED';
+   * const request = {
+   *   parent: formattedParent,
+   *   basicConfig: basicConfig,
+   *   feature: feature,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.labelVideo(request);
+   *
+   * const [response] = await operation.promise();
    */
   labelVideo(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1583,7 +1637,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1649,6 +1703,20 @@ class DataLabelingServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
+   * const basicConfig = {};
+   * const feature = 'FEATURE_UNSPECIFIED';
+   * const request = {
+   *   parent: formattedParent,
+   *   basicConfig: basicConfig,
+   *   feature: feature,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.labelText(request);
+   *
+   * const [response] = await operation.promise();
    */
   labelText(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1690,7 +1758,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1756,6 +1824,20 @@ class DataLabelingServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
+   * const basicConfig = {};
+   * const feature = 'FEATURE_UNSPECIFIED';
+   * const request = {
+   *   parent: formattedParent,
+   *   basicConfig: basicConfig,
+   *   feature: feature,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.labelAudio(request);
+   *
+   * const [response] = await operation.promise();
    */
   labelAudio(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1793,7 +1875,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1862,7 +1944,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1954,7 +2036,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2005,7 +2087,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2061,7 +2143,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2128,7 +2210,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2222,7 +2304,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2264,7 +2346,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2314,7 +2396,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2376,6 +2458,18 @@ class DataLabelingServiceClient {
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const instruction = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   instruction: instruction,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.createInstruction(request);
+   *
+   * const [response] = await operation.promise();
    */
   createInstruction(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -2408,7 +2502,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2475,7 +2569,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2565,7 +2659,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2607,7 +2701,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('datalabeling.v1beta1');
+   * const datalabeling = require('@google-cloud/datalabeling');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
