@@ -94,6 +94,9 @@ Examples:
   node detect.js pdf my-bucket my-pdf.pdf
   node detect.js localize-objects ./resources/duck_and_truck.jpg
   node detect.js localize-objects-gcs gs://bucket/bucketImage.png
+  node batch_annotate_files.js my-pdf.pdf
+  node batch_annotate_files_gcs.js my-pdf.pdf
+  node async_batch_annotate_images.js gs://bucket/bucketImage.png gs://bucket/out
 
 For more information, see https://cloud.google.com/vision/docs
 ```
