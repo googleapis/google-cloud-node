@@ -4,6 +4,38 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## v2.3.1
+
+03-20-2019 15:38 PDT
+
+### Bug Fixes
+- fix: throw on invalid credentials ([#302](https://github.com/googleapis/nodejs-speech/pull/302))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/common to ^0.31.0 ([#292](https://github.com/googleapis/nodejs-speech/pull/292))
+
+### Documentation
+- docs: add backticks to JavaScript samples in jsdoc ([#317](https://github.com/googleapis/nodejs-speech/pull/317))
+- docs(samples): Multi-channel GA sample ([#295](https://github.com/googleapis/nodejs-speech/pull/295))
+- docs: add lint/fix example to contributing guide ([#291](https://github.com/googleapis/nodejs-speech/pull/291))
+- docs: update links in contrib guide ([#304](https://github.com/googleapis/nodejs-speech/pull/304))
+- docs: update contributing path in README ([#297](https://github.com/googleapis/nodejs-speech/pull/297))
+- docs: move CONTRIBUTING.md to root ([#296](https://github.com/googleapis/nodejs-speech/pull/296))
+
+### Internal / Testing Changes
+- chore: publish to npm using wombat ([#322](https://github.com/googleapis/nodejs-speech/pull/322))
+- build: use per-repo npm publish token ([#320](https://github.com/googleapis/nodejs-speech/pull/320))
+- chore: update proto comments and fix tests ([#316](https://github.com/googleapis/nodejs-speech/pull/316))
+- build: Add docuploader credentials to node publish jobs ([#314](https://github.com/googleapis/nodejs-speech/pull/314))
+- build: update release config ([#310](https://github.com/googleapis/nodejs-speech/pull/310))
+- build: use node10 to run samples-test, system-test etc ([#313](https://github.com/googleapis/nodejs-speech/pull/313))
+- chore: update proto docs and code style ([#308](https://github.com/googleapis/nodejs-speech/pull/308))
+- chore(deps): update dependency mocha to v6 ([#305](https://github.com/googleapis/nodejs-speech/pull/305))
+- build: use linkinator for docs test ([#303](https://github.com/googleapis/nodejs-speech/pull/303))
+- fix(deps): update dependency yargs to v13 ([#301](https://github.com/googleapis/nodejs-speech/pull/301))
+- build: create docs test npm scripts ([#300](https://github.com/googleapis/nodejs-speech/pull/300))
+- build: test using @grpc/grpc-js in CI ([#298](https://github.com/googleapis/nodejs-speech/pull/298))
+
 ## v2.3.0
 
 02-04-2019 14:07 PST
