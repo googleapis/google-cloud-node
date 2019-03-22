@@ -165,7 +165,10 @@ class LanguageServiceClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-language',
+      'https://www.googleapis.com/auth/cloud-platform',
+    ];
   }
 
   /**
