@@ -120,7 +120,6 @@ describe('CloudRedisClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const memorySizeGb = 34199707;
       const authorizedNetwork = 'authorizedNetwork-1733809270';
-      const persistenceIamIdentity = 'persistenceIamIdentity1061944584';
       const expectedResponse = {
         name: name2,
         displayName: displayName,
@@ -134,7 +133,6 @@ describe('CloudRedisClient', () => {
         statusMessage: statusMessage,
         memorySizeGb: memorySizeGb,
         authorizedNetwork: authorizedNetwork,
-        persistenceIamIdentity: persistenceIamIdentity,
       };
 
       // Mock Grpc layer
@@ -217,7 +215,6 @@ describe('CloudRedisClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const memorySizeGb2 = 1493816946;
       const authorizedNetwork = 'authorizedNetwork-1733809270';
-      const persistenceIamIdentity = 'persistenceIamIdentity1061944584';
       const expectedResponse = {
         name: name,
         displayName: displayName,
@@ -231,7 +228,6 @@ describe('CloudRedisClient', () => {
         statusMessage: statusMessage,
         memorySizeGb: memorySizeGb2,
         authorizedNetwork: authorizedNetwork,
-        persistenceIamIdentity: persistenceIamIdentity,
       };
 
       // Mock Grpc layer
@@ -353,7 +349,6 @@ describe('CloudRedisClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const memorySizeGb2 = 1493816946;
       const authorizedNetwork = 'authorizedNetwork-1733809270';
-      const persistenceIamIdentity = 'persistenceIamIdentity1061944584';
       const expectedResponse = {
         name: name,
         displayName: displayName2,
@@ -367,7 +362,6 @@ describe('CloudRedisClient', () => {
         statusMessage: statusMessage,
         memorySizeGb: memorySizeGb2,
         authorizedNetwork: authorizedNetwork,
-        persistenceIamIdentity: persistenceIamIdentity,
       };
 
       // Mock Grpc layer
@@ -550,260 +544,6 @@ describe('CloudRedisClient', () => {
     });
   });
 
-  describe('importInstance', function() {
-    it('invokes importInstance without error', done => {
-      const client = new redisModule.v1.CloudRedisClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.instancePath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[INSTANCE]'
-      );
-      const inputConfig = {};
-      const request = {
-        name: formattedName,
-        inputConfig: inputConfig,
-      };
-
-      // Mock response
-      const name2 = 'name2-1052831874';
-      const displayName = 'displayName1615086568';
-      const locationId = 'locationId552319461';
-      const alternativeLocationId = 'alternativeLocationId-718920621';
-      const redisVersion = 'redisVersion-685310444';
-      const reservedIpRange = 'reservedIpRange-1082940580';
-      const host = 'host3208616';
-      const port = 3446913;
-      const currentLocationId = 'currentLocationId1312712735';
-      const statusMessage = 'statusMessage-239442758';
-      const memorySizeGb = 34199707;
-      const authorizedNetwork = 'authorizedNetwork-1733809270';
-      const persistenceIamIdentity = 'persistenceIamIdentity1061944584';
-      const expectedResponse = {
-        name: name2,
-        displayName: displayName,
-        locationId: locationId,
-        alternativeLocationId: alternativeLocationId,
-        redisVersion: redisVersion,
-        reservedIpRange: reservedIpRange,
-        host: host,
-        port: port,
-        currentLocationId: currentLocationId,
-        statusMessage: statusMessage,
-        memorySizeGb: memorySizeGb,
-        authorizedNetwork: authorizedNetwork,
-        persistenceIamIdentity: persistenceIamIdentity,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.importInstance = mockLongRunningGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client
-        .importInstance(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(responses => {
-          assert.deepStrictEqual(responses[0], expectedResponse);
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
-    });
-
-    it('invokes importInstance with error', done => {
-      const client = new redisModule.v1.CloudRedisClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.instancePath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[INSTANCE]'
-      );
-      const inputConfig = {};
-      const request = {
-        name: formattedName,
-        inputConfig: inputConfig,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.importInstance = mockLongRunningGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client
-        .importInstance(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(() => {
-          assert.fail();
-        })
-        .catch(err => {
-          assert(err instanceof Error);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
-        });
-    });
-
-    it('has longrunning decoder functions', () => {
-      const client = new redisModule.v1.CloudRedisClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert(
-        client._descriptors.longrunning.importInstance
-          .responseDecoder instanceof Function
-      );
-      assert(
-        client._descriptors.longrunning.importInstance
-          .metadataDecoder instanceof Function
-      );
-    });
-  });
-
-  describe('exportInstance', function() {
-    it('invokes exportInstance without error', done => {
-      const client = new redisModule.v1.CloudRedisClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.instancePath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[INSTANCE]'
-      );
-      const outputConfig = {};
-      const request = {
-        name: formattedName,
-        outputConfig: outputConfig,
-      };
-
-      // Mock response
-      const name2 = 'name2-1052831874';
-      const displayName = 'displayName1615086568';
-      const locationId = 'locationId552319461';
-      const alternativeLocationId = 'alternativeLocationId-718920621';
-      const redisVersion = 'redisVersion-685310444';
-      const reservedIpRange = 'reservedIpRange-1082940580';
-      const host = 'host3208616';
-      const port = 3446913;
-      const currentLocationId = 'currentLocationId1312712735';
-      const statusMessage = 'statusMessage-239442758';
-      const memorySizeGb = 34199707;
-      const authorizedNetwork = 'authorizedNetwork-1733809270';
-      const persistenceIamIdentity = 'persistenceIamIdentity1061944584';
-      const expectedResponse = {
-        name: name2,
-        displayName: displayName,
-        locationId: locationId,
-        alternativeLocationId: alternativeLocationId,
-        redisVersion: redisVersion,
-        reservedIpRange: reservedIpRange,
-        host: host,
-        port: port,
-        currentLocationId: currentLocationId,
-        statusMessage: statusMessage,
-        memorySizeGb: memorySizeGb,
-        authorizedNetwork: authorizedNetwork,
-        persistenceIamIdentity: persistenceIamIdentity,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.exportInstance = mockLongRunningGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client
-        .exportInstance(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(responses => {
-          assert.deepStrictEqual(responses[0], expectedResponse);
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
-    });
-
-    it('invokes exportInstance with error', done => {
-      const client = new redisModule.v1.CloudRedisClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.instancePath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[INSTANCE]'
-      );
-      const outputConfig = {};
-      const request = {
-        name: formattedName,
-        outputConfig: outputConfig,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.exportInstance = mockLongRunningGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client
-        .exportInstance(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(() => {
-          assert.fail();
-        })
-        .catch(err => {
-          assert(err instanceof Error);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
-        });
-    });
-
-    it('has longrunning decoder functions', () => {
-      const client = new redisModule.v1.CloudRedisClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert(
-        client._descriptors.longrunning.exportInstance
-          .responseDecoder instanceof Function
-      );
-      assert(
-        client._descriptors.longrunning.exportInstance
-          .metadataDecoder instanceof Function
-      );
-    });
-  });
-
   describe('failoverInstance', function() {
     it('invokes failoverInstance without error', done => {
       const client = new redisModule.v1.CloudRedisClient({
@@ -836,7 +576,6 @@ describe('CloudRedisClient', () => {
       const statusMessage = 'statusMessage-239442758';
       const memorySizeGb = 34199707;
       const authorizedNetwork = 'authorizedNetwork-1733809270';
-      const persistenceIamIdentity = 'persistenceIamIdentity1061944584';
       const expectedResponse = {
         name: name2,
         displayName: displayName,
@@ -850,7 +589,6 @@ describe('CloudRedisClient', () => {
         statusMessage: statusMessage,
         memorySizeGb: memorySizeGb,
         authorizedNetwork: authorizedNetwork,
-        persistenceIamIdentity: persistenceIamIdentity,
       };
 
       // Mock Grpc layer
