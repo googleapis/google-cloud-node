@@ -4,6 +4,40 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## v0.3.0
+
+03-22-2019 10:30 PDT
+
+**This release has breaking changes**.  The latest version of the service removed `importInstance` and `exportInstance` methods from the library. This was made to accommodate breaking changes in the underlying API.  Learn more at [#143](https://github.com/googleapis/nodejs-redis/pull/143).
+
+### Implementation Changes
+- refactor: update to the latest version of the protos (breaking change) ([#143](https://github.com/googleapis/nodejs-redis/pull/143))
+- feat: add import and export instance methods ([#132](https://github.com/googleapis/nodejs-redis/pull/132))
+
+### Bug Fixes
+- fix: throw on invalid credentials ([#128](https://github.com/googleapis/nodejs-redis/pull/128))
+
+### Documentation
+- docs: update examples
+- docs: update links in contrib guide ([#130](https://github.com/googleapis/nodejs-redis/pull/130))
+- docs: update contributing path in README ([#125](https://github.com/googleapis/nodejs-redis/pull/125))
+- docs: move CONTRIBUTING.md to root ([#124](https://github.com/googleapis/nodejs-redis/pull/124))
+- docs: add lint/fix example to contributing guide ([#122](https://github.com/googleapis/nodejs-redis/pull/122))
+- docs: fix example comments ([#121](https://github.com/googleapis/nodejs-redis/pull/121))
+
+### Internal / Testing Changes
+- chore: publish to npm using wombat ([#141](https://github.com/googleapis/nodejs-redis/pull/141))
+- build: use per-repo npm publish token ([#140](https://github.com/googleapis/nodejs-redis/pull/140))
+- build: Add docuploader credentials to node publish jobs ([#136](https://github.com/googleapis/nodejs-redis/pull/136))
+- build: use node10 to run samples-test, system-test etc ([#135](https://github.com/googleapis/nodejs-redis/pull/135))
+- build: update release configuration
+- chore: update proto code style
+- chore(deps): update dependency mocha to v6
+- build: use linkinator for docs test ([#129](https://github.com/googleapis/nodejs-redis/pull/129))
+- build: create docs test npm scripts ([#127](https://github.com/googleapis/nodejs-redis/pull/127))
+- build: test using @grpc/grpc-js in CI ([#126](https://github.com/googleapis/nodejs-redis/pull/126))
+- refactor: improve generated code style. ([#120](https://github.com/googleapis/nodejs-redis/pull/120))
+
 ## v0.2.1
 
 01-31-2019 23:00 PST
