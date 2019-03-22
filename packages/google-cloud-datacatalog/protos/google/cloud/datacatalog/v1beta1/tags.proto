@@ -1,0 +1,171 @@
+// Copyright 2019 Google LLC.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+syntax = "proto3";
+
+package google.cloud.datacatalog.v1beta1;
+
+import "google/protobuf/timestamp.proto";
+
+option cc_enable_arenas = true;
+option go_package = "google.golang.org/genproto/googleapis/cloud/datacatalog/v1beta1;datacatalog";
+option java_multiple_files = true;
+option java_package = "com.google.cloud.datacatalog";
+
+// Tags are used to attach custom metadata to Datahub resources. Tags conform to
+// the specifications within their Tag Template.
+message Tag {
+  // The resource name of the tag in URL format. For example,
+  // projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}",
+  // where tag_id is a system-generated identifier.
+  string name = 1;
+
+  // The resource name of the tag template that this tag uses. For example,
+  // projects/{project_id}/tagTemplates/{tag_template_id}. This field cannot be
+  // modified after creation.
+  string template = 2;
+
+  // Output only.
+  // The display name of the tag template. This field is only populated in the
+  // response of
+  // [ListTags][google.cloud.datacatalog.v1beta1.DataCatalog.ListTags] method.
+  string template_display_name = 5;
+
+  // The scope within the parent resource that this tag is attached to. If not
+  // provided, the tag is attached to the parent resource itself. Deleting the
+  // scope from the parent resource will delete all tags attached to that scope.
+  // These fields cannot be updated after creation.
+  oneof scope {
+    // Resources like Entry can have schemas associated with them. This scope
+    // allows users to attach tags to an individual column based on that schema.
+    //
+    // For attaching a tag to a nested column, use '.' to separate the column
+    // names: "outer_column.inner_column".
+    //
+    // For columns with '.' in their names,
+    // wrap the name in '`': "`my.column`", "`outer.column`.inner_column".
+    string column = 4;
+  }
+
+  // This maps the id of a tag field to the value of & additional information
+  // about that field. Valid field IDs are defined by the tag's template.
+  map<string, TagField> fields = 3;
+}
+
+// Contains the value and supporting information for a field within
+// a [Tag][google.cloud.datacatalog.v1beta1.Tag].
+message TagField {
+  // Output only. The display name of this field.
+  string display_name = 1;
+
+  // The value of this field.
+  oneof kind {
+    // Holds the value for a tag field with double type.
+    double double_value = 2;
+
+    // Holds the value for a tag field with string type.
+    string string_value = 3;
+
+    // Holds the value for a tag field with boolean type.
+    bool bool_value = 4;
+
+    // Holds the value for a tag field with timestamp type.
+    google.protobuf.Timestamp timestamp_value = 5;
+
+    // Holds the value for a tag field with enum type. This value must be
+    // one of the allowed values in the definition of this enum.
+    string enum_value = 6;
+  }
+}
+
+// Tag Templates provide the basic format of multiple fields which can be
+// attached to Cloud Data Catalog resources as Tags.
+//
+// Tag Templates can be used as a data glossary as tag templates define the
+// list of acceptable fields that can be applied within a Tag. When a Tag is
+// applied to a resource, the Tag Template defines the mapping of accepted field
+// names & types that can be used within the Tag.
+//
+// A Tag Template also allows you to make Tags using that template visible only
+// to a certain group of users.
+message TagTemplate {
+  // Output only. The resource name of the tag template in URL format. For
+  // example, projects/{project_id}/tagTemplates/{tag_template_id}.
+  string name = 1;
+
+  // The display name for this template.
+  string display_name = 2;
+
+  // Map of tag template field ids to the settings for the field.
+  // This map is an exhaustive list of allowed fields. This map must contain at
+  // least one field and at most 100 fields.
+  //
+  // The keys to this map are tag template field ids. Field ids can contain
+  // letters (both uppercase and lowercase), numbers (0-9), underscores (_) and
+  // dashes (-). Field ids must be at least 1 character long and at most 100
+  // characters long. Field ids must start with a letter or number.
+  map<string, TagTemplateField> fields = 3;
+}
+
+// The template for an individual field within a TagTemplate.
+message TagTemplateField {
+  // The display name for this field.
+  string display_name = 1;
+
+  // The type of value this tag field can contain.
+  FieldType type = 2;
+}
+
+message FieldType {
+  message EnumType {
+    // The set of allowed values for this enum. Any value in a TagField that
+    // uses this enum type must be one of these values.
+    //
+    // Enum values can contain letters (both uppercase and lowercase), numbers
+    // (0-9), underscores (_), dashes (-) and spaces ( ). Enum values must be at
+    // least 1 character long and at most 100 characters long. Enum values must
+    // start with a letter or number.
+    //
+    // The enum values listed here must not contain duplicates. When comparing
+    // enum values for duplicates, spaces and underscores are considered
+    // equivalent and uppercase and lowercase letters are considered equivalent.
+    repeated string allowed_values = 1;
+  }
+
+  enum PrimitiveType {
+    // This is the default invalid value for a type.
+    PRIMITIVE_TYPE_UNSPECIFIED = 0;
+
+    // A double precision number.
+    DOUBLE = 1;
+
+    // An UTF-8 string.
+    STRING = 2;
+
+    // A boolean value.
+    BOOL = 3;
+
+    // A timestamp.
+    TIMESTAMP = 4;
+  }
+
+  oneof type_decl {
+    // Represents primitive types - string, bool etc.
+    PrimitiveType primitive_type = 1;
+
+    // Represents an enum type.
+    EnumType enum_type = 2;
+  }
+}
