@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## v0.5.0
+
+03-21-2019 22:39 PDT
+
+**This release has breaking changes**.  The default version of the API has changed from `v2beta3` to `v2`.  Potential breaking changes may apply.
+
+### New Features
+- feat: add v2 of the tasks API ([#192](https://github.com/googleapis/nodejs-tasks/pull/192))
+
+### Internal / Testing Changes
+- chore: publish to npm using wombat ([#189](https://github.com/googleapis/nodejs-tasks/pull/189))
+- build: use per-repo publish token ([#188](https://github.com/googleapis/nodejs-tasks/pull/188))
+- refactor: update json import paths ([#186](https://github.com/googleapis/nodejs-tasks/pull/186))
+- build: Add docuploader credentials to node publish jobs ([#184](https://github.com/googleapis/nodejs-tasks/pull/184))
+
 ## v0.4.0
 
 03-06-2019 13:30 PST
