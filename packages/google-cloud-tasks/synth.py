@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # Run the gapic generator
 gapic = gcp.GAPICGenerator()
-versions = ["v2beta2", "v2beta3"]
+versions = ["v2beta2", "v2beta3", "v2"]
 for version in versions:
     library = gapic.node_library(
         "tasks", version, config_path=f"artman_cloudtasks_{version}.yaml"

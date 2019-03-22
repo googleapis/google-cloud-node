@@ -25,6 +25,9 @@
  * @namespace google.cloud.tasks.v2beta2
  */
 /**
+ * @namespace google.cloud.tasks.v2
+ */
+/**
  * @namespace google.cloud.tasks.v2beta3
  */
 /**
@@ -46,6 +49,7 @@
 const gapic = Object.freeze({
   v2beta2: require('./v2beta2'),
   v2beta3: require('./v2beta3'),
+  v2: require('./v2'),
 });
 
 /**
@@ -82,7 +86,7 @@ const gapic = Object.freeze({
  * @property {constructor} CloudTasksClient
  *   Reference to {@link v2beta3.CloudTasksClient}
  */
-module.exports = gapic.v2beta3;
+module.exports = gapic.v2;
 
 /**
  * @type {object}
@@ -90,6 +94,13 @@ module.exports = gapic.v2beta3;
  *   Reference to {@link v2beta2.CloudTasksClient}
  */
 module.exports.v2beta2 = gapic.v2beta2;
+
+/**
+ * @type {object}
+ * @property {constructor} CloudTasksClient
+ *   Reference to {@link v2.CloudTasksClient}
+ */
+module.exports.v2 = gapic.v2;
 
 /**
  * @type {object}
