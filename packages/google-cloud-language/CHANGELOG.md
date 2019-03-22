@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## v2.1.0
+
+03-22-2019 10:34 PDT
+
+### New Features
+- feat: add additional entity types ([#220](https://github.com/googleapis/nodejs-language/pull/220))
+
+### Internal / Testing Changes
+- chore: publish to npm using wombat ([#218](https://github.com/googleapis/nodejs-language/pull/218))
+- build: use per-repo npm publish token ([#216](https://github.com/googleapis/nodejs-language/pull/216))
+
 ## v2.0.2
 
 03-14-2019 07:43 PDT
