@@ -116,6 +116,8 @@ async function uploadFile(bucketName, filename) {
   await storage.bucket(bucketName).upload(filename, {
     // Support for HTTP requests made with `Accept-Encoding: gzip`
     gzip: true,
+    // By setting the option `destination`, you can change the name of the
+    // object you are uploading to a bucket.
     metadata: {
       // Enable long-lived HTTP caching headers
       // Use only if the contents of the file will never change
