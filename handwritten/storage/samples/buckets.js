@@ -36,7 +36,11 @@ async function createBucket(bucketName) {
    */
   // const bucketName = 'Name of a bucket, e.g. my-bucket';
 
-  // Creates a new bucket
+  // Creates a new bucket in the Asia region with the coldline default storage
+  // class. Leave the second argument blank for default settings.
+  //
+  // For default values see: https://cloud.google.com/storage/docs/locations and
+  // https://cloud.google.com/storage/docs/storage-classes
   await storage.createBucket(bucketName, {
     location: 'ASIA',
     storageClass: 'COLDLINE',
