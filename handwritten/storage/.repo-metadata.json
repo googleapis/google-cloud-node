@@ -7,5 +7,6 @@
   "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-storage",
-  "distribution_name": "@google-cloud/storage"
+  "distribution_name": "@google-cloud/storage",
+  "api_id": "storage-api.googleapis.com"
 }
