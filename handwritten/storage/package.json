@@ -110,7 +110,7 @@
     "prettier": "^1.7.0",
     "proxyquire": "^2.0.0",
     "source-map-support": "^0.5.6",
-    "tmp": "^0.0.33",
+    "tmp": "^0.1.0",
     "typescript": "~3.3.0",
     "uuid": "^3.1.0",
     "linkinator": "^1.1.2"
