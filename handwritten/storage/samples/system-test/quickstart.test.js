@@ -21,7 +21,6 @@ const uuid = require('uuid');
 const {Storage} = require('@google-cloud/storage');
 
 const storage = new Storage();
-const projectId = process.env.GCLOUD_PROJECT;
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 
 after(async () => {
@@ -30,8 +29,6 @@ after(async () => {
 });
 
 it('should run the quickstart', async () => {
-  const {stdout} = await execa.shell(
-    `node quickstart ${projectId} ${bucketName}`
-  );
+  const {stdout} = await execa.shell(`node quickstart ${bucketName}`);
   assert.match(stdout, /Bucket .* created./);
 });

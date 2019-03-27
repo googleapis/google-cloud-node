@@ -15,22 +15,29 @@
 
 'use strict';
 
-// [START storage_quickstart]
-async function quickstart(
-  projectId = 'YOUR_PROJECT_ID', // Your Google Cloud Platform project ID
+function main(
   bucketName = 'my-new-bucket' // The name for the new bucket
 ) {
+  // [START storage_quickstart]
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
 
   // Creates a client
-  const storage = new Storage({projectId});
+  const storage = new Storage();
 
-  // Creates the new bucket
-  await storage.createBucket(bucketName);
-  console.log(`Bucket ${bucketName} created.`);
+  /**
+   * TODO(developer): Uncomment these variables before running the sample.
+   */
+  // const bucketName = 'bucket-name';
+
+  async function createBucket() {
+    // Creates the new bucket
+    await storage.createBucket(bucketName);
+    console.log(`Bucket ${bucketName} created.`);
+  }
+
+  createBucket();
+  // [END storage_quickstart]
 }
-// [END storage_quickstart]
 
-const args = process.argv.slice(2);
-quickstart(...args).catch(console.error);
+main(...process.argv.slice(2));
