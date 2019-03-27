@@ -2196,6 +2196,11 @@ class File extends ServiceObject<File> {
    *     for the requirements of this feature, most notably:
    *       - The header name must be prefixed with `x-goog-`
    *       - The header name must be all lowercase
+   *     Note: Multi-valued header passed as an array in the extensionHeaders
+   *           object is converted into a string, delimited by `,` with
+   *           no space. Requests made using the signed URL will need to
+   *           delimit multi-valued headers using a single `,` as well, or
+   *           else the server will report a mismatched signature.
    * @param {string} [config.promptSaveAs] The filename to prompt the user to
    *     save the file as when the signed url is accessed. This is ignored if
    *     `config.responseDisposition` is set.
