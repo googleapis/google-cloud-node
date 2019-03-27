@@ -73,7 +73,7 @@ set -eo pipefail
 set -x
 # Install git
 retry apt-get update >/dev/null
-retry apt-get -y -q install git build-essential >/dev/null
+retry apt-get -y -q install git >/dev/null
 
 # Install desired version of Node.js
 retry curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash >/dev/null
