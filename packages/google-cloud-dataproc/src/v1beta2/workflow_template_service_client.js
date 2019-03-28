@@ -313,6 +313,13 @@ class WorkflowTemplateServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createWorkflowTemplate(
       request,
@@ -373,6 +380,13 @@ class WorkflowTemplateServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getWorkflowTemplate(request, options, callback);
   }
@@ -504,6 +518,13 @@ class WorkflowTemplateServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.instantiateWorkflowTemplate(
       request,
@@ -653,6 +674,13 @@ class WorkflowTemplateServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.instantiateInlineWorkflowTemplate(
       request,
@@ -708,6 +736,13 @@ class WorkflowTemplateServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'template.name': request.template.name,
+    });
 
     return this._innerApiCalls.updateWorkflowTemplate(
       request,
@@ -808,6 +843,13 @@ class WorkflowTemplateServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listWorkflowTemplates(
       request,
@@ -913,6 +955,13 @@ class WorkflowTemplateServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteWorkflowTemplate(
       request,
