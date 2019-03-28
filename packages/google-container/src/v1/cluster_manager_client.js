@@ -263,6 +263,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listClusters(request, options, callback);
   }
@@ -329,6 +336,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getCluster(request, options, callback);
   }
@@ -409,6 +423,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createCluster(request, options, callback);
   }
@@ -481,6 +502,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.updateCluster(request, options, callback);
   }
@@ -571,6 +599,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.updateNodePool(request, options, callback);
   }
@@ -649,6 +684,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setNodePoolAutoscaling(
       request,
@@ -727,6 +769,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setLoggingService(request, options, callback);
   }
@@ -801,6 +850,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setMonitoringService(request, options, callback);
   }
@@ -874,6 +930,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setAddonsConfig(request, options, callback);
   }
@@ -950,6 +1013,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setLocations(request, options, callback);
   }
@@ -1029,6 +1099,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.updateMaster(request, options, callback);
   }
@@ -1109,6 +1186,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setMasterAuth(request, options, callback);
   }
@@ -1183,6 +1267,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteCluster(request, options, callback);
   }
@@ -1244,6 +1335,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listOperations(request, options, callback);
   }
@@ -1310,6 +1408,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getOperation(request, options, callback);
   }
@@ -1367,6 +1472,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.cancelOperation(request, options, callback);
   }
@@ -1427,6 +1539,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getServerConfig(request, options, callback);
   }
@@ -1493,6 +1612,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listNodePools(request, options, callback);
   }
@@ -1565,6 +1691,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getNodePool(request, options, callback);
   }
@@ -1638,6 +1771,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createNodePool(request, options, callback);
   }
@@ -1710,6 +1850,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteNodePool(request, options, callback);
   }
@@ -1783,6 +1930,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.rollbackNodePoolUpgrade(
       request,
@@ -1865,6 +2019,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setNodePoolManagement(
       request,
@@ -1948,6 +2109,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setLabels(request, options, callback);
   }
@@ -2018,6 +2186,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setLegacyAbac(request, options, callback);
   }
@@ -2086,6 +2261,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.startIPRotation(request, options, callback);
   }
@@ -2152,6 +2334,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.completeIPRotation(request, options, callback);
   }
@@ -2228,6 +2417,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setNodePoolSize(request, options, callback);
   }
@@ -2300,6 +2496,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setNetworkPolicy(request, options, callback);
   }
@@ -2371,6 +2574,13 @@ class ClusterManagerClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.setMaintenancePolicy(request, options, callback);
   }
