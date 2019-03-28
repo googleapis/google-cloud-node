@@ -29,8 +29,16 @@
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
-    "eslint": "^5.15.3",
+    "codecov": "^3.2.0",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "jsdoc": "^3.5.5",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "linkinator": "^1.1.6",
     "mocha": "^5.2.0",
+    "power-assert": "^1.6.1",
     "through2": "^2.0.3"
   },
   "scripts": {
