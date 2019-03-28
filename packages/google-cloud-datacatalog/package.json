@@ -29,6 +29,7 @@
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
+    "eslint": "^5.15.3",
     "mocha": "^5.2.0",
     "through2": "^2.0.3"
   },
