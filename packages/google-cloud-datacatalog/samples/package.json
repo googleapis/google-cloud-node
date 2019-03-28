@@ -1,0 +1,23 @@
+{
+  "name": "@google-cloud/datacatalog-samples",
+  "description": "Samples for the Cloud Data Catalog client library for Node.js",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": "googleapis/nodejs-datacatalog",
+  "private": true,
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "mocha --timeout 600000"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
+    "mocha": "^6.0.0"
+  }
+}

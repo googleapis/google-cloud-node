@@ -1,5 +1,5 @@
 {
-  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "repository": "googleapis/nodejs-datacatalog",
   "name": "datacatalog",
   "version": "0.1.0",
   "author": "Google LLC",
@@ -33,9 +33,15 @@
     "through2": "^2.0.3"
   },
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js datacatalog",
-    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
-    "test": "mocha test/*.js"
+    "docs": "jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "eslint '**/*.js'",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "mocha system-test --timeout 600000",
+    "test": "nyc mocha",
+    "predocs-test": "npm run docs",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "fix": "eslint --fix '**/*.js'"
   },
   "license": "Apache-2.0",
   "engines": {
