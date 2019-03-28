@@ -237,6 +237,13 @@ class OsLoginServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deletePosixAccount(request, options, callback);
   }
@@ -277,6 +284,13 @@ class OsLoginServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteSshPublicKey(request, options, callback);
   }
@@ -324,6 +338,13 @@ class OsLoginServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getLoginProfile(request, options, callback);
   }
@@ -372,6 +393,13 @@ class OsLoginServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getSshPublicKey(request, options, callback);
   }
@@ -431,6 +459,13 @@ class OsLoginServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.importSshPublicKey(request, options, callback);
   }
@@ -493,6 +528,13 @@ class OsLoginServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.updateSshPublicKey(request, options, callback);
   }
