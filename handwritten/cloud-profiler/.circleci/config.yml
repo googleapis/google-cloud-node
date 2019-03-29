@@ -68,6 +68,7 @@ workflows:
             - node10
             - node11
             - gocheck
+            - npmaudit
           filters:
             branches:
               ignore: /.*/
