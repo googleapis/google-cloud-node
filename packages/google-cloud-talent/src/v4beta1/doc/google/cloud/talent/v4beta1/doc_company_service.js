@@ -21,10 +21,13 @@
  * @property {string} parent
  *   Required.
  *
- *   Resource name of the project under which the company is created.
+ *   Resource name of the tenant under which the company is created.
  *
- *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenant/foo".
+ *
+ *   Tenant id is optional and a default tenant is created if unspecified, for
+ *   example, "projects/api-test-project".
  *
  * @property {Object} company
  *   Required.
@@ -49,8 +52,12 @@ const CreateCompanyRequest = {
  *
  *   The resource name of the company to be retrieved.
  *
- *   The format is "projects/{project_id}/companies/{company_id}", for example,
- *   "projects/api-test-project/companies/foo".
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+ *   example, "projects/api-test-project/tenants/foo/companies/bar".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project/companies/bar".
  *
  * @typedef GetCompanyRequest
  * @memberof google.cloud.talent.v4beta1
@@ -102,8 +109,12 @@ const UpdateCompanyRequest = {
  *
  *   The resource name of the company to be deleted.
  *
- *   The format is "projects/{project_id}/companies/{company_id}", for example,
- *   "projects/api-test-project/companies/foo".
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+ *   example, "projects/api-test-project/tenants/foo/companies/bar".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project/companies/bar".
  *
  * @typedef DeleteCompanyRequest
  * @memberof google.cloud.talent.v4beta1
@@ -119,10 +130,13 @@ const DeleteCompanyRequest = {
  * @property {string} parent
  *   Required.
  *
- *   Resource name of the project under which the company is created.
+ *   Resource name of the tenant under which the company is created.
  *
- *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenant/foo".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project".
  *
  * @property {string} pageToken
  *   Optional.

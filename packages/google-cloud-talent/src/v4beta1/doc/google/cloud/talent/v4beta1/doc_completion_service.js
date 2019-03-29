@@ -20,13 +20,16 @@
  *
  * Auto-complete parameters.
  *
- * @property {string} name
+ * @property {string} parent
  *   Required.
  *
- *   Resource name of project the completion is performed within.
+ *   Resource name of tenant the completion is performed within.
  *
- *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenant/foo".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project".
  *
  * @property {string} query
  *   Required.
@@ -72,13 +75,17 @@
  *
  *   The maximum allowed page size is 10.
  *
- * @property {string} companyName
+ * @property {string} company
  *   Optional.
  *
  *   If provided, restricts completion to specified company.
  *
- *   The format is "projects/{project_id}/companies/{company_id}", for example,
- *   "projects/api-test-project/companies/foo".
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+ *   example, "projects/api-test-project/tenants/foo/companies/bar".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project/companies/bar".
  *
  * @property {number} scope
  *   Optional.

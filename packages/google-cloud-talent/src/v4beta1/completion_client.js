@@ -100,7 +100,9 @@ class CompletionClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
+      tenantPathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -189,13 +191,16 @@ class CompletionClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
+   * @param {string} request.parent
    *   Required.
    *
-   *   Resource name of project the completion is performed within.
+   *   Resource name of tenant the completion is performed within.
    *
-   *   The format is "projects/{project_id}", for example,
-   *   "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenant/foo".
+   *
+   *   Tenant id is optional and the default tenant is used if unspecified, for
+   *   example, "projects/api-test-project".
    * @param {string} request.query
    *   Required.
    *
@@ -237,13 +242,17 @@ class CompletionClient {
    *   are returned.
    *
    *   The maximum number of allowed characters is 255.
-   * @param {string} [request.companyName]
+   * @param {string} [request.company]
    *   Optional.
    *
    *   If provided, restricts completion to specified company.
    *
-   *   The format is "projects/{project_id}/companies/{company_id}", for example,
-   *   "projects/api-test-project/companies/foo".
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+   *   example, "projects/api-test-project/tenants/foo/companies/bar".
+   *
+   *   Tenant id is optional and the default tenant is used if unspecified, for
+   *   example, "projects/api-test-project/companies/bar".
    * @param {number} [request.scope]
    *   Optional.
    *
@@ -277,11 +286,11 @@ class CompletionClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.projectPath('[PROJECT]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    * const query = '';
    * const pageSize = 0;
    * const request = {
-   *   name: formattedName,
+   *   parent: formattedParent,
    *   query: query,
    *   pageSize: pageSize,
    * };
@@ -300,6 +309,13 @@ class CompletionClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.completeQuery(request, options, callback);
   }
@@ -309,26 +325,39 @@ class CompletionClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified tenant resource name string.
    *
    * @param {String} project
+   * @param {String} tenant
    * @returns {String}
    */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
+  tenantPath(project, tenant) {
+    return this._pathTemplates.tenantPathTemplate.render({
       project: project,
+      tenant: tenant,
     });
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Parse the tenantName from a tenant resource.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+  }
+
+  /**
+   * Parse the tenantName from a tenant resource.
+   *
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
+   * @returns {String} - A string representing the tenant.
+   */
+  matchTenantFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 }
 

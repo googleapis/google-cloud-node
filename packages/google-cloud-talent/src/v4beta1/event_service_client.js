@@ -100,7 +100,9 @@ class EventServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
+      tenantPathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -195,7 +197,15 @@ class EventServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Parent project name.
+   *   Required.
+   *
+   *   Resource name of the tenant under which the event is created.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenant/foo".
+   *
+   *   Tenant id is optional and a default tenant is created if unspecified, for
+   *   example, "projects/api-test-project".
    * @param {Object} request.clientEvent
    *   Required.
    *
@@ -222,7 +232,7 @@ class EventServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
    * const clientEvent = {};
    * const request = {
    *   parent: formattedParent,
@@ -243,6 +253,13 @@ class EventServiceClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createClientEvent(request, options, callback);
   }
@@ -252,26 +269,39 @@ class EventServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified tenant resource name string.
    *
    * @param {String} project
+   * @param {String} tenant
    * @returns {String}
    */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
+  tenantPath(project, tenant) {
+    return this._pathTemplates.tenantPathTemplate.render({
       project: project,
+      tenant: tenant,
     });
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Parse the tenantName from a tenant resource.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  matchProjectFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+  }
+
+  /**
+   * Parse the tenantName from a tenant resource.
+   *
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
+   * @returns {String} - A string representing the tenant.
+   */
+  matchTenantFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 }
 

@@ -52,15 +52,11 @@
  *
  *   This object should have the same structure as [ProfileEvent]{@link google.cloud.talent.v4beta1.ProfileEvent}
  *
- * @property {Object.<string, string>} extraInfo
+ * @property {string} eventNotes
  *   Optional.
  *
- *   Extra information about this event. Used for storing information with no
- *   matching field in event payload, for
- *   example, user application specific context or details.
- *
- *   At most 20 keys are supported. The maximum total size of all keys and
- *   values is 2 KB.
+ *   Notes about the event provided by recruiters or other users, for example,
+ *   feedback on why a profile was bookmarked.
  *
  * @typedef ClientEvent
  * @memberof google.cloud.talent.v4beta1
@@ -262,7 +258,7 @@ const JobEvent = {
  *   The profile name(s) associated
  *   with this client event.
  *
- * @property {string} jobId
+ * @property {string[]} jobs
  *   Optional.
  *
  *   The job ID associated with this client event if there is one. Leave it
@@ -304,45 +300,6 @@ const ProfileEvent = {
     /**
      * The profile is bookmarked.
      */
-    BOOKMARK: 3,
-
-    /**
-     * Comment added to the profile.
-     */
-    COMMENT_ADDED: 4,
-
-    /**
-     * Email sent regarding the profile.
-     */
-    EMAIL_SENT: 5,
-
-    /**
-     * The resume of the profile is viewed.
-     */
-    RESUME_VIEWED: 6,
-
-    /**
-     * The profile is added to a job.
-     */
-    ADD_TO_JOB: 7,
-
-    /**
-     * The recruiter explicitly highlights that a given profile is interesting
-     * enough for later review or is a good result for the search.
-     */
-    POSITIVE_REACTION_TO_PROFILE: 8,
-
-    /**
-     * The recruiter explicitly highlights that a given profile is not
-     * interesting enough for later review or is not a good result for the
-     * search.
-     */
-    NEGATIVE_REACTION_TO_PROFILE: 9,
-
-    /**
-     * The candidate is interesting enough to set up an initial screen with the
-     * recruiter. This step may be skipped based on the interview process.
-     */
-    SCREEN: 10
+    BOOKMARK: 3
   }
 };

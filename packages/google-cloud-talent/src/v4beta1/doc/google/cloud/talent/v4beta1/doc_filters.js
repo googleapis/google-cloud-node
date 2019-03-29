@@ -28,7 +28,7 @@
  *
  *   The maximum number of allowed characters is 255.
  *
- * @property {string[]} companyNames
+ * @property {string[]} companies
  *   Optional.
  *
  *   This filter specifies the company entities to search against.
@@ -39,8 +39,12 @@
  *   If multiple values are specified, jobs are searched against the
  *   companies specified.
  *
- *   The format is "projects/{project_id}/companies/{company_id}", for example,
- *   "projects/api-test-project/companies/foo".
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
+ *   example, "projects/api-test-project/tenants/foo/companies/bar".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project/companies/bar".
  *
  *   At most 20 company filters are allowed.
  *
@@ -346,13 +350,13 @@ const JobQuery = {
  *
  *   This object should have the same structure as [ApplicationDateFilter]{@link google.cloud.talent.v4beta1.ApplicationDateFilter}
  *
- * @property {Object[]} applicationOutcomeReasonFilters
+ * @property {Object[]} applicationOutcomeNotesFilters
  *   Optional.
  *
- *   The application outcome reason filters specify the reasons for outcome of
+ *   The application outcome notes filters specify the notes for the outcome of
  *   the job application.
  *
- *   This object should have the same structure as [ApplicationOutcomeReasonFilter]{@link google.cloud.talent.v4beta1.ApplicationOutcomeReasonFilter}
+ *   This object should have the same structure as [ApplicationOutcomeNotesFilter]{@link google.cloud.talent.v4beta1.ApplicationOutcomeNotesFilter}
  *
  * @property {Object[]} applicationLastStageFilters
  *   Optional.
@@ -385,9 +389,13 @@ const JobQuery = {
  *
  *   The syntax for this expression is a subset of Google SQL syntax.
  *
- *   Supported operators are: =, != where the left of the operator is a custom
- *   field key and the right of the operator is a string (surrounded by quotes)
- *   value.
+ *   String custom attributes: supported operators are =, != where the left of
+ *   the operator is a custom field key and the right of the operator is a
+ *   string (surrounded by quotes) value.
+ *
+ *   Numeric custom attributes: Supported operators are '>', '<' or '='
+ *   operators where the left of the operator is a custom field key and the
+ *   right of the operator is a numeric value.
  *
  *   Supported functions are LOWER(<field_name>) to
  *   perform case insensitive match and EMPTY(<field_name>) to filter on the
@@ -896,7 +904,7 @@ const WorkExperienceFilter = {
  * Application Date Range Filter.
  *
  * The API matches profiles with
- * JobApplication.application_date
+ * Application.application_date
  * between start date and end date (both boundaries are inclusive). The filter
  * is ignored if both
  * start_date
@@ -930,27 +938,27 @@ const ApplicationDateFilter = {
 /**
  * Input only.
  *
- * Outcome Reason Filter.
+ * Outcome Notes Filter.
  *
- * @property {string} outcomeReason
+ * @property {string} outcomeNotes
  *   Required.
  *
  *   User entered or selected outcome reason. The API does an exact match on the
- *   JobApplication.outcome_reason
+ *   Application.outcome_notes
  *   in profiles.
  *
  * @property {boolean} negated
  *   Optional.
  *
  *   If true, The API excludes all candidates with any
- *   JobApplication.outcome_reason
+ *   Application.outcome_notes
  *   matching the outcome reason specified in the filter.
  *
- * @typedef ApplicationOutcomeReasonFilter
+ * @typedef ApplicationOutcomeNotesFilter
  * @memberof google.cloud.talent.v4beta1
- * @see [google.cloud.talent.v4beta1.ApplicationOutcomeReasonFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/filters.proto}
+ * @see [google.cloud.talent.v4beta1.ApplicationOutcomeNotesFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/filters.proto}
  */
-const ApplicationOutcomeReasonFilter = {
+const ApplicationOutcomeNotesFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -964,14 +972,13 @@ const ApplicationOutcomeReasonFilter = {
  *
  *   User entered or selected last stage the candidate reached in the
  *   application. The API does an exact match on the
- *   JobApplication.last_stage
- *   in profiles.
+ *   Application.last_stage in profiles.
  *
  * @property {boolean} negated
  *   Optional.
  *   If true, The API excludes all candidates with any
- *   JobApplication.last_stage
- *   matching the last stage specified in the filter.
+ *   Application.last_stage matching the last stage specified in the
+ *   filter.
  *
  * @typedef ApplicationLastStageFilter
  * @memberof google.cloud.talent.v4beta1
@@ -986,36 +993,33 @@ const ApplicationLastStageFilter = {
  *
  * Filter on the job information of Application.
  *
- * @property {string} jobName
+ * @property {string} job
  *   Optional.
  *
  *   The job resource name in the application. The API does an exact match on
  *   the Job.name of
- *   JobApplication.job in
- *   profiles.
+ *   Application.job in profiles.
  *
  * @property {string} jobRequisitionId
  *   Optional.
  *
  *   The job requisition id in the application. The API does an exact match on
  *   the Job.requisistion_id of
- *   JobApplication.job in
- *   profiles.
+ *   Application.job in profiles.
  *
  * @property {string} jobTitle
  *   Optional.
  *
  *   The job title in the application. The API does an exact match on the
  *   Job.title of
- *   JobApplication.job in
- *   profiles.
+ *   Application.job in profiles.
  *
  * @property {boolean} negated
  *   Optional.
  *
  *   If true, the API excludes all profiles with any
- *   JobApplication.job
- *   matching the filters.
+ *   Application.job matching the
+ *   filters.
  *
  * @typedef ApplicationJobFilter
  * @memberof google.cloud.talent.v4beta1
@@ -1028,22 +1032,24 @@ const ApplicationJobFilter = {
 /**
  * Input only.
  *
- * Filter on status of Application.
+ * Filter on state of Application.
  *
- * @property {number} applicationStatus
+ * @property {number} applicationState
  *   Required.
  *
- *   User entered or selected application status. The API does an exact match
- *   between the application status specified in this filter and the
- *   JobApplication.status in profiles.
+ *   User entered or selected application state. The API does an exact match
+ *   between the application state specified in this filter and the
+ *   Application.state in
+ *   profiles.
  *
- *   The number should be among the values of [ApplicationStatus]{@link google.cloud.talent.v4beta1.ApplicationStatus}
+ *   The number should be among the values of [ApplicationState]{@link google.cloud.talent.v4beta1.ApplicationState}
  *
  * @property {boolean} negated
  *   Optional.
  *
- *   If true, The API excludes all candidates with any JobApplication.status
- *   matching the status specified in the filter.
+ *   If true, The API excludes all candidates with any
+ *   Application.state matching
+ *   the state specified in the filter.
  *
  * @typedef ApplicationStatusFilter
  * @memberof google.cloud.talent.v4beta1

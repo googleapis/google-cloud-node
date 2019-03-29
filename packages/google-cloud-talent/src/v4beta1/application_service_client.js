@@ -14,7 +14,7 @@
 
 'use strict';
 
-const gapicConfig = require('./tenant_service_client_config.json');
+const gapicConfig = require('./application_service_client_config.json');
 const gax = require('google-gax');
 const merge = require('lodash.merge');
 const path = require('path');
@@ -22,14 +22,15 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * A service that handles tenant management, including CRUD and enumeration.
+ * A service that handles application management, including CRUD and
+ * enumeration.
  *
  * @class
  * @memberof v4beta1
  */
-class TenantServiceClient {
+class ApplicationServiceClient {
   /**
-   * Construct an instance of TenantServiceClient.
+   * Construct an instance of ApplicationServiceClient.
    *
    * @param {object} [options] - The configuration object. See the subsequent
    *   parameters for more details.
@@ -92,7 +93,7 @@ class TenantServiceClient {
       {},
       gaxGrpc.loadProto(
         path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/talent/v4beta1/tenant_service.proto'
+        'google/cloud/talent/v4beta1/application_service.proto'
       )
     );
 
@@ -100,9 +101,11 @@ class TenantServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
-      tenantPathTemplate: new gax.PathTemplate(
-        'projects/{project}/tenants/{tenant}'
+      profilePathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}/profiles/{profile}'
+      ),
+      applicationPathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
       ),
     };
 
@@ -110,16 +113,16 @@ class TenantServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listTenants: new gax.PageDescriptor(
+      listApplications: new gax.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'tenants'
+        'applications'
       ),
     };
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
-      'google.cloud.talent.v4beta1.TenantService',
+      'google.cloud.talent.v4beta1.ApplicationService',
       gapicConfig,
       opts.clientConfig,
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -131,24 +134,24 @@ class TenantServiceClient {
     this._innerApiCalls = {};
 
     // Put together the "service stub" for
-    // google.cloud.talent.v4beta1.TenantService.
-    const tenantServiceStub = gaxGrpc.createStub(
-      protos.google.cloud.talent.v4beta1.TenantService,
+    // google.cloud.talent.v4beta1.ApplicationService.
+    const applicationServiceStub = gaxGrpc.createStub(
+      protos.google.cloud.talent.v4beta1.ApplicationService,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tenantServiceStubMethods = [
-      'createTenant',
-      'getTenant',
-      'updateTenant',
-      'deleteTenant',
-      'listTenants',
+    const applicationServiceStubMethods = [
+      'createApplication',
+      'getApplication',
+      'updateApplication',
+      'deleteApplication',
+      'listApplications',
     ];
-    for (const methodName of tenantServiceStubMethods) {
+    for (const methodName of applicationServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
-        tenantServiceStub.then(
+        applicationServiceStub.then(
           stub =>
             function() {
               const args = Array.prototype.slice.call(arguments, 0);
@@ -204,49 +207,50 @@ class TenantServiceClient {
   // -------------------
 
   /**
-   * Creates a new tenant entity.
+   * Creates a new application entity.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required.
    *
-   *   Resource name of the project under which the tenant is created.
+   *   Resource name of the profile under which the application is created.
    *
-   *   The format is "projects/{project_id}", for example,
-   *   "projects/api-test-project".
-   * @param {Object} request.tenant
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
+   *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+   * @param {Object} request.application
    *   Required.
    *
-   *   The tenant to be created.
+   *   The application to be created.
    *
-   *   This object should have the same structure as [Tenant]{@link google.cloud.talent.v4beta1.Tenant}
+   *   This object should have the same structure as [Application]{@link google.cloud.talent.v4beta1.Application}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The second parameter to the callback is an object representing [Application]{@link google.cloud.talent.v4beta1.Application}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The first element of the array is an object representing [Application]{@link google.cloud.talent.v4beta1.Application}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const talent = require('@google-cloud/talent');
    *
-   * const client = new talent.v4beta1.TenantServiceClient({
+   * const client = new talent.v4beta1.ApplicationServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.projectPath('[PROJECT]');
-   * const tenant = {};
+   * const formattedParent = client.profilePath('[PROJECT]', '[TENANT]', '[PROFILE]');
+   * const application = {};
    * const request = {
    *   parent: formattedParent,
-   *   tenant: tenant,
+   *   application: application,
    * };
-   * client.createTenant(request)
+   * client.createApplication(request)
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -255,7 +259,7 @@ class TenantServiceClient {
    *     console.error(err);
    *   });
    */
-  createTenant(request, options, callback) {
+  createApplication(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
@@ -269,42 +273,44 @@ class TenantServiceClient {
       parent: request.parent,
     });
 
-    return this._innerApiCalls.createTenant(request, options, callback);
+    return this._innerApiCalls.createApplication(request, options, callback);
   }
 
   /**
-   * Retrieves specified tenant.
+   * Retrieves specified application.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required.
    *
-   *   The resource name of the tenant to be retrieved.
+   *   The resource name of the application to be retrieved.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
+   *   for example,
+   *   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The second parameter to the callback is an object representing [Application]{@link google.cloud.talent.v4beta1.Application}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The first element of the array is an object representing [Application]{@link google.cloud.talent.v4beta1.Application}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const talent = require('@google-cloud/talent');
    *
-   * const client = new talent.v4beta1.TenantServiceClient({
+   * const client = new talent.v4beta1.ApplicationServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.tenantPath('[PROJECT]', '[TENANT]');
-   * client.getTenant({name: formattedName})
+   * const formattedName = client.applicationPath('[PROJECT]', '[TENANT]', '[PROFILE]', '[APPLICATION]');
+   * client.getApplication({name: formattedName})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -313,7 +319,7 @@ class TenantServiceClient {
    *     console.error(err);
    *   });
    */
-  getTenant(request, options, callback) {
+  getApplication(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
@@ -327,20 +333,20 @@ class TenantServiceClient {
       name: request.name,
     });
 
-    return this._innerApiCalls.getTenant(request, options, callback);
+    return this._innerApiCalls.getApplication(request, options, callback);
   }
 
   /**
-   * Updates specified tenant.
+   * Updates specified application.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {Object} request.tenant
+   * @param {Object} request.application
    *   Required.
    *
-   *   The tenant resource to replace the current resource in the system.
+   *   The application resource to replace the current resource in the system.
    *
-   *   This object should have the same structure as [Tenant]{@link google.cloud.talent.v4beta1.Tenant}
+   *   This object should have the same structure as [Application]{@link google.cloud.talent.v4beta1.Application}
    * @param {Object} [request.updateMask]
    *   Optional but strongly recommended for the best service
    *   experience.
@@ -348,12 +354,12 @@ class TenantServiceClient {
    *   If
    *   update_mask
    *   is provided, only the specified fields in
-   *   tenant are
-   *   updated. Otherwise all the fields are updated.
+   *   application
+   *   are updated. Otherwise all the fields are updated.
    *
-   *   A field mask to specify the tenant fields to be updated. Only
-   *   top level fields of Tenant are
-   *   supported.
+   *   A field mask to specify the application fields to be updated. Only
+   *   top level fields of Application
+   *   are supported.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -362,21 +368,21 @@ class TenantServiceClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The second parameter to the callback is an object representing [Application]{@link google.cloud.talent.v4beta1.Application}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The first element of the array is an object representing [Application]{@link google.cloud.talent.v4beta1.Application}.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
    *
    * const talent = require('@google-cloud/talent');
    *
-   * const client = new talent.v4beta1.TenantServiceClient({
+   * const client = new talent.v4beta1.ApplicationServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * const tenant = {};
-   * client.updateTenant({tenant: tenant})
+   * const application = {};
+   * client.updateApplication({application: application})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -385,7 +391,7 @@ class TenantServiceClient {
    *     console.error(err);
    *   });
    */
-  updateTenant(request, options, callback) {
+  updateApplication(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
@@ -396,24 +402,26 @@ class TenantServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'tenant.name': request.tenant.name,
+      'application.name': request.application.name,
     });
 
-    return this._innerApiCalls.updateTenant(request, options, callback);
+    return this._innerApiCalls.updateApplication(request, options, callback);
   }
 
   /**
-   * Deletes specified tenant.
+   * Deletes specified application.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required.
    *
-   *   The resource name of the tenant to be deleted.
+   *   The resource name of the application to be deleted.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
+   *   for example,
+   *   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -426,16 +434,16 @@ class TenantServiceClient {
    *
    * const talent = require('@google-cloud/talent');
    *
-   * const client = new talent.v4beta1.TenantServiceClient({
+   * const client = new talent.v4beta1.ApplicationServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.tenantPath('[PROJECT]', '[TENANT]');
-   * client.deleteTenant({name: formattedName}).catch(err => {
+   * const formattedName = client.applicationPath('[PROJECT]', '[TENANT]', '[PROFILE]', '[APPLICATION]');
+   * client.deleteApplication({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
    */
-  deleteTenant(request, options, callback) {
+  deleteApplication(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
@@ -449,21 +457,22 @@ class TenantServiceClient {
       name: request.name,
     });
 
-    return this._innerApiCalls.deleteTenant(request, options, callback);
+    return this._innerApiCalls.deleteApplication(request, options, callback);
   }
 
   /**
-   * Lists all tenants associated with the project.
+   * Lists all applications associated with the profile.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required.
    *
-   *   Resource name of the project under which the tenant is created.
+   *   Resource name of the profile under which the application is created.
    *
-   *   The format is "projects/{project_id}", for example,
-   *   "projects/api-test-project".
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
+   *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -476,20 +485,20 @@ class TenantServiceClient {
    * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The second parameter to the callback is Array of [Application]{@link google.cloud.talent.v4beta1.Application}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListTenantsResponse]{@link google.cloud.talent.v4beta1.ListTenantsResponse}.
+   *   the raw response object of an object representing [ListApplicationsResponse]{@link google.cloud.talent.v4beta1.ListApplicationsResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Tenant]{@link google.cloud.talent.v4beta1.Tenant}.
+   *   The first element of the array is Array of [Application]{@link google.cloud.talent.v4beta1.Application}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [Tenant]{@link google.cloud.talent.v4beta1.Tenant} in a single response.
+   *   The first element is Array of [Application]{@link google.cloud.talent.v4beta1.Application} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListTenantsResponse]{@link google.cloud.talent.v4beta1.ListTenantsResponse}.
+   *   an object representing [ListApplicationsResponse]{@link google.cloud.talent.v4beta1.ListApplicationsResponse}.
    *
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
@@ -497,14 +506,14 @@ class TenantServiceClient {
    *
    * const talent = require('@google-cloud/talent');
    *
-   * const client = new talent.v4beta1.TenantServiceClient({
+   * const client = new talent.v4beta1.ApplicationServiceClient({
    *   // optional auth parameters.
    * });
    *
    * // Iterate over all elements.
-   * const formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.profilePath('[PROJECT]', '[TENANT]', '[PROFILE]');
    *
-   * client.listTenants({parent: formattedParent})
+   * client.listApplications({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
    *     for (const resource of resources) {
@@ -516,7 +525,7 @@ class TenantServiceClient {
    *   });
    *
    * // Or obtain the paged response.
-   * const formattedParent = client.projectPath('[PROJECT]');
+   * const formattedParent = client.profilePath('[PROJECT]', '[TENANT]', '[PROFILE]');
    *
    *
    * const options = {autoPaginate: false};
@@ -532,16 +541,16 @@ class TenantServiceClient {
    *   }
    *   if (nextRequest) {
    *     // Fetch the next page.
-   *     return client.listTenants(nextRequest, options).then(callback);
+   *     return client.listApplications(nextRequest, options).then(callback);
    *   }
    * }
-   * client.listTenants({parent: formattedParent}, options)
+   * client.listApplications({parent: formattedParent}, options)
    *   .then(callback)
    *   .catch(err => {
    *     console.error(err);
    *   });
    */
-  listTenants(request, options, callback) {
+  listApplications(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
@@ -555,13 +564,13 @@ class TenantServiceClient {
       parent: request.parent,
     });
 
-    return this._innerApiCalls.listTenants(request, options, callback);
+    return this._innerApiCalls.listApplications(request, options, callback);
   }
 
   /**
-   * Equivalent to {@link listTenants}, but returns a NodeJS Stream object.
+   * Equivalent to {@link listApplications}, but returns a NodeJS Stream object.
    *
-   * This fetches the paged responses for {@link listTenants} continuously
+   * This fetches the paged responses for {@link listApplications} continuously
    * and invokes the callback registered for 'data' event for each element in the
    * responses.
    *
@@ -576,10 +585,11 @@ class TenantServiceClient {
    * @param {string} request.parent
    *   Required.
    *
-   *   Resource name of the project under which the tenant is created.
+   *   Resource name of the profile under which the application is created.
    *
-   *   The format is "projects/{project_id}", for example,
-   *   "projects/api-test-project".
+   *   The format is
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
+   *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -590,29 +600,29 @@ class TenantServiceClient {
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Tenant]{@link google.cloud.talent.v4beta1.Tenant} on 'data' event.
+   *   An object stream which emits an object representing [Application]{@link google.cloud.talent.v4beta1.Application} on 'data' event.
    *
    * @example
    *
    * const talent = require('@google-cloud/talent');
    *
-   * const client = new talent.v4beta1.TenantServiceClient({
+   * const client = new talent.v4beta1.ApplicationServiceClient({
    *   // optional auth parameters.
    * });
    *
-   * const formattedParent = client.projectPath('[PROJECT]');
-   * client.listTenantsStream({parent: formattedParent})
+   * const formattedParent = client.profilePath('[PROJECT]', '[TENANT]', '[PROFILE]');
+   * client.listApplicationsStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
    *   }).on('error', err => {
    *     console.log(err);
    *   });
    */
-  listTenantsStream(request, options) {
+  listApplicationsStream(request, options) {
     options = options || {};
 
-    return this._descriptors.page.listTenants.createStream(
-      this._innerApiCalls.listTenants,
+    return this._descriptors.page.listApplications.createStream(
+      this._innerApiCalls.listApplications,
       request,
       options
     );
@@ -623,63 +633,119 @@ class TenantServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
-   * Return a fully-qualified tenant resource name string.
+   * Return a fully-qualified profile resource name string.
    *
    * @param {String} project
    * @param {String} tenant
+   * @param {String} profile
    * @returns {String}
    */
-  tenantPath(project, tenant) {
-    return this._pathTemplates.tenantPathTemplate.render({
+  profilePath(project, tenant, profile) {
+    return this._pathTemplates.profilePathTemplate.render({
       project: project,
       tenant: tenant,
+      profile: profile,
     });
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Return a fully-qualified application resource name string.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @param {String} tenant
+   * @param {String} profile
+   * @param {String} application
+   * @returns {String}
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  applicationPath(project, tenant, profile, application) {
+    return this._pathTemplates.applicationPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
+      application: application,
+    });
   }
 
   /**
-   * Parse the tenantName from a tenant resource.
+   * Parse the profileName from a profile resource.
    *
-   * @param {String} tenantName
-   *   A fully-qualified path representing a tenant resources.
+   * @param {String} profileName
+   *   A fully-qualified path representing a profile resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromTenantName(tenantName) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+  matchProjectFromProfileName(profileName) {
+    return this._pathTemplates.profilePathTemplate.match(profileName).project;
   }
 
   /**
-   * Parse the tenantName from a tenant resource.
+   * Parse the profileName from a profile resource.
    *
-   * @param {String} tenantName
-   *   A fully-qualified path representing a tenant resources.
+   * @param {String} profileName
+   *   A fully-qualified path representing a profile resources.
    * @returns {String} - A string representing the tenant.
    */
-  matchTenantFromTenantName(tenantName) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+  matchTenantFromProfileName(profileName) {
+    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
+  }
+
+  /**
+   * Parse the profileName from a profile resource.
+   *
+   * @param {String} profileName
+   *   A fully-qualified path representing a profile resources.
+   * @returns {String} - A string representing the profile.
+   */
+  matchProfileFromProfileName(profileName) {
+    return this._pathTemplates.profilePathTemplate.match(profileName).profile;
+  }
+
+  /**
+   * Parse the applicationName from a application resource.
+   *
+   * @param {String} applicationName
+   *   A fully-qualified path representing a application resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromApplicationName(applicationName) {
+    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+      .project;
+  }
+
+  /**
+   * Parse the applicationName from a application resource.
+   *
+   * @param {String} applicationName
+   *   A fully-qualified path representing a application resources.
+   * @returns {String} - A string representing the tenant.
+   */
+  matchTenantFromApplicationName(applicationName) {
+    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+      .tenant;
+  }
+
+  /**
+   * Parse the applicationName from a application resource.
+   *
+   * @param {String} applicationName
+   *   A fully-qualified path representing a application resources.
+   * @returns {String} - A string representing the profile.
+   */
+  matchProfileFromApplicationName(applicationName) {
+    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+      .profile;
+  }
+
+  /**
+   * Parse the applicationName from a application resource.
+   *
+   * @param {String} applicationName
+   *   A fully-qualified path representing a application resources.
+   * @returns {String} - A string representing the application.
+   */
+  matchApplicationFromApplicationName(applicationName) {
+    return this._pathTemplates.applicationPathTemplate.match(applicationName)
+      .application;
   }
 }
 
-module.exports = TenantServiceClient;
+module.exports = ApplicationServiceClient;

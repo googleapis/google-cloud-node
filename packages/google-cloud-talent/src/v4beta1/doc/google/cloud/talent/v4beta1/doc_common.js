@@ -19,12 +19,12 @@
  * Message representing a period of time between two timestamps.
  *
  * @property {Object} startTime
- *   Begin of the period.
+ *   Begin of the period (inclusive).
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} endTime
- *   End of the period.
+ *   End of the period (exclusive).
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -687,6 +687,151 @@ const CompensationInfo = {
 };
 
 /**
+ * Resource that represents a license or certification.
+ *
+ * @property {string} displayName
+ *   Optional.
+ *
+ *   Name of license or certification.
+ *
+ *   Number of characters allowed is 100.
+ *
+ * @property {Object} acquireDate
+ *   Optional.
+ *
+ *   Acquisition date or effective date of license or certification.
+ *
+ *   This object should have the same structure as [Date]{@link google.type.Date}
+ *
+ * @property {Object} expireDate
+ *   Optional.
+ *
+ *   Expiration date of license of certification.
+ *
+ *   This object should have the same structure as [Date]{@link google.type.Date}
+ *
+ * @property {string} authority
+ *   Optional.
+ *
+ *   Authority of license, such as government.
+ *
+ *   Number of characters allowed is 100.
+ *
+ * @property {string} description
+ *   Optional.
+ *
+ *   Description of license or certification.
+ *
+ *   Number of characters allowed is 100,000.
+ *
+ * @typedef Certification
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.Certification definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/common.proto}
+ */
+const Certification = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Resource that represents a skill of a candidate.
+ *
+ * @property {string} displayName
+ *   Optional.
+ *
+ *   Skill display name.
+ *
+ *   For example, "Java", "Python".
+ *
+ *   Number of characters allowed is 100.
+ *
+ * @property {Object} lastUsedDate
+ *   Optional.
+ *
+ *   The last time this skill was used.
+ *
+ *   This object should have the same structure as [Date]{@link google.type.Date}
+ *
+ * @property {number} level
+ *   Optional.
+ *
+ *   Skill proficiency level which indicates how proficient the candidate is at
+ *   this skill.
+ *
+ *   The number should be among the values of [SkillProficiencyLevel]{@link google.cloud.talent.v4beta1.SkillProficiencyLevel}
+ *
+ * @property {string} context
+ *   Optional.
+ *
+ *   A paragraph describes context of this skill.
+ *
+ *   Number of characters allowed is 100,000.
+ *
+ * @property {string} skillNameSnippet
+ *   Output only. Skill name snippet shows how the
+ *   display_name is related
+ *   to a search query. It's empty if the
+ *   display_name isn't
+ *   related to the search query.
+ *
+ * @typedef Skill
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.Skill definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/common.proto}
+ */
+const Skill = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Details of an interview.
+ *
+ * @property {Object} rating
+ *   Optional.
+ *
+ *   The rating on this interview.
+ *
+ *   This object should have the same structure as [Rating]{@link google.cloud.talent.v4beta1.Rating}
+ *
+ * @property {number} outcome
+ *   Required.
+ *
+ *   The overall decision resulting from this interview (positive, negative,
+ *   nuetral).
+ *
+ *   The number should be among the values of [Outcome]{@link google.cloud.talent.v4beta1.Outcome}
+ *
+ * @typedef Interview
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.Interview definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/common.proto}
+ */
+const Interview = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The details of the score received for an assessment or interview.
+ *
+ * @property {number} overall
+ *   Overall score.
+ *
+ * @property {number} min
+ *   The minimum value for the score.
+ *
+ * @property {number} max
+ *   The maximum value for the score.
+ *
+ * @property {number} interval
+ *   The steps within the score (for example, interval = 1 max = 5
+ *   min = 1 indicates that the score can be 1, 2, 3, 4, or 5)
+ *
+ * @typedef Rating
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.Rating definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/common.proto}
+ */
+const Rating = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Method for commute.
  *
  * @enum {number}
@@ -718,13 +863,7 @@ const CommuteMethod = {
   /**
    * Commute time is calculated based on biking time.
    */
-  CYCLING: 4,
-
-  /**
-   * Commute time is calculated based on public transit that is wheelchair
-   * accessible.
-   */
-  TRANSIT_ACCESSIBLE: 5
+  CYCLING: 4
 };
 
 /**
@@ -1275,6 +1414,45 @@ const JobLevel = {
 };
 
 /**
+ * The overall outcome /decision / result indicator.
+ *
+ * @enum {number}
+ * @memberof google.cloud.talent.v4beta1
+ */
+const Outcome = {
+
+  /**
+   * Default value.
+   */
+  OUTCOME_UNSPECIFIED: 0,
+
+  /**
+   * A positive outcome / passing indicator (for example, candidate was
+   * recommended for hiring or to be moved forward in the hiring process,
+   * candidate passed a test).
+   */
+  POSITIVE: 1,
+
+  /**
+   * A neutral outcome / no clear indicator (for example, no strong
+   * reccommendation either to move forward / not move forward, neutral score).
+   */
+  NEUTRAL: 2,
+
+  /**
+   * A negative outcome / failing indicator (for example, candidate was
+   * recommended to NOT move forward in the hiring process, failed a test).
+   */
+  NEGATIVE: 3,
+
+  /**
+   * The assessment outcome is not available or otherwise unknown (for example,
+   * candidate did not complete assessment).
+   */
+  OUTCOME_NOT_AVAILABLE: 4
+};
+
+/**
  * An enum that represents the job posting region. In most cases, job postings
  * don't need to specify a region. If a region is given, jobs are
  * eligible for searches in the specified region.
@@ -1320,6 +1498,49 @@ const PostingRegion = {
    * considered as having a location, but telecommuting is allowed.
    */
   TELECOMMUTE: 3
+};
+
+/**
+ * Enum that represents the skill proficiency level.
+ *
+ * @enum {number}
+ * @memberof google.cloud.talent.v4beta1
+ */
+const SkillProficiencyLevel = {
+
+  /**
+   * Default value.
+   */
+  SKILL_PROFICIENCY_LEVEL_UNSPECIFIED: 0,
+
+  /**
+   * Have a common knowledge or an understanding of basic techniques and
+   * concepts.
+   */
+  FUNDAMENTAL_AWARENESS: 1,
+
+  /**
+   * Have the level of experience gained in a classroom and/or experimental
+   * scenarios or as a trainee on-the-job.
+   */
+  NOVICE: 2,
+
+  /**
+   * Be able to successfully complete tasks in this skill as requested. Help
+   * from an expert may be required from time to time, but can usually perform
+   * skill independently.
+   */
+  INTERMEDIATE: 3,
+
+  /**
+   * Can perform the actions associated with this skill without assistance.
+   */
+  ADVANCED: 4,
+
+  /**
+   * Known as an expert in this area.
+   */
+  EXPERT: 5
 };
 
 /**

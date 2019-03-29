@@ -23,10 +23,13 @@
  * @property {string} parent
  *   Required.
  *
- *   The resource name of the project under which the job is created.
+ *   The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenant/foo".
+ *
+ *   Tenant id is optional and a default tenant is created if unspecified, for
+ *   example, "projects/api-test-project".
  *
  * @property {Object} job
  *   Required.
@@ -53,8 +56,12 @@ const CreateJobRequest = {
  *
  *   The resource name of the job to retrieve.
  *
- *   The format is "projects/{project_id}/jobs/{job_id}",
- *   for example, "projects/api-test-project/jobs/1234".
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+ *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project/jobs/1234".
  *
  * @typedef GetJobRequest
  * @memberof google.cloud.talent.v4beta1
@@ -108,8 +115,12 @@ const UpdateJobRequest = {
  *
  *   The resource name of the job to be deleted.
  *
- *   The format is "projects/{project_id}/jobs/{job_id}",
- *   for example, "projects/api-test-project/jobs/1234".
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+ *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project/jobs/1234".
  *
  * @typedef DeleteJobRequest
  * @memberof google.cloud.talent.v4beta1
@@ -127,10 +138,13 @@ const DeleteJobRequest = {
  * @property {string} parent
  *   Required.
  *
- *   The resource name of the project under which the job is created.
+ *   The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenant/foo".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project".
  *
  * @property {string} filter
  *   Required.
@@ -163,10 +177,13 @@ const BatchDeleteJobsRequest = {
  * @property {string} parent
  *   Required.
  *
- *   The resource name of the project under which the job is created.
+ *   The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenant/foo".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project".
  *
  * @property {string} filter
  *   Required.
@@ -184,11 +201,11 @@ const BatchDeleteJobsRequest = {
  *
  *   Sample Query:
  *
- *   * companyName = "projects/api-test-project/companies/123"
- *   * companyName = "projects/api-test-project/companies/123" AND requisitionId
- *   = "req-1"
- *   * companyName = "projects/api-test-project/companies/123" AND status =
- *   "EXPIRED"
+ *   * companyName = "projects/api-test-project/tenants/foo/companies/bar"
+ *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+ *   requisitionId = "req-1"
+ *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+ *   status = "EXPIRED"
  *
  * @property {string} pageToken
  *   Optional.
@@ -264,10 +281,13 @@ const ListJobsResponse = {
  * @property {string} parent
  *   Required.
  *
- *   The resource name of the project to search within.
+ *   The resource name of the tenant to search within.
  *
- *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+ *   "projects/api-test-project/tenant/foo".
+ *
+ *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   example, "projects/api-test-project".
  *
  * @property {number} searchMode
  *   Optional.
@@ -901,8 +921,7 @@ const JobView = {
    * A minimal view of the job, with the following attributes:
    * Job.name,
    * Job.requisition_id,
-   * Job.job_title,
-   * Job.company_name,
+   * Job.job_title, Job.company,
    * Job.DerivedInfo.locations,
    * Job.language_code.
    */
@@ -912,8 +931,7 @@ const JobView = {
    * A small view of the job, with the following attributes in the search
    * results: Job.name,
    * Job.requisition_id,
-   * Job.job_title,
-   * Job.company_name,
+   * Job.job_title, Job.company,
    * Job.DerivedInfo.locations,
    * Job.visibility,
    * Job.language_code,
