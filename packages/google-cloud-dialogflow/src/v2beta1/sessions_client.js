@@ -280,6 +280,13 @@ class SessionsClient {
       options = {};
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      session: request.session,
+    });
 
     return this._innerApiCalls.detectIntent(request, options, callback);
   }
