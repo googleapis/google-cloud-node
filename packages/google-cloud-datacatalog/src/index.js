@@ -33,7 +33,7 @@ const gapic = Object.freeze({
 });
 
 /**
- * The `datacatalog` package has the following named exports:
+ * The `@google-cloud/datacatalog` package has the following named exports:
  *
  * - `DataCatalogClient` - Reference to
  *   {@link v1beta1.DataCatalogClient}
@@ -42,14 +42,14 @@ const gapic = Object.freeze({
  *     - `DataCatalogClient` - Reference to
  *       {@link v1beta1.DataCatalogClient}
  *
- * @module {object} datacatalog
+ * @module {object} @google-cloud/datacatalog
  * @alias nodejs-datacatalog
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save datacatalog
+ * npm install --save @google-cloud/datacatalog
  *
  * @example <caption>Import the client library:</caption>
- * const datacatalog = require('datacatalog');
+ * const datacatalog = require('@google-cloud/datacatalog');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new datacatalog.DataCatalogClient();

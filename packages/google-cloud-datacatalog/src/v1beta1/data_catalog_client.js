@@ -323,7 +323,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -439,7 +439,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -490,7 +490,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -555,7 +555,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -606,7 +606,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -660,7 +660,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -736,7 +736,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -786,7 +786,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -834,7 +834,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -898,7 +898,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -951,7 +951,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1011,7 +1011,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1078,7 +1078,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1133,7 +1133,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1191,7 +1191,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1267,7 +1267,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1328,7 +1328,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1388,7 +1388,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1442,7 +1442,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1506,7 +1506,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1556,7 +1556,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1631,7 +1631,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1727,7 +1727,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1789,7 +1789,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1859,7 +1859,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.
@@ -1929,7 +1929,7 @@ class DataCatalogClient {
    *
    * @example
    *
-   * const datacatalog = require('datacatalog.v1beta1');
+   * const datacatalog = require('@google-cloud/datacatalog');
    *
    * const client = new datacatalog.v1beta1.DataCatalogClient({
    *   // optional auth parameters.

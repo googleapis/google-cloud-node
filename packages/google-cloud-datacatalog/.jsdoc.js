@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2018 Google, LLC.',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'datacatalog',
+    systemName: '@google-cloud/datacatalog',
     theme: 'lumen'
   }
 };

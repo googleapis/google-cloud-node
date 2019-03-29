@@ -26,7 +26,7 @@ gapic = gcp.GAPICGenerator()
 versions = ['v1beta1']
 for version in versions:
     library = gapic.node_library('datacatalog', version, private=True)
-    s.copy(library, excludes=[])
+    s.copy(library, excludes=['README.md', 'src/index.js', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
