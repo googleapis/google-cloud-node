@@ -6,10 +6,9 @@
 [![devDependency Status][david-dev-image]][david-dev-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 
-> **Alpha**. *This is an Alpha release of Stackdriver Profiler Node.js
-profiling agent. This feature might be changed in backward-incompatible ways
-and is not recommended for production use. It is not subject to any SLA or
-deprecation policy.*
+> **Beta**. *This is a Beta release of the Stackdriver Profiler agent for
+Node.js. These libraries might be changed in backward-incompatible ways and are 
+not subject to any SLA or deprecation policy.*
 
 
 ## Prerequisites
