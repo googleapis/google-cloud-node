@@ -24,6 +24,15 @@
 /**
  * @namespace google.cloud.datalabeling.v1beta1
  */
+/**
+ * @namespace google.longrunning
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
 
 'use strict';
 
@@ -33,7 +42,7 @@ const gapic = Object.freeze({
 });
 
 /**
- * The `datalabeling` package has the following named exports:
+ * The `@google-cloud/datalabeling` package has the following named exports:
  *
  * - `DataLabelingServiceClient` - Reference to
  *   {@link v1beta1.DataLabelingServiceClient}
@@ -42,14 +51,14 @@ const gapic = Object.freeze({
  *     - `DataLabelingServiceClient` - Reference to
  *       {@link v1beta1.DataLabelingServiceClient}
  *
- * @module {object} datalabeling
+ * @module {object} @google-cloud/datalabeling
  * @alias nodejs-datalabeling
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save datalabeling
+ * npm install --save @google-cloud/datalabeling
  *
  * @example <caption>Import the client library:</caption>
- * const datalabeling = require('datalabeling');
+ * const datalabeling = require('@google-cloud/datalabeling');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new datalabeling.DataLabelingServiceClient();
