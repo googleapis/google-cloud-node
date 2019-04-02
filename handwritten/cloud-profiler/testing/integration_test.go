@@ -81,8 +81,8 @@ export NVM_DIR="$HOME/.nvm" >/dev/null
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" >/dev/null
 
 # nvm install writes to stderr and stdout on successful install, so both are
-# redirected.
-{{if .NVMMirror}}NVM_NODEJS_ORG_MIRROR={{.NVMMirror}}{{end}} retry nvm install {{.NodeVersion}} &>/dev/null
+# redirected to serial port 3.
+{{if .NVMMirror}}NVM_NODEJS_ORG_MIRROR={{.NVMMirror}}{{end}} retry nvm install {{.NodeVersion}} &>/dev/ttyS2
 npm -v
 node -v
 NODEDIR=$(dirname $(dirname $(which node)))
@@ -100,7 +100,7 @@ git reset --hard {{.Commit}}
 # with Node 11.
 {{if .NVMMirror}} retry npm install https://github.com/nodejs/nan.git {{end}}
 
-retry npm install --nodedir="$NODEDIR" >/dev/null
+retry npm install --nodedir="$NODEDIR" &>/dev/ttyS2
 
 npm run compile 
 npm pack --nodedir="$NODEDIR" >/dev/null
@@ -112,8 +112,8 @@ mkdir -p "$TESTDIR"
 cp -r "testing/busybench" "$TESTDIR"
 cd "$TESTDIR/busybench"
 
-retry npm install node-pre-gyp
-retry npm install --nodedir="$NODEDIR" --build-from-source=google_cloud_profiler "$PROFILER" typescript gts >/dev/null
+retry npm install node-pre-gyp &>/dev/ttyS2
+retry npm install --nodedir="$NODEDIR" --build-from-source=google_cloud_profiler "$PROFILER" typescript gts &>/dev/ttyS2
 
 npm run compile
 
