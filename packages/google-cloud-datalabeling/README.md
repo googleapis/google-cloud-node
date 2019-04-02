@@ -26,6 +26,11 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 **Table of contents:**
 
 
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
