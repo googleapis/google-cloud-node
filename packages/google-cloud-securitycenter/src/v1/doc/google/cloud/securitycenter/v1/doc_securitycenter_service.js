@@ -126,6 +126,18 @@ const GetSourceRequest = {
  *   * integer literals without quotes.
  *   * boolean literals `true` and `false` without quotes.
  *
+ *   The following field and operator combinations are supported:
+ *   name | `=`
+ *   update_time | `>`, `<`, `>=`, `<=`
+ *   iam_policy.policy_blob | '=', ':'
+ *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
+ *   security_marks | '=', ':'
+ *   security_center_properties.resource_name | '=', ':'
+ *   security_center_properties.resource_type | '=', ':'
+ *   security_center_properties.resource_parent | '=', ':'
+ *   security_center_properties.resource_project | '=', ':'
+ *   security_center_properties.resource_owners | '=', ':'
+ *
  *   For example, `resource_properties.size = 100` is a valid filter string.
  *
  * @property {string} groupBy
@@ -264,6 +276,17 @@ const GroupAssetsResponse = {
  *   * integer literals without quotes.
  *   * boolean literals `true` and `false` without quotes.
  *
+ *   The following field and operator combinations are supported:
+ *   name | `=`
+ *   parent | '=', ':'
+ *   resource_name | '=', ':'
+ *   state | '=', ':'
+ *   category | '=', ':'
+ *   external_uri | '=', ':'
+ *   event_time | `>`, `<`, `>=`, `<=`
+ *   security_marks | '=', ':'
+ *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+ *
  *   For example, `source_properties.size = 100` is a valid filter string.
  *
  * @property {string} groupBy
@@ -276,8 +299,11 @@ const GroupAssetsResponse = {
  *   * resource_name
  *   * category
  *   * state
- *   * state_change
  *   * parent
+ *
+ *   The following fields are supported when compare_duration is set:
+ *
+ *   * state_change
  *
  * @property {Object} readTime
  *   Time used as a reference point when filtering findings. The filter is
@@ -459,6 +485,18 @@ const ListSourcesResponse = {
  *   * integer literals without quotes.
  *   * boolean literals `true` and `false` without quotes.
  *
+ *   The following are the allowed field and operator combinations:
+ *   name | `=`
+ *   update_time | `>`, `<`, `>=`, `<=`
+ *   iam_policy.policy_blob | '=', ':'
+ *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
+ *   security_marks | '=', ':'
+ *   security_center_properties.resource_name | '=', ':'
+ *   security_center_properties.resource_type | '=', ':'
+ *   security_center_properties.resource_parent | '=', ':'
+ *   security_center_properties.resource_project | '=', ':'
+ *   security_center_properties.resource_owners | '=', ':'
+ *
  *   For example, `resource_properties.size = 100` is a valid filter string.
  *
  * @property {string} orderBy
@@ -470,6 +508,16 @@ const ListSourcesResponse = {
  *   desc,resource_properties.a_property". Redundant space characters in the
  *   syntax are insignificant. "name desc,resource_properties.a_property" and "
  *   name     desc  ,   resource_properties.a_property  " are equivalent.
+ *
+ *   The following fields are supported:
+ *   name
+ *   update_time
+ *   resource_properties
+ *   security_marks
+ *   security_center_properties.resource_name
+ *   security_center_properties.resource_parent
+ *   security_center_properties.resource_project
+ *   security_center_properties.resource_type
  *
  * @property {Object} readTime
  *   Time used as a reference point when filtering assets. The filter is limited
@@ -650,6 +698,17 @@ const ListAssetsResponse = {
  *   * integer literals without quotes.
  *   * boolean literals `true` and `false` without quotes.
  *
+ *   The following field and operator combinations are supported:
+ *   name | `=`
+ *   parent | '=', ':'
+ *   resource_name | '=', ':'
+ *   state | '=', ':'
+ *   category | '=', ':'
+ *   external_uri | '=', ':'
+ *   event_time | `>`, `<`, `>=`, `<=`
+ *   security_marks | '=', ':'
+ *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+ *
  *   For example, `source_properties.size = 100` is a valid filter string.
  *
  * @property {string} orderBy
@@ -661,6 +720,16 @@ const ListAssetsResponse = {
  *   desc,source_properties.a_property". Redundant space characters in the
  *   syntax are insignificant. "name desc,source_properties.a_property" and "
  *   name     desc  ,   source_properties.a_property  " are equivalent.
+ *
+ *   The following fields are supported:
+ *   name
+ *   parent
+ *   state
+ *   category
+ *   resource_name
+ *   event_time
+ *   source_properties
+ *   security_marks
  *
  * @property {Object} readTime
  *   Time used as a reference point when filtering findings. The filter is

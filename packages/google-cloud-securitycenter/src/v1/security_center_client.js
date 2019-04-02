@@ -639,6 +639,18 @@ class SecurityCenterClient {
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
    *
+   *   The following field and operator combinations are supported:
+   *   name | `=`
+   *   update_time | `>`, `<`, `>=`, `<=`
+   *   iam_policy.policy_blob | '=', ':'
+   *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   security_center_properties.resource_name | '=', ':'
+   *   security_center_properties.resource_type | '=', ':'
+   *   security_center_properties.resource_parent | '=', ':'
+   *   security_center_properties.resource_project | '=', ':'
+   *   security_center_properties.resource_owners | '=', ':'
+   *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {Object} [request.compareDuration]
    *   When compare_duration is set, the GroupResult's "state_change" property is
@@ -841,6 +853,18 @@ class SecurityCenterClient {
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
    *
+   *   The following field and operator combinations are supported:
+   *   name | `=`
+   *   update_time | `>`, `<`, `>=`, `<=`
+   *   iam_policy.policy_blob | '=', ':'
+   *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   security_center_properties.resource_name | '=', ':'
+   *   security_center_properties.resource_type | '=', ':'
+   *   security_center_properties.resource_parent | '=', ':'
+   *   security_center_properties.resource_project | '=', ':'
+   *   security_center_properties.resource_owners | '=', ':'
+   *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {Object} [request.compareDuration]
    *   When compare_duration is set, the GroupResult's "state_change" property is
@@ -946,8 +970,11 @@ class SecurityCenterClient {
    *   * resource_name
    *   * category
    *   * state
-   *   * state_change
    *   * parent
+   *
+   *   The following fields are supported when compare_duration is set:
+   *
+   *   * state_change
    * @param {string} [request.filter]
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -972,6 +999,17 @@ class SecurityCenterClient {
    *   * string literals in quotes.
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
+   *
+   *   The following field and operator combinations are supported:
+   *   name | `=`
+   *   parent | '=', ':'
+   *   resource_name | '=', ':'
+   *   state | '=', ':'
+   *   category | '=', ':'
+   *   external_uri | '=', ':'
+   *   event_time | `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {Object} [request.readTime]
@@ -1144,8 +1182,11 @@ class SecurityCenterClient {
    *   * resource_name
    *   * category
    *   * state
-   *   * state_change
    *   * parent
+   *
+   *   The following fields are supported when compare_duration is set:
+   *
+   *   * state_change
    * @param {string} [request.filter]
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -1170,6 +1211,17 @@ class SecurityCenterClient {
    *   * string literals in quotes.
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
+   *
+   *   The following field and operator combinations are supported:
+   *   name | `=`
+   *   parent | '=', ':'
+   *   resource_name | '=', ':'
+   *   state | '=', ':'
+   *   category | '=', ':'
+   *   external_uri | '=', ':'
+   *   event_time | `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
    *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {Object} [request.readTime]
@@ -1286,6 +1338,18 @@ class SecurityCenterClient {
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
    *
+   *   The following are the allowed field and operator combinations:
+   *   name | `=`
+   *   update_time | `>`, `<`, `>=`, `<=`
+   *   iam_policy.policy_blob | '=', ':'
+   *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   security_center_properties.resource_name | '=', ':'
+   *   security_center_properties.resource_type | '=', ':'
+   *   security_center_properties.resource_parent | '=', ':'
+   *   security_center_properties.resource_project | '=', ':'
+   *   security_center_properties.resource_owners | '=', ':'
+   *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
    *   Expression that defines what fields and order to use for sorting. The
@@ -1296,6 +1360,16 @@ class SecurityCenterClient {
    *   desc,resource_properties.a_property". Redundant space characters in the
    *   syntax are insignificant. "name desc,resource_properties.a_property" and "
    *   name     desc  ,   resource_properties.a_property  " are equivalent.
+   *
+   *   The following fields are supported:
+   *   name
+   *   update_time
+   *   resource_properties
+   *   security_marks
+   *   security_center_properties.resource_name
+   *   security_center_properties.resource_parent
+   *   security_center_properties.resource_project
+   *   security_center_properties.resource_type
    * @param {Object} [request.readTime]
    *   Time used as a reference point when filtering assets. The filter is limited
    *   to assets existing at the supplied time and their values are those at that
@@ -1477,6 +1551,18 @@ class SecurityCenterClient {
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
    *
+   *   The following are the allowed field and operator combinations:
+   *   name | `=`
+   *   update_time | `>`, `<`, `>=`, `<=`
+   *   iam_policy.policy_blob | '=', ':'
+   *   resource_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   security_center_properties.resource_name | '=', ':'
+   *   security_center_properties.resource_type | '=', ':'
+   *   security_center_properties.resource_parent | '=', ':'
+   *   security_center_properties.resource_project | '=', ':'
+   *   security_center_properties.resource_owners | '=', ':'
+   *
    *   For example, `resource_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
    *   Expression that defines what fields and order to use for sorting. The
@@ -1487,6 +1573,16 @@ class SecurityCenterClient {
    *   desc,resource_properties.a_property". Redundant space characters in the
    *   syntax are insignificant. "name desc,resource_properties.a_property" and "
    *   name     desc  ,   resource_properties.a_property  " are equivalent.
+   *
+   *   The following fields are supported:
+   *   name
+   *   update_time
+   *   resource_properties
+   *   security_marks
+   *   security_center_properties.resource_name
+   *   security_center_properties.resource_parent
+   *   security_center_properties.resource_project
+   *   security_center_properties.resource_type
    * @param {Object} [request.readTime]
    *   Time used as a reference point when filtering assets. The filter is limited
    *   to assets existing at the supplied time and their values are those at that
@@ -1605,6 +1701,17 @@ class SecurityCenterClient {
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
    *
+   *   The following field and operator combinations are supported:
+   *   name | `=`
+   *   parent | '=', ':'
+   *   resource_name | '=', ':'
+   *   state | '=', ':'
+   *   category | '=', ':'
+   *   external_uri | '=', ':'
+   *   event_time | `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
    *   Expression that defines what fields and order to use for sorting. The
@@ -1615,6 +1722,16 @@ class SecurityCenterClient {
    *   desc,source_properties.a_property". Redundant space characters in the
    *   syntax are insignificant. "name desc,source_properties.a_property" and "
    *   name     desc  ,   source_properties.a_property  " are equivalent.
+   *
+   *   The following fields are supported:
+   *   name
+   *   parent
+   *   state
+   *   category
+   *   resource_name
+   *   event_time
+   *   source_properties
+   *   security_marks
    * @param {Object} [request.readTime]
    *   Time used as a reference point when filtering findings. The filter is
    *   limited to findings existing at the supplied time and their values are
@@ -1795,6 +1912,17 @@ class SecurityCenterClient {
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
    *
+   *   The following field and operator combinations are supported:
+   *   name | `=`
+   *   parent | '=', ':'
+   *   resource_name | '=', ':'
+   *   state | '=', ':'
+   *   category | '=', ':'
+   *   external_uri | '=', ':'
+   *   event_time | `>`, `<`, `>=`, `<=`
+   *   security_marks | '=', ':'
+   *   source_properties | '=', ':', `>`, `<`, `>=`, `<=`
+   *
    *   For example, `source_properties.size = 100` is a valid filter string.
    * @param {string} [request.orderBy]
    *   Expression that defines what fields and order to use for sorting. The
@@ -1805,6 +1933,16 @@ class SecurityCenterClient {
    *   desc,source_properties.a_property". Redundant space characters in the
    *   syntax are insignificant. "name desc,source_properties.a_property" and "
    *   name     desc  ,   source_properties.a_property  " are equivalent.
+   *
+   *   The following fields are supported:
+   *   name
+   *   parent
+   *   state
+   *   category
+   *   resource_name
+   *   event_time
+   *   source_properties
+   *   security_marks
    * @param {Object} [request.readTime]
    *   Time used as a reference point when filtering findings. The filter is
    *   limited to findings existing at the supplied time and their values are
