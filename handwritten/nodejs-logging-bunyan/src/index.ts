@@ -289,8 +289,7 @@ export class LoggingBunyan extends Writable {
    * Relay a log entry to the logging agent. This is called by bunyan through
    * Writable#write.
    */
-  _write(
-      record: types.BunyanLogRecord, encoding?: string, callback?: Function) {
+  _write(record: types.BunyanLogRecord, encoding: string, callback: Function) {
     const entry = this.formatEntry_(record);
     this.stackdriverLog.write(entry, callback);
   }
@@ -305,7 +304,7 @@ export class LoggingBunyan extends Writable {
         // tslint:disable-next-line:no-any
         chunk: any; encoding: string;
       }>,
-      callback?: Function) {
+      callback: Function) {
     const entries = chunks.map((request: {
                                  // tslint:disable-next-line:no-any
                                  chunk: any; encoding: string;
