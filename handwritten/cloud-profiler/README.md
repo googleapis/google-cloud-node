@@ -28,9 +28,23 @@ profiler is not stable with those versions of Node.js.
     which can cause garbage collection to take several minutes when heap
     profiling is enabled.
 
+1. `@google-cloud/profiler` depends on the
+[`pprof`](https://www.npmjs.com/package/pprof) module, a module with a native
+component that is used to collect profiles with v8's CPU and Heap profilers.
+You may need to install additional dependencies to build the `pprof` module.
+    * For Linux: `pprof` has prebuilt binaries available for Linux and Alpine
+    Linux for Node 6, 8, 10, and 11. No additional dependencies are required.
+    * For other environments: when using `@google-cloud/profiler` on environments
+    that `pprof` does not have prebuilt binaries for, the module
+    [`node-gyp`](https://www.npmjs.com/package/node-gyp) will be used to
+    build binaries. See `node-gyp`'s
+    [documentation](https://github.com/nodejs/node-gyp#installation)
+    for information on dependencies required to build binaries with `node-gyp`.
+
 1. You will need a project in the [Google Developers Console][cloud-console].
 Your application can run anywhere, but the profiler data is associated with a
 particular project.
+
 1. You will need to enable the Stackdriver Profiler API for your project.
 
 ## Basic Set-up
@@ -167,13 +181,6 @@ require('@google-cloud/profiler').start({
 });
 ```
 
-You may also need to download `build-essential`. An example of this would be:
-
-```sh
-apt-get update
-apt-get install build-essential
-```
-
 ### Running on Google Container Engine
 
 To enable the profiling agent for a Node.js program running in the Google
@@ -188,8 +195,6 @@ require('@google-cloud/profiler').start({
   }
 });
 ```
-
-You may also need to add `build-essential` to your environment.
 
 ## Running elsewhere
 
