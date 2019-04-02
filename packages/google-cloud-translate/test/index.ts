@@ -57,7 +57,7 @@ class FakeService {
   }
 }
 
-describe('Translate', () => {
+describe('Translate v2', () => {
   const OPTIONS = {
     projectId: 'test-project',
   };
@@ -68,7 +68,7 @@ describe('Translate', () => {
   let translate: any;
 
   before(() => {
-    Translate = proxyquire('../src', {
+    Translate = proxyquire('../src/v2', {
                   '@google-cloud/common': {
                     util: fakeUtil,
                     Service: FakeService,

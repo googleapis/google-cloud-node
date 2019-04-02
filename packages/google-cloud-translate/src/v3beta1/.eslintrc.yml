@@ -1,0 +1,3 @@
+---
+rules:
+  node/no-missing-require: off
