@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## v3.0.0
+
+BREAKING CHANGE: 
+
+This release introduces the `grpc` dependency.
+
+In some environments, this will trigger a native compilation.
+
+### Implementation Changes
+
+### New Features
+
+- feat: add version v3beta1 ([#232](https://github.com/googleapis/nodejs-translate/pull/232))
+
+### Dependencies
+
+- chore(deps): update dependency typescript to ~3.4.0 ([#231](https://github.com/googleapis/nodejs-translate/pull/231))
+
+### Documentation
+
+### Internal / Testing Changes
+
+- chore: publish to npm using wombat ([#227](https://github.com/googleapis/nodejs-translate/pull/227))
+- build: use per-repo npm publish token ([#225](https://github.com/googleapis/nodejs-translate/pull/225))
+
 ## v2.1.4
 
 03-12-2019 12:30 PDT
