@@ -2547,8 +2547,10 @@ describe('SessionsClient', () => {
 
       // Mock response
       const responseId = 'responseId1847552473';
+      const outputAudio = '24';
       const expectedResponse = {
         responseId: responseId,
+        outputAudio: outputAudio,
       };
 
       // Mock Grpc layer
@@ -2611,8 +2613,10 @@ describe('SessionsClient', () => {
 
       // Mock response
       const responseId = 'responseId1847552473';
+      const outputAudio = '24';
       const expectedResponse = {
         responseId: responseId,
+        outputAudio: outputAudio,
       };
 
       // Mock Grpc layer

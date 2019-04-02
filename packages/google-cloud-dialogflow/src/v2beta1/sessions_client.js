@@ -23,10 +23,9 @@ const VERSION = require('../../package.json').version;
 
 /**
  * A session represents an interaction with a user. You retrieve user input
- * and pass it to the
- * DetectIntent (or
- * StreamingDetectIntent)
- * method to determine user intent and respond.
+ * and pass it to the DetectIntent (or
+ * StreamingDetectIntent) method to determine
+ * user intent and respond.
  *
  * @class
  * @memberof v2beta1
@@ -181,7 +180,10 @@ class SessionsClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**

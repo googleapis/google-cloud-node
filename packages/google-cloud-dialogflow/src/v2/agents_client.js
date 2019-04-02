@@ -28,30 +28,29 @@ const VERSION = require('../../package.json').version;
  * in your app, product, or service to determine user intent and respond to the
  * user in a natural way.
  *
- * After you create an agent, you can add
- * Intents,
- * Contexts, Entity
- * Types,
- * Webhooks, and so on to manage
- * the flow of a conversation and match user input to predefined intents and
- * actions.
+ * After you create an agent, you can add Intents, Contexts,
+ * Entity Types, Webhooks, and so on to
+ * manage the flow of a conversation and match user input to predefined intents
+ * and actions.
  *
  * You can create an agent using both Dialogflow Standard Edition and
  * Dialogflow Enterprise Edition. For details, see
- * [Dialogflow Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
+ * [Dialogflow
+ * Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
  *
  * You can save your agent for backup or versioning by exporting the agent by
- * using the ExportAgent
- * method. You can import a saved agent by using the
- * ImportAgent method.
+ * using the ExportAgent method. You can import a saved
+ * agent by using the ImportAgent method.
  *
  * Dialogflow provides several
- * [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
- * conversation scenarios such as determining a date and time, converting
- * currency, and so on.
+ * [prebuilt
+ * agents](https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt)
+ * for common conversation scenarios such as determining a date and time,
+ * converting currency, and so on.
  *
  * For more information about agents, see the
- * [Dialogflow documentation](https://dialogflow.com/docs/agents).
+ * [Dialogflow
+ * documentation](https://cloud.google.com/dialogflow-enterprise/docs/agents-overview).
  *
  * @class
  * @memberof v2
@@ -267,7 +266,10 @@ class AgentsClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -504,8 +506,7 @@ class AgentsClient {
   /**
    * Trains the specified agent.
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -605,9 +606,7 @@ class AgentsClient {
   /**
    * Exports the specified agent to a ZIP file.
    *
-   * Operation <response:
-   * ExportAgentResponse,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: ExportAgentResponse>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -615,9 +614,11 @@ class AgentsClient {
    *   Required. The project that the agent to export is associated with.
    *   Format: `projects/<Project ID>`.
    * @param {string} [request.agentUri]
-   *   Optional. The Google Cloud Storage URI to export the agent to.
-   *   Note: The URI must start with
-   *   "gs://". If left unspecified, the serialized agent is returned inline.
+   *   Optional. The
+   *   [Google Cloud Storage](https://cloud.google.com/storage/docs/)
+   *   URI to export the agent to.
+   *   The format of this URI must be `gs://<bucket-name>/<object-name>`.
+   *   If left unspecified, the serialized agent is returned inline.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -715,8 +716,7 @@ class AgentsClient {
    * Intents and entity types with the same name are replaced with the new
    * versions from ImportAgentRequest.
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -730,17 +730,17 @@ class AgentsClient {
    *   The agent to import.
    *
    *   Example for how to import an agent via the command line:
-   *
-   *   curl \
-   *     'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:import\
+   *   <pre>curl \
+   *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:import\
    *      -X POST \
-   *      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+   *      -H 'Authorization: Bearer '$(gcloud auth application-default
+   *      print-access-token) \
    *      -H 'Accept: application/json' \
    *      -H 'Content-Type: application/json' \
    *      --compressed \
    *      --data-binary "{
-   *         'agentContent': '$(cat <agent zip file> | base64 -w 0)'
-   *      }"
+   *         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
+   *      }"</pre>
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -837,8 +837,7 @@ class AgentsClient {
    * Replaces the current agent version with a new one. All the intents and
    * entity types in the older version are deleted.
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -852,17 +851,17 @@ class AgentsClient {
    *   The agent to restore.
    *
    *   Example for how to restore an agent via the command line:
-   *
-   *   curl \
-   *     'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\
+   *   <pre>curl \
+   *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
    *      -X POST \
-   *      -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
+   *      -H 'Authorization: Bearer '$(gcloud auth application-default
+   *      print-access-token) \
    *      -H 'Accept: application/json' \
    *      -H 'Content-Type: application/json' \
    *      --compressed \
    *      --data-binary "{
-   *          'agentContent': '$(cat <agent zip file> | base64 -w 0)'
-   *      }" \
+   *          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
+   *      }"</pre>
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

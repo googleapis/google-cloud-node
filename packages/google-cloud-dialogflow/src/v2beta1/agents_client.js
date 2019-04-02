@@ -28,11 +28,8 @@ const VERSION = require('../../package.json').version;
  * in your app, product, or service to determine user intent and respond to the
  * user in a natural way.
  *
- * After you create an agent, you can add
- * Intents,
- * Contexts, Entity
- * Types,
- * Webhooks, and so on to
+ * After you create an agent, you can add Intents, Contexts,
+ * Entity Types, Webhooks, and so on to
  * manage the flow of a conversation and match user input to predefined intents
  * and actions.
  *
@@ -42,17 +39,18 @@ const VERSION = require('../../package.json').version;
  * Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
  *
  * You can save your agent for backup or versioning by exporting the agent by
- * using the ExportAgent
- * method. You can import a saved agent by using the
- * ImportAgent method.
+ * using the ExportAgent method. You can import a saved
+ * agent by using the ImportAgent method.
  *
  * Dialogflow provides several
- * [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
- * conversation scenarios such as determining a date and time, converting
- * currency, and so on.
+ * [prebuilt
+ * agents](https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt)
+ * for common conversation scenarios such as determining a date and time,
+ * converting currency, and so on.
  *
  * For more information about agents, see the
- * [Dialogflow documentation](https://dialogflow.com/docs/agents).
+ * [Dialogflow
+ * documentation](https://cloud.google.com/dialogflow-enterprise/docs/agents-overview).
  *
  * @class
  * @memberof v2beta1
@@ -268,7 +266,10 @@ class AgentsClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -506,8 +507,7 @@ class AgentsClient {
    * Trains the specified agent.
    *
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -608,9 +608,7 @@ class AgentsClient {
    * Exports the specified agent to a ZIP file.
    *
    *
-   * Operation <response:
-   * ExportAgentResponse,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: ExportAgentResponse>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -721,8 +719,7 @@ class AgentsClient {
    * versions from ImportAgentRequest.
    *
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -844,8 +841,7 @@ class AgentsClient {
    * entity types in the older version are deleted.
    *
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.

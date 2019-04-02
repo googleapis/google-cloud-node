@@ -29,6 +29,9 @@
  *   `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
  *   Display Name>`.
  *
+ *   `<Entity Type Display Name>` must be the display name of an existing entity
+ *   type in the same agent that will be overridden or supplemented.
+ *
  * @property {number} entityOverrideMode
  *   Required. Indicates whether the additional data should override or
  *   supplement the developer entity type definition.
@@ -70,18 +73,20 @@ const SessionEntityType = {
     /**
      * The collection of session entities extends the collection of entities in
      * the corresponding developer entity type.
-     * Calls to `ListSessionEntityTypes`, `GetSessionEntityType`,
-     * `CreateSessionEntityType` and `UpdateSessionEntityType` return the full
-     * collection of entities from the developer entity type in the agent's
-     * default language and the session entity type.
+     *
+     * Note: Even in this override mode calls to `ListSessionEntityTypes`,
+     * `GetSessionEntityType`, `CreateSessionEntityType` and
+     * `UpdateSessionEntityType` only return the additional entities added in
+     * this session entity type. If you want to get the supplemented list,
+     * please call EntityTypes.GetEntityType on the developer entity type
+     * and merge.
      */
     ENTITY_OVERRIDE_MODE_SUPPLEMENT: 2
   }
 };
 
 /**
- * The request message for
- * SessionEntityTypes.ListSessionEntityTypes.
+ * The request message for SessionEntityTypes.ListSessionEntityTypes.
  *
  * @property {string} parent
  *   Required. The session to list all session entity types from.
@@ -103,8 +108,7 @@ const ListSessionEntityTypesRequest = {
 };
 
 /**
- * The response message for
- * SessionEntityTypes.ListSessionEntityTypes.
+ * The response message for SessionEntityTypes.ListSessionEntityTypes.
  *
  * @property {Object[]} sessionEntityTypes
  *   The list of session entity types. There will be a maximum number of items
@@ -125,8 +129,7 @@ const ListSessionEntityTypesResponse = {
 };
 
 /**
- * The request message for
- * SessionEntityTypes.GetSessionEntityType.
+ * The request message for SessionEntityTypes.GetSessionEntityType.
  *
  * @property {string} name
  *   Required. The name of the session entity type. Format:
@@ -142,8 +145,7 @@ const GetSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for
- * SessionEntityTypes.CreateSessionEntityType.
+ * The request message for SessionEntityTypes.CreateSessionEntityType.
  *
  * @property {string} parent
  *   Required. The session to create a session entity type for.
@@ -163,8 +165,7 @@ const CreateSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for
- * SessionEntityTypes.UpdateSessionEntityType.
+ * The request message for SessionEntityTypes.UpdateSessionEntityType.
  *
  * @property {Object} sessionEntityType
  *   Required. The entity type to update. Format:
@@ -187,8 +188,7 @@ const UpdateSessionEntityTypeRequest = {
 };
 
 /**
- * The request message for
- * SessionEntityTypes.DeleteSessionEntityType.
+ * The request message for SessionEntityTypes.DeleteSessionEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type to delete. Format:

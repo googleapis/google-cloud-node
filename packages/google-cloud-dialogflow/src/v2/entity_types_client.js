@@ -46,11 +46,11 @@ const VERSION = require('../../package.json').version;
  *
  * *   **User** - entities that are built for an individual user such as
  *     favorites, preferences, playlists, and so on. A user entity is
- *     represented by the
- *     SessionEntityType type.
+ *     represented by the SessionEntityType type.
  *
  * For more information about entity types, see the
- * [Dialogflow documentation](https://dialogflow.com/docs/entities).
+ * [Dialogflow
+ * documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
  *
  * @class
  * @memberof v2
@@ -306,7 +306,10 @@ class EntityTypesClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -333,9 +336,10 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list entity synonyms for. If not specified,
    *   the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -451,9 +455,10 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list entity synonyms for. If not specified,
    *   the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -503,9 +508,10 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to retrieve entity synonyms for. If not specified,
    *   the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -567,9 +573,10 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entity_type`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -628,15 +635,15 @@ class EntityTypesClient {
    *   The request object that will be sent.
    * @param {Object} request.entityType
    *   Required. The entity type to update.
-   *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
    *
    *   This object should have the same structure as [EntityType]{@link google.cloud.dialogflow.v2.EntityType}
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entity_type`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    *
@@ -736,9 +743,7 @@ class EntityTypesClient {
   /**
    * Updates/Creates multiple entity types in the specified agent.
    *
-   * Operation <response:
-   * BatchUpdateEntityTypesResponse,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: BatchUpdateEntityTypesResponse>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -751,15 +756,16 @@ class EntityTypesClient {
    *   EntityBatch type) or a JSON object. Note: The URI must start with
    *   "gs://".
    * @param {Object} [request.entityTypeBatchInline]
-   *   The collection of entity type to update or create.
+   *   The collection of entity types to update or create.
    *
    *   This object should have the same structure as [EntityTypeBatch]{@link google.cloud.dialogflow.v2.EntityTypeBatch}
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entity_types`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    *
@@ -861,8 +867,7 @@ class EntityTypesClient {
   /**
    * Deletes entity types in the specified agent.
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -982,8 +987,7 @@ class EntityTypesClient {
   }
 
   /**
-   * Creates multiple new entities in the specified entity type (extends the
-   * existing collection of entries).
+   * Creates multiple new entities in the specified entity type.
    *
    * Operation <response: google.protobuf.Empty>
    *
@@ -993,15 +997,16 @@ class EntityTypesClient {
    *   Required. The name of the entity type to create entities in. Format:
    *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
    * @param {Object[]} request.entities
-   *   Required. The collection of entities to create.
+   *   Required. The entities to create.
    *
    *   This object should have the same structure as [Entity]{@link google.cloud.dialogflow.v2.Entity}
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entities`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -1108,27 +1113,28 @@ class EntityTypesClient {
   }
 
   /**
-   * Updates entities in the specified entity type (replaces the existing
-   * collection of entries).
+   * Updates or creates multiple entities in the specified entity type. This
+   * method does not affect entities in the entity type that aren't explicitly
+   * specified in the request.
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the entity type to update the entities in. Format:
-   *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+   *   Required. The name of the entity type to update or create entities in.
+   *   Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
    * @param {Object[]} request.entities
-   *   Required. The collection of new entities to replace the existing entities.
+   *   Required. The entities to update or create.
    *
    *   This object should have the same structure as [Entity]{@link google.cloud.dialogflow.v2.Entity}
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entities`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    *
@@ -1241,8 +1247,7 @@ class EntityTypesClient {
   /**
    * Deletes entities in the specified entity type.
    *
-   * Operation <response: google.protobuf.Empty,
-   *            metadata: google.protobuf.Struct>
+   * Operation <response: google.protobuf.Empty>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1256,9 +1261,10 @@ class EntityTypesClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of entity synonyms defined in `entities`. If not
    *   specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.

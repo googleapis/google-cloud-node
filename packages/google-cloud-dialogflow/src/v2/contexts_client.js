@@ -31,14 +31,15 @@ const VERSION = require('../../package.json').version;
  *
  * You can include contexts as input parameters of a
  * DetectIntent (or
- * StreamingDetectIntent)
- * request, or as output contexts included in the returned intent. Contexts
- * expire when an intent is matched, after the number of `DetectIntent` requests
- * specified by the `lifespan_count` parameter, or after 10 minutes if no
- * intents are matched for a `DetectIntent` request.
+ * StreamingDetectIntent) request,
+ * or as output contexts included in the returned intent.
+ * Contexts expire when an intent is matched, after the number of `DetectIntent`
+ * requests specified by the `lifespan_count` parameter, or after 20 minutes
+ * if no intents are matched for a `DetectIntent` request.
  *
  * For more information about contexts, see the
- * [Dialogflow documentation](https://dialogflow.com/docs/contexts).
+ * [Dialogflow
+ * documentation](https://cloud.google.com/dialogflow-enterprise/docs/contexts-overview).
  *
  * @class
  * @memberof v2
@@ -203,7 +204,10 @@ class ContextsClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -433,6 +437,8 @@ class ContextsClient {
 
   /**
    * Creates a context.
+   *
+   * If the specified context already exists, overrides the context.
    *
    * @param {Object} request
    *   The request object that will be sent.

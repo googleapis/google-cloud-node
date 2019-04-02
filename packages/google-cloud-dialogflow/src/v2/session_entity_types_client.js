@@ -33,7 +33,8 @@ const VERSION = require('../../package.json').version;
  * entity type at the session level.
  *
  * For more information about entity types, see the
- * [Dialogflow documentation](https://dialogflow.com/docs/entities).
+ * [Dialogflow
+ * documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
  *
  * @class
  * @memberof v2
@@ -197,7 +198,10 @@ class SessionEntityTypesClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -432,6 +436,9 @@ class SessionEntityTypesClient {
 
   /**
    * Creates a session entity type.
+   *
+   * If the specified session entity type already exists, overrides the session
+   * entity type.
    *
    * @param {Object} request
    *   The request object that will be sent.

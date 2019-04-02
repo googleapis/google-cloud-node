@@ -18,6 +18,9 @@
 /**
  * Represents knowledge base resource.
  *
+ * Note: resource `projects.agent.knowledgeBases` is deprecated, please use
+ * `projects.knowledgeBases` instead.
+ *
  * @property {string} name
  *   The knowledge base resource name.
  *   The name must be empty when creating a knowledge base.
@@ -36,12 +39,11 @@ const KnowledgeBase = {
 };
 
 /**
- * Request message for
- * KnowledgeBases.ListKnowledgeBases.
+ * Request message for KnowledgeBases.ListKnowledgeBases.
  *
  * @property {string} parent
- *   Required. The agent to list of knowledge bases for.
- *   Format: `projects/<Project ID>/agent`.
+ *   Required. The project to list of knowledge bases for.
+ *   Format: `projects/<Project ID>`.
  *
  * @property {number} pageSize
  *   Optional. The maximum number of items to return in a single page. By
@@ -59,8 +61,7 @@ const ListKnowledgeBasesRequest = {
 };
 
 /**
- * Response message for
- * KnowledgeBases.ListKnowledgeBases.
+ * Response message for KnowledgeBases.ListKnowledgeBases.
  *
  * @property {Object[]} knowledgeBases
  *   The list of knowledge bases.
@@ -95,12 +96,11 @@ const GetKnowledgeBaseRequest = {
 };
 
 /**
- * Request message for
- * KnowledgeBases.CreateKnowledgeBase.
+ * Request message for KnowledgeBases.CreateKnowledgeBase.
  *
  * @property {string} parent
- *   Required. The agent to create a knowledge base for.
- *   Format: `projects/<Project ID>/agent`.
+ *   Required. The project to create a knowledge base for.
+ *   Format: `projects/<Project ID>`.
  *
  * @property {Object} knowledgeBase
  *   Required. The knowledge base to create.
@@ -116,8 +116,7 @@ const CreateKnowledgeBaseRequest = {
 };
 
 /**
- * Request message for
- * KnowledgeBases.DeleteKnowledgeBase.
+ * Request message for KnowledgeBases.DeleteKnowledgeBase.
  *
  * @property {string} name
  *   Required. The name of the knowledge base to delete.
@@ -132,5 +131,28 @@ const CreateKnowledgeBaseRequest = {
  * @see [google.cloud.dialogflow.v2beta1.DeleteKnowledgeBaseRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
  */
 const DeleteKnowledgeBaseRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for KnowledgeBases.UpdateKnowledgeBase.
+ *
+ * @property {Object} knowledgeBase
+ *   Required. The knowledge base to update.
+ *
+ *   This object should have the same structure as [KnowledgeBase]{@link google.cloud.dialogflow.v2beta1.KnowledgeBase}
+ *
+ * @property {Object} updateMask
+ *   Optional. Not specified means `update all`.
+ *   Currently, only `display_name` can be updated, an InvalidArgument will be
+ *   returned for attempting to update other fields.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateKnowledgeBaseRequest
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.UpdateKnowledgeBaseRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/knowledge_base.proto}
+ */
+const UpdateKnowledgeBaseRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

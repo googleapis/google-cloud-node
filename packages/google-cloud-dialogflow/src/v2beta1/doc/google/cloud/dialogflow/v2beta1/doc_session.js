@@ -92,13 +92,17 @@ const DetectIntentRequest = {
  *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2beta1.QueryResult}
  *
  * @property {Object} webhookStatus
- *   Specifies the status of the webhook request. `webhook_status`
- *   is never populated in webhook requests.
+ *   Specifies the status of the webhook request.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @property {string} outputAudio
  *   The audio data bytes encoded as specified in the request.
+ *   Note: The output audio is generated based on the values of default platform
+ *   text responses found in the `query_result.fulfillment_messages` field. If
+ *   multiple default text responses exist, they will be concatenated when
+ *   generating audio. If no default platform text responses exist, the
+ *   generated audio content will be empty.
  *
  * @property {Object} outputAudioConfig
  *   Instructs the speech synthesizer how to generate the output audio. This
@@ -140,9 +144,9 @@ const DetectIntentResponse = {
  *   before the new ones are activated.
  *
  * @property {Object[]} sessionEntityTypes
- *   Optional. The collection of session entity types to replace or extend
- *   developer entities with for this query only. The entity synonyms apply
- *   to all languages.
+ *   Optional. Additional session entity types to replace or extend developer
+ *   entity types with. The entity synonyms apply to all languages and persist
+ *   for the session of this query.
  *
  *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2beta1.SessionEntityType}
  *
@@ -156,10 +160,6 @@ const DetectIntentResponse = {
  *   Optional. KnowledgeBases to get alternative results from. If not set, the
  *   KnowledgeBases enabled in the agent (through UI) will be used.
  *   Format:  `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
- *
- *   Note: This field is `repeated` for forward compatibility, currently only
- *   the first one is supported, we may return an error if multiple
- *   KnowledgeBases are specified.
  *
  * @property {Object} sentimentAnalysisRequestConfig
  *   Optional. Configures the type of sentiment analysis to perform. If not
@@ -224,7 +224,8 @@ const QueryInput = {
  *
  * @property {string} languageCode
  *   The language that was triggered during intent detection.
- *   See [Language Support](https://dialogflow.com/docs/reference/language)
+ *   See [Language
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
  *   for a list of the currently supported language codes.
  *
  * @property {number} speechRecognitionConfidence
@@ -255,6 +256,7 @@ const QueryInput = {
  *
  * @property {string} fulfillmentText
  *   The text to be pronounced to the user or shown on the screen.
+ *   Note: This is a legacy field, `fulfillment_messages` should be preferred.
  *
  * @property {Object[]} fulfillmentMessages
  *   The collection of rich messages to present to the user.
@@ -293,8 +295,9 @@ const QueryInput = {
  *   the greatest `knowledgeAnswers.match_confidence` value in the list.
  *
  * @property {Object} diagnosticInfo
- *   The free-form diagnostic info. For example, this field
- *   could contain webhook call latency.
+ *   The free-form diagnostic info. For example, this field could contain
+ *   webhook call latency. The string keys of the Struct's fields map can change
+ *   without notice.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
  *
@@ -362,11 +365,11 @@ const KnowledgeAnswers = {
    *
    * @property {number} matchConfidence
    *   The system's confidence score that this Knowledge answer is a good match
-   *   for this converstational query, range from 0.0 (completely uncertain)
-   *   to 1.0 (completely certain).
+   *   for this conversational query.
+   *   The range is from 0.0 (completely uncertain) to 1.0 (completely certain).
    *   Note: The confidence score is likely to vary somewhat (possibly even for
    *   identical requests), as the underlying model is under constant
-   *   improvement, we may deprecate it in the future. We recommend using
+   *   improvement. It may be deprecated in the future. We recommend using
    *   `match_confidence_level` which should be generally more stable.
    *
    * @typedef Answer
@@ -537,9 +540,7 @@ const StreamingDetectIntentRequest = {
  *   The audio data bytes encoded as specified in the request.
  *
  * @property {Object} outputAudioConfig
- *   Instructs the speech synthesizer how to generate the output audio. This
- *   field is populated from the agent-level speech synthesizer configuration,
- *   if enabled.
+ *   The config used by the speech synthesizer to generate the output audio.
  *
  *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2beta1.OutputAudioConfig}
  *
@@ -571,7 +572,7 @@ const StreamingDetectIntentResponse = {
  *
  * 6.  transcript: " that is"
  *
- * 7.  recognition_event_type: `RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE`
+ * 7.  message_type: `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`
  *
  * 8.  transcript: " that is the question"
  *     is_final: true
@@ -584,7 +585,7 @@ const StreamingDetectIntentResponse = {
  *
  * *  for `MESSAGE_TYPE_TRANSCRIPT`: `transcript` and possibly `is_final`.
  *
- * *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `event_type`.
+ * *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `message_type`.
  *
  * @property {number} messageType
  *   Type of the result message.
@@ -593,14 +594,13 @@ const StreamingDetectIntentResponse = {
  *
  * @property {string} transcript
  *   Transcript text representing the words that the user spoke.
- *   Populated if and only if `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+ *   Populated if and only if `message_type` = `MESSAGE_TYPE_TRANSCRIPT`.
  *
  * @property {boolean} isFinal
- *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *   If `false`, the `StreamingRecognitionResult` represents an
  *   interim result that may change. If `true`, the recognizer will not return
  *   any further hypotheses about this piece of the audio. May only be populated
- *   for `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+ *   for `message_type` = `MESSAGE_TYPE_TRANSCRIPT`.
  *
  * @property {number} confidence
  *   The Speech confidence between 0.0 and 1.0 for the current portion of audio.
@@ -650,68 +650,17 @@ const StreamingRecognitionResult = {
 };
 
 /**
- * Instructs the speech recognizer how to process the audio content.
- *
- * @property {number} audioEncoding
- *   Required. Audio encoding of the audio content to process.
- *
- *   The number should be among the values of [AudioEncoding]{@link google.cloud.dialogflow.v2beta1.AudioEncoding}
- *
- * @property {number} sampleRateHertz
- *   Required. Sample rate (in Hertz) of the audio content sent in the query.
- *   Refer to
- *   [Cloud Speech API
- *   documentation](https://cloud.google.com/speech-to-text/docs/basics) for
- *   more details.
- *
- * @property {string} languageCode
- *   Required. The language of the supplied audio. Dialogflow does not do
- *   translations. See [Language
- *   Support](https://dialogflow.com/docs/languages) for a list of the
- *   currently supported language codes. Note that queries in the same session
- *   do not necessarily need to specify the same language.
- *
- * @property {string[]} phraseHints
- *   Optional. The collection of phrase hints which are used to boost accuracy
- *   of speech recognition.
- *   Refer to
- *   [Cloud Speech API
- *   documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
- *   for more details.
- *
- * @property {string} model
- *   Optional. Which Speech model to select for the given request. Select the
- *   model best suited to your domain to get best results. If a model is not
- *   explicitly specified, then we auto-select a model based on the parameters
- *   in the InputAudioConfig.
- *   If enhanced speech model is enabled for the agent and an enhanced
- *   version of the specified model for the language does not exist, then the
- *   speech is recognized using the standard version of the specified model.
- *   Refer to
- *   [Cloud Speech API
- *   documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
- *   for more details.
- *
- * @typedef InputAudioConfig
- * @memberof google.cloud.dialogflow.v2beta1
- * @see [google.cloud.dialogflow.v2beta1.InputAudioConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/session.proto}
- */
-const InputAudioConfig = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Represents the natural language text to be processed.
  *
  * @property {string} text
  *   Required. The UTF-8 encoded natural language text to be processed.
- *   Text length must not exceed 256 bytes.
+ *   Text length must not exceed 256 characters.
  *
  * @property {string} languageCode
  *   Required. The language of this conversational query. See [Language
- *   Support](https://dialogflow.com/docs/languages) for a list of the
- *   currently supported language codes. Note that queries in the same session
- *   do not necessarily need to specify the same language.
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   for a list of the currently supported language codes. Note that queries in
+ *   the same session do not necessarily need to specify the same language.
  *
  * @typedef TextInput
  * @memberof google.cloud.dialogflow.v2beta1
@@ -723,10 +672,10 @@ const TextInput = {
 
 /**
  * Events allow for matching intents by event name instead of the natural
- * language input. For instance, input `<event: { name: “welcome_event”,
- * parameters: { name: “Sam” } }>` can trigger a personalized welcome response.
+ * language input. For instance, input `<event: { name: "welcome_event",
+ * parameters: { name: "Sam" } }>` can trigger a personalized welcome response.
  * The parameter `name` may be used by the agent in the response:
- * `“Hello #welcome_event.name! What can I do for you today?”`.
+ * `"Hello #welcome_event.name! What can I do for you today?"`.
  *
  * @property {string} name
  *   Required. The unique identifier of the event.
@@ -738,9 +687,9 @@ const TextInput = {
  *
  * @property {string} languageCode
  *   Required. The language of this query. See [Language
- *   Support](https://dialogflow.com/docs/languages) for a list of the
- *   currently supported language codes. Note that queries in the same session
- *   do not necessarily need to specify the same language.
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   for a list of the currently supported language codes. Note that queries in
+ *   the same session do not necessarily need to specify the same language.
  *
  * @typedef EventInput
  * @memberof google.cloud.dialogflow.v2beta1
@@ -801,75 +750,4 @@ const SentimentAnalysisResult = {
  */
 const Sentiment = {
   // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Audio encoding of the audio content sent in the conversational query request.
- * Refer to the
- * [Cloud Speech API
- * documentation](https://cloud.google.com/speech-to-text/docs/basics) for more
- * details.
- *
- * @enum {number}
- * @memberof google.cloud.dialogflow.v2beta1
- */
-const AudioEncoding = {
-
-  /**
-   * Not specified.
-   */
-  AUDIO_ENCODING_UNSPECIFIED: 0,
-
-  /**
-   * Uncompressed 16-bit signed little-endian samples (Linear PCM).
-   */
-  AUDIO_ENCODING_LINEAR_16: 1,
-
-  /**
-   * [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio
-   * Codec) is the recommended encoding because it is lossless (therefore
-   * recognition is not compromised) and requires only about half the
-   * bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and
-   * 24-bit samples, however, not all fields in `STREAMINFO` are supported.
-   */
-  AUDIO_ENCODING_FLAC: 2,
-
-  /**
-   * 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
-   */
-  AUDIO_ENCODING_MULAW: 3,
-
-  /**
-   * Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
-   */
-  AUDIO_ENCODING_AMR: 4,
-
-  /**
-   * Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
-   */
-  AUDIO_ENCODING_AMR_WB: 5,
-
-  /**
-   * Opus encoded audio frames in Ogg container
-   * ([OggOpus](https://wiki.xiph.org/OggOpus)).
-   * `sample_rate_hertz` must be 16000.
-   */
-  AUDIO_ENCODING_OGG_OPUS: 6,
-
-  /**
-   * Although the use of lossy encodings is not recommended, if a very low
-   * bitrate encoding is required, `OGG_OPUS` is highly preferred over
-   * Speex encoding. The [Speex](https://speex.org/) encoding supported by
-   * Dialogflow API has a header byte in each block, as in MIME type
-   * `audio/x-speex-with-header-byte`.
-   * It is a variant of the RTP Speex encoding defined in
-   * [RFC 5574](https://tools.ietf.org/html/rfc5574).
-   * The stream is a sequence of blocks, one block per RTP packet. Each block
-   * starts with a byte containing the length of the block, in bytes, followed
-   * by one or more frames of Speex data, padded to an integral number of
-   * bytes (octets) as specified in RFC 5574. In other words, each RTP header
-   * is replaced with a single byte containing the block length. Only Speex
-   * wideband is supported. `sample_rate_hertz` must be 16000.
-   */
-  AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE: 7
 };

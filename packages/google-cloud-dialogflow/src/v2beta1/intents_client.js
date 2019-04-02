@@ -26,10 +26,10 @@ const VERSION = require('../../package.json').version;
  * An intent represents a mapping between input from a user and an action to
  * be taken by your application. When you pass user input to the
  * DetectIntent (or
- * StreamingDetectIntent)
- * method, the Dialogflow API analyzes the input and searches for a matching
- * intent. If no match is found, the Dialogflow API returns a fallback intent
- * (`is_fallback` = true).
+ * StreamingDetectIntent) method, the
+ * Dialogflow API analyzes the input and searches
+ * for a matching intent. If no match is found, the Dialogflow API returns a
+ * fallback intent (`is_fallback` = true).
  *
  * You can provide additional information for the Dialogflow API to use to
  * match user input to an intent by adding the following to your intent.
@@ -37,7 +37,7 @@ const VERSION = require('../../package.json').version;
  * *   **Contexts** - provide additional context for intent analysis. For
  *     example, if an intent is related to an object in your application that
  *     plays music, you can provide a context to determine when to match the
- *     intent if the user input is “turn it off”.  You can include a context
+ *     intent if the user input is "turn it off". You can include a context
  *     that matches the intent when there is previous user input of
  *     "play music", and not when there is previous user input of
  *     "turn on the light".
@@ -53,7 +53,8 @@ const VERSION = require('../../package.json').version;
  *     Dialogflow API agent to better match intents.
  *
  * For more information about intents, see the
- * [Dialogflow documentation](https://dialogflow.com/docs/intents).
+ * [Dialogflow
+ * documentation](https://cloud.google.com/dialogflow-enterprise/docs/intents-overview).
  *
  * @class
  * @memberof v2beta1
@@ -265,7 +266,10 @@ class IntentsClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -292,9 +296,10 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
    *
@@ -414,9 +419,10 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to list training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
    *
@@ -470,9 +476,10 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language to retrieve training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
-   *   [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
    *
@@ -538,9 +545,10 @@ class IntentsClient {
    * @param {string} [request.languageCode]
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intent`. If not specified, the agent's default language is
-   *   used. [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   used. [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {number} [request.intentView]
    *   Optional. The resource view to apply to the returned intent.
    *
@@ -603,15 +611,15 @@ class IntentsClient {
    *   The request object that will be sent.
    * @param {Object} request.intent
    *   Required. The intent to update.
-   *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
    *
    *   This object should have the same structure as [Intent]{@link google.cloud.dialogflow.v2beta1.Intent}
    * @param {string} request.languageCode
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intent`. If not specified, the agent's default language is
-   *   used. [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   used. [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {Object} [request.updateMask]
    *   Optional. The mask to control which fields get updated.
    *
@@ -672,12 +680,14 @@ class IntentsClient {
   }
 
   /**
-   * Deletes the specified intent.
+   * Deletes the specified intent and its direct or indirect followup intents.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the intent to delete.
+   *   Required. The name of the intent to delete. If this intent has direct or
+   *   indirect followup intents, we also delete them.
+   *
    *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -720,8 +730,7 @@ class IntentsClient {
   /**
    * Updates/Creates multiple intents in the specified agent.
    *
-   * Operation <response:
-   * BatchUpdateIntentsResponse>
+   * Operation <response: BatchUpdateIntentsResponse>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -731,9 +740,10 @@ class IntentsClient {
    * @param {string} request.languageCode
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intents`. If not specified, the agent's default language is
-   *   used. [More than a dozen
-   *   languages](https://dialogflow.com/docs/reference/language) are supported.
-   *   Note: languages must be enabled in the agent, before they can be used.
+   *   used. [Many
+   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
    * @param {string} [request.intentBatchUri]
    *   The URI to a Google Cloud Storage file containing intents to update or
    *   create. The file format can either be a serialized proto (of IntentBatch

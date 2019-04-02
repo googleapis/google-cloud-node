@@ -23,10 +23,9 @@ const VERSION = require('../../package.json').version;
 
 /**
  * A session represents an interaction with a user. You retrieve user input
- * and pass it to the
- * DetectIntent (or
- * StreamingDetectIntent)
- * method to determine user intent and respond.
+ * and pass it to the DetectIntent (or
+ * StreamingDetectIntent) method to determine
+ * user intent and respond.
  *
  * @class
  * @memberof v2
@@ -178,7 +177,10 @@ class SessionsClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -223,6 +225,12 @@ class SessionsClient {
    *   Optional. The parameters of this query.
    *
    *   This object should have the same structure as [QueryParameters]{@link google.cloud.dialogflow.v2.QueryParameters}
+   * @param {Object} [request.outputAudioConfig]
+   *   Optional. Instructs the speech synthesizer how to generate the output
+   *   audio. If this field is not set and agent-level speech synthesizer is not
+   *   configured, no output audio is generated.
+   *
+   *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
    * @param {string} [request.inputAudio]
    *   Optional. The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.

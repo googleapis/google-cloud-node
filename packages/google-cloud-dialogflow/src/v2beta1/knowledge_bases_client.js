@@ -185,7 +185,10 @@ class KnowledgeBasesClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dialogflow',
+    ];
   }
 
   /**
@@ -207,8 +210,8 @@ class KnowledgeBasesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The agent to list of knowledge bases for.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Required. The project to list of knowledge bases for.
+   *   Format: `projects/<Project ID>`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -319,8 +322,8 @@ class KnowledgeBasesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The agent to list of knowledge bases for.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Required. The project to list of knowledge bases for.
+   *   Format: `projects/<Project ID>`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -419,8 +422,8 @@ class KnowledgeBasesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The agent to create a knowledge base for.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Required. The project to create a knowledge base for.
+   *   Format: `projects/<Project ID>`.
    * @param {Object} request.knowledgeBase
    *   Required. The knowledge base to create.
    *

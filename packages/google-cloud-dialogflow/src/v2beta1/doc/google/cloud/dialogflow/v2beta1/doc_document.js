@@ -18,6 +18,9 @@
 /**
  * A document resource.
  *
+ * Note: resource `projects.agent.knowledgeBases.documents` is deprecated,
+ * please use `projects.knowledgeBases.documents` instead.
+ *
  * @property {string} name
  *   The document resource name.
  *   The name must be empty when creating a document.
@@ -48,6 +51,12 @@
  *   Instead use the `gs://` format URI described above.
  *
  * @property {string} content
+ *   The raw content of the document. This field is only permitted for
+ *   EXTRACTIVE_QA and FAQ knowledge types.
+ *   Note: This field is in the process of being deprecated, please use
+ *   raw_content instead.
+ *
+ * @property {string} rawContent
  *   The raw content of the document. This field is only permitted for
  *   EXTRACTIVE_QA and FAQ knowledge types.
  *
@@ -91,8 +100,7 @@ const Document = {
 };
 
 /**
- * Request message for
- * Documents.ListDocuments.
+ * Request message for Documents.ListDocuments.
  *
  * @property {string} parent
  *   Required. The knowledge base to list all documents for.
@@ -114,8 +122,7 @@ const ListDocumentsRequest = {
 };
 
 /**
- * Response message for
- * Documents.ListDocuments.
+ * Response message for Documents.ListDocuments.
  *
  * @property {Object[]} documents
  *   The list of documents.
@@ -135,8 +142,7 @@ const ListDocumentsResponse = {
 };
 
 /**
- * Request message for
- * Documents.GetDocument.
+ * Request message for Documents.GetDocument.
  *
  * @property {string} name
  *   Required. The name of the document to retrieve.
@@ -152,8 +158,7 @@ const GetDocumentRequest = {
 };
 
 /**
- * Request message for
- * Documents.CreateDocument.
+ * Request message for Documents.CreateDocument.
  *
  * @property {string} parent
  *   Required. The knoweldge base to create a document for.
@@ -173,8 +178,7 @@ const CreateDocumentRequest = {
 };
 
 /**
- * Request message for
- * Documents.DeleteDocument.
+ * Request message for Documents.DeleteDocument.
  *
  * @property {string} name
  *   The name of the document to delete.
@@ -186,6 +190,29 @@ const CreateDocumentRequest = {
  * @see [google.cloud.dialogflow.v2beta1.DeleteDocumentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
  */
 const DeleteDocumentRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for Documents.UpdateDocument.
+ *
+ * @property {Object} document
+ *   Required. The document to update.
+ *
+ *   This object should have the same structure as [Document]{@link google.cloud.dialogflow.v2beta1.Document}
+ *
+ * @property {Object} updateMask
+ *   Optional. Not specified means `update all`.
+ *   Currently, only `display_name` can be updated, an InvalidArgument will be
+ *   returned for attempting to update other fields.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateDocumentRequest
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.UpdateDocumentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
+ */
+const UpdateDocumentRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -232,4 +259,20 @@ const KnowledgeOperationMetadata = {
      */
     DONE: 3
   }
+};
+
+/**
+ * Request message for Documents.ReloadDocument.
+ *
+ * @property {string} name
+ *   The name of the document to reload.
+ *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+ *   ID>/documents/<Document ID>`
+ *
+ * @typedef ReloadDocumentRequest
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.ReloadDocumentRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/document.proto}
+ */
+const ReloadDocumentRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
 };

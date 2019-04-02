@@ -21,22 +21,25 @@
  * action is an extraction of a user command or sentence semantics.
  *
  * @property {string} name
- *   Required for all methods except `create` (`create` populates the name
- *   automatically.
  *   The unique identifier of this intent.
+ *   Required for Intents.UpdateIntent and Intents.BatchUpdateIntents
+ *   methods.
  *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
  *
  * @property {string} displayName
  *   Required. The name of this intent.
  *
  * @property {number} webhookState
- *   Required. Indicates whether webhooks are enabled for the intent.
+ *   Optional. Indicates whether webhooks are enabled for the intent.
  *
  *   The number should be among the values of [WebhookState]{@link google.cloud.dialogflow.v2beta1.WebhookState}
  *
  * @property {number} priority
  *   Optional. The priority of this intent. Higher numbers represent higher
- *   priorities. Zero or negative numbers mean that the intent is disabled.
+ *   priorities. If this is zero or unspecified, we use the default
+ *   priority 500000.
+ *
+ *   Negative numbers mean that the intent is disabled.
  *
  * @property {boolean} isFallback
  *   Optional. Indicates whether this is a fallback intent.
@@ -76,7 +79,7 @@
  *   be present in the active user session for an event to trigger this intent.
  *
  * @property {Object[]} trainingPhrases
- *   Optional. The collection of examples/templates that the agent is
+ *   Optional. The collection of examples that the agent is
  *   trained on.
  *
  *   This object should have the same structure as [TrainingPhrase]{@link google.cloud.dialogflow.v2beta1.TrainingPhrase}
@@ -116,19 +119,24 @@
  *   The number should be among the values of [Platform]{@link google.cloud.dialogflow.v2beta1.Platform}
  *
  * @property {string} rootFollowupIntentName
- *   The unique identifier of the root intent in the chain of followup intents.
- *   It identifies the correct followup intents chain for this intent.
+ *   Read-only. The unique identifier of the root intent in the chain of
+ *   followup intents. It identifies the correct followup intents chain for
+ *   this intent. We populate this field only in the output.
+ *
  *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
  *
  * @property {string} parentFollowupIntentName
- *   The unique identifier of the parent intent in the chain of followup
- *   intents.
+ *   Read-only after creation. The unique identifier of the parent intent in the
+ *   chain of followup intents. You can set this field when creating an intent,
+ *   for example with CreateIntent or BatchUpdateIntents, in order to
+ *   make this intent a followup intent.
+ *
  *   It identifies the parent followup intent.
  *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
  *
  * @property {Object[]} followupIntentInfo
- *   Optional. Collection of information about all followup intents that have
- *   name of this intent as a root_name.
+ *   Read-only. Information about all followup intents that have this intent as
+ *   a direct or indirect parent. We populate this field only in the output.
  *
  *   This object should have the same structure as [FollowupIntentInfo]{@link google.cloud.dialogflow.v2beta1.FollowupIntentInfo}
  *
@@ -140,10 +148,10 @@ const Intent = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Represents an example or template that the agent is trained on.
+   * Represents an example that the agent is trained on.
    *
    * @property {string} name
-   *   Required. The unique identifier of this training phrase.
+   *   Output only. The unique identifier of this training phrase.
    *
    * @property {number} type
    *   Required. The type of the training phrase.
@@ -151,14 +159,30 @@ const Intent = {
    *   The number should be among the values of [Type]{@link google.cloud.dialogflow.v2beta1.Type}
    *
    * @property {Object[]} parts
-   *   Required. The collection of training phrase parts (can be annotated).
-   *   Fields: `entity_type`, `alias` and `user_defined` should be populated
-   *   only for the annotated parts of the training phrase.
+   *   Required. The ordered list of training phrase parts.
+   *   The parts are concatenated in order to form the training phrase.
+   *
+   *   Note: The API does not automatically annotate training phrases like the
+   *   Dialogflow Console does.
+   *
+   *   Note: Do not forget to include whitespace at part boundaries,
+   *   so the training phrase is well formatted when the parts are concatenated.
+   *
+   *   If the training phrase does not need to be annotated with parameters,
+   *   you just need a single part with only the Part.text field set.
+   *
+   *   If you want to annotate the training phrase, you must create multiple
+   *   parts, where the fields of each part are populated in one of two ways:
+   *
+   *   -   `Part.text` is set to a part of the phrase that has no parameters.
+   *   -   `Part.text` is set to a part of the phrase that you want to annotate,
+   *       and the `entity_type`, `alias`, and `user_defined` fields are all
+   *       set.
    *
    *   This object should have the same structure as [Part]{@link google.cloud.dialogflow.v2beta1.Part}
    *
    * @property {number} timesAddedCount
-   *   Optional. Indicates how many times this example or template was added to
+   *   Optional. Indicates how many times this example was added to
    *   the intent. Each time a developer adds an existing sample by editing an
    *   intent or training, this counter is increased.
    *
@@ -173,22 +197,22 @@ const Intent = {
      * Represents a part of a training phrase.
      *
      * @property {string} text
-     *   Required. The text corresponding to the example or template,
-     *   if there are no annotations. For
-     *   annotated examples, it is the text for one of the example's parts.
+     *   Required. The text for this part.
      *
      * @property {string} entityType
-     *   Optional. The entity type name prefixed with `@`. This field is
-     *   required for the annotated part of the text and applies only to
-     *   examples.
+     *   Optional. The entity type name prefixed with `@`.
+     *   This field is required for annotated parts of the training phrase.
      *
      * @property {string} alias
      *   Optional. The parameter name for the value extracted from the
      *   annotated part of the example.
+     *   This field is required for annotated parts of the training phrase.
      *
      * @property {boolean} userDefined
-     *   Optional. Indicates whether the text was manually annotated by the
-     *   developer.
+     *   Optional. Indicates whether the text was manually annotated.
+     *   This field is set to true when the Dialogflow Console is used to
+     *   manually annotate the part. When creating an annotated part with the
+     *   API, you must set this to true.
      *
      * @typedef Part
      * @memberof google.cloud.dialogflow.v2beta1
@@ -220,6 +244,10 @@ const Intent = {
       /**
        * Templates are not annotated with entity types, but they can contain
        * @-prefixed entity type names as substrings.
+       * Template mode has been deprecated. Example mode is the only supported
+       * way to create new training phrases. If you have existing training
+       * phrases that you've created in template mode, those will continue to
+       * work.
        */
       TEMPLATE: 2
     }
@@ -910,7 +938,7 @@ const Intent = {
    *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
    *
    * @property {string} parentFollowupIntentName
-   *   The unique identifier of the followup intent parent.
+   *   The unique identifier of the followup intent's parent.
    *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
    *
    * @typedef FollowupIntentInfo
@@ -948,8 +976,7 @@ const Intent = {
 };
 
 /**
- * The request message for
- * Intents.ListIntents.
+ * The request message for Intents.ListIntents.
  *
  * @property {string} parent
  *   Required. The agent to list all intents from.
@@ -958,9 +985,10 @@ const Intent = {
  * @property {string} languageCode
  *   Optional. The language to list training phrases, parameters and rich
  *   messages for. If not specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {number} intentView
  *   Optional. The resource view to apply to the returned intent.
@@ -983,8 +1011,7 @@ const ListIntentsRequest = {
 };
 
 /**
- * The response message for
- * Intents.ListIntents.
+ * The response message for Intents.ListIntents.
  *
  * @property {Object[]} intents
  *   The list of agent intents. There will be a maximum number of items
@@ -1005,8 +1032,7 @@ const ListIntentsResponse = {
 };
 
 /**
- * The request message for
- * Intents.GetIntent.
+ * The request message for Intents.GetIntent.
  *
  * @property {string} name
  *   Required. The name of the intent.
@@ -1015,9 +1041,10 @@ const ListIntentsResponse = {
  * @property {string} languageCode
  *   Optional. The language to retrieve training phrases, parameters and rich
  *   messages for. If not specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {number} intentView
  *   Optional. The resource view to apply to the returned intent.
@@ -1033,8 +1060,7 @@ const GetIntentRequest = {
 };
 
 /**
- * The request message for
- * Intents.CreateIntent.
+ * The request message for Intents.CreateIntent.
  *
  * @property {string} parent
  *   Required. The agent to create a intent for.
@@ -1048,9 +1074,10 @@ const GetIntentRequest = {
  * @property {string} languageCode
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intent`. If not specified, the agent's default language is
- *   used. [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   used. [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {number} intentView
  *   Optional. The resource view to apply to the returned intent.
@@ -1066,21 +1093,20 @@ const CreateIntentRequest = {
 };
 
 /**
- * The request message for
- * Intents.UpdateIntent.
+ * The request message for Intents.UpdateIntent.
  *
  * @property {Object} intent
  *   Required. The intent to update.
- *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
  *
  *   This object should have the same structure as [Intent]{@link google.cloud.dialogflow.v2beta1.Intent}
  *
  * @property {string} languageCode
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intent`. If not specified, the agent's default language is
- *   used. [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   used. [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {Object} updateMask
  *   Optional. The mask to control which fields get updated.
@@ -1101,11 +1127,12 @@ const UpdateIntentRequest = {
 };
 
 /**
- * The request message for
- * Intents.DeleteIntent.
+ * The request message for Intents.DeleteIntent.
  *
  * @property {string} name
- *   Required. The name of the intent to delete.
+ *   Required. The name of the intent to delete. If this intent has direct or
+ *   indirect followup intents, we also delete them.
+ *
  *   Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
  *
  * @typedef DeleteIntentRequest
@@ -1117,8 +1144,7 @@ const DeleteIntentRequest = {
 };
 
 /**
- * The request message for
- * Intents.BatchUpdateIntents.
+ * The request message for Intents.BatchUpdateIntents.
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create intents in.
@@ -1137,9 +1163,10 @@ const DeleteIntentRequest = {
  * @property {string} languageCode
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intents`. If not specified, the agent's default language is
- *   used. [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   used. [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {Object} updateMask
  *   Optional. The mask to control which fields get updated.
@@ -1160,8 +1187,7 @@ const BatchUpdateIntentsRequest = {
 };
 
 /**
- * The response message for
- * Intents.BatchUpdateIntents.
+ * The response message for Intents.BatchUpdateIntents.
  *
  * @property {Object[]} intents
  *   The collection of updated or created intents.
@@ -1177,8 +1203,7 @@ const BatchUpdateIntentsResponse = {
 };
 
 /**
- * The request message for
- * Intents.BatchDeleteIntents.
+ * The request message for Intents.BatchDeleteIntents.
  *
  * @property {string} parent
  *   Required. The name of the agent to delete all entities types for. Format:

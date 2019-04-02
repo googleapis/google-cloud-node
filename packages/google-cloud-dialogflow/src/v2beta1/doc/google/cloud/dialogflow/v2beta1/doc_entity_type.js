@@ -21,13 +21,13 @@
  * language queries.
  *
  * @property {string} name
- *   Required for all methods except `create` (`create` populates the name
- *   automatically.
- *   The unique identifier of the entity type. Format:
- *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+ *   The unique identifier of the entity type.
+ *   Required for EntityTypes.UpdateEntityType and
+ *   EntityTypes.BatchUpdateEntityTypes methods.
+ *   Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
  *
  * @property {string} displayName
- *   Required. The name of the entity.
+ *   Required. The name of the entity type.
  *
  * @property {number} kind
  *   Required. Indicates the kind of entity type.
@@ -41,7 +41,7 @@
  *   The number should be among the values of [AutoExpansionMode]{@link google.cloud.dialogflow.v2beta1.AutoExpansionMode}
  *
  * @property {Object[]} entities
- *   Optional. The collection of entities associated with the entity type.
+ *   Optional. The collection of entity entries associated with the entity type.
  *
  *   This object should have the same structure as [Entity]{@link google.cloud.dialogflow.v2beta1.Entity}
  *
@@ -53,19 +53,30 @@ const EntityType = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Optional. Represents an entity.
+   * An **entity entry** for an associated entity type.
    *
    * @property {string} value
-   *   Required.
+   *   Required. The primary value associated with this entity entry.
+   *   For example, if the entity type is *vegetable*, the value could be
+   *   *scallions*.
+   *
    *   For `KIND_MAP` entity types:
-   *     A canonical name to be used in place of synonyms.
+   *
+   *   *   A canonical value to be used in place of synonyms.
+   *
    *   For `KIND_LIST` entity types:
-   *     A string that can contain references to other entity types (with or
-   *     without aliases).
+   *
+   *   *   A string that can contain references to other entity types (with or
+   *       without aliases).
    *
    * @property {string[]} synonyms
-   *   Required. A collection of synonyms. For `KIND_LIST` entity types this
-   *   must contain exactly one synonym equal to `value`.
+   *   Required. A collection of value synonyms. For example, if the entity type
+   *   is *vegetable*, and `value` is *scallions*, a synonym could be *green
+   *   onions*.
+   *
+   *   For `KIND_LIST` entity types:
+   *
+   *   *   This collection must contain exactly one synonym equal to `value`.
    *
    * @typedef Entity
    * @memberof google.cloud.dialogflow.v2beta1
@@ -126,8 +137,7 @@ const EntityType = {
 };
 
 /**
- * The request message for
- * EntityTypes.ListEntityTypes.
+ * The request message for EntityTypes.ListEntityTypes.
  *
  * @property {string} parent
  *   Required. The agent to list all entity types from.
@@ -136,9 +146,10 @@ const EntityType = {
  * @property {string} languageCode
  *   Optional. The language to list entity synonyms for. If not specified,
  *   the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {number} pageSize
  *   Optional. The maximum number of items to return in a single page. By
@@ -156,8 +167,7 @@ const ListEntityTypesRequest = {
 };
 
 /**
- * The response message for
- * EntityTypes.ListEntityTypes.
+ * The response message for EntityTypes.ListEntityTypes.
  *
  * @property {Object[]} entityTypes
  *   The list of agent entity types. There will be a maximum number of items
@@ -178,8 +188,7 @@ const ListEntityTypesResponse = {
 };
 
 /**
- * The request message for
- * EntityTypes.GetEntityType.
+ * The request message for EntityTypes.GetEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type.
@@ -188,9 +197,10 @@ const ListEntityTypesResponse = {
  * @property {string} languageCode
  *   Optional. The language to retrieve entity synonyms for. If not specified,
  *   the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @typedef GetEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -201,8 +211,7 @@ const GetEntityTypeRequest = {
 };
 
 /**
- * The request message for
- * EntityTypes.CreateEntityType.
+ * The request message for EntityTypes.CreateEntityType.
  *
  * @property {string} parent
  *   Required. The agent to create a entity type for.
@@ -216,9 +225,10 @@ const GetEntityTypeRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entity_type`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @typedef CreateEntityTypeRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -229,21 +239,20 @@ const CreateEntityTypeRequest = {
 };
 
 /**
- * The request message for
- * EntityTypes.UpdateEntityType.
+ * The request message for EntityTypes.UpdateEntityType.
  *
  * @property {Object} entityType
  *   Required. The entity type to update.
- *   Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
  *
  *   This object should have the same structure as [EntityType]{@link google.cloud.dialogflow.v2beta1.EntityType}
  *
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entity_type`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {Object} updateMask
  *   Optional. The mask to control which fields get updated.
@@ -259,8 +268,7 @@ const UpdateEntityTypeRequest = {
 };
 
 /**
- * The request message for
- * EntityTypes.DeleteEntityType.
+ * The request message for EntityTypes.DeleteEntityType.
  *
  * @property {string} name
  *   Required. The name of the entity type to delete.
@@ -275,8 +283,7 @@ const DeleteEntityTypeRequest = {
 };
 
 /**
- * The request message for
- * EntityTypes.BatchUpdateEntityTypes.
+ * The request message for EntityTypes.BatchUpdateEntityTypes.
  *
  * @property {string} parent
  *   Required. The name of the agent to update or create entity types in.
@@ -289,16 +296,17 @@ const DeleteEntityTypeRequest = {
  *   "gs://".
  *
  * @property {Object} entityTypeBatchInline
- *   The collection of entity type to update or create.
+ *   The collection of entity types to update or create.
  *
  *   This object should have the same structure as [EntityTypeBatch]{@link google.cloud.dialogflow.v2beta1.EntityTypeBatch}
  *
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entity_types`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {Object} updateMask
  *   Optional. The mask to control which fields get updated.
@@ -314,8 +322,7 @@ const BatchUpdateEntityTypesRequest = {
 };
 
 /**
- * The response message for
- * EntityTypes.BatchUpdateEntityTypes.
+ * The response message for EntityTypes.BatchUpdateEntityTypes.
  *
  * @property {Object[]} entityTypes
  *   The collection of updated or created entity types.
@@ -331,8 +338,7 @@ const BatchUpdateEntityTypesResponse = {
 };
 
 /**
- * The request message for
- * EntityTypes.BatchDeleteEntityTypes.
+ * The request message for EntityTypes.BatchDeleteEntityTypes.
  *
  * @property {string} parent
  *   Required. The name of the agent to delete all entities types for. Format:
@@ -351,24 +357,24 @@ const BatchDeleteEntityTypesRequest = {
 };
 
 /**
- * The request message for
- * EntityTypes.BatchCreateEntities.
+ * The request message for EntityTypes.BatchCreateEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to create entities in. Format:
  *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
  *
  * @property {Object[]} entities
- *   Required. The collection of entities to create.
+ *   Required. The entities to create.
  *
  *   This object should have the same structure as [Entity]{@link google.cloud.dialogflow.v2beta1.Entity}
  *
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @typedef BatchCreateEntitiesRequest
  * @memberof google.cloud.dialogflow.v2beta1
@@ -379,24 +385,24 @@ const BatchCreateEntitiesRequest = {
 };
 
 /**
- * The response message for
- * EntityTypes.BatchCreateEntities.
+ * The request message for EntityTypes.BatchUpdateEntities.
  *
  * @property {string} parent
- *   Required. The name of the entity type to update the entities in. Format:
- *   `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+ *   Required. The name of the entity type to update or create entities in.
+ *   Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
  *
  * @property {Object[]} entities
- *   Required. The collection of new entities to replace the existing entities.
+ *   Required. The entities to update or create.
  *
  *   This object should have the same structure as [Entity]{@link google.cloud.dialogflow.v2beta1.Entity}
  *
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @property {Object} updateMask
  *   Optional. The mask to control which fields get updated.
@@ -412,8 +418,7 @@ const BatchUpdateEntitiesRequest = {
 };
 
 /**
- * The request message for
- * EntityTypes.BatchDeleteEntities.
+ * The request message for EntityTypes.BatchDeleteEntities.
  *
  * @property {string} parent
  *   Required. The name of the entity type to delete entries for. Format:
@@ -427,9 +432,10 @@ const BatchUpdateEntitiesRequest = {
  * @property {string} languageCode
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
- *   [More than a dozen
- *   languages](https://dialogflow.com/docs/reference/language) are supported.
- *   Note: languages must be enabled in the agent, before they can be used.
+ *   [Many
+ *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   are supported. Note: languages must be enabled in the agent before they can
+ *   be used.
  *
  * @typedef BatchDeleteEntitiesRequest
  * @memberof google.cloud.dialogflow.v2beta1

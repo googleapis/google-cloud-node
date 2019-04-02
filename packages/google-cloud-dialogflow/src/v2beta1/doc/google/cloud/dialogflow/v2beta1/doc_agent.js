@@ -27,9 +27,10 @@
  *
  * @property {string} defaultLanguageCode
  *   Required. The default language of the agent as a language tag. See
- *   [Language Support](https://dialogflow.com/docs/reference/language) for a
- *   list of the currently supported language codes.
- *   This field cannot be set by the `Update` method.
+ *   [Language
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   for a list of the currently supported language codes. This field cannot be
+ *   set by the `Update` method.
  *
  * @property {string[]} supportedLanguageCodes
  *   Optional. The list of all languages supported by this agent (except for the
@@ -47,7 +48,9 @@
  * @property {string} avatarUri
  *   Optional. The URI of the agent's avatar.
  *   Avatars are used throughout the Dialogflow console and in the self-hosted
- *   [Web Demo](https://dialogflow.com/docs/integrations/web-demo) integration.
+ *   [Web
+ *   Demo](https://cloud.google.com/dialogflow-enterprise/docs/integrations/web-demo)
+ *   integration.
  *
  * @property {boolean} enableLogging
  *   Optional. Determines whether this agent should log conversation queries.
@@ -61,7 +64,7 @@
  *   Optional. To filter out false positive results and still get variety in
  *   matched natural language inputs for your agent, you can tune the machine
  *   learning classification threshold. If the returned score value is less than
- *   the threshold value, then a fallback intent is be triggered or, if there
+ *   the threshold value, then a fallback intent will be triggered or, if there
  *   are no fallback intents defined, no intent will be triggered. The score
  *   values range from 0.0 (completely uncertain) to 1.0 (completely certain).
  *   If set to 0.0, the default of 0.3 is used.
@@ -101,8 +104,7 @@ const Agent = {
 };
 
 /**
- * The request message for
- * Agents.GetAgent.
+ * The request message for Agents.GetAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to fetch is associated with.
@@ -117,8 +119,7 @@ const GetAgentRequest = {
 };
 
 /**
- * The request message for
- * Agents.SearchAgents.
+ * The request message for Agents.SearchAgents.
  *
  * @property {string} parent
  *   Required. The project to list agents from.
@@ -140,8 +141,7 @@ const SearchAgentsRequest = {
 };
 
 /**
- * The response message for
- * Agents.SearchAgents.
+ * The response message for Agents.SearchAgents.
  *
  * @property {Object[]} agents
  *   The list of agents. There will be a maximum number of items returned based
@@ -162,8 +162,7 @@ const SearchAgentsResponse = {
 };
 
 /**
- * The request message for
- * Agents.TrainAgent.
+ * The request message for Agents.TrainAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to train is associated with.
@@ -178,8 +177,7 @@ const TrainAgentRequest = {
 };
 
 /**
- * The request message for
- * Agents.ExportAgent.
+ * The request message for Agents.ExportAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to export is associated with.
@@ -201,8 +199,7 @@ const ExportAgentRequest = {
 };
 
 /**
- * The response message for
- * Agents.ExportAgent.
+ * The response message for Agents.ExportAgent.
  *
  * @property {string} agentUri
  *   The URI to a file containing the exported agent. This field is populated
@@ -233,8 +230,7 @@ const ExportAgentResponse = {
 };
 
 /**
- * The request message for
- * Agents.ImportAgent.
+ * The request message for Agents.ImportAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to import is associated with.
@@ -269,8 +265,7 @@ const ImportAgentRequest = {
 };
 
 /**
- * The request message for
- * Agents.RestoreAgent.
+ * The request message for Agents.RestoreAgent.
  *
  * @property {string} parent
  *   Required. The project that the agent to restore is associated with.

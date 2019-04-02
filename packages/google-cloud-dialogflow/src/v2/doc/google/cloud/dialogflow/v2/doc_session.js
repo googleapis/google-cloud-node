@@ -42,6 +42,13 @@
  *
  *   This object should have the same structure as [QueryInput]{@link google.cloud.dialogflow.v2.QueryInput}
  *
+ * @property {Object} outputAudioConfig
+ *   Optional. Instructs the speech synthesizer how to generate the output
+ *   audio. If this field is not set and agent-level speech synthesizer is not
+ *   configured, no output audio is generated.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
+ *
  * @property {string} inputAudio
  *   Optional. The natural language speech audio to be processed. This field
  *   should be populated iff `query_input` is set to an input audio config.
@@ -63,15 +70,28 @@ const DetectIntentRequest = {
  *   locate a response in the training example set or for reporting issues.
  *
  * @property {Object} queryResult
- *   The results of the conversational query or event processing.
+ *   The selected results of the conversational query or event processing.
+ *   See `alternative_query_results` for additional potential results.
  *
  *   This object should have the same structure as [QueryResult]{@link google.cloud.dialogflow.v2.QueryResult}
  *
  * @property {Object} webhookStatus
- *   Specifies the status of the webhook request. `webhook_status`
- *   is never populated in webhook requests.
+ *   Specifies the status of the webhook request.
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
+ *
+ * @property {string} outputAudio
+ *   The audio data bytes encoded as specified in the request.
+ *   Note: The output audio is generated based on the values of default platform
+ *   text responses found in the `query_result.fulfillment_messages` field. If
+ *   multiple default text responses exist, they will be concatenated when
+ *   generating audio. If no default platform text responses exist, the
+ *   generated audio content will be empty.
+ *
+ * @property {Object} outputAudioConfig
+ *   The config used by the speech synthesizer to generate the output audio.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
  *
  * @typedef DetectIntentResponse
  * @memberof google.cloud.dialogflow.v2
@@ -106,9 +126,9 @@ const DetectIntentResponse = {
  *   before the new ones are activated.
  *
  * @property {Object[]} sessionEntityTypes
- *   Optional. The collection of session entity types to replace or extend
- *   developer entities with for this query only. The entity synonyms apply
- *   to all languages.
+ *   Optional. Additional session entity types to replace or extend developer
+ *   entity types with. The entity synonyms apply to all languages and persist
+ *   for the session of this query.
  *
  *   This object should have the same structure as [SessionEntityType]{@link google.cloud.dialogflow.v2.SessionEntityType}
  *
@@ -117,6 +137,12 @@ const DetectIntentResponse = {
  *   associated with the agent. Arbitrary JSON objects are supported.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
+ *
+ * @property {Object} sentimentAnalysisRequestConfig
+ *   Optional. Configures the type of sentiment analysis to perform. If not
+ *   provided, sentiment analysis is not performed.
+ *
+ *   This object should have the same structure as [SentimentAnalysisRequestConfig]{@link google.cloud.dialogflow.v2.SentimentAnalysisRequestConfig}
  *
  * @typedef QueryParameters
  * @memberof google.cloud.dialogflow.v2
@@ -173,7 +199,8 @@ const QueryInput = {
  *
  * @property {string} languageCode
  *   The language that was triggered during intent detection.
- *   See [Language Support](https://dialogflow.com/docs/reference/language)
+ *   See [Language
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
  *   for a list of the currently supported language codes.
  *
  * @property {number} speechRecognitionConfidence
@@ -182,10 +209,10 @@ const QueryInput = {
  *   correct. The default of 0.0 is a sentinel value indicating that confidence
  *   was not set.
  *
- *   You should not rely on this field as it isn't guaranteed to be accurate, or
- *   even set. In particular this field isn't set in Webhook calls and for
- *   StreamingDetectIntent since the streaming endpoint has separate confidence
- *   estimates per portion of the audio in StreamingRecognitionResult.
+ *   This field is not guaranteed to be accurate or set. In particular this
+ *   field isn't set for StreamingDetectIntent since the streaming endpoint has
+ *   separate confidence estimates per portion of the audio in
+ *   StreamingRecognitionResult.
  *
  * @property {string} action
  *   The action name from the matched intent.
@@ -204,6 +231,7 @@ const QueryInput = {
  *
  * @property {string} fulfillmentText
  *   The text to be pronounced to the user or shown on the screen.
+ *   Note: This is a legacy field, `fulfillment_messages` should be preferred.
  *
  * @property {Object[]} fulfillmentMessages
  *   The collection of rich messages to present to the user.
@@ -238,12 +266,21 @@ const QueryInput = {
  * @property {number} intentDetectionConfidence
  *   The intent detection confidence. Values range from 0.0
  *   (completely uncertain) to 1.0 (completely certain).
+ *   If there are `multiple knowledge_answers` messages, this value is set to
+ *   the greatest `knowledgeAnswers.match_confidence` value in the list.
  *
  * @property {Object} diagnosticInfo
- *   The free-form diagnostic info. For example, this field
- *   could contain webhook call latency.
+ *   The free-form diagnostic info. For example, this field could contain
+ *   webhook call latency. The string keys of the Struct's fields map can change
+ *   without notice.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
+ *
+ * @property {Object} sentimentAnalysisResult
+ *   The sentiment analysis result, which depends on the
+ *   `sentiment_analysis_request_config` specified in the request.
+ *
+ *   This object should have the same structure as [SentimentAnalysisResult]{@link google.cloud.dialogflow.v2.SentimentAnalysisResult}
  *
  * @typedef QueryResult
  * @memberof google.cloud.dialogflow.v2
@@ -260,8 +297,7 @@ const QueryResult = {
  * Multiple request messages should be sent in order:
  *
  * 1.  The first message must contain `session`, `query_input` plus optionally
- *     `query_params` and/or `single_utterance`. The message must not contain
- *     `input_audio`.
+ *     `query_params` and/or `single_utterance`. The message must not contain `input_audio`.
  *
  * 2.  If `query_input` was set to a streaming input audio config,
  *     all subsequent messages must contain only `input_audio`.
@@ -271,7 +307,7 @@ const QueryResult = {
  *   Required. The name of the session the query is sent to.
  *   Format of the session name:
  *   `projects/<Project ID>/agent/sessions/<Session ID>`. It’s up to the API
- *   caller to choose an appropriate <Session ID>. It can be a random number or
+ *   caller to choose an appropriate `Session ID`. It can be a random number or
  *   some type of user identifier (preferably hashed). The length of the session
  *   ID must not exceed 36 characters.
  *
@@ -301,6 +337,13 @@ const QueryResult = {
  *   client should close the stream and start a new request with a new stream as
  *   needed.
  *   This setting is ignored when `query_input` is a piece of text or an event.
+ *
+ * @property {Object} outputAudioConfig
+ *   Optional. Instructs the speech synthesizer how to generate the output
+ *   audio. If this field is not set and agent-level speech synthesizer is not
+ *   configured, no output audio is generated.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
  *
  * @property {string} inputAudio
  *   Optional. The input audio content to be recognized. Must be sent if
@@ -348,6 +391,16 @@ const StreamingDetectIntentRequest = {
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
+ * @property {string} outputAudio
+ *   The audio data bytes encoded as specified in the request.
+ *
+ * @property {Object} outputAudioConfig
+ *   Instructs the speech synthesizer how to generate the output audio. This
+ *   field is populated from the agent-level speech synthesizer configuration,
+ *   if enabled.
+ *
+ *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
+ *
  * @typedef StreamingDetectIntentResponse
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.StreamingDetectIntentResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
@@ -376,7 +429,7 @@ const StreamingDetectIntentResponse = {
  *
  * 6.  transcript: " that is"
  *
- * 7.  recognition_event_type: `RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE`
+ * 7.  message_type: `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`
  *
  * 8.  transcript: " that is the question"
  *     is_final: true
@@ -389,7 +442,7 @@ const StreamingDetectIntentResponse = {
  *
  * *  for `MESSAGE_TYPE_TRANSCRIPT`: `transcript` and possibly `is_final`.
  *
- * *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `event_type`.
+ * *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `message_type`.
  *
  * @property {number} messageType
  *   Type of the result message.
@@ -398,14 +451,13 @@ const StreamingDetectIntentResponse = {
  *
  * @property {string} transcript
  *   Transcript text representing the words that the user spoke.
- *   Populated if and only if `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+ *   Populated if and only if `message_type` = `MESSAGE_TYPE_TRANSCRIPT`.
  *
  * @property {boolean} isFinal
- *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *   If `false`, the `StreamingRecognitionResult` represents an
  *   interim result that may change. If `true`, the recognizer will not return
  *   any further hypotheses about this piece of the audio. May only be populated
- *   for `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+ *   for `message_type` = `MESSAGE_TYPE_TRANSCRIPT`.
  *
  * @property {number} confidence
  *   The Speech confidence between 0.0 and 1.0 for the current portion of audio.
@@ -464,20 +516,24 @@ const StreamingRecognitionResult = {
  *
  * @property {number} sampleRateHertz
  *   Required. Sample rate (in Hertz) of the audio content sent in the query.
- *   Refer to [Cloud Speech API documentation](https://cloud.google.com/speech/docs/basics) for more
- *   details.
+ *   Refer to
+ *   [Cloud Speech API
+ *   documentation](https://cloud.google.com/speech-to-text/docs/basics) for
+ *   more details.
  *
  * @property {string} languageCode
  *   Required. The language of the supplied audio. Dialogflow does not do
  *   translations. See [Language
- *   Support](https://dialogflow.com/docs/languages) for a list of the
- *   currently supported language codes. Note that queries in the same session
- *   do not necessarily need to specify the same language.
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   for a list of the currently supported language codes. Note that queries in
+ *   the same session do not necessarily need to specify the same language.
  *
  * @property {string[]} phraseHints
  *   Optional. The collection of phrase hints which are used to boost accuracy
  *   of speech recognition.
- *   Refer to [Cloud Speech API documentation](https://cloud.google.com/speech/docs/basics#phrase-hints)
+ *   Refer to
+ *   [Cloud Speech API
+ *   documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
  *   for more details.
  *
  * @typedef InputAudioConfig
@@ -493,13 +549,13 @@ const InputAudioConfig = {
  *
  * @property {string} text
  *   Required. The UTF-8 encoded natural language text to be processed.
- *   Text length must not exceed 256 bytes.
+ *   Text length must not exceed 256 characters.
  *
  * @property {string} languageCode
  *   Required. The language of this conversational query. See [Language
- *   Support](https://dialogflow.com/docs/languages) for a list of the
- *   currently supported language codes. Note that queries in the same session
- *   do not necessarily need to specify the same language.
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   for a list of the currently supported language codes. Note that queries in
+ *   the same session do not necessarily need to specify the same language.
  *
  * @typedef TextInput
  * @memberof google.cloud.dialogflow.v2
@@ -511,10 +567,10 @@ const TextInput = {
 
 /**
  * Events allow for matching intents by event name instead of the natural
- * language input. For instance, input `<event: { name: “welcome_event”,
- * parameters: { name: “Sam” } }>` can trigger a personalized welcome response.
+ * language input. For instance, input `<event: { name: "welcome_event",
+ * parameters: { name: "Sam" } }>` can trigger a personalized welcome response.
  * The parameter `name` may be used by the agent in the response:
- * `“Hello #welcome_event.name! What can I do for you today?”`.
+ * `"Hello #welcome_event.name! What can I do for you today?"`.
  *
  * @property {string} name
  *   Required. The unique identifier of the event.
@@ -526,9 +582,9 @@ const TextInput = {
  *
  * @property {string} languageCode
  *   Required. The language of this query. See [Language
- *   Support](https://dialogflow.com/docs/languages) for a list of the
- *   currently supported language codes. Note that queries in the same session
- *   do not necessarily need to specify the same language.
+ *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   for a list of the currently supported language codes. Note that queries in
+ *   the same session do not necessarily need to specify the same language.
  *
  * @typedef EventInput
  * @memberof google.cloud.dialogflow.v2
@@ -539,8 +595,63 @@ const EventInput = {
 };
 
 /**
+ * Configures the types of sentiment analysis to perform.
+ *
+ * @property {boolean} analyzeQueryTextSentiment
+ *   Optional. Instructs the service to perform sentiment analysis on
+ *   `query_text`. If not provided, sentiment analysis is not performed on
+ *   `query_text`.
+ *
+ * @typedef SentimentAnalysisRequestConfig
+ * @memberof google.cloud.dialogflow.v2
+ * @see [google.cloud.dialogflow.v2.SentimentAnalysisRequestConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
+ */
+const SentimentAnalysisRequestConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The result of sentiment analysis as configured by
+ * `sentiment_analysis_request_config`.
+ *
+ * @property {Object} queryTextSentiment
+ *   The sentiment analysis result for `query_text`.
+ *
+ *   This object should have the same structure as [Sentiment]{@link google.cloud.dialogflow.v2.Sentiment}
+ *
+ * @typedef SentimentAnalysisResult
+ * @memberof google.cloud.dialogflow.v2
+ * @see [google.cloud.dialogflow.v2.SentimentAnalysisResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
+ */
+const SentimentAnalysisResult = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The sentiment, such as positive/negative feeling or association, for a unit
+ * of analysis, such as the query text.
+ *
+ * @property {number} score
+ *   Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
+ *   sentiment).
+ *
+ * @property {number} magnitude
+ *   A non-negative number in the [0, +inf) range, which represents the absolute
+ *   magnitude of sentiment, regardless of score (positive or negative).
+ *
+ * @typedef Sentiment
+ * @memberof google.cloud.dialogflow.v2
+ * @see [google.cloud.dialogflow.v2.Sentiment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/session.proto}
+ */
+const Sentiment = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Audio encoding of the audio content sent in the conversational query request.
- * Refer to the [Cloud Speech API documentation](https://cloud.google.com/speech/docs/basics) for more
+ * Refer to the
+ * [Cloud Speech API
+ * documentation](https://cloud.google.com/speech-to-text/docs/basics) for more
  * details.
  *
  * @enum {number}

@@ -22,16 +22,20 @@
  *   Required. The unique identifier of the context. Format:
  *   `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
  *
+ *   The `Context ID` is always converted to lowercase, may only contain
+ *   characters in [a-zA-Z0-9_-%] and may be at most 250 bytes long.
+ *
  * @property {number} lifespanCount
  *   Optional. The number of conversational query requests after which the
  *   context expires. If set to `0` (the default) the context expires
- *   immediately. Contexts expire automatically after 10 minutes even if there
+ *   immediately. Contexts expire automatically after 20 minutes if there
  *   are no matching queries.
  *
  * @property {Object} parameters
  *   Optional. The collection of parameters associated with this context.
- *   Refer to [this doc](https://dialogflow.com/docs/actions-and-parameters) for
- *   syntax.
+ *   Refer to [this
+ *   doc](https://cloud.google.com/dialogflow-enterprise/docs/intents-actions-parameters)
+ *   for syntax.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
  *
@@ -44,8 +48,7 @@ const Context = {
 };
 
 /**
- * The request message for
- * Contexts.ListContexts.
+ * The request message for Contexts.ListContexts.
  *
  * @property {string} parent
  *   Required. The session to list all contexts from.
@@ -67,8 +70,7 @@ const ListContextsRequest = {
 };
 
 /**
- * The response message for
- * Contexts.ListContexts.
+ * The response message for Contexts.ListContexts.
  *
  * @property {Object[]} contexts
  *   The list of contexts. There will be a maximum number of items
@@ -89,8 +91,7 @@ const ListContextsResponse = {
 };
 
 /**
- * The request message for
- * Contexts.GetContext.
+ * The request message for Contexts.GetContext.
  *
  * @property {string} name
  *   Required. The name of the context. Format:
@@ -105,8 +106,7 @@ const GetContextRequest = {
 };
 
 /**
- * The request message for
- * Contexts.CreateContext.
+ * The request message for Contexts.CreateContext.
  *
  * @property {string} parent
  *   Required. The session to create a context for.
@@ -126,8 +126,7 @@ const CreateContextRequest = {
 };
 
 /**
- * The request message for
- * Contexts.UpdateContext.
+ * The request message for Contexts.UpdateContext.
  *
  * @property {Object} context
  *   Required. The context to update.
@@ -148,8 +147,7 @@ const UpdateContextRequest = {
 };
 
 /**
- * The request message for
- * Contexts.DeleteContext.
+ * The request message for Contexts.DeleteContext.
  *
  * @property {string} name
  *   Required. The name of the context to delete. Format:
@@ -164,8 +162,7 @@ const DeleteContextRequest = {
 };
 
 /**
- * The request message for
- * Contexts.DeleteAllContexts.
+ * The request message for Contexts.DeleteAllContexts.
  *
  * @property {string} parent
  *   Required. The name of the session to delete all contexts from. Format:
