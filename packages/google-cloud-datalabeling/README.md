@@ -1,48 +1,70 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `npm run generate-scaffolding`."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Data Labeling API: Node.js Client](https://github.com/GoogleCloudPlatform/google-cloud-node)
+# [Google Cloud Data Labeling: Node.js Client](https://github.com/googleapis/nodejs-datalabeling)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/datalabeling.svg)](https://www.npmjs.org/package/datalabeling)
-[![codecov](https://img.shields.io/codecov/c/github/GoogleCloudPlatform/google-cloud-node/master.svg?style=flat)](https://codecov.io/gh/GoogleCloudPlatform/google-cloud-node)
-
-[Cloud Labeling](https://cloud.google.com/datalabeling/docs) TBD
+[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/datalabeling.svg)](https://www.npmjs.org/package/@google-cloud/datalabeling)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-datalabeling/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-datalabeling)
 
 
-* [Using the client library](#using-the-client-library)
+
+
+Data Labeling API client for Node.js
+
+
+* [Google Cloud Data Labeling Node.js Client API Reference][client-docs]
+* [Google Cloud Data Labeling Documentation][product-docs]
+* [github.com/googleapis/nodejs-datalabeling](https://github.com/googleapis/nodejs-datalabeling)
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
+**Table of contents:**
+
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
-## Using the client library
+## Quickstart
+
+### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
-
 1.  [Enable billing for your project][billing].
-
-1.  [Enable the Google Cloud Data Labeling API API][enable_api].
-
+1.  [Enable the Google Cloud Data Labeling API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-1. Install the client library:
+### Installing the client library
 
-        npm install --save datalabeling
+```bash
+npm install @google-cloud/datalabeling
+```
 
 
 
-The [Cloud Data Labeling Node.js Client API Reference][client-docs] documentation
+
+
+The [Google Cloud Data Labeling Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
 
+
+
+
 This library is considered to be in **alpha**. This means it is still a
 work-in-progress and under active development. Any release is subject to
 backwards-incompatible changes at any time.
+
+
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
@@ -50,27 +72,16 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-datalabeling/blob/master/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-datalabeling/blob/master/LICENSE)
 
-## What's Next
-
-* [Cloud Data Labeling Documentation][product-docs]
-* [Cloud Data Labeling Node.js Client API Reference][client-docs]
-* [github.com/GoogleCloudPlatform/google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-node)
-
-Read more about the client libraries for Cloud APIs, including the older
-Google APIs Client Libraries, in [Client Libraries Explained][explained].
-
-[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
-
-[client-docs]: https://cloud.google.com/datalabeling/docs
-[product-docs]: https://cloud.google.com/datalabeling/docs
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/datalabeling/latest/
+[product-docs]: https://cloud.google.com/datalabeling
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

@@ -1876,6 +1876,51 @@ describe('DataLabelingServiceClient', () => {
       });
     });
   });
+
+  describe('deleteAnnotatedDataset', () => {
+    it('invokes deleteAnnotatedDataset without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteAnnotatedDataset = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteAnnotatedDataset(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteAnnotatedDataset with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteAnnotatedDataset = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteAnnotatedDataset(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

@@ -303,6 +303,7 @@ class DataLabelingServiceClient {
       'getInstruction',
       'listInstructions',
       'deleteInstruction',
+      'deleteAnnotatedDataset',
     ];
     for (const methodName of dataLabelingServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -2888,6 +2889,57 @@ class DataLabelingServiceClient {
     });
 
     return this._innerApiCalls.deleteInstruction(request, options, callback);
+  }
+
+  /**
+   * Deletes an annotated dataset by resource name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.name]
+   *   Required. Name of the annotated dataset to delete, format:
+   *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
+   *   {annotated_dataset_id}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('@google-cloud/datalabeling');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   *
+   * client.deleteAnnotatedDataset({}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteAnnotatedDataset(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteAnnotatedDataset(
+      request,
+      options,
+      callback
+    );
   }
 
   // --------------------
