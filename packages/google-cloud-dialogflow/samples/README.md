@@ -81,7 +81,7 @@ Examples:
   node detect.js audio resources/book_a_room.wav -r 16000
   node detect.js stream resources/mountain_view.wav -r 16000
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_detect_intent_text_0_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.DetectIntentRequest
@@ -157,7 +157,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_create_knowledge_base_1_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.createKnowledgeBase
@@ -233,7 +233,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_get_knowledge_base_2_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.getKnowledgeBase
@@ -309,7 +309,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_list_knowledge_base_3_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.listKnowledgeBase
@@ -385,7 +385,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_delete_knowledge_base_4_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.deleteKnowledgeBase
@@ -461,7 +461,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_create_document_5_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.createDocument
@@ -537,7 +537,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_list_document_6_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.listDocuments
@@ -613,7 +613,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_get_document_7_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.getDocument
@@ -689,7 +689,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_delete_document_8_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.deleteDocument
@@ -765,7 +765,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_detect_intent_with_sentiment_analysis_9_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.detectIntentwithSentimentAnalysis
@@ -841,7 +841,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_detect_intent_with_texttospeech_response_10_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.detectIntentwithtexttospeechresponse
@@ -917,7 +917,7 @@ Examples:
   node detect.v2beta1.js detectIntentandSentiment "Book a great room for six great folks!"
   node detect.v2beta1.js detectIntentwithModelSelection -i "./resources/book_a_room.wav" -l "en-US" -o "phone_call"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_detect_intent_knowledge_11_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.detectIntentknowledge
@@ -961,7 +961,7 @@ Examples:
   node detect.js audio resources/book_a_room.wav -r 16000
   node detect.js stream resources/mountain_view.wav -r 16000
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_detect_intent_audio_12_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.DetectIntentRequest
@@ -1005,7 +1005,7 @@ Examples:
   node detect.js audio resources/book_a_room.wav -r 16000
   node detect.js stream resources/mountain_view.wav -r 16000
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_detect_intent_streaming_13_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.DetectIntentRequest
@@ -1058,7 +1058,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_create_entity_14_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.EntityTypes.CreateEntityType
@@ -1111,7 +1111,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_delete_entity_15_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.EntityTypes.DeleteEntityType
@@ -1164,7 +1164,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_create_intent_16_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Intents.CreateIntent
@@ -1217,7 +1217,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_delete_intent_17_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Intents.DeleteIntent
@@ -1270,7 +1270,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_create_context_18_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Contexts.CreateContext
@@ -1323,7 +1323,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_delete_context_19_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.Contexts.DeleteContext
@@ -1376,7 +1376,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_create_session_entity_type_20_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.SessionEntityTypes.CreateSessionEntityType
@@ -1429,7 +1429,7 @@ Examples:
   node resource.js update-context "my-session-id" "my-context-id"
   node resource.js update-session-entity-type "my-session-id" "my-entity-type-name"
 
-For more information, see https://cloud.google.com/conversation/docs
+For more information, see https://cloud.google.com/dialogflow-enterprise/docs
 ```
 
 [dialogflow_delete_session_entity_type_21_docs]: https://dialogflow.com/docs/reference/api-v2/rpc/google.cloud.dialogflow.v2beta1#google.cloud.dialogflow.v2beta1.SessionEntityTypes.DeleteSessionEntityType
