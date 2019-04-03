@@ -16,8 +16,7 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for
- * AutoMl.CreateDataset.
+ * Request message for AutoMl.CreateDataset.
  *
  * @property {string} parent
  *   The resource name of the project to create the dataset for.
@@ -36,8 +35,7 @@ const CreateDatasetRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.GetDataset.
+ * Request message for AutoMl.GetDataset.
  *
  * @property {string} name
  *   The resource name of the dataset to retrieve.
@@ -51,8 +49,7 @@ const GetDatasetRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ListDatasets.
+ * Request message for AutoMl.ListDatasets.
  *
  * @property {string} parent
  *   The resource name of the project from which to list datasets.
@@ -60,9 +57,8 @@ const GetDatasetRequest = {
  * @property {string} filter
  *   An expression for filtering the results of the request.
  *
- *     * `dataset_metadata` - for existence of the case.
- *
- *   An example of using the filter is:
+ *     * `dataset_metadata` - for existence of the case (e.g.
+ *               image_classification_dataset_metadata:*). Some examples of using the filter are:
  *
  *     * `translation_dataset_metadata:*` --> The dataset has
  *                                            translation_dataset_metadata.
@@ -74,10 +70,8 @@ const GetDatasetRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return
  *   Typically obtained via
- *   ListDatasetsResponse.next_page_token
- *   of the previous
- *   AutoMl.ListDatasets
- *   call.
+ *   ListDatasetsResponse.next_page_token of the previous
+ *   AutoMl.ListDatasets call.
  *
  * @typedef ListDatasetsRequest
  * @memberof google.cloud.automl.v1beta1
@@ -88,8 +82,7 @@ const ListDatasetsRequest = {
 };
 
 /**
- * Response message for
- * AutoMl.ListDatasets.
+ * Response message for AutoMl.ListDatasets.
  *
  * @property {Object[]} datasets
  *   The datasets read.
@@ -98,9 +91,7 @@ const ListDatasetsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results.
- *   Pass to
- *   ListDatasetsRequest.page_token
- *   to obtain that page.
+ *   Pass to ListDatasetsRequest.page_token to obtain that page.
  *
  * @typedef ListDatasetsResponse
  * @memberof google.cloud.automl.v1beta1
@@ -111,8 +102,33 @@ const ListDatasetsResponse = {
 };
 
 /**
- * Request message for
- * AutoMl.DeleteDataset.
+ * Request message for AutoMl.UpdateDataset
+ *
+ * @property {Object} dataset
+ *   The dataset which replaces the resource on the server.
+ *
+ *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1beta1.Dataset}
+ *
+ * @property {Object} updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *
+ *   https:
+ *   //developers.google.com/protocol-buffers
+ *   // /docs/reference/google.protobuf#fieldmask
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateDatasetRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.UpdateDatasetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const UpdateDatasetRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.DeleteDataset.
  *
  * @property {string} name
  *   The resource name of the dataset to delete.
@@ -126,15 +142,15 @@ const DeleteDatasetRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ImportData.
+ * Request message for AutoMl.ImportData.
  *
  * @property {string} name
  *   Required. Dataset name. Dataset must already exist. All imported
  *   annotations and examples will be added.
  *
  * @property {Object} inputConfig
- *   Required. The desired input location.
+ *   Required. The desired input location and its domain specific semantics,
+ *   if any.
  *
  *   This object should have the same structure as [InputConfig]{@link google.cloud.automl.v1beta1.InputConfig}
  *
@@ -147,8 +163,7 @@ const ImportDataRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ExportData.
+ * Request message for AutoMl.ExportData.
  *
  * @property {string} name
  *   Required. The resource name of the dataset.
@@ -167,8 +182,215 @@ const ExportDataRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.CreateModel.
+ * Request message for AutoMl.GetAnnotationSpec.
+ *
+ * @property {string} name
+ *   The resource name of the annotation spec to retrieve.
+ *
+ * @typedef GetAnnotationSpecRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.GetAnnotationSpecRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const GetAnnotationSpecRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.GetTableSpec.
+ *
+ * @property {string} name
+ *   The resource name of the table spec to retrieve.
+ *
+ * @property {Object} fieldMask
+ *   Mask specifying which fields to read.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef GetTableSpecRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.GetTableSpecRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const GetTableSpecRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.ListTableSpecs.
+ *
+ * @property {string} parent
+ *   The resource name of the dataset to list table specs from.
+ *
+ * @property {Object} fieldMask
+ *   Mask specifying which fields to read.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @property {string} filter
+ *   Filter expression, see go/filtering.
+ *
+ * @property {number} pageSize
+ *   Requested page size. The server can return fewer results than requested.
+ *   If unspecified, the server will pick a default size.
+ *
+ * @property {string} pageToken
+ *   A token identifying a page of results for the server to return.
+ *   Typically obtained from the
+ *   ListTableSpecsResponse.next_page_token field of the previous
+ *   AutoMl.ListTableSpecs call.
+ *
+ * @typedef ListTableSpecsRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.ListTableSpecsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const ListTableSpecsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response message for AutoMl.ListTableSpecs.
+ *
+ * @property {Object[]} tableSpecs
+ *   The table specs read.
+ *
+ *   This object should have the same structure as [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}
+ *
+ * @property {string} nextPageToken
+ *   A token to retrieve next page of results.
+ *   Pass to ListTableSpecsRequest.page_token to obtain that page.
+ *
+ * @typedef ListTableSpecsResponse
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.ListTableSpecsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const ListTableSpecsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.UpdateTableSpec
+ *
+ * @property {Object} tableSpec
+ *   The table spec which replaces the resource on the server.
+ *
+ *   This object should have the same structure as [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}
+ *
+ * @property {Object} updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *
+ *   https:
+ *   //developers.google.com/protocol-buffers
+ *   // /docs/reference/google.protobuf#fieldmask
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateTableSpecRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.UpdateTableSpecRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const UpdateTableSpecRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.GetColumnSpec.
+ *
+ * @property {string} name
+ *   The resource name of the column spec to retrieve.
+ *
+ * @property {Object} fieldMask
+ *   Mask specifying which fields to read.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef GetColumnSpecRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.GetColumnSpecRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const GetColumnSpecRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.ListColumnSpecs.
+ *
+ * @property {string} parent
+ *   The resource name of the table spec to list column specs from.
+ *
+ * @property {Object} fieldMask
+ *   Mask specifying which fields to read.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @property {string} filter
+ *   Filter expression, see go/filtering.
+ *
+ * @property {number} pageSize
+ *   Requested page size. The server can return fewer results than requested.
+ *   If unspecified, the server will pick a default size.
+ *
+ * @property {string} pageToken
+ *   A token identifying a page of results for the server to return.
+ *   Typically obtained from the
+ *   ListColumnSpecsResponse.next_page_token field of the previous
+ *   AutoMl.ListColumnSpecs call.
+ *
+ * @typedef ListColumnSpecsRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.ListColumnSpecsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const ListColumnSpecsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response message for AutoMl.ListColumnSpecs.
+ *
+ * @property {Object[]} columnSpecs
+ *   The column specs read.
+ *
+ *   This object should have the same structure as [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}
+ *
+ * @property {string} nextPageToken
+ *   A token to retrieve next page of results.
+ *   Pass to ListColumnSpecsRequest.page_token to obtain that page.
+ *
+ * @typedef ListColumnSpecsResponse
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.ListColumnSpecsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const ListColumnSpecsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.UpdateColumnSpec
+ *
+ * @property {Object} columnSpec
+ *   The column spec which replaces the resource on the server.
+ *
+ *   This object should have the same structure as [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}
+ *
+ * @property {Object} updateMask
+ *   The update mask applies to the resource. For the `FieldMask` definition,
+ *   see
+ *
+ *   https:
+ *   //developers.google.com/protocol-buffers
+ *   // /docs/reference/google.protobuf#fieldmask
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateColumnSpecRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.UpdateColumnSpecRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const UpdateColumnSpecRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.CreateModel.
  *
  * @property {string} parent
  *   Resource name of the parent project where the model is being created.
@@ -187,8 +409,7 @@ const CreateModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.GetModel.
+ * Request message for AutoMl.GetModel.
  *
  * @property {string} name
  *   Resource name of the model.
@@ -202,8 +423,7 @@ const GetModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ListModels.
+ * Request message for AutoMl.ListModels.
  *
  * @property {string} parent
  *   Resource name of the project, from which to list the models.
@@ -211,15 +431,13 @@ const GetModelRequest = {
  * @property {string} filter
  *   An expression for filtering the results of the request.
  *
- *     * `model_metadata` - for existence of the case.
- *     * `dataset_id` - for = or !=.
- *
- *   Some examples of using the filter are:
+ *     * `model_metadata` - for existence of the case (e.g.
+ *               video_classification_model_metadata:*).
+ *     * `dataset_id` - for = or !=. Some examples of using the filter are:
  *
  *     * `image_classification_model_metadata:*` --> The model has
  *                                          image_classification_model_metadata.
- *     * `dataset_id=5` --> The model was created from a sibling dataset with
- *                      ID 5.
+ *     * `dataset_id=5` --> The model was created from a dataset with ID 5.
  *
  * @property {number} pageSize
  *   Requested page size.
@@ -227,8 +445,7 @@ const GetModelRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return
  *   Typically obtained via
- *   ListModelsResponse.next_page_token
- *   of the previous
+ *   ListModelsResponse.next_page_token of the previous
  *   AutoMl.ListModels call.
  *
  * @typedef ListModelsRequest
@@ -240,8 +457,7 @@ const ListModelsRequest = {
 };
 
 /**
- * Response message for
- * AutoMl.ListModels.
+ * Response message for AutoMl.ListModels.
  *
  * @property {Object[]} model
  *   List of models in the requested page.
@@ -250,7 +466,7 @@ const ListModelsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results.
- *   Pass to ListModels.page_token to obtain that page.
+ *   Pass to ListModelsRequest.page_token to obtain that page.
  *
  * @typedef ListModelsResponse
  * @memberof google.cloud.automl.v1beta1
@@ -261,8 +477,7 @@ const ListModelsResponse = {
 };
 
 /**
- * Request message for
- * AutoMl.DeleteModel.
+ * Request message for AutoMl.DeleteModel.
  *
  * @property {string} name
  *   Resource name of the model being deleted.
@@ -276,8 +491,12 @@ const DeleteModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.DeployModel.
+ * Request message for AutoMl.DeployModel.
+ *
+ * @property {Object} imageObjectDetectionModelDeploymentMetadata
+ *   Model deployment metadata specific to Image Object Detection.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionModelDeploymentMetadata]{@link google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata}
  *
  * @property {string} name
  *   Resource name of the model to deploy.
@@ -291,8 +510,7 @@ const DeployModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.UndeployModel.
+ * Request message for AutoMl.UndeployModel.
  *
  * @property {string} name
  *   Resource name of the model to undeploy.
@@ -306,8 +524,48 @@ const UndeployModelRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.GetModelEvaluation.
+ * Request message for AutoMl.ExportModel.
+ * Models need to be enabled for exporting, otherwise an error code will be
+ * returned.
+ *
+ * @property {string} name
+ *   Required. The resource name of the model to export.
+ *
+ * @property {Object} outputConfig
+ *   Required. The desired output location and configuration.
+ *
+ *   This object should have the same structure as [ModelExportOutputConfig]{@link google.cloud.automl.v1beta1.ModelExportOutputConfig}
+ *
+ * @typedef ExportModelRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.ExportModelRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const ExportModelRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.ExportEvaluatedExamples.
+ *
+ * @property {string} name
+ *   Required. The resource name of the model whose evaluated examples are to
+ *   be exported.
+ *
+ * @property {Object} outputConfig
+ *   Required. The desired output location and configuration.
+ *
+ *   This object should have the same structure as [ExportEvaluatedExamplesOutputConfig]{@link google.cloud.automl.v1beta1.ExportEvaluatedExamplesOutputConfig}
+ *
+ * @typedef ExportEvaluatedExamplesRequest
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.ExportEvaluatedExamplesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/service.proto}
+ */
+const ExportEvaluatedExamplesRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for AutoMl.GetModelEvaluation.
  *
  * @property {string} name
  *   Resource name for the model evaluation.
@@ -321,8 +579,7 @@ const GetModelEvaluationRequest = {
 };
 
 /**
- * Request message for
- * AutoMl.ListModelEvaluations.
+ * Request message for AutoMl.ListModelEvaluations.
  *
  * @property {string} parent
  *   Resource name of the model to list the model evaluations for.
@@ -348,9 +605,8 @@ const GetModelEvaluationRequest = {
  * @property {string} pageToken
  *   A token identifying a page of results for the server to return.
  *   Typically obtained via
- *   `ListModelEvaluationsResponse.next_page_token` of the previous
- *   AutoMl.ListModelEvaluations
- *   call.
+ *   ListModelEvaluationsResponse.next_page_token of the previous
+ *   AutoMl.ListModelEvaluations call.
  *
  * @typedef ListModelEvaluationsRequest
  * @memberof google.cloud.automl.v1beta1
@@ -361,8 +617,7 @@ const ListModelEvaluationsRequest = {
 };
 
 /**
- * Response message for
- * AutoMl.ListModelEvaluations.
+ * Response message for AutoMl.ListModelEvaluations.
  *
  * @property {Object[]} modelEvaluation
  *   List of model evaluations in the requested page.
@@ -371,7 +626,8 @@ const ListModelEvaluationsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results.
- *   Pass to ListModelEvaluations.page_token to obtain that page.
+ *   Pass to the ListModelEvaluationsRequest.page_token field of a new
+ *   AutoMl.ListModelEvaluations request to obtain that page.
  *
  * @typedef ListModelEvaluationsResponse
  * @memberof google.cloud.automl.v1beta1

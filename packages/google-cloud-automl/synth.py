@@ -39,7 +39,6 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'toISOString)')
 # [END fix-dead-link]
 
-
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])

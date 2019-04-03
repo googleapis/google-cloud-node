@@ -19,14 +19,39 @@
  * Evaluation results of a model.
  *
  * @property {Object} classificationEvaluationMetrics
- *   Evaluation metrics for models on classification problems models.
+ *   Model evaluation metrics for image, text, video and tables
+ *   classification.
+ *   Tables problem is considered a classification when the target column
+ *   has either CATEGORY or ARRAY(CATEGORY) DataType.
  *
  *   This object should have the same structure as [ClassificationEvaluationMetrics]{@link google.cloud.automl.v1beta1.ClassificationEvaluationMetrics}
  *
+ * @property {Object} regressionEvaluationMetrics
+ *   Model evaluation metrics for Tables regression.
+ *   Tables problem is considered a regression when the target column
+ *   has FLOAT64 DataType.
+ *
+ *   This object should have the same structure as [RegressionEvaluationMetrics]{@link google.cloud.automl.v1beta1.RegressionEvaluationMetrics}
+ *
  * @property {Object} translationEvaluationMetrics
- *   Evaluation metrics for models on translation models.
+ *   Model evaluation metrics for translation.
  *
  *   This object should have the same structure as [TranslationEvaluationMetrics]{@link google.cloud.automl.v1beta1.TranslationEvaluationMetrics}
+ *
+ * @property {Object} imageObjectDetectionEvaluationMetrics
+ *   Model evaluation metrics for image object detection.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionEvaluationMetrics]{@link google.cloud.automl.v1beta1.ImageObjectDetectionEvaluationMetrics}
+ *
+ * @property {Object} textSentimentEvaluationMetrics
+ *   Evaluation metrics for text sentiment models.
+ *
+ *   This object should have the same structure as [TextSentimentEvaluationMetrics]{@link google.cloud.automl.v1beta1.TextSentimentEvaluationMetrics}
+ *
+ * @property {Object} textExtractionEvaluationMetrics
+ *   Evaluation metrics for text extraction models.
+ *
+ *   This object should have the same structure as [TextExtractionEvaluationMetrics]{@link google.cloud.automl.v1beta1.TextExtractionEvaluationMetrics}
  *
  * @property {string} name
  *   Output only.
@@ -38,10 +63,21 @@
  * @property {string} annotationSpecId
  *   Output only.
  *   The ID of the annotation spec that the model evaluation applies to. The
- *   ID is empty for overall model evaluation.
+ *   The ID is empty for the overall model evaluation.
+ *   For Tables classification these are the distinct values of the target
+ *   column at the moment of the evaluation; for this problem annotation specs
+ *   in the dataset do not exist.
  *   NOTE: Currently there is no way to obtain the display_name of the
  *   annotation spec from its ID. To see the display_names, review the model
  *   evaluations in the UI.
+ *
+ * @property {string} displayName
+ *   Output only. The value of AnnotationSpec.display_name when the model
+ *   was trained. Because this field returns a value at model training time,
+ *   for different models trained using the same dataset, the returned value
+ *   could be different as model owner could update the display_name between
+ *   any two model training.
+ *   The display_name is empty for the overall model evaluation.
  *
  * @property {Object} createTime
  *   Output only.
@@ -50,7 +86,16 @@
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {number} evaluatedExampleCount
- *   Output only. The number of examples used for model evaluation.
+ *   Output only.
+ *   The number of examples used for model evaluation, i.e. for
+ *   which ground truth from time of model creation is compared against the
+ *   predicted annotations created by the model.
+ *   For overall ModelEvaluation (i.e. with annotation_spec_id not set) this is
+ *   the total number of all examples used for evaluation.
+ *   Otherwise, this is the count of examples that according to the ground
+ *   truth were annotated by the
+ *
+ *   annotation_spec_id.
  *
  * @typedef ModelEvaluation
  * @memberof google.cloud.automl.v1beta1

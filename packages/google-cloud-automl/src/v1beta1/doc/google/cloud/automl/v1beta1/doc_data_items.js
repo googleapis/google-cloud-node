@@ -17,6 +17,7 @@
 
 /**
  * A representation of an image.
+ * Only images up to 30MB in size are supported.
  *
  * @property {string} imageBytes
  *   Image content represented as a stream of bytes.
@@ -47,10 +48,9 @@ const Image = {
  *   characters long.
  *
  * @property {string} mimeType
- *   The format of the source text. For example, "text/html" or
- *   "text/plain". If left blank the format is automatically determined from
- *   the type of the uploaded content. The default is "text/html". Up to 25000
- *   characters long.
+ *   The format of the source text. Currently the only two allowed values are
+ *   "text/html" and "text/plain". If left blank the format is automatically
+ *   determined from the type of the uploaded content.
  *
  * @property {string} contentUri
  *   Output only. HTTP URI where you can download the content.
@@ -64,10 +64,55 @@ const TextSnippet = {
 };
 
 /**
+ * A structured text document e.g. a PDF.
+ *
+ * @property {Object} inputConfig
+ *   An input config specifying the content of the document.
+ *
+ *   This object should have the same structure as [DocumentInputConfig]{@link google.cloud.automl.v1beta1.DocumentInputConfig}
+ *
+ * @typedef Document
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.Document definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/data_items.proto}
+ */
+const Document = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A representation of a row in a relational table.
+ *
+ * @property {string[]} columnSpecIds
+ *   The resource IDs of the column specs describing the columns of the row.
+ *   If set must contain, but possibly in a different order, all input feature
+ *
+ *   column_spec_ids
+ *   of the Model this row is being passed to.
+ *   Note: The below `values` field must match order of this field, if this
+ *   field is set.
+ *
+ * @property {Object[]} values
+ *   Required. The values of the row cells, given in the same order as the
+ *   column_spec_ids, or, if not set, then in the same order as input feature
+ *
+ *   column_specs
+ *   of the Model this row is being passed to.
+ *
+ *   This object should have the same structure as [Value]{@link google.protobuf.Value}
+ *
+ * @typedef Row
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.Row definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/data_items.proto}
+ */
+const Row = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Example data used for training or prediction.
  *
  * @property {Object} image
- *   An example image.
+ *   Example image.
  *
  *   This object should have the same structure as [Image]{@link google.cloud.automl.v1beta1.Image}
  *
@@ -75,6 +120,16 @@ const TextSnippet = {
  *   Example text.
  *
  *   This object should have the same structure as [TextSnippet]{@link google.cloud.automl.v1beta1.TextSnippet}
+ *
+ * @property {Object} document
+ *   Example document.
+ *
+ *   This object should have the same structure as [Document]{@link google.cloud.automl.v1beta1.Document}
+ *
+ * @property {Object} row
+ *   Example relational table row.
+ *
+ *   This object should have the same structure as [Row]{@link google.cloud.automl.v1beta1.Row}
  *
  * @typedef ExamplePayload
  * @memberof google.cloud.automl.v1beta1

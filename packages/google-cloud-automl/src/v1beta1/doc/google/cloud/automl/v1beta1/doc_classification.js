@@ -34,18 +34,80 @@ const ClassificationAnnotation = {
 };
 
 /**
+ * Contains annotation details specific to video classification.
+ *
+ * @property {string} type
+ *   Output only. Expresses the type of video classification. Possible values:
+ *
+ *   *  `segment` - Classification done on a specified by user
+ *          time segment of a video. AnnotationSpec is answered to be present
+ *          in that time segment, if it is present in any part of it. The video
+ *          ML model evaluations are done only for this type of classification.
+ *
+ *   *  `shot`- Shot-level classification.
+ *          AutoML Video Intelligence determines the boundaries
+ *          for each camera shot in the entire segment of the video that user
+ *          specified in the request configuration. AutoML Video Intelligence
+ *          then returns labels and their confidence scores for each detected
+ *          shot, along with the start and end time of the shot.
+ *          WARNING: Model evaluation is not done for this classification type,
+ *          the quality of it depends on training data, but there are no
+ *          metrics provided to describe that quality.
+ *
+ *   *  `1s_interval` - AutoML Video Intelligence returns labels and their
+ *          confidence scores for each second of the entire segment of the video
+ *          that user specified in the request configuration.
+ *          WARNING: Model evaluation is not done for this classification type,
+ *          the quality of it depends on training data, but there are no
+ *          metrics provided to describe that quality.
+ *
+ * @property {Object} classificationAnnotation
+ *   Output only . The classification details of this annotation.
+ *
+ *   This object should have the same structure as [ClassificationAnnotation]{@link google.cloud.automl.v1beta1.ClassificationAnnotation}
+ *
+ * @property {Object} timeSegment
+ *   Output only . The time segment of the video to which the
+ *   annotation applies.
+ *
+ *   This object should have the same structure as [TimeSegment]{@link google.cloud.automl.v1beta1.TimeSegment}
+ *
+ * @typedef VideoClassificationAnnotation
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.VideoClassificationAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/classification.proto}
+ */
+const VideoClassificationAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Model evaluation metrics for classification problems.
- * Visible only to v1beta1
+ * Note: For Video Classification this metrics only describe quality of the
+ * Video Classification predictions of "segment_classification" type.
  *
  * @property {number} auPrc
- *   Output only. The Area under precision recall curve metric.
+ *   Output only. The Area Under Precision-Recall Curve metric. Micro-averaged
+ *   for the overall evaluation.
  *
  * @property {number} baseAuPrc
- *   Output only. The Area under precision recall curve metric based on priors.
+ *   Output only. The Area Under Precision-Recall Curve metric based on priors.
+ *   Micro-averaged for the overall evaluation.
+ *   Deprecated.
+ *
+ * @property {number} auRoc
+ *   Output only. The Area Under Receiver Operating Characteristic curve metric.
+ *   Micro-averaged for the overall evaluation.
+ *
+ * @property {number} logLoss
+ *   Output only. The Log Loss metric.
  *
  * @property {Object[]} confidenceMetricsEntry
- *   Output only. Metrics that have confidence thresholds.
- *   Precision-recall curve can be derived from it.
+ *   Output only. Metrics for each confidence_threshold in
+ *   0.00,0.05,0.10,...,0.95,0.96,0.97,0.98,0.99 and
+ *   position_threshold = INT32_MAX_VALUE.
+ *   Precision-recall curve is derived from them.
+ *   The above metrics may also be supplied for additional values of
+ *   position_threshold.
  *
  *   This object should have the same structure as [ConfidenceMetricsEntry]{@link google.cloud.automl.v1beta1.ConfidenceMetricsEntry}
  *
@@ -71,32 +133,60 @@ const ClassificationEvaluationMetrics = {
    * Metrics for a single confidence threshold.
    *
    * @property {number} confidenceThreshold
-   *   Output only. The confidence threshold value used to compute the metrics.
+   *   Output only. Metrics are computed with an assumption that the model
+   *   never returns predictions with score lower than this value.
+   *
+   * @property {number} positionThreshold
+   *   Output only. Metrics are computed with an assumption that the model
+   *   always returns at most this many predictions (ordered by their score,
+   *   descendingly), but they all still need to meet the confidence_threshold.
    *
    * @property {number} recall
-   *   Output only. Recall under the given confidence threshold.
+   *   Output only. Recall (True Positive Rate) for the given confidence
+   *   threshold.
    *
    * @property {number} precision
-   *   Output only. Precision under the given confidence threshold.
+   *   Output only. Precision for the given confidence threshold.
+   *
+   * @property {number} falsePositiveRate
+   *   Output only. False Positive Rate for the given confidence threshold.
    *
    * @property {number} f1Score
    *   Output only. The harmonic mean of recall and precision.
    *
    * @property {number} recallAt1
-   *   Output only. The recall when only considering the label that has the
-   *   highest prediction score and not below the confidence threshold for each
-   *   example.
+   *   Output only. The Recall (True Positive Rate) when only considering the
+   *   label that has the highest prediction score and not below the confidence
+   *   threshold for each example.
    *
    * @property {number} precisionAt1
    *   Output only. The precision when only considering the label that has the
-   *   highest predictionscore and not below the confidence threshold for each
+   *   highest prediction score and not below the confidence threshold for each
    *   example.
    *
+   * @property {number} falsePositiveRateAt1
+   *   Output only. The False Positive Rate when only considering the label that
+   *   has the highest prediction score and not below the confidence threshold
+   *   for each example.
+   *
    * @property {number} f1ScoreAt1
-   *   Output only. The harmonic mean of
-   *   recall_at1
-   *   and
-   *   precision_at1.
+   *   Output only. The harmonic mean of recall_at1 and precision_at1.
+   *
+   * @property {number} truePositiveCount
+   *   Output only. The number of model created labels that match a ground truth
+   *   label.
+   *
+   * @property {number} falsePositiveCount
+   *   Output only. The number of model created labels that do not match a
+   *   ground truth label.
+   *
+   * @property {number} falseNegativeCount
+   *   Output only. The number of ground truth labels that are not matched
+   *   by a model created label.
+   *
+   * @property {number} trueNegativeCount
+   *   Output only. The number of labels that were not created by the model,
+   *   but if they would, they would not match a ground truth label.
    *
    * @typedef ConfidenceMetricsEntry
    * @memberof google.cloud.automl.v1beta1
@@ -133,8 +223,8 @@ const ClassificationEvaluationMetrics = {
      *
      * @property {number[]} exampleCount
      *   Output only. Value of the specific cell in the confusion matrix.
-     *   The number of values each row is equal to the size of
-     *   annotatin_spec_id.
+     *   The number of values each row has (i.e. the length of the row) is equal
+     *   to the length of the annotation_spec_id field.
      *
      * @typedef Row
      * @memberof google.cloud.automl.v1beta1

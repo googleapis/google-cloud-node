@@ -33,6 +33,11 @@ const VERSION = require('../../package.json').version;
  * `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`, then
  * the id for the item is `{dataset_id}`.
  *
+ * Currently the only supported `location_id` is "us-central1".
+ *
+ * On any input that is documented to expect a string parameter in
+ * snake_case or kebab-case, either of those cases is accepted.
+ *
  * @class
  * @memberof v1beta1
  */
@@ -121,6 +126,15 @@ class AutoMlClient {
       modelEvaluationPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/modelEvaluations/{model_evaluation}'
       ),
+      annotationSpecPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
+      ),
+      tableSpecPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}'
+      ),
+      columnSpecPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}/columnSpecs/{column_spec}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -137,6 +151,16 @@ class AutoMlClient {
         'pageToken',
         'nextPageToken',
         'modelEvaluation'
+      ),
+      listTableSpecs: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tableSpecs'
+      ),
+      listColumnSpecs: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'columnSpecs'
       ),
     };
     let protoFilesRoot = new gax.GoogleProtoFilesRoot();
@@ -183,6 +207,26 @@ class AutoMlClient {
     const deleteModelMetadata = protoFilesRoot.lookup(
       'google.cloud.automl.v1beta1.OperationMetadata'
     );
+    const deployModelResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const deployModelMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1beta1.OperationMetadata'
+    );
+    const undeployModelResponse = protoFilesRoot.lookup(
+      'google.protobuf.Empty'
+    );
+    const undeployModelMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1beta1.OperationMetadata'
+    );
+    const exportModelResponse = protoFilesRoot.lookup('google.protobuf.Empty');
+    const exportModelMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1beta1.OperationMetadata'
+    );
+    const exportEvaluatedExamplesResponse = protoFilesRoot.lookup(
+      'google.protobuf.Empty'
+    );
+    const exportEvaluatedExamplesMetadata = protoFilesRoot.lookup(
+      'google.cloud.automl.v1beta1.OperationMetadata'
+    );
 
     this._descriptors.longrunning = {
       deleteDataset: new gax.LongrunningDescriptor(
@@ -210,6 +254,30 @@ class AutoMlClient {
         deleteModelResponse.decode.bind(deleteModelResponse),
         deleteModelMetadata.decode.bind(deleteModelMetadata)
       ),
+      deployModel: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        deployModelResponse.decode.bind(deployModelResponse),
+        deployModelMetadata.decode.bind(deployModelMetadata)
+      ),
+      undeployModel: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        undeployModelResponse.decode.bind(undeployModelResponse),
+        undeployModelMetadata.decode.bind(undeployModelMetadata)
+      ),
+      exportModel: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        exportModelResponse.decode.bind(exportModelResponse),
+        exportModelMetadata.decode.bind(exportModelMetadata)
+      ),
+      exportEvaluatedExamples: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        exportEvaluatedExamplesResponse.decode.bind(
+          exportEvaluatedExamplesResponse
+        ),
+        exportEvaluatedExamplesMetadata.decode.bind(
+          exportEvaluatedExamplesMetadata
+        )
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -236,6 +304,7 @@ class AutoMlClient {
     // and create an API call method for each.
     const autoMlStubMethods = [
       'createDataset',
+      'updateDataset',
       'getDataset',
       'listDatasets',
       'deleteDataset',
@@ -248,7 +317,16 @@ class AutoMlClient {
       'deployModel',
       'undeployModel',
       'getModelEvaluation',
+      'exportModel',
+      'exportEvaluatedExamples',
       'listModelEvaluations',
+      'getAnnotationSpec',
+      'getTableSpec',
+      'listTableSpecs',
+      'updateTableSpec',
+      'getColumnSpec',
+      'listColumnSpecs',
+      'updateColumnSpec',
     ];
     for (const methodName of autoMlStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -368,6 +446,70 @@ class AutoMlClient {
   }
 
   /**
+   * Updates a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.dataset
+   *   The dataset which replaces the resource on the server.
+   *
+   *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1beta1.Dataset}
+   * @param {Object} [request.updateMask]
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Dataset]{@link google.cloud.automl.v1beta1.Dataset}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const dataset = {};
+   * client.updateDataset({dataset: dataset})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  updateDataset(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'dataset.name': request.dataset.name,
+    });
+
+    return this._innerApiCalls.updateDataset(request, options, callback);
+  }
+
+  /**
    * Gets a dataset.
    *
    * @param {Object} request
@@ -430,9 +572,8 @@ class AutoMlClient {
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
-   *     * `dataset_metadata` - for existence of the case.
-   *
-   *   An example of using the filter is:
+   *     * `dataset_metadata` - for existence of the case (e.g.
+   *               image_classification_dataset_metadata:*). Some examples of using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            translation_dataset_metadata.
@@ -550,9 +691,8 @@ class AutoMlClient {
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
-   *     * `dataset_metadata` - for existence of the case.
-   *
-   *   An example of using the filter is:
+   *     * `dataset_metadata` - for existence of the case (e.g.
+   *               image_classification_dataset_metadata:*). Some examples of using the filter are:
    *
    *     * `translation_dataset_metadata:*` --> The dataset has
    *                                            translation_dataset_metadata.
@@ -696,7 +836,12 @@ class AutoMlClient {
   }
 
   /**
-   * Imports data into a dataset.
+   * Imports data into a dataset. For Tables this method can only be called on an empty Dataset.
+   *
+   * For Tables:
+   * *   A
+   * schema_inference_version
+   *     parameter must be explicitly set.
    * Returns an empty response in the
    * response field when it completes.
    *
@@ -706,7 +851,8 @@ class AutoMlClient {
    *   Required. Dataset name. Dataset must already exist. All imported
    *   annotations and examples will be added.
    * @param {Object} request.inputConfig
-   *   Required. The desired input location.
+   *   Required. The desired input location and its domain specific semantics,
+   *   if any.
    *
    *   This object should have the same structure as [InputConfig]{@link google.cloud.automl.v1beta1.InputConfig}
    * @param {Object} [options]
@@ -815,7 +961,7 @@ class AutoMlClient {
   }
 
   /**
-   * Exports dataset's data to a Google Cloud Storage bucket.
+   * Exports dataset's data to the provided output location.
    * Returns an empty response in the
    * response field when it completes.
    *
@@ -1115,15 +1261,13 @@ class AutoMlClient {
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
-   *     * `model_metadata` - for existence of the case.
-   *     * `dataset_id` - for = or !=.
-   *
-   *   Some examples of using the filter are:
+   *     * `model_metadata` - for existence of the case (e.g.
+   *               video_classification_model_metadata:*).
+   *     * `dataset_id` - for = or !=. Some examples of using the filter are:
    *
    *     * `image_classification_model_metadata:*` --> The model has
    *                                          image_classification_model_metadata.
-   *     * `dataset_id=5` --> The model was created from a sibling dataset with
-   *                      ID 5.
+   *     * `dataset_id=5` --> The model was created from a dataset with ID 5.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1238,15 +1382,13 @@ class AutoMlClient {
    * @param {string} [request.filter]
    *   An expression for filtering the results of the request.
    *
-   *     * `model_metadata` - for existence of the case.
-   *     * `dataset_id` - for = or !=.
-   *
-   *   Some examples of using the filter are:
+   *     * `model_metadata` - for existence of the case (e.g.
+   *               video_classification_model_metadata:*).
+   *     * `dataset_id` - for = or !=. Some examples of using the filter are:
    *
    *     * `image_classification_model_metadata:*` --> The model has
    *                                          image_classification_model_metadata.
-   *     * `dataset_id=5` --> The model was created from a sibling dataset with
-   *                      ID 5.
+   *     * `dataset_id=5` --> The model was created from a dataset with ID 5.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -1287,9 +1429,6 @@ class AutoMlClient {
 
   /**
    * Deletes a model.
-   * If a model is already deployed, this only deletes the model in AutoML BE,
-   * and does not change the status of the deployed model in the production
-   * environment.
    * Returns `google.protobuf.Empty` in the
    * response field when it completes,
    * and `delete_details` in the
@@ -1390,23 +1529,36 @@ class AutoMlClient {
   }
 
   /**
-   * Deploys model.
-   * Returns a DeployModelResponse in the
+   * Deploys a model. If a model is already deployed, deploying it with the
+   * same parameters has no effect. Deploying with different parametrs
+   * (as e.g. changing
+   *
+   * node_number
+   * ) will update the deployment without pausing the model's availability.
+   *
+   * Only applicable for Text Classification, Image Object Detection and Tables;
+   * all other domains manage deployment automatically.
+   *
+   * Returns an empty response in the
    * response field when it completes.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Resource name of the model to deploy.
+   * @param {Object} [request.imageObjectDetectionModelDeploymentMetadata]
+   *   Model deployment metadata specific to Image Object Detection.
+   *
+   *   This object should have the same structure as [ImageObjectDetectionModelDeploymentMetadata]{@link google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
@@ -1418,14 +1570,58 @@ class AutoMlClient {
    * });
    *
    * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the promise pattern.
    * client.deployModel({name: formattedName})
    *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.deployModel({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deployModel({name: formattedName});
+   *
+   * const [response] = await operation.promise();
    */
   deployModel(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1445,8 +1641,12 @@ class AutoMlClient {
   }
 
   /**
-   * Undeploys model.
-   * Returns an `UndeployModelResponse` in the
+   * Undeploys a model. If the model is not deployed this method has no effect.
+   *
+   * Only applicable for Text Classification, Image Object Detection and Tables;
+   * all other domains manage deployment automatically.
+   *
+   * Returns an empty response in the
    * response field when it completes.
    *
    * @param {Object} request
@@ -1459,9 +1659,9 @@ class AutoMlClient {
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
@@ -1473,14 +1673,58 @@ class AutoMlClient {
    * });
    *
    * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the promise pattern.
    * client.undeployModel({name: formattedName})
    *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
    *   })
    *   .catch(err => {
    *     console.error(err);
    *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.undeployModel({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.undeployModel({name: formattedName});
+   *
+   * const [response] = await operation.promise();
    */
   undeployModel(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
@@ -1550,6 +1794,263 @@ class AutoMlClient {
     });
 
     return this._innerApiCalls.getModelEvaluation(request, options, callback);
+  }
+
+  /**
+   * Exports a trained, "export-able", model to a user specified Google Cloud
+   * Storage location. A model is considered export-able if and only if it has
+   * an export format defined for it in
+   *
+   * ModelExportOutputConfig.
+   *
+   * Returns an empty response in the
+   * response field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model to export.
+   * @param {Object} request.outputConfig
+   *   Required. The desired output location and configuration.
+   *
+   *   This object should have the same structure as [ModelExportOutputConfig]{@link google.cloud.automl.v1beta1.ModelExportOutputConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.exportModel(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.exportModel(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportModel(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  exportModel(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.exportModel(request, options, callback);
+  }
+
+  /**
+   * Exports examples on which the model was evaluated (i.e. which were in the
+   * TEST set of the dataset the model was created from), together with their
+   * ground truth annotations and the annotations created (predicted) by the
+   * model.
+   * The examples, ground truth and predictions are exported in the state
+   * they were at the moment the model was evaluated.
+   *
+   * This export is available only for 30 days since the model evaluation is
+   * created.
+   *
+   * Currently only available for Tables.
+   *
+   * Returns an empty response in the
+   * response field when it completes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model whose evaluated examples are to
+   *   be exported.
+   * @param {Object} request.outputConfig
+   *   Required. The desired output location and configuration.
+   *
+   *   This object should have the same structure as [ExportEvaluatedExamplesOutputConfig]{@link google.cloud.automl.v1beta1.ExportEvaluatedExamplesOutputConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.exportEvaluatedExamples(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.exportEvaluatedExamples(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.modelPath('[PROJECT]', '[LOCATION]', '[MODEL]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportEvaluatedExamples(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  exportEvaluatedExamples(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.exportEvaluatedExamples(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1736,6 +2237,637 @@ class AutoMlClient {
     );
   }
 
+  /**
+   * Gets an annotation spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource name of the annotation spec to retrieve.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [AnnotationSpec]{@link google.cloud.automl.v1beta1.AnnotationSpec}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnnotationSpec]{@link google.cloud.automl.v1beta1.AnnotationSpec}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.annotationSpecPath('[PROJECT]', '[LOCATION]', '[DATASET]', '[ANNOTATION_SPEC]');
+   * client.getAnnotationSpec({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getAnnotationSpec(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getAnnotationSpec(request, options, callback);
+  }
+
+  /**
+   * Gets a table spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource name of the table spec to retrieve.
+   * @param {Object} [request.fieldMask]
+   *   Mask specifying which fields to read.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.tableSpecPath('[PROJECT]', '[LOCATION]', '[DATASET]', '[TABLE_SPEC]');
+   * client.getTableSpec({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getTableSpec(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getTableSpec(request, options, callback);
+  }
+
+  /**
+   * Lists table specs in a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The resource name of the dataset to list table specs from.
+   * @param {Object} [request.fieldMask]
+   *   Mask specifying which fields to read.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {string} [request.filter]
+   *   Filter expression, see go/filtering.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListTableSpecsResponse]{@link google.cloud.automl.v1beta1.ListTableSpecsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListTableSpecsResponse]{@link google.cloud.automl.v1beta1.ListTableSpecsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   *
+   * client.listTableSpecs({parent: formattedParent})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listTableSpecs(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listTableSpecs({parent: formattedParent}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listTableSpecs(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listTableSpecs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listTableSpecs}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listTableSpecs} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The resource name of the dataset to list table specs from.
+   * @param {Object} [request.fieldMask]
+   *   Mask specifying which fields to read.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {string} [request.filter]
+   *   Filter expression, see go/filtering.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec} on 'data' event.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.datasetPath('[PROJECT]', '[LOCATION]', '[DATASET]');
+   * client.listTableSpecsStream({parent: formattedParent})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listTableSpecsStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listTableSpecs.createStream(
+      this._innerApiCalls.listTableSpecs,
+      request,
+      options
+    );
+  }
+
+  /**
+   * Updates a table spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.tableSpec
+   *   The table spec which replaces the resource on the server.
+   *
+   *   This object should have the same structure as [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}
+   * @param {Object} [request.updateMask]
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const tableSpec = {};
+   * client.updateTableSpec({tableSpec: tableSpec})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  updateTableSpec(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'table_spec.name': request.tableSpec.name,
+    });
+
+    return this._innerApiCalls.updateTableSpec(request, options, callback);
+  }
+
+  /**
+   * Gets a column spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource name of the column spec to retrieve.
+   * @param {Object} [request.fieldMask]
+   *   Mask specifying which fields to read.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.columnSpecPath('[PROJECT]', '[LOCATION]', '[DATASET]', '[TABLE_SPEC]', '[COLUMN_SPEC]');
+   * client.getColumnSpec({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getColumnSpec(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getColumnSpec(request, options, callback);
+  }
+
+  /**
+   * Lists column specs in a table spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The resource name of the table spec to list column specs from.
+   * @param {Object} [request.fieldMask]
+   *   Mask specifying which fields to read.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {string} [request.filter]
+   *   Filter expression, see go/filtering.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListColumnSpecsResponse]{@link google.cloud.automl.v1beta1.ListColumnSpecsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListColumnSpecsResponse]{@link google.cloud.automl.v1beta1.ListColumnSpecsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.tableSpecPath('[PROJECT]', '[LOCATION]', '[DATASET]', '[TABLE_SPEC]');
+   *
+   * client.listColumnSpecs({parent: formattedParent})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.tableSpecPath('[PROJECT]', '[LOCATION]', '[DATASET]', '[TABLE_SPEC]');
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listColumnSpecs(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listColumnSpecs({parent: formattedParent}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listColumnSpecs(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listColumnSpecs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listColumnSpecs}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listColumnSpecs} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The resource name of the table spec to list column specs from.
+   * @param {Object} [request.fieldMask]
+   *   Mask specifying which fields to read.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {string} [request.filter]
+   *   Filter expression, see go/filtering.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec} on 'data' event.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.tableSpecPath('[PROJECT]', '[LOCATION]', '[DATASET]', '[TABLE_SPEC]');
+   * client.listColumnSpecsStream({parent: formattedParent})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listColumnSpecsStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listColumnSpecs.createStream(
+      this._innerApiCalls.listColumnSpecs,
+      request,
+      options
+    );
+  }
+
+  /**
+   * Updates a column spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.columnSpec
+   *   The column spec which replaces the resource on the server.
+   *
+   *   This object should have the same structure as [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}
+   * @param {Object} [request.updateMask]
+   *   The update mask applies to the resource. For the `FieldMask` definition,
+   *   see
+   *
+   *   https:
+   *   //developers.google.com/protocol-buffers
+   *   // /docs/reference/google.protobuf#fieldmask
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const automl = require('@google-cloud/automl');
+   *
+   * const client = new automl.v1beta1.AutoMlClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const columnSpec = {};
+   * client.updateColumnSpec({columnSpec: columnSpec})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  updateColumnSpec(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'column_spec.name': request.columnSpec.name,
+    });
+
+    return this._innerApiCalls.updateColumnSpec(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1801,6 +2933,62 @@ class AutoMlClient {
       location: location,
       model: model,
       model_evaluation: modelEvaluation,
+    });
+  }
+
+  /**
+   * Return a fully-qualified annotation_spec resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} dataset
+   * @param {String} annotationSpec
+   * @returns {String}
+   */
+  annotationSpecPath(project, location, dataset, annotationSpec) {
+    return this._pathTemplates.annotationSpecPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      annotation_spec: annotationSpec,
+    });
+  }
+
+  /**
+   * Return a fully-qualified table_spec resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} dataset
+   * @param {String} tableSpec
+   * @returns {String}
+   */
+  tableSpecPath(project, location, dataset, tableSpec) {
+    return this._pathTemplates.tableSpecPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      table_spec: tableSpec,
+    });
+  }
+
+  /**
+   * Return a fully-qualified column_spec resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} dataset
+   * @param {String} tableSpec
+   * @param {String} columnSpec
+   * @returns {String}
+   */
+  columnSpecPath(project, location, dataset, tableSpec, columnSpec) {
+    return this._pathTemplates.columnSpecPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      table_spec: tableSpec,
+      column_spec: columnSpec,
     });
   }
 
@@ -1943,6 +3131,166 @@ class AutoMlClient {
     return this._pathTemplates.modelEvaluationPathTemplate.match(
       modelEvaluationName
     ).model_evaluation;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).project;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).location;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).dataset;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the annotation_spec.
+   */
+  matchAnnotationSpecFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).annotation_spec;
+  }
+
+  /**
+   * Parse the tableSpecName from a table_spec resource.
+   *
+   * @param {String} tableSpecName
+   *   A fully-qualified path representing a table_spec resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromTableSpecName(tableSpecName) {
+    return this._pathTemplates.tableSpecPathTemplate.match(tableSpecName)
+      .project;
+  }
+
+  /**
+   * Parse the tableSpecName from a table_spec resource.
+   *
+   * @param {String} tableSpecName
+   *   A fully-qualified path representing a table_spec resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromTableSpecName(tableSpecName) {
+    return this._pathTemplates.tableSpecPathTemplate.match(tableSpecName)
+      .location;
+  }
+
+  /**
+   * Parse the tableSpecName from a table_spec resource.
+   *
+   * @param {String} tableSpecName
+   *   A fully-qualified path representing a table_spec resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromTableSpecName(tableSpecName) {
+    return this._pathTemplates.tableSpecPathTemplate.match(tableSpecName)
+      .dataset;
+  }
+
+  /**
+   * Parse the tableSpecName from a table_spec resource.
+   *
+   * @param {String} tableSpecName
+   *   A fully-qualified path representing a table_spec resources.
+   * @returns {String} - A string representing the table_spec.
+   */
+  matchTableSpecFromTableSpecName(tableSpecName) {
+    return this._pathTemplates.tableSpecPathTemplate.match(tableSpecName)
+      .table_spec;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .project;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .location;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .dataset;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the table_spec.
+   */
+  matchTableSpecFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .table_spec;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the column_spec.
+   */
+  matchColumnSpecFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .column_spec;
   }
 }
 

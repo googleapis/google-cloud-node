@@ -28,18 +28,43 @@
  *
  *   This object should have the same structure as [ClassificationAnnotation]{@link google.cloud.automl.v1beta1.ClassificationAnnotation}
  *
+ * @property {Object} imageObjectDetection
+ *   Annotation details for image object detection.
+ *
+ *   This object should have the same structure as [ImageObjectDetectionAnnotation]{@link google.cloud.automl.v1beta1.ImageObjectDetectionAnnotation}
+ *
+ * @property {Object} videoClassification
+ *   Annotation details for video classification.
+ *   Returned for Video Classification predictions.
+ *
+ *   This object should have the same structure as [VideoClassificationAnnotation]{@link google.cloud.automl.v1beta1.VideoClassificationAnnotation}
+ *
+ * @property {Object} textExtraction
+ *   Annotation details for text extraction.
+ *
+ *   This object should have the same structure as [TextExtractionAnnotation]{@link google.cloud.automl.v1beta1.TextExtractionAnnotation}
+ *
+ * @property {Object} textSentiment
+ *   Annotation details for text sentiment.
+ *
+ *   This object should have the same structure as [TextSentimentAnnotation]{@link google.cloud.automl.v1beta1.TextSentimentAnnotation}
+ *
+ * @property {Object} tables
+ *   Annotation details for Tables.
+ *
+ *   This object should have the same structure as [TablesAnnotation]{@link google.cloud.automl.v1beta1.TablesAnnotation}
+ *
  * @property {string} annotationSpecId
  *   Output only . The resource ID of the annotation spec that
  *   this annotation pertains to. The annotation spec comes from either an
  *   ancestor dataset, or the dataset that was used to train the model in use.
  *
  * @property {string} displayName
- *   Output only. The value of
- *   AnnotationSpec.display_name
- *   when the model was trained. Because this field returns a value at model
- *   training time, for different models trained using the same dataset, the
- *   returned value could be different as model owner could update the
- *   display_name between any two model training.
+ *   Output only. The value of AnnotationSpec.display_name when the model
+ *   was trained. Because this field returns a value at model training time,
+ *   for different models trained using the same dataset, the returned value
+ *   could be different as model owner could update the display_name between
+ *   any two model training.
  *
  * @typedef AnnotationPayload
  * @memberof google.cloud.automl.v1beta1
