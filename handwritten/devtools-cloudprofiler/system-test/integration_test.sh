@@ -28,7 +28,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="${SERVICE_KEY}"
 # Move test to go path.
 export GOPATH="$HOME/go"
 mkdir -p "$GOPATH/src"
-cp -R "testing" "$GOPATH/src/proftest"
+cp -R "system-test" "$GOPATH/src/proftest"
 
 # Run test.
 cd "$GOPATH/src/proftest"
