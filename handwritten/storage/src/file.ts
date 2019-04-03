@@ -24,7 +24,7 @@ import * as extend from 'extend';
 import * as fs from 'fs';
 const hashStreamValidation = require('hash-stream-validation');
 import * as mime from 'mime';
-import * as once from 'once';
+import * as once from 'onetime';
 import * as os from 'os';
 const pumpify = require('pumpify');
 import * as resumableUpload from 'gcs-resumable-upload';
