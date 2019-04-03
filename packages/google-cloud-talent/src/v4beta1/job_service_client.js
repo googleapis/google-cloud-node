@@ -103,6 +103,9 @@ class JobServiceClient {
       tenantPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}'
       ),
+      companyOldPathTemplate: new gax.PathTemplate(
+        'projects/{project}/companies/{company}'
+      ),
       jobOldPathTemplate: new gax.PathTemplate(
         'projects/{project}/jobs/{jobs}'
       ),
@@ -2275,6 +2278,20 @@ class JobServiceClient {
   }
 
   /**
+   * Return a fully-qualified company_old resource name string.
+   *
+   * @param {String} project
+   * @param {String} company
+   * @returns {String}
+   */
+  companyOldPath(project, company) {
+    return this._pathTemplates.companyOldPathTemplate.render({
+      project: project,
+      company: company,
+    });
+  }
+
+  /**
    * Return a fully-qualified job_old resource name string.
    *
    * @param {String} project
@@ -2308,6 +2325,30 @@ class JobServiceClient {
    */
   matchTenantFromTenantName(tenantName) {
     return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+  }
+
+  /**
+   * Parse the companyOldName from a company_old resource.
+   *
+   * @param {String} companyOldName
+   *   A fully-qualified path representing a company_old resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromCompanyOldName(companyOldName) {
+    return this._pathTemplates.companyOldPathTemplate.match(companyOldName)
+      .project;
+  }
+
+  /**
+   * Parse the companyOldName from a company_old resource.
+   *
+   * @param {String} companyOldName
+   *   A fully-qualified path representing a company_old resources.
+   * @returns {String} - A string representing the company.
+   */
+  matchCompanyFromCompanyOldName(companyOldName) {
+    return this._pathTemplates.companyOldPathTemplate.match(companyOldName)
+      .company;
   }
 
   /**

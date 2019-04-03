@@ -103,6 +103,9 @@ class CompletionClient {
       tenantPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}'
       ),
+      companyOldPathTemplate: new gax.PathTemplate(
+        'projects/{project}/companies/{company}'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -339,6 +342,20 @@ class CompletionClient {
   }
 
   /**
+   * Return a fully-qualified company_old resource name string.
+   *
+   * @param {String} project
+   * @param {String} company
+   * @returns {String}
+   */
+  companyOldPath(project, company) {
+    return this._pathTemplates.companyOldPathTemplate.render({
+      project: project,
+      company: company,
+    });
+  }
+
+  /**
    * Parse the tenantName from a tenant resource.
    *
    * @param {String} tenantName
@@ -358,6 +375,30 @@ class CompletionClient {
    */
   matchTenantFromTenantName(tenantName) {
     return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+  }
+
+  /**
+   * Parse the companyOldName from a company_old resource.
+   *
+   * @param {String} companyOldName
+   *   A fully-qualified path representing a company_old resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromCompanyOldName(companyOldName) {
+    return this._pathTemplates.companyOldPathTemplate.match(companyOldName)
+      .project;
+  }
+
+  /**
+   * Parse the companyOldName from a company_old resource.
+   *
+   * @param {String} companyOldName
+   *   A fully-qualified path representing a company_old resources.
+   * @returns {String} - A string representing the company.
+   */
+  matchCompanyFromCompanyOldName(companyOldName) {
+    return this._pathTemplates.companyOldPathTemplate.match(companyOldName)
+      .company;
   }
 }
 
