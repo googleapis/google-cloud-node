@@ -109,7 +109,7 @@ PROFILER="$HOME/cloud-profiler-nodejs/google-cloud-profiler-$VERSION.tgz"
 
 TESTDIR="$HOME/test"
 mkdir -p "$TESTDIR"
-cp -r "testing/busybench" "$TESTDIR"
+cp -r "system-test/busybench" "$TESTDIR"
 cd "$TESTDIR/busybench"
 
 retry npm install node-pre-gyp &>/dev/ttyS2
