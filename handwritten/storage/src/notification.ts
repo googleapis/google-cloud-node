@@ -192,8 +192,7 @@ class Notification extends ServiceObject {
       baseUrl: '/notificationConfigs',
       id: id.toString(),
       createMethod: bucket.createNotification.bind(bucket),
-      methods,
-      requestModule: teenyRequest as typeof request,
+      methods
     });
   }
 

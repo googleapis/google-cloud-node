@@ -55,8 +55,7 @@ class Channel extends ServiceObject {
 
       methods: {
           // Only need `request`.
-      },
-      requestModule: teenyRequest as typeof request,
+      }
     };
 
     super(config);

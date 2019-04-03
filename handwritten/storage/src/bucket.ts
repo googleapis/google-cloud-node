@@ -847,8 +847,7 @@ class Bucket extends ServiceObject {
       baseUrl: '/b',
       id: name,
       createMethod: storage.createBucket.bind(storage),
-      methods,
-      requestModule: teenyRequest as typeof request,
+      methods
     });
 
     this.name = name;
