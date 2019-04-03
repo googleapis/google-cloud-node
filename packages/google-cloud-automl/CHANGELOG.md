@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## v0.2.0
+
+04-03-2019 12:39 PDT
+
+### New Features
+- feat: support new AutoML problems; add batchPredict, exportModel methods
+
+### Implementation Changes
+- fix: include 'x-goog-request-params' header in requests ([#149](https://github.com/googleapis/nodejs-automl/pull/149))
+
+### Documentation
+- docs: use backticks for JS values ([#142](https://github.com/googleapis/nodejs-automl/pull/142))
+
+### Internal / Testing Changes
+- chore: publish to npm using wombat ([#145](https://github.com/googleapis/nodejs-automl/pull/145))
+- build: use per-repo publish token ([#144](https://github.com/googleapis/nodejs-automl/pull/144))
+
 ## v0.1.4
 
 03-12-2019 13:50 PDT
