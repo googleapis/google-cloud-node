@@ -17,7 +17,7 @@
 
 const fs = require('fs');
 const {assert} = require('chai');
-const execa = require('execa');
+const {execSync} = require('child_process');
 
 const outputFile = 'output.mp3';
 
@@ -32,7 +32,7 @@ describe('quickstart', () => {
 
   it('should synthesize speech to local mp3 file', async () => {
     assert.strictEqual(fs.existsSync(outputFile), false);
-    const {stdout} = await execa.shell('node quickstart');
+    const stdout = execSync('node quickstart');
     assert.match(stdout, /Audio content written to file: output.mp3/);
     assert.ok(fs.existsSync(outputFile));
   });
