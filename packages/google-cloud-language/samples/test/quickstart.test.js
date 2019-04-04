@@ -16,11 +16,11 @@
 'use strict';
 
 const {assert} = require('chai');
-const execa = require('execa');
+const {execSync} = require('child_process');
 
 describe('quickstart', () => {
   it('should analyze sentiment in text', async () => {
-    const {stdout} = await execa.shell('node quickstart.js');
+    const stdout = execSync('node quickstart.js');
     assert(stdout, /Text: Hello, world!/);
     assert(stdout, /Sentiment score: /);
     assert(stdout, /Sentiment magnitude: /);
