@@ -15,11 +15,11 @@
 'use strict';
 
 const {assert} = require('chai');
-const execa = require('execa');
+const {execSync} = require('child_process');
 
 describe('iot samples', () => {
   it('should run the quickstart', async () => {
-    const {stdout} = await execa.shell('node quickstart');
+    const stdout = execSync('node quickstart');
     assert.match(stdout, /\d resource\(s\) found./);
   });
 });
