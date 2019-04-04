@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * A Snapshot object allows you to interact with a Google Compute Engine
@@ -135,7 +134,6 @@ class Snapshot extends common.ServiceObject {
        */
       id: name,
       methods: methods,
-      requestModule: teenyRequest,
     };
     if (isDisk) {
       config.createMethod = scope.createSnapshot.bind(scope);

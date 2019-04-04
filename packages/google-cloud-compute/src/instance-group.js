@@ -21,7 +21,6 @@ const common = require('@google-cloud/common');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * You can create and manage groups of virtual machine instances so that you
@@ -173,7 +172,6 @@ class InstanceGroup extends common.ServiceObject {
       id: name,
       createMethod: zone.createInstanceGroup.bind(zone),
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * The parent {@link Zone} instance of this {@link InstanceGroup} instance.

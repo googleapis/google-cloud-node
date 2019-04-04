@@ -22,7 +22,6 @@ const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {replaceProjectIdToken} = require('@google-cloud/projectify');
-const {teenyRequest} = require('teeny-request');
 
 const Disk = require('./disk.js');
 
@@ -225,7 +224,6 @@ class VM extends common.ServiceObject {
       id: name,
       createMethod: zone.createVM.bind(zone),
       methods: methods,
-      requestModule: teenyRequest,
     });
 
     /**

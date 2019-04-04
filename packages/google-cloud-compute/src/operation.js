@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * An Operation object allows you to interact with a Google Compute Engine
@@ -175,7 +174,6 @@ class Operation extends common.Operation {
        */
       id: name,
       methods: methods,
-      requestModule: teenyRequest,
     });
 
     /**

@@ -20,7 +20,6 @@ const common = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * Health checks ensure that Compute Engine forwards new connections only to
@@ -182,7 +181,6 @@ class HealthCheck extends common.ServiceObject {
         compute.createHealthCheck(name, options, callback);
       },
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * The parent {@link Compute} instance of this {@link HealthCheck} instance.

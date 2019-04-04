@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * A Project object allows you to interact with your Google Compute Engine
@@ -96,7 +95,6 @@ class Project extends common.ServiceObject {
       baseUrl: '',
       id: '',
       methods: methods,
-      requestModule: teenyRequest,
     });
   }
 }

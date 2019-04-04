@@ -20,7 +20,6 @@ const arrify = require('arrify');
 const common = require('@google-cloud/common');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * A managed instance group uses an instance template to create a group of identical instances.
@@ -141,7 +140,6 @@ class InstanceGroupManager extends common.ServiceObject {
       id: name,
       // createMethod: zone.createInstanceGroupManager.bind(zone),
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * The parent {@link Zone} instance of this {@link InstanceGroup} instance.

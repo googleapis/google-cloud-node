@@ -25,7 +25,6 @@ const {GCEImages} = require('gce-images');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
-const {teenyRequest} = require('teeny-request');
 
 const Autoscaler = require('./autoscaler.js');
 const Disk = require('./disk.js');
@@ -139,7 +138,6 @@ class Zone extends common.ServiceObject {
        */
       id: name,
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * The parent {@link Compute} instance of this {@link Zone} instance.

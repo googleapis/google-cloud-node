@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * An Image object allows you to interact with a Google Compute Engine image.
@@ -157,7 +156,6 @@ class Image extends common.ServiceObject {
       id: name,
       createMethod: compute.createImage.bind(compute),
       methods: methods,
-      requestModule: teenyRequest,
     });
   }
   /**

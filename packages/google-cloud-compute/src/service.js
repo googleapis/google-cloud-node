@@ -21,7 +21,6 @@ const common = require('@google-cloud/common');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * An HTTP(S) load balancing backend service is a centralized service for
@@ -182,7 +181,6 @@ class Service extends common.ServiceObject {
       id: name,
       createMethod: compute.createService.bind(compute),
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * The parent {@link Compute} instance of this {@link Service} instance.

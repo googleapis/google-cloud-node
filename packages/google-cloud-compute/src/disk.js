@@ -20,7 +20,6 @@ const common = require('@google-cloud/common');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 const Snapshot = require('./snapshot.js');
 
 /**
@@ -173,7 +172,6 @@ class Disk extends common.ServiceObject {
       id: name,
       createMethod: zone.createDisk.bind(zone),
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * @name Disk#name

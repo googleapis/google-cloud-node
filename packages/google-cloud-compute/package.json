@@ -36,7 +36,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.31.0",
+    "@google-cloud/common": "^0.32.0",
     "@google-cloud/paginator": "^0.2.0",
     "@google-cloud/projectify": "^0.3.0",
     "@google-cloud/promisify": "^0.4.0",
@@ -46,8 +46,7 @@
     "extend": "^3.0.1",
     "gce-images": "^1.0.0",
     "is": "^3.2.1",
-    "string-format-obj": "^1.1.1",
-    "teeny-request": "^3.10.0"
+    "string-format-obj": "^1.1.1"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",

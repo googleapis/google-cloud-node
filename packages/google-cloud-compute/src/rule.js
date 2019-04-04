@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * Forwarding rules work in conjunction with target pools and target instances
@@ -187,7 +186,6 @@ class Rule extends common.ServiceObject {
       id: name,
       createMethod: scope.createRule.bind(scope),
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * @name Rule#scope

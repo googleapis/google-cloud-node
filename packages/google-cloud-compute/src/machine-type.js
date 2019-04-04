@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * A MachineType object allows you to interact with a Google Compute Engine
@@ -129,7 +128,6 @@ class MachineType extends common.ServiceObject {
        */
       id: name,
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * The parent {@link Zone} instance of this {@link MachineType} instance.

@@ -18,7 +18,6 @@
 
 const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * An Subnetwork object allows you to interact with a Google Compute Engine
@@ -169,7 +168,6 @@ class Subnetwork extends common.ServiceObject {
       id: name,
       createMethod: region.createSubnetwork.bind(region),
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * @name Subnetwork#name

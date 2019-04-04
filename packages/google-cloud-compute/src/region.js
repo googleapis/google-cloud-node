@@ -20,7 +20,6 @@ const common = require('@google-cloud/common');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {paginator} = require('@google-cloud/paginator');
-const {teenyRequest} = require('teeny-request');
 
 const Address = require('./address.js');
 const Network = require('./network.js');
@@ -132,7 +131,6 @@ class Region extends common.ServiceObject {
        */
       id: name,
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * @name Region#name

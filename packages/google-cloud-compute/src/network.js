@@ -20,7 +20,6 @@ const common = require('@google-cloud/common');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
-const {teenyRequest} = require('teeny-request');
 
 /**
  * A Network object allows you to interact with a Google Compute Engine network.
@@ -168,7 +167,6 @@ class Network extends common.ServiceObject {
       id: name,
       createMethod: compute.createNetwork.bind(compute),
       methods: methods,
-      requestModule: teenyRequest,
     });
     /**
      * The parent {@link Compute} instance of this {@link Network} instance.
