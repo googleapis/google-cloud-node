@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-import {DeleteCallback, GetConfig, ServiceObject} from '@google-cloud/common';
+import {DeleteCallback, GetConfig, Metadata, ServiceObject} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
 import * as fs from 'fs';
 
 import groupBy = require('lodash.groupby');
-import {teenyRequest} from 'teeny-request';
 const zonefile = require('dns-zonefile');
 
 import {Change, CreateChangeCallback, CreateChangeRequest} from './change';
 import {Record, RecordMetadata, RecordObject} from './record';
 import {DNS, CreateZoneRequest} from '.';
-import * as r from 'request';
 import {Readable} from 'stream';
-import {GetResponse, InstanceResponseCallback} from '@google-cloud/common/build/src/service-object';
+import {InstanceResponseCallback} from '@google-cloud/common';
+import {GetResponse} from '@google-cloud/common/build/src/service-object';
 
 /**
  * Config to set for the change.
@@ -50,7 +49,7 @@ export interface CreateChangeRequest {
  * @property {Change} 0 A {@link Change} object.
  * @property {object} 1 The full API response.
  */
-export type CreateChangeResponse = [Change, r.Response];
+export type CreateChangeResponse = [Change, Metadata];
 
 /**
  * @callback CreateChangeCallback
@@ -59,14 +58,14 @@ export type CreateChangeResponse = [Change, r.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface CreateChangeCallback {
-  (err: Error|null, change?: Change, apiResponse?: r.Response): void;
+  (err: Error|null, change?: Change, apiResponse?: Metadata): void;
 }
 
 /**
  * @typedef {array} DeleteZoneResponse
  * @property {object} 0 The full API response.
  */
-export type DeleteZoneResponse = [r.Response];
+export type DeleteZoneResponse = [Metadata];
 
 /**
  * @callback DeleteZoneCallback
@@ -81,10 +80,10 @@ export interface DeleteZoneConfig {
 
 export interface GetRecordsCallback {
   (err: Error|null, records?: Record[]|null, nextQuery?: {}|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
 
-export type GetRecordsResponse = [Record[], r.Response];
+export type GetRecordsResponse = [Record[], Metadata];
 
 export interface GetRecordsRequest {
   autoPaginate?: boolean;
@@ -125,7 +124,7 @@ export interface GetChangesRequest {
  * @property {Change[]} 0 Array of {@link Change} instances.
  * @property {object} 1 The full API response.
  */
-export type GetChangesResponse = [Change[], r.Response];
+export type GetChangesResponse = [Change[], Metadata];
 
 /**
  * @callback GetChangesCallback
@@ -136,14 +135,14 @@ export type GetChangesResponse = [Change[], r.Response];
 
 export interface GetChangesCallback {
   (err: Error|null, changes?: Change[]|null, nextQuery?: {}|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
 
 /**
  * @typedef {array} ZoneExportResponse
  * @property {object} 0 The full API response.
  */
-export type ZoneExportResponse = [r.Response];
+export type ZoneExportResponse = [Metadata];
 
 /**
  * @callback ZoneExportCallback
@@ -335,8 +334,7 @@ class Zone extends ServiceObject<Zone> {
        */
       id: name,
       createMethod: dns.createZone.bind(dns),
-      methods,
-      requestModule: teenyRequest as typeof r,
+      methods
     });
     /**
      * @name Zone#name

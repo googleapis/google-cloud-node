@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-import {GoogleAuthOptions, Service} from '@google-cloud/common';
+import {GoogleAuthOptions, Metadata, Service} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as arrify from 'arrify';
-import * as r from 'request';
 import {Stream} from 'stream';
-import {teenyRequest} from 'teeny-request';
 
 import {Zone} from './zone';
 
@@ -40,13 +38,13 @@ export interface DNSConfig extends GoogleAuthOptions {
 
 export interface GetZonesCallback {
   (err: Error|null, zones: Zone[]|null, nextQuery?: GetZonesRequest|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
 
-export type GetZonesResponse = [Zone[], GetZonesRequest | null, r.Response];
+export type GetZonesResponse = [Zone[], GetZonesRequest | null, Metadata];
 
 export interface GetZoneCallback {
-  (err: Error|null, zone?: Zone|null, apiResponse?: r.Response): void;
+  (err: Error|null, zone?: Zone|null, apiResponse?: Metadata): void;
 }
 
 export interface CreateZoneRequest {
@@ -55,7 +53,7 @@ export interface CreateZoneRequest {
   name?: string;
 }
 
-export type CreateZoneResponse = [Zone, r.Response];
+export type CreateZoneResponse = [Zone, Metadata];
 
 /**
  * @typedef {object} ClientConfig
@@ -124,8 +122,7 @@ class DNS extends Service {
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform',
       ],
-      packageJson: require('../../package.json'),
-      requestModule: teenyRequest as typeof r,
+      packageJson: require('../../package.json')
     };
     super(config, options);
 

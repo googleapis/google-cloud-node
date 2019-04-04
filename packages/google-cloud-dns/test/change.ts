@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-import {ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
+import {Metadata, ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
-import {Response} from 'request';
 
 import {Change} from '../src/change';
 
@@ -110,7 +109,7 @@ describe('Change', () => {
 
       it('should execute callback with error & apiResponse', done => {
         change.create(
-            {}, (err: Error, change: Change, apiResponse_: Response) => {
+            {}, (err: Error, change: Change, apiResponse_: Metadata) => {
               assert.strictEqual(err, error);
               assert.strictEqual(change, null);
               assert.strictEqual(apiResponse_, apiResponse);
@@ -134,7 +133,7 @@ describe('Change', () => {
 
       it('should execute callback with self & API response', done => {
         change.create(
-            {}, (err: Error, change_: Change, apiResponse_: Response) => {
+            {}, (err: Error, change_: Change, apiResponse_: Metadata) => {
               assert.ifError(err);
               assert.strictEqual(change_, change);
               assert.strictEqual(apiResponse_, apiResponse);

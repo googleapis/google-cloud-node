@@ -16,7 +16,6 @@
 
 import * as assert from 'assert';
 import * as fs from 'fs';
-import {Response} from 'request';
 import * as tmp from 'tmp';
 import * as util from 'util';
 import * as uuid from 'uuid';
@@ -276,7 +275,7 @@ describe('dns', () => {
         assert.ifError(err);
         const onRecordsReceived =
             (err?: Error|null, records?: Record[]|null, nextQuery?: {}|null,
-             apiResponse?: Response) => {
+             apiResponse?: Metadata) => {
               if (nextQuery) {
                 ZONE.getRecords(nextQuery, onRecordsReceived);
                 return;
