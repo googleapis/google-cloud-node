@@ -20,6 +20,7 @@ const path = require('path');
 const {Storage} = require('@google-cloud/storage');
 const {assert} = require('chai');
 const execa = require('execa');
+const fetch = require('node-fetch');
 const uuid = require('uuid');
 const {promisify} = require('util');
 
@@ -31,10 +32,13 @@ const bucket = storage.bucket(bucketName);
 const fileName = 'test.txt';
 const movedFileName = 'test2.txt';
 const copiedFileName = 'test3.txt';
+const signedFileName = 'signed-upload.txt';
 const kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US;
 const filePath = path.join(cwd, 'resources', fileName);
 const downloadFilePath = path.join(cwd, 'downloaded.txt');
 const cmd = `node files.js`;
+
+const fileContent = fs.readFileSync(filePath, 'utf-8');
 
 before(async () => {
   await bucket.create();
@@ -137,11 +141,61 @@ it('should make a file public', async () => {
   );
 });
 
-it('should generate a signed URL for a file', async () => {
+it('should generate a v2 signed URL for a file', async () => {
   const output = await exec(
     `${cmd} generate-signed-url ${bucketName} ${copiedFileName}`
   );
   assert.match(output, new RegExp(`The signed url for ${copiedFileName} is `));
+});
+
+it('should generate a v4 signed URL and read a file', async () => {
+  const output = await exec(
+    `${cmd} generate-v4-read-signed-url ${bucketName} ${copiedFileName}`
+  );
+
+  const expected = /URL:\n([^\s]+)/;
+  assert.match(output, expected);
+
+  const match = output.match(expected);
+  const res = await fetch(match[1]);
+  const text = await res.text();
+  assert.strictEqual(text, fileContent);
+});
+
+it('should generate a v4 signed URL and upload a file', async () => {
+  const output = await exec(
+    `${cmd} generate-v4-upload-signed-url ${bucketName} ${signedFileName}`
+  );
+
+  const expected = /URL:\n([^\s]+)/;
+  assert.match(output, expected);
+
+  const match = output.match(expected);
+  const req = {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/octet-stream'},
+    body: fileContent,
+  };
+  await fetch(match[1], req);
+
+  await new Promise((resolve, reject) => {
+    let remoteContent = '';
+    bucket
+      .file(signedFileName)
+      .createReadStream()
+      .on('response', res => {
+        assert.strictEqual(
+          res.headers['content-type'],
+          'application/octet-stream'
+        );
+      })
+      .on('data', buf => (remoteContent += buf.toString()))
+      .on('end', () => {
+        assert.strictEqual(remoteContent, fileContent);
+        resolve();
+      })
+      .on('error', reject);
+  });
 });
 
 it('should get metadata for a file', async () => {

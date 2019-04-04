@@ -298,11 +298,12 @@ async function generateSignedUrl(bucketName, filename) {
 
   // These options will allow temporary read access to the file
   const options = {
+    version: 'v2', // defaults to 'v2' if missing.
     action: 'read',
     expires: Date.now() + 1000 * 60 * 60, // one hour
   };
 
-  // Get a signed URL for the file
+  // Get a v2 signed URL for the file
   const [url] = await storage
     .bucket(bucketName)
     .file(filename)
@@ -310,6 +311,79 @@ async function generateSignedUrl(bucketName, filename) {
 
   console.log(`The signed url for ${filename} is ${url}.`);
   // [END storage_generate_signed_url]
+}
+
+async function generateV4ReadSignedUrl(bucketName, filename) {
+  // [START storage_generate_signed_url_v4]
+  // Imports the Google Cloud client library
+  const {Storage} = require('@google-cloud/storage');
+
+  // Creates a client
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to access, e.g. file.txt';
+
+  // These options will allow temporary read access to the file
+  const options = {
+    version: 'v4',
+    action: 'read',
+    expires: Date.now() + 15 * 60 * 1000, // 15 minutes
+  };
+
+  // Get a v4 signed URL for reading the file
+  const [url] = await storage
+    .bucket(bucketName)
+    .file(filename)
+    .getSignedUrl(options);
+
+  console.log('Generated GET signed URL:');
+  console.log(url);
+  console.log('You can use this URL with any user agent, for example:');
+  console.log(`curl '${url}'`);
+  // [END storage_generate_signed_url_v4]
+}
+
+async function generateV4UploadSignedUrl(bucketName, filename) {
+  // [START storage_generate_upload_signed_url_v4]
+  // Imports the Google Cloud client library
+  const {Storage} = require('@google-cloud/storage');
+
+  // Creates a client
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const filename = 'File to access, e.g. file.txt';
+
+  // These options will allow temporary uploading of the file with outgoing
+  // Content-Type: application/octet-stream header.
+  const options = {
+    version: 'v4',
+    action: 'write',
+    expires: Date.now() + 15 * 60 * 1000, // 15 minutes
+    contentType: 'application/octet-stream',
+  };
+
+  // Get a v4 signed URL for uploading file
+  const [url] = await storage
+    .bucket(bucketName)
+    .file(filename)
+    .getSignedUrl(options);
+
+  console.log('Generated PUT signed URL:');
+  console.log(url);
+  console.log('You can use this URL with any user agent, for example:');
+  console.log(
+    "curl -X PUT -H 'Content-Type: application/octet-stream' " +
+      `--upload-file my-file '${url}'`
+  );
+  // [END storage_generate_upload_signed_url_v4]
 }
 
 async function moveFile(bucketName, srcFilename, destFilename) {
@@ -428,6 +502,18 @@ require(`yargs`)
     `Generates a signed URL for a file.`,
     {},
     opts => generateSignedUrl(opts.bucketName, opts.fileName)
+  )
+  .command(
+    'generate-v4-read-signed-url <bucketName> <fileName>',
+    'Generates a v4 signed URL for reading a file.',
+    {},
+    opts => generateV4ReadSignedUrl(opts.bucketName, opts.fileName)
+  )
+  .command(
+    'generate-v4-upload-signed-url <bucketName> <fileName>',
+    'Generates a v4 signed URL for uploading a file.',
+    {},
+    opts => generateV4UploadSignedUrl(opts.bucketName, opts.fileName)
   )
   .command(
     `move <bucketName> <srcFileName> <destFileName>`,
