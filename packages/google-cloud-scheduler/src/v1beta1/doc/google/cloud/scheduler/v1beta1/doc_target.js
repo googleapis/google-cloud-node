@@ -17,9 +17,8 @@
 
 /**
  * Http target. The job will be pushed to the job handler by means of
- * an HTTP request via an
- * http_method such as
- * HTTP POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
+ * an HTTP request via an http_method such as HTTP
+ * POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
  * response code in the range [200 - 299]. A failure to receive a response
  * constitutes a failed execution. For a redirected request, the response
  * returned by the redirected request is considered.
@@ -61,6 +60,28 @@
  *   method is POST, PUT, or PATCH. It is an error to set body on a job with an
  *   incompatible HttpMethod.
  *
+ * @property {Object} oauthToken
+ *   If specified, an
+ *   [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
+ *   will be generated and attached as an `Authorization` header in the HTTP
+ *   request.
+ *
+ *   This type of authorization should be used when sending requests to a GCP
+ *   endpoint.
+ *
+ *   This object should have the same structure as [OAuthToken]{@link google.cloud.scheduler.v1beta1.OAuthToken}
+ *
+ * @property {Object} oidcToken
+ *   If specified, an
+ *   [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
+ *   token will be generated and attached as an `Authorization` header in the
+ *   HTTP request.
+ *
+ *   This type of authorization should be used when sending requests to third
+ *   party endpoints.
+ *
+ *   This object should have the same structure as [OidcToken]{@link google.cloud.scheduler.v1beta1.OidcToken}
+ *
  * @typedef HttpTarget
  * @memberof google.cloud.scheduler.v1beta1
  * @see [google.cloud.scheduler.v1beta1.HttpTarget definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1beta1/target.proto}
@@ -71,14 +92,14 @@ const HttpTarget = {
 
 /**
  * App Engine target. The job will be pushed to a job handler by means
- * of an HTTP request via an
- * http_method
- * such as HTTP POST, HTTP GET, etc. The job is acknowledged by means of an HTTP
- * response code in the range [200 - 299]. Error 503 is considered an App Engine
- * system error instead of an application error. Requests returning error 503
- * will be retried regardless of retry configuration and not counted against
- * retry counts. Any other response code, or a failure to receive a response
- * before the deadline, constitutes a failed attempt.
+ * of an HTTP request via an http_method such
+ * as HTTP POST, HTTP GET, etc. The job is acknowledged by means of an
+ * HTTP response code in the range [200 - 299]. Error 503 is
+ * considered an App Engine system error instead of an application
+ * error. Requests returning error 503 will be retried regardless of
+ * retry configuration and not counted against retry counts. Any other
+ * response code, or a failure to receive a response before the
+ * deadline, constitutes a failed attempt.
  *
  * @property {number} httpMethod
  *   The HTTP method to use for the request. PATCH and OPTIONS are not
@@ -112,10 +133,10 @@ const HttpTarget = {
  *     This header can be modified, but Cloud Scheduler will append
  *     `"AppEngine-Google; (+http://code.google.com/appengine)"` to the
  *     modified `User-Agent`.
+ *   * `X-CloudScheduler`: This header will be set to true.
  *
- *   If the job has an
- *   body, Cloud
- *   Scheduler sets the following headers:
+ *   If the job has an body, Cloud Scheduler sets
+ *   the following headers:
  *
  *   * `Content-Type`: By default, the `Content-Type` header is set to
  *     `"application/octet-stream"`. The default can be overridden by explictly
@@ -128,22 +149,17 @@ const HttpTarget = {
  *   The headers below are output only. They cannot be set or overridden:
  *
  *   * `X-Google-*`: For Google internal use only.
- *   * `X-AppEngine-*`: For Google internal use only. See
- *     [Reading request
- *     headers](https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers).
+ *   * `X-AppEngine-*`: For Google internal use only.
  *
  *   In addition, some App Engine headers, which contain
- *   job-specific information, are also be sent to the job handler; see
- *   [request
- *   headers](https://cloud.google.com/appengine/docs/standard/python/config/cron#securing_urls_for_cron).
+ *   job-specific information, are also be sent to the job handler.
  *
  * @property {string} body
  *   Body.
  *
  *   HTTP request body. A request body is allowed only if the HTTP method is
  *   POST or PUT. It will result in invalid argument error to set a body on a
- *   job with an incompatible
- *   HttpMethod.
+ *   job with an incompatible HttpMethod.
  *
  * @typedef AppEngineHttpTarget
  * @memberof google.cloud.scheduler.v1beta1
@@ -250,57 +266,99 @@ const PubsubTarget = {
  *     example <app-id>.appspot.com, which is associated with the
  *     job's project ID.
  *
- *   * `service =`
- *   service
+ *   * `service =` service
  *
- *   * `version =`
- *   version
+ *   * `version =` version
  *
  *   * `version_dot_service =`
- *     version `+ '.'
- *     +` service
+ *     version `+ '.' +`
+ *     service
  *
- *   * `instance =`
- *   instance
+ *   * `instance =` instance
  *
  *   * `instance_dot_service =`
- *     instance `+
- *     '.' +` service
+ *     instance `+ '.' +`
+ *     service
  *
  *   * `instance_dot_version =`
- *     instance `+
- *     '.' +` version
+ *     instance `+ '.' +`
+ *     version
  *
  *   * `instance_dot_version_dot_service =`
- *     instance `+
- *     '.' +` version
- *     `+ '.' +`
+ *     instance `+ '.' +`
+ *     version `+ '.' +`
  *     service
  *
  *
- *   If service is
- *   empty, then the job will be sent to the service which is the default
- *   service when the job is attempted.
+ *   If service is empty, then the job will be sent
+ *   to the service which is the default service when the job is attempted.
  *
- *   If version is
- *   empty, then the job will be sent to the version which is the default
- *   version when the job is attempted.
+ *   If version is empty, then the job will be sent
+ *   to the version which is the default version when the job is attempted.
  *
- *   If instance is
- *   empty, then the job will be sent to an instance which is available when the
- *   job is attempted.
+ *   If instance is empty, then the job will be
+ *   sent to an instance which is available when the job is attempted.
  *
  *   If service,
  *   version, or
- *   instance is
- *   invalid, then the job will be sent to the default version of the default
- *   service when the job is attempted.
+ *   instance is invalid, then the job will be sent
+ *   to the default version of the default service when the job is attempted.
  *
  * @typedef AppEngineRouting
  * @memberof google.cloud.scheduler.v1beta1
  * @see [google.cloud.scheduler.v1beta1.AppEngineRouting definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1beta1/target.proto}
  */
 const AppEngineRouting = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Contains information needed for generating an
+ * [OAuth token](https://developers.google.com/identity/protocols/OAuth2).
+ * This type of authorization should be used when sending requests to a GCP
+ * endpoint.
+ *
+ * @property {string} serviceAccountEmail
+ *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+ *   to be used for generating OAuth token.
+ *   The service account must be within the same project as the job. The caller
+ *   must have iam.serviceAccounts.actAs permission for the service account.
+ *
+ * @property {string} scope
+ *   OAuth scope to be used for generating OAuth access token.
+ *   If not specified, "https://www.googleapis.com/auth/cloud-platform"
+ *   will be used.
+ *
+ * @typedef OAuthToken
+ * @memberof google.cloud.scheduler.v1beta1
+ * @see [google.cloud.scheduler.v1beta1.OAuthToken definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1beta1/target.proto}
+ */
+const OAuthToken = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Contains information needed for generating an
+ * [OpenID Connect
+ * token](https://developers.google.com/identity/protocols/OpenIDConnect). This
+ * type of authorization should be used when sending requests to third party
+ * endpoints.
+ *
+ * @property {string} serviceAccountEmail
+ *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+ *   to be used for generating OIDC token.
+ *   The service account must be within the same project as the job. The caller
+ *   must have iam.serviceAccounts.actAs permission for the service account.
+ *
+ * @property {string} audience
+ *   Audience to be used when generating OIDC token. If not specified, the URI
+ *   specified in target will be used.
+ *
+ * @typedef OidcToken
+ * @memberof google.cloud.scheduler.v1beta1
+ * @see [google.cloud.scheduler.v1beta1.OidcToken definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1beta1/target.proto}
+ */
+const OidcToken = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

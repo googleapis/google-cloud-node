@@ -16,8 +16,7 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for listing jobs using
- * ListJobs.
+ * Request message for listing jobs using ListJobs.
  *
  * @property {string} parent
  *   Required.
@@ -37,13 +36,10 @@
  *   A token identifying a page of results the server will return. To
  *   request the first page results, page_token must be empty. To
  *   request the next page of results, page_token must be the value of
- *   next_page_token
- *   returned from the previous call to
- *   ListJobs. It is
- *   an error to switch the value of
- *   filter or
- *   order_by while
- *   iterating through pages.
+ *   next_page_token returned from
+ *   the previous call to ListJobs. It is an error to
+ *   switch the value of filter or
+ *   order_by while iterating through pages.
  *
  * @typedef ListJobsRequest
  * @memberof google.cloud.scheduler.v1beta1
@@ -54,8 +50,7 @@ const ListJobsRequest = {
 };
 
 /**
- * Response message for listing jobs using
- * ListJobs.
+ * Response message for listing jobs using ListJobs.
  *
  * @property {Object[]} jobs
  *   The list of jobs.
@@ -64,11 +59,10 @@ const ListJobsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results. Pass this value in the
- *   page_token
- *   field in the subsequent call to
- *   ListJobs to
- *   retrieve the next page of results. If this is empty it indicates that there
- *   are no more results through which to paginate.
+ *   page_token field in the subsequent call to
+ *   ListJobs to retrieve the next page of results.
+ *   If this is empty it indicates that there are no more results
+ *   through which to paginate.
  *
  *   The page token is valid for only 2 hours.
  *
@@ -81,8 +75,7 @@ const ListJobsResponse = {
 };
 
 /**
- * Request message for
- * GetJob.
+ * Request message for GetJob.
  *
  * @property {string} name
  *   Required.
@@ -99,8 +92,7 @@ const GetJobRequest = {
 };
 
 /**
- * Request message for
- * CreateJob.
+ * Request message for CreateJob.
  *
  * @property {string} parent
  *   Required.
@@ -112,8 +104,7 @@ const GetJobRequest = {
  *   Required.
  *
  *   The job to add. The user can optionally specify a name for the
- *   job in name.
- *   name cannot be the same as an
+ *   job in name. name cannot be the same as an
  *   existing job. If a name is not specified then the system will
  *   generate a random unique name that will be returned
  *   (name) in the response.
@@ -129,14 +120,12 @@ const CreateJobRequest = {
 };
 
 /**
- * Request message for
- * UpdateJob.
+ * Request message for UpdateJob.
  *
  * @property {Object} job
  *   Required.
  *
- *   The new job properties. name
- *   must be specified.
+ *   The new job properties. name must be specified.
  *
  *   Output only fields cannot be modified using UpdateJob.
  *   Any value specified for an output only field will be ignored.
@@ -175,8 +164,7 @@ const DeleteJobRequest = {
 };
 
 /**
- * Request message for
- * PauseJob.
+ * Request message for PauseJob.
  *
  * @property {string} name
  *   Required.
@@ -193,8 +181,7 @@ const PauseJobRequest = {
 };
 
 /**
- * Request message for
- * ResumeJob.
+ * Request message for ResumeJob.
  *
  * @property {string} name
  *   Required.
