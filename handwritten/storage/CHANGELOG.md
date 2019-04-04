@@ -4,6 +4,49 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## v2.5.0
+
+04-04-2019 12:27 PDT
+
+This release brings an option to file#getSignedURL to create a version 4 Signed URL.
+
+```javascript
+file.getSignedUrl({
+  version: 'v4', // optional, defaults to v2 (existing version)
+  action: 'read',
+  expires: FUTURE_DATE,
+})
+```
+
+### New Features
+- feat: introduce v4 signed url ([#637](https://github.com/googleapis/nodejs-storage/pull/637))
+
+### Dependencies
+- chore(deps): update dependency @types/node to v11.13.0 ([#662](https://github.com/googleapis/nodejs-storage/pull/662))
+- chore(deps): update dependency @types/tmp to v0.1.0
+- chore(deps): upgrade to newest version of @google-cloud/common ([#657](https://github.com/googleapis/nodejs-storage/pull/657))
+- chore(deps): update dependency typescript to ~3.4.0
+- chore(deps): update dependency tmp to ^0.1.0 ([#641](https://github.com/googleapis/nodejs-storage/pull/641))
+
+### Documentation
+- docs: regenerate the samples/README.md ([#649](https://github.com/googleapis/nodejs-storage/pull/649))
+- docs: slight difference in how nightly synthtool run generated README ([#650](https://github.com/googleapis/nodejs-storage/pull/650))
+- docs: new synthtool generated README ([#645](https://github.com/googleapis/nodejs-storage/pull/645))
+- docs(samples): refactor the quickstart to match the new rubric ([#647](https://github.com/googleapis/nodejs-storage/pull/647))
+- docs: update README format
+- docs: add requires_billing, retire .cloud-repo-tools.json ([#644](https://github.com/googleapis/nodejs-storage/pull/644))
+- docs: add additional api_id field ([#640](https://github.com/googleapis/nodejs-storage/pull/640))
+- docs: document destination option ([#633](https://github.com/googleapis/nodejs-storage/pull/633))
+- docs: clarify in docs, the meaning of ASIA and coldline ([#632](https://github.com/googleapis/nodejs-storage/pull/632))
+- docs: add a .repo-metadata.json ([#639](https://github.com/googleapis/nodejs-storage/pull/639))
+
+### Internal / Testing Changes
+- test(v2-sign): add multi-valued headers system-test ([#646](https://github.com/googleapis/nodejs-storage/pull/646))
+- refactor: replace once with onetime ([#660](https://github.com/googleapis/nodejs-storage/pull/660))
+- fix: do not download cached files ([#643](https://github.com/googleapis/nodejs-storage/pull/643))
+- chore: publish to npm using wombat ([#634](https://github.com/googleapis/nodejs-storage/pull/634))
+- build: use per-repo npm publish token ([#630](https://github.com/googleapis/nodejs-storage/pull/630))
+
 ## v2.4.3
 
 03-13-2019 17:10 PDT
