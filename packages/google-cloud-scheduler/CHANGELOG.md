@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## v0.3.0
+
+04-04-2019 13:46 PDT
+
+### New Features
+- feat(v1beta1): added oauthToken, oidcToken and attemptDeadline
+
+The generation of the library includes these changes to v1beta1 (v1 unchanged):
+
+- `HttpTarget`: added `oauthToken` and `oidcToken` fields
+- `Job`: added `attemptDeadline` field
+
+
+### Implementation Changes
+- fix: include 'x-goog-request-params' header in requests ([#68](https://github.com/googleapis/nodejs-scheduler/pull/68))
+
+### Internal / Testing Changes
+- chore: publish to npm using wombat ([#66](https://github.com/googleapis/nodejs-scheduler/pull/66))
+- build: use per-repo publish token ([#63](https://github.com/googleapis/nodejs-scheduler/pull/63))
+- refactor: update json import paths ([#62](https://github.com/googleapis/nodejs-scheduler/pull/62))
+
 ## v0.2.0
 
 03-11-2019 12:48 PDT
