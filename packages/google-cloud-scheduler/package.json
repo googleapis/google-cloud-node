@@ -42,19 +42,19 @@
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
+    "@google-cloud/nodejs-repo-tools": "^3.2.0",
     "codecov": "^3.0.0",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "linkinator": "^1.1.2",
     "mocha": "^6.0.0",
     "nyc": "^13.0.0",
     "power-assert": "^1.4.4",
-    "prettier": "^1.7.4",
-    "linkinator": "^1.1.2"
+    "prettier": "^1.7.4"
   }
 }
