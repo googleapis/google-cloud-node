@@ -28,6 +28,7 @@
  *
  * @property {string} content
  *   The content of the input in string format.
+ *   Cloud audit logging exempt since it is based on user data.
  *
  * @property {string} gcsContentUri
  *   The Google Cloud Storage URI where the file content is located.
@@ -87,8 +88,8 @@ const Document = {
  *
  * @property {Object} sentiment
  *   For calls to AnalyzeSentiment or if
- *   AnnotateTextRequest.Features.extract_document_sentiment
- *   is set to true, this field will contain the sentiment for the sentence.
+ *   AnnotateTextRequest.Features.extract_document_sentiment is set to
+ *   true, this field will contain the sentiment for the sentence.
  *
  *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1.Sentiment}
  *
@@ -116,8 +117,9 @@ const Sentence = {
  * @property {Object.<string, string>} metadata
  *   Metadata associated with the entity.
  *
- *   Currently, Wikipedia URLs and Knowledge Graph MIDs are provided, if
- *   available. The associated keys are "wikipedia_url" and "mid", respectively.
+ *   For most entity types, the metadata is a Wikipedia URL (`wikipedia_url`)
+ *   and Knowledge Graph MID (`mid`), if they are available. For the metadata
+ *   associated with other entity types, see the Type table below.
  *
  * @property {number} salience
  *   The salience score associated with the entity in the [0, 1.0] range.
@@ -135,9 +137,9 @@ const Sentence = {
  *
  * @property {Object} sentiment
  *   For calls to AnalyzeEntitySentiment or if
- *   AnnotateTextRequest.Features.extract_entity_sentiment
- *   is set to true, this field will contain the aggregate sentiment expressed
- *   for this entity in the provided document.
+ *   AnnotateTextRequest.Features.extract_entity_sentiment is set to
+ *   true, this field will contain the aggregate sentiment expressed for this
+ *   entity in the provided document.
  *
  *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1.Sentiment}
  *
@@ -149,7 +151,10 @@ const Entity = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * The type of the entity.
+   * The type of the entity. For most entity types, the associated metadata is a
+   * Wikipedia URL (`wikipedia_url`) and Knowledge Graph MID (`mid`). The table
+   * below lists the associated fields for entities that have different
+   * metadata.
    *
    * @enum {number}
    * @memberof google.cloud.language.v1
@@ -182,42 +187,67 @@ const Entity = {
     EVENT: 4,
 
     /**
-     * Work of art
+     * Artwork
      */
     WORK_OF_ART: 5,
 
     /**
-     * Consumer goods
+     * Consumer product
      */
     CONSUMER_GOOD: 6,
 
     /**
-     * Other types
+     * Other types of entities
      */
     OTHER: 7,
 
     /**
-     * Phone number
+     * Phone number<br><br>
+     * The metadata lists the phone number, formatted according to local
+     * convention, plus whichever additional elements appear in the text:<ul>
+     * <li><code>number</code> &ndash; the actual number, broken down into
+     * sections as per local convention</li> <li><code>national_prefix</code>
+     * &ndash; country code, if detected</li> <li><code>area_code</code> &ndash;
+     * region or area code, if detected</li> <li><code>extension</code> &ndash;
+     * phone extension (to be dialed after connection), if detected</li></ul>
      */
     PHONE_NUMBER: 9,
 
     /**
-     * Address
+     * Address<br><br>
+     * The metadata identifies the street number and locality plus whichever
+     * additional elements appear in the text:<ul>
+     * <li><code>street_number</code> &ndash; street number</li>
+     * <li><code>locality</code> &ndash; city or town</li>
+     * <li><code>street_name</code> &ndash; street/route name, if detected</li>
+     * <li><code>postal_code</code> &ndash; postal code, if detected</li>
+     * <li><code>country</code> &ndash; country, if detected</li>
+     * <li><code>broad_region</code> &ndash; administrative area, such as the
+     * state, if detected</li> <li><code>narrow_region</code> &ndash; smaller
+     * administrative area, such as county, if detected</li>
+     * <li><code>sublocality</code> &ndash; used in Asian addresses to demark a
+     * district within a city, if detected</li></ul>
      */
     ADDRESS: 10,
 
     /**
-     * Date
+     * Date<br><br>
+     * The metadata identifies the components of the date:<ul>
+     * <li><code>year</code> &ndash; four digit year, if detected</li>
+     * <li><code>month</code> &ndash; two digit month number, if detected</li>
+     * <li><code>day</code> &ndash; two digit day number, if detected</li></ul>
      */
     DATE: 11,
 
     /**
-     * Number
+     * Number<br><br>
+     * The metadata is the number itself.
      */
     NUMBER: 12,
 
     /**
-     * Price
+     * Price<br><br>
+     * The metadata identifies the <code>value</code> and <code>currency</code>.
      */
     PRICE: 13
   }
@@ -1336,9 +1366,9 @@ const DependencyEdge = {
  *
  * @property {Object} sentiment
  *   For calls to AnalyzeEntitySentiment or if
- *   AnnotateTextRequest.Features.extract_entity_sentiment
- *   is set to true, this field will contain the sentiment expressed for this
- *   mention of the entity in the provided document.
+ *   AnnotateTextRequest.Features.extract_entity_sentiment is set to
+ *   true, this field will contain the sentiment expressed for this mention of
+ *   the entity in the provided document.
  *
  *   This object should have the same structure as [Sentiment]{@link google.cloud.language.v1.Sentiment}
  *
@@ -1382,9 +1412,7 @@ const EntityMention = {
  *
  * @property {number} beginOffset
  *   The API calculates the beginning offset of the content in the original
- *   document according to the
- *   EncodingType specified in the API
- *   request.
+ *   document according to the EncodingType specified in the API request.
  *
  * @typedef TextSpan
  * @memberof google.cloud.language.v1
@@ -1445,8 +1473,7 @@ const AnalyzeSentimentRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field
- *   for more details.
+ *   See Document.language field for more details.
  *
  * @property {Object[]} sentences
  *   The sentiment for all the sentences in the document.
@@ -1493,8 +1520,7 @@ const AnalyzeEntitySentimentRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field
- *   for more details.
+ *   See Document.language field for more details.
  *
  * @typedef AnalyzeEntitySentimentResponse
  * @memberof google.cloud.language.v1
@@ -1536,8 +1562,7 @@ const AnalyzeEntitiesRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field
- *   for more details.
+ *   See Document.language field for more details.
  *
  * @typedef AnalyzeEntitiesResponse
  * @memberof google.cloud.language.v1
@@ -1584,8 +1609,7 @@ const AnalyzeSyntaxRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field
- *   for more details.
+ *   See Document.language field for more details.
  *
  * @typedef AnalyzeSyntaxResponse
  * @memberof google.cloud.language.v1
@@ -1713,8 +1737,7 @@ const AnnotateTextRequest = {
  * @property {string} language
  *   The language of the text, which will be the same as the language specified
  *   in the request or, if not specified, the automatically-detected language.
- *   See Document.language field
- *   for more details.
+ *   See Document.language field for more details.
  *
  * @property {Object[]} categories
  *   Categories identified in the input document.
