@@ -32,7 +32,6 @@
   "scripts": {
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "system-test": "mocha build/system-test --timeout 600000",
     "presystem-test": "npm run compile",
     "test": "nyc mocha build/test",
@@ -71,7 +70,6 @@
     "xdg-basedir": "^3.0.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "@google-cloud/pubsub": "^0.28.0",
     "@types/arrify": "^1.0.4",
     "@types/async": "^2.0.49",
