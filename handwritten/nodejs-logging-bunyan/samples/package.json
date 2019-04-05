@@ -23,7 +23,6 @@
     "@google-cloud/logging": "^4.0.0",
     "chai": "^4.2.0",
     "delay": "^4.0.0",
-    "execa": "^1.0.0",
     "got": "^9.4.0",
     "mocha": "^6.0.0"
   }

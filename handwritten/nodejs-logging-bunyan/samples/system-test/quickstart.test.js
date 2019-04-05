@@ -17,13 +17,15 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
+
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
 describe('quickstart samples', () => {
   it('should write using bunyan', async () => {
-    const {stdout} = await execa.shell('node quickstart.js', {cwd});
+    const stdout = execSync('node quickstart.js', {cwd});
     assert.match(stdout, /99%/);
   });
 });
