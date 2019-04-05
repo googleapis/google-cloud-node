@@ -17,7 +17,7 @@
 import {DeleteCallback, GetConfig, Metadata, ServiceObject} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as fs from 'fs';
 
 import groupBy = require('lodash.groupby');
@@ -465,8 +465,10 @@ class Zone extends ServiceObject<Zone> {
     };
     const body = Object.assign(
         {
-          additions: groupByType(arrify(config.add).map(x => x.toJSON())),
-          deletions: groupByType(arrify(config.delete).map(x => x.toJSON())),
+          additions: groupByType(
+              (arrify(config.add) as Record[]).map(x => x.toJSON())),
+          deletions: groupByType(
+              (arrify(config.delete) as Record[]).map(x => x.toJSON())),
         },
         config);
     delete body.add;
@@ -646,7 +648,7 @@ class Zone extends ServiceObject<Zone> {
       callback = recordsOrCallback;
       records = [];
     } else {
-      records = arrify<Record|string>(recordsOrCallback);
+      records = arrify(recordsOrCallback) as Array<Record|string>;
     }
 
     if (typeof records[0] === 'string') {

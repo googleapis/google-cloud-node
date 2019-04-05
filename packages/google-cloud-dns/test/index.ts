@@ -16,7 +16,7 @@
 
 import {Service, ServiceConfig, ServiceOptions, util} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import {CoreOptions, OptionsWithUri, Response} from 'request';
