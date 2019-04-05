@@ -1,27 +1,30 @@
 {
   "name": "@google-cloud/automl-samples",
   "description": "Samples for the Cloud AutoML Client Library for Node.js.",
+  "version": "0.0.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
     "node": ">=8"
   },
-  "files": [
-    "!test/*"
-  ],
   "repository": "googleapis/nodejs-automl",
   "private": true,
+  "nyc": {
+    "exclude": [
+      "**/*.test.js"
+    ]
+  },
   "scripts": {
-    "test": "mocha --timeout 600000 --recursive"
+    "test": "mocha --timeout 600000"
   },
   "dependencies": {
     "@google-cloud/automl": "^0.2.0",
+    "chai": "^4.2.0",
+    "execa": "^1.0.0",
     "mathjs": "^5.5.0",
-    "yargs": "^13.2.1",
-    "execa":"^1.0.0"
+    "yargs": "^13.2.1"
   },
   "devDependencies": {
-    "mocha": "^6.0.1",
-    "chai": "^4.2.0"
+    "mocha": "^6.0.1"
   }
 }
