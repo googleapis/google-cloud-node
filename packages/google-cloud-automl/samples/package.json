@@ -12,12 +12,13 @@
   "repository": "googleapis/nodejs-automl",
   "private": true,
   "scripts": {
-    "test": "mocha --timeout 600000"
+    "test": "mocha --timeout 600000 --recursive"
   },
   "dependencies": {
     "@google-cloud/automl": "^0.2.0",
     "mathjs": "^5.5.0",
-    "yargs": "^13.2.1"
+    "yargs": "^13.2.1",
+    "execa":"^1.0.0"
   },
   "devDependencies": {
     "mocha": "^6.0.1",
