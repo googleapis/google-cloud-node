@@ -232,11 +232,11 @@ class CloudTasksClient {
    *   The location name.
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} [request.filter]
-   *   `filter` can be used to specify a subset of queues. Any
-   *   Queue field can be used as a filter and
-   *   several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
-   *   filter syntax is the same as described in [Stackdriver's Advanced Logs
-   *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+   *   `filter` can be used to specify a subset of queues. Any Queue
+   *   field can be used as a filter and several operators as supported.
+   *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
+   *   described in
+   *   [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
    *
    *   Sample filter "state: PAUSED".
    *
@@ -357,11 +357,11 @@ class CloudTasksClient {
    *   The location name.
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} [request.filter]
-   *   `filter` can be used to specify a subset of queues. Any
-   *   Queue field can be used as a filter and
-   *   several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
-   *   filter syntax is the same as described in [Stackdriver's Advanced Logs
-   *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+   *   `filter` can be used to specify a subset of queues. Any Queue
+   *   field can be used as a filter and several operators as supported.
+   *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
+   *   described in
+   *   [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
    *
    *   Sample filter "state: PAUSED".
    *
@@ -465,15 +465,14 @@ class CloudTasksClient {
    * Creates a queue.
    *
    * Queues created with this method allow tasks to live for a maximum of 31
-   * days. After a task is 31 days old, the task will be deleted regardless of
-   * whether it was dispatched or not.
+   * days. After a task is 31 days old, the task will be deleted regardless of whether
+   * it was dispatched or not.
    *
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and
-   * queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
-   * this method.
+   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
+   * before using this method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -491,8 +490,7 @@ class CloudTasksClient {
    *
    *   The queue to create.
    *
-   *   Queue's name cannot be the same as
-   *   an existing queue.
+   *   Queue's name cannot be the same as an existing queue.
    *
    *   This object should have the same structure as [Queue]{@link google.cloud.tasks.v2beta3.Queue}
    * @param {Object} [options]
@@ -553,15 +551,14 @@ class CloudTasksClient {
    * the queue if it does exist.
    *
    * Queues created with this method allow tasks to live for a maximum of 31
-   * days. After a task is 31 days old, the task will be deleted regardless of
-   * whether it was dispatched or not.
+   * days. After a task is 31 days old, the task will be deleted regardless of whether
+   * it was dispatched or not.
    *
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and
-   * queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
-   * this method.
+   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
+   * before using this method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -570,13 +567,11 @@ class CloudTasksClient {
    *
    *   The queue to create or update.
    *
-   *   The queue's name must be
-   *   specified.
+   *   The queue's name must be specified.
    *
    *   Output only fields cannot be modified using UpdateQueue.
    *   Any value specified for an output only field will be ignored.
-   *   The queue's name cannot be
-   *   changed.
+   *   The queue's name cannot be changed.
    *
    *   This object should have the same structure as [Queue]{@link google.cloud.tasks.v2beta3.Queue}
    * @param {Object} [request.updateMask]
@@ -642,9 +637,8 @@ class CloudTasksClient {
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and
-   * queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
-   * this method.
+   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
+   * before using this method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -757,10 +751,9 @@ class CloudTasksClient {
    *
    * If a queue is paused then the system will stop dispatching tasks
    * until the queue is resumed via
-   * ResumeQueue. Tasks can
-   * still be added when the queue is paused. A queue is paused if its
-   * state is
-   * PAUSED.
+   * ResumeQueue. Tasks can still be added
+   * when the queue is paused. A queue is paused if its
+   * state is PAUSED.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -820,17 +813,14 @@ class CloudTasksClient {
    *
    * This method resumes a queue after it has been
    * PAUSED or
-   * DISABLED. The state of a
-   * queue is stored in the queue's
-   * state; after calling this method
-   * it will be set to
-   * RUNNING.
+   * DISABLED. The state of a queue is stored
+   * in the queue's state; after calling this method it
+   * will be set to RUNNING.
    *
    * WARNING: Resuming many high-QPS queues at the same time can
    * lead to target overloading. If you are resuming high-QPS
    * queues, follow the 500/50/5 pattern described in
-   * [Managing Cloud Tasks Scaling
-   * Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
+   * [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -886,9 +876,9 @@ class CloudTasksClient {
   }
 
   /**
-   * Gets the access control policy for a
-   * Queue. Returns an empty policy if the
-   * resource exists and does not have a policy set.
+   * Gets the access control policy for a Queue.
+   * Returns an empty policy if the resource exists and does not have a policy
+   * set.
    *
    * Authorization requires the following
    * [Google IAM](https://cloud.google.com/iam) permission on the specified
@@ -949,8 +939,8 @@ class CloudTasksClient {
   }
 
   /**
-   * Sets the access control policy for a
-   * Queue. Replaces any existing policy.
+   * Sets the access control policy for a Queue. Replaces any existing
+   * policy.
    *
    * Note: The Cloud Console does not check queue-level IAM permissions yet.
    * Project-level permissions are required to use the Cloud Console.
@@ -1026,10 +1016,9 @@ class CloudTasksClient {
   }
 
   /**
-   * Returns permissions that a caller has on a
-   * Queue. If the resource does not exist,
-   * this will return an empty set of permissions, not a
-   * NOT_FOUND error.
+   * Returns permissions that a caller has on a Queue.
+   * If the resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
    *
    * Note: This operation is designed to be used for building permission-aware
    * UIs and command-line tools, not for authorization checking. This operation
@@ -1100,10 +1089,10 @@ class CloudTasksClient {
   /**
    * Lists the tasks in a queue.
    *
-   * By default, only the BASIC
-   * view is retrieved due to performance considerations;
-   * response_view
-   * controls the subset of information which is returned.
+   * By default, only the BASIC view is retrieved
+   * due to performance considerations;
+   * response_view controls the
+   * subset of information which is returned.
    *
    * The tasks may be returned in any order. The ordering may change at any
    * time.
@@ -1116,19 +1105,18 @@ class CloudTasksClient {
    *   The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {number} [request.responseView]
-   *   The response_view specifies which subset of the
-   *   Task will be returned.
+   *   The response_view specifies which subset of the Task will be
+   *   returned.
    *
-   *   By default response_view is
-   *   BASIC; not all information is
-   *   retrieved by default because some data, such as payloads, might be
-   *   desirable to return only when needed because of its large size or because
-   *   of the sensitivity of data that it contains.
+   *   By default response_view is BASIC; not all
+   *   information is retrieved by default because some data, such as
+   *   payloads, might be desirable to return only when needed because
+   *   of its large size or because of the sensitivity of data that it
+   *   contains.
    *
-   *   Authorization for FULL
-   *   requires `cloudtasks.tasks.fullView` [Google
-   *   IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   Authorization for FULL requires
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta3.View}
    * @param {number} [request.pageSize]
@@ -1246,19 +1234,18 @@ class CloudTasksClient {
    *   The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {number} [request.responseView]
-   *   The response_view specifies which subset of the
-   *   Task will be returned.
+   *   The response_view specifies which subset of the Task will be
+   *   returned.
    *
-   *   By default response_view is
-   *   BASIC; not all information is
-   *   retrieved by default because some data, such as payloads, might be
-   *   desirable to return only when needed because of its large size or because
-   *   of the sensitivity of data that it contains.
+   *   By default response_view is BASIC; not all
+   *   information is retrieved by default because some data, such as
+   *   payloads, might be desirable to return only when needed because
+   *   of its large size or because of the sensitivity of data that it
+   *   contains.
    *
-   *   Authorization for FULL
-   *   requires `cloudtasks.tasks.fullView` [Google
-   *   IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   Authorization for FULL requires
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta3.View}
    * @param {number} [request.pageSize]
@@ -1310,19 +1297,18 @@ class CloudTasksClient {
    *   The task name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {number} [request.responseView]
-   *   The response_view specifies which subset of the
-   *   Task will be returned.
+   *   The response_view specifies which subset of the Task will be
+   *   returned.
    *
-   *   By default response_view is
-   *   BASIC; not all information is
-   *   retrieved by default because some data, such as payloads, might be
-   *   desirable to return only when needed because of its large size or because
-   *   of the sensitivity of data that it contains.
+   *   By default response_view is BASIC; not all
+   *   information is retrieved by default because some data, such as
+   *   payloads, might be desirable to return only when needed because
+   *   of its large size or because of the sensitivity of data that it
+   *   contains.
    *
-   *   Authorization for FULL
-   *   requires `cloudtasks.tasks.fullView` [Google
-   *   IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   Authorization for FULL requires
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta3.View}
    * @param {Object} [options]
@@ -1376,8 +1362,7 @@ class CloudTasksClient {
    *
    * Tasks cannot be updated after creation; there is no UpdateTask command.
    *
-   * * For App Engine queues,
-   * the maximum task size is
+   * * For App Engine queues, the maximum task size is
    *   100KB.
    *
    * @param {Object} request
@@ -1396,13 +1381,13 @@ class CloudTasksClient {
    *
    *   Task names have the following format:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
-   *   The user can optionally specify a task
-   *   name. If a name is not specified
-   *   then the system will generate a random unique task id, which will be set in
-   *   the task returned in the response.
+   *   The user can optionally specify a task name. If a
+   *   name is not specified then the system will generate a random
+   *   unique task id, which will be set in the task returned in the
+   *   response.
    *
-   *   If schedule_time is not
-   *   set or is in the past then Cloud Tasks will set it to the current time.
+   *   If schedule_time is not set or is in the
+   *   past then Cloud Tasks will set it to the current time.
    *
    *   Task De-duplication:
    *
@@ -1417,10 +1402,10 @@ class CloudTasksClient {
    *   for ~9days after the original task was deleted or executed.
    *
    *   Because there is an extra lookup cost to identify duplicate task
-   *   names, these CreateTask
-   *   calls have significantly increased latency. Using hashed strings for the
-   *   task id or for the prefix of the task id is recommended. Choosing task ids
-   *   that are sequential or have sequential prefixes, for example using a
+   *   names, these CreateTask calls have significantly
+   *   increased latency. Using hashed strings for the task id or for
+   *   the prefix of the task id is recommended. Choosing task ids that
+   *   are sequential or have sequential prefixes, for example using a
    *   timestamp, causes an increase in latency and error rates in all
    *   task commands. The infrastructure relies on an approximately
    *   uniform distribution of task ids to store and serve tasks
@@ -1428,19 +1413,18 @@ class CloudTasksClient {
    *
    *   This object should have the same structure as [Task]{@link google.cloud.tasks.v2beta3.Task}
    * @param {number} [request.responseView]
-   *   The response_view specifies which subset of the
-   *   Task will be returned.
+   *   The response_view specifies which subset of the Task will be
+   *   returned.
    *
-   *   By default response_view is
-   *   BASIC; not all information is
-   *   retrieved by default because some data, such as payloads, might be
-   *   desirable to return only when needed because of its large size or because
-   *   of the sensitivity of data that it contains.
+   *   By default response_view is BASIC; not all
+   *   information is retrieved by default because some data, such as
+   *   payloads, might be desirable to return only when needed because
+   *   of its large size or because of the sensitivity of data that it
+   *   contains.
    *
-   *   Authorization for FULL
-   *   requires `cloudtasks.tasks.fullView` [Google
-   *   IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   Authorization for FULL requires
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta3.View}
    * @param {Object} [options]
@@ -1550,14 +1534,13 @@ class CloudTasksClient {
    * Forces a task to run now.
    *
    * When this method is called, Cloud Tasks will dispatch the task, even if
-   * the task is already running, the queue has reached its
-   * RateLimits or is
-   * PAUSED.
+   * the task is already running, the queue has reached its RateLimits or
+   * is PAUSED.
    *
    * This command is meant to be used for manual debugging. For
-   * example, RunTask can be
-   * used to retry a failed task after a fix has been made or to manually force
-   * a task to be dispatched now.
+   * example, RunTask can be used to retry a failed
+   * task after a fix has been made or to manually force a task to be
+   * dispatched now.
    *
    * The dispatched task is returned. That is, the task that is returned
    * contains the status after the task is dispatched but
@@ -1565,11 +1548,9 @@ class CloudTasksClient {
    *
    * If Cloud Tasks receives a successful response from the task's
    * target, then the task will be deleted; otherwise the task's
-   * schedule_time will be
-   * reset to the time that
-   * RunTask was called plus
-   * the retry delay specified in the queue's
-   * RetryConfig.
+   * schedule_time will be reset to the time that
+   * RunTask was called plus the retry delay specified
+   * in the queue's RetryConfig.
    *
    * RunTask returns
    * NOT_FOUND when it is called on a
@@ -1583,19 +1564,18 @@ class CloudTasksClient {
    *   The task name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {number} [request.responseView]
-   *   The response_view specifies which subset of the
-   *   Task will be returned.
+   *   The response_view specifies which subset of the Task will be
+   *   returned.
    *
-   *   By default response_view is
-   *   BASIC; not all information is
-   *   retrieved by default because some data, such as payloads, might be
-   *   desirable to return only when needed because of its large size or because
-   *   of the sensitivity of data that it contains.
+   *   By default response_view is BASIC; not all
+   *   information is retrieved by default because some data, such as
+   *   payloads, might be desirable to return only when needed because
+   *   of its large size or because of the sensitivity of data that it
+   *   contains.
    *
-   *   Authorization for FULL
-   *   requires `cloudtasks.tasks.fullView` [Google
-   *   IAM](https://cloud.google.com/iam/) permission on the
-   *   Task resource.
+   *   Authorization for FULL requires
+   *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+   *   permission on the Task resource.
    *
    *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta3.View}
    * @param {Object} [options]

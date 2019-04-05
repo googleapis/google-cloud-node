@@ -105,8 +105,10 @@ describe('CloudTasksClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
+      const logSamplingRatio = -1.25350193e8;
       const expectedResponse = {
         name: name2,
+        logSamplingRatio: logSamplingRatio,
       };
 
       // Mock Grpc layer
@@ -171,8 +173,10 @@ describe('CloudTasksClient', () => {
 
       // Mock response
       const name = 'name3373707';
+      const logSamplingRatio = -1.25350193e8;
       const expectedResponse = {
         name: name,
+        logSamplingRatio: logSamplingRatio,
       };
 
       // Mock Grpc layer
@@ -233,8 +237,10 @@ describe('CloudTasksClient', () => {
 
       // Mock response
       const name = 'name3373707';
+      const logSamplingRatio = -1.25350193e8;
       const expectedResponse = {
         name: name,
+        logSamplingRatio: logSamplingRatio,
       };
 
       // Mock Grpc layer
@@ -354,8 +360,10 @@ describe('CloudTasksClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
+      const logSamplingRatio = -1.25350193e8;
       const expectedResponse = {
         name: name2,
+        logSamplingRatio: logSamplingRatio,
       };
 
       // Mock Grpc layer
@@ -422,8 +430,10 @@ describe('CloudTasksClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
+      const logSamplingRatio = -1.25350193e8;
       const expectedResponse = {
         name: name2,
+        logSamplingRatio: logSamplingRatio,
       };
 
       // Mock Grpc layer
@@ -490,8 +500,10 @@ describe('CloudTasksClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
+      const logSamplingRatio = -1.25350193e8;
       const expectedResponse = {
         name: name2,
+        logSamplingRatio: logSamplingRatio,
       };
 
       // Mock Grpc layer

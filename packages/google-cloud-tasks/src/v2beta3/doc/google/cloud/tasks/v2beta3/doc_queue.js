@@ -21,9 +21,8 @@
  * retry options, queue types, and others.
  *
  * @property {string} name
- *   Caller-specified and required in
- *   CreateQueue, after
- *   which it becomes output only.
+ *   Caller-specified and required in CreateQueue,
+ *   after which it becomes output only.
  *
  *   The queue name.
  *
@@ -43,38 +42,33 @@
  *     hyphens (-). The maximum length is 100 characters.
  *
  * @property {Object} appEngineHttpQueue
- *   AppEngineHttpQueue
- *   settings apply only to App Engine
- *   tasks in this queue.
- *   Http tasks are not affected by
- *   this proto.
+ *   AppEngineHttpQueue settings apply only to
+ *   App Engine tasks in this queue.
+ *   Http tasks are not affected by this proto.
  *
  *   This object should have the same structure as [AppEngineHttpQueue]{@link google.cloud.tasks.v2beta3.AppEngineHttpQueue}
  *
  * @property {Object} rateLimits
  *   Rate limits for task dispatches.
  *
- *   rate_limits and
- *   retry_config are related
- *   because they both control task attempts. However they control task attempts
- *   in different ways:
+ *   rate_limits and retry_config are
+ *   related because they both control task attempts. However they control task
+ *   attempts in different ways:
  *
- *   * rate_limits controls the
- *   total rate of
+ *   * rate_limits controls the total rate of
  *     dispatches from a queue (i.e. all traffic dispatched from the
  *     queue, regardless of whether the dispatch is from a first
  *     attempt or a retry).
- *   * retry_config controls
- *   what happens to
+ *   * retry_config controls what happens to
  *     particular a task after its first attempt fails. That is,
- *     retry_config controls
- *     task retries (the second attempt, third attempt, etc).
+ *     retry_config controls task retries (the
+ *     second attempt, third attempt, etc).
  *
  *   The queue's actual dispatch rate is the result of:
  *
  *   * Number of tasks in the queue
- *   * User-specified throttling: rate limits
- *     retry configuration, and the
+ *   * User-specified throttling: rate_limits,
+ *     retry_config, and the
  *     queue's state.
  *   * System throttling due to `429` (Too Many Requests) or `503` (Service
  *     Unavailable) responses from the worker, high error rates, or to smooth
@@ -101,29 +95,32 @@
  *
  *   `state` can only be changed by called
  *   PauseQueue,
- *   ResumeQueue, or
- *   uploading
+ *   ResumeQueue, or uploading
  *   [queue.yaml/xml](https://cloud.google.com/appengine/docs/python/config/queueref).
- *   UpdateQueue cannot be
- *   used to change `state`.
+ *   UpdateQueue cannot be used to change `state`.
  *
  *   The number should be among the values of [State]{@link google.cloud.tasks.v2beta3.State}
  *
  * @property {Object} purgeTime
  *   Output only. The last time this queue was purged.
  *
- *   All tasks that were created
- *   before this time were purged.
+ *   All tasks that were created before this time
+ *   were purged.
  *
- *   A queue can be purged using
- *   PurgeQueue, the [App
- *   Engine Task Queue SDK, or the Cloud
+ *   A queue can be purged using PurgeQueue, the
+ *   [App Engine Task Queue SDK, or the Cloud
  *   Console](https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).
  *
  *   Purge time will be truncated to the nearest microsecond. Purge
  *   time will be unset if the queue has never been purged.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {number} logSamplingRatio
+ *   Specifies the fraction of operations to write to
+ *   [Stackdriver Logging](https://cloud.google.com/logging/docs/).
+ *   This field may contain any value between 0.0 and 1.0, inclusive.
+ *   0.0 is the default and means that no operations are logged.
  *
  * @typedef Queue
  * @memberof google.cloud.tasks.v2beta3
@@ -190,10 +187,8 @@ const Queue = {
  * This message determines the maximum rate that tasks can be dispatched by a
  * queue, regardless of whether the dispatch is a first task attempt or a retry.
  *
- * Note: The debugging command,
- * RunTask, will run a task
- * even if the queue has reached its
- * RateLimits.
+ * Note: The debugging command, RunTask, will run a task
+ * even if the queue has reached its RateLimits.
  *
  * @property {number} maxDispatchesPerSecond
  *   The maximum rate at which tasks are dispatched from this queue.
@@ -201,8 +196,7 @@ const Queue = {
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   * For App Engine queues,
- *   the maximum allowed value
+ *   * For App Engine queues, the maximum allowed value
  *     is 500.
  *
  *
@@ -236,9 +230,9 @@ const Queue = {
  *   `queue.yaml/xml`, `max_burst_size` is equal to
  *   [bucket_size](https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size).
  *   Since `max_burst_size` is output only, if
- *   UpdateQueue is called
- *   on a queue created by `queue.yaml/xml`, `max_burst_size` will be reset
- *   based on the value of
+ *   UpdateQueue is called on a queue
+ *   created by `queue.yaml/xml`, `max_burst_size` will be reset based
+ *   on the value of
  *   max_dispatches_per_second,
  *   regardless of whether
  *   max_dispatches_per_second
@@ -294,9 +288,9 @@ const RateLimits = {
  *   If positive, `max_retry_duration` specifies the time limit for
  *   retrying a failed task, measured from when the task was first
  *   attempted. Once `max_retry_duration` time has passed *and* the
- *   task has been attempted
- *   max_attempts times,
- *   no further attempts will be made and the task will be deleted.
+ *   task has been attempted max_attempts
+ *   times, no further attempts will be made and the task will be
+ *   deleted.
  *
  *   If zero, then the task age is unlimited.
  *
@@ -313,13 +307,11 @@ const RateLimits = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} minBackoff
- *   A task will be scheduled
- *   for retry between
+ *   A task will be scheduled for retry between
  *   min_backoff and
- *   max_backoff duration
- *   after it fails, if the queue's
- *   RetryConfig specifies that the
- *   task should be retried.
+ *   max_backoff duration after it fails,
+ *   if the queue's RetryConfig specifies that the task should be
+ *   retried.
  *
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
@@ -334,13 +326,11 @@ const RateLimits = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} maxBackoff
- *   A task will be scheduled
- *   for retry between
+ *   A task will be scheduled for retry between
  *   min_backoff and
- *   max_backoff duration
- *   after it fails, if the queue's
- *   RetryConfig specifies that the
- *   task should be retried.
+ *   max_backoff duration after it fails,
+ *   if the queue's RetryConfig specifies that the task should be
+ *   retried.
  *
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
@@ -358,23 +348,21 @@ const RateLimits = {
  *   The time between retries will double `max_doublings` times.
  *
  *   A task's retry interval starts at
- *   min_backoff, then
- *   doubles `max_doublings` times, then increases linearly, and finally retries
- *   retries at intervals of
+ *   min_backoff, then doubles
+ *   `max_doublings` times, then increases linearly, and finally
+ *   retries retries at intervals of
  *   max_backoff up to
  *   max_attempts times.
  *
- *   For example, if
- *   min_backoff is 10s,
- *   max_backoff is 300s,
- *   and `max_doublings` is 3, then the a task will first be retried in 10s. The
- *   retry interval will double three times, and then increase linearly by 2^3 *
- *   10s.  Finally, the task will retry at intervals of
- *   max_backoff until the
- *   task has been attempted
- *   max_attempts times.
- *   Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s,
- *   300s, ....
+ *   For example, if min_backoff is 10s,
+ *   max_backoff is 300s, and
+ *   `max_doublings` is 3, then the a task will first be retried in
+ *   10s. The retry interval will double three times, and then
+ *   increase linearly by 2^3 * 10s.  Finally, the task will retry at
+ *   intervals of max_backoff until the
+ *   task has been attempted max_attempts
+ *   times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s,
+ *   240s, 300s, 300s, ....
  *
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
