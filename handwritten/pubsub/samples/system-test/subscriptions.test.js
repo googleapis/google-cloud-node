@@ -17,14 +17,10 @@
 
 const {PubSub} = require('@google-cloud/pubsub');
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
 
-async function exec(cmd) {
-  const promise = execa.shell(cmd);
-  promise.stdout.pipe(process.stdout);
-  return (await promise).stdout;
-}
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('subscriptions', () => {
   const projectId = process.env.GCLOUD_PROJECT;
@@ -59,7 +55,7 @@ describe('subscriptions', () => {
   });
 
   it('should create a subscription', async () => {
-    const output = await exec(
+    const output = execSync(
       `${cmd} create ${topicNameOne} ${subscriptionNameOne}`
     );
     assert.strictEqual(output, `Subscription ${subscriptionNameOne} created.`);
@@ -68,7 +64,7 @@ describe('subscriptions', () => {
   });
 
   it('should create a push subscription', async () => {
-    const output = await exec(
+    const output = execSync(
       `${cmd} create-push ${topicNameOne} ${subscriptionNameTwo}`
     );
     assert.strictEqual(output, `Subscription ${subscriptionNameTwo} created.`);
@@ -77,7 +73,7 @@ describe('subscriptions', () => {
   });
 
   it('should modify the config of an existing push subscription', async () => {
-    const output = await exec(
+    const output = execSync(
       `${cmd} modify-config ${topicNameTwo} ${subscriptionNameTwo}`
     );
     assert.strictEqual(
@@ -87,7 +83,7 @@ describe('subscriptions', () => {
   });
 
   it('should get metadata for a subscription', async () => {
-    const output = await exec(`${cmd} get ${subscriptionNameOne}`);
+    const output = execSync(`${cmd} get ${subscriptionNameOne}`);
     const expected =
       `Subscription: ${fullSubscriptionNameOne}` +
       `\nTopic: ${fullTopicNameOne}` +
@@ -97,14 +93,14 @@ describe('subscriptions', () => {
   });
 
   it('should list all subscriptions', async () => {
-    const output = await exec(`${cmd} list`);
+    const output = execSync(`${cmd} list`);
     assert.match(output, /Subscriptions:/);
     assert.match(output, new RegExp(fullSubscriptionNameOne));
     assert.match(output, new RegExp(fullSubscriptionNameTwo));
   });
 
   it('should list subscriptions for a topic', async () => {
-    const output = await exec(`${cmd} list ${topicNameOne}`);
+    const output = execSync(`${cmd} list ${topicNameOne}`);
     assert.match(output, new RegExp(`Subscriptions for ${topicNameOne}:`));
     assert.match(output, new RegExp(fullSubscriptionNameOne));
     assert.match(output, new RegExp(fullSubscriptionNameTwo));
@@ -114,13 +110,13 @@ describe('subscriptions', () => {
     const messageIds = await pubsub
       .topic(topicNameOne)
       .publish(Buffer.from(`Hello, world!`));
-    const output = await exec(`${cmd} listen-messages ${subscriptionNameOne}`);
+    const output = execSync(`${cmd} listen-messages ${subscriptionNameOne}`);
     assert.match(output, new RegExp(`Received message ${messageIds}:`));
   });
 
   it('should listen for messages synchronously', async () => {
     pubsub.topic(topicNameOne).publish(Buffer.from(`Hello, world!`));
-    const output = await exec(
+    const output = execSync(
       `${cmd} sync-pull ${projectId} ${subscriptionNameOne}`
     );
     assert.match(output, /Done./);
@@ -188,14 +184,13 @@ describe('subscriptions', () => {
   });
 
   it('should listen for error messages', async () => {
-    const {stderr} = await execa.shell(
-      `${cmd} listen-errors nonexistent-subscription`
-    );
-    assert.match(stderr, /Resource not found/);
+    assert.throws(() => {
+      execSync(`${cmd} listen-errors nonexistent-subscription`);
+    }, /Resource not found/);
   });
 
   it('should set the IAM policy for a subscription', async () => {
-    await exec(`${cmd} set-policy ${subscriptionNameOne}`);
+    execSync(`${cmd} set-policy ${subscriptionNameOne}`);
     const results = await pubsub
       .subscription(subscriptionNameOne)
       .iam.getPolicy();
@@ -216,7 +211,7 @@ describe('subscriptions', () => {
     const results = await pubsub
       .subscription(subscriptionNameOne)
       .iam.getPolicy();
-    const output = await exec(`${cmd} get-policy ${subscriptionNameOne}`);
+    const output = execSync(`${cmd} get-policy ${subscriptionNameOne}`);
     assert.strictEqual(
       output,
       `Policy for subscription: ${JSON.stringify(results[0].bindings)}.`
@@ -224,12 +219,12 @@ describe('subscriptions', () => {
   });
 
   it('should test permissions for a subscription', async () => {
-    const output = await exec(`${cmd} test-permissions ${subscriptionNameOne}`);
+    const output = execSync(`${cmd} test-permissions ${subscriptionNameOne}`);
     assert.match(output, /Tested permissions for subscription/);
   });
 
   it('should delete a subscription', async () => {
-    const output = await exec(`${cmd} delete ${subscriptionNameOne}`);
+    const output = execSync(`${cmd} delete ${subscriptionNameOne}`);
     assert.strictEqual(output, `Subscription ${subscriptionNameOne} deleted.`);
     const [subscriptions] = await pubsub.getSubscriptions();
     assert.ok(subscriptions);
@@ -237,7 +232,7 @@ describe('subscriptions', () => {
   });
 
   it('should create a subscription with flow control', async () => {
-    const output = await exec(
+    const output = execSync(
       `${cmd} create-flow ${topicNameTwo} ${subscriptionNameFour} -m 5 -b 1024`
     );
     assert.strictEqual(

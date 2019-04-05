@@ -17,8 +17,10 @@
 
 const {PubSub} = require('@google-cloud/pubsub');
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
+
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('quickstart', () => {
   const projectId = process.env.GCLOUD_PROJECT;
@@ -30,9 +32,7 @@ describe('quickstart', () => {
   });
 
   it('should run the quickstart', async () => {
-    const {stdout} = await execa.shell(
-      `node quickstart ${projectId} ${topicName}`
-    );
+    const stdout = execSync(`node quickstart ${projectId} ${topicName}`);
     assert.match(stdout, /^Topic .* created.$/);
   });
 });

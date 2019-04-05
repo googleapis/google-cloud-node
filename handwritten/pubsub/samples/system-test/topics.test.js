@@ -17,14 +17,10 @@
 
 const {PubSub} = require('@google-cloud/pubsub');
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
 
-async function exec(cmd) {
-  const promise = execa.shell(cmd);
-  promise.stdout.pipe(process.stdout);
-  return (await promise).stdout;
-}
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('topics', () => {
   const projectId = process.env.GCLOUD_PROJECT;
@@ -80,14 +76,14 @@ describe('topics', () => {
   };
 
   it('should create a topic', async () => {
-    const output = await exec(`${cmd} create ${topicNameOne}`);
+    const output = execSync(`${cmd} create ${topicNameOne}`);
     assert.strictEqual(output, `Topic ${topicNameOne} created.`);
     const [topics] = await pubsub.getTopics();
     assert(topics.some(t => t.name === fullTopicNameOne));
   });
 
   it('should list topics', async () => {
-    const output = await exec(`${cmd} list`);
+    const output = execSync(`${cmd} list`);
     assert.match(output, /Topics:/);
     assert.match(output, new RegExp(fullTopicNameOne));
   });
@@ -97,7 +93,7 @@ describe('topics', () => {
       .topic(topicNameOne)
       .subscription(subscriptionNameOne)
       .get({autoCreate: true});
-    await exec(`${cmd} publish ${topicNameOne} "${expectedMessage.data}"`);
+    execSync(`${cmd} publish ${topicNameOne} "${expectedMessage.data}"`);
     const receivedMessage = await _pullOneMessage(subscription);
     assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);
   });
@@ -107,7 +103,7 @@ describe('topics', () => {
       .topic(topicNameOne)
       .subscription(subscriptionNameOne)
       .get({autoCreate: true});
-    await exec(`${cmd} publish ${topicNameOne} "${expectedMessage.data}"`);
+    execSync(`${cmd} publish ${topicNameOne} "${expectedMessage.data}"`);
     const receivedMessage = await _pullOneMessage(subscription);
     assert.deepStrictEqual(
       receivedMessage.data.toString(),
@@ -120,7 +116,7 @@ describe('topics', () => {
       .topic(topicNameOne)
       .subscription(subscriptionNameOne)
       .get({autoCreate: true});
-    await exec(
+    execSync(
       `${cmd} publish-attributes ${topicNameOne} "${expectedMessage.data}"`
     );
     const receivedMessage = await _pullOneMessage(subscription);
@@ -166,7 +162,7 @@ describe('topics', () => {
       .subscription(subscriptionNameThree)
       .get({autoCreate: true});
     const startTime = Date.now();
-    await exec(
+    execSync(
       `${cmd} publish-batch ${topicNameOne} "${
         expectedMessage.data
       }" -w ${waitTime}`
@@ -184,7 +180,7 @@ describe('topics', () => {
       .topic(topicNameOne)
       .subscription(subscriptionNameFour)
       .get({autoCreate: true});
-    await exec(
+    execSync(
       `${cmd} publish-retry ${projectId} ${topicNameOne} "${
         expectedMessage.data
       }"`
@@ -194,7 +190,7 @@ describe('topics', () => {
   });
 
   it('should set the IAM policy for a topic', async () => {
-    await exec(`${cmd} set-policy ${topicNameOne}`);
+    execSync(`${cmd} set-policy ${topicNameOne}`);
     const results = await pubsub.topic(topicNameOne).iam.getPolicy();
     const [policy] = results;
     assert.deepStrictEqual(policy.bindings, [
@@ -211,7 +207,7 @@ describe('topics', () => {
 
   it('should get the IAM policy for a topic', async () => {
     const [policy] = await pubsub.topic(topicNameOne).iam.getPolicy();
-    const output = await exec(`${cmd} get-policy ${topicNameOne}`);
+    const output = execSync(`${cmd} get-policy ${topicNameOne}`);
     assert.strictEqual(
       output,
       `Policy for topic: ${JSON.stringify(policy.bindings)}.`
@@ -219,12 +215,12 @@ describe('topics', () => {
   });
 
   it('should test permissions for a topic', async () => {
-    const output = await exec(`${cmd} test-permissions ${topicNameOne}`);
+    const output = execSync(`${cmd} test-permissions ${topicNameOne}`);
     assert.match(output, /Tested permissions for topic/);
   });
 
   it('should delete a topic', async () => {
-    const output = await exec(`${cmd} delete ${topicNameOne}`);
+    const output = execSync(`${cmd} delete ${topicNameOne}`);
     assert.strictEqual(output, `Topic ${topicNameOne} deleted.`);
     const [topics] = await pubsub.getTopics();
     assert(topics.every(s => s.name !== fullTopicNameOne));
