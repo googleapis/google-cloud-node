@@ -18,7 +18,7 @@
  * @module common/paginator
  */
 
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as extend from 'extend';
 import {split} from 'split-array-stream';
 import {Transform, TransformOptions} from 'stream';
