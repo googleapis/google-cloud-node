@@ -543,6 +543,131 @@ describe('CloudRedisClient', () => {
       );
     });
   });
+
+  describe('failoverInstance', function() {
+    it('invokes failoverInstance without error', done => {
+      const client = new redisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.instancePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[INSTANCE]'
+      );
+      const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+      const request = {
+        name: formattedName,
+        dataProtectionMode: dataProtectionMode,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const locationId = 'locationId552319461';
+      const alternativeLocationId = 'alternativeLocationId-718920621';
+      const redisVersion = 'redisVersion-685310444';
+      const reservedIpRange = 'reservedIpRange-1082940580';
+      const host = 'host3208616';
+      const port = 3446913;
+      const currentLocationId = 'currentLocationId1312712735';
+      const statusMessage = 'statusMessage-239442758';
+      const memorySizeGb = 34199707;
+      const authorizedNetwork = 'authorizedNetwork-1733809270';
+      const expectedResponse = {
+        name: name2,
+        displayName: displayName,
+        locationId: locationId,
+        alternativeLocationId: alternativeLocationId,
+        redisVersion: redisVersion,
+        reservedIpRange: reservedIpRange,
+        host: host,
+        port: port,
+        currentLocationId: currentLocationId,
+        statusMessage: statusMessage,
+        memorySizeGb: memorySizeGb,
+        authorizedNetwork: authorizedNetwork,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.failoverInstance = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .failoverInstance(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes failoverInstance with error', done => {
+      const client = new redisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.instancePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[INSTANCE]'
+      );
+      const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+      const request = {
+        name: formattedName,
+        dataProtectionMode: dataProtectionMode,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.failoverInstance = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .failoverInstance(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new redisModule.v1beta1.CloudRedisClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.failoverInstance
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.failoverInstance
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

@@ -24,7 +24,7 @@
  *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
  *
  *   Note: Redis instances are managed and addressed at regional level so
- *   location_id here refers to a GCP region; however, users get to choose which
+ *   location_id here refers to a GCP region; however, users may choose which
  *   specific zone (or collection of zones for cross-zone instances) an instance
  *   should be provisioned in. Refer to [location_id] and
  *   [alternative_location_id] fields for more details.
@@ -39,7 +39,7 @@
  *   Optional. The zone where the instance will be provisioned. If not provided,
  *   the service will choose a zone for the instance. For STANDARD_HA tier,
  *   instances will be created across two zones for protection against zonal
- *   failures. if [alternative_location_id] is also provided, it must be
+ *   failures. If [alternative_location_id] is also provided, it must be
  *   different from [location_id].
  *
  * @property {string} alternativeLocationId
@@ -49,27 +49,32 @@
  *
  * @property {string} redisVersion
  *   Optional. The version of Redis software.
- *   If not provided, latest supported version will be used.
+ *   If not provided, latest supported version will be used. Updating the
+ *   version will perform an upgrade/downgrade to the new version. Currently,
+ *   the supported values are:
+ *
+ *    *   `REDIS_4_0` for Redis 4.0 compatibility
+ *    *   `REDIS_3_2` for Redis 3.2 compatibility (default)
  *
  * @property {string} reservedIpRange
  *   Optional. The CIDR range of internal addresses that are reserved for this
  *   instance. If not provided, the service will choose an unused /29 block,
  *   for example, 10.0.0.0/29 or 192.168.0.0/29. Ranges must be unique
- *   and non-overlapping with existing subnets in a network.
+ *   and non-overlapping with existing subnets in an authorized network.
  *
  * @property {string} host
- *   Output only. Hostname or IP address of the exposed redis endpoint used by
+ *   Output only. Hostname or IP address of the exposed Redis endpoint used by
  *   clients to connect to the service.
  *
  * @property {number} port
- *   Output only. The port number of the exposed redis endpoint.
+ *   Output only. The port number of the exposed Redis endpoint.
  *
  * @property {string} currentLocationId
- *   Output only. The current zone where the Redis endpoint is placed. In
- *   single zone deployments, this will always be the same as [location_id]
- *   provided by the user at creation time. In cross-zone instances (only
- *   applicable in STANDARD_HA tier), this can be either [location_id] or
- *   [alternative_location_id] and can change on a failover event.
+ *   Output only. The current zone where the Redis endpoint is placed. For Basic
+ *   Tier instances, this will always be the same as the [location_id]
+ *   provided by the user at creation time. For Standard Tier instances,
+ *   this can be either [location_id] or [alternative_location_id] and can
+ *   change after a failover event.
  *
  * @property {Object} createTime
  *   Output only. The time the instance was created.
@@ -89,8 +94,17 @@
  *   Optional. Redis configuration parameters, according to
  *   http://redis.io/topics/config. Currently, the only supported parameters
  *   are:
- *    * maxmemory-policy
- *    * notify-keyspace-events
+ *
+ *    Redis 3.2 and above:
+ *
+ *    *   maxmemory-policy
+ *    *   notify-keyspace-events
+ *
+ *    Redis 4.0 and above:
+ *
+ *    *   activedefrag
+ *    *   lfu-log-factor
+ *    *   lfu-decay-time
  *
  * @property {number} tier
  *   Required. The service tier of the instance.
@@ -98,7 +112,7 @@
  *   The number should be among the values of [Tier]{@link google.cloud.redis.v1beta1.Tier}
  *
  * @property {number} memorySizeGb
- *   Required. Redis memory size in GB.
+ *   Required. Redis memory size in GiB.
  *
  * @property {string} authorizedNetwork
  *   Optional. The full name of the Google Compute Engine
@@ -149,15 +163,24 @@ const Instance = {
     DELETING: 4,
 
     /**
-     * Redis instance is being repaired and may be unusable. Details can be
-     * found in the `status_message` field.
+     * Redis instance is being repaired and may be unusable.
      */
     REPAIRING: 5,
 
     /**
      * Maintenance is being performed on this Redis instance.
      */
-    MAINTENANCE: 6
+    MAINTENANCE: 6,
+
+    /**
+     * Redis instance is importing data (availability may be affected).
+     */
+    IMPORTING: 8,
+
+    /**
+     * Redis instance is failing over (availability may be affected).
+     */
+    FAILING_OVER: 10
   },
 
   /**
@@ -237,6 +260,9 @@ const ListInstancesRequest = {
  *   Token to retrieve the next page of results, or empty if there are no more
  *   results in the list.
  *
+ * @property {string[]} unreachable
+ *   Locations that could not be reached.
+ *
  * @typedef ListInstancesResponse
  * @memberof google.cloud.redis.v1beta1
  * @see [google.cloud.redis.v1beta1.ListInstancesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1beta1/cloud_redis.proto}
@@ -301,10 +327,11 @@ const CreateInstanceRequest = {
  *   Required. Mask of fields to update. At least one path must be supplied in
  *   this field. The elements of the repeated paths field may only include these
  *   fields from Instance:
- *   * `display_name`
- *   * `labels`
- *   * `memory_size_gb`
- *   * `redis_config`
+ *
+ *    *   `displayName`
+ *    *   `labels`
+ *    *   `memorySizeGb`
+ *    *   `redisConfig`
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -337,6 +364,50 @@ const UpdateInstanceRequest = {
  */
 const DeleteInstanceRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request for
+ * Failover.
+ *
+ * @property {string} name
+ *   Required. Redis instance resource name using the form:
+ *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+ *   where `location_id` refers to a GCP region
+ *
+ * @property {number} dataProtectionMode
+ *   Optional. Available data protection modes that the user can choose. If it's
+ *   unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
+ *
+ *   The number should be among the values of [DataProtectionMode]{@link google.cloud.redis.v1beta1.DataProtectionMode}
+ *
+ * @typedef FailoverInstanceRequest
+ * @memberof google.cloud.redis.v1beta1
+ * @see [google.cloud.redis.v1beta1.FailoverInstanceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1beta1/cloud_redis.proto}
+ */
+const FailoverInstanceRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * @enum {number}
+   * @memberof google.cloud.redis.v1beta1
+   */
+  DataProtectionMode: {
+    DATA_PROTECTION_MODE_UNSPECIFIED: 0,
+
+    /**
+     * Instance failover will be protected with data loss control. More
+     * specifically, the failover will only be performed if the current
+     * replication offset diff between master and replica is under a certain
+     * threshold.
+     */
+    LIMITED_DATA_LOSS: 1,
+
+    /**
+     * Instance failover will be performed without data loss control.
+     */
+    FORCE_DATA_LOSS: 2
+  }
 };
 
 /**

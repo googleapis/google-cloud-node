@@ -165,6 +165,12 @@ class CloudRedisClient {
       'google.protobuf.Empty'
     );
     const deleteInstanceMetadata = protoFilesRoot.lookup('google.protobuf.Any');
+    const failoverInstanceResponse = protoFilesRoot.lookup(
+      'google.cloud.redis.v1beta1.Instance'
+    );
+    const failoverInstanceMetadata = protoFilesRoot.lookup(
+      'google.protobuf.Any'
+    );
 
     this._descriptors.longrunning = {
       createInstance: new gax.LongrunningDescriptor(
@@ -181,6 +187,11 @@ class CloudRedisClient {
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
         deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
+      ),
+      failoverInstance: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        failoverInstanceResponse.decode.bind(failoverInstanceResponse),
+        failoverInstanceMetadata.decode.bind(failoverInstanceMetadata)
       ),
     };
 
@@ -212,6 +223,7 @@ class CloudRedisClient {
       'createInstance',
       'updateInstance',
       'deleteInstance',
+      'failoverInstance',
     ];
     for (const methodName of cloudRedisStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -493,7 +505,7 @@ class CloudRedisClient {
   /**
    * Creates a Redis instance based on the specified tier and memory size.
    *
-   * By default, the instance is peered to the project's
+   * By default, the instance is accessible from the project's
    * [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
    *
    * The creation is executed asynchronously and callers may check the returned
@@ -662,10 +674,11 @@ class CloudRedisClient {
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. The elements of the repeated paths field may only include these
    *   fields from Instance:
-   *   * `display_name`
-   *   * `labels`
-   *   * `memory_size_gb`
-   *   * `redis_config`
+   *
+   *    *   `displayName`
+   *    *   `labels`
+   *    *   `memorySizeGb`
+   *    *   `redisConfig`
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} request.instance
@@ -906,6 +919,126 @@ class CloudRedisClient {
     });
 
     return this._innerApiCalls.deleteInstance(request, options, callback);
+  }
+
+  /**
+   * Failover the master role to current replica node against a specific
+   * STANDARD tier redis instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region
+   * @param {number} request.dataProtectionMode
+   *   Optional. Available data protection modes that the user can choose. If it's
+   *   unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
+   *
+   *   The number should be among the values of [DataProtectionMode]{@link google.cloud.redis.v1beta1.DataProtectionMode}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('redis.v1beta1');
+   *
+   * const client = new redis.v1beta1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+   * const request = {
+   *   name: formattedName,
+   *   dataProtectionMode: dataProtectionMode,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.failoverInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+   * const request = {
+   *   name: formattedName,
+   *   dataProtectionMode: dataProtectionMode,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.failoverInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const dataProtectionMode = 'DATA_PROTECTION_MODE_UNSPECIFIED';
+   * const request = {
+   *   name: formattedName,
+   *   dataProtectionMode: dataProtectionMode,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.failoverInstance(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  failoverInstance(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.failoverInstance(request, options, callback);
   }
 
   // --------------------
