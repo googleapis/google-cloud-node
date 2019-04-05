@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## v0.4.0
+
+04-05-2019 08:45 PDT
+
+### New Features
+- feat: add support for instance failover ([#147](https://github.com/googleapis/nodejs-redis/pull/147))
+
+### Bug Fixes
+- fix: include 'x-goog-request-params' header in requests ([#146](https://github.com/googleapis/nodejs-redis/pull/146))
+
 ## v0.3.0
 
 03-22-2019 10:30 PDT
