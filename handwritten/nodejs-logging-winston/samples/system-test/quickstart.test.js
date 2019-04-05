@@ -17,7 +17,9 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {execSync} = require('child_process');
+const cp = require('child_process');
+
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('QuickStart', () => {
   it('should write using winston', async () => {
