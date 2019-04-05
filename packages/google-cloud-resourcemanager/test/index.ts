@@ -16,7 +16,7 @@
 
 import {DecorateRequestOptions, Operation, util} from '@google-cloud/common';
 import {MakeAuthenticatedRequestFactoryConfig} from '@google-cloud/common/build/src/util';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import {Response} from 'request';
