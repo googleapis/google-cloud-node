@@ -16,7 +16,7 @@
 
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 
 const concat = require('concat-stream');
 import * as extend from 'extend';

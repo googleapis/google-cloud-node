@@ -15,7 +15,7 @@
  */
 
 import {promisifyAll} from '@google-cloud/promisify';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import {CallOptions} from 'google-gax';
 
 import {google} from '../proto/datastore';
