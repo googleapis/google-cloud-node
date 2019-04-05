@@ -15,7 +15,7 @@
  */
 
 import {DecorateRequestOptions, Metadata, ServiceObject, ServiceObjectConfig, util} from '@google-cloud/common';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as assert from 'assert';
 import * as async from 'async';
 import * as mime from 'mime-types';

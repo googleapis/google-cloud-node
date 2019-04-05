@@ -17,7 +17,7 @@
 import {GoogleAuthOptions, Service} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as r from 'request';  // Only for type declarations.
 import {Readable} from 'stream';
 import {teenyRequest} from 'teeny-request';

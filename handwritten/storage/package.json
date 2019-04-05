@@ -54,7 +54,7 @@
     "@google-cloud/common": "^0.32.0",
     "@google-cloud/paginator": "^0.2.0",
     "@google-cloud/promisify": "^0.4.0",
-    "arrify": "^1.0.0",
+    "arrify": "^2.0.0",
     "async": "^2.0.1",
     "compressible": "^2.0.12",
     "concat-stream": "^2.0.0",
@@ -75,7 +75,6 @@
   },
   "devDependencies": {
     "@google-cloud/pubsub": "^0.28.0",
-    "@types/arrify": "^1.0.4",
     "@types/async": "^2.0.49",
     "@types/compressible": "^2.0.0",
     "@types/concat-stream": "^1.6.0",
