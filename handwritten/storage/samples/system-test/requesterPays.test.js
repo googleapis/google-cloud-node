@@ -18,12 +18,13 @@
 const fs = require('fs');
 const {Storage} = require('@google-cloud/storage');
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
 const path = require('path');
 const {promisify} = require('util');
 
-const exec = async cmd => (await execa.shell(cmd)).stdout;
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+
 const storage = new Storage();
 const cwd = path.join(__dirname, '..');
 const cmd = 'node requesterPays.js';
@@ -48,8 +49,8 @@ after(async () => {
   await bucket.delete().catch(console.error);
 });
 
-it.skip(`should error on requester-pays requests if they are disabled`, async () => {
-  const result = await execa.shell(
+it.skip(`should error on requester-pays requests if they are disabled`, () => {
+  const result = execSync(
     `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`
   );
   assert.ok(result.stderr);
@@ -59,44 +60,44 @@ it.skip(`should error on requester-pays requests if they are disabled`, async ()
   );
 });
 
-it(`should fetch requester-pays status on a default bucket`, async () => {
-  const out = await exec(`${cmd} get-status ${bucketName}`);
-  assert.strictEqual(
+it(`should fetch requester-pays status on a default bucket`, () => {
+  const out = execSync(`${cmd} get-status ${bucketName}`);
+  assert.include(
     out,
     `Requester-pays requests are disabled for bucket ${bucketName}.`
   );
 });
 
-it(`should enable requester-pays requests`, async () => {
-  const out = await exec(`${cmd} enable ${bucketName}`);
-  assert.strictEqual(
+it(`should enable requester-pays requests`, () => {
+  const out = execSync(`${cmd} enable ${bucketName}`);
+  assert.include(
     out,
     `Requester-pays requests have been enabled for bucket ${bucketName}.`
   );
 });
 
-it(`should fetch requester-pays status on a modified bucket`, async () => {
-  const out = await exec(`${cmd} get-status ${bucketName}`);
-  assert.strictEqual(
+it(`should fetch requester-pays status on a modified bucket`, () => {
+  const out = execSync(`${cmd} get-status ${bucketName}`);
+  assert.include(
     out,
     `Requester-pays requests are enabled for bucket ${bucketName}.`
   );
 });
 
-it(`should download a file using requester-pays requests`, async () => {
-  const out = await exec(
+it(`should download a file using requester-pays requests`, () => {
+  const out = execSync(
     `${cmd} download ${bucketName} ${fileName} ${downloadFilePath}`
   );
-  assert.strictEqual(
+  assert.include(
     out,
     `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath} using requester-pays requests.`
   );
   fs.statSync(downloadFilePath);
 });
 
-it(`should disable requester-pays requests`, async () => {
-  const out = await exec(`${cmd} disable ${bucketName}`);
-  assert.strictEqual(
+it(`should disable requester-pays requests`, () => {
+  const out = execSync(`${cmd} disable ${bucketName}`);
+  assert.include(
     out,
     `Requester-pays requests have been disabled for bucket ${bucketName}.`
   );

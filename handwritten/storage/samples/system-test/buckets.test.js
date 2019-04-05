@@ -17,42 +17,41 @@
 
 const {Storage} = require(`@google-cloud/storage`);
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
+
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const defaultKmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_ASIA;
 const bucket = storage.bucket(bucketName);
 const cmd = 'node buckets.js';
-const exec = async cmd => (await execa.shell(cmd)).stdout;
 
 after(async () => {
   return bucket.delete().catch(console.error);
 });
 
 it('should create a bucket', async () => {
-  const output = await exec(`${cmd} create ${bucketName}`);
+  const output = execSync(`${cmd} create ${bucketName}`);
   assert.match(output, new RegExp(`Bucket ${bucketName} created.`));
   const [exists] = await bucket.exists();
   assert.strictEqual(exists, true);
 });
 
-it('should list buckets', async () => {
-  const output = await exec(`${cmd} list`);
+it('should list buckets', () => {
+  const output = execSync(`${cmd} list`);
   assert.match(output, /Buckets:/);
   assert.match(output, new RegExp(bucketName));
 });
 
 it('should set a buckets default KMS key', async () => {
-  const output = await exec(
+  const output = execSync(
     `${cmd} enable-default-kms-key ${bucketName} ${defaultKmsKeyName}`
   );
-  assert.match(
+  assert.include(
     output,
-    new RegExp(
-      `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
-    )
+    `Default KMS key for ${bucketName} was set to ${defaultKmsKeyName}.`
   );
   const metadata = await bucket.getMetadata();
   assert.strictEqual(
@@ -62,7 +61,7 @@ it('should set a buckets default KMS key', async () => {
 });
 
 it(`should enable a bucket's Bucket Policy Only`, async () => {
-  const output = await exec(`${cmd} enable-bucket-policy-only ${bucketName}`);
+  const output = execSync(`${cmd} enable-bucket-policy-only ${bucketName}`);
   assert.match(
     output,
     new RegExp(`Bucket Policy Only was enabled for ${bucketName}.`)
@@ -76,7 +75,7 @@ it(`should enable a bucket's Bucket Policy Only`, async () => {
 });
 
 it(`should get a bucket's Bucket Policy Only metadata`, async () => {
-  const output = await exec(`${cmd} get-bucket-policy-only ${bucketName}`);
+  const output = execSync(`${cmd} get-bucket-policy-only ${bucketName}`);
 
   assert.match(
     output,
@@ -92,7 +91,7 @@ it(`should get a bucket's Bucket Policy Only metadata`, async () => {
 });
 
 it(`should disable a bucket's Bucket Policy Only`, async () => {
-  const output = await exec(`${cmd} disable-bucket-policy-only ${bucketName}`);
+  const output = execSync(`${cmd} disable-bucket-policy-only ${bucketName}`);
   assert.match(
     output,
     new RegExp(`Bucket Policy Only was disabled for ${bucketName}.`)
@@ -106,7 +105,7 @@ it(`should disable a bucket's Bucket Policy Only`, async () => {
 });
 
 it(`should delete a bucket`, async () => {
-  const output = await exec(`${cmd} delete ${bucketName}`);
+  const output = execSync(`${cmd} delete ${bucketName}`);
   assert.match(output, new RegExp(`Bucket ${bucketName} deleted.`));
   const [exists] = await bucket.exists();
   assert.strictEqual(exists, false);

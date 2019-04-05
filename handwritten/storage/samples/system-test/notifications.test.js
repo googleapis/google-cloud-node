@@ -18,10 +18,11 @@
 const {PubSub} = require('@google-cloud/pubsub');
 const {Storage} = require('@google-cloud/storage');
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
 
-const exec = async cmd => (await execa.shell(cmd)).stdout;
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+
 const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
@@ -51,21 +52,21 @@ after(async () => {
 });
 
 it('should create a notification', async () => {
-  const output = await exec(`${cmd} create ${bucketName} ${topicName}`);
+  const output = execSync(`${cmd} create ${bucketName} ${topicName}`);
   assert.match(output, /Notification subscription created./);
   const [exists] = await notification.exists();
   assert.strictEqual(exists, true);
 });
 
 it('should list notifications', async () => {
-  const output = await exec(`${cmd} list ${bucketName}`);
+  const output = execSync(`${cmd} list ${bucketName}`);
   assert.match(output, /Notifications:/);
   assert.match(output, new RegExp(notificationId));
 });
 
 it('should get metadata', async () => {
   const metadata = await notification.getMetadata();
-  const output = await exec(
+  const output = execSync(
     `${cmd} get-metadata ${bucketName} ${notificationId}`
   );
   assert.match(output, /ID:/);
@@ -88,7 +89,7 @@ it('should get metadata', async () => {
 });
 
 it('should delete a notification', async () => {
-  const output = await exec(`${cmd} delete ${bucketName} ${notificationId}`);
+  const output = execSync(`${cmd} delete ${bucketName} ${notificationId}`);
   assert.match(output, new RegExp(`Notification ${notificationId} deleted.`));
   const [exists] = await notification.exists();
   assert.strictEqual(exists, false);

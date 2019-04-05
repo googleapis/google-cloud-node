@@ -19,11 +19,12 @@ const fs = require('fs');
 const path = require('path');
 const {Storage} = require('@google-cloud/storage');
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
 const {promisify} = require('util');
 
-const exec = async cmd => (await execa.shell(cmd)).stdout;
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+
 const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
@@ -47,15 +48,15 @@ after(async () => {
   await bucket.delete().catch(console.error);
 });
 
-it('should generate a key', async () => {
-  const output = await exec(`${cmd} generate-encryption-key`);
+it('should generate a key', () => {
+  const output = execSync(`${cmd} generate-encryption-key`);
   assert.match(output, /Base 64 encoded encryption key:/);
-  const test = /^Base 64 encoded encryption key: (.+)$/;
+  const test = /^Base 64 encoded encryption key: ([^\s]+)/;
   key = output.match(test)[1];
 });
 
 it('should upload a file', async () => {
-  const output = await exec(
+  const output = execSync(
     `${cmd} upload ${bucketName} ${filePath} ${fileName} ${key}`
   );
   assert.match(
@@ -66,8 +67,8 @@ it('should upload a file', async () => {
   assert.strictEqual(exists, true);
 });
 
-it('should download a file', async () => {
-  const output = await exec(
+it('should download a file', () => {
+  const output = execSync(
     `${cmd} download ${bucketName} ${fileName} ${downloadFilePath} ${key}`
   );
   assert.match(
@@ -77,14 +78,12 @@ it('should download a file', async () => {
   fs.statSync(downloadFilePath);
 });
 
-it('should rotate keys', async () => {
+it('should rotate keys', () => {
   // Generate a new key
-  let output = await exec(`${cmd} generate-encryption-key`);
+  let output = execSync(`${cmd} generate-encryption-key`);
   assert.match(output, /Base 64 encoded encryption key:/);
-  const test = /^Base 64 encoded encryption key: (.+)$/;
+  const test = /^Base 64 encoded encryption key: ([^\s]+)/;
   const newKey = output.match(test)[1];
-  output = await exec(
-    `${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`
-  );
-  assert.strictEqual(output, 'Encryption key rotated successfully.');
+  output = execSync(`${cmd} rotate ${bucketName} ${fileName} ${key} ${newKey}`);
+  assert.include(output, 'Encryption key rotated successfully.');
 });

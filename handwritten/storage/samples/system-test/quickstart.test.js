@@ -16,9 +16,11 @@
 'use strict';
 
 const {assert} = require('chai');
-const execa = require('execa');
+const cp = require('child_process');
 const uuid = require('uuid');
 const {Storage} = require('@google-cloud/storage');
+
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const storage = new Storage();
 const bucketName = `nodejs-storage-samples-${uuid.v4()}`;
@@ -29,6 +31,6 @@ after(async () => {
 });
 
 it('should run the quickstart', async () => {
-  const {stdout} = await execa.shell(`node quickstart ${bucketName}`);
+  const stdout = execSync(`node quickstart ${bucketName}`);
   assert.match(stdout, /Bucket .* created./);
 });
