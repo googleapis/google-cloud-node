@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import {Key} from 'readline';
 import {Datastore} from '.';
 import {Entity} from './entity';

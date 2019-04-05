@@ -24,7 +24,7 @@
  * @namespace google.protobuf
  */
 
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import {GrpcClient} from 'google-gax';
 import {ChannelCredentials} from 'grpc';
@@ -642,7 +642,7 @@ class Datastore extends DatastoreRequest {
       kind = namespaceOrKind;
       namespace = this.namespace!;
     }
-    return new Query(this, namespace, arrify(kind));
+    return new Query(this, namespace, arrify(kind) as string[]);
   }
 
   key(options: entity.KeyOptions): entity.Key;
@@ -700,7 +700,7 @@ class Datastore extends DatastoreRequest {
   key(options: string|entity.KeyOptions|PathType[]): entity.Key {
     options = is.object(options) ? options : {
       namespace: this.namespace,
-      path: arrify(options),
+      path: arrify(options) as PathType[],
     };
     return new entity.Key(options as entity.KeyOptions);
   }

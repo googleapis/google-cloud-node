@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as extend from 'extend';
 import * as is from 'is';
 import {Query, QueryProto} from './query';
