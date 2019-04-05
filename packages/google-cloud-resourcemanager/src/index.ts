@@ -18,7 +18,6 @@ import {GoogleAuthOptions, Operation, Service} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as r from 'request';  // Only for type declarations.
-import {teenyRequest} from 'teeny-request';
 
 import {Project} from './project';
 
@@ -144,8 +143,7 @@ class Resource extends Service {
       baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       projectIdRequired: false,
-      packageJson: require('../../package.json'),
-      requestModule: teenyRequest as typeof r,
+      packageJson: require('../../package.json')
     };
     super(config, options);
 
@@ -384,8 +382,7 @@ class Resource extends Service {
     if (!name) {
       throw new Error('A name must be specified for an operation.');
     }
-    return new Operation<Project>(
-        {parent: this, id: name, requestModule: teenyRequest as typeof r});
+    return new Operation<Project>({parent: this, id: name});
   }
 
   /**

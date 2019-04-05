@@ -17,7 +17,6 @@
 import {Operation, ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as r from 'request';  // Only for type declarations.
-import {teenyRequest} from 'teeny-request';
 
 import {CreateProjectCallback, CreateProjectResponse, Resource} from '.';
 
@@ -265,7 +264,6 @@ class Project extends ServiceObject {
 
     super({
       parent: resource,
-      requestModule: teenyRequest as typeof r,
       baseUrl: '/projects',
       /**
        * @name Project#id

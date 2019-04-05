@@ -20,7 +20,6 @@ import * as arrify from 'arrify';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import {Response} from 'request';
-import {teenyRequest} from 'teeny-request';
 
 import * as root from '../src';
 import {Project} from '../src';
@@ -353,8 +352,7 @@ describe('Resource', () => {
       const operation = resource.operation(NAME);
       assert(operation instanceof FakeOperation);
       assert.deepStrictEqual(
-          operation.calledWith_[0],
-          {parent: resource, id: NAME, requestModule: teenyRequest});
+          operation.calledWith_[0], {parent: resource, id: NAME});
     });
   });
 
