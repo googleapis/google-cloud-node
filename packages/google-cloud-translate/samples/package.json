@@ -8,7 +8,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "test": "mocha system-test --recursive --timeout 90000"
+    "test": "mocha --recursive --timeout 90000"
   },
   "dependencies": {
     "@google-cloud/translate": "^3.0.0",
@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "execa": "^1.0.0",
     "@google-cloud/storage": "^2.4.3",
     "mocha": "^6.0.0",
     "uuid": "^3.3.2"
