@@ -14,7 +14,7 @@
 
 import {Service, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as arrify from 'arrify';
+import arrify = require('arrify');
 import * as extend from 'extend';
 import {GoogleAuthOptions} from 'google-auth-library';
 import * as is from 'is';
