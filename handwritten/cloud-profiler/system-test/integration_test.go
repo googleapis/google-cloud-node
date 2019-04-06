@@ -34,11 +34,10 @@ import (
 )
 
 var (
-	repo                = flag.String("repo", "https://github.com/googleapis/cloud-profiler-nodejs.git", "git repo to test")
-	branch              = flag.String("branch", "", "git branch to test")
-	commit              = flag.String("commit", "", "git commit to test")
-	pr                  = flag.Int("pr", 0, "git pull request to test")
-	runOnlyV8CanaryTest = flag.Bool("run_only_v8_canary_test", false, "if true test will be run only with the v8-canary build, otherwise, no tests will be run with v8 canary")
+	repo   = flag.String("repo", "https://github.com/googleapis/cloud-profiler-nodejs.git", "git repo to test")
+	branch = flag.String("branch", "", "git branch to test")
+	commit = flag.String("commit", "", "git commit to test")
+	pr     = flag.Int("pr", 0, "git pull request to test")
 
 	runID             = strings.Replace(time.Now().Format("2006-01-02-15-04-05.000000-0700"), ".", "-", -1)
 	benchFinishString = "busybench finished profiling"
@@ -73,7 +72,7 @@ set -eo pipefail
 set -x
 # Install git
 retry apt-get update >/dev/null
-retry apt-get -y -q install git  {{if .NVMMirror}}build-essential{{end}}>/dev/null
+retry apt-get -y -q install git >/dev/null
 
 # Install desired version of Node.js
 retry curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash >/dev/null
@@ -82,7 +81,7 @@ export NVM_DIR="$HOME/.nvm" >/dev/null
 
 # nvm install writes to stderr and stdout on successful install, so both are
 # redirected to serial port 3.
-{{if .NVMMirror}}NVM_NODEJS_ORG_MIRROR={{.NVMMirror}}{{end}} retry nvm install {{.NodeVersion}} &>/dev/ttyS2
+retry nvm install {{.NodeVersion}} &>/dev/ttyS2
 npm -v
 node -v
 NODEDIR=$(dirname $(dirname $(which node)))
@@ -93,12 +92,6 @@ cd cloud-profiler-nodejs
 retry git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pull_branch
 git checkout pull_branch
 git reset --hard {{.Commit}}
-
-# TODO: remove this workaround.
-# For v8-canary tests, we need to use the version of NAN on github, which 
-# contains unreleased fixes which allows the native component to be compiled
-# with Node 11.
-{{if .NVMMirror}} retry npm install https://github.com/nodejs/nan.git {{end}}
 
 retry npm install --nodedir="$NODEDIR" &>/dev/ttyS2
 
@@ -137,7 +130,6 @@ type nodeGCETestCase struct {
 	proftest.InstanceConfig
 	name         string
 	nodeVersion  string
-	nvmMirror    string
 	wantProfiles []profileSummary
 }
 
@@ -147,7 +139,6 @@ func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) 
 		struct {
 			Service      string
 			NodeVersion  string
-			NVMMirror    string
 			Repo         string
 			PR           int
 			Branch       string
@@ -157,7 +148,6 @@ func (tc *nodeGCETestCase) initializeStartUpScript(template *template.Template) 
 		}{
 			Service:      tc.name,
 			NodeVersion:  tc.nodeVersion,
-			NVMMirror:    tc.nvmMirror,
 			Repo:         *repo,
 			PR:           *pr,
 			Branch:       *branch,
@@ -261,20 +251,6 @@ func TestAgentIntegration(t *testing.T) {
 			wantProfiles: wantProfiles,
 			nodeVersion:  "11",
 		},
-	}
-	if *runOnlyV8CanaryTest {
-		testcases = []nodeGCETestCase{{
-			InstanceConfig: proftest.InstanceConfig{
-				ProjectID:   projectID,
-				Zone:        zone,
-				Name:        fmt.Sprintf("profiler-test-v8-canary-%s", runID),
-				MachineType: "n1-standard-1",
-			},
-			name:         fmt.Sprintf("profiler-test-v8-canary-%s-gce", runID),
-			wantProfiles: wantProfiles,
-			nodeVersion:  "node", // install latest version of node
-			nvmMirror:    "https://nodejs.org/download/v8-canary",
-		}}
 	}
 
 	// Allow test cases to run in parallel.
