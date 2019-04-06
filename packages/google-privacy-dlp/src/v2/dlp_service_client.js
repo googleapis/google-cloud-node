@@ -671,7 +671,7 @@ class DlpServiceClient {
    * @param {string} [request.templateId]
    *   The template id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1104,7 +1104,7 @@ class DlpServiceClient {
    * @param {string} [request.templateId]
    *   The template id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1551,7 +1551,7 @@ class DlpServiceClient {
    * @param {string} [request.jobId]
    *   The job id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -2414,7 +2414,7 @@ class DlpServiceClient {
    * @param {string} [request.triggerId]
    *   The trigger id can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -2479,7 +2479,7 @@ class DlpServiceClient {
    * @param {string} [request.storedInfoTypeId]
    *   The storedInfoType ID can contain uppercase and lowercase letters,
    *   numbers, and hyphens; that is, it must match the regular
-   *   expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+   *   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
    *   characters. Can be empty to allow the system to generate one.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
