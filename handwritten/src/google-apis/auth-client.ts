@@ -20,7 +20,6 @@ import {Configuration, Logger} from '../configuration';
 import {ErrorMessage} from '../classes/error-message';
 import * as http from 'http';
 import {Service, ServiceOptions} from '@google-cloud/common';
-import {teenyRequest} from 'teeny-request';
 
 /* @const {Array<String>} list of scopes needed to work with the errors api. */
 const SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
@@ -100,8 +99,6 @@ export class RequestHandler extends Service {
     });
     super(
         {
-          // tslint:disable-next-line:no-any
-          requestModule: teenyRequest as any,
           packageJson: pkg,
           baseUrl: API,
           scopes: SCOPES,
