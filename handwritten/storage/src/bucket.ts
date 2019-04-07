@@ -25,8 +25,6 @@ import * as mime from 'mime-types';
 import * as path from 'path';
 
 const snakeize = require('snakeize');
-import * as request from 'request';  // Only for type declarations.
-import {teenyRequest} from 'teeny-request';
 
 import {Acl, AddAclCallback} from './acl';
 import {Channel} from './channel';
@@ -55,7 +53,7 @@ interface BucketOptions {
 
 export interface GetFilesCallback {
   (err: Error|null, files?: File[], nextQuery?: {},
-   apiResponse?: request.Response): void;
+   apiResponse?: Metadata): void;
 }
 
 interface WatchAllOptions {
@@ -96,10 +94,10 @@ export interface CombineOptions {
 }
 
 export interface CombineCallback {
-  (err: Error|null, newFile: File|null, apiResponse: request.Response): void;
+  (err: Error|null, newFile: File|null, apiResponse: Metadata): void;
 }
 
-export type CombineResponse = [File, request.Response];
+export type CombineResponse = [File, Metadata];
 
 export interface CreateChannelConfig extends WatchAllOptions {
   address: string;
@@ -109,10 +107,10 @@ export interface CreateChannelOptions {
   userProject?: string;
 }
 
-export type CreateChannelResponse = [Channel, request.Response];
+export type CreateChannelResponse = [Channel, Metadata];
 
 export interface CreateChannelCallback {
-  (err: Error|null, channel: Channel|null, apiResponse: request.Response): void;
+  (err: Error|null, channel: Channel|null, apiResponse: Metadata): void;
 }
 
 export interface CreateNotificationOptions {
@@ -125,19 +123,19 @@ export interface CreateNotificationOptions {
 
 export interface CreateNotificationCallback {
   (err: Error|null, notification: Notification|null,
-   apiResponse: request.Response): void;
+   apiResponse: Metadata): void;
 }
 
-export type CreateNotificationResponse = [Notification, request.Response];
+export type CreateNotificationResponse = [Notification, Metadata];
 
 export interface DeleteBucketOptions {
   userProject?: string;
 }
 
-export type DeleteBucketResponse = [request.Response];
+export type DeleteBucketResponse = [Metadata];
 
 export interface DeleteBucketCallback extends DeleteCallback {
-  (err: Error|null, apiResponse: request.Response): void;
+  (err: Error|null, apiResponse: Metadata): void;
 }
 
 export interface DeleteFilesOptions extends GetFilesOptions {
@@ -148,20 +146,20 @@ export interface DeleteFilesCallback {
   (err: Error|Error[]|null, apiResponse?: object): void;
 }
 
-export type DeleteLabelsResponse = [request.Response];
+export type DeleteLabelsResponse = [Metadata];
 
 export interface DeleteLabelsCallback extends SetLabelsCallback {}
 
-export type DisableRequesterPaysResponse = [request.Response];
+export type DisableRequesterPaysResponse = [Metadata];
 
 export interface DisableRequesterPaysCallback {
   (err?: Error|null, apiResponse?: object): void;
 }
 
-export type EnableRequesterPaysResponse = [request.Response];
+export type EnableRequesterPaysResponse = [Metadata];
 
 export interface EnableRequesterPaysCallback {
-  (err?: Error|null, apiResponse?: request.Response): void;
+  (err?: Error|null, apiResponse?: Metadata): void;
 }
 
 export interface BucketExistsOptions extends GetConfig {
@@ -176,28 +174,26 @@ export interface GetBucketOptions extends GetConfig {
   userProject?: string;
 }
 
-export type GetBucketResponse = [Bucket, request.Response];
+export type GetBucketResponse = [Bucket, Metadata];
 
 export interface GetBucketCallback {
-  (err: ApiError|null, bucket: Bucket|null,
-   apiResponse: request.Response): void;
+  (err: ApiError|null, bucket: Bucket|null, apiResponse: Metadata): void;
 }
 
 export interface GetLabelsOptions {
   userProject?: string;
 }
 
-export type GetLabelsResponse = [request.Response];
+export type GetLabelsResponse = [Metadata];
 
 export interface GetLabelsCallback {
   (err: Error|null, labels: object|null): void;
 }
 
-export type GetBucketMetadataResponse = [Metadata, request.Response];
+export type GetBucketMetadataResponse = [Metadata, Metadata];
 
 export interface GetBucketMetadataCallback {
-  (err: ApiError|null, metadata: Metadata|null,
-   apiResponse: request.Response): void;
+  (err: ApiError|null, metadata: Metadata|null, apiResponse: Metadata): void;
 }
 
 export interface GetBucketMetadataOptions {
@@ -210,10 +206,10 @@ export interface GetNotificationsOptions {
 
 export interface GetNotificationsCallback {
   (err: Error|null, notifications: Notification[]|null,
-   apiResponse: request.Response): void;
+   apiResponse: Metadata): void;
 }
 
-export type GetNotificationsResponse = [Notification[], request.Response];
+export type GetNotificationsResponse = [Notification[], Metadata];
 
 export interface MakeBucketPrivateOptions {
   includeFiles?: boolean;
@@ -246,17 +242,17 @@ export interface SetBucketMetadataOptions {
   userProject?: string;
 }
 
-export type SetBucketMetadataResponse = [request.Response];
+export type SetBucketMetadataResponse = [Metadata];
 
 export interface SetBucketMetadataCallback {
   (err?: Error|null, metadata?: Metadata): void;
 }
 
 export interface BucketLockCallback {
-  (err?: Error|null, apiResponse?: request.Response): void;
+  (err?: Error|null, apiResponse?: Metadata): void;
 }
 
-export type BucketLockResponse = [request.Response];
+export type BucketLockResponse = [Metadata];
 
 export type Labels = {
   [key: string]: string;
@@ -266,7 +262,7 @@ export interface SetLabelsOptions {
   userProject?: string;
 }
 
-export type SetLabelsResponse = [request.Response];
+export type SetLabelsResponse = [Metadata];
 
 export interface SetLabelsCallback {
   (err?: Error|null, metadata?: Metadata): void;
@@ -280,10 +276,10 @@ export interface SetBucketStorageClassCallback {
   (err?: Error|null): void;
 }
 
-export type UploadResponse = [File, request.Response];
+export type UploadResponse = [File, Metadata];
 
 export interface UploadCallback {
-  (err: Error|null, file?: File|null, apiResponse?: request.Response): void;
+  (err: Error|null, file?: File|null, apiResponse?: Metadata): void;
 }
 
 export interface UploadOptions extends CreateResumableUploadOptions,
@@ -2517,8 +2513,7 @@ class Bucket extends ServiceObject {
         callback!);
   }
 
-  request(reqOpts: DecorateRequestOptions):
-      Promise<[ResponseBody, request.Response]>;
+  request(reqOpts: DecorateRequestOptions): Promise<[ResponseBody, Metadata]>;
   request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
       void;
   /**
@@ -2530,7 +2525,7 @@ class Bucket extends ServiceObject {
    * @param {function} callback - The callback function.
    */
   request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
-      void|Promise<[ResponseBody, request.Response]> {
+      void|Promise<[ResponseBody, Metadata]> {
     if (this.userProject && (!reqOpts.qs || !reqOpts.qs.userProject)) {
       reqOpts.qs = extend(reqOpts.qs, {userProject: this.userProject});
     }

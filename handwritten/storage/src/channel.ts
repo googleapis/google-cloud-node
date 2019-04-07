@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-import {ServiceObject, util} from '@google-cloud/common';
+import {Metadata, ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as request from 'request';  // Only for type declarations.
-import {Response} from 'request';
-import {teenyRequest} from 'teeny-request';
 
 import {Storage} from './storage';
 
 export interface StopCallback {
-  (err: Error|null, apiResponse?: request.Response): void;
+  (err: Error|null, apiResponse?: Metadata): void;
 }
 
 
@@ -67,7 +64,7 @@ class Channel extends ServiceObject {
     metadata.resourceId = resourceId;
   }
 
-  stop(): Promise<Response>;
+  stop(): Promise<Metadata>;
   stop(callback: StopCallback): void;
   /**
    * @typedef {array} StopResponse
@@ -101,7 +98,7 @@ class Channel extends ServiceObject {
    *   const apiResponse = data[0];
    * });
    */
-  stop(callback?: StopCallback): Promise<Response>|void {
+  stop(callback?: StopCallback): Promise<Metadata>|void {
     callback = callback || util.noop;
     this.request(
         {

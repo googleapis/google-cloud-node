@@ -37,7 +37,6 @@ import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 import * as url from 'url';
 import * as http from 'http';
-import * as r from 'request';  // Only for type declarations.
 
 import {Storage} from './storage';
 import {Bucket} from './bucket';
@@ -45,10 +44,11 @@ import {Acl} from './acl';
 import {ResponseBody, ApiError, Duplexify, DuplexifyConstructor} from '@google-cloud/common/build/src/util';
 const duplexify: DuplexifyConstructor = require('duplexify');
 import {normalize, objectEntries} from './util';
+import {Headers} from 'gaxios';
 
 export type GetExpirationDateResponse = [Date];
 export interface GetExpirationDateCallback {
-  (err: Error|null, expirationDate?: Date|null, apiResponse?: r.Response): void;
+  (err: Error|null, expirationDate?: Date|null, apiResponse?: Metadata): void;
 }
 
 export interface GetSignedUrlConfig {
@@ -117,20 +117,20 @@ export interface GetFileMetadataOptions {
   userProject?: string;
 }
 
-export type GetFileMetadataResponse = [Metadata, r.Response];
+export type GetFileMetadataResponse = [Metadata, Metadata];
 
 export interface GetFileMetadataCallback {
-  (err: Error|null, metadata?: Metadata, apiResponse?: r.Response): void;
+  (err: Error|null, metadata?: Metadata, apiResponse?: Metadata): void;
 }
 
 export interface GetFileOptions extends GetConfig {
   userProject?: string;
 }
 
-export type GetFileResponse = [File, r.Response];
+export type GetFileResponse = [File, Metadata];
 
 export interface GetFileCallback {
-  (err: Error|null, file?: File, apiResponse?: r.Response): void;
+  (err: Error|null, file?: File, apiResponse?: Metadata): void;
 }
 
 export interface FileExistsOptions {
@@ -147,10 +147,10 @@ export interface DeleteFileOptions {
   userProject?: string;
 }
 
-export type DeleteFileResponse = [r.Response];
+export type DeleteFileResponse = [Metadata];
 
 export interface DeleteFileCallback {
-  (err: Error|null, apiResponse?: r.Response): void;
+  (err: Error|null, apiResponse?: Metadata): void;
 }
 
 export type PredefinedAcl = 'authenticatedRead'|'bucketOwnerFullControl'|
@@ -185,21 +185,20 @@ export interface MakeFilePrivateOptions {
   userProject?: string;
 }
 
-export type MakeFilePrivateResponse = [r.Response];
+export type MakeFilePrivateResponse = [Metadata];
 
 export interface MakeFilePrivateCallback extends SetFileMetadataCallback {}
 
-export type MakeFilePublicResponse = [r.Response];
+export type MakeFilePublicResponse = [Metadata];
 
 export interface MakeFilePublicCallback {
-  (err?: Error|null, apiResponse?: r.Response): void;
+  (err?: Error|null, apiResponse?: Metadata): void;
 }
 
-export type MoveResponse = [r.Response];
+export type MoveResponse = [Metadata];
 
 export interface MoveCallback {
-  (err: Error|null, destinationFile?: File|null,
-   apiResponse?: r.Response): void;
+  (err: Error|null, destinationFile?: File|null, apiResponse?: Metadata): void;
 }
 
 export interface MoveOptions {
@@ -269,10 +268,10 @@ export interface CopyOptions {
   userProject?: string;
 }
 
-export type CopyResponse = [File, r.Response];
+export type CopyResponse = [File, Metadata];
 
 export interface CopyCallback {
-  (err: Error|null, file?: File|null, apiResponse?: r.Response): void;
+  (err: Error|null, file?: File|null, apiResponse?: Metadata): void;
 }
 
 export type DownloadResponse = [Buffer];
@@ -339,12 +338,12 @@ export interface SetFileMetadataOptions {
 }
 
 export interface SetFileMetadataCallback {
-  (err?: Error|null, apiResponse?: r.Response): void;
+  (err?: Error|null, apiResponse?: Metadata): void;
 }
 
-export type SetFileMetadataResponse = [r.Response];
+export type SetFileMetadataResponse = [Metadata];
 
-export type SetStorageClassResponse = [r.Response];
+export type SetStorageClassResponse = [Metadata];
 
 export interface SetStorageClassOptions {
   userProject?: string;
@@ -355,7 +354,7 @@ interface SetStorageClassRequest extends SetStorageClassOptions {
 }
 
 export interface SetStorageClassCallback {
-  (err?: Error|null, apiResponse?: r.Response): void;
+  (err?: Error|null, apiResponse?: Metadata): void;
 }
 
 class RequestError extends Error {
@@ -1196,7 +1195,7 @@ class File extends ServiceObject<File> {
       const headers = {
         'Accept-Encoding': 'gzip',
         'Cache-Control': 'no-store'
-      } as r.Headers;
+      } as Headers;
 
       if (rangeRequest) {
         const start = typeof options.start === 'number' ? options.start : '0';
@@ -1237,7 +1236,7 @@ class File extends ServiceObject<File> {
       //      applicable, to the user.
       const onResponse =
           (err: Error|null, body: ResponseBody,
-           rawResponseStream: r.Response) => {
+           rawResponseStream: Metadata) => {
             if (err) {
               // Get error message from the body.
               rawResponseStream.pipe(concat(body => {
@@ -1974,7 +1973,7 @@ class File extends ServiceObject<File> {
   getExpirationDate(callback?: GetExpirationDateCallback):
       void|Promise<GetExpirationDateResponse> {
     this.getMetadata(
-        (err: ApiError|null, metadata: Metadata, apiResponse: r.Response) => {
+        (err: ApiError|null, metadata: Metadata, apiResponse: Metadata) => {
           if (err) {
             callback!(err, null, apiResponse);
             return;
@@ -2804,7 +2803,7 @@ class File extends ServiceObject<File> {
     });
   }
 
-  request(reqOpts: DecorateRequestOptions): Promise<[ResponseBody, r.Response]>;
+  request(reqOpts: DecorateRequestOptions): Promise<[ResponseBody, Metadata]>;
   request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
       void;
   /**
@@ -2816,7 +2815,7 @@ class File extends ServiceObject<File> {
    * @param {function} callback - The callback function.
    */
   request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
-      void|Promise<[ResponseBody, r.Response]> {
+      void|Promise<[ResponseBody, Metadata]> {
     return this.parent.request.call(this, reqOpts, callback!);
   }
 

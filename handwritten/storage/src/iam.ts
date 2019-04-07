@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import {BodyResponseCallback, DecorateRequestOptions} from '@google-cloud/common';
+import {BodyResponseCallback, DecorateRequestOptions, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
-import * as r from 'request';
 
 import {Bucket} from './bucket';
 import {normalize} from './util';
@@ -36,7 +35,7 @@ export interface GetPolicyOptions {
  * @property {object} 0 The policy.
  * @property {object} 1 The full API response.
  */
-export type GetPolicyResponse = [Policy, r.Response];
+export type GetPolicyResponse = [Policy, Metadata];
 
 /**
  * @callback GetPolicyCallback
@@ -45,7 +44,7 @@ export type GetPolicyResponse = [Policy, r.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface GetPolicyCallback {
-  (err?: Error|null, acl?: Policy, apiResponse?: r.Response): void;
+  (err?: Error|null, acl?: Policy, apiResponse?: Metadata): void;
 }
 
 /**
@@ -62,7 +61,7 @@ export interface SetPolicyOptions {
  * @property {object} 0 The policy.
  * @property {object} 1 The full API response.
  */
-export type SetPolicyResponse = [Policy, r.Response];
+export type SetPolicyResponse = [Policy, Metadata];
 
 /**
  * @callback SetPolicyCallback
@@ -94,7 +93,7 @@ export interface PolicyBinding {
  * @property {object} 0 A subset of permissions that the caller is allowed.
  * @property {object} 1 The full API response.
  */
-export type TestIamPermissionsResponse = [{[key: string]: boolean}, r.Response];
+export type TestIamPermissionsResponse = [{[key: string]: boolean}, Metadata];
 
 /**
  * @callback TestIamPermissionsCallback
@@ -104,7 +103,7 @@ export type TestIamPermissionsResponse = [{[key: string]: boolean}, r.Response];
  */
 export interface TestIamPermissionsCallback {
   (err?: Error|null, acl?: {[key: string]: boolean}|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
 
 /**

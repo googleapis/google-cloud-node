@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-import {BodyResponseCallback, DecorateRequestOptions} from '@google-cloud/common';
+import {BodyResponseCallback, DecorateRequestOptions, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
-import * as r from 'request';
 
 export interface AclOptions {
   pathPrefix: string;
@@ -26,10 +25,10 @@ export interface AclOptions {
 }
 
 export type GetAclResponse =
-    [AccessControlObject | AccessControlObject[], r.Response];
+    [AccessControlObject | AccessControlObject[], Metadata];
 export interface GetAclCallback {
   (err: Error|null, acl?: AccessControlObject|AccessControlObject[]|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
 export interface GetAclOptions {
   entity: string;
@@ -43,10 +42,10 @@ export interface UpdateAclOptions {
   generation?: number;
   userProject?: string;
 }
-export type UpdateAclResponse = [AccessControlObject, r.Response];
+export type UpdateAclResponse = [AccessControlObject, Metadata];
 export interface UpdateAclCallback {
   (err: Error|null, acl?: AccessControlObject|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
 
 export interface AddAclOptions {
@@ -55,14 +54,14 @@ export interface AddAclOptions {
   generation?: number;
   userProject?: string;
 }
-export type AddAclResponse = [AccessControlObject, r.Response];
+export type AddAclResponse = [AccessControlObject, Metadata];
 export interface AddAclCallback {
   (err: Error|null, acl?: AccessControlObject|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
-export type RemoveAclResponse = [r.Response];
+export type RemoveAclResponse = [Metadata];
 export interface RemoveAclCallback {
-  (err: Error|null, apiResponse?: r.Response): void;
+  (err: Error|null, apiResponse?: Metadata): void;
 }
 export interface RemoveAclOptions {
   entity: string;

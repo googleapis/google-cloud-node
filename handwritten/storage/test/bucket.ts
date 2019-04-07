@@ -28,7 +28,6 @@ import * as through from 'through2';
 import {Bucket, Channel, Notification} from '../src';
 import {CreateWriteStreamOptions, File, SetFileMetadataOptions, FileOptions} from '../src/file';
 import {PromisifyAllOptions} from '@google-cloud/promisify';
-import * as r from 'request';
 import {GetBucketMetadataCallback, GetFilesOptions, MakeAllFilesPublicPrivateOptions, SetBucketMetadataCallback} from '../src/bucket';
 import {AddAclOptions} from '../src/acl';
 
@@ -203,7 +202,7 @@ describe('Bucket', () => {
     });
 
     describe('ACL objects', () => {
-      let _request: typeof r;
+      let _request: Function;
 
       before(() => {
         _request = Bucket.prototype.request;
@@ -299,7 +298,7 @@ describe('Bucket', () => {
   describe('addLifecycleRule', () => {
     beforeEach(() => {
       bucket.getMetadata = (callback: GetBucketMetadataCallback) => {
-        callback(null, {}, {} as r.Response);
+        callback(null, {}, {});
       };
     });
 
@@ -425,7 +424,7 @@ describe('Bucket', () => {
       };
 
       bucket.getMetadata = (callback: GetBucketMetadataCallback) => {
-        callback(null, {lifecycle: {rule: [existingRule]}}, {} as r.Response);
+        callback(null, {lifecycle: {rule: [existingRule]}}, {});
       };
 
       bucket.setMetadata = (metadata: Metadata) => {
