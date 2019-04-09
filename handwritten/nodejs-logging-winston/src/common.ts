@@ -154,11 +154,11 @@ export class LoggingCommon {
       entryMetadata.httpRequest = metadata.httpRequest;
     }
 
-    // If the metadata contains a metadata property, promote it to the entry
+    // If the metadata contains a timestamp property, promote it to the entry
     // metadata. As Winston 3 buffers logs when a transport (such as this one)
     // invokes its log callback asynchronously, a timestamp assigned at log time
     // is more accurate than one assigned in a transport.
-    if (metadata.timestamp) {
+    if (metadata.timestamp instanceof Date) {
       entryMetadata.timestamp = metadata.timestamp;
     }
 
@@ -202,5 +202,5 @@ type MetadataArg = {
    */
   httpRequest?: types.HttpRequest,
   labels?: {},
-  timestamp?: Date|string
+  timestamp?: {}
 }&{[key: string]: string | {}};
