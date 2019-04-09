@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## v0.6.2
+
+04-09-2019 11:14 PDT
+
+### Bug Fixes
+
+- fix: in Koa2 interface await `next` as a function ([#336](https://github.com/googleapis/nodejs-error-reporting/pull/336))
+
+### CI/CD
+
+- build: use per-repo publish token ([#327](https://github.com/googleapis/nodejs-error-reporting/pull/327))
+- chore: publish to npm using wombat ([#328](https://github.com/googleapis/nodejs-error-reporting/pull/328))
+
+### Dependencies
+
+- fix(deps): update dependency @google-cloud/common to ^0.32.0 ([#334](https://github.com/googleapis/nodejs-error-reporting/pull/334))
+- chore(deps): update dependency typescript to ~3.4.0
+
+### Internal / Testing Changes
+
+- chore: test Restify 18 in the install tests ([#324](https://github.com/googleapis/nodejs-error-reporting/pull/324))
+
 ## v0.6.1
 
 03-13-2019 16:21 PDT
