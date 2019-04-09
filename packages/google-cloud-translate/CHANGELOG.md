@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## v3.0.1
+
+04-09-2019 12:19 PDT
+
+### Fixes
+- fix(build): include build/protos in npm package ([#241](https://github.com/googleapis/nodejs-translate/pull/241))
+
+### Dependencies
+- fix(deps): update dependency @google-cloud/automl to ^0.2.0 ([#236](https://github.com/googleapis/nodejs-translate/pull/236))
+- fix(deps): update dependency arrify to v2
+- fix(deps): update dependency @google-cloud/common to ^0.32.0
+
+### Documentation / Samples
+- Change region tag to translate_translate_text_with_glossary_beta ([#240](https://github.com/googleapis/nodejs-translate/pull/240))
+- docs(samples): Add samples for translate v3 beta ([#234](https://github.com/googleapis/nodejs-translate/pull/234))
+
+### Internal / Testing Changes
+- refactor: use execSync for tests ([#237](https://github.com/googleapis/nodejs-translate/pull/237))
+
 ## v3.0.0
 
 BREAKING CHANGE: 
