@@ -42,11 +42,12 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    * @param {Function} next - the result of the request handlers to yield
    * @returns {Undefined} does not return anything
    */
-  return function*(this: {request: Request; response: Response;}, next: {}) {
+  return function*(
+      this: {request: Request; response: Response;}, next: Function) {
     const svc = config.getServiceContext();
 
     try {
-      yield next;
+      yield next();
     } catch (err) {
       const em = new ErrorMessage()
                      .consumeRequestInformation(koaRequestInformationExtractor(
