@@ -304,6 +304,30 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
     });
 
+    it('should promote timestamp property to metadata', (done) => {
+      const date = new Date();
+      const metadataWithRequest = Object.assign(
+          {
+            timestamp: date,
+          },
+          METADATA);
+
+      loggingCommon.stackdriverLog.entry =
+          (entryMetadata: types.StackdriverEntryMetadata,
+           data: types.StackdriverData) => {
+            assert.deepStrictEqual(entryMetadata, {
+              resource: loggingCommon.resource,
+              timestamp: date,
+            });
+            assert.deepStrictEqual(data, {
+              message: MESSAGE,
+              metadata: METADATA,
+            });
+            done();
+          };
+      loggingCommon.log(LEVEL, MESSAGE, metadataWithRequest, assert.ifError);
+    });
+
     it('should promote labels from metadata to log entry', (done) => {
       const LABELS = {labelKey: 'labelValue'};
       const metadataWithLabels = Object.assign({labels: LABELS}, METADATA);

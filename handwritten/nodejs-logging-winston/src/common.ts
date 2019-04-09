@@ -154,6 +154,14 @@ export class LoggingCommon {
       entryMetadata.httpRequest = metadata.httpRequest;
     }
 
+    // If the metadata contains a metadata property, promote it to the entry
+    // metadata. As Winston 3 buffers logs when a transport (such as this one)
+    // invokes its log callback asynchronously, a timestamp assigned at log time
+    // is more accurate than one assigned in a transport.
+    if (metadata.timestamp) {
+      entryMetadata.timestamp = metadata.timestamp;
+    }
+
     // If the metadata contains a labels property, promote it to the entry
     // metadata.
     // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
@@ -179,6 +187,7 @@ export class LoggingCommon {
       delete data.metadata![LOGGING_TRACE_KEY];
       delete data.metadata!.httpRequest;
       delete data.metadata!.labels;
+      delete data.metadata!.timestamp;
     }
 
     const entry = this.stackdriverLog.entry(entryMetadata, data);
@@ -192,5 +201,6 @@ type MetadataArg = {
    * set httpRequest to a http.clientRequest object to log it
    */
   httpRequest?: types.HttpRequest,
-  labels?: {}
+  labels?: {},
+  timestamp?: Date|string
 }&{[key: string]: string | {}};
