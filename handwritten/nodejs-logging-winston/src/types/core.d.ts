@@ -137,7 +137,7 @@ export interface StackdriverEntryMetadata {
   httpRequest?: HttpRequest;
   labels?: {};
   trace?: {};
-  timestamp?: Date|string;
+  timestamp?: Date;
 }
 
 export enum STACKDRIVER_LOGGING_LEVELS {
