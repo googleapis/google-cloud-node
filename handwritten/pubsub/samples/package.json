@@ -8,7 +8,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-pubsub",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "test": "mocha system-test --timeout 600000"

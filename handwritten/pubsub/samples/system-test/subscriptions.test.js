@@ -16,11 +16,22 @@
 'use strict';
 
 const {PubSub} = require('@google-cloud/pubsub');
+const assertRejects = require('assert').rejects;
 const {assert} = require('chai');
 const cp = require('child_process');
 const uuid = require('uuid');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execPromise = cmd =>
+  new Promise((resolve, reject) => {
+    cp.exec(cmd, {encoding: 'utf-8'}, (err, stdout, stderr) => {
+      if (err) {
+        err.stderr = stderr;
+        return reject(err);
+      }
+      resolve(stdout);
+    });
+  });
 
 describe('subscriptions', () => {
   const projectId = process.env.GCLOUD_PROJECT;
@@ -58,7 +69,7 @@ describe('subscriptions', () => {
     const output = execSync(
       `${cmd} create ${topicNameOne} ${subscriptionNameOne}`
     );
-    assert.strictEqual(output, `Subscription ${subscriptionNameOne} created.`);
+    assert.include(output, `Subscription ${subscriptionNameOne} created.`);
     const [subscriptions] = await pubsub.topic(topicNameOne).getSubscriptions();
     assert.strictEqual(subscriptions[0].name, fullSubscriptionNameOne);
   });
@@ -67,7 +78,7 @@ describe('subscriptions', () => {
     const output = execSync(
       `${cmd} create-push ${topicNameOne} ${subscriptionNameTwo}`
     );
-    assert.strictEqual(output, `Subscription ${subscriptionNameTwo} created.`);
+    assert.include(output, `Subscription ${subscriptionNameTwo} created.`);
     const [subscriptions] = await pubsub.topic(topicNameOne).getSubscriptions();
     assert(subscriptions.some(s => s.name === fullSubscriptionNameTwo));
   });
@@ -76,7 +87,7 @@ describe('subscriptions', () => {
     const output = execSync(
       `${cmd} modify-config ${topicNameTwo} ${subscriptionNameTwo}`
     );
-    assert.strictEqual(
+    assert.include(
       output,
       `Modified push config for subscription ${subscriptionNameTwo}.`
     );
@@ -89,7 +100,7 @@ describe('subscriptions', () => {
       `\nTopic: ${fullTopicNameOne}` +
       `\nPush config: ` +
       `\nAck deadline: 10s`;
-    assert.strictEqual(output, expected);
+    assert.include(output, expected);
   });
 
   it('should list all subscriptions', async () => {
@@ -116,7 +127,7 @@ describe('subscriptions', () => {
 
   it('should listen for messages synchronously', async () => {
     pubsub.topic(topicNameOne).publish(Buffer.from(`Hello, world!`));
-    const output = execSync(
+    const output = await execPromise(
       `${cmd} sync-pull ${projectId} ${subscriptionNameOne}`
     );
     assert.match(output, /Done./);
@@ -184,9 +195,10 @@ describe('subscriptions', () => {
   });
 
   it('should listen for error messages', async () => {
-    assert.throws(() => {
-      execSync(`${cmd} listen-errors nonexistent-subscription`);
-    }, /Resource not found/);
+    assertRejects(
+      () => execPromise(`${cmd} listen-errors nonexistent-subscription`),
+      /Resource not found/
+    );
   });
 
   it('should set the IAM policy for a subscription', async () => {
@@ -212,7 +224,7 @@ describe('subscriptions', () => {
       .subscription(subscriptionNameOne)
       .iam.getPolicy();
     const output = execSync(`${cmd} get-policy ${subscriptionNameOne}`);
-    assert.strictEqual(
+    assert.include(
       output,
       `Policy for subscription: ${JSON.stringify(results[0].bindings)}.`
     );
@@ -225,7 +237,7 @@ describe('subscriptions', () => {
 
   it('should delete a subscription', async () => {
     const output = execSync(`${cmd} delete ${subscriptionNameOne}`);
-    assert.strictEqual(output, `Subscription ${subscriptionNameOne} deleted.`);
+    assert.include(output, `Subscription ${subscriptionNameOne} deleted.`);
     const [subscriptions] = await pubsub.getSubscriptions();
     assert.ok(subscriptions);
     assert(subscriptions.every(s => s.name !== fullSubscriptionNameOne));
@@ -235,7 +247,7 @@ describe('subscriptions', () => {
     const output = execSync(
       `${cmd} create-flow ${topicNameTwo} ${subscriptionNameFour} -m 5 -b 1024`
     );
-    assert.strictEqual(
+    assert.include(
       output,
       `Subscription ${fullSubscriptionNameFour} created with a maximum of 5 unprocessed messages.`
     );

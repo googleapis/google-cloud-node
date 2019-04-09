@@ -33,6 +33,6 @@ describe('quickstart', () => {
 
   it('should run the quickstart', async () => {
     const stdout = execSync(`node quickstart ${projectId} ${topicName}`);
-    assert.match(stdout, /^Topic .* created.$/);
+    assert.match(stdout, /^Topic .* created./);
   });
 });

@@ -77,7 +77,7 @@ describe('topics', () => {
 
   it('should create a topic', async () => {
     const output = execSync(`${cmd} create ${topicNameOne}`);
-    assert.strictEqual(output, `Topic ${topicNameOne} created.`);
+    assert.include(output, `Topic ${topicNameOne} created.`);
     const [topics] = await pubsub.getTopics();
     assert(topics.some(t => t.name === fullTopicNameOne));
   });
@@ -208,7 +208,7 @@ describe('topics', () => {
   it('should get the IAM policy for a topic', async () => {
     const [policy] = await pubsub.topic(topicNameOne).iam.getPolicy();
     const output = execSync(`${cmd} get-policy ${topicNameOne}`);
-    assert.strictEqual(
+    assert.include(
       output,
       `Policy for topic: ${JSON.stringify(policy.bindings)}.`
     );
@@ -221,7 +221,7 @@ describe('topics', () => {
 
   it('should delete a topic', async () => {
     const output = execSync(`${cmd} delete ${topicNameOne}`);
-    assert.strictEqual(output, `Topic ${topicNameOne} deleted.`);
+    assert.include(output, `Topic ${topicNameOne} deleted.`);
     const [topics] = await pubsub.getTopics();
     assert(topics.every(s => s.name !== fullTopicNameOne));
   });
