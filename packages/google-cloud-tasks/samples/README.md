@@ -1,20 +1,20 @@
 # Node.js Google Cloud Tasks sample for Google App Engine
 
 This sample application shows how to use [Google Cloud Tasks](https://cloud.google.com/cloud-tasks/)
-on Google App Engine [flexible environment][appengine-flex].
+on [Google App Engine][appengine].
 
-App Engine queues push tasks to an App Engine HTTP target. This directory
+This directory
 contains both the App Engine app to deploy, as well as the snippets to run
 locally to push tasks to it, which could also be called on App Engine.
 
 `createTask.js` is a simple command-line program to create tasks to be pushed to
 the App Engine app.
 
+`createHttpTask.js` is a simple command-line program to create tasks to be pushed to
+a HTTP endpoint.
+
 `server.js` is the main App Engine app. This app serves as an endpoint to
 receive App Engine task attempts.
-
-`app.flexible.yaml` configures the app for App Engine Node.js flexible
-environment.
 
 * [Setup](#setup)
 * [Running locally](#running-locally)
@@ -48,11 +48,11 @@ To create a queue using the Cloud SDK, use the following gcloud command:
 Note: A newly created queue will route to the default App Engine service and
 version unless configured to do otherwise.
 
-## Deploying the app to App Engine flexible environment
+## Deploying the app to App Engine
 
-Deploy the App Engine app with gcloud:
+Deploy to App Engine Standard environment with gcloud:
 
-    gcloud app deploy app.flexible.yaml
+    gcloud app deploy
 
 Verify the index page is serving:
 
@@ -85,10 +85,12 @@ location is "us-central1").
 export LOCATION_ID=us-central1
 ```
 
-Create a task, targeted at the `log_payload` endpoint, with a payload specified:
+### Using App Engine Queues
+Running the sample will create a task, targeted at the `/log_payload`
+endpoint, with a payload specified:
 
 ```
-node createTask.js --project=$PROJECT_ID --queue=$QUEUE_ID --location=$LOCATION_ID --payload=hello
+node createTask.js $PROJECT_ID $LOCATION_ID $QUEUE_ID hello
 ```
 
 The App Engine app serves as a target for the push requests. It has an
@@ -101,9 +103,25 @@ Create a task that will be scheduled for a time in the future using the
 `--in_seconds` flag:
 
 ```
-node createTask.js --project=$PROJECT_ID --queue=$QUEUE_ID --location=$LOCATION_ID --payload=hello --in_seconds=30
+node createTask.js $PROJECT_ID $LOCATION_ID $QUEUE_ID hello 30
 ```
 
+### Using HTTP Push Queues
+
+Set an environment variable for the endpoint to your task handler. This is an
+example url to send requests to the App Engine task handler:
+```
+export URL=https://<project_id>.appspot.com/log_payload
+```
+
+Running the sample will create a task and send the task to the specific URL
+endpoint, with a payload specified:
+
+```
+node createHttpTask $PROJECT_ID $LOCATION_ID $QUEUE_ID $URL hello
+```
+
+## More Info
 
 To get usage information: `node createTask.js --help`
 
@@ -125,5 +143,5 @@ Examples:
 For more information, see https://cloud.google.com/cloud-tasks
 ```
 
-[appengine-flex]: https://cloud.google.com/appengine/docs/flexible/nodejs
+[appengine]: https://cloud.google.com/appengine/docs/nodejs
 [appengine-std]: https://cloud.google.com/appengine/docs/standard/nodejs
