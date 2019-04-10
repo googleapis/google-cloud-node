@@ -4,6 +4,35 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## v0.11.1
+
+04-09-2019 17:34 PDT
+
+### Bug Fixes
+
+- fix: add missing dep on google-auth-library
+- fix: only copy timestamp metadata if it is a date ([#295](https://github.com/googleapis/nodejs-logging-winston/pull/295))
+- fix: assign timestamps from log metadata ([#294](https://github.com/googleapis/nodejs-logging-winston/pull/294))
+
+### Dependencies
+
+- chore(deps): update dependency @types/semver to v6
+- fix(deps): update dependency semver to v6
+- chore(deps): update dependency mocha to v6 ([#269](https://github.com/googleapis/nodejs-logging-winston/pull/269))
+
+### Internal / Testing Changes
+
+- refactor: use execSync for tests ([#292](https://github.com/googleapis/nodejs-logging-winston/pull/292))
+- chore: publish to npm using wombat ([#283](https://github.com/googleapis/nodejs-logging-winston/pull/283))
+- test: error-reporting system test improvement ([#282](https://github.com/googleapis/nodejs-logging-winston/pull/282))
+- test: make error reporting system test more robust
+- test: fix error reporting system test race
+- build: Add docuploader credentials to node publish jobs ([#274](https://github.com/googleapis/nodejs-logging-winston/pull/274))
+- refactor: wrap execSync with encoding: utf-8
+- build: use per-repo npm publish token
+- build: update release config ([#271](https://github.com/googleapis/nodejs-logging-winston/pull/271))
+- build: use node10 to run samples-test, system-test etc ([#273](https://github.com/googleapis/nodejs-logging-winston/pull/273))
+
 ## v0.11.0
 
 02-15-2019 10:42 PST
