@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## v0.6.3
+
+04-11-2019 11:37 PDT
+
+### Bug Fixes
+
+- fix: update Koa2 plugin to await next ([#339](https://github.com/googleapis/nodejs-error-reporting/pull/339))
+
 ## v0.6.2
 
 04-09-2019 11:14 PDT
