@@ -25,7 +25,7 @@ import {koaRequestInformationExtractor} from '../request-extractors/koa';
 type KoaContext = {
   request: Request; response: Response
 };
-type KoaNext = {};
+type KoaNext = Function;
 
 /**
  * The koaErrorHandler should be placed at the beginning of the koa middleware
@@ -54,7 +54,7 @@ export function koa2ErrorHandler(
     const svc = config.getServiceContext();
 
     try {
-      await next;
+      await next();
     } catch (err) {
       const em = new ErrorMessage()
                      .consumeRequestInformation(koaRequestInformationExtractor(

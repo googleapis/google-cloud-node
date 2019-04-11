@@ -120,7 +120,7 @@ export class ErrorReporting {
   // tslint:disable-next-line:no-any
   koa!: (context: any, next: {}) => IterableIterator<{}>;
   // tslint:disable-next-line:no-any
-  koa2!: (context: any, next: {}) => Promise<void>;
+  koa2!: (context: any, next: Function) => Promise<void>;
 
   constructor(initConfiguration?: ConfigurationOptions) {
     if (!(this instanceof ErrorReporting)) {
