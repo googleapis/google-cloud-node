@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "execa": "^1.0.0",
     "mocha": "^6.0.0",
     "pixelmatch": "^4.0.2",
     "pngjs": "^3.3.3",
