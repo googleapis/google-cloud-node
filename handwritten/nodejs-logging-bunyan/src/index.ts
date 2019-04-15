@@ -20,7 +20,7 @@ import * as express from './middleware/express';
 // Export the express middleware as 'express'.
 export {express};
 
-const {Logging} = require('@google-cloud/logging');
+const {Logging, detectServiceContext} = require('@google-cloud/logging');
 
 import * as types from './types/core';
 
@@ -162,6 +162,18 @@ export class LoggingBunyan extends Writable {
       throw new Error(
           `If 'serviceContext' is specified then ` +
           `'serviceContext.service' is required.`);
+    }
+
+    /* Asynchrnously attempt to discover the service context. */
+    if (!this.serviceContext) {
+      detectServiceContext(this.stackdriverLog.logging.auth)
+          .then(
+              (serviceContext: types.ServiceContext) => {
+                this.serviceContext = serviceContext;
+              },
+              () => {
+                  /* swallow any errors. */
+              });
     }
   }
 
