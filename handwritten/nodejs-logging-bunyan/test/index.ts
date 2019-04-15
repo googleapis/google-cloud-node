@@ -20,12 +20,28 @@ import {inspect} from 'util';
 import {LoggingBunyan} from '../src';
 import * as types from '../src/types/core';
 
+interface FakeLogType {
+  entry?: () => void;
+  write?: () => void;
+  logging: {auth: {getEnv: Function;}};
+}
+
 describe('logging-bunyan', () => {
-  let fakeLogInstance: {entry?: () => void, write?: () => void} = {};
+  const FAKE_LOG_INSTANCE: FakeLogType = {
+    logging: {
+      auth: {
+        getEnv: () => {
+          return 'foo';
+        }
+      }
+    }
+  };
+  let fakeLogInstance: FakeLogType;
   let fakeLoggingOptions_: types.Options|null;
   let fakeLogName_: string|null;
   let fakeLogOptions_: types.Options;
   let fakeWritableOptions_: types.Options;
+  let fakeDetectedServiceContext: types.ServiceContext|null;
 
   function fakeLogging(options: types.Options) {
     fakeLoggingOptions_ = options;
@@ -56,18 +72,23 @@ describe('logging-bunyan', () => {
   };
 
 
+  const fakeDetectServiceContext = () => {
+    if (fakeDetectedServiceContext === null) {
+      return Promise.reject(new Error('fake error'));
+    }
+    return Promise.resolve(fakeDetectedServiceContext);
+  };
   const loggingBunyanLib = proxyquire('../src/index.js', {
-    '@google-cloud/logging': {
-      Logging: fakeLogging,
-    },
+    '@google-cloud/logging':
+        {Logging: fakeLogging, detectServiceContext: fakeDetectServiceContext},
     stream: fakeStream,
   });
   const loggingBunyanCached = proxyquire('../src/index.js', {
-    '@google-cloud/logging': {
-      Logging: fakeLogging,
-    },
+    '@google-cloud/logging':
+        {Logging: fakeLogging, detectServiceContext: fakeDetectServiceContext},
     stream: fakeStream,
   });
+
   // loggingBunyan is loggingBunyan namespace which cannot be determined type.
   // tslint:disable-next-line:no-any
   let loggingBunyan: any;
@@ -86,9 +107,10 @@ describe('logging-bunyan', () => {
   };
 
   beforeEach(() => {
-    fakeLogInstance = {};
+    fakeLogInstance = {...FAKE_LOG_INSTANCE};
     fakeLoggingOptions_ = null;
     fakeLogName_ = null;
+    fakeDetectedServiceContext = null;
 
     Object.assign(true, loggingBunyanLib.LoggingBunyan, loggingBunyanCached);
     loggingBunyan = new loggingBunyanLib.LoggingBunyan(OPTIONS);
@@ -143,6 +165,33 @@ describe('logging-bunyan', () => {
            done();
          }
        });
+
+    it('should not attempt to discover service context if passed', () => {
+      const serviceContext = {service: 'foo'};
+      // tslint:disable-next-line:no-unused-expression
+      new loggingBunyanLib.LoggingBunyan({serviceContext});
+    });
+
+    it('should attempt to discover service context if not passed', (done) => {
+      const serviceContext = {service: 'foo'};
+      fakeDetectedServiceContext = serviceContext;
+      const lb = new loggingBunyanLib.LoggingBunyan();
+      assert.strictEqual(lb.serviceContext, undefined);
+      setTimeout(() => {
+        assert.deepStrictEqual(lb.serviceContext, serviceContext);
+        done();
+      }, 10);
+    });
+
+    it('should handle errors in discovering service context', (done) => {
+      fakeDetectedServiceContext = null;
+      const lb = new loggingBunyanLib.LoggingBunyan();
+      assert.strictEqual(lb.serviceContext, undefined);
+      setTimeout(() => {
+        assert.deepStrictEqual(lb.serviceContext, undefined);
+        done();
+      }, 10);
+    });
   });
 
   describe('stream', () => {
@@ -390,7 +439,6 @@ describe('logging-bunyan', () => {
       // tslint:disable-next-line:no-any
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_TRACE_KEY] =
           'projects/project1/traces/trace1';
-
 
       FakeWritable.prototype.write = function(
           // Writable.write used 'any' in function signature.
