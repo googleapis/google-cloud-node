@@ -622,7 +622,7 @@ export class Storage extends Service {
             return;
           }
 
-          const buckets = arrify(resp.items).map(bucket => {
+          const buckets = arrify(resp.items).map((bucket: Metadata) => {
             const bucketInstance = this.bucket(bucket.id);
             bucketInstance.metadata = bucket;
             return bucketInstance;

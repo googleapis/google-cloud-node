@@ -2375,7 +2375,8 @@ class File extends ServiceObject<File> {
 
       const signedUrl = new url.URL(config.cname || STORAGE_DOWNLOAD_BASE_URL);
       signedUrl.pathname = config.cname ? name : `${this.bucket.name}/${name}`;
-      signedUrl.search = querystring.stringify(query);
+      // tslint:disable-next-line:no-any
+      signedUrl.search = querystring.stringify(query as any);
 
       callback!(null, signedUrl.href);
     }, callback!);
@@ -2470,7 +2471,8 @@ class File extends ServiceObject<File> {
         'X-Goog-SignedHeaders': signedHeaders,
       };
 
-      const canonicalQueryParams = querystring.stringify(queryParams);
+      // tslint:disable-next-line:no-any
+      const canonicalQueryParams = querystring.stringify(queryParams as any);
 
       const canonicalRequest = [
         config.method,
