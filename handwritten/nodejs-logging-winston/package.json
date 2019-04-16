@@ -46,7 +46,7 @@
     "postcompile": "cpy ./src/types/* ./build/src/types",
     "fix": "gts fix && eslint --fix '**/*.js'",
     "prepare": "npm run compile",
-    "pretest": "npm run compile && node ./bin/install-winston2.js",
+    "pretest": "npm run compile",
     "posttest": "npm run check",
     "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
@@ -56,7 +56,6 @@
     "google-auth-library": "^3.1.0",
     "lodash.mapvalues": "^4.6.0",
     "logform": "^2.0.0",
-    "semver": "^6.0.0",
     "winston-transport": "^4.2.0"
   },
   "devDependencies": {
@@ -91,6 +90,6 @@
     "linkinator": "^1.1.2"
   },
   "peerDependencies": {
-    "winston": ">=2.x <=3.x"
+    "winston": "3.x"
   }
 }

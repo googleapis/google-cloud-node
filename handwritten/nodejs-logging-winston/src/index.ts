@@ -1,11 +1,10 @@
 
-import * as semver from 'semver';
-import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY} from './common';
+import * as TransportStream from 'winston-transport';
+
+import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
 import * as types from './types/core';
 
-
-require('winston');
-const winstonVersion = require('winston/package.json').version;
+type Callback = (err: Error, apiResponse: {}) => void;
 
 /**
  * This module provides support for streaming your winston logs to
@@ -85,12 +84,29 @@ const winstonVersion = require('winston/package.json').version;
  * region_tag:logging_winston_quickstart
  * Full quickstart example:
  */
-// This is a class.
-// tslint:disable-next-line:variable-name
-export const LoggingWinston: types.Logger = semver.lt(winstonVersion, '3.0.0') ?
-    require('./winston2').LoggingWinston :
-    require('./winston3').LoggingWinston;
-// winstons are required instead of imported so they are not executed unless
-// they're used.
+export class LoggingWinston extends TransportStream {
+  static readonly LOGGING_TRACE_KEY = COMMON_TRACE_KEY;
+
+  common: LoggingCommon;
+  constructor(options?: types.Options) {
+    options = options || {};
+
+    super({
+      level: options.level,
+    });
+
+    this.common = new LoggingCommon(options);
+  }
+
+  log({message, level, splat, stack, ...metadata}: types.Winston3LogArg,
+      callback: Callback) {
+    // If the whole message is an error we have to manually copy the stack into
+    // metadata. Errors dont have enumerable properties so they don't
+    // destructure.
+    if (stack) metadata.stack = stack;
+
+    this.common.log(level, message, metadata || {}, callback);
+  }
+}
 
 export const LOGGING_TRACE_KEY = COMMON_TRACE_KEY;
