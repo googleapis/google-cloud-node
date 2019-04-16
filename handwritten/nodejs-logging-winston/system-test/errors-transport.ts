@@ -56,8 +56,7 @@ export class ErrorsApiTransport extends common.Service {
     super({
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-      packageJson,
-      requestModule: teenyRequest as typeof request
+      packageJson
     });
   }
 
