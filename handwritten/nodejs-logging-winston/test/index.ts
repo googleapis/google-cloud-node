@@ -52,7 +52,7 @@ describe('logging-winston', () => {
   };
 
   const loggingWinstonLib = inject(
-      '../src/winston2',
+      '../src/index',
       {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
   // loggingWinston is LoggingWinston namespace which cannot be determined type.
   // tslint:disable-next-line:no-any
@@ -74,8 +74,15 @@ describe('logging-winston', () => {
     loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
   });
 
-  // tslint:disable-next-line:no-any
-  function passesOptionsCorrectly(loggingWinstonLib: {LoggingWinston: any}) {
+  describe('instantiation/options', () => {
+    const loggingWinstonLib =
+        inject('../src/index', {'../src/common': {LoggingCommon: FakeLogging}});
+
+    it('should inherit from winston-transport.TransportStream', () => {
+      const loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
+      assert.ok(loggingWinston instanceof TransportStream);
+    });
+
     it('should initialize Log instance using provided scopes', () => {
       const fakeScope = 'fake scope';
 
@@ -121,82 +128,15 @@ describe('logging-winston', () => {
       assert.strictEqual(
           fakeLoggingOptions_!.serviceContext, OPTIONS.serviceContext);
     });
-  }
-
-  describe('instantiation/options winston 2', () => {
-    const loggingWinstonLib = inject(
-        '../src/winston2',
-        {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
-
-    const loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
-
-    it('should inherit from winston.Transport', () => {
-      assert.deepEqual(loggingWinston.transportCalledWith_[0], {
-        level: OPTIONS.level,
-        name: OPTIONS.logName,
-      });
-    });
-
-    it('should assign itself to winston.transports', () => {
-      // have to reinject to make the object identity check pass consistently
-      const loggingWinstonLib = inject('../src/winston2', {
-        '../src/common': {LoggingCommon: FakeLogging},
-        winston: fakeWinston
-      });
-      assert.strictEqual(
-          // StackDriverLogging is added to winston.transports.
-          // tslint:disable-next-line:no-any
-          (fakeWinston.transports as any).StackdriverLogging,
-          loggingWinstonLib.LoggingWinston);
-    });
-
-    passesOptionsCorrectly(loggingWinstonLib);
   });
 
-  describe('instantiation/options winston 3', () => {
-    const loggingWinstonLib = inject(
-        '../src/winston3', {'../src/common': {LoggingCommon: FakeLogging}});
-
-    it('should inherit from winston-transport.TransportStream', () => {
-      const loggingWinston = new loggingWinstonLib.LoggingWinston(OPTIONS);
-      assert.ok(loggingWinston instanceof TransportStream);
-    });
-
-    passesOptionsCorrectly(loggingWinstonLib);
-  });
-
-  describe('log winston2', () => {
+  describe('log', () => {
     const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
     const MESSAGE = 'message';
     const METADATA = {a: 1};
 
     const loggingWinstonLib = inject(
-        '../src/winston2',
-        {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
-
-    const loggingWinston = new loggingWinstonLib.LoggingWinston();
-
-    beforeEach(() => {
-      lastFakeLoggingArgs = [];
-    });
-
-    it('should properly call common.log', (done) => {
-      loggingWinston.log(LEVEL, MESSAGE, METADATA, assert.ifError);
-      const [level, message, meta] = lastFakeLoggingArgs;
-      assert.strictEqual(level, 'one');
-      assert.strictEqual(message, 'message');
-      assert.deepEqual(meta, {a: 1});
-      done();
-    });
-  });
-
-  describe('log winston3', () => {
-    const LEVEL = Object.keys(OPTIONS.levels as {[name: string]: number})[0];
-    const MESSAGE = 'message';
-    const METADATA = {a: 1};
-
-    const loggingWinstonLib = inject(
-        '../src/winston3',
+        '../src/index',
         {'../src/common': {LoggingCommon: FakeLogging}, winston: fakeWinston});
 
     const loggingWinston = new loggingWinstonLib.LoggingWinston();
