@@ -23,12 +23,10 @@ import {ErrorsApiTransport} from './errors-transport';
 
 const inject = require('require-inject');
 
-const winston3 = require('winston');
-const winston2 = require('../../test/winston-2/node_modules/winston');
+const winston = require('winston');
 
 const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
-const LoggingWinston = require('../src/index').LoggingWinston;
 
 const WRITE_CONSISTENCY_DELAY_MS = 90000;
 
@@ -84,58 +82,7 @@ describe('LoggingWinston', function() {
     args: any[]; level: string; verify: (entry: types.StackdriverEntry) => void;
   };
 
-  describe('log winston 2', () => {
-    const testData = commonTestData.concat([
-      {
-        args: [new Error('fourth')],
-        level: 'error',
-        verify: (entry: types.StackdriverEntry) => {
-          assert((entry.data as {
-                   message: string
-                 }).message.startsWith('Error: fourth'));
-        },
-      },
-      {
-        args: ['fifth message', new Error('fifth')],
-        level: 'error',
-        verify: (entry: types.StackdriverEntry) => {
-          assert((entry.data as {
-                   message: string
-                 }).message.startsWith('fifth message Error: fifth'));
-        },
-      },
-    ] as typeof commonTestData);
-
-    const LOG_NAME = logName('logging_winston_2_system_tests');
-    const LoggingWinston = inject('../src/index', {
-                             winston: winston2,
-                             'winston/package.json': {version: '2.2.0'}
-                           }).LoggingWinston;
-
-    const logger = new winston2.Logger({
-      transports: [new LoggingWinston({logName: LOG_NAME})],
-    });
-
-    it('should properly write log entries', async () => {
-      const start = Date.now();
-      testData.forEach((test) => {
-        // logger does not have index signature.
-        // tslint:disable-next-line:no-any
-        (logger as any)[test.level].apply(logger, test.args);
-      });
-
-      const entries = await pollLogs(
-          LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS);
-      assert.strictEqual(entries.length, testData.length);
-      entries.reverse().forEach((entry, index) => {
-        const test = testData[index];
-        test.verify(entry);
-      });
-    });
-  });
-
-
-  describe('log winston 3', () => {
+  describe('log', () => {
     const testData = commonTestData.concat([
       {
         args: [new Error('fourth')],
@@ -161,13 +108,12 @@ describe('LoggingWinston', function() {
       },
     ] as TestData[]);
 
-    const LOG_NAME = logName('logging_winston_3_system_tests');
+    const LOG_NAME = logName('logging_winston_system_tests');
     const LoggingWinston = inject('../src/index', {
-                             winston: winston3,
-                             'winston/package.json': {version: '3.0.0'}
+                             winston,
                            }).LoggingWinston;
 
-    const logger = winston3.createLogger({
+    const logger = winston.createLogger({
       transports: [new LoggingWinston({logName: LOG_NAME})],
     });
 
@@ -194,42 +140,14 @@ describe('LoggingWinston', function() {
     const ERROR_REPORTING_POLL_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS;
     const errorsTransport = new ErrorsApiTransport();
 
-    it('reports errors when logging errors with winston2', async () => {
-      const start = Date.now();
-      const service = `logging-winston-system-test-winston2-${UUID}`;
-      const LoggingWinston = inject('../src/index', {
-                               winston: winston2,
-                               'winston/package.json': {version: '2.2.0'}
-                             }).LoggingWinston;
-
-      const logger = new winston2.Logger({
-        transports: [new LoggingWinston(
-            {logName: LOG_NAME, serviceContext: {service, version: 'none'}})],
-      });
-
-      const message = `an error at ${Date.now()}`;
-
-      logger.error('an error', new Error(message));
-
-      const errors = await errorsTransport.pollForNewEvents(
-          service, start, ERROR_REPORTING_POLL_TIMEOUT);
-
-      assert.strictEqual(errors.length, 1);
-      const errEvent = errors[0];
-
-      assert.strictEqual(errEvent.serviceContext.service, service);
-      assert(errEvent.message.startsWith(`an error Error: ${message}`));
-    });
-
-    it('reports errors when logging errors with winston3', async () => {
+    it('reports errors', async () => {
       const start = Date.now();
       const service = `logging-winston-system-test-winston3-${UUID}`;
       const LoggingWinston = inject('../src/index', {
-                               winston: winston3,
-                               'winston/package.json': {version: '3.0.0'}
+                               winston,
                              }).LoggingWinston;
 
-      const logger = winston3.createLogger({
+      const logger = winston.createLogger({
         transports: [new LoggingWinston(
             {logName: LOG_NAME, serviceContext: {service, version: 'none'}})],
       });

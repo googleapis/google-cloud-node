@@ -21,15 +21,15 @@ const TS_CODE_SAMPLES: check.CodeSample[] = [
     code: `import * as loggingWinston from '@google-cloud/logging-winston';
 new loggingWinston.LoggingWinston();`,
     description: 'imports the module using * syntax',
-    dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2', 'typescript@3']
+    dependencies: ['winston'],
+    devDependencies: ['@types/winston', 'typescript@3']
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
 new LoggingWinston();`,
     description: 'imports the module with {} syntax',
-    dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2', 'typescript@3']
+    dependencies: ['winston'],
+    devDependencies: ['@types/winston', 'typescript@3']
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
@@ -40,8 +40,8 @@ new LoggingWinston({
 });`,
     description:
         'imports the module and starts with a partial `serviceContext`',
-    dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2', 'typescript@3']
+    dependencies: ['winston'],
+    devDependencies: ['@types/winston', 'typescript@3']
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
@@ -54,28 +54,10 @@ new LoggingWinston({
 });`,
     description:
         'imports the module and starts with a complete `serviceContext`',
-    dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2', 'typescript@3']
+    dependencies: ['winston'],
+    devDependencies: ['@types/winston', 'typescript@3']
   },
 
-  {
-    code: `import {LoggingWinston} from '@google-cloud/logging-winston';
-import * as winston from 'winston';
-const loggingWinston = new LoggingWinston({
-  prefix: 'some-prefix',
-  labels: {
-    env: 'local',
-    name: 'some-name',
-    version: 'some-version'
-  }
-});
-
-new winston.Logger({transports:[loggingWinston]})
-`,
-    description: 'imports the module with a prefix and labels specified',
-    dependencies: ['winston@2'],
-    devDependencies: ['@types/winston@2', 'typescript@3']
-  },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
     import * as winston from 'winston';
@@ -90,9 +72,8 @@ const loggingWinston = new LoggingWinston({
 
 winston.createLogger({transports:[loggingWinston]})
 `,
-    description:
-        'winston3: imports the module with a prefix and labels specified',
-    dependencies: ['winston@3'],
+    description: 'imports the module with a prefix and labels specified',
+    dependencies: ['winston'],
     devDependencies: ['typescript@3']
   }
 ];
@@ -103,7 +84,7 @@ const JS_CODE_SAMPLES: check.CodeSample[] = [
         `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
 new LoggingWinston();`,
     description: 'requires the module using Node 4+ syntax',
-    dependencies: ['winston@2'],
+    dependencies: ['winston'],
     devDependencies: []
   },
   {
@@ -116,7 +97,7 @@ new LoggingWinston({
 });`,
     description:
         'requires the module and starts with a partial `serviceContext`',
-    dependencies: ['winston@2'],
+    dependencies: ['winston'],
     devDependencies: []
   },
   {
@@ -131,7 +112,7 @@ new LoggingWinston({
 });`,
     description:
         'requires the module and starts with a complete `serviceContext`',
-    dependencies: ['winston@2'],
+    dependencies: ['winston'],
     devDependencies: []
   },
   {
@@ -146,25 +127,9 @@ new LoggingWinston({
   }
 });`,
     description: 'imports the module with a prefix and labels specified',
-    dependencies: ['winston@2'],
+    dependencies: ['winston'],
     devDependencies: []
   },
-  {
-    code:
-        `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
-new LoggingWinston({
-  prefix: 'some-prefix',
-  labels: {
-    env: 'local',
-    name: 'some-name',
-    version: 'some-version'
-  }
-});`,
-    description:
-        'winston3: imports the module with a prefix and labels specified',
-    dependencies: ['winston@3'],
-    devDependencies: []
-  }
 ];
 
 check.testInstallation(
