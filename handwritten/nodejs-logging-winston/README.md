@@ -103,6 +103,64 @@ logger.info('hello winston')
 
 ```
 
+### Using as an express middleware (winston 3.1+)
+
+***NOTE: this feature is experimental. The API may change in a backwards
+incompatible way until this is deemed stable. Please provide us feedback so
+that we can better refine this express integration.***
+
+We provide a middleware that can be used in an express application. Apart from
+being easy to use, this enables some more powerful features of Stackdriver
+Logging: request bundling. Any application logs emitted on behalf of a specific
+request will be shown nested inside the request log as you see in this
+screenshot:
+
+![Request Bundling Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/request-bundling.png)
+
+This middleware adds a `winston`-style log function to the `request` object.
+You can use this wherever you have access to the `request` object (`req` in the
+sample below). All log entries that are made on behalf of a specific request are
+shown bundled together in the Stackdriver Logging UI.
+
+```javascript
+const lw = require('@google-cloud/logging-winston');
+
+// Import express module and create an http server.
+const express = require('express');
+
+async function main() {
+  const {logger, mw} = await lw.express.middleware();
+  const app = express();
+
+  // Install the logging middleware. This ensures that a Winston-style `log`
+  // function is available on the `request` object. Attach this as one of the
+  // earliest middleware to make sure that the log function is available in all
+  // subsequent middleware and routes.
+  app.use(mw);
+
+  // Setup an http route and a route handler.
+  app.get('/', (req, res) => {
+    // `req.log` can be used as a winston style log method. All logs generated
+    // using `req.log` use the current request context. That is, all logs
+    // corresponding to a specific request will be bundled in the Stackdriver
+    // UI.
+    req.log.info('this is an info log message');
+    res.send('hello world');
+  });
+
+  // `logger` can be used as a global logger, one not correlated to any specific
+  // request.
+  logger.info('bonjour');
+
+  // Start listening on the http server.
+  app.listen(8080, () => {
+    logger.info('http server listening on port 8080');
+  });  
+}
+
+main();
+```
+
 ### Error Reporting
 
 Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Stackdriver Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instantiating a `LoggingWinston` instance:
