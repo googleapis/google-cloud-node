@@ -2,7 +2,11 @@
 import * as TransportStream from 'winston-transport';
 
 import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
+import * as express from './middleware/express';
 import * as types from './types/core';
+
+// Export the express middleware as 'express'.
+export {express};
 
 type Callback = (err: Error, apiResponse: {}) => void;
 

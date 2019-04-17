@@ -18,7 +18,7 @@ import * as assert from 'assert';
 import * as nodeutil from 'util';
 import * as types from '../src/types/core';
 
-const inject = require('require-inject');
+const proxyquire = require('proxyquire');
 
 describe('logging-common', () => {
   let fakeLogInstance: types.StackdriverLogging;
@@ -51,7 +51,7 @@ describe('logging-common', () => {
     Transport: FakeTransport,
   };
 
-  const loggingCommonLib = inject('../src/common', {
+  const loggingCommonLib = proxyquire('../src/common', {
     '@google-cloud/logging': {
       Logging: fakeLogging,
     },
