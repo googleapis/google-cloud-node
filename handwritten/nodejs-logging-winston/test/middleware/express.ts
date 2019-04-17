@@ -19,9 +19,9 @@ import {GCPEnv} from 'google-auth-library';
 import {LogEntry} from 'winston';
 import * as TransportStream from 'winston-transport';
 
-const inject = require('require-inject');
+const proxyquire = require('proxyquire');
 
-// types-only import. Actual require is done through require-inject below.
+// types-only import. Actual require is done through proxyquire below.
 import {MiddlewareOptions} from '../../src/middleware/express';
 
 const FAKE_PROJECT_ID = 'project-🦄';
@@ -71,11 +71,12 @@ function fakeMakeMiddleware(
   return FAKE_GENERATED_MIDDLEWARE;
 }
 
-const {middleware, APP_LOG_SUFFIX} = inject('../../src/middleware/express', {
-  '../../src/index': {LoggingWinston: FakeLoggingWinston},
-  '@google-cloud/logging':
-      {middleware: {express: {makeMiddleware: fakeMakeMiddleware}}}
-});
+const {middleware, APP_LOG_SUFFIX} =
+    proxyquire('../../src/middleware/express', {
+      '../index': {LoggingWinston: FakeLoggingWinston},
+      '@google-cloud/logging':
+          {middleware: {express: {makeMiddleware: fakeMakeMiddleware}}}
+    });
 
 describe('middleware/express', () => {
   beforeEach(() => {
