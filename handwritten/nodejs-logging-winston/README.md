@@ -63,8 +63,6 @@ For a more detailed Stackdriver Logging setup guide, see https://cloud.google.co
 
 ### Using the client library
 
-#### `winston@3.x`
-
 ```javascript
 const winston = require('winston');
 const {LoggingWinston} = require('@google-cloud/logging-winston')
@@ -86,24 +84,7 @@ Creates a Winston logger that streams to Stackdriver Logging
 
 Logs will be written to: "projects/YOUR_PROJECT_ID/logs/winston_log"
 
-#### `winston@2.x`
-
-```javascript
-const winston = require('winston');
-const {LoggingWinston} = require('@google-cloud/logging-winston');
-
-const logger = new winston.Logger({
-  transports:[
-     new winston.transports.Console(),
-     new LoggingWinston()
-  ]
-})
-
-logger.info('hello winston')
-
-```
-
-### Using as an express middleware (winston 3.1+)
+### Using as an express middleware
 
 ***NOTE: this feature is experimental. The API may change in a backwards
 incompatible way until this is deemed stable. Please provide us feedback so
@@ -184,6 +165,8 @@ You may also want to see the [@google-cloud/error-reporting][@google-cloud/error
 
 ### Formatting Request Logs
 
+**NOTE: The express middleware provided by this library handles this automatically for you. These instructions are for there case where you may want to handle this manually.**
+
 To format your request logs you can provide a `httpRequest` property as part of the log metadata you provide to winston. We will treat this as the [`HttpRequest`][http-request-message] message and Stackdriver logging will show this as a request log. Example:
 
 ![Request Log Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/request-log.png)
@@ -203,6 +186,8 @@ winston.info(`${req.url} endpoint hit`, {
 The `httpRequest` property must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
 
 ### Correlating Logs with Traces
+
+**NOTE: The express middleware provided by this library handles this automatically for you. These instructions are for there case where you may want to handle this manually.**
 
 If you use [@google-cloud/trace-agent][trace-agent] module, then this module will set the Stackdriver Logging [LogEntry][LogEntry] `trace` property based on the current trace context when available. That correlation allows you to [view log entries][trace-viewing-log-entries] inline with trace spans in the Stackdriver Trace Viewer. Example:
 
