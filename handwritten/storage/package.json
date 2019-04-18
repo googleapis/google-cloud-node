@@ -106,7 +106,7 @@
     "nock": "^10.0.1",
     "node-fetch": "^2.2.0",
     "normalize-newline": "^3.0.0",
-    "nyc": "^13.0.0",
+    "nyc": "^14.0.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.7.0",
     "proxyquire": "^2.0.0",
