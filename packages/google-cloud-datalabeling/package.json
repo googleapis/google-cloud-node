@@ -11,9 +11,7 @@
   "main": "src/index.js",
   "files": [
     "protos",
-    "src",
-    "AUTHORS",
-    "COPYING"
+    "src"
   ],
   "keywords": [
     "google apis client",
@@ -31,7 +29,6 @@
   "scripts": {
     "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "eslint '**/*.js'",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
@@ -47,7 +44,6 @@
     "protobufjs": "^6.8.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "codecov": "^3.0.2",
     "eslint": "^5.0.1",
     "eslint-config-prettier": "^4.0.0",
@@ -60,8 +56,6 @@
     "nyc": "^14.0.0",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.6",
-    "sinon": "^7.0.0",
-    "uuid": "^3.3.0",
     "linkinator": "^1.1.2"
   }
 }
