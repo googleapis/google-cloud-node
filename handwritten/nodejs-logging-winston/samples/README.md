@@ -39,5 +39,5 @@ View the [source code][setup_explicit_1_code].
 [setup_explicit_1_docs]: https://cloud.google.com/logging/docs/
 [setup_explicit_1_code]: setup_explicit.js
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/README.md
