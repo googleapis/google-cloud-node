@@ -2,13 +2,13 @@
 [//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Kubernetes Engine: Node.js Client](https://github.com/googleapis/nodejs-cloud-container)
+# [Google Kubernetes Engine: Node.js Cluster Manager](https://github.com/googleapis/nodejs-cloud-container)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/container.svg)](https://www.npmjs.org/package/@google-cloud/container)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-container/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-container)
 
-> Node.js idiomatic client for [Kubernetes Engine][product-docs].
+> Node.js idiomatic client for [Kubernetes Engine][product-docs] cluster management.
 
 [Kubernetes Engine](https://cloud.google.com/kubernetes-engine/docs/) is used for building and managing container based applications, powered by the open source Kubernetes technology.
 
