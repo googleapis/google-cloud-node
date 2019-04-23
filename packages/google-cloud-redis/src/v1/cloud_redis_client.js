@@ -115,11 +115,11 @@ class CloudRedisClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      locationPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}'
-      ),
       instancePathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
+      ),
+      locationPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
     };
 
@@ -1052,20 +1052,6 @@ class CloudRedisClient {
   // --------------------
 
   /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @returns {String}
-   */
-  locationPath(project, location) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project: project,
-      location: location,
-    });
-  }
-
-  /**
    * Return a fully-qualified instance resource name string.
    *
    * @param {String} project
@@ -1082,26 +1068,17 @@ class CloudRedisClient {
   }
 
   /**
-   * Parse the locationName from a location resource.
+   * Return a fully-qualified location resource name string.
    *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @param {String} location
+   * @returns {String}
    */
-  matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the locationName from a location resource.
-   *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
+  locationPath(project, location) {
+    return this._pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
   }
 
   /**
@@ -1137,6 +1114,29 @@ class CloudRedisClient {
   matchInstanceFromInstanceName(instanceName) {
     return this._pathTemplates.instancePathTemplate.match(instanceName)
       .instance;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName)
+      .location;
   }
 }
 
