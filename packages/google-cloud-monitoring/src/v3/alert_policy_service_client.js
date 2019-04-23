@@ -108,13 +108,13 @@ class AlertPolicyServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       alertPolicyPathTemplate: new gax.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}'
       ),
       alertPolicyConditionPathTemplate: new gax.PathTemplate(
         'projects/{project}/alertPolicies/{alert_policy}/conditions/{condition}'
       ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -679,18 +679,6 @@ class AlertPolicyServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Return a fully-qualified alert_policy resource name string.
    *
    * @param {String} project
@@ -721,14 +709,15 @@ class AlertPolicyServiceClient {
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Return a fully-qualified project resource name string.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @returns {String}
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
   }
 
   /**
@@ -792,6 +781,17 @@ class AlertPolicyServiceClient {
     return this._pathTemplates.alertPolicyConditionPathTemplate.match(
       alertPolicyConditionName
     ).condition;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 

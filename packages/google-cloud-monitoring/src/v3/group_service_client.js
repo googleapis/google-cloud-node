@@ -111,10 +111,10 @@ class GroupServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       groupPathTemplate: new gax.PathTemplate(
         'projects/{project}/groups/{group}'
       ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -824,18 +824,6 @@ class GroupServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Return a fully-qualified group resource name string.
    *
    * @param {String} project
@@ -850,14 +838,15 @@ class GroupServiceClient {
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Return a fully-qualified project resource name string.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @returns {String}
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
   }
 
   /**
@@ -880,6 +869,17 @@ class GroupServiceClient {
    */
   matchGroupFromGroupName(groupName) {
     return this._pathTemplates.groupPathTemplate.match(groupName).group;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 

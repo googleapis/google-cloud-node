@@ -101,13 +101,13 @@ class MetricServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       metricDescriptorPathTemplate: new gax.PathTemplate(
         'projects/{project}/metricDescriptors/{metric_descriptor=**}'
       ),
       monitoredResourceDescriptorPathTemplate: new gax.PathTemplate(
         'projects/{project}/monitoredResourceDescriptors/{monitored_resource_descriptor}'
       ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1130,18 +1130,6 @@ class MetricServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Return a fully-qualified metric_descriptor resource name string.
    *
    * @param {String} project
@@ -1170,14 +1158,15 @@ class MetricServiceClient {
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Return a fully-qualified project resource name string.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @returns {String}
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
   }
 
   /**
@@ -1234,6 +1223,17 @@ class MetricServiceClient {
     return this._pathTemplates.monitoredResourceDescriptorPathTemplate.match(
       monitoredResourceDescriptorName
     ).monitored_resource_descriptor;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 

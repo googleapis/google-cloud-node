@@ -101,13 +101,13 @@ class NotificationChannelServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       notificationChannelPathTemplate: new gax.PathTemplate(
         'projects/{project}/notificationChannels/{notification_channel}'
       ),
       notificationChannelDescriptorPathTemplate: new gax.PathTemplate(
         'projects/{project}/notificationChannelDescriptors/{channel_descriptor}'
       ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -913,18 +913,6 @@ class NotificationChannelServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Return a fully-qualified notification_channel resource name string.
    *
    * @param {String} project
@@ -955,14 +943,15 @@ class NotificationChannelServiceClient {
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Return a fully-qualified project resource name string.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @returns {String}
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
   }
 
   /**
@@ -1019,6 +1008,17 @@ class NotificationChannelServiceClient {
     return this._pathTemplates.notificationChannelDescriptorPathTemplate.match(
       notificationChannelDescriptorName
     ).channel_descriptor;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 
