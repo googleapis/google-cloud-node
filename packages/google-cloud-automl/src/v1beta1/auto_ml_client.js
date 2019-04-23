@@ -114,11 +114,17 @@ class AutoMlClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      locationPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}'
+      annotationSpecPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
+      ),
+      columnSpecPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}/columnSpecs/{column_spec}'
       ),
       datasetPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
+      ),
+      locationPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       modelPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
@@ -126,14 +132,8 @@ class AutoMlClient {
       modelEvaluationPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/modelEvaluations/{model_evaluation}'
       ),
-      annotationSpecPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
-      ),
       tableSpecPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}'
-      ),
-      columnSpecPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}/columnSpecs/{column_spec}'
       ),
     };
 
@@ -2873,16 +2873,40 @@ class AutoMlClient {
   // --------------------
 
   /**
-   * Return a fully-qualified location resource name string.
+   * Return a fully-qualified annotation_spec resource name string.
    *
    * @param {String} project
    * @param {String} location
+   * @param {String} dataset
+   * @param {String} annotationSpec
    * @returns {String}
    */
-  locationPath(project, location) {
-    return this._pathTemplates.locationPathTemplate.render({
+  annotationSpecPath(project, location, dataset, annotationSpec) {
+    return this._pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
+      dataset: dataset,
+      annotation_spec: annotationSpec,
+    });
+  }
+
+  /**
+   * Return a fully-qualified column_spec resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} dataset
+   * @param {String} tableSpec
+   * @param {String} columnSpec
+   * @returns {String}
+   */
+  columnSpecPath(project, location, dataset, tableSpec, columnSpec) {
+    return this._pathTemplates.columnSpecPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      table_spec: tableSpec,
+      column_spec: columnSpec,
     });
   }
 
@@ -2899,6 +2923,20 @@ class AutoMlClient {
       project: project,
       location: location,
       dataset: dataset,
+    });
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @returns {String}
+   */
+  locationPath(project, location) {
+    return this._pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
     });
   }
 
@@ -2937,24 +2975,6 @@ class AutoMlClient {
   }
 
   /**
-   * Return a fully-qualified annotation_spec resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} dataset
-   * @param {String} annotationSpec
-   * @returns {String}
-   */
-  annotationSpecPath(project, location, dataset, annotationSpec) {
-    return this._pathTemplates.annotationSpecPathTemplate.render({
-      project: project,
-      location: location,
-      dataset: dataset,
-      annotation_spec: annotationSpec,
-    });
-  }
-
-  /**
    * Return a fully-qualified table_spec resource name string.
    *
    * @param {String} project
@@ -2973,46 +2993,115 @@ class AutoMlClient {
   }
 
   /**
-   * Return a fully-qualified column_spec resource name string.
+   * Parse the annotationSpecName from a annotation_spec resource.
    *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} dataset
-   * @param {String} tableSpec
-   * @param {String} columnSpec
-   * @returns {String}
-   */
-  columnSpecPath(project, location, dataset, tableSpec, columnSpec) {
-    return this._pathTemplates.columnSpecPathTemplate.render({
-      project: project,
-      location: location,
-      dataset: dataset,
-      table_spec: tableSpec,
-      column_spec: columnSpec,
-    });
-  }
-
-  /**
-   * Parse the locationName from a location resource.
-   *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  matchProjectFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).project;
   }
 
   /**
-   * Parse the locationName from a location resource.
+   * Parse the annotationSpecName from a annotation_spec resource.
    *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
    * @returns {String} - A string representing the location.
    */
-  matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
+  matchLocationFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).location;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).dataset;
+  }
+
+  /**
+   * Parse the annotationSpecName from a annotation_spec resource.
+   *
+   * @param {String} annotationSpecName
+   *   A fully-qualified path representing a annotation_spec resources.
+   * @returns {String} - A string representing the annotation_spec.
+   */
+  matchAnnotationSpecFromAnnotationSpecName(annotationSpecName) {
+    return this._pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).annotation_spec;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .project;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
       .location;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .dataset;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the table_spec.
+   */
+  matchTableSpecFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .table_spec;
+  }
+
+  /**
+   * Parse the columnSpecName from a column_spec resource.
+   *
+   * @param {String} columnSpecName
+   *   A fully-qualified path representing a column_spec resources.
+   * @returns {String} - A string representing the column_spec.
+   */
+  matchColumnSpecFromColumnSpecName(columnSpecName) {
+    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
+      .column_spec;
   }
 
   /**
@@ -3046,6 +3135,29 @@ class AutoMlClient {
    */
   matchDatasetFromDatasetName(datasetName) {
     return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName)
+      .location;
   }
 
   /**
@@ -3134,58 +3246,6 @@ class AutoMlClient {
   }
 
   /**
-   * Parse the annotationSpecName from a annotation_spec resource.
-   *
-   * @param {String} annotationSpecName
-   *   A fully-qualified path representing a annotation_spec resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromAnnotationSpecName(annotationSpecName) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).project;
-  }
-
-  /**
-   * Parse the annotationSpecName from a annotation_spec resource.
-   *
-   * @param {String} annotationSpecName
-   *   A fully-qualified path representing a annotation_spec resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromAnnotationSpecName(annotationSpecName) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).location;
-  }
-
-  /**
-   * Parse the annotationSpecName from a annotation_spec resource.
-   *
-   * @param {String} annotationSpecName
-   *   A fully-qualified path representing a annotation_spec resources.
-   * @returns {String} - A string representing the dataset.
-   */
-  matchDatasetFromAnnotationSpecName(annotationSpecName) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).dataset;
-  }
-
-  /**
-   * Parse the annotationSpecName from a annotation_spec resource.
-   *
-   * @param {String} annotationSpecName
-   *   A fully-qualified path representing a annotation_spec resources.
-   * @returns {String} - A string representing the annotation_spec.
-   */
-  matchAnnotationSpecFromAnnotationSpecName(annotationSpecName) {
-    return this._pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).annotation_spec;
-  }
-
-  /**
    * Parse the tableSpecName from a table_spec resource.
    *
    * @param {String} tableSpecName
@@ -3231,66 +3291,6 @@ class AutoMlClient {
   matchTableSpecFromTableSpecName(tableSpecName) {
     return this._pathTemplates.tableSpecPathTemplate.match(tableSpecName)
       .table_spec;
-  }
-
-  /**
-   * Parse the columnSpecName from a column_spec resource.
-   *
-   * @param {String} columnSpecName
-   *   A fully-qualified path representing a column_spec resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromColumnSpecName(columnSpecName) {
-    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
-      .project;
-  }
-
-  /**
-   * Parse the columnSpecName from a column_spec resource.
-   *
-   * @param {String} columnSpecName
-   *   A fully-qualified path representing a column_spec resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromColumnSpecName(columnSpecName) {
-    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
-      .location;
-  }
-
-  /**
-   * Parse the columnSpecName from a column_spec resource.
-   *
-   * @param {String} columnSpecName
-   *   A fully-qualified path representing a column_spec resources.
-   * @returns {String} - A string representing the dataset.
-   */
-  matchDatasetFromColumnSpecName(columnSpecName) {
-    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
-      .dataset;
-  }
-
-  /**
-   * Parse the columnSpecName from a column_spec resource.
-   *
-   * @param {String} columnSpecName
-   *   A fully-qualified path representing a column_spec resources.
-   * @returns {String} - A string representing the table_spec.
-   */
-  matchTableSpecFromColumnSpecName(columnSpecName) {
-    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
-      .table_spec;
-  }
-
-  /**
-   * Parse the columnSpecName from a column_spec resource.
-   *
-   * @param {String} columnSpecName
-   *   A fully-qualified path representing a column_spec resources.
-   * @returns {String} - A string representing the column_spec.
-   */
-  matchColumnSpecFromColumnSpecName(columnSpecName) {
-    return this._pathTemplates.columnSpecPathTemplate.match(columnSpecName)
-      .column_spec;
   }
 }
 
