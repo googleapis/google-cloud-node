@@ -103,13 +103,13 @@ class OsLoginServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      userPathTemplate: new gax.PathTemplate('users/{user}'),
-      projectPathTemplate: new gax.PathTemplate(
-        'users/{user}/projects/{project}'
-      ),
       fingerprintPathTemplate: new gax.PathTemplate(
         'users/{user}/sshPublicKeys/{fingerprint}'
       ),
+      projectPathTemplate: new gax.PathTemplate(
+        'users/{user}/projects/{project}'
+      ),
+      userPathTemplate: new gax.PathTemplate('users/{user}'),
     };
 
     // Put together the default options sent with requests.
@@ -544,14 +544,16 @@ class OsLoginServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified user resource name string.
+   * Return a fully-qualified fingerprint resource name string.
    *
    * @param {String} user
+   * @param {String} fingerprint
    * @returns {String}
    */
-  userPath(user) {
-    return this._pathTemplates.userPathTemplate.render({
+  fingerprintPath(user, fingerprint) {
+    return this._pathTemplates.fingerprintPathTemplate.render({
       user: user,
+      fingerprint: fingerprint,
     });
   }
 
@@ -570,28 +572,39 @@ class OsLoginServiceClient {
   }
 
   /**
-   * Return a fully-qualified fingerprint resource name string.
+   * Return a fully-qualified user resource name string.
    *
    * @param {String} user
-   * @param {String} fingerprint
    * @returns {String}
    */
-  fingerprintPath(user, fingerprint) {
-    return this._pathTemplates.fingerprintPathTemplate.render({
+  userPath(user) {
+    return this._pathTemplates.userPathTemplate.render({
       user: user,
-      fingerprint: fingerprint,
     });
   }
 
   /**
-   * Parse the userName from a user resource.
+   * Parse the fingerprintName from a fingerprint resource.
    *
-   * @param {String} userName
-   *   A fully-qualified path representing a user resources.
+   * @param {String} fingerprintName
+   *   A fully-qualified path representing a fingerprint resources.
    * @returns {String} - A string representing the user.
    */
-  matchUserFromUserName(userName) {
-    return this._pathTemplates.userPathTemplate.match(userName).user;
+  matchUserFromFingerprintName(fingerprintName) {
+    return this._pathTemplates.fingerprintPathTemplate.match(fingerprintName)
+      .user;
+  }
+
+  /**
+   * Parse the fingerprintName from a fingerprint resource.
+   *
+   * @param {String} fingerprintName
+   *   A fully-qualified path representing a fingerprint resources.
+   * @returns {String} - A string representing the fingerprint.
+   */
+  matchFingerprintFromFingerprintName(fingerprintName) {
+    return this._pathTemplates.fingerprintPathTemplate.match(fingerprintName)
+      .fingerprint;
   }
 
   /**
@@ -617,27 +630,14 @@ class OsLoginServiceClient {
   }
 
   /**
-   * Parse the fingerprintName from a fingerprint resource.
+   * Parse the userName from a user resource.
    *
-   * @param {String} fingerprintName
-   *   A fully-qualified path representing a fingerprint resources.
+   * @param {String} userName
+   *   A fully-qualified path representing a user resources.
    * @returns {String} - A string representing the user.
    */
-  matchUserFromFingerprintName(fingerprintName) {
-    return this._pathTemplates.fingerprintPathTemplate.match(fingerprintName)
-      .user;
-  }
-
-  /**
-   * Parse the fingerprintName from a fingerprint resource.
-   *
-   * @param {String} fingerprintName
-   *   A fully-qualified path representing a fingerprint resources.
-   * @returns {String} - A string representing the fingerprint.
-   */
-  matchFingerprintFromFingerprintName(fingerprintName) {
-    return this._pathTemplates.fingerprintPathTemplate.match(fingerprintName)
-      .fingerprint;
+  matchUserFromUserName(userName) {
+    return this._pathTemplates.userPathTemplate.match(userName).user;
   }
 }
 
