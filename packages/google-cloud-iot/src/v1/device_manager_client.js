@@ -100,14 +100,14 @@ class DeviceManagerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      devicePathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/registries/{registry}/devices/{device}'
+      ),
       locationPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
       registryPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/registries/{registry}'
-      ),
-      devicePathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/registries/{registry}/devices/{device}'
       ),
     };
 
@@ -1675,6 +1675,24 @@ class DeviceManagerClient {
   // --------------------
 
   /**
+   * Return a fully-qualified device resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} registry
+   * @param {String} device
+   * @returns {String}
+   */
+  devicePath(project, location, registry, device) {
+    return this._pathTemplates.devicePathTemplate.render({
+      project: project,
+      location: location,
+      registry: registry,
+      device: device,
+    });
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {String} project
@@ -1705,21 +1723,47 @@ class DeviceManagerClient {
   }
 
   /**
-   * Return a fully-qualified device resource name string.
+   * Parse the deviceName from a device resource.
    *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} registry
-   * @param {String} device
-   * @returns {String}
+   * @param {String} deviceName
+   *   A fully-qualified path representing a device resources.
+   * @returns {String} - A string representing the project.
    */
-  devicePath(project, location, registry, device) {
-    return this._pathTemplates.devicePathTemplate.render({
-      project: project,
-      location: location,
-      registry: registry,
-      device: device,
-    });
+  matchProjectFromDeviceName(deviceName) {
+    return this._pathTemplates.devicePathTemplate.match(deviceName).project;
+  }
+
+  /**
+   * Parse the deviceName from a device resource.
+   *
+   * @param {String} deviceName
+   *   A fully-qualified path representing a device resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromDeviceName(deviceName) {
+    return this._pathTemplates.devicePathTemplate.match(deviceName).location;
+  }
+
+  /**
+   * Parse the deviceName from a device resource.
+   *
+   * @param {String} deviceName
+   *   A fully-qualified path representing a device resources.
+   * @returns {String} - A string representing the registry.
+   */
+  matchRegistryFromDeviceName(deviceName) {
+    return this._pathTemplates.devicePathTemplate.match(deviceName).registry;
+  }
+
+  /**
+   * Parse the deviceName from a device resource.
+   *
+   * @param {String} deviceName
+   *   A fully-qualified path representing a device resources.
+   * @returns {String} - A string representing the device.
+   */
+  matchDeviceFromDeviceName(deviceName) {
+    return this._pathTemplates.devicePathTemplate.match(deviceName).device;
   }
 
   /**
@@ -1778,50 +1822,6 @@ class DeviceManagerClient {
   matchRegistryFromRegistryName(registryName) {
     return this._pathTemplates.registryPathTemplate.match(registryName)
       .registry;
-  }
-
-  /**
-   * Parse the deviceName from a device resource.
-   *
-   * @param {String} deviceName
-   *   A fully-qualified path representing a device resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromDeviceName(deviceName) {
-    return this._pathTemplates.devicePathTemplate.match(deviceName).project;
-  }
-
-  /**
-   * Parse the deviceName from a device resource.
-   *
-   * @param {String} deviceName
-   *   A fully-qualified path representing a device resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromDeviceName(deviceName) {
-    return this._pathTemplates.devicePathTemplate.match(deviceName).location;
-  }
-
-  /**
-   * Parse the deviceName from a device resource.
-   *
-   * @param {String} deviceName
-   *   A fully-qualified path representing a device resources.
-   * @returns {String} - A string representing the registry.
-   */
-  matchRegistryFromDeviceName(deviceName) {
-    return this._pathTemplates.devicePathTemplate.match(deviceName).registry;
-  }
-
-  /**
-   * Parse the deviceName from a device resource.
-   *
-   * @param {String} deviceName
-   *   A fully-qualified path representing a device resources.
-   * @returns {String} - A string representing the device.
-   */
-  matchDeviceFromDeviceName(deviceName) {
-    return this._pathTemplates.devicePathTemplate.match(deviceName).device;
   }
 }
 
