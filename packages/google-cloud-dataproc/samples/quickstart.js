@@ -16,18 +16,15 @@
 'use strict';
 
 // [START dataproc_quickstart]
+const dataproc = require('@google-cloud/dataproc');
+const client = new dataproc.v1.ClusterControllerClient();
+
 async function quickstart() {
-  const dataproc = require('@google-cloud/dataproc');
-  const client = new dataproc.v1.ClusterControllerClient({
-    // optional auth parameters.
-  });
-
-  const projectId = process.env.GCLOUD_PROJECT;
-
-  // Iterate over all elements.
-  const region = 'global';
-  const request = {projectId, region};
-
+  const projectId = await client.getProjectId();
+  const request = {
+    region: 'global',
+    projectId,
+  };
   const [resources] = await client.listClusters(request);
   console.log('Total resources:', resources.length);
   for (const resource of resources) {
@@ -54,6 +51,6 @@ async function quickstart() {
     console.log(element);
   });
 }
-// [END dataproc_quickstart]
 
-quickstart().catch(console.error);
+quickstart();
+// [END dataproc_quickstart]
