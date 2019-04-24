@@ -1,4 +1,4 @@
-// Copyright 2017, Google LLC All rights reserved.
+// Copyright 2019, Google LLC All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,21 +14,16 @@
 
 'use strict';
 
-async function main() {
-  // [START oslogin_quickstart]
-  const {OsLoginServiceClient} = require('@google-cloud/os-login');
-  const client = new OsLoginServiceClient();
+const {assert} = require('chai');
+const {execSync} = require('child_process');
 
-  async function quickstart() {
-    const [loginProfile] = await client.getLoginProfile({
-      name: 'users/beckwith@google.com',
-    });
-    console.log('Login Profile:');
-    console.log(loginProfile);
-  }
+const exec = cmd => execSync(cmd, {encoding: 'utf8'});
 
-  quickstart();
-  // [END oslogin_quickstart]
-}
-
-main();
+describe('sample tests', () => {
+  // This test current fails because it requires setup in the google-cloud-node
+  // project, running VMs, and a fair amount of infrastructure.
+  it.skip('should run the quickstart', () => {
+    const output = exec('node quickstart');
+    assert.include(output, 'Login Profile:');
+  });
+});
