@@ -15,8 +15,49 @@
 
 'use strict';
 
-// [START scheduler_quickstart]
-// Imports the Google Cloud client library
-const scheduler = require('@google-cloud/scheduler');
-console.log(scheduler);
-// [END scheduler_quickstart]
+// sample-metadata:
+//   title: Quickstart
+//   description: POST "Hello World" to a URL every minute.
+//   usage: node quickstart.js [project-id] [location-id] [url]
+
+async function main(projectId, locationId, url) {
+  // [START scheduler_quickstart]
+  // const projectId = "PROJECT_ID"
+  // const locationId = "LOCATION_ID" // see: https://cloud.google.com/about/locations/
+  // const url = "https://postb.in/..." // where should we say hello?
+
+  const scheduler = require('@google-cloud/scheduler');
+
+  // Create a client.
+  const client = new scheduler.CloudSchedulerClient();
+
+  // Construct the fully qualified location path.
+  const parent = client.locationPath(projectId, locationId);
+
+  // Construct the request body.
+  const job = {
+    httpTarget: {
+      uri: url,
+      httpMethod: 'POST',
+      body: Buffer.from('Hello World'),
+    },
+    schedule: '* * * * *',
+    timeZone: 'America/Los_Angeles',
+  };
+
+  const request = {
+    parent: parent,
+    job: job,
+  };
+
+  // Use the client to send the job creation request.
+  const [response] = await client.createJob(request);
+  console.log(`Created job: ${response.name}`);
+  // [END scheduler_quickstart]
+}
+
+const args = process.argv.slice(2);
+main(...args).catch(err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});

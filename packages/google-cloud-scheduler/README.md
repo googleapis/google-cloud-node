@@ -54,9 +54,37 @@ npm install @google-cloud/scheduler
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud client library
-const scheduler = require('@google-cloud/scheduler');
-console.log(scheduler);
+  // const projectId = "PROJECT_ID"
+  // const locationId = "LOCATION_ID" // see: https://cloud.google.com/about/locations/
+  // const url = "https://postb.in/..." // where should we say hello?
+
+  const scheduler = require('@google-cloud/scheduler');
+
+  // Create a client.
+  const client = new scheduler.CloudSchedulerClient();
+
+  // Construct the fully qualified location path.
+  const parent = client.locationPath(projectId, locationId);
+
+  // Construct the request body.
+  const job = {
+    httpTarget: {
+      uri: url,
+      httpMethod: 'POST',
+      body: Buffer.from('Hello World'),
+    },
+    schedule: '* * * * *',
+    timeZone: 'America/Los_Angeles',
+  };
+
+  const request = {
+    parent: parent,
+    job: job,
+  };
+
+  // Use the client to send the job creation request.
+  const [response] = await client.createJob(request);
+  console.log(`Created job: ${response.name}`);
 
 ```
 

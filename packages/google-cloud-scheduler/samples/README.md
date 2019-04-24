@@ -45,6 +45,8 @@ __Usage:__
 
 ### Create Job
 
+Create a job that posts to /log_payload on an App Engine service.
+
 View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/createJob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/createJob.js,samples/README.md)
@@ -52,7 +54,7 @@ View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/maste
 __Usage:__
 
 
-`node createJob.js`
+`node createJob.js [project-id] [location-id] [app-engine-service-id]`
 
 
 -----
@@ -62,6 +64,8 @@ __Usage:__
 
 ### Delete Job
 
+Delete a job by its ID.
+
 View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/deleteJob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md)
@@ -69,7 +73,7 @@ View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/maste
 __Usage:__
 
 
-`node deleteJob.js`
+`node deleteJob.js [project-id] [location-id] [job-id]`
 
 
 -----
@@ -79,6 +83,8 @@ __Usage:__
 
 ### Quickstart
 
+POST "Hello World" to a URL every minute.
+
 View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
@@ -86,7 +92,7 @@ View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/maste
 __Usage:__
 
 
-`node quickstart.js`
+`node quickstart.js [project-id] [location-id] [url]`
 
 
 
