@@ -101,13 +101,13 @@ class CloudSchedulerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
-      locationPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}'
-      ),
       jobPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/jobs/{job}'
       ),
+      locationPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -804,14 +804,18 @@ class CloudSchedulerClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified job resource name string.
    *
    * @param {String} project
+   * @param {String} location
+   * @param {String} job
    * @returns {String}
    */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
+  jobPath(project, location, job) {
+    return this._pathTemplates.jobPathTemplate.render({
       project: project,
+      location: location,
+      job: job,
     });
   }
 
@@ -830,53 +834,15 @@ class CloudSchedulerClient {
   }
 
   /**
-   * Return a fully-qualified job resource name string.
+   * Return a fully-qualified project resource name string.
    *
    * @param {String} project
-   * @param {String} location
-   * @param {String} job
    * @returns {String}
    */
-  jobPath(project, location, job) {
-    return this._pathTemplates.jobPathTemplate.render({
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
       project: project,
-      location: location,
-      job: job,
     });
-  }
-
-  /**
-   * Parse the projectName from a project resource.
-   *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
-
-  /**
-   * Parse the locationName from a location resource.
-   *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the locationName from a location resource.
-   *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
   }
 
   /**
@@ -910,6 +876,40 @@ class CloudSchedulerClient {
    */
   matchJobFromJobName(jobName) {
     return this._pathTemplates.jobPathTemplate.match(jobName).job;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName)
+      .location;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 
