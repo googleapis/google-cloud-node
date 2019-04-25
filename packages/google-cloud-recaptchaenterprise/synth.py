@@ -27,7 +27,7 @@ for version in versions:
   library = gapic.node_library(
     'recaptchaenterprise',
     version)
-  s.copy(library, excludes=['README.md'])
+  s.copy(library, excludes=['README.md', 'package.json', 'src/index.js'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
