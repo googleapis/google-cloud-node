@@ -259,9 +259,8 @@ const MetricDescriptor = {
  * labels of a `MetricDescriptor`.
  *
  * @property {string} type
- *   An existing metric type, see
- *   google.api.MetricDescriptor. For example,
- *   `custom.googleapis.com/invoice/paid/amount`.
+ *   An existing metric type, see google.api.MetricDescriptor.
+ *   For example, `custom.googleapis.com/invoice/paid/amount`.
  *
  * @property {Object.<string, string>} labels
  *   The set of label values that uniquely identify this metric. All
