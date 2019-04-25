@@ -1,0 +1,56 @@
+{
+  "repository": "googleapis/nodejs-recaptcha-enterprise",
+  "name": "@google-cloud/recaptcha-enterprise",
+  "version": "0.1.0",
+  "author": "Google LLC",
+  "description": "reCAPTCHA Enterprise API client for Node.js",
+  "main": "src/index.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google recaptchaenterprise",
+    "recaptchaenterprise",
+    "reCAPTCHA Enterprise API"
+  ],
+  "dependencies": {
+    "google-gax": "^0.25.3",
+    "lodash.merge": "^4.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "through2": "^2.0.3",
+    "eslint": "^5.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prettier": "^3.0.0"
+  },
+  "scripts": {
+    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
+    "docs": "jsdoc -c .jsdoc.js",
+    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
+    "lint": "eslint '**/*.js'",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
+    "test-no-cover": "mocha test/*.js",
+    "test": "npm run cover",
+    "fix": "eslint --fix '**/*.js'",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "predocs-test": "npm run docs"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
