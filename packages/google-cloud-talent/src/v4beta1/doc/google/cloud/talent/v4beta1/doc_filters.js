@@ -52,17 +52,15 @@
  *   Optional.
  *
  *   The location filter specifies geo-regions containing the jobs to
- *   search against. See
- *   LocationFilter for more
- *   information.
+ *   search against. See LocationFilter for more information.
  *
  *   If a location value isn't specified, jobs fitting the other search
  *   criteria are retrieved regardless of where they're located.
  *
  *   If multiple values are specified, jobs are retrieved from any of the
  *   specified locations. If different values are specified for the
- *   LocationFilter.distance_in_miles
- *   parameter, the maximum provided distance is used for all locations.
+ *   LocationFilter.distance_in_miles parameter, the maximum provided
+ *   distance is used for all locations.
  *
  *   At most 5 location filters are allowed.
  *
@@ -111,10 +109,10 @@
  *   Optional.
  *
  *   This search filter is applied only to
- *   Job.compensation_info.
- *   For example, if the filter is specified as "Hourly job with per-hour
- *   compensation > $15", only jobs meeting these criteria are searched. If a
- *   filter isn't defined, all open jobs are searched.
+ *   Job.compensation_info. For example, if the filter is specified
+ *   as "Hourly job with per-hour compensation > $15", only jobs meeting
+ *   these criteria are searched. If a filter isn't defined, all open jobs
+ *   are searched.
  *
  *   This object should have the same structure as [CompensationFilter]{@link google.cloud.talent.v4beta1.CompensationFilter}
  *
@@ -122,8 +120,7 @@
  *   Optional.
  *
  *   This filter specifies a structured syntax to match against the
- *   Job.custom_attributes
- *   marked as `filterable`.
+ *   Job.custom_attributes marked as `filterable`.
  *
  *   The syntax for this expression is a subset of SQL syntax.
  *
@@ -158,8 +155,7 @@
  *   Optional.
  *
  *   The employment type filter specifies the employment type of jobs to
- *   search against, such as
- *   EmploymentType.FULL_TIME.
+ *   search against, such as EmploymentType.FULL_TIME.
  *
  *   If a value isn't specified, jobs in the search results includes any
  *   employment type.
@@ -227,9 +223,8 @@ const JobQuery = {
  *   If a location filter isn't specified, profiles fitting the other search
  *   criteria are retrieved regardless of where they're located.
  *
- *   If
- *   LocationFilter.negated
- *   is specified, the result doesn't contain profiles from that location.
+ *   If LocationFilter.negated is specified, the result doesn't contain
+ *   profiles from that location.
  *
  *   For example, search for profiles with addresses in "New York City".
  *
@@ -245,9 +240,8 @@ const JobQuery = {
  *   If multiple values are specified, profiles are retrieved with any of the
  *   specified job titles.
  *
- *   If
- *   JobTitleFilter.negated
- *   is specified, the result won't contain profiles with the job titles.
+ *   If JobTitleFilter.negated is specified, the result won't contain
+ *   profiles with the job titles.
  *
  *   For example, search for profiles with a job title "Product Manager".
  *
@@ -264,9 +258,8 @@ const JobQuery = {
  *   If multiple employer filters are specified, profiles with any matching
  *   employers are retrieved.
  *
- *   If
- *   EmployerFilter.negated
- *   is specified, the result won't contain profiles that match the employers.
+ *   If EmployerFilter.negated is specified, the result won't contain
+ *   profiles that match the employers.
  *
  *   For example, search for profiles that have working experience at "Google
  *   LLC".
@@ -284,9 +277,8 @@ const JobQuery = {
  *   If multiple education filters are specified, profiles that match any
  *   education filters are retrieved.
  *
- *   If
- *   EducationFilter.negated
- *   is specified, the result won't contain profiles that match the educations.
+ *   If EducationFilter.negated is specified, the result won't contain
+ *   profiles that match the educations.
  *
  *   For example, search for profiles with a master degree.
  *
@@ -302,8 +294,8 @@ const JobQuery = {
  *   If multiple skill filters are specified, profiles that match any skill
  *   filters are retrieved.
  *
- *   If SkillFilter.negated
- *   is specified, the result won't contain profiles that match the skills.
+ *   If SkillFilter.negated is specified, the result won't contain profiles
+ *   that match the skills.
  *
  *   For example, search for profiles that have "Java" and "Python" in skill
  *   list.
@@ -358,14 +350,6 @@ const JobQuery = {
  *
  *   This object should have the same structure as [ApplicationOutcomeNotesFilter]{@link google.cloud.talent.v4beta1.ApplicationOutcomeNotesFilter}
  *
- * @property {Object[]} applicationLastStageFilters
- *   Optional.
- *
- *   The application last stage filters specify the last stage of job
- *   application.
- *
- *   This object should have the same structure as [ApplicationLastStageFilter]{@link google.cloud.talent.v4beta1.ApplicationLastStageFilter}
- *
  * @property {Object[]} applicationJobFilters
  *   Optional.
  *
@@ -373,19 +357,11 @@ const JobQuery = {
  *
  *   This object should have the same structure as [ApplicationJobFilter]{@link google.cloud.talent.v4beta1.ApplicationJobFilter}
  *
- * @property {Object[]} applicationStatusFilters
- *   Optional.
- *
- *   The application status filters specify the status of job application.
- *
- *   This object should have the same structure as [ApplicationStatusFilter]{@link google.cloud.talent.v4beta1.ApplicationStatusFilter}
- *
- * @property {string} customFieldFilter
+ * @property {string} customAttributeFilter
  *   Optional.
  *
  *   This filter specifies a structured syntax to match against the
- *   Profile.custom_attributes
- *   that are marked as `filterable`.
+ *   Profile.custom_attributes that are marked as `filterable`.
  *
  *   The syntax for this expression is a subset of Google SQL syntax.
  *
@@ -463,15 +439,12 @@ const ProfileQuery = {
  *   Allows the client to return jobs without a
  *   set location, specifically, telecommuting jobs (telecomuting is considered
  *   by the service as a special location.
- *   Job.posting_region
- *   indicates if a job permits telecommuting. If this field is set to
- *   TelecommutePreference.TELECOMMUTE_ALLOWED,
- *   telecommuting jobs are searched, and
- *   address and
- *   lat_lng are ignored.
- *   If not set or set to
- *   TelecommutePreference.TELECOMMUTE_EXCLUDED,
- *   telecommute job are not searched.
+ *   Job.posting_region indicates if a job permits telecommuting.
+ *   If this field is set to TelecommutePreference.TELECOMMUTE_ALLOWED,
+ *   telecommuting jobs are searched, and address and lat_lng are
+ *   ignored. If not set or set to
+ *   TelecommutePreference.TELECOMMUTE_EXCLUDED, telecommute job are not
+ *   searched.
  *
  *   This filter can be used by itself to search exclusively for telecommuting
  *   jobs, or it can be combined with another location
@@ -577,14 +550,11 @@ const CompensationFilter = {
     /**
      * Filter by `base compensation entry's` unit. A job is a match if and
      * only if the job contains a base CompensationEntry and the base
-     * CompensationEntry's unit matches provided
-     * units. Populate
-     * one or more
-     * units.
+     * CompensationEntry's unit matches provided units.
+     * Populate one or more units.
      *
-     * See
-     * CompensationInfo.CompensationEntry
-     * for definition of base compensation entry.
+     * See CompensationInfo.CompensationEntry for definition of
+     * base compensation entry.
      */
     UNIT_ONLY: 1,
 
@@ -594,29 +564,22 @@ const CompensationFilter = {
      * the base entry's unit matches provided compensation_units and amount
      * or range overlaps with provided compensation_range.
      *
-     * See
-     * CompensationInfo.CompensationEntry
-     * for definition of base compensation entry.
+     * See CompensationInfo.CompensationEntry for definition of
+     * base compensation entry.
      *
-     * Set exactly one
-     * units and
-     * populate range.
+     * Set exactly one units and populate range.
      */
     UNIT_AND_AMOUNT: 2,
 
     /**
      * Filter by annualized base compensation amount and `base compensation
-     * entry's` unit. Populate
-     * range and zero or
-     * more units.
+     * entry's` unit. Populate range and zero or more units.
      */
     ANNUALIZED_BASE_AMOUNT: 3,
 
     /**
      * Filter by annualized total compensation amount and `base compensation
-     * entry's` unit . Populate
-     * range and zero or
-     * more units.
+     * entry's` unit . Populate range and zero or more units.
      */
     ANNUALIZED_TOTAL_AMOUNT: 4
   }
@@ -739,7 +702,7 @@ const JobTitleFilter = {
  * @property {string} skill
  *   Required.
  *
- *   The skill name. For example, "java", "j2ee", etc.
+ *   The skill name. For example, "java", "j2ee", and so on.
  *
  * @property {boolean} negated
  *   Optional.
@@ -768,12 +731,9 @@ const SkillFilter = {
  * @property {number} mode
  *   Optional.
  *
- *   Define set of
- *   EmploymentRecords to search
- *   against.
+ *   Define set of EmploymentRecords to search against.
  *
- *   Defaults to
- *   EmployerFilterMode.ALL_EMPLOYMENT_RECORDS.
+ *   Defaults to EmployerFilterMode.ALL_EMPLOYMENT_RECORDS.
  *
  *   The number should be among the values of [EmployerFilterMode]{@link google.cloud.talent.v4beta1.EmployerFilterMode}
  *
@@ -791,9 +751,8 @@ const EmployerFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Enum indicating which set of
-   * Profile.employment_records
-   * to search against.
+   * Enum indicating which set of Profile.employment_records to search
+   * against.
    *
    * @enum {number}
    * @memberof google.cloud.talent.v4beta1
@@ -806,14 +765,12 @@ const EmployerFilter = {
     EMPLOYER_FILTER_MODE_UNSPECIFIED: 0,
 
     /**
-     * Apply to all employers in
-     * Profile.employment_records.
+     * Apply to all employers in Profile.employment_records.
      */
     ALL_EMPLOYMENT_RECORDS: 1,
 
     /**
-     * Apply only to current employer in
-     * Profile.employment_records.
+     * Apply only to current employer in Profile.employment_records.
      */
     CURRENT_EMPLOYMENT_RECORDS_ONLY: 2,
 
@@ -871,10 +828,7 @@ const EducationFilter = {
  * Work experience filter.
  *
  * This filter is used to search for profiles with working experience length
- * between
- * min_experience
- * and
- * max_experience.
+ * between min_experience and max_experience.
  *
  * @property {Object} minExperience
  *   Optional.
@@ -903,13 +857,9 @@ const WorkExperienceFilter = {
  *
  * Application Date Range Filter.
  *
- * The API matches profiles with
- * Application.application_date
- * between start date and end date (both boundaries are inclusive). The filter
- * is ignored if both
- * start_date
- * and end_date
- * are missing.
+ * The API matches profiles with Application.application_date between
+ * start date and end date (both boundaries are inclusive). The filter is
+ * ignored if both start_date and end_date are missing.
  *
  * @property {Object} startDate
  *   Optional.
@@ -944,15 +894,14 @@ const ApplicationDateFilter = {
  *   Required.
  *
  *   User entered or selected outcome reason. The API does an exact match on the
- *   Application.outcome_notes
- *   in profiles.
+ *   Application.outcome_notes in profiles.
  *
  * @property {boolean} negated
  *   Optional.
  *
  *   If true, The API excludes all candidates with any
- *   Application.outcome_notes
- *   matching the outcome reason specified in the filter.
+ *   Application.outcome_notes matching the outcome reason specified in
+ *   the filter.
  *
  * @typedef ApplicationOutcomeNotesFilter
  * @memberof google.cloud.talent.v4beta1
@@ -965,97 +914,31 @@ const ApplicationOutcomeNotesFilter = {
 /**
  * Input only.
  *
- * Filter on Last Stage of Application.
- *
- * @property {string} lastStage
- *   Required.
- *
- *   User entered or selected last stage the candidate reached in the
- *   application. The API does an exact match on the
- *   Application.last_stage in profiles.
- *
- * @property {boolean} negated
- *   Optional.
- *   If true, The API excludes all candidates with any
- *   Application.last_stage matching the last stage specified in the
- *   filter.
- *
- * @typedef ApplicationLastStageFilter
- * @memberof google.cloud.talent.v4beta1
- * @see [google.cloud.talent.v4beta1.ApplicationLastStageFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/filters.proto}
- */
-const ApplicationLastStageFilter = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Input only.
- *
  * Filter on the job information of Application.
- *
- * @property {string} job
- *   Optional.
- *
- *   The job resource name in the application. The API does an exact match on
- *   the Job.name of
- *   Application.job in profiles.
  *
  * @property {string} jobRequisitionId
  *   Optional.
  *
  *   The job requisition id in the application. The API does an exact match on
- *   the Job.requisistion_id of
- *   Application.job in profiles.
+ *   the Job.requisistion_id of Application.job in profiles.
  *
  * @property {string} jobTitle
  *   Optional.
  *
  *   The job title in the application. The API does an exact match on the
- *   Job.title of
- *   Application.job in profiles.
+ *   Job.title of Application.job in profiles.
  *
  * @property {boolean} negated
  *   Optional.
  *
- *   If true, the API excludes all profiles with any
- *   Application.job matching the
- *   filters.
+ *   If true, the API excludes all profiles with any Application.job
+ *   matching the filters.
  *
  * @typedef ApplicationJobFilter
  * @memberof google.cloud.talent.v4beta1
  * @see [google.cloud.talent.v4beta1.ApplicationJobFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/filters.proto}
  */
 const ApplicationJobFilter = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Input only.
- *
- * Filter on state of Application.
- *
- * @property {number} applicationState
- *   Required.
- *
- *   User entered or selected application state. The API does an exact match
- *   between the application state specified in this filter and the
- *   Application.state in
- *   profiles.
- *
- *   The number should be among the values of [ApplicationState]{@link google.cloud.talent.v4beta1.ApplicationState}
- *
- * @property {boolean} negated
- *   Optional.
- *
- *   If true, The API excludes all candidates with any
- *   Application.state matching
- *   the state specified in the filter.
- *
- * @typedef ApplicationStatusFilter
- * @memberof google.cloud.talent.v4beta1
- * @see [google.cloud.talent.v4beta1.ApplicationStatusFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/filters.proto}
- */
-const ApplicationStatusFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1087,8 +970,7 @@ const ApplicationStatusFilter = {
  *
  *   Specifies which time field to filter profiles.
  *
- *   Defaults to
- *   TimeField.CREATE_TIME.
+ *   Defaults to TimeField.CREATE_TIME.
  *
  *   The number should be among the values of [TimeField]{@link google.cloud.talent.v4beta1.TimeField}
  *

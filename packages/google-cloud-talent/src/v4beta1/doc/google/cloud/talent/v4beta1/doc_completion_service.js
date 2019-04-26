@@ -46,25 +46,16 @@
  *   For more information, see
  *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
  *
- *   For
- *   CompletionType.JOB_TITLE
- *   type, only open jobs with the same
- *   language_codes
- *   are returned.
+ *   For CompletionType.JOB_TITLE type, only open jobs with the same
+ *   language_codes are returned.
  *
- *   For
- *   CompletionType.COMPANY_NAME
- *   type, only companies having open jobs with the same
- *   language_codes
- *   are returned.
+ *   For CompletionType.COMPANY_NAME type,
+ *   only companies having open jobs with the same language_codes are
+ *   returned.
  *
- *   For
- *   CompletionType.COMBINED
- *   type, only open jobs with the same
- *   language_codes
- *   or companies having open jobs with the same
- *   language_codes
- *   are returned.
+ *   For CompletionType.COMBINED type, only open jobs with the same
+ *   language_codes or companies having open jobs with the same
+ *   language_codes are returned.
  *
  *   The maximum number of allowed characters is 255.
  *
@@ -90,16 +81,14 @@
  * @property {number} scope
  *   Optional.
  *
- *   The scope of the completion. The defaults is
- *   CompletionScope.PUBLIC.
+ *   The scope of the completion. The defaults is CompletionScope.PUBLIC.
  *
  *   The number should be among the values of [CompletionScope]{@link google.cloud.talent.v4beta1.CompletionScope}
  *
  * @property {number} type
  *   Optional.
  *
- *   The completion topic. The default is
- *   CompletionType.COMBINED.
+ *   The completion topic. The default is CompletionType.COMBINED.
  *
  *   The number should be among the values of [CompletionType]{@link google.cloud.talent.v4beta1.CompletionType}
  *

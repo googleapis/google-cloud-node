@@ -17,9 +17,8 @@
 
 /**
  * A Job resource represents a job posting (also referred to as a "job listing"
- * or "job requisition"). A job belongs to a
- * Company, which is the hiring entity
- * responsible for the job.
+ * or "job requisition"). A job belongs to a Company, which is the hiring
+ * entity responsible for the job.
  *
  * @property {string} name
  *   Required during job update.
@@ -35,8 +34,7 @@
  *   example, "projects/api-test-project/jobs/1234".
  *
  *   Use of this field in job queries and API calls is preferred over the use of
- *   requisition_id since this
- *   value is unique.
+ *   requisition_id since this value is unique.
  *
  * @property {string} company
  *   Required.
@@ -56,10 +54,8 @@
  *   The requisition ID, also referred to as the posting ID, is assigned by the
  *   client to identify a job. This field is intended to be used by clients
  *   for client identification and tracking of postings. A job isn't allowed
- *   to be created if there is another job with the same
- *   company,
- *   language_code and
- *   requisition_id.
+ *   to be created if there is another job with the same company,
+ *   language_code and requisition_id.
  *
  *   The maximum number of allowed characters is 255.
  *
@@ -75,10 +71,9 @@
  *
  *   The description of the job, which typically includes a multi-paragraph
  *   description of the company and related information. Separate fields are
- *   provided on the job object for
- *   responsibilities,
- *   qualifications, and other
- *   job characteristics. Use of these separate job fields is recommended.
+ *   provided on the job object for responsibilities,
+ *   qualifications, and other job characteristics. Use of
+ *   these separate job fields is recommended.
  *
  *   This field accepts and sanitizes HTML input, and also accepts
  *   bold, italic, ordered list, and unordered list markup tags.
@@ -95,22 +90,17 @@
  *
  *   At most 50 locations are allowed for best search performance. If a job has
  *   more locations, it is suggested to split it into multiple jobs with unique
- *   requisition_ids (e.g.
- *   'ReqA' becomes 'ReqA-1', 'ReqA-2', etc.) as multiple jobs with the same
- *   company[], language_code and
- *   requisition_id are not
- *   allowed. If the original
- *   requisition_id must be
- *   preserved, a custom field should be used for storage. It is also suggested
- *   to group the locations that close to each other in the same job for better
- *   search experience.
+ *   requisition_ids (e.g. 'ReqA' becomes 'ReqA-1', 'ReqA-2', and so on.) as
+ *   multiple jobs with the same company[], language_code and
+ *   requisition_id are not allowed. If the original requisition_id must
+ *   be preserved, a custom field should be used for storage. It is also
+ *   suggested to group the locations that close to each other in the same job
+ *   for better search experience.
  *
  *   The maximum number of allowed characters is 500.
  *
  * @property {Object} applicationInfo
- *   Required. At least one field within
- *   ApplicationInfo must be
- *   specified.
+ *   Optional.
  *
  *   Job application information.
  *
@@ -190,11 +180,9 @@
  *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47){:
  *   class="external" target="_blank" }.
  *
- *   If this field is unspecified and
- *   Job.description is present,
- *   detected language code based on
- *   Job.description is assigned,
- *   otherwise defaults to 'en_US'.
+ *   If this field is unspecified and Job.description is present, detected
+ *   language code based on Job.description is assigned, otherwise
+ *   defaults to 'en_US'.
  *
  * @property {number} jobLevel
  *   Optional.
@@ -219,8 +207,7 @@
  *
  *   A description of the qualifications required to perform the
  *   job. The use of this field is recommended
- *   as an alternative to using the more general
- *   description field.
+ *   as an alternative to using the more general description field.
  *
  *   This field accepts and sanitizes HTML input, and also accepts
  *   bold, italic, ordered list, and unordered list markup tags.
@@ -231,8 +218,8 @@
  *   Optional.
  *
  *   A description of job responsibilities. The use of this field is
- *   recommended as an alternative to using the more general
- *   description field.
+ *   recommended as an alternative to using the more general description
+ *   field.
  *
  *   This field accepts and sanitizes HTML input, and also accepts
  *   bold, italic, ordered list, and unordered list markup tags.
@@ -242,16 +229,13 @@
  * @property {number} postingRegion
  *   Optional.
  *
- *   The job PostingRegion (for
- *   example, state, country) throughout which the job is available. If this
- *   field is set, a
- *   LocationFilter in a search
- *   query within the job region finds this job posting if an exact location
- *   match isn't specified. If this field is set to
- *   PostingRegion.NATION or
- *   PostingRegion.ADMINISTRATIVE_AREA,
- *   setting job Job.addresses to
- *   the same location level as this field is strongly recommended.
+ *   The job PostingRegion (for example, state, country) throughout
+ *   which the job is available. If this field is set, a LocationFilter
+ *   in a search query within the job region finds this job posting if an
+ *   exact location match isn't specified. If this field is set to
+ *   PostingRegion.NATION or PostingRegion.ADMINISTRATIVE_AREA,
+ *   setting job Job.addresses to the same location level as this field
+ *   is strongly recommended.
  *
  *   The number should be among the values of [PostingRegion]{@link google.cloud.talent.v4beta1.PostingRegion}
  *
@@ -260,9 +244,7 @@
  *
  *   The visibility of the job.
  *
- *   Defaults to
- *   Visibility.ACCOUNT_ONLY
- *   if not specified.
+ *   Defaults to Visibility.ACCOUNT_ONLY if not specified.
  *
  *   The number should be among the values of [Visibility]{@link google.cloud.talent.v4beta1.Visibility}
  *
@@ -302,8 +284,7 @@
  *   updated with the UpdateJob API. An expired job can be updated and
  *   opened again by using a future expiration timestamp. Updating an expired
  *   job fails if there is another existing open job with same
- *   company[], language_code and
- *   requisition_id.
+ *   company[], language_code and requisition_id.
  *
  *   The expired jobs are retained in our system for 90 days. However, the
  *   overall expired job count cannot exceed 3 times the maximum of open jobs
@@ -322,11 +303,10 @@
  *   unspecified expiration date, the job expires after 2017/01/31 13:00AM UTC.
  *
  *   If this value isn't provided on job update, it depends on the field masks
- *   set by
- *   UpdateJobRequest.update_mask.
- *   If the field masks include expiry_time, or the masks are empty meaning
- *   that every field is updated, the job posting expires after 30 days from the
- *   job's last update time. Otherwise the expiration date isn't updated.
+ *   set by UpdateJobRequest.update_mask. If the field masks include
+ *   expiry_time, or the masks are empty meaning that every field is
+ *   updated, the job posting expires after 30 days from the job's last
+ *   update time. Otherwise the expiration date isn't updated.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -366,11 +346,7 @@ const Job = {
    * Application related details of a job posting.
    *
    * @property {string[]} emails
-   *   Optional but at least one of
-   *   uris,
-   *   emails or
-   *   instruction
-   *   must be specified.
+   *   Optional.
    *
    *   Use this field to specify email address(es) to which resumes or
    *   applications can be sent.
@@ -378,11 +354,7 @@ const Job = {
    *   The maximum number of allowed characters for each entry is 255.
    *
    * @property {string} instruction
-   *   Optional but at least one of
-   *   uris,
-   *   emails or
-   *   instruction
-   *   must be specified.
+   *   Optional.
    *
    *   Use this field to provide instructions, such as "Mail your application
    *   to ...", that a candidate can follow to apply for the job.
@@ -393,11 +365,7 @@ const Job = {
    *   The maximum number of allowed characters is 3,000.
    *
    * @property {string[]} uris
-   *   Optional but at least one of
-   *   uris,
-   *   emails or
-   *   instruction
-   *   must be specified.
+   *   Optional.
    *
    *   Use this URI field to direct an applicant to a website, for example to
    *   link to an online application form.
@@ -418,20 +386,15 @@ const Job = {
    * Derived details about the job posting.
    *
    * @property {Object[]} locations
-   *   Structured locations of the job, resolved from
-   *   Job.addresses.
+   *   Structured locations of the job, resolved from Job.addresses.
    *
-   *   locations are
-   *   exactly matched to
-   *   Job.addresses in the same
+   *   locations are exactly matched to Job.addresses in the same
    *   order.
    *
    *   This object should have the same structure as [Location]{@link google.cloud.talent.v4beta1.Location}
    *
    * @property {number[]} jobCategories
-   *   Job categories derived from
-   *   Job.title and
-   *   Job.description.
+   *   Job categories derived from Job.title and Job.description.
    *
    *   The number should be among the values of [JobCategory]{@link google.cloud.talent.v4beta1.JobCategory}
    *
@@ -468,8 +431,7 @@ const Job = {
    *   HTML tags in these fields may be stripped if sanitiazation isn't
    *   disabled.
    *
-   *   Defaults to
-   *   HtmlSanitization.SIMPLE_FORMATTING_ONLY.
+   *   Defaults to HtmlSanitization.SIMPLE_FORMATTING_ONLY.
    *
    *   The number should be among the values of [HtmlSanitization]{@link google.cloud.talent.v4beta1.HtmlSanitization}
    *

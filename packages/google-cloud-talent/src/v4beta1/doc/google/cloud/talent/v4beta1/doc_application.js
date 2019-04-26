@@ -51,8 +51,8 @@
  *   Resource name of the job which the candidate applied for.
  *
  *   The format is
- *   "projects/{project_id}/jobs/{job_id}",
- *   for example, "projects/api-test-project/jobs/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}",
+ *   for example, "projects/api-test-project/tenants/foo/jobs/bar".
  *
  * @property {string} company
  *   One of either a job or a company is required.
@@ -60,8 +60,8 @@
  *   Resource name of the company which the candidate applied for.
  *
  *   The format is
- *   "projects/{project_id}/companies/{company_id}",
- *   for example, "projects/api-test-project/companies/foo".
+ *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}",
+ *   for example, "projects/api-test-project/tenants/foo/companies/bar".
  *
  * @property {Object} applicationDate
  *   Optional.
@@ -90,9 +90,9 @@
  * @property {Object[]} interviews
  *   Optional.
  *
- *   All interviews (screen, onsite, etc) conducted as part of this application
- *   (includes details such as user conducting the interview, timestamp,
- *   feedback, etc).
+ *   All interviews (screen, onsite, and so on) conducted as part of this
+ *   application (includes details such as user conducting the interview,
+ *   timestamp, feedback, and so on).
  *
  *   This object should have the same structure as [Interview]{@link google.cloud.talent.v4beta1.Interview}
  *

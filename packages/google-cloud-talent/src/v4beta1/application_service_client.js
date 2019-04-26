@@ -351,15 +351,11 @@ class ApplicationServiceClient {
    *   Optional but strongly recommended for the best service
    *   experience.
    *
-   *   If
-   *   update_mask
-   *   is provided, only the specified fields in
-   *   application
-   *   are updated. Otherwise all the fields are updated.
+   *   If update_mask is provided, only the specified fields in
+   *   application are updated. Otherwise all the fields are updated.
    *
    *   A field mask to specify the application fields to be updated. Only
-   *   top level fields of Application
-   *   are supported.
+   *   top level fields of Application are supported.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
