@@ -1,0 +1,8 @@
+{
+  "name": "promisify",
+  "name_pretty": "Google Cloud Common Promisify",
+  "release_level": "ga",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-promisify",
+  "distribution_name": "@google-cloud/promisify"
+}

@@ -3,3 +3,5 @@ build
 docs
 .nyc_output
 package-lock.json
+.vscode
+__pycache__
