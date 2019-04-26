@@ -3,7 +3,8 @@
   "compilerOptions": {
     "rootDir": "ts",
     "outDir": "out",
-    "lib": [ "es2015" ]
+    "lib": [ "es2015" ],
+    "target": "es2015"
   },
   "include": [
     "ts/**/*.ts"
