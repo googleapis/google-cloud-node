@@ -8,12 +8,13 @@
   "repository": "googleapis/nodejs-promisify",
   "private": true,
   "scripts": {
-    "test": "mocha system-test"
+    "test": "mocha"
   },
   "dependencies": {
     "@google-cloud/promisify": "^0.4.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^6.0.0"
   }
 }

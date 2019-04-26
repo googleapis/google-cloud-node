@@ -14,4 +14,27 @@
  * limitations under the License.
  */
 
-console.warn(`no samples available 👻`);
+// [START promisify_quickstart]
+const {promisify} = require('@google-cloud/promisify');
+
+/**
+ * This is a very basic example function that accepts a callback.
+ */
+function someCallbackFunction(name, callback) {
+  if (!name) {
+    callback(new Error('Name is required!'));
+  } else {
+    callback(null, `Well hello there, ${name}!`);
+  }
+}
+
+// let's promisify it!
+const somePromiseFunction = promisify(someCallbackFunction);
+
+async function quickstart() {
+  // now we can just `await` the function to use it like a promisified method
+  const [result] = await somePromiseFunction('nodestronaut');
+  console.log(result);
+}
+quickstart();
+// [END promisify_quickstart]
