@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## v0.12.0
+
+04-26-2019 12:39 PDT
+
+### New Features
+
+- feat: add x-goog-request-params header
+- feat: add deterministic encryption ([#263](https://github.com/googleapis/nodejs-dlp/pull/263))
+
 ## v0.11.0
 
 03-12-2019 15:22 PDT
