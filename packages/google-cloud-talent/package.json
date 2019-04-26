@@ -53,7 +53,7 @@
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "linkinator": "^1.1.6",
     "mocha": "^6.0.0",
-    "nyc": "^13.0.0",
+    "nyc": "^14.0.0",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.6"
   }
