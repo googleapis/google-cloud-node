@@ -4,3 +4,4 @@ build
 package-lock.json
 docs/
 .coverage
+__pycache__
