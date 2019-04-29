@@ -624,7 +624,7 @@ class Transaction extends DatastoreRequest {
    */
   // tslint:disable-next-line no-any
   save(entities: Entities): any {
-    arrify(entities).forEach(ent => {
+    arrify(entities).forEach((ent: Entity) => {
       this.modifiedEntities_.push({
         entity: {
           key: ent.key,
