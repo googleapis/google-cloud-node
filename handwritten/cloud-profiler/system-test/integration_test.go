@@ -211,17 +211,6 @@ func TestAgentIntegration(t *testing.T) {
 			InstanceConfig: proftest.InstanceConfig{
 				ProjectID:   projectID,
 				Zone:        zone,
-				Name:        fmt.Sprintf("profiler-test-node6-%s", runID),
-				MachineType: "n1-standard-1",
-			},
-			name:         fmt.Sprintf("profiler-test-node6-%s-gce", runID),
-			wantProfiles: wantProfiles,
-			nodeVersion:  "6",
-		},
-		{
-			InstanceConfig: proftest.InstanceConfig{
-				ProjectID:   projectID,
-				Zone:        zone,
 				Name:        fmt.Sprintf("profiler-test-node8-%s", runID),
 				MachineType: "n1-standard-1",
 			},
