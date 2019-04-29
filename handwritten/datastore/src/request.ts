@@ -352,7 +352,7 @@ class DatastoreRequest {
         typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
 
     const reqOpts = {
-      mutations: arrify(keys).map(key => {
+      mutations: arrify(keys).map((key: entity.Key) => {
         return {
           delete: entity.keyToKeyProto(key),
         };
@@ -498,11 +498,12 @@ class DatastoreRequest {
    */
   insert(entities: Entities, callback?: CallOptions):
       void|Promise<CommitResponse> {
-    entities =
-        arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
-          x.method = 'insert';
-          return x;
-        });
+    entities = arrify(entities)
+                   .map(DatastoreRequest.prepareEntityObject_)
+                   .map((x: PrepareEntityObjectResponse) => {
+                     x.method = 'insert';
+                     return x;
+                   });
 
     this.save(entities, callback);
   }
@@ -1033,7 +1034,7 @@ class DatastoreRequest {
       mutations,
     };
 
-    function onCommit(err?: Error|null, resp?: {mutationResults: Entity;}) {
+    function onCommit(err?: Error|null, resp?: {mutationResults: [Entity];}) {
       if (err || !resp) {
         callback(err, resp);
         return;
@@ -1087,11 +1088,12 @@ class DatastoreRequest {
    */
   update(entities: Entities, callback?: CallOptions):
       void|Promise<CommitResponse> {
-    entities =
-        arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
-          x.method = 'update';
-          return x;
-        });
+    entities = arrify(entities)
+                   .map(DatastoreRequest.prepareEntityObject_)
+                   .map((x: PrepareEntityObjectResponse) => {
+                     x.method = 'update';
+                     return x;
+                   });
 
     this.save(entities, callback);
   }
@@ -1114,11 +1116,12 @@ class DatastoreRequest {
    */
   upsert(entities: Entities, callback?: CallOptions):
       void|Promise<CommitResponse> {
-    entities =
-        arrify(entities).map(DatastoreRequest.prepareEntityObject_).map(x => {
-          x.method = 'upsert';
-          return x;
-        });
+    entities = arrify(entities)
+                   .map(DatastoreRequest.prepareEntityObject_)
+                   .map((x: PrepareEntityObjectResponse) => {
+                     x.method = 'upsert';
+                     return x;
+                   });
 
     this.save(entities, callback);
   }
