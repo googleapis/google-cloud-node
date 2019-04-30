@@ -1,45 +1,170 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `npm run generate-scaffolding`."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Compute Engine: Node.js Samples
+# [Google Compute Engine: Node.js Samples](https://github.com/googleapis/nodejs-compute)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-[Compute Engine](https://cloud.google.com/compute/docs/) lets you create and run virtual machines on Google infrastructure. Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google&#x27;s infrastructure. There are no upfront investments and you can run thousands of virtual CPUs on a system that has been designed to be fast, and to offer strong consistency of performance.
+
 
 ## Table of Contents
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create Virtual Machine with Apache and Custom Homepage](#create-virtual-machine-with-apache-and-custom-homepage)
-  * [List Virtual Machines](#list-virtual-machines)
+  * [Create VM](#create-vm)
+  * [Delete VM](#delete-vm)
+  * [List VMs](#list-vms)
+  * [Mailjet](#mailjet)
+  * [Quickstart](#quickstart)
+  * [Sendgrid](#sendgrid)
+  * [Startup Script](#startup-script)
+  * [Vms](#vms)
 
 ## Before you begin
 
-Before running the samples, make sure you've followed the steps in the
-[Before you begin section](../README.md#before-you-begin) of the client
-library's README.
+Before running the samples, make sure you've followed the steps outlined in
+[Using the client library](https://github.com/googleapis/nodejs-compute#using-the-client-library).
 
 ## Samples
 
-### Create Virtual Machine with Apache and Custom Homepage
 
 
-View the [README](startup-script/README.md).
+### Create VM
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createVM.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createVM.js,samples/README.md)
+
+__Usage:__
+
+
+`node createVM <vmName>`
+
+
+-----
 
 
 
-### List Virtual Machines
 
-View the [source code][vms_1_code].
+### Delete VM
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteVM.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteVM.js,samples/README.md)
+
+__Usage:__
+
+
+`node deleteVM <vmName>`
+
+
+-----
+
+
+
+
+### List VMs
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listVMs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listVMs.js,samples/README.md)
+
+__Usage:__
+
+
+`node listVMs`
+
+
+-----
+
+
+
+
+### Mailjet
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/mailjet.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/mailjet.js,samples/README.md)
+
+__Usage:__
+
+
+`node mailjet`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node quickstart.js`
+
+
+-----
+
+
+
+
+### Sendgrid
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/sendgrid.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/sendgrid.js,samples/README.md)
+
+__Usage:__
+
+
+`node sendgrid.js`
+
+
+-----
+
+
+
+
+### Startup Script
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/startupScript.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startupScript.js,samples/README.md)
+
+__Usage:__
+
+
+`node startupScript.js`
+
+
+-----
+
+
+
+
+### Vms
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md)
 
-Get a list of virtual machine instances and log the first result.
+__Usage:__
 
-[vms_1_docs]: https://cloud.google.com/compute/docs
-[vms_1_code]: vms.js
+
+`node vms.js`
+
+
+
+
+
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/README.md
+[product-docs]: https://cloud.google.com/compute

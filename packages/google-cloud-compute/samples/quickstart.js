@@ -13,29 +13,35 @@
 
 'use strict';
 
-// [START compute_engine_quickstart]
-async function createVM(
+async function main(
   vmName = 'new_virtual_machine' // VM name of your choice
 ) {
+  // [START compute_engine_quickstart]
   // Imports the Google Cloud client library
   const Compute = require('@google-cloud/compute');
 
   // Creates a client
   const compute = new Compute();
 
-  // Create a new VM using the latest OS image of your choice.
-  const zone = compute.zone('us-central1-c');
+  async function quickstart() {
+    // Create a new VM using the latest OS image of your choice.
+    const zone = compute.zone('us-central1-c');
 
-  // Start the VM create task
-  const [vm, operation] = await zone.createVM(vmName, {os: 'ubuntu'});
-  console.log(vm);
+    // TODO(developer): choose a name for the VM
+    // const vmName = 'vm-name';
 
-  // `operation` lets you check the status of long-running tasks.
-  await operation.promise();
+    // Start the VM create task
+    const [vm, operation] = await zone.createVM(vmName, {os: 'ubuntu'});
+    console.log(vm);
 
-  // Complete!
-  console.log('Virtual machine created!');
+    // `operation` lets you check the status of long-running tasks.
+    await operation.promise();
+
+    // Complete!
+    console.log('Virtual machine created!');
+  }
+  quickstart();
+  // [END compute_engine_quickstart]
 }
-// [END compute_engine_quickstart]
 
-createVM(...process.argv.slice(2)).catch(console.error);
+main(...process.argv.slice(2));
