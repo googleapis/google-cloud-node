@@ -78,7 +78,6 @@
     "@types/uuid": "^3.4.4",
     "body-parser": "^1.18.3",
     "boom": "^7.2.0",
-    "broken-link-checker-local": "^0.2.0",
     "codecov": "^3.0.2",
     "cpy-cli": "^2.0.0",
     "delay": "^4.1.0",
