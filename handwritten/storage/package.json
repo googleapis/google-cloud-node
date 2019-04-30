@@ -69,7 +69,7 @@
     "snakeize": "^0.1.0",
     "stream-events": "^1.0.1",
     "through2": "^3.0.0",
-    "xdg-basedir": "^3.0.0"
+    "xdg-basedir": "^4.0.0"
   },
   "devDependencies": {
     "@google-cloud/pubsub": "^0.28.0",
