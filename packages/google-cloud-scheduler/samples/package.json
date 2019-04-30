@@ -11,7 +11,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha system-test --timeout 10000 --exit"
+    "test": "mocha --timeout 10000 --exit"
   },
   "dependencies": {
     "@google-cloud/scheduler": "^0.3.0",
