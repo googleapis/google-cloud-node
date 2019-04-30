@@ -15,12 +15,18 @@
  */
 
 import * as consoleLogLevel from 'console-log-level';
-import {defaultConfig} from './config';
+import { defaultConfig } from './config';
 
 const pjson = require('../../package.json');
 
-const LEVEL_NAMES: consoleLogLevel.LogLevelNames[] =
-    ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
+const LEVEL_NAMES: consoleLogLevel.LogLevelNames[] = [
+  'fatal',
+  'error',
+  'warn',
+  'info',
+  'debug',
+  'trace',
+];
 
 function logLevelToName(level?: number): consoleLogLevel.LogLevelNames {
   if (level === undefined) {
@@ -34,6 +40,9 @@ function logLevelToName(level?: number): consoleLogLevel.LogLevelNames {
 }
 
 export function createLogger(level?: number) {
-  return consoleLogLevel(
-      {stderr: true, prefix: pjson.name, level: logLevelToName(level)});
+  return consoleLogLevel({
+    stderr: true,
+    prefix: pjson.name,
+    level: logLevelToName(level),
+  });
 }

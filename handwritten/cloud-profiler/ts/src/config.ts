@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {GoogleAuthOptions} from '@google-cloud/common';
+import { GoogleAuthOptions } from '@google-cloud/common';
 
 const parseDuration: (str: string) => number = require('parse-duration');
 
@@ -150,7 +150,7 @@ export interface Config extends GoogleAuthOptions {
 export interface ProfilerConfig extends GoogleAuthOptions {
   projectId?: string;
   logLevel: number;
-  serviceContext: {service: string; version?: string;};
+  serviceContext: { service: string; version?: string };
   instance?: string;
   zone?: string;
   disableTime: boolean;
@@ -181,7 +181,7 @@ export const defaultConfig = {
   heapIntervalBytes: 512 * 1024,
   heapMaxStackDepth: 64,
   ignoreHeapSamplesPath: '@google-cloud/profiler',
-  initialBackoffMillis: 60 * 1000,  // 1 minute
+  initialBackoffMillis: 60 * 1000, // 1 minute
   backoffCapMillis: parseDuration('1h'),
   backoffMultiplier: 1.3,
   baseApiUrl: 'https://cloudprofiler.googleapis.com/v2',
