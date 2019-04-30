@@ -101,11 +101,11 @@ class ApplicationServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      profilePathTemplate: new gax.PathTemplate(
-        'projects/{project}/tenants/{tenant}/profiles/{profile}'
-      ),
       applicationPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
+      ),
+      profilePathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}/profiles/{profile}'
       ),
     };
 
@@ -629,22 +629,6 @@ class ApplicationServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified profile resource name string.
-   *
-   * @param {String} project
-   * @param {String} tenant
-   * @param {String} profile
-   * @returns {String}
-   */
-  profilePath(project, tenant, profile) {
-    return this._pathTemplates.profilePathTemplate.render({
-      project: project,
-      tenant: tenant,
-      profile: profile,
-    });
-  }
-
-  /**
    * Return a fully-qualified application resource name string.
    *
    * @param {String} project
@@ -663,36 +647,19 @@ class ApplicationServiceClient {
   }
 
   /**
-   * Parse the profileName from a profile resource.
+   * Return a fully-qualified profile resource name string.
    *
-   * @param {String} profileName
-   *   A fully-qualified path representing a profile resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @param {String} tenant
+   * @param {String} profile
+   * @returns {String}
    */
-  matchProjectFromProfileName(profileName) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).project;
-  }
-
-  /**
-   * Parse the profileName from a profile resource.
-   *
-   * @param {String} profileName
-   *   A fully-qualified path representing a profile resources.
-   * @returns {String} - A string representing the tenant.
-   */
-  matchTenantFromProfileName(profileName) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
-  }
-
-  /**
-   * Parse the profileName from a profile resource.
-   *
-   * @param {String} profileName
-   *   A fully-qualified path representing a profile resources.
-   * @returns {String} - A string representing the profile.
-   */
-  matchProfileFromProfileName(profileName) {
-    return this._pathTemplates.profilePathTemplate.match(profileName).profile;
+  profilePath(project, tenant, profile) {
+    return this._pathTemplates.profilePathTemplate.render({
+      project: project,
+      tenant: tenant,
+      profile: profile,
+    });
   }
 
   /**
@@ -741,6 +708,39 @@ class ApplicationServiceClient {
   matchApplicationFromApplicationName(applicationName) {
     return this._pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
+  }
+
+  /**
+   * Parse the profileName from a profile resource.
+   *
+   * @param {String} profileName
+   *   A fully-qualified path representing a profile resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProfileName(profileName) {
+    return this._pathTemplates.profilePathTemplate.match(profileName).project;
+  }
+
+  /**
+   * Parse the profileName from a profile resource.
+   *
+   * @param {String} profileName
+   *   A fully-qualified path representing a profile resources.
+   * @returns {String} - A string representing the tenant.
+   */
+  matchTenantFromProfileName(profileName) {
+    return this._pathTemplates.profilePathTemplate.match(profileName).tenant;
+  }
+
+  /**
+   * Parse the profileName from a profile resource.
+   *
+   * @param {String} profileName
+   *   A fully-qualified path representing a profile resources.
+   * @returns {String} - A string representing the profile.
+   */
+  matchProfileFromProfileName(profileName) {
+    return this._pathTemplates.profilePathTemplate.match(profileName).profile;
   }
 }
 

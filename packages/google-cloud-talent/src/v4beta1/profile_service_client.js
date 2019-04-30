@@ -101,11 +101,11 @@ class ProfileServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      tenantPathTemplate: new gax.PathTemplate(
-        'projects/{project}/tenants/{tenant}'
-      ),
       profilePathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}/profiles/{profile}'
+      ),
+      tenantPathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}'
       ),
     };
 
@@ -1155,20 +1155,6 @@ class ProfileServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified tenant resource name string.
-   *
-   * @param {String} project
-   * @param {String} tenant
-   * @returns {String}
-   */
-  tenantPath(project, tenant) {
-    return this._pathTemplates.tenantPathTemplate.render({
-      project: project,
-      tenant: tenant,
-    });
-  }
-
-  /**
    * Return a fully-qualified profile resource name string.
    *
    * @param {String} project
@@ -1185,25 +1171,17 @@ class ProfileServiceClient {
   }
 
   /**
-   * Parse the tenantName from a tenant resource.
+   * Return a fully-qualified tenant resource name string.
    *
-   * @param {String} tenantName
-   *   A fully-qualified path representing a tenant resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @param {String} tenant
+   * @returns {String}
    */
-  matchProjectFromTenantName(tenantName) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
-  }
-
-  /**
-   * Parse the tenantName from a tenant resource.
-   *
-   * @param {String} tenantName
-   *   A fully-qualified path representing a tenant resources.
-   * @returns {String} - A string representing the tenant.
-   */
-  matchTenantFromTenantName(tenantName) {
-    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
+  tenantPath(project, tenant) {
+    return this._pathTemplates.tenantPathTemplate.render({
+      project: project,
+      tenant: tenant,
+    });
   }
 
   /**
@@ -1237,6 +1215,28 @@ class ProfileServiceClient {
    */
   matchProfileFromProfileName(profileName) {
     return this._pathTemplates.profilePathTemplate.match(profileName).profile;
+  }
+
+  /**
+   * Parse the tenantName from a tenant resource.
+   *
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).project;
+  }
+
+  /**
+   * Parse the tenantName from a tenant resource.
+   *
+   * @param {String} tenantName
+   *   A fully-qualified path representing a tenant resources.
+   * @returns {String} - A string representing the tenant.
+   */
+  matchTenantFromTenantName(tenantName) {
+    return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
   }
 }
 

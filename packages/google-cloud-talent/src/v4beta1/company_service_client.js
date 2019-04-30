@@ -100,11 +100,11 @@ class CompanyServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      companyPathTemplate: new gax.PathTemplate(
+        'projects/{project}/tenants/{tenant}/companies/{company}'
+      ),
       tenantPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}'
-      ),
-      companyOldPathTemplate: new gax.PathTemplate(
-        'projects/{project}/companies/{company}'
       ),
     };
 
@@ -312,7 +312,7 @@ class CompanyServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.companyOldPath('[PROJECT]', '[COMPANY]');
+   * const formattedName = client.companyPath('[PROJECT]', '[TENANT]', '[COMPANY]');
    * client.getCompany({name: formattedName})
    *   .then(responses => {
    *     const response = responses[0];
@@ -440,7 +440,7 @@ class CompanyServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const formattedName = client.companyOldPath('[PROJECT]', '[COMPANY]');
+   * const formattedName = client.companyPath('[PROJECT]', '[TENANT]', '[COMPANY]');
    * client.deleteCompany({name: formattedName}).catch(err => {
    *   console.error(err);
    * });
@@ -657,6 +657,22 @@ class CompanyServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified company resource name string.
+   *
+   * @param {String} project
+   * @param {String} tenant
+   * @param {String} company
+   * @returns {String}
+   */
+  companyPath(project, tenant, company) {
+    return this._pathTemplates.companyPathTemplate.render({
+      project: project,
+      tenant: tenant,
+      company: company,
+    });
+  }
+
+  /**
    * Return a fully-qualified tenant resource name string.
    *
    * @param {String} project
@@ -671,17 +687,36 @@ class CompanyServiceClient {
   }
 
   /**
-   * Return a fully-qualified company_old resource name string.
+   * Parse the companyName from a company resource.
    *
-   * @param {String} project
-   * @param {String} company
-   * @returns {String}
+   * @param {String} companyName
+   *   A fully-qualified path representing a company resources.
+   * @returns {String} - A string representing the project.
    */
-  companyOldPath(project, company) {
-    return this._pathTemplates.companyOldPathTemplate.render({
-      project: project,
-      company: company,
-    });
+  matchProjectFromCompanyName(companyName) {
+    return this._pathTemplates.companyPathTemplate.match(companyName).project;
+  }
+
+  /**
+   * Parse the companyName from a company resource.
+   *
+   * @param {String} companyName
+   *   A fully-qualified path representing a company resources.
+   * @returns {String} - A string representing the tenant.
+   */
+  matchTenantFromCompanyName(companyName) {
+    return this._pathTemplates.companyPathTemplate.match(companyName).tenant;
+  }
+
+  /**
+   * Parse the companyName from a company resource.
+   *
+   * @param {String} companyName
+   *   A fully-qualified path representing a company resources.
+   * @returns {String} - A string representing the company.
+   */
+  matchCompanyFromCompanyName(companyName) {
+    return this._pathTemplates.companyPathTemplate.match(companyName).company;
   }
 
   /**
@@ -704,30 +739,6 @@ class CompanyServiceClient {
    */
   matchTenantFromTenantName(tenantName) {
     return this._pathTemplates.tenantPathTemplate.match(tenantName).tenant;
-  }
-
-  /**
-   * Parse the companyOldName from a company_old resource.
-   *
-   * @param {String} companyOldName
-   *   A fully-qualified path representing a company_old resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromCompanyOldName(companyOldName) {
-    return this._pathTemplates.companyOldPathTemplate.match(companyOldName)
-      .project;
-  }
-
-  /**
-   * Parse the companyOldName from a company_old resource.
-   *
-   * @param {String} companyOldName
-   *   A fully-qualified path representing a company_old resources.
-   * @returns {String} - A string representing the company.
-   */
-  matchCompanyFromCompanyOldName(companyOldName) {
-    return this._pathTemplates.companyOldPathTemplate.match(companyOldName)
-      .company;
   }
 }
 
