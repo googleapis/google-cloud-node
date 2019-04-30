@@ -1,0 +1,13 @@
+{
+  "name": "security-center",
+  "name_pretty": "Google Cloud Security Command Center",
+  "product_documentation": "https://cloud.google.com/security-command-center",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/security-center/latest/",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559748",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-security-center",
+  "distribution_name": "@google-cloud/security-center",
+  "api_id": "securitycenter.googleapis.com",
+  "requires_billing": true
+}

@@ -13,30 +13,33 @@
  * limitations under the License.
  */
 
+// sample-metadata:
+//  usage: node quickstart.js [organization]
+
 'use strict';
 
-// [START securitycenter_quickstart]
-async function quickstart(
+async function main(
   organization = 'YOUR_ORGANIZATION' // Your GCP organization
 ) {
+  // [START securitycenter_quickstart]
   const sc = require('@google-cloud/security-center');
 
   // Create a client
   const client = new sc.SecurityCenterClient();
 
-  const formattedParent = client.organizationPath(organization);
-  const reqSource = {};
-  const request = {
-    parent: formattedParent,
-    source: reqSource,
-  };
-
-  const [source] = await client.createSource(request);
-  // The newly created source.
-  console.log('Source created.');
-  console.log(source);
+  async function quickstart() {
+    // TODO(developer): choose the organization to use
+    // const organization = 'your-organization';
+    const [source] = await client.createSource({
+      parent: client.organizationPath(organization),
+      source: {},
+    });
+    // The newly created source.
+    console.log('Source created.');
+    console.log(source);
+  }
+  quickstart();
+  // [END securitycenter_quickstart]
 }
-// [END securitycenter_quickstart]
 
-const args = process.argv.slice(2);
-quickstart(...args).catch(console.error);
+main(...process.argv.slice(2));
