@@ -69,7 +69,7 @@
     "@types/lodash.random": "^3.2.3",
     "@types/lodash.without": "^4.4.3",
     "@types/mocha": "^5.2.0",
-    "@types/nock": "^9.1.3",
+    "@types/nock": "^10.0.0",
     "@types/node": "^10.1.1",
     "@types/once": "^1.4.0",
     "@types/proxyquire": "^1.3.28",
