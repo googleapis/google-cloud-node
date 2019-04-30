@@ -101,20 +101,20 @@ class SecurityCenterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      organizationPathTemplate: new gax.PathTemplate(
-        'organizations/{organization}'
-      ),
-      sourcePathTemplate: new gax.PathTemplate(
-        'organizations/{organization}/sources/{source}'
-      ),
-      organizationSettingsPathTemplate: new gax.PathTemplate(
-        'organizations/{organization}/organizationSettings'
+      assetSecurityMarksPathTemplate: new gax.PathTemplate(
+        'organizations/{organization}/assets/{asset}/securityMarks'
       ),
       findingPathTemplate: new gax.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
-      assetSecurityMarksPathTemplate: new gax.PathTemplate(
-        'organizations/{organization}/assets/{asset}/securityMarks'
+      organizationPathTemplate: new gax.PathTemplate(
+        'organizations/{organization}'
+      ),
+      organizationSettingsPathTemplate: new gax.PathTemplate(
+        'organizations/{organization}/organizationSettings'
+      ),
+      sourcePathTemplate: new gax.PathTemplate(
+        'organizations/{organization}/sources/{source}'
       ),
     };
 
@@ -2472,40 +2472,16 @@ class SecurityCenterClient {
   // --------------------
 
   /**
-   * Return a fully-qualified organization resource name string.
+   * Return a fully-qualified asset_security_marks resource name string.
    *
    * @param {String} organization
+   * @param {String} asset
    * @returns {String}
    */
-  organizationPath(organization) {
-    return this._pathTemplates.organizationPathTemplate.render({
+  assetSecurityMarksPath(organization, asset) {
+    return this._pathTemplates.assetSecurityMarksPathTemplate.render({
       organization: organization,
-    });
-  }
-
-  /**
-   * Return a fully-qualified source resource name string.
-   *
-   * @param {String} organization
-   * @param {String} source
-   * @returns {String}
-   */
-  sourcePath(organization, source) {
-    return this._pathTemplates.sourcePathTemplate.render({
-      organization: organization,
-      source: source,
-    });
-  }
-
-  /**
-   * Return a fully-qualified organization_settings resource name string.
-   *
-   * @param {String} organization
-   * @returns {String}
-   */
-  organizationSettingsPath(organization) {
-    return this._pathTemplates.organizationSettingsPathTemplate.render({
-      organization: organization,
+      asset: asset,
     });
   }
 
@@ -2526,65 +2502,67 @@ class SecurityCenterClient {
   }
 
   /**
-   * Return a fully-qualified asset_security_marks resource name string.
+   * Return a fully-qualified organization resource name string.
    *
    * @param {String} organization
-   * @param {String} asset
    * @returns {String}
    */
-  assetSecurityMarksPath(organization, asset) {
-    return this._pathTemplates.assetSecurityMarksPathTemplate.render({
+  organizationPath(organization) {
+    return this._pathTemplates.organizationPathTemplate.render({
       organization: organization,
-      asset: asset,
     });
   }
 
   /**
-   * Parse the organizationName from a organization resource.
+   * Return a fully-qualified organization_settings resource name string.
    *
-   * @param {String} organizationName
-   *   A fully-qualified path representing a organization resources.
-   * @returns {String} - A string representing the organization.
+   * @param {String} organization
+   * @returns {String}
    */
-  matchOrganizationFromOrganizationName(organizationName) {
-    return this._pathTemplates.organizationPathTemplate.match(organizationName)
-      .organization;
+  organizationSettingsPath(organization) {
+    return this._pathTemplates.organizationSettingsPathTemplate.render({
+      organization: organization,
+    });
   }
 
   /**
-   * Parse the sourceName from a source resource.
+   * Return a fully-qualified source resource name string.
    *
-   * @param {String} sourceName
-   *   A fully-qualified path representing a source resources.
-   * @returns {String} - A string representing the organization.
+   * @param {String} organization
+   * @param {String} source
+   * @returns {String}
    */
-  matchOrganizationFromSourceName(sourceName) {
-    return this._pathTemplates.sourcePathTemplate.match(sourceName)
-      .organization;
+  sourcePath(organization, source) {
+    return this._pathTemplates.sourcePathTemplate.render({
+      organization: organization,
+      source: source,
+    });
   }
 
   /**
-   * Parse the sourceName from a source resource.
+   * Parse the assetSecurityMarksName from a asset_security_marks resource.
    *
-   * @param {String} sourceName
-   *   A fully-qualified path representing a source resources.
-   * @returns {String} - A string representing the source.
-   */
-  matchSourceFromSourceName(sourceName) {
-    return this._pathTemplates.sourcePathTemplate.match(sourceName).source;
-  }
-
-  /**
-   * Parse the organizationSettingsName from a organization_settings resource.
-   *
-   * @param {String} organizationSettingsName
-   *   A fully-qualified path representing a organization_settings resources.
+   * @param {String} assetSecurityMarksName
+   *   A fully-qualified path representing a asset_security_marks resources.
    * @returns {String} - A string representing the organization.
    */
-  matchOrganizationFromOrganizationSettingsName(organizationSettingsName) {
-    return this._pathTemplates.organizationSettingsPathTemplate.match(
-      organizationSettingsName
+  matchOrganizationFromAssetSecurityMarksName(assetSecurityMarksName) {
+    return this._pathTemplates.assetSecurityMarksPathTemplate.match(
+      assetSecurityMarksName
     ).organization;
+  }
+
+  /**
+   * Parse the assetSecurityMarksName from a asset_security_marks resource.
+   *
+   * @param {String} assetSecurityMarksName
+   *   A fully-qualified path representing a asset_security_marks resources.
+   * @returns {String} - A string representing the asset.
+   */
+  matchAssetFromAssetSecurityMarksName(assetSecurityMarksName) {
+    return this._pathTemplates.assetSecurityMarksPathTemplate.match(
+      assetSecurityMarksName
+    ).asset;
   }
 
   /**
@@ -2622,29 +2600,51 @@ class SecurityCenterClient {
   }
 
   /**
-   * Parse the assetSecurityMarksName from a asset_security_marks resource.
+   * Parse the organizationName from a organization resource.
    *
-   * @param {String} assetSecurityMarksName
-   *   A fully-qualified path representing a asset_security_marks resources.
+   * @param {String} organizationName
+   *   A fully-qualified path representing a organization resources.
    * @returns {String} - A string representing the organization.
    */
-  matchOrganizationFromAssetSecurityMarksName(assetSecurityMarksName) {
-    return this._pathTemplates.assetSecurityMarksPathTemplate.match(
-      assetSecurityMarksName
+  matchOrganizationFromOrganizationName(organizationName) {
+    return this._pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
+  }
+
+  /**
+   * Parse the organizationSettingsName from a organization_settings resource.
+   *
+   * @param {String} organizationSettingsName
+   *   A fully-qualified path representing a organization_settings resources.
+   * @returns {String} - A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSettingsName(organizationSettingsName) {
+    return this._pathTemplates.organizationSettingsPathTemplate.match(
+      organizationSettingsName
     ).organization;
   }
 
   /**
-   * Parse the assetSecurityMarksName from a asset_security_marks resource.
+   * Parse the sourceName from a source resource.
    *
-   * @param {String} assetSecurityMarksName
-   *   A fully-qualified path representing a asset_security_marks resources.
-   * @returns {String} - A string representing the asset.
+   * @param {String} sourceName
+   *   A fully-qualified path representing a source resources.
+   * @returns {String} - A string representing the organization.
    */
-  matchAssetFromAssetSecurityMarksName(assetSecurityMarksName) {
-    return this._pathTemplates.assetSecurityMarksPathTemplate.match(
-      assetSecurityMarksName
-    ).asset;
+  matchOrganizationFromSourceName(sourceName) {
+    return this._pathTemplates.sourcePathTemplate.match(sourceName)
+      .organization;
+  }
+
+  /**
+   * Parse the sourceName from a source resource.
+   *
+   * @param {String} sourceName
+   *   A fully-qualified path representing a source resources.
+   * @returns {String} - A string representing the source.
+   */
+  matchSourceFromSourceName(sourceName) {
+    return this._pathTemplates.sourcePathTemplate.match(sourceName).source;
   }
 }
 
