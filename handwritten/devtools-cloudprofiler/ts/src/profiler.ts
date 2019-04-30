@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-import {Service, ServiceConfig, ServiceObject} from '@google-cloud/common';
+import { Service, ServiceConfig, ServiceObject } from '@google-cloud/common';
 import * as http from 'http';
 import * as pify from 'pify';
-import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
+import {
+  heap as heapProfiler,
+  SourceMapper,
+  time as timeProfiler,
+} from 'pprof';
 import * as msToStr from 'pretty-ms';
-import {teenyRequest as request} from 'teeny-request';
+import { teenyRequest as request } from 'teeny-request';
 import * as zlib from 'zlib';
 
-import {perftools} from '../../proto/profile';
+import { perftools } from '../../proto/profile';
 
-import {ProfilerConfig} from './config';
-import {createLogger} from './logger';
+import { ProfilerConfig } from './config';
+import { createLogger } from './logger';
 
 const parseDuration: (str: string) => number = require('parse-duration');
 const pjson = require('../../package.json');
@@ -34,7 +38,7 @@ const gzip = pify(zlib.gzip);
 
 enum ProfileTypes {
   Wall = 'WALL',
-  Heap = 'HEAP'
+  Heap = 'HEAP',
 }
 
 /**
@@ -54,7 +58,7 @@ function isErrorResponseStatusCode(code: number) {
 export interface Deployment {
   projectId?: string;
   target?: string;
-  labels?: {zone?: string, version?: string, language: string};
+  labels?: { zone?: string; version?: string; language: string };
 }
 
 /**
@@ -70,7 +74,7 @@ export interface RequestProfile {
   duration?: string;
   profileBytes?: string;
   deployment?: Deployment;
-  labels?: {instance?: string};
+  labels?: { instance?: string };
 }
 
 /**
@@ -79,7 +83,9 @@ export interface RequestProfile {
  * message.
  */
 function getResponseErrorMessage(
-    response: http.IncomingMessage, err: Error|null): string|undefined {
+  response: http.IncomingMessage,
+  err: Error | null
+): string | undefined {
   if (err && err.message) {
     return err.message;
   }
@@ -95,13 +101,16 @@ function getResponseErrorMessage(
  * @return number indicated by backoff if the response indicates a backoff and
  * that backoff is greater than 0. Otherwise returns undefined.
  */
-function getServerResponseBackoff(body: object): number|undefined {
+function getServerResponseBackoff(body: object): number | undefined {
   // tslint:disable-next-line: no-any
   const b = body as any;
   if (b.error && b.error.details && Array.isArray(b.error.details)) {
     for (const item of b.error.details) {
-      if (typeof item === 'object' && item.retryDelay &&
-          typeof item.retryDelay === 'string') {
+      if (
+        typeof item === 'object' &&
+        item.retryDelay &&
+        typeof item.retryDelay === 'string'
+      ) {
         const backoffMillis = parseDuration(item.retryDelay);
         if (backoffMillis > 0) {
           return backoffMillis;
@@ -118,11 +127,14 @@ function getServerResponseBackoff(body: object): number|undefined {
  *
  * Public for testing.
  */
-export function parseBackoffDuration(backoffMessage: string): number|undefined {
-  const backoffMessageRegex =
-      /action throttled, backoff for ((?:([0-9]+)h)?(?:([0-9]+)m)?([0-9.]+)s)$/;
-  const [, duration] =
-      backoffMessageRegex.exec(backoffMessage) || [undefined, undefined];
+export function parseBackoffDuration(
+  backoffMessage: string
+): number | undefined {
+  const backoffMessageRegex = /action throttled, backoff for ((?:([0-9]+)h)?(?:([0-9]+)m)?([0-9.]+)s)$/;
+  const [, duration] = backoffMessageRegex.exec(backoffMessage) || [
+    undefined,
+    undefined,
+  ];
   if (duration) {
     const backoffMillis = parseDuration(duration);
     if (backoffMillis > 0) {
@@ -137,13 +149,15 @@ export function parseBackoffDuration(backoffMessage: string): number|undefined {
  */
 // tslint:disable-next-line: no-any
 function isDeployment(deployment: any): deployment is Deployment {
-  return (deployment.projectId === undefined ||
-          typeof deployment.projectId === 'string') &&
-      (deployment.target === undefined ||
-       typeof deployment.target === 'string') &&
-      (deployment.labels !== undefined &&
-       deployment.labels.language !== undefined &&
-       typeof deployment.labels.language === 'string');
+  return (
+    (deployment.projectId === undefined ||
+      typeof deployment.projectId === 'string') &&
+    (deployment.target === undefined ||
+      typeof deployment.target === 'string') &&
+    (deployment.labels !== undefined &&
+      deployment.labels.language !== undefined &&
+      typeof deployment.labels.language === 'string')
+  );
 }
 
 /**
@@ -151,12 +165,16 @@ function isDeployment(deployment: any): deployment is Deployment {
  */
 // tslint:disable-next-line: no-any
 function isRequestProfile(prof: any): prof is RequestProfile {
-  return prof && typeof prof.name === 'string' &&
-      typeof prof.profileType === 'string' &&
-      (prof.duration === undefined || typeof prof.duration === 'string') &&
-      (prof.labels === undefined || prof.labels.instance === undefined ||
-       typeof prof.labels.instance === 'string') &&
-      (prof.deployment === undefined || isDeployment(prof.deployment));
+  return (
+    prof &&
+    typeof prof.name === 'string' &&
+    typeof prof.profileType === 'string' &&
+    (prof.duration === undefined || typeof prof.duration === 'string') &&
+    (prof.labels === undefined ||
+      prof.labels.instance === undefined ||
+      typeof prof.labels.instance === 'string') &&
+    (prof.deployment === undefined || isDeployment(prof.deployment))
+  );
 }
 
 /**
@@ -178,7 +196,7 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
  * Error constructed from HTTP server response which indicates backoff.
  */
 class BackoffResponseError extends Error {
-  constructor(message: string|undefined, readonly backoffMillis: number) {
+  constructor(message: string | undefined, readonly backoffMillis: number) {
     super(message);
   }
 }
@@ -201,15 +219,20 @@ export class Retryer {
   private random: () => number;
 
   constructor(
-      readonly initialBackoffMillis: number, readonly backoffCapMillis: number,
-      readonly backoffMultiplier: number, random = Math.random) {
+    readonly initialBackoffMillis: number,
+    readonly backoffCapMillis: number,
+    readonly backoffMultiplier: number,
+    random = Math.random
+  ) {
     this.nextBackoffMillis = this.initialBackoffMillis;
     this.random = random;
   }
   getBackoff(): number {
     const curBackoff = this.random() * this.nextBackoffMillis;
     this.nextBackoffMillis = Math.min(
-        this.backoffMultiplier * this.nextBackoffMillis, this.backoffCapMillis);
+      this.backoffMultiplier * this.nextBackoffMillis,
+      this.backoffCapMillis
+    );
     return curBackoff;
   }
   reset() {
@@ -224,8 +247,10 @@ export class Retryer {
  * was not valid.
  */
 function responseToProfileOrError(
-    err: Error|null, body?: object,
-    response?: http.IncomingMessage): RequestProfile {
+  err: Error | null,
+  body?: object,
+  response?: http.IncomingMessage
+): RequestProfile {
   // response.statusCode is guaranteed to exist on client requests.
   if (response && isErrorResponseStatusCode(response.statusCode!)) {
     const message = getResponseErrorMessage(response, err);
@@ -255,17 +280,17 @@ function responseToProfileOrError(
  */
 export class Profiler extends ServiceObject {
   private logger: ReturnType<typeof createLogger>;
-  private profileLabels: {instance?: string};
+  private profileLabels: { instance?: string };
   private deployment: Deployment;
   private profileTypes: string[];
   private retryer: Retryer;
-  private sourceMapper: SourceMapper|undefined;
+  private sourceMapper: SourceMapper | undefined;
 
   // Public for testing.
   config: ProfilerConfig;
 
   constructor(config: ProfilerConfig) {
-    config = config || {} as ProfilerConfig;
+    config = config || ({} as ProfilerConfig);
     const serviceConfig: ServiceConfig = {
       baseUrl: config.baseApiUrl,
       scopes: [SCOPE],
@@ -277,14 +302,15 @@ export class Profiler extends ServiceObject {
       parent: new Service(serviceConfig, config),
       baseUrl: '/',
       // tslint:disable-next-line: no-any
-      requestModule: request as any
+      requestModule: request as any,
     });
     this.config = config;
 
     this.logger = createLogger(this.config.logLevel);
 
-    const labels: {zone?: string,
-                   version?: string, language: string} = {language: 'nodejs'};
+    const labels: { zone?: string; version?: string; language: string } = {
+      language: 'nodejs',
+    };
     if (this.config.zone) {
       labels.zone = this.config.zone;
     }
@@ -294,7 +320,7 @@ export class Profiler extends ServiceObject {
     this.deployment = {
       projectId: this.config.projectId,
       target: this.config.serviceContext.service,
-      labels
+      labels,
     };
 
     this.profileLabels = {};
@@ -310,8 +336,10 @@ export class Profiler extends ServiceObject {
       this.profileTypes.push(ProfileTypes.Heap);
     }
     this.retryer = new Retryer(
-        this.config.initialBackoffMillis, this.config.backoffCapMillis,
-        this.config.backoffMultiplier);
+      this.config.initialBackoffMillis,
+      this.config.backoffCapMillis,
+      this.config.backoffMultiplier
+    );
   }
 
   /**
@@ -327,12 +355,13 @@ export class Profiler extends ServiceObject {
   async start(): Promise<void> {
     if (!this.config.disableSourceMaps) {
       try {
-        this.sourceMapper =
-            await SourceMapper.create(this.config.sourceMapSearchPath);
+        this.sourceMapper = await SourceMapper.create(
+          this.config.sourceMapSearchPath
+        );
       } catch (err) {
         this.logger.error(
-            `Failed to initialize SourceMapper. Source map support has been disabled: ${
-                err}`);
+          `Failed to initialize SourceMapper. Source map support has been disabled: ${err}`
+        );
         this.config.disableSourceMaps = true;
       }
     }
@@ -361,13 +390,17 @@ export class Profiler extends ServiceObject {
       prof = await this.createProfile();
     } catch (err) {
       if (isBackoffResponseError(err)) {
-        this.logger.debug(`Must wait ${
-            msToStr(err.backoffMillis)} to create profile: ${err}`);
+        this.logger.debug(
+          `Must wait ${msToStr(err.backoffMillis)} to create profile: ${err}`
+        );
         return Math.min(err.backoffMillis, this.config.serverBackoffCapMillis);
       }
       const backoff = this.retryer.getBackoff();
-      this.logger.warn(`Failed to create profile, waiting ${
-          msToStr(backoff)} to try again: ${err}`);
+      this.logger.warn(
+        `Failed to create profile, waiting ${msToStr(
+          backoff
+        )} to try again: ${err}`
+      );
       return backoff;
     }
     this.retryer.reset();
@@ -413,17 +446,19 @@ export class Profiler extends ServiceObject {
     this.logger.debug(`Attempting to create profile.`);
     return new Promise<RequestProfile>((resolve, reject) => {
       this.request(
-          options,
-          (err: Error|null, body?: object, response?: http.IncomingMessage) => {
-            try {
-              const prof = responseToProfileOrError(err, body, response);
-              this.logger.debug(
-                  `Successfully created profile ${prof.profileType}.`);
-              resolve(prof);
-            } catch (err) {
-              reject(err);
-            }
-          });
+        options,
+        (err: Error | null, body?: object, response?: http.IncomingMessage) => {
+          try {
+            const prof = responseToProfileOrError(err, body, response);
+            this.logger.debug(
+              `Successfully created profile ${prof.profileType}.`
+            );
+            resolve(prof);
+          } catch (err) {
+            reject(err);
+          }
+        }
+      );
     });
   }
 
@@ -453,7 +488,7 @@ export class Profiler extends ServiceObject {
     try {
       const [, res] = await this.request(options);
       if (isErrorResponseStatusCode(res.statusCode)) {
-        let message: number|string = res.statusCode;
+        let message: number | string = res.statusCode;
         if (res.statusMessage) {
           message = res.statusMessage;
         }
@@ -477,7 +512,7 @@ export class Profiler extends ServiceObject {
   async profile(prof: RequestProfile): Promise<RequestProfile> {
     switch (prof.profileType) {
       case ProfileTypes.Wall:
-        return await this.writeTimeProfile(prof);
+        return this.writeTimeProfile(prof);
       case ProfileTypes.Heap:
         return this.writeHeapProfile(prof);
       default:
@@ -501,13 +536,14 @@ export class Profiler extends ServiceObject {
     const durationMillis = parseDuration(prof.duration);
     if (!durationMillis) {
       throw Error(
-          `Cannot collect time profile, duration "${prof.duration}" cannot` +
-          ` be parsed.`);
+        `Cannot collect time profile, duration "${prof.duration}" cannot` +
+          ` be parsed.`
+      );
     }
     const options = {
       durationMillis,
       intervalMicros: this.config.timeIntervalMicros,
-      sourceMapper: this.sourceMapper
+      sourceMapper: this.sourceMapper,
     };
 
     const p = await timeProfiler.profile(options);
@@ -526,7 +562,9 @@ export class Profiler extends ServiceObject {
       throw Error('Cannot collect heap profile, heap profiler not enabled.');
     }
     const p = heapProfiler.profile(
-        this.config.ignoreHeapSamplesPath, this.sourceMapper);
+      this.config.ignoreHeapSamplesPath,
+      this.sourceMapper
+    );
     prof.profileBytes = await profileBytes(p);
     return prof;
   }

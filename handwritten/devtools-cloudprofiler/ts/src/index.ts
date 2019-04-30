@@ -18,13 +18,13 @@ import delay from 'delay';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
-import {heap as heapProfiler} from 'pprof';
+import { heap as heapProfiler } from 'pprof';
 import * as semver from 'semver';
-import {SemVer} from 'semver';
+import { SemVer } from 'semver';
 
-import {Config, defaultConfig, ProfilerConfig} from './config';
-import {createLogger} from './logger';
-import {Profiler} from './profiler';
+import { Config, defaultConfig, ProfilerConfig } from './config';
+import { createLogger } from './logger';
+import { Profiler } from './profiler';
 
 const pjson = require('../../package.json');
 const serviceRegex = /^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/;
@@ -38,10 +38,13 @@ async function getMetadataInstanceField(field: string): Promise<string> {
   return res.data;
 }
 
-function hasService(config: Config):
-    config is {serviceContext: {service: string}} {
-  return config.serviceContext !== undefined &&
-      typeof config.serviceContext.service === 'string';
+function hasService(
+  config: Config
+): config is { serviceContext: { service: string } } {
+  return (
+    config.serviceContext !== undefined &&
+    typeof config.serviceContext.service === 'string'
+  );
 }
 
 /**
@@ -55,7 +58,7 @@ function initConfigLocal(config: Config): ProfilerConfig {
     serviceContext: {
       service: process.env.GAE_SERVICE || process.env.K_SERVICE,
       version: process.env.GAE_VERSION || process.env.K_REVISION,
-    }
+    },
   };
 
   if (process.env.GCLOUD_PROFILER_LOGLEVEL !== undefined) {
@@ -82,12 +85,15 @@ function initConfigLocal(config: Config): ProfilerConfig {
   }
 
   const mergedUserConfigs = extend(true, {}, envSetConfig, envConfig, config);
-  if (Array.isArray(mergedUserConfigs.sourceMapSearchPath) &&
-      mergedUserConfigs.sourceMapSearchPath.length === 0 &&
-      !mergedUserConfigs.disableSourceMaps) {
+  if (
+    Array.isArray(mergedUserConfigs.sourceMapSearchPath) &&
+    mergedUserConfigs.sourceMapSearchPath.length === 0 &&
+    !mergedUserConfigs.disableSourceMaps
+  ) {
     throw new Error(
-        'serviceMapSearchPath is an empty array. Use disableSourceMaps to' +
-        ' disable source map support instead.');
+      'serviceMapSearchPath is an empty array. Use disableSourceMaps to' +
+        ' disable source map support instead.'
+    );
   }
 
   const mergedConfig = extend(true, {}, defaultConfig, mergedUserConfigs);
@@ -97,10 +103,11 @@ function initConfigLocal(config: Config): ProfilerConfig {
   }
 
   if (!serviceRegex.test(mergedConfig.serviceContext.service)) {
-    throw new Error(`Service ${
-        mergedConfig.serviceContext
-            .service} does not match regular expression "${
-        serviceRegex.toString()}"`);
+    throw new Error(
+      `Service ${
+        mergedConfig.serviceContext.service
+      } does not match regular expression "${serviceRegex.toString()}"`
+    );
   }
 
   return mergedConfig;
@@ -110,19 +117,16 @@ function initConfigLocal(config: Config): ProfilerConfig {
  * Sets unset values in the configuration which can be retrieved from GCP
  * metadata.
  */
-async function initConfigMetadata(config: ProfilerConfig):
-    Promise<ProfilerConfig> {
+async function initConfigMetadata(
+  config: ProfilerConfig
+): Promise<ProfilerConfig> {
   if (!config.zone || !config.instance) {
-    const [instance, zone] =
-        await Promise
-            .all([
-              getMetadataInstanceField('name'), getMetadataInstanceField('zone')
-            ])
-            .catch(
-                (err: Error) => {
-                    // ignore errors, which will occur when not on GCE.
-                }) ||
-        [undefined, undefined];
+    const [instance, zone] = (await Promise.all([
+      getMetadataInstanceField('name'),
+      getMetadataInstanceField('zone'),
+    ]).catch((err: Error) => {
+      // ignore errors, which will occur when not on GCE.
+    })) || [undefined, undefined];
     if (!config.zone && zone) {
       config.zone = zone.substring(zone.lastIndexOf('/') + 1);
     }
@@ -133,14 +137,13 @@ async function initConfigMetadata(config: ProfilerConfig):
   return config;
 }
 
-
 /**
  * Returns true if the version passed in satifised version requirements
  * specified in the profiler's package.json.
  *
  * Exported for testing.
  */
-export function nodeVersionOkay(version: string|SemVer): boolean {
+export function nodeVersionOkay(version: string | SemVer): boolean {
   // Coerce version if possible, to remove any pre-release, alpha, beta, etc
   // tags.
   version = semver.coerce(version) || version;
@@ -155,10 +158,11 @@ export function nodeVersionOkay(version: string|SemVer): boolean {
 export async function createProfiler(config: Config): Promise<Profiler> {
   if (!nodeVersionOkay(process.version)) {
     throw new Error(
-        `Could not start profiler: node version ${process.version}` +
+      `Could not start profiler: node version ${process.version}` +
         ` does not satisfies "${pjson.engines.node}"` +
         '\nSee https://github.com/GoogleCloudPlatform/cloud-profiler-nodejs#prerequisites' +
-        ' for details.');
+        ' for details.'
+    );
   }
 
   let profilerConfig: ProfilerConfig = initConfigLocal(config);
@@ -168,7 +172,9 @@ export async function createProfiler(config: Config): Promise<Profiler> {
   // all memory allocations made after start() is called can be captured.
   if (!profilerConfig.disableHeap) {
     heapProfiler.start(
-        profilerConfig.heapIntervalBytes, profilerConfig.heapMaxStackDepth);
+      profilerConfig.heapIntervalBytes,
+      profilerConfig.heapMaxStackDepth
+    );
   }
   profilerConfig = await initConfigMetadata(profilerConfig);
   return new Profiler(profilerConfig);
@@ -227,24 +233,24 @@ export async function startLocal(config: Config = {}): Promise<void> {
 
   setInterval(() => {
     const curTime = Date.now();
-    const {rss, heapTotal, heapUsed} = process.memoryUsage();
+    const { rss, heapTotal, heapUsed } = process.memoryUsage();
     logger.debug(
-        new Date().toISOString(),
-        'rss',
-        (rss / (1024 * 1024)).toFixed(3),
-        'MiB,',
-        'heap total',
-        (heapTotal / (1024 * 1024)).toFixed(3),
-        'MiB,',
-        'heap used',
-        (heapUsed / (1024 * 1024)).toFixed(3),
-        'MiB,',
-        'heap profile collection rate',
-        (heapProfileCount * 1000 / (curTime - prevLogTime)).toFixed(3),
-        'profiles/s,',
-        'time profile collection rate',
-        (timeProfileCount * 1000 / (curTime - prevLogTime)).toFixed(3),
-        'profiles/s',
+      new Date().toISOString(),
+      'rss',
+      (rss / (1024 * 1024)).toFixed(3),
+      'MiB,',
+      'heap total',
+      (heapTotal / (1024 * 1024)).toFixed(3),
+      'MiB,',
+      'heap used',
+      (heapUsed / (1024 * 1024)).toFixed(3),
+      'MiB,',
+      'heap profile collection rate',
+      ((heapProfileCount * 1000) / (curTime - prevLogTime)).toFixed(3),
+      'profiles/s,',
+      'time profile collection rate',
+      ((timeProfileCount * 1000) / (curTime - prevLogTime)).toFixed(3),
+      'profiles/s'
     );
 
     heapProfileCount = 0;
@@ -255,8 +261,10 @@ export async function startLocal(config: Config = {}): Promise<void> {
   // Periodic profiling
   setInterval(async () => {
     if (!config.disableHeap) {
-      const heap = await profiler.profile(
-          {name: 'Heap-Profile' + new Date(), profileType: 'HEAP'});
+      const heap = await profiler.profile({
+        name: 'Heap-Profile' + new Date(),
+        profileType: 'HEAP',
+      });
       heapProfileCount++;
     }
     await delay(profiler.config.localProfilingPeriodMillis / 2);
@@ -264,7 +272,7 @@ export async function startLocal(config: Config = {}): Promise<void> {
       const wall = await profiler.profile({
         name: 'Time-Profile' + new Date(),
         profileType: 'WALL',
-        duration: profiler.config.localTimeDurationMillis.toString() + 'ms'
+        duration: profiler.config.localTimeDurationMillis.toString() + 'ms',
       });
       timeProfileCount++;
     }
