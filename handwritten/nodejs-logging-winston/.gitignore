@@ -12,4 +12,4 @@ system-test/*key.json
 google-cloud-logging-winston-*.tgz
 google-cloud-logging-bunyan-*.tgz
 key.json
-
+__pycache__

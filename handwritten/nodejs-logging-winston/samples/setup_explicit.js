@@ -13,6 +13,9 @@
  * limitations under the License.
  */
 
+// sample-metadata:
+//   title: Explicit Auth Setup
+
 'use strict';
 
 /* eslint-disable no-unused-vars */
