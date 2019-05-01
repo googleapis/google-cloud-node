@@ -2556,6 +2556,28 @@ describe('File', () => {
       }, /Invalid signed URL version: v42\. Supported versions are 'v2' and 'v4'\./);
     });
 
+    it('should error if action is null', () => {
+      const config = Object.assign({}, CONFIG, {action: null});
+      assert.throws(() => {
+        file.getSignedUrl(config, () => {});
+      }, /The action is not provided or invalid./);
+    });
+
+    it('should error if action is undefined', () => {
+      const config = Object.assign({}, CONFIG);
+      delete config.action;
+      assert.throws(() => {
+        file.getSignedUrl(config, () => {});
+      }, /The action is not provided or invalid./);
+    });
+
+    it('should error for an invalid action', () => {
+      const config = Object.assign({}, CONFIG, {action: 'watch'});
+      assert.throws(() => {
+        file.getSignedUrl(config, () => {});
+      }, /The action is not provided or invalid./);
+    });
+
     describe('v4 signed URL', () => {
       beforeEach(() => {
         CONFIG.version = 'v4';
