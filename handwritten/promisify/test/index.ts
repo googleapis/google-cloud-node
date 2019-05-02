@@ -86,6 +86,7 @@ describe('promisifyAll', () => {
       });
     `);
   } catch (error) {
+    // tslint:disable-next-line ban
     it.skip('should work on ES classes');
   }
 
@@ -100,18 +101,19 @@ describe('promisifyAll', () => {
     assert(FakeClass2.prototype.method.promisified_);
   });
 
-  it('should pass the options object to promisify', (done) => {
+  it('should pass the options object to promisify', done => {
     const fakeOptions = {
       a: 'a',
     } as util.PromisifyAllOptions;
 
-    const stub =
-        sandbox.stub(util, 'promisify').callsFake((method, options) => {
-          assert.strictEqual(method, FakeClass2.prototype.method);
-          assert.strictEqual(options, fakeOptions);
-          done();
-          stub.restore();
-        });
+    const stub = sandbox
+      .stub(util, 'promisify')
+      .callsFake((method, options) => {
+        assert.strictEqual(method, FakeClass2.prototype.method);
+        assert.strictEqual(options, fakeOptions);
+        done();
+        stub.restore();
+      });
 
     function FakeClass2() {}
     FakeClass2.prototype.method = () => {};
@@ -146,7 +148,7 @@ describe('promisify', () => {
     assert.strictEqual(original, func);
   });
 
-  it('should not return a promise in callback mode', (done) => {
+  it('should not return a promise in callback mode', done => {
     let returnVal: {};
     returnVal = func.call(fakeContext, function(this: {}) {
       const args = [].slice.call(arguments);
@@ -167,12 +169,13 @@ describe('promisify', () => {
     const error = new Error('err');
     fakeArgs = [error];
     return func().then(
-        () => {
-          throw new Error('Should have gone to failure block');
-        },
-        (err: Error) => {
-          assert.strictEqual(err, error);
-        });
+      () => {
+        throw new Error('Should have gone to failure block');
+      },
+      (err: Error) => {
+        assert.strictEqual(err, error);
+      }
+    );
   });
 
   it('should allow the Promise object to be overridden', () => {
@@ -185,12 +188,15 @@ describe('promisify', () => {
   it('should resolve singular arguments', () => {
     const fakeArg = 'hi';
 
-    func = util.promisify((callback: () => void) => {
-      // tslint:disable-next-line no-any
-      (callback as any).apply(func, [null, fakeArg]);
-    }, {
-      singular: true,
-    });
+    func = util.promisify(
+      (callback: () => void) => {
+        // tslint:disable-next-line no-any
+        (callback as any).apply(func, [null, fakeArg]);
+      },
+      {
+        singular: true,
+      }
+    );
 
     return func().then((arg: {}) => {
       assert.strictEqual(arg, fakeArg);
@@ -201,11 +207,14 @@ describe('promisify', () => {
     // tslint:disable-next-line:no-any
     const fakeArgs: any[] = ['a', 'b'];
 
-    func = util.promisify((callback: Function) => {
-      callback.apply(func, [null].concat(fakeArgs));
-    }, {
-      singular: true,
-    });
+    func = util.promisify(
+      (callback: Function) => {
+        callback.apply(func, [null].concat(fakeArgs));
+      },
+      {
+        singular: true,
+      }
+    );
 
     return func().then((args: Array<{}>) => {
       assert.deepStrictEqual(args, fakeArgs);
@@ -215,18 +224,18 @@ describe('promisify', () => {
   describe('trailing undefined arguments', () => {
     it('should not return a promise in callback mode', () => {
       const func = util.promisify((optional: Function) => {
-        assert.equal(typeof optional, 'function');
+        assert.strictEqual(typeof optional, 'function');
         optional(null);
       });
 
       const returnVal = func(() => {});
-      assert.equal(returnVal, undefined);
+      assert.strictEqual(returnVal, undefined);
     });
 
-    it('should return a promise when callback omitted', (done) => {
+    it('should return a promise when callback omitted', done => {
       const func = util.promisify((optional: Function, ...args: Array<{}>) => {
         assert.strictEqual(args.length, 0);
-        assert.equal(typeof optional, 'function');
+        assert.strictEqual(typeof optional, 'function');
         optional(null);
       });
 
@@ -235,13 +244,14 @@ describe('promisify', () => {
       });
     });
 
-    it('should not mistake non-function args for callbacks', (done) => {
-      const func =
-          util.promisify((foo: {}, optional: Function, ...args: Array<{}>) => {
-            assert.strictEqual(args.length, 0);
-            assert.equal(typeof optional, 'function');
-            optional(null);
-          });
+    it('should not mistake non-function args for callbacks', done => {
+      const func = util.promisify(
+        (foo: {}, optional: Function, ...args: Array<{}>) => {
+          assert.strictEqual(args.length, 0);
+          assert.strictEqual(typeof optional, 'function');
+          optional(null);
+        }
+      );
 
       func('foo').then(() => {
         done();
@@ -326,7 +336,7 @@ describe('callbackify', () => {
     });
   });
 
-  it('should call the callback if it is provided', (done) => {
+  it('should call the callback if it is provided', done => {
     func(function(this: {}) {
       const args = [].slice.call(arguments);
       assert.deepStrictEqual(args, [null, ...fakeArgs]);
@@ -334,7 +344,7 @@ describe('callbackify', () => {
     });
   });
 
-  it('should call the provided callback with undefined', (done) => {
+  it('should call the provided callback with undefined', done => {
     func = util.callbackify(async function(this: {}) {});
     // tslint:disable-next-line:no-any
     func((err: Error, resp: any) => {
@@ -344,7 +354,7 @@ describe('callbackify', () => {
     });
   });
 
-  it('should call the provided callback with null', (done) => {
+  it('should call the provided callback with null', done => {
     func = util.callbackify(async function(this: {}) {
       return null;
     });
@@ -363,19 +373,18 @@ describe('callbackify', () => {
     func((err: Error) => assert.strictEqual(err, error));
   });
 
-  it('should call the callback only a single time when the promise resolves but callback throws an error',
-     () => {
-       const error = new Error('err');
-       const callback = sinon.stub().throws(error);
+  it('should call the callback only a single time when the promise resolves but callback throws an error', () => {
+    const error = new Error('err');
+    const callback = sinon.stub().throws(error);
 
-       const originalRejection = process.listeners('unhandledRejection').pop();
-       process.removeListener('unhandledRejection', originalRejection!);
-       process.once('unhandledRejection', (err) => {
-         assert.strictEqual(error, err);
-         assert.ok(callback.calledOnce);
-         process.listeners('unhandledRejection').push(originalRejection!);
-       });
+    const originalRejection = process.listeners('unhandledRejection').pop();
+    process.removeListener('unhandledRejection', originalRejection!);
+    process.once('unhandledRejection', err => {
+      assert.strictEqual(error, err);
+      assert.ok(callback.calledOnce);
+      process.listeners('unhandledRejection').push(originalRejection!);
+    });
 
-       func(callback);
-     });
+    func(callback);
+  });
 });
