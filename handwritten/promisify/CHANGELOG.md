@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-promisify/compare/v0.4.0...v1.0.0) (2019-05-02)
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#108](https://www.github.com/googleapis/nodejs-promisify/issues/108)) ([78ab89c](https://www.github.com/googleapis/nodejs-promisify/commit/78ab89c))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#108)
+
 ## v0.4.0
 
 02-12-2019 19:44 PST
@@ -75,4 +87,3 @@
 - chore(deps): update dependency gts to ^0.8.0 (#1)
 - chore(deps): lock file maintenance (#3)
 - chore(deps): lock file maintenance (#2)
-
