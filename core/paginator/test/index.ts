@@ -25,14 +25,14 @@ import * as P from '../src';
 import {paginator, ParsedArguments} from '../src';
 
 const util = {
-  noop: () => {}
+  noop: () => {},
 };
 
 const p = proxyquire('../src', {
-            'stream-events': fakeStreamEvents,
-          }) as typeof P;
+  'stream-events': fakeStreamEvents,
+}) as typeof P;
 
-let streamEventsOverride: Function|null;
+let streamEventsOverride: Function | null;
 function fakeStreamEvents() {
   return (streamEventsOverride || streamEvents).apply(null, arguments);
 }
@@ -59,7 +59,7 @@ describe('paginator', () => {
       const originalMethod = FakeClass.prototype.methodToExtend;
       paginator.extend(FakeClass, 'methodToExtend');
       const overwrittenMethod = FakeClass.prototype.methodToExtend;
-      assert.notEqual(originalMethod, overwrittenMethod);
+      assert.notStrictEqual(originalMethod, overwrittenMethod);
     });
 
     it('should store the original method as a private member', () => {
@@ -74,11 +74,14 @@ describe('paginator', () => {
       const anotherMethod = FakeClass.prototype.anotherMethodToExtend;
       const methodsToExtend = ['methodToExtend', 'anotherMethodToExtend'];
       paginator.extend(FakeClass, methodsToExtend);
-      assert.notEqual(originalMethod, FakeClass.prototype.methodToExtend);
-      assert.notEqual(anotherMethod, FakeClass.prototype.anotherMethodToExtend);
+      assert.notStrictEqual(originalMethod, FakeClass.prototype.methodToExtend);
+      assert.notStrictEqual(
+        anotherMethod,
+        FakeClass.prototype.anotherMethodToExtend
+      );
     });
 
-    it('should parse the arguments', (done) => {
+    it('should parse the arguments', done => {
       sandbox.stub(paginator, 'parseArguments_').callsFake(args => {
         assert.deepStrictEqual([].slice.call(args), [1, 2, 3]);
         done();
@@ -89,14 +92,14 @@ describe('paginator', () => {
       FakeClass.prototype.methodToExtend(1, 2, 3);
     });
 
-    it('should call router when the original method is called', (done) => {
+    it('should call router when the original method is called', done => {
       const expectedReturnValue = FakeClass.prototype.methodToExtend();
       const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
 
       sandbox.stub(paginator, 'parseArguments_').returns(parsedArguments);
       sandbox.stub(paginator, 'run_').callsFake((args, originalMethod) => {
         assert.strictEqual(args, parsedArguments);
-        assert.equal(originalMethod(), expectedReturnValue);
+        assert.strictEqual(originalMethod(), expectedReturnValue);
         done();
       });
 
@@ -104,7 +107,7 @@ describe('paginator', () => {
       FakeClass.prototype.methodToExtend();
     });
 
-    it('should maintain `this` context', (done) => {
+    it('should maintain `this` context', done => {
       FakeClass.prototype.methodToExtend = function() {
         return this.uuid;
       };
@@ -114,7 +117,7 @@ describe('paginator', () => {
       cls.uuid = uuid.v1();
 
       sandbox.stub(paginator, 'run_').callsFake((_, originalMethod) => {
-        assert.equal(originalMethod(), cls.uuid);
+        assert.strictEqual(originalMethod(), cls.uuid);
         done();
       });
 
@@ -128,7 +131,7 @@ describe('paginator', () => {
         return uniqueValue;
       });
       paginator.extend(FakeClass, 'methodToExtend');
-      assert.equal(FakeClass.prototype.methodToExtend(), uniqueValue);
+      assert.strictEqual(FakeClass.prototype.methodToExtend(), uniqueValue);
     });
   });
 
@@ -142,7 +145,7 @@ describe('paginator', () => {
       assert.strictEqual(typeof fakeStreamMethod, 'function');
     });
 
-    it('should parse the arguments', (done) => {
+    it('should parse the arguments', done => {
       const fakeArgs = [1, 2, 3];
 
       sandbox.stub(paginator, 'parseArguments_').callsFake(args => {
@@ -154,7 +157,7 @@ describe('paginator', () => {
       FakeClass.prototype.streamMethod.apply(FakeClass.prototype, fakeArgs);
     });
 
-    it('should run the method as a stream', (done) => {
+    it('should run the method as a stream', done => {
       const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
       sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
         return parsedArguments;
@@ -168,7 +171,7 @@ describe('paginator', () => {
       FakeClass.prototype.streamMethod();
     });
 
-    it('should apply the proper context', (done) => {
+    it('should apply the proper context', done => {
       const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
       FakeClass.prototype.methodToExtend = function() {
         return this;
@@ -183,7 +186,7 @@ describe('paginator', () => {
       FakeClass.prototype.streamMethod();
     });
 
-    it('should check for a private member', (done) => {
+    it('should check for a private member', done => {
       const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
       const fakeValue = 123;
 
@@ -309,23 +312,24 @@ describe('paginator', () => {
   describe('run_', () => {
     describe('autoPaginate', () => {
       describe('originalmethod is callback based', () => {
-        it('should call runAsStream_ when autoPaginate:true', (done) => {
+        it('should call runAsStream_ when autoPaginate:true', done => {
           const parsedArguments = {
             autoPaginate: true,
             callback: util.noop,
           };
 
-          sandbox.stub(paginator, 'runAsStream_')
-              .callsFake((args, originalMethod) => {
-                assert.strictEqual(args, parsedArguments);
-                originalMethod();
-                return through();
-              });
+          sandbox
+            .stub(paginator, 'runAsStream_')
+            .callsFake((args, originalMethod) => {
+              assert.strictEqual(args, parsedArguments);
+              originalMethod();
+              return through();
+            });
 
           paginator.run_(parsedArguments, done);
         });
 
-        it('should execute callback on error', (done) => {
+        it('should execute callback on error', done => {
           const error = new Error('Error.');
 
           const parsedArguments = {
@@ -347,7 +351,7 @@ describe('paginator', () => {
           paginator.run_(parsedArguments, util.noop);
         });
 
-        it('should return all results on end', (done) => {
+        it('should return all results on end', done => {
           const results = [{a: 1}, {b: 2}, {c: 3}];
 
           const parsedArguments = {
@@ -375,13 +379,14 @@ describe('paginator', () => {
         const parsedArguments = {
           autoPaginate: true,
         };
-        it('should call runAsStream_ when autoPaginate:true', (done) => {
-          sandbox.stub(paginator, 'runAsStream_')
-              .callsFake((args, originalMethod) => {
-                assert.strictEqual(args, parsedArguments);
-                originalMethod();
-                return through();
-              });
+        it('should call runAsStream_ when autoPaginate:true', done => {
+          sandbox
+            .stub(paginator, 'runAsStream_')
+            .callsFake((args, originalMethod) => {
+              assert.strictEqual(args, parsedArguments);
+              originalMethod();
+              return through();
+            });
 
           paginator.run_(parsedArguments, done);
         });
@@ -397,8 +402,9 @@ describe('paginator', () => {
             return stream;
           });
 
-          paginator.run_(parsedArguments, util.noop)
-              .then(util.noop, (err: Error) => assert.strictEqual(err, error));
+          paginator
+            .run_(parsedArguments, util.noop)
+            .then(util.noop, (err: Error) => assert.strictEqual(err, error));
         });
 
         it('should resolve with all results on end', () => {
@@ -413,17 +419,18 @@ describe('paginator', () => {
             return stream;
           });
 
-          paginator.run_(parsedArguments, util.noop)
-              .then(
-                  ([results_]: [1]) =>
-                      assert.deepStrictEqual(results_, results));
+          paginator
+            .run_(parsedArguments, util.noop)
+            .then(([results_]: [1]) =>
+              assert.deepStrictEqual(results_, results)
+            );
         });
       });
     });
 
     describe('manual pagination', () => {
       describe('originalmethod is callback based', () => {
-        it('should recognize autoPaginate: false', (done) => {
+        it('should recognize autoPaginate: false', done => {
           const parsedArguments = {
             autoPaginate: false,
             query: {
@@ -461,10 +468,13 @@ describe('paginator', () => {
   describe('runAsStream_', () => {
     const PARSED_ARGUMENTS = {
       query: {maxApiCalls: 12345, pageSize: 23456},
-      callback: util.noop
+      callback: util.noop,
     };
 
-    let limiterStub: sinon.SinonStub<[Function, (P.CreateLimiterOptions | undefined)?], P.Limiter>;
+    let limiterStub: sinon.SinonStub<
+      [Function, (P.CreateLimiterOptions | undefined)?],
+      P.Limiter
+    >;
     beforeEach(() => {
       limiterStub = sandbox.stub(p, 'createLimiter').callsFake(makeRequest => {
         const transformStream = new stream.Transform({objectMode: true});
@@ -482,7 +492,7 @@ describe('paginator', () => {
     });
 
     describe('originalmethod is callback based', () => {
-      it('should call original method when stream opens', (done) => {
+      it('should call original method when stream opens', done => {
         function originalMethod(query: {}) {
           assert.strictEqual(query, PARSED_ARGUMENTS.query);
           done();
@@ -490,7 +500,7 @@ describe('paginator', () => {
         p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
       });
 
-      it('should emit an error if one occurs', (done) => {
+      it('should emit an error if one occurs', done => {
         const error = new Error('Error.');
 
         function originalMethod(query: {}, callback: (err: Error) => void) {
@@ -506,12 +516,14 @@ describe('paginator', () => {
         });
       });
 
-      it('should push results onto the stream', (done) => {
+      it('should push results onto the stream', done => {
         const results = ['a', 'b', 'c'];
         const resultsReceived: Array<{}> = [];
 
         function originalMethod(
-            query: {}, callback: (err: Error|null, results: {}) => void) {
+          query: {},
+          callback: (err: Error | null, results: {}) => void
+        ) {
           setImmediate(() => {
             callback(null, results);
           });
@@ -532,7 +544,7 @@ describe('paginator', () => {
       before(() => {
         delete PARSED_ARGUMENTS.callback;
       });
-      it('should call original method when stream opens', (done) => {
+      it('should call original method when stream opens', done => {
         function originalMethod(query: {}) {
           assert.strictEqual(query, PARSED_ARGUMENTS.query);
           done();
@@ -540,7 +552,7 @@ describe('paginator', () => {
         p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
       });
 
-      it('should emit an error if one occurs', (done) => {
+      it('should emit an error if one occurs', done => {
         const error = new Error('Error.');
 
         function originalMethod(query: {}, callback: (err: Error) => void) {
@@ -556,12 +568,14 @@ describe('paginator', () => {
         });
       });
 
-      it('should push results onto the stream', (done) => {
+      it('should push results onto the stream', done => {
         const results = ['a', 'b', 'c'];
         const resultsReceived: Array<{}> = [];
 
         function originalMethod(
-            query: {}, callback: (err: Error|null, results: {}) => void) {
+          query: {},
+          callback: (err: Error | null, results: {}) => void
+        ) {
           setImmediate(() => {
             callback(null, results);
           });
@@ -581,7 +595,7 @@ describe('paginator', () => {
     describe('maxApiCalls', () => {
       const maxApiCalls = 10;
 
-      it('should create a limiter', (done) => {
+      it('should create a limiter', done => {
         limiterStub.restore();
         sandbox.stub(p, 'createLimiter').callsFake((_, options) => {
           assert.strictEqual(options!.maxApiCalls, maxApiCalls);
@@ -599,7 +613,7 @@ describe('paginator', () => {
         highWaterMark: 8,
       };
 
-      it('should pass through stream options', (done) => {
+      it('should pass through stream options', done => {
         limiterStub.restore();
         sandbox.stub(p, 'createLimiter').callsFake((_, options) => {
           assert.strictEqual(options!.streamOptions, streamOptions);
@@ -610,11 +624,12 @@ describe('paginator', () => {
         });
 
         p.paginator.runAsStream_(
-            {
-              maxApiCalls: 100,
-              streamOptions,
-            } as ParsedArguments,
-            util.noop);
+          {
+            maxApiCalls: 100,
+            streamOptions,
+          } as ParsedArguments,
+          util.noop
+        );
       });
     });
 
@@ -622,36 +637,40 @@ describe('paginator', () => {
       const limit = 1;
 
       function originalMethod(
-          query: {}, callback: (err: Error|null, results: number[]) => void) {
+        query: {},
+        callback: (err: Error | null, results: number[]) => void
+      ) {
         setImmediate(() => {
           callback(null, [1, 2, 3]);
         });
       }
 
-      it('should respect maxResults', (done) => {
+      it('should respect maxResults', done => {
         let numResultsReceived = 0;
 
         p.paginator
-            .runAsStream_(
-                {maxResults: limit, callback: util.noop}, originalMethod)
-            .on('data',
-                () => {
-                  numResultsReceived++;
-                })
-            .on('end', () => {
-              assert.strictEqual(numResultsReceived, limit);
-              done();
-            });
+          .runAsStream_(
+            {maxResults: limit, callback: util.noop},
+            originalMethod
+          )
+          .on('data', () => {
+            numResultsReceived++;
+          })
+          .on('end', () => {
+            assert.strictEqual(numResultsReceived, limit);
+            done();
+          });
       });
     });
 
-    it('should get more results if nextQuery exists', (done) => {
+    it('should get more results if nextQuery exists', done => {
       const nextQuery = {a: 'b', c: 'd'};
       let nextQuerySent = false;
 
       function originalMethod(
-          query: {},
-          callback: (err: Error|null, res: Array<{}>, nextQuery: {}) => void) {
+        query: {},
+        callback: (err: Error | null, res: Array<{}>, nextQuery: {}) => void
+      ) {
         if (nextQuerySent) {
           assert.deepStrictEqual(query, nextQuery);
           done();
@@ -667,11 +686,13 @@ describe('paginator', () => {
       p.paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
     });
 
-    it('should not push more results if stream ends early', (done) => {
+    it('should not push more results if stream ends early', done => {
       const results = ['a', 'b', 'c'];
 
       function originalMethod(
-          query: {}, callback: (err: Error|null, results: string[]) => void) {
+        query: {},
+        callback: (err: Error | null, results: string[]) => void
+      ) {
         setImmediate(() => {
           callback(null, results);
         });
@@ -684,21 +705,22 @@ describe('paginator', () => {
           rs.end();
         }
 
-        assert.notEqual(result, 'c');
+        assert.notStrictEqual(result, 'c');
       });
       rs.on('end', () => {
         done();
       });
     });
 
-    it('should not get more results if stream ends early', (done) => {
+    it('should not get more results if stream ends early', done => {
       const results = ['a', 'b', 'c'];
 
       let originalMethodCalledCount = 0;
 
       function originalMethod(
-          query: {},
-          callback: (err: Error|null, results: string[], body: {}) => void) {
+        query: {},
+        callback: (err: Error | null, results: string[], body: {}) => void
+      ) {
         originalMethodCalledCount++;
 
         setImmediate(() => {
@@ -714,7 +736,7 @@ describe('paginator', () => {
         }
       });
       rs.on('end', () => {
-        assert.equal(originalMethodCalledCount, 1);
+        assert.strictEqual(originalMethodCalledCount, 1);
         done();
       });
     });
@@ -729,7 +751,7 @@ describe('createLimiter', () => {
     },
   };
 
-  it('should create an object stream with stream-events', (done) => {
+  it('should create an object stream with stream-events', done => {
     streamEventsOverride = (stream: stream.Readable) => {
       // tslint:disable-next-line:no-any
       assert.strictEqual((stream as any)._readableState.objectMode, true);
@@ -742,7 +764,7 @@ describe('createLimiter', () => {
 
   it('should return a makeRequest function', () => {
     const limiter = p.createLimiter(REQUEST_FN, OPTIONS);
-    assert.equal(typeof limiter.makeRequest, 'function');
+    assert.strictEqual(typeof limiter.makeRequest, 'function');
   });
 
   it('should return the created stream', () => {
@@ -760,13 +782,14 @@ describe('createLimiter', () => {
     const limiter = p.createLimiter(REQUEST_FN, OPTIONS);
 
     assert.strictEqual(
-        // tslint:disable-next-line:no-any
-        (limiter.stream as any)._readableState.highWaterMark,
-        OPTIONS.streamOptions.highWaterMark);
+      // tslint:disable-next-line:no-any
+      (limiter.stream as any)._readableState.highWaterMark,
+      OPTIONS.streamOptions.highWaterMark
+    );
   });
 
   describe('makeRequest', () => {
-    it('should pass arguments to request method', (done) => {
+    it('should pass arguments to request method', done => {
       const args = [{}, {}];
 
       const limiter = p.createLimiter((obj1: {}, obj2: {}) => {
@@ -778,16 +801,19 @@ describe('createLimiter', () => {
       limiter.makeRequest.apply(null, args);
     });
 
-    it('should not make more requests than the limit', (done) => {
+    it('should not make more requests than the limit', done => {
       let callsMade = 0;
       const maxApiCalls = 10;
 
-      const limiter = p.createLimiter(() => {
-        callsMade++;
-        limiter.makeRequest();
-      }, {
-        maxApiCalls,
-      });
+      const limiter = p.createLimiter(
+        () => {
+          callsMade++;
+          limiter.makeRequest();
+        },
+        {
+          maxApiCalls,
+        }
+      );
 
       limiter.makeRequest();
 

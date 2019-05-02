@@ -38,7 +38,7 @@ export interface CreateLimiterOptions {
 
 export interface Limiter {
   // tslint:disable-next-line no-any
-  makeRequest(...args: any[]): Transform|undefined;
+  makeRequest(...args: any[]): Transform | undefined;
   stream: Transform;
 }
 
@@ -47,12 +47,16 @@ export type ResourceStream<T> = {
   emit(event: 'data', data: T): boolean;
   on(event: 'data', listener: (data: T) => void): ResourceStream<T>;
   once(event: 'data', listener: (data: T) => void): ResourceStream<T>;
-  prependListener(event: 'data', listener: (data: T) => void):
-      ResourceStream<T>;
-  prependOnceListener(event: 'data', listener: (data: T) => void):
-      ResourceStream<T>;
+  prependListener(
+    event: 'data',
+    listener: (data: T) => void
+  ): ResourceStream<T>;
+  prependOnceListener(
+    event: 'data',
+    listener: (data: T) => void
+  ): ResourceStream<T>;
   removeListener(event: 'data', listener: (data: T) => void): ResourceStream<T>;
-}&Transform;
+} & Transform;
 
 /**
  * Limit requests according to a `maxApiCalls` limit.
@@ -63,7 +67,9 @@ export type ResourceStream<T> = {
  * @param {object} options.streamOptions - Options to pass to the Stream constructor.
  */
 export function createLimiter(
-    makeRequestFn: Function, options?: CreateLimiterOptions): Limiter {
+  makeRequestFn: Function,
+  options?: CreateLimiterOptions
+): Limiter {
   options = options || {};
 
   const streamOptions = options.streamOptions || {};
@@ -151,7 +157,7 @@ export class Paginator {
    * @param {string|string[]} methodNames - Name(s) of the methods to extend.
    */
   // tslint:disable-next-line:variable-name
-  extend(Class: Function, methodNames: string|string[]) {
+  extend(Class: Function, methodNames: string | string[]) {
     methodNames = arrify(methodNames);
     methodNames.forEach(methodName => {
       const originalMethod = Class.prototype[methodName];
@@ -183,8 +189,11 @@ export class Paginator {
   // tslint:disable-next-line:no-any
   streamify<T = any>(methodName: string) {
     return function(
-        // tslint:disable-next-line:no-any
-        this: {[index: string]: Function}, ...args: any[]): ResourceStream<T> {
+      // tslint:disable-next-line:no-any
+      this: {[index: string]: Function},
+      // tslint:disable-next-line:no-any
+      ...args: any[]
+    ): ResourceStream<T> {
       const parsedArguments = paginator.parseArguments_(args);
       const originalMethod = this[methodName + '_'] || this[methodName];
       return paginator.runAsStream_(parsedArguments, originalMethod.bind(this));
@@ -199,11 +208,11 @@ export class Paginator {
    */
   // tslint:disable-next-line:no-any
   parseArguments_(args: any[]) {
-    let query: string|ParsedArguments|undefined;
+    let query: string | ParsedArguments | undefined;
     let autoPaginate = true;
     let maxApiCalls = -1;
     let maxResults = -1;
-    let callback: Function|undefined;
+    let callback: Function | undefined;
 
     const firstArgument = args[0];
     const lastArgument = args[args.length - 1];
@@ -250,7 +259,10 @@ export class Paginator {
     } as ParsedArguments;
 
     parsedArguments.streamOptions = extend<{}, ParsedArguments>(
-        true, {}, parsedArguments.query as ParsedArguments);
+      true,
+      {},
+      parsedArguments.query as ParsedArguments
+    );
     delete parsedArguments.streamOptions.autoPaginate;
     delete parsedArguments.streamOptions.maxResults;
     delete parsedArguments.streamOptions.pageSize;
@@ -282,16 +294,19 @@ export class Paginator {
     }
     const results = new Array<{}>();
     const promise = new Promise((resolve, reject) => {
-      paginator.runAsStream_(parsedArguments, originalMethod)
-          .on('error', reject)
-          .on('data', (data: {}) => results.push(data))
-          .on('end', () => resolve(results));
+      paginator
+        .runAsStream_(parsedArguments, originalMethod)
+        .on('error', reject)
+        .on('data', (data: {}) => results.push(data))
+        .on('end', () => resolve(results));
     });
     if (!callback) {
       return promise.then(results => [results]);
     }
     promise.then(
-        results => callback(null, results), (err: Error) => callback(err));
+      results => callback(null, results),
+      (err: Error) => callback(err)
+    );
   }
 
   /**
@@ -327,12 +342,12 @@ export class Paginator {
       limiter.makeRequest(query);
     });
 
-    function makeRequest(query?: ParsedArguments|string) {
+    function makeRequest(query?: ParsedArguments | string) {
       originalMethod(query, onResultSet);
     }
 
     // tslint:disable-next-line:no-any
-    function onResultSet(err: Error|null, results?: any[], nextQuery?: any) {
+    function onResultSet(err: Error | null, results?: any[], nextQuery?: any) {
       if (err) {
         stream.destroy(err);
         return;
