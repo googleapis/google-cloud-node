@@ -56,7 +56,9 @@ export interface CallbackMethod extends Function {
  * @return {function} wrapped
  */
 export function promisify(
-    originalMethod: PromiseMethod, options?: PromisifyOptions) {
+  originalMethod: PromiseMethod,
+  options?: PromisifyOptions
+) {
   if (originalMethod.promisified_) {
     return originalMethod;
   }
@@ -74,11 +76,11 @@ export function promisify(
       const arg = arguments[last];
 
       if (typeof arg === 'undefined') {
-        continue;  // skip trailing undefined.
+        continue; // skip trailing undefined.
       }
 
       if (typeof arg !== 'function') {
-        break;  // non-callback last argument found.
+        break; // non-callback last argument found.
       }
 
       return originalMethod.apply(context, arguments);
@@ -133,7 +135,7 @@ export function promisify(
 export function promisifyAll(Class: Function, options?: PromisifyAllOptions) {
   const exclude = (options && options.exclude) || [];
   const ownPropertyNames = Object.getOwnPropertyNames(Class.prototype);
-  const methods = ownPropertyNames.filter((methodName) => {
+  const methods = ownPropertyNames.filter(methodName => {
     // clang-format off
     return (
       typeof Class.prototype[methodName] === 'function' && // is it a function?
@@ -143,7 +145,7 @@ export function promisifyAll(Class: Function, options?: PromisifyAllOptions) {
     // clang-format on
   });
 
-  methods.forEach((methodName) => {
+  methods.forEach(methodName => {
     const originalMethod = Class.prototype[methodName];
     if (!originalMethod.promisified_) {
       Class.prototype[methodName] = exports.promisify(originalMethod, options);
@@ -174,13 +176,14 @@ export function callbackify(originalMethod: CallbackMethod) {
 
     const cb = Array.prototype.pop.call(arguments);
 
-    originalMethod
-        .apply(context, arguments)
-        // tslint:disable-next-line:no-any
-        .then((res: any) => {
-          res = Array.isArray(res) ? res : [res];
-          cb(null, ...res);
-        }, (err: Error) => cb(err));
+    originalMethod.apply(context, arguments).then(
+      // tslint:disable-next-line:no-any
+      (res: any) => {
+        res = Array.isArray(res) ? res : [res];
+        cb(null, ...res);
+      },
+      (err: Error) => cb(err)
+    );
   };
   wrapper.callbackified_ = true;
   return wrapper;
@@ -194,20 +197,23 @@ export function callbackify(originalMethod: CallbackMethod) {
  * @param {object=} options - Configuration object.
  */
 export function callbackifyAll(
-    // tslint:disable-next-line:variable-name
-    Class: Function, options?: CallbackifyAllOptions) {
+  // tslint:disable-next-line:variable-name
+  Class: Function,
+  options?: CallbackifyAllOptions
+) {
   const exclude = (options && options.exclude) || [];
   const ownPropertyNames = Object.getOwnPropertyNames(Class.prototype);
-  const methods = ownPropertyNames.filter((methodName) => {
+  const methods = ownPropertyNames.filter(methodName => {
     // clang-format off
-    return (typeof Class.prototype[methodName] === 'function' && // is it a function?
+    return (
+      typeof Class.prototype[methodName] === 'function' && // is it a function?
       !/^_|(Stream|_)|^constructor$/.test(methodName) && // is it callbackifyable?
       exclude.indexOf(methodName) === -1
     ); // is it blacklisted?
     // clang-format on
   });
 
-  methods.forEach((methodName) => {
+  methods.forEach(methodName => {
     const originalMethod = Class.prototype[methodName];
     if (!originalMethod.callbackified_) {
       Class.prototype[methodName] = exports.callbackify(originalMethod);
