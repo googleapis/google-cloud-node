@@ -21,8 +21,7 @@
   ],
   "scripts": {
     "docs": "compodoc src/",
-    "generate-scaffolding": "node node_modules/.bin/repo-tools generate all && node node_modules/.bin/repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "lint": "eslint samples/ && gts check && jsgl --local .",
+    "lint": "eslint '**/*.js' && gts check && jsgl --local .",
     "presystem-test": "npm run compile",
     "system-test": "nyc --exclude=\"error-message.js\" mocha  build/system-test/**/*.js",
     "cover": "nyc --exclude=\"fuzzer.js\" --reporter=lcov mocha build/test/unit/*.js build/test/unit/**/*.js && nyc report",
@@ -35,7 +34,7 @@
     "clean": "gts clean",
     "compile": "tsc -p .",
     "postcompile": "cpy 'utils/**/*.*' build --parents && cpy 'test/**/*.*' build --parents",
-    "fix": "gts fix",
+    "fix": "gts fix && eslint --fix '**/*.js'",
     "prepare": "npm run compile",
     "pretest-only": "npm run compile",
     "posttest": "npm run check && npm run license-check",
@@ -52,7 +51,6 @@
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.7",
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "@types/boom": "^7.2.0",
     "@types/console-log-level": "^1.4.0",
     "@types/express": "^4.11.1",
