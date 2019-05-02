@@ -13,18 +13,29 @@
  * limitations under the License.
  */
 
+// sample-metadata:
+//   title: Explicit setup
+//   description: Reports a simple error using explicit credentials.
+//   usage: node explicitSetup.js
+
 'use strict';
 
-function quickstart() {
-  // [START error_reporting_quickstart]
+function explicitSetup() {
+  // [START error_reporting_setup_explicit]
+  // [START error_reporting_setup_nodejs_explicit]
   // Imports the Google Cloud client library
   const {ErrorReporting} = require('@google-cloud/error-reporting');
 
   // Instantiates a client
-  const errors = new ErrorReporting();
+  const errors = new ErrorReporting({
+    projectId: 'your-project-id',
+    keyFilename: '/path/to/key.json',
+  });
 
   // Reports a simple error
   errors.report('Something broke!');
-  // [END error_reporting_quickstart]
+  // [END error_reporting_setup_nodejs_explicit]
+  // [END error_reporting_setup_explicit]
 }
-quickstart();
+
+explicitSetup();

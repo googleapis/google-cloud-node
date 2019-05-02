@@ -12,3 +12,4 @@ build
 .vscode
 package-lock.json
 key.json
+__pycache__
