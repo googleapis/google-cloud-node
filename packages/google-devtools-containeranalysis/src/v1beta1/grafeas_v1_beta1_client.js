@@ -113,14 +113,14 @@ class GrafeasV1Beta1Client {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      notePathTemplate: new gax.PathTemplate(
+        'projects/{project}/notes/{note}'
+      ),
       occurrencePathTemplate: new gax.PathTemplate(
         'projects/{project}/occurrences/{occurrence}'
       ),
       projectPathTemplate: new gax.PathTemplate(
         'projects/{project}'
-      ),
-      notePathTemplate: new gax.PathTemplate(
-        'projects/{project}/notes/{note}'
       ),
     };
 
@@ -261,7 +261,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -334,7 +334,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -430,7 +430,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -474,7 +474,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -526,7 +526,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -588,7 +588,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -654,7 +654,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -713,7 +713,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -766,7 +766,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -839,7 +839,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -935,7 +935,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -977,7 +977,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -1031,7 +1031,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -1093,7 +1093,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -1159,7 +1159,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -1239,7 +1239,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -1335,7 +1335,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -1382,7 +1382,7 @@ class GrafeasV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.GrafeasV1Beta1Client({
    *   // optional auth parameters.
@@ -1419,6 +1419,20 @@ class GrafeasV1Beta1Client {
   // --------------------
 
   /**
+   * Return a fully-qualified note resource name string.
+   *
+   * @param {String} project
+   * @param {String} note
+   * @returns {String}
+   */
+  notePath(project, note) {
+    return this._pathTemplates.notePathTemplate.render({
+      project: project,
+      note: note,
+    });
+  }
+
+  /**
    * Return a fully-qualified occurrence resource name string.
    *
    * @param {String} project
@@ -1445,17 +1459,29 @@ class GrafeasV1Beta1Client {
   }
 
   /**
-   * Return a fully-qualified note resource name string.
+   * Parse the noteName from a note resource.
    *
-   * @param {String} project
-   * @param {String} note
-   * @returns {String}
+   * @param {String} noteName
+   *   A fully-qualified path representing a note resources.
+   * @returns {String} - A string representing the project.
    */
-  notePath(project, note) {
-    return this._pathTemplates.notePathTemplate.render({
-      project: project,
-      note: note,
-    });
+  matchProjectFromNoteName(noteName) {
+    return this._pathTemplates.notePathTemplate
+      .match(noteName)
+      .project;
+  }
+
+  /**
+   * Parse the noteName from a note resource.
+   *
+   * @param {String} noteName
+   *   A fully-qualified path representing a note resources.
+   * @returns {String} - A string representing the note.
+   */
+  matchNoteFromNoteName(noteName) {
+    return this._pathTemplates.notePathTemplate
+      .match(noteName)
+      .note;
   }
 
   /**
@@ -1495,32 +1521,6 @@ class GrafeasV1Beta1Client {
     return this._pathTemplates.projectPathTemplate
       .match(projectName)
       .project;
-  }
-
-  /**
-   * Parse the noteName from a note resource.
-   *
-   * @param {String} noteName
-   *   A fully-qualified path representing a note resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromNoteName(noteName) {
-    return this._pathTemplates.notePathTemplate
-      .match(noteName)
-      .project;
-  }
-
-  /**
-   * Parse the noteName from a note resource.
-   *
-   * @param {String} noteName
-   *   A fully-qualified path representing a note resources.
-   * @returns {String} - A string representing the note.
-   */
-  matchNoteFromNoteName(noteName) {
-    return this._pathTemplates.notePathTemplate
-      .match(noteName)
-      .note;
   }
 }
 

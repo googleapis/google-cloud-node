@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2018 Google, LLC.',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'containeranalysis',
+    systemName: '@google-cloud/containeranalysis',
     theme: 'lumen'
   }
 };

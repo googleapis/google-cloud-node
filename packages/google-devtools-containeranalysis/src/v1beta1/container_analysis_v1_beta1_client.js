@@ -115,11 +115,11 @@ class ContainerAnalysisV1Beta1Client {
       notePathTemplate: new gax.PathTemplate(
         'projects/{project}/notes/{note}'
       ),
-      scanConfigPathTemplate: new gax.PathTemplate(
-        'projects/{project}/scanConfigs/{scan_config}'
-      ),
       projectPathTemplate: new gax.PathTemplate(
         'projects/{project}'
+      ),
+      scanConfigPathTemplate: new gax.PathTemplate(
+        'projects/{project}/scanConfigs/{scan_config}'
       ),
     };
 
@@ -256,7 +256,7 @@ class ContainerAnalysisV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client({
    *   // optional auth parameters.
@@ -322,7 +322,7 @@ class ContainerAnalysisV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client({
    *   // optional auth parameters.
@@ -387,7 +387,7 @@ class ContainerAnalysisV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client({
    *   // optional auth parameters.
@@ -445,7 +445,7 @@ class ContainerAnalysisV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client({
    *   // optional auth parameters.
@@ -518,7 +518,7 @@ class ContainerAnalysisV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client({
    *   // optional auth parameters.
@@ -614,7 +614,7 @@ class ContainerAnalysisV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client({
    *   // optional auth parameters.
@@ -663,7 +663,7 @@ class ContainerAnalysisV1Beta1Client {
    *
    * @example
    *
-   * const containeranalysis = require('containeranalysis.v1beta1');
+   * const containeranalysis = require('@google-cloud/containeranalysis');
    *
    * const client = new containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client({
    *   // optional auth parameters.
@@ -719,6 +719,18 @@ class ContainerAnalysisV1Beta1Client {
   }
 
   /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {String} project
+   * @returns {String}
+   */
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
    * Return a fully-qualified scan_config resource name string.
    *
    * @param {String} project
@@ -729,18 +741,6 @@ class ContainerAnalysisV1Beta1Client {
     return this._pathTemplates.scanConfigPathTemplate.render({
       project: project,
       scan_config: scanConfig,
-    });
-  }
-
-  /**
-   * Return a fully-qualified project resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
-      project: project,
     });
   }
 
@@ -771,6 +771,19 @@ class ContainerAnalysisV1Beta1Client {
   }
 
   /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate
+      .match(projectName)
+      .project;
+  }
+
+  /**
    * Parse the scanConfigName from a scan_config resource.
    *
    * @param {String} scanConfigName
@@ -794,19 +807,6 @@ class ContainerAnalysisV1Beta1Client {
     return this._pathTemplates.scanConfigPathTemplate
       .match(scanConfigName)
       .scan_config;
-  }
-
-  /**
-   * Parse the projectName from a project resource.
-   *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
   }
 }
 
