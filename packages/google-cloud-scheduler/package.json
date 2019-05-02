@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=8"
+    "node": ">=8.10.0"
   },
   "repository": "googleapis/nodejs-scheduler",
   "main": "src/index.js",
