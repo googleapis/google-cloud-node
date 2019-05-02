@@ -314,7 +314,8 @@ class DNS extends Service {
             callback!(err, null, null, resp);
             return;
           }
-          const zones = arrify(resp.managedZones).map(zone => {
+          // tslint:disable-next-line no-any
+          const zones = arrify(resp.managedZones).map((zone: any) => {
             const zoneInstance = this.zone(zone.name);
             zoneInstance.metadata = zone;
             return zoneInstance;

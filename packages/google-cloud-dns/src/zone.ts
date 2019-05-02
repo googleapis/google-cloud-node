@@ -1002,7 +1002,8 @@ import(localPath: string, callback?: CreateChangeCallback): void|Promise<CreateC
     const recordsToCreate: Record[] = [];
     recordTypes.forEach(recordType => {
       const recordTypeSet = arrify(parsedZonefile[recordType]);
-      recordTypeSet.forEach(record => {
+      // tslint:disable-next-line no-any
+      recordTypeSet.forEach((record: any) => {
         record.ttl = record.ttl || defaultTTL;
         recordsToCreate.push(Record.fromZoneRecord_(this, recordType, record));
       });

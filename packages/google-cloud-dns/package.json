@@ -28,7 +28,6 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "gts check && eslint '**/*.js'",
     "test": "nyc mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
@@ -52,7 +51,6 @@
     "string-format-obj": "^1.1.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "@types/lodash.groupby": "^4.6.4",
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.9.4",

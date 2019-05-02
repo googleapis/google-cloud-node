@@ -1,51 +1,66 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Cloud DNS: Node.js Samples
+# [Cloud DNS: Node.js Samples](https://github.com/googleapis/nodejs-dns)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-[Cloud DNS](https://cloud.google.com/dns/docs/) allows you to publish your domain names using Google&#x27;s infrastructure for production-quality, high-volume DNS services. Google&#x27;s global network of anycast name servers provide reliable, low-latency authoritative name lookups for your domains from anywhere in the world.
+
 
 ## Table of Contents
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Zones](#zones)
+  * [List Zones](#list-zones)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
-Before running the samples, make sure you've followed the steps in the
-[Before you begin section](../README.md#before-you-begin) of the client
-library's README.
+Before running the samples, make sure you've followed the steps outlined in
+[Using the client library](https://github.com/googleapis/nodejs-dns#using-the-client-library).
 
 ## Samples
 
-### Zones
 
-View the [source code][zones_0_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/zones.js,samples/README.md)
+### List Zones
 
-__Usage:__ `node zones.js --help`
+Lists all zones in the current project.
 
-```
-zones.js <command>
+View the [source code](https://github.com/googleapis/nodejs-dns/blob/master/samples/listZones.js).
 
-Commands:
-  zones.js list  Lists all zones in the current project.
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/listZones.js,samples/README.md)
 
-Options:
-  --version  Show version number                                                                               [boolean]
-  --help     Show help                                                                                         [boolean]
+__Usage:__
 
-Examples:
-  node zones.js list  Lists all zones in the current project.
 
-For more information, see https://cloud.google.com/dns/docs
-```
+`node listZones`
 
-[zones_0_docs]: https://cloud.google.com/dns/docs
-[zones_0_code]: zones.js
 
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+-----
+
+
+
+
+### Quickstart
+
+Fetches a list of all available zones.
+
+View the [source code](https://github.com/googleapis/nodejs-dns/blob/master/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node quickstart`
+
+
+
+
+
+
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/README.md
+[product-docs]: https://cloud.google.com/dns
