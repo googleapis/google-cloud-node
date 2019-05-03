@@ -37,8 +37,10 @@ describe('LoggingBunyan', function() {
 
   const SERVICE = `logging-bunyan-system-test-${UUID}`;
   const LOG_NAME = logName('logging-bunyan-system-test');
-  const loggingBunyan = new LoggingBunyan(
-      {logName: LOG_NAME, serviceContext: {service: SERVICE, version: 'none'}});
+  const loggingBunyan = new LoggingBunyan({
+    logName: LOG_NAME,
+    serviceContext: {service: SERVICE, version: 'none'},
+  });
   const logger = bunyan.createLogger({
     name: 'google-cloud-node-system-test',
     streams: [loggingBunyan.stream('info')],
@@ -59,9 +61,13 @@ describe('LoggingBunyan', function() {
         level: 'info',
         verify: (entry: types.StackdriverEntry) => {
           assert.strictEqual(
-              (entry.data as types.StackdriverData).message, 'first');
+            (entry.data as types.StackdriverData).message,
+            'first'
+          );
           assert.strictEqual(
-              (entry.data as types.StackdriverData).pid, process.pid);
+            (entry.data as types.StackdriverData).pid,
+            process.pid
+          );
         },
       },
 
@@ -69,10 +75,14 @@ describe('LoggingBunyan', function() {
         args: [new Error('second')],
         level: 'error',
         verify: (entry: types.StackdriverEntry) => {
-          assert(((entry.data as types.StackdriverData).message as string)
-                     .startsWith('Error: second'));
+          assert(
+            ((entry.data as types.StackdriverData)
+              .message as string).startsWith('Error: second')
+          );
           assert.strictEqual(
-              (entry.data as types.StackdriverData).pid, process.pid);
+            (entry.data as types.StackdriverData).pid,
+            process.pid
+          );
         },
       },
 
@@ -86,9 +96,13 @@ describe('LoggingBunyan', function() {
         level: 'info',
         verify: (entry: types.StackdriverEntry) => {
           assert.strictEqual(
-              (entry.data as types.StackdriverData).message, 'third');
+            (entry.data as types.StackdriverData).message,
+            'third'
+          );
           assert.strictEqual(
-              (entry.data as types.StackdriverData).pid, process.pid);
+            (entry.data as types.StackdriverData).pid,
+            process.pid
+          );
           assert.deepStrictEqual((entry.data as types.StackdriverData).test, {
             circular: '[Circular]',
           });
@@ -106,14 +120,18 @@ describe('LoggingBunyan', function() {
       level: 'info',
       verify: (entry: types.StackdriverEntry) => {
         assert.strictEqual(
-            (entry.data as types.StackdriverData).message, 'earliest');
+          (entry.data as types.StackdriverData).message,
+          'earliest'
+        );
         assert.strictEqual(
-            (entry.data as types.StackdriverData).pid, process.pid);
+          (entry.data as types.StackdriverData).pid,
+          process.pid
+        );
         assert.strictEqual(
-            ((entry.metadata as types.StackdriverEntryMetadata).timestamp as
-             Date)
-                .toString(),
-            timestamp.toString());
+          ((entry.metadata as types.StackdriverEntryMetadata)
+            .timestamp as Date).toString(),
+          timestamp.toString()
+        );
       },
     };
 
@@ -136,7 +154,11 @@ describe('LoggingBunyan', function() {
     testData.unshift(earliest as any);
 
     const entries = await pollLogs(
-        LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS);
+      LOG_NAME,
+      start,
+      testData.length,
+      WRITE_CONSISTENCY_DELAY_MS
+    );
     assert.strictEqual(entries.length, testData.length);
     entries.reverse().forEach((entry, index) => {
       const test = testData[index];
@@ -155,11 +177,16 @@ describe('LoggingBunyan', function() {
       logger.error(new Error(message));
 
       const errors = await errorsTransport.pollForNewEvents(
-          SERVICE, start, ERROR_REPORTING_POLL_TIMEOUT);
+        SERVICE,
+        start,
+        ERROR_REPORTING_POLL_TIMEOUT
+      );
 
       assert.strictEqual(
-          errors.length, 1,
-          `expected 1 error but got ${require('util').inspect(errors)}`);
+        errors.length,
+        1,
+        `expected 1 error but got ${require('util').inspect(errors)}`
+      );
       const errEvent = errors[0];
 
       assert.strictEqual(errEvent.serviceContext.service, SERVICE);
@@ -170,7 +197,11 @@ describe('LoggingBunyan', function() {
 
 // polls for the entire array of entries to be greater than logTime.
 function pollLogs(
-    logName: string, logTime: number, size: number, timeout: number) {
+  logName: string,
+  logTime: number,
+  size: number,
+  timeout: number
+) {
   const p = new Promise<types.StackdriverEntry[]>((resolve, reject) => {
     const end = Date.now() + timeout;
     loop();
@@ -178,27 +209,27 @@ function pollLogs(
     function loop() {
       setTimeout(() => {
         logging.log(logName).getEntries(
-            {
-              pageSize: size,
-            },
-            (err: Error, entries: types.StackdriverEntry[]) => {
-              if (!entries || entries.length < size) return loop();
+          {
+            pageSize: size,
+          },
+          (err: Error, entries: types.StackdriverEntry[]) => {
+            if (!entries || entries.length < size) return loop();
 
-              const {receiveTimestamp} =
-                  (entries[entries.length - 1].metadata || {}) as
-                  {receiveTimestamp: {seconds: number, nanos: number}};
-              const timeMilliseconds = (receiveTimestamp.seconds * 1000) +
-                  (receiveTimestamp.nanos * 1e-6);
+            const {receiveTimestamp} = (entries[entries.length - 1].metadata ||
+              {}) as {receiveTimestamp: {seconds: number; nanos: number}};
+            const timeMilliseconds =
+              receiveTimestamp.seconds * 1000 + receiveTimestamp.nanos * 1e-6;
 
-              if (timeMilliseconds >= logTime) {
-                return resolve(entries);
-              }
+            if (timeMilliseconds >= logTime) {
+              return resolve(entries);
+            }
 
-              if (Date.now() > end) {
-                return reject(new Error('timeout'));
-              }
-              loop();
-            });
+            if (Date.now() > end) {
+              return reject(new Error('timeout'));
+            }
+            loop();
+          }
+        );
       }, 500);
     }
   });

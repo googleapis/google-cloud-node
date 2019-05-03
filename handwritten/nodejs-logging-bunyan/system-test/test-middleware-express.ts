@@ -26,7 +26,7 @@ const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
 
 const WRITE_CONSISTENCY_DELAY_MS = 20 * 1000;
-const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + (10 * 1000);
+const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + 10 * 1000;
 const LOG_NAME = `bunyan-system-test-${uuid.v4()}`;
 
 describe('express middleware', () => {
@@ -52,7 +52,7 @@ describe('express middleware', () => {
   });
 
   describe('request logging middleware', () => {
-    it('should write request correlated log entries', (done) => {
+    it('should write request correlated log entries', done => {
       const LOG_MESSAGE = `correlated log message ${uuid.v4()}`;
       const fakeRequest = {headers: {fake: 'header'}};
       const fakeResponse = {};
