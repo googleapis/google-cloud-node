@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-import {DecorateRequestOptions, ServiceObject, ServiceObjectConfig, util} from '@google-cloud/common';
+import {
+  DecorateRequestOptions,
+  ServiceObject,
+  ServiceObjectConfig,
+  util,
+} from '@google-cloud/common';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 
@@ -52,12 +57,12 @@ describe('Notification', () => {
 
   before(() => {
     Notification = proxyquire('../src/notification.js', {
-                     '@google-cloud/promisify': fakePromisify,
-                     '@google-cloud/common': {
-                       ServiceObject: FakeServiceObject,
-                       util: fakeUtil,
-                     },
-                   }).Notification;
+      '@google-cloud/promisify': fakePromisify,
+      '@google-cloud/common': {
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil,
+      },
+    }).Notification;
   });
 
   beforeEach(() => {
@@ -112,23 +117,27 @@ describe('Notification', () => {
     it('should make the correct request', done => {
       const options = {};
 
-      notification.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            assert.strictEqual(reqOpts.method, 'DELETE');
-            assert.strictEqual(reqOpts.uri, '');
-            assert.strictEqual(reqOpts.qs, options);
-            callback();  // the done fn
-          };
+      notification.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.method, 'DELETE');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.strictEqual(reqOpts.qs, options);
+        callback(); // the done fn
+      };
 
       notification.delete(options, done);
     });
 
     it('should optionally accept options', done => {
-      notification.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            assert.deepStrictEqual(reqOpts.qs, {});
-            callback();  // the done fn
-          };
+      notification.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.deepStrictEqual(reqOpts.qs, {});
+        callback(); // the done fn
+      };
 
       notification.delete(done);
     });
@@ -136,10 +145,12 @@ describe('Notification', () => {
     it('should optionally accept a callback', done => {
       fakeUtil.noop = done;
 
-      notification.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback();  // the done fn
-          };
+      notification.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(); // the done fn
+      };
 
       notification.delete();
     });
@@ -230,7 +241,7 @@ describe('Notification', () => {
 
       it('should pass only a callback to create if no config', done => {
         notification.create = (callback: Function) => {
-          callback();  // done()
+          callback(); // done()
         };
 
         notification.get(AUTO_CREATE_CONFIG, done);
@@ -244,19 +255,21 @@ describe('Notification', () => {
           notification.create = (callback: Function) => {
             notification.get = (config: {}, callback: Function) => {
               assert.deepStrictEqual(config, {});
-              callback();  // done()
+              callback(); // done()
             };
 
             callback(error, null, apiResponse);
           };
 
           notification.get(
-              AUTO_CREATE_CONFIG, (err: Error, instance: {}, resp: {}) => {
-                assert.strictEqual(err, error);
-                assert.strictEqual(instance, null);
-                assert.strictEqual(resp, apiResponse);
-                done();
-              });
+            AUTO_CREATE_CONFIG,
+            (err: Error, instance: {}, resp: {}) => {
+              assert.strictEqual(err, error);
+              assert.strictEqual(instance, null);
+              assert.strictEqual(resp, apiResponse);
+              done();
+            }
+          );
         });
 
         it('should refresh the metadata after a 409', done => {
@@ -267,7 +280,7 @@ describe('Notification', () => {
           notification.create = (callback: Function) => {
             notification.get = (config: {}, callback: Function) => {
               assert.deepStrictEqual(config, {});
-              callback();  // done()
+              callback(); // done()
             };
 
             callback(error);
@@ -305,10 +318,12 @@ describe('Notification', () => {
       const error = new Error('err');
       const response = {};
 
-      notification.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(error, response);
-          };
+      notification.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(error, response);
+      };
 
       notification.getMetadata((err: Error, metadata: {}, resp: {}) => {
         assert.strictEqual(err, error);
@@ -321,10 +336,12 @@ describe('Notification', () => {
     it('should set and return the metadata', done => {
       const response = {};
 
-      notification.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(null, response);
-          };
+      notification.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(null, response);
+      };
 
       notification.getMetadata((err: Error, metadata: {}, resp: {}) => {
         assert.ifError(err);

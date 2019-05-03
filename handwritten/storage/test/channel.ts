@@ -18,7 +18,11 @@
  * @module storage/channel
  */
 
-import {DecorateRequestOptions, ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
+import {
+  DecorateRequestOptions,
+  ServiceObject,
+  ServiceObjectConfig,
+} from '@google-cloud/common';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 
@@ -52,11 +56,11 @@ describe('Channel', () => {
 
   before(() => {
     Channel = proxyquire('../src/channel.js', {
-                '@google-cloud/promisify': fakePromisify,
-                '@google-cloud/common': {
-                  ServiceObject: FakeServiceObject,
-                },
-              }).Channel;
+      '@google-cloud/promisify': fakePromisify,
+      '@google-cloud/common': {
+        ServiceObject: FakeServiceObject,
+      },
+    }).Channel;
   });
 
   beforeEach(() => {
@@ -104,10 +108,12 @@ describe('Channel', () => {
       const error = {};
       const apiResponse = {};
 
-      channel.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(error, apiResponse);
-          };
+      channel.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(error, apiResponse);
+      };
 
       channel.stop((err: Error, apiResponse_: {}) => {
         assert.strictEqual(err, error);
@@ -117,11 +123,13 @@ describe('Channel', () => {
     });
 
     it('should not require a callback', done => {
-      channel.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            assert.doesNotThrow(() => callback());
-            done();
-          };
+      channel.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.doesNotThrow(() => callback());
+        done();
+      };
 
       channel.stop();
     });

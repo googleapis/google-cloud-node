@@ -15,11 +15,15 @@
  */
 
 export function normalize<T = {}, U = Function>(
-    optionsOrCallback?: T|U, cb?: U) {
-  const options =
-      (typeof optionsOrCallback === 'object' ? optionsOrCallback : {}) as T;
-  const callback =
-      (typeof optionsOrCallback === 'function' ? optionsOrCallback : cb)! as U;
+  optionsOrCallback?: T | U,
+  cb?: U
+) {
+  const options = (typeof optionsOrCallback === 'object'
+    ? optionsOrCallback
+    : {}) as T;
+  const callback = (typeof optionsOrCallback === 'function'
+    ? optionsOrCallback
+    : cb)! as U;
   return {options, callback};
 }
 
@@ -29,5 +33,5 @@ export function normalize<T = {}, U = Function>(
  * @internal
  */
 export function objectEntries<T>(obj: {[key: string]: T}): Array<[string, T]> {
-  return Object.keys(obj).map((key) => [key, obj[key]] as [string, T]);
+  return Object.keys(obj).map(key => [key, obj[key]] as [string, T]);
 }

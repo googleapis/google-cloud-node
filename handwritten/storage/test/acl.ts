@@ -149,11 +149,12 @@ describe('storage/acl', () => {
       };
 
       acl.add(
-          {entity: ENTITY, role: ROLE},
-          (err: Error, acls: {}, apiResponse: Metadata) => {
-            assert.deepStrictEqual(resp, apiResponse);
-            done();
-          });
+        {entity: ENTITY, role: ROLE},
+        (err: Error, acls: {}, apiResponse: Metadata) => {
+          assert.deepStrictEqual(resp, apiResponse);
+          done();
+        }
+      );
     });
   });
 
@@ -442,10 +443,12 @@ describe('storage/acl', () => {
 
       const config = {entity: ENTITY, role: ROLE};
       acl.update(
-          config, (err: Error, acls: Array<{}>, apiResponse: Metadata) => {
-            assert.deepStrictEqual(resp, apiResponse);
-            done();
-          });
+        config,
+        (err: Error, acls: Array<{}>, apiResponse: Metadata) => {
+          assert.deepStrictEqual(resp, apiResponse);
+          done();
+        }
+      );
     });
   });
 
@@ -483,7 +486,7 @@ describe('storage/acl', () => {
       acl.request_ = (reqOpts_: DecorateRequestOptions, callback: Function) => {
         assert.strictEqual(reqOpts_, reqOpts);
         assert.strictEqual(reqOpts_.uri, PATH_PREFIX + uri);
-        callback();  // done()
+        callback(); // done()
       };
 
       acl.request(reqOpts, done);
@@ -559,17 +562,18 @@ describe('storage/AclRoleAccessorMethods', () => {
       aclEntity._assignAccessMethods(role);
 
       async.parallel(
-          [
-            next => {
-              // The method name should be in plural form. (fakeroles vs
-              // fakerole)
-              aclEntity.fakeroles.addUser(userName, next);
-            },
-            next => {
-              aclEntity.fakeroles.deleteAllUsers(next);
-            },
-          ],
-          done);
+        [
+          next => {
+            // The method name should be in plural form. (fakeroles vs
+            // fakerole)
+            aclEntity.fakeroles.addUser(userName, next);
+          },
+          next => {
+            aclEntity.fakeroles.deleteAllUsers(next);
+          },
+        ],
+        done
+      );
     });
 
     it('should return the parent methods return value', () => {
@@ -603,11 +607,12 @@ describe('storage/AclRoleAccessorMethods', () => {
       };
 
       const expectedOptions = Object.assign(
-          {
-            entity: 'user-' + fakeUser,
-            role: fakeRole,
-          },
-          fakeOptions);
+        {
+          entity: 'user-' + fakeUser,
+          role: fakeRole,
+        },
+        fakeOptions
+      );
 
       aclEntity.add = (options: {}) => {
         assert.deepStrictEqual(options, expectedOptions);

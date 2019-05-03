@@ -34,25 +34,25 @@ interface V4SignedURLConformanceTestCases {
 }
 
 interface MethodAction {
-  [key: string]: 'read'|'resumable'|'write'|'delete';
+  [key: string]: 'read' | 'resumable' | 'write' | 'delete';
 }
 
 const testFile = fs.readFileSync(
-    path.join(
-        __dirname,
-        '../../conformance-test/test-data/v4SignedUrl.json',
-        ),
-    'utf-8');
+  path.join(__dirname, '../../conformance-test/test-data/v4SignedUrl.json'),
+  'utf-8'
+);
 
 const testCases = JSON.parse(testFile) as V4SignedURLConformanceTestCases[];
 
 const SERVICE_ACCOUNT = path.join(
-    __dirname, '../../conformance-test/fixtures/signing-service-account.json');
+  __dirname,
+  '../../conformance-test/fixtures/signing-service-account.json'
+);
 
 describe('v4 signed url', () => {
   const storage = new Storage({keyFilename: SERVICE_ACCOUNT});
 
-  testCases.forEach((testCase) => {
+  testCases.forEach(testCase => {
     it(testCase.description, async function() {
       // v4 signed URL does not support Bucket operations (list bucket, etc) yet
       // Remove this conditional once it is supported.
@@ -61,8 +61,11 @@ describe('v4 signed url', () => {
         return;
       }
 
-      const NOW =
-          dateFormat.parse(testCase.timestamp, 'YYYYMMDD HHmmss ', true);
+      const NOW = dateFormat.parse(
+        testCase.timestamp,
+        'YYYYMMDD HHmmss ',
+        true
+      );
       const fakeTimer = sinon.useFakeTimers(NOW);
 
       const bucket = storage.bucket(testCase.bucket);

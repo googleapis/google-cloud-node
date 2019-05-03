@@ -24,8 +24,74 @@ import * as path from 'path';
 import * as through from 'through2';
 import * as tmp from 'tmp';
 import * as uuid from 'uuid';
-import {util, ApiError, InstanceResponseCallback, BodyResponseCallback, MetadataResponse, Metadata} from '@google-cloud/common';
-import {Storage, Bucket, File, AccessControlObject, Notification, GetNotificationOptions, DeleteBucketCallback, CreateNotificationOptions, BucketExistsOptions, BucketExistsCallback, GetBucketOptions, GetBucketCallback, GetNotificationsCallback, MakeBucketPrivateOptions, MakeBucketPrivateCallback, SetBucketMetadataOptions, SetBucketMetadataCallback, DeleteFileCallback, SaveCallback, DownloadOptions, DownloadCallback, FileExistsOptions, FileExistsCallback, CreateReadStreamOptions, CreateResumableUploadOptions, GetFileOptions, GetFileCallback, SetStorageClassOptions, SetStorageClassCallback, UploadOptions, UploadCallback, CopyOptions, CopyCallback, GetFileMetadataOptions, GetFileMetadataCallback, MakeFilePrivateOptions, MakeFilePrivateCallback, SetFileMetadataOptions, SetFileMetadataCallback, AddAclOptions, AddAclCallback, UpdateAclCallback, UpdateAclOptions, GetAclOptions, GetAclCallback, RemoveAclOptions, RemoveAclCallback, GetPolicyOptions, GetPolicyCallback, SetPolicyCallback, TestIamPermissionsOptions, TestIamPermissionsCallback, GetNotificationCallback, GetNotificationMetadataOptions, GetNotificationMetadataCallback, DeleteNotificationOptions, DeleteNotificationCallback, Iam} from '../src';
+import {
+  util,
+  ApiError,
+  InstanceResponseCallback,
+  BodyResponseCallback,
+  MetadataResponse,
+  Metadata,
+} from '@google-cloud/common';
+import {
+  Storage,
+  Bucket,
+  File,
+  AccessControlObject,
+  Notification,
+  GetNotificationOptions,
+  DeleteBucketCallback,
+  CreateNotificationOptions,
+  BucketExistsOptions,
+  BucketExistsCallback,
+  GetBucketOptions,
+  GetBucketCallback,
+  GetNotificationsCallback,
+  MakeBucketPrivateOptions,
+  MakeBucketPrivateCallback,
+  SetBucketMetadataOptions,
+  SetBucketMetadataCallback,
+  DeleteFileCallback,
+  SaveCallback,
+  DownloadOptions,
+  DownloadCallback,
+  FileExistsOptions,
+  FileExistsCallback,
+  CreateReadStreamOptions,
+  CreateResumableUploadOptions,
+  GetFileOptions,
+  GetFileCallback,
+  SetStorageClassOptions,
+  SetStorageClassCallback,
+  UploadOptions,
+  UploadCallback,
+  CopyOptions,
+  CopyCallback,
+  GetFileMetadataOptions,
+  GetFileMetadataCallback,
+  MakeFilePrivateOptions,
+  MakeFilePrivateCallback,
+  SetFileMetadataOptions,
+  SetFileMetadataCallback,
+  AddAclOptions,
+  AddAclCallback,
+  UpdateAclCallback,
+  UpdateAclOptions,
+  GetAclOptions,
+  GetAclCallback,
+  RemoveAclOptions,
+  RemoveAclCallback,
+  GetPolicyOptions,
+  GetPolicyCallback,
+  SetPolicyCallback,
+  TestIamPermissionsOptions,
+  TestIamPermissionsCallback,
+  GetNotificationCallback,
+  GetNotificationMetadataOptions,
+  GetNotificationMetadataCallback,
+  DeleteNotificationOptions,
+  DeleteNotificationCallback,
+  Iam,
+} from '../src';
 import * as nock from 'nock';
 const {PubSub} = require('@google-cloud/pubsub');
 
@@ -35,9 +101,9 @@ const RUNNING_IN_VPCSC = !!process.env['GOOGLE_CLOUD_TESTS_IN_VPCSC'];
 
 // block all attempts to chat with the metadata server (kokoro runs on GCE)
 nock('http://metadata.google.internal')
-    .get(url => true)
-    .replyWithError({code: 'ENOTFOUND'})
-    .persist();
+  .get(url => true)
+  .replyWithError({code: 'ENOTFOUND'})
+  .persist();
 
 describe('storage', () => {
   const USER_ACCOUNT = 'user-spsawchuk@gmail.com';
@@ -55,37 +121,42 @@ describe('storage', () => {
   const FILES: {[index: string]: any} = {
     logo: {
       path: path.join(
-          __dirname, '../../system-test/data/CloudPlatform_128px_Retina.png'),
+        __dirname,
+        '../../system-test/data/CloudPlatform_128px_Retina.png'
+      ),
     },
     big: {
       path: path.join(__dirname, '../../system-test/data/three-mb-file.tif'),
-      hash: undefined
+      hash: undefined,
     },
     html: {
       path: path.join(__dirname, '../../system-test/data/long-html-file.html'),
     },
     gzip: {
-      path:
-          path.join(__dirname, '../../system-test/data/long-html-file.html.gz'),
+      path: path.join(
+        __dirname,
+        '../../system-test/data/long-html-file.html.gz'
+      ),
     },
   };
 
   before(() => {
-    return bucket.create()
-        .then(() => {
-          return pubsub.createTopic(generateName());
-        })
-        .then(data => {
-          topic = data[0];
-          return topic.iam.setPolicy({
-            bindings: [
-              {
-                role: 'roles/pubsub.editor',
-                members: ['allUsers'],
-              },
-            ],
-          });
+    return bucket
+      .create()
+      .then(() => {
+        return pubsub.createTopic(generateName());
+      })
+      .then(data => {
+        topic = data[0];
+        return topic.iam.setPolicy({
+          bindings: [
+            {
+              role: 'roles/pubsub.editor',
+              members: ['allUsers'],
+            },
+          ],
         });
+      });
   });
 
   after(done => {
@@ -97,10 +168,10 @@ describe('storage', () => {
     let privateFile: File;
     let storageWithoutAuth: Storage;
 
-    let GOOGLE_APPLICATION_CREDENTIALS: string|undefined;
+    let GOOGLE_APPLICATION_CREDENTIALS: string | undefined;
 
     before(done => {
-      privateBucket = bucket;  // `bucket` was created in the global `before`
+      privateBucket = bucket; // `bucket` was created in the global `before`
       privateFile = privateBucket.file('file-name');
 
       privateFile.save('data', err => {
@@ -111,7 +182,7 @@ describe('storage', () => {
 
         // CI authentication is done with ADC. Cache it here, restore it `after`
         GOOGLE_APPLICATION_CREDENTIALS =
-            process.env.GOOGLE_APPLICATION_CREDENTIALS;
+          process.env.GOOGLE_APPLICATION_CREDENTIALS;
         delete process.env.GOOGLE_APPLICATION_CREDENTIALS;
         delete require.cache[require.resolve('../src')];
 
@@ -122,8 +193,7 @@ describe('storage', () => {
     });
 
     after(() => {
-      process.env.GOOGLE_APPLICATION_CREDENTIALS =
-          GOOGLE_APPLICATION_CREDENTIALS;
+      process.env.GOOGLE_APPLICATION_CREDENTIALS = GOOGLE_APPLICATION_CREDENTIALS;
     });
 
     describe('public data', () => {
@@ -139,14 +209,15 @@ describe('storage', () => {
 
       it('should list and download a file', done => {
         bucket.getFiles(
-            {
-              autoPaginate: false,
-            },
-            (err, files) => {
-              assert.ifError(err);
-              const file = files![0];
-              file.download(done);
-            });
+          {
+            autoPaginate: false,
+          },
+          (err, files) => {
+            assert.ifError(err);
+            const file = files![0];
+            file.download(done);
+          }
+        );
       });
     });
 
@@ -162,7 +233,8 @@ describe('storage', () => {
       it('should not download a file', done => {
         file.download(err => {
           assert(
-              err!.message.indexOf('does not have storage.objects.get') > -1);
+            err!.message.indexOf('does not have storage.objects.get') > -1
+          );
           done();
         });
       });
@@ -170,8 +242,8 @@ describe('storage', () => {
       it('should not upload a file', done => {
         file.save('new data', err => {
           assert(
-              err!.message.indexOf('Could not load the default credentials') >
-              -1);
+            err!.message.indexOf('Could not load the default credentials') > -1
+          );
           done();
         });
       });
@@ -190,40 +262,44 @@ describe('storage', () => {
 
       it('should add entity to default access controls', done => {
         bucket.acl.default.add(
-            {
-              entity: USER_ACCOUNT,
-              role: storage.acl.OWNER_ROLE,
-            },
-            (err, accessControl) => {
-              assert.ifError(err);
-              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+          {
+            entity: USER_ACCOUNT,
+            role: storage.acl.OWNER_ROLE,
+          },
+          (err, accessControl) => {
+            assert.ifError(err);
+            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
-              bucket.acl.default.get(
+            bucket.acl.default.get(
+              {
+                entity: USER_ACCOUNT,
+              },
+              (err, accessControl) => {
+                assert.ifError(err);
+                assert.strictEqual(
+                  (accessControl as AccessControlObject)!.role,
+                  storage.acl.OWNER_ROLE
+                );
+
+                bucket.acl.default.update(
                   {
                     entity: USER_ACCOUNT,
+                    role: storage.acl.READER_ROLE,
                   },
                   (err, accessControl) => {
                     assert.ifError(err);
                     assert.strictEqual(
-                        (accessControl as AccessControlObject)!.role,
-                        storage.acl.OWNER_ROLE);
+                      (accessControl as AccessControlObject).role,
+                      storage.acl.READER_ROLE
+                    );
 
-                    bucket.acl.default.update(
-                        {
-                          entity: USER_ACCOUNT,
-                          role: storage.acl.READER_ROLE,
-                        },
-                        (err, accessControl) => {
-                          assert.ifError(err);
-                          assert.strictEqual(
-                              (accessControl as AccessControlObject).role,
-                              storage.acl.READER_ROLE);
-
-                          bucket.acl.default.delete(
-                              {entity: USER_ACCOUNT}, done);
-                        });
-                  });
-            });
+                    bucket.acl.default.delete({entity: USER_ACCOUNT}, done);
+                  }
+                );
+              }
+            );
+          }
+        );
       });
 
       it('should get default access controls', done => {
@@ -236,50 +312,56 @@ describe('storage', () => {
 
       it('should grant an account access', done => {
         bucket.acl.add(
-            {
-              entity: USER_ACCOUNT,
-              role: storage.acl.OWNER_ROLE,
-            },
-            (err, accessControl) => {
+          {
+            entity: USER_ACCOUNT,
+            role: storage.acl.OWNER_ROLE,
+          },
+          (err, accessControl) => {
+            assert.ifError(err);
+            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+
+            const opts = {entity: USER_ACCOUNT};
+
+            bucket.acl.get(opts, (err, accessControl) => {
               assert.ifError(err);
-              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(
+                (accessControl as AccessControlObject).role,
+                storage.acl.OWNER_ROLE
+              );
 
-              const opts = {entity: USER_ACCOUNT};
-
-              bucket.acl.get(opts, (err, accessControl) => {
-                assert.ifError(err);
-                assert.strictEqual(
-                    (accessControl as AccessControlObject).role,
-                    storage.acl.OWNER_ROLE);
-
-                bucket.acl.delete(opts, done);
-              });
+              bucket.acl.delete(opts, done);
             });
+          }
+        );
       });
 
       it('should update an account', done => {
         bucket.acl.add(
-            {
-              entity: USER_ACCOUNT,
-              role: storage.acl.OWNER_ROLE,
-            },
-            (err, accessControl) => {
-              assert.ifError(err);
-              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+          {
+            entity: USER_ACCOUNT,
+            role: storage.acl.OWNER_ROLE,
+          },
+          (err, accessControl) => {
+            assert.ifError(err);
+            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
-              bucket.acl.update(
-                  {
-                    entity: USER_ACCOUNT,
-                    role: storage.acl.WRITER_ROLE,
-                  },
-                  (err, accessControl) => {
-                    assert.ifError(err);
-                    assert.strictEqual(
-                        accessControl!.role, storage.acl.WRITER_ROLE);
+            bucket.acl.update(
+              {
+                entity: USER_ACCOUNT,
+                role: storage.acl.WRITER_ROLE,
+              },
+              (err, accessControl) => {
+                assert.ifError(err);
+                assert.strictEqual(
+                  accessControl!.role,
+                  storage.acl.WRITER_ROLE
+                );
 
-                    bucket.acl.delete({entity: USER_ACCOUNT}, done);
-                  });
-            });
+                bucket.acl.delete({entity: USER_ACCOUNT}, done);
+              }
+            );
+          }
+        );
       });
 
       it('should make a bucket public', done => {
@@ -306,19 +388,22 @@ describe('storage', () => {
               async.each(files!, isFilePublic, err => {
                 assert.ifError(err);
                 async.parallel(
-                    [
-                      next =>
-                          bucket.acl.default.delete({entity: 'allUsers'}, next),
-                      next => bucket.deleteFiles(next)
-                    ],
-                    done);
+                  [
+                    next =>
+                      bucket.acl.default.delete({entity: 'allUsers'}, next),
+                    next => bucket.deleteFiles(next),
+                  ],
+                  done
+                );
               });
             });
           });
         });
 
         function createFileWithContent(
-            content: string, callback: SaveCallback) {
+          content: string,
+          callback: SaveCallback
+        ) {
           bucket.file(generateName() + '.txt').save(content, callback);
         }
 
@@ -329,8 +414,10 @@ describe('storage', () => {
               return;
             }
 
-            if ((aclObject as AccessControlObject).entity === 'allUsers' &&
-                (aclObject as AccessControlObject).role === 'READER') {
+            if (
+              (aclObject as AccessControlObject).entity === 'allUsers' &&
+              (aclObject as AccessControlObject).role === 'READER'
+            ) {
               callback();
             } else {
               callback(new Error('File is not public.'));
@@ -370,12 +457,14 @@ describe('storage', () => {
         });
 
         function createFileWithContent(
-            content: string, callback: SaveCallback) {
+          content: string,
+          callback: SaveCallback
+        ) {
           bucket.file(generateName() + '.txt').save(content, callback);
         }
 
         function isFilePrivate(file: File, callback: Function) {
-          file.acl.get({entity: 'allUsers'}, (err: ApiError|null) => {
+          file.acl.get({entity: 'allUsers'}, (err: ApiError | null) => {
             if (err && err.code === 404) {
               callback();
             } else {
@@ -421,49 +510,55 @@ describe('storage', () => {
 
       it('should grant an account access', done => {
         file.acl.add(
-            {
-              entity: USER_ACCOUNT,
-              role: storage.acl.OWNER_ROLE,
-            },
-            (err, accessControl) => {
+          {
+            entity: USER_ACCOUNT,
+            role: storage.acl.OWNER_ROLE,
+          },
+          (err, accessControl) => {
+            assert.ifError(err);
+            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+
+            file.acl.get({entity: USER_ACCOUNT}, (err, accessControl) => {
               assert.ifError(err);
-              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+              assert.strictEqual(
+                (accessControl as AccessControlObject).role,
+                storage.acl.OWNER_ROLE
+              );
 
-              file.acl.get({entity: USER_ACCOUNT}, (err, accessControl) => {
-                assert.ifError(err);
-                assert.strictEqual(
-                    (accessControl as AccessControlObject).role,
-                    storage.acl.OWNER_ROLE);
-
-                file.acl.delete({entity: USER_ACCOUNT}, done);
-              });
+              file.acl.delete({entity: USER_ACCOUNT}, done);
             });
+          }
+        );
       });
 
       it('should update an account', done => {
         file.acl.add(
-            {
-              entity: USER_ACCOUNT,
-              role: storage.acl.OWNER_ROLE,
-            },
-            (err, accessControl) => {
-              assert.ifError(err);
-              assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
+          {
+            entity: USER_ACCOUNT,
+            role: storage.acl.OWNER_ROLE,
+          },
+          (err, accessControl) => {
+            assert.ifError(err);
+            assert.strictEqual(accessControl!.role, storage.acl.OWNER_ROLE);
 
-              file.acl.update(
-                  {
-                    entity: USER_ACCOUNT,
-                    role: storage.acl.READER_ROLE,
-                  },
-                  (err, accessControl) => {
-                    assert.ifError(err);
+            file.acl.update(
+              {
+                entity: USER_ACCOUNT,
+                role: storage.acl.READER_ROLE,
+              },
+              (err, accessControl) => {
+                assert.ifError(err);
 
-                    assert.strictEqual(
-                        accessControl!.role, storage.acl.READER_ROLE);
+                assert.strictEqual(
+                  accessControl!.role,
+                  storage.acl.READER_ROLE
+                );
 
-                    file.acl.delete({entity: USER_ACCOUNT}, done);
-                  });
-            });
+                file.acl.delete({entity: USER_ACCOUNT}, done);
+              }
+            );
+          }
+        );
       });
 
       it('should make a file public', done => {
@@ -486,12 +581,14 @@ describe('storage', () => {
           file.makePrivate(err => {
             assert.ifError(err);
             file.acl.get(
-                {entity: 'allUsers'}, (err: ApiError|null, aclObject) => {
-                  assert.strictEqual(err!.code, 404);
-                  assert.strictEqual(err!.message, 'Not Found');
-                  assert.strictEqual(aclObject, null);
-                  done();
-                });
+              {entity: 'allUsers'},
+              (err: ApiError | null, aclObject) => {
+                assert.strictEqual(err!.code, 404);
+                assert.strictEqual(err!.message, 'Not Found');
+                assert.strictEqual(aclObject, null);
+                done();
+              }
+            );
           });
         });
       });
@@ -499,98 +596,112 @@ describe('storage', () => {
       it('should set custom encryption during the upload', done => {
         const key = '12345678901234567890123456789012';
         bucket.upload(
-            FILES.big.path, {
-              encryptionKey: key,
-              resumable: false,
-            },
-            (err, file) => {
-              assert.ifError(err);
+          FILES.big.path,
+          {
+            encryptionKey: key,
+            resumable: false,
+          },
+          (err, file) => {
+            assert.ifError(err);
 
-              file!.getMetadata((err: ApiError|null, metadata: Metadata) => {
-                assert.ifError(err);
-                assert.strictEqual(
-                    metadata.customerEncryption.encryptionAlgorithm, 'AES256');
-                done();
-              });
+            file!.getMetadata((err: ApiError | null, metadata: Metadata) => {
+              assert.ifError(err);
+              assert.strictEqual(
+                metadata.customerEncryption.encryptionAlgorithm,
+                'AES256'
+              );
+              done();
             });
+          }
+        );
       });
 
       it('should set custom encryption in a resumable upload', done => {
         const key = crypto.randomBytes(32);
 
         bucket.upload(
-            FILES.big.path, {
-              encryptionKey: key,
-              resumable: true,
-            },
-            (err, file) => {
-              assert.ifError(err);
+          FILES.big.path,
+          {
+            encryptionKey: key,
+            resumable: true,
+          },
+          (err, file) => {
+            assert.ifError(err);
 
-              file!.getMetadata((err: ApiError|null, metadata: Metadata) => {
-                assert.ifError(err);
-                assert.strictEqual(
-                    metadata.customerEncryption.encryptionAlgorithm, 'AES256');
-                done();
-              });
+            file!.getMetadata((err: ApiError | null, metadata: Metadata) => {
+              assert.ifError(err);
+              assert.strictEqual(
+                metadata.customerEncryption.encryptionAlgorithm,
+                'AES256'
+              );
+              done();
             });
+          }
+        );
       });
 
       it('should make a file public during the upload', done => {
         bucket.upload(
-            FILES.big.path, {
-              resumable: false,
-              public: true,
-            },
-            (err, file) => {
-              assert.ifError(err);
+          FILES.big.path,
+          {
+            resumable: false,
+            public: true,
+          },
+          (err, file) => {
+            assert.ifError(err);
 
-              file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-                assert.ifError(err);
-                assert.deepStrictEqual(aclObject, {
-                  entity: 'allUsers',
-                  role: 'READER',
-                });
-                done();
+            file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
+              assert.ifError(err);
+              assert.deepStrictEqual(aclObject, {
+                entity: 'allUsers',
+                role: 'READER',
               });
+              done();
             });
+          }
+        );
       });
 
       it('should make a file public from a resumable upload', done => {
         bucket.upload(
-            FILES.big.path, {
-              resumable: true,
-              public: true,
-            },
-            (err, file) => {
-              assert.ifError(err);
+          FILES.big.path,
+          {
+            resumable: true,
+            public: true,
+          },
+          (err, file) => {
+            assert.ifError(err);
 
-              file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-                assert.ifError(err);
-                assert.deepStrictEqual(aclObject, {
-                  entity: 'allUsers',
-                  role: 'READER',
-                });
-                done();
+            file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
+              assert.ifError(err);
+              assert.deepStrictEqual(aclObject, {
+                entity: 'allUsers',
+                role: 'READER',
               });
+              done();
             });
+          }
+        );
       });
 
       it('should make a file private from a resumable upload', done => {
         bucket.upload(
-            FILES.big.path, {
-              resumable: true,
-              private: true,
-            },
-            (err, file) => {
-              assert.ifError(err);
+          FILES.big.path,
+          {
+            resumable: true,
+            private: true,
+          },
+          (err, file) => {
+            assert.ifError(err);
 
-              file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
-                assert.strictEqual((err as ApiError)!.code, 404);
-                assert.strictEqual(err!.message, 'Not Found');
-                assert.strictEqual(aclObject, null);
-                done();
-              });
+            file!.acl.get({entity: 'allUsers'}, (err, aclObject) => {
+              assert.strictEqual((err as ApiError)!.code, 404);
+              assert.strictEqual(err!.message, 'Not Found');
+              assert.strictEqual(aclObject, null);
+              done();
             });
+          }
+        );
       });
     });
   });
@@ -649,10 +760,11 @@ describe('storage', () => {
           bucket.iam.setPolicy(policy!, (err, newPolicy) => {
             assert.ifError(err);
 
-            const legacyBucketReaderBinding =
-                newPolicy!.bindings.filter(binding => {
-                  return binding.role === 'roles/storage.legacyBucketReader';
-                })[0];
+            const legacyBucketReaderBinding = newPolicy!.bindings.filter(
+              binding => {
+                return binding.role === 'roles/storage.legacyBucketReader';
+              }
+            )[0];
 
             assert(legacyBucketReaderBinding.members.includes('allUsers'));
 
@@ -695,23 +807,22 @@ describe('storage', () => {
     };
 
     const setBucketPolicyOnly = (bucket: Bucket, enabled: boolean) =>
-        bucket.setMetadata({
-          iamConfiguration: {
-            bucketPolicyOnly: {
-              enabled,
-            },
+      bucket.setMetadata({
+        iamConfiguration: {
+          bucketPolicyOnly: {
+            enabled,
           },
-        });
+        },
+      });
 
     describe('files', () => {
       before(createBucket);
 
-      it('can be written to the bucket by project owner w/o configuration',
-         async () => {
-           await setBucketPolicyOnly(bucket, true);
-           const file = bucket.file('file');
-           return assert.doesNotReject(() => file.save('data'));
-         });
+      it('can be written to the bucket by project owner w/o configuration', async () => {
+        await setBucketPolicyOnly(bucket, true);
+        const file = bucket.file('file');
+        return assert.doesNotReject(() => file.save('data'));
+      });
     });
 
     describe('disables file ACL', () => {
@@ -733,13 +844,16 @@ describe('storage', () => {
 
       it('should fail to get file ACL', () => {
         return assert.rejects(
-            () => file.acl.get(), validateBucketPolicyOnlyEnabledError);
+          () => file.acl.get(),
+          validateBucketPolicyOnlyEnabledError
+        );
       });
 
       it('should fail to update file ACL', () => {
         return assert.rejects(
-            () => file.acl.update(customAcl),
-            validateBucketPolicyOnlyEnabledError);
+          () => file.acl.update(customAcl),
+          validateBucketPolicyOnlyEnabledError
+        );
       });
     });
 
@@ -792,15 +906,16 @@ describe('storage', () => {
 
       const expectedContents = 'Normalization Form C';
 
-      return file.get()
-          .then(data => {
-            const receivedFile = data[0];
-            assert.strictEqual(receivedFile.name, name);
-            return receivedFile.download();
-          })
-          .then(contents => {
-            assert.strictEqual(contents.toString(), expectedContents);
-          });
+      return file
+        .get()
+        .then(data => {
+          const receivedFile = data[0];
+          assert.strictEqual(receivedFile.name, name);
+          return receivedFile.download();
+        })
+        .then(contents => {
+          assert.strictEqual(contents.toString(), expectedContents);
+        });
     });
 
     // Normalization form D: an ASCII character followed by U+0301 combining
@@ -811,15 +926,16 @@ describe('storage', () => {
 
       const expectedContents = 'Normalization Form D';
 
-      return file.get()
-          .then(data => {
-            const receivedFile = data[0];
-            assert.strictEqual(receivedFile.name, name);
-            return receivedFile.download();
-          })
-          .then(contents => {
-            assert.strictEqual(contents.toString(), expectedContents);
-          });
+      return file
+        .get()
+        .then(data => {
+          const receivedFile = data[0];
+          assert.strictEqual(receivedFile.name, name);
+          return receivedFile.download();
+        })
+        .then(contents => {
+          assert.strictEqual(contents.toString(), expectedContents);
+        });
     });
   });
 
@@ -832,12 +948,13 @@ describe('storage', () => {
 
     after(done => {
       async.series(
-          bucketsToCreate.map(bucket => {
-            return (done: DeleteBucketCallback) => {
-              storage.bucket(bucket).delete(done);
-            };
-          }),
-          done);
+        bucketsToCreate.map(bucket => {
+          return (done: DeleteBucketCallback) => {
+            storage.bucket(bucket).delete(done);
+          };
+        }),
+        done
+      );
     });
 
     it('should get buckets', done => {
@@ -854,16 +971,16 @@ describe('storage', () => {
     it('should get buckets as a stream', done => {
       let bucketEmitted = false;
 
-      storage.getBucketsStream()
-          .on('error', done)
-          .on('data',
-              bucket => {
-                bucketEmitted = bucket instanceof Bucket;
-              })
-          .on('end', () => {
-            assert.strictEqual(bucketEmitted, true);
-            done();
-          });
+      storage
+        .getBucketsStream()
+        .on('error', done)
+        .on('data', bucket => {
+          bucketEmitted = bucket instanceof Bucket;
+        })
+        .on('end', () => {
+          assert.strictEqual(bucketEmitted, true);
+          done();
+        });
     });
   });
 
@@ -876,7 +993,7 @@ describe('storage', () => {
         },
       };
 
-      bucket.setMetadata(metadata, (err: ApiError|null, meta: Metadata) => {
+      bucket.setMetadata(metadata, (err: ApiError | null, meta: Metadata) => {
         assert.ifError(err);
         assert.deepStrictEqual(meta.website, metadata.website);
         done();
@@ -886,38 +1003,39 @@ describe('storage', () => {
     it('should allow changing the storage class', done => {
       const bucket = storage.bucket(generateName());
 
-      async.series<{}, Error|null>(
-          [
-            next => {
-              bucket.create(next);
-            },
+      async.series<{}, Error | null>(
+        [
+          next => {
+            bucket.create(next);
+          },
 
-            next => {
-              bucket.getMetadata((err: ApiError|null, metadata: Metadata) => {
-                assert.ifError(err);
-                assert.strictEqual(metadata.storageClass, 'STANDARD');
-                next();
-              });
-            },
-
-            next => {
-              bucket.setStorageClass('multi-regional', next);
-            },
-          ],
-          err => {
-            assert.ifError(err);
-
-            bucket.getMetadata((err: ApiError|null, metadata: Metadata) => {
+          next => {
+            bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
               assert.ifError(err);
-              assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
-              done();
+              assert.strictEqual(metadata.storageClass, 'STANDARD');
+              next();
             });
+          },
+
+          next => {
+            bucket.setStorageClass('multi-regional', next);
+          },
+        ],
+        err => {
+          assert.ifError(err);
+
+          bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
+            assert.ifError(err);
+            assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
+            done();
           });
+        }
+      );
     });
 
     describe('labels', () => {
       const LABELS = {
-        label: 'labelvalue',  // no caps or spaces allowed (?)
+        label: 'labelvalue', // no caps or spaces allowed (?)
         labeltwo: 'labelvaluetwo',
       };
 
@@ -951,7 +1069,9 @@ describe('storage', () => {
             bucket.getLabels((err, labels) => {
               assert.ifError(err);
               assert.deepStrictEqual(
-                  labels, Object.assign({}, LABELS, newLabels));
+                labels,
+                Object.assign({}, LABELS, newLabels)
+              );
               done();
             });
           });
@@ -976,8 +1096,9 @@ describe('storage', () => {
               assert.ifError(err);
 
               const expectedLabels = Object.assign({}, LABELS);
-              delete (
-                  expectedLabels as {[index: string]: {}})[labelKeyToDelete];
+              delete (expectedLabels as {[index: string]: {}})[
+                labelKeyToDelete
+              ];
 
               assert.deepStrictEqual(labels, expectedLabels);
 
@@ -1004,102 +1125,112 @@ describe('storage', () => {
   describe('bucket object lifecycle management', () => {
     it('should add a rule', done => {
       bucket.addLifecycleRule(
-          {
-            action: 'delete',
+        {
+          action: 'delete',
+          condition: {
+            age: 30,
+            isLive: true,
+          },
+        },
+        err => {
+          assert.ifError(err);
+
+          const rules = [].slice.call(bucket.metadata.lifecycle.rule);
+
+          assert.deepStrictEqual(rules.pop(), {
+            action: {
+              type: 'Delete',
+            },
             condition: {
               age: 30,
               isLive: true,
             },
-          },
-          err => {
-            assert.ifError(err);
-
-            const rules = [].slice.call(bucket.metadata.lifecycle.rule);
-
-            assert.deepStrictEqual(rules.pop(), {
-              action: {
-                type: 'Delete',
-              },
-              condition: {
-                age: 30,
-                isLive: true,
-              },
-            });
-
-            done();
           });
+
+          done();
+        }
+      );
     });
 
     it('should work with dates', done => {
       bucket.addLifecycleRule(
-          {
-            action: 'delete',
-            condition: {
-              createdBefore: new Date('2018'),
-            },
+        {
+          action: 'delete',
+          condition: {
+            createdBefore: new Date('2018'),
           },
-          err => {
-            assert.ifError(err);
+        },
+        err => {
+          assert.ifError(err);
 
-            const rules = [].slice.call(bucket.metadata.lifecycle.rule);
+          const rules = [].slice.call(bucket.metadata.lifecycle.rule);
 
-            assert.deepStrictEqual(rules.pop(), {
-              action: {
-                type: 'Delete',
-              },
-              condition: {
-                createdBefore: '2018-01-01',
-              },
-            });
-
-            done();
+          assert.deepStrictEqual(rules.pop(), {
+            action: {
+              type: 'Delete',
+            },
+            condition: {
+              createdBefore: '2018-01-01',
+            },
           });
+
+          done();
+        }
+      );
     });
 
     it('should append a new rule', done => {
       const numExistingRules =
-          bucket.metadata.lifecycle && bucket.metadata.lifecycle.rule.length;
+        bucket.metadata.lifecycle && bucket.metadata.lifecycle.rule.length;
 
       async.series(
-          [
-            next => bucket.addLifecycleRule(
-                {
-                  action: 'delete',
-                  condition: {
-                    age: 30,
-                    isLive: true,
-                  },
+        [
+          next =>
+            bucket.addLifecycleRule(
+              {
+                action: 'delete',
+                condition: {
+                  age: 30,
+                  isLive: true,
                 },
-                next),
+              },
+              next
+            ),
 
-            next => bucket.addLifecycleRule(
-                {
-                  action: 'delete',
-                  condition: {
-                    age: 60,
-                    isLive: true,
-                  },
+          next =>
+            bucket.addLifecycleRule(
+              {
+                action: 'delete',
+                condition: {
+                  age: 60,
+                  isLive: true,
                 },
-                next),
-          ],
-          err => {
-            assert.ifError(err);
-            assert.strictEqual(
-                bucket.metadata.lifecycle.rule.length, numExistingRules + 2);
-            done();
-          });
+              },
+              next
+            ),
+        ],
+        err => {
+          assert.ifError(err);
+          assert.strictEqual(
+            bucket.metadata.lifecycle.rule.length,
+            numExistingRules + 2
+          );
+          done();
+        }
+      );
     });
 
     it('should remove all existing rules', done => {
       bucket.setMetadata(
-          {
-            lifecycle: null,
-          },
-          (err: ApiError) => {
-            assert.ifError(err);
-            assert.strictEqual(bucket.metadata.lifecycle, undefined);
-            done();
-          });
+        {
+          lifecycle: null,
+        },
+        (err: ApiError) => {
+          assert.ifError(err);
+          assert.strictEqual(bucket.metadata.lifecycle, undefined);
+          done();
+        }
+      );
     });
   });
 
@@ -1111,94 +1242,99 @@ describe('storage', () => {
         const bucket = storage.bucket(generateName());
 
         async.series(
-            [
-              next => {
-                storage.createBucket(
-                    bucket.name, {
-                      retentionPolicy: {
-                        retentionPeriod: RETENTION_DURATION_SECONDS,
-                      },
-                    },
-                    err => {
-                      if (err) {
-                        next(err);
-                        return;
-                      }
+          [
+            next => {
+              storage.createBucket(
+                bucket.name,
+                {
+                  retentionPolicy: {
+                    retentionPeriod: RETENTION_DURATION_SECONDS,
+                  },
+                },
+                err => {
+                  if (err) {
+                    next(err);
+                    return;
+                  }
 
-                      next();
-                    });
-              },
-              next => bucket.getMetadata((err: ApiError) => next(err)),
-            ],
-            err => {
-              assert.ifError(err);
-              assert.strictEqual(
-                  bucket.metadata.retentionPolicy.retentionPeriod,
-                  `${RETENTION_DURATION_SECONDS}`);
-              done();
-            });
+                  next();
+                }
+              );
+            },
+            next => bucket.getMetadata((err: ApiError) => next(err)),
+          ],
+          err => {
+            assert.ifError(err);
+            assert.strictEqual(
+              bucket.metadata.retentionPolicy.retentionPeriod,
+              `${RETENTION_DURATION_SECONDS}`
+            );
+            done();
+          }
+        );
       });
 
       it('should set a retention policy', done => {
         const bucket = storage.bucket(generateName());
 
-        async.series<{}, Error|null>(
-            [
-              next => bucket.create(next),
-              next =>
-                  bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
-              next => bucket.getMetadata((err: ApiError) => next(err)),
-            ],
-            err => {
-              assert.ifError(err);
-              assert.strictEqual(
-                  bucket.metadata.retentionPolicy.retentionPeriod,
-                  `${RETENTION_DURATION_SECONDS}`);
-              done();
-            });
+        async.series<{}, Error | null>(
+          [
+            next => bucket.create(next),
+            next => bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
+            next => bucket.getMetadata((err: ApiError) => next(err)),
+          ],
+          err => {
+            assert.ifError(err);
+            assert.strictEqual(
+              bucket.metadata.retentionPolicy.retentionPeriod,
+              `${RETENTION_DURATION_SECONDS}`
+            );
+            done();
+          }
+        );
       });
 
       it('should lock the retention period', done => {
         const bucket = storage.bucket(generateName());
 
-        async.series<{}, Error|null>(
-            [
-              next => bucket.create(next),
-              next =>
-                  bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
-              next => bucket.getMetadata((err: ApiError) => next(err)),
-              next => {
-                bucket.lock(bucket.metadata.metageneration, next);
-              },
-              next => bucket.setRetentionPeriod(
-                  RETENTION_DURATION_SECONDS / 2, next),
-            ],
-            err => {
-              if (!err) {
-                done(new Error('Expected an error.'));
-                return;
-              }
-              assert.strictEqual((err as ApiError).code, 403);
-              done();
-            });
+        async.series<{}, Error | null>(
+          [
+            next => bucket.create(next),
+            next => bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
+            next => bucket.getMetadata((err: ApiError) => next(err)),
+            next => {
+              bucket.lock(bucket.metadata.metageneration, next);
+            },
+            next =>
+              bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS / 2, next),
+          ],
+          err => {
+            if (!err) {
+              done(new Error('Expected an error.'));
+              return;
+            }
+            assert.strictEqual((err as ApiError).code, 403);
+            done();
+          }
+        );
       });
 
       it('should remove a retention period', done => {
         const bucket = storage.bucket(generateName());
 
-        async.series<{}, Error|null>(
-            [
-              next => bucket.create(next),
-              next =>
-                  bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
-              next => bucket.removeRetentionPeriod(next),
-              next => bucket.getMetadata((err: ApiError) => next(err)),
-            ],
-            err => {
-              assert.ifError(err);
-              assert.strictEqual(bucket.metadata.retentionPolicy, undefined);
-              done();
-            });
+        async.series<{}, Error | null>(
+          [
+            next => bucket.create(next),
+            next => bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS, next),
+            next => bucket.removeRetentionPeriod(next),
+            next => bucket.getMetadata((err: ApiError) => next(err)),
+          ],
+          err => {
+            assert.ifError(err);
+            assert.strictEqual(bucket.metadata.retentionPolicy, undefined);
+            done();
+          }
+        );
       });
     });
 
@@ -1208,19 +1344,20 @@ describe('storage', () => {
 
       before(done => {
         BUCKET.create(
-            {
-              retentionPolicy: {
-                retentionPeriod: 1,
-              },
+          {
+            retentionPolicy: {
+              retentionPeriod: 1,
             },
-            err => {
-              if (err) {
-                done(err);
-                return;
-              }
+          },
+          err => {
+            if (err) {
+              done(err);
+              return;
+            }
 
-              FILE.save('data', done);
-            });
+            FILE.save('data', done);
+          }
+        );
       });
 
       afterEach(() => {
@@ -1233,36 +1370,38 @@ describe('storage', () => {
 
       it('should set and release an event-based hold', done => {
         async.series(
-            [
-              next => FILE.setMetadata({eventBasedHold: true}, next),
-              next => {
-                assert.strictEqual(FILE.metadata.eventBasedHold, true);
-                next();
-              },
-              next => FILE.setMetadata({eventBasedHold: false}, next),
-              next => {
-                assert.strictEqual(FILE.metadata.eventBasedHold, false);
-                next();
-              }
-            ],
-            done);
+          [
+            next => FILE.setMetadata({eventBasedHold: true}, next),
+            next => {
+              assert.strictEqual(FILE.metadata.eventBasedHold, true);
+              next();
+            },
+            next => FILE.setMetadata({eventBasedHold: false}, next),
+            next => {
+              assert.strictEqual(FILE.metadata.eventBasedHold, false);
+              next();
+            },
+          ],
+          done
+        );
       });
 
       it('should set and release a temporary hold', done => {
         async.series(
-            [
-              next => FILE.setMetadata({temporaryHold: true}, next),
-              next => {
-                assert.strictEqual(FILE.metadata.temporaryHold, true);
-                next();
-              },
-              next => FILE.setMetadata({temporaryHold: false}, next),
-              next => {
-                assert.strictEqual(FILE.metadata.temporaryHold, false);
-                next();
-              }
-            ],
-            done);
+          [
+            next => FILE.setMetadata({temporaryHold: true}, next),
+            next => {
+              assert.strictEqual(FILE.metadata.temporaryHold, true);
+              next();
+            },
+            next => FILE.setMetadata({temporaryHold: false}, next),
+            next => {
+              assert.strictEqual(FILE.metadata.temporaryHold, false);
+              next();
+            },
+          ],
+          done
+        );
       });
 
       it('should get an expiration date', done => {
@@ -1278,7 +1417,7 @@ describe('storage', () => {
       const BUCKET = storage.bucket(generateName());
       const FILES: File[] = [];
 
-      const RETENTION_PERIOD_SECONDS = 5;  // Each test has this much time!
+      const RETENTION_PERIOD_SECONDS = 5; // Each test has this much time!
 
       function createFile(callback: GetFileCallback) {
         const file = BUCKET.file(generateName());
@@ -1295,25 +1434,30 @@ describe('storage', () => {
       }
 
       function deleteFiles(callback: async.ErrorCallback) {
-        async.each(FILES, (file, next) => {
-          file.setMetadata({temporaryHold: null}, (err: ApiError|null) => {
-            if (err) {
-              next(err);
-              return;
-            }
-            file.delete(next as DeleteFileCallback);
-          });
-        }, callback);
+        async.each(
+          FILES,
+          (file, next) => {
+            file.setMetadata({temporaryHold: null}, (err: ApiError | null) => {
+              if (err) {
+                next(err);
+                return;
+              }
+              file.delete(next as DeleteFileCallback);
+            });
+          },
+          callback
+        );
       }
 
       before(done => {
         BUCKET.create(
-            {
-              retentionPolicy: {
-                retentionPeriod: RETENTION_PERIOD_SECONDS,
-              },
+          {
+            retentionPolicy: {
+              retentionPeriod: RETENTION_PERIOD_SECONDS,
             },
-            done);
+          },
+          done
+        );
       });
 
       after(done => {
@@ -1346,17 +1490,18 @@ describe('storage', () => {
 
   describe('requester pays', () => {
     const HAS_2ND_PROJECT =
-        process.env.GCN_STORAGE_2ND_PROJECT_ID !== undefined;
+      process.env.GCN_STORAGE_2ND_PROJECT_ID !== undefined;
     let bucket: Bucket;
 
     before(done => {
       bucket = storage.bucket(generateName());
 
       bucket.create(
-          {
-            requesterPays: true,
-          },
-          done);
+        {
+          requesterPays: true,
+        },
+        done
+      );
     });
 
     after(done => {
@@ -1364,7 +1509,7 @@ describe('storage', () => {
     });
 
     it('should have enabled requesterPays functionality', done => {
-      bucket.getMetadata((err: ApiError|null, metadata: Metadata) => {
+      bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
         assert.ifError(err);
         assert.strictEqual(metadata.billing.requesterPays, true);
         done();
@@ -1384,8 +1529,9 @@ describe('storage', () => {
       let bucketNonWhitelist: Bucket;
 
       function isRequesterPaysEnabled(
-          callback: (err: Error|null, isEnabled?: boolean) => void) {
-        bucket.getMetadata((err: ApiError|null, metadata: Metadata) => {
+        callback: (err: Error | null, isEnabled?: boolean) => void
+      ) {
+        bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
           if (err) {
             callback(err);
             return;
@@ -1456,34 +1602,35 @@ describe('storage', () => {
         before(() => {
           file = bucketNonWhitelist.file(generateName());
 
-          return bucket.enableRequesterPays()
-              .then(() => bucket.iam.getPolicy())
-              .then(data => {
-                const policy = data[0];
+          return bucket
+            .enableRequesterPays()
+            .then(() => bucket.iam.getPolicy())
+            .then(data => {
+              const policy = data[0];
 
-                // Allow an absolute or relative path (from project root)
-                // for the key file.
-                let key2 = process.env.GCN_STORAGE_2ND_PROJECT_KEY;
-                if (key2 && key2.charAt(0) === '.') {
-                  key2 = `${__dirname}/../../${key2}`;
-                }
+              // Allow an absolute or relative path (from project root)
+              // for the key file.
+              let key2 = process.env.GCN_STORAGE_2ND_PROJECT_KEY;
+              if (key2 && key2.charAt(0) === '.') {
+                key2 = `${__dirname}/../../${key2}`;
+              }
 
-                // Get the service account for the "second" account (the
-                // one that will read the requester pays file).
-                const clientEmail = require(key2!).client_email;
+              // Get the service account for the "second" account (the
+              // one that will read the requester pays file).
+              const clientEmail = require(key2!).client_email;
 
-                policy.bindings.push({
-                  role: 'roles/storage.admin',
-                  members: [`serviceAccount:${clientEmail}`],
-                });
-
-                return bucket.iam.setPolicy(policy);
-              })
-              .then(() => file.save('abc', USER_PROJECT_OPTIONS))
-              .then(() => topic.getMetadata())
-              .then(data => {
-                topicName = data[0].name;
+              policy.bindings.push({
+                role: 'roles/storage.admin',
+                members: [`serviceAccount:${clientEmail}`],
               });
+
+              return bucket.iam.setPolicy(policy);
+            })
+            .then(() => file.save('abc', USER_PROJECT_OPTIONS))
+            .then(() => topic.getMetadata())
+            .then(data => {
+              topicName = data[0].name;
+            });
         });
 
         // This acts as a test for the following methods:
@@ -1503,23 +1650,24 @@ describe('storage', () => {
 
         function doubleTest(testFunction: Function) {
           const failureMessage =
-              'Bucket is requester pays bucket but no user project provided.';
+            'Bucket is requester pays bucket but no user project provided.';
 
           return (done: async.ErrorCallback) => {
             async.series(
-                [
-                  next => {
-                    testFunction({}, (err: Error) => {
-                      assert(err.message.indexOf(failureMessage) > -1);
-                      next();
-                    });
-                  },
+              [
+                next => {
+                  testFunction({}, (err: Error) => {
+                    assert(err.message.indexOf(failureMessage) > -1);
+                    next();
+                  });
+                },
 
-                  next => {
-                    testFunction(USER_PROJECT_OPTIONS, next);
-                  },
-                ],
-                done);
+                next => {
+                  testFunction(USER_PROJECT_OPTIONS, next);
+                },
+              ],
+              done
+            );
           };
         }
 
@@ -1533,286 +1681,405 @@ describe('storage', () => {
             assert.ifError(err);
 
             const sourceFiles = files.map(x => x.file);
-            const destinationFile =
-                bucketNonWhitelist.file('file-one-n-two.txt');
+            const destinationFile = bucketNonWhitelist.file(
+              'file-one-n-two.txt'
+            );
 
             bucketNonWhitelist.combine(
-                sourceFiles, destinationFile, USER_PROJECT_OPTIONS, done);
+              sourceFiles,
+              destinationFile,
+              USER_PROJECT_OPTIONS,
+              done
+            );
           });
 
           // tslint:disable-next-line no-any
           function createFile(fileObject: any, callback: async.ErrorCallback) {
             fileObject.file.save(
-                fileObject.contents, USER_PROJECT_OPTIONS, callback);
+              fileObject.contents,
+              USER_PROJECT_OPTIONS,
+              callback
+            );
           }
         });
 
-        it('bucket#createNotification',
-           doubleTest(
-               (options: CreateNotificationOptions,
-                done: async.ErrorCallback) => {
-                 bucketNonWhitelist.createNotification(
-                     topicName, options, (err, _notification) => {
-                       notification = _notification!;
-                       done(err);
-                     });
-               }));
+        it(
+          'bucket#createNotification',
+          doubleTest(
+            (options: CreateNotificationOptions, done: async.ErrorCallback) => {
+              bucketNonWhitelist.createNotification(
+                topicName,
+                options,
+                (err, _notification) => {
+                  notification = _notification!;
+                  done(err);
+                }
+              );
+            }
+          )
+        );
 
-        it('bucket#exists',
-           doubleTest(
-               (options: BucketExistsOptions, done: BucketExistsCallback) => {
-                 bucketNonWhitelist.exists(options, done);
-               }));
+        it(
+          'bucket#exists',
+          doubleTest(
+            (options: BucketExistsOptions, done: BucketExistsCallback) => {
+              bucketNonWhitelist.exists(options, done);
+            }
+          )
+        );
 
-        it('bucket#get',
-           doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
-             // tslint:disable-next-line no-any
-             bucketNonWhitelist.get(options, done as any);
-           }));
+        it(
+          'bucket#get',
+          doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
+            // tslint:disable-next-line no-any
+            bucketNonWhitelist.get(options, done as any);
+          })
+        );
 
-        it('bucket#getMetadata',
-           doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
-             // tslint:disable-next-line no-any
-             bucketNonWhitelist.get(options, done as any);
-           }));
+        it(
+          'bucket#getMetadata',
+          doubleTest((options: GetBucketOptions, done: GetBucketCallback) => {
+            // tslint:disable-next-line no-any
+            bucketNonWhitelist.get(options, done as any);
+          })
+        );
 
-        it('bucket#getNotifications',
-           doubleTest(
-               (options: GetNotificationOptions,
-                done: GetNotificationsCallback) => {
-                 bucketNonWhitelist.getNotifications(options, done);
-               }));
+        it(
+          'bucket#getNotifications',
+          doubleTest(
+            (
+              options: GetNotificationOptions,
+              done: GetNotificationsCallback
+            ) => {
+              bucketNonWhitelist.getNotifications(options, done);
+            }
+          )
+        );
 
-        it('bucket#makePrivate',
-           doubleTest(
-               (options: MakeBucketPrivateOptions,
-                done: MakeBucketPrivateCallback) => {
-                 bucketNonWhitelist.makePrivate(options, done);
-               }));
+        it(
+          'bucket#makePrivate',
+          doubleTest(
+            (
+              options: MakeBucketPrivateOptions,
+              done: MakeBucketPrivateCallback
+            ) => {
+              bucketNonWhitelist.makePrivate(options, done);
+            }
+          )
+        );
 
-        it('bucket#setMetadata',
-           doubleTest(
-               (options: SetBucketMetadataOptions,
-                done: SetBucketMetadataCallback) => {
-                 bucketNonWhitelist.setMetadata(
-                     {newMetadata: true}, options, done);
-               }));
+        it(
+          'bucket#setMetadata',
+          doubleTest(
+            (
+              options: SetBucketMetadataOptions,
+              done: SetBucketMetadataCallback
+            ) => {
+              bucketNonWhitelist.setMetadata(
+                {newMetadata: true},
+                options,
+                done
+              );
+            }
+          )
+        );
 
-        it('bucket#setStorageClass',
-           doubleTest(
-               (options: SetStorageClassOptions,
-                done: SetStorageClassCallback) => {
-                 bucketNonWhitelist.setStorageClass(
-                     'multi-regional', options, done);
-               }));
+        it(
+          'bucket#setStorageClass',
+          doubleTest(
+            (
+              options: SetStorageClassOptions,
+              done: SetStorageClassCallback
+            ) => {
+              bucketNonWhitelist.setStorageClass(
+                'multi-regional',
+                options,
+                done
+              );
+            }
+          )
+        );
 
-        it('bucket#upload',
-           doubleTest((options: UploadOptions, done: UploadCallback) => {
-             bucketNonWhitelist.upload(FILES.big.path, options, done);
-           }));
+        it(
+          'bucket#upload',
+          doubleTest((options: UploadOptions, done: UploadCallback) => {
+            bucketNonWhitelist.upload(FILES.big.path, options, done);
+          })
+        );
 
-        it('file#copy',
-           doubleTest((options: CopyOptions, done: CopyCallback) => {
-             file.copy('new-file.txt', options, done);
-           }));
+        it(
+          'file#copy',
+          doubleTest((options: CopyOptions, done: CopyCallback) => {
+            file.copy('new-file.txt', options, done);
+          })
+        );
 
-        it('file#createReadStream',
-           doubleTest(
-               (options: CreateReadStreamOptions,
-                done: (err: Error) => void) => {
-                 file.createReadStream(options)
-                     .on('error', done)
-                     .on('end', done)
-                     .on('data', util.noop);
-               }));
+        it(
+          'file#createReadStream',
+          doubleTest(
+            (options: CreateReadStreamOptions, done: (err: Error) => void) => {
+              file
+                .createReadStream(options)
+                .on('error', done)
+                .on('end', done)
+                .on('data', util.noop);
+            }
+          )
+        );
 
-        it('file#createResumableUpload',
-           doubleTest(
-               (options: CreateResumableUploadOptions,
-                done: (err: Error) => void) => {
-                 file.createResumableUpload(options, (err, uri) => {
-                   if (err) {
-                     done(err);
-                     return;
-                   }
+        it(
+          'file#createResumableUpload',
+          doubleTest(
+            (
+              options: CreateResumableUploadOptions,
+              done: (err: Error) => void
+            ) => {
+              file.createResumableUpload(options, (err, uri) => {
+                if (err) {
+                  done(err);
+                  return;
+                }
 
-                   file.createWriteStream({uri})
-                       .on('error', done)
-                       .on('finish', done)
-                       .end('Test data');
-                 });
-               }));
+                file
+                  .createWriteStream({uri})
+                  .on('error', done)
+                  .on('finish', done)
+                  .end('Test data');
+              });
+            }
+          )
+        );
 
-        it('file#download',
-           doubleTest((options: DownloadOptions, done: DownloadCallback) => {
-             file.download(options, done);
-           }));
+        it(
+          'file#download',
+          doubleTest((options: DownloadOptions, done: DownloadCallback) => {
+            file.download(options, done);
+          })
+        );
 
-        it('file#exists',
-           doubleTest(
-               (options: FileExistsOptions, done: FileExistsCallback) => {
-                 file.exists(options, done);
-               }));
+        it(
+          'file#exists',
+          doubleTest((options: FileExistsOptions, done: FileExistsCallback) => {
+            file.exists(options, done);
+          })
+        );
 
-        it('file#get',
-           doubleTest((options: GetFileOptions, done: GetFileCallback) => {
-             file.get(options, (err: ApiError|null) => {
-               done(err);
-             });
-           }));
+        it(
+          'file#get',
+          doubleTest((options: GetFileOptions, done: GetFileCallback) => {
+            file.get(options, (err: ApiError | null) => {
+              done(err);
+            });
+          })
+        );
 
-        it('file#getMetadata',
-           doubleTest(
-               (options: GetFileMetadataOptions,
-                done: GetFileMetadataCallback) => {
-                 file.getMetadata(options, done);
-               }));
+        it(
+          'file#getMetadata',
+          doubleTest(
+            (
+              options: GetFileMetadataOptions,
+              done: GetFileMetadataCallback
+            ) => {
+              file.getMetadata(options, done);
+            }
+          )
+        );
 
-        it('file#makePrivate',
-           doubleTest(
-               (options: MakeFilePrivateOptions,
-                done: MakeFilePrivateCallback) => {
-                 file.makePrivate(options, done);
-               }));
+        it(
+          'file#makePrivate',
+          doubleTest(
+            (
+              options: MakeFilePrivateOptions,
+              done: MakeFilePrivateCallback
+            ) => {
+              file.makePrivate(options, done);
+            }
+          )
+        );
 
-        it('file#move',
-           doubleTest((options: GetFileOptions, done: SaveCallback) => {
-             const newFile = bucketNonWhitelist.file(generateName());
+        it(
+          'file#move',
+          doubleTest((options: GetFileOptions, done: SaveCallback) => {
+            const newFile = bucketNonWhitelist.file(generateName());
 
-             file.move(newFile, options, err => {
-               if (err) {
-                 done(err);
-                 return;
-               }
+            file.move(newFile, options, err => {
+              if (err) {
+                done(err);
+                return;
+              }
 
-               // Re-create the file. The tests need it.
-               file.save('newcontent', options, done);
-             });
-           }));
+              // Re-create the file. The tests need it.
+              file.save('newcontent', options, done);
+            });
+          })
+        );
 
-        it('file#setMetadata',
-           doubleTest(
-               (options: SetFileMetadataOptions,
-                done: SetFileMetadataCallback) => {
-                 file.setMetadata({newMetadata: true}, options, done);
-               }));
+        it(
+          'file#setMetadata',
+          doubleTest(
+            (
+              options: SetFileMetadataOptions,
+              done: SetFileMetadataCallback
+            ) => {
+              file.setMetadata({newMetadata: true}, options, done);
+            }
+          )
+        );
 
-        it('file#setStorageClass',
-           doubleTest(
-               (options: SetStorageClassOptions,
-                done: SetStorageClassCallback) => {
-                 file.setStorageClass('multi-regional', options, done);
-               }));
+        it(
+          'file#setStorageClass',
+          doubleTest(
+            (
+              options: SetStorageClassOptions,
+              done: SetStorageClassCallback
+            ) => {
+              file.setStorageClass('multi-regional', options, done);
+            }
+          )
+        );
 
-        it('acl#add',
-           doubleTest((options: AddAclOptions, done: AddAclCallback) => {
-             options = Object.assign(
-                 {
-                   entity: USER_ACCOUNT,
-                   role: storage.acl.OWNER_ROLE,
-                 },
-                 options);
+        it(
+          'acl#add',
+          doubleTest((options: AddAclOptions, done: AddAclCallback) => {
+            options = Object.assign(
+              {
+                entity: USER_ACCOUNT,
+                role: storage.acl.OWNER_ROLE,
+              },
+              options
+            );
 
-             bucketNonWhitelist.acl.add(options, done);
-           }));
+            bucketNonWhitelist.acl.add(options, done);
+          })
+        );
 
-        it('acl#update',
-           doubleTest((options: UpdateAclOptions, done: UpdateAclCallback) => {
-             options = Object.assign(
-                 {
-                   entity: USER_ACCOUNT,
-                   role: storage.acl.WRITER_ROLE,
-                 },
-                 options);
+        it(
+          'acl#update',
+          doubleTest((options: UpdateAclOptions, done: UpdateAclCallback) => {
+            options = Object.assign(
+              {
+                entity: USER_ACCOUNT,
+                role: storage.acl.WRITER_ROLE,
+              },
+              options
+            );
 
-             bucketNonWhitelist.acl.update(options, done);
-           }));
+            bucketNonWhitelist.acl.update(options, done);
+          })
+        );
 
-        it('acl#get',
-           doubleTest((options: GetAclOptions, done: GetAclCallback) => {
-             options = Object.assign(
-                 {
-                   entity: USER_ACCOUNT,
-                 },
-                 options);
+        it(
+          'acl#get',
+          doubleTest((options: GetAclOptions, done: GetAclCallback) => {
+            options = Object.assign(
+              {
+                entity: USER_ACCOUNT,
+              },
+              options
+            );
 
-             bucketNonWhitelist.acl.get(options, done);
-           }));
+            bucketNonWhitelist.acl.get(options, done);
+          })
+        );
 
-        it('acl#delete',
-           doubleTest((options: RemoveAclOptions, done: RemoveAclCallback) => {
-             options = Object.assign(
-                 {
-                   entity: USER_ACCOUNT,
-                 },
-                 options);
+        it(
+          'acl#delete',
+          doubleTest((options: RemoveAclOptions, done: RemoveAclCallback) => {
+            options = Object.assign(
+              {
+                entity: USER_ACCOUNT,
+              },
+              options
+            );
 
-             bucketNonWhitelist.acl.delete(options, done);
-           }));
+            bucketNonWhitelist.acl.delete(options, done);
+          })
+        );
 
-        it('iam#getPolicy',
-           doubleTest((options: GetPolicyOptions, done: GetPolicyCallback) => {
-             bucketNonWhitelist.iam.getPolicy(options, done);
-           }));
+        it(
+          'iam#getPolicy',
+          doubleTest((options: GetPolicyOptions, done: GetPolicyCallback) => {
+            bucketNonWhitelist.iam.getPolicy(options, done);
+          })
+        );
 
-        it('iam#setPolicy',
-           doubleTest((options: GetPolicyOptions, done: SetPolicyCallback) => {
-             bucket.iam.getPolicy((err, policy) => {
-               if (err) {
-                 done(err);
-                 return;
-               }
+        it(
+          'iam#setPolicy',
+          doubleTest((options: GetPolicyOptions, done: SetPolicyCallback) => {
+            bucket.iam.getPolicy((err, policy) => {
+              if (err) {
+                done(err);
+                return;
+              }
 
-               policy!.bindings.push({
-                 role: 'roles/storage.objectViewer',
-                 members: ['allUsers'],
-               });
+              policy!.bindings.push({
+                role: 'roles/storage.objectViewer',
+                members: ['allUsers'],
+              });
 
-               bucketNonWhitelist.iam.setPolicy(policy!, options, done);
-             });
-           }));
+              bucketNonWhitelist.iam.setPolicy(policy!, options, done);
+            });
+          })
+        );
 
-        it('iam#testPermissions',
-           doubleTest(
-               (options: TestIamPermissionsOptions,
-                done: TestIamPermissionsCallback) => {
-                 const tests = ['storage.buckets.delete'];
-                 bucketNonWhitelist.iam.testPermissions(tests, options, done);
-               }));
+        it(
+          'iam#testPermissions',
+          doubleTest(
+            (
+              options: TestIamPermissionsOptions,
+              done: TestIamPermissionsCallback
+            ) => {
+              const tests = ['storage.buckets.delete'];
+              bucketNonWhitelist.iam.testPermissions(tests, options, done);
+            }
+          )
+        );
 
-        it('notification#get',
-           doubleTest(
-               (options: GetNotificationOptions,
-                done: GetNotificationCallback) => {
-                 if (!notification) {
-                   throw new Error(
-                       'Notification was not successfully created.');
-                 }
+        it(
+          'notification#get',
+          doubleTest(
+            (
+              options: GetNotificationOptions,
+              done: GetNotificationCallback
+            ) => {
+              if (!notification) {
+                throw new Error('Notification was not successfully created.');
+              }
 
-                 notification.get(options, done);
-               }));
+              notification.get(options, done);
+            }
+          )
+        );
 
-        it('notification#getMetadata',
-           doubleTest(
-               (options: GetNotificationMetadataOptions,
-                done: GetNotificationMetadataCallback) => {
-                 if (!notification) {
-                   throw new Error(
-                       'Notification was not successfully created.');
-                 }
-                 notification.getMetadata(options, done);
-               }));
+        it(
+          'notification#getMetadata',
+          doubleTest(
+            (
+              options: GetNotificationMetadataOptions,
+              done: GetNotificationMetadataCallback
+            ) => {
+              if (!notification) {
+                throw new Error('Notification was not successfully created.');
+              }
+              notification.getMetadata(options, done);
+            }
+          )
+        );
 
-        it('notification#delete',
-           doubleTest(
-               (options: DeleteNotificationOptions,
-                done: DeleteNotificationCallback) => {
-                 if (!notification) {
-                   throw new Error(
-                       'Notification was not successfully created.');
-                 }
-                 notification.delete(options, done);
-               }));
+        it(
+          'notification#delete',
+          doubleTest(
+            (
+              options: DeleteNotificationOptions,
+              done: DeleteNotificationCallback
+            ) => {
+              if (!notification) {
+                throw new Error('Notification was not successfully created.');
+              }
+              notification.delete(options, done);
+            }
+          )
+        );
       });
     });
   });
@@ -1824,11 +2091,11 @@ describe('storage', () => {
         const hash = crypto.createHash('md5');
 
         fs.createReadStream(file.path)
-            .on('data', hash.update.bind(hash))
-            .on('end', () => {
-              file.hash = hash.digest('base64');
-              done();
-            });
+          .on('data', hash.update.bind(hash))
+          .on('end', () => {
+            file.hash = hash.digest('base64');
+            done();
+          });
       }
       // tslint:disable-next-line no-any
       async.each(Object.keys(FILES), setHash as any, done);
@@ -1846,16 +2113,16 @@ describe('storage', () => {
       writeStream.on('finish', () => {
         let data = Buffer.from('', 'utf8');
 
-        file.createReadStream()
-            .on('error', done)
-            .on('data',
-                (chunk: Buffer) => {
-                  data = Buffer.concat([data, chunk]);
-                })
-            .on('end', () => {
-              assert.strictEqual(data.toString(), contents);
-              done();
-            });
+        file
+          .createReadStream()
+          .on('error', done)
+          .on('data', (chunk: Buffer) => {
+            data = Buffer.concat([data, chunk]);
+          })
+          .on('end', () => {
+            assert.strictEqual(data.toString(), contents);
+            done();
+          });
       });
     });
 
@@ -1863,20 +2130,20 @@ describe('storage', () => {
       const file = bucket.file('non-existing-file');
       let dataEmitted = false;
 
-      file.createReadStream()
-          .on('data',
-              () => {
-                dataEmitted = true;
-              })
-          .on('error', err => {
-            assert.strictEqual(dataEmitted, false);
-            assert.strictEqual((err as ApiError).code, 404);
-            done();
-          });
+      file
+        .createReadStream()
+        .on('data', () => {
+          dataEmitted = true;
+        })
+        .on('error', err => {
+          assert.strictEqual(dataEmitted, false);
+          assert.strictEqual((err as ApiError).code, 404);
+          done();
+        });
     });
 
     it('should read a byte range from a file', done => {
-      bucket.upload(FILES.big.path, (err: Error|null, file?: File|null) => {
+      bucket.upload(FILES.big.path, (err: Error | null, file?: File | null) => {
         assert.ifError(err);
 
         const fileSize = file!.metadata.size;
@@ -1887,22 +2154,22 @@ describe('storage', () => {
         const expectedContentSize = byteRange.start + 1;
 
         let sizeStreamed = 0;
-        file!.createReadStream(byteRange)
-            .on('data',
-                chunk => {
-                  sizeStreamed += chunk.length;
-                })
-            .on('error', done)
-            .on('end', () => {
-              assert.strictEqual(sizeStreamed, expectedContentSize);
-              file!.delete(done);
-            });
+        file!
+          .createReadStream(byteRange)
+          .on('data', chunk => {
+            sizeStreamed += chunk.length;
+          })
+          .on('error', done)
+          .on('end', () => {
+            assert.strictEqual(sizeStreamed, expectedContentSize);
+            file!.delete(done);
+          });
       });
     });
 
     it('should download a file to memory', done => {
       const fileContents = fs.readFileSync(FILES.big.path);
-      bucket.upload(FILES.big.path, (err: Error|null, file?: File|null) => {
+      bucket.upload(FILES.big.path, (err: Error | null, file?: File | null) => {
         assert.ifError(err);
         file!.download((err, remoteContents) => {
           assert.ifError(err);
@@ -1943,8 +2210,9 @@ describe('storage', () => {
         },
       };
 
-      const expectedContents =
-          normalizeNewline(fs.readFileSync(FILES.html.path, 'utf-8'));
+      const expectedContents = normalizeNewline(
+        fs.readFileSync(FILES.html.path, 'utf-8')
+      );
 
       bucket.upload(FILES.gzip.path, options, (err, file) => {
         assert.ifError(err);
@@ -1952,7 +2220,7 @@ describe('storage', () => {
         // Sometimes this file is not found immediately; include some
         // retry to attempt to make the test less flaky.
         let attempt = 0;
-        const downloadCallback = (err: Error|null, contents: {}) => {
+        const downloadCallback = (err: Error | null, contents: {}) => {
           // If we got an error, gracefully retry a few times.
           if (err) {
             attempt += 1;
@@ -1988,12 +2256,12 @@ describe('storage', () => {
       it('should stream write, then remove file (3mb)', done => {
         const file = bucket.file('LargeFile');
         fs.createReadStream(FILES.big.path)
-            .pipe(file!.createWriteStream({resumable: false}))
-            .on('error', done)
-            .on('finish', () => {
-              assert.strictEqual(file.metadata.md5Hash, FILES.big.hash);
-              file.delete(done);
-            });
+          .pipe(file!.createWriteStream({resumable: false}))
+          .on('error', done)
+          .on('finish', () => {
+            assert.strictEqual(file.metadata.md5Hash, FILES.big.hash);
+            file.delete(done);
+          });
       });
 
       it('should write metadata', done => {
@@ -2003,10 +2271,12 @@ describe('storage', () => {
         };
         bucket.upload(FILES.logo.path, options, (err, file) => {
           assert.ifError(err);
-          file!.getMetadata((err: ApiError|null, metadata: Metadata) => {
+          file!.getMetadata((err: ApiError | null, metadata: Metadata) => {
             assert.ifError(err);
             assert.strictEqual(
-                metadata.contentType, options.metadata.contentType);
+              metadata.contentType,
+              options.metadata.contentType
+            );
             file!.delete(done);
           });
         });
@@ -2034,7 +2304,8 @@ describe('storage', () => {
             let sizeStreamed = 0;
 
             fs.createReadStream(FILES.big.path)
-                .pipe(through(function(chunk, enc, next) {
+              .pipe(
+                through(function(chunk, enc, next) {
                   sizeStreamed += chunk.length;
 
                   if (opts.interrupt && sizeStreamed >= fileSize / 2) {
@@ -2046,10 +2317,11 @@ describe('storage', () => {
                     this.push(chunk);
                     next();
                   }
-                }))
-                .pipe(ws)
-                .on('error', callback)
-                .on('finish', callback);
+                })
+              )
+              .pipe(ws)
+              .on('error', callback)
+              .on('finish', callback);
           }
         });
       });
@@ -2068,20 +2340,21 @@ describe('storage', () => {
           writable.end();
 
           writable.on('finish', () => {
-            file.createReadStream()
-                .on('error', done)
-                .pipe(fs.createWriteStream(tmpFilePath))
-                .on('error', done)
-                .on('finish', () => {
-                  file.delete((err: ApiError|null) => {
-                    assert.ifError(err);
+            file
+              .createReadStream()
+              .on('error', done)
+              .pipe(fs.createWriteStream(tmpFilePath))
+              .on('error', done)
+              .on('finish', () => {
+                file.delete((err: ApiError | null) => {
+                  assert.ifError(err);
 
-                    fs.readFile(tmpFilePath, (err, data) => {
-                      assert.strictEqual(data.toString(), fileContent);
-                      done();
-                    });
+                  fs.readFile(tmpFilePath, (err, data) => {
+                    assert.strictEqual(data.toString(), fileContent);
+                    done();
                   });
                 });
+              });
           });
         });
       });
@@ -2101,15 +2374,16 @@ describe('storage', () => {
 
       it('should not get the hashes from the unencrypted file', done => {
         unencryptedFile.getMetadata(
-            (err: ApiError|null, metadata: Metadata) => {
-              assert.ifError(err);
-              assert.strictEqual(metadata.crc32c, undefined);
-              done();
-            });
+          (err: ApiError | null, metadata: Metadata) => {
+            assert.ifError(err);
+            assert.strictEqual(metadata.crc32c, undefined);
+            done();
+          }
+        );
       });
 
       it('should get the hashes from the encrypted file', done => {
-        file.getMetadata((err: ApiError|null, metadata: Metadata) => {
+        file.getMetadata((err: ApiError | null, metadata: Metadata) => {
           assert.ifError(err);
           assert.notStrictEqual(metadata.crc32c, undefined);
           done();
@@ -2123,10 +2397,14 @@ describe('storage', () => {
             return;
           }
 
-          assert(err!.message.indexOf([
-            'The target object is encrypted by a',
-            'customer-supplied encryption key.',
-          ].join(' ')) > -1);
+          assert(
+            err!.message.indexOf(
+              [
+                'The target object is encrypted by a',
+                'customer-supplied encryption key.',
+              ].join(' ')
+            ) > -1
+          );
           done();
         });
       });
@@ -2169,109 +2447,111 @@ describe('storage', () => {
 
       function setProjectId(projectId: string) {
         PROJECT_ID = projectId;
-        keyRingsBaseUrl = `https://cloudkms.googleapis.com/v1/projects/${
-            PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings`;
+        keyRingsBaseUrl = `https://cloudkms.googleapis.com/v1/projects/${PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings`;
         kmsKeyName = generateKmsKeyName(cryptoKeyId);
       }
 
       function generateKmsKeyName(cryptoKeyId: string) {
-        return `projects/${PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings/${
-            keyRingId}/cryptoKeys/${cryptoKeyId}`;
+        return `projects/${PROJECT_ID}/locations/${BUCKET_LOCATION}/keyRings/${keyRingId}/cryptoKeys/${cryptoKeyId}`;
       }
 
       function createCryptoKey(
-          cryptoKeyId: string, callback: async.ErrorCallback) {
+        cryptoKeyId: string,
+        callback: async.ErrorCallback
+      ) {
         async.series(
-            [
-              function createCryptoKeyId(next) {
-                storage.request(
-                    {
-                      method: 'POST',
-                      uri: `${keyRingsBaseUrl}/${keyRingId}/cryptoKeys`,
-                      qs: {cryptoKeyId},
-                      json: {purpose: 'ENCRYPT_DECRYPT'},
-                    },
-                    next as BodyResponseCallback);
-              },
+          [
+            function createCryptoKeyId(next) {
+              storage.request(
+                {
+                  method: 'POST',
+                  uri: `${keyRingsBaseUrl}/${keyRingId}/cryptoKeys`,
+                  qs: {cryptoKeyId},
+                  json: {purpose: 'ENCRYPT_DECRYPT'},
+                },
+                next as BodyResponseCallback
+              );
+            },
 
-              function getServiceAccountEmail(next) {
-                if (SERVICE_ACCOUNT_EMAIL) {
-                  setImmediate(next);
+            function getServiceAccountEmail(next) {
+              if (SERVICE_ACCOUNT_EMAIL) {
+                setImmediate(next);
+                return;
+              }
+
+              storage.getServiceAccount((err, serviceAccount) => {
+                if (err) {
+                  next(err);
                   return;
                 }
+                SERVICE_ACCOUNT_EMAIL = serviceAccount!.emailAddress!;
+                next();
+              });
+            },
 
-                storage.getServiceAccount((err, serviceAccount) => {
-                  if (err) {
-                    next(err);
-                    return;
-                  }
-                  SERVICE_ACCOUNT_EMAIL = serviceAccount!.emailAddress!;
-                  next();
-                });
-              },
-
-              function grantPermissionToServiceAccount(next) {
-                storage.request(
-                    {
-                      method: 'POST',
-                      uri: `${keyRingsBaseUrl}/${keyRingId}/cryptoKeys/${
-                          cryptoKeyId}:setIamPolicy`,
-                      json: {
-                        policy: {
-                          bindings: [
-                            {
-                              role:
-                                  'roles/cloudkms.cryptoKeyEncrypterDecrypter',
-                              members:
-                                  `serviceAccount:${SERVICE_ACCOUNT_EMAIL}`,
-                            },
-                          ],
+            function grantPermissionToServiceAccount(next) {
+              storage.request(
+                {
+                  method: 'POST',
+                  uri: `${keyRingsBaseUrl}/${keyRingId}/cryptoKeys/${cryptoKeyId}:setIamPolicy`,
+                  json: {
+                    policy: {
+                      bindings: [
+                        {
+                          role: 'roles/cloudkms.cryptoKeyEncrypterDecrypter',
+                          members: `serviceAccount:${SERVICE_ACCOUNT_EMAIL}`,
                         },
-                      },
+                      ],
                     },
-                    next as BodyResponseCallback);
-              },
-            ],
-            callback);
+                  },
+                },
+                next as BodyResponseCallback
+              );
+            },
+          ],
+          callback
+        );
       }
 
       before(done => {
         bucket = storage.bucket(generateName());
 
         async.series(
-            [
-              function getProjectId(next) {
-                storage.authClient.getProjectId((err, projectId) => {
-                  if (err) {
-                    next(err);
-                    return;
-                  }
-                  setProjectId(projectId!);
-                  next();
-                });
-              },
-
-              function createBucket(next) {
-                bucket.create({location: BUCKET_LOCATION}, err => {
+          [
+            function getProjectId(next) {
+              storage.authClient.getProjectId((err, projectId) => {
+                if (err) {
                   next(err);
-                });
-              },
+                  return;
+                }
+                setProjectId(projectId!);
+                next();
+              });
+            },
 
-              function createKeyRing(next) {
-                storage.request(
-                    {
-                      method: 'POST',
-                      uri: keyRingsBaseUrl,
-                      qs: {keyRingId},
-                    },
-                    next);
-              },
+            function createBucket(next) {
+              bucket.create({location: BUCKET_LOCATION}, err => {
+                next(err);
+              });
+            },
 
-              next => {
-                createCryptoKey(cryptoKeyId, next);
-              },
-            ],
-            done);
+            function createKeyRing(next) {
+              storage.request(
+                {
+                  method: 'POST',
+                  uri: keyRingsBaseUrl,
+                  qs: {keyRingId},
+                },
+                next
+              );
+            },
+
+            next => {
+              createCryptoKey(cryptoKeyId, next);
+            },
+          ],
+          done
+        );
       });
 
       describe('files', () => {
@@ -2283,14 +2563,16 @@ describe('storage', () => {
         });
 
         it('should have set kmsKeyName on created file', done => {
-          file.getMetadata((err: ApiError|null, metadata: Metadata) => {
+          file.getMetadata((err: ApiError | null, metadata: Metadata) => {
             assert.ifError(err);
 
             // Strip the project ID, as it could be the placeholder locally, but
             // the real value upstream.
             const projectIdRegExp = /^.+\/locations/;
-            const actualKmsKeyName =
-                metadata.kmsKeyName.replace(projectIdRegExp, '');
+            const actualKmsKeyName = metadata.kmsKeyName.replace(
+              projectIdRegExp,
+              ''
+            );
             let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
             // Upstream attaches a version.
@@ -2308,14 +2590,16 @@ describe('storage', () => {
           file.save(FILE_CONTENTS, {resumable: true}, err => {
             assert.ifError(err);
 
-            file.getMetadata((err: ApiError|null, metadata: Metadata) => {
+            file.getMetadata((err: ApiError | null, metadata: Metadata) => {
               assert.ifError(err);
 
               // Strip the project ID, as it could be the placeholder locally,
               // but the real value upstream.
               const projectIdRegExp = /^.+\/locations/;
-              const actualKmsKeyName =
-                  metadata.kmsKeyName.replace(projectIdRegExp, '');
+              const actualKmsKeyName = metadata.kmsKeyName.replace(
+                projectIdRegExp,
+                ''
+              );
               let expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
               // Upstream attaches a version.
@@ -2373,42 +2657,46 @@ describe('storage', () => {
         before(done => {
           bucket = storage.bucket(generateName(), {kmsKeyName});
           async.series(
-              [
-                function createBucket(next) {
-                  bucket.create(next);
-                },
+            [
+              function createBucket(next) {
+                bucket.create(next);
+              },
 
-                function setDefaultKmsKeyName(next) {
-                  bucket.setMetadata(
-                      {
-                        encryption: {
-                          defaultKmsKeyName: kmsKeyName,
-                        },
-                      },
-                      next);
-                },
-              ],
-              done);
+              function setDefaultKmsKeyName(next) {
+                bucket.setMetadata(
+                  {
+                    encryption: {
+                      defaultKmsKeyName: kmsKeyName,
+                    },
+                  },
+                  next
+                );
+              },
+            ],
+            done
+          );
         });
 
         after(done => {
           bucket.setMetadata(
-              {
-                encryption: null,
-              },
-              done);
+            {
+              encryption: null,
+            },
+            done
+          );
         });
 
         it('should have set defaultKmsKeyName on created bucket', done => {
-          bucket.getMetadata((err: ApiError|null, metadata: Metadata) => {
+          bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
             assert.ifError(err);
 
             // Strip the project ID, as it could be the placeholder locally, but
             // the real value upstream.
             const projectIdRegExp = /^.+\/locations/;
-            const actualKmsKeyName =
-                metadata.encryption.defaultKmsKeyName.replace(
-                    projectIdRegExp, '');
+            const actualKmsKeyName = metadata.encryption.defaultKmsKeyName.replace(
+              projectIdRegExp,
+              ''
+            );
             const expectedKmsKeyName = kmsKeyName.replace(projectIdRegExp, '');
 
             assert.strictEqual(actualKmsKeyName, expectedKmsKeyName);
@@ -2425,19 +2713,20 @@ describe('storage', () => {
             assert.ifError(err);
 
             bucket.setMetadata(
-                {
-                  encryption: {
-                    defaultKmsKeyName: newKmsKeyName,
-                  },
+              {
+                encryption: {
+                  defaultKmsKeyName: newKmsKeyName,
                 },
-                done);
+              },
+              done
+            );
           });
         });
 
         it('should insert an object that inherits the kms key name', done => {
           const file = bucket.file('kms-encrypted-file');
 
-          bucket.getMetadata((err: ApiError|null, metadata: Metadata) => {
+          bucket.getMetadata((err: ApiError | null, metadata: Metadata) => {
             assert.ifError(err);
 
             const defaultKmsKeyName = metadata.encryption.defaultKmsKeyName;
@@ -2448,10 +2737,14 @@ describe('storage', () => {
               // Strip the project ID, as it could be the placeholder locally,
               // but the real value upstream.
               const projectIdRegExp = /^.+\/locations/;
-              const actualKmsKeyName =
-                  file.metadata.kmsKeyName.replace(projectIdRegExp, '');
-              let expectedKmsKeyName =
-                  defaultKmsKeyName.replace(projectIdRegExp, '');
+              const actualKmsKeyName = file.metadata.kmsKeyName.replace(
+                projectIdRegExp,
+                ''
+              );
+              let expectedKmsKeyName = defaultKmsKeyName.replace(
+                projectIdRegExp,
+                ''
+              );
 
               // Upstream attaches a version.
               expectedKmsKeyName = `${expectedKmsKeyName}/cryptoKeyVersions/1`;
@@ -2473,8 +2766,9 @@ describe('storage', () => {
         file!.copy('CloudLogoCopy', (err, copiedFile) => {
           assert.ifError(err);
           async.parallel(
-              [file!.delete.bind(file), copiedFile!.delete.bind(copiedFile)],
-              done);
+            [file!.delete.bind(file), copiedFile!.delete.bind(copiedFile)],
+            done
+          );
         });
       });
     });
@@ -2525,37 +2819,38 @@ describe('storage', () => {
     it('should allow changing the storage class', done => {
       const file = bucket.file(generateName());
       async.series(
-          [
-            next => {
-              // tslint:disable-next-line no-any
-              bucket.upload(FILES.logo.path, {destination: file}, next as any);
-            },
+        [
+          next => {
+            // tslint:disable-next-line no-any
+            bucket.upload(FILES.logo.path, {destination: file}, next as any);
+          },
 
-            next => {
-              file.setStorageClass('standard', next);
-            },
+          next => {
+            file.setStorageClass('standard', next);
+          },
 
-            next => {
-              file.getMetadata((err: ApiError|null, metadata: Metadata) => {
-                assert.ifError(err);
-                assert.strictEqual(metadata.storageClass, 'STANDARD');
-                next();
-              });
-            },
-
-            next => {
-              file.setStorageClass('multi-regional', next);
-            },
-          ],
-          err => {
-            assert.ifError(err);
-
-            file.getMetadata((err: ApiError|null, metadata: Metadata) => {
+          next => {
+            file.getMetadata((err: ApiError | null, metadata: Metadata) => {
               assert.ifError(err);
-              assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
-              done();
+              assert.strictEqual(metadata.storageClass, 'STANDARD');
+              next();
             });
+          },
+
+          next => {
+            file.setStorageClass('multi-regional', next);
+          },
+        ],
+        err => {
+          assert.ifError(err);
+
+          file.getMetadata((err: ApiError | null, metadata: Metadata) => {
+            assert.ifError(err);
+            assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
+            done();
           });
+        }
+      );
     });
   });
 
@@ -2565,7 +2860,7 @@ describe('storage', () => {
         address: 'https://yahoo.com',
       };
 
-      bucket.createChannel('new-channel', config, (err: Error|null) => {
+      bucket.createChannel('new-channel', config, (err: Error | null) => {
         // Actually creating a channel is pretty complicated. This will at least
         // let us know we hit the right endpoint and it received "yahoo.com".
         assert(err!.message.includes(config.address));
@@ -2579,7 +2874,7 @@ describe('storage', () => {
       const channel = storage.channel('id', 'resource-id');
       channel.stop(err => {
         assert.strictEqual((err as ApiError).code, 404);
-        assert.strictEqual(err!.message.indexOf('Channel \'id\' not found'), 0);
+        assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
         done();
       });
     });
@@ -2605,7 +2900,9 @@ describe('storage', () => {
             assert.ifError(err);
 
             assert.strictEqual(
-                contents.toString(), files.map(x => x.contents).join(''));
+              contents.toString(),
+              files.map(x => x.contents).join('')
+            );
 
             async.each(sourceFiles.concat([destinationFile]), deleteFile, done);
           });
@@ -2656,16 +2953,16 @@ describe('storage', () => {
     it('should get files as a stream', done => {
       let numFilesEmitted = 0;
 
-      bucket.getFilesStream()
-          .on('error', done)
-          .on('data',
-              () => {
-                numFilesEmitted++;
-              })
-          .on('end', () => {
-            assert.strictEqual(numFilesEmitted, NEW_FILES.length);
-            done();
-          });
+      bucket
+        .getFilesStream()
+        .on('error', done)
+        .on('data', () => {
+          numFilesEmitted++;
+        })
+        .on('end', () => {
+          assert.strictEqual(numFilesEmitted, NEW_FILES.length);
+          done();
+        });
     });
 
     it('should get files from a directory', done => {
@@ -2679,16 +2976,16 @@ describe('storage', () => {
     it('should get files from a directory as a stream', done => {
       let numFilesEmitted = 0;
 
-      bucket.getFilesStream({directory: DIRECTORY_NAME})
-          .on('error', done)
-          .on('data',
-              () => {
-                numFilesEmitted++;
-              })
-          .on('end', () => {
-            assert.strictEqual(numFilesEmitted, 3);
-            done();
-          });
+      bucket
+        .getFilesStream({directory: DIRECTORY_NAME})
+        .on('error', done)
+        .on('data', () => {
+          numFilesEmitted++;
+        })
+        .on('end', () => {
+          assert.strictEqual(numFilesEmitted, 3);
+          done();
+        });
     });
 
     it('should paginate the list', done => {
@@ -2714,26 +3011,28 @@ describe('storage', () => {
 
     before(done => {
       bucketWithVersioning.create(
-          {
-            versioning: {
-              enabled: true,
-            },
+        {
+          versioning: {
+            enabled: true,
           },
-          done);
+        },
+        done
+      );
     });
 
     after(done => {
       bucketWithVersioning.deleteFiles(
-          {
-            versions: true,
-          },
-          err => {
-            if (err) {
-              done(err);
-              return;
-            }
-            bucketWithVersioning.delete(done);
-          });
+        {
+          versions: true,
+        },
+        err => {
+          if (err) {
+            done(err);
+            return;
+          }
+          bucketWithVersioning.delete(done);
+        }
+      );
     });
 
     it('should overwrite file, then get older version', done => {
@@ -2742,25 +3041,30 @@ describe('storage', () => {
       versionedFile.save('a', err => {
         assert.ifError(err);
 
-        versionedFile.getMetadata((err: ApiError|null, metadata: Metadata) => {
-          assert.ifError(err);
-
-          const initialGeneration = metadata.generation;
-
-          versionedFile.save('b', err => {
+        versionedFile.getMetadata(
+          (err: ApiError | null, metadata: Metadata) => {
             assert.ifError(err);
 
-            const firstGenFile = bucketWithVersioning.file(versionedFile.name, {
-              generation: initialGeneration,
-            });
+            const initialGeneration = metadata.generation;
 
-            firstGenFile.download((err, contents) => {
+            versionedFile.save('b', err => {
               assert.ifError(err);
-              assert.strictEqual(contents.toString(), 'a');
-              done();
+
+              const firstGenFile = bucketWithVersioning.file(
+                versionedFile.name,
+                {
+                  generation: initialGeneration,
+                }
+              );
+
+              firstGenFile.download((err, contents) => {
+                assert.ifError(err);
+                assert.strictEqual(contents.toString(), 'a');
+                done();
+              });
             });
-          });
-        });
+          }
+        );
       });
     });
 
@@ -2781,7 +3085,9 @@ describe('storage', () => {
 
           // different generations.
           assert.notStrictEqual(
-              files![0].metadata.generation, files![1].metadata.generation);
+            files![0].metadata.generation,
+            files![1].metadata.generation
+          );
 
           done();
         });
@@ -2801,9 +3107,9 @@ describe('storage', () => {
     beforeEach(done => {
       file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(FILES.logo.path)
-          .pipe(file.createWriteStream())
-          .on('error', done)
-          .on('finish', done.bind(null, null));
+        .pipe(file.createWriteStream())
+        .on('error', done)
+        .on('finish', done.bind(null, null));
     });
 
     it('should create a signed read url', async () => {
@@ -2828,8 +3134,8 @@ describe('storage', () => {
 
       await fetch(signedDeleteUrl, {method: 'DELETE'});
       assert.rejects(
-          () => file.getMetadata(),
-          (err: ApiError) => err.code === 404,
+        () => file.getMetadata(),
+        (err: ApiError) => err.code === 404
       );
     });
 
@@ -2858,9 +3164,9 @@ describe('storage', () => {
     before(done => {
       file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(FILES.logo.path)
-          .pipe(file.createWriteStream())
-          .on('error', done)
-          .on('finish', done.bind(null, null));
+        .pipe(file.createWriteStream())
+        .on('error', done)
+        .on('finish', done.bind(null, null));
     });
 
     it('should create a signed read url', async () => {
@@ -2884,12 +3190,11 @@ describe('storage', () => {
       });
       await fetch(signedDeleteUrl!, {method: 'DELETE'});
       assert.rejects(
-          () => file.getMetadata(),
-          (err: ApiError) => err.code === 404,
+        () => file.getMetadata(),
+        (err: ApiError) => err.code === 404
       );
     });
   });
-
 
   describe('sign policy', () => {
     let file: File;
@@ -2897,9 +3202,9 @@ describe('storage', () => {
     before(done => {
       file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(FILES.logo.path)
-          .pipe(file.createWriteStream())
-          .on('error', done)
-          .on('finish', done.bind(null, null));
+        .pipe(file.createWriteStream())
+        .on('error', done)
+        .on('finish', done.bind(null, null));
     });
 
     beforeEach(function() {
@@ -2946,29 +3251,34 @@ describe('storage', () => {
 
     before(() => {
       return bucket
-          .createNotification(topic, {
-            eventTypes: ['OBJECT_FINALIZE'],
-          })
-          .then(data => {
-            notification = data[0];
-            subscription = topic.subscription(generateName());
+        .createNotification(topic, {
+          eventTypes: ['OBJECT_FINALIZE'],
+        })
+        .then(data => {
+          notification = data[0];
+          subscription = topic.subscription(generateName());
 
-            return subscription.create();
-          });
+          return subscription.create();
+        });
     });
 
     after(() => {
-      return subscription.delete()
+      return (
+        subscription
+          .delete()
           .then(() => {
             return bucket.getNotifications();
           })
           // tslint:disable-next-line no-any
           .then((data: any) => {
-            // tslint:disable-next-line no-any
-            return Promise.all(data[0].map((notification: any) => {
-              return notification.delete();
-            }));
-          });
+            return Promise.all(
+              // tslint:disable-next-line no-any
+              data[0].map((notification: any) => {
+                return notification.delete();
+              })
+            );
+          })
+      );
     });
 
     it('should get an existing notification', done => {
@@ -2980,7 +3290,7 @@ describe('storage', () => {
     });
 
     it('should get a notifications metadata', done => {
-      notification.getMetadata((err: ApiError|null, metadata: Metadata) => {
+      notification.getMetadata((err: ApiError | null, metadata: Metadata) => {
         assert.ifError(err);
         assert(metadata !== null && typeof metadata === 'object');
         done();
@@ -2988,7 +3298,7 @@ describe('storage', () => {
     });
 
     it('should tell us if a notification exists', done => {
-      notification.exists((err: ApiError|null, exists: boolean) => {
+      notification.exists((err: ApiError | null, exists: boolean) => {
         assert.ifError(err);
         assert(exists);
         done();
@@ -2998,7 +3308,7 @@ describe('storage', () => {
     it('should tell us if a notification does not exist', done => {
       const notification = bucket.notification('123');
 
-      notification.exists((err: ApiError|null, exists: boolean) => {
+      notification.exists((err: ApiError | null, exists: boolean) => {
         assert.ifError(err);
         assert.strictEqual(exists, false);
         done();
@@ -3021,7 +3331,7 @@ describe('storage', () => {
         done();
       });
 
-      bucket.upload(FILES.logo.path, (err: Error|null) => {
+      bucket.upload(FILES.logo.path, (err: Error | null) => {
         if (err) {
           done(err);
         }
@@ -3033,36 +3343,42 @@ describe('storage', () => {
       let notification: Notification;
 
       return bucket
-          .createNotification(topic, {
-            eventTypes: ['OBJECT_DELETE'],
-          })
-          .then(data => {
-            notification = data[0];
-            return bucket.getNotifications();
-          })
-          .then(data => {
-            notificationCount = data[0].length;
-            return notification.delete();
-          })
-          .then(() => {
-            return bucket.getNotifications();
-          })
-          .then(data => {
-            assert.strictEqual(data[0].length, notificationCount - 1);
-          });
+        .createNotification(topic, {
+          eventTypes: ['OBJECT_DELETE'],
+        })
+        .then(data => {
+          notification = data[0];
+          return bucket.getNotifications();
+        })
+        .then(data => {
+          notificationCount = data[0].length;
+          return notification.delete();
+        })
+        .then(() => {
+          return bucket.getNotifications();
+        })
+        .then(data => {
+          assert.strictEqual(data[0].length, notificationCount - 1);
+        });
     });
   });
 
   function deleteBucket(
-      bucket: Bucket, options: {}, callback: DeleteBucketCallback): void;
+    bucket: Bucket,
+    options: {},
+    callback: DeleteBucketCallback
+  ): void;
   function deleteBucket(bucket: Bucket, callback: DeleteBucketCallback): void;
   function deleteBucket(
-      bucket: Bucket, optsOrCb: {}|DeleteBucketCallback,
-      callback?: DeleteBucketCallback) {
+    bucket: Bucket,
+    optsOrCb: {} | DeleteBucketCallback,
+    callback?: DeleteBucketCallback
+  ) {
     let options = typeof optsOrCb === 'object' ? optsOrCb : {};
-    callback = typeof optsOrCb === 'function' ?
-        optsOrCb as DeleteBucketCallback :
-        callback;
+    callback =
+      typeof optsOrCb === 'function'
+        ? (optsOrCb as DeleteBucketCallback)
+        : callback;
 
     // After files are deleted, eventual consistency may require a bit of a
     // delay to ensure that the bucket recognizes that the files don't exist
@@ -3095,7 +3411,10 @@ describe('storage', () => {
   }
 
   function shortUUID() {
-    return uuid.v1().split('-').shift();
+    return uuid
+      .v1()
+      .split('-')
+      .shift();
   }
 
   function generateName() {
@@ -3104,16 +3423,17 @@ describe('storage', () => {
 
   function deleteAllBuckets(callback: async.ErrorCallback) {
     storage.getBuckets(
-        {
-          prefix: TESTS_PREFIX,
-        },
-        (err, buckets) => {
-          if (err) {
-            callback(err);
-            return;
-          }
-          async.eachLimit(buckets, 10, deleteBucket, callback);
-        });
+      {
+        prefix: TESTS_PREFIX,
+      },
+      (err, buckets) => {
+        if (err) {
+          callback(err);
+          return;
+        }
+        async.eachLimit(buckets, 10, deleteBucket, callback);
+      }
+    );
   }
 
   function deleteAllTopics(callback: async.ErrorCallback) {

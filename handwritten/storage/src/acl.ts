@@ -14,21 +14,32 @@
  * limitations under the License.
  */
 
-import {BodyResponseCallback, DecorateRequestOptions, Metadata} from '@google-cloud/common';
+import {
+  BodyResponseCallback,
+  DecorateRequestOptions,
+  Metadata,
+} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 
 export interface AclOptions {
   pathPrefix: string;
-  request:
-      (reqOpts: DecorateRequestOptions, callback: BodyResponseCallback) => void;
+  request: (
+    reqOpts: DecorateRequestOptions,
+    callback: BodyResponseCallback
+  ) => void;
 }
 
-export type GetAclResponse =
-    [AccessControlObject | AccessControlObject[], Metadata];
+export type GetAclResponse = [
+  AccessControlObject | AccessControlObject[],
+  Metadata
+];
 export interface GetAclCallback {
-  (err: Error|null, acl?: AccessControlObject|AccessControlObject[]|null,
-   apiResponse?: Metadata): void;
+  (
+    err: Error | null,
+    acl?: AccessControlObject | AccessControlObject[] | null,
+    apiResponse?: Metadata
+  ): void;
 }
 export interface GetAclOptions {
   entity: string;
@@ -44,8 +55,11 @@ export interface UpdateAclOptions {
 }
 export type UpdateAclResponse = [AccessControlObject, Metadata];
 export interface UpdateAclCallback {
-  (err: Error|null, acl?: AccessControlObject|null,
-   apiResponse?: Metadata): void;
+  (
+    err: Error | null,
+    acl?: AccessControlObject | null,
+    apiResponse?: Metadata
+  ): void;
 }
 
 export interface AddAclOptions {
@@ -56,12 +70,15 @@ export interface AddAclOptions {
 }
 export type AddAclResponse = [AccessControlObject, Metadata];
 export interface AddAclCallback {
-  (err: Error|null, acl?: AccessControlObject|null,
-   apiResponse?: Metadata): void;
+  (
+    err: Error | null,
+    acl?: AccessControlObject | null,
+    apiResponse?: Metadata
+  ): void;
 }
 export type RemoveAclResponse = [Metadata];
 export interface RemoveAclCallback {
-  (err: Error|null, apiResponse?: Metadata): void;
+  (err: Error | null, apiResponse?: Metadata): void;
 }
 export interface RemoveAclOptions {
   entity: string;
@@ -292,41 +309,45 @@ class AclRoleAccessorMethods {
         // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the
         // more complex API of specifying an `entity` and `role`.
         // tslint:disable-next-line:no-any
-        (acc as any)[method] =
-            (entityId: string, options: {}, callback: Function|{}) => {
-              let apiEntity;
+        (acc as any)[method] = (
+          entityId: string,
+          options: {},
+          callback: Function | {}
+        ) => {
+          let apiEntity;
 
-              if (typeof options === 'function') {
-                callback = options;
-                options = {};
-              }
+          if (typeof options === 'function') {
+            callback = options;
+            options = {};
+          }
 
-              if (isPrefix) {
-                apiEntity = entity + entityId;
-              } else {
-                // If the entity is not a prefix, it is a special entity group
-                // that does not require further details. The accessor methods
-                // only accept a callback.
-                apiEntity = entity;
-                callback = entityId;
-              }
+          if (isPrefix) {
+            apiEntity = entity + entityId;
+          } else {
+            // If the entity is not a prefix, it is a special entity group
+            // that does not require further details. The accessor methods
+            // only accept a callback.
+            apiEntity = entity;
+            callback = entityId;
+          }
 
-              options = Object.assign(
-                  {
-                    entity: apiEntity,
-                    role,
-                  },
-                  options);
+          options = Object.assign(
+            {
+              entity: apiEntity,
+              role,
+            },
+            options
+          );
 
-              const args = [options];
+          const args = [options];
 
-              if (typeof callback === 'function') {
-                args.push(callback);
-              }
+          if (typeof callback === 'function') {
+            args.push(callback);
+          }
 
-              // tslint:disable-next-line:no-any
-              return (this as any)[accessMethod].apply(this, args);
-            };
+          // tslint:disable-next-line:no-any
+          return (this as any)[accessMethod].apply(this, args);
+        };
       });
 
       return acc;
@@ -376,10 +397,12 @@ class AclRoleAccessorMethods {
  * @param {object} options Configuration options.
  */
 class Acl extends AclRoleAccessorMethods {
-  default !: Acl;
+  default!: Acl;
   pathPrefix: string;
-  request_:
-      (reqOpts: DecorateRequestOptions, callback: BodyResponseCallback) => void;
+  request_: (
+    reqOpts: DecorateRequestOptions,
+    callback: BodyResponseCallback
+  ) => void;
 
   constructor(options: AclOptions) {
     super();
@@ -462,8 +485,10 @@ class Acl extends AclRoleAccessorMethods {
    * region_tag:storage_add_bucket_default_owner
    * Example of adding a default owner to a bucket:
    */
-  add(options: AddAclOptions,
-      callback?: AddAclCallback): void|Promise<AddAclResponse> {
+  add(
+    options: AddAclOptions,
+    callback?: AddAclCallback
+  ): void | Promise<AddAclResponse> {
     const query = {} as AclQuery;
 
     if (options.generation) {
@@ -475,23 +500,24 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-        {
-          method: 'POST',
-          uri: '',
-          qs: query,
-          json: {
-            entity: options.entity,
-            role: options.role.toUpperCase(),
-          },
+      {
+        method: 'POST',
+        uri: '',
+        qs: query,
+        json: {
+          entity: options.entity,
+          role: options.role.toUpperCase(),
         },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, resp);
-            return;
-          }
+      },
+      (err, resp) => {
+        if (err) {
+          callback!(err, null, resp);
+          return;
+        }
 
-          callback!(null, this.makeAclObject_(resp), resp);
-        });
+        callback!(null, this.makeAclObject_(resp), resp);
+      }
+    );
   }
 
   delete(options: RemoveAclOptions): Promise<RemoveAclResponse>;
@@ -556,8 +582,10 @@ class Acl extends AclRoleAccessorMethods {
    * region_tag:storage_remove_file_owner
    * Example of removing an owner from a bucket:
    */
-  delete(options: RemoveAclOptions, callback?: RemoveAclCallback):
-      void|Promise<RemoveAclResponse> {
+  delete(
+    options: RemoveAclOptions,
+    callback?: RemoveAclCallback
+  ): void | Promise<RemoveAclResponse> {
     const query = {} as AclQuery;
 
     if (options.generation) {
@@ -569,14 +597,15 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-        {
-          method: 'DELETE',
-          uri: '/' + encodeURIComponent(options.entity),
-          qs: query,
-        },
-        (err, resp) => {
-          callback!(err, resp);
-        });
+      {
+        method: 'DELETE',
+        uri: '/' + encodeURIComponent(options.entity),
+        qs: query,
+      },
+      (err, resp) => {
+        callback!(err, resp);
+      }
+    );
   }
 
   get(options?: GetAclOptions): Promise<GetAclResponse>;
@@ -665,12 +694,14 @@ class Acl extends AclRoleAccessorMethods {
    * region_tag:storage_print_bucket_acl_for_user
    * Example of printing a bucket's ACL for a specific user:
    */
-  get(optionsOrCallback?: GetAclOptions|GetAclCallback,
-      cb?: GetAclCallback): void|Promise<GetAclResponse> {
+  get(
+    optionsOrCallback?: GetAclOptions | GetAclCallback,
+    cb?: GetAclCallback
+  ): void | Promise<GetAclResponse> {
     const options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : null;
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : null;
     const callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
     let path = '';
     const query = {} as AclQuery;
 
@@ -687,26 +718,27 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-        {
-          uri: path,
-          qs: query,
-        },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, resp);
-            return;
-          }
+      {
+        uri: path,
+        qs: query,
+      },
+      (err, resp) => {
+        if (err) {
+          callback!(err, null, resp);
+          return;
+        }
 
-          let results;
+        let results;
 
-          if (resp.items) {
-            results = arrify(resp.items).map(this.makeAclObject_);
-          } else {
-            results = this.makeAclObject_(resp);
-          }
+        if (resp.items) {
+          results = arrify(resp.items).map(this.makeAclObject_);
+        } else {
+          results = this.makeAclObject_(resp);
+        }
 
-          callback!(null, results, resp);
-        });
+        callback!(null, results, resp);
+      }
+    );
   }
 
   update(options: UpdateAclOptions): Promise<UpdateAclResponse>;
@@ -768,8 +800,10 @@ class Acl extends AclRoleAccessorMethods {
    *   const apiResponse = data[1];
    * });
    */
-  update(options: UpdateAclOptions, callback?: UpdateAclCallback):
-      void|Promise<UpdateAclResponse> {
+  update(
+    options: UpdateAclOptions,
+    callback?: UpdateAclCallback
+  ): void | Promise<UpdateAclResponse> {
     const query = {} as AclQuery;
 
     if (options.generation) {
@@ -781,22 +815,23 @@ class Acl extends AclRoleAccessorMethods {
     }
 
     this.request(
-        {
-          method: 'PUT',
-          uri: '/' + encodeURIComponent(options.entity),
-          qs: query,
-          json: {
-            role: options.role.toUpperCase(),
-          },
+      {
+        method: 'PUT',
+        uri: '/' + encodeURIComponent(options.entity),
+        qs: query,
+        json: {
+          role: options.role.toUpperCase(),
         },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, resp);
-            return;
-          }
+      },
+      (err, resp) => {
+        if (err) {
+          callback!(err, null, resp);
+          return;
+        }
 
-          callback!(null, this.makeAclObject_(resp), resp);
-        });
+        callback!(null, this.makeAclObject_(resp), resp);
+      }
+    );
   }
 
   /**
@@ -804,8 +839,9 @@ class Acl extends AclRoleAccessorMethods {
    *
    * @private
    */
-  makeAclObject_(accessControlObject: AccessControlObject):
-      AccessControlObject {
+  makeAclObject_(
+    accessControlObject: AccessControlObject
+  ): AccessControlObject {
     const obj = {
       entity: accessControlObject.entity,
       role: accessControlObject.role,
@@ -829,8 +865,10 @@ class Acl extends AclRoleAccessorMethods {
    * @param {*} body Request body contents.
    * @param {function} callback Callback function.
    */
-  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
-      void {
+  request(
+    reqOpts: DecorateRequestOptions,
+    callback: BodyResponseCallback
+  ): void {
     reqOpts.uri = this.pathPrefix + reqOpts.uri;
     this.request_(reqOpts, callback);
   }
@@ -845,7 +883,4 @@ promisifyAll(Acl, {
   exclude: ['request'],
 });
 
-export {
-  Acl,
-  AclRoleAccessorMethods,
-};
+export {Acl, AclRoleAccessorMethods};

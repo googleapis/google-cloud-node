@@ -38,8 +38,8 @@ describe('storage/iam', () => {
 
   before(() => {
     Iam = proxyquire('../src/iam.js', {
-            '@google-cloud/promisify': fakePromisify,
-          }).Iam;
+      '@google-cloud/promisify': fakePromisify,
+    }).Iam;
   });
 
   beforeEach(() => {
@@ -62,7 +62,7 @@ describe('storage/iam', () => {
       Object.assign(BUCKET_INSTANCE, {
         request(callback: Function) {
           assert.strictEqual(this, BUCKET_INSTANCE);
-          callback();  // done()
+          callback(); // done()
         },
       });
 
@@ -83,7 +83,7 @@ describe('storage/iam', () => {
           qs: {},
         });
 
-        callback();  // done()
+        callback(); // done()
       };
 
       iam.getPolicy(done);
@@ -120,14 +120,15 @@ describe('storage/iam', () => {
           method: 'PUT',
           uri: '/iam',
           json: Object.assign(
-              {
-                resourceId: iam.resourceId_,
-              },
-              policy),
+            {
+              resourceId: iam.resourceId_,
+            },
+            policy
+          ),
           qs: {},
         });
 
-        callback();  // done()
+        callback(); // done()
       };
 
       iam.setPolicy(policy, done);
@@ -186,12 +187,14 @@ describe('storage/iam', () => {
       };
 
       iam.testPermissions(
-          permissions, (err: Error, permissions: Array<{}>, apiResp: {}) => {
-            assert.strictEqual(err, error);
-            assert.strictEqual(permissions, null);
-            assert.strictEqual(apiResp, apiResponse);
-            done();
-          });
+        permissions,
+        (err: Error, permissions: Array<{}>, apiResp: {}) => {
+          assert.strictEqual(err, error);
+          assert.strictEqual(permissions, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        }
+      );
     });
 
     it('should pass back a hash of permissions the user has', done => {
@@ -205,16 +208,18 @@ describe('storage/iam', () => {
       };
 
       iam.testPermissions(
-          permissions, (err: Error, permissions: Array<{}>, apiResp: {}) => {
-            assert.ifError(err);
-            assert.deepStrictEqual(permissions, {
-              'storage.bucket.list': false,
-              'storage.bucket.consume': true,
-            });
-            assert.strictEqual(apiResp, apiResponse);
-
-            done();
+        permissions,
+        (err: Error, permissions: Array<{}>, apiResp: {}) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(permissions, {
+            'storage.bucket.list': false,
+            'storage.bucket.consume': true,
           });
+          assert.strictEqual(apiResp, apiResponse);
+
+          done();
+        }
+      );
     });
 
     it('should accept an options object', done => {
@@ -224,10 +229,11 @@ describe('storage/iam', () => {
       };
 
       const expectedQuery = Object.assign(
-          {
-            permissions,
-          },
-          options);
+        {
+          permissions,
+        },
+        options
+      );
 
       iam.request_ = (reqOpts: DecorateRequestOptions) => {
         assert.deepStrictEqual(reqOpts.qs, expectedQuery);

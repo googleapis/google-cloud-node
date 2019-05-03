@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-import {BodyResponseCallback, DecorateRequestOptions, Metadata} from '@google-cloud/common';
+import {
+  BodyResponseCallback,
+  DecorateRequestOptions,
+  Metadata,
+} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 
@@ -44,7 +48,7 @@ export type GetPolicyResponse = [Policy, Metadata];
  * @param {object} apiResponse The full API response.
  */
 export interface GetPolicyCallback {
-  (err?: Error|null, acl?: Policy, apiResponse?: Metadata): void;
+  (err?: Error | null, acl?: Policy, apiResponse?: Metadata): void;
 }
 
 /**
@@ -70,7 +74,7 @@ export type SetPolicyResponse = [Policy, Metadata];
  * @param {object} apiResponse The full API response.
  */
 export interface SetPolicyCallback {
-  (err?: Error|null, acl?: Policy, apiResponse?: object): void;
+  (err?: Error | null, acl?: Policy, apiResponse?: object): void;
 }
 
 /**
@@ -102,8 +106,11 @@ export type TestIamPermissionsResponse = [{[key: string]: boolean}, Metadata];
  * @param {object} apiResponse The full API response.
  */
 export interface TestIamPermissionsCallback {
-  (err?: Error|null, acl?: {[key: string]: boolean}|null,
-   apiResponse?: Metadata): void;
+  (
+    err?: Error | null,
+    acl?: {[key: string]: boolean} | null,
+    apiResponse?: Metadata
+  ): void;
 }
 
 /**
@@ -114,7 +121,6 @@ export interface TestIamPermissionsCallback {
 export interface TestIamPermissionsOptions {
   userProject?: string;
 }
-
 
 /**
  * Get and set IAM policies for your Cloud Storage bucket.
@@ -134,8 +140,10 @@ export interface TestIamPermissionsOptions {
  * // bucket.iam
  */
 class Iam {
-  private request_:
-      (reqOpts: DecorateRequestOptions, callback: BodyResponseCallback) => void;
+  private request_: (
+    reqOpts: DecorateRequestOptions,
+    callback: BodyResponseCallback
+  ) => void;
   private resourceId_: string;
 
   constructor(bucket: Bucket) {
@@ -174,26 +182,33 @@ class Iam {
    * Example of retrieving a bucket's IAM policy:
    */
   getPolicy(
-      optionsOrCallback?: GetPolicyOptions|GetPolicyCallback,
-      callback?: GetPolicyCallback): Promise<GetPolicyResponse>|void {
-    const {options, callback: cb} =
-        normalize<GetPolicyOptions, GetPolicyCallback>(
-            optionsOrCallback, callback);
+    optionsOrCallback?: GetPolicyOptions | GetPolicyCallback,
+    callback?: GetPolicyCallback
+  ): Promise<GetPolicyResponse> | void {
+    const {options, callback: cb} = normalize<
+      GetPolicyOptions,
+      GetPolicyCallback
+    >(optionsOrCallback, callback);
 
     this.request_(
-        {
-          uri: '/iam',
-          qs: options,
-        },
-        cb!);
+      {
+        uri: '/iam',
+        qs: options,
+      },
+      cb!
+    );
   }
 
-  setPolicy(policy: Policy, options?: SetPolicyOptions):
-      Promise<SetPolicyResponse>;
+  setPolicy(
+    policy: Policy,
+    options?: SetPolicyOptions
+  ): Promise<SetPolicyResponse>;
   setPolicy(policy: Policy, callback: SetPolicyCallback): void;
   setPolicy(
-      policy: Policy, options: SetPolicyOptions,
-      callback: SetPolicyCallback): void;
+    policy: Policy,
+    options: SetPolicyOptions,
+    callback: SetPolicyCallback
+  ): void;
   /**
    * Set the IAM policy.
    *
@@ -241,38 +256,48 @@ class Iam {
    * Example of removing from a bucket's IAM policy:
    */
   setPolicy(
-      policy: Policy, optionsOrCallback?: SetPolicyOptions|SetPolicyCallback,
-      callback?: SetPolicyCallback): Promise<SetPolicyResponse>|void {
+    policy: Policy,
+    optionsOrCallback?: SetPolicyOptions | SetPolicyCallback,
+    callback?: SetPolicyCallback
+  ): Promise<SetPolicyResponse> | void {
     if (policy === null || typeof policy !== 'object') {
       throw new Error('A policy object is required.');
     }
 
-    const {options, callback: cb} =
-        normalize<SetPolicyOptions, SetPolicyCallback>(
-            optionsOrCallback, callback);
+    const {options, callback: cb} = normalize<
+      SetPolicyOptions,
+      SetPolicyCallback
+    >(optionsOrCallback, callback);
 
     this.request_(
-        {
-          method: 'PUT',
-          uri: '/iam',
-          json: Object.assign(
-              {
-                resourceId: this.resourceId_,
-              },
-              policy),
-          qs: options,
-        },
-        cb);
+      {
+        method: 'PUT',
+        uri: '/iam',
+        json: Object.assign(
+          {
+            resourceId: this.resourceId_,
+          },
+          policy
+        ),
+        qs: options,
+      },
+      cb
+    );
   }
 
   testPermissions(
-      permissions: string|string[],
-      options?: TestIamPermissionsOptions): Promise<TestIamPermissionsResponse>;
+    permissions: string | string[],
+    options?: TestIamPermissionsOptions
+  ): Promise<TestIamPermissionsResponse>;
   testPermissions(
-      permissions: string|string[], callback: TestIamPermissionsCallback): void;
+    permissions: string | string[],
+    callback: TestIamPermissionsCallback
+  ): void;
   testPermissions(
-      permissions: string|string[], options: TestIamPermissionsOptions,
-      callback: TestIamPermissionsCallback): void;
+    permissions: string | string[],
+    options: TestIamPermissionsOptions,
+    callback: TestIamPermissionsCallback
+  ): void;
   /**
    * Test a set of permissions for a resource.
    *
@@ -327,49 +352,53 @@ class Iam {
    * });
    */
   testPermissions(
-      permissions: string|string[],
-      optionsOrCallback?: TestIamPermissionsOptions|TestIamPermissionsCallback,
-      callback?: TestIamPermissionsCallback):
-      Promise<TestIamPermissionsResponse>|void {
+    permissions: string | string[],
+    optionsOrCallback?: TestIamPermissionsOptions | TestIamPermissionsCallback,
+    callback?: TestIamPermissionsCallback
+  ): Promise<TestIamPermissionsResponse> | void {
     if (!Array.isArray(permissions) && typeof permissions !== 'string') {
       throw new Error('Permissions are required.');
     }
 
-    const {options, callback: cb} =
-        normalize<TestIamPermissionsOptions, TestIamPermissionsCallback>(
-            optionsOrCallback, callback);
+    const {options, callback: cb} = normalize<
+      TestIamPermissionsOptions,
+      TestIamPermissionsCallback
+    >(optionsOrCallback, callback);
 
     const permissionsArray = arrify(permissions);
 
     const req = Object.assign(
-        {
-          permissions: permissionsArray,
-        },
-        options);
+      {
+        permissions: permissionsArray,
+      },
+      options
+    );
 
     this.request_(
-        {
-          uri: '/iam/testPermissions',
-          qs: req,
-          useQuerystring: true,
-        },
-        (err, resp) => {
-          if (err) {
-            cb!(err, null, resp);
-            return;
-          }
+      {
+        uri: '/iam/testPermissions',
+        qs: req,
+        useQuerystring: true,
+      },
+      (err, resp) => {
+        if (err) {
+          cb!(err, null, resp);
+          return;
+        }
 
-          const availablePermissions = arrify(resp.permissions);
+        const availablePermissions = arrify(resp.permissions);
 
-          const permissionsHash = permissionsArray.reduce(
-              (acc: {[index: string]: boolean}, permission) => {
-                acc[permission] = availablePermissions.indexOf(permission) > -1;
-                return acc;
-              },
-              {});
+        const permissionsHash = permissionsArray.reduce(
+          (acc: {[index: string]: boolean}, permission) => {
+            acc[permission] = availablePermissions.indexOf(permission) > -1;
+            return acc;
+          },
+          {}
+        );
 
-          cb!(null, permissionsHash, resp);
-        });
+        cb!(null, permissionsHash, resp);
+      }
+    );
   }
 }
 
