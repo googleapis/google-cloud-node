@@ -20,7 +20,7 @@ import {Datastore} from '.';
 import {Entity} from './entity';
 import {Transaction} from './transaction';
 
-export type Operator = '='|'<'|'>'|'<='|'>='|'HAS_ANCESTOR';
+export type Operator = '=' | '<' | '>' | '<=' | '>=' | 'HAS_ANCESTOR';
 
 export interface OrderOptions {
   descending?: boolean;
@@ -28,7 +28,7 @@ export interface OrderOptions {
 
 export interface Order {
   name: string;
-  sign: '-'|'+';
+  sign: '-' | '+';
 }
 
 export interface Filter {
@@ -58,24 +58,29 @@ export interface Filter {
  * const query = datastore.createQuery('AnimalNamespace', 'Lion');
  */
 class Query {
-  scope?: Datastore|Transaction;
-  namespace?: string|null;
+  scope?: Datastore | Transaction;
+  namespace?: string | null;
   kinds: string[];
   filters: Filter[];
   orders: Order[];
   groupByVal: Array<{}>;
   selectVal: Array<{}>;
-  startVal: string|Buffer|null;
-  endVal: string|Buffer|null;
+  startVal: string | Buffer | null;
+  endVal: string | Buffer | null;
   limitVal: number;
   offsetVal: number;
 
-  constructor(scope?: Datastore|Transaction, kinds?: string[]|null);
+  constructor(scope?: Datastore | Transaction, kinds?: string[] | null);
   constructor(
-      scope?: Datastore|Transaction, namespace?: string|null, kinds?: string[]);
+    scope?: Datastore | Transaction,
+    namespace?: string | null,
+    kinds?: string[]
+  );
   constructor(
-      scope?: Datastore|Transaction, namespaceOrKinds?: string|string[]|null,
-      kinds?: string[]) {
+    scope?: Datastore | Transaction,
+    namespaceOrKinds?: string | string[] | null,
+    kinds?: string[]
+  ) {
     let namespace = namespaceOrKinds as string | null;
     if (!kinds) {
       kinds = namespaceOrKinds as string[];
@@ -260,7 +265,7 @@ class Query {
    * const companyQuery = datastore.createQuery('Company');
    * const groupedQuery = companyQuery.groupBy(['name', 'size']);
    */
-  groupBy(fieldNames: string|string[]) {
+  groupBy(fieldNames: string | string[]) {
     this.groupByVal = arrify(fieldNames);
     return this;
   }
@@ -287,7 +292,7 @@ class Query {
    * // Only retrieve the name and size properties.
    * const selectQuery = companyQuery.select(['name', 'size']);
    */
-  select(fieldNames: string|string[]) {
+  select(fieldNames: string | string[]) {
     this.selectVal = arrify(fieldNames);
     return this;
   }
@@ -310,7 +315,7 @@ class Query {
    * // Retrieve results starting from cursorToken.
    * const startQuery = companyQuery.start(cursorToken);
    */
-  start(start: string|Buffer) {
+  start(start: string | Buffer) {
     this.startVal = start;
     return this;
   }
@@ -333,7 +338,7 @@ class Query {
    * // Retrieve results limited to the extent of cursorToken.
    * const endQuery = companyQuery.end(cursorToken);
    */
-  end(end: string|Buffer) {
+  end(end: string | Buffer) {
     this.endVal = end;
     return this;
   }
@@ -438,13 +443,15 @@ class Query {
    *   const entities = data[0];
    * });
    */
-  run(optionsOrCallback?: RunQueryOptions|RunQueryCallback,
-      cb?: RunQueryCallback): void|Promise<RunQueryResponse> {
+  run(
+    optionsOrCallback?: RunQueryOptions | RunQueryCallback,
+    cb?: RunQueryCallback
+  ): void | Promise<RunQueryResponse> {
     const query = this as Query;
     const options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
     const runQuery = this.scope!.runQuery.bind(this.scope);
     return (runQuery as Function)(query, options, callback);
   }
@@ -491,12 +498,12 @@ class Query {
 }
 
 export interface QueryProto {
-  startCursor?: string|Buffer;
+  startCursor?: string | Buffer;
   distinctOn: {};
   kind: {};
   order: {};
   projection: {};
-  endCursor?: string|Buffer;
+  endCursor?: string | Buffer;
   limit?: {};
   offset?: number;
   filter?: {};
@@ -510,17 +517,19 @@ export interface QueryProto {
 export {Query};
 
 export interface RunQueryOptions {
-  consistency?: 'strong'|'eventual';
+  consistency?: 'strong' | 'eventual';
 }
 
 export interface RunQueryCallback {
-  (err: Error|null, entities?: Entity[], info?: RunQueryInfo): void;
+  (err: Error | null, entities?: Entity[], info?: RunQueryInfo): void;
 }
 
 export type RunQueryResponse = [Entity[], RunQueryInfo];
 
 export interface RunQueryInfo {
   endCursor?: string;
-  moreResults?: 'MORE_RESULTS_AFTER_LIMIT'|'MORE_RESULTS_AFTER_CURSOR'|
-      'NO_MORE_RESULTS';
+  moreResults?:
+    | 'MORE_RESULTS_AFTER_LIMIT'
+    | 'MORE_RESULTS_AFTER_CURSOR'
+    | 'NO_MORE_RESULTS';
 }

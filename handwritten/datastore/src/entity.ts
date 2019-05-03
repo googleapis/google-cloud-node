@@ -91,7 +91,7 @@ export namespace entity {
    */
   export class Int {
     value: string;
-    constructor(value: number|string) {
+    constructor(value: number | string) {
       /**
        * @name Int#value
        * @type {string}
@@ -162,7 +162,7 @@ export namespace entity {
 
   export interface KeyOptions {
     namespace?: string;
-    path: Array<string|number>;
+    path: Array<string | number>;
   }
 
   /**
@@ -216,7 +216,7 @@ export namespace entity {
     name?: string;
     kind: string;
     parent?: Key;
-    path!: Array<string|number>;
+    path!: Array<string | number>;
 
     constructor(options: KeyOptions) {
       /**
@@ -231,7 +231,7 @@ export namespace entity {
         const identifier = options.path.pop();
 
         if (is.number(identifier) || isDsInt(identifier)) {
-          this.id = ((identifier as {} as Int).value || identifier) as string;
+          this.id = (((identifier as {}) as Int).value || identifier) as string;
         } else if (is.string(identifier)) {
           this.name = identifier as string;
         }
@@ -333,7 +333,9 @@ export namespace entity {
         return new Date(Number(value.seconds) * 1000 + milliseconds);
       }
 
-      default: { return value; }
+      default: {
+        return value;
+      }
     }
   }
 
@@ -519,14 +521,14 @@ export namespace entity {
     const entityProto: EntityProto = {
       key: null,
 
-      properties: Object.keys(properties)
-                      .reduce(
-                          (encoded, key) => {
-                            encoded[key] = entity.encodeValue(properties[key]);
-                            return encoded;
-                          },
-                          // tslint:disable-next-line no-any
-                          {} as any),
+      properties: Object.keys(properties).reduce(
+        (encoded, key) => {
+          encoded[key] = entity.encodeValue(properties[key]);
+          return encoded;
+        },
+        // tslint:disable-next-line no-any
+        {} as any
+      ),
     };
 
     if (excludeFromIndexes && excludeFromIndexes.length > 0) {
@@ -547,9 +549,11 @@ export namespace entity {
       if (!hasArrayPath && !hasEntityPath) {
         // This is the path end node. Traversal ends here in either case.
         if (entity.properties) {
-          if (entity.properties[path] &&
-              // array properties should be excluded with [] syntax:
-              !entity.properties[path].arrayValue) {
+          if (
+            entity.properties[path] &&
+            // array properties should be excluded with [] syntax:
+            !entity.properties[path].arrayValue
+          ) {
             // This is the property to exclude!
             entity.properties[path].excludeFromIndexes = true;
           }
@@ -580,9 +584,11 @@ export namespace entity {
         return;
       }
 
-      if (firstPathPartIsArray &&
-          // check also if the property in question is actually an array value.
-          entity.properties[firstPathPart].arrayValue) {
+      if (
+        firstPathPartIsArray &&
+        // check also if the property in question is actually an array value.
+        entity.properties[firstPathPart].arrayValue
+      ) {
         const array = entity.properties[firstPathPart].arrayValue;
         // tslint:disable-next-line no-any
         array.values.forEach((value: any) => {
@@ -591,15 +597,15 @@ export namespace entity {
             // equivalent with excluding all its values
             // (including entity values at their roots):
             excludePathFromEntity(
-                value,
-                remainderPath  // === ''
+              value,
+              remainderPath // === ''
             );
           } else {
             // Path traversal continues at value.entityValue,
             // if it is an entity, or must end at value.
             excludePathFromEntity(
-                value.entityValue || value,
-                remainderPath  // !== ''
+              value.entityValue || value,
+              remainderPath // !== ''
             );
           }
         });
@@ -915,7 +921,7 @@ export interface ValueProto {
 }
 
 export interface EntityProto {
-  key: KeyProto|null;
+  key: KeyProto | null;
   // tslint:disable-next-line no-any
   properties: any;
   excludeFromIndexes?: boolean;
@@ -927,7 +933,9 @@ export type Entity = any;
 export interface KeyProto {
   path: Array<{
     // tslint:disable-next-line no-any
-    [index: string]: any; id: string; name: string;
+    [index: string]: any;
+    id: string;
+    name: string;
     kind?: string;
     idType?: string;
   }>;

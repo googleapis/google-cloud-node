@@ -200,7 +200,9 @@ describe('entity', () => {
       };
 
       assert.deepStrictEqual(
-          entity.decodeValueProto(valueProto), expectedValue);
+        entity.decodeValueProto(valueProto),
+        expectedValue
+      );
     });
 
     it('should decode blobs', () => {
@@ -212,7 +214,9 @@ describe('entity', () => {
       };
 
       assert.deepStrictEqual(
-          entity.decodeValueProto(valueProto), expectedValue);
+        entity.decodeValueProto(valueProto),
+        expectedValue
+      );
     });
 
     it('should decode null', () => {
@@ -298,7 +302,9 @@ describe('entity', () => {
       };
 
       assert.deepStrictEqual(
-          entity.decodeValueProto(valueProto), expectedValue);
+        entity.decodeValueProto(valueProto),
+        expectedValue
+      );
     });
 
     it('should return the value if no conversions are necessary', () => {
@@ -552,7 +558,9 @@ describe('entity', () => {
       };
 
       assert.deepStrictEqual(
-          entity.entityFromEntityProto(entityProto), expectedEntity);
+        entity.entityFromEntityProto(entityProto),
+        expectedEntity
+      );
     });
   });
 
@@ -577,7 +585,9 @@ describe('entity', () => {
       };
 
       assert.deepStrictEqual(
-          entity.entityToEntityProto(entityObject), expectedEntityProto);
+        entity.entityToEntityProto(entityObject),
+        expectedEntityProto
+      );
     });
 
     it('should respect excludeFromIndexes', () => {
@@ -1002,7 +1012,9 @@ describe('entity', () => {
       };
 
       assert.deepStrictEqual(
-          entity.entityToEntityProto(entityObject), expectedEntityProto);
+        entity.entityToEntityProto(entityObject),
+        expectedEntityProto
+      );
     });
   });
 
@@ -1040,7 +1052,7 @@ describe('entity', () => {
   });
 
   describe('isKeyComplete', () => {
-    it('should convert key to key proto', (done) => {
+    it('should convert key to key proto', done => {
       const key = new entity.Key({
         path: ['Kind', 123],
       });
@@ -1101,7 +1113,7 @@ describe('entity', () => {
       ],
     };
 
-    it('should set the namespace', (done) => {
+    it('should set the namespace', done => {
       entity.Key = class {
         constructor(keyOptions: entity.KeyOptions) {
           assert.strictEqual(keyOptions.namespace, NAMESPACE);
@@ -1111,7 +1123,7 @@ describe('entity', () => {
       entity.keyFromKeyProto(keyProto);
     });
 
-    it('should create a proper Key', (done) => {
+    it('should create a proper Key', done => {
       entity.Key = class {
         constructor(keyOptions: entity.KeyOptions) {
           assert.deepStrictEqual(keyOptions, {
@@ -1136,7 +1148,7 @@ describe('entity', () => {
       assert.strictEqual(entity.keyFromKeyProto(keyProto), expectedValue);
     });
 
-    it('should throw if path is invalid', (done) => {
+    it('should throw if path is invalid', done => {
       const keyProtoInvalid = {
         partitionId: {
           namespaceId: 'Namespace',
@@ -1228,7 +1240,7 @@ describe('entity', () => {
       assert.strictEqual(keyProtoWithNs.path[0].name, undefined);
     });
 
-    it('should throw if key contains 0 items', (done) => {
+    it('should throw if key contains 0 items', done => {
       const key = new entity.Key({
         path: [],
       });
@@ -1242,7 +1254,7 @@ describe('entity', () => {
       }
     });
 
-    it('should throw if key path contains null ids', (done) => {
+    it('should throw if key path contains null ids', done => {
       const key = new entity.Key({
         namespace: 'Namespace',
         path: ['Kind1', null, 'Company'],
@@ -1347,16 +1359,17 @@ describe('entity', () => {
 
       const ds = new Datastore({projectId: 'project-id'});
 
-      const query = ds.createQuery('Kind1')
-                        .filter('name', 'John')
-                        .start('start')
-                        .end('end')
-                        .groupBy(['name'])
-                        .order('name')
-                        .select('name')
-                        .limit(1)
-                        .offset(1)
-                        .hasAncestor(ancestorKey);
+      const query = ds
+        .createQuery('Kind1')
+        .filter('name', 'John')
+        .start('start')
+        .end('end')
+        .groupBy(['name'])
+        .order('name')
+        .select('name')
+        .limit(1)
+        .offset(1)
+        .hasAncestor(ancestorKey);
 
       assert.deepStrictEqual(entity.queryToQueryProto(query), queryProto);
     });
@@ -1366,7 +1379,10 @@ describe('entity', () => {
       const startVal = Buffer.from('start');
       const endVal = Buffer.from('end');
 
-      const query = ds.createQuery('Kind1').start(startVal).end(endVal);
+      const query = ds
+        .createQuery('Kind1')
+        .start(startVal)
+        .end(endVal);
 
       const queryProto = entity.queryToQueryProto(query);
       assert.strictEqual(queryProto.endCursor, endVal);

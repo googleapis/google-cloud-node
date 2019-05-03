@@ -44,12 +44,13 @@ describe('Query', () => {
     });
 
     it('should use null for all falsy namespace values', () => {
-      [new Query(SCOPE, '', KINDS),
-       new Query(SCOPE, null, KINDS),
-       new Query(SCOPE, undefined, KINDS),
-       new Query(SCOPE, 0 as {} as string, KINDS),
-       new Query(SCOPE, KINDS),
-      ].forEach((query) => {
+      [
+        new Query(SCOPE, '', KINDS),
+        new Query(SCOPE, null, KINDS),
+        new Query(SCOPE, undefined, KINDS),
+        new Query(SCOPE, (0 as {}) as string, KINDS),
+        new Query(SCOPE, KINDS),
+      ].forEach(query => {
         assert.strictEqual(query.namespace, null);
       });
     });
@@ -69,11 +70,11 @@ describe('Query', () => {
     it('should recognize all the different operators', () => {
       const now = new Date();
       const query = new Query(['kind1'])
-                        .filter('date', '<=', now)
-                        .filter('name', '=', 'Title')
-                        .filter('count', '>', 20)
-                        .filter('size', '<', 10)
-                        .filter('something', '>=', 11);
+        .filter('date', '<=', now)
+        .filter('name', '=', 'Title')
+        .filter('count', '>', 20)
+        .filter('size', '<', 10)
+        .filter('something', '>=', 11);
 
       assert.strictEqual(query.filters[0].name, 'date');
       assert.strictEqual(query.filters[0].op, '<=');
@@ -103,8 +104,11 @@ describe('Query', () => {
     });
 
     it('should remove any whitespace surrounding the operator', () => {
-      const query =
-          new Query(['kind1']).filter('count', '       <        ', 123);
+      const query = new Query(['kind1']).filter(
+        'count',
+        '       <        ',
+        123
+      );
 
       assert.strictEqual(query.filters[0].op, '<');
     });
@@ -166,8 +170,9 @@ describe('Query', () => {
     });
 
     it('should support both ascending and descending', () => {
-      const query =
-          new Query(['kind1']).order('name').order('count', {descending: true});
+      const query = new Query(['kind1'])
+        .order('name')
+        .order('count', {descending: true});
 
       assert.strictEqual(query.orders[0].name, 'name');
       assert.strictEqual(query.orders[0].sign, '+');
@@ -286,7 +291,7 @@ describe('Query', () => {
   });
 
   describe('run', () => {
-    it('should call the parent instance runQuery correctly', (done) => {
+    it('should call the parent instance runQuery correctly', done => {
       const args = [{}, () => {}];
 
       query.scope.runQuery = function() {

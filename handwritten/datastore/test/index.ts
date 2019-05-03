@@ -65,23 +65,25 @@ const fakeEntity: any = {
   },
 };
 
-let googleAuthOverride: Function|null;
+let googleAuthOverride: Function | null;
 function fakeGoogleAuth() {
   return (googleAuthOverride || (() => {})).apply(null, arguments);
 }
 
-let createInsecureOverride: Function|null;
+let createInsecureOverride: Function | null;
 
 const fakeGoogleGax = {
-  GrpcClient: class extends gax.GrpcClient{
+  GrpcClient: class extends gax.GrpcClient {
     constructor(opts: gax.GrpcClientOptions) {
       // super constructor must be called first!
       super(opts);
       this.grpc = {
         credentials: {
           createInsecure() {
-            return (createInsecureOverride || (() => {}))
-                .apply(null, arguments);
+            return (createInsecureOverride || (() => {})).apply(
+              null,
+              arguments
+            );
           },
         },
       } as gax.GrpcModule;
@@ -126,15 +128,15 @@ describe('Datastore', () => {
 
   before(() => {
     Datastore = proxyquire('../src', {
-                  './entity.js': {entity: fakeEntity},
-                  './query.js': {Query: FakeQuery},
-                  './transaction.js': {Transaction: FakeTransaction},
-                  './v1': FakeV1,
-                  'google-auth-library': {
-                    GoogleAuth: fakeGoogleAuth,
-                  },
-                  'google-gax': fakeGoogleGax,
-                }).Datastore;
+      './entity.js': {entity: fakeEntity},
+      './query.js': {Query: FakeQuery},
+      './transaction.js': {Transaction: FakeTransaction},
+      './v1': FakeV1,
+      'google-auth-library': {
+        GoogleAuth: fakeGoogleAuth,
+      },
+      'google-gax': fakeGoogleGax,
+    }).Datastore;
   });
 
   beforeEach(() => {
@@ -208,10 +210,10 @@ describe('Datastore', () => {
       assert.strictEqual(datastore.defaultBaseUrl_, 'datastore.googleapis.com');
     });
 
-    it('should set default API connection details', (done) => {
+    it('should set default API connection details', done => {
       const determineBaseUrl_ = Datastore.prototype.determineBaseUrl_;
 
-      Datastore.prototype.determineBaseUrl_ = (customApiEndpoint) => {
+      Datastore.prototype.determineBaseUrl_ = customApiEndpoint => {
         Datastore.prototype.determineBaseUrl_ = determineBaseUrl_;
 
         assert.strictEqual(customApiEndpoint, OPTIONS.apiEndpoint);
@@ -234,17 +236,19 @@ describe('Datastore', () => {
       assert.notStrictEqual(datastore.options, options);
 
       assert.deepStrictEqual(
-          datastore.options,
-          Object.assign(
-              {
-                libName: 'gccl',
-                libVersion: require('../../package.json').version,
-                scopes: v1.DatastoreClient.scopes,
-                servicePath: datastore.baseUrl_,
-                port: 443,
-                projectId: undefined,
-              },
-              options));
+        datastore.options,
+        Object.assign(
+          {
+            libName: 'gccl',
+            libVersion: require('../../package.json').version,
+            scopes: v1.DatastoreClient.scopes,
+            servicePath: datastore.baseUrl_,
+            port: 443,
+            projectId: undefined,
+          },
+          options
+        )
+      );
     });
 
     it('should set port if detected', () => {
@@ -432,26 +436,32 @@ describe('Datastore', () => {
   describe('MORE_RESULTS_AFTER_CURSOR', () => {
     it('should expose a MORE_RESULTS_AFTER_CURSOR helper', () => {
       assert.strictEqual(
-          Datastore.MORE_RESULTS_AFTER_CURSOR, 'MORE_RESULTS_AFTER_CURSOR');
+        Datastore.MORE_RESULTS_AFTER_CURSOR,
+        'MORE_RESULTS_AFTER_CURSOR'
+      );
     });
 
     it('should also be on the prototype', () => {
       assert.strictEqual(
-          datastore.MORE_RESULTS_AFTER_CURSOR,
-          Datastore.MORE_RESULTS_AFTER_CURSOR);
+        datastore.MORE_RESULTS_AFTER_CURSOR,
+        Datastore.MORE_RESULTS_AFTER_CURSOR
+      );
     });
   });
 
   describe('MORE_RESULTS_AFTER_LIMIT', () => {
     it('should expose a MORE_RESULTS_AFTER_LIMIT helper', () => {
       assert.strictEqual(
-          Datastore.MORE_RESULTS_AFTER_LIMIT, 'MORE_RESULTS_AFTER_LIMIT');
+        Datastore.MORE_RESULTS_AFTER_LIMIT,
+        'MORE_RESULTS_AFTER_LIMIT'
+      );
     });
 
     it('should also be on the prototype', () => {
       assert.strictEqual(
-          datastore.MORE_RESULTS_AFTER_LIMIT,
-          Datastore.MORE_RESULTS_AFTER_LIMIT);
+        datastore.MORE_RESULTS_AFTER_LIMIT,
+        Datastore.MORE_RESULTS_AFTER_LIMIT
+      );
     });
   });
 
