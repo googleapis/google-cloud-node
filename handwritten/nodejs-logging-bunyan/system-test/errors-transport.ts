@@ -41,7 +41,7 @@ export interface ErrorGroupStats {
 }
 
 export interface ApiResponse {
-  body: {errorGroupStats: ErrorGroupStats[]; errorEvents: ErrorEvent[];};
+  body: {errorGroupStats: ErrorGroupStats[]; errorEvents: ErrorEvent[]};
 }
 
 /* @const {String} Base Error Reporting API */
@@ -54,7 +54,7 @@ export class ErrorsApiTransport extends common.Service {
     super({
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-      packageJson
+      packageJson,
     });
   }
 
@@ -70,7 +70,7 @@ export class ErrorsApiTransport extends common.Service {
     const projectId = await this.getProjectId();
     const options = {
       uri: [API, projectId, 'groupStats?' + ONE_HOUR_API].join('/'),
-      method: 'GET'
+      method: 'GET',
     };
     const response = await this.request(options);
     return response.body.errorGroupStats || [];
@@ -80,18 +80,22 @@ export class ErrorsApiTransport extends common.Service {
     const projectId = await this.getProjectId();
     const options = {
       uri: [
-        API, projectId,
-        'events?groupId=' + groupId + '&pageSize=10&' + ONE_HOUR_API
+        API,
+        projectId,
+        'events?groupId=' + groupId + '&pageSize=10&' + ONE_HOUR_API,
       ].join('/'),
-      method: 'GET'
+      method: 'GET',
     };
 
     const response = await this.request(options);
     return response.body.errorEvents || [];
   }
 
-  async pollForNewEvents(service: string, time: number, timeout: number):
-      Promise<ErrorEvent[]> {
+  async pollForNewEvents(
+    service: string,
+    time: number,
+    timeout: number
+  ): Promise<ErrorEvent[]> {
     const timeLimit = Date.now() + timeout;
     let groupId;
     // wait for a group
@@ -102,9 +106,10 @@ export class ErrorsApiTransport extends common.Service {
         const groups = await this.getAllGroups();
         if (!groups.length) continue;
         // find an error group that matches the service
-        groups.forEach((group) => {
+        groups.forEach(group => {
           const match = group.affectedServices.find(
-              context => context.service === service);
+            context => context.service === service
+          );
           if (match) {
             groupId = group.group.groupId;
           }
@@ -116,8 +121,10 @@ export class ErrorsApiTransport extends common.Service {
 
       const events = await this.getGroupEvents(groupId);
       const filteredEvents = events.filter(
-          event => event.serviceContext.service === service &&
-              (new Date(event.eventTime).getTime() >= time));
+        event =>
+          event.serviceContext.service === service &&
+          new Date(event.eventTime).getTime() >= time
+      );
       if (filteredEvents.length) {
         return filteredEvents;
       }

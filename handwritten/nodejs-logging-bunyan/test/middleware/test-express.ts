@@ -27,7 +27,7 @@ const FAKE_GENERATED_MIDDLEWARE = () => {};
 const FAKE_ENVIRONMENT = 'FAKE_ENVIRONMENT';
 
 let authEnvironment: string;
-let passedOptions: Array<MiddlewareOptions|undefined>;
+let passedOptions: Array<MiddlewareOptions | undefined>;
 
 class FakeLoggingBunyan {
   // tslint:disable-next-line:no-any Doing "just enough" faking.
@@ -42,9 +42,9 @@ class FakeLoggingBunyan {
           },
           async getEnv() {
             return authEnvironment;
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
 
@@ -54,22 +54,27 @@ class FakeLoggingBunyan {
   }
 }
 
-let passedProjectId: string|undefined;
-let passedEmitRequestLog: Function|undefined;
+let passedProjectId: string | undefined;
+let passedEmitRequestLog: Function | undefined;
 function fakeMakeMiddleware(
-    projectId: string, makeChildLogger: Function,
-    emitRequestLog: Function): Function {
+  projectId: string,
+  makeChildLogger: Function,
+  emitRequestLog: Function
+): Function {
   passedProjectId = projectId;
   passedEmitRequestLog = emitRequestLog;
   return FAKE_GENERATED_MIDDLEWARE;
 }
 
-const {middleware, APP_LOG_SUFFIX} =
-    proxyquire('../../src/middleware/express', {
-      '../../src/index': {LoggingBunyan: FakeLoggingBunyan},
-      '@google-cloud/logging':
-          {middleware: {express: {makeMiddleware: fakeMakeMiddleware}}}
-    });
+const {middleware, APP_LOG_SUFFIX} = proxyquire(
+  '../../src/middleware/express',
+  {
+    '../../src/index': {LoggingBunyan: FakeLoggingBunyan},
+    '@google-cloud/logging': {
+      middleware: {express: {makeMiddleware: fakeMakeMiddleware}},
+    },
+  }
+);
 
 describe('middleware/express', () => {
   beforeEach(() => {
@@ -89,8 +94,11 @@ describe('middleware/express', () => {
     // Should generate two loggers with the expected names.
     assert.ok(passedOptions);
     assert.strictEqual(passedOptions.length, 2);
-    assert.ok(passedOptions.some(
-        option => option!.logName === `bunyan_log_${APP_LOG_SUFFIX}`));
+    assert.ok(
+      passedOptions.some(
+        option => option!.logName === `bunyan_log_${APP_LOG_SUFFIX}`
+      )
+    );
     assert.ok(passedOptions.some(option => option!.logName === `bunyan_log`));
     assert.ok(passedOptions.every(option => option!.level === 'info'));
   });
@@ -102,8 +110,11 @@ describe('middleware/express', () => {
     await middleware(OPTIONS);
     assert.ok(passedOptions);
     assert.strictEqual(passedOptions.length, 2);
-    assert.ok(passedOptions.some(
-        option => option!.logName === `${LOGNAME}_${APP_LOG_SUFFIX}`));
+    assert.ok(
+      passedOptions.some(
+        option => option!.logName === `${LOGNAME}_${APP_LOG_SUFFIX}`
+      )
+    );
     assert.ok(passedOptions.some(option => option!.logName === LOGNAME));
     assert.ok(passedOptions.every(option => option!.level === LEVEL));
   });

@@ -33,7 +33,7 @@ bunyan.createLogger({
 });`,
     description: 'imports the module using * syntax',
     dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan']
+    devDependencies: ['@types/bunyan'],
   },
   {
     code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
@@ -51,7 +51,7 @@ bunyan.createLogger({
 });`,
     description: 'imports the module with {} syntax',
     dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan']
+    devDependencies: ['@types/bunyan'],
   },
   {
     code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
@@ -72,9 +72,9 @@ bunyan.createLogger({
   ],
 });`,
     description:
-        'imports the module and starts with a partial `serviceContext`',
+      'imports the module and starts with a partial `serviceContext`',
     dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan']
+    devDependencies: ['@types/bunyan'],
   },
   {
     code: `import {LoggingBunyan} from '@google-cloud/logging-bunyan';
@@ -97,9 +97,9 @@ bunyan.createLogger({
   ],
 });`,
     description:
-        'imports the module and starts with a complete `serviceContext`',
+      'imports the module and starts with a complete `serviceContext`',
     dependencies: ['bunyan'],
-    devDependencies: ['@types/bunyan']
+    devDependencies: ['@types/bunyan'],
   },
   {
     code: `import * as lb from '@google-cloud/logging-bunyan';
@@ -112,14 +112,13 @@ async function main() {
 }`,
     description: 'can be used with express',
     dependencies: ['express', 'bunyan'],
-    devDependencies: ['@types/bunyan', '@types/express']
-  }
+    devDependencies: ['@types/bunyan', '@types/express'],
+  },
 ];
 
 const JS_CODE_ARRAY: check.CodeSample[] = [
   {
-    code:
-        `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
+    code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
 const bunyan = require('bunyan');
 
 const loggingBunyan = new LoggingBunyan();
@@ -134,11 +133,10 @@ bunyan.createLogger({
 });`,
     description: 'requires the module using Node 4+ syntax',
     dependencies: ['bunyan'],
-    devDependencies: []
+    devDependencies: [],
   },
   {
-    code:
-        `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
+    code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
 const bunyan = require('bunyan');
 
 const loggingBunyan = new LoggingBunyan({
@@ -156,13 +154,12 @@ bunyan.createLogger({
   ],
 });`,
     description:
-        'requires the module and starts with a partial `serviceContext`',
+      'requires the module and starts with a partial `serviceContext`',
     dependencies: ['bunyan'],
-    devDependencies: []
+    devDependencies: [],
   },
   {
-    code:
-        `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
+    code: `const LoggingBunyan = require('@google-cloud/logging-bunyan').LoggingBunyan;
 const bunyan = require('bunyan');
 
 const loggingBunyan = new LoggingBunyan({
@@ -182,9 +179,9 @@ bunyan.createLogger({
   ],
 });`,
     description:
-        'requires the module and starts with a complete `serviceContext`',
+      'requires the module and starts with a complete `serviceContext`',
     dependencies: ['bunyan'],
-    devDependencies: []
+    devDependencies: [],
   },
   {
     code: `const lb = require('@google-cloud/logging-bunyan');
@@ -201,8 +198,8 @@ async function main() {
 }`,
     description: 'can be used with express',
     dependencies: ['express', 'bunyan'],
-    devDependencies: []
-  }
+    devDependencies: [],
+  },
 ];
 
 check.testInstallation(TS_CODE_ARRAY, JS_CODE_ARRAY, {timeout: 2 * 60 * 1000});

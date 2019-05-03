@@ -137,17 +137,16 @@ function getCurrentTraceFromAgent() {
  */
 export class LoggingBunyan extends Writable {
   private logName: string;
-  private resource: types.MonitoredResource|undefined;
+  private resource: types.MonitoredResource | undefined;
   private serviceContext?: types.ServiceContext;
-  stackdriverLog:
-      types.StackdriverLog;  // TODO: add type for @google-cloud/logging
+  stackdriverLog: types.StackdriverLog; // TODO: add type for @google-cloud/logging
   constructor(options?: types.Options) {
     options = options || {};
     super({objectMode: true});
     this.logName = options.logName || 'bunyan_log';
     this.resource = options.resource;
     this.serviceContext = options.serviceContext;
-    this.stackdriverLog = (new Logging(options)).log(this.logName, {
+    this.stackdriverLog = new Logging(options).log(this.logName, {
       removeCircular: true,
     });
 
@@ -160,20 +159,21 @@ export class LoggingBunyan extends Writable {
     // that serviceContext.service is specified.
     if (this.serviceContext && !this.serviceContext.service) {
       throw new Error(
-          `If 'serviceContext' is specified then ` +
-          `'serviceContext.service' is required.`);
+        `If 'serviceContext' is specified then ` +
+          `'serviceContext.service' is required.`
+      );
     }
 
     /* Asynchrnously attempt to discover the service context. */
     if (!this.serviceContext) {
-      detectServiceContext(this.stackdriverLog.logging.auth)
-          .then(
-              (serviceContext: types.ServiceContext) => {
-                this.serviceContext = serviceContext;
-              },
-              () => {
-                  /* swallow any errors. */
-              });
+      detectServiceContext(this.stackdriverLog.logging.auth).then(
+        (serviceContext: types.ServiceContext) => {
+          this.serviceContext = serviceContext;
+        },
+        () => {
+          /* swallow any errors. */
+        }
+      );
     }
   }
 
@@ -188,10 +188,11 @@ export class LoggingBunyan extends Writable {
   /**
    * Format a bunyan record into a Stackdriver log entry.
    */
-  private formatEntry_(record: string|types.BunyanLogRecord) {
+  private formatEntry_(record: string | types.BunyanLogRecord) {
     if (typeof record === 'string') {
       throw new Error(
-          '@google-cloud/logging-bunyan only works as a raw bunyan stream type.');
+        '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
+      );
     }
     // Stackdriver Log Viewer picks up the summary line from the 'message' field
     // of the payload. Unless the user has provided a 'message' property also,
@@ -216,7 +217,7 @@ export class LoggingBunyan extends Writable {
     const entryMetadata: types.StackdriverEntryMetadata = {
       resource: this.resource,
       timestamp: record.time,
-      severity: BUNYAN_TO_STACKDRIVER.get(Number(record.level))
+      severity: BUNYAN_TO_STACKDRIVER.get(Number(record.level)),
     };
 
     // If the record contains a httpRequest property, provide it on the entry
@@ -268,15 +269,18 @@ export class LoggingBunyan extends Writable {
    * we may well be in a different continuation.
    */
   write(record: types.BunyanLogRecord, callback?: Function): boolean;
-  write(record: types.BunyanLogRecord, encoding?: string, callback?: Function):
-      boolean;
+  write(
+    record: types.BunyanLogRecord,
+    encoding?: string,
+    callback?: Function
+  ): boolean;
   // Writable.write used 'any' in function signature.
   // tslint:disable-next-line:no-any
   write(...args: any[]): boolean {
     let record = args[0];
-    let encoding: string|null = null;
-    type Callback = (error: Error|null|undefined) => void;
-    let callback: Callback|string;
+    let encoding: string | null = null;
+    type Callback = (error: Error | null | undefined) => void;
+    let callback: Callback | string;
     if (typeof args[1] === 'string') {
       encoding = args[1];
       callback = args[2];
@@ -312,15 +316,15 @@ export class LoggingBunyan extends Writable {
    */
   // Writable._write used 'any' in function signature.
   _writev(
-      chunks: Array<{
-        // tslint:disable-next-line:no-any
-        chunk: any; encoding: string;
-      }>,
-      callback: Function) {
-    const entries = chunks.map((request: {
-                                 // tslint:disable-next-line:no-any
-                                 chunk: any; encoding: string;
-                               }) => {
+    chunks: Array<{
+      // tslint:disable-next-line:no-any
+      chunk: any;
+      encoding: string;
+    }>,
+    callback: Function
+  ) {
+    const entries = chunks.map((request: {// tslint:disable-next-line:no-any
+      chunk: any; encoding: string}) => {
       return this.formatEntry_(request.chunk);
     });
 
