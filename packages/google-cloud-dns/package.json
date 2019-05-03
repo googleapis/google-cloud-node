@@ -44,7 +44,7 @@
   "dependencies": {
     "@google-cloud/common": "^0.32.0",
     "@google-cloud/paginator": "^0.2.0",
-    "@google-cloud/promisify": "^0.4.0",
+    "@google-cloud/promisify": "^1.0.0",
     "arrify": "^2.0.0",
     "dns-zonefile": "0.2.2",
     "lodash.groupby": "^4.6.0",
