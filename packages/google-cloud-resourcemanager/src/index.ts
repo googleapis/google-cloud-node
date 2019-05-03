@@ -17,18 +17,24 @@
 import {GoogleAuthOptions, Operation, Service} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as r from 'request';  // Only for type declarations.
+import * as r from 'request'; // Only for type declarations.
 
 import {Project} from './project';
 
-export type CreateProjectCallback =
-    (err: Error|null, project?: Project|null, operation?: Operation<Project>,
-     apiResponse?: r.Response) => void;
+export type CreateProjectCallback = (
+  err: Error | null,
+  project?: Project | null,
+  operation?: Operation<Project>,
+  apiResponse?: r.Response
+) => void;
 export type CreateProjectResponse = [Project, Operation<Project>, r.Response];
 export type GetProjectsResponse = [Project[], r.Response];
-export type GetProjectsCallback =
-    (err: Error|null, projects?: Project[]|null, nextQuery?: {}|null,
-     apiResponse?: r.Response) => void;
+export type GetProjectsCallback = (
+  err: Error | null,
+  projects?: Project[] | null,
+  nextQuery?: {} | null,
+  apiResponse?: r.Response
+) => void;
 
 export interface GetProjectOptions {
   autoPaginate?: boolean;
@@ -68,7 +74,7 @@ export interface CreateProjectOptions {
   name: string;
   createTime: string;
   labels: {[index: string]: string};
-  parent: {type: string, id: string};
+  parent: {type: string; id: string};
 }
 
 /**
@@ -143,7 +149,7 @@ class Resource extends Service {
       baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       projectIdRequired: false,
-      packageJson: require('../../package.json')
+      packageJson: require('../../package.json'),
     };
     super(config, options);
 
@@ -237,38 +243,44 @@ class Resource extends Service {
    *     // Project created successfully!
    *   });
    */
-  createProject(id: string, options?: CreateProjectOptions):
-      Promise<CreateProjectResponse>;
   createProject(
-      id: string, options: CreateProjectOptions,
-      callback: CreateProjectCallback): void;
+    id: string,
+    options?: CreateProjectOptions
+  ): Promise<CreateProjectResponse>;
+  createProject(
+    id: string,
+    options: CreateProjectOptions,
+    callback: CreateProjectCallback
+  ): void;
   createProject(id: string, callback: CreateProjectCallback): void;
   createProject(
-      id: string,
-      optionsOrCallback?: CreateProjectOptions|CreateProjectCallback,
-      callback?: CreateProjectCallback): void|Promise<CreateProjectResponse> {
+    id: string,
+    optionsOrCallback?: CreateProjectOptions | CreateProjectCallback,
+    callback?: CreateProjectCallback
+  ): void | Promise<CreateProjectResponse> {
     const options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     this.request(
-        {
-          method: 'POST',
-          uri: '/projects',
-          json: Object.assign({}, options, {
-            projectId: id,
-          }),
-        },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, resp);
-            return;
-          }
-          const project = this.project(resp.projectId);
-          const operation = this.operation(resp.name);
-          operation.metadata = resp;
-          callback!(null, project, operation, resp);
-        });
+      {
+        method: 'POST',
+        uri: '/projects',
+        json: Object.assign({}, options, {
+          projectId: id,
+        }),
+      },
+      (err, resp) => {
+        if (err) {
+          callback!(err, null, resp);
+          return;
+        }
+        const project = this.project(resp.projectId);
+        const operation = this.operation(resp.name);
+        operation.metadata = resp;
+        callback!(null, project, operation, resp);
+      }
+    );
   }
 
   /**
@@ -326,39 +338,41 @@ class Resource extends Service {
   getProjects(options: GetProjectOptions, callback: GetProjectsCallback): void;
   getProjects(callback: GetProjectsCallback): void;
   getProjects(
-      optionsOrCallback?: GetProjectOptions|GetProjectsCallback,
-      callback?: GetProjectsCallback): void|Promise<GetProjectsResponse> {
+    optionsOrCallback?: GetProjectOptions | GetProjectsCallback,
+    callback?: GetProjectsCallback
+  ): void | Promise<GetProjectsResponse> {
     const options =
-        typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+      typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     callback =
-        typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
+      typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     this.request(
-        {
-          uri: '/projects',
-          qs: options,
-        },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, null, resp);
-            return;
-          }
+      {
+        uri: '/projects',
+        qs: options,
+      },
+      (err, resp) => {
+        if (err) {
+          callback!(err, null, null, resp);
+          return;
+        }
 
-          let nextQuery: GetProjectOptions;
+        let nextQuery: GetProjectOptions;
 
-          if (resp.nextPageToken) {
-            nextQuery = Object.assign({}, options, {
-              pageToken: resp.nextPageToken,
-            });
-          }
-
-          const projects = (resp.projects || []).map((project: Project) => {
-            const projectInstance = this.project(project.projectId);
-            projectInstance.metadata = project;
-            return projectInstance;
+        if (resp.nextPageToken) {
+          nextQuery = Object.assign({}, options, {
+            pageToken: resp.nextPageToken,
           });
+        }
 
-          callback!(null, projects, nextQuery!, resp);
+        const projects = (resp.projects || []).map((project: Project) => {
+          const projectInstance = this.project(project.projectId);
+          projectInstance.metadata = project;
+          return projectInstance;
         });
+
+        callback!(null, projects, nextQuery!, resp);
+      }
+    );
   }
 
   /*! Developer Documentation

@@ -18,10 +18,13 @@ import * as assert from 'assert';
 import * as uuid from 'uuid';
 import {Project, Resource} from '../src';
 
-if (!process.env.GCLOUD_PROJECT ||
-    !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+if (
+  !process.env.GCLOUD_PROJECT ||
+  !process.env.GOOGLE_APPLICATION_CREDENTIALS
+) {
   throw new Error(
-      'the GCLOUD_PROJECT and GOOGLE_APPLICATION_CREDENTIAL environment variables must be set to run the system tests 👻');
+    'the GCLOUD_PROJECT and GOOGLE_APPLICATION_CREDENTIAL environment variables must be set to run the system tests 👻'
+  );
 }
 
 describe('Resource', () => {
@@ -37,13 +40,14 @@ describe('Resource', () => {
 
     it('should get a list of projects in stream mode', done => {
       let resultsMatched = 0;
-      resource.getProjectsStream()
-          .on('error', done)
-          .on('data', () => resultsMatched++)
-          .on('end', () => {
-            assert(resultsMatched > 0);
-            done();
-          });
+      resource
+        .getProjectsStream()
+        .on('error', done)
+        .on('data', () => resultsMatched++)
+        .on('end', () => {
+          assert(resultsMatched > 0);
+          done();
+        });
     });
   });
 
@@ -59,6 +63,7 @@ describe('Resource', () => {
   //   - Set metadata
   //   - Restore a project
   //   - Delete a project
+  // tslint:disable-next-line ban
   describe.skip('lifecycle', () => {
     const testProjects: Project[] = [];
     const resource = new Resource();

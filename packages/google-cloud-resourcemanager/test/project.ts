@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-import {DecorateRequestOptions, ServiceObject, ServiceObjectConfig, util} from '@google-cloud/common';
+import {
+  DecorateRequestOptions,
+  ServiceObject,
+  ServiceObjectConfig,
+  util,
+} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
@@ -51,11 +56,11 @@ describe('Project', () => {
 
   before(() => {
     Project = proxyquire('../src/project.js', {
-                '@google-cloud/common': {
-                  ServiceObject: FakeServiceObject,
-                },
-                '@google-cloud/promisify': fakePromisify
-              }).Project;
+      '@google-cloud/common': {
+        ServiceObject: FakeServiceObject,
+      },
+      '@google-cloud/promisify': fakePromisify,
+    }).Project;
   });
 
   beforeEach(() => {
@@ -105,10 +110,12 @@ describe('Project', () => {
     const apiResponse = {a: 'b', c: 'd'};
 
     beforeEach(() => {
-      project.request =
-          (reqOpts: DecorateRequestOptions, callback: Function) => {
-            callback(error, apiResponse);
-          };
+      project.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(error, apiResponse);
+      };
     });
 
     it('should make the correct API request', done => {

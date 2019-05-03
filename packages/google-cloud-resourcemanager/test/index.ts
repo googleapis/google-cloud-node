@@ -61,7 +61,7 @@ const fakePaginator = {
     streamify(methodName: string) {
       return methodName;
     },
-  }
+  },
 };
 
 let promisified = true;
@@ -76,7 +76,7 @@ const fakePromisify = {
   },
 };
 
-let makeAuthenticatedRequestFactoryOverride: Function|null;
+let makeAuthenticatedRequestFactoryOverride: Function | null;
 const fakeUtil = Object.assign({}, util, {
   makeAuthenticatedRequestFactory(cfg: MakeAuthenticatedRequestFactoryConfig) {
     if (makeAuthenticatedRequestFactoryOverride) {
@@ -97,16 +97,16 @@ describe('Resource', () => {
 
   before(() => {
     Resource = proxyquire('../src', {
-                 '@google-cloud/common': {
-                   Operation: FakeOperation,
-                   Service: FakeService,
-                 },
-                 '@google-cloud/promisify': fakePromisify,
-                 '@google-cloud/paginator': fakePaginator,
-                 './project': {
-                   Project: FakeProject,
-                 }
-               }).Resource;
+      '@google-cloud/common': {
+        Operation: FakeOperation,
+        Service: FakeService,
+      },
+      '@google-cloud/promisify': fakePromisify,
+      '@google-cloud/paginator': fakePaginator,
+      './project': {
+        Project: FakeProject,
+      },
+    }).Resource;
   });
 
   beforeEach(() => {
@@ -120,7 +120,7 @@ describe('Resource', () => {
 
   describe('instantiation', () => {
     it('should extend the correct methods', () => {
-      assert(extended);  // See `fakePaginator.extend`
+      assert(extended); // See `fakePaginator.extend`
     });
 
     it('should streamify the correct methods', () => {
@@ -143,15 +143,18 @@ describe('Resource', () => {
       ]);
       assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepStrictEqual(
-          calledWith.packageJson, require('../../package.json'));
+        calledWith.packageJson,
+        require('../../package.json')
+      );
     });
   });
 
   describe('createProject', () => {
     const NEW_PROJECT_ID = 'new-project-id';
     const OPTIONS = {a: 'b', c: 'd'};
-    const EXPECTED_BODY =
-        Object.assign({}, OPTIONS, {projectId: NEW_PROJECT_ID});
+    const EXPECTED_BODY = Object.assign({}, OPTIONS, {
+      projectId: NEW_PROJECT_ID,
+    });
 
     it('should not require any options', done => {
       const expectedBody = {projectId: NEW_PROJECT_ID};
@@ -181,21 +184,25 @@ describe('Resource', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        resource.request =
-            (reqOpts: DecorateRequestOptions, callback: Function) => {
-              callback(error, apiResponse);
-            };
+        resource.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          callback(error, apiResponse);
+        };
       });
 
       it('should execute callback with error & API response', done => {
         resource.createProject(
-            NEW_PROJECT_ID, OPTIONS,
-            (err: Error, p: Project, res: Response) => {
-              assert.strictEqual(err, error);
-              assert.strictEqual(p, null);
-              assert.strictEqual(res, apiResponse);
-              done();
-            });
+          NEW_PROJECT_ID,
+          OPTIONS,
+          (err: Error, p: Project, res: Response) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(p, null);
+            assert.strictEqual(res, apiResponse);
+            done();
+          }
+        );
       });
     });
 
@@ -203,10 +210,12 @@ describe('Resource', () => {
       const apiResponse = {name: 'operation-name', projectId: undefined};
 
       beforeEach(() => {
-        resource.request =
-            (reqOpts: DecorateRequestOptions, callback: Function) => {
-              callback(null, apiResponse);
-            };
+        resource.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          callback(null, apiResponse);
+        };
       });
 
       it('should exec callback with Project & API response', done => {
@@ -224,15 +233,17 @@ describe('Resource', () => {
         };
 
         resource.createProject(
-            NEW_PROJECT_ID, OPTIONS,
-            (e: Error, p: Project, o: Operation, res: Response) => {
-              assert.ifError(e);
-              assert.strictEqual(p, project);
-              assert.strictEqual(o, fakeOperation);
-              assert.strictEqual(o.metadata, apiResponse);
-              assert.strictEqual(res, apiResponse);
-              done();
-            });
+          NEW_PROJECT_ID,
+          OPTIONS,
+          (e: Error, p: Project, o: Operation, res: Response) => {
+            assert.ifError(e);
+            assert.strictEqual(p, project);
+            assert.strictEqual(o, fakeOperation);
+            assert.strictEqual(o.metadata, apiResponse);
+            assert.strictEqual(res, apiResponse);
+            done();
+          }
+        );
       });
     });
   });
@@ -261,23 +272,30 @@ describe('Resource', () => {
       const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(() => {
-        resource.request =
-            (reqOpts: DecorateRequestOptions, callback: Function) => {
-              callback(error, apiResponse);
-            };
+        resource.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          callback(error, apiResponse);
+        };
       });
 
       it('should execute callback with error & API response', done => {
         resource.getProjects(
-            {},
-            (err: Error, projects: Project[], nextQuery: {},
-             apiResp: Response) => {
-              assert.strictEqual(err, error);
-              assert.strictEqual(projects, null);
-              assert.strictEqual(nextQuery, null);
-              assert.strictEqual(apiResp, apiResponse);
-              done();
-            });
+          {},
+          (
+            err: Error,
+            projects: Project[],
+            nextQuery: {},
+            apiResp: Response
+          ) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(projects, null);
+            assert.strictEqual(nextQuery, null);
+            assert.strictEqual(apiResp, apiResponse);
+            done();
+          }
+        );
       });
     });
 
@@ -287,10 +305,12 @@ describe('Resource', () => {
       };
 
       beforeEach(() => {
-        resource.request =
-            (reqOpts: DecorateRequestOptions, callback: Function) => {
-              callback(null, apiResponse);
-            };
+        resource.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          callback(null, apiResponse);
+        };
       });
 
       it('should build a nextQuery if necessary', done => {
@@ -302,19 +322,23 @@ describe('Resource', () => {
           pageToken: nextPageToken,
         };
 
-        resource.request =
-            (reqOpts: DecorateRequestOptions, callback: Function) => {
-              callback(null, apiResponseWithNextPageToken);
-            };
+        resource.request = (
+          reqOpts: DecorateRequestOptions,
+          callback: Function
+        ) => {
+          callback(null, apiResponseWithNextPageToken);
+        };
 
         resource.getProjects(
-            {}, (err: Error, projects: Project[], nextQuery: {}) => {
-              assert.ifError(err);
+          {},
+          (err: Error, projects: Project[], nextQuery: {}) => {
+            assert.ifError(err);
 
-              assert.deepStrictEqual(nextQuery, expectedNextQuery);
+            assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
-              done();
-            });
+            done();
+          }
+        );
       });
 
       it('should execute callback with Projects & API resp', done => {
@@ -326,15 +350,20 @@ describe('Resource', () => {
         };
 
         resource.getProjects(
-            {},
-            (err: Error, projects: Project[], nextQuery: {},
-             apiResp: Response) => {
-              assert.ifError(err);
-              assert.strictEqual(projects[0], project);
-              assert.strictEqual(projects[0].metadata, apiResponse.projects[0]);
-              assert.strictEqual(apiResp, apiResponse);
-              done();
-            });
+          {},
+          (
+            err: Error,
+            projects: Project[],
+            nextQuery: {},
+            apiResp: Response
+          ) => {
+            assert.ifError(err);
+            assert.strictEqual(projects[0], project);
+            assert.strictEqual(projects[0].metadata, apiResponse.projects[0]);
+            assert.strictEqual(apiResp, apiResponse);
+            done();
+          }
+        );
       });
     });
   });
@@ -351,8 +380,10 @@ describe('Resource', () => {
     it('should return a common/operation', () => {
       const operation = resource.operation(NAME);
       assert(operation instanceof FakeOperation);
-      assert.deepStrictEqual(
-          operation.calledWith_[0], {parent: resource, id: NAME});
+      assert.deepStrictEqual(operation.calledWith_[0], {
+        parent: resource,
+        id: NAME,
+      });
     });
   });
 

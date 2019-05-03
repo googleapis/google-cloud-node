@@ -16,18 +16,24 @@
 
 import {Operation, ServiceObject, util} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as r from 'request';  // Only for type declarations.
+import * as r from 'request'; // Only for type declarations.
 
 import {CreateProjectCallback, CreateProjectResponse, Resource} from '.';
 
-export type RestoreCallback = (err: Error|null, apiResonse?: r.Response) =>
-    void;
+export type RestoreCallback = (
+  err: Error | null,
+  apiResonse?: r.Response
+) => void;
 export type RestoreResponse = [r.Response];
 
 export type ProjectCreateResponse = [Project, Operation<Project>, r.Response];
 export interface ProjectCreateCallback {
-  (err: Error|null, project?: Project, operation?: Operation<Project>,
-   apiResponse?: r.Response): void;
+  (
+    err: Error | null,
+    project?: Project,
+    operation?: Operation<Project>,
+    apiResponse?: r.Response
+  ): void;
 }
 
 /**
@@ -277,11 +283,11 @@ class Project extends ServiceObject {
 
   create(): Promise<CreateProjectResponse>;
   create(callback: CreateProjectCallback): void;
-  create(callback?: CreateProjectCallback):
-      void|Promise<CreateProjectResponse> {
+  create(
+    callback?: CreateProjectCallback
+  ): void | Promise<CreateProjectResponse> {
     super.create(callback);
   }
-
 
   /**
    * Restore a project.
@@ -315,16 +321,17 @@ class Project extends ServiceObject {
    */
   restore(): Promise<RestoreResponse>;
   restore(callback: RestoreCallback): void;
-  restore(callback?: RestoreCallback): void|Promise<RestoreResponse> {
+  restore(callback?: RestoreCallback): void | Promise<RestoreResponse> {
     callback = callback || util.noop;
     this.request(
-        {
-          method: 'POST',
-          uri: ':undelete',
-        },
-        (err, resp) => {
-          callback!(err, resp);
-        });
+      {
+        method: 'POST',
+        uri: ':undelete',
+      },
+      (err, resp) => {
+        callback!(err, resp);
+      }
+    );
   }
 }
 
