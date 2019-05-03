@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@google-cloud/projectify": "^0.3.2",
-    "@google-cloud/promisify": "^0.4.0",
+    "@google-cloud/promisify": "^1.0.0",
     "@types/duplexify": "^3.6.0",
     "arrify": "^2.0.0",
     "concat-stream": "^2.0.0",
