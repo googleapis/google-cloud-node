@@ -208,11 +208,13 @@ describe('Datastore', () => {
 
       // The key's path should now be complete.
       assert(postKey.id);
-      await assertRejects(datastore.save({
-        key: postKey,
-        method: 'insert',
-        data: post,
-      }));
+      await assertRejects(
+        datastore.save({
+          key: postKey,
+          method: 'insert',
+          data: post,
+        })
+      );
       const [entity] = await datastore.get(postKey);
       delete entity[datastore.KEY];
       assert.deepStrictEqual(entity, post);
@@ -221,11 +223,13 @@ describe('Datastore', () => {
 
     it('should fail explicitly set first update on save', async () => {
       const postKey = datastore.key('Post');
-      await assertRejects(datastore.save({
-        key: postKey,
-        method: 'update',
-        data: post,
-      }));
+      await assertRejects(
+        datastore.save({
+          key: postKey,
+          method: 'update',
+          data: post,
+        })
+      );
     });
 
     it('should save/get/delete multiple entities at once', async () => {
@@ -251,22 +255,24 @@ describe('Datastore', () => {
       const key2 = datastore.key('Post');
 
       datastore.save(
-          [{key: key1, data: post}, {key: key2, data: post}], err => {
-            assert.ifError(err);
+        [{key: key1, data: post}, {key: key2, data: post}],
+        err => {
+          assert.ifError(err);
 
-            let numEntitiesEmitted = 0;
+          let numEntitiesEmitted = 0;
 
-            datastore.createReadStream([key1, key2])
-                .on('error', done)
-                .on('data',
-                    () => {
-                      numEntitiesEmitted++;
-                    })
-                .on('end', () => {
-                  assert.strictEqual(numEntitiesEmitted, 2);
-                  datastore.delete([key1, key2], done);
-                });
-          });
+          datastore
+            .createReadStream([key1, key2])
+            .on('error', done)
+            .on('data', () => {
+              numEntitiesEmitted++;
+            })
+            .on('end', () => {
+              assert.strictEqual(numEntitiesEmitted, 2);
+              datastore.delete([key1, key2], done);
+            });
+        }
+      );
     });
 
     it('should save keys as a part of entity and query by key', async () => {
@@ -275,12 +281,13 @@ describe('Datastore', () => {
         key: personKey,
         data: {
           fullName: 'Full name',
-          linkedTo: personKey,  // himself
+          linkedTo: personKey, // himself
         },
       });
-      const query = datastore.createQuery('Person')
-                        .hasAncestor(datastore.key(['People', 'US']))
-                        .filter('linkedTo', personKey);
+      const query = datastore
+        .createQuery('Person')
+        .hasAncestor(datastore.key(['People', 'US']))
+        .filter('linkedTo', personKey);
       const [results] = await datastore.runQuery(query);
       assert.strictEqual(results![0].fullName, 'Full name');
       assert.deepStrictEqual(results![0].linkedTo, personKey);
@@ -418,21 +425,26 @@ describe('Datastore', () => {
     });
 
     it('should limit queries', async () => {
-      const q =
-          datastore.createQuery('Character').hasAncestor(ancestor).limit(5);
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .limit(5);
       const [firstEntities, info] = await datastore.runQuery(q);
       assert.strictEqual(firstEntities!.length, 5);
-      const secondQ = datastore.createQuery('Character')
-                          .hasAncestor(ancestor)
-                          .start(info!.endCursor!);
+      const secondQ = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .start(info!.endCursor!);
       const [secondEntities] = await datastore.runQuery(secondQ);
       assert.strictEqual(secondEntities!.length, 3);
     });
 
     it('should not go over a limit', async () => {
       const limit = 3;
-      const q =
-          datastore.createQuery('Character').hasAncestor(ancestor).limit(limit);
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .limit(limit);
       const [results] = await datastore.runQuery(q);
       assert.strictEqual(results!.length, limit);
     });
@@ -440,42 +452,48 @@ describe('Datastore', () => {
     it('should run a query as a stream', done => {
       const q = datastore.createQuery('Character').hasAncestor(ancestor);
       let resultsReturned = 0;
-      datastore.runQueryStream(q)
-          .on('error', done)
-          .on('data', () => resultsReturned++)
-          .on('end', () => {
-            assert.strictEqual(resultsReturned, characters.length);
-            done();
-          });
+      datastore
+        .runQueryStream(q)
+        .on('error', done)
+        .on('data', () => resultsReturned++)
+        .on('end', () => {
+          assert.strictEqual(resultsReturned, characters.length);
+          done();
+        });
     });
 
     it('should not go over a limit with a stream', done => {
       const limit = 3;
-      const q =
-          datastore.createQuery('Character').hasAncestor(ancestor).limit(limit);
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .limit(limit);
       let resultsReturned = 0;
-      datastore.runQueryStream(q)
-          .on('error', done)
-          .on('data', () => resultsReturned++)
-          .on('end', () => {
-            assert.strictEqual(resultsReturned, limit);
-            done();
-          });
+      datastore
+        .runQueryStream(q)
+        .on('error', done)
+        .on('data', () => resultsReturned++)
+        .on('end', () => {
+          assert.strictEqual(resultsReturned, limit);
+          done();
+        });
     });
 
     it('should filter queries with simple indexes', async () => {
-      const q = datastore.createQuery('Character')
-                    .hasAncestor(ancestor)
-                    .filter('appearances', '>=', 20);
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('appearances', '>=', 20);
       const [entities] = await datastore.runQuery(q);
       assert.strictEqual(entities!.length, 6);
     });
 
     it('should filter queries with defined indexes', async () => {
-      const q = datastore.createQuery('Character')
-                    .hasAncestor(ancestor)
-                    .filter('family', 'Stark')
-                    .filter('appearances', '>=', 20);
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('family', 'Stark')
+        .filter('appearances', '>=', 20);
       const [entities] = await datastore.runQuery(q);
       assert.strictEqual(entities!.length, 6);
     });
@@ -488,17 +506,19 @@ describe('Datastore', () => {
 
     it('should filter by key', async () => {
       const key = datastore.key(['Book', 'GoT', 'Character', 'Rickard']);
-      const q = datastore.createQuery('Character')
-                    .hasAncestor(ancestor)
-                    .filter('__key__', key);
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('__key__', key);
       const [entities] = await datastore.runQuery(q);
       assert.strictEqual(entities!.length, 1);
     });
 
     it('should order queries', async () => {
-      const q = datastore.createQuery('Character')
-                    .hasAncestor(ancestor)
-                    .order('appearances');
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .order('appearances');
 
       const [entities] = await datastore.runQuery(q);
       assert.strictEqual(entities![0].name, characters[0].name);
@@ -506,10 +526,10 @@ describe('Datastore', () => {
     });
 
     it('should select projections', async () => {
-      const q =
-          datastore.createQuery('Character').hasAncestor(ancestor).select([
-            'name', 'family'
-          ]);
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .select(['name', 'family']);
 
       const [entities] = await datastore.runQuery(q);
       delete entities[0][datastore.KEY];
@@ -525,20 +545,22 @@ describe('Datastore', () => {
     });
 
     it('should paginate with offset and limit', async () => {
-      const q = datastore.createQuery('Character')
-                    .hasAncestor(ancestor)
-                    .offset(2)
-                    .limit(3)
-                    .order('appearances');
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .offset(2)
+        .limit(3)
+        .order('appearances');
 
       const [entities, info] = await datastore.runQuery(q);
       assert.strictEqual(entities!.length, 3);
       assert.strictEqual(entities![0].name, 'Robb');
       assert.strictEqual(entities![2].name, 'Catelyn');
-      const secondQ = datastore.createQuery('Character')
-                          .hasAncestor(ancestor)
-                          .order('appearances')
-                          .start(info!.endCursor!);
+      const secondQ = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .order('appearances')
+        .start(info!.endCursor!);
       const [secondEntities] = await datastore.runQuery(secondQ);
       assert.strictEqual(secondEntities!.length, 3);
       assert.strictEqual(secondEntities![0].name, 'Sansa');
@@ -546,16 +568,18 @@ describe('Datastore', () => {
     });
 
     it('should resume from a start cursor', async () => {
-      const q = datastore.createQuery('Character')
-                    .hasAncestor(ancestor)
-                    .offset(2)
-                    .limit(2)
-                    .order('appearances');
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .offset(2)
+        .limit(2)
+        .order('appearances');
       const [, info] = await datastore.runQuery(q);
-      const secondQ = datastore.createQuery('Character')
-                          .hasAncestor(ancestor)
-                          .order('appearances')
-                          .start(info!.endCursor!);
+      const secondQ = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .order('appearances')
+        .start(info!.endCursor!);
       const [secondEntities] = await datastore.runQuery(secondQ);
       assert.strictEqual(secondEntities!.length, 4);
       assert.strictEqual(secondEntities![0].name, 'Catelyn');
@@ -563,9 +587,10 @@ describe('Datastore', () => {
     });
 
     it('should group queries', async () => {
-      const q = datastore.createQuery('Character')
-                    .hasAncestor(ancestor)
-                    .groupBy('appearances');
+      const q = datastore
+        .createQuery('Character')
+        .hasAncestor(ancestor)
+        .groupBy('appearances');
       const [entities] = await datastore.runQuery(q);
       assert.strictEqual(entities!.length, characters.length - 1);
     });
@@ -625,7 +650,7 @@ describe('Datastore', () => {
         // Deletes the key that is in the deletion queue.
         datastore.get(deleteKey),
         // Updates data on the key.
-        datastore.get(key)
+        datastore.get(key),
       ]);
       assert.strictEqual(typeof deletedEntity, 'undefined');
       assert.strictEqual(fetchedEntity.rating, 10);

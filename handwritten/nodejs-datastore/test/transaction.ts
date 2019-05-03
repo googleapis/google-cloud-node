@@ -28,7 +28,7 @@ import * as tsTypes from '../src/transaction';
 
 // tslint:disable-next-line no-any
 type Any = any;
-type Path = string|[string]|[string, number];
+type Path = string | [string] | [string, number];
 
 const {entity} = require('../src/entity');
 
@@ -44,10 +44,10 @@ const fakePfy = Object.assign({}, pfy, {
 });
 
 // tslint:disable-next-line variable-name
-const DatastoreRequestOverride = {
-  delete () {},
+const DatastoreRequestOverride = ({
+  delete() {},
   save() {},
-} as {} as DatastoreRequest;
+} as {}) as DatastoreRequest;
 
 class FakeDatastoreRequest {
   delete() {
@@ -73,11 +73,11 @@ describe('Transaction', () => {
   const PROJECT_ID = 'project-id';
   const NAMESPACE = 'a-namespace';
 
-  const DATASTORE = {
+  const DATASTORE = ({
     request_() {},
     projectId: PROJECT_ID,
     namespace: NAMESPACE,
-  } as {} as Datastore;
+  } as {}) as Datastore;
 
   function key(path: Path) {
     return new entity.Key({path: arrify(path)});
@@ -85,9 +85,9 @@ describe('Transaction', () => {
 
   before(() => {
     Transaction = proxyquire('../src/transaction.js', {
-                    '@google-cloud/promisify': fakePfy,
-                    './request.js': {DatastoreRequest: FakeDatastoreRequest},
-                  }).Transaction;
+      '@google-cloud/promisify': fakePfy,
+      './request.js': {DatastoreRequest: FakeDatastoreRequest},
+    }).Transaction;
   });
 
   beforeEach(() => {
@@ -161,7 +161,7 @@ describe('Transaction', () => {
     });
 
     it('should commit', done => {
-      transaction.request_ = (config) => {
+      transaction.request_ = config => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'commit');
         assert.strictEqual(config.gaxOptions, undefined);
@@ -173,8 +173,8 @@ describe('Transaction', () => {
     it('should accept gaxOptions', done => {
       const gaxOptions = {};
 
-      transaction.request_ = (config) => {
-        assert.deepEqual(config.gaxOpts, {});
+      transaction.request_ = config => {
+        assert.deepStrictEqual(config.gaxOpts, {});
         done();
       };
 
@@ -199,8 +199,8 @@ describe('Transaction', () => {
 
       beforeEach(() => {
         transaction.rollback = ((callback: Function) => {
-                                 callback(rollbackError, rollbackApiResponse);
-                               }) as Any;
+          callback(rollbackError, rollbackApiResponse);
+        }) as Any;
 
         transaction.request_ = (config, callback) => {
           callback(error, apiResponse);
@@ -245,15 +245,15 @@ describe('Transaction', () => {
 
       let deleteCalled = 0;
       DatastoreRequestOverride.delete = ((a: {}) => {
-                                          args.push(a);
-                                          deleteCalled++;
-                                        }) as Any;
+        args.push(a);
+        deleteCalled++;
+      }) as Any;
 
       let saveCalled = 0;
       DatastoreRequestOverride.save = ((a: {}) => {
-                                        args.push(a);
-                                        saveCalled++;
-                                      }) as Any;
+        args.push(a);
+        saveCalled++;
+      }) as Any;
 
       transaction.request_ = () => {};
 
@@ -278,13 +278,13 @@ describe('Transaction', () => {
 
       let deleteCalled = 0;
       DatastoreRequestOverride.delete = (() => {
-                                          deleteCalled++;
-                                        }) as Any;
+        deleteCalled++;
+      }) as Any;
 
       let saveCalled = 0;
       DatastoreRequestOverride.save = (() => {
-                                        saveCalled++;
-                                      }) as Any;
+        saveCalled++;
+      }) as Any;
 
       transaction.request_ = () => {};
 
@@ -298,9 +298,9 @@ describe('Transaction', () => {
       transaction.save({key: key(['Product']), data: ''});
 
       DatastoreRequestOverride.save = ((entities: Entity[]) => {
-                                        assert.strictEqual(entities.length, 2);
-                                        done();
-                                      }) as Any;
+        assert.strictEqual(entities.length, 2);
+        done();
+      }) as Any;
 
       transaction.request_ = () => {};
 
@@ -317,7 +317,7 @@ describe('Transaction', () => {
         },
       ];
 
-      transaction.request_ = (config) => {
+      transaction.request_ = config => {
         assert.deepStrictEqual(config.reqOpts, {
           mutations: [{a: 'b'}, {c: 'd'}, {e: 'f'}, {g: 'h'}],
         });
@@ -353,8 +353,7 @@ describe('Transaction', () => {
 
   describe('createQuery', () => {
     it('should return query from datastore.createQuery', () => {
-      const args =
-          ['0', '1'];  // Query only accepts to accept string||null values
+      const args = ['0', '1']; // Query only accepts to accept string||null values
       const createQueryReturnValue = {};
 
       transaction.datastore.createQuery = function(...ags: Any) {
@@ -364,19 +363,14 @@ describe('Transaction', () => {
         return createQueryReturnValue as Query;
       };
 
-      const query =
-          transaction.createQuery(args[0], args[1]);  // verbose de-structure
+      const query = transaction.createQuery(args[0], args[1]); // verbose de-structure
       assert.strictEqual(query, createQueryReturnValue);
     });
   });
 
   describe('delete', () => {
     it('should push entities into a queue', () => {
-      const keys = [
-        key('Product123'),
-        key('Product234'),
-        key('Product345'),
-      ];
+      const keys = [key('Product123'), key('Product234'), key('Product345')];
 
       transaction.delete(keys);
 
@@ -396,7 +390,7 @@ describe('Transaction', () => {
     });
 
     it('should rollback', done => {
-      transaction.request_ = (config) => {
+      transaction.request_ = config => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'rollback');
         assert.strictEqual(config.gaxOptions, undefined);
@@ -421,7 +415,7 @@ describe('Transaction', () => {
       transaction.request_ = (config, callback) => {
         callback(error);
       };
-      transaction.rollback((err) => {
+      transaction.rollback(err => {
         assert.deepStrictEqual(err, error);
         done();
       });
@@ -462,7 +456,7 @@ describe('Transaction', () => {
 
   describe('run', () => {
     it('should make the correct API request', done => {
-      transaction.request_ = (config) => {
+      transaction.request_ = config => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'beginTransaction');
         assert.deepStrictEqual(config.reqOpts, {transactionOptions: {}});
@@ -476,7 +470,7 @@ describe('Transaction', () => {
     it('should allow setting gaxOptions', done => {
       const gaxOptions = {};
 
-      transaction.request_ = (config) => {
+      transaction.request_ = config => {
         assert.strictEqual(config.gaxOpts, gaxOptions);
         done();
       };
@@ -492,7 +486,9 @@ describe('Transaction', () => {
 
         transaction.request_ = (config: Any) => {
           assert.deepStrictEqual(
-              config.reqOpts.transactionOptions.readOnly, {});
+            config.reqOpts.transactionOptions.readOnly,
+            {}
+          );
           done();
         };
 
@@ -502,9 +498,11 @@ describe('Transaction', () => {
       it('should respect the global readOnly option', done => {
         transaction.readOnly = true;
 
-        transaction.request_ = (config) => {
+        transaction.request_ = config => {
           assert.deepStrictEqual(
-              config.reqOpts!.transactionOptions!.readOnly, {});
+            config.reqOpts!.transactionOptions!.readOnly,
+            {}
+          );
           done();
         };
 
@@ -518,11 +516,13 @@ describe('Transaction', () => {
           transactionId: 'transaction-id',
         };
 
-        transaction.request_ = (config) => {
+        transaction.request_ = config => {
           assert.deepStrictEqual(
-              config.reqOpts!.transactionOptions!.readWrite, {
-                previousTransaction: options.transactionId,
-              });
+            config.reqOpts!.transactionOptions!.readWrite,
+            {
+              previousTransaction: options.transactionId,
+            }
+          );
           done();
         };
 
@@ -532,11 +532,13 @@ describe('Transaction', () => {
       it('should respect the global transactionId option', done => {
         transaction.id = 'transaction-id';
 
-        transaction.request_ = (config) => {
+        transaction.request_ = config => {
           assert.deepStrictEqual(
-              config.reqOpts!.transactionOptions!.readWrite, {
-                previousTransaction: transaction.id,
-              });
+            config.reqOpts!.transactionOptions!.readWrite,
+            {
+              previousTransaction: transaction.id,
+            }
+          );
           done();
         };
 
@@ -548,15 +550,15 @@ describe('Transaction', () => {
       it('should allow full override of transactionOptions', done => {
         transaction.readOnly = true;
 
-        const options = {
+        const options = ({
           transactionOptions: {
             readWrite: {
               previousTransaction: 'transaction-id',
             },
           },
-        } as {} as TransactionOptions;
+        } as {}) as TransactionOptions;
 
-        transaction.request_ = (config) => {
+        transaction.request_ = config => {
           assert.deepStrictEqual(config.reqOpts, options);
           done();
         };
@@ -598,7 +600,7 @@ describe('Transaction', () => {
 
       it('should set transaction id', done => {
         delete transaction.id;
-        transaction.run((err: Error|null) => {
+        transaction.run((err: Error | null) => {
           assert.ifError(err);
           assert.strictEqual(transaction.id, TRANSACTION_ID);
           done();
@@ -627,7 +629,7 @@ describe('Transaction', () => {
       assert.strictEqual(transaction.modifiedEntities_.length, entities.length);
       transaction.modifiedEntities_.forEach((queuedEntity: Entity) => {
         assert.strictEqual(queuedEntity.method, 'save');
-        const match = entities.filter((ent) => {
+        const match = entities.filter(ent => {
           return ent.key === queuedEntity.entity.key;
         })[0];
         assert.deepStrictEqual(queuedEntity.args, [match]);

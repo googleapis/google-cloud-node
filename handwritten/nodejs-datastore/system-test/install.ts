@@ -21,10 +21,10 @@ import * as tmp from 'tmp';
 import {promisify} from 'util';
 
 const execSync = (cmd: string, opts?: object) =>
-    cp.execSync(cmd, {encoding: 'utf-8', ...opts});
+  cp.execSync(cmd, {encoding: 'utf-8', ...opts});
 
 const keep = false;
-const mvp = promisify(mv) as {} as (...args: string[]) => Promise<void>;
+const mvp = (promisify(mv) as {}) as (...args: string[]) => Promise<void>;
 const ncpp = promisify(ncp);
 const stagingDir = tmp.dirSync({keep, unsafeCleanup: true});
 const stagingPath = stagingDir.name;
@@ -40,12 +40,14 @@ describe('📦 pack and install', () => {
     const tarball = `google-cloud-datastore-${pkg.version}.tgz`;
     await mvp(tarball, `${stagingPath}/datastore.tgz`);
     await ncpp('system-test/fixtures/sample', `${stagingPath}/`);
-    execSync(
-        'npm install --unsafe-perm',
-        {cwd: `${stagingPath}/`, stdio: 'inherit'});
-    execSync(
-        'node --throw-deprecation build/src/index.js',
-        {cwd: `${stagingPath}/`, stdio: 'inherit'});
+    execSync('npm install --unsafe-perm', {
+      cwd: `${stagingPath}/`,
+      stdio: 'inherit',
+    });
+    execSync('node --throw-deprecation build/src/index.js', {
+      cwd: `${stagingPath}/`,
+      stdio: 'inherit',
+    });
   });
 
   /**
