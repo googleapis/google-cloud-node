@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-paginator/compare/v0.2.0...v1.0.0) (2019-05-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency arrify to v2 ([#109](https://www.github.com/googleapis/nodejs-paginator/issues/109)) ([9f06c83](https://www.github.com/googleapis/nodejs-paginator/commit/9f06c83))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#115](https://www.github.com/googleapis/nodejs-paginator/issues/115)) ([0921076](https://www.github.com/googleapis/nodejs-paginator/commit/0921076))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#115)
+
 ## v0.2.0
 
 03-08-2019 12:15 PST
@@ -92,4 +109,3 @@
 - chore(deps): update dependency typescript to v3 (#6)
 - chore: assert.deelEqual => assert.deepStrictEqual (#5)
 - chore: move mocha options to mocha.opts (#4)
-
