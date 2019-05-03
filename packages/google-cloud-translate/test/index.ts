@@ -15,7 +15,10 @@
  */
 
 import {DecorateRequestOptions, util} from '@google-cloud/common';
-import {BodyResponseCallback, MakeRequestConfig} from '@google-cloud/common/build/src/util';
+import {
+  BodyResponseCallback,
+  MakeRequestConfig,
+} from '@google-cloud/common/build/src/util';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as extend from 'extend';
@@ -39,8 +42,10 @@ const fakePromisify = extend({}, pfy, {
 
 const fakeUtil = extend({}, util, {
   makeRequest(
-      opts: DecorateRequestOptions, cfg: MakeRequestConfig,
-      cb: BodyResponseCallback) {
+    opts: DecorateRequestOptions,
+    cfg: MakeRequestConfig,
+    cb: BodyResponseCallback
+  ) {
     if (makeRequestOverride) {
       return makeRequestOverride(opts, cfg, cb);
     }
@@ -69,12 +74,12 @@ describe('Translate v2', () => {
 
   before(() => {
     Translate = proxyquire('../src/v2', {
-                  '@google-cloud/common': {
-                    util: fakeUtil,
-                    Service: FakeService,
-                  },
-                  '@google-cloud/promisify': fakePromisify
-                }).Translate;
+      '@google-cloud/common': {
+        util: fakeUtil,
+        Service: FakeService,
+      },
+      '@google-cloud/promisify': fakePromisify,
+    }).Translate;
   });
 
   beforeEach(() => {
@@ -95,7 +100,7 @@ describe('Translate v2', () => {
       // tslint:disable-next-line no-any
       const calledWith = (translate as any).calledWith_[0];
       const baseUrl =
-          'https://translation.googleapis.com/language/translate/v2';
+        'https://translation.googleapis.com/language/translate/v2';
 
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepStrictEqual(calledWith.scopes, [
@@ -243,13 +248,15 @@ describe('Translate v2', () => {
 
       it('should return an array if input was an array', done => {
         translate.detect(
-            [INPUT], (err: Error, results: {}, apiResponse_: {}) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(results, [expectedResults]);
-              assert.strictEqual(apiResponse_, apiResponse);
-              assert.deepStrictEqual(apiResponse_, originalApiResponse);
-              done();
-            });
+          [INPUT],
+          (err: Error, results: {}, apiResponse_: {}) => {
+            assert.ifError(err);
+            assert.deepStrictEqual(results, [expectedResults]);
+            assert.strictEqual(apiResponse_, apiResponse);
+            assert.deepStrictEqual(apiResponse_, originalApiResponse);
+            done();
+          }
+        );
       });
     });
   });
@@ -291,12 +298,13 @@ describe('Translate v2', () => {
 
       it('should exec callback with error & API response', done => {
         translate.getLanguages(
-            (err: Error, languages: {}, apiResponse_: {}) => {
-              assert.strictEqual(err, error);
-              assert.strictEqual(languages, null);
-              assert.strictEqual(apiResponse_, apiResponse);
-              done();
-            });
+          (err: Error, languages: {}, apiResponse_: {}) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(languages, null);
+            assert.strictEqual(apiResponse_, apiResponse);
+            done();
+          }
+        );
       });
     });
 
@@ -335,12 +343,13 @@ describe('Translate v2', () => {
 
       it('should exec callback with languages', done => {
         translate.getLanguages(
-            (err: Error, languages: {}, apiResponse_: {}) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(languages, expectedResults);
-              assert.strictEqual(apiResponse_, apiResponse);
-              done();
-            });
+          (err: Error, languages: {}, apiResponse_: {}) => {
+            assert.ifError(err);
+            assert.deepStrictEqual(languages, expectedResults);
+            assert.strictEqual(apiResponse_, apiResponse);
+            done();
+          }
+        );
       });
     });
   });
@@ -382,11 +391,13 @@ describe('Translate v2', () => {
         };
 
         translate.translate(
-            INPUT, {
-              from: SOURCE_LANG_CODE,
-              to: TARGET_LANG_CODE,
-            },
-            assert.ifError);
+          INPUT,
+          {
+            from: SOURCE_LANG_CODE,
+            to: TARGET_LANG_CODE,
+          },
+          assert.ifError
+        );
       });
     });
 
@@ -467,13 +478,15 @@ describe('Translate v2', () => {
 
       it('should exec callback with error & API response', done => {
         translate.translate(
-            INPUT, OPTIONS,
-            (err: Error, translations: {}, resp: r.Response) => {
-              assert.strictEqual(err, error);
-              assert.strictEqual(translations, null);
-              assert.strictEqual(resp, apiResponse);
-              done();
-            });
+          INPUT,
+          OPTIONS,
+          (err: Error, translations: {}, resp: r.Response) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(translations, null);
+            assert.strictEqual(resp, apiResponse);
+            done();
+          }
+        );
       });
     });
 
@@ -500,13 +513,15 @@ describe('Translate v2', () => {
 
       it('should execute callback with results & API response', done => {
         translate.translate(
-            INPUT, OPTIONS,
-            (err: Error, translations: {}, resp: r.Response) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(translations, expectedResults);
-              assert.strictEqual(resp, apiResponse);
-              done();
-            });
+          INPUT,
+          OPTIONS,
+          (err: Error, translations: {}, resp: r.Response) => {
+            assert.ifError(err);
+            assert.deepStrictEqual(translations, expectedResults);
+            assert.strictEqual(resp, apiResponse);
+            done();
+          }
+        );
       });
 
       it('should execute callback with multiple results', done => {
@@ -520,11 +535,14 @@ describe('Translate v2', () => {
 
       it('should return an array if input was an array', done => {
         translate.translate(
-            [INPUT], OPTIONS, (err: Error, translations: {}) => {
-              assert.ifError(err);
-              assert.deepStrictEqual(translations, [expectedResults]);
-              done();
-            });
+          [INPUT],
+          OPTIONS,
+          (err: Error, translations: {}) => {
+            assert.ifError(err);
+            assert.deepStrictEqual(translations, [expectedResults]);
+            done();
+          }
+        );
       });
     });
   });
@@ -550,11 +568,13 @@ describe('Translate v2', () => {
           },
         };
 
-        FakeService.prototype.request =
-            (reqOpts: r.Options, callback: Function) => {
-              assert.strictEqual(reqOpts, fakeOptions);
-              callback();
-            };
+        FakeService.prototype.request = (
+          reqOpts: r.Options,
+          callback: Function
+        ) => {
+          assert.strictEqual(reqOpts, fakeOptions);
+          callback();
+        };
 
         translate.request(fakeOptions, done);
       });
@@ -573,7 +593,7 @@ describe('Translate v2', () => {
         const userAgent = 'user-agent/0.0.0';
 
         const getUserAgentFn = fakeUtil.getUserAgentFromPackageJson;
-        fakeUtil.getUserAgentFromPackageJson = (packageJson) => {
+        fakeUtil.getUserAgentFromPackageJson = packageJson => {
           fakeUtil.getUserAgentFromPackageJson = getUserAgentFn;
           assert.deepStrictEqual(packageJson, pkgJson);
           return userAgent;
@@ -600,12 +620,15 @@ describe('Translate v2', () => {
 
         expectedReqOpts.uri = translate.baseUrl + reqOpts.uri;
 
-        makeRequestOverride =
-            (reqOpts: r.Options, options: {}, callback: Function) => {
-              assert.deepStrictEqual(reqOpts, expectedReqOpts);
-              assert.strictEqual(options, translate.options);
-              callback();  // done()
-            };
+        makeRequestOverride = (
+          reqOpts: r.Options,
+          options: {},
+          callback: Function
+        ) => {
+          assert.deepStrictEqual(reqOpts, expectedReqOpts);
+          assert.strictEqual(options, translate.options);
+          callback(); // done()
+        };
 
         translate.request(reqOpts, done);
       });

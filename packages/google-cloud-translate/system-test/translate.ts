@@ -90,7 +90,9 @@ describe('translate', () => {
       const [results] = await translate.translate(input, opts);
       const translation = results.split(/<\/*body>/g)[1].trim();
       assert.strictEqual(
-          removeSymbols(translation), INPUT[0].expectedTranslation);
+        removeSymbols(translation),
+        INPUT[0].expectedTranslation
+      );
     });
   });
 
@@ -106,7 +108,7 @@ describe('translate', () => {
 
     it('should accept a target language', async () => {
       const [languages] = await translate.getLanguages('es');
-      const englishResult = languages.filter((language) => {
+      const englishResult = languages.filter(language => {
         return language.code === 'en';
       })[0];
       assert.deepStrictEqual(englishResult, {
@@ -120,12 +122,13 @@ describe('translate', () => {
     beforeEach(() => {
       if (!API_KEY) {
         throw new Error(
-            'The `TRANSLATE_API_KEY` environment variable is required!');
+          'The `TRANSLATE_API_KEY` environment variable is required!'
+        );
       }
       translate = new Translate({key: API_KEY});
     });
 
-    it('should use an API key to authenticate', (done) => {
+    it('should use an API key to authenticate', done => {
       translate.getLanguages(done);
     });
   });
