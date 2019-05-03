@@ -154,8 +154,9 @@ describe('dns', () => {
     });
 
     it('should import records from a zone file', done => {
-      const zoneFilename =
-          require.resolve('../../system-test/data/zonefile.zone');
+      const zoneFilename = require.resolve(
+        '../../system-test/data/zonefile.zone'
+      );
       let zoneFileTemplate = fs.readFileSync(zoneFilename, 'utf-8');
       zoneFileTemplate = format(zoneFileTemplate, {
         DNS_DOMAIN,
@@ -178,16 +179,18 @@ describe('dns', () => {
               })[0];
 
               assert.strictEqual(
-                  spfRecord.toJSON().rrdatas![0],
-                  '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"');
+                spfRecord.toJSON().rrdatas![0],
+                '"v=spf1" "mx:' + DNS_DOMAIN + '" "-all"'
+              );
 
               const txtRecord = records!.filter(record => {
                 return record.type === 'TXT';
               })[0];
 
               assert.strictEqual(
-                  txtRecord.toJSON().rrdatas![0],
-                  '"google-site-verification=xxxxxxxxxxxxYYYYYYXXX"');
+                txtRecord.toJSON().rrdatas![0],
+                '"google-site-verification=xxxxxxxxxxxxYYYYYYXXX"'
+              );
 
               done();
             });
@@ -273,21 +276,25 @@ describe('dns', () => {
 
       ZONE.replaceRecords('cname', newRecords, err => {
         assert.ifError(err);
-        const onRecordsReceived =
-            (err?: Error|null, records?: Record[]|null, nextQuery?: {}|null,
-             apiResponse?: Metadata) => {
-              if (nextQuery) {
-                ZONE.getRecords(nextQuery, onRecordsReceived);
-                return;
-              }
-              ZONE.deleteRecords(newRecords, done);
-            };
+        const onRecordsReceived = (
+          err?: Error | null,
+          records?: Record[] | null,
+          nextQuery?: {} | null,
+          apiResponse?: Metadata
+        ) => {
+          if (nextQuery) {
+            ZONE.getRecords(nextQuery, onRecordsReceived);
+            return;
+          }
+          ZONE.deleteRecords(newRecords, done);
+        };
         ZONE.getRecords(
-            {
-              type: 'cname',
-              maxResults: 2,
-            },
-            onRecordsReceived);
+          {
+            type: 'cname',
+            maxResults: 2,
+          },
+          onRecordsReceived
+        );
       });
     });
 

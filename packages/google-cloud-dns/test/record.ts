@@ -49,8 +49,8 @@ describe('Record', () => {
 
   before(() => {
     Record = proxyquire('../src/record', {
-               '@google-cloud/promisify': fakePromisify,
-             }).Record;
+      '@google-cloud/promisify': fakePromisify,
+    }).Record;
   });
 
   beforeEach(() => {

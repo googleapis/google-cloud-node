@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-import {Service, ServiceConfig, ServiceOptions, util} from '@google-cloud/common';
+import {
+  Service,
+  ServiceConfig,
+  ServiceOptions,
+  util,
+} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as assert from 'assert';
@@ -83,15 +88,15 @@ describe('DNS', () => {
 
   before(() => {
     DNS = proxyquire('../src', {
-            '@google-cloud/common': {
-              Service: FakeService,
-            },
-            '@google-cloud/paginator': fakePaginator,
-            '@google-cloud/promisify': fakePromisify,
-            './zone': {
-              Zone: FakeZone,
-            }
-          }).DNS;
+      '@google-cloud/common': {
+        Service: FakeService,
+      },
+      '@google-cloud/paginator': fakePaginator,
+      '@google-cloud/promisify': fakePromisify,
+      './zone': {
+        Zone: FakeZone,
+      },
+    }).DNS;
   });
 
   beforeEach(() => {
@@ -103,7 +108,7 @@ describe('DNS', () => {
 
   describe('instantiation', () => {
     it('should extend the correct methods', () => {
-      assert(extended);  // See `fakePaginator.extend`
+      assert(extended); // See `fakePaginator.extend`
     });
 
     it('should streamify the correct methods', () => {
@@ -126,7 +131,9 @@ describe('DNS', () => {
         'https://www.googleapis.com/auth/cloud-platform',
       ]);
       assert.deepStrictEqual(
-          calledWith.packageJson, require('../../package.json'));
+        calledWith.packageJson,
+        require('../../package.json')
+      );
     });
   });
 
@@ -198,13 +205,15 @@ describe('DNS', () => {
 
       it('should execute callback with error and API response', done => {
         dns.createZone(
-            zoneName, config,
-            (err: Error, zone: Zone, apiResponse_: Response) => {
-              assert.strictEqual(err, error);
-              assert.strictEqual(zone, null);
-              assert.strictEqual(apiResponse_, apiResponse);
-              done();
-            });
+          zoneName,
+          config,
+          (err: Error, zone: Zone, apiResponse_: Response) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(zone, null);
+            assert.strictEqual(apiResponse_, apiResponse);
+            done();
+          }
+        );
       });
     });
 
@@ -234,14 +243,16 @@ describe('DNS', () => {
 
       it('should execute callback with zone and API response', done => {
         dns.createZone(
-            zoneName, config,
-            (err: Error, zone_: Zone, apiResponse_: Response) => {
-              assert.ifError(err);
-              assert.strictEqual(zone_, zone);
-              assert.strictEqual(apiResponse_, apiResponse);
+          zoneName,
+          config,
+          (err: Error, zone_: Zone, apiResponse_: Response) => {
+            assert.ifError(err);
+            assert.strictEqual(zone_, zone);
+            assert.strictEqual(apiResponse_, apiResponse);
 
-              done();
-            });
+            done();
+          }
+        );
       });
 
       it('should set the metadata to the response', done => {
@@ -288,16 +299,21 @@ describe('DNS', () => {
 
       it('should execute callback with error and API response', done => {
         dns.getZones(
-            {},
-            (err: Error, zones: Zone[], nextQuery: {},
-             apiResponse_: Response) => {
-              assert.strictEqual(err, error);
-              assert.strictEqual(zones, null);
-              assert.strictEqual(nextQuery, null);
-              assert.strictEqual(apiResponse_, apiResponse);
+          {},
+          (
+            err: Error,
+            zones: Zone[],
+            nextQuery: {},
+            apiResponse_: Response
+          ) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(zones, null);
+            assert.strictEqual(nextQuery, null);
+            assert.strictEqual(apiResponse_, apiResponse);
 
-              done();
-            });
+            done();
+          }
+        );
       });
     });
 
@@ -343,9 +359,12 @@ describe('DNS', () => {
           // Check the original query wasn't modified.
           assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepStrictEqual(nextQuery, Object.assign({}, query, {
-            pageToken: apiResponseWithNextPageToken.nextPageToken,
-          }));
+          assert.deepStrictEqual(
+            nextQuery,
+            Object.assign({}, query, {
+              pageToken: apiResponseWithNextPageToken.nextPageToken,
+            })
+          );
 
           done();
         });
@@ -353,16 +372,21 @@ describe('DNS', () => {
 
       it('should execute callback with zones and API response', done => {
         dns.getZones(
-            {},
-            (err: Error, zones: Zone[], nextQuery: {},
-             apiResponse_: Response) => {
-              assert.ifError(err);
-              assert.strictEqual(zones[0], zone);
-              assert.strictEqual(nextQuery, null);
-              assert.strictEqual(apiResponse_, apiResponse);
+          {},
+          (
+            err: Error,
+            zones: Zone[],
+            nextQuery: {},
+            apiResponse_: Response
+          ) => {
+            assert.ifError(err);
+            assert.strictEqual(zones[0], zone);
+            assert.strictEqual(nextQuery, null);
+            assert.strictEqual(apiResponse_, apiResponse);
 
-              done();
-            });
+            done();
+          }
+        );
       });
 
       it('should assign metadata to zones', done => {

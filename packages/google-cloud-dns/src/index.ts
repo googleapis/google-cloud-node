@@ -37,14 +37,18 @@ export interface DNSConfig extends GoogleAuthOptions {
 }
 
 export interface GetZonesCallback {
-  (err: Error|null, zones: Zone[]|null, nextQuery?: GetZonesRequest|null,
-   apiResponse?: Metadata): void;
+  (
+    err: Error | null,
+    zones: Zone[] | null,
+    nextQuery?: GetZonesRequest | null,
+    apiResponse?: Metadata
+  ): void;
 }
 
 export type GetZonesResponse = [Zone[], GetZonesRequest | null, Metadata];
 
 export interface GetZoneCallback {
-  (err: Error|null, zone?: Zone|null, apiResponse?: Metadata): void;
+  (err: Error | null, zone?: Zone | null, apiResponse?: Metadata): void;
 }
 
 export interface CreateZoneRequest {
@@ -122,7 +126,7 @@ class DNS extends Service {
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform',
       ],
-      packageJson: require('../../package.json')
+      packageJson: require('../../package.json'),
     };
     super(config, options);
 
@@ -159,10 +163,15 @@ class DNS extends Service {
     this.getZonesStream = paginator.streamify('getZones');
   }
 
-  createZone(name: string, config: CreateZoneRequest):
-      Promise<CreateZoneResponse>;
   createZone(
-      name: string, config: CreateZoneRequest, callback: GetZoneCallback): void;
+    name: string,
+    config: CreateZoneRequest
+  ): Promise<CreateZoneResponse>;
+  createZone(
+    name: string,
+    config: CreateZoneRequest,
+    callback: GetZoneCallback
+  ): void;
   /**
    * Config to set for the zone.
    *
@@ -221,8 +230,10 @@ class DNS extends Service {
    * });
    */
   createZone(
-      name: string, config: CreateZoneRequest,
-      callback?: GetZoneCallback): void|Promise<CreateZoneResponse> {
+    name: string,
+    config: CreateZoneRequest,
+    callback?: GetZoneCallback
+  ): void | Promise<CreateZoneResponse> {
     if (!name) {
       throw new Error('A zone name is required.');
     }
@@ -233,20 +244,21 @@ class DNS extends Service {
     // Required by the API.
     config.description = config.description || '';
     this.request(
-        {
-          method: 'POST',
-          uri: '/managedZones',
-          json: config,
-        },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, resp);
-            return;
-          }
-          const zone = this.zone(resp.name);
-          zone.metadata = resp;
-          callback!(null, zone, resp);
-        });
+      {
+        method: 'POST',
+        uri: '/managedZones',
+        json: config,
+      },
+      (err, resp) => {
+        if (err) {
+          callback!(err, null, resp);
+          return;
+        }
+        const zone = this.zone(resp.name);
+        zone.metadata = resp;
+        callback!(null, zone, resp);
+      }
+    );
   }
 
   getZones(query?: GetZonesRequest): Promise<GetZonesResponse>;
@@ -299,35 +311,37 @@ class DNS extends Service {
    * });
    */
   getZones(
-      queryOrCallback?: GetZonesRequest|GetZonesCallback,
-      callback?: GetZonesCallback): void|Promise<GetZonesResponse> {
+    queryOrCallback?: GetZonesRequest | GetZonesCallback,
+    callback?: GetZonesCallback
+  ): void | Promise<GetZonesResponse> {
     const query = typeof queryOrCallback === 'object' ? queryOrCallback : {};
     callback =
-        typeof queryOrCallback === 'function' ? queryOrCallback : callback;
+      typeof queryOrCallback === 'function' ? queryOrCallback : callback;
     this.request(
-        {
-          uri: '/managedZones',
-          qs: query,
-        },
-        (err, resp) => {
-          if (err) {
-            callback!(err, null, null, resp);
-            return;
-          }
-          // tslint:disable-next-line no-any
-          const zones = arrify(resp.managedZones).map((zone: any) => {
-            const zoneInstance = this.zone(zone.name);
-            zoneInstance.metadata = zone;
-            return zoneInstance;
-          });
-          let nextQuery: GetZonesRequest|null = null;
-          if (resp.nextPageToken) {
-            nextQuery = Object.assign({}, query, {
-              pageToken: resp.nextPageToken,
-            });
-          }
-          callback!(null, zones, nextQuery, resp);
+      {
+        uri: '/managedZones',
+        qs: query,
+      },
+      (err, resp) => {
+        if (err) {
+          callback!(err, null, null, resp);
+          return;
+        }
+        // tslint:disable-next-line no-any
+        const zones = arrify(resp.managedZones).map((zone: any) => {
+          const zoneInstance = this.zone(zone.name);
+          zoneInstance.metadata = zone;
+          return zoneInstance;
         });
+        let nextQuery: GetZonesRequest | null = null;
+        if (resp.nextPageToken) {
+          nextQuery = Object.assign({}, query, {
+            pageToken: resp.nextPageToken,
+          });
+        }
+        callback!(null, zones, nextQuery, resp);
+      }
+    );
   }
 
   /**

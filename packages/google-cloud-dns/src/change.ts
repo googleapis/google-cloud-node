@@ -21,14 +21,14 @@ import {Record} from './record';
 import {Zone} from './zone';
 
 export interface CreateChangeRequest {
-  add?: Record|Record[];
-  delete?: Record|Record[];
+  add?: Record | Record[];
+  delete?: Record | Record[];
 }
 
 export type CreateChangeResponse = [Change, Metadata];
 
 export interface CreateChangeCallback {
-  (err: Error|null, change?: Change|null, apiResponse?: Metadata): void;
+  (err: Error | null, change?: Change | null, apiResponse?: Metadata): void;
 }
 
 /**
@@ -191,7 +191,7 @@ export class Change extends ServiceObject {
        * @type {string}
        */
       id,
-      methods
+      methods,
     });
   }
 
@@ -233,11 +233,12 @@ export class Change extends ServiceObject {
    * });
    */
   create(
-      configOrCallback?: CreateChangeRequest|CreateChangeCallback,
-      callback?: CreateChangeCallback): void|Promise<CreateChangeResponse> {
+    configOrCallback?: CreateChangeRequest | CreateChangeCallback,
+    callback?: CreateChangeCallback
+  ): void | Promise<CreateChangeResponse> {
     const config = typeof configOrCallback === 'object' ? configOrCallback : {};
     callback =
-        typeof configOrCallback === 'function' ? configOrCallback! : callback;
+      typeof configOrCallback === 'function' ? configOrCallback! : callback;
     this.parent.createChange(config, (err, change, apiResponse) => {
       if (err) {
         callback!(err, null, apiResponse);

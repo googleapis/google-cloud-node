@@ -31,7 +31,7 @@ export interface RecordObject {
 
 export interface RecordMetadata {
   name: string;
-  data: string|string[];
+  data: string | string[];
   ttl: number;
   type?: string;
   signatureRrdatas?: string[];
@@ -51,7 +51,7 @@ export type DeleteRecordResponse = [Change, r.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface DeleteRecordCallback {
-  (err: Error|null, change?: Change, apiResponse?: r.Response): void;
+  (err: Error | null, change?: Change, apiResponse?: r.Response): void;
 }
 
 /**
@@ -151,7 +151,9 @@ export class Record implements RecordObject {
    *   const apiResponse = data[1];
    * });
    */
-  delete(callback?: CreateChangeCallback): void|Promise<DeleteRecordResponse> {
+  delete(
+    callback?: CreateChangeCallback
+  ): void | Promise<DeleteRecordResponse> {
     this.zone_.deleteRecords(this, callback!);
   }
   /**
@@ -177,11 +179,11 @@ export class Record implements RecordObject {
   toString() {
     const json = this.toJSON();
     return (json.rrdatas || [{}])
-        .map(data => {
-          json.rrdata = data;
-          return format('{name} {ttl} IN {type} {rrdata}', json);
-        })
-        .join('\n');
+      .map(data => {
+        json.rrdata = data;
+        return format('{name} {ttl} IN {type} {rrdata}', json);
+      })
+      .join('\n');
   }
   /**
    * Create a Record instance from a resource record set in a zone file.

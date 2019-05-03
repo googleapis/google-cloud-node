@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-import {Metadata, ServiceObject, ServiceObjectConfig} from '@google-cloud/common';
+import {
+  Metadata,
+  ServiceObject,
+  ServiceObjectConfig,
+} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
@@ -53,11 +57,11 @@ describe('Change', () => {
 
   before(() => {
     Change = proxyquire('../src/change', {
-               '@google-cloud/common': {
-                 ServiceObject: FakeServiceObject,
-               },
-               '@google-cloud/promisify': fakePromisify,
-             }).Change;
+      '@google-cloud/common': {
+        ServiceObject: FakeServiceObject,
+      },
+      '@google-cloud/promisify': fakePromisify,
+    }).Change;
   });
 
   beforeEach(() => {
@@ -109,12 +113,14 @@ describe('Change', () => {
 
       it('should execute callback with error & apiResponse', done => {
         change.create(
-            {}, (err: Error, change: Change, apiResponse_: Metadata) => {
-              assert.strictEqual(err, error);
-              assert.strictEqual(change, null);
-              assert.strictEqual(apiResponse_, apiResponse);
-              done();
-            });
+          {},
+          (err: Error, change: Change, apiResponse_: Metadata) => {
+            assert.strictEqual(err, error);
+            assert.strictEqual(change, null);
+            assert.strictEqual(apiResponse_, apiResponse);
+            done();
+          }
+        );
       });
     });
 
@@ -133,12 +139,14 @@ describe('Change', () => {
 
       it('should execute callback with self & API response', done => {
         change.create(
-            {}, (err: Error, change_: Change, apiResponse_: Metadata) => {
-              assert.ifError(err);
-              assert.strictEqual(change_, change);
-              assert.strictEqual(apiResponse_, apiResponse);
-              done();
-            });
+          {},
+          (err: Error, change_: Change, apiResponse_: Metadata) => {
+            assert.ifError(err);
+            assert.strictEqual(change_, change);
+            assert.strictEqual(apiResponse_, apiResponse);
+            done();
+          }
+        );
       });
 
       it('should assign the ID and metadata from the change', done => {
