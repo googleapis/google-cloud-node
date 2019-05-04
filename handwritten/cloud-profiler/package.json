@@ -45,7 +45,7 @@
     "parse-duration": "^0.1.1",
     "pify": "^4.0.0",
     "pprof": "^0.2.0",
-    "pretty-ms": "^4.0.0",
+    "pretty-ms": "^5.0.0",
     "protobufjs": "~6.8.6",
     "semver": "^6.0.0",
     "source-map": "^0.6.1",
