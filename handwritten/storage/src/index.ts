@@ -97,6 +97,7 @@ export {
   GetBucketResponse,
   GetFilesCallback,
   GetFilesOptions,
+  GetFilesResponse,
   GetLabelsCallback,
   GetLabelsOptions,
   GetLabelsResponse,

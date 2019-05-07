@@ -75,9 +75,14 @@ export interface BucketCallback {
   (err: Error | null, bucket?: Bucket | null, apiResponse?: Metadata): void;
 }
 
-export type GetBucketsResponse = [Bucket[]];
+export type GetBucketsResponse = [Bucket[], {}, Metadata];
 export interface GetBucketsCallback {
-  (err: Error | null, buckets: Bucket[]): void;
+  (
+    err: Error | null,
+    buckets: Bucket[],
+    nextQuery?: {},
+    apiResponse?: Metadata
+  ): void;
 }
 export interface GetBucketsRequest {
   prefix?: string;

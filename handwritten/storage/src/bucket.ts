@@ -68,6 +68,7 @@ interface BucketOptions {
   userProject?: string;
 }
 
+export type GetFilesResponse = [File[], {}, Metadata];
 export interface GetFilesCallback {
   (
     err: Error | null,
@@ -1899,7 +1900,7 @@ class Bucket extends ServiceObject {
     return new File(this, name, options);
   }
 
-  getFiles(query?: GetFilesOptions): Promise<[File[]]>;
+  getFiles(query?: GetFilesOptions): Promise<GetFilesResponse>;
   getFiles(query: GetFilesOptions, callback: GetFilesCallback): void;
   getFiles(callback: GetFilesCallback): void;
   /**
@@ -2007,7 +2008,7 @@ class Bucket extends ServiceObject {
   getFiles(
     queryOrCallback?: GetFilesOptions | GetFilesCallback,
     callback?: GetFilesCallback
-  ): void | Promise<[File[]]> {
+  ): void | Promise<GetFilesResponse> {
     let query = typeof queryOrCallback === 'object' ? queryOrCallback : {};
     if (!callback) {
       callback = queryOrCallback as GetFilesCallback;
