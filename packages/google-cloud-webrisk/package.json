@@ -1,0 +1,44 @@
+{
+  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "name": "webrisk",
+  "version": "0.1.0",
+  "author": "Google LLC",
+  "description": "Web Risk API client for Node.js",
+  "main": "src/index.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google webrisk",
+    "webrisk",
+    "Web Risk API"
+  ],
+  "dependencies": {
+    "google-gax": "^0.25.3",
+    "lodash.merge": "^4.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "through2": "^2.0.3"
+  },
+  "scripts": {
+    "publish-module": "node ../../scripts/publish.js webrisk",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
+    "test": "mocha test/*.js"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.10.0"
+  }
+}
