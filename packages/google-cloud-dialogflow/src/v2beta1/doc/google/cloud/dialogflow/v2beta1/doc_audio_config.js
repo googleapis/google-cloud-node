@@ -16,7 +16,7 @@
 // to be loaded as the JS file.
 
 /**
- * Instructs the speech recognizer how to process the audio content.
+ * Instructs the speech recognizer on how to process the audio content.
  *
  * @property {number} audioEncoding
  *   Required. Audio encoding of the audio content to process.
@@ -57,6 +57,11 @@
  *   [Cloud Speech API
  *   documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
  *   for more details.
+ *
+ * @property {number} modelVariant
+ *   Optional. Which variant of the Speech model to use.
+ *
+ *   The number should be among the values of [SpeechModelVariant]{@link google.cloud.dialogflow.v2beta1.SpeechModelVariant}
  *
  * @typedef InputAudioConfig
  * @memberof google.cloud.dialogflow.v2beta1
@@ -262,6 +267,63 @@ const OutputAudioEncoding = {
    * than MP3 while using approximately the same bitrate.
    */
   OUTPUT_AUDIO_ENCODING_OGG_OPUS: 3
+};
+
+/**
+ * Variant of the specified Speech model to use.
+ *
+ * See the [Cloud Speech
+ * documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
+ * for which models have different variants. For example, the "phone_call" model
+ * has both a standard and an enhanced variant. When you use an enhanced model,
+ * you will generally receive higher quality results than for a standard model.
+ *
+ * @enum {number}
+ * @memberof google.cloud.dialogflow.v2beta1
+ */
+const SpeechModelVariant = {
+
+  /**
+   * No model variant specified. In this case Dialogflow defaults to
+   * USE_BEST_AVAILABLE.
+   */
+  SPEECH_MODEL_VARIANT_UNSPECIFIED: 0,
+
+  /**
+   * Use the best available variant of the Speech
+   * model that the caller is eligible for.
+   *
+   * Please see the [Dialogflow
+   * docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging) for
+   * how to make your project eligible for enhanced models.
+   */
+  USE_BEST_AVAILABLE: 1,
+
+  /**
+   * Use standard model variant even if an enhanced model is available.  See the
+   * [Cloud Speech
+   * documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
+   * for details about enhanced models.
+   */
+  USE_STANDARD: 2,
+
+  /**
+   * Use an enhanced model variant:
+   *
+   * * If an enhanced variant does not exist for the given
+   *   model and request language, Dialogflow falls
+   *   back to the standard variant.
+   *
+   *   The [Cloud Speech
+   *   documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
+   *   describes which models have enhanced variants.
+   *
+   * * If the API caller isn't eligible for enhanced models, Dialogflow returns
+   *   an error.  Please see the [Dialogflow
+   *   docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging)
+   *   for how to make your project eligible.
+   */
+  USE_ENHANCED: 3
 };
 
 /**

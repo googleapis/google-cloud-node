@@ -117,17 +117,17 @@ class ContextsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      sessionPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent/sessions/{session}'
-      ),
-      environmentSessionPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}'
-      ),
       contextPathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
       environmentContextPathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+      ),
+      environmentSessionPathTemplate: new gax.PathTemplate(
+        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}'
+      ),
+      sessionPathTemplate: new gax.PathTemplate(
+        'projects/{project}/agent/sessions/{session}'
       ),
     };
 
@@ -685,38 +685,6 @@ class ContextsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified session resource name string.
-   *
-   * @param {String} project
-   * @param {String} session
-   * @returns {String}
-   */
-  sessionPath(project, session) {
-    return this._pathTemplates.sessionPathTemplate.render({
-      project: project,
-      session: session,
-    });
-  }
-
-  /**
-   * Return a fully-qualified environment_session resource name string.
-   *
-   * @param {String} project
-   * @param {String} environment
-   * @param {String} user
-   * @param {String} session
-   * @returns {String}
-   */
-  environmentSessionPath(project, environment, user, session) {
-    return this._pathTemplates.environmentSessionPathTemplate.render({
-      project: project,
-      environment: environment,
-      user: user,
-      session: session,
-    });
-  }
-
-  /**
    * Return a fully-qualified context resource name string.
    *
    * @param {String} project
@@ -753,77 +721,35 @@ class ContextsClient {
   }
 
   /**
-   * Parse the sessionName from a session resource.
+   * Return a fully-qualified environment_session resource name string.
    *
-   * @param {String} sessionName
-   *   A fully-qualified path representing a session resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @param {String} environment
+   * @param {String} user
+   * @param {String} session
+   * @returns {String}
    */
-  matchProjectFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
+  environmentSessionPath(project, environment, user, session) {
+    return this._pathTemplates.environmentSessionPathTemplate.render({
+      project: project,
+      environment: environment,
+      user: user,
+      session: session,
+    });
   }
 
   /**
-   * Parse the sessionName from a session resource.
+   * Return a fully-qualified session resource name string.
    *
-   * @param {String} sessionName
-   *   A fully-qualified path representing a session resources.
-   * @returns {String} - A string representing the session.
+   * @param {String} project
+   * @param {String} session
+   * @returns {String}
    */
-  matchSessionFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
-  }
-
-  /**
-   * Parse the environmentSessionName from a environment_session resource.
-   *
-   * @param {String} environmentSessionName
-   *   A fully-qualified path representing a environment_session resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromEnvironmentSessionName(environmentSessionName) {
-    return this._pathTemplates.environmentSessionPathTemplate.match(
-      environmentSessionName
-    ).project;
-  }
-
-  /**
-   * Parse the environmentSessionName from a environment_session resource.
-   *
-   * @param {String} environmentSessionName
-   *   A fully-qualified path representing a environment_session resources.
-   * @returns {String} - A string representing the environment.
-   */
-  matchEnvironmentFromEnvironmentSessionName(environmentSessionName) {
-    return this._pathTemplates.environmentSessionPathTemplate.match(
-      environmentSessionName
-    ).environment;
-  }
-
-  /**
-   * Parse the environmentSessionName from a environment_session resource.
-   *
-   * @param {String} environmentSessionName
-   *   A fully-qualified path representing a environment_session resources.
-   * @returns {String} - A string representing the user.
-   */
-  matchUserFromEnvironmentSessionName(environmentSessionName) {
-    return this._pathTemplates.environmentSessionPathTemplate.match(
-      environmentSessionName
-    ).user;
-  }
-
-  /**
-   * Parse the environmentSessionName from a environment_session resource.
-   *
-   * @param {String} environmentSessionName
-   *   A fully-qualified path representing a environment_session resources.
-   * @returns {String} - A string representing the session.
-   */
-  matchSessionFromEnvironmentSessionName(environmentSessionName) {
-    return this._pathTemplates.environmentSessionPathTemplate.match(
-      environmentSessionName
-    ).session;
+  sessionPath(project, session) {
+    return this._pathTemplates.sessionPathTemplate.render({
+      project: project,
+      session: session,
+    });
   }
 
   /**
@@ -922,6 +848,80 @@ class ContextsClient {
     return this._pathTemplates.environmentContextPathTemplate.match(
       environmentContextName
     ).context;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).project;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the environment.
+   */
+  matchEnvironmentFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).environment;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the user.
+   */
+  matchUserFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).user;
+  }
+
+  /**
+   * Parse the environmentSessionName from a environment_session resource.
+   *
+   * @param {String} environmentSessionName
+   *   A fully-qualified path representing a environment_session resources.
+   * @returns {String} - A string representing the session.
+   */
+  matchSessionFromEnvironmentSessionName(environmentSessionName) {
+    return this._pathTemplates.environmentSessionPathTemplate.match(
+      environmentSessionName
+    ).session;
+  }
+
+  /**
+   * Parse the sessionName from a session resource.
+   *
+   * @param {String} sessionName
+   *   A fully-qualified path representing a session resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromSessionName(sessionName) {
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
+  }
+
+  /**
+   * Parse the sessionName from a session resource.
+   *
+   * @param {String} sessionName
+   *   A fully-qualified path representing a session resources.
+   * @returns {String} - A string representing the session.
+   */
+  matchSessionFromSessionName(sessionName) {
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
   }
 }
 

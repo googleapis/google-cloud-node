@@ -101,11 +101,11 @@ class DocumentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      knowledgeBasePathTemplate: new gax.PathTemplate(
-        'projects/{project}/knowledgeBases/{knowledge_base}'
-      ),
       documentPathTemplate: new gax.PathTemplate(
         'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
+      ),
+      knowledgeBasePathTemplate: new gax.PathTemplate(
+        'projects/{project}/knowledgeBases/{knowledge_base}'
       ),
     };
 
@@ -151,6 +151,12 @@ class DocumentsClient {
     const deleteDocumentMetadata = protoFilesRoot.lookup(
       'google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
     );
+    const updateDocumentResponse = protoFilesRoot.lookup(
+      'google.cloud.dialogflow.v2beta1.Document'
+    );
+    const updateDocumentMetadata = protoFilesRoot.lookup(
+      'google.cloud.dialogflow.v2beta1.KnowledgeOperationMetadata'
+    );
 
     this._descriptors.longrunning = {
       createDocument: new gax.LongrunningDescriptor(
@@ -162,6 +168,11 @@ class DocumentsClient {
         this.operationsClient,
         deleteDocumentResponse.decode.bind(deleteDocumentResponse),
         deleteDocumentMetadata.decode.bind(deleteDocumentMetadata)
+      ),
+      updateDocument: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        updateDocumentResponse.decode.bind(updateDocumentResponse),
+        updateDocumentMetadata.decode.bind(updateDocumentMetadata)
       ),
     };
 
@@ -192,6 +203,8 @@ class DocumentsClient {
       'getDocument',
       'createDocument',
       'deleteDocument',
+      'updateDocument',
+      'reloadDocument',
     ];
     for (const methodName of documentsStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -686,23 +699,176 @@ class DocumentsClient {
     return this._innerApiCalls.deleteDocument(request, options, callback);
   }
 
+  /**
+   * Updates the specified document.
+   * Operation <response: Document,
+   *            metadata: KnowledgeOperationMetadata>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.document
+   *   Required. The document to update.
+   *
+   *   This object should have the same structure as [Document]{@link google.cloud.dialogflow.v2beta1.Document}
+   * @param {Object} [request.updateMask]
+   *   Optional. Not specified means `update all`.
+   *   Currently, only `display_name` can be updated, an InvalidArgument will be
+   *   returned for attempting to update other fields.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dialogflow = require('dialogflow');
+   *
+   * const client = new dialogflow.v2beta1.DocumentsClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const document = {};
+   *
+   * // Handle the operation using the promise pattern.
+   * client.updateDocument({document: document})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const document = {};
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.updateDocument({document: document})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const document = {};
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.updateDocument({document: document});
+   *
+   * const [response] = await operation.promise();
+   */
+  updateDocument(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'document.name': request.document.name,
+    });
+
+    return this._innerApiCalls.updateDocument(request, options, callback);
+  }
+
+  /**
+   * Reloads the specified document from its specified source, content_uri or
+   * content. The previously loaded content of the document will be deleted.
+   * Note: Even when the content of the document has not changed, there still
+   * may be side effects because of internal implementation changes.
+   * Operation <response: Document,
+   *            metadata: KnowledgeOperationMetadata>
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.name]
+   *   The name of the document to reload.
+   *   Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+   *   ID>/documents/<Document ID>`
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Operation]{@link google.longrunning.Operation}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.longrunning.Operation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dialogflow = require('dialogflow');
+   *
+   * const client = new dialogflow.v2beta1.DocumentsClient({
+   *   // optional auth parameters.
+   * });
+   *
+   *
+   * client.reloadDocument({})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  reloadDocument(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.reloadDocument(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified knowledge_base resource name string.
-   *
-   * @param {String} project
-   * @param {String} knowledgeBase
-   * @returns {String}
-   */
-  knowledgeBasePath(project, knowledgeBase) {
-    return this._pathTemplates.knowledgeBasePathTemplate.render({
-      project: project,
-      knowledge_base: knowledgeBase,
-    });
-  }
 
   /**
    * Return a fully-qualified document resource name string.
@@ -721,29 +887,17 @@ class DocumentsClient {
   }
 
   /**
-   * Parse the knowledgeBaseName from a knowledge_base resource.
+   * Return a fully-qualified knowledge_base resource name string.
    *
-   * @param {String} knowledgeBaseName
-   *   A fully-qualified path representing a knowledge_base resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @param {String} knowledgeBase
+   * @returns {String}
    */
-  matchProjectFromKnowledgeBaseName(knowledgeBaseName) {
-    return this._pathTemplates.knowledgeBasePathTemplate.match(
-      knowledgeBaseName
-    ).project;
-  }
-
-  /**
-   * Parse the knowledgeBaseName from a knowledge_base resource.
-   *
-   * @param {String} knowledgeBaseName
-   *   A fully-qualified path representing a knowledge_base resources.
-   * @returns {String} - A string representing the knowledge_base.
-   */
-  matchKnowledgeBaseFromKnowledgeBaseName(knowledgeBaseName) {
-    return this._pathTemplates.knowledgeBasePathTemplate.match(
-      knowledgeBaseName
-    ).knowledge_base;
+  knowledgeBasePath(project, knowledgeBase) {
+    return this._pathTemplates.knowledgeBasePathTemplate.render({
+      project: project,
+      knowledge_base: knowledgeBase,
+    });
   }
 
   /**
@@ -779,6 +933,32 @@ class DocumentsClient {
   matchDocumentFromDocumentName(documentName) {
     return this._pathTemplates.documentPathTemplate.match(documentName)
       .document;
+  }
+
+  /**
+   * Parse the knowledgeBaseName from a knowledge_base resource.
+   *
+   * @param {String} knowledgeBaseName
+   *   A fully-qualified path representing a knowledge_base resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromKnowledgeBaseName(knowledgeBaseName) {
+    return this._pathTemplates.knowledgeBasePathTemplate.match(
+      knowledgeBaseName
+    ).project;
+  }
+
+  /**
+   * Parse the knowledgeBaseName from a knowledge_base resource.
+   *
+   * @param {String} knowledgeBaseName
+   *   A fully-qualified path representing a knowledge_base resources.
+   * @returns {String} - A string representing the knowledge_base.
+   */
+  matchKnowledgeBaseFromKnowledgeBaseName(knowledgeBaseName) {
+    return this._pathTemplates.knowledgeBasePathTemplate.match(
+      knowledgeBaseName
+    ).knowledge_base;
   }
 }
 

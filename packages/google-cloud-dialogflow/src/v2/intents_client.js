@@ -132,14 +132,14 @@ class IntentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectAgentPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent'
+      agentPathTemplate: new gax.PathTemplate(
+        'projects/{project}/agents/{agent}'
       ),
       intentPathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      agentPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agents/{agent}'
+      projectAgentPathTemplate: new gax.PathTemplate(
+        'projects/{project}/agent'
       ),
     };
 
@@ -992,14 +992,16 @@ class IntentsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project_agent resource name string.
+   * Return a fully-qualified agent resource name string.
    *
    * @param {String} project
+   * @param {String} agent
    * @returns {String}
    */
-  projectAgentPath(project) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
+  agentPath(project, agent) {
+    return this._pathTemplates.agentPathTemplate.render({
       project: project,
+      agent: agent,
     });
   }
 
@@ -1018,29 +1020,37 @@ class IntentsClient {
   }
 
   /**
-   * Return a fully-qualified agent resource name string.
+   * Return a fully-qualified project_agent resource name string.
    *
    * @param {String} project
-   * @param {String} agent
    * @returns {String}
    */
-  agentPath(project, agent) {
-    return this._pathTemplates.agentPathTemplate.render({
+  projectAgentPath(project) {
+    return this._pathTemplates.projectAgentPathTemplate.render({
       project: project,
-      agent: agent,
     });
   }
 
   /**
-   * Parse the projectAgentName from a project_agent resource.
+   * Parse the agentName from a agent resource.
    *
-   * @param {String} projectAgentName
-   *   A fully-qualified path representing a project_agent resources.
+   * @param {String} agentName
+   *   A fully-qualified path representing a agent resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromProjectAgentName(projectAgentName) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
-      .project;
+  matchProjectFromAgentName(agentName) {
+    return this._pathTemplates.agentPathTemplate.match(agentName).project;
+  }
+
+  /**
+   * Parse the agentName from a agent resource.
+   *
+   * @param {String} agentName
+   *   A fully-qualified path representing a agent resources.
+   * @returns {String} - A string representing the agent.
+   */
+  matchAgentFromAgentName(agentName) {
+    return this._pathTemplates.agentPathTemplate.match(agentName).agent;
   }
 
   /**
@@ -1066,25 +1076,15 @@ class IntentsClient {
   }
 
   /**
-   * Parse the agentName from a agent resource.
+   * Parse the projectAgentName from a project_agent resource.
    *
-   * @param {String} agentName
-   *   A fully-qualified path representing a agent resources.
+   * @param {String} projectAgentName
+   *   A fully-qualified path representing a project_agent resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromAgentName(agentName) {
-    return this._pathTemplates.agentPathTemplate.match(agentName).project;
-  }
-
-  /**
-   * Parse the agentName from a agent resource.
-   *
-   * @param {String} agentName
-   *   A fully-qualified path representing a agent resources.
-   * @returns {String} - A string representing the agent.
-   */
-  matchAgentFromAgentName(agentName) {
-    return this._pathTemplates.agentPathTemplate.match(agentName).agent;
+  matchProjectFromProjectAgentName(projectAgentName) {
+    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
   }
 }
 

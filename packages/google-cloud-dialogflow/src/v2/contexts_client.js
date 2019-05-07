@@ -117,11 +117,11 @@ class ContextsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      sessionPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent/sessions/{session}'
-      ),
       contextPathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
+      ),
+      sessionPathTemplate: new gax.PathTemplate(
+        'projects/{project}/agent/sessions/{session}'
       ),
     };
 
@@ -656,20 +656,6 @@ class ContextsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified session resource name string.
-   *
-   * @param {String} project
-   * @param {String} session
-   * @returns {String}
-   */
-  sessionPath(project, session) {
-    return this._pathTemplates.sessionPathTemplate.render({
-      project: project,
-      session: session,
-    });
-  }
-
-  /**
    * Return a fully-qualified context resource name string.
    *
    * @param {String} project
@@ -686,25 +672,17 @@ class ContextsClient {
   }
 
   /**
-   * Parse the sessionName from a session resource.
+   * Return a fully-qualified session resource name string.
    *
-   * @param {String} sessionName
-   *   A fully-qualified path representing a session resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @param {String} session
+   * @returns {String}
    */
-  matchProjectFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
-  }
-
-  /**
-   * Parse the sessionName from a session resource.
-   *
-   * @param {String} sessionName
-   *   A fully-qualified path representing a session resources.
-   * @returns {String} - A string representing the session.
-   */
-  matchSessionFromSessionName(sessionName) {
-    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
+  sessionPath(project, session) {
+    return this._pathTemplates.sessionPathTemplate.render({
+      project: project,
+      session: session,
+    });
   }
 
   /**
@@ -738,6 +716,28 @@ class ContextsClient {
    */
   matchContextFromContextName(contextName) {
     return this._pathTemplates.contextPathTemplate.match(contextName).context;
+  }
+
+  /**
+   * Parse the sessionName from a session resource.
+   *
+   * @param {String} sessionName
+   *   A fully-qualified path representing a session resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromSessionName(sessionName) {
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).project;
+  }
+
+  /**
+   * Parse the sessionName from a session resource.
+   *
+   * @param {String} sessionName
+   *   A fully-qualified path representing a session resources.
+   * @returns {String} - A string representing the session.
+   */
+  matchSessionFromSessionName(sessionName) {
+    return this._pathTemplates.sessionPathTemplate.match(sessionName).session;
   }
 }
 

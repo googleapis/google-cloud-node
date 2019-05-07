@@ -132,11 +132,11 @@ class IntentsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectAgentPathTemplate: new gax.PathTemplate(
-        'projects/{project}/agent'
-      ),
       intentPathTemplate: new gax.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
+      ),
+      projectAgentPathTemplate: new gax.PathTemplate(
+        'projects/{project}/agent'
       ),
     };
 
@@ -990,18 +990,6 @@ class IntentsClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project_agent resource name string.
-   *
-   * @param {String} project
-   * @returns {String}
-   */
-  projectAgentPath(project) {
-    return this._pathTemplates.projectAgentPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
    * Return a fully-qualified intent resource name string.
    *
    * @param {String} project
@@ -1016,15 +1004,15 @@ class IntentsClient {
   }
 
   /**
-   * Parse the projectAgentName from a project_agent resource.
+   * Return a fully-qualified project_agent resource name string.
    *
-   * @param {String} projectAgentName
-   *   A fully-qualified path representing a project_agent resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @returns {String}
    */
-  matchProjectFromProjectAgentName(projectAgentName) {
-    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
-      .project;
+  projectAgentPath(project) {
+    return this._pathTemplates.projectAgentPathTemplate.render({
+      project: project,
+    });
   }
 
   /**
@@ -1047,6 +1035,18 @@ class IntentsClient {
    */
   matchIntentFromIntentName(intentName) {
     return this._pathTemplates.intentPathTemplate.match(intentName).intent;
+  }
+
+  /**
+   * Parse the projectAgentName from a project_agent resource.
+   *
+   * @param {String} projectAgentName
+   *   A fully-qualified path representing a project_agent resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectAgentName(projectAgentName) {
+    return this._pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
   }
 }
 
