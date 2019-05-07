@@ -976,10 +976,14 @@ describe('ProductSearchClient', () => {
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      const product = 'product-309474065';
+      const formattedProduct = client.productPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]'
+      );
       const request = {
         name: formattedName,
-        product: product,
+        product: formattedProduct,
       };
 
       // Mock Grpc layer
@@ -1005,10 +1009,14 @@ describe('ProductSearchClient', () => {
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      const product = 'product-309474065';
+      const formattedProduct = client.productPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]'
+      );
       const request = {
         name: formattedName,
-        product: product,
+        product: formattedProduct,
       };
 
       // Mock Grpc layer
@@ -1039,10 +1047,14 @@ describe('ProductSearchClient', () => {
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      const product = 'product-309474065';
+      const formattedProduct = client.productPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]'
+      );
       const request = {
         name: formattedName,
-        product: product,
+        product: formattedProduct,
       };
 
       // Mock Grpc layer
@@ -1068,10 +1080,14 @@ describe('ProductSearchClient', () => {
         '[LOCATION]',
         '[PRODUCT_SET]'
       );
-      const product = 'product-309474065';
+      const formattedProduct = client.productPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]'
+      );
       const request = {
         name: formattedName,
-        product: product,
+        product: formattedProduct,
       };
 
       // Mock Grpc layer

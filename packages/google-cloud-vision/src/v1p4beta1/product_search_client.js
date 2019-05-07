@@ -121,11 +121,11 @@ class ProductSearchClient {
       locationPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      productSetPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/productSets/{product_set}'
-      ),
       productPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/products/{product}'
+      ),
+      productSetPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/productSets/{product_set}'
       ),
       referenceImagePathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}'
@@ -1999,22 +1999,6 @@ class ProductSearchClient {
   }
 
   /**
-   * Return a fully-qualified product_set resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} productSet
-   * @returns {String}
-   */
-  productSetPath(project, location, productSet) {
-    return this._pathTemplates.productSetPathTemplate.render({
-      project: project,
-      location: location,
-      product_set: productSet,
-    });
-  }
-
-  /**
    * Return a fully-qualified product resource name string.
    *
    * @param {String} project
@@ -2027,6 +2011,22 @@ class ProductSearchClient {
       project: project,
       location: location,
       product: product,
+    });
+  }
+
+  /**
+   * Return a fully-qualified product_set resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} productSet
+   * @returns {String}
+   */
+  productSetPath(project, location, productSet) {
+    return this._pathTemplates.productSetPathTemplate.render({
+      project: project,
+      location: location,
+      product_set: productSet,
     });
   }
 
@@ -2072,6 +2072,39 @@ class ProductSearchClient {
   }
 
   /**
+   * Parse the productName from a product resource.
+   *
+   * @param {String} productName
+   *   A fully-qualified path representing a product resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProductName(productName) {
+    return this._pathTemplates.productPathTemplate.match(productName).project;
+  }
+
+  /**
+   * Parse the productName from a product resource.
+   *
+   * @param {String} productName
+   *   A fully-qualified path representing a product resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromProductName(productName) {
+    return this._pathTemplates.productPathTemplate.match(productName).location;
+  }
+
+  /**
+   * Parse the productName from a product resource.
+   *
+   * @param {String} productName
+   *   A fully-qualified path representing a product resources.
+   * @returns {String} - A string representing the product.
+   */
+  matchProductFromProductName(productName) {
+    return this._pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
    * Parse the productSetName from a product_set resource.
    *
    * @param {String} productSetName
@@ -2105,39 +2138,6 @@ class ProductSearchClient {
   matchProductSetFromProductSetName(productSetName) {
     return this._pathTemplates.productSetPathTemplate.match(productSetName)
       .product_set;
-  }
-
-  /**
-   * Parse the productName from a product resource.
-   *
-   * @param {String} productName
-   *   A fully-qualified path representing a product resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromProductName(productName) {
-    return this._pathTemplates.productPathTemplate.match(productName).project;
-  }
-
-  /**
-   * Parse the productName from a product resource.
-   *
-   * @param {String} productName
-   *   A fully-qualified path representing a product resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromProductName(productName) {
-    return this._pathTemplates.productPathTemplate.match(productName).location;
-  }
-
-  /**
-   * Parse the productName from a product resource.
-   *
-   * @param {String} productName
-   *   A fully-qualified path representing a product resources.
-   * @returns {String} - A string representing the product.
-   */
-  matchProductFromProductName(productName) {
-    return this._pathTemplates.productPathTemplate.match(productName).product;
   }
 
   /**
