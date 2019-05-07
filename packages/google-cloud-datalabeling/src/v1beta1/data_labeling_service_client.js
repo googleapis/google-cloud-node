@@ -99,25 +99,25 @@ class DataLabelingServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
-      annotationSpecSetPathTemplate: new gax.PathTemplate(
-        'projects/{project}/annotationSpecSets/{annotation_spec_set}'
-      ),
-      datasetPathTemplate: new gax.PathTemplate(
-        'projects/{project}/datasets/{dataset}'
-      ),
       annotatedDatasetPathTemplate: new gax.PathTemplate(
         'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}'
       ),
-      examplePathTemplate: new gax.PathTemplate(
-        'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}/examples/{example}'
+      annotationSpecSetPathTemplate: new gax.PathTemplate(
+        'projects/{project}/annotationSpecSets/{annotation_spec_set}'
       ),
       dataItemPathTemplate: new gax.PathTemplate(
         'projects/{project}/datasets/{dataset}/dataItems/{data_item}'
       ),
+      datasetPathTemplate: new gax.PathTemplate(
+        'projects/{project}/datasets/{dataset}'
+      ),
+      examplePathTemplate: new gax.PathTemplate(
+        'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}/examples/{example}'
+      ),
       instructionPathTemplate: new gax.PathTemplate(
         'projects/{project}/instructions/{instruction}'
       ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -2947,14 +2947,18 @@ class DataLabelingServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified project resource name string.
+   * Return a fully-qualified annotated_dataset resource name string.
    *
    * @param {String} project
+   * @param {String} dataset
+   * @param {String} annotatedDataset
    * @returns {String}
    */
-  projectPath(project) {
-    return this._pathTemplates.projectPathTemplate.render({
+  annotatedDatasetPath(project, dataset, annotatedDataset) {
+    return this._pathTemplates.annotatedDatasetPathTemplate.render({
       project: project,
+      dataset: dataset,
+      annotated_dataset: annotatedDataset,
     });
   }
 
@@ -2973,6 +2977,22 @@ class DataLabelingServiceClient {
   }
 
   /**
+   * Return a fully-qualified data_item resource name string.
+   *
+   * @param {String} project
+   * @param {String} dataset
+   * @param {String} dataItem
+   * @returns {String}
+   */
+  dataItemPath(project, dataset, dataItem) {
+    return this._pathTemplates.dataItemPathTemplate.render({
+      project: project,
+      dataset: dataset,
+      data_item: dataItem,
+    });
+  }
+
+  /**
    * Return a fully-qualified dataset resource name string.
    *
    * @param {String} project
@@ -2983,22 +3003,6 @@ class DataLabelingServiceClient {
     return this._pathTemplates.datasetPathTemplate.render({
       project: project,
       dataset: dataset,
-    });
-  }
-
-  /**
-   * Return a fully-qualified annotated_dataset resource name string.
-   *
-   * @param {String} project
-   * @param {String} dataset
-   * @param {String} annotatedDataset
-   * @returns {String}
-   */
-  annotatedDatasetPath(project, dataset, annotatedDataset) {
-    return this._pathTemplates.annotatedDatasetPathTemplate.render({
-      project: project,
-      dataset: dataset,
-      annotated_dataset: annotatedDataset,
     });
   }
 
@@ -3021,22 +3025,6 @@ class DataLabelingServiceClient {
   }
 
   /**
-   * Return a fully-qualified data_item resource name string.
-   *
-   * @param {String} project
-   * @param {String} dataset
-   * @param {String} dataItem
-   * @returns {String}
-   */
-  dataItemPath(project, dataset, dataItem) {
-    return this._pathTemplates.dataItemPathTemplate.render({
-      project: project,
-      dataset: dataset,
-      data_item: dataItem,
-    });
-  }
-
-  /**
    * Return a fully-qualified instruction resource name string.
    *
    * @param {String} project
@@ -3051,62 +3039,15 @@ class DataLabelingServiceClient {
   }
 
   /**
-   * Parse the projectName from a project resource.
+   * Return a fully-qualified project resource name string.
    *
-   * @param {String} projectName
-   *   A fully-qualified path representing a project resources.
-   * @returns {String} - A string representing the project.
+   * @param {String} project
+   * @returns {String}
    */
-  matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate.match(projectName).project;
-  }
-
-  /**
-   * Parse the annotationSpecSetName from a annotation_spec_set resource.
-   *
-   * @param {String} annotationSpecSetName
-   *   A fully-qualified path representing a annotation_spec_set resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromAnnotationSpecSetName(annotationSpecSetName) {
-    return this._pathTemplates.annotationSpecSetPathTemplate.match(
-      annotationSpecSetName
-    ).project;
-  }
-
-  /**
-   * Parse the annotationSpecSetName from a annotation_spec_set resource.
-   *
-   * @param {String} annotationSpecSetName
-   *   A fully-qualified path representing a annotation_spec_set resources.
-   * @returns {String} - A string representing the annotation_spec_set.
-   */
-  matchAnnotationSpecSetFromAnnotationSpecSetName(annotationSpecSetName) {
-    return this._pathTemplates.annotationSpecSetPathTemplate.match(
-      annotationSpecSetName
-    ).annotation_spec_set;
-  }
-
-  /**
-   * Parse the datasetName from a dataset resource.
-   *
-   * @param {String} datasetName
-   *   A fully-qualified path representing a dataset resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromDatasetName(datasetName) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).project;
-  }
-
-  /**
-   * Parse the datasetName from a dataset resource.
-   *
-   * @param {String} datasetName
-   *   A fully-qualified path representing a dataset resources.
-   * @returns {String} - A string representing the dataset.
-   */
-  matchDatasetFromDatasetName(datasetName) {
-    return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
   }
 
   /**
@@ -3146,6 +3087,88 @@ class DataLabelingServiceClient {
     return this._pathTemplates.annotatedDatasetPathTemplate.match(
       annotatedDatasetName
     ).annotated_dataset;
+  }
+
+  /**
+   * Parse the annotationSpecSetName from a annotation_spec_set resource.
+   *
+   * @param {String} annotationSpecSetName
+   *   A fully-qualified path representing a annotation_spec_set resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromAnnotationSpecSetName(annotationSpecSetName) {
+    return this._pathTemplates.annotationSpecSetPathTemplate.match(
+      annotationSpecSetName
+    ).project;
+  }
+
+  /**
+   * Parse the annotationSpecSetName from a annotation_spec_set resource.
+   *
+   * @param {String} annotationSpecSetName
+   *   A fully-qualified path representing a annotation_spec_set resources.
+   * @returns {String} - A string representing the annotation_spec_set.
+   */
+  matchAnnotationSpecSetFromAnnotationSpecSetName(annotationSpecSetName) {
+    return this._pathTemplates.annotationSpecSetPathTemplate.match(
+      annotationSpecSetName
+    ).annotation_spec_set;
+  }
+
+  /**
+   * Parse the dataItemName from a data_item resource.
+   *
+   * @param {String} dataItemName
+   *   A fully-qualified path representing a data_item resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromDataItemName(dataItemName) {
+    return this._pathTemplates.dataItemPathTemplate.match(dataItemName).project;
+  }
+
+  /**
+   * Parse the dataItemName from a data_item resource.
+   *
+   * @param {String} dataItemName
+   *   A fully-qualified path representing a data_item resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromDataItemName(dataItemName) {
+    return this._pathTemplates.dataItemPathTemplate.match(dataItemName).dataset;
+  }
+
+  /**
+   * Parse the dataItemName from a data_item resource.
+   *
+   * @param {String} dataItemName
+   *   A fully-qualified path representing a data_item resources.
+   * @returns {String} - A string representing the data_item.
+   */
+  matchDataItemFromDataItemName(dataItemName) {
+    return this._pathTemplates.dataItemPathTemplate.match(dataItemName)
+      .data_item;
+  }
+
+  /**
+   * Parse the datasetName from a dataset resource.
+   *
+   * @param {String} datasetName
+   *   A fully-qualified path representing a dataset resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromDatasetName(datasetName) {
+    return this._pathTemplates.datasetPathTemplate.match(datasetName).project;
+  }
+
+  /**
+   * Parse the datasetName from a dataset resource.
+   *
+   * @param {String} datasetName
+   *   A fully-qualified path representing a dataset resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromDatasetName(datasetName) {
+    return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
   }
 
   /**
@@ -3194,40 +3217,6 @@ class DataLabelingServiceClient {
   }
 
   /**
-   * Parse the dataItemName from a data_item resource.
-   *
-   * @param {String} dataItemName
-   *   A fully-qualified path representing a data_item resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromDataItemName(dataItemName) {
-    return this._pathTemplates.dataItemPathTemplate.match(dataItemName).project;
-  }
-
-  /**
-   * Parse the dataItemName from a data_item resource.
-   *
-   * @param {String} dataItemName
-   *   A fully-qualified path representing a data_item resources.
-   * @returns {String} - A string representing the dataset.
-   */
-  matchDatasetFromDataItemName(dataItemName) {
-    return this._pathTemplates.dataItemPathTemplate.match(dataItemName).dataset;
-  }
-
-  /**
-   * Parse the dataItemName from a data_item resource.
-   *
-   * @param {String} dataItemName
-   *   A fully-qualified path representing a data_item resources.
-   * @returns {String} - A string representing the data_item.
-   */
-  matchDataItemFromDataItemName(dataItemName) {
-    return this._pathTemplates.dataItemPathTemplate.match(dataItemName)
-      .data_item;
-  }
-
-  /**
    * Parse the instructionName from a instruction resource.
    *
    * @param {String} instructionName
@@ -3249,6 +3238,17 @@ class DataLabelingServiceClient {
   matchInstructionFromInstructionName(instructionName) {
     return this._pathTemplates.instructionPathTemplate.match(instructionName)
       .instruction;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
 
