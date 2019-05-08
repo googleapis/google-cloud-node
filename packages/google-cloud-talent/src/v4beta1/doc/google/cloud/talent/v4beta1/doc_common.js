@@ -37,9 +37,8 @@ const TimestampRange = {
 };
 
 /**
- * Output only.
- *
- * A resource that represents a location with full geographic information.
+ * Output only. A resource that represents a location with full geographic
+ * information.
  *
  * @property {number} locationType
  *   The type of a location, which corresponds to the address lines field of
@@ -222,9 +221,8 @@ const RequestMetadata = {
 };
 
 /**
- * Output only.
- *
- * Additional information returned to client, such as debugging information.
+ * Output only. Additional information returned to client, such as debugging
+ * information.
  *
  * @property {string} requestId
  *   A unique id associated with this call.
@@ -353,9 +351,7 @@ const CustomAttribute = {
 };
 
 /**
- * Output only.
- *
- * Spell check result.
+ * Output only. Spell check result.
  *
  * @property {boolean} corrected
  *   Indicates if the query was corrected by the spell checker.

@@ -47,6 +47,16 @@
  *
  *   The number should be among the values of [DataUsageType]{@link google.cloud.talent.v4beta1.DataUsageType}
  *
+ * @property {string[]} keywordSearchableProfileCustomAttributes
+ *   Optional.
+ *
+ *   A list of keys of filterable Profile.custom_attributes, whose
+ *   corresponding `string_values` are used in keyword searches. Profiles with
+ *   `string_values` under these specified field keys are returned if any
+ *   of the values match the search keyword. Custom field values with
+ *   parenthesis, brackets and special symbols are not searchable as-is,
+ *   and must be surrounded by quotes.
+ *
  * @typedef Tenant
  * @memberof google.cloud.talent.v4beta1
  * @see [google.cloud.talent.v4beta1.Tenant definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/tenant.proto}

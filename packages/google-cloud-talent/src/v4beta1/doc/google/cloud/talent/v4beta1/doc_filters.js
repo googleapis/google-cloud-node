@@ -194,7 +194,7 @@
  *
  *   This filter specifies a list of job names to be excluded during search.
  *
- *   At most 200 excluded job names are allowed.
+ *   At most 400 excluded job names are allowed.
  *
  * @typedef JobQuery
  * @memberof google.cloud.talent.v4beta1

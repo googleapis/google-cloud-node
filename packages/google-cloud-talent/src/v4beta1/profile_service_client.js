@@ -816,15 +816,9 @@ class ProfileServiceClient {
    *   * application_outcome_notes: The application outcome reason specifies the
    *   reasons behind the outcome of the job application.
    *   See ApplicationOutcomeNotesFilter for more details.
-   *   * application_last_stage: The application last stage specifies the last
-   *   stage of job application.
-   *   See ApplicationLastStageFilter for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
    *   See ApplicationJobFilter for more details.
-   *   * application_status: The application status specifies the status of job
-   *   application.
-   *   See ApplicationStatusFilter for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].
@@ -1088,15 +1082,9 @@ class ProfileServiceClient {
    *   * application_outcome_notes: The application outcome reason specifies the
    *   reasons behind the outcome of the job application.
    *   See ApplicationOutcomeNotesFilter for more details.
-   *   * application_last_stage: The application last stage specifies the last
-   *   stage of job application.
-   *   See ApplicationLastStageFilter for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
    *   See ApplicationJobFilter for more details.
-   *   * application_status: The application status specifies the status of job
-   *   application.
-   *   See ApplicationStatusFilter for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].

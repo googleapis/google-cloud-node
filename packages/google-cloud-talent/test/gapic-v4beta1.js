@@ -1556,7 +1556,6 @@ describe('ProfileServiceClient', () => {
       const source = 'source-896505829';
       const uri = 'uri116076';
       const groupId = 'groupId506361563';
-      const resumeHrxml = 'resumeHrxml1834730555';
       const processed = true;
       const keywordSnippet = 'keywordSnippet1325317319';
       const expectedResponse = {
@@ -1565,7 +1564,6 @@ describe('ProfileServiceClient', () => {
         source: source,
         uri: uri,
         groupId: groupId,
-        resumeHrxml: resumeHrxml,
         processed: processed,
         keywordSnippet: keywordSnippet,
       };
@@ -1636,7 +1634,6 @@ describe('ProfileServiceClient', () => {
       const source = 'source-896505829';
       const uri = 'uri116076';
       const groupId = 'groupId506361563';
-      const resumeHrxml = 'resumeHrxml1834730555';
       const processed = true;
       const keywordSnippet = 'keywordSnippet1325317319';
       const expectedResponse = {
@@ -1645,7 +1642,6 @@ describe('ProfileServiceClient', () => {
         source: source,
         uri: uri,
         groupId: groupId,
-        resumeHrxml: resumeHrxml,
         processed: processed,
         keywordSnippet: keywordSnippet,
       };
@@ -1714,7 +1710,6 @@ describe('ProfileServiceClient', () => {
       const source = 'source-896505829';
       const uri = 'uri116076';
       const groupId = 'groupId506361563';
-      const resumeHrxml = 'resumeHrxml1834730555';
       const processed = true;
       const keywordSnippet = 'keywordSnippet1325317319';
       const expectedResponse = {
@@ -1723,7 +1718,6 @@ describe('ProfileServiceClient', () => {
         source: source,
         uri: uri,
         groupId: groupId,
-        resumeHrxml: resumeHrxml,
         processed: processed,
         keywordSnippet: keywordSnippet,
       };

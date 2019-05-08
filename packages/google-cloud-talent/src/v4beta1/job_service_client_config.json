@@ -3,7 +3,6 @@
     "google.cloud.talent.v4beta1.JobService": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
