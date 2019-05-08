@@ -1,6 +1,6 @@
 {
   "repository": "GoogleCloudPlatform/google-cloud-node",
-  "name": "containeranalysis",
+  "name": "@google-cloud/containeranalysis",
   "version": "0.1.0",
   "author": "Google LLC",
   "description": "Container Analysis API client for Node.js",
@@ -30,33 +30,13 @@
     "lodash.union": "^4.6.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "codecov": "^3.0.2",
-    "eslint": "^5.14.1",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "intelli-espower-loader": "^1.0.1",
-    "jsdoc": "^3.5.5",
-    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
-    "linkinator": "^1.1.6",
-    "mocha": "^6.0.0",
-    "nyc": "^13.0.0",
-    "power-assert": "^1.6.0",
-    "prettier": "^1.13.6"
+    "mocha": "^5.2.0",
+    "through2": "^2.0.3"
   },
   "scripts": {
-    "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
-    "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "lint": "eslint '**/*.js'",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
-    "test-no-cover": "mocha test/*.js",
-    "test": "npm run cover",
-    "fix": "eslint --fix '**/*.js'",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
-    "predocs-test": "npm run docs"
+    "publish-module": "node ../../scripts/publish.js containeranalysis",
+    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
+    "test": "mocha test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {

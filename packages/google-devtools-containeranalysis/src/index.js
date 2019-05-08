@@ -33,7 +33,7 @@ const gapic = Object.freeze({
 });
 
 /**
- * The `containeranalysis` package has the following named exports:
+ * The `@google-cloud/containeranalysis` package has the following named exports:
  *
  * - `ContainerAnalysisV1Beta1Client` - Reference to
  *   {@link v1beta1.ContainerAnalysisV1Beta1Client}
@@ -46,14 +46,14 @@ const gapic = Object.freeze({
  *     - `GrafeasV1Beta1Client` - Reference to
  *       {@link v1beta1.GrafeasV1Beta1Client}
  *
- * @module {object} containeranalysis
+ * @module {object} @google-cloud/containeranalysis
  * @alias nodejs-containeranalysis
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save containeranalysis
+ * npm install --save @google-cloud/containeranalysis
  *
  * @example <caption>Import the client library:</caption>
- * const containeranalysis = require('containeranalysis');
+ * const containeranalysis = require('@google-cloud/containeranalysis');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
  * const client = new containeranalysis.ContainerAnalysisV1Beta1Client();
