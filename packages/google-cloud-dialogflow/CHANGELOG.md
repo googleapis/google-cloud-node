@@ -4,6 +4,33 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [0.9.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.8.2...v0.9.0) (2019-05-07)
+
+### BREAKING CHANGE
+
+This release drops support for node versions below v8.10.0.
+
+### Bug Fixes
+
+* include 'x-goog-request-params' header in requests ([#310](https://www.github.com/googleapis/nodejs-dialogflow/issues/310)) ([479defe](https://www.github.com/googleapis/nodejs-dialogflow/commit/479defe))
+* **deps:** update dependency google-gax to ^0.26.0 ([#326](https://www.github.com/googleapis/nodejs-dialogflow/issues/326)) ([7541e5f](https://www.github.com/googleapis/nodejs-dialogflow/commit/7541e5f))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#328](https://www.github.com/googleapis/nodejs-dialogflow/issues/328)) ([62f144f](https://www.github.com/googleapis/nodejs-dialogflow/commit/62f144f))
+
+
+### Features
+
+* add the `updateDocument and `reloadDocument` methods ([#315](https://www.github.com/googleapis/nodejs-dialogflow/issues/315)) ([6e2defe](https://www.github.com/googleapis/nodejs-dialogflow/commit/6e2defe))
+* support audio config ([4ecea0e](https://www.github.com/googleapis/nodejs-dialogflow/commit/4ecea0e))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#328)
+
 ## v0.8.2
 
 03-13-2019 16:30 PDT
@@ -165,4 +192,3 @@ Version v0.6.0 of the Dialogflow NodeJS Client Library brings with it these chan
 - chore(build): synth.py: npm ci; node templates
 - chore(deps): update node:10 docker digest to 1201e1 (#96)
 - Regenerate GAPIC for V1 and V2Beta1 using synth.py (#110)
-
