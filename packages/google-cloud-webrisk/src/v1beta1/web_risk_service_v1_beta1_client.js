@@ -162,9 +162,7 @@ class WebRiskServiceV1Beta1Client {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -237,7 +235,11 @@ class WebRiskServiceV1Beta1Client {
     }
     options = options || {};
 
-    return this._innerApiCalls.computeThreatListDiff(request, options, callback);
+    return this._innerApiCalls.computeThreatListDiff(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -350,6 +352,5 @@ class WebRiskServiceV1Beta1Client {
     return this._innerApiCalls.searchHashes(request, options, callback);
   }
 }
-
 
 module.exports = WebRiskServiceV1Beta1Client;

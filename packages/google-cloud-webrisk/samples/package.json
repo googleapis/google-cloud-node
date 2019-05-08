@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-web-risk-samples",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=8"
+  },
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "mocha --timeout 600000"
+  },
+  "dependencies": {
+    "@google-cloud/web-risk": "^1.0.0"
+  },
+  "devDependencies": {}
+}
+

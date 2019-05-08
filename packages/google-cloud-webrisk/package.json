@@ -1,5 +1,5 @@
 {
-  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "repository": "googleapis/nodejs-web-risk",
   "name": "webrisk",
   "version": "0.1.0",
   "author": "Google LLC",
@@ -29,11 +29,18 @@
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
     "mocha": "^5.2.0",
+    "prettier": "^1.17.0",
     "through2": "^2.0.3"
   },
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js webrisk",
+    "fix": "eslint . --fix",
+    "lint": "eslint .",
     "smoke-test": "mocha smoke-test/*.js --timeout 5000",
     "test": "mocha test/*.js"
   },

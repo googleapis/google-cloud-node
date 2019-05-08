@@ -3,7 +3,6 @@
     "google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []

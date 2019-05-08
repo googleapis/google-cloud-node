@@ -198,7 +198,6 @@ describe('WebRiskServiceV1Beta1Client', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {
