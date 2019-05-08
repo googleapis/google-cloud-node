@@ -1,0 +1,14 @@
+{
+    "name": "nodejs-containeranalysis-samples",
+    "private": true,
+    "license": "Apache-2.0",
+    "author": "Google Inc.",
+    "repository": "googleapis/nodejs-containeranalysis",
+    "files": [
+        "*.js"
+    ],
+    "engines": {
+       "node": ">=8"
+    }
+}
+    
