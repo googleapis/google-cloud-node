@@ -24,7 +24,7 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
       }
     );
 
-    const inputUri = 'gs://demomaker/cat.mp4';
+    const inputUri = 'gs://videodemomaker/cat.mp4';
     const featuresElement = 'LABEL_DETECTION';
     const features = [featuresElement];
     const request = {
@@ -71,7 +71,7 @@ describe('VideoIntelligenceServiceSmokeTest', () => {
       }
     );
 
-    const inputUri = 'gs://demomaker/cat.mp4';
+    const inputUri = 'gs://videodemomaker/cat.mp4';
     const featuresElement = 'LABEL_DETECTION';
     const features = [featuresElement];
     const request = {
