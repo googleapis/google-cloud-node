@@ -3,7 +3,6 @@
     "google.cloud.dialogflow.v2.Intents": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
