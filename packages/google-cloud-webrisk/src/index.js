@@ -16,6 +16,9 @@
  * @namespace google
  */
 /**
+ * @namespace google.protobuf
+ */
+/**
  * @namespace google.cloud
  */
 /**

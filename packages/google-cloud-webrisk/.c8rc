@@ -1,9 +1,9 @@
 {
-  "report-dir": "./.coverage",
+  "report-dir": "./coverage",
   "reporter": ["text", "lcov"],
   "exclude": [
     "**/*-test",
-    "**/.coverage",
+    "**/coverage",
     "**/apis",
     "**/benchmark",
     "**/docs",
@@ -16,7 +16,5 @@
     "karma.conf.js",
     "webpack-tests.config.js",
     "webpack.config.js"
-  ],
-  "exclude-after-remap": false,
-  "all": true
+  ]
 }

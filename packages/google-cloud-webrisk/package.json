@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-web-risk",
-  "name": "webrisk",
-  "version": "0.1.0",
+  "name": "@google-cloud/web-risk",
+  "version": "1.0.0",
   "author": "Google LLC",
   "description": "Web Risk API client for Node.js",
   "main": "src/index.js",
@@ -29,20 +29,28 @@
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
+    "c8": "^4.1.4",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-node": "^9.0.1",
     "eslint-plugin-prettier": "^3.0.1",
+    "jsdoc": "^3.5.5",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "linkinator": "^1.4.0",
     "mocha": "^5.2.0",
     "prettier": "^1.17.0",
     "through2": "^2.0.3"
   },
   "scripts": {
+    "docs": "jsdoc -c .jsdoc.js",
     "fix": "eslint . --fix",
     "lint": "eslint .",
-    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
-    "test": "mocha test/*.js"
+    "test": "c8 mocha test/*.js",
+    "predocs-test": "npm run docs",
+    "docs-test": "linkinator docs -r --skip 'www.npmjs.org/package/@google-cloud/web-risk|cloud.google.com/nodejs/docs/reference/web-risk/latest/'",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ..",
+    "system-test": "mocha --timeout=5000 system-test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {
