@@ -1,5 +1,5 @@
 import * as $protobuf from "protobufjs";
-import * as long from "long";
+import * as Long from "long";
 /** Namespace google. */
 export namespace google {
 

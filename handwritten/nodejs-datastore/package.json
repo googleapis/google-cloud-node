@@ -49,6 +49,7 @@
     "@google-cloud/projectify": "^1.0.0",
     "@google-cloud/promisify": "^1.0.0",
     "@types/duplexify": "^3.6.0",
+    "@types/long": "^4.0.0",
     "arrify": "^2.0.0",
     "concat-stream": "^2.0.0",
     "extend": "^3.0.1",
