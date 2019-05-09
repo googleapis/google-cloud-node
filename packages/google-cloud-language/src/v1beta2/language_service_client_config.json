@@ -3,7 +3,6 @@
     "google.cloud.language.v1beta2.LanguageService": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
