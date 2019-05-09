@@ -3,7 +3,6 @@
     "google.cloud.speech.v1p1beta1.Speech": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
