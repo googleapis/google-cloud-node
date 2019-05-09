@@ -114,20 +114,20 @@ class KeyManagementServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      keyRingPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/keyRings/{key_ring}'
+      cryptoKeyPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
       cryptoKeyPathPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key_path=**}'
       ),
-      locationPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}'
-      ),
-      cryptoKeyPathTemplate: new gax.PathTemplate(
-        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
-      ),
       cryptoKeyVersionPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
+      ),
+      keyRingPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}'
+      ),
+      locationPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
     };
 
@@ -1892,8 +1892,7 @@ class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy is being specified.
-   *   `resource` is usually specified as a path. For example, a Project
-   *   resource is specified as `projects/{project}`.
+   *   See the operation documentation for the appropriate value for this field.
    * @param {Object} request.policy
    *   REQUIRED: The complete policy to be applied to the `resource`. The size of
    *   the policy is limited to a few 10s of KB. An empty policy is a
@@ -1961,8 +1960,7 @@ class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy is being requested.
-   *   `resource` is usually specified as a path. For example, a Project
-   *   resource is specified as `projects/{project}`.
+   *   See the operation documentation for the appropriate value for this field.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -2014,12 +2012,15 @@ class KeyManagementServiceClient {
    * If the resource does not exist, this will return an empty set of
    * permissions, not a NOT_FOUND error.
    *
+   * Note: This operation is designed to be used for building permission-aware
+   * UIs and command-line tools, not for authorization checking. This operation
+   * may "fail open" without warning.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy detail is being requested.
-   *   `resource` is usually specified as a path. For example, a Project
-   *   resource is specified as `projects/{project}`.
+   *   See the operation documentation for the appropriate value for this field.
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
@@ -2081,18 +2082,20 @@ class KeyManagementServiceClient {
   // --------------------
 
   /**
-   * Return a fully-qualified key_ring resource name string.
+   * Return a fully-qualified crypto_key resource name string.
    *
    * @param {String} project
    * @param {String} location
    * @param {String} keyRing
+   * @param {String} cryptoKey
    * @returns {String}
    */
-  keyRingPath(project, location, keyRing) {
-    return this._pathTemplates.keyRingPathTemplate.render({
+  cryptoKeyPath(project, location, keyRing, cryptoKey) {
+    return this._pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
       key_ring: keyRing,
+      crypto_key: cryptoKey,
     });
   }
 
@@ -2111,38 +2114,6 @@ class KeyManagementServiceClient {
       location: location,
       key_ring: keyRing,
       crypto_key_path: cryptoKeyPath,
-    });
-  }
-
-  /**
-   * Return a fully-qualified location resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @returns {String}
-   */
-  locationPath(project, location) {
-    return this._pathTemplates.locationPathTemplate.render({
-      project: project,
-      location: location,
-    });
-  }
-
-  /**
-   * Return a fully-qualified crypto_key resource name string.
-   *
-   * @param {String} project
-   * @param {String} location
-   * @param {String} keyRing
-   * @param {String} cryptoKey
-   * @returns {String}
-   */
-  cryptoKeyPath(project, location, keyRing, cryptoKey) {
-    return this._pathTemplates.cryptoKeyPathTemplate.render({
-      project: project,
-      location: location,
-      key_ring: keyRing,
-      crypto_key: cryptoKey,
     });
   }
 
@@ -2173,36 +2144,81 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Parse the keyRingName from a key_ring resource.
+   * Return a fully-qualified key_ring resource name string.
    *
-   * @param {String} keyRingName
-   *   A fully-qualified path representing a key_ring resources.
+   * @param {String} project
+   * @param {String} location
+   * @param {String} keyRing
+   * @returns {String}
+   */
+  keyRingPath(project, location, keyRing) {
+    return this._pathTemplates.keyRingPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+    });
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @returns {String}
+   */
+  locationPath(project, location) {
+    return this._pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the cryptoKeyName from a crypto_key resource.
+   *
+   * @param {String} cryptoKeyName
+   *   A fully-qualified path representing a crypto_key resources.
    * @returns {String} - A string representing the project.
    */
-  matchProjectFromKeyRingName(keyRingName) {
-    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).project;
+  matchProjectFromCryptoKeyName(cryptoKeyName) {
+    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
   }
 
   /**
-   * Parse the keyRingName from a key_ring resource.
+   * Parse the cryptoKeyName from a crypto_key resource.
    *
-   * @param {String} keyRingName
-   *   A fully-qualified path representing a key_ring resources.
+   * @param {String} cryptoKeyName
+   *   A fully-qualified path representing a crypto_key resources.
    * @returns {String} - A string representing the location.
    */
-  matchLocationFromKeyRingName(keyRingName) {
-    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).location;
+  matchLocationFromCryptoKeyName(cryptoKeyName) {
+    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
   }
 
   /**
-   * Parse the keyRingName from a key_ring resource.
+   * Parse the cryptoKeyName from a crypto_key resource.
    *
-   * @param {String} keyRingName
-   *   A fully-qualified path representing a key_ring resources.
+   * @param {String} cryptoKeyName
+   *   A fully-qualified path representing a crypto_key resources.
    * @returns {String} - A string representing the key_ring.
    */
-  matchKeyRingFromKeyRingName(keyRingName) {
-    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).key_ring;
+  matchKeyRingFromCryptoKeyName(cryptoKeyName) {
+    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the cryptoKeyName from a crypto_key resource.
+   *
+   * @param {String} cryptoKeyName
+   *   A fully-qualified path representing a crypto_key resources.
+   * @returns {String} - A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName) {
+    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
   }
 
   /**
@@ -2255,77 +2271,6 @@ class KeyManagementServiceClient {
     return this._pathTemplates.cryptoKeyPathPathTemplate.match(
       cryptoKeyPathName
     ).crypto_key_path;
-  }
-
-  /**
-   * Parse the locationName from a location resource.
-   *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName).project;
-  }
-
-  /**
-   * Parse the locationName from a location resource.
-   *
-   * @param {String} locationName
-   *   A fully-qualified path representing a location resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate.match(locationName)
-      .location;
-  }
-
-  /**
-   * Parse the cryptoKeyName from a crypto_key resource.
-   *
-   * @param {String} cryptoKeyName
-   *   A fully-qualified path representing a crypto_key resources.
-   * @returns {String} - A string representing the project.
-   */
-  matchProjectFromCryptoKeyName(cryptoKeyName) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .project;
-  }
-
-  /**
-   * Parse the cryptoKeyName from a crypto_key resource.
-   *
-   * @param {String} cryptoKeyName
-   *   A fully-qualified path representing a crypto_key resources.
-   * @returns {String} - A string representing the location.
-   */
-  matchLocationFromCryptoKeyName(cryptoKeyName) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .location;
-  }
-
-  /**
-   * Parse the cryptoKeyName from a crypto_key resource.
-   *
-   * @param {String} cryptoKeyName
-   *   A fully-qualified path representing a crypto_key resources.
-   * @returns {String} - A string representing the key_ring.
-   */
-  matchKeyRingFromCryptoKeyName(cryptoKeyName) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .key_ring;
-  }
-
-  /**
-   * Parse the cryptoKeyName from a crypto_key resource.
-   *
-   * @param {String} cryptoKeyName
-   *   A fully-qualified path representing a crypto_key resources.
-   * @returns {String} - A string representing the crypto_key.
-   */
-  matchCryptoKeyFromCryptoKeyName(cryptoKeyName) {
-    return this._pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
-      .crypto_key;
   }
 
   /**
@@ -2391,6 +2336,62 @@ class KeyManagementServiceClient {
     return this._pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).crypto_key_version;
+  }
+
+  /**
+   * Parse the keyRingName from a key_ring resource.
+   *
+   * @param {String} keyRingName
+   *   A fully-qualified path representing a key_ring resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromKeyRingName(keyRingName) {
+    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).project;
+  }
+
+  /**
+   * Parse the keyRingName from a key_ring resource.
+   *
+   * @param {String} keyRingName
+   *   A fully-qualified path representing a key_ring resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromKeyRingName(keyRingName) {
+    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).location;
+  }
+
+  /**
+   * Parse the keyRingName from a key_ring resource.
+   *
+   * @param {String} keyRingName
+   *   A fully-qualified path representing a key_ring resources.
+   * @returns {String} - A string representing the key_ring.
+   */
+  matchKeyRingFromKeyRingName(keyRingName) {
+    return this._pathTemplates.keyRingPathTemplate.match(keyRingName).key_ring;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName)
+      .location;
   }
 }
 
