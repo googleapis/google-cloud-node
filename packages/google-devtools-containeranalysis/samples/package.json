@@ -9,5 +9,13 @@
     ],
     "engines": {
         "node": ">=8"
+    },
+    "scripts": {
+        "test": "mocha --preserve-symlinks system-test/**.test.js"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^6.1.4",
+        "uuid": "^3.3.2"
     }
 }
