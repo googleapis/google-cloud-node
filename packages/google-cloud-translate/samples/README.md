@@ -202,4 +202,3 @@ For more information, see https://cloud.google.com/translate/docs
 
 [shell_img]: //gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/README.md
-
