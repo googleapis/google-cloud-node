@@ -3,7 +3,6 @@
     "google.cloud.redis.v1.CloudRedis": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
