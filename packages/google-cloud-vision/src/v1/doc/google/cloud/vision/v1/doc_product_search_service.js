@@ -100,7 +100,8 @@ const Product = {
  * @property {Object} indexTime
  *   Output only. The time at which this ProductSet was last indexed. Query
  *   results will reflect all updates before this time. If this ProductSet has
- *   never been indexed, this field is 0.
+ *   never been indexed, this timestamp is the default value
+ *   "1970-01-01T00:00:00Z".
  *
  *   This field is ignored when creating a ProductSet.
  *

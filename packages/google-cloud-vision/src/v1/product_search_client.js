@@ -134,6 +134,11 @@ class ProductSearchClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
+      listProductSets: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'productSets'
+      ),
       listProducts: new gax.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -143,11 +148,6 @@ class ProductSearchClient {
         'pageToken',
         'nextPageToken',
         'referenceImages'
-      ),
-      listProductSets: new gax.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'productSets'
       ),
       listProductsInProductSet: new gax.PageDescriptor(
         'pageToken',
@@ -213,20 +213,20 @@ class ProductSearchClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const productSearchStubMethods = [
-      'createProduct',
-      'listProducts',
-      'getProduct',
-      'updateProduct',
-      'deleteProduct',
-      'listReferenceImages',
-      'getReferenceImage',
-      'deleteReferenceImage',
-      'createReferenceImage',
       'createProductSet',
       'listProductSets',
       'getProductSet',
       'updateProductSet',
       'deleteProductSet',
+      'createProduct',
+      'listProducts',
+      'getProduct',
+      'updateProduct',
+      'deleteProduct',
+      'createReferenceImage',
+      'deleteReferenceImage',
+      'listReferenceImages',
+      'getReferenceImage',
       'addProductToProductSet',
       'removeProductFromProductSet',
       'listProductsInProductSet',
@@ -289,6 +289,425 @@ class ProductSearchClient {
   // -------------------
   // -- Service calls --
   // -------------------
+
+  /**
+   * Creates and returns a new ProductSet resource.
+   *
+   * Possible errors:
+   *
+   * * Returns INVALID_ARGUMENT if display_name is missing, or is longer than
+   *   4096 characters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The project in which the ProductSet should be created.
+   *
+   *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+   * @param {Object} request.productSet
+   *   The ProductSet to create.
+   *
+   *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1.ProductSet}
+   * @param {string} [request.productSetId]
+   *   A user-supplied resource id for this ProductSet. If set, the server will
+   *   attempt to use this value as the resource id. If it is already in use, an
+   *   error is returned with code ALREADY_EXISTS. Must be at most 128 characters
+   *   long. It cannot contain the character `/`.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const productSet = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   productSet: productSet,
+   * };
+   * client.createProductSet(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createProductSet(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.createProductSet(request, options, callback);
+  }
+
+  /**
+   * Lists ProductSets in an unspecified order.
+   *
+   * Possible errors:
+   *
+   * * Returns INVALID_ARGUMENT if page_size is greater than 100, or less
+   *   than 1.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The project from which ProductSets should be listed.
+   *
+   *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListProductSetsResponse]{@link google.cloud.vision.v1.ListProductSetsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [ProductSet]{@link google.cloud.vision.v1.ProductSet} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListProductSetsResponse]{@link google.cloud.vision.v1.ListProductSetsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   *
+   * client.listProductSets({parent: formattedParent})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listProductSets(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listProductSets({parent: formattedParent}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listProductSets(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listProductSets(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listProductSets}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listProductSets} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The project from which ProductSets should be listed.
+   *
+   *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet} on 'data' event.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * client.listProductSetsStream({parent: formattedParent})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listProductSetsStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listProductSets.createStream(
+      this._innerApiCalls.listProductSets,
+      request,
+      options
+    );
+  }
+
+  /**
+   * Gets information associated with a ProductSet.
+   *
+   * Possible errors:
+   *
+   * * Returns NOT_FOUND if the ProductSet does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name of the ProductSet to get.
+   *
+   *   Format is:
+   *   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.productSetPath('[PROJECT]', '[LOCATION]', '[PRODUCT_SET]');
+   * client.getProductSet({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getProductSet(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getProductSet(request, options, callback);
+  }
+
+  /**
+   * Makes changes to a ProductSet resource.
+   * Only display_name can be updated currently.
+   *
+   * Possible errors:
+   *
+   * * Returns NOT_FOUND if the ProductSet does not exist.
+   * * Returns INVALID_ARGUMENT if display_name is present in update_mask but
+   *   missing from the request or longer than 4096 characters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.productSet
+   *   The ProductSet resource which replaces the one on the server.
+   *
+   *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1.ProductSet}
+   * @param {Object} [request.updateMask]
+   *   The FieldMask that specifies which fields to
+   *   update.
+   *   If update_mask isn't specified, all mutable fields are to be updated.
+   *   Valid mask path is `display_name`.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const productSet = {};
+   * client.updateProductSet({productSet: productSet})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  updateProductSet(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'product_set.name': request.productSet.name,
+    });
+
+    return this._innerApiCalls.updateProductSet(request, options, callback);
+  }
+
+  /**
+   * Permanently deletes a ProductSet. Products and ReferenceImages in the
+   * ProductSet are not deleted.
+   *
+   * The actual image files are not deleted from Google Cloud Storage.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name of the ProductSet to delete.
+   *
+   *   Format is:
+   *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.productSetPath('[PROJECT]', '[LOCATION]', '[PRODUCT_SET]');
+   * client.deleteProductSet({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteProductSet(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteProductSet(request, options, callback);
+  }
 
   /**
    * Creates and returns a new product resource.
@@ -678,10 +1097,6 @@ class ProductSearchClient {
    * search queries against ProductSets containing the product may still work
    * until all related caches are refreshed.
    *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the product does not exist.
-   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -725,6 +1140,150 @@ class ProductSearchClient {
     });
 
     return this._innerApiCalls.deleteProduct(request, options, callback);
+  }
+
+  /**
+   * Creates and returns a new ReferenceImage resource.
+   *
+   * The `bounding_poly` field is optional. If `bounding_poly` is not specified,
+   * the system will try to detect regions of interest in the image that are
+   * compatible with the product_category on the parent product. If it is
+   * specified, detection is ALWAYS skipped. The system converts polygons into
+   * non-rotated rectangles.
+   *
+   * Note that the pipeline will resize the image if the image resolution is too
+   * large to process (above 50MP).
+   *
+   * Possible errors:
+   *
+   * * Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096
+   *   characters.
+   * * Returns INVALID_ARGUMENT if the product does not exist.
+   * * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing
+   *   compatible with the parent product's product_category is detected.
+   * * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Resource name of the product in which to create the reference image.
+   *
+   *   Format is
+   *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
+   * @param {Object} request.referenceImage
+   *   The reference image to create.
+   *   If an image ID is specified, it is ignored.
+   *
+   *   This object should have the same structure as [ReferenceImage]{@link google.cloud.vision.v1.ReferenceImage}
+   * @param {string} [request.referenceImageId]
+   *   A user-supplied resource id for the ReferenceImage to be added. If set,
+   *   the server will attempt to use this value as the resource id. If it is
+   *   already in use, an error is returned with code ALREADY_EXISTS. Must be at
+   *   most 128 characters long. It cannot contain the character `/`.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ReferenceImage]{@link google.cloud.vision.v1.ReferenceImage}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ReferenceImage]{@link google.cloud.vision.v1.ReferenceImage}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.productPath('[PROJECT]', '[LOCATION]', '[PRODUCT]');
+   * const referenceImage = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   referenceImage: referenceImage,
+   * };
+   * client.createReferenceImage(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createReferenceImage(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.createReferenceImage(request, options, callback);
+  }
+
+  /**
+   * Permanently deletes a reference image.
+   *
+   * The image metadata will be deleted right away, but search queries
+   * against ProductSets containing the image may still work until all related
+   * caches are refreshed.
+   *
+   * The actual image files are not deleted from Google Cloud Storage.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource name of the reference image to delete.
+   *
+   *   Format is:
+   *
+   *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ProductSearchClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.referenceImagePath('[PROJECT]', '[LOCATION]', '[PRODUCT]', '[REFERENCE_IMAGE]');
+   * client.deleteReferenceImage({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteReferenceImage(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteReferenceImage(request, options, callback);
   }
 
   /**
@@ -957,577 +1516,6 @@ class ProductSearchClient {
   }
 
   /**
-   * Permanently deletes a reference image.
-   *
-   * The image metadata will be deleted right away, but search queries
-   * against ProductSets containing the image may still work until all related
-   * caches are refreshed.
-   *
-   * The actual image files are not deleted from Google Cloud Storage.
-   *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the reference image does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The resource name of the reference image to delete.
-   *
-   *   Format is:
-   *
-   *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error)} [callback]
-   *   The function which will be called with the result of the API call.
-   * @returns {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedName = client.referenceImagePath('[PROJECT]', '[LOCATION]', '[PRODUCT]', '[REFERENCE_IMAGE]');
-   * client.deleteReferenceImage({name: formattedName}).catch(err => {
-   *   console.error(err);
-   * });
-   */
-  deleteReferenceImage(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name,
-    });
-
-    return this._innerApiCalls.deleteReferenceImage(request, options, callback);
-  }
-
-  /**
-   * Creates and returns a new ReferenceImage resource.
-   *
-   * The `bounding_poly` field is optional. If `bounding_poly` is not specified,
-   * the system will try to detect regions of interest in the image that are
-   * compatible with the product_category on the parent product. If it is
-   * specified, detection is ALWAYS skipped. The system converts polygons into
-   * non-rotated rectangles.
-   *
-   * Note that the pipeline will resize the image if the image resolution is too
-   * large to process (above 50MP).
-   *
-   * Possible errors:
-   *
-   * * Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096
-   *   characters.
-   * * Returns INVALID_ARGUMENT if the product does not exist.
-   * * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing
-   *   compatible with the parent product's product_category is detected.
-   * * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Resource name of the product in which to create the reference image.
-   *
-   *   Format is
-   *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
-   * @param {Object} request.referenceImage
-   *   The reference image to create.
-   *   If an image ID is specified, it is ignored.
-   *
-   *   This object should have the same structure as [ReferenceImage]{@link google.cloud.vision.v1.ReferenceImage}
-   * @param {string} [request.referenceImageId]
-   *   A user-supplied resource id for the ReferenceImage to be added. If set,
-   *   the server will attempt to use this value as the resource id. If it is
-   *   already in use, an error is returned with code ALREADY_EXISTS. Must be at
-   *   most 128 characters long. It cannot contain the character `/`.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [ReferenceImage]{@link google.cloud.vision.v1.ReferenceImage}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ReferenceImage]{@link google.cloud.vision.v1.ReferenceImage}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedParent = client.productPath('[PROJECT]', '[LOCATION]', '[PRODUCT]');
-   * const referenceImage = {};
-   * const request = {
-   *   parent: formattedParent,
-   *   referenceImage: referenceImage,
-   * };
-   * client.createReferenceImage(request)
-   *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  createReferenceImage(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent,
-    });
-
-    return this._innerApiCalls.createReferenceImage(request, options, callback);
-  }
-
-  /**
-   * Creates and returns a new ProductSet resource.
-   *
-   * Possible errors:
-   *
-   * * Returns INVALID_ARGUMENT if display_name is missing, or is longer than
-   *   4096 characters.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The project in which the ProductSet should be created.
-   *
-   *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
-   * @param {Object} request.productSet
-   *   The ProductSet to create.
-   *
-   *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1.ProductSet}
-   * @param {string} [request.productSetId]
-   *   A user-supplied resource id for this ProductSet. If set, the server will
-   *   attempt to use this value as the resource id. If it is already in use, an
-   *   error is returned with code ALREADY_EXISTS. Must be at most 128 characters
-   *   long. It cannot contain the character `/`.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * const productSet = {};
-   * const request = {
-   *   parent: formattedParent,
-   *   productSet: productSet,
-   * };
-   * client.createProductSet(request)
-   *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  createProductSet(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent,
-    });
-
-    return this._innerApiCalls.createProductSet(request, options, callback);
-  }
-
-  /**
-   * Lists ProductSets in an unspecified order.
-   *
-   * Possible errors:
-   *
-   * * Returns INVALID_ARGUMENT if page_size is greater than 100, or less
-   *   than 1.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The project from which ProductSets should be listed.
-   *
-   *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
-   * @param {number} [request.pageSize]
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is Array of [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   *
-   *   When autoPaginate: false is specified through options, it contains the result
-   *   in a single response. If the response indicates the next page exists, the third
-   *   parameter is set to be used for the next request object. The fourth parameter keeps
-   *   the raw response object of an object representing [ListProductSetsResponse]{@link google.cloud.vision.v1.ListProductSetsResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   *
-   *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [ProductSet]{@link google.cloud.vision.v1.ProductSet} in a single response.
-   *   The second element is the next request object if the response
-   *   indicates the next page exists, or null. The third element is
-   *   an object representing [ListProductSetsResponse]{@link google.cloud.vision.v1.ListProductSetsResponse}.
-   *
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * // Iterate over all elements.
-   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   *
-   * client.listProductSets({parent: formattedParent})
-   *   .then(responses => {
-   *     const resources = responses[0];
-   *     for (const resource of resources) {
-   *       // doThingsWith(resource)
-   *     }
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   *
-   * // Or obtain the paged response.
-   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   *
-   *
-   * const options = {autoPaginate: false};
-   * const callback = responses => {
-   *   // The actual resources in a response.
-   *   const resources = responses[0];
-   *   // The next request if the response shows that there are more responses.
-   *   const nextRequest = responses[1];
-   *   // The actual response object, if necessary.
-   *   // const rawResponse = responses[2];
-   *   for (const resource of resources) {
-   *     // doThingsWith(resource);
-   *   }
-   *   if (nextRequest) {
-   *     // Fetch the next page.
-   *     return client.listProductSets(nextRequest, options).then(callback);
-   *   }
-   * }
-   * client.listProductSets({parent: formattedParent}, options)
-   *   .then(callback)
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  listProductSets(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent,
-    });
-
-    return this._innerApiCalls.listProductSets(request, options, callback);
-  }
-
-  /**
-   * Equivalent to {@link listProductSets}, but returns a NodeJS Stream object.
-   *
-   * This fetches the paged responses for {@link listProductSets} continuously
-   * and invokes the callback registered for 'data' event for each element in the
-   * responses.
-   *
-   * The returned object has 'end' method when no more elements are required.
-   *
-   * autoPaginate option will be ignored.
-   *
-   * @see {@link https://nodejs.org/api/stream.html}
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   The project from which ProductSets should be listed.
-   *
-   *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
-   * @param {number} [request.pageSize]
-   *   The maximum number of resources contained in the underlying API
-   *   response. If page streaming is performed per-resource, this
-   *   parameter does not affect the return value. If page streaming is
-   *   performed per-page, this determines the maximum number of
-   *   resources in a page.
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet} on 'data' event.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-   * client.listProductSetsStream({parent: formattedParent})
-   *   .on('data', element => {
-   *     // doThingsWith(element)
-   *   }).on('error', err => {
-   *     console.log(err);
-   *   });
-   */
-  listProductSetsStream(request, options) {
-    options = options || {};
-
-    return this._descriptors.page.listProductSets.createStream(
-      this._innerApiCalls.listProductSets,
-      request,
-      options
-    );
-  }
-
-  /**
-   * Gets information associated with a ProductSet.
-   *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the ProductSet does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Resource name of the ProductSet to get.
-   *
-   *   Format is:
-   *   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedName = client.productSetPath('[PROJECT]', '[LOCATION]', '[PRODUCT_SET]');
-   * client.getProductSet({name: formattedName})
-   *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  getProductSet(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name,
-    });
-
-    return this._innerApiCalls.getProductSet(request, options, callback);
-  }
-
-  /**
-   * Makes changes to a ProductSet resource.
-   * Only display_name can be updated currently.
-   *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the ProductSet does not exist.
-   * * Returns INVALID_ARGUMENT if display_name is present in update_mask but
-   *   missing from the request or longer than 4096 characters.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {Object} request.productSet
-   *   The ProductSet resource which replaces the one on the server.
-   *
-   *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1.ProductSet}
-   * @param {Object} [request.updateMask]
-   *   The FieldMask that specifies which fields to
-   *   update.
-   *   If update_mask isn't specified, all mutable fields are to be updated.
-   *   Valid mask path is `display_name`.
-   *
-   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ProductSet]{@link google.cloud.vision.v1.ProductSet}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const productSet = {};
-   * client.updateProductSet({productSet: productSet})
-   *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  updateProductSet(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'product_set.name': request.productSet.name,
-    });
-
-    return this._innerApiCalls.updateProductSet(request, options, callback);
-  }
-
-  /**
-   * Permanently deletes a ProductSet. Products and ReferenceImages in the
-   * ProductSet are not deleted.
-   *
-   * The actual image files are not deleted from Google Cloud Storage.
-   *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND if the ProductSet does not exist.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Resource name of the ProductSet to delete.
-   *
-   *   Format is:
-   *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
-   * @param {function(?Error)} [callback]
-   *   The function which will be called with the result of the API call.
-   * @returns {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const vision = require('@google-cloud/vision');
-   *
-   * const client = new vision.v1.ProductSearchClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedName = client.productSetPath('[PROJECT]', '[LOCATION]', '[PRODUCT_SET]');
-   * client.deleteProductSet({name: formattedName}).catch(err => {
-   *   console.error(err);
-   * });
-   */
-  deleteProductSet(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name,
-    });
-
-    return this._innerApiCalls.deleteProductSet(request, options, callback);
-  }
-
-  /**
    * Adds a Product to the specified ProductSet. If the Product is already
    * present, no change is made.
    *
@@ -1598,10 +1586,6 @@ class ProductSearchClient {
 
   /**
    * Removes a Product from the specified ProductSet.
-   *
-   * Possible errors:
-   *
-   * * Returns NOT_FOUND If the Product is not found under the ProductSet.
    *
    * @param {Object} request
    *   The request object that will be sent.

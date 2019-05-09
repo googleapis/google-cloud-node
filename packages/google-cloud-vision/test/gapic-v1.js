@@ -22,7 +22,624 @@ const FAKE_STATUS_CODE = 1;
 const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
+describe('ImageAnnotatorClient', () => {
+  describe('batchAnnotateImages', () => {
+    it('invokes batchAnnotateImages without error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const request = {
+        requests: requests,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchAnnotateImages = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.batchAnnotateImages(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes batchAnnotateImages with error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const request = {
+        requests: requests,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchAnnotateImages = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.batchAnnotateImages(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('batchAnnotateFiles', () => {
+    it('invokes batchAnnotateFiles without error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const request = {
+        requests: requests,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchAnnotateFiles = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.batchAnnotateFiles(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes batchAnnotateFiles with error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const request = {
+        requests: requests,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchAnnotateFiles = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.batchAnnotateFiles(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('asyncBatchAnnotateImages', function() {
+    it('invokes asyncBatchAnnotateImages without error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const outputConfig = {};
+      const request = {
+        requests: requests,
+        outputConfig: outputConfig,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.asyncBatchAnnotateImages = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .asyncBatchAnnotateImages(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes asyncBatchAnnotateImages with error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const outputConfig = {};
+      const request = {
+        requests: requests,
+        outputConfig: outputConfig,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.asyncBatchAnnotateImages = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .asyncBatchAnnotateImages(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.asyncBatchAnnotateImages
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.asyncBatchAnnotateImages
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
+
+  describe('asyncBatchAnnotateFiles', function() {
+    it('invokes asyncBatchAnnotateFiles without error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const request = {
+        requests: requests,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.asyncBatchAnnotateFiles = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .asyncBatchAnnotateFiles(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes asyncBatchAnnotateFiles with error', done => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const requests = [];
+      const request = {
+        requests: requests,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.asyncBatchAnnotateFiles = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .asyncBatchAnnotateFiles(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new visionModule.v1.ImageAnnotatorClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.asyncBatchAnnotateFiles
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.asyncBatchAnnotateFiles
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
+});
 describe('ProductSearchClient', () => {
+  describe('createProductSet', () => {
+    it('invokes createProductSet without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const productSet = {};
+      const request = {
+        parent: formattedParent,
+        productSet: productSet,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createProductSet = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createProductSet(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createProductSet with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const productSet = {};
+      const request = {
+        parent: formattedParent,
+        productSet: productSet,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createProductSet = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createProductSet(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listProductSets', () => {
+    it('invokes listProductSets without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const productSetsElement = {};
+      const productSets = [productSetsElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        productSets: productSets,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listProductSets = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.productSets);
+      };
+
+      client.listProductSets(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.productSets);
+        done();
+      });
+    });
+
+    it('invokes listProductSets with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listProductSets = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listProductSets(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getProductSet', () => {
+    it('invokes getProductSet without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.productSetPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT_SET]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name2,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getProductSet = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getProductSet(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getProductSet with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.productSetPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT_SET]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getProductSet = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getProductSet(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateProductSet', () => {
+    it('invokes updateProductSet without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const productSet = {};
+      const request = {
+        productSet: productSet,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateProductSet = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateProductSet(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateProductSet with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const productSet = {};
+      const request = {
+        productSet: productSet,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateProductSet = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateProductSet(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteProductSet', () => {
+    it('invokes deleteProductSet without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.productSetPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT_SET]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteProductSet = mockSimpleGrpcMethod(request);
+
+      client.deleteProductSet(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteProductSet with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.productSetPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT_SET]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteProductSet = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteProductSet(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
   describe('createProduct', () => {
     it('invokes createProduct without error', done => {
       const client = new visionModule.v1.ProductSearchClient({
@@ -357,6 +974,141 @@ describe('ProductSearchClient', () => {
     });
   });
 
+  describe('createReferenceImage', () => {
+    it('invokes createReferenceImage without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.productPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]'
+      );
+      const referenceImage = {};
+      const request = {
+        parent: formattedParent,
+        referenceImage: referenceImage,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const uri = 'uri116076';
+      const expectedResponse = {
+        name: name,
+        uri: uri,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createReferenceImage = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createReferenceImage(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createReferenceImage with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.productPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]'
+      );
+      const referenceImage = {};
+      const request = {
+        parent: formattedParent,
+        referenceImage: referenceImage,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createReferenceImage = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createReferenceImage(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteReferenceImage', () => {
+    it('invokes deleteReferenceImage without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.referenceImagePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]',
+        '[REFERENCE_IMAGE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteReferenceImage = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteReferenceImage(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteReferenceImage with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.referenceImagePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[PRODUCT]',
+        '[REFERENCE_IMAGE]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteReferenceImage = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteReferenceImage(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
   describe('listReferenceImages', () => {
     it('invokes listReferenceImages without error', done => {
       const client = new visionModule.v1.ProductSearchClient({
@@ -501,463 +1253,6 @@ describe('ProductSearchClient', () => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('deleteReferenceImage', () => {
-    it('invokes deleteReferenceImage without error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.referenceImagePath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT]',
-        '[REFERENCE_IMAGE]'
-      );
-      const request = {
-        name: formattedName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.deleteReferenceImage = mockSimpleGrpcMethod(
-        request
-      );
-
-      client.deleteReferenceImage(request, err => {
-        assert.ifError(err);
-        done();
-      });
-    });
-
-    it('invokes deleteReferenceImage with error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.referenceImagePath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT]',
-        '[REFERENCE_IMAGE]'
-      );
-      const request = {
-        name: formattedName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.deleteReferenceImage = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.deleteReferenceImage(request, err => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        done();
-      });
-    });
-  });
-
-  describe('createReferenceImage', () => {
-    it('invokes createReferenceImage without error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.productPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT]'
-      );
-      const referenceImage = {};
-      const request = {
-        parent: formattedParent,
-        referenceImage: referenceImage,
-      };
-
-      // Mock response
-      const name = 'name3373707';
-      const uri = 'uri116076';
-      const expectedResponse = {
-        name: name,
-        uri: uri,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.createReferenceImage = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.createReferenceImage(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes createReferenceImage with error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.productPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT]'
-      );
-      const referenceImage = {};
-      const request = {
-        parent: formattedParent,
-        referenceImage: referenceImage,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.createReferenceImage = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.createReferenceImage(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('createProductSet', () => {
-    it('invokes createProductSet without error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      const productSet = {};
-      const request = {
-        parent: formattedParent,
-        productSet: productSet,
-      };
-
-      // Mock response
-      const name = 'name3373707';
-      const displayName = 'displayName1615086568';
-      const expectedResponse = {
-        name: name,
-        displayName: displayName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.createProductSet = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.createProductSet(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes createProductSet with error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      const productSet = {};
-      const request = {
-        parent: formattedParent,
-        productSet: productSet,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.createProductSet = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.createProductSet(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('listProductSets', () => {
-    it('invokes listProductSets without error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      const request = {
-        parent: formattedParent,
-      };
-
-      // Mock response
-      const nextPageToken = '';
-      const productSetsElement = {};
-      const productSets = [productSetsElement];
-      const expectedResponse = {
-        nextPageToken: nextPageToken,
-        productSets: productSets,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.listProductSets = (
-        actualRequest,
-        options,
-        callback
-      ) => {
-        assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse.productSets);
-      };
-
-      client.listProductSets(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse.productSets);
-        done();
-      });
-    });
-
-    it('invokes listProductSets with error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
-      const request = {
-        parent: formattedParent,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.listProductSets = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.listProductSets(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('getProductSet', () => {
-    it('invokes getProductSet without error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.productSetPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT_SET]'
-      );
-      const request = {
-        name: formattedName,
-      };
-
-      // Mock response
-      const name2 = 'name2-1052831874';
-      const displayName = 'displayName1615086568';
-      const expectedResponse = {
-        name: name2,
-        displayName: displayName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.getProductSet = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.getProductSet(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes getProductSet with error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.productSetPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT_SET]'
-      );
-      const request = {
-        name: formattedName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.getProductSet = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.getProductSet(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('updateProductSet', () => {
-    it('invokes updateProductSet without error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const productSet = {};
-      const request = {
-        productSet: productSet,
-      };
-
-      // Mock response
-      const name = 'name3373707';
-      const displayName = 'displayName1615086568';
-      const expectedResponse = {
-        name: name,
-        displayName: displayName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.updateProductSet = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.updateProductSet(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes updateProductSet with error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const productSet = {};
-      const request = {
-        productSet: productSet,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.updateProductSet = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.updateProductSet(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('deleteProductSet', () => {
-    it('invokes deleteProductSet without error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.productSetPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT_SET]'
-      );
-      const request = {
-        name: formattedName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.deleteProductSet = mockSimpleGrpcMethod(request);
-
-      client.deleteProductSet(request, err => {
-        assert.ifError(err);
-        done();
-      });
-    });
-
-    it('invokes deleteProductSet with error', done => {
-      const client = new visionModule.v1.ProductSearchClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedName = client.productSetPath(
-        '[PROJECT]',
-        '[LOCATION]',
-        '[PRODUCT_SET]'
-      );
-      const request = {
-        name: formattedName,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.deleteProductSet = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.deleteProductSet(request, err => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -1267,152 +1562,6 @@ describe('ProductSearchClient', () => {
       );
       assert(
         client._descriptors.longrunning.importProductSets
-          .metadataDecoder instanceof Function
-      );
-    });
-  });
-});
-describe('ImageAnnotatorClient', () => {
-  describe('batchAnnotateImages', () => {
-    it('invokes batchAnnotateImages without error', done => {
-      const client = new visionModule.v1.ImageAnnotatorClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const requests = [];
-      const request = {
-        requests: requests,
-      };
-
-      // Mock response
-      const expectedResponse = {};
-
-      // Mock Grpc layer
-      client._innerApiCalls.batchAnnotateImages = mockSimpleGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client.batchAnnotateImages(request, (err, response) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(response, expectedResponse);
-        done();
-      });
-    });
-
-    it('invokes batchAnnotateImages with error', done => {
-      const client = new visionModule.v1.ImageAnnotatorClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const requests = [];
-      const request = {
-        requests: requests,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.batchAnnotateImages = mockSimpleGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client.batchAnnotateImages(request, (err, response) => {
-        assert(err instanceof Error);
-        assert.strictEqual(err.code, FAKE_STATUS_CODE);
-        assert(typeof response === 'undefined');
-        done();
-      });
-    });
-  });
-
-  describe('asyncBatchAnnotateFiles', function() {
-    it('invokes asyncBatchAnnotateFiles without error', done => {
-      const client = new visionModule.v1.ImageAnnotatorClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const requests = [];
-      const request = {
-        requests: requests,
-      };
-
-      // Mock response
-      const expectedResponse = {};
-
-      // Mock Grpc layer
-      client._innerApiCalls.asyncBatchAnnotateFiles = mockLongRunningGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client
-        .asyncBatchAnnotateFiles(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(responses => {
-          assert.deepStrictEqual(responses[0], expectedResponse);
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
-    });
-
-    it('invokes asyncBatchAnnotateFiles with error', done => {
-      const client = new visionModule.v1.ImageAnnotatorClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const requests = [];
-      const request = {
-        requests: requests,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.asyncBatchAnnotateFiles = mockLongRunningGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client
-        .asyncBatchAnnotateFiles(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(() => {
-          assert.fail();
-        })
-        .catch(err => {
-          assert(err instanceof Error);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
-        });
-    });
-
-    it('has longrunning decoder functions', () => {
-      const client = new visionModule.v1.ImageAnnotatorClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert(
-        client._descriptors.longrunning.asyncBatchAnnotateFiles
-          .responseDecoder instanceof Function
-      );
-      assert(
-        client._descriptors.longrunning.asyncBatchAnnotateFiles
           .metadataDecoder instanceof Function
       );
     });

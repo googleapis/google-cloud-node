@@ -118,6 +118,12 @@ class ImageAnnotatorClient {
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
 
+    const asyncBatchAnnotateImagesResponse = protoFilesRoot.lookup(
+      'google.cloud.vision.v1.AsyncBatchAnnotateImagesResponse'
+    );
+    const asyncBatchAnnotateImagesMetadata = protoFilesRoot.lookup(
+      'google.cloud.vision.v1.OperationMetadata'
+    );
     const asyncBatchAnnotateFilesResponse = protoFilesRoot.lookup(
       'google.cloud.vision.v1.AsyncBatchAnnotateFilesResponse'
     );
@@ -126,6 +132,15 @@ class ImageAnnotatorClient {
     );
 
     this._descriptors.longrunning = {
+      asyncBatchAnnotateImages: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        asyncBatchAnnotateImagesResponse.decode.bind(
+          asyncBatchAnnotateImagesResponse
+        ),
+        asyncBatchAnnotateImagesMetadata.decode.bind(
+          asyncBatchAnnotateImagesMetadata
+        )
+      ),
       asyncBatchAnnotateFiles: new gax.LongrunningDescriptor(
         this.operationsClient,
         asyncBatchAnnotateFilesResponse.decode.bind(
@@ -161,6 +176,8 @@ class ImageAnnotatorClient {
     // and create an API call method for each.
     const imageAnnotatorStubMethods = [
       'batchAnnotateImages',
+      'batchAnnotateFiles',
+      'asyncBatchAnnotateImages',
       'asyncBatchAnnotateFiles',
     ];
     for (const methodName of imageAnnotatorStubMethods) {
@@ -266,6 +283,184 @@ class ImageAnnotatorClient {
     options = options || {};
 
     return this._innerApiCalls.batchAnnotateImages(request, options, callback);
+  }
+
+  /**
+   * Service that performs image detection and annotation for a batch of files.
+   * Now only "application/pdf", "image/tiff" and "image/gif" are supported.
+   *
+   * This service will extract at most 5 (customers can specify which 5 in
+   * AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+   * file provided and perform detection and annotation for each image
+   * extracted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object[]} request.requests
+   *   The list of file annotation requests. Right now we support only one
+   *   AnnotateFileRequest in BatchAnnotateFilesRequest.
+   *
+   *   This object should have the same structure as [AnnotateFileRequest]{@link google.cloud.vision.v1.AnnotateFileRequest}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [BatchAnnotateFilesResponse]{@link google.cloud.vision.v1.BatchAnnotateFilesResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchAnnotateFilesResponse]{@link google.cloud.vision.v1.BatchAnnotateFilesResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ImageAnnotatorClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const requests = [];
+   * client.batchAnnotateFiles({requests: requests})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  batchAnnotateFiles(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.batchAnnotateFiles(request, options, callback);
+  }
+
+  /**
+   * Run asynchronous image detection and annotation for a list of images.
+   *
+   * Progress and results can be retrieved through the
+   * `google.longrunning.Operations` interface.
+   * `Operation.metadata` contains `OperationMetadata` (metadata).
+   * `Operation.response` contains `AsyncBatchAnnotateImagesResponse` (results).
+   *
+   * This service will write image annotation outputs to json files in customer
+   * GCS bucket, each json file containing BatchAnnotateImagesResponse proto.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object[]} request.requests
+   *   Individual image annotation requests for this batch.
+   *
+   *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1.AnnotateImageRequest}
+   * @param {Object} request.outputConfig
+   *   Required. The desired output location and metadata (e.g. format).
+   *
+   *   This object should have the same structure as [OutputConfig]{@link google.cloud.vision.v1.OutputConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const vision = require('@google-cloud/vision');
+   *
+   * const client = new vision.v1.ImageAnnotatorClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const requests = [];
+   * const outputConfig = {};
+   * const request = {
+   *   requests: requests,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.asyncBatchAnnotateImages(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const requests = [];
+   * const outputConfig = {};
+   * const request = {
+   *   requests: requests,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.asyncBatchAnnotateImages(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const requests = [];
+   * const outputConfig = {};
+   * const request = {
+   *   requests: requests,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.asyncBatchAnnotateImages(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  asyncBatchAnnotateImages(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+
+    return this._innerApiCalls.asyncBatchAnnotateImages(
+      request,
+      options,
+      callback
+    );
   }
 
   /**

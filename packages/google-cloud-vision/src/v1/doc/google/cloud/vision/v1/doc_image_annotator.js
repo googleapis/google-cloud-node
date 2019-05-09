@@ -187,7 +187,7 @@ const Image = {
  *
  * @property {Object} boundingPoly
  *   The bounding polygon around the face. The coordinates of the bounding box
- *   are in the original image's scale, as returned in `ImageParams`.
+ *   are in the original image's scale.
  *   The bounding box is computed to "frame" the face in accordance with human
  *   expectations. It is based on the landmarker results.
  *   Note that one or more x and/or y coordinates may not be generated in the
@@ -736,7 +736,7 @@ const ImageProperties = {
  *
  * @property {Object} boundingPoly
  *   The bounding polygon for the crop region. The coordinates of the bounding
- *   box are in the original image's scale, as returned in `ImageParams`.
+ *   box are in the original image's scale.
  *
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.vision.v1.BoundingPoly}
  *
@@ -847,7 +847,7 @@ const ImageContext = {
 
 /**
  * Request for performing Google Cloud Vision API tasks over a user-provided
- * image, with user-requested features.
+ * image, with user-requested features, and with context information.
  *
  * @property {Object} image
  *   The image to be processed.
@@ -993,6 +993,9 @@ const AnnotateImageResponse = {
  *
  *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1.AnnotateImageResponse}
  *
+ * @property {number} totalPages
+ *   This field gives the total number of pages in the file.
+ *
  * @typedef AnnotateFileResponse
  * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.AnnotateFileResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
@@ -1030,6 +1033,82 @@ const BatchAnnotateImagesRequest = {
  * @see [google.cloud.vision.v1.BatchAnnotateImagesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
  */
 const BatchAnnotateImagesResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A request to annotate one single file, e.g. a PDF, TIFF or GIF file.
+ *
+ * @property {Object} inputConfig
+ *   Required. Information about the input file.
+ *
+ *   This object should have the same structure as [InputConfig]{@link google.cloud.vision.v1.InputConfig}
+ *
+ * @property {Object[]} features
+ *   Required. Requested features.
+ *
+ *   This object should have the same structure as [Feature]{@link google.cloud.vision.v1.Feature}
+ *
+ * @property {Object} imageContext
+ *   Additional context that may accompany the image(s) in the file.
+ *
+ *   This object should have the same structure as [ImageContext]{@link google.cloud.vision.v1.ImageContext}
+ *
+ * @property {number[]} pages
+ *   Pages of the file to perform image annotation.
+ *
+ *   Pages starts from 1, we assume the first page of the file is page 1.
+ *   At most 5 pages are supported per request. Pages can be negative.
+ *
+ *   Page 1 means the first page.
+ *   Page 2 means the second page.
+ *   Page -1 means the last page.
+ *   Page -2 means the second to the last page.
+ *
+ *   If the file is GIF instead of PDF or TIFF, page refers to GIF frames.
+ *
+ *   If this field is empty, by default the service performs image annotation
+ *   for the first 5 pages of the file.
+ *
+ * @typedef AnnotateFileRequest
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.AnnotateFileRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
+ */
+const AnnotateFileRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A list of requests to annotate files using the BatchAnnotateFiles API.
+ *
+ * @property {Object[]} requests
+ *   The list of file annotation requests. Right now we support only one
+ *   AnnotateFileRequest in BatchAnnotateFilesRequest.
+ *
+ *   This object should have the same structure as [AnnotateFileRequest]{@link google.cloud.vision.v1.AnnotateFileRequest}
+ *
+ * @typedef BatchAnnotateFilesRequest
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.BatchAnnotateFilesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
+ */
+const BatchAnnotateFilesRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A list of file annotation responses.
+ *
+ * @property {Object[]} responses
+ *   The list of file annotation responses, each response corresponding to each
+ *   AnnotateFileRequest in BatchAnnotateFilesRequest.
+ *
+ *   This object should have the same structure as [AnnotateFileResponse]{@link google.cloud.vision.v1.AnnotateFileResponse}
+ *
+ * @typedef BatchAnnotateFilesResponse
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.BatchAnnotateFilesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
+ */
+const BatchAnnotateFilesResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -1081,6 +1160,43 @@ const AsyncAnnotateFileResponse = {
 };
 
 /**
+ * Request for async image annotation for a list of images.
+ *
+ * @property {Object[]} requests
+ *   Individual image annotation requests for this batch.
+ *
+ *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1.AnnotateImageRequest}
+ *
+ * @property {Object} outputConfig
+ *   Required. The desired output location and metadata (e.g. format).
+ *
+ *   This object should have the same structure as [OutputConfig]{@link google.cloud.vision.v1.OutputConfig}
+ *
+ * @typedef AsyncBatchAnnotateImagesRequest
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
+ */
+const AsyncBatchAnnotateImagesRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response to an async batch image annotation request.
+ *
+ * @property {Object} outputConfig
+ *   The output location and metadata from AsyncBatchAnnotateImagesRequest.
+ *
+ *   This object should have the same structure as [OutputConfig]{@link google.cloud.vision.v1.OutputConfig}
+ *
+ * @typedef AsyncBatchAnnotateImagesResponse
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.AsyncBatchAnnotateImagesResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
+ */
+const AsyncBatchAnnotateImagesResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Multiple async file annotation requests are batched into a single service
  * call.
  *
@@ -1121,6 +1237,14 @@ const AsyncBatchAnnotateFilesResponse = {
  *   The Google Cloud Storage location to read the input from.
  *
  *   This object should have the same structure as [GcsSource]{@link google.cloud.vision.v1.GcsSource}
+ *
+ * @property {string} content
+ *   File content, represented as a stream of bytes.
+ *   Note: As with all `bytes` fields, protobuffers use a pure binary
+ *   representation, whereas JSON representations use base64.
+ *
+ *   Currently, this field only works for BatchAnnotateFiles requests. It does
+ *   not work for AsyncBatchAnnotateFiles requests.
  *
  * @property {string} mimeType
  *   The type of the file. Currently only "application/pdf" and "image/tiff"
@@ -1182,16 +1306,23 @@ const GcsSource = {
  * The Google Cloud Storage location where the output will be written to.
  *
  * @property {string} uri
- *   Google Cloud Storage URI where the results will be stored. Results will
- *   be in JSON format and preceded by its corresponding input URI. This field
- *   can either represent a single file, or a prefix for multiple outputs.
- *   Prefixes must end in a `/`.
+ *   Google Cloud Storage URI prefix where the results will be stored. Results
+ *   will be in JSON format and preceded by its corresponding input URI prefix.
+ *   This field can either represent a gcs file prefix or gcs directory. In
+ *   either case, the uri should be unique because in order to get all of the
+ *   output files, you will need to do a wildcard gcs search on the uri prefix
+ *   you provide.
  *
  *   Examples:
  *
- *   *    File: gs://bucket-name/filename.json
- *   *    Prefix: gs://bucket-name/prefix/here/
- *   *    File: gs://bucket-name/prefix/here
+ *   *    File Prefix: gs://bucket-name/here/filenameprefix   The output files
+ *   will be created in gs://bucket-name/here/ and the names of the
+ *   output files will begin with "filenameprefix".
+ *
+ *   *    Directory Prefix: gs://bucket-name/some/location/   The output files
+ *   will be created in gs://bucket-name/some/location/ and the names of the
+ *   output files could be anything because there was no filename prefix
+ *   specified.
  *
  *   If multiple outputs, each response is still AnnotateFileResponse, each of
  *   which contains some subset of the full list of AnnotateImageResponse.

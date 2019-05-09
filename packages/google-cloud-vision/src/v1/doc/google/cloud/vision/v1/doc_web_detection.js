@@ -98,6 +98,25 @@ const WebDetection = {
   },
 
   /**
+   * Label to provide extra metadata for the web detection.
+   *
+   * @property {string} label
+   *   Label for extra metadata.
+   *
+   * @property {string} languageCode
+   *   The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
+   *   For more information, see
+   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+   *
+   * @typedef WebLabel
+   * @memberof google.cloud.vision.v1
+   * @see [google.cloud.vision.v1.WebDetection.WebLabel definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/web_detection.proto}
+   */
+  WebLabel: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
    * Metadata for web pages.
    *
    * @property {string} url
@@ -128,25 +147,6 @@ const WebDetection = {
    * @see [google.cloud.vision.v1.WebDetection.WebPage definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/web_detection.proto}
    */
   WebPage: {
-    // This is for documentation. Actual contents will be loaded by gRPC.
-  },
-
-  /**
-   * Label to provide extra metadata for the web detection.
-   *
-   * @property {string} label
-   *   Label for extra metadata.
-   *
-   * @property {string} languageCode
-   *   The BCP-47 language code for `label`, such as "en-US" or "sr-Latn".
-   *   For more information, see
-   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-   *
-   * @typedef WebLabel
-   * @memberof google.cloud.vision.v1
-   * @see [google.cloud.vision.v1.WebDetection.WebLabel definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/web_detection.proto}
-   */
-  WebLabel: {
     // This is for documentation. Actual contents will be loaded by gRPC.
   }
 };
