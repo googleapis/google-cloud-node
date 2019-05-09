@@ -3,7 +3,6 @@
     "google.privacy.dlp.v2.DlpService": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
