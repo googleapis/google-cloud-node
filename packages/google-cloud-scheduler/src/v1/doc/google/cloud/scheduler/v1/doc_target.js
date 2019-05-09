@@ -60,6 +60,28 @@
  *   method is POST, PUT, or PATCH. It is an error to set body on a job with an
  *   incompatible HttpMethod.
  *
+ * @property {Object} oauthToken
+ *   If specified, an
+ *   [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
+ *   will be generated and attached as an `Authorization` header in the HTTP
+ *   request.
+ *
+ *   This type of authorization should be used when sending requests to a GCP
+ *   endpoint.
+ *
+ *   This object should have the same structure as [OAuthToken]{@link google.cloud.scheduler.v1.OAuthToken}
+ *
+ * @property {Object} oidcToken
+ *   If specified, an
+ *   [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
+ *   token will be generated and attached as an `Authorization` header in the
+ *   HTTP request.
+ *
+ *   This type of authorization should be used when sending requests to third
+ *   party endpoints or Cloud Run.
+ *
+ *   This object should have the same structure as [OidcToken]{@link google.cloud.scheduler.v1.OidcToken}
+ *
  * @typedef HttpTarget
  * @memberof google.cloud.scheduler.v1
  * @see [google.cloud.scheduler.v1.HttpTarget definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1/target.proto}
@@ -287,6 +309,56 @@ const PubsubTarget = {
  * @see [google.cloud.scheduler.v1.AppEngineRouting definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1/target.proto}
  */
 const AppEngineRouting = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Contains information needed for generating an
+ * [OAuth token](https://developers.google.com/identity/protocols/OAuth2).
+ * This type of authorization should be used when sending requests to a GCP
+ * endpoint.
+ *
+ * @property {string} serviceAccountEmail
+ *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+ *   to be used for generating OAuth token.
+ *   The service account must be within the same project as the job. The caller
+ *   must have iam.serviceAccounts.actAs permission for the service account.
+ *
+ * @property {string} scope
+ *   OAuth scope to be used for generating OAuth access token.
+ *   If not specified, "https://www.googleapis.com/auth/cloud-platform"
+ *   will be used.
+ *
+ * @typedef OAuthToken
+ * @memberof google.cloud.scheduler.v1
+ * @see [google.cloud.scheduler.v1.OAuthToken definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1/target.proto}
+ */
+const OAuthToken = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Contains information needed for generating an
+ * [OpenID Connect
+ * token](https://developers.google.com/identity/protocols/OpenIDConnect). This
+ * type of authorization should be used when sending requests to third party
+ * endpoints or Cloud Run.
+ *
+ * @property {string} serviceAccountEmail
+ *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+ *   to be used for generating OIDC token.
+ *   The service account must be within the same project as the job. The caller
+ *   must have iam.serviceAccounts.actAs permission for the service account.
+ *
+ * @property {string} audience
+ *   Audience to be used when generating OIDC token. If not specified, the URI
+ *   specified in target will be used.
+ *
+ * @typedef OidcToken
+ * @memberof google.cloud.scheduler.v1
+ * @see [google.cloud.scheduler.v1.OidcToken definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/scheduler/v1/target.proto}
+ */
+const OidcToken = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

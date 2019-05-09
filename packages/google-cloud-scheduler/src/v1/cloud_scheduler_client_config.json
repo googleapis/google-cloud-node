@@ -3,7 +3,6 @@
     "google.cloud.scheduler.v1.CloudScheduler": {
       "retry_codes": {
         "idempotent": [
-          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
