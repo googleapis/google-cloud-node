@@ -3,6 +3,7 @@
     "google.cloud.tasks.v2beta3.CloudTasks": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
