@@ -76,24 +76,29 @@ function extractRemoteAddressFromRequest(req: hapi.Request) {
 export function hapiRequestInformationExtractor(req?: hapi.Request) {
   const returnObject = new RequestInformationContainer();
 
-  if (!is.object(req) || !is.object(req!.headers) || is.function(req) ||
-      is.array(req)) {
-        return returnObject;
-      }
+  if (
+    !is.object(req) ||
+    !is.object(req!.headers) ||
+    is.function(req) ||
+    is.array(req)
+  ) {
+    return returnObject;
+  }
 
-      let urlString: string;
-      if (is.string(req!.url)) {
-        urlString = req!.url as {} as string;
-      } else {
-        urlString = req!.url.pathname;
-      }
+  let urlString: string;
+  if (is.string(req!.url)) {
+    urlString = (req!.url as {}) as string;
+  } else {
+    urlString = req!.url.pathname;
+  }
 
-      returnObject.setMethod(req!.method)
-          .setUrl(urlString)
-          .setUserAgent(req!.headers['user-agent'])
-          .setReferrer(req!.headers.referrer)
-          .setStatusCode(attemptToExtractStatusCode(req!))
-          .setRemoteAddress(extractRemoteAddressFromRequest(req!));
+  returnObject
+    .setMethod(req!.method)
+    .setUrl(urlString)
+    .setUserAgent(req!.headers['user-agent'])
+    .setReferrer(req!.headers.referrer)
+    .setStatusCode(attemptToExtractStatusCode(req!))
+    .setRemoteAddress(extractRemoteAddressFromRequest(req!));
 
-      return returnObject;
+  return returnObject;
 }

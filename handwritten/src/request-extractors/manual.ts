@@ -48,32 +48,33 @@ export interface Request {
 export function manualRequestInformationExtractor(req: Request) {
   const returnObject = new RequestInformationContainer();
 
-  if (!is.object(req) || is.array(req) || is.function(req))
-    { return returnObject; }
-
-    if (has(req, 'method')) {
-      returnObject.setMethod(req.method!);
-    }
-
-    if (has(req, 'url')) {
-      returnObject.setUrl(req.url!);
-    }
-
-    if (has(req, 'userAgent')) {
-      returnObject.setUserAgent(req.userAgent);
-    }
-
-    if (has(req, 'referrer')) {
-      returnObject.setReferrer(req.referrer);
-    }
-
-    if (has(req, 'statusCode')) {
-      returnObject.setStatusCode(req.statusCode!);
-    }
-
-    if (has(req, 'remoteAddress')) {
-      returnObject.setRemoteAddress(req.remoteAddress);
-    }
-
+  if (!is.object(req) || is.array(req) || is.function(req)) {
     return returnObject;
+  }
+
+  if (has(req, 'method')) {
+    returnObject.setMethod(req.method!);
+  }
+
+  if (has(req, 'url')) {
+    returnObject.setUrl(req.url!);
+  }
+
+  if (has(req, 'userAgent')) {
+    returnObject.setUserAgent(req.userAgent);
+  }
+
+  if (has(req, 'referrer')) {
+    returnObject.setReferrer(req.referrer);
+  }
+
+  if (has(req, 'statusCode')) {
+    returnObject.setStatusCode(req.statusCode!);
+  }
+
+  if (has(req, 'remoteAddress')) {
+    returnObject.setRemoteAddress(req.remoteAddress);
+  }
+
+  return returnObject;
 }

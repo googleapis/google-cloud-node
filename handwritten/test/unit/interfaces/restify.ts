@@ -25,7 +25,7 @@ import {handlerSetup as restifyInterface} from '../../../src/interfaces/restify'
 // node v0.12 compatibility
 if (!EventEmitter.prototype.listenerCount) {
   EventEmitter.prototype.listenerCount = function(this, eventName) {
-    // eslint-disable-next-line node/no-deprecated-api
+    // tslint:disable-next-line deprecation
     return EventEmitter.listenerCount(this, eventName);
   };
 }
@@ -40,15 +40,19 @@ describe('restifyInterface', () => {
     it('Should attach one listener after instantiation', () => {
       const ee = new EventEmitter();
       assert.strictEqual(
-          ee.listenerCount(UNCAUGHT_EVENT), 0,
-          'Listeners on event should be zero');
+        ee.listenerCount(UNCAUGHT_EVENT),
+        0,
+        'Listeners on event should be zero'
+      );
       // return the bound function which the user will actually interface with
       const errorHandlerInstance = restifyInterface(null!, null!);
       // execute the handler the user will use with the stubbed server instance
       errorHandlerInstance(ee as restify.Server);
       assert.strictEqual(
-          ee.listenerCount(UNCAUGHT_EVENT), 1,
-          'Listeners on event should now be one');
+        ee.listenerCount(UNCAUGHT_EVENT),
+        1,
+        'Listeners on event should now be one'
+      );
     });
   });
   describe('Request handler lifecycle events', () => {
@@ -66,14 +70,17 @@ describe('restifyInterface', () => {
       ee.removeAllListeners();
       const req = new EventEmitter();
       const res = new EventEmitter();
-      (res as {} as {statusCode: number}).statusCode = 200;
+      ((res as {}) as {statusCode: number}).statusCode = 200;
       it('Should have 0 listeners on the finish event', () => {
         assert.strictEqual(res.listenerCount(FINISH), 0);
       });
       it('Should not throw while handling the req/res objects', () => {
         assert.doesNotThrow(() => {
           requestHandlerInstance(
-              req as restify.Request, res as restify.Response, noOp);
+            req as restify.Request,
+            res as restify.Response,
+            noOp
+          );
         });
       });
       it('Should have 1 listener', () => {
@@ -92,7 +99,7 @@ describe('restifyInterface', () => {
           assert(true, 'sendError should be called');
         },
       };
-      const config = {
+      const config = ({
         getServiceContext() {
           assert(true, 'getServiceContext should be called');
           return {
@@ -106,20 +113,25 @@ describe('restifyInterface', () => {
         getVersion() {
           return '1';
         },
-      } as {} as Configuration;
-      const errorHandlerInstance =
-          restifyInterface(client as {} as RequestHandler, config);
+      } as {}) as Configuration;
+      const errorHandlerInstance = restifyInterface(
+        (client as {}) as RequestHandler,
+        config
+      );
       const requestHandlerInstance = errorHandlerInstance(ee as restify.Server);
       const req = new EventEmitter();
       const res = new EventEmitter();
-      (res as {} as {statusCode: number}).statusCode = 500;
+      ((res as {}) as {statusCode: number}).statusCode = 500;
       it('Should have 0 Listeners on the finish event', () => {
         assert.strictEqual(res.listenerCount(FINISH), 0);
       });
       it('Should not throw on instantiation', () => {
         assert.doesNotThrow(() => {
           requestHandlerInstance(
-              req as restify.Request, res as restify.Response, noOp);
+            req as restify.Request,
+            res as restify.Response,
+            noOp
+          );
         });
       });
       it('Should have 1 listener on the finish event', () => {

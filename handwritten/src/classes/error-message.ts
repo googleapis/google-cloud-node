@@ -22,12 +22,15 @@ import {RequestInformationContainer} from './request-information-container';
 
 export interface Context {
   httpRequest: {
-    method: string; url: string; userAgent: string; referrer: string;
+    method: string;
+    url: string;
+    userAgent: string;
+    referrer: string;
     responseStatusCode: number;
     remoteIp: string;
   };
   user: string;
-  reportLocation: {filePath: string; lineNumber: number; functionName: string;};
+  reportLocation: {filePath: string; lineNumber: number; functionName: string};
 }
 
 export class ErrorMessage {
@@ -172,8 +175,9 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setUserAgent(userAgent?: string) {
-    this.context.httpRequest.userAgent =
-        (is.string(userAgent) ? userAgent : '')!;
+    this.context.httpRequest.userAgent = (is.string(userAgent)
+      ? userAgent
+      : '')!;
 
     return this;
   }
@@ -197,8 +201,9 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setResponseStatusCode(responseStatusCode?: number) {
-    this.context.httpRequest.responseStatusCode =
-        (is.number(responseStatusCode) ? responseStatusCode : 0)!;
+    this.context.httpRequest.responseStatusCode = (is.number(responseStatusCode)
+      ? responseStatusCode
+      : 0)!;
 
     return this;
   }
@@ -234,8 +239,9 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setFilePath(filePath?: string) {
-    this.context.reportLocation.filePath =
-        (is.string(filePath) ? filePath : '')!;
+    this.context.reportLocation.filePath = (is.string(filePath)
+      ? filePath
+      : '')!;
 
     return this;
   }
@@ -247,8 +253,9 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setLineNumber(lineNumber?: number) {
-    this.context.reportLocation.lineNumber =
-        (is.number(lineNumber) ? lineNumber : 0)!;
+    this.context.reportLocation.lineNumber = (is.number(lineNumber)
+      ? lineNumber
+      : 0)!;
 
     return this;
   }
@@ -260,8 +267,9 @@ export class ErrorMessage {
    * @returns {this} - returns the instance for chaining
    */
   setFunctionName(functionName?: string) {
-    this.context.reportLocation.functionName =
-        (is.string(functionName) ? functionName : '')!;
+    this.context.reportLocation.functionName = (is.string(functionName)
+      ? functionName
+      : '')!;
 
     return this;
   }
@@ -280,11 +288,11 @@ export class ErrorMessage {
     }
 
     this.setHttpMethod(requestInformation.method)
-        .setUrl(requestInformation.url)
-        .setUserAgent(requestInformation.userAgent)
-        .setReferrer(requestInformation.referrer)
-        .setResponseStatusCode(requestInformation.statusCode)
-        .setRemoteIp(requestInformation.remoteAddress);
+      .setUrl(requestInformation.url)
+      .setUserAgent(requestInformation.userAgent)
+      .setReferrer(requestInformation.referrer)
+      .setResponseStatusCode(requestInformation.statusCode)
+      .setRemoteIp(requestInformation.remoteAddress);
 
     return this;
   }

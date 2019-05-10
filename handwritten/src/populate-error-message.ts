@@ -27,7 +27,7 @@ export interface PopulatedObject {
   filePath?: string;
   lineNumber?: number;
   functionName?: string;
-  serviceContext?: {service?: string; version?: string;};
+  serviceContext?: {service?: string; version?: string};
 }
 
 /**
@@ -69,7 +69,9 @@ export function populateErrorMessage(ob: any, em: ErrorMessage) {
  * @returns {Undefined} - does not return anything
  */
 function populateFromError(
-    err: Error&PopulatedObject, errorMessage: ErrorMessage) {
+  err: Error & PopulatedObject,
+  errorMessage: ErrorMessage
+) {
   errorMessage.setMessage(err.stack!);
 
   if (has(err, 'user')) {
@@ -78,7 +80,9 @@ function populateFromError(
 
   if (has(err, 'serviceContext') && is.object(err.serviceContext)) {
     errorMessage.setServiceContext(
-        err.serviceContext!.service!, err.serviceContext!.version);
+      err.serviceContext!.service!,
+      err.serviceContext!.version
+    );
   }
 }
 
@@ -131,6 +135,8 @@ function populateFromObject(ob: PopulatedObject, errorMessage: ErrorMessage) {
 
   if (has(ob, 'serviceContext') && is.object(ob.serviceContext)) {
     errorMessage.setServiceContext(
-        ob.serviceContext!.service!, ob.serviceContext!.version);
+      ob.serviceContext!.service!,
+      ob.serviceContext!.version
+    );
   }
 }

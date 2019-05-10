@@ -35,7 +35,10 @@ describe('manualRequestInformationExtractor', () => {
         deepStrictEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
-          manualRequestInformationExtractor, ['object'], cbFn);
+        manualRequestInformationExtractor,
+        ['object'],
+        cbFn
+      );
     });
   });
   describe('Behaviour given valid input', () => {
@@ -49,50 +52,63 @@ describe('manualRequestInformationExtractor', () => {
     };
     it('Should return expected output', () => {
       deepStrictEqual(
-          manualRequestInformationExtractor(FULL_VALID_INPUT), FULL_VALID_INPUT,
-          [
-            'Given a full valid input object these values should be reflected by',
-            'the output of the request extraction',
-          ].join(' '));
+        manualRequestInformationExtractor(FULL_VALID_INPUT),
+        FULL_VALID_INPUT,
+        [
+          'Given a full valid input object these values should be reflected by',
+          'the output of the request extraction',
+        ].join(' ')
+      );
       deepStrictEqual(
-          manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'method')),
-          Object.assign({}, FULL_VALID_INPUT, {method: ''}), [
-            'Given a full valid input object sans the method property values',
-            'should be reflected by the output of the request extraction',
-          ].join(' '));
+        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'method')),
+        Object.assign({}, FULL_VALID_INPUT, {method: ''}),
+        [
+          'Given a full valid input object sans the method property values',
+          'should be reflected by the output of the request extraction',
+        ].join(' ')
+      );
       deepStrictEqual(
-          manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'url')),
-          Object.assign({}, FULL_VALID_INPUT, {url: ''}), [
-            'Given a valid input sans the url property these values should be',
-            'reflected by the output of the request extraction',
-          ].join(''));
+        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'url')),
+        Object.assign({}, FULL_VALID_INPUT, {url: ''}),
+        [
+          'Given a valid input sans the url property these values should be',
+          'reflected by the output of the request extraction',
+        ].join('')
+      );
       deepStrictEqual(
-          manualRequestInformationExtractor(
-              omit(FULL_VALID_INPUT, 'userAgent')),
-          Object.assign({}, FULL_VALID_INPUT, {userAgent: ''}), [
-            'Given a full valid input sans the userAgent property these values',
-            'should be reflected by the output of the request extraction',
-          ].join(''));
+        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'userAgent')),
+        Object.assign({}, FULL_VALID_INPUT, {userAgent: ''}),
+        [
+          'Given a full valid input sans the userAgent property these values',
+          'should be reflected by the output of the request extraction',
+        ].join('')
+      );
       deepStrictEqual(
-          manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'referrer')),
-          Object.assign({}, FULL_VALID_INPUT, {referrer: ''}), [
-            'Given a full valid input sans the referrer property these values',
-            'should be reflected by the output of the request extraction',
-          ].join(''));
+        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'referrer')),
+        Object.assign({}, FULL_VALID_INPUT, {referrer: ''}),
+        [
+          'Given a full valid input sans the referrer property these values',
+          'should be reflected by the output of the request extraction',
+        ].join('')
+      );
       deepStrictEqual(
-          manualRequestInformationExtractor(
-              omit(FULL_VALID_INPUT, 'statusCode')),
-          Object.assign({}, FULL_VALID_INPUT, {statusCode: 0}), [
-            'Given a full valid input sans the statusCode property these values',
-            'should be reflected by the output of the request extraction',
-          ].join(''));
+        manualRequestInformationExtractor(omit(FULL_VALID_INPUT, 'statusCode')),
+        Object.assign({}, FULL_VALID_INPUT, {statusCode: 0}),
+        [
+          'Given a full valid input sans the statusCode property these values',
+          'should be reflected by the output of the request extraction',
+        ].join('')
+      );
       deepStrictEqual(
-          manualRequestInformationExtractor(
-              omit(FULL_VALID_INPUT, 'remoteAddress')),
-          Object.assign({}, FULL_VALID_INPUT, {remoteAddress: ''}), [
-            'Given a valid input sans the remoteAddress property these values',
-            'should be reflected by the output of the request extraction',
-          ].join(''));
+        manualRequestInformationExtractor(
+          omit(FULL_VALID_INPUT, 'remoteAddress')
+        ),
+        Object.assign({}, FULL_VALID_INPUT, {remoteAddress: ''}),
+        [
+          'Given a valid input sans the remoteAddress property these values',
+          'should be reflected by the output of the request extraction',
+        ].join('')
+      );
     });
   });
 });

@@ -105,32 +105,39 @@ describe('hapiRequestInformationExtractor behaviour', () => {
     };
     it('Should produce the full request input', () => {
       deepStrictEqual(
-          hapiRequestInformationExtractor(
-              FULL_REQ_DERIVATION_VALUE as {} as hapi.Request),
-          FULL_REQ_EXPECTED_VALUE);
+        hapiRequestInformationExtractor(
+          (FULL_REQ_DERIVATION_VALUE as {}) as hapi.Request
+        ),
+        FULL_REQ_EXPECTED_VALUE
+      );
     });
     it('Should produce the partial request input', () => {
       deepStrictEqual(
-          hapiRequestInformationExtractor(
-              PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
-          PARTIAL_REQ_EXPECTED_VALUE);
+        hapiRequestInformationExtractor(
+          (PARTIAL_REQ_DERIVATION_VALUE as {}) as hapi.Request
+        ),
+        PARTIAL_REQ_EXPECTED_VALUE
+      );
     });
     it('Should produce the second partial request input', () => {
       deepStrictEqual(
-          hapiRequestInformationExtractor(
-              ANOTHER_PARTIAL_REQ_DERIVATION_VALUE as {} as hapi.Request),
-          ANOTHER_PARTIAL_REQ_EXPECTED_VALUE);
+        hapiRequestInformationExtractor(
+          (ANOTHER_PARTIAL_REQ_DERIVATION_VALUE as {}) as hapi.Request
+        ),
+        ANOTHER_PARTIAL_REQ_EXPECTED_VALUE
+      );
     });
     it('Should deal with hapi v16+ URL objects', () => {
       const PATH = '/foo/bar';
       const REQUEST = {
         ...FULL_REQ_DERIVATION_VALUE,
-        url: new URL(`https://www.SUPER-TEST.com${PATH}`)
+        url: new URL(`https://www.SUPER-TEST.com${PATH}`),
       };
       const EXPECTED = {...FULL_REQ_EXPECTED_VALUE, url: PATH};
       deepStrictEqual(
-          hapiRequestInformationExtractor(REQUEST as {} as hapi.Request),
-          EXPECTED);
+        hapiRequestInformationExtractor((REQUEST as {}) as hapi.Request),
+        EXPECTED
+      );
     });
   });
 });

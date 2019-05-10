@@ -39,7 +39,11 @@ import * as expressRequestInformationExtractor from '../request-extractors/expre
  * @returns {Undefined} - does not return anything
  */
 function restifyErrorHandler(
-    client: RequestHandler, config: Configuration, err: {}, em: ErrorMessage) {
+  client: RequestHandler,
+  config: Configuration,
+  err: {},
+  em: ErrorMessage
+) {
   const svc = config.getServiceContext();
   em.setServiceContext(svc.service, svc.version);
 
@@ -64,20 +68,28 @@ function restifyErrorHandler(
  * @returns {Undefined} - does not return anything
  */
 function restifyRequestFinishHandler(
-    client: RequestHandler, config: Configuration, req: restify.Request,
-    res: restify.Response) {
+  client: RequestHandler,
+  config: Configuration,
+  req: restify.Request,
+  res: restify.Response
+) {
   let em;
 
   // TODO: Address the fact that `_body` does not exist in `res`
-  if ((res as {} as {_body: {}})._body instanceof Error ||
-      (res.statusCode > 309 && res.statusCode < 512)) {
+  if (
+    ((res as {}) as {_body: {}})._body instanceof Error ||
+    (res.statusCode > 309 && res.statusCode < 512)
+  ) {
     em = new ErrorMessage().consumeRequestInformation(
-        // TODO: Address the type conflict with `req` and `res` and the types
-        //       expected for `expressRequestInformationExtractor`
-        expressRequestInformationExtractor.expressRequestInformationExtractor(
-            req as {} as express.Request, res as {} as express.Response));
+      // TODO: Address the type conflict with `req` and `res` and the types
+      //       expected for `expressRequestInformationExtractor`
+      expressRequestInformationExtractor.expressRequestInformationExtractor(
+        (req as {}) as express.Request,
+        (res as {}) as express.Response
+      )
+    );
 
-    restifyErrorHandler(client, config, (res as {} as {_body: {}})._body, em);
+    restifyErrorHandler(client, config, ((res as {}) as {_body: {}})._body, em);
   }
 }
 
@@ -100,22 +112,31 @@ function restifyRequestFinishHandler(
  * @returns {Any} - the result of the next function
  */
 function restifyRequestHandler(
-    client: RequestHandler, config: Configuration, req: restify.Request,
-    res: restify.Response, next: Function) {
+  client: RequestHandler,
+  config: Configuration,
+  req: restify.Request,
+  res: restify.Response,
+  next: Function
+) {
   // TODO: Address the fact that a cast is needed to use `listener`
   let listener = {};
 
-  if (is.object(res) && is.function(res.on) && is.function(res.removeListener)) {
-      listener = () => {
-        restifyRequestFinishHandler(client, config, req, res);
-        res.removeListener(
-            'finish', listener as {} as (...args: Array<{}>) => void);
-      };
+  if (
+    is.object(res) &&
+    is.function(res.on) &&
+    is.function(res.removeListener)
+  ) {
+    listener = () => {
+      restifyRequestFinishHandler(client, config, req, res);
+      res.removeListener('finish', (listener as {}) as (
+        ...args: Array<{}>
+      ) => void);
+    };
 
-      res.on('finish', listener as {} as (...args: Array<{}>) => void);
-    }
+    res.on('finish', (listener as {}) as (...args: Array<{}>) => void);
+  }
 
-    return next();
+  return next();
 }
 
 /**
@@ -136,16 +157,22 @@ function restifyRequestHandler(
  * @returns {Function} - the actual request error handler
  */
 function serverErrorHandler(
-    client: RequestHandler, config: Configuration, server: restify.Server) {
-    server.on('uncaughtException', (req, res, reqConfig, err) => {
-      const em = new ErrorMessage().consumeRequestInformation(
-          expressRequestInformationExtractor.expressRequestInformationExtractor(
-              req, res));
+  client: RequestHandler,
+  config: Configuration,
+  server: restify.Server
+) {
+  server.on('uncaughtException', (req, res, reqConfig, err) => {
+    const em = new ErrorMessage().consumeRequestInformation(
+      expressRequestInformationExtractor.expressRequestInformationExtractor(
+        req,
+        res
+      )
+    );
 
-      restifyErrorHandler(client, config, err, em);
-    });
+    restifyErrorHandler(client, config, err, em);
+  });
 
-    return restifyRequestHandler.bind(null, client, config);
+  return restifyRequestHandler.bind(null, client, config);
 }
 
 /**
@@ -160,5 +187,5 @@ function serverErrorHandler(
  *  restify middleware stack
  */
 export function handlerSetup(client: RequestHandler, config: Configuration) {
-    return serverErrorHandler.bind(null, client, config);
+  return serverErrorHandler.bind(null, client, config);
 }

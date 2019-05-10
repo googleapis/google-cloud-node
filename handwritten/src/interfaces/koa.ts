@@ -43,16 +43,19 @@ export function koaErrorHandler(client: RequestHandler, config: Configuration) {
    * @returns {Undefined} does not return anything
    */
   return function*(
-      this: {request: Request; response: Response;}, next: Function) {
+    this: {request: Request; response: Response},
+    next: Function
+  ) {
     const svc = config.getServiceContext();
 
     try {
       yield next();
     } catch (err) {
       const em = new ErrorMessage()
-                     .consumeRequestInformation(koaRequestInformationExtractor(
-                         this.request, this.response))
-                     .setServiceContext(svc.service, svc.version);
+        .consumeRequestInformation(
+          koaRequestInformationExtractor(this.request, this.response)
+        )
+        .setServiceContext(svc.service, svc.version);
 
       populateErrorMessage(err, em);
 

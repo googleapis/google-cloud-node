@@ -39,17 +39,16 @@ import * as hapi from 'hapi';
  */
 function hapiErrorHandler(err: {}, req?: hapi.Request, config?: Configuration) {
   let service = '';
-  let version: string|undefined = '';
+  let version: string | undefined = '';
 
   if (is.object(config)) {
     service = config!.getServiceContext().service;
     version = config!.getServiceContext().version;
   }
 
-  const em =
-      new ErrorMessage()
-          .consumeRequestInformation(hapiRequestInformationExtractor(req))
-          .setServiceContext(service, version);
+  const em = new ErrorMessage()
+    .consumeRequestInformation(hapiRequestInformationExtractor(req))
+    .setServiceContext(service, version);
 
   populateErrorMessage(err, em);
 
@@ -79,70 +78,81 @@ export function makeHapiPlugin(client: RequestHandler, config: Configuration) {
    * @returns {Undefined} - returns the execution of the next callback
    */
   function hapiRegisterFunction(
-      server: any,  // tslint:disable-line:no-any
-      options: {}, next?: Function) {
+    server: any, // tslint:disable-line:no-any
+    options: {},
+    next?: Function
+  ) {
     if (server) {
       if (server.events && server.events.on) {
         // Hapi 17 is being used
         server.events.on(
-            'log', (event: {error?: {}; channel: string;}, tags: {}) => {
-              if (event.error && event.channel === 'app') {
-                client.sendError(hapiErrorHandler(event.error));
-              }
-            });
+          'log',
+          (event: {error?: {}; channel: string}, tags: {}) => {
+            if (event.error && event.channel === 'app') {
+              client.sendError(hapiErrorHandler(event.error));
+            }
+          }
+        );
 
         server.events.on(
-            'request',
-            (request: hapi.Request, event: {error?: {}; channel: string;},
-             tags: {}) => {
-              if (event.error && event.channel === 'error') {
-                client.sendError(hapiErrorHandler(event.error, request));
-              }
-            });
-      } else {
-        if (is.function(server.on))
-          {
-            server.on('request-error', (req: hapi.Request, err: {}) => {
-              client.sendError(hapiErrorHandler(err, req, config));
-            });
-          }
-
-        if (is.function(server.ext))
-            {
-          server.ext(
-              'onPreResponse',
-              (request: hapi.Request,
-               reply: any) => {  // tslint:disable-line:no-any
-                if (is.object(request) && request.response &&
-                    (request.response as boom).isBoom) {
-                  // Cast to {} is necessary, as@types/hapi@16 incorrectly types
-                  // response as 'Response | null' instead of 'Response | Boom |
-                  // null'.
-                  const boom = request.response as {} as Error;
-                  const em = hapiErrorHandler(
-                      new Error(boom.message), request, config);
-                  client.sendError(em);
-                }
-
-                if (reply && is.function(reply.continue))
-                  { reply.continue(); }
-              })
-                  ;
-        }
+          'request',
+          (
+            request: hapi.Request,
+            event: {error?: {}; channel: string},
+            tags: {}
+          ) => {
+            if (event.error && event.channel === 'error') {
+              client.sendError(hapiErrorHandler(event.error, request));
             }
+          }
+        );
+      } else {
+        if (is.function(server.on)) {
+          server.on('request-error', (req: hapi.Request, err: {}) => {
+            client.sendError(hapiErrorHandler(err, req, config));
+          });
+        }
+
+        if (is.function(server.ext)) {
+          // tslint:disable-next-line no-any
+          server.ext('onPreResponse', (request: hapi.Request, reply: any) => {
+            if (
+              is.object(request) &&
+              request.response &&
+              (request.response as boom).isBoom
+            ) {
+              // Cast to {} is necessary, as@types/hapi@16 incorrectly types
+              // response as 'Response | null' instead of 'Response | Boom |
+              // null'.
+              const boom = (request.response as {}) as Error;
+              const em = hapiErrorHandler(
+                new Error(boom.message),
+                request,
+                config
+              );
+              client.sendError(em);
+            }
+
+            if (reply && is.function(reply.continue)) {
+              reply.continue();
+            }
+          });
+        }
+      }
     }
 
-    if (is.function(next))
-            { return next!(); }
+    if (is.function(next)) {
+      return next!();
+    }
   }
 
   const hapiPlugin = {
     register: hapiRegisterFunction,
     name: packageJson.name,
-    version: packageJson.version
+    version: packageJson.version,
   };
 
-  (hapiPlugin.register as {} as {attributes: {}}).attributes = {
+  ((hapiPlugin.register as {}) as {attributes: {}}).attributes = {
     name: packageJson.name,
     version: packageJson.version,
   };
