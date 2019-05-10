@@ -42,18 +42,20 @@ app.post('/testErrorHandling', (req, res, next) => {
 
 app.get('/customError', (req, res, next) => {
   errorHandler.report(
-      'Error on Express Custom Error GET Route', (err: Error|null) => {
-        if (err) {
-          log(WARNING_HEADER);
-          log('Error in sending custom get error to api');
-          log(err);
-          log(EXCLAMATION_LN);
-        } else {
-          log(EXCLAMATION_LN);
-          log('Successfully sent custom get error to api');
-          log(EXCLAMATION_LN);
-        }
-      });
+    'Error on Express Custom Error GET Route',
+    (err: Error | null) => {
+      if (err) {
+        log(WARNING_HEADER);
+        log('Error in sending custom get error to api');
+        log(err);
+        log(EXCLAMATION_LN);
+      } else {
+        log(EXCLAMATION_LN);
+        log('Successfully sent custom get error to api');
+        log(EXCLAMATION_LN);
+      }
+    }
+  );
 
   res.send('Success');
   res.end();
@@ -75,26 +77,29 @@ function throwUncaughtError() {
 function reportManualError() {
   log('Reporting a manual error..');
   errorHandler.report(
-      new Error('This is a manually reported error'), null, null,
-      (err: Error|null) => {
-        if (err) {
-          log(WARNING_HEADER);
-          log('Got an error in sending error information to the API');
-          log(err);
-          log(EXCLAMATION_LN);
-        } else {
-          log(EXCLAMATION_LN);
-          log('Successfully sent error information to the API');
-          log(EXCLAMATION_LN);
-        }
+    new Error('This is a manually reported error'),
+    null,
+    null,
+    (err: Error | null) => {
+      if (err) {
+        log(WARNING_HEADER);
+        log('Got an error in sending error information to the API');
+        log(err);
+        log(EXCLAMATION_LN);
+      } else {
+        log(EXCLAMATION_LN);
+        log('Successfully sent error information to the API');
+        log(EXCLAMATION_LN);
+      }
 
-        if (process.env.THROW_ON_STARTUP) {
-          throwUncaughtError();
-        }
-      });
+      if (process.env.THROW_ON_STARTUP) {
+        throwUncaughtError();
+      }
+    }
+  );
 }
 log('reporting a manual error first');
-errorHandler.report(new Error('This is a test'), (err: Error|null) => {
+errorHandler.report(new Error('This is a test'), (err: Error | null) => {
   log('reported first manual error');
   if (err) {
     log('Error was unable to be reported', err);

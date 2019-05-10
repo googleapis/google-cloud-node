@@ -53,18 +53,22 @@ export class ErrorsApiTransport extends AuthClient {
   }
 
   async getAllGroups(
-      service: string, version: string, pageSize: number,
-      pageToken?: string): Promise<GroupStatesResponse> {
+    service: string,
+    version: string,
+    pageSize: number,
+    pageToken?: string
+  ): Promise<GroupStatesResponse> {
     const id = await this.getProjectId();
     const options = {
       uri: [
-        API, id,
-        'groupStats?' + ONE_HOUR_API +
-            `&serviceFilter.service=${service}&serviceFilter.version=${
-                version}&pageSize=${pageSize}&order=LAST_SEEN_DESC` +
-            (pageToken ? `&pageToken=${pageToken}` : '')
+        API,
+        id,
+        'groupStats?' +
+          ONE_HOUR_API +
+          `&serviceFilter.service=${service}&serviceFilter.version=${version}&pageSize=${pageSize}&order=LAST_SEEN_DESC` +
+          (pageToken ? `&pageToken=${pageToken}` : ''),
       ].join('/'),
-      method: 'GET'
+      method: 'GET',
     };
     return new Promise((resolve, reject) => {
       this.request(options, (err, body, res) => {

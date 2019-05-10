@@ -36,7 +36,10 @@ describe('koaRequestInformationExtractor', () => {
         deepStrictEqual(value, DEFAULT_RETURN_VALUE);
       };
       f.fuzzFunctionForTypes(
-          koaRequestInformationExtractor, ['object', 'object'], cbFn);
+        koaRequestInformationExtractor,
+        ['object', 'object'],
+        cbFn
+      );
     });
   });
   describe('Behaviour under valid input', () => {
@@ -62,10 +65,12 @@ describe('koaRequestInformationExtractor', () => {
         statusCode: 200,
       };
       deepStrictEqual(
-          koaRequestInformationExtractor(
-              FULL_REQ_DERIVATION_VALUE as Request,
-              FULL_RES_DERIVATION_VALUE as Response),
-          FULL_REQ_EXPECTED_VALUE);
+        koaRequestInformationExtractor(
+          FULL_REQ_DERIVATION_VALUE as Request,
+          FULL_RES_DERIVATION_VALUE as Response
+        ),
+        FULL_REQ_EXPECTED_VALUE
+      );
     });
   });
 });

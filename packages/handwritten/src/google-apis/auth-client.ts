@@ -66,7 +66,7 @@ export class RequestHandler extends Service {
    *  null in case no api key is given
    * @static
    */
-  static manufactureQueryString(key: string|null) {
+  static manufactureQueryString(key: string | null) {
     if (is.string(key)) {
       return {key};
     }
@@ -98,44 +98,56 @@ export class RequestHandler extends Service {
       customEndpoint: !tryAuthenticate,
     });
     super(
-        {
-          packageJson: pkg,
-          baseUrl: API,
-          scopes: SCOPES,
-          projectIdRequired: true,
-        },
-        serviceOptions);
+      {
+        packageJson: pkg,
+        baseUrl: API,
+        scopes: SCOPES,
+        projectIdRequired: true,
+      },
+      serviceOptions
+    );
     this._config = config;
     this._logger = logger;
 
     const that = this;
     if (tryAuthenticate) {
-      this.authClient.getAccessToken().then(() => {}, err => {
-        that._logger.error([
-          'Unable to find credential information on instance. This library',
-          'will be unable to communicate with the Stackdriver API to save',
-          'errors.  Message: ' + err.message,
-        ].join(' '));
-      });
+      this.authClient.getAccessToken().then(
+        () => {},
+        err => {
+          that._logger.error(
+            [
+              'Unable to find credential information on instance. This library',
+              'will be unable to communicate with the Stackdriver API to save',
+              'errors.  Message: ' + err.message,
+            ].join(' ')
+          );
+        }
+      );
     } else {
       this.request(
-          {
-            uri: 'events:report',
-            qs: RequestHandler.manufactureQueryString(this._config.getKey()),
-            method: 'POST',
-            json: {},
-          },
-          (err, body, response) => {
-            if (err && err.message !== 'Message cannot be empty.' && response &&
-                response.statusCode === 400) {
-              this._logger.error(
-                  [
-                    'Encountered an error while attempting to validate the provided',
-                    'API key',
-                  ].join(' '),
-                  err);
-            }
-          });
+        {
+          uri: 'events:report',
+          qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+          method: 'POST',
+          json: {},
+        },
+        (err, body, response) => {
+          if (
+            err &&
+            err.message !== 'Message cannot be empty.' &&
+            response &&
+            response.statusCode === 400
+          ) {
+            this._logger.error(
+              [
+                'Encountered an error while attempting to validate the provided',
+                'API key',
+              ].join(' '),
+              err
+            );
+          }
+        }
+      );
       that._logger.info('API key provided; skipping OAuth2 token request.');
     }
   }
@@ -152,64 +164,74 @@ export class RequestHandler extends Service {
    * @instance
    */
   sendError(
-      errorMessage: ErrorMessage,
-      userCb?:
-          (err: Error|null, response: http.ServerResponse|null,
-           body: {}) => void) {
-      const cb: Function = (is.function(userCb) ? userCb : RequestHandler.noOp)!;
-      if (!this._config.isReportingEnabled()) {
-        cb(null, null, {});
-        return;
-      }
-      if (this._config.getShouldReportErrorsToAPI()) {
-        this.request(
-            {
-              uri: 'events:report',
-              qs: RequestHandler.manufactureQueryString(this._config.getKey()),
-              method: 'POST',
-              json: errorMessage,
-            },
-            (err, body, response) => {
-              if (err) {
-                this._logger.error(
-                    [
-                      'Encountered an error while attempting to transmit an error to',
-                      'the Stackdriver Error Reporting API.',
-                    ].join(' '),
-                    err);
-              }
-              cb(err, response, body);
-            });
-      } else {
-        cb(new Error([
-             'The stackdriver error reporting client is configured to report errors',
-             'if and only if the NODE_ENV environment variable is set to "production".',
-             'Errors will not be reported.  To have errors always reported, regardless of the',
-             'value of NODE_ENV, set the reportMode configuration option to "always".'
-           ].join(' ')),
-           null, null);
-      }
+    errorMessage: ErrorMessage,
+    userCb?: (
+      err: Error | null,
+      response: http.ServerResponse | null,
+      body: {}
+    ) => void
+  ) {
+    const cb: Function = (is.function(userCb) ? userCb : RequestHandler.noOp)!;
+    if (!this._config.isReportingEnabled()) {
+      cb(null, null, {});
+      return;
+    }
+    if (this._config.getShouldReportErrorsToAPI()) {
+      this.request(
+        {
+          uri: 'events:report',
+          qs: RequestHandler.manufactureQueryString(this._config.getKey()),
+          method: 'POST',
+          json: errorMessage,
+        },
+        (err, body, response) => {
+          if (err) {
+            this._logger.error(
+              [
+                'Encountered an error while attempting to transmit an error to',
+                'the Stackdriver Error Reporting API.',
+              ].join(' '),
+              err
+            );
+          }
+          cb(err, response, body);
+        }
+      );
+    } else {
+      cb(
+        new Error(
+          [
+            'The stackdriver error reporting client is configured to report errors',
+            'if and only if the NODE_ENV environment variable is set to "production".',
+            'Errors will not be reported.  To have errors always reported, regardless of the',
+            'value of NODE_ENV, set the reportMode configuration option to "always".',
+          ].join(' ')
+        ),
+        null,
+        null
+      );
     }
   }
+}
 
-  /**
-   * The requestCallback callback function is called on completion of an API
-   * request whether that completion is success or failure. The request can
-   * either fail by reaching the max number of retries or encountering an
-   * unrecoverable response from the API. The first parameter to any invocation
-   * of the requestCallback function type will be the applicable error if one
-   * was generated during the request-response transaction. If an error was not
-   * generated during the transaction then the first parameter will be of type
-   * Null. The second parameter is the entire response from the transaction,
-   * this is an object that as well as containing the body of the response from
-   * the transaction will also include transaction information. The third
-   * parameter is the body of the response, this can be an object, a string or
-   * any type given by the response object.
-   * @callback RequestHandler~requestCallback cb - The function that will be
-   *  invoked once the transaction has completed
-   * @param {Error|Null} err - The error, if applicable, generated during the
-   *  transaction
-   * @param {Object|Undefined|Null} response - The response, if applicable,
-   *  received during the transaction
-   * @param {Any} body - The response body if applicable
-   */
+/**
+ * The requestCallback callback function is called on completion of an API
+ * request whether that completion is success or failure. The request can
+ * either fail by reaching the max number of retries or encountering an
+ * unrecoverable response from the API. The first parameter to any invocation
+ * of the requestCallback function type will be the applicable error if one
+ * was generated during the request-response transaction. If an error was not
+ * generated during the transaction then the first parameter will be of type
+ * Null. The second parameter is the entire response from the transaction,
+ * this is an object that as well as containing the body of the response from
+ * the transaction will also include transaction information. The third
+ * parameter is the body of the response, this can be an object, a string or
+ * any type given by the response object.
+ * @callback RequestHandler~requestCallback cb - The function that will be
+ *  invoked once the transaction has completed
+ * @param {Error|Null} err - The error, if applicable, generated during the
+ *  transaction
+ * @param {Object|Undefined|Null} response - The response, if applicable,
+ *  received during the transaction
+ * @param {Any} body - The response body if applicable
+ */

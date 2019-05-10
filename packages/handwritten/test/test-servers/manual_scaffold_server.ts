@@ -16,8 +16,13 @@
 
 import {ErrorReporting} from '../../src/index';
 const errors = new ErrorReporting();
-(errors.report as Function)('Sample test string', (err: Error|null) => {
+(errors.report as Function)('Sample test string', (err: Error | null) => {
   // eslint-disable-next-line no-console
   console.log(
-      'Callback from report:\n', '\tError: ', err, '\n', '\tResponse Body:');
+    'Callback from report:\n',
+    '\tError: ',
+    err,
+    '\n',
+    '\tResponse Body:'
+  );
 });
