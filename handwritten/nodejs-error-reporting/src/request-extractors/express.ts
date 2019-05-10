@@ -51,19 +51,22 @@ function extractRemoteAddressFromRequest(req: express.Request) {
  *  information in a standardized format
  */
 export function expressRequestInformationExtractor(
-    req: express.Request, res: express.Response) {
+  req: express.Request,
+  res: express.Response
+) {
   const returnObject = new RequestInformationContainer();
 
   if (!is.object(req) || !is.function(req.header) || !is.object(res)) {
-      return returnObject;
-    }
-
-    returnObject.setMethod(req.method)
-        .setUrl(req.url)
-        .setUserAgent(req.header('user-agent'))
-        .setReferrer(req.header('referrer'))
-        .setStatusCode(res.statusCode)
-        .setRemoteAddress(extractRemoteAddressFromRequest(req));
-
     return returnObject;
+  }
+
+  returnObject
+    .setMethod(req.method)
+    .setUrl(req.url)
+    .setUserAgent(req.header('user-agent'))
+    .setReferrer(req.header('referrer'))
+    .setStatusCode(res.statusCode)
+    .setRemoteAddress(extractRemoteAddressFromRequest(req));
+
+  return returnObject;
 }

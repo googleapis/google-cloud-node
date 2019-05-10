@@ -112,7 +112,7 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| Examples | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/snippets.js) |
+| Examples | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/quickstart.js) |
 
 ## Configuration
 

@@ -37,7 +37,10 @@ describe('Behaviour under varying input', () => {
       deepStrictEqual(value, DEFAULT_RETURN_VALUE);
     };
     f.fuzzFunctionForTypes(
-        expressRequestInformationExtractor, ['object', 'object'], cbFn);
+      expressRequestInformationExtractor,
+      ['object', 'object'],
+      cbFn
+    );
   });
   it('Should return valid request object given valid input', () => {
     const FULL_REQ_DERIVATION_VALUE = {
@@ -112,31 +115,46 @@ describe('Behaviour under varying input', () => {
       return lrn;
     };
     let tmpOutput = expressRequestInformationExtractor(
-        headerFactory(FULL_REQ_DERIVATION_VALUE),
-        FULL_RES_DERIVATION_VALUE as Response);
-    deepStrictEqual(tmpOutput, FULL_REQ_EXPECTED_VALUE, [
-      'Given a valid object input for the request parameter and an',
-      '\'x-forwarded-for\' parameter the request extractor should return',
-      'the expected full req output and the \'x-forwarded-for\' value',
-      'as the value for the \'remoteAddress\' property.',
-    ].join(' '));
+      headerFactory(FULL_REQ_DERIVATION_VALUE),
+      FULL_RES_DERIVATION_VALUE as Response
+    );
+    deepStrictEqual(
+      tmpOutput,
+      FULL_REQ_EXPECTED_VALUE,
+      [
+        'Given a valid object input for the request parameter and an',
+        "'x-forwarded-for' parameter the request extractor should return",
+        "the expected full req output and the 'x-forwarded-for' value",
+        "as the value for the 'remoteAddress' property.",
+      ].join(' ')
+    );
     tmpOutput = expressRequestInformationExtractor(
-        headerFactory(PARTIAL_REQ_DERIVATION_VALUE),
-        PARTIAL_RES_DERIVATION_VALUE as Response);
-    deepStrictEqual(tmpOutput, PARTIAL_REQ_EXPECTED_VALUE, [
-      'Given a valid object input for the request parameter but sans an',
-      '\'x-forwarded-for\' parameter the request extractor should return',
-      'the expected parital req output and the remoteAddress value',
-      'as the value for the \'remoteAddress\' property.',
-    ].join(' '));
+      headerFactory(PARTIAL_REQ_DERIVATION_VALUE),
+      PARTIAL_RES_DERIVATION_VALUE as Response
+    );
+    deepStrictEqual(
+      tmpOutput,
+      PARTIAL_REQ_EXPECTED_VALUE,
+      [
+        'Given a valid object input for the request parameter but sans an',
+        "'x-forwarded-for' parameter the request extractor should return",
+        'the expected parital req output and the remoteAddress value',
+        "as the value for the 'remoteAddress' property.",
+      ].join(' ')
+    );
     tmpOutput = expressRequestInformationExtractor(
-        headerFactory(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
-        ANOTHER_PARTIAL_RES_DERIVATION_VALUE as Response);
-    deepStrictEqual(tmpOutput, ANOTHER_PARTIAL_REQ_EXPECTED_VALUE, [
-      'Given a valid object input for the request parameter but sans an',
-      '\'x-forwarded-for\' parameter or a remoteAddress parameter',
-      'the request extractor should return an empty string',
-      'as the value for the \'remoteAddress\' property.',
-    ].join(' '));
+      headerFactory(ANOTHER_PARTIAL_REQ_DERIVATION_VALUE),
+      ANOTHER_PARTIAL_RES_DERIVATION_VALUE as Response
+    );
+    deepStrictEqual(
+      tmpOutput,
+      ANOTHER_PARTIAL_REQ_EXPECTED_VALUE,
+      [
+        'Given a valid object input for the request parameter but sans an',
+        "'x-forwarded-for' parameter or a remoteAddress parameter",
+        'the request extractor should return an empty string',
+        "as the value for the 'remoteAddress' property.",
+      ].join(' ')
+    );
   });
 });

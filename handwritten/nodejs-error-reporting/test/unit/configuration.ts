@@ -29,7 +29,7 @@ const logger = createLogger({
 import * as nock from 'nock';
 
 const METADATA_URL =
-    'http://metadata.google.internal/computeMetadata/v1/project';
+  'http://metadata.google.internal/computeMetadata/v1/project';
 
 const configEnv = {
   NODE_ENV: process.env.NODE_ENV,
@@ -50,7 +50,10 @@ function restoreConfigEnv() {
   process.env.GAE_MODULE_VERSION = configEnv.GAE_MODULE_VERSION;
 }
 function createDeadMetadataService() {
-  return nock(METADATA_URL).get('/project-id').times(1).reply(500);
+  return nock(METADATA_URL)
+    .get('/project-id')
+    .times(1)
+    .reply(500);
 }
 
 describe('Configuration class', () => {
@@ -65,10 +68,13 @@ describe('Configuration class', () => {
     describe('fuzzing the constructor', () => {
       it('Should return default values', () => {
         let c;
-        f.fuzzFunctionForTypes((givenConfigFuzz: ConfigurationOptions) => {
-          c = new Configuration(givenConfigFuzz, logger);
-          deepStrictEqual(c._givenConfiguration, {});
-        }, ['object']);
+        f.fuzzFunctionForTypes(
+          (givenConfigFuzz: ConfigurationOptions) => {
+            c = new Configuration(givenConfigFuzz, logger);
+            deepStrictEqual(c._givenConfiguration, {});
+          },
+          ['object']
+        );
       });
     });
     describe('valid config and default values', () => {
@@ -105,7 +111,7 @@ describe('Configuration class', () => {
       });
     });
     describe('reportMode', () => {
-      let nodeEnv: string|undefined;
+      let nodeEnv: string | undefined;
       beforeEach(() => {
         nodeEnv = process.env.NODE_ENV;
       });
@@ -118,61 +124,60 @@ describe('Configuration class', () => {
         }
       });
 
-      it('Should print a deprecation warning if "ignoreEvnironmentCheck" is used',
-         () => {
-           let warnText = '';
-           const logger = {
-             warn: (text) => {
-               warnText += text + '\n';
-             }
-           } as Logger;
-           // tslint:disable-next-line:no-unused-expression
-           new Configuration({ignoreEnvironmentCheck: true}, logger);
-           assert.strictEqual(
-               warnText,
-               'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
-                   'Use the "reportMode" config option instead.\n');
-         });
+      it('Should print a deprecation warning if "ignoreEvnironmentCheck" is used', () => {
+        let warnText = '';
+        const logger = {
+          warn: text => {
+            warnText += text + '\n';
+          },
+        } as Logger;
+        // tslint:disable-next-line:no-unused-expression
+        new Configuration({ignoreEnvironmentCheck: true}, logger);
+        assert.strictEqual(
+          warnText,
+          'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+            'Use the "reportMode" config option instead.\n'
+        );
+      });
 
-      it('Should print a warning if both "ignoreEnvironmentCheck" and "reportMode" are specified',
-         () => {
-           let warnText = '';
-           const logger = {
-             warn: (text) => {
-               warnText += text + '\n';
-             }
-           } as Logger;
-           // tslint:disable-next-line:no-unused-expression
-           new Configuration(
-               {ignoreEnvironmentCheck: true, reportMode: 'never'}, logger);
-           assert.strictEqual(
-               warnText,
-               'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
-                   'Use the "reportMode" config option instead.\nBoth the "ignoreEnvironmentCheck" ' +
-                   'and "reportMode" configuration options have been specified.  The "reportMode" ' +
-                   'option will take precedence.\n');
-         });
+      it('Should print a warning if both "ignoreEnvironmentCheck" and "reportMode" are specified', () => {
+        let warnText = '';
+        const logger = {
+          warn: text => {
+            warnText += text + '\n';
+          },
+        } as Logger;
+        // tslint:disable-next-line:no-unused-expression
+        new Configuration(
+          {ignoreEnvironmentCheck: true, reportMode: 'never'},
+          logger
+        );
+        assert.strictEqual(
+          warnText,
+          'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+            'Use the "reportMode" config option instead.\nBoth the "ignoreEnvironmentCheck" ' +
+            'and "reportMode" configuration options have been specified.  The "reportMode" ' +
+            'option will take precedence.\n'
+        );
+      });
 
-      it('Should set "reportMode" to "always" if "ignoreEnvironmentCheck" is true',
-         () => {
-           const conf =
-               new Configuration({ignoreEnvironmentCheck: true}, logger);
-           assert.strictEqual(conf._reportMode, 'always');
-         });
+      it('Should set "reportMode" to "always" if "ignoreEnvironmentCheck" is true', () => {
+        const conf = new Configuration({ignoreEnvironmentCheck: true}, logger);
+        assert.strictEqual(conf._reportMode, 'always');
+      });
 
-      it('Should set "reportMode" to "production" if "ignoreEnvironmentCheck" is false',
-         () => {
-           const conf =
-               new Configuration({ignoreEnvironmentCheck: false}, logger);
-           assert.strictEqual(conf._reportMode, 'production');
-         });
+      it('Should set "reportMode" to "production" if "ignoreEnvironmentCheck" is false', () => {
+        const conf = new Configuration({ignoreEnvironmentCheck: false}, logger);
+        assert.strictEqual(conf._reportMode, 'production');
+      });
 
-      it('Should prefer "reportMode" config if "ignoreEnvironmentCheck" is also set',
-         () => {
-           const conf = new Configuration(
-               {ignoreEnvironmentCheck: true, reportMode: 'never'}, logger);
-           assert.strictEqual(conf._reportMode, 'never');
-         });
+      it('Should prefer "reportMode" config if "ignoreEnvironmentCheck" is also set', () => {
+        const conf = new Configuration(
+          {ignoreEnvironmentCheck: true, reportMode: 'never'},
+          logger
+        );
+        assert.strictEqual(conf._reportMode, 'never');
+      });
 
       it('Should be set to "production" by default', () => {
         const conf = new Configuration({}, logger);
@@ -194,51 +199,48 @@ describe('Configuration class', () => {
         assert.strictEqual(conf.isReportingEnabled(), false);
       });
 
-      it('Should state reporting should proceed with mode "production" and env "production"',
-         () => {
-           process.env.NODE_ENV = 'production';
-           const conf = new Configuration({reportMode: 'production'}, logger);
-           assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
-         });
+      it('Should state reporting should proceed with mode "production" and env "production"', () => {
+        process.env.NODE_ENV = 'production';
+        const conf = new Configuration({reportMode: 'production'}, logger);
+        assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
+      });
 
-      it('Should state reporting should not proceed with mode "production" and env not "production"',
-         () => {
-           process.env.NODE_ENV = 'dev';
-           const conf = new Configuration({reportMode: 'production'}, logger);
-           assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
-         });
+      it('Should state reporting should not proceed with mode "production" and env not "production"', () => {
+        process.env.NODE_ENV = 'dev';
+        const conf = new Configuration({reportMode: 'production'}, logger);
+        assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
+      });
 
-      it('Should state reporting should proceed with mode "always" and env "production"',
-         () => {
-           process.env.NODE_ENV = 'production';
-           const conf = new Configuration({reportMode: 'always'}, logger);
-           assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
-         });
+      it('Should state reporting should proceed with mode "always" and env "production"', () => {
+        process.env.NODE_ENV = 'production';
+        const conf = new Configuration({reportMode: 'always'}, logger);
+        assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
+      });
 
-      it('Should state reporting should proceed with mode "always" and env not "production"',
-         () => {
-           process.env.NODE_ENV = 'dev';
-           const conf = new Configuration({reportMode: 'always'}, logger);
-           assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
-         });
+      it('Should state reporting should proceed with mode "always" and env not "production"', () => {
+        process.env.NODE_ENV = 'dev';
+        const conf = new Configuration({reportMode: 'always'}, logger);
+        assert.strictEqual(conf.getShouldReportErrorsToAPI(), true);
+      });
 
-      it('Should state reporting should not proceed with mode "never" and env "production"',
-         () => {
-           process.env.NODE_ENV = 'production';
-           const conf = new Configuration({reportMode: 'never'}, logger);
-           assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
-         });
+      it('Should state reporting should not proceed with mode "never" and env "production"', () => {
+        process.env.NODE_ENV = 'production';
+        const conf = new Configuration({reportMode: 'never'}, logger);
+        assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
+      });
 
-      it('Should state reporting should not proceed with mode "never" and env not "production"',
-         () => {
-           process.env.NODE_ENV = 'dev';
-           const conf = new Configuration({reportMode: 'never'}, logger);
-           assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
-         });
+      it('Should state reporting should not proceed with mode "never" and env not "production"', () => {
+        process.env.NODE_ENV = 'dev';
+        const conf = new Configuration({reportMode: 'never'}, logger);
+        assert.strictEqual(conf.getShouldReportErrorsToAPI(), false);
+      });
     });
     describe('with ignoreEnvironmentCheck', () => {
-      const conf =
-          merge({}, {projectId: 'some-id'}, {ignoreEnvironmentCheck: true});
+      const conf = merge(
+        {},
+        {projectId: 'some-id'},
+        {ignoreEnvironmentCheck: true}
+      );
       const c = new Configuration(conf, logger);
       it('Should reportErrorsToAPI', () => {
         assert.strictEqual(c.getShouldReportErrorsToAPI(), true);
@@ -265,15 +267,18 @@ describe('Configuration class', () => {
         assert.throws(() => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-              {reportMode: new Date()} as {} as ConfigurationOptions, logger);
+            ({reportMode: new Date()} as {}) as ConfigurationOptions,
+            logger
+          );
         });
       });
       it('Should throw if invalid value for reportMode', () => {
         assert.throws(() => {
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-              {reportMode: 'invalid-mode'} as {} as ConfigurationOptions,
-              logger);
+            ({reportMode: 'invalid-mode'} as {}) as ConfigurationOptions,
+            logger
+          );
         });
       });
       it('Should throw if invalid type for key', () => {
@@ -281,7 +286,10 @@ describe('Configuration class', () => {
           // we are intentionally providing an invalid configuration
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
-          new Configuration({key: null} as {} as ConfigurationOptions, logger);
+          new Configuration(
+            ({key: null} as {}) as ConfigurationOptions,
+            logger
+          );
         });
       });
       it('Should throw if invalid for ignoreEnvironmentCheck', () => {
@@ -290,8 +298,9 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-              {ignoreEnvironmentCheck: null} as {} as ConfigurationOptions,
-              logger);
+            ({ignoreEnvironmentCheck: null} as {}) as ConfigurationOptions,
+            logger
+          );
         });
       });
       it('Should throw if invalid for serviceContext.service', () => {
@@ -300,8 +309,9 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-              {serviceContext: {service: false}} as {} as ConfigurationOptions,
-              logger);
+            ({serviceContext: {service: false}} as {}) as ConfigurationOptions,
+            logger
+          );
         });
       });
       it('Should throw if invalid for serviceContext.version', () => {
@@ -310,8 +320,9 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-              {serviceContext: {version: true}} as {} as ConfigurationOptions,
-              logger);
+            ({serviceContext: {version: true}} as {}) as ConfigurationOptions,
+            logger
+          );
         });
       });
       it('Should throw if invalid for reportUnhandledRejections', () => {
@@ -320,9 +331,11 @@ describe('Configuration class', () => {
           // thus an explicit cast is needed
           // tslint:disable-next-line:no-unused-expression
           new Configuration(
-              {reportUnhandledRejections: 'INVALID'} as {} as
-                  ConfigurationOptions,
-              logger);
+            ({
+              reportUnhandledRejections: 'INVALID',
+            } as {}) as ConfigurationOptions,
+            logger
+          );
         });
       });
       it('Should not throw given an empty object for serviceContext', () => {
@@ -355,7 +368,9 @@ describe('Configuration class', () => {
         before(() => {
           sterilizeConfigEnv();
           c = new Configuration(
-              {projectId: pn} as {} as ConfigurationOptions, logger);
+            ({projectId: pn} as {}) as ConfigurationOptions,
+            logger
+          );
         });
         after(() => {
           nock.cleanAll();
@@ -390,7 +405,9 @@ describe('Configuration class', () => {
           // we are intentionally providing an invalid configuration
           // thus an explicit cast is needed
           c = new Configuration(
-              {projectId: null} as {} as ConfigurationOptions, logger);
+            ({projectId: null} as {}) as ConfigurationOptions,
+            logger
+          );
         });
         after(() => {
           nock.cleanAll();
@@ -475,11 +492,12 @@ describe('Configuration class', () => {
           const key = '1337-api-key';
           before(() => {
             c = new Configuration(
-                {
-                  key,
-                  projectId,
-                },
-                logger);
+              {
+                key,
+                projectId,
+              },
+              logger
+            );
           });
           it('Should assign', () => {
             assert.strictEqual(c.getKey(), key);
@@ -495,7 +513,9 @@ describe('Configuration class', () => {
           });
           it('Should assign', () => {
             assert.strictEqual(
-                c.getReportUnhandledRejections(), reportRejections);
+              c.getReportUnhandledRejections(),
+              reportRejections
+            );
           });
         });
       });

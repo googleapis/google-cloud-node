@@ -23,7 +23,7 @@ const SKIP = {
   express: false,
   hapi: {sixteen: false, seventeen: false},
   koa: {one: false, two: false},
-  restify: {seven: false, eight: false}
+  restify: {seven: false, eight: false},
 };
 
 const TS_CODE_ARRAY: check.CodeSample[] = [
@@ -33,7 +33,7 @@ new errorReporting.ErrorReporting();`,
     description: 'imports the module using * syntax',
     dependencies: [],
     devDependencies: [],
-    skip: SKIP.base
+    skip: SKIP.base,
   },
   {
     code: `import {ErrorReporting} from '@google-cloud/error-reporting';
@@ -41,7 +41,7 @@ new ErrorReporting();`,
     description: 'imports the module with {} syntax',
     dependencies: [],
     devDependencies: [],
-    skip: SKIP.base
+    skip: SKIP.base,
   },
   {
     code: `import {ErrorReporting} from '@google-cloud/error-reporting';
@@ -51,10 +51,10 @@ new ErrorReporting({
   }
 });`,
     description:
-        'imports the module and starts with a partial `serviceContext`',
+      'imports the module and starts with a partial `serviceContext`',
     dependencies: [],
     devDependencies: [],
-    skip: SKIP.base
+    skip: SKIP.base,
   },
   {
     code: `import {ErrorReporting} from '@google-cloud/error-reporting';
@@ -66,10 +66,10 @@ new ErrorReporting({
   }
 });`,
     description:
-        'imports the module and starts with a complete `serviceContext`',
+      'imports the module and starts with a complete `serviceContext`',
     dependencies: [],
     devDependencies: [],
-    skip: SKIP.base
+    skip: SKIP.base,
   },
   {
     code: `import * as express from 'express';
@@ -93,7 +93,7 @@ app.use(errors.express);
     description: 'uses express',
     dependencies: ['express'],
     devDependencies: ['@types/express'],
-    skip: SKIP.express
+    skip: SKIP.express,
   },
   {
     code: `import * as hapi from 'hapi';
@@ -118,7 +118,7 @@ server.register(errors.hapi);
     description: 'uses hapi16',
     dependencies: ['hapi@16.x.x'],
     devDependencies: ['@types/hapi@16.x.x'],
-    skip: SKIP.hapi.sixteen
+    skip: SKIP.hapi.sixteen,
   },
   {
     code: `import * as hapi from 'hapi';
@@ -148,7 +148,7 @@ start().catch(console.error);
     description: 'uses hapi17',
     dependencies: ['hapi@17.x.x'],
     devDependencies: ['@types/hapi@17.x.x'],
-    skip: SKIP.hapi.seventeen
+    skip: SKIP.hapi.seventeen,
   },
   {
     code: `import * as Koa from 'koa';
@@ -173,7 +173,7 @@ app.use(function *(this: any): IterableIterator<any> {
     description: 'uses koa1',
     dependencies: ['koa@1.x.x'],
     devDependencies: ['@types/koa'],
-    skip: SKIP.koa.one
+    skip: SKIP.koa.one,
   },
   {
     code: `import * as Koa from 'koa';
@@ -198,7 +198,7 @@ app.use(async (ctx: Koa.Context, next: {}): Promise<void> => {
     description: 'uses koa2',
     dependencies: ['koa@2.x.x'],
     devDependencies: ['@types/koa@2.x.x'],
-    skip: SKIP.koa.two
+    skip: SKIP.koa.two,
   },
   {
     code: `import * as restify from 'restify';
@@ -219,7 +219,7 @@ server.head('/hello/:name', respond);
     description: 'uses restify',
     dependencies: ['restify@7.x.x'],
     devDependencies: ['@types/restify@7.x.x'],
-    skip: SKIP.restify.seven
+    skip: SKIP.restify.seven,
   },
   {
     code: `import * as restify from 'restify';
@@ -240,37 +240,34 @@ server.head('/hello/:name', respond);
     description: 'uses restify',
     dependencies: ['restify@8.x.x'],
     devDependencies: ['@types/restify@7.x.x'],
-    skip: SKIP.restify.eight
+    skip: SKIP.restify.eight,
   },
 ];
 
 const JS_CODE_ARRAY: check.CodeSample[] = [
   {
-    code:
-        `const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+    code: `const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
 new ErrorReporting();`,
     description: 'requires the module using Node 4+ syntax',
     dependencies: [],
     devDependencies: [],
-    skip: SKIP.base
+    skip: SKIP.base,
   },
   {
-    code:
-        `const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+    code: `const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
 new ErrorReporting({
   serviceContext: {
     service: 'some service'
   }
 });`,
     description:
-        'requires the module and starts with a partial `serviceContext`',
+      'requires the module and starts with a partial `serviceContext`',
     dependencies: [],
     devDependencies: [],
-    skip: SKIP.base
+    skip: SKIP.base,
   },
   {
-    code:
-        `const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
+    code: `const ErrorReporting = require('@google-cloud/error-reporting').ErrorReporting;
 new ErrorReporting({
   projectId: 'some-project',
   serviceContext: {
@@ -279,10 +276,10 @@ new ErrorReporting({
   }
 });`,
     description:
-        'requires the module and starts with a complete `serviceContext`',
+      'requires the module and starts with a complete `serviceContext`',
     dependencies: [],
     devDependencies: [],
-    skip: SKIP.base
+    skip: SKIP.base,
   },
   {
     code: `const express = require('express');
@@ -308,7 +305,7 @@ app.use(errors.express);
     description: 'uses express',
     dependencies: ['express'],
     devDependencies: [],
-    skip: SKIP.express
+    skip: SKIP.express,
   },
   {
     code: `const hapi = require('hapi');
@@ -333,7 +330,7 @@ server.register(errors.hapi);
     description: 'uses hapi16',
     dependencies: ['hapi@16.x.x'],
     devDependencies: [],
-    skip: SKIP.hapi.sixteen
+    skip: SKIP.hapi.sixteen,
   },
   {
     code: `const hapi = require('hapi');
@@ -363,7 +360,7 @@ start().catch(console.error);
     description: 'uses hapi17',
     dependencies: ['hapi@17.x.x'],
     devDependencies: [],
-    skip: SKIP.hapi.seventeen
+    skip: SKIP.hapi.seventeen,
   },
   {
     code: `const Koa = require('koa');
@@ -388,7 +385,7 @@ app.use(function *(){
     description: 'uses koa1',
     dependencies: ['koa@1.x.x'],
     devDependencies: [],
-    skip: SKIP.koa.one
+    skip: SKIP.koa.one,
   },
   {
     code: `const Koa = require('koa');
@@ -413,7 +410,7 @@ app.use(async (ctx, next) => {
     description: 'uses koa2',
     dependencies: ['koa@2.x.x'],
     devDependencies: [],
-    skip: SKIP.koa.two
+    skip: SKIP.koa.two,
   },
   {
     code: `const restify = require('restify');
@@ -434,7 +431,7 @@ server.head('/hello/:name', respond);
     description: 'uses restify',
     dependencies: ['restify@7.x.x'],
     devDependencies: [],
-    skip: SKIP.restify.seven
+    skip: SKIP.restify.seven,
   },
   {
     code: `const restify = require('restify');
@@ -455,8 +452,8 @@ server.head('/hello/:name', respond);
     description: 'uses restify',
     dependencies: ['restify@8.x.x'],
     devDependencies: [],
-    skip: SKIP.restify.eight
-  }
+    skip: SKIP.restify.eight,
+  },
 ];
 
 check.testInstallation(TS_CODE_ARRAY, JS_CODE_ARRAY, {timeout: 2 * 60 * 1000});

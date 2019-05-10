@@ -17,9 +17,12 @@
 import * as assert from 'assert';
 import * as stringify from 'json-stable-stringify';
 
-export type Anything = {}|undefined|null;
+export type Anything = {} | undefined | null;
 
 export function deepStrictEqual(
-    actual: Anything, expected: Anything, message?: string) {
+  actual: Anything,
+  expected: Anything,
+  message?: string
+) {
   assert.deepStrictEqual(stringify(actual), stringify(expected), message);
 }

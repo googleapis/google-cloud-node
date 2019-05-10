@@ -39,36 +39,43 @@ describe('expressInterface', () => {
   });
   describe('Intended behaviour', () => {
     const stubbedConfig = new Configuration(
-        {
-          serviceContext: {
-            service: 'a_test_service',
-            version: 'a_version',
-          },
+      {
+        serviceContext: {
+          service: 'a_test_service',
+          version: 'a_version',
         },
-        createLogger({logLevel: 4}));
-    (stubbedConfig as {} as {lacksCredentials: Function}).lacksCredentials =
-        () => {
-          return false;
-        };
+      },
+      createLogger({logLevel: 4})
+    );
+    ((stubbedConfig as {}) as {
+      lacksCredentials: Function;
+    }).lacksCredentials = () => {
+      return false;
+    };
     const client = {
       sendError() {
         return;
       },
     };
     const testError = new Error('This is a test');
-    const validBoundHandler =
-        expressInterface(client as {} as RequestHandler, stubbedConfig);
+    const validBoundHandler = expressInterface(
+      (client as {}) as RequestHandler,
+      stubbedConfig
+    );
     it('Should return the error message', () => {
       const res = validBoundHandler(testError, null!, null!, null!);
       deepStrictEqual(
-          res,
-          merge(
-              new ErrorMessage()
-                  .setMessage(testError.stack!)
-                  .setServiceContext(
-                      stubbedConfig._serviceContext.service,
-                      stubbedConfig._serviceContext.version),
-              {eventTime: res.eventTime}));
+        res,
+        merge(
+          new ErrorMessage()
+            .setMessage(testError.stack!)
+            .setServiceContext(
+              stubbedConfig._serviceContext.service,
+              stubbedConfig._serviceContext.version
+            ),
+          {eventTime: res.eventTime}
+        )
+      );
     });
     describe('Calling back to express builtins', () => {
       it('Should callback to next', done => {
@@ -84,8 +91,10 @@ describe('expressInterface', () => {
         const client = {
           sendError,
         };
-        const handler =
-            expressInterface(client as {} as RequestHandler, stubbedConfig);
+        const handler = expressInterface(
+          (client as {}) as RequestHandler,
+          stubbedConfig
+        );
         handler(testError, null!, null!, () => {
           return;
         });

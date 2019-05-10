@@ -25,7 +25,14 @@ const env = process.env;
 // TypeScript users of the error reporting library would
 // need to install @types/console-log-level to compile their
 // code.  As a result, the interface is explicitly specified instead.
-export type LogLevel = 'error'|'trace'|'debug'|'info'|'warn'|'fatal'|undefined;
+export type LogLevel =
+  | 'error'
+  | 'trace'
+  | 'debug'
+  | 'info'
+  | 'warn'
+  | 'fatal'
+  | undefined;
 export interface Logger {
   error(...args: Array<{}>): void;
   trace(...args: Array<{}>): void;
@@ -35,14 +42,14 @@ export interface Logger {
   fatal(...args: Array<{}>): void;
 }
 
-export type ReportMode = 'production'|'always'|'never';
+export type ReportMode = 'production' | 'always' | 'never';
 
 export interface ConfigurationOptions {
   projectId?: string;
   keyFilename?: string;
-  logLevel?: string|number;
+  logLevel?: string | number;
   key?: string;
-  serviceContext?: {service?: string; version?: string;};
+  serviceContext?: {service?: string; version?: string};
   ignoreEnvironmentCheck?: boolean;
   reportMode?: ReportMode;
   credentials?: {};
@@ -78,15 +85,15 @@ export interface ServiceContext {
 export class Configuration {
   _logger: Logger;
   _reportMode: ReportMode;
-  _projectId: string|null;
-  _key: string|null;
-  keyFilename: string|null;
-  credentials: {}|null;
+  _projectId: string | null;
+  _key: string | null;
+  keyFilename: string | null;
+  credentials: {} | null;
   _serviceContext: ServiceContext;
   _reportUnhandledRejections: boolean;
   _givenConfiguration: ConfigurationOptions;
 
-  constructor(givenConfig: ConfigurationOptions|undefined, logger: Logger) {
+  constructor(givenConfig: ConfigurationOptions | undefined, logger: Logger) {
     /**
      * The _logger property caches the logger instance created at the top-level
      * for configuration logging purposes.
@@ -232,15 +239,13 @@ export class Configuration {
 
     if (is.object(this._givenConfiguration.serviceContext)) {
       if (is.string(this._givenConfiguration.serviceContext!.service)) {
-        this._serviceContext.service =
-            this._givenConfiguration.serviceContext!.service!;
+        this._serviceContext.service = this._givenConfiguration.serviceContext!.service!;
       } else if (has(this._givenConfiguration.serviceContext, 'service')) {
         throw new Error('config.serviceContext.service must be a string');
       }
 
       if (is.string(this._givenConfiguration.serviceContext!.version)) {
-        this._serviceContext.version =
-            this._givenConfiguration.serviceContext!.version;
+        this._serviceContext.version = this._givenConfiguration.serviceContext!.version;
       } else if (has(this._givenConfiguration.serviceContext, 'version')) {
         throw new Error('config.serviceContext.version must be a string');
       }
@@ -248,8 +253,7 @@ export class Configuration {
   }
   _determineReportMode() {
     if (this._givenConfiguration.reportMode) {
-      this._reportMode =
-          this._givenConfiguration.reportMode.toLowerCase() as ReportMode;
+      this._reportMode = this._givenConfiguration.reportMode.toLowerCase() as ReportMode;
     }
   }
   /**
@@ -269,36 +273,43 @@ export class Configuration {
     let isReportModeValid = true;
     if (has(this._givenConfiguration, 'reportMode')) {
       const reportMode = this._givenConfiguration.reportMode;
-      isReportModeValid = is.string(reportMode) &&
-          (reportMode === 'production' || reportMode === 'always' ||
-           reportMode === 'never');
+      isReportModeValid =
+        is.string(reportMode) &&
+        (reportMode === 'production' ||
+          reportMode === 'always' ||
+          reportMode === 'never');
     }
 
     if (!isReportModeValid) {
       throw new Error(
-          'config.reportMode must a string that is one ' +
-          'of "production", "always", or "never".');
+        'config.reportMode must a string that is one ' +
+          'of "production", "always", or "never".'
+      );
     }
 
     const hasEnvCheck = has(this._givenConfiguration, 'ignoreEnvironmentCheck');
     const hasReportMode = has(this._givenConfiguration, 'reportMode');
     if (hasEnvCheck) {
       this._logger.warn(
-          'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
-          'Use the "reportMode" config option instead.');
+        'The "ignoreEnvironmentCheck" config option is deprecated.  ' +
+          'Use the "reportMode" config option instead.'
+      );
     }
     if (hasEnvCheck && hasReportMode) {
-      this._logger.warn([
-        'Both the "ignoreEnvironmentCheck" and "reportMode" configuration options',
-        'have been specified.  The "reportMode" option will take precedence.'
-      ].join(' '));
+      this._logger.warn(
+        [
+          'Both the "ignoreEnvironmentCheck" and "reportMode" configuration options',
+          'have been specified.  The "reportMode" option will take precedence.',
+        ].join(' ')
+      );
       this._determineReportMode();
     } else if (hasEnvCheck) {
       if (this._givenConfiguration.ignoreEnvironmentCheck === true) {
         this._reportMode = 'always';
       } else if (
-          has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
-          !is.boolean(this._givenConfiguration.ignoreEnvironmentCheck)) {
+        has(this._givenConfiguration, 'ignoreEnvironmentCheck') &&
+        !is.boolean(this._givenConfiguration.ignoreEnvironmentCheck)
+      ) {
         throw new Error('config.ignoreEnvironmentCheck must be a boolean');
       } else {
         this._reportMode = 'production';
@@ -308,12 +319,14 @@ export class Configuration {
     }
 
     if (this.isReportingEnabled() && !this.getShouldReportErrorsToAPI()) {
-      this._logger.warn([
-        'The stackdriver error reporting client is configured to report errors',
-        'if and only if the NODE_ENV environment variable is set to "production".',
-        'Errors will not be reported.  To have errors always reported, regardless of the',
-        'value of NODE_ENV, set the reportMode configuration option to "always".'
-      ].join(' '));
+      this._logger.warn(
+        [
+          'The stackdriver error reporting client is configured to report errors',
+          'if and only if the NODE_ENV environment variable is set to "production".',
+          'Errors will not be reported.  To have errors always reported, regardless of the',
+          'value of NODE_ENV, set the reportMode configuration option to "always".',
+        ].join(' ')
+      );
     }
 
     if (is.string(this._givenConfiguration.key)) {
@@ -332,8 +345,7 @@ export class Configuration {
       throw new Error('config.credentials must be a valid credentials object');
     }
     if (is.boolean(this._givenConfiguration.reportUnhandledRejections)) {
-      this._reportUnhandledRejections =
-          this._givenConfiguration.reportUnhandledRejections!;
+      this._reportUnhandledRejections = this._givenConfiguration.reportUnhandledRejections!;
     } else if (has(this._givenConfiguration, 'reportUnhandledRejections')) {
       throw new Error('config.reportUnhandledRejections must be a boolean');
     }
@@ -385,9 +397,11 @@ export class Configuration {
    * @returns {Boolean} - whether errors should be reported to the API
    */
   getShouldReportErrorsToAPI() {
-    return this._reportMode === 'always' ||
-        (this._reportMode === 'production' &&
-         (process.env.NODE_ENV || '').toLowerCase() === 'production');
+    return (
+      this._reportMode === 'always' ||
+      (this._reportMode === 'production' &&
+        (process.env.NODE_ENV || '').toLowerCase() === 'production')
+    );
   }
   isReportingEnabled() {
     return this._reportMode !== 'never';

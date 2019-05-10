@@ -105,13 +105,16 @@ export class ErrorReporting {
   private _config!: Configuration;
   private _client!: AuthClient;
   // the `err` argument can be anything, including `null` and `undefined`
-  report!:
-      (err: any,  // tslint:disable-line:no-any
-       request?: manualRequestExtractor.Request, additionalMessage?: string|{},
-       callback?: manualInterface.Callback|{}|string) => ErrorMessage;
+  report!: (
+    err: any, // tslint:disable-line:no-any
+    request?: manualRequestExtractor.Request,
+    additionalMessage?: string | {},
+    callback?: manualInterface.Callback | {} | string
+  ) => ErrorMessage;
   event!: () => ErrorMessage;
   hapi!: {
-    register: (server: {}, options: {}, next?: Function) => void; name: string;
+    register: (server: {}, options: {}, next?: Function) => void;
+    name: string;
     version?: string;
   };
   express!: (err: {}, req: {}, res: {}, next: Function) => void;
@@ -135,10 +138,12 @@ export class ErrorReporting {
       const that = this;
       process.on('unhandledRejection', reason => {
         that._logger.warn(
-            'UnhandledPromiseRejectionWarning: ' +
-            'Unhandled promise rejection: ' + reason +
+          'UnhandledPromiseRejectionWarning: ' +
+            'Unhandled promise rejection: ' +
+            reason +
             '.  This rejection has been reported to the ' +
-            'Google Cloud Platform error-reporting console.');
+            'Google Cloud Platform error-reporting console.'
+        );
         that.report(reason);
       });
     }
@@ -151,8 +156,11 @@ export class ErrorReporting {
      *  console.log('done!');
      * });
      */
-    this.report =
-        manualInterface.handlerSetup(this._client, this._config, this._logger);
+    this.report = manualInterface.handlerSetup(
+      this._client,
+      this._config,
+      this._logger
+    );
 
     /**
      * @example
@@ -186,8 +194,10 @@ export class ErrorReporting {
      * app.use(errors.express);
      * app.listen(3000);
      */
-    this.express =
-        expressInterface.makeExpressHandler(this._client, this._config);
+    this.express = expressInterface.makeExpressHandler(
+      this._client,
+      this._config
+    );
 
     /**
      * @example
