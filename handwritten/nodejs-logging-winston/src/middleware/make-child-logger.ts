@@ -24,8 +24,8 @@ export function makeChildLogger(logger: winston.Logger, trace: string) {
       value(info: winston.LogEntry) {
         info[LOGGING_TRACE_KEY] = trace;
         return logger.write(info);
-      }
-    }
+      },
+    },
   });
   return childLogger;
 }

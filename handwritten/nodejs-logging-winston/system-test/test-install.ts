@@ -22,14 +22,14 @@ const TS_CODE_SAMPLES: check.CodeSample[] = [
 new loggingWinston.LoggingWinston();`,
     description: 'imports the module using * syntax',
     dependencies: ['winston'],
-    devDependencies: ['@types/winston', 'typescript@3']
+    devDependencies: ['@types/winston', 'typescript@3'],
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
 new LoggingWinston();`,
     description: 'imports the module with {} syntax',
     dependencies: ['winston'],
-    devDependencies: ['@types/winston', 'typescript@3']
+    devDependencies: ['@types/winston', 'typescript@3'],
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
@@ -39,9 +39,9 @@ new LoggingWinston({
   }
 });`,
     description:
-        'imports the module and starts with a partial `serviceContext`',
+      'imports the module and starts with a partial `serviceContext`',
     dependencies: ['winston'],
-    devDependencies: ['@types/winston', 'typescript@3']
+    devDependencies: ['@types/winston', 'typescript@3'],
   },
   {
     code: `import {LoggingWinston} from '@google-cloud/logging-winston';
@@ -53,9 +53,9 @@ new LoggingWinston({
   }
 });`,
     description:
-        'imports the module and starts with a complete `serviceContext`',
+      'imports the module and starts with a complete `serviceContext`',
     dependencies: ['winston'],
-    devDependencies: ['@types/winston', 'typescript@3']
+    devDependencies: ['@types/winston', 'typescript@3'],
   },
 
   {
@@ -74,35 +74,32 @@ winston.createLogger({transports:[loggingWinston]})
 `,
     description: 'imports the module with a prefix and labels specified',
     dependencies: ['winston'],
-    devDependencies: ['typescript@3']
-  }
+    devDependencies: ['typescript@3'],
+  },
 ];
 
 const JS_CODE_SAMPLES: check.CodeSample[] = [
   {
-    code:
-        `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+    code: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
 new LoggingWinston();`,
     description: 'requires the module using Node 4+ syntax',
     dependencies: ['winston'],
-    devDependencies: []
+    devDependencies: [],
   },
   {
-    code:
-        `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+    code: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
 new LoggingWinston({
   serviceContext: {
     service: 'some service'
   }
 });`,
     description:
-        'requires the module and starts with a partial `serviceContext`',
+      'requires the module and starts with a partial `serviceContext`',
     dependencies: ['winston'],
-    devDependencies: []
+    devDependencies: [],
   },
   {
-    code:
-        `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+    code: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
 new LoggingWinston({
   projectId: 'some-project',
   serviceContext: {
@@ -111,13 +108,12 @@ new LoggingWinston({
   }
 });`,
     description:
-        'requires the module and starts with a complete `serviceContext`',
+      'requires the module and starts with a complete `serviceContext`',
     dependencies: ['winston'],
-    devDependencies: []
+    devDependencies: [],
   },
   {
-    code:
-        `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
+    code: `const LoggingWinston = require('@google-cloud/logging-winston').LoggingWinston;
 new LoggingWinston({
   prefix: 'some-prefix',
   labels: {
@@ -128,9 +124,10 @@ new LoggingWinston({
 });`,
     description: 'imports the module with a prefix and labels specified',
     dependencies: ['winston'],
-    devDependencies: []
+    devDependencies: [],
   },
 ];
 
-check.testInstallation(
-    TS_CODE_SAMPLES, JS_CODE_SAMPLES, {timeout: 2 * 60 * 1000});
+check.testInstallation(TS_CODE_SAMPLES, JS_CODE_SAMPLES, {
+  timeout: 2 * 60 * 1000,
+});

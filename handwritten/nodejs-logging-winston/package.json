@@ -74,7 +74,7 @@
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-node": "^9.0.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "gts": "^0.9.0",
+    "gts": "^1.0.0",
     "intelli-espower-loader": "^1.0.1",
     "linkinator": "^1.1.2",
     "mocha": "^6.1.4",
