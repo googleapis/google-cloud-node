@@ -3,6 +3,7 @@
     "google.cloud.dataproc.v1beta2.JobController": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "INTERNAL",
           "UNAVAILABLE"
         ],
