@@ -43,7 +43,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.32.0",
+    "@google-cloud/common": "^1.0.0",
     "console-log-level": "^1.4.0",
     "is": "^3.2.1",
     "lodash.has": "^4.5.2",
