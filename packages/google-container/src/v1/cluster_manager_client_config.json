@@ -3,6 +3,7 @@
     "google.container.v1.ClusterManager": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
