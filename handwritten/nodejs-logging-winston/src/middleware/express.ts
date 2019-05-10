@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-import {HttpRequest, middleware as commonMiddleware} from '@google-cloud/logging';
+import {
+  HttpRequest,
+  middleware as commonMiddleware,
+} from '@google-cloud/logging';
 import {GCPEnv} from 'google-auth-library';
 import * as winston from 'winston';
 
@@ -35,21 +38,25 @@ export async function middleware(options?: MiddlewareOptions) {
   const defaultOptions = {
     logName: 'winston_log',
     level: 'info',
-    levels: winston.config.npm.levels
+    levels: winston.config.npm.levels,
   };
   options = Object.assign({}, defaultOptions, options);
 
-  const loggingWinstonApp = new LoggingWinston(
-      {...options, logName: `${options.logName}_${APP_LOG_SUFFIX}`});
+  const loggingWinstonApp = new LoggingWinston({
+    ...options,
+    logName: `${options.logName}_${APP_LOG_SUFFIX}`,
+  });
   const logger = winston.createLogger({
     level: options.level,
     levels: options.levels,
-    transports: [loggingWinstonApp]
+    transports: [loggingWinstonApp],
   });
 
   const auth = loggingWinstonApp.common.stackdriverLog.logging.auth;
-  const [env, projectId] =
-      await Promise.all([auth.getEnv(), auth.getProjectId()]);
+  const [env, projectId] = await Promise.all([
+    auth.getEnv(),
+    auth.getProjectId(),
+  ]);
 
   // Unless we are running on Google App Engine or Cloud Functions, generate a
   // parent request log entry that all the request specific logs ("app logs")
@@ -61,7 +68,7 @@ export async function middleware(options?: MiddlewareOptions) {
     const requestLogger = winston.createLogger({
       level: options.level,
       levels: options.levels,
-      transports: [loggingWinstonReq]
+      transports: [loggingWinstonReq],
     });
     emitRequestLog = (httpRequest: HttpRequest, trace: string) => {
       requestLogger.info({[LOGGING_TRACE_KEY]: trace, httpRequest});
@@ -71,10 +78,11 @@ export async function middleware(options?: MiddlewareOptions) {
   return {
     logger,
     mw: commonMiddleware.express.makeMiddleware(
-        projectId,
-        (trace: string) => {
-          return makeChildLogger(logger, trace);
-        },
-        emitRequestLog)
+      projectId,
+      (trace: string) => {
+        return makeChildLogger(logger, trace);
+      },
+      emitRequestLog
+    ),
   };
 }

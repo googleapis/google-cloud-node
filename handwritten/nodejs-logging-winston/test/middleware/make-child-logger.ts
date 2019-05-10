@@ -6,8 +6,9 @@ import {makeChildLogger} from '../../src/middleware/make-child-logger';
 
 describe('makeChildLogger', () => {
   const FAKE_TRACE = '🤥';
-  const LOGGER = winston.createLogger(
-      {transports: [new winston.transports.Console({silent: true})]});
+  const LOGGER = winston.createLogger({
+    transports: [new winston.transports.Console({silent: true})],
+  });
   const origWrite = LOGGER.write;
 
   afterEach(() => {

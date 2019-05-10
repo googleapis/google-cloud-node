@@ -74,13 +74,15 @@ describe('LoggingWinston', function() {
           },
         });
       },
-    }
+    },
   ];
 
-  type TestData = {
+  interface TestData {
     // tslint:disable-next-line:no-any
-    args: any[]; level: string; verify: (entry: types.StackdriverEntry) => void;
-  };
+    args: any[];
+    level: string;
+    verify: (entry: types.StackdriverEntry) => void;
+  }
 
   describe('log', () => {
     const testData = commonTestData.concat([
@@ -88,22 +90,28 @@ describe('LoggingWinston', function() {
         args: [new Error('fourth')],
         level: 'error',
         verify: (entry: types.StackdriverEntry) => {
-          assert((entry.data as {
-                   message: string
-                 }).message.startsWith('fourth Error:'));
+          assert(
+            (entry.data as {
+              message: string;
+            }).message.startsWith('fourth Error:')
+          );
         },
       },
       {
-        args: [{
-          level: 'error',
-          message: 'fifth message',
-          error: new Error('fifth')
-        }],
+        args: [
+          {
+            level: 'error',
+            message: 'fifth message',
+            error: new Error('fifth'),
+          },
+        ],
         level: 'log',
         verify: (entry: types.StackdriverEntry) => {
-          assert((entry.data as {
-                   message: string
-                 }).message.startsWith('fifth message'));
+          assert(
+            (entry.data as {
+              message: string;
+            }).message.startsWith('fifth message')
+          );
         },
       },
     ] as TestData[]);
@@ -117,14 +125,18 @@ describe('LoggingWinston', function() {
 
     it('should properly write log entries', async () => {
       const start = Date.now();
-      testData.forEach((test) => {
+      testData.forEach(test => {
         // logger does not have index signature.
         // tslint:disable-next-line:no-any
         (logger as any)[test.level].apply(logger, test.args);
       });
 
       const entries = await pollLogs(
-          LOG_NAME, start, testData.length, WRITE_CONSISTENCY_DELAY_MS);
+        LOG_NAME,
+        start,
+        testData.length,
+        WRITE_CONSISTENCY_DELAY_MS
+      );
       assert.strictEqual(entries.length, testData.length);
       entries.reverse().forEach((entry, index) => {
         const test = testData[index];
@@ -141,12 +153,16 @@ describe('LoggingWinston', function() {
     it('reports errors', async () => {
       const start = Date.now();
       const service = `logging-winston-system-test-winston3-${UUID}`;
-      const LoggingWinston =
-          proxyquire('../src/index', {winston}).LoggingWinston;
+      const LoggingWinston = proxyquire('../src/index', {winston})
+        .LoggingWinston;
 
       const logger = winston.createLogger({
-        transports: [new LoggingWinston(
-            {logName: LOG_NAME, serviceContext: {service, version: 'none'}})],
+        transports: [
+          new LoggingWinston({
+            logName: LOG_NAME,
+            serviceContext: {service, version: 'none'},
+          }),
+        ],
       });
 
       const message = `an error at ${Date.now()}`;
@@ -154,7 +170,10 @@ describe('LoggingWinston', function() {
       logger.error(new Error(message));
 
       const errors = await errorsTransport.pollForNewEvents(
-          service, start, ERROR_REPORTING_POLL_TIMEOUT);
+        service,
+        start,
+        ERROR_REPORTING_POLL_TIMEOUT
+      );
 
       assert.strictEqual(errors.length, 1);
       const errEvent = errors[0];
@@ -168,7 +187,11 @@ describe('LoggingWinston', function() {
 
 // polls for the entire array of entries to be greater than logTime.
 function pollLogs(
-    logName: string, logTime: number, size: number, timeout: number) {
+  logName: string,
+  logTime: number,
+  size: number,
+  timeout: number
+) {
   const p = new Promise<types.StackdriverEntry[]>((resolve, reject) => {
     const end = Date.now() + timeout;
     loop();
@@ -176,27 +199,27 @@ function pollLogs(
     function loop() {
       setTimeout(() => {
         logging.log(logName).getEntries(
-            {
-              pageSize: size,
-            },
-            (err: Error, entries: types.StackdriverEntry[]) => {
-              if (!entries || entries.length < size) return loop();
+          {
+            pageSize: size,
+          },
+          (err: Error, entries: types.StackdriverEntry[]) => {
+            if (!entries || entries.length < size) return loop();
 
-              const {receiveTimestamp} =
-                  (entries[entries.length - 1].metadata || {}) as
-                  {receiveTimestamp: {seconds: number, nanos: number}};
-              const timeMilliseconds = (receiveTimestamp.seconds * 1000) +
-                  (receiveTimestamp.nanos * 1e-6);
+            const {receiveTimestamp} = (entries[entries.length - 1].metadata ||
+              {}) as {receiveTimestamp: {seconds: number; nanos: number}};
+            const timeMilliseconds =
+              receiveTimestamp.seconds * 1000 + receiveTimestamp.nanos * 1e-6;
 
-              if (timeMilliseconds >= logTime) {
-                return resolve(entries);
-              }
+            if (timeMilliseconds >= logTime) {
+              return resolve(entries);
+            }
 
-              if (Date.now() > end) {
-                return reject(new Error('timeout'));
-              }
-              loop();
-            });
+            if (Date.now() > end) {
+              return reject(new Error('timeout'));
+            }
+            loop();
+          }
+        );
       }, 500);
     }
   });

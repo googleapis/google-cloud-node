@@ -22,16 +22,20 @@ import * as types from '../src/types/core';
 const proxyquire = require('proxyquire');
 
 describe('logging-winston', () => {
-  let fakeLoggingOptions_: types.Options|null;
+  let fakeLoggingOptions_: types.Options | null;
   // tslint:disable-next-line:no-any
-  let lastFakeLoggingArgs: IArguments|any[] = [];
+  let lastFakeLoggingArgs: IArguments | any[] = [];
 
   class FakeLogging {
     constructor(options: {}) {
       fakeLoggingOptions_ = options;
     }
-    log(level: string, message: string, metadata: {}|undefined,
-        callback: () => void): void {
+    log(
+      level: string,
+      message: string,
+      metadata: {} | undefined,
+      callback: () => void
+    ): void {
       lastFakeLoggingArgs = arguments;
       if (callback) setImmediate(callback);
     }
@@ -51,9 +55,10 @@ describe('logging-winston', () => {
     Transport: FakeTransport,
   };
 
-  const loggingWinstonLib = proxyquire(
-      '../src/index',
-      {'./common': {LoggingCommon: FakeLogging}, 'winston': fakeWinston});
+  const loggingWinstonLib = proxyquire('../src/index', {
+    './common': {LoggingCommon: FakeLogging},
+    winston: fakeWinston,
+  });
   // loggingWinston is LoggingWinston namespace which cannot be determined type.
   // tslint:disable-next-line:no-any
   let loggingWinston: any;
@@ -116,14 +121,15 @@ describe('logging-winston', () => {
       assert.strictEqual(fakeLoggingOptions_!.logName, logName);
     });
 
-
     it('should pass the provided resource', () => {
       assert.strictEqual(fakeLoggingOptions_!.resource, OPTIONS.resource);
     });
 
     it('should pass the provided service context', () => {
       assert.strictEqual(
-          fakeLoggingOptions_!.serviceContext, OPTIONS.serviceContext);
+        fakeLoggingOptions_!.serviceContext,
+        OPTIONS.serviceContext
+      );
     });
   });
 
@@ -138,16 +144,18 @@ describe('logging-winston', () => {
       lastFakeLoggingArgs = [];
     });
 
-    it('should properly call common.log', (done) => {
-      const args =
-          Object.assign({}, METADATA, {level: LEVEL, message: MESSAGE});
+    it('should properly call common.log', done => {
+      const args = Object.assign({}, METADATA, {
+        level: LEVEL,
+        message: MESSAGE,
+      });
 
       loggingWinston.log(args);
 
       const [level, message, meta] = lastFakeLoggingArgs;
       assert.strictEqual(level, 'one');
       assert.strictEqual(message, 'message');
-      assert.deepEqual(meta, {a: 1});
+      assert.deepStrictEqual(meta, {a: 1});
       done();
     });
   });
