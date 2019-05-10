@@ -43,8 +43,8 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
+    "@google-cloud/paginator": "^1.0.0",
     "@google-cloud/common": "^1.0.0",
-    "@google-cloud/paginator": "^0.2.0",
     "@google-cloud/promisify": "^1.0.0"
   },
   "devDependencies": {
