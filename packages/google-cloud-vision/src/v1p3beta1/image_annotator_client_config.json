@@ -3,6 +3,7 @@
     "google.cloud.vision.v1p3beta1.ImageAnnotator": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []

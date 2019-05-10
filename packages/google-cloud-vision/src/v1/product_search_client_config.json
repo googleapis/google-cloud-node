@@ -3,6 +3,7 @@
     "google.cloud.vision.v1.ProductSearch": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
