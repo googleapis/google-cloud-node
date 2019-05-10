@@ -24,7 +24,7 @@ const TEST_USER_INVALID = 12;
 const TEST_MESSAGE = 'This is a test';
 const TEST_SERVICE_DEFAULT = {
   service: 'node',
-  version: undefined
+  version: undefined,
 };
 const TEST_STACK_DEFAULT = {
   filePath: '',
@@ -87,202 +87,226 @@ describe('populate-error-message', () => {
 
   it('Should not throw given an object of invalid form', () => {
     assert.doesNotThrow(
-        populateErrorMessage.bind(null, adversarialObjectInput, em));
+      populateErrorMessage.bind(null, adversarialObjectInput, em)
+    );
     assert.doesNotThrow(
-        populateErrorMessage.bind(null, adversarialObjectInputTwo, em));
+      populateErrorMessage.bind(null, adversarialObjectInputTwo, em)
+    );
   });
 
-  it('Message Field: Should set the message as the stack given an Error',
-     () => {
-       const err = new Error(TEST_MESSAGE);
-       populateErrorMessage(err, em);
-       deepStrictEqual(
-           em.message, err.stack,
-           'Given a valid message the ' +
-               'error message should absorb the error stack as the message');
-     });
+  it('Message Field: Should set the message as the stack given an Error', () => {
+    const err = new Error(TEST_MESSAGE);
+    populateErrorMessage(err, em);
+    deepStrictEqual(
+      em.message,
+      err.stack,
+      'Given a valid message the ' +
+        'error message should absorb the error stack as the message'
+    );
+  });
 
-  it('Message Field: Should set the field given valid input given an object',
-     () => {
-       let err = {};
-       const MESSAGE = 'test';
-       err = {message: MESSAGE};
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.message, MESSAGE);
-     });
+  it('Message Field: Should set the field given valid input given an object', () => {
+    let err = {};
+    const MESSAGE = 'test';
+    err = {message: MESSAGE};
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.message, MESSAGE);
+  });
 
-  it('Message Field: Should default the field given lack-of input given ' +
-         'an object',
-     () => {
-       const err = {error: 'some error message'};
-       populateErrorMessage(err, em);
-       assert(em.message.startsWith('{ error: \'some error message\' }'));
-     });
+  it(
+    'Message Field: Should default the field given lack-of input given ' +
+      'an object',
+    () => {
+      const err = {error: 'some error message'};
+      populateErrorMessage(err, em);
+      assert(em.message.startsWith("{ error: 'some error message' }"));
+    }
+  );
 
-  it('User Field: Should set the field given valid input given an Error',
-     () => {
-       const err: AnnotatedError = new Error();
-       const TEST_USER_VALID = 'TEST_USER';
-       err.user = TEST_USER_VALID;
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.user, TEST_USER_VALID);
-     });
+  it('User Field: Should set the field given valid input given an Error', () => {
+    const err: AnnotatedError = new Error();
+    const TEST_USER_VALID = 'TEST_USER';
+    err.user = TEST_USER_VALID;
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.context.user, TEST_USER_VALID);
+  });
 
-  it('User Field: Should default the field given invalid input given an Error',
-     () => {
-       const err: AnnotatedError = new Error();
-       err.user = TEST_USER_INVALID;
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.user, '');
-     });
+  it('User Field: Should default the field given invalid input given an Error', () => {
+    const err: AnnotatedError = new Error();
+    err.user = TEST_USER_INVALID;
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.context.user, '');
+  });
 
-  it('User Field: Should set the field given valid input given an object',
-     () => {
-       const err: AnnotatedError = {};
-       const USER = 'test';
-       err.user = USER;
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.user, USER);
-     });
+  it('User Field: Should set the field given valid input given an object', () => {
+    const err: AnnotatedError = {};
+    const USER = 'test';
+    err.user = USER;
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.context.user, USER);
+  });
 
-  it('User Field: Should default the field given lack-of input given an ' +
-         'object',
-     () => {
-       const err = {};
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.user, '');
-     });
+  it(
+    'User Field: Should default the field given lack-of input given an ' +
+      'object',
+    () => {
+      const err = {};
+      populateErrorMessage(err, em);
+      assert.strictEqual(em.context.user, '');
+    }
+  );
 
-  it('ServiceContext Field: Should set the field given valid input given ' +
-         'an Error',
-     () => {
-       const err: AnnotatedError = new Error();
-       const TEST_SERVICE_VALID = {service: 'test', version: 'test'};
-       err.serviceContext = TEST_SERVICE_VALID;
-       populateErrorMessage(err, em);
-       deepStrictEqual(err.serviceContext, TEST_SERVICE_VALID);
-     });
+  it(
+    'ServiceContext Field: Should set the field given valid input given ' +
+      'an Error',
+    () => {
+      const err: AnnotatedError = new Error();
+      const TEST_SERVICE_VALID = {service: 'test', version: 'test'};
+      err.serviceContext = TEST_SERVICE_VALID;
+      populateErrorMessage(err, em);
+      deepStrictEqual(err.serviceContext, TEST_SERVICE_VALID);
+    }
+  );
 
-  it('ServiceContext Field: Should default the field given invalid input ' +
-         'given an Error',
-     () => {
-       const err: AnnotatedError = new Error();
-       const TEST_SERVICE_INVALID = 12;
-       err.serviceContext = TEST_SERVICE_INVALID;
-       populateErrorMessage(err, em);
-       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-     });
+  it(
+    'ServiceContext Field: Should default the field given invalid input ' +
+      'given an Error',
+    () => {
+      const err: AnnotatedError = new Error();
+      const TEST_SERVICE_INVALID = 12;
+      err.serviceContext = TEST_SERVICE_INVALID;
+      populateErrorMessage(err, em);
+      deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
+    }
+  );
 
-  it('ServiceContext Field: Should default the field if not given input ' +
-         'given an Error',
-     () => {
-       const err = new Error();
-       populateErrorMessage(err, em);
-       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-     });
+  it(
+    'ServiceContext Field: Should default the field if not given input ' +
+      'given an Error',
+    () => {
+      const err = new Error();
+      populateErrorMessage(err, em);
+      deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
+    }
+  );
 
-  it('ServiceContext Field: Should set the field given valid input given an ' +
-         'object',
-     () => {
-       const err: AnnotatedError = {};
-       const TEST_SERVICE_VALID = {service: 'test', version: 'test'};
-       err.serviceContext = TEST_SERVICE_VALID;
-       populateErrorMessage(err, em);
-       deepStrictEqual(em.serviceContext, TEST_SERVICE_VALID);
-     });
+  it(
+    'ServiceContext Field: Should set the field given valid input given an ' +
+      'object',
+    () => {
+      const err: AnnotatedError = {};
+      const TEST_SERVICE_VALID = {service: 'test', version: 'test'};
+      err.serviceContext = TEST_SERVICE_VALID;
+      populateErrorMessage(err, em);
+      deepStrictEqual(em.serviceContext, TEST_SERVICE_VALID);
+    }
+  );
 
-  it('ServiceContext Field: Should default the field given invalid input ' +
-         'given an object',
-     () => {
-       const err: AnnotatedError = {};
-       const TEST_SERVICE_INVALID = 12;
-       err.serviceContext = TEST_SERVICE_INVALID;
-       populateErrorMessage(err, em);
-       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-     });
+  it(
+    'ServiceContext Field: Should default the field given invalid input ' +
+      'given an object',
+    () => {
+      const err: AnnotatedError = {};
+      const TEST_SERVICE_INVALID = 12;
+      err.serviceContext = TEST_SERVICE_INVALID;
+      populateErrorMessage(err, em);
+      deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
+    }
+  );
 
-  it('ServiceContext Field: Should default the field given lack-of input ' +
-         'given an object',
-     () => {
-       const err = {};
-       populateErrorMessage(err, em);
-       deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
-     });
+  it(
+    'ServiceContext Field: Should default the field given lack-of input ' +
+      'given an object',
+    () => {
+      const err = {};
+      populateErrorMessage(err, em);
+      deepStrictEqual(em.serviceContext, TEST_SERVICE_DEFAULT);
+    }
+  );
 
-  it('Report location Field: Should default the field if given invalid input ' +
-         'given an Error',
-     () => {
-       const TEST_STACK_INVALID_CONTENTS = {
-         filePath: null,
-         lineNumber: '2',
-         functionName: {},
-       };
-       const err: AnnotatedError = new Error();
-       err.stack = TEST_STACK_INVALID_CONTENTS;
-       populateErrorMessage(err, em);
-       deepStrictEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
-     });
+  it(
+    'Report location Field: Should default the field if given invalid input ' +
+      'given an Error',
+    () => {
+      const TEST_STACK_INVALID_CONTENTS = {
+        filePath: null,
+        lineNumber: '2',
+        functionName: {},
+      };
+      const err: AnnotatedError = new Error();
+      err.stack = TEST_STACK_INVALID_CONTENTS;
+      populateErrorMessage(err, em);
+      deepStrictEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
+    }
+  );
 
-  it('Report location Field: Should default field if not given a valid type ' +
-         'given an Error',
-     () => {
-       const err: AnnotatedError = new Error();
-       const TEST_STACK_INVALID_TYPE = [] as {};
-       err.stack = TEST_STACK_INVALID_TYPE;
-       populateErrorMessage(err, em);
-       deepStrictEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
-     });
+  it(
+    'Report location Field: Should default field if not given a valid type ' +
+      'given an Error',
+    () => {
+      const err: AnnotatedError = new Error();
+      const TEST_STACK_INVALID_TYPE = [] as {};
+      err.stack = TEST_STACK_INVALID_TYPE;
+      populateErrorMessage(err, em);
+      deepStrictEqual(em.context.reportLocation, TEST_STACK_DEFAULT);
+    }
+  );
 
-  it('FilePath Field: Should set the field given valid input given an object',
-     () => {
-       const err: AnnotatedError = {};
-       const PATH = 'test';
-       err.filePath = PATH;
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.reportLocation.filePath, PATH);
-     });
+  it('FilePath Field: Should set the field given valid input given an object', () => {
+    const err: AnnotatedError = {};
+    const PATH = 'test';
+    err.filePath = PATH;
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.context.reportLocation.filePath, PATH);
+  });
 
-  it('FilePath Field: Should default the field given lack-of input given ' +
-         'an object',
-     () => {
-       const err = {};
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.reportLocation.filePath, '');
-     });
+  it(
+    'FilePath Field: Should default the field given lack-of input given ' +
+      'an object',
+    () => {
+      const err = {};
+      populateErrorMessage(err, em);
+      assert.strictEqual(em.context.reportLocation.filePath, '');
+    }
+  );
 
-  it('LineNumber Field: Should set the field given valid input given an object',
-     () => {
-       const err: AnnotatedError = {};
-       const LINE_NUMBER = 10;
-       err.lineNumber = LINE_NUMBER;
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.reportLocation.lineNumber, LINE_NUMBER);
-     });
+  it('LineNumber Field: Should set the field given valid input given an object', () => {
+    const err: AnnotatedError = {};
+    const LINE_NUMBER = 10;
+    err.lineNumber = LINE_NUMBER;
+    populateErrorMessage(err, em);
+    assert.strictEqual(em.context.reportLocation.lineNumber, LINE_NUMBER);
+  });
 
-  it('LineNumber Field: Should default the field given lack-of input given ' +
-         'an object',
-     () => {
-       const err = {};
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.reportLocation.lineNumber, 0);
-     });
+  it(
+    'LineNumber Field: Should default the field given lack-of input given ' +
+      'an object',
+    () => {
+      const err = {};
+      populateErrorMessage(err, em);
+      assert.strictEqual(em.context.reportLocation.lineNumber, 0);
+    }
+  );
 
-  it('FunctionName Field: Should set the field given valid input given ' +
-         'an object',
-     () => {
-       const err: AnnotatedError = {};
-       const FUNCTION_NAME = 'test';
-       err.functionName = FUNCTION_NAME;
-       populateErrorMessage(err, em);
-       assert.strictEqual(
-           em.context.reportLocation.functionName, FUNCTION_NAME);
-     });
+  it(
+    'FunctionName Field: Should set the field given valid input given ' +
+      'an object',
+    () => {
+      const err: AnnotatedError = {};
+      const FUNCTION_NAME = 'test';
+      err.functionName = FUNCTION_NAME;
+      populateErrorMessage(err, em);
+      assert.strictEqual(em.context.reportLocation.functionName, FUNCTION_NAME);
+    }
+  );
 
-  it('FunctionName Field: Should default the field given lack-of input given ' +
-         'an object',
-     () => {
-       const err = {};
-       populateErrorMessage(err, em);
-       assert.strictEqual(em.context.reportLocation.functionName, '');
-     });
+  it(
+    'FunctionName Field: Should default the field given lack-of input given ' +
+      'an object',
+    () => {
+      const err = {};
+      populateErrorMessage(err, em);
+      assert.strictEqual(em.context.reportLocation.functionName, '');
+    }
+  );
 });

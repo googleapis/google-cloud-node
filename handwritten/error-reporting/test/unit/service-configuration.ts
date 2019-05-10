@@ -37,21 +37,27 @@ function sterilizeServiceConfigEnv() {
   });
 }
 function setEnv(
-    serviceName: string|null, serviceVersion: string, moduleName: string|null,
-    mv: string, fn: string|null) {
+  serviceName: string | null,
+  serviceVersion: string,
+  moduleName: string | null,
+  mv: string,
+  fn: string | null
+) {
   Object.assign(
-      process.env,
-      omitBy(
-          {
-            GAE_SERVICE: serviceName,
-            GAE_VERSION: serviceVersion,
-            GAE_MODULE_NAME: moduleName,
-            GAE_MODULE_VERSION: mv,
-            FUNCTION_NAME: fn,
-          },
-          val => {
-            return !is.string(val);
-          }));
+    process.env,
+    omitBy(
+      {
+        GAE_SERVICE: serviceName,
+        GAE_VERSION: serviceVersion,
+        GAE_MODULE_NAME: moduleName,
+        GAE_MODULE_VERSION: mv,
+        FUNCTION_NAME: fn,
+      },
+      val => {
+        return !is.string(val);
+      }
+    )
+  );
 }
 function restoreServiceConfigEnv() {
   Object.assign(process.env, serviceConfigEnv);
@@ -64,172 +70,215 @@ describe('Testing service configuration', () => {
   after(() => {
     restoreServiceConfigEnv();
   });
-  it('A Configuration uses the function name as the service name on GCF ' +
-         'if the service name is not given in the given config',
-     () => {
-       setEnv(
-           'someModuleName', '1.0', 'InvalidName', 'InvalidVersion',
-           'someFunction');
-       const c = new Configuration({}, logger);
-       deepStrictEqual(c.getServiceContext().service, 'someFunction');
-       // FUNCTION_NAME is set and the user didn't specify a version, and so
-       // the version should not be defined
-       deepStrictEqual(c.getServiceContext().version, undefined);
-     });
-  it('A Configuration uses the function name as the service name on GCF ' +
-         'if the service name is not given in the given config ' +
-         'even if the GAE_SERVICE was not set',
-     () => {
-       setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
-       const c = new Configuration({}, logger);
-       deepStrictEqual(c.getServiceContext().service, 'someFunction');
-       // The user didn't specify a version and FUNCTION_NAME is defined, and
-       // so the version should not be defined
-       deepStrictEqual(c.getServiceContext().version, undefined);
-     });
-  it('A Configuration uses the GAE_SERVICE env value as the service name ' +
-         'if the FUNCTION_NAME env variable is not set and the given config ' +
-         'does not specify the service name',
-     () => {
-       setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
-       const c = new Configuration({}, logger);
-       deepStrictEqual(c.getServiceContext().service, 'someModuleName');
-       // The user didn't specify a version, and FUNCTION_NAME is not defined,
-       // and so use the GAE_MODULE_VERSION
-       deepStrictEqual(c.getServiceContext().version, '1.0');
-     });
-  it('A Configuration uses the service name in the given config if it ' +
-         'was specified and both the GAE_SERVICE and FUNCTION_NAME ' +
-         'env vars are set',
-     () => {
-       setEnv(
-           'someModuleName', '1.0', 'InvalidName', 'InvalidVersion',
-           'someFunction');
-       const c = new Configuration(
-           {
-             serviceContext: {
-               service: 'customService',
-             },
-           },
-           logger);
-       deepStrictEqual(c.getServiceContext().service, 'customService');
-       // The user didn't specify a version, but FUNCTION_NAME is defined, and
-       // so the version should not be defined
-       deepStrictEqual(c.getServiceContext().version, undefined);
-     });
-  it('A Configuration uses the service name and version in the given config' +
-         'they were both specified and both the GAE_SERVICE and FUNCTION_NAME ' +
-         'env vars are set',
-     () => {
-       setEnv(
-           'someModuleName', '1.0', 'InvalidName', 'InvalidVersion',
-           'someFunction');
-       const c = new Configuration(
-           {
-             serviceContext: {
-               service: 'customService',
-               version: '2.0',
-             },
-           },
-           logger);
-       deepStrictEqual(c.getServiceContext().service, 'customService');
-       // The user specified version should be used
-       deepStrictEqual(c.getServiceContext().version, '2.0');
-     });
-  it('A Configuration uses the service name in the given config if it ' +
-         'was specified and only the GAE_SERVICE env const is set',
-     () => {
-       setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
-       const c = new Configuration(
-           {
-             serviceContext: {
-               service: 'customService',
-             },
-           },
-           logger);
-       deepStrictEqual(c.getServiceContext().service, 'customService');
-       // The user didn't specify a version and FUNCTION_NAME is not defined
-       // and so the GAE_MODULE_VERSION should be used
-       deepStrictEqual(c.getServiceContext().version, '1.0');
-     });
-  it('A Configuration uses the service name and version in the given config ' +
-         'they were both specified and only the GAE_SERVICE env const is set',
-     () => {
-       setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
-       const c = new Configuration(
-           {
-             serviceContext: {
-               service: 'customService',
-               version: '2.0',
-             },
-           },
-           logger);
-       deepStrictEqual(c.getServiceContext().service, 'customService');
-       // The user specified version should be used
-       deepStrictEqual(c.getServiceContext().version, '2.0');
-     });
-  it('A Configuration uses the service name in the given config if it ' +
-         'was specified and only the FUNCTION_NAME env const is set',
-     () => {
-       setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
-       const c = new Configuration(
-           {
-             serviceContext: {
-               service: 'customService',
-             },
-           },
-           logger);
-       deepStrictEqual(c.getServiceContext().service, 'customService');
-       // The user didn't specify a version and thus because FUNCTION_NAME is
-       // defined the version should not be defined
-       deepStrictEqual(c.getServiceContext().version, undefined);
-     });
-  it('A Configuration uses the service name and version in the given config ' +
-         'if they were both specified and only the FUNCTION_NAME env const is set',
-     () => {
-       setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
-       const c = new Configuration(
-           {
-             serviceContext: {
-               service: 'customService',
-               version: '2.0',
-             },
-           },
-           logger);
-       assert.strictEqual(c.getServiceContext().service, 'customService');
-       // The user specified version should be used
-       assert.strictEqual(c.getServiceContext().version, '2.0');
-     });
-  it('A Configuration uses the service name "node" and no version if ' +
-         'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has ' +
-         'not specified a service name or version',
-     () => {
-       const c = new Configuration({}, logger);
-       assert.strictEqual(c.getServiceContext().service, 'node');
-       assert.strictEqual(c.getServiceContext().version, undefined);
-     });
-  it('A Configuration uses the service name "node" and no version if ' +
-         'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has ' +
-         'not specified a service name or version even if GAE_VERSION has ' +
-         'been set',
-     () => {
-       setEnv(null, 'InvalidVersion', null, 'InvalidVersion', null);
-       const c = new Configuration({}, logger);
-       assert.strictEqual(c.getServiceContext().service, 'node');
-       assert.strictEqual(c.getServiceContext().version, undefined);
-     });
-  it('A Configuration uses the service name "node" and the user specified ' +
-         'version if GAE_SERVICE is not set, FUNCTION_NAME is not set, and the ' +
-         'user has not specified a service name but has specified a version',
-     () => {
-       const c = new Configuration(
-           {
-             serviceContext: {
-               version: '2.0',
-             },
-           },
-           logger);
-       deepStrictEqual(c.getServiceContext().service, 'node');
-       deepStrictEqual(c.getServiceContext().version, '2.0');
-     });
+  it(
+    'A Configuration uses the function name as the service name on GCF ' +
+      'if the service name is not given in the given config',
+    () => {
+      setEnv(
+        'someModuleName',
+        '1.0',
+        'InvalidName',
+        'InvalidVersion',
+        'someFunction'
+      );
+      const c = new Configuration({}, logger);
+      deepStrictEqual(c.getServiceContext().service, 'someFunction');
+      // FUNCTION_NAME is set and the user didn't specify a version, and so
+      // the version should not be defined
+      deepStrictEqual(c.getServiceContext().version, undefined);
+    }
+  );
+  it(
+    'A Configuration uses the function name as the service name on GCF ' +
+      'if the service name is not given in the given config ' +
+      'even if the GAE_SERVICE was not set',
+    () => {
+      setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
+      const c = new Configuration({}, logger);
+      deepStrictEqual(c.getServiceContext().service, 'someFunction');
+      // The user didn't specify a version and FUNCTION_NAME is defined, and
+      // so the version should not be defined
+      deepStrictEqual(c.getServiceContext().version, undefined);
+    }
+  );
+  it(
+    'A Configuration uses the GAE_SERVICE env value as the service name ' +
+      'if the FUNCTION_NAME env variable is not set and the given config ' +
+      'does not specify the service name',
+    () => {
+      setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
+      const c = new Configuration({}, logger);
+      deepStrictEqual(c.getServiceContext().service, 'someModuleName');
+      // The user didn't specify a version, and FUNCTION_NAME is not defined,
+      // and so use the GAE_MODULE_VERSION
+      deepStrictEqual(c.getServiceContext().version, '1.0');
+    }
+  );
+  it(
+    'A Configuration uses the service name in the given config if it ' +
+      'was specified and both the GAE_SERVICE and FUNCTION_NAME ' +
+      'env vars are set',
+    () => {
+      setEnv(
+        'someModuleName',
+        '1.0',
+        'InvalidName',
+        'InvalidVersion',
+        'someFunction'
+      );
+      const c = new Configuration(
+        {
+          serviceContext: {
+            service: 'customService',
+          },
+        },
+        logger
+      );
+      deepStrictEqual(c.getServiceContext().service, 'customService');
+      // The user didn't specify a version, but FUNCTION_NAME is defined, and
+      // so the version should not be defined
+      deepStrictEqual(c.getServiceContext().version, undefined);
+    }
+  );
+  it(
+    'A Configuration uses the service name and version in the given config' +
+      'they were both specified and both the GAE_SERVICE and FUNCTION_NAME ' +
+      'env vars are set',
+    () => {
+      setEnv(
+        'someModuleName',
+        '1.0',
+        'InvalidName',
+        'InvalidVersion',
+        'someFunction'
+      );
+      const c = new Configuration(
+        {
+          serviceContext: {
+            service: 'customService',
+            version: '2.0',
+          },
+        },
+        logger
+      );
+      deepStrictEqual(c.getServiceContext().service, 'customService');
+      // The user specified version should be used
+      deepStrictEqual(c.getServiceContext().version, '2.0');
+    }
+  );
+  it(
+    'A Configuration uses the service name in the given config if it ' +
+      'was specified and only the GAE_SERVICE env const is set',
+    () => {
+      setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
+      const c = new Configuration(
+        {
+          serviceContext: {
+            service: 'customService',
+          },
+        },
+        logger
+      );
+      deepStrictEqual(c.getServiceContext().service, 'customService');
+      // The user didn't specify a version and FUNCTION_NAME is not defined
+      // and so the GAE_MODULE_VERSION should be used
+      deepStrictEqual(c.getServiceContext().version, '1.0');
+    }
+  );
+  it(
+    'A Configuration uses the service name and version in the given config ' +
+      'they were both specified and only the GAE_SERVICE env const is set',
+    () => {
+      setEnv('someModuleName', '1.0', 'InvalidName', 'InvalidVersion', null);
+      const c = new Configuration(
+        {
+          serviceContext: {
+            service: 'customService',
+            version: '2.0',
+          },
+        },
+        logger
+      );
+      deepStrictEqual(c.getServiceContext().service, 'customService');
+      // The user specified version should be used
+      deepStrictEqual(c.getServiceContext().version, '2.0');
+    }
+  );
+  it(
+    'A Configuration uses the service name in the given config if it ' +
+      'was specified and only the FUNCTION_NAME env const is set',
+    () => {
+      setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
+      const c = new Configuration(
+        {
+          serviceContext: {
+            service: 'customService',
+          },
+        },
+        logger
+      );
+      deepStrictEqual(c.getServiceContext().service, 'customService');
+      // The user didn't specify a version and thus because FUNCTION_NAME is
+      // defined the version should not be defined
+      deepStrictEqual(c.getServiceContext().version, undefined);
+    }
+  );
+  it(
+    'A Configuration uses the service name and version in the given config ' +
+      'if they were both specified and only the FUNCTION_NAME env const is set',
+    () => {
+      setEnv(null, '1.0', null, 'InvalidVersion', 'someFunction');
+      const c = new Configuration(
+        {
+          serviceContext: {
+            service: 'customService',
+            version: '2.0',
+          },
+        },
+        logger
+      );
+      assert.strictEqual(c.getServiceContext().service, 'customService');
+      // The user specified version should be used
+      assert.strictEqual(c.getServiceContext().version, '2.0');
+    }
+  );
+  it(
+    'A Configuration uses the service name "node" and no version if ' +
+      'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has ' +
+      'not specified a service name or version',
+    () => {
+      const c = new Configuration({}, logger);
+      assert.strictEqual(c.getServiceContext().service, 'node');
+      assert.strictEqual(c.getServiceContext().version, undefined);
+    }
+  );
+  it(
+    'A Configuration uses the service name "node" and no version if ' +
+      'GAE_SERVICE is not set, FUNCTION_NAME is not set, and the user has ' +
+      'not specified a service name or version even if GAE_VERSION has ' +
+      'been set',
+    () => {
+      setEnv(null, 'InvalidVersion', null, 'InvalidVersion', null);
+      const c = new Configuration({}, logger);
+      assert.strictEqual(c.getServiceContext().service, 'node');
+      assert.strictEqual(c.getServiceContext().version, undefined);
+    }
+  );
+  it(
+    'A Configuration uses the service name "node" and the user specified ' +
+      'version if GAE_SERVICE is not set, FUNCTION_NAME is not set, and the ' +
+      'user has not specified a service name but has specified a version',
+    () => {
+      const c = new Configuration(
+        {
+          serviceContext: {
+            version: '2.0',
+          },
+        },
+        logger
+      );
+      deepStrictEqual(c.getServiceContext().service, 'node');
+      deepStrictEqual(c.getServiceContext().version, '2.0');
+    }
+  );
 });

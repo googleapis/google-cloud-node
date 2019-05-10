@@ -22,10 +22,15 @@ const packageJson = require('../../package.json');
 
 import {ConfigurationOptions, Logger} from './configuration';
 
-
-const LEVELNAMES: consoleLogLevel.LogLevelNames[] =
-    ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
-const DEFAULT_LEVEL = 2;  // warn.
+const LEVELNAMES: consoleLogLevel.LogLevelNames[] = [
+  'fatal',
+  'error',
+  'warn',
+  'info',
+  'debug',
+  'trace',
+];
+const DEFAULT_LEVEL = 2; // warn.
 
 function logLevelToName(level: number): consoleLogLevel.LogLevelNames {
   if (typeof level === 'string') {
@@ -70,13 +75,14 @@ export function createLogger(config?: ConfigurationOptions): Logger {
       level = Number(config!.logLevel!) || DEFAULT_LEVEL;
     } else {
       throw new Error(
-          'config.logLevel must be a number or decimal ' +
-          'representation of a number in string form');
+        'config.logLevel must be a number or decimal ' +
+          'representation of a number in string form'
+      );
     }
   }
   return consoleLogLevel({
     stderr: true,
     prefix: (level: string) => `${level.toUpperCase()}:${packageJson.name}:`,
-    level: logLevelToName(level)
+    level: logLevelToName(level),
   });
 }

@@ -33,7 +33,9 @@ import {expressRequestInformationExtractor} from '../request-extractors/express'
  *  error handling middleware.
  */
 export function makeExpressHandler(
-    client: RequestHandler, config: Configuration) {
+  client: RequestHandler,
+  config: Configuration
+) {
   /**
    * The Express Error Handler function is an interface for the error handler
    * stack into the Express architecture.
@@ -47,28 +49,33 @@ export function makeExpressHandler(
    */
   function expressErrorHandler(err: {}, req: {}, res: {}, next: Function) {
     let ctxService = '';
-    let ctxVersion: string|undefined = '';
+    let ctxVersion: string | undefined = '';
 
     if (is.object(config)) {
       ctxService = config.getServiceContext().service;
       ctxVersion = config.getServiceContext().version;
     }
 
-    const em =
-        new ErrorMessage()
-            .consumeRequestInformation(expressRequestInformationExtractor(
-                req as express.Request, res as express.Response))
-            .setServiceContext(ctxService, ctxVersion);
+    const em = new ErrorMessage()
+      .consumeRequestInformation(
+        expressRequestInformationExtractor(
+          req as express.Request,
+          res as express.Response
+        )
+      )
+      .setServiceContext(ctxService, ctxVersion);
 
     populateErrorMessage(err, em);
 
-    if (is.object(client) && is.function(client.sendError))
-      { client.sendError(em); }
+    if (is.object(client) && is.function(client.sendError)) {
+      client.sendError(em);
+    }
 
-    if (is.function(next))
-        { next(err); }
+    if (is.function(next)) {
+      next(err);
+    }
 
-        return em;
+    return em;
   }
 
   return expressErrorHandler;

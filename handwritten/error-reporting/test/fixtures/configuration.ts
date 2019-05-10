@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-import {Configuration, ConfigurationOptions, Logger} from '../../src/configuration';
+import {
+  Configuration,
+  ConfigurationOptions,
+  Logger,
+} from '../../src/configuration';
 
 export class FakeConfiguration extends Configuration {
-  constructor(config: ConfigurationOptions|undefined, logger?: Logger) {
-    super(config, logger || {warn() {}} as {} as Logger);
+  constructor(config: ConfigurationOptions | undefined, logger?: Logger) {
+    super(config, logger || (({warn() {}} as {}) as Logger));
   }
 }

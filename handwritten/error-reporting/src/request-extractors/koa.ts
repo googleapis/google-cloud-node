@@ -30,20 +30,30 @@ import {RequestInformationContainer} from '../classes/request-information-contai
  *  container instance that may be in its initial state
  */
 export function koaRequestInformationExtractor(
-    req: koa.Request, res: koa.Response) {
+  req: koa.Request,
+  res: koa.Response
+) {
   const returnObject = new RequestInformationContainer();
 
-  if (!is.object(req) || !is.object(res) || is.function(req) || is.function(res) ||
-      is.array(req) || is.array(res) || !is.object(req.headers)) {
-      return returnObject;
-    }
-
-    returnObject.setMethod(req.method)
-        .setUrl(req.url)
-        .setUserAgent(req.headers['user-agent'])
-        .setReferrer(req.headers.referrer)
-        .setStatusCode(res.status)
-        .setRemoteAddress(req.ip);
-
+  if (
+    !is.object(req) ||
+    !is.object(res) ||
+    is.function(req) ||
+    is.function(res) ||
+    is.array(req) ||
+    is.array(res) ||
+    !is.object(req.headers)
+  ) {
     return returnObject;
+  }
+
+  returnObject
+    .setMethod(req.method)
+    .setUrl(req.url)
+    .setUserAgent(req.headers['user-agent'])
+    .setReferrer(req.headers.referrer)
+    .setStatusCode(res.status)
+    .setRemoteAddress(req.ip);
+
+  return returnObject;
 }

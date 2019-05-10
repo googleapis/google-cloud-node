@@ -25,21 +25,22 @@ const SRC_ROOT = __dirname;
  * @returns {String} - A string representation of the stack trace at the point
  *   where this method was invoked.
  */
-export function buildStackTrace(message?: string|null) {
+export function buildStackTrace(message?: string | null) {
   const target = {};
   // Build a stack trace without the frames associated with `buildStackTrace`.
   // The stack is located at `target.stack`.
   Error.captureStackTrace(target, buildStackTrace);
   const prefix = message ? message + '\n' : '';
   return (
-      prefix +
-      (target as {stack: string})
-          .stack.split('\n')
-          .slice(1)
-          .filter((line: string) => {
-            // Filter out all frames that are specific to the error-reporting
-            // library
-            return !line || line.indexOf(SRC_ROOT) === -1;
-          })
-          .join('\n'));
+    prefix +
+    (target as {stack: string}).stack
+      .split('\n')
+      .slice(1)
+      .filter((line: string) => {
+        // Filter out all frames that are specific to the error-reporting
+        // library
+        return !line || line.indexOf(SRC_ROOT) === -1;
+      })
+      .join('\n')
+  );
 }
