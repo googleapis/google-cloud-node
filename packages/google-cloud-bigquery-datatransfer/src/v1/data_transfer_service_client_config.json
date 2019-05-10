@@ -3,6 +3,7 @@
     "google.cloud.bigquery.datatransfer.v1.DataTransferService": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
