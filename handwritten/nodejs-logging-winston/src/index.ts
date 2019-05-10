@@ -1,4 +1,3 @@
-
 import * as TransportStream from 'winston-transport';
 
 import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
@@ -102,8 +101,10 @@ export class LoggingWinston extends TransportStream {
     this.common = new LoggingCommon(options);
   }
 
-  log({message, level, splat, stack, ...metadata}: types.Winston3LogArg,
-      callback: Callback) {
+  log(
+    {message, level, splat, stack, ...metadata}: types.Winston3LogArg,
+    callback: Callback
+  ) {
     // If the whole message is an error we have to manually copy the stack into
     // metadata. Errors dont have enumerable properties so they don't
     // destructure.

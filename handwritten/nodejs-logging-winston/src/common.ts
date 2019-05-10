@@ -32,17 +32,18 @@ const NPM_LEVEL_NAME_TO_CODE = {
 };
 
 // Map of Stackdriver Logging levels.
-const STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME:
-    {[key: number]: types.StackdriverLoggingLevelNames} = {
-      0: 'emergency',
-      1: 'alert',
-      2: 'critical',
-      3: 'error',
-      4: 'warning',
-      5: 'notice',
-      6: 'info',
-      7: 'debug'
-    };
+const STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME: {
+  [key: number]: types.StackdriverLoggingLevelNames;
+} = {
+  0: 'emergency',
+  1: 'alert',
+  2: 'critical',
+  3: 'error',
+  4: 'warning',
+  5: 'notice',
+  6: 'info',
+  7: 'debug',
+};
 
 /*!
  * Log entry data key to allow users to indicate a trace for the request.
@@ -54,7 +55,7 @@ export const LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
  * @google-cloud/trace-agent library in the LogEntry.trace field format of:
  * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
  */
-function getCurrentTraceFromAgent(): string|null {
+function getCurrentTraceFromAgent(): string | null {
   const agent = global._google_trace_agent;
   if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
     return null;
@@ -76,20 +77,20 @@ function getCurrentTraceFromAgent(): string|null {
 export class LoggingCommon {
   private inspectMetadata: boolean;
   private levels: {[name: string]: number};
-  stackdriverLog:
-      types.StackdriverLog;  // TODO: add type for @google-cloud/logging
-  private resource: types.MonitoredResource|undefined;
-  private serviceContext: types.ServiceContext|undefined;
-  private prefix: string|undefined;
-  private labels: object|undefined;
+  stackdriverLog: types.StackdriverLog; // TODO: add type for @google-cloud/logging
+  private resource: types.MonitoredResource | undefined;
+  private serviceContext: types.ServiceContext | undefined;
+  private prefix: string | undefined;
+  private labels: object | undefined;
   static readonly LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
 
   constructor(options?: types.Options) {
     options = Object.assign(
-        {
-          scopes: ['https://www.googleapis.com/auth/logging.write'],
-        },
-        options);
+      {
+        scopes: ['https://www.googleapis.com/auth/logging.write'],
+      },
+      options
+    );
 
     const logName = options.logName || 'winston_log';
 
@@ -104,9 +105,13 @@ export class LoggingCommon {
     this.labels = options.labels;
   }
 
-  log(level: string, message: string, metadata: MetadataArg|undefined,
-      callback: Callback) {
-    metadata = metadata || {} as MetadataArg;
+  log(
+    level: string,
+    message: string,
+    metadata: MetadataArg | undefined,
+    callback: Callback
+  ) {
+    metadata = metadata || ({} as MetadataArg);
     message = message || '';
     const hasMetadata = Object.keys(metadata).length;
 
@@ -165,9 +170,9 @@ export class LoggingCommon {
     // metadata.
     // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
     if (this.labels || metadata.labels) {
-      entryMetadata.labels = !this.labels ?
-          metadata.labels :
-          Object.assign({}, this.labels, metadata.labels);
+      entryMetadata.labels = !this.labels
+        ? metadata.labels
+        : Object.assign({}, this.labels, metadata.labels);
     }
 
     const trace = metadata[LOGGING_TRACE_KEY] || getCurrentTraceFromAgent();
@@ -178,8 +183,9 @@ export class LoggingCommon {
     // we have tests that assert that metadata is always passed.
     // not sure if its correct but for now we always set it even if it has
     // nothing in it
-    data.metadata =
-        this.inspectMetadata ? mapValues(metadata, util.inspect) : metadata;
+    data.metadata = this.inspectMetadata
+      ? mapValues(metadata, util.inspect)
+      : metadata;
 
     if (hasMetadata) {
       // clean entryMetadata props
@@ -195,11 +201,11 @@ export class LoggingCommon {
 }
 
 type MetadataArg = {
-  stack?: {},
+  stack?: {};
   /**
    * set httpRequest to a http.clientRequest object to log it
    */
-  httpRequest?: types.HttpRequest,
-  labels?: {},
-  timestamp?: {}
-}&{[key: string]: string | {}};
+  httpRequest?: types.HttpRequest;
+  labels?: {};
+  timestamp?: {};
+} & {[key: string]: string | {}};
