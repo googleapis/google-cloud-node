@@ -3,6 +3,7 @@
     "google.cloud.kms.v1.KeyManagementService": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
