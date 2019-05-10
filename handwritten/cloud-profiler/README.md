@@ -105,9 +105,9 @@ export GCLOUD_PROFILER_CONFIG=./path/to/your/profiler/configuration.js
 
 The profiler writes log statements to the console log for diagnostic purposes.
 By default, the log level is set to warn. You can adjust this by setting
-`logLevel` in the config. Setting `logLevel` to 0 will disable logging, 1 sets
-log level to error, 2 sets it to warn, 3 sets it to info, and 4 sets it to
-debug.
+`logLevel` in the config. Setting `logLevel` to 0 will disable logging,
+1 sets log level to error, 2 sets it to warn (default), 3 sets it to info,
+and 4 sets it to debug.
 
 So, for example, to start the profiler with the log level at debug, you would
 do this:
