@@ -3,6 +3,7 @@
     "google.cloud.videointelligence.v1beta2.VideoIntelligenceService": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []

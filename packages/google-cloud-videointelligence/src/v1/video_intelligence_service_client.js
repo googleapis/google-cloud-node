@@ -269,7 +269,7 @@ class VideoIntelligenceServiceClient {
    *   // optional auth parameters.
    * });
    *
-   * const inputUri = 'gs://videodemomaker/cat.mp4';
+   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const featuresElement = 'LABEL_DETECTION';
    * const features = [featuresElement];
    * const request = {
@@ -294,7 +294,7 @@ class VideoIntelligenceServiceClient {
    *     console.error(err);
    *   });
    *
-   * const inputUri = 'gs://videodemomaker/cat.mp4';
+   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const featuresElement = 'LABEL_DETECTION';
    * const features = [featuresElement];
    * const request = {
@@ -328,7 +328,7 @@ class VideoIntelligenceServiceClient {
    *     console.error(err);
    *   });
    *
-   * const inputUri = 'gs://videodemomaker/cat.mp4';
+   * const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
    * const featuresElement = 'LABEL_DETECTION';
    * const features = [featuresElement];
    * const request = {
