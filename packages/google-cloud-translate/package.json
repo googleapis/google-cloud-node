@@ -51,7 +51,7 @@
     "@google-cloud/promisify": "^1.0.0",
     "arrify": "^2.0.0",
     "extend": "^3.0.1",
-    "google-gax": "^0.26.0",
+    "google-gax": "^1.0.0",
     "is": "^3.2.1",
     "is-html": "^1.1.0",
     "lodash.merge": "^4.6.1",
