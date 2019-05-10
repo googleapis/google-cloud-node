@@ -3,6 +3,7 @@
     "google.cloud.dialogflow.v2beta1.KnowledgeBases": {
       "retry_codes": {
         "idempotent": [
+          "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
