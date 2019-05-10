@@ -47,7 +47,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "@google-cloud/common": "^0.32.0",
+    "@google-cloud/common": "^1.0.0",
     "@google-cloud/promisify": "^1.0.0",
     "arrify": "^2.0.0",
     "extend": "^3.0.1",
