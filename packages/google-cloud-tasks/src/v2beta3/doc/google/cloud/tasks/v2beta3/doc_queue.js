@@ -116,11 +116,12 @@
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
- * @property {number} logSamplingRatio
- *   Specifies the fraction of operations to write to
- *   [Stackdriver Logging](https://cloud.google.com/logging/docs/).
- *   This field may contain any value between 0.0 and 1.0, inclusive.
- *   0.0 is the default and means that no operations are logged.
+ * @property {Object} stackdriverLoggingConfig
+ *   Configuration options for writing logs to
+ *   [Stackdriver Logging](https://cloud.google.com/logging/docs/). If this
+ *   field is unset, then no logs are written.
+ *
+ *   This object should have the same structure as [StackdriverLoggingConfig]{@link google.cloud.tasks.v2beta3.StackdriverLoggingConfig}
  *
  * @typedef Queue
  * @memberof google.cloud.tasks.v2beta3
@@ -377,5 +378,23 @@ const RateLimits = {
  * @see [google.cloud.tasks.v2beta3.RetryConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta3/queue.proto}
  */
 const RetryConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Configuration options for writing logs to
+ * [Stackdriver Logging](https://cloud.google.com/logging/docs/).
+ *
+ * @property {number} samplingRatio
+ *   Specifies the fraction of operations to write to
+ *   [Stackdriver Logging](https://cloud.google.com/logging/docs/).
+ *   This field may contain any value between 0.0 and 1.0, inclusive.
+ *   0.0 is the default and means that no operations are logged.
+ *
+ * @typedef StackdriverLoggingConfig
+ * @memberof google.cloud.tasks.v2beta3
+ * @see [google.cloud.tasks.v2beta3.StackdriverLoggingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/tasks/v2beta3/queue.proto}
+ */
+const StackdriverLoggingConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
