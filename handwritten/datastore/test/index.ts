@@ -77,7 +77,7 @@ const fakeGoogleGax = {
     constructor(opts: gax.GrpcClientOptions) {
       // super constructor must be called first!
       super(opts);
-      this.grpc = {
+      this.grpc = ({
         credentials: {
           createInsecure() {
             return (createInsecureOverride || (() => {})).apply(
@@ -86,7 +86,7 @@ const fakeGoogleGax = {
             );
           },
         },
-      } as gax.GrpcModule;
+      } as {}) as gax.GrpcModule;
     }
   },
 };

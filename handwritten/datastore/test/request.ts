@@ -18,7 +18,7 @@ import * as pjy from '@google-cloud/projectify';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as extend from 'extend';
-import {CallOptions} from 'grpc';
+import {CallOptions} from '@grpc/grpc-js';
 import * as is from 'is';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
@@ -1649,7 +1649,8 @@ describe('Request', () => {
     it('should send gaxOpts', done => {
       request.datastore.clients_ = new Map();
       request.datastore.clients_.set(CONFIG.client, {
-        [CONFIG.method](_: object, gaxO: CallOptions) {
+        // tslint:disable-next-line no-any
+        [CONFIG.method](_: object, gaxO: any) {
           delete gaxO.headers;
           assert.deepStrictEqual(gaxO, CONFIG.gaxOpts);
           done();
@@ -1662,7 +1663,8 @@ describe('Request', () => {
     it('should send google-cloud-resource-prefix', done => {
       request.datastore.clients_ = new Map();
       request.datastore.clients_.set(CONFIG.client, {
-        [CONFIG.method](_: object, gaxO: CallOptions) {
+        // tslint:disable-next-line no-any
+        [CONFIG.method](_: object, gaxO: any) {
           assert.deepStrictEqual(gaxO.headers, {
             'google-cloud-resource-prefix': 'projects/' + PROJECT_ID,
           });
