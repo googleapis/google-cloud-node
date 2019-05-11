@@ -136,6 +136,11 @@
  *
  *   This object should have the same structure as [MetricDescriptorMetadata]{@link google.api.MetricDescriptorMetadata}
  *
+ * @property {number} launchStage
+ *   Optional. The launch stage of the metric definition.
+ *
+ *   The number should be among the values of [LaunchStage]{@link google.api.LaunchStage}
+ *
  * @typedef MetricDescriptor
  * @memberof google.api
  * @see [google.api.MetricDescriptor definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/metric.proto}
@@ -147,6 +152,7 @@ const MetricDescriptor = {
    * Additional annotations that can be used to guide the usage of a metric.
    *
    * @property {number} launchStage
+   *   Deprecated. Please use the MetricDescriptor.launch_stage instead.
    *   The launch stage of the metric definition.
    *
    *   The number should be among the values of [LaunchStage]{@link google.api.LaunchStage}

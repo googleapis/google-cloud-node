@@ -56,6 +56,11 @@
  *
  *   This object should have the same structure as [LabelDescriptor]{@link google.api.LabelDescriptor}
  *
+ * @property {number} launchStage
+ *   Optional. The launch stage of the monitored resource definition.
+ *
+ *   The number should be among the values of [LaunchStage]{@link google.api.LaunchStage}
+ *
  * @typedef MonitoredResourceDescriptor
  * @memberof google.api
  * @see [google.api.MonitoredResourceDescriptor definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/api/monitored_resource.proto}
