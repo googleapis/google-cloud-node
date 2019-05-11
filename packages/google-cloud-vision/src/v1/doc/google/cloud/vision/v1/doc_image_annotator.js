@@ -1247,8 +1247,8 @@ const AsyncBatchAnnotateFilesResponse = {
  *   not work for AsyncBatchAnnotateFiles requests.
  *
  * @property {string} mimeType
- *   The type of the file. Currently only "application/pdf" and "image/tiff"
- *   are supported. Wildcards are not supported.
+ *   The type of the file. Currently only "application/pdf", "image/tiff" and
+ *   "image/gif" are supported. Wildcards are not supported.
  *
  * @typedef InputConfig
  * @memberof google.cloud.vision.v1
