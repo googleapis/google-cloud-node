@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^4.4.0",
-    "google-auth-library": "^3.1.0",
+    "google-auth-library": "^4.0.0",
     "lodash.mapvalues": "^4.6.0",
     "logform": "^2.0.0",
     "winston-transport": "^4.2.0"
