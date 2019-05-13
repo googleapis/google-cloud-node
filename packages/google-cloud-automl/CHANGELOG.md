@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-automl/compare/v0.2.0...v1.0.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to v1 ([#176](https://www.github.com/googleapis/nodejs-automl/issues/176)) ([423ae98](https://www.github.com/googleapis/nodejs-automl/commit/423ae98))
+* DEADLINE_EXCEEDED is no longer retried ([20eb86c](https://www.github.com/googleapis/nodejs-automl/commit/20eb86c))
+* DEADLINE_EXCEEDED retry code is idempotent ([#177](https://www.github.com/googleapis/nodejs-automl/issues/177)) ([e8313ab](https://www.github.com/googleapis/nodejs-automl/commit/e8313ab))
+* **deps:** update dependency google-gax to ^0.26.0 ([#166](https://www.github.com/googleapis/nodejs-automl/issues/166)) ([b449fc7](https://www.github.com/googleapis/nodejs-automl/commit/b449fc7))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#168](https://www.github.com/googleapis/nodejs-automl/issues/168)) ([249c7a8](https://www.github.com/googleapis/nodejs-automl/commit/249c7a8))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#168)
+
 ## v0.2.0
 
 04-03-2019 12:39 PDT
