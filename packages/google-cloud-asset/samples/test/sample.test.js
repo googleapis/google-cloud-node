@@ -22,7 +22,6 @@ const {Storage} = require('@google-cloud/storage');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const cmd = 'node quickstart.js';
 const storage = new Storage();
 const bucketName = `asset-nodejs-${uuid.v4()}`;
 const bucket = storage.bucket(bucketName);
@@ -38,7 +37,7 @@ describe('quickstart sample tests', () => {
 
   it('should export assets to specified path', async () => {
     const dumpFilePath = `gs://${bucketName}/my-assets.txt`;
-    execSync(`${cmd} export-assets ${dumpFilePath}`);
+    execSync(`node exportAssets ${dumpFilePath}`);
     const file = await bucket.file('my-assets.txt');
     const exists = await file.exists();
     assert.ok(exists);
@@ -47,7 +46,13 @@ describe('quickstart sample tests', () => {
 
   it('should get assets history successfully', async () => {
     const assetName = `//storage.googleapis.com/${bucketName}`;
-    const stdout = execSync(`${cmd} batch-get-history ${assetName}`);
-    assert.match(stdout, new RegExp(assetName));
+    const stdout = execSync(`node getBatchAssetHistory ${assetName}`);
+    assert.include(stdout, assetName);
+  });
+
+  it('should run the quickstart', async () => {
+    const assetName = `//storage.googleapis.com/${bucketName}`;
+    const stdout = execSync(`node quickstart ${assetName}`);
+    assert.include(stdout, assetName);
   });
 });

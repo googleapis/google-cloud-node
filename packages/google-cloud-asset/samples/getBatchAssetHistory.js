@@ -16,18 +16,18 @@
 'use strict';
 
 // sample-metadata:
-//   title: Asset History Quickstart
+//   title: Get Batch Asset History
 //   description: Batch get history of assets.
 //   usage: node getBatchAssetHistory "//storage.googleapis.com/<BUCKET_NAME>"
 
 async function main(assetNames) {
-  // [START asset_quickstart]
+  // [START asset_quickstart_batch_get_assets_history]
   const util = require('util');
   const {AssetServiceClient} = require('@google-cloud/asset');
 
   const client = new AssetServiceClient();
 
-  async function quickstart() {
+  async function batchGetAssetsHistory() {
     const projectId = await client.getProjectId();
     const projectResource = client.projectPath(projectId);
     // TODO(developer): Choose asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
@@ -48,9 +48,12 @@ async function main(assetNames) {
     const result = await client.batchGetAssetsHistory(request);
     // Do things with with the response.
     console.log(util.inspect(result, {depth: null}));
-    // [END asset_quickstart]
+    // [END asset_quickstart_batch_get_assets_history]
   }
-  quickstart();
+  batchGetAssetsHistory();
 }
 
-main(...process.argv.slice(2));
+main(...process.argv.slice(2)).catch(err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
