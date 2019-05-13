@@ -1,21 +1,22 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `npm run generate-scaffolding`."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Tasks: Node.js Client](https://github.com/googleapis/nodejs-tasks)
+# [Cloud Tasks: Node.js Client](https://github.com/googleapis/nodejs-tasks)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/tasks.svg)](https://www.npmjs.org/package/@google-cloud/tasks)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-tasks/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-tasks)
 
-> Node.js idiomatic client for [Cloud Tasks][product-docs].
 
-Manages the execution of large numbers of distributed requests.
+
+
+Cloud Tasks API client for Node.js
 
 
 * [Cloud Tasks Node.js Client API Reference][client-docs]
-* [github.com/googleapis/nodejs-tasks](https://github.com/googleapis/nodejs-tasks)
 * [Cloud Tasks Documentation][product-docs]
+* [github.com/googleapis/nodejs-tasks](https://github.com/googleapis/nodejs-tasks)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -24,59 +25,84 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-* [Using the client library](#using-the-client-library)
+
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
-## Using the client library
+## Quickstart
+
+### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
-
 1.  [Enable billing for your project][billing].
-
-1.  [Enable the Google Cloud Tasks API][enable_api].
-
+1.  [Enable the Cloud Tasks API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-1. Install the client library:
+### Installing the client library
 
-        npm install --save @google-cloud/tasks
+```bash
+npm install @google-cloud/tasks
+```
 
-1. Try an example:
 
-```js
-// Imports the Google Cloud client library
-const {CloudTasksClient} = require('@google-cloud/tasks');
+### Using the client library
 
-async function quickstart(
-  projectId = 'your-project-id', // Your Google Cloud Platform project ID
-  queue = 'my-appengine-queue', // Name of the Queue to create
-  location = 'us-central-1' // The region in which to create the queue
-) {
-  // Instantiates a client
+```javascript
+  // Imports the Google Cloud Tasks library.
+  const {CloudTasksClient} = require('@google-cloud/tasks');
+
+  // Instantiates a client.
   const client = new CloudTasksClient();
 
-  // Send create queue request.
-  const [response] = await client.createQueue({
-    // The fully qualified path to the location where the queue is created
-    parent: client.locationPath(projectId, location),
-    queue: {
-      // The fully qualified path to the queue
-      name: client.queuePath(projectId, location, queue),
-      appEngineHttpQueue: {
-        appEngineRoutingOverride: {
-          // The App Engine service that will receive the tasks.
-          service: 'default',
-        },
-      },
+  // TODO(developer): Uncomment these lines and replace with your values.
+  // const project = 'my-project-id';
+  // const queue = 'my-appengine-queue';
+  // const location = 'us-central1';
+  // const options = {payload: 'hello'};
+
+  // Construct the fully qualified queue name.
+  const parent = client.queuePath(project, location, queue);
+
+  const task = {
+    appEngineHttpRequest: {
+      httpMethod: 'POST',
+      relativeUri: '/log_payload',
     },
-  });
-  console.log(`Created queue ${response.name}`);
-}
+  };
+
+  if (payload) {
+    task.appEngineHttpRequest.body = Buffer.from(payload).toString('base64');
+  }
+
+  if (inSeconds) {
+    task.scheduleTime = {
+      seconds: inSeconds + Date.now() / 1000,
+    };
+  }
+
+  const request = {
+    parent: parent,
+    task: task,
+  };
+
+  console.log('Sending task:');
+  console.log(task);
+  // Send create task request.
+  const [response] = await client.createTask(request);
+  const name = response.name;
+  console.log(`Created task ${name}`);
+
+
 ```
+
+
 
 ## Samples
 
@@ -85,8 +111,16 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Queues | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createQueue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createQueue.js,samples/README.md) |
-| Tasks | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createTask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createTask.js,samples/README.md) |
+| Create Http Task | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createHttpTask.js,samples/README.md) |
+| Create Http Task With Token | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTaskWithToken.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createHttpTaskWithToken.js,samples/README.md) |
+| Create Queue | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createQueue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createQueue.js,samples/README.md) |
+| Create Task | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createTask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createTask.js,samples/README.md) |
+| Delete Queue | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/deleteQueue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/deleteQueue.js,samples/README.md) |
+| List Queues | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/listQueues.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/listQueues.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Server | [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/server.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/server.js,samples/README.md) |
+
+
 
 The [Cloud Tasks Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -95,9 +129,16 @@ also contains samples.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-This library is considered to be in **alpha**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
+
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
+
+
+
+
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 

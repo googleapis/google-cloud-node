@@ -18,10 +18,6 @@
 /**
  * HTTP request.
  *
- * Warning: This is an [alpha](https://cloud.google.com/terms/launch-stages)
- * feature. If you haven't already joined, you can [use this form to sign
- * up](https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform).
- *
  * The task will be pushed to the worker as an HTTP request. If the worker
  * or the redirected worker acknowledges the task by returning a successful HTTP
  * response code ([`200` - `299`]), the task will removed from the queue. If
@@ -108,8 +104,8 @@
  *   will be generated and attached as an `Authorization` header in the HTTP
  *   request.
  *
- *   This type of authorization should be used when sending requests to a GCP
- *   endpoint.
+ *   This type of authorization should generally only be used when calling
+ *   Google APIs hosted on *.googleapis.com.
  *
  *   This object should have the same structure as [OAuthToken]{@link google.cloud.tasks.v2beta3.OAuthToken}
  *
@@ -119,8 +115,9 @@
  *   token will be generated and attached as an `Authorization` header in the
  *   HTTP request.
  *
- *   This type of authorization should be used when sending requests to third
- *   party endpoints or Cloud Run.
+ *   This type of authorization can be used for many scenarios, including
+ *   calling Cloud Run, or endpoints where you intend to validate the token
+ *   yourself.
  *
  *   This object should have the same structure as [OidcToken]{@link google.cloud.tasks.v2beta3.OidcToken}
  *
@@ -216,13 +213,17 @@ const AppEngineHttpQueue = {
  * required`](https://cloud.google.com/appengine/docs/standard/python/config/appref)
  * Task dispatches also do not follow redirects.
  *
- * The task attempt has succeeded if the app's request handler returns
- * an HTTP response code in the range [`200` - `299`]. `503` is
- * considered an App Engine system error instead of an application
- * error. Requests returning error `503` will be retried regardless of
- * retry configuration and not counted against retry counts.
- * Any other response code or a failure to receive a response before the
- * deadline is a failed attempt.
+ * The task attempt has succeeded if the app's request handler returns an HTTP
+ * response code in the range [`200` - `299`]. The task attempt has failed if
+ * the app's handler returns a non-2xx response code or Cloud Tasks does
+ * not receive response before the deadline. Failed
+ * tasks will be retried according to the
+ * retry configuration. `503` (Service Unavailable) is
+ * considered an App Engine system error instead of an application error and
+ * will cause Cloud Tasks' traffic congestion control to temporarily throttle
+ * the queue's dispatches. Unlike other types of task targets, a `429` (Too Many
+ * Requests) response from an app handler does not cause traffic congestion
+ * control to throttle the queue.
  *
  * @property {number} httpMethod
  *   The HTTP method to use for the request. The default is POST.
@@ -406,8 +407,8 @@ const AppEngineRouting = {
 /**
  * Contains information needed for generating an
  * [OAuth token](https://developers.google.com/identity/protocols/OAuth2).
- * This type of authorization should be used when sending requests to a GCP
- * endpoint.
+ * This type of authorization should generally only be used when calling Google
+ * APIs hosted on *.googleapis.com.
  *
  * @property {string} serviceAccountEmail
  *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)
@@ -432,9 +433,10 @@ const OAuthToken = {
 /**
  * Contains information needed for generating an
  * [OpenID Connect
- * token](https://developers.google.com/identity/protocols/OpenIDConnect). This
- * type of authorization should be used when sending requests to third party
- * endpoints or Cloud Run.
+ * token](https://developers.google.com/identity/protocols/OpenIDConnect).
+ * This type of authorization can be used for many scenarios, including
+ * calling Cloud Run, or endpoints where you intend to validate the token
+ * yourself.
  *
  * @property {string} serviceAccountEmail
  *   [Service account email](https://cloud.google.com/iam/docs/service-accounts)

@@ -1,147 +1,170 @@
-# Node.js Google Cloud Tasks sample for Google App Engine
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-This sample application shows how to use [Google Cloud Tasks](https://cloud.google.com/cloud-tasks/)
-on [Google App Engine][appengine].
+# [Cloud Tasks: Node.js Samples](https://github.com/googleapis/nodejs-tasks)
 
-This directory
-contains both the App Engine app to deploy, as well as the snippets to run
-locally to push tasks to it, which could also be called on App Engine.
+[![Open in Cloud Shell][shell_img]][shell_link]
 
-`createTask.js` is a simple command-line program to create tasks to be pushed to
-the App Engine app.
 
-`createHttpTask.js` is a simple command-line program to create tasks to be pushed to
-a HTTP endpoint.
 
-`server.js` is the main App Engine app. This app serves as an endpoint to
-receive App Engine task attempts.
+## Table of Contents
 
-* [Setup](#setup)
-* [Running locally](#running-locally)
-* [Deploying to App Engine](#deploying-to-app-engine)
-* [Running the tests](#running-the-tests)
+* [Before you begin](#before-you-begin)
+* [Samples](#samples)
+  * [Create Http Task](#create-http-task)
+  * [Create Http Task With Token](#create-http-task-with-token)
+  * [Create Queue](#create-queue)
+  * [Create Task](#create-task)
+  * [Delete Queue](#delete-queue)
+  * [List Queues](#list-queues)
+  * [Quickstart](#quickstart)
+  * [Server](#server)
 
-## Setup
+## Before you begin
 
-Before you can run or deploy the sample, you need to do the following:
+Before running the samples, make sure you've followed the steps outlined in
+[Using the client library](https://github.com/googleapis/nodejs-tasks#using-the-client-library).
 
-1.  Refer to the [appengine/README.md][readme] file for instructions on
-    running and deploying.
-1.  Enable the Cloud Tasks API in the [Google Cloud Console](https://console.cloud.google.com/apis/api/tasks.googleapis.com).
-1.  Set up [Google Application Credentials](https://cloud.google.com/docs/authentication/getting-started).
-1.  Install dependencies:
+## Samples
 
-    With `npm`:
 
-        npm install
 
-    or with `yarn`:
+### Create Http Task
 
-        yarn install
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTask.js).
 
-## Creating a queue
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createHttpTask.js,samples/README.md)
 
-To create a queue using the Cloud SDK, use the following gcloud command:
+__Usage:__
 
-    gcloud beta tasks queues create-app-engine-queue my-appengine-queue
 
-Note: A newly created queue will route to the default App Engine service and
-version unless configured to do otherwise.
+`node createHttpTask.js`
 
-## Deploying the app to App Engine
 
-Deploy to App Engine Standard environment with gcloud:
+-----
 
-    gcloud app deploy
 
-Verify the index page is serving:
 
-    gcloud app browse
 
-## Run the Sample Using the Command Line
+### Create Http Task With Token
 
-Set environment variables:
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTaskWithToken.js).
 
-First, your project ID:
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createHttpTaskWithToken.js,samples/README.md)
 
-```
-export PROJECT_ID=my-project-id
-```
+__Usage:__
 
-Then the queue ID, as specified at queue creation time. Queue IDs already
-created can be listed with `gcloud beta tasks queues list`.
 
-```
-export QUEUE_ID=my-appengine-queue
-```
+`node createHttpTaskWithToken.js`
 
-And finally the location ID, which can be discovered with
-`gcloud beta tasks queues describe $QUEUE_ID`, with the location embedded in
-the "name" value (for instance, if the name is
-"projects/my-project/locations/us-central1/queues/my-appengine-queue", then the
-location is "us-central1").
 
-```
-export LOCATION_ID=us-central1
-```
+-----
 
-### Using App Engine Queues
-Running the sample will create a task, targeted at the `/log_payload`
-endpoint, with a payload specified:
 
-```
-node createTask.js $PROJECT_ID $LOCATION_ID $QUEUE_ID hello
-```
 
-The App Engine app serves as a target for the push requests. It has an
-endpoint `/log_payload` that reads the payload (i.e., the request body) of the
-HTTP POST request and logs it. The log output can be viewed with:
 
-    gcloud app logs read
+### Create Queue
 
-Create a task that will be scheduled for a time in the future using the
-`--in_seconds` flag:
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createQueue.js).
 
-```
-node createTask.js $PROJECT_ID $LOCATION_ID $QUEUE_ID hello 30
-```
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createQueue.js,samples/README.md)
 
-### Using HTTP Push Queues
+__Usage:__
 
-Set an environment variable for the endpoint to your task handler. This is an
-example url to send requests to the App Engine task handler:
-```
-export URL=https://<project_id>.appspot.com/log_payload
-```
 
-Running the sample will create a task and send the task to the specific URL
-endpoint, with a payload specified:
+`node createQueue.js`
 
-```
-node createHttpTask $PROJECT_ID $LOCATION_ID $QUEUE_ID $URL hello
-```
 
-## More Info
+-----
 
-To get usage information: `node createTask.js --help`
 
-Which prints:
 
-```
-Options:
-  --version        Show version number                                                                         [boolean]
-  --location, -l   Location of the queue to add the task to.                                         [string] [required]
-  --queue, -q      ID (short name) of the queue to add the task to.                                  [string] [required]
-  --project, -p    Project of the queue to add the task to.                                          [string] [required]
-  --payload, -d    (Optional) Payload to attach to the push queue.                                              [string]
-  --inSeconds, -s  (Optional) The number of seconds from now to schedule task attempt.                          [number]
-  --help           Show help                                                                                   [boolean]
 
-Examples:
-  node createTask.js --project my-project-id
+### Create Task
 
-For more information, see https://cloud.google.com/cloud-tasks
-```
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createTask.js).
 
-[appengine]: https://cloud.google.com/appengine/docs/nodejs
-[appengine-std]: https://cloud.google.com/appengine/docs/standard/nodejs
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createTask.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTask.js`
+
+
+-----
+
+
+
+
+### Delete Queue
+
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/deleteQueue.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/deleteQueue.js,samples/README.md)
+
+__Usage:__
+
+
+`node deleteQueue.js`
+
+
+-----
+
+
+
+
+### List Queues
+
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/listQueues.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/listQueues.js,samples/README.md)
+
+__Usage:__
+
+
+`node listQueues.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node quickstart.js`
+
+
+-----
+
+
+
+
+### Server
+
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/server.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/server.js,samples/README.md)
+
+__Usage:__
+
+
+`node server.js`
+
+
+
+
+
+
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/README.md
+[product-docs]: https://cloud.google.com/tasks/docs/

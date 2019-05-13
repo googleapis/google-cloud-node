@@ -39,7 +39,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip 'www.googleapis.com|github.com/googleapis/nodejs-tasks/blob/master/samples/quickstart.js'",
     "predocs-test": "npm run docs"
   },
   "dependencies": {

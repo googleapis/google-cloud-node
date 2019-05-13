@@ -236,7 +236,8 @@ class CloudTasksClient {
    *   field can be used as a filter and several operators as supported.
    *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
    *   described in
-   *   [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+   *   [Stackdriver's Advanced Logs
+   *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
    *
    *   Sample filter "state: PAUSED".
    *
@@ -361,7 +362,8 @@ class CloudTasksClient {
    *   field can be used as a filter and several operators as supported.
    *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
    *   described in
-   *   [Stackdriver's Advanced Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
+   *   [Stackdriver's Advanced Logs
+   *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
    *
    *   Sample filter "state: PAUSED".
    *
@@ -471,8 +473,9 @@ class CloudTasksClient {
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-   * before using this method.
+   * [Overview of Queue Management and
+   * queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+   * this method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -557,8 +560,9 @@ class CloudTasksClient {
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-   * before using this method.
+   * [Overview of Queue Management and
+   * queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+   * this method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -637,8 +641,9 @@ class CloudTasksClient {
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
    * Read
-   * [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml)
-   * before using this method.
+   * [Overview of Queue Management and
+   * queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using
+   * this method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -820,7 +825,8 @@ class CloudTasksClient {
    * WARNING: Resuming many high-QPS queues at the same time can
    * lead to target overloading. If you are resuming high-QPS
    * queues, follow the 500/50/5 pattern described in
-   * [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
+   * [Managing Cloud Tasks Scaling
+   * Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1359,8 +1365,7 @@ class CloudTasksClient {
    *
    * Tasks cannot be updated after creation; there is no UpdateTask command.
    *
-   * * For App Engine queues, the maximum task size is
-   *   100KB.
+   * * The maximum task size is 100KB.
    *
    * @param {Object} request
    *   The request object that will be sent.
