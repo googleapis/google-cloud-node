@@ -23,7 +23,6 @@ import {
   time as timeProfiler,
 } from 'pprof';
 import * as msToStr from 'pretty-ms';
-import { teenyRequest as request } from 'teeny-request';
 import * as zlib from 'zlib';
 
 import { perftools } from '../../proto/profile';
@@ -295,14 +294,10 @@ export class Profiler extends ServiceObject {
       baseUrl: config.baseApiUrl,
       scopes: [SCOPE],
       packageJson: pjson,
-      // tslint:disable-next-line: no-any
-      requestModule: request as any,
     };
     super({
       parent: new Service(serviceConfig, config),
       baseUrl: '/',
-      // tslint:disable-next-line: no-any
-      requestModule: request as any,
     });
     this.config = config;
 
