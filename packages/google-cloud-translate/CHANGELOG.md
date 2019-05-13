@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-translate/compare/v3.0.1...v4.0.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v1 ([#262](https://www.github.com/googleapis/nodejs-translate/issues/262)) ([269018b](https://www.github.com/googleapis/nodejs-translate/commit/269018b))
+* **deps:** update dependency google-gax to v1 ([#263](https://www.github.com/googleapis/nodejs-translate/issues/263)) ([95efe30](https://www.github.com/googleapis/nodejs-translate/commit/95efe30))
+* DEADLINE_EXCEEDED is idempotent ([#264](https://www.github.com/googleapis/nodejs-translate/issues/264)) ([1c222f8](https://www.github.com/googleapis/nodejs-translate/commit/1c222f8))
+* DEADLINE_EXCEEDED is no longer retried ([#259](https://www.github.com/googleapis/nodejs-translate/issues/259)) ([4ea044e](https://www.github.com/googleapis/nodejs-translate/commit/4ea044e))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#253](https://www.github.com/googleapis/nodejs-translate/issues/253)) ([672f6da](https://www.github.com/googleapis/nodejs-translate/commit/672f6da))
+* **deps:** update dependency google-gax to ^0.26.0 ([#248](https://www.github.com/googleapis/nodejs-translate/issues/248)) ([4412bbf](https://www.github.com/googleapis/nodejs-translate/commit/4412bbf))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#249](https://www.github.com/googleapis/nodejs-translate/issues/249)) ([88ec9e2](https://www.github.com/googleapis/nodejs-translate/commit/88ec9e2))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#249)
+
 ## v3.0.1
 
 04-09-2019 12:19 PDT
@@ -240,4 +262,3 @@ const translate = new Translate({
 - Update proxyquire to the latest version 🚀 (#29)
 - Update mocha to the latest version 🚀 (#22)
 - Linting per prettier@1.9.0. (#21)
-
