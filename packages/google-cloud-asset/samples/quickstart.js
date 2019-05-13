@@ -15,105 +15,42 @@
 
 'use strict';
 
-async function exportAssets(dumpFilePath) {
-  // [START asset_quickstart_export_assets]
-  const {AssetServiceClient} = require('@google-cloud/asset');
-  const client = new AssetServiceClient({
-    // optional auth parameters.
-  });
+// sample-metadata:
+//   title: Asset History Quickstart
+//   description: Batch get history of assets.
+//   usage: node getBatchAssetHistory "//storage.googleapis.com/<BUCKET_NAME>"
 
-  // Your Google Cloud Platform project ID
-  const projectId = await client.getProjectId();
-  const projectResource = client.projectPath(projectId);
-
-  // var dumpFilePath = 'Dump file path, e.g.: gs://<my_bucket>/<my_asset_file>'
-  const outputConfig = {
-    gcsDestination: {
-      uri: dumpFilePath,
-    },
-  };
-  const request = {
-    parent: projectResource,
-    outputConfig: outputConfig,
-  };
-
-  // Handle the operation using the promise pattern.
-  const [operation] = await client.exportAssets(request);
-  // Operation#promise starts polling for the completion of the operation.
-  const [result] = await operation.promise();
-  // Do things with with the response.
-  console.log(result);
-  // [END asset_quickstart_export_assets]
-}
-
-async function batchGetAssetsHistory(assetNames) {
-  // [START asset_quickstart_batch_get_assets_history]
+async function main(assetNames) {
+  // [START asset_quickstart]
   const util = require('util');
   const {AssetServiceClient} = require('@google-cloud/asset');
-  const client = new AssetServiceClient({
-    // optional auth parameters.
-  });
 
-  // Your Google Cloud Platform project ID
-  const projectId = await client.getProjectId();
-  const projectResource = client.projectPath(projectId);
-  // Your asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
-  // var assetNames = ['ASSET_NAME1', 'ASSET_NAME2', ...];
+  const client = new AssetServiceClient();
 
-  const contentType = 'RESOURCE';
-  const readTimeWindow = {
-    startTime: {
-      seconds: Math.floor(new Date().getTime() / 1000),
-    },
-  };
+  async function quickstart() {
+    const projectId = await client.getProjectId();
+    const projectResource = client.projectPath(projectId);
+    // TODO(developer): Choose asset names, such as //storage.googleapis.com/[YOUR_BUCKET_NAME].
+    // const assetNames = ['ASSET_NAME1', 'ASSET_NAME2', ...];
 
-  const request = {
-    parent: projectResource,
-    assetNames: assetNames,
-    contentType: contentType,
-    readTimeWindow: readTimeWindow,
-  };
+    const request = {
+      parent: projectResource,
+      assetNames: assetNames.split(','),
+      contentType: 'RESOURCE',
+      readTimeWindow: {
+        startTime: {
+          seconds: Math.floor(new Date().getTime() / 1000),
+        },
+      },
+    };
 
-  // Handle the operation using the promise pattern.
-  const result = await client.batchGetAssetsHistory(request);
-  // Do things with with the response.
-  console.log(util.inspect(result, {depth: null}));
-  // [END asset_quickstart_batch_get_assets_history]
+    // Handle the operation using the promise pattern.
+    const result = await client.batchGetAssetsHistory(request);
+    // Do things with with the response.
+    console.log(util.inspect(result, {depth: null}));
+    // [END asset_quickstart]
+  }
+  quickstart();
 }
 
-const cli = require('yargs')
-  .demand(1)
-  .command(
-    'export-assets <dumpFilePath>',
-    'Export asserts to specified dump file path.',
-    {},
-    opts => exportAssets(opts.dumpFilePath)
-  )
-  .command(
-    'batch-get-history <assetNames>',
-    'Batch get history of assets.',
-    {},
-    opts => {
-      const assetNameList = opts.assetNames.split(',');
-      batchGetAssetsHistory(assetNameList);
-    }
-  )
-  .example(
-    'node $0 export-assets gs://my-bucket/my-assets.txt',
-    'Export assets to gs://my-bucket/my-assets.txt.'
-  )
-  .example(
-    'node $0 batch-get-history "//storage.googleapis.com/<BUCKET_NAME>,"',
-    'Batch get history of assets //storage.googleapis.com/<BUCKET_NAME> etc.'
-  )
-  .wrap(10)
-  .recommendCommands()
-  .epilogue(
-    'https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview'
-  )
-  .help()
-  .strict();
-
-if (module === require.main) {
-  cli.parse(process.argv.slice(2));
-}
+main(...process.argv.slice(2));
