@@ -39,7 +39,7 @@
     "delay": "^4.0.1",
     "extend": "^3.0.1",
     "findit2": "^2.2.3",
-    "gcp-metadata": "^1.0.0",
+    "gcp-metadata": "^2.0.0",
     "lodash.pickby": "^4.6.0",
     "p-limit": "^2.0.0",
     "parse-duration": "^0.1.1",
