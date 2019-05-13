@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/tasks",
   "description": "Cloud Tasks API client for Node.js",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -39,7 +39,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
-    "docs-test": "linkinator docs -r --skip 'www.googleapis.com|github.com/googleapis/nodejs-tasks/blob/master/samples/quickstart.js'",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
   },
   "dependencies": {

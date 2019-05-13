@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-tasks/compare/v0.5.0...v1.0.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* DEADLINE_EXCEEDED retry code is idempotent ([#219](https://www.github.com/googleapis/nodejs-tasks/issues/219)) ([59cfd36](https://www.github.com/googleapis/nodejs-tasks/commit/59cfd36))
+* **deps:** update dependency google-gax to v1 ([#218](https://www.github.com/googleapis/nodejs-tasks/issues/218)) ([25d0317](https://www.github.com/googleapis/nodejs-tasks/commit/25d0317))
+* DEADLINE_EXCEEDED no longer treated as idempotent and retried ([739a515](https://www.github.com/googleapis/nodejs-tasks/commit/739a515))
+* **deps:** update dependency google-gax to ^0.26.0 ([#207](https://www.github.com/googleapis/nodejs-tasks/issues/207)) ([7492ae3](https://www.github.com/googleapis/nodejs-tasks/commit/7492ae3))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#209](https://www.github.com/googleapis/nodejs-tasks/issues/209)) ([c2f4869](https://www.github.com/googleapis/nodejs-tasks/commit/c2f4869))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#209)
+
 ## v0.5.0
 
 03-21-2019 22:39 PDT
@@ -188,4 +208,3 @@ v0.20.0 fixes an issue with semver.
 - fix(deps): update dependency yargs to v12 (#22)
 - fix: update dependencies, run synth (#20)
 - Configure Renovate (#15)
-
