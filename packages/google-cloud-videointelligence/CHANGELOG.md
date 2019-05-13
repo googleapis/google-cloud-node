@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v1.6.0...v2.0.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* DEADLINE_EXCEEDED retry code is idempotent ([#234](https://www.github.com/googleapis/nodejs-video-intelligence/issues/234)) ([7a98ca6](https://www.github.com/googleapis/nodejs-video-intelligence/commit/7a98ca6))
+* **deps:** update dependency google-gax to v1 ([#233](https://www.github.com/googleapis/nodejs-video-intelligence/issues/233)) ([0ad08b2](https://www.github.com/googleapis/nodejs-video-intelligence/commit/0ad08b2))
+* DEADLINE_EXCEEDED no longer treated as idempotent and retried  ([#228](https://www.github.com/googleapis/nodejs-video-intelligence/issues/228)) ([c25517e](https://www.github.com/googleapis/nodejs-video-intelligence/commit/c25517e))
+* **deps:** update dependency google-gax to ^0.26.0 ([#222](https://www.github.com/googleapis/nodejs-video-intelligence/issues/222)) ([22de82b](https://www.github.com/googleapis/nodejs-video-intelligence/commit/22de82b))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#223](https://www.github.com/googleapis/nodejs-video-intelligence/issues/223)) ([966eef9](https://www.github.com/googleapis/nodejs-video-intelligence/commit/966eef9))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#223)
+
 ## v1.6.0
 
 02-21-2019 13:46 PST
@@ -93,4 +113,3 @@
 - Update CI config ([#95](https://github.com/googleapis/nodejs-video-intelligence/pull/95))
 - Retry npm install in CI ([#93](https://github.com/googleapis/nodejs-video-intelligence/pull/93))
 - add templates to synth.py ([#91](https://github.com/googleapis/nodejs-video-intelligence/pull/91))
-
