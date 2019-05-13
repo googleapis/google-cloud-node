@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-asset/compare/v0.3.0...v1.0.0) (2019-05-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#132](https://www.github.com/googleapis/nodejs-asset/issues/132)) ([29dec78](https://www.github.com/googleapis/nodejs-asset/commit/29dec78))
+* **deps:** update dependency google-gax to v1 ([#142](https://www.github.com/googleapis/nodejs-asset/issues/142)) ([c5d4508](https://www.github.com/googleapis/nodejs-asset/commit/c5d4508))
+* include 'x-goog-request-params' header in requests ([#126](https://www.github.com/googleapis/nodejs-asset/issues/126)) ([ff57600](https://www.github.com/googleapis/nodejs-asset/commit/ff57600))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#134](https://www.github.com/googleapis/nodejs-asset/issues/134)) ([ad7814c](https://www.github.com/googleapis/nodejs-asset/commit/ad7814c))
+
+
+### Features
+
+* introduces 'expression text', deprecates version field ([#143](https://www.github.com/googleapis/nodejs-asset/issues/143)) ([4c35683](https://www.github.com/googleapis/nodejs-asset/commit/4c35683))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#134)
+
 ## v0.3.0
 
 03-19-2019 11:42 PDT
@@ -115,4 +139,3 @@ const client = new asset.v1.AssetServiceClient();
 ## v0.1.0
 
 Initial release of the Cloud Asset API.
-
