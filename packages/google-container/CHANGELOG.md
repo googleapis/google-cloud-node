@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v0.3.1...v1.0.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* DEADLINE_EXCEEDED retry code is idempotent ([#192](https://www.github.com/googleapis/nodejs-cloud-container/issues/192)) ([66082aa](https://www.github.com/googleapis/nodejs-cloud-container/commit/66082aa))
+* **deps:** update dependency google-gax to v1 ([#191](https://www.github.com/googleapis/nodejs-cloud-container/issues/191)) ([e4470fa](https://www.github.com/googleapis/nodejs-cloud-container/commit/e4470fa))
+* DEADLINE_EXCEEDED is no longer retried ([16453ff](https://www.github.com/googleapis/nodejs-cloud-container/commit/16453ff))
+* **deps:** update dependency google-gax to ^0.26.0 ([#181](https://www.github.com/googleapis/nodejs-cloud-container/issues/181)) ([0ee0e98](https://www.github.com/googleapis/nodejs-cloud-container/commit/0ee0e98))
+* include 'x-goog-request-params' header in requests ([#175](https://www.github.com/googleapis/nodejs-cloud-container/issues/175)) ([0d3ba60](https://www.github.com/googleapis/nodejs-cloud-container/commit/0d3ba60))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#183](https://www.github.com/googleapis/nodejs-cloud-container/issues/183)) ([7a6a24b](https://www.github.com/googleapis/nodejs-cloud-container/commit/7a6a24b))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#183)
+
 ## v0.3.1
 
 03-12-2019 13:44 PDT
@@ -129,4 +150,3 @@ This patch release has a few bug fixes, dependency updates, and doc fixes.  Enjo
 - chore: lock files maintenance ([#26](https://github.com/googleapis/nodejs-cloud-container/pull/26))
 - chore: test on node10 ([#25](https://github.com/googleapis/nodejs-cloud-container/pull/25))
 - chore: lock files maintenance ([#24](https://github.com/googleapis/nodejs-cloud-container/pull/24))
-
