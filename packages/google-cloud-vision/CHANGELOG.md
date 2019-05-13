@@ -4,6 +4,33 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-vision/compare/v0.25.0...v1.0.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to v1 ([#376](https://www.github.com/googleapis/nodejs-vision/issues/376)) ([14a5ca9](https://www.github.com/googleapis/nodejs-vision/commit/14a5ca9))
+* DEADLINE_EXCEEDED is idempotent ([#377](https://www.github.com/googleapis/nodejs-vision/issues/377)) ([d7ed2d3](https://www.github.com/googleapis/nodejs-vision/commit/d7ed2d3))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#367](https://www.github.com/googleapis/nodejs-vision/issues/367)) ([f1a5bcc](https://www.github.com/googleapis/nodejs-vision/commit/f1a5bcc))
+* **deps:** update dependency google-gax to ^0.26.0 ([#362](https://www.github.com/googleapis/nodejs-vision/issues/362)) ([81a3379](https://www.github.com/googleapis/nodejs-vision/commit/81a3379))
+* include 'x-goog-request-params' header in requests ([4e7a1c6](https://www.github.com/googleapis/nodejs-vision/commit/4e7a1c6)), closes [#353](https://www.github.com/googleapis/nodejs-vision/issues/353)
+* **samples:** make test assertion less specific ([#354](https://www.github.com/googleapis/nodejs-vision/issues/354)) ([435ddf0](https://www.github.com/googleapis/nodejs-vision/commit/435ddf0))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#363](https://www.github.com/googleapis/nodejs-vision/issues/363)) ([e8a7141](https://www.github.com/googleapis/nodejs-vision/commit/e8a7141))
+
+
+### Features
+
+* image annotation batching ([#375](https://www.github.com/googleapis/nodejs-vision/issues/375)) ([bed2515](https://www.github.com/googleapis/nodejs-vision/commit/bed2515))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#363)
+
 ## v0.25.0
 
 02-22-2019 17:39 PST
@@ -235,4 +262,3 @@ This release brings in v1p3beta1 of the Cloud Vision API, which includes the fol
 - Configure Renovate (#87)
 - refactor: drop repo-tool as an exec wrapper (#97)
 - fix: update linking for samples (#92)
-
