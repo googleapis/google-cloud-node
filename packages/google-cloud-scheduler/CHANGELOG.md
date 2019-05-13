@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v0.3.0...v1.0.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to v1 ([#93](https://www.github.com/googleapis/nodejs-scheduler/issues/93)) ([47a97dd](https://www.github.com/googleapis/nodejs-scheduler/commit/47a97dd))
+* DEADLINE_EXCEEDED retry code is idempotent ([#94](https://www.github.com/googleapis/nodejs-scheduler/issues/94)) ([42f6c42](https://www.github.com/googleapis/nodejs-scheduler/commit/42f6c42))
+* **deps:** update dependency google-gax to ^0.26.0 ([#81](https://www.github.com/googleapis/nodejs-scheduler/issues/81)) ([f26654a](https://www.github.com/googleapis/nodejs-scheduler/commit/f26654a))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#82](https://www.github.com/googleapis/nodejs-scheduler/issues/82)) ([47d1824](https://www.github.com/googleapis/nodejs-scheduler/commit/47d1824))
+
+
+### Features
+
+* DEADLINE_EXCEEDED is no longer retried; attemptDeadline option has been introduced ([86d0e4f](https://www.github.com/googleapis/nodejs-scheduler/commit/86d0e4f))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#82)
+
 ## v0.3.0
 
 04-04-2019 13:46 PDT
@@ -100,4 +124,3 @@ This is the initial release of the Cloud Scheduler client library for Node.js.
 - chore: update CI config ([#4](https://github.com/googleapis/nodejs-scheduler/pull/4))
 - chore: clean up lint rules ([#2](https://github.com/googleapis/nodejs-scheduler/pull/2))
 - add license header
-
