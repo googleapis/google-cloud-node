@@ -61,7 +61,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "gts": "^1.0.0",
     "intelli-espower-loader": "^1.0.1",
-    "jsdoc": "3.5.5",
+    "jsdoc": "^3.6.2",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "linkinator": "^1.1.2",
     "mocha": "^6.0.0",
