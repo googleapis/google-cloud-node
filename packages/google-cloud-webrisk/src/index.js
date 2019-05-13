@@ -49,7 +49,7 @@ const gapic = Object.freeze({
  * @alias nodejs-web-risk
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
- * npm install --save webrisk
+ * npm install --save @google-cloud/web-risk
  *
  * @example <caption>Import the client library:</caption>
  * const webrisk = require('@google-cloud/web-risk');
