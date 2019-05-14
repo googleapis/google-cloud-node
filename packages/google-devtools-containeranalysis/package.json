@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "mocha": "^5.2.0",
-    "through2": "^2.0.3"
+    "through2": "^3.0.0"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js containeranalysis",
