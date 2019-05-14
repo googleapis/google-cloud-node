@@ -207,9 +207,9 @@ class WebRiskServiceV1Beta1Client {
    *
    * @example
    *
-   * const webrisk = require('webrisk.v1beta1');
+   * const webRisk = require('@google-cloud/web-risk');
    *
-   * const client = new webrisk.v1beta1.WebRiskServiceV1Beta1Client({
+   * const client = new webRisk.v1beta1.WebRiskServiceV1Beta1Client({
    *   // optional auth parameters.
    * });
    *
@@ -266,9 +266,9 @@ class WebRiskServiceV1Beta1Client {
    *
    * @example
    *
-   * const webrisk = require('webrisk.v1beta1');
+   * const webRisk = require('@google-cloud/web-risk');
    *
-   * const client = new webrisk.v1beta1.WebRiskServiceV1Beta1Client({
+   * const client = new webRisk.v1beta1.WebRiskServiceV1Beta1Client({
    *   // optional auth parameters.
    * });
    *
@@ -326,9 +326,9 @@ class WebRiskServiceV1Beta1Client {
    *
    * @example
    *
-   * const webrisk = require('webrisk.v1beta1');
+   * const webRisk = require('@google-cloud/web-risk');
    *
-   * const client = new webrisk.v1beta1.WebRiskServiceV1Beta1Client({
+   * const client = new webRisk.v1beta1.WebRiskServiceV1Beta1Client({
    *   // optional auth parameters.
    * });
    *

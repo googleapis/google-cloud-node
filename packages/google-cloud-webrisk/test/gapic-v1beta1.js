@@ -16,7 +16,7 @@
 
 const assert = require('assert');
 
-const webriskModule = require('../src');
+const webRiskModule = require('../src');
 
 const FAKE_STATUS_CODE = 1;
 const error = new Error();
@@ -25,7 +25,7 @@ error.code = FAKE_STATUS_CODE;
 describe('WebRiskServiceV1Beta1Client', () => {
   describe('computeThreatListDiff', () => {
     it('invokes computeThreatListDiff without error', done => {
-      const client = new webriskModule.v1beta1.WebRiskServiceV1Beta1Client({
+      const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -58,7 +58,7 @@ describe('WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes computeThreatListDiff with error', done => {
-      const client = new webriskModule.v1beta1.WebRiskServiceV1Beta1Client({
+      const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -89,7 +89,7 @@ describe('WebRiskServiceV1Beta1Client', () => {
 
   describe('searchUris', () => {
     it('invokes searchUris without error', done => {
-      const client = new webriskModule.v1beta1.WebRiskServiceV1Beta1Client({
+      const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -119,7 +119,7 @@ describe('WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchUris with error', done => {
-      const client = new webriskModule.v1beta1.WebRiskServiceV1Beta1Client({
+      const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -150,7 +150,7 @@ describe('WebRiskServiceV1Beta1Client', () => {
 
   describe('searchHashes', () => {
     it('invokes searchHashes without error', done => {
-      const client = new webriskModule.v1beta1.WebRiskServiceV1Beta1Client({
+      const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
@@ -175,7 +175,7 @@ describe('WebRiskServiceV1Beta1Client', () => {
     });
 
     it('invokes searchHashes with error', done => {
-      const client = new webriskModule.v1beta1.WebRiskServiceV1Beta1Client({
+      const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
