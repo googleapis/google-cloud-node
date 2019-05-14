@@ -213,6 +213,11 @@ const StreamingRecognitionConfig = {
  *   to all users. In the future this may be exclusively available as a
  *   premium feature.
  *
+ * @property {Object} metadata
+ *   *Optional* Metadata regarding this request.
+ *
+ *   This object should have the same structure as [RecognitionMetadata]{@link google.cloud.speech.v1.RecognitionMetadata}
+ *
  * @property {string} model
  *   *Optional* Which model to select for the given request. Select the model
  *   best suited to your domain to get best results. If a model is not
@@ -357,6 +362,219 @@ const RecognitionConfig = {
      * wideband is supported. `sample_rate_hertz` must be 16000.
      */
     SPEEX_WITH_HEADER_BYTE: 7
+  }
+};
+
+/**
+ * Description of audio data to be recognized.
+ *
+ * @property {number} interactionType
+ *   The use case most closely describing the audio content to be recognized.
+ *
+ *   The number should be among the values of [InteractionType]{@link google.cloud.speech.v1.InteractionType}
+ *
+ * @property {number} industryNaicsCodeOfAudio
+ *   The industry vertical to which this speech recognition request most
+ *   closely applies. This is most indicative of the topics contained
+ *   in the audio.  Use the 6-digit NAICS code to identify the industry
+ *   vertical - see https://www.naics.com/search/.
+ *
+ * @property {number} microphoneDistance
+ *   The audio type that most closely describes the audio being recognized.
+ *
+ *   The number should be among the values of [MicrophoneDistance]{@link google.cloud.speech.v1.MicrophoneDistance}
+ *
+ * @property {number} originalMediaType
+ *   The original media the speech was recorded on.
+ *
+ *   The number should be among the values of [OriginalMediaType]{@link google.cloud.speech.v1.OriginalMediaType}
+ *
+ * @property {number} recordingDeviceType
+ *   The type of device the speech was recorded with.
+ *
+ *   The number should be among the values of [RecordingDeviceType]{@link google.cloud.speech.v1.RecordingDeviceType}
+ *
+ * @property {string} recordingDeviceName
+ *   The device used to make the recording.  Examples 'Nexus 5X' or
+ *   'Polycom SoundStation IP 6000' or 'POTS' or 'VoIP' or
+ *   'Cardioid Microphone'.
+ *
+ * @property {string} originalMimeType
+ *   Mime type of the original audio file.  For example `audio/m4a`,
+ *   `audio/x-alaw-basic`, `audio/mp3`, `audio/3gpp`.
+ *   A list of possible audio mime types is maintained at
+ *   http://www.iana.org/assignments/media-types/media-types.xhtml#audio
+ *
+ * @property {string} audioTopic
+ *   Description of the content. Eg. "Recordings of federal supreme court
+ *   hearings from 2012".
+ *
+ * @typedef RecognitionMetadata
+ * @memberof google.cloud.speech.v1
+ * @see [google.cloud.speech.v1.RecognitionMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
+ */
+const RecognitionMetadata = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * Use case categories that the audio recognition request can be described
+   * by.
+   *
+   * @enum {number}
+   * @memberof google.cloud.speech.v1
+   */
+  InteractionType: {
+
+    /**
+     * Use case is either unknown or is something other than one of the other
+     * values below.
+     */
+    INTERACTION_TYPE_UNSPECIFIED: 0,
+
+    /**
+     * Multiple people in a conversation or discussion. For example in a
+     * meeting with two or more people actively participating. Typically
+     * all the primary people speaking would be in the same room (if not,
+     * see PHONE_CALL)
+     */
+    DISCUSSION: 1,
+
+    /**
+     * One or more persons lecturing or presenting to others, mostly
+     * uninterrupted.
+     */
+    PRESENTATION: 2,
+
+    /**
+     * A phone-call or video-conference in which two or more people, who are
+     * not in the same room, are actively participating.
+     */
+    PHONE_CALL: 3,
+
+    /**
+     * A recorded message intended for another person to listen to.
+     */
+    VOICEMAIL: 4,
+
+    /**
+     * Professionally produced audio (eg. TV Show, Podcast).
+     */
+    PROFESSIONALLY_PRODUCED: 5,
+
+    /**
+     * Transcribe spoken questions and queries into text.
+     */
+    VOICE_SEARCH: 6,
+
+    /**
+     * Transcribe voice commands, such as for controlling a device.
+     */
+    VOICE_COMMAND: 7,
+
+    /**
+     * Transcribe speech to text to create a written document, such as a
+     * text-message, email or report.
+     */
+    DICTATION: 8
+  },
+
+  /**
+   * Enumerates the types of capture settings describing an audio file.
+   *
+   * @enum {number}
+   * @memberof google.cloud.speech.v1
+   */
+  MicrophoneDistance: {
+
+    /**
+     * Audio type is not known.
+     */
+    MICROPHONE_DISTANCE_UNSPECIFIED: 0,
+
+    /**
+     * The audio was captured from a closely placed microphone. Eg. phone,
+     * dictaphone, or handheld microphone. Generally if there speaker is within
+     * 1 meter of the microphone.
+     */
+    NEARFIELD: 1,
+
+    /**
+     * The speaker if within 3 meters of the microphone.
+     */
+    MIDFIELD: 2,
+
+    /**
+     * The speaker is more than 3 meters away from the microphone.
+     */
+    FARFIELD: 3
+  },
+
+  /**
+   * The original media the speech was recorded on.
+   *
+   * @enum {number}
+   * @memberof google.cloud.speech.v1
+   */
+  OriginalMediaType: {
+
+    /**
+     * Unknown original media type.
+     */
+    ORIGINAL_MEDIA_TYPE_UNSPECIFIED: 0,
+
+    /**
+     * The speech data is an audio recording.
+     */
+    AUDIO: 1,
+
+    /**
+     * The speech data originally recorded on a video.
+     */
+    VIDEO: 2
+  },
+
+  /**
+   * The type of device the speech was recorded with.
+   *
+   * @enum {number}
+   * @memberof google.cloud.speech.v1
+   */
+  RecordingDeviceType: {
+
+    /**
+     * The recording device is unknown.
+     */
+    RECORDING_DEVICE_TYPE_UNSPECIFIED: 0,
+
+    /**
+     * Speech was recorded on a smartphone.
+     */
+    SMARTPHONE: 1,
+
+    /**
+     * Speech was recorded using a personal computer or tablet.
+     */
+    PC: 2,
+
+    /**
+     * Speech was recorded over a phone line.
+     */
+    PHONE_LINE: 3,
+
+    /**
+     * Speech was recorded in a vehicle.
+     */
+    VEHICLE: 4,
+
+    /**
+     * Speech was recorded outdoors.
+     */
+    OTHER_OUTDOOR_DEVICE: 5,
+
+    /**
+     * Speech was recorded indoors.
+     */
+    OTHER_INDOOR_DEVICE: 6
   }
 };
 
@@ -605,10 +823,22 @@ const StreamingRecognizeResponse = {
  *   This field is only provided for interim results (`is_final=false`).
  *   The default of 0.0 is a sentinel value indicating `stability` was not set.
  *
+ * @property {Object} resultEndTime
+ *   Output only. Time offset of the end of this result relative to the
+ *   beginning of the audio.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
  * @property {number} channelTag
  *   For multi-channel audio, this is the channel number corresponding to the
  *   recognized result for the audio from that channel.
  *   For audio_channel_count = N, its output values can range from '1' to 'N'.
+ *
+ * @property {string} languageCode
+ *   Output only. The
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+ *   language in this result. This language code was detected to have the most
+ *   likelihood of being spoken in the audio.
  *
  * @typedef StreamingRecognitionResult
  * @memberof google.cloud.speech.v1
