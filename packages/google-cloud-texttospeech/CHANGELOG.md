@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v0.5.1...v1.0.0) (2019-05-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to v1 ([#223](https://www.github.com/googleapis/nodejs-text-to-speech/issues/223)) ([aa8bbed](https://www.github.com/googleapis/nodejs-text-to-speech/commit/aa8bbed))
+* DEADLINE_EXCEEDED is idempotent ([#224](https://www.github.com/googleapis/nodejs-text-to-speech/issues/224)) ([affbbd1](https://www.github.com/googleapis/nodejs-text-to-speech/commit/affbbd1))
+* DEADLINE_EXCEEDED no longer treated as idempotent and retried ([9e5baee](https://www.github.com/googleapis/nodejs-text-to-speech/commit/9e5baee))
+* **deps:** update dependency google-gax to ^0.26.0 ([#212](https://www.github.com/googleapis/nodejs-text-to-speech/issues/212)) ([30ea99f](https://www.github.com/googleapis/nodejs-text-to-speech/commit/30ea99f))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#214](https://www.github.com/googleapis/nodejs-text-to-speech/issues/214)) ([d0c1639](https://www.github.com/googleapis/nodejs-text-to-speech/commit/d0c1639))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#214)
+
 ## v0.5.1
 
 02-14-2019 17:36 PST
@@ -151,4 +171,3 @@
 ### Internal / Testing Changes
 - Configure Renovate (#30)
 - refactor: drop repo-tool as an exec wrapper (#35)
-
