@@ -23,8 +23,8 @@
     "Container Analysis API"
   ],
   "dependencies": {
-    "google-gax": "^0.25.3",
-    "lodash.merge": "^4.6.0"
+    "google-gax": "^1.0.0",
+    "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
@@ -34,7 +34,7 @@
     "jsdoc": "^3.6.2",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "linkinator": "^1.4.2",
-    "mocha": "^5.2.0",
+    "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "power-assert": "^1.6.1",
     "prettier": "^1.17.1"
