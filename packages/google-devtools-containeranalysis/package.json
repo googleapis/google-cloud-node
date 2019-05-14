@@ -44,7 +44,7 @@
     "test": "nyc mocha",
     "lint": "eslint '**/*.js'",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
+    "system-test": "mocha system-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
     "docs-test": "linkinator docs -r --skip www.googleapis.com",
     "predocs-test": "npm run docs"
