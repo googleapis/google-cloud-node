@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -52,6 +52,46 @@ npm install @google-cloud/recaptcha-enterprise
 ```
 
 
+### Using the client library
+
+```javascript
+/**
+ * Instantiate the reCAPTCHA Enterprise client and make request.
+ * @param {string} projectNumber The project number to use when making requests.
+ */
+async function main(projectNumber) {
+  // Create the reCAPTCHA client library.
+  const {
+    RecaptchaEnterpriseServiceV1Beta1Client,
+  } = require('@google-cloud/recaptcha-enterprise');
+  const client = new RecaptchaEnterpriseServiceV1Beta1Client();
+
+  // format the path to the project (it should be prefaced with projects/).
+  const formattedParent = client.projectPath(projectNumber);
+  // assessment should contain event with RESPONSE_TOKEN and RECAPTCHA_SITE_KEY:
+  // "{'event': {'token': 'RESPONSE_TOKEN', 'siteKey': 'RECAPTCHA_SITE_KEY'}}"
+  const assessment = {};
+
+  const request = {
+    parent: formattedParent,
+    assessment: assessment,
+  };
+
+  await client.createAssessment(request);
+}
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-recaptcha-enterprise/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-recaptcha-enterprise/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-recaptcha-enterprise&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

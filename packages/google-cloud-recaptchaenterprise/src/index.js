@@ -19,6 +19,9 @@
  * @namespace google.cloud
  */
 /**
+ * @namespace google.protobuf
+ */
+/**
  * @namespace google.cloud.recaptchaenterprise
  */
 /**

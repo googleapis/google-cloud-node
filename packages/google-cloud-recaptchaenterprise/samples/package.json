@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-recaptcha-enterprise-samples",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=8"
+  },
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "mocha --timeout 600000 test/*.js"
+  },
+  "dependencies": {
+    "@google-cloud/recaptcha-enterprise": "^0.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "uuid": "^3.3.2"
+  }
+}

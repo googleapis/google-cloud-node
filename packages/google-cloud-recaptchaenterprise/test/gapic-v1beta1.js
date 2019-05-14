@@ -25,10 +25,12 @@ error.code = FAKE_STATUS_CODE;
 describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
   describe('createAssessment', () => {
     it('invokes createAssessment without error', done => {
-      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedParent = client.projectPath('[PROJECT]');
@@ -40,7 +42,7 @@ describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
 
       // Mock response
       const name = 'name3373707';
-      const score = 1.0926453E7;
+      const score = 1.0926453e7;
       const expectedResponse = {
         name: name,
         score: score,
@@ -60,10 +62,12 @@ describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes createAssessment with error', done => {
-      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedParent = client.projectPath('[PROJECT]');
@@ -91,10 +95,12 @@ describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
 
   describe('annotateAssessment', () => {
     it('invokes annotateAssessment without error', done => {
-      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedName = client.assessmentPath('[PROJECT]', '[ASSESSMENT]');
@@ -121,10 +127,12 @@ describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
     });
 
     it('invokes annotateAssessment with error', done => {
-      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedName = client.assessmentPath('[PROJECT]', '[ASSESSMENT]');
@@ -149,7 +157,6 @@ describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

@@ -103,9 +103,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
       assessmentPathTemplate: new gax.PathTemplate(
         'projects/{project}/assessments/{assessment}'
       ),
-      projectPathTemplate: new gax.PathTemplate(
-        'projects/{project}'
-      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Put together the default options sent with requests.
@@ -124,7 +122,8 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
     // Put together the "service stub" for
     // google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.
     const recaptchaEnterpriseServiceV1Beta1Stub = gaxGrpc.createStub(
-      protos.google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1,
+      protos.google.cloud.recaptchaenterprise.v1beta1
+        .RecaptchaEnterpriseServiceV1Beta1,
       opts
     );
 
@@ -172,9 +171,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -244,10 +241,11 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createAssessment(request, options, callback);
   }
@@ -307,10 +305,11 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.annotateAssessment(request, options, callback);
   }
@@ -353,8 +352,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromAssessmentName(assessmentName) {
-    return this._pathTemplates.assessmentPathTemplate
-      .match(assessmentName)
+    return this._pathTemplates.assessmentPathTemplate.match(assessmentName)
       .project;
   }
 
@@ -366,8 +364,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    * @returns {String} - A string representing the assessment.
    */
   matchAssessmentFromAssessmentName(assessmentName) {
-    return this._pathTemplates.assessmentPathTemplate
-      .match(assessmentName)
+    return this._pathTemplates.assessmentPathTemplate.match(assessmentName)
       .assessment;
   }
 
@@ -379,11 +376,8 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
-
 
 module.exports = RecaptchaEnterpriseServiceV1Beta1Client;
