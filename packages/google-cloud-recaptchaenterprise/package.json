@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "mocha": "^5.2.0",
-    "through2": "^2.0.3",
+    "through2": "^3.0.0",
     "eslint": "^5.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-node": "^8.0.0",
