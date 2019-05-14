@@ -40,7 +40,7 @@
     "linkinator": "^1.4.0",
     "mocha": "^6.0.0",
     "prettier": "^1.17.0",
-    "through2": "^2.0.3"
+    "through2": "^3.0.0"
   },
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
