@@ -121,7 +121,7 @@ class ProfileServiceClient {
       searchProfiles: new gax.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'histogramQueryResults'
+        'summarizedProfiles'
       ),
     };
 
@@ -841,17 +841,17 @@ class ProfileServiceClient {
    * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is Array of [HistogramQueryResult]{@link google.cloud.talent.v4beta1.HistogramQueryResult}.
+   *   The second parameter to the callback is Array of [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile}.
    *
    *   When autoPaginate: false is specified through options, it contains the result
    *   in a single response. If the response indicates the next page exists, the third
    *   parameter is set to be used for the next request object. The fourth parameter keeps
    *   the raw response object of an object representing [SearchProfilesResponse]{@link google.cloud.talent.v4beta1.SearchProfilesResponse}.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [HistogramQueryResult]{@link google.cloud.talent.v4beta1.HistogramQueryResult}.
+   *   The first element of the array is Array of [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile}.
    *
    *   When autoPaginate: false is specified through options, the array has three elements.
-   *   The first element is Array of [HistogramQueryResult]{@link google.cloud.talent.v4beta1.HistogramQueryResult} in a single response.
+   *   The first element is Array of [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile} in a single response.
    *   The second element is the next request object if the response
    *   indicates the next page exists, or null. The third element is
    *   an object representing [SearchProfilesResponse]{@link google.cloud.talent.v4beta1.SearchProfilesResponse}.
@@ -1105,7 +1105,7 @@ class ProfileServiceClient {
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [HistogramQueryResult]{@link google.cloud.talent.v4beta1.HistogramQueryResult} on 'data' event.
+   *   An object stream which emits an object representing [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile} on 'data' event.
    *
    * @example
    *

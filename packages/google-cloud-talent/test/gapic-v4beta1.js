@@ -1838,12 +1838,12 @@ describe('ProfileServiceClient', () => {
       // Mock response
       const estimatedTotalSize = 1882144769;
       const nextPageToken = '';
-      const histogramQueryResultsElement = {};
-      const histogramQueryResults = [histogramQueryResultsElement];
+      const summarizedProfilesElement = {};
+      const summarizedProfiles = [summarizedProfilesElement];
       const expectedResponse = {
         estimatedTotalSize: estimatedTotalSize,
         nextPageToken: nextPageToken,
-        histogramQueryResults: histogramQueryResults,
+        summarizedProfiles: summarizedProfiles,
       };
 
       // Mock Grpc layer
@@ -1853,15 +1853,12 @@ describe('ProfileServiceClient', () => {
         callback
       ) => {
         assert.deepStrictEqual(actualRequest, request);
-        callback(null, expectedResponse.histogramQueryResults);
+        callback(null, expectedResponse.summarizedProfiles);
       };
 
       client.searchProfiles(request, (err, response) => {
         assert.ifError(err);
-        assert.deepStrictEqual(
-          response,
-          expectedResponse.histogramQueryResults
-        );
+        assert.deepStrictEqual(response, expectedResponse.summarizedProfiles);
         done();
       });
     });
