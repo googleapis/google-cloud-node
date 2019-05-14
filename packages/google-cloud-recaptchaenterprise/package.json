@@ -31,7 +31,7 @@
   "devDependencies": {
     "eslint": "^5.1.0",
     "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-node": "^9.0.0",
     "eslint-plugin-prettier": "^3.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
