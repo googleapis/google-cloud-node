@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-talent/compare/v0.3.0...v1.0.0) (2019-05-14)
+
+
+### Bug Fixes
+
+* use SummarizedProfile over HistogramQueryResult ([#54](https://www.github.com/googleapis/nodejs-talent/issues/54)) ([87036f0](https://www.github.com/googleapis/nodejs-talent/commit/87036f0))
+* **deps:** update dependency google-gax to v1 ([#51](https://www.github.com/googleapis/nodejs-talent/issues/51)) ([4ad1db5](https://www.github.com/googleapis/nodejs-talent/commit/4ad1db5))
+* DEADLINE_EXCEEDED is idempotent ([#52](https://www.github.com/googleapis/nodejs-talent/issues/52)) ([6f8dd1b](https://www.github.com/googleapis/nodejs-talent/commit/6f8dd1b))
+
 ## [0.3.0](https://www.github.com/googleapis/nodejs-talent/compare/v0.2.0...v0.3.0) (2019-05-09)
 
 
