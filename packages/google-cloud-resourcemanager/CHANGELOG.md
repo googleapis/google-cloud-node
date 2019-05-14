@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-resource/compare/v0.9.1...v1.0.0) (2019-05-14)
+
+
+### Bug Fixes
+
+* **deps:** remove teeny-request as dependency ([#199](https://www.github.com/googleapis/nodejs-resource/issues/199)) ([385b400](https://www.github.com/googleapis/nodejs-resource/commit/385b400))
+* **deps:** update dependency @google-cloud/common to ^0.32.0 ([4707eb9](https://www.github.com/googleapis/nodejs-resource/commit/4707eb9)), closes [#8203](https://www.github.com/googleapis/nodejs-resource/issues/8203)
+* **deps:** update dependency @google-cloud/common to v1 ([#215](https://www.github.com/googleapis/nodejs-resource/issues/215)) ([ab7cb12](https://www.github.com/googleapis/nodejs-resource/commit/ab7cb12))
+* **deps:** update dependency @google-cloud/paginator to v1 ([#209](https://www.github.com/googleapis/nodejs-resource/issues/209)) ([14b6523](https://www.github.com/googleapis/nodejs-resource/commit/14b6523))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#208](https://www.github.com/googleapis/nodejs-resource/issues/208)) ([3a71dcb](https://www.github.com/googleapis/nodejs-resource/commit/3a71dcb))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#204](https://www.github.com/googleapis/nodejs-resource/issues/204)) ([57b27fd](https://www.github.com/googleapis/nodejs-resource/commit/57b27fd))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#204)
+
 ## v0.9.1
 
 03-12-2019 12:22 PDT
@@ -167,4 +188,3 @@ const resource = Resource({...});
 - Upgrade repo-tools and regenerate scaffolding. ([#16](https://github.com/googleapis/nodejs-resource/pull/16))
 - Update proxyquire to the latest version 🚀 ([#15](https://github.com/googleapis/nodejs-resource/pull/15))
 - chore: removing node7 job from CircleCI ([#14](https://github.com/googleapis/nodejs-resource/pull/14))
-
