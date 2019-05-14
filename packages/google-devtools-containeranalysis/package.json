@@ -30,7 +30,7 @@
     "lodash.union": "^4.6.0"
   },
   "devDependencies": {
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "through2": "^3.0.0"
   },
   "scripts": {
