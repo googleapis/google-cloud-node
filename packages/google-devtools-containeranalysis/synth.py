@@ -27,7 +27,7 @@ versions = ['v1beta1']
 for version in versions:
     library = gapic.node_library('containeranalysis', version,
             config_path=f"/google/devtools/containeranalysis/artman_containeranalysis_{version}.yaml")
-    s.copy(library, excludes=['README.md'])
+    s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-containeranalysis-samples",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "repository": "googleapis/nodejs-containeranalysis",
+  "files": [
+    "*.js"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@google-cloud/containeranalysis": "^0.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.0"
+  }
+}

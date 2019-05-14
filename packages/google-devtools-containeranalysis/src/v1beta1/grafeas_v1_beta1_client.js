@@ -113,15 +113,11 @@ class GrafeasV1Beta1Client {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      notePathTemplate: new gax.PathTemplate(
-        'projects/{project}/notes/{note}'
-      ),
+      notePathTemplate: new gax.PathTemplate('projects/{project}/notes/{note}'),
       occurrencePathTemplate: new gax.PathTemplate(
         'projects/{project}/occurrences/{occurrence}'
       ),
-      projectPathTemplate: new gax.PathTemplate(
-        'projects/{project}'
-      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -133,11 +129,7 @@ class GrafeasV1Beta1Client {
         'nextPageToken',
         'occurrences'
       ),
-      listNotes: new gax.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'notes'
-      ),
+      listNotes: new gax.PageDescriptor('pageToken', 'nextPageToken', 'notes'),
       listNoteOccurrences: new gax.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -222,9 +214,7 @@ class GrafeasV1Beta1Client {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -285,10 +275,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getOccurrence(request, options, callback);
   }
@@ -388,10 +379,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listOccurrences(request, options, callback);
   }
@@ -452,7 +444,7 @@ class GrafeasV1Beta1Client {
       request,
       options
     );
-  };
+  }
 
   /**
    * Deletes the specified occurrence. For example, use this method to delete an
@@ -493,10 +485,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteOccurrence(request, options, callback);
   }
@@ -555,10 +548,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createOccurrence(request, options, callback);
   }
@@ -617,12 +611,17 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
-    return this._innerApiCalls.batchCreateOccurrences(request, options, callback);
+    return this._innerApiCalls.batchCreateOccurrences(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -683,10 +682,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.updateOccurrence(request, options, callback);
   }
@@ -737,10 +737,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getOccurrenceNote(request, options, callback);
   }
@@ -790,10 +791,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getNote(request, options, callback);
   }
@@ -893,10 +895,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listNotes(request, options, callback);
   }
@@ -957,7 +960,7 @@ class GrafeasV1Beta1Client {
       request,
       options
     );
-  };
+  }
 
   /**
    * Deletes the specified note.
@@ -996,10 +999,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteNote(request, options, callback);
   }
@@ -1062,10 +1066,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createNote(request, options, callback);
   }
@@ -1122,10 +1127,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.batchCreateNotes(request, options, callback);
   }
@@ -1188,10 +1194,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.updateNote(request, options, callback);
   }
@@ -1293,10 +1300,11 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.listNoteOccurrences(request, options, callback);
   }
@@ -1357,7 +1365,7 @@ class GrafeasV1Beta1Client {
       request,
       options
     );
-  };
+  }
 
   /**
    * Gets a summary of the number and severity of occurrences.
@@ -1406,12 +1414,17 @@ class GrafeasV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
-    return this._innerApiCalls.getVulnerabilityOccurrencesSummary(request, options, callback);
+    return this._innerApiCalls.getVulnerabilityOccurrencesSummary(
+      request,
+      options,
+      callback
+    );
   }
 
   // --------------------
@@ -1466,9 +1479,7 @@ class GrafeasV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromNoteName(noteName) {
-    return this._pathTemplates.notePathTemplate
-      .match(noteName)
-      .project;
+    return this._pathTemplates.notePathTemplate.match(noteName).project;
   }
 
   /**
@@ -1479,9 +1490,7 @@ class GrafeasV1Beta1Client {
    * @returns {String} - A string representing the note.
    */
   matchNoteFromNoteName(noteName) {
-    return this._pathTemplates.notePathTemplate
-      .match(noteName)
-      .note;
+    return this._pathTemplates.notePathTemplate.match(noteName).note;
   }
 
   /**
@@ -1492,8 +1501,7 @@ class GrafeasV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromOccurrenceName(occurrenceName) {
-    return this._pathTemplates.occurrencePathTemplate
-      .match(occurrenceName)
+    return this._pathTemplates.occurrencePathTemplate.match(occurrenceName)
       .project;
   }
 
@@ -1505,8 +1513,7 @@ class GrafeasV1Beta1Client {
    * @returns {String} - A string representing the occurrence.
    */
   matchOccurrenceFromOccurrenceName(occurrenceName) {
-    return this._pathTemplates.occurrencePathTemplate
-      .match(occurrenceName)
+    return this._pathTemplates.occurrencePathTemplate.match(occurrenceName)
       .occurrence;
   }
 
@@ -1518,11 +1525,8 @@ class GrafeasV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 }
-
 
 module.exports = GrafeasV1Beta1Client;

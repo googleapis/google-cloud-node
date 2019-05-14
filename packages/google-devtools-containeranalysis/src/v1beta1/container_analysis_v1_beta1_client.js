@@ -112,12 +112,8 @@ class ContainerAnalysisV1Beta1Client {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      notePathTemplate: new gax.PathTemplate(
-        'projects/{project}/notes/{note}'
-      ),
-      projectPathTemplate: new gax.PathTemplate(
-        'projects/{project}'
-      ),
+      notePathTemplate: new gax.PathTemplate('projects/{project}/notes/{note}'),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       scanConfigPathTemplate: new gax.PathTemplate(
         'projects/{project}/scanConfigs/{scan_config}'
       ),
@@ -202,9 +198,7 @@ class ContainerAnalysisV1Beta1Client {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -284,10 +278,11 @@ class ContainerAnalysisV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'resource': request.resource
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      resource: request.resource,
+    });
 
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
@@ -344,10 +339,11 @@ class ContainerAnalysisV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'resource': request.resource
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      resource: request.resource,
+    });
 
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
@@ -413,10 +409,11 @@ class ContainerAnalysisV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'resource': request.resource
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      resource: request.resource,
+    });
 
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
@@ -466,10 +463,11 @@ class ContainerAnalysisV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getScanConfig(request, options, callback);
   }
@@ -569,10 +567,11 @@ class ContainerAnalysisV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listScanConfigs(request, options, callback);
   }
@@ -633,7 +632,7 @@ class ContainerAnalysisV1Beta1Client {
       request,
       options
     );
-  };
+  }
 
   /**
    * Updates the specified scan configuration.
@@ -689,10 +688,11 @@ class ContainerAnalysisV1Beta1Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.updateScanConfig(request, options, callback);
   }
@@ -749,9 +749,7 @@ class ContainerAnalysisV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromNoteName(noteName) {
-    return this._pathTemplates.notePathTemplate
-      .match(noteName)
-      .project;
+    return this._pathTemplates.notePathTemplate.match(noteName).project;
   }
 
   /**
@@ -762,9 +760,7 @@ class ContainerAnalysisV1Beta1Client {
    * @returns {String} - A string representing the note.
    */
   matchNoteFromNoteName(noteName) {
-    return this._pathTemplates.notePathTemplate
-      .match(noteName)
-      .note;
+    return this._pathTemplates.notePathTemplate.match(noteName).note;
   }
 
   /**
@@ -775,9 +771,7 @@ class ContainerAnalysisV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromProjectName(projectName) {
-    return this._pathTemplates.projectPathTemplate
-      .match(projectName)
-      .project;
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
@@ -788,8 +782,7 @@ class ContainerAnalysisV1Beta1Client {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromScanConfigName(scanConfigName) {
-    return this._pathTemplates.scanConfigPathTemplate
-      .match(scanConfigName)
+    return this._pathTemplates.scanConfigPathTemplate.match(scanConfigName)
       .project;
   }
 
@@ -801,11 +794,9 @@ class ContainerAnalysisV1Beta1Client {
    * @returns {String} - A string representing the scan_config.
    */
   matchScanConfigFromScanConfigName(scanConfigName) {
-    return this._pathTemplates.scanConfigPathTemplate
-      .match(scanConfigName)
+    return this._pathTemplates.scanConfigPathTemplate.match(scanConfigName)
       .scan_config;
   }
 }
-
 
 module.exports = ContainerAnalysisV1Beta1Client;
