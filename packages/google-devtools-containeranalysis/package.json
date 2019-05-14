@@ -1,5 +1,5 @@
 {
-  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "repository": "googleapis/nodejs-containeranalysis",
   "name": "@google-cloud/containeranalysis",
   "version": "0.1.0",
   "author": "Google LLC",
@@ -7,9 +7,7 @@
   "main": "src/index.js",
   "files": [
     "protos",
-    "src",
-    "AUTHORS",
-    "COPYING"
+    "src"
   ],
   "keywords": [
     "google apis client",
@@ -25,18 +23,31 @@
     "Container Analysis API"
   ],
   "dependencies": {
-    "google-gax": "^1.0.0",
-    "lodash.merge": "^4.6.0",
-    "lodash.union": "^4.6.0"
+    "google-gax": "^0.25.3",
+    "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
-    "mocha": "^6.0.0",
-    "through2": "^3.0.0"
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jsdoc": "^3.6.2",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "linkinator": "^1.4.2",
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1",
+    "power-assert": "^1.6.1",
+    "prettier": "^1.17.1"
   },
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js containeranalysis",
-    "smoke-test": "mocha smoke-test/*.js --timeout 5000",
-    "test": "mocha test/*.js"
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "test": "nyc mocha",
+    "lint": "eslint '**/*.js'",
+    "docs": "jsdoc -c .jsdoc.js",
+    "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
+    "fix": "eslint '**/*.js' --fix",
+    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "predocs-test": "npm run docs"
   },
   "license": "Apache-2.0",
   "engines": {
