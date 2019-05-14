@@ -38,7 +38,7 @@
     "jsdoc": "^3.5.5",
     "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
     "linkinator": "^1.4.0",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "prettier": "^1.17.0",
     "through2": "^2.0.3"
   },
