@@ -22,7 +22,7 @@ const path = require('path');
 const VERSION = require('../../package.json').version;
 
 /**
- * [Grafeas](https://cloud.google.comgrafeas.io) API.
+ * [Grafeas](https://grafeas.io) API.
  *
  * Retrieves analysis results of Cloud components such as Docker container
  * images.

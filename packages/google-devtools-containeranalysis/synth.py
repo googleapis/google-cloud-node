@@ -34,6 +34,10 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
+s.replace('src/v1beta1/*.js',
+        'cloud.google.comgrafeas.io',
+        'grafeas.io')
+
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
