@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-datastore/compare/v3.1.2...v4.0.0) (2019-05-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to v1 ([#402](https://www.github.com/googleapis/nodejs-datastore/issues/402)) ([547f1a1](https://www.github.com/googleapis/nodejs-datastore/commit/547f1a1))
+* correct Long types import ([#358](https://www.github.com/googleapis/nodejs-datastore/issues/358)) ([dfe1def](https://www.github.com/googleapis/nodejs-datastore/commit/dfe1def))
+* DEADLINE_EXCEEDED is no longer retried ([47eedf0](https://www.github.com/googleapis/nodejs-datastore/commit/47eedf0))
+* DEADLINE_EXCEEDED retry code is idempotent ([#403](https://www.github.com/googleapis/nodejs-datastore/issues/403)) ([2a7c3ab](https://www.github.com/googleapis/nodejs-datastore/commit/2a7c3ab))
+* **deps:** update dependency @google-cloud/projectify to v1 ([#391](https://www.github.com/googleapis/nodejs-datastore/issues/391)) ([761896b](https://www.github.com/googleapis/nodejs-datastore/commit/761896b))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#392](https://www.github.com/googleapis/nodejs-datastore/issues/392)) ([94a45bd](https://www.github.com/googleapis/nodejs-datastore/commit/94a45bd))
+* **deps:** update dependency arrify to v2 ([2b47d10](https://www.github.com/googleapis/nodejs-datastore/commit/2b47d10))
+* **deps:** update dependency google-auth-library to v4 ([#400](https://www.github.com/googleapis/nodejs-datastore/issues/400)) ([19bc787](https://www.github.com/googleapis/nodejs-datastore/commit/19bc787))
+* **deps:** update dependency google-gax to ^0.26.0 ([#386](https://www.github.com/googleapis/nodejs-datastore/issues/386)) ([29b81e3](https://www.github.com/googleapis/nodejs-datastore/commit/29b81e3))
+* include 'x-goog-request-params' header in requests ([#372](https://www.github.com/googleapis/nodejs-datastore/issues/372)) ([d91be05](https://www.github.com/googleapis/nodejs-datastore/commit/d91be05))
+* lint ([#384](https://www.github.com/googleapis/nodejs-datastore/issues/384)) ([9a4d746](https://www.github.com/googleapis/nodejs-datastore/commit/9a4d746))
+* **docs:** move ts overloads above doc string ([#356](https://www.github.com/googleapis/nodejs-datastore/issues/356)) ([a7f1123](https://www.github.com/googleapis/nodejs-datastore/commit/a7f1123))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#388](https://www.github.com/googleapis/nodejs-datastore/issues/388)) ([a8cf59f](https://www.github.com/googleapis/nodejs-datastore/commit/a8cf59f))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#388)
+
 ## v3.1.2
 
 03-06-2019 12:24 PST
@@ -235,4 +263,3 @@ Please take care to update your imports accordingly!
 - fix: update linking for samples ([#115](https://github.com/googleapis/nodejs-datastore/pull/115))
 - chore(package): update eslint to version 5.0.0 ([#114](https://github.com/googleapis/nodejs-datastore/pull/114))
 - chore(package): Update sinon to the latest version 🚀 ([#104](https://github.com/googleapis/nodejs-datastore/pull/104))
-
