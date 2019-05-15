@@ -93,6 +93,81 @@ describe('InstanceGroupManager', function() {
     });
   });
 
+  describe('abandonInstances', function() {
+    const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
+
+    it('should make the correct API request', function(done) {
+      instanceGroupManager.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/abandonInstances');
+        assert.deepStrictEqual(reqOpts.json, {
+          instances: VMS.map(function(vm) {
+            return vm.url;
+          }),
+        });
+
+        done();
+      };
+
+      instanceGroupManager.abandonInstances(VMS, assert.ifError);
+    });
+
+    describe('error', function() {
+      const apiResponse = {};
+      const error = new Error('Error.');
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should return an error and API response', function(done) {
+        instanceGroupManager.abandonInstances(VMS, function(
+          err,
+          operation,
+          apiResponse_
+        ) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(operation, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      const apiResponse = {name: 'op-name'};
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should return an Operation and API response', function(done) {
+        const operation = {};
+
+        instanceGroupManager.zone.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        instanceGroupManager.abandonInstances(VMS, function(
+          err,
+          operation_,
+          apiResponse_
+        ) {
+          assert.ifError(err);
+          assert.strictEqual(operation_, operation);
+          assert.strictEqual(operation.metadata, apiResponse);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
   describe('deleteInstances', function() {
     const VMS = [{url: 'vm-url'}, {url: 'vm-url-2'}];
 
