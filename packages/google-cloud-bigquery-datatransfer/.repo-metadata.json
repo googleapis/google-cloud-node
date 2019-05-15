@@ -1,0 +1,13 @@
+{
+  "name": "bigquery-data-transfer",
+  "name_pretty": "Google BigQuery Data Transfer Service",
+  "product_documentation": "https://cloud.google.com/bigquery/transfer/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest/",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559654",
+  "release_level": "alpha",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-bigquery-data-transfer",
+  "distribution_name": "@google-cloud/bigquery-data-transfer",
+  "api_id": "bigquerydatatransfer.googleapis.com",
+  "requires_billing": true
+}
