@@ -28,8 +28,6 @@
   ],
   "scripts": {
     "test": "nyc mocha",
-    "generate-scaffolding": "repo-tools generate all",
-    "generate-scaffolding-samples": "repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "lint": "eslint '**/*.js'",
     "docs": "jsdoc -c .jsdoc.js",
@@ -43,19 +41,18 @@
     "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "codecov": "^3.0.2",
-    "eslint": "^5.0.0",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-node": "^9.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "codecov": "^3.5.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
     "intelli-espower-loader": "^1.0.1",
-    "jsdoc": "^3.5.5",
-    "mocha": "^6.0.0",
-    "nyc": "^14.0.0",
-    "power-assert": "^1.5.0",
-    "prettier": "^1.13.4",
-    "linkinator": "^1.1.2"
+    "jsdoc": "^3.6.2",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "linkinator": "^1.4.2",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "power-assert": "^1.6.1",
+    "prettier": "^1.17.1"
   }
 }

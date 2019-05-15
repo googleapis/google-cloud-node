@@ -9,6 +9,5 @@ system-test/secrets.js
 system-test/*key.json
 *.lock
 .DS_Store
-google-cloud-logging-winston-*.tgz
-google-cloud-logging-bunyan-*.tgz
+__pycache__
 package-lock.json

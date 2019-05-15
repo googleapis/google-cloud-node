@@ -11,7 +11,7 @@
   "repository": "googleapis/nodejs-bigquery-data-transfer",
   "private": true,
   "scripts": {
-    "test": "mocha system-test --timeout 60000"
+    "test": "mocha --timeout 60000"
   },
   "dependencies": {
     "@google-cloud/bigquery-data-transfer": "^0.5.1"
