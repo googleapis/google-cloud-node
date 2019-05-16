@@ -158,5 +158,19 @@ describe('logging-winston', () => {
       assert.deepStrictEqual(meta, {a: 1});
       done();
     });
+
+    it('should prefer Symbol for level', () => {
+      const info = {
+        ...METADATA,
+        message: MESSAGE,
+        level: `\u001b[34m${LEVEL}\u001b[39m`,
+        [Symbol.for('level')]: LEVEL,
+      };
+      loggingWinston.log(info);
+      const [level, message, meta] = lastFakeLoggingArgs;
+      assert.strictEqual(level, 'one');
+      assert.strictEqual(message, 'message');
+      assert.deepStrictEqual(meta, {a: 1, [Symbol.for('level')]: LEVEL});
+    });
   });
 });
