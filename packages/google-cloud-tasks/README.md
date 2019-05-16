@@ -65,7 +65,7 @@ npm install @google-cloud/tasks
   // const project = 'my-project-id';
   // const queue = 'my-appengine-queue';
   // const location = 'us-central1';
-  // const options = {payload: 'hello'};
+  // const payload = 'hello';
 
   // Construct the fully qualified queue name.
   const parent = client.queuePath(project, location, queue);
