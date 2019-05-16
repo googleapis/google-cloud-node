@@ -29,8 +29,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -52,6 +52,28 @@ npm install @google-cloud/containeranalysis
 ```
 
 
+### Using the client library
+
+```javascript
+async function quickstart() {
+  // Imports the @google-cloud/containeranalysis client library
+  const client = require('@google-cloud/containeranalysis');
+  console.log(client);
+}
+quickstart();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-containeranalysis/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -86,7 +108,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-containeranalysis/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/containeranalysis/latest/
-[product-docs]: https://cloud.google.com/containeranalysis
+[product-docs]: https://cloud.google.com/container-registry/docs/container-analysis
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing

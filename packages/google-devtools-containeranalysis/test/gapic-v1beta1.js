@@ -25,10 +25,12 @@ error.code = FAKE_STATUS_CODE;
 describe('ContainerAnalysisV1Beta1Client', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedResource = client.notePath('[PROJECT]', '[NOTE]');
@@ -60,10 +62,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes setIamPolicy with error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedResource = client.notePath('[PROJECT]', '[NOTE]');
@@ -91,10 +95,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
 
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedResource = client.notePath('[PROJECT]', '[NOTE]');
@@ -124,10 +130,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes getIamPolicy with error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedResource = client.notePath('[PROJECT]', '[NOTE]');
@@ -153,10 +161,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
 
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedResource = client.notePath('[PROJECT]', '[NOTE]');
@@ -183,10 +193,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes testIamPermissions with error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedResource = client.notePath('[PROJECT]', '[NOTE]');
@@ -214,10 +226,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
 
   describe('getScanConfig', () => {
     it('invokes getScanConfig without error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedName = client.scanConfigPath('[PROJECT]', '[SCAN_CONFIG]');
@@ -249,10 +263,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes getScanConfig with error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedName = client.scanConfigPath('[PROJECT]', '[SCAN_CONFIG]');
@@ -278,10 +294,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
 
   describe('listScanConfigs', () => {
     it('invokes listScanConfigs without error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedParent = client.projectPath('[PROJECT]');
@@ -299,7 +317,11 @@ describe('ContainerAnalysisV1Beta1Client', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listScanConfigs = (actualRequest, options, callback) => {
+      client._innerApiCalls.listScanConfigs = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.scanConfigs);
       };
@@ -312,10 +334,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes listScanConfigs with error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedParent = client.projectPath('[PROJECT]');
@@ -341,10 +365,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
 
   describe('updateScanConfig', () => {
     it('invokes updateScanConfig without error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedName = client.scanConfigPath('[PROJECT]', '[SCAN_CONFIG]');
@@ -378,10 +404,12 @@ describe('ContainerAnalysisV1Beta1Client', () => {
     });
 
     it('invokes updateScanConfig with error', done => {
-      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
 
       // Mock request
       const formattedName = client.scanConfigPath('[PROJECT]', '[SCAN_CONFIG]');
@@ -406,7 +434,6 @@ describe('ContainerAnalysisV1Beta1Client', () => {
       });
     });
   });
-
 });
 describe('GrafeasV1Beta1Client', () => {
   describe('getOccurrence', () => {
@@ -496,7 +523,11 @@ describe('GrafeasV1Beta1Client', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listOccurrences = (actualRequest, options, callback) => {
+      client._innerApiCalls.listOccurrences = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.occurrences);
       };
@@ -1246,7 +1277,11 @@ describe('GrafeasV1Beta1Client', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.listNoteOccurrences = (actualRequest, options, callback) => {
+      client._innerApiCalls.listNoteOccurrences = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.occurrences);
       };
@@ -1342,7 +1377,6 @@ describe('GrafeasV1Beta1Client', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

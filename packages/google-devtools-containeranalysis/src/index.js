@@ -24,6 +24,51 @@
 /**
  * @namespace google.cloud.containeranalysis.v1beta1
  */
+/**
+ * @namespace google.devtools.containeranalysis.v1beta1
+ */
+/**
+ * @namespace google.iam.v1
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
+/**
+ * @namespace grafeas.v1beta1
+ */
+/**
+ * @namespace grafeas.v1beta1.attestation
+ */
+/**
+ * @namespace grafeas.v1beta1.build
+ */
+/**
+ * @namespace grafeas.v1beta1.deployment
+ */
+/**
+ * @namespace grafeas.v1beta1.discovery
+ */
+/**
+ * @namespace grafeas.v1beta1.image
+ */
+/**
+ * @namespace grafeas.v1beta1.package
+ */
+/**
+ * @namespace grafeas.v1beta1.provenance
+ */
+/**
+ * @namespace grafeas.v1beta1.source
+ */
+/**
+ * @namespace grafeas.v1beta1.vulnerability
+ */
 
 'use strict';
 
