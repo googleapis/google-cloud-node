@@ -1,5 +1,0 @@
-type: com.google.api.codegen.ConfigProto
-language: ruby
-generator:
-  factory: com.google.api.codegen.gapic.MainGapicProviderFactory
-  id: ruby_doc
