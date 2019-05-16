@@ -55,9 +55,10 @@ npm install @google-cloud/bigquery-data-transfer
 ### Using the client library
 
 ```javascript
+const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
+const client = new bigqueryDataTransfer.v1.DataTransferServiceClient();
+
 async function quickstart() {
-  const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
-  const client = new bigqueryDataTransfer.v1.DataTransferServiceClient();
   const projectId = await client.getProjectId();
 
   // Iterate over all elements.
@@ -88,7 +89,7 @@ async function quickstart() {
       console.log(`  ${element.name}`);
     });
 }
-quickstart().catch(console.error);
+quickstart();
 
 ```
 
