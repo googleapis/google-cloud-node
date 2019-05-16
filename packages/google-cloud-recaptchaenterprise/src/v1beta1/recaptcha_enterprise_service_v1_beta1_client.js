@@ -212,7 +212,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    *
    * @example
    *
-   * const recaptchaenterprise = require('recaptchaenterprise.v1beta1');
+   * const recaptchaenterprise = require('@google-cloud/recaptchaenterprise');
    *
    * const client = new recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client({
    *   // optional auth parameters.
@@ -276,7 +276,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    *
    * @example
    *
-   * const recaptchaenterprise = require('recaptchaenterprise.v1beta1');
+   * const recaptchaenterprise = require('@google-cloud/recaptchaenterprise');
    *
    * const client = new recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client({
    *   // optional auth parameters.
