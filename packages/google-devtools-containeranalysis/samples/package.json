@@ -11,9 +11,10 @@
         "node": ">=8"
     },
     "scripts": {
-        "test": "mocha --preserve-symlinks system-test/**.test.js"
+        "test": "mocha --preserve-symlinks --timeout 100000 system-test/**.test.js"
     },
     "devDependencies": {
+        "@google-cloud/pubsub": "^0.28.1",
         "chai": "^4.2.0",
         "mocha": "^6.1.4",
         "uuid": "^3.3.2"
