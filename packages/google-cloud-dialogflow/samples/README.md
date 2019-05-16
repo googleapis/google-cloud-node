@@ -109,7 +109,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -185,7 +185,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -261,7 +261,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -337,7 +337,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -413,7 +413,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -489,7 +489,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -565,7 +565,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -641,7 +641,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -717,7 +717,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -793,7 +793,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
@@ -869,7 +869,7 @@ Commands:
   detect.v2beta1.js deleteDocument                        Deletes a specific document from a knowledge base
   detect.v2beta1.js detectIntentwithTexttoSpeechResponse  Detects the intent of text input, outputs .wav file to target
                                                           location
-  detect.v2beta1.js detectIntentKnowledge                 Detects anwsers from knowledge base queries
+  detect.v2beta1.js detectIntentKnowledge                 Detects answers from knowledge base queries
   detect.v2beta1.js detectIntentandSentiment              Detects sentiment with detect Intent query
   detect.v2beta1.js detectIntentwithModelSelection        Returns result of detect intent with model selection on an
                                                           audio file as input
