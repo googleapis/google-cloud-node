@@ -1,4 +1,5 @@
 import * as TransportStream from 'winston-transport';
+import {LEVEL} from 'triple-beam';
 
 import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
 import * as express from './middleware/express';
@@ -101,16 +102,15 @@ export class LoggingWinston extends TransportStream {
     this.common = new LoggingCommon(options);
   }
 
-  log(
-    {message, level, splat, stack, ...metadata}: types.Winston3LogArg,
-    callback: Callback
-  ) {
+  // tslint:disable-next-line:no-any Matching the Winston API.
+  log(info: any, callback: Callback) {
+    const {message, level, splat, stack, ...metadata} = info;
+
     // If the whole message is an error we have to manually copy the stack into
     // metadata. Errors dont have enumerable properties so they don't
     // destructure.
     if (stack) metadata.stack = stack;
-
-    this.common.log(level, message, metadata || {}, callback);
+    this.common.log(info[LEVEL] || level, message, metadata || {}, callback);
   }
 }
 
