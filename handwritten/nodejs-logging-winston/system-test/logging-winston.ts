@@ -85,45 +85,46 @@ describe('LoggingWinston', function() {
   }
 
   describe('log', () => {
-    const testData = commonTestData.concat([
-      {
-        args: [new Error('fourth')],
-        level: 'error',
-        verify: (entry: types.StackdriverEntry) => {
-          assert(
-            (entry.data as {
-              message: string;
-            }).message.startsWith('fourth Error:')
-          );
-        },
-      },
-      {
-        args: [
-          {
-            level: 'error',
-            message: 'fifth message',
-            error: new Error('fifth'),
-          },
-        ],
-        level: 'log',
-        verify: (entry: types.StackdriverEntry) => {
-          assert(
-            (entry.data as {
-              message: string;
-            }).message.startsWith('fifth message')
-          );
-        },
-      },
-    ] as TestData[]);
-
-    const LOG_NAME = logName('logging_winston_system_tests');
     const LoggingWinston = proxyquire('../src/index', {winston}).LoggingWinston;
 
-    const logger = winston.createLogger({
-      transports: [new LoggingWinston({logName: LOG_NAME})],
-    });
-
     it('should properly write log entries', async () => {
+      const testData = commonTestData.concat([
+        {
+          args: [new Error('fourth')],
+          level: 'error',
+          verify: (entry: types.StackdriverEntry) => {
+            assert(
+              (entry.data as {
+                message: string;
+              }).message.startsWith('fourth Error:')
+            );
+          },
+        },
+        {
+          args: [
+            {
+              level: 'error',
+              message: 'fifth message',
+              error: new Error('fifth'),
+            },
+          ],
+          level: 'log',
+          verify: (entry: types.StackdriverEntry) => {
+            assert(
+              (entry.data as {
+                message: string;
+              }).message.startsWith('fifth message')
+            );
+          },
+        },
+      ] as TestData[]);
+
+      const LOG_NAME = logName(`logging_winston_system_tests_1`);
+
+      const logger = winston.createLogger({
+        transports: [new LoggingWinston({logName: LOG_NAME})],
+      });
+
       const start = Date.now();
       testData.forEach(test => {
         // logger does not have index signature.
@@ -142,6 +143,30 @@ describe('LoggingWinston', function() {
         const test = testData[index];
         test.verify(entry);
       });
+    });
+
+    it('should work correctly with winston formats', async () => {
+      const MESSAGE = 'A message that should be padded';
+      const start = Date.now();
+      const LOG_NAME = logName(`logging_winston_system_tests_2`);
+      const logger = winston.createLogger({
+        transports: [new LoggingWinston({logName: LOG_NAME})],
+        format: winston.format.combine(
+          winston.format.colorize(),
+          winston.format.padLevels()
+        ),
+      });
+
+      logger.error(MESSAGE);
+
+      const [entry] = await pollLogs(
+        LOG_NAME,
+        start,
+        1,
+        WRITE_CONSISTENCY_DELAY_MS
+      );
+      const data = entry.data as {message: string};
+      assert.strictEqual(data.message, `   ${MESSAGE}`);
     });
   });
 
