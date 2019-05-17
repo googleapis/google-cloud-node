@@ -1,5 +1,5 @@
 {
-  "updateTime": "2019-05-11T11:18:47.991857Z",
+  "updateTime": "2019-05-17T01:08:29.317885Z",
   "sources": [
     {
       "generator": {
@@ -12,15 +12,15 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "32b08107fa1710f46287c17d5bb2016e443ed3ba",
-        "internalRef": "247684466"
+        "sha": "03269e767cff9dd644d7784a4d4350b2ba6daf69",
+        "internalRef": "248524261"
       }
     },
     {
       "template": {
         "name": "node_library",
         "origin": "synthtool.gcp",
-        "version": "2019.5.2"
+        "version": "2019.4.10"
       }
     }
   ],
