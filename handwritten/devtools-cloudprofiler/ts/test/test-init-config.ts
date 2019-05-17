@@ -143,9 +143,9 @@ describe('createProfiler', () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub
       .withArgs('name')
-      .resolves({ data: 'gce-instance' })
+      .resolves('gce-instance')
       .withArgs('zone')
-      .resolves({ data: 'projects/123456789012/zones/gce-zone' });
+      .resolves('projects/123456789012/zones/gce-zone');
 
     const config = Object.assign(
       {
@@ -168,9 +168,9 @@ describe('createProfiler', () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub
       .withArgs('name')
-      .resolves({ data: 'gce-instance' })
+      .resolves('gce-instance')
       .withArgs('zone')
-      .resolves({ data: 'projects/123456789012/zones/gce-zone' });
+      .resolves('projects/123456789012/zones/gce-zone');
     const config = Object.assign(
       {
         projectId: 'projectId',
@@ -383,9 +383,9 @@ describe('createProfiler', () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub
       .withArgs('name')
-      .resolves({ data: 'gce-instance' })
+      .resolves('gce-instance')
       .withArgs('zone')
-      .resolves({ data: 'projects/123456789012/zones/gce-zone' });
+      .resolves('projects/123456789012/zones/gce-zone');
     const config = disableSourceMapParams;
     const expConfigParams = {
       projectId: 'process-projectId',
@@ -450,9 +450,9 @@ describe('createProfiler', () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub
       .withArgs('name')
-      .resolves({ data: 'gce-instance' })
+      .resolves('gce-instance')
       .withArgs('zone')
-      .resolves({ data: 'projects/123456789012/zones/gce-zone' });
+      .resolves('projects/123456789012/zones/gce-zone');
 
     const config = Object.assign(
       {
