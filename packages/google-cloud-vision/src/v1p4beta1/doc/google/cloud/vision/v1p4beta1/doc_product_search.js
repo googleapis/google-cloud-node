@@ -34,8 +34,10 @@
  *
  * @property {string[]} productCategories
  *   The list of product categories to search in. Currently, we only consider
- *   the first category, and either "homegoods", "apparel", or "toys" should be
- *   specified.
+ *   the first category, and either "homegoods-v2", "apparel-v2", "toys-v2", or
+ *   "packagedgoods" should be specified. The legacy categories "homegoods",
+ *   "apparel", and "toys" are still supported, but these should not be used for
+ *   new products.
  *
  * @property {string} filter
  *   The filtering expression. This can be used to restrict search results based
