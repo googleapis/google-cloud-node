@@ -34,8 +34,7 @@ const serviceRegex = /^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/;
  * Throws error if there is a problem accessing metadata API.
  */
 async function getMetadataInstanceField(field: string): Promise<string> {
-  const res = await gcpMetadata.instance(field);
-  return res.data;
+  return gcpMetadata.instance(field);
 }
 
 function hasService(
