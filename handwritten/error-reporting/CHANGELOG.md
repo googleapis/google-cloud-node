@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-error-reporting/compare/v0.6.3...v1.0.0) (2019-05-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v1 ([#357](https://www.github.com/googleapis/nodejs-error-reporting/issues/357)) ([1e928e8](https://www.github.com/googleapis/nodejs-error-reporting/commit/1e928e8))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#349](https://www.github.com/googleapis/nodejs-error-reporting/issues/349)) ([1ab75f2](https://www.github.com/googleapis/nodejs-error-reporting/commit/1ab75f2))
+
+
+### BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#349)
+
 ## v0.6.3
 
 04-11-2019 11:37 PDT
@@ -186,4 +203,3 @@
 - chore: use post-install-check ([#166](https://github.com/googleapis/nodejs-error-reporting/pull/166))
 - test: fix system tests ([#162](https://github.com/googleapis/nodejs-error-reporting/pull/162))
 - fix: drop support for nodejs 9.x ([#161](https://github.com/googleapis/nodejs-error-reporting/pull/161))
-
