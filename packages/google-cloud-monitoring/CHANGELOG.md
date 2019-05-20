@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v0.7.1...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#241)
+
+### Bug Fixes
+
+* include 'x-goog-request-params' header in requests ([#233](https://www.github.com/googleapis/nodejs-monitoring/issues/233)) ([54733ef](https://www.github.com/googleapis/nodejs-monitoring/commit/54733ef))
+* **deps:** update dependency google-gax to ^0.26.0 ([#240](https://www.github.com/googleapis/nodejs-monitoring/issues/240)) ([da50ee8](https://www.github.com/googleapis/nodejs-monitoring/commit/da50ee8))
+* **deps:** update dependency google-gax to v1 ([#249](https://www.github.com/googleapis/nodejs-monitoring/issues/249)) ([896141a](https://www.github.com/googleapis/nodejs-monitoring/commit/896141a))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#241](https://www.github.com/googleapis/nodejs-monitoring/issues/241)) ([6e7587d](https://www.github.com/googleapis/nodejs-monitoring/commit/6e7587d))
+
 ## v0.7.1
 
 03-13-2019 15:05 PDT
@@ -204,4 +222,3 @@ Bring in some documentation changes inside protos (see #96)
 - Fix region tags. (#42)
 - Add Alerting samples. (#41)
 - chore: test on node10 (#40)
-
