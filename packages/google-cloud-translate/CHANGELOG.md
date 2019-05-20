@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [4.0.1](https://www.github.com/googleapis/nodejs-translate/compare/v4.0.0...v4.0.1) (2019-05-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/automl to v1 ([#267](https://www.github.com/googleapis/nodejs-translate/issues/267)) ([180d8f6](https://www.github.com/googleapis/nodejs-translate/commit/180d8f6))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-translate/compare/v3.0.1...v4.0.0) (2019-05-13)
 
 
