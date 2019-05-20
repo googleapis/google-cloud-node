@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-dlp/compare/v0.12.0...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#272)
+
+### Bug Fixes
+
+* DEADLINE_EXCEEDED no longer treated as idempotent and retried ([1a0000c](https://www.github.com/googleapis/nodejs-dlp/commit/1a0000c))
+* DEADLINE_EXCEEDED retry code is idempotent ([#281](https://www.github.com/googleapis/nodejs-dlp/issues/281)) ([9c00cf6](https://www.github.com/googleapis/nodejs-dlp/commit/9c00cf6))
+* **deps:** update dependency @google-cloud/pubsub to ^0.29.0 ([#283](https://www.github.com/googleapis/nodejs-dlp/issues/283)) ([b1f9ee1](https://www.github.com/googleapis/nodejs-dlp/commit/b1f9ee1))
+* **deps:** update dependency google-gax to ^0.26.0 ([#270](https://www.github.com/googleapis/nodejs-dlp/issues/270)) ([68258a6](https://www.github.com/googleapis/nodejs-dlp/commit/68258a6))
+* **deps:** update dependency google-gax to v1 ([#280](https://www.github.com/googleapis/nodejs-dlp/issues/280)) ([2cbb997](https://www.github.com/googleapis/nodejs-dlp/commit/2cbb997))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#272](https://www.github.com/googleapis/nodejs-dlp/issues/272)) ([233e814](https://www.github.com/googleapis/nodejs-dlp/commit/233e814))
+
 ## v0.12.0
 
 04-26-2019 12:39 PDT
@@ -159,4 +179,3 @@ Greetings!  This release has a few new features, bug fixes, and doc updates.  En
 ### Internal / Testing Changes
 - chore(build): use `npm ci` instead of `npm install` (#86)
 - chore: really delete node4 and node9 (#83)
-
