@@ -30,7 +30,6 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "predocs": "npm run compile",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme  -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "npm run check && eslint '**/*.js'",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 600000",
@@ -59,7 +58,6 @@
     "teeny-request": "^3.4.0"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.2.0",
     "@types/extend": "^3.0.0",
     "@types/is": "0.0.21",
     "@types/mocha": "^5.2.4",
