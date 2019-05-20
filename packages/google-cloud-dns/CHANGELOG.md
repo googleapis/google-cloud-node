@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-dns/compare/v0.9.2...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#246)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to ^0.32.0 ([#238](https://www.github.com/googleapis/nodejs-dns/issues/238)) ([e1ba124](https://www.github.com/googleapis/nodejs-dns/commit/e1ba124))
+* **deps:** update dependency @google-cloud/common to v1 ([#257](https://www.github.com/googleapis/nodejs-dns/issues/257)) ([f8f7398](https://www.github.com/googleapis/nodejs-dns/commit/f8f7398))
+* **deps:** update dependency @google-cloud/paginator to v1 ([#250](https://www.github.com/googleapis/nodejs-dns/issues/250)) ([002e85a](https://www.github.com/googleapis/nodejs-dns/commit/002e85a))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#249](https://www.github.com/googleapis/nodejs-dns/issues/249)) ([25319bf](https://www.github.com/googleapis/nodejs-dns/commit/25319bf))
+* **deps:** update dependency arrify to v2 ([#240](https://www.github.com/googleapis/nodejs-dns/issues/240)) ([5f86971](https://www.github.com/googleapis/nodejs-dns/commit/5f86971))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#246](https://www.github.com/googleapis/nodejs-dns/issues/246)) ([30d840b](https://www.github.com/googleapis/nodejs-dns/commit/30d840b))
+
 ## v0.9.2
 
 03-12-2019 13:47 PDT
@@ -202,4 +222,3 @@ const dns = new DNS();
 - chore: workaround for repo-tools EPERM ([#32](https://github.com/googleapis/nodejs-dns/pull/32))
 - chore: setup nighty build in CircleCI ([#30](https://github.com/googleapis/nodejs-dns/pull/30))
 - Upgrade repo-tools and regenerate scaffolding. ([#29](https://github.com/googleapis/nodejs-dns/pull/29))
-
