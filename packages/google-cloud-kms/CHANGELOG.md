@@ -4,6 +4,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-kms/compare/v0.4.0...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#151)
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#149](https://www.github.com/googleapis/nodejs-kms/issues/149)) ([b92c822](https://www.github.com/googleapis/nodejs-kms/commit/b92c822))
+* DEADLINE_EXCEEDED is no longer retried ([5f4f9ff](https://www.github.com/googleapis/nodejs-kms/commit/5f4f9ff))
+* DEADLINE_EXCEEDED retry code is idempotent ([#159](https://www.github.com/googleapis/nodejs-kms/issues/159)) ([a7e511a](https://www.github.com/googleapis/nodejs-kms/commit/a7e511a))
+* indicate that Encrypt, Decrypt, AsymmetricDecrypt, AsymmetricSign are idempotent, such that they're retried ([122b3f8](https://www.github.com/googleapis/nodejs-kms/commit/122b3f8))
+* **deps:** update dependency google-gax to v1 ([#158](https://www.github.com/googleapis/nodejs-kms/issues/158)) ([91fe078](https://www.github.com/googleapis/nodejs-kms/commit/91fe078))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#151](https://www.github.com/googleapis/nodejs-kms/issues/151)) ([45b2a9f](https://www.github.com/googleapis/nodejs-kms/commit/45b2a9f))
+
 ## v0.4.0
 
 03-13-2019 16:16 PDT
@@ -109,4 +129,3 @@
 - Update CI config ([#32](https://github.com/googleapis/nodejs-kms/pull/32))
 - Retry npm install in CI ([#30](https://github.com/googleapis/nodejs-kms/pull/30))
 - Update CI config ([#27](https://github.com/googleapis/nodejs-kms/pull/27))
-
