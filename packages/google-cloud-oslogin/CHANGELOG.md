@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-os-login/compare/v0.3.3...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#184)
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#182](https://www.github.com/googleapis/nodejs-os-login/issues/182)) ([c97e514](https://www.github.com/googleapis/nodejs-os-login/commit/c97e514))
+* **deps:** update dependency google-gax to v1 ([#191](https://www.github.com/googleapis/nodejs-os-login/issues/191)) ([5268691](https://www.github.com/googleapis/nodejs-os-login/commit/5268691))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#184](https://www.github.com/googleapis/nodejs-os-login/issues/184)) ([8b0866a](https://www.github.com/googleapis/nodejs-os-login/commit/8b0866a))
+
 ### [0.3.3](https://www.github.com/googleapis/nodejs-os-login/compare/v0.3.2...v0.3.3) (2019-04-30)
 
 
