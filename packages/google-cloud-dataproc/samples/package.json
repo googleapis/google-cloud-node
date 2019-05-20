@@ -2,7 +2,9 @@
   "name": "nodejs-docs-samples-dataproc",
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "files": ["*.js"],
+  "files": [
+    "*.js"
+  ],
   "engines": {
     "node": ">=8"
   },
@@ -12,7 +14,7 @@
     "test": "mocha system-test --timeout 60000"
   },
   "dependencies": {
-    "@google-cloud/dataproc": "^0.5.0"
+    "@google-cloud/dataproc": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v0.5.0...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#195)
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#193](https://www.github.com/googleapis/nodejs-dataproc/issues/193)) ([16f112a](https://www.github.com/googleapis/nodejs-dataproc/commit/16f112a))
+* DEADLINE_EXCEEDED is no longer retried ([9d38130](https://www.github.com/googleapis/nodejs-dataproc/commit/9d38130))
+* DEADLINE_EXCEEDED retry code is idempotent ([#204](https://www.github.com/googleapis/nodejs-dataproc/issues/204)) ([e048b26](https://www.github.com/googleapis/nodejs-dataproc/commit/e048b26))
+* include 'x-goog-request-params' header in requests ([#186](https://www.github.com/googleapis/nodejs-dataproc/issues/186)) ([f13ebcd](https://www.github.com/googleapis/nodejs-dataproc/commit/f13ebcd))
+* **deps:** update dependency google-gax to v1 ([#203](https://www.github.com/googleapis/nodejs-dataproc/issues/203)) ([b005f75](https://www.github.com/googleapis/nodejs-dataproc/commit/b005f75))
+* **docs:** fix a broken link ([#177](https://www.github.com/googleapis/nodejs-dataproc/issues/177)) ([d7b2fce](https://www.github.com/googleapis/nodejs-dataproc/commit/d7b2fce))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#195](https://www.github.com/googleapis/nodejs-dataproc/issues/195)) ([00f0f63](https://www.github.com/googleapis/nodejs-dataproc/commit/00f0f63))
+
 ## v0.5.0
 
 03-08-2019 22:48 PST
@@ -151,4 +172,3 @@
 - chore: make samples depend on the current version
 - chore: make samples depend on the current version
 - chore: setup nighty build in CircleCI ([#15](https://github.com/googleapis/nodejs-dataproc/pull/15))
-
