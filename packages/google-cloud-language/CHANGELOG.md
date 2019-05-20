@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-language/compare/v2.1.0...v3.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#232)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/automl to ^0.2.0 ([#223](https://www.github.com/googleapis/nodejs-language/issues/223)) ([1fe903a](https://www.github.com/googleapis/nodejs-language/commit/1fe903a))
+* DEADLINE_EXCEEDED error is no longer retried ([a32713f](https://www.github.com/googleapis/nodejs-language/commit/a32713f))
+* DEADLINE_EXCEEDED is idempotent ([#241](https://www.github.com/googleapis/nodejs-language/issues/241)) ([dbd417f](https://www.github.com/googleapis/nodejs-language/commit/dbd417f))
+* improve docstrings, and add more field validation ([#224](https://www.github.com/googleapis/nodejs-language/issues/224)) ([ed2c692](https://www.github.com/googleapis/nodejs-language/commit/ed2c692))
+* **deps:** update dependency @google-cloud/automl to v1 ([#242](https://www.github.com/googleapis/nodejs-language/issues/242)) ([c7e4797](https://www.github.com/googleapis/nodejs-language/commit/c7e4797))
+* **deps:** update dependency google-gax to ^0.26.0 ([#230](https://www.github.com/googleapis/nodejs-language/issues/230)) ([5b8af98](https://www.github.com/googleapis/nodejs-language/commit/5b8af98))
+* **deps:** update dependency google-gax to v1 ([#240](https://www.github.com/googleapis/nodejs-language/issues/240)) ([54660e1](https://www.github.com/googleapis/nodejs-language/commit/54660e1))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#232](https://www.github.com/googleapis/nodejs-language/issues/232)) ([ec540f3](https://www.github.com/googleapis/nodejs-language/commit/ec540f3))
+
 ## v2.1.0
 
 03-22-2019 10:34 PDT
@@ -167,4 +189,3 @@
 - chore: workaround for repo-tools EPERM ([#45](https://github.com/googleapis/nodejs-language/pull/45))
 - chore: make samples depend on the current version ([#44](https://github.com/googleapis/nodejs-language/pull/44))
 - chore: setup nighty build in CircleCI ([#43](https://github.com/googleapis/nodejs-language/pull/43))
-
