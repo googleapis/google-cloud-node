@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-compute/compare/v0.12.0...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#292)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to ^0.32.0 ([#285](https://www.github.com/googleapis/nodejs-compute/issues/285)) ([a728cff](https://www.github.com/googleapis/nodejs-compute/commit/a728cff))
+* **deps:** update dependency @google-cloud/common to v1 ([#303](https://www.github.com/googleapis/nodejs-compute/issues/303)) ([5b5e2e7](https://www.github.com/googleapis/nodejs-compute/commit/5b5e2e7))
+* **deps:** update dependency @google-cloud/paginator to v1 ([#297](https://www.github.com/googleapis/nodejs-compute/issues/297)) ([16b5ff2](https://www.github.com/googleapis/nodejs-compute/commit/16b5ff2))
+* **deps:** update dependency @google-cloud/projectify to v1 ([#295](https://www.github.com/googleapis/nodejs-compute/issues/295)) ([30fff7d](https://www.github.com/googleapis/nodejs-compute/commit/30fff7d))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#296](https://www.github.com/googleapis/nodejs-compute/issues/296)) ([166e99e](https://www.github.com/googleapis/nodejs-compute/commit/166e99e))
+* **deps:** update dependency arrify to v2 ([#287](https://www.github.com/googleapis/nodejs-compute/issues/287)) ([4bc19c8](https://www.github.com/googleapis/nodejs-compute/commit/4bc19c8))
+* **deps:** update dependency gce-images to v2 ([#304](https://www.github.com/googleapis/nodejs-compute/issues/304)) ([19eaaf5](https://www.github.com/googleapis/nodejs-compute/commit/19eaaf5))
+* **deps:** update dependency nodemailer to v6 ([4c8e9c5](https://www.github.com/googleapis/nodejs-compute/commit/4c8e9c5))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#292](https://www.github.com/googleapis/nodejs-compute/issues/292)) ([4101d77](https://www.github.com/googleapis/nodejs-compute/commit/4101d77))
+
+
+### Features
+
+* Adds abandonInstances to InstanceGroupManger API ([#306](https://www.github.com/googleapis/nodejs-compute/issues/306)) ([c359ce3](https://www.github.com/googleapis/nodejs-compute/commit/c359ce3))
+
 ## v0.12.0
 
 03-13-2019 14:47 PDT
@@ -169,4 +197,3 @@
 - chore: workaround for repo-tools EPERM ([#58](https://github.com/googleapis/nodejs-compute/pull/58))
 - chore: setup nighty build in CircleCI ([#56](https://github.com/googleapis/nodejs-compute/pull/56))
 - Upgrade repo-tools and regenerate scaffolding. ([#55](https://github.com/googleapis/nodejs-compute/pull/55))
-
