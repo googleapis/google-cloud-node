@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-iot/compare/v0.2.1...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#144)
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#142](https://www.github.com/googleapis/nodejs-iot/issues/142)) ([e329c68](https://www.github.com/googleapis/nodejs-iot/commit/e329c68))
+* DEADLINE_EXCEEDED is no longer retried ([#152](https://www.github.com/googleapis/nodejs-iot/issues/152)) ([d037e51](https://www.github.com/googleapis/nodejs-iot/commit/d037e51))
+* DEADLINE_EXCEEDED retry code is idempotent ([#155](https://www.github.com/googleapis/nodejs-iot/issues/155)) ([9e177ed](https://www.github.com/googleapis/nodejs-iot/commit/9e177ed))
+* **deps:** update dependency google-gax to v1 ([#154](https://www.github.com/googleapis/nodejs-iot/issues/154)) ([ea2d803](https://www.github.com/googleapis/nodejs-iot/commit/ea2d803))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#144](https://www.github.com/googleapis/nodejs-iot/issues/144)) ([320fb70](https://www.github.com/googleapis/nodejs-iot/commit/320fb70))
+
 ## v0.2.1
 
 03-13-2019 14:59 PDT
