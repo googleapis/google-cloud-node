@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v0.5.1...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#194)
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#192](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/192)) ([417634a](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/417634a))
+* DEADLINE_EXCEEDED is no longer retried ([fb87d7c](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/fb87d7c))
+* DEADLINE_EXCEEDED retry code is idempotent ([#203](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/203)) ([d0ff039](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/d0ff039))
+* **deps:** update dependency google-gax to v1 ([#202](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/202)) ([245cf09](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/245cf09))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#194](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/194)) ([39eca4f](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/39eca4f))
+
 ## v0.5.1
 
 03-12-2019 13:53 PDT
