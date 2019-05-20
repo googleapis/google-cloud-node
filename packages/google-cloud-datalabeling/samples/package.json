@@ -12,6 +12,8 @@
   "scripts": {
     "test": "mocha --timeout 600000"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@google-cloud/datalabeling": "^1.0.0"
+  },
   "devDependencies": {}
 }
