@@ -4,6 +4,32 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-speech/compare/v2.3.1...v3.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#339)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to ^0.32.0 ([13d76eb](https://www.github.com/googleapis/nodejs-speech/commit/13d76eb)), closes [#8203](https://www.github.com/googleapis/nodejs-speech/issues/8203)
+* DEADLINE_EXCEEDED is idempotent ([#351](https://www.github.com/googleapis/nodejs-speech/issues/351)) ([aa5cca5](https://www.github.com/googleapis/nodejs-speech/commit/aa5cca5))
+* DEADLINE_EXCEEDED no longer treated as idempotent and retried ([8b0655f](https://www.github.com/googleapis/nodejs-speech/commit/8b0655f))
+* **deps:** update dependency @google-cloud/common to v1 ([#349](https://www.github.com/googleapis/nodejs-speech/issues/349)) ([d3f216d](https://www.github.com/googleapis/nodejs-speech/commit/d3f216d))
+* **deps:** update dependency google-gax to ^0.26.0 ([#338](https://www.github.com/googleapis/nodejs-speech/issues/338)) ([b589b2c](https://www.github.com/googleapis/nodejs-speech/commit/b589b2c))
+* **deps:** update dependency google-gax to v1 ([#350](https://www.github.com/googleapis/nodejs-speech/issues/350)) ([a43fb45](https://www.github.com/googleapis/nodejs-speech/commit/a43fb45))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#339](https://www.github.com/googleapis/nodejs-speech/issues/339)) ([3f12222](https://www.github.com/googleapis/nodejs-speech/commit/3f12222))
+
+
+### Features
+
+* add recognition metadata ([#352](https://www.github.com/googleapis/nodejs-speech/issues/352)) ([071b540](https://www.github.com/googleapis/nodejs-speech/commit/071b540))
+
 ## v2.3.1
 
 03-20-2019 15:38 PDT
@@ -192,4 +218,3 @@
 - chore: require node 8 for samples ([#128](https://github.com/googleapis/nodejs-speech/pull/128))
 - test: use strictEqual in tests ([#120](https://github.com/googleapis/nodejs-speech/pull/120))
 - modify helpers.js to be compatible with generated code ([#116](https://github.com/googleapis/nodejs-speech/pull/116))
-
