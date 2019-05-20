@@ -4,6 +4,25 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-redis/compare/v0.4.0...v1.0.0) (2019-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#154)
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#153](https://www.github.com/googleapis/nodejs-redis/issues/153)) ([587ae91](https://www.github.com/googleapis/nodejs-redis/commit/587ae91))
+* DEADLINE_EXCEEDED error is no longer retried ([2ff07c7](https://www.github.com/googleapis/nodejs-redis/commit/2ff07c7))
+* DEADLINE_EXCEEDED retry code is idempotent ([#164](https://www.github.com/googleapis/nodejs-redis/issues/164)) ([0658433](https://www.github.com/googleapis/nodejs-redis/commit/0658433))
+* **deps:** update dependency google-gax to v1 ([#163](https://www.github.com/googleapis/nodejs-redis/issues/163)) ([0bf6004](https://www.github.com/googleapis/nodejs-redis/commit/0bf6004))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#154](https://www.github.com/googleapis/nodejs-redis/issues/154)) ([179c1fd](https://www.github.com/googleapis/nodejs-redis/commit/179c1fd))
+
 ## v0.4.0
 
 04-05-2019 08:45 PDT
@@ -140,4 +159,3 @@
 - refactor: drop repo-tool as an exec wrapper (#10)
 - chore: the ultimate fix for repo-tools EPERM (#3)
 - chore: timeout for system test (#2)
-
