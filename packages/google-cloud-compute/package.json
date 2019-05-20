@@ -41,7 +41,7 @@
     "@google-cloud/projectify": "^1.0.0",
     "@google-cloud/promisify": "^1.0.0",
     "arrify": "^2.0.0",
-    "async": "^2.6.1",
+    "async": "^3.0.0",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.1",
     "gce-images": "^2.0.0",
