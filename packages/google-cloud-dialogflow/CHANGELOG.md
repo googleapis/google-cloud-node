@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [0.9.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.9.0...v0.9.1) (2019-05-20)
+
+
+### Bug Fixes
+
+* DEADLINE_EXCEEDED retry code is idempotent ([#343](https://www.github.com/googleapis/nodejs-dialogflow/issues/343)) ([d1238f7](https://www.github.com/googleapis/nodejs-dialogflow/commit/d1238f7))
+* remove DEADLINE_EXCEEDED from list of idempotent operations ([871070f](https://www.github.com/googleapis/nodejs-dialogflow/commit/871070f))
+* **deps:** update dependency google-gax to v1 ([#342](https://www.github.com/googleapis/nodejs-dialogflow/issues/342)) ([dead90b](https://www.github.com/googleapis/nodejs-dialogflow/commit/dead90b))
+
 ## [0.9.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.8.2...v0.9.0) (2019-05-07)
 
 ### BREAKING CHANGE
