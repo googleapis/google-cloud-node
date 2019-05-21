@@ -37,8 +37,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "google-gax": "^1.0.0",
-    "lodash.merge": "^4.6.0"
+    "google-gax": "^1.0.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^3.0.0",
