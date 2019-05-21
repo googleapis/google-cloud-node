@@ -16,7 +16,6 @@
 
 const gapicConfig = require('./language_service_client_config.json');
 const gax = require('google-gax');
-const merge = require('lodash.merge');
 const path = require('path');
 
 const VERSION = require('../../package.json').version;
@@ -89,12 +88,9 @@ class LanguageServiceClient {
     }
 
     // Load the applicable protos.
-    const protos = merge(
-      {},
-      gaxGrpc.loadProto(
-        path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/language/v1/language_service.proto'
-      )
+    const protos = gaxGrpc.loadProto(
+      path.join(__dirname, '..', '..', 'protos'),
+      ['google/cloud/language/v1/language_service.proto']
     );
 
     // Put together the default options sent with requests.
@@ -199,7 +195,7 @@ class LanguageServiceClient {
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1.EncodingType}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
@@ -253,7 +249,7 @@ class LanguageServiceClient {
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1.EncodingType}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
@@ -306,7 +302,7 @@ class LanguageServiceClient {
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1.EncodingType}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
@@ -364,7 +360,7 @@ class LanguageServiceClient {
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1.EncodingType}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
@@ -412,7 +408,7 @@ class LanguageServiceClient {
    *   This object should have the same structure as [Document]{@link google.cloud.language.v1.Document}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
@@ -469,7 +465,7 @@ class LanguageServiceClient {
    *   The number should be among the values of [EncodingType]{@link google.cloud.language.v1.EncodingType}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
