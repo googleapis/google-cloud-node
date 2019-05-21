@@ -17,6 +17,7 @@
         "@google-cloud/pubsub": "^0.28.1",
         "chai": "^4.2.0",
         "mocha": "^6.1.4",
+        "p-retry": "^4.1.0",
         "uuid": "^3.3.2"
     }
 }
