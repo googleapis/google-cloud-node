@@ -65,6 +65,10 @@ retry() {
   return 1
 }
 
+npm_install() {
+	timeout 60 npm install "${@}"
+}
+
 # Fail on any error
 set -eo pipefail
 
@@ -93,7 +97,7 @@ retry git fetch origin {{if .PR}}pull/{{.PR}}/head{{else}}{{.Branch}}{{end}}:pul
 git checkout pull_branch
 git reset --hard {{.Commit}}
 
-retry npm install --nodedir="$NODEDIR" &>/dev/ttyS2
+retry npm_install --nodedir="$NODEDIR" &>/dev/ttyS2
 
 npm run compile 
 npm pack --nodedir="$NODEDIR" >/dev/null
@@ -105,8 +109,8 @@ mkdir -p "$TESTDIR"
 cp -r "system-test/busybench" "$TESTDIR"
 cd "$TESTDIR/busybench"
 
-retry npm install node-pre-gyp &>/dev/ttyS2
-retry npm install --nodedir="$NODEDIR" --build-from-source=google_cloud_profiler "$PROFILER" typescript gts &>/dev/ttyS2
+retry npm_install node-pre-gyp &>/dev/ttyS2
+retry npm_install --nodedir="$NODEDIR" "$PROFILER" typescript gts &>/dev/ttyS2
 
 npm run compile
 
