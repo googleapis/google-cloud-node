@@ -7,7 +7,7 @@
   "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/nodejs-web-risk",
-  "distribution_name": "@google-cloud/datalabeling",
+  "distribution_name": "@google-cloud/web-risk",
   "api_id": "webrisk.googleapis.com",
   "requires_billing": true
 }
