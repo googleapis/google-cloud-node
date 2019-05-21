@@ -37,8 +37,7 @@
     "fix": "eslint --fix '**/*.js'"
   },
   "dependencies": {
-    "google-gax": "^1.0.0",
-    "lodash.merge": "^4.6.1"
+    "google-gax": "^1.0.0"
   },
   "devDependencies": {
     "codecov": "^3.0.2",
