@@ -25,8 +25,7 @@
     "reCAPTCHA Enterprise API"
   ],
   "dependencies": {
-    "google-gax": "^1.0.0",
-    "lodash.merge": "^4.6.0"
+    "google-gax": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^5.1.0",
