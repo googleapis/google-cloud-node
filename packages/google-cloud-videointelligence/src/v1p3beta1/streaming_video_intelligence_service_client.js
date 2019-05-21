@@ -16,7 +16,6 @@
 
 const gapicConfig = require('./streaming_video_intelligence_service_client_config.json');
 const gax = require('google-gax');
-const merge = require('lodash.merge');
 const path = require('path');
 
 const VERSION = require('../../package.json').version;
@@ -88,12 +87,9 @@ class StreamingVideoIntelligenceServiceClient {
     }
 
     // Load the applicable protos.
-    const protos = merge(
-      {},
-      gaxGrpc.loadProto(
-        path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/videointelligence/v1p3beta1/video_intelligence.proto'
-      )
+    const protos = gaxGrpc.loadProto(
+      path.join(__dirname, '..', '..', 'protos'),
+      ['google/cloud/videointelligence/v1p3beta1/video_intelligence.proto']
     );
 
     // Some of the methods on this service provide streaming responses.
@@ -191,7 +187,7 @@ class StreamingVideoIntelligenceServiceClient {
    *
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
    *   representing [StreamingAnnotateVideoRequest]{@link google.cloud.videointelligence.v1p3beta1.StreamingAnnotateVideoRequest} for write() method, and
