@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "google-gax": "^1.0.0",
-    "lodash.merge": "^4.6.1",
     "protobufjs": "^6.8.6"
   },
   "devDependencies": {
