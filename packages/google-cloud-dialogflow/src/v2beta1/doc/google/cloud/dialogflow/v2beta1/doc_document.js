@@ -18,8 +18,8 @@
 /**
  * A document resource.
  *
- * Note: resource `projects.agent.knowledgeBases.documents` is deprecated,
- * please use `projects.knowledgeBases.documents` instead.
+ * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+ * only use `projects.knowledgeBases.documents`.
  *
  * @property {string} name
  *   The document resource name.

@@ -113,8 +113,8 @@
  *   This object should have the same structure as [Message]{@link google.cloud.dialogflow.v2beta1.Message}
  *
  * @property {number[]} defaultResponsePlatforms
- *   Optional. The list of platforms for which the first response will be
- *   taken from among the messages assigned to the DEFAULT_PLATFORM.
+ *   Optional. The list of platforms for which the first responses will be
+ *   copied from the messages in PLATFORM_UNSPECIFIED (i.e. default platform).
  *
  *   The number should be among the values of [Platform]{@link google.cloud.dialogflow.v2beta1.Platform}
  *
@@ -926,7 +926,12 @@ const Intent = {
       /**
        * Telephony Gateway.
        */
-      TELEPHONY: 10
+      TELEPHONY: 10,
+
+      /**
+       * Google Hangouts.
+       */
+      GOOGLE_HANGOUTS: 11
     }
   },
 

@@ -16,7 +16,6 @@
 
 const gapicConfig = require('./documents_client_config.json');
 const gax = require('google-gax');
-const merge = require('lodash.merge');
 const path = require('path');
 const protobuf = require('protobufjs');
 
@@ -89,12 +88,9 @@ class DocumentsClient {
     }
 
     // Load the applicable protos.
-    const protos = merge(
-      {},
-      gaxGrpc.loadProto(
-        path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/dialogflow/v2beta1/document.proto'
-      )
+    const protos = gaxGrpc.loadProto(
+      path.join(__dirname, '..', '..', 'protos'),
+      ['google/cloud/dialogflow/v2beta1/document.proto']
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -267,6 +263,9 @@ class DocumentsClient {
   /**
    * Returns the list of all documents of the knowledge base.
    *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -280,7 +279,7 @@ class DocumentsClient {
    *   resources in a page.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
@@ -392,7 +391,7 @@ class DocumentsClient {
    *   resources in a page.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @returns {Stream}
    *   An object stream which emits an object representing [Document]{@link google.cloud.dialogflow.v2beta1.Document} on 'data' event.
    *
@@ -425,6 +424,9 @@ class DocumentsClient {
   /**
    * Retrieves the specified document.
    *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -433,7 +435,7 @@ class DocumentsClient {
    *   ID>/documents/<Document ID>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
@@ -480,6 +482,9 @@ class DocumentsClient {
   /**
    * Creates a new document.
    *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
    * Operation <response: Document,
    *            metadata: KnowledgeOperationMetadata>
    *
@@ -494,13 +499,13 @@ class DocumentsClient {
    *   This object should have the same structure as [Document]{@link google.cloud.dialogflow.v2beta1.Document}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
@@ -600,6 +605,9 @@ class DocumentsClient {
   /**
    * Deletes the specified document.
    *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
    * Operation <response: google.protobuf.Empty,
    *            metadata: KnowledgeOperationMetadata>
    *
@@ -611,13 +619,13 @@ class DocumentsClient {
    *   ID>/documents/<Document ID>`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
@@ -701,6 +709,10 @@ class DocumentsClient {
 
   /**
    * Updates the specified document.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
    * Operation <response: Document,
    *            metadata: KnowledgeOperationMetadata>
    *
@@ -718,13 +730,13 @@ class DocumentsClient {
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
-   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/Operation} object.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
    *   The promise has a method named "cancel" which cancels the ongoing API call.
    *
    * @example
@@ -811,6 +823,10 @@ class DocumentsClient {
    * content. The previously loaded content of the document will be deleted.
    * Note: Even when the content of the document has not changed, there still
    * may be side effects because of internal implementation changes.
+   *
+   * Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
+   * only use `projects.knowledgeBases.documents`.
+   *
    * Operation <response: Document,
    *            metadata: KnowledgeOperationMetadata>
    *
@@ -822,7 +838,7 @@ class DocumentsClient {
    *   ID>/documents/<Document ID>`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *

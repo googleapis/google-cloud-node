@@ -18,8 +18,8 @@
 /**
  * Represents knowledge base resource.
  *
- * Note: resource `projects.agent.knowledgeBases` is deprecated, please use
- * `projects.knowledgeBases` instead.
+ * Note: The `projects.agent.knowledgeBases` resource is deprecated;
+ * only use `projects.knowledgeBases`.
  *
  * @property {string} name
  *   The knowledge base resource name.
