@@ -25,8 +25,7 @@
     "Web Risk API"
   ],
   "dependencies": {
-    "google-gax": "^1.0.0",
-    "lodash.merge": "^4.6.0"
+    "google-gax": "^1.0.0"
   },
   "devDependencies": {
     "c8": "^4.1.4",
