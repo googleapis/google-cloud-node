@@ -16,7 +16,6 @@
 
 const gapicConfig = require('./image_annotator_client_config.json');
 const gax = require('google-gax');
-const merge = require('lodash.merge');
 const path = require('path');
 
 const VERSION = require('../../package.json').version;
@@ -90,12 +89,9 @@ class ImageAnnotatorClient {
     }
 
     // Load the applicable protos.
-    const protos = merge(
-      {},
-      gaxGrpc.loadProto(
-        path.join(__dirname, '..', '..', 'protos'),
-        'google/cloud/vision/v1p1beta1/image_annotator.proto'
-      )
+    const protos = gaxGrpc.loadProto(
+      path.join(__dirname, '..', '..', 'protos'),
+      ['google/cloud/vision/v1p1beta1/image_annotator.proto']
     );
 
     // Put together the default options sent with requests.
@@ -189,7 +185,7 @@ class ImageAnnotatorClient {
    *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1p1beta1.AnnotateImageRequest}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
    * @param {function(?Error, ?Object)} [callback]
    *   The function which will be called with the result of the API call.
    *
