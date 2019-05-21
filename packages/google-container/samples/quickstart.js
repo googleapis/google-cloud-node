@@ -14,33 +14,27 @@
  */
 
 'use strict';
+
 async function main() {
   // [START container_quickstart]
   const container = require('@google-cloud/container');
 
-  if (
-    !process.env.GCLOUD_PROJECT ||
-    !process.env.GOOGLE_APPLICATION_CREDENTIALS
-  ) {
-    throw new Error(
-      'Usage: GCLOUD_PROJECT=<project_id> GOOGLE_APPLICATION_CREDENTIALS=<path to key json file> node #{$0}'
-    );
+  // Create the Cluster Manager Client
+  const client = new container.v1.ClusterManagerClient();
+
+  async function quickstart() {
+    const zone = 'us-central1-a';
+    const projectId = await client.getProjectId();
+    const request = {
+      projectId: projectId,
+      zone: zone,
+    };
+
+    const [response] = await client.listClusters(request);
+    console.log('Clusters:');
+    console.log(response);
   }
-
-  const client = new container.v1.ClusterManagerClient({
-    // optional auth parameters.
-  });
-
-  const projectId = process.env.GCLOUD_PROJECT;
-  const zone = 'us-central1-a';
-  const request = {
-    projectId: projectId,
-    zone: zone,
-  };
-
-  const [response] = await client.listClusters(request);
-  console.log('Clusters:');
-  console.log(response);
+  quickstart();
   // [END container_quickstart]
 }
 
