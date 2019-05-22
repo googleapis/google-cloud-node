@@ -42,13 +42,13 @@ describe('Manual handler', () => {
   } as {}) as RequestHandler;
   const report = manual.handlerSetup(client, config, ({
     warn(message: string) {
-      // The use of `report` in this class should issue the following warning
-      // becasue the `report` class is used directly and, as such, cannot
-      // by itself have information where a ErrorMesasge was constructed.  It
-      // only knows that an error has been reported.
-      // Thus, the ErrorMessage objects given to the `report` method in the
-      // tests do not have construction site information to verify that if
-      // that information is not available, the user is issued a warning.
+      // The use of `report` in this class should issue the following
+      // warning becasue the `report` class is used directly and, as such,
+      // cannot by itself have information where a ErrorMesasge was
+      // constructed.  It only knows that an error has been reported. Thus,
+      // the ErrorMessage objects given to the `report` method in the tests
+      // do not have construction site information to verify that if that
+      // information is not available, the user is issued a warning.
       assert.strictEqual(
         message,
         'Encountered a manually constructed error ' +
