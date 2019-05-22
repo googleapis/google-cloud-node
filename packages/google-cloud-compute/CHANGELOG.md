@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-compute/compare/v1.0.0...v1.0.1) (2019-05-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency async to v3 ([#313](https://www.github.com/googleapis/nodejs-compute/issues/313)) ([c459c57](https://www.github.com/googleapis/nodejs-compute/commit/c459c57))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-compute/compare/v0.12.0...v1.0.0) (2019-05-20)
 
 
