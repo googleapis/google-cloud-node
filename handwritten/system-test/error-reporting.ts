@@ -32,7 +32,6 @@ import {
 
 import pick = require('lodash.pick');
 import omitBy = require('lodash.omitby');
-import * as request from 'request';
 import * as uuid from 'uuid';
 import * as util from 'util';
 import * as path from 'path';
@@ -428,52 +427,6 @@ describe('Expected Behavior', () => {
       assert(is.empty(body));
       assert.strictEqual(response!.statusCode, 200);
       done();
-    });
-  });
-});
-
-describe('Error Reporting API', () => {
-  [
-    {
-      name: 'when a valid API key is given',
-      getKey: () => env.apiKey,
-      message: 'Message cannot be empty.',
-      statusCode: 400,
-    },
-    {
-      name: 'when an empty API key is given',
-      getKey: () => '',
-      message: 'The request is missing a valid API key.',
-      // TODO: Determine if 403 is the correct expected status code.
-      //       Prior to the code migration, the expected status code
-      //       was 400.  However, the service is now reporting 403.
-      statusCode: 403,
-    },
-    {
-      name: 'when an invalid API key is given',
-      getKey: () => env.apiKey.slice(1) + env.apiKey[0],
-      message: 'API key not valid. Please pass a valid API key.',
-      statusCode: 400,
-    },
-  ].forEach(testCase => {
-    it(`should return an expected message ${
-      testCase.name
-    }`, function(this, done) {
-      this.timeout(60000);
-      const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
-      const key = testCase.getKey();
-      request.post(
-        {
-          url: `${API}/projects/${env.projectId}/events:report?key=${key}`,
-          json: {},
-        },
-        (err, response, body) => {
-          assert.ok(!err && body.error);
-          assert.strictEqual(response.statusCode, testCase.statusCode);
-          assert.strictEqual(body.error.message, testCase.message);
-          done();
-        }
-      );
     });
   });
 });
