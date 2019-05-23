@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.0.0...v1.1.0) (2019-05-23)
+
+
+### Features
+
+* add .repo-metadata.json; allows us to generate new docs site ([#183](https://www.github.com/googleapis/nodejs-automl/issues/183)) ([8b42e76](https://www.github.com/googleapis/nodejs-automl/commit/8b42e76))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-automl/compare/v0.2.0...v1.0.0) (2019-05-13)
 
 
