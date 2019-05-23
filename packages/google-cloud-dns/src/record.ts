@@ -18,9 +18,9 @@ import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 import {Change, CreateChangeCallback} from './change';
 import {Zone} from './zone';
+import {Metadata} from '@google-cloud/common';
 
 const format = require('string-format-obj');
-import * as r from 'request';
 
 export interface RecordObject {
   rrdatas?: Array<{}>;
@@ -42,7 +42,7 @@ export interface RecordMetadata {
  * @property {Change} 0 A {@link Change} object.
  * @property {object} 1 The full API response.
  */
-export type DeleteRecordResponse = [Change, r.Response];
+export type DeleteRecordResponse = [Change, Metadata];
 
 /**
  * @callback DeleteRecordCallback
@@ -51,7 +51,7 @@ export type DeleteRecordResponse = [Change, r.Response];
  * @param {object} apiResponse The full API response.
  */
 export interface DeleteRecordCallback {
-  (err: Error | null, change?: Change, apiResponse?: r.Response): void;
+  (err: Error | null, change?: Change, apiResponse?: Metadata): void;
 }
 
 /**
