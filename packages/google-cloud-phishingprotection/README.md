@@ -1,31 +1,126 @@
-# Node.js Client for Phishing Protection API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-[Phishing Protection API][Product Documentation]:
+# [Phishing Protection: Node.js Client](https://github.com/googleapis/nodejs-phishing-protection)
 
-- [Client Library Documentation][]
-- [Product Documentation][]
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/phishing-protection.svg)](https://www.npmjs.org/package/@google-cloud/phishing-protection)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-phishing-protection/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-phishing-protection)
 
-## Quick Start
-In order to use this library, you first need to go through the following
-steps:
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Phishing Protection API.](https://console.cloud.google.com/apis/library/phishingprotection.googleapis.com)
-4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/master/guides/authentication)
 
-### Installation
+
+Phishing Protection API client for Node.js
+
+
+* [Phishing Protection Node.js Client API Reference][client-docs]
+* [Phishing Protection Documentation][product-docs]
+* [github.com/googleapis/nodejs-phishing-protection](https://github.com/googleapis/nodejs-phishing-protection)
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
+**Table of contents:**
+
+
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
+
+## Quickstart
+
+### Before you begin
+
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable billing for your project][billing].
+1.  [Enable the Phishing Protection API][enable_api].
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
+
+### Installing the client library
+
+```bash
+npm install @google-cloud/phishing-protection
 ```
-$ npm install --save phishingprotection
+
+
+### Using the client library
+
+```javascript
+  const {
+    PhishingProtectionServiceV1Beta1Client,
+  } = require('@google-cloud/phishing-protection');
+  const client = new PhishingProtectionServiceV1Beta1Client();
+
+  // the numeric project ID.
+  const formattedParent = client.projectPath(projectId);
+  const request = {
+    parent: formattedParent,
+    uri: uri, // the URI to report to Phishing API.
+  };
+
+  await client.reportPhishing(request);
+
+  console.info(`reported ${uri} to Phishing Protection API`);
+
 ```
 
-### Next Steps
-- Read the [Client Library Documentation][] for Phishing Protection API
-  to see other available methods on the client.
-- Read the [Phishing Protection API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/phishingprotection
-[Product Documentation]: https://cloud.google.com/phishingprotection
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-phishing-protection/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-phishing-protection/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-phishing-protection&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+
+
+
+The [Phishing Protection Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+
+
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
+
+
+
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-phishing-protection/blob/master/CONTRIBUTING.md).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](https://github.com/googleapis/nodejs-phishing-protection/blob/master/LICENSE)
+
+[client-docs]: https://googleapis.dev/nodejs/phishing-protection/latest/index.html
+[product-docs]: https://cloud.google.com/phishing-protection/docs/
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=phishingprotection.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started

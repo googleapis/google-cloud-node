@@ -1,0 +1,13 @@
+{
+  "name": "phishing-protection",
+  "name_pretty": "Phishing Protection",
+  "product_documentation": "https://cloud.google.com/phishing-protection/docs/",
+  "client_documentation": "https://googleapis.dev/nodejs/phishing-protection/latest/index.html",
+  "issue_tracker": "",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-phishing-protection",
+  "distribution_name": "@google-cloud/phishing-protection",
+  "api_id": "phishingprotection.googleapis.com",
+  "requires_billing": true
+}

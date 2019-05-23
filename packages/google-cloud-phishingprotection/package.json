@@ -1,0 +1,58 @@
+{
+  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "name": "@google-cloud/phishing-protection",
+  "version": "0.1.0",
+  "author": "Google LLC",
+  "description": "Phishing Protection API client for Node.js",
+  "main": "src/index.js",
+  "files": [
+    "protos",
+    "src",
+    "AUTHORS",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google phishingprotection",
+    "phishingprotection",
+    "Phishing Protection API"
+  ],
+  "dependencies": {
+    "google-gax": "^1.1.0"
+  },
+  "devDependencies": {
+    "c8": "^4.1.4",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jsdoc": "^3.6.2",
+    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "linkinator": "^1.4.0",
+    "mocha": "^6.0.0",
+    "prettier": "^1.17.0",
+    "through2": "^3.0.0"
+  },
+  "scripts": {
+    "docs": "jsdoc -c .jsdoc.js",
+    "fix": "eslint . --fix",
+    "lint": "eslint .",
+    "test": "c8 mocha test/*.js",
+    "predocs-test": "npm run docs",
+    "docs-test": "linkinator docs -r --skip 'github.com/googleapis/nodejs-phishing-protection/blob/master/samples/quickstart.js|github.com/googleapis/nodejs-phishing-protection/tree/master/samples|www.npmjs.org/package/@google-cloud/phishing-protection|googleapis.dev/nodejs/phishing-protection/latest/index.html'",
+    "samples-test": "cd samples/ && npm link ../ && npm test && cd ..",
+    "system-test": "mocha --timeout=5000 system-test/*.js"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.10.0"
+  }
+}
