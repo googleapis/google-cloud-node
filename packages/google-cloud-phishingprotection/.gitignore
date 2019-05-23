@@ -11,6 +11,5 @@ system-test/*key.json
 *.lock
 .DS_Store
 package-lock.json
-protos/
 __pycache__
 

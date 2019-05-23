@@ -15,7 +15,7 @@
 
 'use strict';
 
-const PROJECT_ID = 12345;
+const PROJECT_ID = '1046198160504';
 
 describe('PhishingProtection', () => {
   it('submits a URI to the phishing protection API', async () => {

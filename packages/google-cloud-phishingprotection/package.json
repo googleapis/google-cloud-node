@@ -1,5 +1,5 @@
 {
-  "repository": "GoogleCloudPlatform/google-cloud-node",
+  "repository": "googleapis/nodejs-phishing-protection",
   "name": "@google-cloud/phishing-protection",
   "version": "0.1.0",
   "author": "Google LLC",
@@ -28,7 +28,7 @@
     "google-gax": "^1.1.0"
   },
   "devDependencies": {
-    "c8": "^4.1.4",
+    "c8": "^5.0.1",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
@@ -48,8 +48,8 @@
     "test": "c8 mocha test/*.js",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs -r --skip 'github.com/googleapis/nodejs-phishing-protection/blob/master/samples/quickstart.js|github.com/googleapis/nodejs-phishing-protection/tree/master/samples|www.npmjs.org/package/@google-cloud/phishing-protection|googleapis.dev/nodejs/phishing-protection/latest/index.html'",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ..",
-    "system-test": "mocha --timeout=5000 system-test/*.js"
+    "samples-test": "c8 mocha samples/test/*.js",
+    "system-test": "c8 mocha --timeout=5000 system-test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {
