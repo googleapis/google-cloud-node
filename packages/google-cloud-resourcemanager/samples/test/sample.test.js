@@ -15,23 +15,20 @@
 
 'use strict';
 
-async function main() {
-  // [START resource_quickstart]
-  // Imports the Google Cloud client library
-  const {Resource} = require('@google-cloud/resource');
+const {assert} = require('chai');
+const {execSync} = require('child_process');
 
-  // Creates a client
-  const resource = new Resource();
+const exec = cmd => execSync(cmd, {encoding: 'utf-8'});
 
-  async function quickstart() {
-    // Lists current projects
-    const [projects] = await resource.getProjects();
+describe('resource samples', () => {
+  it('should run the quickstart', () => {
+    const stdout = exec('node listProjects');
+    assert.include(stdout, 'Projects:');
+    assert.include(stdout, process.env.GCLOUD_PROJECT);
+  });
 
-    console.log('Projects:');
-    projects.forEach(project => console.log(project.id));
-  }
-  quickstart();
-  // [END resource_quickstart]
-}
-
-main().catch(console.error);
+  it('should list projects', () => {
+    const stdout = exec('node quickstart');
+    assert.match(stdout, /Projects:/);
+  });
+});

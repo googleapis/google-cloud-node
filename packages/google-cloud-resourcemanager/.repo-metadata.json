@@ -1,0 +1,13 @@
+{
+  "name": "resource",
+  "name_pretty": "Google Cloud Resource Manager API",
+  "product_documentation": "https://cloud.google.com/resource-manager",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/resource/latest/",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559757",
+  "release_level": "alpha",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-resource",
+  "distribution_name": "@google-cloud/resource",
+  "api_id": "cloudresourcemanager.googleapis.com",
+  "requires_billing": true
+}
