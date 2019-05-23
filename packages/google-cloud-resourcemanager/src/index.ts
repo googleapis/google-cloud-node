@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-import {GoogleAuthOptions, Operation, Service} from '@google-cloud/common';
+import {
+  GoogleAuthOptions,
+  Operation,
+  Service,
+  Metadata,
+} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as r from 'request'; // Only for type declarations.
 
 import {Project} from './project';
 
@@ -25,15 +29,15 @@ export type CreateProjectCallback = (
   err: Error | null,
   project?: Project | null,
   operation?: Operation<Project>,
-  apiResponse?: r.Response
+  apiResponse?: Metadata
 ) => void;
-export type CreateProjectResponse = [Project, Operation<Project>, r.Response];
-export type GetProjectsResponse = [Project[], r.Response];
+export type CreateProjectResponse = [Project, Operation<Project>, Metadata];
+export type GetProjectsResponse = [Project[], Metadata];
 export type GetProjectsCallback = (
   err: Error | null,
   projects?: Project[] | null,
   nextQuery?: {} | null,
-  apiResponse?: r.Response
+  apiResponse?: Metadata
 ) => void;
 
 export interface GetProjectOptions {

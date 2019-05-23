@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-import {DecorateRequestOptions, Operation, util} from '@google-cloud/common';
+import {
+  DecorateRequestOptions,
+  Operation,
+  util,
+  Metadata,
+} from '@google-cloud/common';
 import {MakeAuthenticatedRequestFactoryConfig} from '@google-cloud/common/build/src/util';
 import arrify = require('arrify');
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
-import {Response} from 'request';
 
 import * as root from '../src';
 import {Project} from '../src';
@@ -196,7 +200,7 @@ describe('Resource', () => {
         resource.createProject(
           NEW_PROJECT_ID,
           OPTIONS,
-          (err: Error, p: Project, res: Response) => {
+          (err: Error, p: Project, res: Metadata) => {
             assert.strictEqual(err, error);
             assert.strictEqual(p, null);
             assert.strictEqual(res, apiResponse);
@@ -235,7 +239,7 @@ describe('Resource', () => {
         resource.createProject(
           NEW_PROJECT_ID,
           OPTIONS,
-          (e: Error, p: Project, o: Operation, res: Response) => {
+          (e: Error, p: Project, o: Operation, res: Metadata) => {
             assert.ifError(e);
             assert.strictEqual(p, project);
             assert.strictEqual(o, fakeOperation);
@@ -287,7 +291,7 @@ describe('Resource', () => {
             err: Error,
             projects: Project[],
             nextQuery: {},
-            apiResp: Response
+            apiResp: Metadata
           ) => {
             assert.strictEqual(err, error);
             assert.strictEqual(projects, null);
@@ -355,7 +359,7 @@ describe('Resource', () => {
             err: Error,
             projects: Project[],
             nextQuery: {},
-            apiResp: Response
+            apiResp: Metadata
           ) => {
             assert.ifError(err);
             assert.strictEqual(projects[0], project);

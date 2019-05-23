@@ -14,25 +14,24 @@
  * limitations under the License.
  */
 
-import {Operation, ServiceObject, util} from '@google-cloud/common';
+import {Operation, ServiceObject, util, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as r from 'request'; // Only for type declarations.
 
 import {CreateProjectCallback, CreateProjectResponse, Resource} from '.';
 
 export type RestoreCallback = (
   err: Error | null,
-  apiResonse?: r.Response
+  apiResonse?: Metadata
 ) => void;
-export type RestoreResponse = [r.Response];
+export type RestoreResponse = [Metadata];
 
-export type ProjectCreateResponse = [Project, Operation<Project>, r.Response];
+export type ProjectCreateResponse = [Project, Operation<Project>, Metadata];
 export interface ProjectCreateCallback {
   (
     err: Error | null,
     project?: Project,
     operation?: Operation<Project>,
-    apiResponse?: r.Response
+    apiResponse?: Metadata
   ): void;
 }
 

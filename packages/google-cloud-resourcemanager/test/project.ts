@@ -19,11 +19,11 @@ import {
   ServiceObject,
   ServiceObjectConfig,
   util,
+  Metadata,
 } from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
-import {Response} from 'request';
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
@@ -128,7 +128,7 @@ describe('Project', () => {
     });
 
     it('should execute the callback with error & API response', done => {
-      project.restore((err: Error, apiResponse_: Response) => {
+      project.restore((err: Error, apiResponse_: Metadata) => {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
