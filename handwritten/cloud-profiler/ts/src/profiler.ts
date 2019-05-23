@@ -16,7 +16,7 @@
 
 import { Service, ServiceConfig, ServiceObject } from '@google-cloud/common';
 import * as http from 'http';
-import * as pify from 'pify';
+import { promisify } from 'util';
 import {
   heap as heapProfiler,
   SourceMapper,
@@ -33,7 +33,7 @@ import { createLogger } from './logger';
 const parseDuration: (str: string) => number = require('parse-duration');
 const pjson = require('../../package.json');
 const SCOPE = 'https://www.googleapis.com/auth/monitoring.write';
-const gzip = pify(zlib.gzip);
+const gzip = promisify(zlib.gzip);
 
 enum ProfileTypes {
   Wall = 'WALL',
@@ -187,7 +187,7 @@ function isRequestProfile(prof: any): prof is RequestProfile {
  */
 async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
   const buffer = perftools.profiles.Profile.encode(p).finish();
-  const gzBuf = await gzip(buffer);
+  const gzBuf = (await gzip(buffer)) as Buffer;
   return gzBuf.toString('base64');
 }
 
