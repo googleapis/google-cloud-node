@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## v2.0.1
+
+05-23-2019 13:08 PDT
+
+### Implementation Changes
+- fix: agent should correctly set zone in GCP ([#489](https://github.com/googleapis/cloud-profiler-nodejs/pull/489))
+
+### Dependencies
+- fix(deps): remove unused dependencies ([#494](https://github.com/googleapis/cloud-profiler-nodejs/pull/494))
+- refactor: drop dependency on pify ([#493](https://github.com/googleapis/cloud-profiler-nodejs/pull/493))
+
+### Documentation
+- doc: remove reference to Node 6 from documentation ([#485](https://github.com/googleapis/cloud-profiler-nodejs/pull/485))
+
+### Internal / Testing Changes
+- chore: retry npm install in system test when the command hangs  ([#491](https://github.com/googleapis/cloud-profiler-nodejs/pull/491))
+- chore: remove unused third_party directory ([#486](https://github.com/googleapis/cloud-profiler-nodejs/pull/486))
+
 ## v2.0.0
 
 05-14-2019 13:21 PDT
