@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Add Task](#add-task)
   * [Concepts](#concepts)
   * [Quickstart](#quickstart)
   * [Tasks](#tasks)
@@ -22,6 +23,23 @@ Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-datastore#using-the-client-library).
 
 ## Samples
+
+
+
+### Add Task
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/addTask.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/addTask.js,samples/README.md)
+
+__Usage:__
+
+
+`node addTask.js`
+
+
+-----
+
 
 
 
