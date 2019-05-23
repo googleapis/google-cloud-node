@@ -22,7 +22,7 @@ import {
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as nock from 'nock';
-import * as pify from 'pify';
+import { promisify } from 'util';
 import { heap as heapProfiler, time as timeProfiler } from 'pprof';
 import * as sinon from 'sinon';
 import * as zlib from 'zlib';
@@ -128,7 +128,9 @@ describe('Profiler', () => {
       };
       const prof = await profiler.profile(requestProf);
       const decodedBytes = Buffer.from(prof.profileBytes as 'string', 'base64');
-      const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+      const unzippedBytes = (await promisify(zlib.gunzip)(
+        decodedBytes
+      )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedTimeProfile, outProfile);
     });
@@ -141,7 +143,9 @@ describe('Profiler', () => {
       };
       const prof = await profiler.profile(requestProf);
       const decodedBytes = Buffer.from(prof.profileBytes as 'string', 'base64');
-      const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+      const unzippedBytes = (await promisify(zlib.gunzip)(
+        decodedBytes
+      )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedHeapProfile, outProfile);
     });
@@ -183,7 +187,9 @@ describe('Profiler', () => {
         }
 
         const decodedBytes = Buffer.from(encodedBytes as string, 'base64');
-        const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+        const unzippedBytes = (await promisify(zlib.gunzip)(
+          decodedBytes
+        )) as Uint8Array;
         const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
 
         // compare to decodedTimeProfile, which is equivalent to timeProfile,
@@ -233,7 +239,9 @@ describe('Profiler', () => {
         }
 
         const decodedBytes = Buffer.from(encodedBytes as string, 'base64');
-        const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+        const unzippedBytes = (await promisify(zlib.gunzip)(
+          decodedBytes
+        )) as Uint8Array;
         const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
 
         // compare to decodedTimeProfile, which is equivalent to timeProfile,
@@ -291,7 +299,9 @@ describe('Profiler', () => {
         uploaded.profileBytes as string,
         'base64'
       );
-      const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+      const unzippedBytes = (await promisify(zlib.gunzip)(
+        decodedBytes
+      )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedTimeProfile, outProfile);
 
@@ -318,7 +328,9 @@ describe('Profiler', () => {
         uploaded.profileBytes as string,
         'base64'
       );
-      const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+      const unzippedBytes = (await promisify(zlib.gunzip)(
+        decodedBytes
+      )) as Uint8Array;
       const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
       assert.deepStrictEqual(decodedHeapProfile, outProfile);
 

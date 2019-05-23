@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import delay from 'delay';
 import * as nock from 'nock';
-import * as pify from 'pify';
+import { promisify } from 'util';
 import * as zlib from 'zlib';
 
 import { perftools } from '../../proto/profile';
@@ -114,7 +114,9 @@ describe('start', () => {
   it('should have uploaded wall profile with samples first', async () => {
     const wall = uploadedProfiles[0];
     const decodedBytes = Buffer.from(wall.profileBytes as string, 'base64');
-    const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+    const unzippedBytes = (await promisify(zlib.gunzip)(
+      decodedBytes
+    )) as Uint8Array;
     const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
     assert.strictEqual(wall.profileType, 'WALL');
     assert.strictEqual(
@@ -138,7 +140,9 @@ describe('start', () => {
   it('should have uploaded heap profile second', async () => {
     const heap = uploadedProfiles[1];
     const decodedBytes = Buffer.from(heap.profileBytes as string, 'base64');
-    const unzippedBytes = await pify(zlib.gunzip)(decodedBytes);
+    const unzippedBytes = (await promisify(zlib.gunzip)(
+      decodedBytes
+    )) as Uint8Array;
     const outProfile = perftools.profiles.Profile.decode(unzippedBytes);
     assert.strictEqual(heap.profileType, 'HEAP');
     assert.strictEqual(
