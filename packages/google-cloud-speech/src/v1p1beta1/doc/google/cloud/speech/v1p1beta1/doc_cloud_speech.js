@@ -398,7 +398,14 @@ const RecognitionConfig = {
      * is replaced with a single byte containing the block length. Only Speex
      * wideband is supported. `sample_rate_hertz` must be 16000.
      */
-    SPEEX_WITH_HEADER_BYTE: 7
+    SPEEX_WITH_HEADER_BYTE: 7,
+
+    /**
+     * MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+     * kbps). When using this encoding, `sample_rate_hertz` can be optionally
+     * unset if not known.
+     */
+    MP3: 8
   }
 };
 
@@ -630,6 +637,16 @@ const RecognitionMetadata = {
  *   specific commands are typically spoken by the user. This can also be used
  *   to add additional words to the vocabulary of the recognizer. See
  *   [usage limits](https://cloud.google.com/speech-to-text/quotas#content).
+ *
+ * @property {number} boost
+ *   Hint Boost. Positive value will increase the probability that a specific
+ *   phrase will be recognized over other similar sounding phrases. The higher
+ *   the boost, the higher the chance of false positive recognition as well.
+ *   Negative boost values would correspond to anti-biasing. Anti-biasing is not
+ *   enabled, so negative boost will simply be ignored. Though `boost` can
+ *   accept a wide range of positive values, most use cases are best served with
+ *   values between 0 and 20. We recommend using a binary search approach to
+ *   finding the optimal value for your use case.
  *
  * @typedef SpeechContext
  * @memberof google.cloud.speech.v1p1beta1
