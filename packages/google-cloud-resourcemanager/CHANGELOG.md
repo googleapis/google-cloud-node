@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-resource/compare/v1.0.0...v1.0.1) (2019-05-24)
+
+
+### Bug Fixes
+
+* **types:** use Metadata for api response type ([#222](https://www.github.com/googleapis/nodejs-resource/issues/222)) ([2032590](https://www.github.com/googleapis/nodejs-resource/commit/2032590))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-resource/compare/v0.9.1...v1.0.0) (2019-05-14)
 
 
