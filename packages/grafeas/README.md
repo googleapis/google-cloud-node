@@ -1,32 +1,128 @@
-# Node.js Client for Container Analysis API ([Alpha](https://github.com/GoogleCloudPlatform/google-cloud-node#versioning))
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-[Container Analysis API][Product Documentation]:
-An implementation of the Grafeas API, which stores, and enables querying and
-retrieval of critical metadata about all of your software artifacts.
-- [Client Library Documentation][]
-- [Product Documentation][]
+# [Grafeas: Node.js Client](https://github.com/googleapis/nodejs-grafeas)
 
-## Quick Start
-In order to use this library, you first need to go through the following
-steps:
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/grafeas.svg)](https://www.npmjs.org/package/@google-cloud/grafeas)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-grafeas/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-grafeas)
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Container Analysis API.](https://console.cloud.google.com/apis/library/grafeas.googleapis.com)
-4. [Setup Authentication.](https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/master/guides/authentication)
 
-### Installation
+
+
+A [Grafeas API Client](https://grafeas.io/) compatible with Google Cloud's
+[Container Analysis API](https://cloud.google.com/container-registry/docs/container-analysis).
+
+
+* [Grafeas Node.js Client API Reference][client-docs]
+* [Grafeas Documentation][product-docs]
+* [github.com/googleapis/nodejs-grafeas](https://github.com/googleapis/nodejs-grafeas)
+
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
+
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
+
+**Table of contents:**
+
+
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
+
+## Quickstart
+
+### Before you begin
+
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable the Grafeas API][enable_api].
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
+
+### Installing the client library
+
+```bash
+npm install @google-cloud/grafeas
 ```
-$ npm install --save @google-cloud/grafeas
+
+
+### Using the client library
+
+```javascript
+
+  // const projectId = 'my-project';
+
+  // instantiate the client.
+  const {GrafeasClient} = require('@google-cloud/grafeas');
+  const client = new GrafeasClient();
+
+  // populate the request.
+  const formattedName = client.projectPath(projectId);
+  const request = {
+    parent: formattedName,
+  };
+
+  // fetch the list of occurrences.
+  const [resp] = await client.listOccurrences(request);
+  console.info(resp);
+
 ```
 
-### Next Steps
-- Read the [Client Library Documentation][] for Container Analysis API
-  to see other available methods on the client.
-- Read the [Container Analysis API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
 
-[Client Library Documentation]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/grafeas
-[Product Documentation]: https://cloud.google.com/grafeas
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-grafeas/tree/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-grafeas/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-grafeas&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+
+
+
+The [Grafeas Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
+
+
+
+
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-grafeas/blob/master/CONTRIBUTING.md).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](https://github.com/googleapis/nodejs-grafeas/blob/master/LICENSE)
+
+[client-docs]: https://googleapis.dev/nodejs/grafeas/latest/index.html
+[product-docs]: https://cloud.google.com/container-registry/docs/container-analysis
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=containeranalysis.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
