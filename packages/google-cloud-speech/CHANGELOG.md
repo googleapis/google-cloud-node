@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.0.0...v3.1.0) (2019-05-24)
+
+
+### Features
+
+* add support for MP3 bitrates and hint boost ([#363](https://www.github.com/googleapis/nodejs-speech/issues/363)) ([b1369ae](https://www.github.com/googleapis/nodejs-speech/commit/b1369ae))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-speech/compare/v2.3.1...v3.0.0) (2019-05-20)
 
 
