@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-dns/compare/v1.0.0...v1.0.1) (2019-05-24)
+
+
+### Bug Fixes
+
+* **types:** use Metadata type instead of r.Response ([#266](https://www.github.com/googleapis/nodejs-dns/issues/266)) ([cf32552](https://www.github.com/googleapis/nodejs-dns/commit/cf32552))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-dns/compare/v0.9.2...v1.0.0) (2019-05-20)
 
 
