@@ -1,5 +1,5 @@
 {
-  "repository": "googleapis/grafeas",
+  "repository": "googleapis/nodejs-grafeas",
   "name": "@google-cloud/grafeas",
   "version": "0.1.0",
   "author": "Google LLC",
