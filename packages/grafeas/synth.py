@@ -28,7 +28,13 @@ for version in versions:
    'grafeas',
    version,
    config_path='/grafeas/artman_grafeas_v1.yaml')
- s.copy(library, excludes=["README.md", "package.json", "src/index.js", "src/v1/grafeas_client.js"])
+ s.copy(library, excludes=[
+   "README.md",
+   "package.json",
+   "src/index.js",
+   "src/v1/grafeas_client.js",
+   "protos/google/*"
+ ])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
