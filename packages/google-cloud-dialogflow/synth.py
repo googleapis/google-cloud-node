@@ -27,7 +27,7 @@ for version in versions:
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
-s.copy(templates)
+s.copy(templates, excludes=["README.md", "samples/README.md"])
 
 # dialogflow publishes to npm with no scope.
 s.replace("src/**/*",
