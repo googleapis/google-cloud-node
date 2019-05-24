@@ -14,10 +14,12 @@
 
 'use strict';
 
+const AutoscalingPolicyServiceClient = require('./autoscaling_policy_service_client');
 const ClusterControllerClient = require('./cluster_controller_client');
 const JobControllerClient = require('./job_controller_client');
 const WorkflowTemplateServiceClient = require('./workflow_template_service_client');
 
+module.exports.AutoscalingPolicyServiceClient = AutoscalingPolicyServiceClient;
 module.exports.ClusterControllerClient = ClusterControllerClient;
 module.exports.JobControllerClient = JobControllerClient;
 module.exports.WorkflowTemplateServiceClient = WorkflowTemplateServiceClient;

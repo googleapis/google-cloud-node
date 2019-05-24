@@ -273,11 +273,10 @@ class ClusterControllerClient {
    *   This object should have the same structure as [Cluster]{@link google.cloud.dataproc.v1beta2.Cluster}
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
-   *   receives two
-   *   CreateClusterRequest
-   *   requests  with the same id, then the second request will be ignored and the
-   *   first google.longrunning.Operation created
-   *   and stored in the backend is returned.
+   *   receives two CreateClusterRequest requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first google.longrunning.Operation created and stored in the backend
+   *   is returned.
    *
    *   It is recommended to always set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -460,6 +459,10 @@ class ClusterControllerClient {
    *   <td>config.lifecycle_config.idle_delete_ttl</td><td>Update Idle TTL
    *   duration</td>
    *   </tr>
+   *   <tr>
+   *   <td>config.autoscaling_config.policy_uri</td><td>Use, stop using, or change
+   *   autoscaling policies</td>
+   *   </tr>
    *   </table>
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
@@ -476,11 +479,10 @@ class ClusterControllerClient {
    *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
-   *   receives two
-   *   UpdateClusterRequest
-   *   requests  with the same id, then the second request will be ignored and the
-   *   first google.longrunning.Operation created
-   *   and stored in the backend is returned.
+   *   receives two UpdateClusterRequest requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first google.longrunning.Operation created and stored in the
+   *   backend is returned.
    *
    *   It is recommended to always set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -620,11 +622,10 @@ class ClusterControllerClient {
    *   (with error NOT_FOUND) if cluster with specified UUID does not exist.
    * @param {string} [request.requestId]
    *   Optional. A unique id used to identify the request. If the server
-   *   receives two
-   *   DeleteClusterRequest
-   *   requests  with the same id, then the second request will be ignored and the
-   *   first google.longrunning.Operation created
-   *   and stored in the backend is returned.
+   *   receives two DeleteClusterRequest requests  with the same
+   *   id, then the second request will be ignored and the
+   *   first google.longrunning.Operation created and stored in the
+   *   backend is returned.
    *
    *   It is recommended to always set this value to a
    *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).

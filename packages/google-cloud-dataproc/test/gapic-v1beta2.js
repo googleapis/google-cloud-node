@@ -22,6 +22,331 @@ const FAKE_STATUS_CODE = 1;
 const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
+describe('AutoscalingPolicyServiceClient', () => {
+  describe('createAutoscalingPolicy', () => {
+    it('invokes createAutoscalingPolicy without error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const policy = {};
+      const request = {
+        parent: formattedParent,
+        policy: policy,
+      };
+
+      // Mock response
+      const id = 'id3355';
+      const name = 'name3373707';
+      const expectedResponse = {
+        id: id,
+        name: name,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createAutoscalingPolicy = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createAutoscalingPolicy(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createAutoscalingPolicy with error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const policy = {};
+      const request = {
+        parent: formattedParent,
+        policy: policy,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createAutoscalingPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createAutoscalingPolicy(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateAutoscalingPolicy', () => {
+    it('invokes updateAutoscalingPolicy without error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const policy = {};
+      const request = {
+        policy: policy,
+      };
+
+      // Mock response
+      const id = 'id3355';
+      const name = 'name3373707';
+      const expectedResponse = {
+        id: id,
+        name: name,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateAutoscalingPolicy = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateAutoscalingPolicy(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateAutoscalingPolicy with error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const policy = {};
+      const request = {
+        policy: policy,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateAutoscalingPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateAutoscalingPolicy(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getAutoscalingPolicy', () => {
+    it('invokes getAutoscalingPolicy without error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.autoscalingPolicyPath(
+        '[PROJECT]',
+        '[REGION]',
+        '[AUTOSCALING_POLICY]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const id = 'id3355';
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
+        id: id,
+        name: name2,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getAutoscalingPolicy = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getAutoscalingPolicy(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getAutoscalingPolicy with error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.autoscalingPolicyPath(
+        '[PROJECT]',
+        '[REGION]',
+        '[AUTOSCALING_POLICY]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getAutoscalingPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getAutoscalingPolicy(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('listAutoscalingPolicies', () => {
+    it('invokes listAutoscalingPolicies without error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const policiesElement = {};
+      const policies = [policiesElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        policies: policies,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listAutoscalingPolicies = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.policies);
+      };
+
+      client.listAutoscalingPolicies(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.policies);
+        done();
+      });
+    });
+
+    it('invokes listAutoscalingPolicies with error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.regionPath('[PROJECT]', '[REGION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listAutoscalingPolicies = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listAutoscalingPolicies(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteAutoscalingPolicy', () => {
+    it('invokes deleteAutoscalingPolicy without error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.autoscalingPolicyPath(
+        '[PROJECT]',
+        '[REGION]',
+        '[AUTOSCALING_POLICY]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteAutoscalingPolicy = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.deleteAutoscalingPolicy(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteAutoscalingPolicy with error', done => {
+      const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.autoscalingPolicyPath(
+        '[PROJECT]',
+        '[REGION]',
+        '[AUTOSCALING_POLICY]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteAutoscalingPolicy = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteAutoscalingPolicy(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+});
 describe('ClusterControllerClient', () => {
   describe('createCluster', function() {
     it('invokes createCluster without error', done => {
