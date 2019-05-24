@@ -45,7 +45,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
-    "docs-test": "linkinator docs -r --skip www.npmjs.org",
+    "docs-test": "linkinator docs -r --skip 'www.npmjs.org|cloud.google.com/nodejs/docs/reference/containeranalysis/latest/'",
     "predocs-test": "npm run docs"
   },
   "license": "Apache-2.0",
