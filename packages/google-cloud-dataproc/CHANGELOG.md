@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.0.0...v1.1.0) (2019-05-24)
+
+
+### Features
+
+* add support for autoscaling policies ([#215](https://www.github.com/googleapis/nodejs-dataproc/issues/215)) ([729831a](https://www.github.com/googleapis/nodejs-dataproc/commit/729831a))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v0.5.0...v1.0.0) (2019-05-20)
 
 
