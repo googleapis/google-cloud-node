@@ -28,7 +28,7 @@
     "google-gax": "^1.0.0"
   },
   "devDependencies": {
-    "c8": "^4.1.4",
+    "c8": "^5.0.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
