@@ -1,7 +1,0 @@
-{
-  "requiresKeyFile": true,
-  "requiresProjectId": true,
-  "product": "cloudiot",
-  "client_reference_url": "https://cloud.google.com/nodejs/docs/reference/iot/latest/",
-  "release_quality": "alpha"
-}
