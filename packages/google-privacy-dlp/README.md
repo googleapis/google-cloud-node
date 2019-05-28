@@ -1,19 +1,24 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Data Loss Prevention (DLP) API: Node.js Client](https://github.com/googleapis/nodejs-dlp)
+# [Cloud Data Loss Prevention: Node.js Client](https://github.com/googleapis/nodejs-dlp)
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/dlp.svg)](https://www.npmjs.org/package/@google-cloud/dlp)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dlp/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dlp)
 
-> Node.js idiomatic client for [Data Loss Prevention (DLP) API][product-docs].
-
-The [Data Loss Prevention API](https://cloud.google.com/dlp/docs/) provides programmatic access to a powerful detection engine for personally identifiable information and other privacy-sensitive data in unstructured data streams.
 
 
-* [Data Loss Prevention (DLP) API Node.js Client API Reference][client-docs]
+
+The [Data Loss Prevention API](https://cloud.google.com/dlp/docs/) provides programmatic access to a
+powerful detection engine for personally identifiable information and other privacy-sensitive
+data in unstructured data streams.
+
+
+* [Cloud Data Loss Prevention Node.js Client API Reference][client-docs]
+* [Cloud Data Loss Prevention Documentation][product-docs]
 * [github.com/googleapis/nodejs-dlp](https://github.com/googleapis/nodejs-dlp)
-* [Data Loss Prevention (DLP) API Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -21,6 +26,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
 **Table of contents:**
+
 
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
@@ -35,96 +41,80 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ### Before you begin
 
-1.  Select or create a Cloud Platform project.
-
-    [Go to the projects page][projects]
-
-1.  Enable billing for your project.
-
-    [Enable billing][billing]
-
-1.  Enable the Google Cloud Data Loss Prevention (DLP) API API.
-
-    [Enable the API][enable_api]
-
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable billing for your project][billing].
+1.  [Enable the Cloud Data Loss Prevention API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-[projects]: https://console.cloud.google.com/project
-[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=dlp.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
-
 ### Installing the client library
 
-    npm install --save @google-cloud/dlp
+```bash
+npm install @google-cloud/dlp
+```
+
 
 ### Using the client library
 
 ```javascript
-// Imports the Google Cloud Data Loss Prevention library
-const DLP = require('@google-cloud/dlp');
 
-// Instantiates a client
-const dlp = new DLP.DlpServiceClient();
+  // Instantiates a client
+  const dlp = new DLP.DlpServiceClient();
 
-// The string to inspect
-const string = 'Robert Frost';
+  // The string to inspect
+  const string = 'Robert Frost';
 
-// The project ID to run the API call under
-const projectId = process.env.GCLOUD_PROJECT;
+  // The project ID to run the API call under
+  const projectId = process.env.GCLOUD_PROJECT;
 
-// The minimum likelihood required before returning a match
-const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
+  // The minimum likelihood required before returning a match
+  const minLikelihood = 'LIKELIHOOD_UNSPECIFIED';
 
-// The maximum number of findings to report (0 = server maximum)
-const maxFindings = 0;
+  // The maximum number of findings to report (0 = server maximum)
+  const maxFindings = 0;
 
-// The infoTypes of information to match
-const infoTypes = [{name: 'PERSON_NAME'}, {name: 'US_STATE'}];
+  // The infoTypes of information to match
+  const infoTypes = [{name: 'PERSON_NAME'}, {name: 'US_STATE'}];
 
-// Whether to include the matching string
-const includeQuote = true;
+  // Whether to include the matching string
+  const includeQuote = true;
 
-// Construct item to inspect
-const item = {value: string};
+  // Construct item to inspect
+  const item = {value: string};
 
-// Construct request
-const request = {
-  parent: dlp.projectPath(projectId),
-  inspectConfig: {
-    infoTypes: infoTypes,
-    minLikelihood: minLikelihood,
-    limits: {
-      maxFindingsPerRequest: maxFindings,
+  // Construct request
+  const request = {
+    parent: dlp.projectPath(projectId),
+    inspectConfig: {
+      infoTypes: infoTypes,
+      minLikelihood: minLikelihood,
+      limits: {
+        maxFindingsPerRequest: maxFindings,
+      },
+      includeQuote: includeQuote,
     },
-    includeQuote: includeQuote,
-  },
-  item: item,
-};
+    item: item,
+  };
 
-// Run request
-dlp
-  .inspectContent(request)
-  .then(response => {
-    const findings = response[0].result.findings;
-    if (findings.length > 0) {
-      console.log(`Findings:`);
-      findings.forEach(finding => {
-        if (includeQuote) {
-          console.log(`\tQuote: ${finding.quote}`);
-        }
-        console.log(`\tInfo type: ${finding.infoType.name}`);
-        console.log(`\tLikelihood: ${finding.likelihood}`);
-      });
-    } else {
-      console.log(`No findings.`);
-    }
-  })
-  .catch(err => {
-    console.error(`Error in inspectString: ${err.message || err}`);
-  });
+  // Run request
+  const [response] = await dlp.inspectContent(request);
+  const findings = response.result.findings;
+  if (findings.length > 0) {
+    console.log(`Findings:`);
+    findings.forEach(finding => {
+      if (includeQuote) {
+        console.log(`\tQuote: ${finding.quote}`);
+      }
+      console.log(`\tInfo type: ${finding.infoType.name}`);
+      console.log(`\tLikelihood: ${finding.likelihood}`);
+    });
+  } else {
+    console.log(`No findings.`);
+  }
+
 ```
+
+
 
 ## Samples
 
@@ -133,26 +123,34 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Deid | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deid.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deid.js,samples/README.md) |
 | Inspect | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspect.js,samples/README.md) |
-| Redact | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/redact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redact.js,samples/README.md) |
+| Job Management | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/jobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/jobs.js,samples/README.md) |
 | Metadata | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/metadata.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/metadata.js,samples/README.md) |
-| DeID | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deid.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deid.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Redact | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/redact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redact.js,samples/README.md) |
 | Risk Analysis | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/risk.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/risk.js,samples/README.md) |
 | Inspect Templates | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/templates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/templates.js,samples/README.md) |
-| Job Management | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/jobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/jobs.js,samples/README.md) |
 | Job Triggers | [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/triggers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/triggers.js,samples/README.md) |
 
-The [Data Loss Prevention (DLP) API Node.js Client API Reference][client-docs] documentation
+
+
+The [Cloud Data Loss Prevention Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
 
+
+
 This library is considered to be in **beta**. This means it is expected to be
 mostly stable while we work toward a general availability release; however,
 complete stability is not guaranteed. We will address issues and requests
 against beta libraries with a high priority.
+
+
+
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
@@ -170,5 +168,8 @@ See [LICENSE](https://github.com/googleapis/nodejs-dlp/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/dlp/latest/
 [product-docs]: https://cloud.google.com/dlp/docs/
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
-
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=dlp.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
