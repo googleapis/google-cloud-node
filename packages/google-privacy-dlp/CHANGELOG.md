@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.0.0...v1.1.0) (2019-05-28)
+
+
+### Features
+
+* auto-generate READMEs, add .repo-metdata.json ([#293](https://www.github.com/googleapis/nodejs-dlp/issues/293)) ([6895e23](https://www.github.com/googleapis/nodejs-dlp/commit/6895e23))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-dlp/compare/v0.12.0...v1.0.0) (2019-05-20)
 
 
