@@ -53,6 +53,7 @@ export class ErrorsApiTransport extends common.Service {
   constructor() {
     super({
       baseUrl: 'https://clouderrorreporting.googleapis.com/v1beta1',
+      apiEndpoint: 'clouderrorreporting.googleapis.com',
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson,
     });
