@@ -27,6 +27,8 @@ const SCOPES = ['https://www.googleapis.com/auth/cloud-platform'];
 /* @const {String} Base Error Reporting API */
 const API = 'https://clouderrorreporting.googleapis.com/v1beta1';
 
+const API_ENDPOINT = 'clouderrorreporting.googleapis.com';
+
 /**
  * The RequestHandler constructor initializes several properties on the
  * RequestHandler instance and create a new request factory for requesting
@@ -101,6 +103,7 @@ export class RequestHandler extends Service {
       {
         packageJson: pkg,
         baseUrl: API,
+        apiEndpoint: API_ENDPOINT,
         scopes: SCOPES,
         projectIdRequired: true,
       },
