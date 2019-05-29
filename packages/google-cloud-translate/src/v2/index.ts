@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Service, util} from '@google-cloud/common';
+import {Service, util, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as extend from 'extend';
@@ -21,8 +21,6 @@ import * as is from 'is';
 
 const isHtml = require('is-html');
 import {DecorateRequestOptions, BodyResponseCallback} from '@google-cloud/common/build/src/util';
-import * as r from 'request';
-import {teenyRequest} from 'teeny-request';
 
 const PKG = require('../../../package.json');
 
@@ -34,7 +32,7 @@ export interface TranslateRequest {
 }
 
 export interface TranslateCallback<T extends string|string[]> {
-  (err: Error|null, translations?: T|null, apiResponse?: r.Response): void;
+  (err: Error|null, translations?: T|null, apiResponse?: Metadata): void;
 }
 
 export interface DetectResult {
@@ -44,7 +42,7 @@ export interface DetectResult {
 }
 
 export interface DetectCallback<T extends DetectResult|DetectResult[]> {
-  (err: Error|null, results?: T|null, apiResponse?: r.Response): void;
+  (err: Error|null, results?: T|null, apiResponse?: Metadata): void;
 }
 
 export interface LanguageResult {
@@ -54,14 +52,13 @@ export interface LanguageResult {
 
 export interface GetLanguagesCallback {
   (err: Error|null, results?: LanguageResult[]|null,
-   apiResponse?: r.Response): void;
+   apiResponse?: Metadata): void;
 }
 
 export interface TranslateConfig extends GoogleAuthOptions {
   key?: string;
   autoRetry?: boolean;
   maxRetries?: number;
-  request?: typeof r;
 }
 
 /**
@@ -135,19 +132,17 @@ export class Translate extends Service {
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson: require('../../../package.json'),
       projectIdRequired: false,
-      requestModule: teenyRequest as typeof r,
     };
 
     super(config, options);
     this.options = options || {};
-    this.options.request = config.requestModule;
     if (this.options.key) {
       this.key = this.options.key;
     }
   }
 
-  detect(input: string): Promise<[DetectResult, r.Response]>;
-  detect(input: string[]): Promise<[DetectResult[], r.Response]>;
+  detect(input: string): Promise<[DetectResult, Metadata]>;
+  detect(input: string[]): Promise<[DetectResult[], Metadata]>;
   detect(input: string, callback: DetectCallback<DetectResult>): void;
   detect(input: string[], callback: DetectCallback<DetectResult[]>): void;
 /**
@@ -236,8 +231,8 @@ export class Translate extends Service {
   detect(
       input: string|string[],
       callback?: DetectCallback<DetectResult>|
-      DetectCallback<DetectResult[]>): void|Promise<[DetectResult, r.Response]>|
-      Promise<[DetectResult[], r.Response]> {
+      DetectCallback<DetectResult[]>): void|Promise<[DetectResult, Metadata]>|
+      Promise<[DetectResult[], Metadata]> {
     const inputIsArray = Array.isArray(input);
     input = arrify(input);
     this.request(
@@ -275,7 +270,7 @@ export class Translate extends Service {
         });
   }
 
-  getLanguages(target?: string): Promise<[LanguageResult[], r.Response]>;
+  getLanguages(target?: string): Promise<[LanguageResult[], Metadata]>;
   getLanguages(target: string, callback: GetLanguagesCallback): void;
   getLanguages(callback: GetLanguagesCallback): void;
 /**
@@ -318,7 +313,7 @@ export class Translate extends Service {
   getLanguages(
       targetOrCallback?: string|GetLanguagesCallback,
       callback?: GetLanguagesCallback):
-      void|Promise<[LanguageResult[], r.Response]> {
+      void|Promise<[LanguageResult[], Metadata]> {
     let target: string;
     if (is.fn(targetOrCallback)) {
       callback = targetOrCallback as GetLanguagesCallback;
@@ -356,11 +351,11 @@ export class Translate extends Service {
   }
 
   translate(input: string, options: TranslateRequest):
-      Promise<[string, r.Response]>;
+      Promise<[string, Metadata]>;
   translate(input: string[], options: TranslateRequest):
-      Promise<[string[], r.Response]>;
-  translate(input: string, to: string): Promise<[string, r.Response]>;
-  translate(input: string[], to: string): Promise<[string[], r.Response]>;
+      Promise<[string[], Metadata]>;
+  translate(input: string, to: string): Promise<[string, Metadata]>;
+  translate(input: string[], to: string): Promise<[string[], Metadata]>;
   translate(
       input: string, options: TranslateRequest,
       callback: TranslateCallback<string>): void;
@@ -473,7 +468,7 @@ export class Translate extends Service {
   translate(
       inputs: string|string[], optionsOrTo: string|TranslateRequest,
       callback?: TranslateCallback<string>|TranslateCallback<string[]>):
-      void|Promise<[string, r.Response]>|Promise<[string[], r.Response]> {
+      void|Promise<[string, Metadata]>|Promise<[string[], Metadata]> {
     const inputIsArray = Array.isArray(inputs);
     const input = arrify(inputs);
     let options: TranslateRequest = {};
@@ -533,9 +528,6 @@ export class Translate extends Service {
         });
   }
 
-  request(reqOpts: DecorateRequestOptions): Promise<r.Response>;
-  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback):
-      void;
   /**
    * A custom request implementation. Requests to this API may optionally use an
    * API key for an application, not a bearer token from a service account. This
@@ -547,8 +539,7 @@ export class Translate extends Service {
    * @param {object} reqOpts - Request options that are passed to `request`.
    * @param {function} callback - The callback function passed to `request`.
    */
-  request(reqOpts: DecorateRequestOptions, callback?: BodyResponseCallback):
-      void|Promise<r.Response> {
+  request(reqOpts: DecorateRequestOptions, callback: BodyResponseCallback): void {
     if (!this.key) {
       super.request(reqOpts, callback!);
       return;
