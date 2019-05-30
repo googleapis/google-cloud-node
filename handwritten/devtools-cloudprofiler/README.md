@@ -80,7 +80,7 @@ application default credentials:
 
 ## Configuration
 
-See [the default configuration](ts/src/config.ts) for a list of possible
+See [the default configuration](https://github.com/googleapis/cloud-profiler-nodejs/blob/master/ts/src/config.ts) for a list of possible
 configuration options. These options can be passed to the agent through the
 object argument to the start command shown below:
 
@@ -262,17 +262,17 @@ the service when starting the profiler:
        });
        ```
 [app-default-credentials]: https://developers.google.com/identity/protocols/application-default-credentials
-[circle-image]: https://circleci.com/gh/GoogleCloudPlatform/cloud-profiler-nodejs.svg?style=svg
-[circle-url]: https://circleci.com/gh/GoogleCloudPlatform/cloud-profiler-nodejs
+[circle-image]: https://circleci.com/gh/googleapis/cloud-profiler-nodejs.svg?style=svg
+[circle-url]: https://circleci.com/gh/googleapis/cloud-profiler-nodejs
 [cloud-console]: https://console.cloud.google.com
-[coveralls-image]: https://coveralls.io/repos/GoogleCloudPlatform/cloud-profiler-nodejs/badge.svg?branch=master&service=github
-[david-image]: https://david-dm.org/GoogleCloudPlatform/cloud-profiler-nodejs.svg
-[david-url]: https://david-dm.org/GoogleCloudPlatform/cloud-profiler-nodejs
-[david-dev-image]: https://david-dm.org/GoogleCloudPlatform/cloud-profiler-nodejs/dev-status.svg
-[david-dev-url]: https://david-dm.org/GoogleCloudPlatform/cloud-profiler-nodejs#info=devDependencies
+[coveralls-image]: https://coveralls.io/repos/googleapis/cloud-profiler-nodejs/badge.svg?branch=master&service=github
+[david-image]: https://david-dm.org/googleapis/cloud-profiler-nodejs.svg
+[david-url]: https://david-dm.org/googleapis/cloud-profiler-nodejs
+[david-dev-image]: https://david-dm.org/googleapis/cloud-profiler-nodejs/dev-status.svg
+[david-dev-url]: https://david-dm.org/googleapis/cloud-profiler-nodejs#info=devDependencies
 [gcloud-sdk]: https://cloud.google.com/sdk/gcloud/
 [npm-image]: https://badge.fury.io/js/%40google-cloud%2Fprofiler.svg
 [npm-url]: https://npmjs.org/package/@google-cloud/profiler
 [service-account]: https://console.developers.google.com/apis/credentials/serviceaccountkey
-[snyk-image]: https://snyk.io/test/github/GoogleCloudPlatform/cloud-profiler-nodejs/badge.svg
-[snyk-url]: https://snyk.io/test/github/GoogleCloudPlatform/cloud-profiler-nodejs
+[snyk-image]: https://snyk.io/test/github/googleapis/cloud-profiler-nodejs/badge.svg
+[snyk-url]: https://snyk.io/test/github/googleapis/cloud-profiler-nodejs
