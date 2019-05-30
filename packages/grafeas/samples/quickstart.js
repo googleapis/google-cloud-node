@@ -25,8 +25,13 @@ async function main(projectId) {
   // const projectId = 'my-project';
 
   // instantiate the client.
+  const grpc = require('@grpc/grpc-js');
   const {GrafeasClient} = require('@google-cloud/grafeas');
-  const client = new GrafeasClient();
+  const client = new GrafeasClient({
+    sslCreds: grpc.credentials.createInsecure(), // or any other credentials object.
+    servicePath: '0.0.0.0', // overriding the service path.
+    port: 8080, // overriding the port.
+  });
 
   // populate the request.
   const formattedName = client.projectPath(projectId);
