@@ -57,7 +57,7 @@ import {
 } from '@google-cloud/common/build/src/util';
 const duplexify: DuplexifyConstructor = require('duplexify');
 import {normalize, objectEntries} from './util';
-import {Headers} from 'gaxios';
+import {GaxiosError, Headers, request as gaxiosRequest} from 'gaxios';
 
 export type GetExpirationDateResponse = [Date];
 export interface GetExpirationDateCallback {
@@ -210,6 +210,12 @@ export interface MakeFilePrivateOptions {
 export type MakeFilePrivateResponse = [Metadata];
 
 export interface MakeFilePrivateCallback extends SetFileMetadataCallback {}
+
+export interface IsPublicCallback {
+  (err: Error | null, resp?: boolean): void;
+}
+
+export type IsPublicResponse = [boolean];
 
 export type MakeFilePublicResponse = [Metadata];
 
@@ -2593,6 +2599,72 @@ class File extends ServiceObject<File> {
           throw signingErr;
         });
     });
+  }
+
+  isPublic(): Promise<IsPublicResponse>;
+  isPublic(callback: IsPublicCallback): void;
+  /**
+   * @callback IsPublicCallback
+   * @param {?Error} err Request error, if any.
+   * @param {boolean} resp Whether file is public or not.
+   */
+  /**
+   * @typedef {array} IsPublicResponse
+   * @property {boolean} 0 Whether file is public or not.
+   */
+  /**
+   * Check whether this file is public or not by sending
+   * a HEAD request without credentials.
+   * No errors from the server indicates that the current
+   * file is public.
+   * A 403-Forbidden error {@link https://cloud.google.com/storage/docs/json_api/v1/status-codes#403_Forbidden}
+   * indicates that file is private.
+   * Any other non 403 error is propagated to user.
+   *
+   * @param {IsPublicCallback} [callback] Callback function.
+   * @returns {Promise<IsPublicResponse>}
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const myBucket = storage.bucket('my-bucket');
+   *
+   * const file = myBucket.file('my-file');
+   *
+   * //-
+   * // Check whether the file is publicly accessible.
+   * //-
+   * file.isPublic(function(err, resp) {
+   *   if (err) {
+   *     console.error(err);
+   *     return;
+   *   }
+   *   console.log(`the file ${file.id} is public: ${resp}`) ;
+   * })
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * file.isPublic().then(function(data) {
+   *   const resp = data[0];
+   * });
+   */
+
+  isPublic(callback?: IsPublicCallback): Promise<IsPublicResponse> | void {
+    gaxiosRequest({
+      method: 'HEAD',
+      url: `http://${
+        this.bucket.name
+      }.storage.googleapis.com/${encodeURIComponent(this.name)}`,
+    }).then(
+      () => callback!(null, true),
+      (err: GaxiosError) => {
+        if (err.code === '403') {
+          callback!(null, false);
+        } else {
+          callback!(err);
+        }
+      }
+    );
   }
 
   makePrivate(

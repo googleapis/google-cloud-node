@@ -209,17 +209,12 @@ describe('storage', () => {
         bucket = storageWithoutAuth.bucket('gcp-public-data-landsat');
       });
 
-      it('should list and download a file', done => {
-        bucket.getFiles(
-          {
-            autoPaginate: false,
-          },
-          (err, files) => {
-            assert.ifError(err);
-            const file = files![0];
-            file.download(done);
-          }
-        );
+      it('should list and download a file', async () => {
+        const [files] = await bucket.getFiles({autoPaginate: false});
+        const file = files[0];
+        const [isPublic] = await file.isPublic();
+        assert.strictEqual(isPublic, true);
+        assert.doesNotReject(file.download());
       });
     });
 
@@ -232,13 +227,14 @@ describe('storage', () => {
         file = bucket.file(privateFile.id!);
       });
 
-      it('should not download a file', done => {
-        file.download(err => {
-          assert(
-            err!.message.indexOf('does not have storage.objects.get') > -1
-          );
-          done();
-        });
+      it('should not download a file', async () => {
+        const [isPublic] = await file.isPublic();
+        assert.strictEqual(isPublic, false);
+        assert.rejects(
+          file.download(),
+          (err: Error) =>
+            err.message.indexOf('does not have storage.objects.get') > -1
+        );
       });
 
       it('should not upload a file', done => {
@@ -390,7 +386,7 @@ describe('storage', () => {
         const resps = await Promise.all(
           files.map(file => isFilePublicAsync(file))
         );
-        resps.forEach(resp => assert.ok(resp));
+        resps.forEach(resp => assert.strictEqual(resp, true));
         await Promise.all([
           bucket.acl.default.delete({entity: 'allUsers'}),
           bucket.deleteFiles(),
@@ -422,7 +418,9 @@ describe('storage', () => {
         const resps = await Promise.all(
           files.map(file => isFilePublicAsync(file))
         );
-        resps.forEach(resp => assert.ok(!resp));
+        resps.forEach(resp => {
+          assert.strictEqual(resp, false);
+        });
         await bucket.deleteFiles();
       });
     });
