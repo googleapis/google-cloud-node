@@ -74,7 +74,7 @@
     "prettier": "^1.13.5",
     "proxyquire": "^2.0.1",
     "tmp": "^0.1.0",
-    "typescript": "~3.4.0",
+    "typescript": "~3.5.0",
     "uuid": "^3.2.1"
   }
 }
