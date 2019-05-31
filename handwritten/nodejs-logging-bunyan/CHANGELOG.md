@@ -4,6 +4,28 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v0.10.1...v1.0.0) (2019-05-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#298)
+
+### Bug Fixes
+
+* proper signature for _write[v] ([#287](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/287)) ([8bb305a](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/8bb305a))
+* **deps:** update dependency google-auth-library to v4 ([#308](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/308)) ([e309b7c](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/e309b7c))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#298](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/298)) ([143933c](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/143933c))
+
+
+### Features
+
+* auto-detect service context ([#290](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/290)) ([595a4db](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/595a4db))
+
 ## v0.10.1
 
 03-14-2019 14:58 PDT
@@ -191,4 +213,3 @@
 - test: use source-map-support (#72)
 - chore: remove `--bail` from the system tests config (#67)
 - chore: the ultimate fix for repo-tools EPERM (#64)
-
