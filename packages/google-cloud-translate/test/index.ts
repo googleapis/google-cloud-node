@@ -110,6 +110,16 @@ describe('Translate v2', () => {
       assert.strictEqual(calledWith.projectIdRequired, false);
     });
 
+    it('should allow apiEndpoint override', () => {
+      const apiEndpoint = 'fake.endpoint';
+      translate = new Translate({
+        projectId: 'test-project',
+        apiEndpoint,
+      });
+      const calledWith = translate.calledWith_[0];
+      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
+    });
+
     describe('Using an API Key', () => {
       const KEY_OPTIONS = {
         key: 'api-key',

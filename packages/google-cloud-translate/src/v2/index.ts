@@ -59,6 +59,11 @@ export interface TranslateConfig extends GoogleAuthOptions {
   key?: string;
   autoRetry?: boolean;
   maxRetries?: number;
+  /**
+   * The API endpoint of the service used to make requests.
+   * Defaults to `translation.googleapis.com`.
+   */
+  apiEndpoint?: string;
 }
 
 /**
@@ -120,14 +125,15 @@ export interface TranslateConfig extends GoogleAuthOptions {
 export class Translate extends Service {
   options: TranslateConfig;
   key?: string;
-  constructor(options?: TranslateConfig) {
-    let baseUrl = 'https://translation.googleapis.com/language/translate/v2';
-
+  constructor(options: TranslateConfig = {}) {
+    options.apiEndpoint = options.apiEndpoint || 'translation.googleapis.com';
+    let baseUrl = `https://${options.apiEndpoint}/language/translate/v2`;
     if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
       baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT.replace(/\/+$/, '');
     }
 
     const config = {
+      apiEndpoint: options.apiEndpoint,
       baseUrl,
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       packageJson: require('../../../package.json'),

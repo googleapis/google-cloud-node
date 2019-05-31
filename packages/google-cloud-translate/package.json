@@ -46,7 +46,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "@google-cloud/common": "^1.0.0",
+    "@google-cloud/common": "^2.0.0",
     "@google-cloud/promisify": "^1.0.0",
     "arrify": "^2.0.0",
     "extend": "^3.0.1",
@@ -74,7 +74,7 @@
     "jsdoc": "^3.6.2",
     "jsdoc-baseline": "^0.1.0",
     "linkinator": "^1.1.2",
-    "mocha": "^6.0.0",
+    "mocha": "^6.1.4",
     "nyc": "^14.0.0",
     "power-assert": "^1.6.0",
     "prettier": "^1.13.5",
