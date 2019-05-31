@@ -110,6 +110,11 @@ export interface CreateProjectOptions {
 export interface ClientConfig extends GoogleAuthOptions {
   autoRetry?: boolean;
   maxRetries?: boolean;
+  /**
+   * The API endpoint of the service used to make requests.
+   * Defaults to `cloudresourcemanager.googleapis.com`.
+   */
+  apiEndpoint?: string;
 }
 
 /**
@@ -149,8 +154,11 @@ export interface ClientConfig extends GoogleAuthOptions {
 class Resource extends Service {
   getProjectsStream: Function;
   constructor(options: ClientConfig = {}) {
+    options.apiEndpoint =
+      options.apiEndpoint || 'cloudresourcemanager.googleapis.com';
     const config = {
-      baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
+      apiEndpoint: options.apiEndpoint,
+      baseUrl: `https://${options.apiEndpoint}/v1`,
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
       projectIdRequired: false,
       packageJson: require('../../package.json'),

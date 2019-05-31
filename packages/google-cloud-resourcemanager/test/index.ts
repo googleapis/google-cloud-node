@@ -139,7 +139,6 @@ describe('Resource', () => {
       assert(resource instanceof FakeService);
 
       const calledWith = resource.calledWith_[0];
-
       const baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepStrictEqual(calledWith.scopes, [
@@ -150,6 +149,15 @@ describe('Resource', () => {
         calledWith.packageJson,
         require('../../package.json')
       );
+    });
+
+    it('should allow overriding the apiEndpoint', () => {
+      const apiEndpoint = 'fake.endpoint';
+      resource = new Resource({
+        apiEndpoint,
+      });
+      const calledWith = resource.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, `https://${apiEndpoint}/v1`);
     });
   });
 
