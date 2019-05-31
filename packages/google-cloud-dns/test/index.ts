@@ -135,6 +135,17 @@ describe('DNS', () => {
         require('../../package.json')
       );
     });
+
+    it('should enable apiEndpoint override', () => {
+      const apiEndpoint = 'fake.endpoint';
+      dns = new DNS({
+        projectId: PROJECT_ID,
+        apiEndpoint,
+      });
+      const calledWith = dns.calledWith_[0];
+      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
+      assert.strictEqual(calledWith.baseUrl, `https://${apiEndpoint}/dns/v1`);
+    });
   });
 
   describe('createZone', () => {

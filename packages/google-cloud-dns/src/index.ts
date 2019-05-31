@@ -59,6 +59,14 @@ export interface CreateZoneRequest {
 
 export type CreateZoneResponse = [Zone, Metadata];
 
+export interface DNSOptions extends GoogleAuthOptions {
+  /**
+   * The API endpoint of the service used to make requests.
+   * Defaults to `www.googleapis.com`.
+   */
+  apiEndpoint?: string;
+}
+
 /**
  * @typedef {object} ClientConfig
  * @property {string} [projectId] The project ID from the Google Developer's
@@ -118,10 +126,11 @@ export type CreateZoneResponse = [Zone, Metadata];
  */
 class DNS extends Service {
   getZonesStream: (query: GetZonesRequest) => Stream;
-  constructor(options?: GoogleAuthOptions) {
-    options = options || {};
+  constructor(options: DNSOptions = {}) {
+    options.apiEndpoint = options.apiEndpoint || 'www.googleapis.com';
     const config = {
-      baseUrl: 'https://www.googleapis.com/dns/v1',
+      apiEndpoint: options.apiEndpoint,
+      baseUrl: `https://${options.apiEndpoint}/dns/v1`,
       scopes: [
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform',
