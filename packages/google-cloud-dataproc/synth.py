@@ -29,16 +29,6 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
-# [START fix-dead-link]
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
-        r"https://\1)")
-
-s.replace('**/doc/google/protobuf/doc_timestamp.js',
-        'toISOString\]',
-        'toISOString)')
-# [END fix-dead-link]
-
 s.replace('src/**/doc/google/cloud/dataproc/v1beta2/doc_clusters.js',
         'https:\/\/cloud\.google\.com[\s\*]*\/compute\/',
         'https://cloud.google.com/compute/')

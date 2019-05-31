@@ -75,15 +75,18 @@ const Cluster = {
  * The cluster config.
  *
  * @property {string} configBucket
- *   Optional. A Cloud Storage staging bucket used for sharing generated
- *   SSH keys and config. If you do not specify a staging bucket, Cloud
- *   Dataproc will determine an appropriate Cloud Storage location (US,
+ *   Optional. A Google Cloud Storage bucket used to stage job
+ *   dependencies, config files, and job driver console output.
+ *   If you do not specify a staging bucket, Cloud
+ *   Dataproc will determine a Cloud Storage location (US,
  *   ASIA, or EU) for your cluster's staging bucket according to the Google
- *   Compute Engine zone where your cluster is deployed, and then it will create
- *   and manage this project-level, per-location bucket for you.
+ *   Compute Engine zone where your cluster is deployed, and then create
+ *   and manage this project-level, per-location bucket (see
+ *   [Cloud Dataproc staging
+ *   bucket](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
  *
  * @property {Object} gceClusterConfig
- *   Required. The shared Compute Engine config settings for
+ *   Optional. The shared Compute Engine config settings for
  *   all instances in a cluster.
  *
  *   This object should have the same structure as [GceClusterConfig]{@link google.cloud.dataproc.v1.GceClusterConfig}
@@ -192,8 +195,8 @@ const EncryptionConfig = {
  *
  *   A full URL, partial URI, or short name are valid. Examples:
  *
- *   * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0`
- *   * `projects/[project_id]/regions/us-east1/sub0`
+ *   * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0`
+ *   * `projects/[project_id]/regions/us-east1/subnetworks/sub0`
  *   * `sub0`
  *
  * @property {boolean} internalIpOnly
@@ -526,13 +529,13 @@ const ClusterStatus = {
  *   such as "1.2" (including a subminor version, such as "1.2.29"), or the
  *   ["preview"
  *   version](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
- *   If unspecified, it defaults to the latest version.
+ *   If unspecified, it defaults to the latest Debian version.
  *
  * @property {Object.<string, string>} properties
  *   Optional. The properties to set on daemon config files.
  *
- *   Property keys are specified in `prefix:property` format, such as
- *   `core:fs.defaultFS`. The following are supported prefixes
+ *   Property keys are specified in `prefix:property` format, for example
+ *   `core:hadoop.tmp.dir`. The following are supported prefixes
  *   and their mappings:
  *
  *   * capacity-scheduler: `capacity-scheduler.xml`
@@ -547,6 +550,11 @@ const ClusterStatus = {
  *
  *   For more information, see
  *   [Cluster properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
+ *
+ * @property {number[]} optionalComponents
+ *   The set of optional components to activate on the cluster.
+ *
+ *   The number should be among the values of [Component]{@link google.cloud.dataproc.v1.Component}
  *
  * @typedef SoftwareConfig
  * @memberof google.cloud.dataproc.v1
@@ -593,11 +601,10 @@ const ClusterMetrics = {
  *
  * @property {string} requestId
  *   Optional. A unique id used to identify the request. If the server
- *   receives two
- *   CreateClusterRequest
- *   requests  with the same id, then the second request will be ignored and the
- *   first google.longrunning.Operation created
- *   and stored in the backend is returned.
+ *   receives two CreateClusterRequest requests  with the same
+ *   id, then the second request will be ignored and the
+ *   first google.longrunning.Operation created and stored in the backend
+ *   is returned.
  *
  *   It is recommended to always set this value to a
  *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -696,11 +703,10 @@ const CreateClusterRequest = {
  *
  * @property {string} requestId
  *   Optional. A unique id used to identify the request. If the server
- *   receives two
- *   UpdateClusterRequest
- *   requests  with the same id, then the second request will be ignored and the
- *   first google.longrunning.Operation created
- *   and stored in the backend is returned.
+ *   receives two UpdateClusterRequest requests  with the same
+ *   id, then the second request will be ignored and the
+ *   first google.longrunning.Operation created and stored in the
+ *   backend is returned.
  *
  *   It is recommended to always set this value to a
  *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -735,11 +741,10 @@ const UpdateClusterRequest = {
  *
  * @property {string} requestId
  *   Optional. A unique id used to identify the request. If the server
- *   receives two
- *   DeleteClusterRequest
- *   requests  with the same id, then the second request will be ignored and the
- *   first google.longrunning.Operation created
- *   and stored in the backend is returned.
+ *   receives two DeleteClusterRequest requests  with the same
+ *   id, then the second request will be ignored and the
+ *   first google.longrunning.Operation created and stored in the
+ *   backend is returned.
  *
  *   It is recommended to always set this value to a
  *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).

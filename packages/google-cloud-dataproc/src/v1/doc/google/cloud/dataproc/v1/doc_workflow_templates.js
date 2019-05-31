@@ -183,8 +183,8 @@ const ClusterSelector = {
  *
  *   The step id is used as prefix for job id, as job
  *   `goog-dataproc-workflow-step-id` label, and in
- *   prerequisiteStepIds
- *   field from other steps.
+ *   prerequisiteStepIds field from other
+ *   steps.
  *
  *   The id must contain only letters (a-z, A-Z), numbers (0-9),
  *   underscores (_), and hyphens (-). Cannot begin or end with underscore
@@ -274,10 +274,10 @@ const OrderedJob = {
  *   A field is allowed to appear in at most one parameter's list of field
  *   paths.
  *
- *   A field path is similar in syntax to a
- *   google.protobuf.FieldMask. For example, a
- *   field path that references the zone field of a workflow template's cluster
- *   selector would be specified as `placement.clusterSelector.zone`.
+ *   A field path is similar in syntax to a google.protobuf.FieldMask.
+ *   For example, a field path that references the zone field of a workflow
+ *   template's cluster selector would be specified as
+ *   `placement.clusterSelector.zone`.
  *
  *   Also, field paths can reference fields using the following syntax:
  *
