@@ -50,6 +50,11 @@ export interface StorageOptions extends GoogleAuthOptions {
   autoRetry?: boolean;
   maxRetries?: number;
   promise?: typeof Promise;
+  /**
+   * The API endpoint of the service used to make requests.
+   * Defaults to `www.googleapis.com`.
+   */
+  apiEndpoint?: string;
 }
 
 export interface BucketOptions {
@@ -285,8 +290,10 @@ export class Storage extends Service {
    * @param {StorageOptions} [options] Configuration options.
    */
   constructor(options: StorageOptions = {}) {
+    options.apiEndpoint = options.apiEndpoint || 'www.googleapis.com';
     const config = {
-      baseUrl: 'https://www.googleapis.com/storage/v1',
+      apiEndpoint: options.apiEndpoint,
+      baseUrl: `https://${options.apiEndpoint}/storage/v1`,
       projectIdRequired: false,
       scopes: [
         'https://www.googleapis.com/auth/iam',

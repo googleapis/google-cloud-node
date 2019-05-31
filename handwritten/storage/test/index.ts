@@ -134,6 +134,20 @@ describe('Storage', () => {
         require('../../package.json')
       );
     });
+
+    it('should propagate the apiEndpoint option', () => {
+      const apiEndpoint = 'some.fake.endpoint';
+      storage = new Storage({
+        projectId: PROJECT_ID,
+        apiEndpoint,
+      });
+      const calledWith = storage.calledWith_[0];
+      assert.strictEqual(
+        calledWith.baseUrl,
+        `https://${apiEndpoint}/storage/v1`
+      );
+      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
+    });
   });
 
   describe('bucket', () => {
