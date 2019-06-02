@@ -1,43 +1,82 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Stackdriver Logging for Bunyan: Node.js Samples
+This module provides an easy to use, higher-level layer for working with [Stackdriver Logging](https://cloud.google.com/logging/docs),
+compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a transport to your existing Bunyan loggers. Samples
+
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-[Stackdriver Logging](https://cloud.google.com/logging/docs) allows you to store, search, analyze, monitor, and alert on log data and events from Google Cloud Platform and Amazon Web Services.
+
 
 ## Table of Contents
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Express](#express)
   * [Quickstart](#quickstart)
   * [Explict Auth Setup](#explict-auth-setup)
 
 ## Before you begin
 
-Before running the samples, make sure you've followed the steps in the
-[Before you begin section](../README.md#before-you-begin) of the client
-library's README.
+Before running the samples, make sure you've followed the steps outlined in
+[Using the client library](https://github.com/googleapis/nodejs-logging-bunyan#using-the-client-library).
 
 ## Samples
 
+
+
+### Express
+
+View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/express.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/express.js,samples/README.md)
+
+__Usage:__
+
+
+`node express.js`
+
+
+-----
+
+
+
+
 ### Quickstart
 
-View the [source code][quickstart_0_code].
+View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
-[quickstart_0_docs]: https://cloud.google.com/logging/docs/
-[quickstart_0_code]: quickstart.js
+__Usage:__
+
+
+`node quickstart.js`
+
+
+-----
+
+
+
 
 ### Explict Auth Setup
 
-View the [source code][setup_explicit_1_code].
+View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/setup_explicit.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md)
 
-[setup_explicit_1_docs]: https://cloud.google.com/logging/docs/
-[setup_explicit_1_code]: setup_explicit.js
+__Usage:__
 
-[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png
+
+`node setup_explicit.js`
+
+
+
+
+
+
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/README.md
+[product-docs]: https://cloud.google.com/logging

@@ -1,0 +1,12 @@
+{
+  "name": "logging-bunyan",
+  "name_pretty": "Stackdriver Logging for Winston",
+  "product_documentation": "https://cloud.google.com/logging",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/logging-bunyan/latest/",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-logging-bunyan",
+  "distribution_name": "@google-cloud/logging-bunyan",
+  "api_id": "logging.googleapis.com"
+}

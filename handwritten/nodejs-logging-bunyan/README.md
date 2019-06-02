@@ -1,19 +1,24 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Stackdriver Logging for Bunyan](https://github.com/googleapis/nodejs-logging-bunyan)
+This module provides an easy to use, higher-level layer for working with [Stackdriver Logging](https://cloud.google.com/logging/docs),
+compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a transport to your existing Bunyan loggers.
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+
+[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/logging-bunyan.svg)](https://www.npmjs.org/package/@google-cloud/logging-bunyan)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-logging-bunyan/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-logging-bunyan)
 
-This module provides an easy to use, higher-level layer for working with
-[Stackdriver Logging](https://cloud.google.com/logging/docs), compatible with
-[Bunyan](https://www.npmjs.com/package/bunyan). Simply attach this as a
-transport to your existing Bunyan loggers.
 
-* [Stackdriver Logging for Bunyan API Reference][client-docs]
+
+
+Stackdriver Logging stream for Bunyan
+
+
+* [Stackdriver Logging for Winston Node.js Client API Reference][client-docs]
+* [Stackdriver Logging for Winston Documentation][product-docs]
 * [github.com/googleapis/nodejs-logging-bunyan](https://github.com/googleapis/nodejs-logging-bunyan)
-* [Logging Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -21,6 +26,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 [explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
 **Table of contents:**
+
 
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
@@ -35,38 +41,24 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 ### Before you begin
 
-1.  Select or create a Cloud Platform project.
-
-    [Go to the projects page][projects]
-
-1.  Enable billing for your project.
-
-    [Enable billing][billing]
-
-1.  Enable the Stackdriver Logging API.
-
-    [Enable the API][enable_api]
-
+1.  [Select or create a Cloud Platform project][projects].
+1.  [Enable the Stackdriver Logging for Winston API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
-[projects]: https://console.cloud.google.com/project
-[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=logging.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
-
-For a more detailed Stackdriver Logging setup guide, see https://cloud.google.com/logging/docs/setup/nodejs.
-
 ### Installing the client library
 
-    npm install --save @google-cloud/logging-bunyan
+```bash
+npm install @google-cloud/logging-bunyan
+```
+
 
 ### Using the client library
 
 ```javascript
 const bunyan = require('bunyan');
 
-// Imports the Google Cloud client library for Bunyan (Node 6+)
+// Imports the Google Cloud client library for Bunyan
 const {LoggingBunyan} = require('@google-cloud/logging-bunyan');
 
 // Creates a Bunyan Stackdriver Logging client
@@ -78,12 +70,10 @@ const logger = bunyan.createLogger({
   // The JSON payload of the log as it appears in Stackdriver Logging
   // will contain "name": "my-service"
   name: 'my-service',
-  // log at 'info' and above
-  level: 'info',
   streams: [
-    // Log to the console
-    {stream: process.stdout},
-    // And log to Stackdriver Logging
+    // Log to the console at 'info' and above
+    {stream: process.stdout, level: 'info'},
+    // And log to Stackdriver Logging, logging at 'info' and above
     loggingBunyan.stream('info'),
   ],
 });
@@ -91,8 +81,8 @@ const logger = bunyan.createLogger({
 // Writes some log entries
 logger.error('warp nacelles offline');
 logger.info('shields at 99%');
-```
 
+```
 ### Using as an express middleware
 
 ***NOTE: this feature is experimental. The API may change in a backwards
@@ -225,6 +215,7 @@ logger.info({
 }, 'Bunyan log entry with custom trace field');
 ```
 
+
 ## Samples
 
 Samples are in the [`samples/`](https://github.com/googleapis/nodejs-logging-bunyan/tree/master/samples) directory. The samples' `README.md`
@@ -232,17 +223,28 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Express | [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/express.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/express.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Explict Auth Setup | [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/setup_explicit.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md) |
 
+
+
+The [Stackdriver Logging for Winston Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
 ## Versioning
 
-This library follows [Semantic Versioning](https://semver.org/).
+This library follows [Semantic Versioning](http://semver.org/).
+
+
 
 This library is considered to be in **beta**. This means it is expected to be
 mostly stable while we work toward a general availability release; however,
 complete stability is not guaranteed. We will address issues and requests
 against beta libraries with a high priority.
+
+
+
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
@@ -259,15 +261,9 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/logging-bunyan/latest/
-[product-docs]: https://cloud.google.com/logging/docs
+[product-docs]: https://cloud.google.com/logging
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-
-[http-request-message]: https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.type#google.logging.type.HttpRequest
-[error-reporting]: https://cloud.google.com/error-reporting/
-[@google-cloud/error-reporting]: https://www.npmjs.com/package/@google-cloud/error-reporting
-[uncaught]: https://nodejs.org/api/process.html#process_event_uncaughtexception
-[unhandled]: https://nodejs.org/api/process.html#process_event_unhandledrejection
-[trace-agent]: https://www.npmjs.com/package/@google-cloud/trace-agent
-[LogEntry]: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry
-[trace-viewing-log-entries]: https://cloud.google.com/trace/docs/viewing-details#log_entries
-
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=logging.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started

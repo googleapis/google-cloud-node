@@ -15,6 +15,9 @@
 
 'use strict';
 
+// sample-metadata:
+//   title: Explict Auth Setup
+
 /* eslint-disable no-unused-vars */
 // [START logging_bunyan_setup_explicit]
 // Imports the Google Cloud client library for Bunyan
