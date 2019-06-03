@@ -1,23 +1,26 @@
 {
-  "name": "nodejs-containeranalysis-samples",
-  "private": true,
-  "license": "Apache-2.0",
-  "author": "Google Inc.",
-  "repository": "googleapis/nodejs-containeranalysis",
-  "files": [
-    "*.js"
-  ],
-  "engines": {
-    "node": ">=10"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
-  "dependencies": {
-    "@google-cloud/containeranalysis": "^0.1.0"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.0.0"
-  }
+    "name": "nodejs-containeranalysis-samples",
+    "private": true,
+    "license": "Apache-2.0",
+    "author": "Google Inc.",
+    "repository": "googleapis/nodejs-containeranalysis",
+    "files": [
+        "*.js"
+    ],
+    "engines": {
+        "node": ">=10"
+    },
+    "scripts": {
+        "test": "mocha --timeout 100000 test/**.test.js"
+    },
+    "dependencies": {
+        "@google-cloud/containeranalysis": "^0.1.0",
+        "@google-cloud/pubsub": "^0.28.1",
+        "p-retry": "^4.1.0"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^6.1.4",
+        "uuid": "^3.3.2"
+    }
 }
