@@ -23,6 +23,22 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('OsLoginServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = osLoginModule.v1beta.OsLoginServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = osLoginModule.v1beta.OsLoginServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = osLoginModule.v1beta.OsLoginServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', done => {
       const client = new osLoginModule.v1beta.OsLoginServiceClient({
