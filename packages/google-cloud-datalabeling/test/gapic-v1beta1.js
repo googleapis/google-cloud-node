@@ -23,6 +23,24 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DataLabelingServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      datalabelingModule.v1beta1.DataLabelingServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      datalabelingModule.v1beta1.DataLabelingServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = datalabelingModule.v1beta1.DataLabelingServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
       const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
