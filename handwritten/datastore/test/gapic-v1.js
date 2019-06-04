@@ -23,6 +23,22 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DatastoreClient', () => {
+  it('has servicePath', () => {
+    const servicePath = datastoreModule.v1.DatastoreClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = datastoreModule.v1.DatastoreClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = datastoreModule.v1.DatastoreClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
   describe('lookup', () => {
     it('invokes lookup without error', done => {
       const client = new datastoreModule.v1.DatastoreClient({
