@@ -39,6 +39,11 @@ describe('OsLoginServiceClient', () => {
     assert(typeof port === 'number');
   });
 
+  it('should create a client with no options', () => {
+    const client = new osLoginModule.v1beta.OsLoginServiceClient();
+    assert(client);
+  });
+
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', done => {
       const client = new osLoginModule.v1beta.OsLoginServiceClient({
