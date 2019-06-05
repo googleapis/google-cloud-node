@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.1.0...v1.2.0) (2019-06-05)
+
+
+### Features
+
+* add support for cluster components ([#221](https://www.github.com/googleapis/nodejs-dataproc/issues/221)) ([164c97b](https://www.github.com/googleapis/nodejs-dataproc/commit/164c97b))
+* support apiEndpoint override in client constructor ([#224](https://www.github.com/googleapis/nodejs-dataproc/issues/224)) ([b54d170](https://www.github.com/googleapis/nodejs-dataproc/commit/b54d170))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.0.0...v1.1.0) (2019-05-24)
 
 
