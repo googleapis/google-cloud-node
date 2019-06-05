@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('KeyManagementServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = kmsModule.v1.KeyManagementServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = kmsModule.v1.KeyManagementServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = kmsModule.v1.KeyManagementServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new kmsModule.v1.KeyManagementServiceClient();
+    assert(client);
+  });
+
   describe('listKeyRings', () => {
     it('invokes listKeyRings without error', done => {
       const client = new kmsModule.v1.KeyManagementServiceClient({
