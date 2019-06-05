@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Speech-to-Text: Node.js Client](https://github.com/googleapis/nodejs-speech)
+# [Cloud Speech: Node.js Client](https://github.com/googleapis/nodejs-speech)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/speech.svg)](https://www.npmjs.org/package/@google-cloud/speech)
@@ -14,8 +14,8 @@
 Cloud Speech Client Library for Node.js
 
 
-* [Cloud Speech-to-Text Node.js Client API Reference][client-docs]
-* [Cloud Speech-to-Text Documentation][product-docs]
+* [Cloud Speech Node.js Client API Reference][client-docs]
+* [Cloud Speech Documentation][product-docs]
 * [github.com/googleapis/nodejs-speech](https://github.com/googleapis/nodejs-speech)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -40,7 +40,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable the Cloud Speech-to-Text API][enable_api].
+1.  [Enable the Cloud Speech API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -111,7 +111,7 @@ has instructions for running the samples.
 
 
 
-The [Cloud Speech-to-Text Node.js Client API Reference][client-docs] documentation
+The [Cloud Speech Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning

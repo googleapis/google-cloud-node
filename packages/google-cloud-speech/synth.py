@@ -32,7 +32,7 @@ for version in versions:
     # skip index, protos, package.json, and README.md
     s.copy(
         library,
-        excludes=['package.json', 'README.md', 'src/index.js',]
+        excludes=['package.json', 'src/index.js',]
     )
 
     # Manual helper methods overrides the streaming API so that it
