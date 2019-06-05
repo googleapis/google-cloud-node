@@ -23,6 +23,29 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AlertPolicyServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      monitoringModule.v3.AlertPolicyServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      monitoringModule.v3.AlertPolicyServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = monitoringModule.v3.AlertPolicyServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new monitoringModule.v3.AlertPolicyServiceClient();
+    assert(client);
+  });
+
   describe('listAlertPolicies', () => {
     it('invokes listAlertPolicies without error', done => {
       const client = new monitoringModule.v3.AlertPolicyServiceClient({
@@ -342,6 +365,27 @@ describe('AlertPolicyServiceClient', () => {
   });
 });
 describe('GroupServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = monitoringModule.v3.GroupServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = monitoringModule.v3.GroupServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = monitoringModule.v3.GroupServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new monitoringModule.v3.GroupServiceClient();
+    assert(client);
+  });
+
   describe('listGroups', () => {
     it('invokes listGroups without error', done => {
       const client = new monitoringModule.v3.GroupServiceClient({
@@ -732,6 +776,27 @@ describe('GroupServiceClient', () => {
   });
 });
 describe('MetricServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = monitoringModule.v3.MetricServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = monitoringModule.v3.MetricServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = monitoringModule.v3.MetricServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new monitoringModule.v3.MetricServiceClient();
+    assert(client);
+  });
+
   describe('listMonitoredResourceDescriptors', () => {
     it('invokes listMonitoredResourceDescriptors without error', done => {
       const client = new monitoringModule.v3.MetricServiceClient({
@@ -1274,6 +1339,29 @@ describe('MetricServiceClient', () => {
   });
 });
 describe('NotificationChannelServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      monitoringModule.v3.NotificationChannelServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      monitoringModule.v3.NotificationChannelServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = monitoringModule.v3.NotificationChannelServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new monitoringModule.v3.NotificationChannelServiceClient();
+    assert(client);
+  });
+
   describe('listNotificationChannelDescriptors', () => {
     it('invokes listNotificationChannelDescriptors without error', done => {
       const client = new monitoringModule.v3.NotificationChannelServiceClient({
@@ -1746,6 +1834,29 @@ describe('NotificationChannelServiceClient', () => {
   });
 });
 describe('UptimeCheckServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      monitoringModule.v3.UptimeCheckServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      monitoringModule.v3.UptimeCheckServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = monitoringModule.v3.UptimeCheckServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new monitoringModule.v3.UptimeCheckServiceClient();
+    assert(client);
+  });
+
   describe('listUptimeCheckConfigs', () => {
     it('invokes listUptimeCheckConfigs without error', done => {
       const client = new monitoringModule.v3.UptimeCheckServiceClient({
