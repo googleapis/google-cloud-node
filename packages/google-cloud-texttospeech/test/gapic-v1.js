@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('TextToSpeechClient', () => {
+  it('has servicePath', () => {
+    const servicePath = textToSpeechModule.v1.TextToSpeechClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = textToSpeechModule.v1.TextToSpeechClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = textToSpeechModule.v1.TextToSpeechClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new textToSpeechModule.v1.TextToSpeechClient();
+    assert(client);
+  });
+
   describe('listVoices', () => {
     it('invokes listVoices without error', done => {
       const client = new textToSpeechModule.v1.TextToSpeechClient({
