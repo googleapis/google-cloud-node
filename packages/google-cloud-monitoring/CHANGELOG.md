@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#265](https://www.github.com/googleapis/nodejs-monitoring/issues/265)) ([8a413bc](https://www.github.com/googleapis/nodejs-monitoring/commit/8a413bc))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v0.7.1...v1.0.0) (2019-05-20)
 
 
