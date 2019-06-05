@@ -24,6 +24,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('SpeechClient', () => {
+  it('has servicePath', () => {
+    const servicePath = speechModule.v1p1beta1.SpeechClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = speechModule.v1p1beta1.SpeechClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = speechModule.v1p1beta1.SpeechClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new speechModule.v1p1beta1.SpeechClient();
+    assert(client);
+  });
+
   describe('recognize', () => {
     it('invokes recognize without error', done => {
       const client = new speechModule.v1p1beta1.SpeechClient({
