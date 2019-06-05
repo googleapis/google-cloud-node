@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#393](https://www.github.com/googleapis/nodejs-vision/issues/393)) ([7777275](https://www.github.com/googleapis/nodejs-vision/commit/7777275))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-vision/compare/v0.25.0...v1.0.0) (2019-05-13)
 
 
