@@ -15,7 +15,7 @@
  */
 
 import * as consoleLogLevel from 'console-log-level';
-import { defaultConfig } from './config';
+import {defaultConfig} from './config';
 
 const pjson = require('../../package.json');
 

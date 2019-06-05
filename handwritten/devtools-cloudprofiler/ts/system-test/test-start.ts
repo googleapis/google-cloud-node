@@ -17,11 +17,11 @@
 import * as assert from 'assert';
 import delay from 'delay';
 import * as nock from 'nock';
-import { promisify } from 'util';
+import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import { perftools } from '../../proto/profile';
-import { RequestProfile } from '../src/profiler';
+import {perftools} from '../../proto/profile';
+import {RequestProfile} from '../src/profiler';
 
 const API = 'https://cloudprofiler.googleapis.com/v2';
 let savedEnv: {};
@@ -87,7 +87,7 @@ before(async () => {
 
   // start profiling and wait to collect profiles.
   const profiler = require('../src/index');
-  profiler.start({ credentials: fakeCredentials });
+  profiler.start({credentials: fakeCredentials});
   await delay(30 * 1000);
 
   // copy over currently uploaded profiles, so all tests look at same profiles.

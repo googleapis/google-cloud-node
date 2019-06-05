@@ -16,11 +16,11 @@
 
 import * as assert from 'assert';
 import * as gcpMetadata from 'gcp-metadata';
-import { heap as heapProfiler } from 'pprof';
+import {heap as heapProfiler} from 'pprof';
 import * as sinon from 'sinon';
 
-import { createProfiler, nodeVersionOkay } from '../src/index';
-import { Profiler } from '../src/profiler';
+import {createProfiler, nodeVersionOkay} from '../src/index';
+import {Profiler} from '../src/profiler';
 
 describe('nodeVersionOkay', () => {
   it('should accept alpha versions', () => {
@@ -124,7 +124,7 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         logLevel: 2,
-        serviceContext: { version: 'fake-version', service: 'fake-service' },
+        serviceContext: {version: 'fake-version', service: 'fake-service'},
         disableHeap: true,
         disableTime: true,
         instance: 'instance',
@@ -150,7 +150,7 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         logLevel: 2,
-        serviceContext: { version: 'fake-version', service: 'fake-service' },
+        serviceContext: {version: 'fake-version', service: 'fake-service'},
         disableHeap: true,
         disableTime: true,
         instance: 'instance',
@@ -175,7 +175,7 @@ describe('createProfiler', () => {
       {
         projectId: 'projectId',
         logLevel: 2,
-        serviceContext: { version: '', service: 'fake-service' },
+        serviceContext: {version: '', service: 'fake-service'},
         disableHeap: true,
         disableTime: true,
       },
@@ -183,7 +183,7 @@ describe('createProfiler', () => {
     );
     const expConfigParams = {
       logLevel: 2,
-      serviceContext: { version: '', service: 'fake-service' },
+      serviceContext: {version: '', service: 'fake-service'},
       disableHeap: true,
       disableTime: true,
       instance: 'gce-instance',
@@ -206,13 +206,13 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         projectId: 'fake-projectId',
-        serviceContext: { service: 'fake-service' },
+        serviceContext: {service: 'fake-service'},
       },
       disableSourceMapParams
     );
     const expConfigParams = {
       logLevel: 2,
-      serviceContext: { service: 'fake-service' },
+      serviceContext: {service: 'fake-service'},
       disableHeap: false,
       disableTime: false,
       projectId: 'fake-projectId',
@@ -233,7 +233,7 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         logLevel: 2,
-        serviceContext: { version: '' },
+        serviceContext: {version: ''},
         disableHeap: true,
         disableTime: true,
       },
@@ -256,7 +256,7 @@ describe('createProfiler', () => {
     metadataStub.throwsException('cannot access metadata');
     const config = {
       logLevel: 2,
-      serviceContext: { service: 'serviceName', version: '' },
+      serviceContext: {service: 'serviceName', version: ''},
       disableHeap: true,
       disableTime: true,
     };
@@ -278,7 +278,7 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         logLevel: 2,
-        serviceContext: { version: '', service: 'fake-service' },
+        serviceContext: {version: '', service: 'fake-service'},
         disableHeap: true,
         disableTime: true,
         instance: 'instance',
@@ -303,7 +303,7 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         logLevel: 2,
-        serviceContext: { version: '', service: 'fake-service' },
+        serviceContext: {version: '', service: 'fake-service'},
         disableHeap: true,
         disableTime: true,
         instance: 'instance',
@@ -327,7 +327,7 @@ describe('createProfiler', () => {
     metadataStub.throwsException('cannot access metadata');
 
     const config = {
-      serviceContext: { version: '', service: 'fake-service' },
+      serviceContext: {version: '', service: 'fake-service'},
       instance: 'instance',
       zone: 'zone',
       sourceMapSearchPath: [],
@@ -352,13 +352,13 @@ describe('createProfiler', () => {
 
     const config = Object.assign(
       {
-        serviceContext: { version: '', service: 'fake-service' },
+        serviceContext: {version: '', service: 'fake-service'},
         baseApiUrl: 'https://test-cloudprofiler.sandbox.googleapis.com/v2',
       },
       disableSourceMapParams
     );
     const expConfigParams = {
-      serviceContext: { version: '', service: 'fake-service' },
+      serviceContext: {version: '', service: 'fake-service'},
       disableHeap: false,
       disableTime: false,
       logLevel: 2,
@@ -410,7 +410,7 @@ describe('createProfiler', () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     const config = disableSourceMapParams;
     const expConfigParams = {
-      serviceContext: { version: 'k-version', service: 'k-service' },
+      serviceContext: {version: 'k-version', service: 'k-service'},
       disableHeap: false,
       disableTime: false,
       logLevel: 2,
@@ -501,7 +501,7 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         projectId: 'config-projectId',
-        serviceContext: { service: 'config-service' },
+        serviceContext: {service: 'config-service'},
         instance: 'envConfig-instance',
         zone: 'envConfig-zone',
       },
@@ -517,7 +517,7 @@ describe('createProfiler', () => {
     const config = Object.assign(
       {
         projectId: 'config-projectId',
-        serviceContext: { service: 'config-service' },
+        serviceContext: {service: 'config-service'},
         disableHeap: true,
         instance: 'envConfig-instance',
         zone: 'envConfig-zone',
