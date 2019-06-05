@@ -39,6 +39,11 @@ describe('CloudRedisClient', () => {
     assert(typeof port === 'number');
   });
 
+  it('should create a client with no options', () => {
+    const client = new redisModule.v1.CloudRedisClient();
+    assert(client);
+  });
+
   describe('listInstances', () => {
     it('invokes listInstances without error', done => {
       const client = new redisModule.v1.CloudRedisClient({
