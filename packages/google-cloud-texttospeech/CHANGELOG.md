@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#234](https://www.github.com/googleapis/nodejs-text-to-speech/issues/234)) ([519c36c](https://www.github.com/googleapis/nodejs-text-to-speech/commit/519c36c))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v0.5.1...v1.0.0) (2019-05-14)
 
 
