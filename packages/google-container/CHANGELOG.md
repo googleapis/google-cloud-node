@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#203](https://www.github.com/googleapis/nodejs-cloud-container/issues/203)) ([92be0f8](https://www.github.com/googleapis/nodejs-cloud-container/commit/92be0f8))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v0.3.1...v1.0.0) (2019-05-13)
 
 
