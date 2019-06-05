@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-resource/compare/v1.0.1...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override ([#229](https://www.github.com/googleapis/nodejs-resource/issues/229)) ([f90f4b4](https://www.github.com/googleapis/nodejs-resource/commit/f90f4b4))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-resource/compare/v1.0.0...v1.0.1) (2019-05-24)
 
 
