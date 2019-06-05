@@ -23,6 +23,29 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('LanguageServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      languageModule.v1beta2.LanguageServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      languageModule.v1beta2.LanguageServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = languageModule.v1beta2.LanguageServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new languageModule.v1beta2.LanguageServiceClient();
+    assert(client);
+  });
+
   describe('analyzeSentiment', () => {
     it('invokes analyzeSentiment without error', done => {
       const client = new languageModule.v1beta2.LanguageServiceClient({
