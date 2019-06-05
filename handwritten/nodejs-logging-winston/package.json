@@ -51,7 +51,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "@google-cloud/logging": "^5.0.0",
+    "@google-cloud/logging": "^5.0.1",
     "google-auth-library": "^4.0.0",
     "lodash.mapvalues": "^4.6.0",
     "logform": "^2.0.0",
@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.7",
-    "@google-cloud/common": "^1.0.0",
+    "@google-cloud/common": "^2.0.0",
     "@types/lodash.mapvalues": "^4.6.3",
     "@types/mocha": "^5.2.3",
     "@types/node": "^10.3.6",
