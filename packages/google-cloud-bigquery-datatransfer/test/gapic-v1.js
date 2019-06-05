@@ -23,6 +23,29 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DataTransferServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      bigqueryDataTransferModule.v1.DataTransferServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      bigqueryDataTransferModule.v1.DataTransferServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = bigqueryDataTransferModule.v1.DataTransferServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient();
+    assert(client);
+  });
+
   describe('getDataSource', () => {
     it('invokes getDataSource without error', done => {
       const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
