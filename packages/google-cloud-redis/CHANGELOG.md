@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* add .repo-metadata.json, quickstart, and generate README ([#177](https://www.github.com/googleapis/nodejs-redis/issues/177)) ([e7e7224](https://www.github.com/googleapis/nodejs-redis/commit/e7e7224))
+* support apiEndpoint override in client constructor ([261bcb3](https://www.github.com/googleapis/nodejs-redis/commit/261bcb3))
+* support apiEndpoint override in client constructor ([#180](https://www.github.com/googleapis/nodejs-redis/issues/180)) ([c2b30a0](https://www.github.com/googleapis/nodejs-redis/commit/c2b30a0))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-redis/compare/v0.4.0...v1.0.0) (2019-05-20)
 
 
