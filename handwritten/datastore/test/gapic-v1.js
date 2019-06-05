@@ -39,6 +39,11 @@ describe('DatastoreClient', () => {
     assert(typeof port === 'number');
   });
 
+  it('should create a client with no options', () => {
+    const client = new datastoreModule.v1.DatastoreClient();
+    assert(client);
+  });
+
   describe('lookup', () => {
     it('invokes lookup without error', done => {
       const client = new datastoreModule.v1.DatastoreClient({
