@@ -24,6 +24,32 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('VideoIntelligenceServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient
+        .servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient
+        .apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port =
+      videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient();
+    assert(client);
+  });
+
   describe('annotateVideo', function() {
     it('invokes annotateVideo without error', done => {
       const client = new videoIntelligenceModule.v1p3beta1.VideoIntelligenceServiceClient(
@@ -125,6 +151,33 @@ describe('VideoIntelligenceServiceClient', () => {
   });
 });
 describe('StreamingVideoIntelligenceServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient
+        .servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient
+        .apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port =
+      videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient
+        .port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient();
+    assert(client);
+  });
+
   describe('streamingAnnotateVideo', () => {
     it('invokes streamingAnnotateVideo without error', done => {
       const client = new videoIntelligenceModule.v1p3beta1.StreamingVideoIntelligenceServiceClient(

@@ -91,10 +91,20 @@ const AnnotateVideoRequest = {
  *
  *   This object should have the same structure as [ExplicitContentDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.ExplicitContentDetectionConfig}
  *
+ * @property {Object} speechTranscriptionConfig
+ *   Config for SPEECH_TRANSCRIPTION.
+ *
+ *   This object should have the same structure as [SpeechTranscriptionConfig]{@link google.cloud.videointelligence.v1p3beta1.SpeechTranscriptionConfig}
+ *
  * @property {Object} textDetectionConfig
  *   Config for TEXT_DETECTION.
  *
  *   This object should have the same structure as [TextDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.TextDetectionConfig}
+ *
+ * @property {Object} objectTrackingConfig
+ *   Config for OBJECT_TRACKING.
+ *
+ *   This object should have the same structure as [ObjectTrackingConfig]{@link google.cloud.videointelligence.v1p3beta1.ObjectTrackingConfig}
  *
  * @typedef VideoContext
  * @memberof google.cloud.videointelligence.v1p3beta1
@@ -124,6 +134,22 @@ const VideoContext = {
  *   Supported values: "builtin/stable" (the default if unset) and
  *   "builtin/latest".
  *
+ * @property {number} frameConfidenceThreshold
+ *   The confidence threshold we perform filtering on the labels from
+ *   frame-level detection. If not set, it is set to 0.4 by default. The valid
+ *   range for this threshold is [0.1, 0.9]. Any value set outside of this
+ *   range will be clipped.
+ *   Note: for best results please follow the default threshold. We will update
+ *   the default threshold everytime when we release a new model.
+ *
+ * @property {number} videoConfidenceThreshold
+ *   The confidence threshold we perform filtering on the labels from
+ *   video-level and shot-level detections. If not set, it is set to 0.3 by
+ *   default. The valid range for this threshold is [0.1, 0.9]. Any value set
+ *   outside of this range will be clipped.
+ *   Note: for best results please follow the default threshold. We will update
+ *   the default threshold everytime when we release a new model.
+ *
  * @typedef LabelDetectionConfig
  * @memberof google.cloud.videointelligence.v1p3beta1
  * @see [google.cloud.videointelligence.v1p3beta1.LabelDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
@@ -145,6 +171,22 @@ const LabelDetectionConfig = {
  * @see [google.cloud.videointelligence.v1p3beta1.ShotChangeDetectionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
  */
 const ShotChangeDetectionConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Config for OBJECT_TRACKING.
+ *
+ * @property {string} model
+ *   Model to use for object tracking.
+ *   Supported values: "builtin/stable" (the default if unset) and
+ *   "builtin/latest".
+ *
+ * @typedef ObjectTrackingConfig
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.ObjectTrackingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const ObjectTrackingConfig = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -173,6 +215,11 @@ const ExplicitContentDetectionConfig = {
  *   be language code in BCP-47 format.
  *
  *   Automatic language detection is performed if no hint is provided.
+ *
+ * @property {string} model
+ *   Model to use for text detection.
+ *   Supported values: "builtin/stable" (the default if unset) and
+ *   "builtin/latest".
  *
  * @typedef TextDetectionConfig
  * @memberof google.cloud.videointelligence.v1p3beta1
@@ -366,6 +413,87 @@ const NormalizedBoundingBox = {
 };
 
 /**
+ * For tracking related features, such as LOGO_RECOGNITION, FACE_DETECTION,
+ * CELEBRITY_RECOGNITION, PERSON_DETECTION.
+ * An object at time_offset with attributes, and located with
+ * normalized_bounding_box.
+ *
+ * @property {Object} normalizedBoundingBox
+ *   Normalized Bounding box in a frame, where the object is located.
+ *
+ *   This object should have the same structure as [NormalizedBoundingBox]{@link google.cloud.videointelligence.v1p3beta1.NormalizedBoundingBox}
+ *
+ * @property {Object} timeOffset
+ *   Time-offset, relative to the beginning of the video,
+ *   corresponding to the video frame for this object.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object[]} attributes
+ *   Optional. The attributes of the object in the bounding box.
+ *
+ *   This object should have the same structure as [DetectedAttribute]{@link google.cloud.videointelligence.v1p3beta1.DetectedAttribute}
+ *
+ * @typedef TimestampedObject
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.TimestampedObject definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const TimestampedObject = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A track of an object instance.
+ *
+ * @property {Object} segment
+ *   Video segment of a track.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1p3beta1.VideoSegment}
+ *
+ * @property {Object[]} timestampedObjects
+ *   The object with timestamp and attributes per frame in the track.
+ *
+ *   This object should have the same structure as [TimestampedObject]{@link google.cloud.videointelligence.v1p3beta1.TimestampedObject}
+ *
+ * @property {Object[]} attributes
+ *   Optional. Attributes in the track level.
+ *
+ *   This object should have the same structure as [DetectedAttribute]{@link google.cloud.videointelligence.v1p3beta1.DetectedAttribute}
+ *
+ * @property {number} confidence
+ *   Optional. The confidence score of the tracked object.
+ *
+ * @typedef Track
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.Track definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const Track = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A generic detected attribute represented by name in string format.
+ *
+ * @property {string} name
+ *   The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+ *   A full list of supported type names will be provided in the document.
+ *
+ * @property {number} confidence
+ *   Detected attribute confidence. Range [0, 1].
+ *
+ * @property {string} value
+ *   Text value of the detection result. For example, the value for "HairColor"
+ *   can be "black", "blonde", etc.
+ *
+ * @typedef DetectedAttribute
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.DetectedAttribute definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const DetectedAttribute = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Annotation results for a single video.
  *
  * @property {string} inputUri
@@ -400,6 +528,11 @@ const NormalizedBoundingBox = {
  *
  *   This object should have the same structure as [ExplicitContentAnnotation]{@link google.cloud.videointelligence.v1p3beta1.ExplicitContentAnnotation}
  *
+ * @property {Object[]} speechTranscriptions
+ *   Speech transcription.
+ *
+ *   This object should have the same structure as [SpeechTranscription]{@link google.cloud.videointelligence.v1p3beta1.SpeechTranscription}
+ *
  * @property {Object[]} textAnnotations
  *   OCR text detection and tracking.
  *   Annotations for list of detected text snippets. Each will have list of
@@ -411,6 +544,11 @@ const NormalizedBoundingBox = {
  *   Annotations for list of objects detected and tracked in video.
  *
  *   This object should have the same structure as [ObjectTrackingAnnotation]{@link google.cloud.videointelligence.v1p3beta1.ObjectTrackingAnnotation}
+ *
+ * @property {Object[]} logoRecognitionAnnotations
+ *   Annotations for list of logos detected, tracked and recognized in video.
+ *
+ *   This object should have the same structure as [LogoRecognitionAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation}
  *
  * @property {Object} error
  *   If set, indicates an error. Note that for a single `AnnotateVideoRequest`
@@ -488,6 +626,192 @@ const VideoAnnotationProgress = {
  * @see [google.cloud.videointelligence.v1p3beta1.AnnotateVideoProgress definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
  */
 const AnnotateVideoProgress = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Config for SPEECH_TRANSCRIPTION.
+ *
+ * @property {string} languageCode
+ *   *Required* The language of the supplied audio as a
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+ *   Example: "en-US".
+ *   See [Language Support](https://cloud.google.com/speech/docs/languages)
+ *   for a list of the currently supported language codes.
+ *
+ * @property {number} maxAlternatives
+ *   *Optional* Maximum number of recognition hypotheses to be returned.
+ *   Specifically, the maximum number of `SpeechRecognitionAlternative` messages
+ *   within each `SpeechTranscription`. The server may return fewer than
+ *   `max_alternatives`. Valid values are `0`-`30`. A value of `0` or `1` will
+ *   return a maximum of one. If omitted, will return a maximum of one.
+ *
+ * @property {boolean} filterProfanity
+ *   *Optional* If set to `true`, the server will attempt to filter out
+ *   profanities, replacing all but the initial character in each filtered word
+ *   with asterisks, e.g. "f***". If set to `false` or omitted, profanities
+ *   won't be filtered out.
+ *
+ * @property {Object[]} speechContexts
+ *   *Optional* A means to provide context to assist the speech recognition.
+ *
+ *   This object should have the same structure as [SpeechContext]{@link google.cloud.videointelligence.v1p3beta1.SpeechContext}
+ *
+ * @property {boolean} enableAutomaticPunctuation
+ *   *Optional* If 'true', adds punctuation to recognition result hypotheses.
+ *   This feature is only available in select languages. Setting this for
+ *   requests in other languages has no effect at all. The default 'false' value
+ *   does not add punctuation to result hypotheses. NOTE: "This is currently
+ *   offered as an experimental service, complimentary to all users. In the
+ *   future this may be exclusively available as a premium feature."
+ *
+ * @property {number[]} audioTracks
+ *   *Optional* For file formats, such as MXF or MKV, supporting multiple audio
+ *   tracks, specify up to two tracks. Default: track 0.
+ *
+ * @property {boolean} enableSpeakerDiarization
+ *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   the top alternative of the recognition result using a speaker_tag provided
+ *   in the WordInfo.
+ *   Note: When this is true, we send all the words from the beginning of the
+ *   audio for the top alternative in every consecutive responses.
+ *   This is done in order to improve our speaker tags as our models learn to
+ *   identify the speakers in the conversation over time.
+ *
+ * @property {number} diarizationSpeakerCount
+ *   *Optional*
+ *   If set, specifies the estimated number of speakers in the conversation.
+ *   If not set, defaults to '2'.
+ *   Ignored unless enable_speaker_diarization is set to true.
+ *
+ * @property {boolean} enableWordConfidence
+ *   *Optional* If `true`, the top result includes a list of words and the
+ *   confidence for those words. If `false`, no word-level confidence
+ *   information is returned. The default is `false`.
+ *
+ * @typedef SpeechTranscriptionConfig
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.SpeechTranscriptionConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const SpeechTranscriptionConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Provides "hints" to the speech recognizer to favor specific words and phrases
+ * in the results.
+ *
+ * @property {string[]} phrases
+ *   *Optional* A list of strings containing words and phrases "hints" so that
+ *   the speech recognition is more likely to recognize them. This can be used
+ *   to improve the accuracy for specific words and phrases, for example, if
+ *   specific commands are typically spoken by the user. This can also be used
+ *   to add additional words to the vocabulary of the recognizer. See
+ *   [usage limits](https://cloud.google.com/speech/limits#content).
+ *
+ * @typedef SpeechContext
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.SpeechContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const SpeechContext = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A speech recognition result corresponding to a portion of the audio.
+ *
+ * @property {Object[]} alternatives
+ *   May contain one or more recognition hypotheses (up to the maximum specified
+ *   in `max_alternatives`).  These alternatives are ordered in terms of
+ *   accuracy, with the top (first) alternative being the most probable, as
+ *   ranked by the recognizer.
+ *
+ *   This object should have the same structure as [SpeechRecognitionAlternative]{@link google.cloud.videointelligence.v1p3beta1.SpeechRecognitionAlternative}
+ *
+ * @property {string} languageCode
+ *   Output only. The
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag of the
+ *   language in this result. This language code was detected to have the most
+ *   likelihood of being spoken in the audio.
+ *
+ * @typedef SpeechTranscription
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.SpeechTranscription definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const SpeechTranscription = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Alternative hypotheses (a.k.a. n-best list).
+ *
+ * @property {string} transcript
+ *   Transcript text representing the words that the user spoke.
+ *
+ * @property {number} confidence
+ *   The confidence estimate between 0.0 and 1.0. A higher number
+ *   indicates an estimated greater likelihood that the recognized words are
+ *   correct. This field is typically provided only for the top hypothesis, and
+ *   only for `is_final=true` results. Clients should not rely on the
+ *   `confidence` field as it is not guaranteed to be accurate or consistent.
+ *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
+ *
+ * @property {Object[]} words
+ *   A list of word-specific information for each recognized word.
+ *
+ *   This object should have the same structure as [WordInfo]{@link google.cloud.videointelligence.v1p3beta1.WordInfo}
+ *
+ * @typedef SpeechRecognitionAlternative
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.SpeechRecognitionAlternative definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const SpeechRecognitionAlternative = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Word-specific information for recognized words. Word information is only
+ * included in the response when certain request parameters are set, such
+ * as `enable_word_time_offsets`.
+ *
+ * @property {Object} startTime
+ *   Time offset relative to the beginning of the audio, and
+ *   corresponding to the start of the spoken word. This field is only set if
+ *   `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+ *   experimental feature and the accuracy of the time offset can vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} endTime
+ *   Time offset relative to the beginning of the audio, and
+ *   corresponding to the end of the spoken word. This field is only set if
+ *   `enable_word_time_offsets=true` and only in the top hypothesis. This is an
+ *   experimental feature and the accuracy of the time offset can vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {string} word
+ *   The word corresponding to this set of information.
+ *
+ * @property {number} confidence
+ *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
+ *   indicates an estimated greater likelihood that the recognized words are
+ *   correct. This field is set only for the top alternative.
+ *   This field is not guaranteed to be accurate and users should not rely on it
+ *   to be always provided.
+ *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
+ *
+ * @property {number} speakerTag
+ *   Output only. A distinct integer value is assigned for every speaker within
+ *   the audio. This field specifies which one of those speakers was detected to
+ *   have spoken this word. Value ranges from 1 up to diarization_speaker_count,
+ *   and is only set if speaker diarization is enabled.
+ *
+ * @typedef WordInfo
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.WordInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const WordInfo = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -675,6 +999,35 @@ const ObjectTrackingAnnotation = {
 };
 
 /**
+ * Annotation corresponding to one detected, tracked and recognized logo class.
+ *
+ * @property {Object} entity
+ *   Entity category information to specify the logo class that all the logo
+ *   tracks within this LogoRecognitionAnnotation are recognized as.
+ *
+ *   This object should have the same structure as [Entity]{@link google.cloud.videointelligence.v1p3beta1.Entity}
+ *
+ * @property {Object[]} tracks
+ *   All logo tracks where the recognized logo appears. Each track corresponds
+ *   to one logo instance appearing in consecutive frames.
+ *
+ *   This object should have the same structure as [Track]{@link google.cloud.videointelligence.v1p3beta1.Track}
+ *
+ * @property {Object[]} segments
+ *   All video segments where the recognized logo appears. There might be
+ *   multiple instances of the same logo class appearing in one VideoSegment.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1p3beta1.VideoSegment}
+ *
+ * @typedef LogoRecognitionAnnotation
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.LogoRecognitionAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const LogoRecognitionAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * The top-level message sent by the client for the `StreamingAnnotateVideo`
  * method. Multiple `StreamingAnnotateVideoRequest` messages are sent.
  * The first message must only contain a `StreamingVideoConfig` message.
@@ -693,6 +1046,8 @@ const ObjectTrackingAnnotation = {
  *   `StreamingAnnotateVideoRequest` message containing only
  *   `video_config`, all subsequent `AnnotateStreamingVideoRequest`
  *   messages must only contain `input_content` field.
+ *   Note: as with all bytes fields, protobuffers use a pure binary
+ *   representation (not base64).
  *
  * @typedef StreamingAnnotateVideoRequest
  * @memberof google.cloud.videointelligence.v1p3beta1
@@ -822,7 +1177,7 @@ const StreamingStorageConfig = {
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1p3beta1.LabelAnnotation}
  *
  * @property {Object} explicitAnnotation
- *   Explicit content detection results.
+ *   Explicit content annotation results.
  *
  *   This object should have the same structure as [ExplicitContentAnnotation]{@link google.cloud.videointelligence.v1p3beta1.ExplicitContentAnnotation}
  *
@@ -849,12 +1204,12 @@ const StreamingVideoAnnotationResults = {
  *   The number should be among the values of [StreamingFeature]{@link google.cloud.videointelligence.v1p3beta1.StreamingFeature}
  *
  * @property {Object} shotChangeDetectionConfig
- *   Config for SHOT_CHANGE_DETECTION.
+ *   Config for STREAMING_SHOT_CHANGE_DETECTION.
  *
  *   This object should have the same structure as [StreamingShotChangeDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.StreamingShotChangeDetectionConfig}
  *
  * @property {Object} labelDetectionConfig
- *   Config for LABEL_DETECTION.
+ *   Config for STREAMING_LABEL_DETECTION.
  *
  *   This object should have the same structure as [StreamingLabelDetectionConfig]{@link google.cloud.videointelligence.v1p3beta1.StreamingLabelDetectionConfig}
  *
@@ -910,6 +1265,11 @@ const Feature = {
   EXPLICIT_CONTENT_DETECTION: 3,
 
   /**
+   * Speech transcription.
+   */
+  SPEECH_TRANSCRIPTION: 6,
+
+  /**
    * OCR text detection and tracking.
    */
   TEXT_DETECTION: 7,
@@ -917,7 +1277,12 @@ const Feature = {
   /**
    * Object detection and tracking.
    */
-  OBJECT_TRACKING: 9
+  OBJECT_TRACKING: 9,
+
+  /**
+   * Logo detection, tracking, and recognition.
+   */
+  LOGO_RECOGNITION: 12
 };
 
 /**

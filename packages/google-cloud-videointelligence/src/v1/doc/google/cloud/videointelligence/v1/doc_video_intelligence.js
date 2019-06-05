@@ -106,6 +106,11 @@ const AnnotateVideoRequest = {
  *
  *   This object should have the same structure as [TextDetectionConfig]{@link google.cloud.videointelligence.v1.TextDetectionConfig}
  *
+ * @property {Object} objectTrackingConfig
+ *   Config for OBJECT_TRACKING.
+ *
+ *   This object should have the same structure as [ObjectTrackingConfig]{@link google.cloud.videointelligence.v1.ObjectTrackingConfig}
+ *
  * @typedef VideoContext
  * @memberof google.cloud.videointelligence.v1
  * @see [google.cloud.videointelligence.v1.VideoContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
@@ -133,6 +138,22 @@ const VideoContext = {
  *   Model to use for label detection.
  *   Supported values: "builtin/stable" (the default if unset) and
  *   "builtin/latest".
+ *
+ * @property {number} frameConfidenceThreshold
+ *   The confidence threshold we perform filtering on the labels from
+ *   frame-level detection. If not set, it is set to 0.4 by default. The valid
+ *   range for this threshold is [0.1, 0.9]. Any value set outside of this
+ *   range will be clipped.
+ *   Note: for best results please follow the default threshold. We will update
+ *   the default threshold everytime when we release a new model.
+ *
+ * @property {number} videoConfidenceThreshold
+ *   The confidence threshold we perform filtering on the labels from
+ *   video-level and shot-level detections. If not set, it is set to 0.3 by
+ *   default. The valid range for this threshold is [0.1, 0.9]. Any value set
+ *   outside of this range will be clipped.
+ *   Note: for best results please follow the default threshold. We will update
+ *   the default threshold everytime when we release a new model.
  *
  * @typedef LabelDetectionConfig
  * @memberof google.cloud.videointelligence.v1
@@ -194,6 +215,22 @@ const FaceDetectionConfig = {
 };
 
 /**
+ * Config for OBJECT_TRACKING.
+ *
+ * @property {string} model
+ *   Model to use for object tracking.
+ *   Supported values: "builtin/stable" (the default if unset) and
+ *   "builtin/latest".
+ *
+ * @typedef ObjectTrackingConfig
+ * @memberof google.cloud.videointelligence.v1
+ * @see [google.cloud.videointelligence.v1.ObjectTrackingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1/video_intelligence.proto}
+ */
+const ObjectTrackingConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Config for TEXT_DETECTION.
  *
  * @property {string[]} languageHints
@@ -202,6 +239,11 @@ const FaceDetectionConfig = {
  *   be language code in BCP-47 format.
  *
  *   Automatic language detection is performed if no hint is provided.
+ *
+ * @property {string} model
+ *   Model to use for text detection.
+ *   Supported values: "builtin/stable" (the default if unset) and
+ *   "builtin/latest".
  *
  * @typedef TextDetectionConfig
  * @memberof google.cloud.videointelligence.v1
