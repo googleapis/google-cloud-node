@@ -24,6 +24,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AgentsClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dialogflowModule.v2.AgentsClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dialogflowModule.v2.AgentsClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dialogflowModule.v2.AgentsClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new dialogflowModule.v2.AgentsClient();
+    assert(client);
+  });
+
   describe('getAgent', () => {
     it('invokes getAgent without error', done => {
       const client = new dialogflowModule.v2.AgentsClient({
@@ -521,6 +542,27 @@ describe('AgentsClient', () => {
   });
 });
 describe('ContextsClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dialogflowModule.v2.ContextsClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dialogflowModule.v2.ContextsClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dialogflowModule.v2.ContextsClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new dialogflowModule.v2.ContextsClient();
+    assert(client);
+  });
+
   describe('listContexts', () => {
     it('invokes listContexts without error', done => {
       const client = new dialogflowModule.v2.ContextsClient({
@@ -893,6 +935,27 @@ describe('ContextsClient', () => {
   });
 });
 describe('EntityTypesClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dialogflowModule.v2.EntityTypesClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dialogflowModule.v2.EntityTypesClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dialogflowModule.v2.EntityTypesClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new dialogflowModule.v2.EntityTypesClient();
+    assert(client);
+  });
+
   describe('listEntityTypes', () => {
     it('invokes listEntityTypes without error', done => {
       const client = new dialogflowModule.v2.EntityTypesClient({
@@ -1674,6 +1737,27 @@ describe('EntityTypesClient', () => {
   });
 });
 describe('IntentsClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dialogflowModule.v2.IntentsClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dialogflowModule.v2.IntentsClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dialogflowModule.v2.IntentsClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new dialogflowModule.v2.IntentsClient();
+    assert(client);
+  });
+
   describe('listIntents', () => {
     it('invokes listIntents without error', done => {
       const client = new dialogflowModule.v2.IntentsClient({
@@ -2211,6 +2295,29 @@ describe('IntentsClient', () => {
   });
 });
 describe('SessionEntityTypesClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      dialogflowModule.v2.SessionEntityTypesClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      dialogflowModule.v2.SessionEntityTypesClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dialogflowModule.v2.SessionEntityTypesClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new dialogflowModule.v2.SessionEntityTypesClient();
+    assert(client);
+  });
+
   describe('listSessionEntityTypes', () => {
     it('invokes listSessionEntityTypes without error', done => {
       const client = new dialogflowModule.v2.SessionEntityTypesClient({
@@ -2530,6 +2637,27 @@ describe('SessionEntityTypesClient', () => {
   });
 });
 describe('SessionsClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dialogflowModule.v2.SessionsClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dialogflowModule.v2.SessionsClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dialogflowModule.v2.SessionsClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new dialogflowModule.v2.SessionsClient();
+    assert(client);
+  });
+
   describe('detectIntent', () => {
     it('invokes detectIntent without error', done => {
       const client = new dialogflowModule.v2.SessionsClient({
