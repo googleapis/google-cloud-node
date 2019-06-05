@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#157](https://www.github.com/googleapis/nodejs-asset/issues/157)) ([0da529e](https://www.github.com/googleapis/nodejs-asset/commit/0da529e))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-asset/compare/v0.3.0...v1.0.0) (2019-05-11)
 
 
