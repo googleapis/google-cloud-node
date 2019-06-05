@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#239](https://www.github.com/googleapis/nodejs-tasks/issues/239)) ([5bb4eff](https://www.github.com/googleapis/nodejs-tasks/commit/5bb4eff))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-tasks/compare/v0.5.0...v1.0.0) (2019-05-13)
 
 
