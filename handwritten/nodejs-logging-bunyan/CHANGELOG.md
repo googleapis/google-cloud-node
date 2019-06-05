@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* add .repo-metadata.json, generate docs ([#328](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/328)) ([342a41e](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/342a41e))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v0.10.1...v1.0.0) (2019-05-29)
 
 
