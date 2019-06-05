@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [0.10.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.9.1...v0.10.0) (2019-06-05)
+
+
+### Features
+
+* add support for apiEndpoint option ([#363](https://www.github.com/googleapis/nodejs-dialogflow/issues/363)) ([10e84a3](https://www.github.com/googleapis/nodejs-dialogflow/commit/10e84a3))
+
 ### [0.9.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.9.0...v0.9.1) (2019-05-20)
 
 
