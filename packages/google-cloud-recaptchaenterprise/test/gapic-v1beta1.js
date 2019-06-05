@@ -23,6 +23,33 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client
+        .servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client
+        .apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port =
+      recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client
+        .port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client();
+    assert(client);
+  });
+
   describe('createAssessment', () => {
     it('invokes createAssessment without error', done => {
       const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
