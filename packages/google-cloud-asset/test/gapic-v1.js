@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AssetServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = assetModule.v1.AssetServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = assetModule.v1.AssetServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = assetModule.v1.AssetServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new assetModule.v1.AssetServiceClient();
+    assert(client);
+  });
+
   describe('exportAssets', function() {
     it('invokes exportAssets without error', done => {
       const client = new assetModule.v1.AssetServiceClient({
