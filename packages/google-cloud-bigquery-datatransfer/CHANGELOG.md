@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#219](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/219)) ([c8e6ca0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/c8e6ca0))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v0.5.1...v1.0.0) (2019-05-20)
 
 
