@@ -18,13 +18,13 @@ import delay from 'delay';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
-import { heap as heapProfiler } from 'pprof';
+import {heap as heapProfiler} from 'pprof';
 import * as semver from 'semver';
-import { SemVer } from 'semver';
+import {SemVer} from 'semver';
 
-import { Config, defaultConfig, ProfilerConfig } from './config';
-import { createLogger } from './logger';
-import { Profiler } from './profiler';
+import {Config, defaultConfig, ProfilerConfig} from './config';
+import {createLogger} from './logger';
+import {Profiler} from './profiler';
 
 const pjson = require('../../package.json');
 const serviceRegex = /^[a-z]([-a-z0-9_.]{0,253}[a-z0-9])?$/;
@@ -39,7 +39,7 @@ async function getMetadataInstanceField(field: string): Promise<string> {
 
 function hasService(
   config: Config
-): config is { serviceContext: { service: string } } {
+): config is {serviceContext: {service: string}} {
   return (
     config.serviceContext !== undefined &&
     typeof config.serviceContext.service === 'string'
@@ -232,7 +232,7 @@ export async function startLocal(config: Config = {}): Promise<void> {
 
   setInterval(() => {
     const curTime = Date.now();
-    const { rss, heapTotal, heapUsed } = process.memoryUsage();
+    const {rss, heapTotal, heapUsed} = process.memoryUsage();
     logger.debug(
       new Date().toISOString(),
       'rss',

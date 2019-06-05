@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-import { Service, ServiceConfig, ServiceObject } from '@google-cloud/common';
+import {Service, ServiceConfig, ServiceObject} from '@google-cloud/common';
 import * as http from 'http';
-import {
-  heap as heapProfiler,
-  SourceMapper,
-  time as timeProfiler,
-} from 'pprof';
+import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
 import * as msToStr from 'pretty-ms';
-import { promisify } from 'util';
+import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import { perftools } from '../../proto/profile';
+import {perftools} from '../../proto/profile';
 
-import { ProfilerConfig } from './config';
-import { createLogger } from './logger';
+import {ProfilerConfig} from './config';
+import {createLogger} from './logger';
 
 const parseDuration: (str: string) => number = require('parse-duration');
 const pjson = require('../../package.json');
@@ -57,7 +53,7 @@ function isErrorResponseStatusCode(code: number) {
 export interface Deployment {
   projectId?: string;
   target?: string;
-  labels?: { zone?: string; version?: string; language: string };
+  labels?: {zone?: string; version?: string; language: string};
 }
 
 /**
@@ -73,7 +69,7 @@ export interface RequestProfile {
   duration?: string;
   profileBytes?: string;
   deployment?: Deployment;
-  labels?: { instance?: string };
+  labels?: {instance?: string};
 }
 
 /**
@@ -279,7 +275,7 @@ function responseToProfileOrError(
  */
 export class Profiler extends ServiceObject {
   private logger: ReturnType<typeof createLogger>;
-  private profileLabels: { instance?: string };
+  private profileLabels: {instance?: string};
   private deployment: Deployment;
   private profileTypes: string[];
   private retryer: Retryer;
@@ -303,7 +299,7 @@ export class Profiler extends ServiceObject {
 
     this.logger = createLogger(this.config.logLevel);
 
-    const labels: { zone?: string; version?: string; language: string } = {
+    const labels: {zone?: string; version?: string; language: string} = {
       language: 'nodejs',
     };
     if (this.config.zone) {
