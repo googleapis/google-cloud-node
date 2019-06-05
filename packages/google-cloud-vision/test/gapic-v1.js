@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ImageAnnotatorClient', () => {
+  it('has servicePath', () => {
+    const servicePath = visionModule.v1.ImageAnnotatorClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = visionModule.v1.ImageAnnotatorClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = visionModule.v1.ImageAnnotatorClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new visionModule.v1.ImageAnnotatorClient();
+    assert(client);
+  });
+
   describe('batchAnnotateImages', () => {
     it('invokes batchAnnotateImages without error', done => {
       const client = new visionModule.v1.ImageAnnotatorClient({
@@ -318,6 +339,27 @@ describe('ImageAnnotatorClient', () => {
   });
 });
 describe('ProductSearchClient', () => {
+  it('has servicePath', () => {
+    const servicePath = visionModule.v1.ProductSearchClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = visionModule.v1.ProductSearchClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = visionModule.v1.ProductSearchClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new visionModule.v1.ProductSearchClient();
+    assert(client);
+  });
+
   describe('createProductSet', () => {
     it('invokes createProductSet without error', done => {
       const client = new visionModule.v1.ProductSearchClient({
