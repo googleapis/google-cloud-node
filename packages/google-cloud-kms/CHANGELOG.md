@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#173](https://www.github.com/googleapis/nodejs-kms/issues/173)) ([0e67019](https://www.github.com/googleapis/nodejs-kms/commit/0e67019))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-kms/compare/v0.4.0...v1.0.0) (2019-05-20)
 
 
