@@ -60,6 +60,7 @@ class DatastoreClient {
    *     API remote host.
    */
   constructor(opts) {
+    opts = opts || {};
     this._descriptors = {};
 
     const servicePath =
