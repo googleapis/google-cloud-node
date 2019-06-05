@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('CloudSchedulerClient', () => {
+  it('has servicePath', () => {
+    const servicePath = schedulerModule.v1.CloudSchedulerClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = schedulerModule.v1.CloudSchedulerClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = schedulerModule.v1.CloudSchedulerClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new schedulerModule.v1.CloudSchedulerClient();
+    assert(client);
+  });
+
   describe('listJobs', () => {
     it('invokes listJobs without error', done => {
       const client = new schedulerModule.v1.CloudSchedulerClient({
