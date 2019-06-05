@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.0.0...v4.1.0) (2019-06-05)
+
+
+### Bug Fixes
+
+* default options to empty object ([c04777d](https://www.github.com/googleapis/nodejs-datastore/commit/c04777d))
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#422](https://www.github.com/googleapis/nodejs-datastore/issues/422)) ([0f75d38](https://www.github.com/googleapis/nodejs-datastore/commit/0f75d38))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-datastore/compare/v3.1.2...v4.0.0) (2019-05-15)
 
 
