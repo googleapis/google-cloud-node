@@ -22,9 +22,9 @@ import {
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as nock from 'nock';
-import { promisify } from 'util';
 import { heap as heapProfiler, time as timeProfiler } from 'pprof';
 import * as sinon from 'sinon';
+import { promisify } from 'util';
 import * as zlib from 'zlib';
 
 import { perftools } from '../../proto/profile';
