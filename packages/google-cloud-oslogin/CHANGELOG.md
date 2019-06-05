@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-os-login/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#204](https://www.github.com/googleapis/nodejs-os-login/issues/204)) ([bcc4d3d](https://www.github.com/googleapis/nodejs-os-login/commit/bcc4d3d))
+* support apiEndpoint override in client constructor ([#206](https://www.github.com/googleapis/nodejs-os-login/issues/206)) ([3aeacf6](https://www.github.com/googleapis/nodejs-os-login/commit/3aeacf6))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-os-login/compare/v0.3.3...v1.0.0) (2019-05-20)
 
 
