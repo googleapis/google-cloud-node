@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-language/compare/v3.0.0...v3.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#256](https://www.github.com/googleapis/nodejs-language/issues/256)) ([48ac8fd](https://www.github.com/googleapis/nodejs-language/commit/48ac8fd))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-language/compare/v2.1.0...v3.0.0) (2019-05-20)
 
 
