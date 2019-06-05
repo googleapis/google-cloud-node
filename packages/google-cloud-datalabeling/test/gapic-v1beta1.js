@@ -41,6 +41,11 @@ describe('DataLabelingServiceClient', () => {
     assert(typeof port === 'number');
   });
 
+  it('should create a client with no options', () => {
+    const client = new datalabelingModule.v1beta1.DataLabelingServiceClient();
+    assert(client);
+  });
+
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
       const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
