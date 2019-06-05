@@ -23,6 +23,32 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ContainerAnalysisV1Beta1Client', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client
+        .servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client
+        .apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port =
+      containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client();
+    assert(client);
+  });
+
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
       const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
@@ -436,6 +462,29 @@ describe('ContainerAnalysisV1Beta1Client', () => {
   });
 });
 describe('GrafeasV1Beta1Client', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      containeranalysisModule.v1beta1.GrafeasV1Beta1Client.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      containeranalysisModule.v1beta1.GrafeasV1Beta1Client.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = containeranalysisModule.v1beta1.GrafeasV1Beta1Client.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new containeranalysisModule.v1beta1.GrafeasV1Beta1Client();
+    assert(client);
+  });
+
   describe('getOccurrence', () => {
     it('invokes getOccurrence without error', done => {
       const client = new containeranalysisModule.v1beta1.GrafeasV1Beta1Client({
