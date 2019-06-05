@@ -72,12 +72,15 @@ class CloudRedisClient {
   constructor(opts) {
     this._descriptors = {};
 
+    const servicePath =
+      opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
+
     // Ensure that options include the service address and port.
     opts = Object.assign(
       {
         clientConfig: {},
         port: this.constructor.port,
-        servicePath: this.constructor.servicePath,
+        servicePath,
       },
       opts
     );
@@ -161,16 +164,28 @@ class CloudRedisClient {
     const updateInstanceMetadata = protoFilesRoot.lookup(
       'google.cloud.redis.v1.OperationMetadata'
     );
-    const deleteInstanceResponse = protoFilesRoot.lookup(
-      'google.protobuf.Empty'
+    const importInstanceResponse = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.Instance'
     );
-    const deleteInstanceMetadata = protoFilesRoot.lookup(
+    const importInstanceMetadata = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.OperationMetadata'
+    );
+    const exportInstanceResponse = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.Instance'
+    );
+    const exportInstanceMetadata = protoFilesRoot.lookup(
       'google.cloud.redis.v1.OperationMetadata'
     );
     const failoverInstanceResponse = protoFilesRoot.lookup(
       'google.cloud.redis.v1.Instance'
     );
     const failoverInstanceMetadata = protoFilesRoot.lookup(
+      'google.cloud.redis.v1.OperationMetadata'
+    );
+    const deleteInstanceResponse = protoFilesRoot.lookup(
+      'google.protobuf.Empty'
+    );
+    const deleteInstanceMetadata = protoFilesRoot.lookup(
       'google.cloud.redis.v1.OperationMetadata'
     );
 
@@ -185,15 +200,25 @@ class CloudRedisClient {
         updateInstanceResponse.decode.bind(updateInstanceResponse),
         updateInstanceMetadata.decode.bind(updateInstanceMetadata)
       ),
-      deleteInstance: new gax.LongrunningDescriptor(
+      importInstance: new gax.LongrunningDescriptor(
         this.operationsClient,
-        deleteInstanceResponse.decode.bind(deleteInstanceResponse),
-        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
+        importInstanceResponse.decode.bind(importInstanceResponse),
+        importInstanceMetadata.decode.bind(importInstanceMetadata)
+      ),
+      exportInstance: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        exportInstanceResponse.decode.bind(exportInstanceResponse),
+        exportInstanceMetadata.decode.bind(exportInstanceMetadata)
       ),
       failoverInstance: new gax.LongrunningDescriptor(
         this.operationsClient,
         failoverInstanceResponse.decode.bind(failoverInstanceResponse),
         failoverInstanceMetadata.decode.bind(failoverInstanceMetadata)
+      ),
+      deleteInstance: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        deleteInstanceResponse.decode.bind(deleteInstanceResponse),
+        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)
       ),
     };
 
@@ -224,8 +249,10 @@ class CloudRedisClient {
       'getInstance',
       'createInstance',
       'updateInstance',
-      'deleteInstance',
+      'importInstance',
+      'exportInstance',
       'failoverInstance',
+      'deleteInstance',
     ];
     for (const methodName of cloudRedisStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -251,6 +278,14 @@ class CloudRedisClient {
    * The DNS address for this API service.
    */
   static get servicePath() {
+    return 'redis.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service - same as servicePath(),
+   * exists for compatibility reasons.
+   */
+  static get apiEndpoint() {
     return 'redis.googleapis.com';
   }
 
@@ -297,7 +332,7 @@ class CloudRedisClient {
    * @param {string} request.parent
    *   Required. The resource name of the instance location using the form:
    *       `projects/{project_id}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region
+   *   where `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -410,7 +445,7 @@ class CloudRedisClient {
    * @param {string} request.parent
    *   Required. The resource name of the instance location using the form:
    *       `projects/{project_id}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region
+   *   where `location_id` refers to a GCP region.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -457,7 +492,7 @@ class CloudRedisClient {
    * @param {string} request.name
    *   Required. Redis instance resource name using the form:
    *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-   *   where `location_id` refers to a GCP region
+   *   where `location_id` refers to a GCP region.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -523,7 +558,7 @@ class CloudRedisClient {
    * @param {string} request.parent
    *   Required. The resource name of the instance location using the form:
    *       `projects/{project_id}/locations/{location_id}`
-   *   where `location_id` refers to a GCP region
+   *   where `location_id` refers to a GCP region.
    * @param {string} request.instanceId
    *   Required. The logical name of the Redis instance in the customer project
    *   with the following restrictions:
@@ -713,11 +748,9 @@ class CloudRedisClient {
    * const updateMask = {
    *   paths: paths,
    * };
-   * const displayName = 'UpdatedDisplayName';
-   * const memorySizeGb = 4;
+   * const displayName = ' instance.memory_size_gb=4';
    * const instance = {
    *   displayName: displayName,
-   *   memorySizeGb: memorySizeGb,
    * };
    * const request = {
    *   updateMask: updateMask,
@@ -747,11 +780,9 @@ class CloudRedisClient {
    * const updateMask = {
    *   paths: paths,
    * };
-   * const displayName = 'UpdatedDisplayName';
-   * const memorySizeGb = 4;
+   * const displayName = ' instance.memory_size_gb=4';
    * const instance = {
    *   displayName: displayName,
-   *   memorySizeGb: memorySizeGb,
    * };
    * const request = {
    *   updateMask: updateMask,
@@ -790,11 +821,9 @@ class CloudRedisClient {
    * const updateMask = {
    *   paths: paths,
    * };
-   * const displayName = 'UpdatedDisplayName';
-   * const memorySizeGb = 4;
+   * const displayName = ' instance.memory_size_gb=4';
    * const instance = {
    *   displayName: displayName,
-   *   memorySizeGb: memorySizeGb,
    * };
    * const request = {
    *   updateMask: updateMask,
@@ -824,15 +853,25 @@ class CloudRedisClient {
   }
 
   /**
-   * Deletes a specific Redis instance.  Instance stops serving and data is
-   * deleted.
+   * Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
+   *
+   * Redis may stop serving during this operation. Instance state will be
+   * IMPORTING for entire operation. When complete, the instance will contain
+   * only data from the imported file.
+   *
+   * The returned operation is automatically deleted after a few hours, so
+   * there is no need to call DeleteOperation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Redis instance resource name using the form:
    *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-   *   where `location_id` refers to a GCP region
+   *   where `location_id` refers to a GCP region.
+   * @param {Object} request.inputConfig
+   *   Required. Specify data to be imported.
+   *
+   *   This object should have the same structure as [InputConfig]{@link google.cloud.redis.v1.InputConfig}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -853,9 +892,14 @@ class CloudRedisClient {
    * });
    *
    * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
    *
    * // Handle the operation using the promise pattern.
-   * client.deleteInstance({name: formattedName})
+   * client.importInstance(request)
    *   .then(responses => {
    *     const [operation, initialApiResponse] = responses;
    *
@@ -872,9 +916,14 @@ class CloudRedisClient {
    *   });
    *
    * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
    *
    * // Handle the operation using the event emitter pattern.
-   * client.deleteInstance({name: formattedName})
+   * client.importInstance(request)
    *   .then(responses => {
    *     const [operation, initialApiResponse] = responses;
    *
@@ -900,13 +949,18 @@ class CloudRedisClient {
    *   });
    *
    * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const inputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   inputConfig: inputConfig,
+   * };
    *
    * // Handle the operation using the await pattern.
-   * const [operation] = await client.deleteInstance({name: formattedName});
+   * const [operation] = await client.importInstance(request);
    *
    * const [response] = await operation.promise();
    */
-  deleteInstance(request, options, callback) {
+  importInstance(request, options, callback) {
     if (options instanceof Function && callback === undefined) {
       callback = options;
       options = {};
@@ -920,19 +974,142 @@ class CloudRedisClient {
       name: request.name,
     });
 
-    return this._innerApiCalls.deleteInstance(request, options, callback);
+    return this._innerApiCalls.importInstance(request, options, callback);
   }
 
   /**
-   * Failover the master role to current replica node against a specific
-   * STANDARD tier redis instance.
+   * Export Redis instance data into a Redis RDB format file in Cloud Storage.
+   *
+   * Redis will continue serving during this operation.
+   *
+   * The returned operation is automatically deleted after a few hours, so
+   * there is no need to call DeleteOperation.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Redis instance resource name using the form:
    *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
-   *   where `location_id` refers to a GCP region
+   *   where `location_id` refers to a GCP region.
+   * @param {Object} request.outputConfig
+   *   Required. Specify data to be exported.
+   *
+   *   This object should have the same structure as [OutputConfig]{@link google.cloud.redis.v1.OutputConfig}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('redis.v1');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.exportInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.exportInstance(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   * const outputConfig = {};
+   * const request = {
+   *   name: formattedName,
+   *   outputConfig: outputConfig,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.exportInstance(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  exportInstance(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.exportInstance(request, options, callback);
+  }
+
+  /**
+   * Initiates a failover of the master node to current replica node for a
+   * specific STANDARD tier Cloud Memorystore for Redis instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region.
    * @param {number} request.dataProtectionMode
    *   Optional. Available data protection modes that the user can choose. If it's
    *   unspecified, data protection mode will be LIMITED_DATA_LOSS by default.
@@ -1041,6 +1218,106 @@ class CloudRedisClient {
     });
 
     return this._innerApiCalls.failoverInstance(request, options, callback);
+  }
+
+  /**
+   * Deletes a specific Redis instance.  Instance stops serving and data is
+   * deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis instance resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+   *   where `location_id` refers to a GCP region.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const redis = require('redis.v1');
+   *
+   * const client = new redis.v1.CloudRedisClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   *
+   * // Handle the operation using the promise pattern.
+   * client.deleteInstance({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.deleteInstance({name: formattedName})
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedName = client.instancePath('[PROJECT]', '[LOCATION]', '[INSTANCE]');
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.deleteInstance({name: formattedName});
+   *
+   * const [response] = await operation.promise();
+   */
+  deleteInstance(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteInstance(request, options, callback);
   }
 
   // --------------------

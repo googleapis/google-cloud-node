@@ -51,7 +51,10 @@
  *   Optional. The version of Redis software.
  *   If not provided, latest supported version will be used. Updating the
  *   version will perform an upgrade/downgrade to the new version. Currently,
- *   the supported values are `REDIS_3_2` for Redis 3.2.
+ *   the supported values are:
+ *
+ *    *   `REDIS_4_0` for Redis 4.0 compatibility (default)
+ *    *   `REDIS_3_2` for Redis 3.2 compatibility
  *
  * @property {string} reservedIpRange
  *   Optional. The CIDR range of internal addresses that are reserved for this
@@ -92,8 +95,16 @@
  *   http://redis.io/topics/config. Currently, the only supported parameters
  *   are:
  *
+ *    Redis 3.2 and above:
+ *
  *    *   maxmemory-policy
  *    *   notify-keyspace-events
+ *
+ *    Redis 4.0 and above:
+ *
+ *    *   activedefrag
+ *    *   lfu-log-factor
+ *    *   lfu-decay-time
  *
  * @property {number} tier
  *   Required. The service tier of the instance.
@@ -108,6 +119,13 @@
  *   [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the
  *   instance is connected. If left unspecified, the `default` network
  *   will be used.
+ *
+ * @property {string} persistenceIamIdentity
+ *   Output only. Cloud IAM identity used by import / export operations to
+ *   transfer data to/from Cloud Storage. Format is
+ *   "serviceAccount:<service_account_email>". The value may change over time
+ *   for a given instance so should be checked before each import/export
+ *   operation.
  *
  * @typedef Instance
  * @memberof google.cloud.redis.v1
@@ -162,6 +180,11 @@ const Instance = {
     MAINTENANCE: 6,
 
     /**
+     * Redis instance is importing data (availability may be affected).
+     */
+    IMPORTING: 8,
+
+    /**
      * Redis instance is failing over (availability may be affected).
      */
     FAILING_OVER: 9
@@ -198,7 +221,7 @@ const Instance = {
  * @property {string} parent
  *   Required. The resource name of the instance location using the form:
  *       `projects/{project_id}/locations/{location_id}`
- *   where `location_id` refers to a GCP region
+ *   where `location_id` refers to a GCP region.
  *
  * @property {number} pageSize
  *   The maximum number of items to return.
@@ -259,7 +282,7 @@ const ListInstancesResponse = {
  * @property {string} name
  *   Required. Redis instance resource name using the form:
  *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
- *   where `location_id` refers to a GCP region
+ *   where `location_id` refers to a GCP region.
  *
  * @typedef GetInstanceRequest
  * @memberof google.cloud.redis.v1
@@ -275,7 +298,7 @@ const GetInstanceRequest = {
  * @property {string} parent
  *   Required. The resource name of the instance location using the form:
  *       `projects/{project_id}/locations/{location_id}`
- *   where `location_id` refers to a GCP region
+ *   where `location_id` refers to a GCP region.
  *
  * @property {string} instanceId
  *   Required. The logical name of the Redis instance in the customer project
@@ -335,7 +358,7 @@ const UpdateInstanceRequest = {
  * @property {string} name
  *   Required. Redis instance resource name using the form:
  *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
- *   where `location_id` refers to a GCP region
+ *   where `location_id` refers to a GCP region.
  *
  * @typedef DeleteInstanceRequest
  * @memberof google.cloud.redis.v1
@@ -346,12 +369,115 @@ const DeleteInstanceRequest = {
 };
 
 /**
+ * The Cloud Storage location for the input content
+ *
+ * @property {string} uri
+ *   Required. Source data URI. (e.g. 'gs://my_bucket/my_object').
+ *
+ * @typedef GcsSource
+ * @memberof google.cloud.redis.v1
+ * @see [google.cloud.redis.v1.GcsSource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
+ */
+const GcsSource = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The input content
+ *
+ * @property {Object} gcsSource
+ *   Google Cloud Storage location where input content is located.
+ *
+ *   This object should have the same structure as [GcsSource]{@link google.cloud.redis.v1.GcsSource}
+ *
+ * @typedef InputConfig
+ * @memberof google.cloud.redis.v1
+ * @see [google.cloud.redis.v1.InputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
+ */
+const InputConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request for Import.
+ *
+ * @property {string} name
+ *   Required. Redis instance resource name using the form:
+ *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+ *   where `location_id` refers to a GCP region.
+ *
+ * @property {Object} inputConfig
+ *   Required. Specify data to be imported.
+ *
+ *   This object should have the same structure as [InputConfig]{@link google.cloud.redis.v1.InputConfig}
+ *
+ * @typedef ImportInstanceRequest
+ * @memberof google.cloud.redis.v1
+ * @see [google.cloud.redis.v1.ImportInstanceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
+ */
+const ImportInstanceRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The Cloud Storage location for the output content
+ *
+ * @property {string} uri
+ *   Required. Data destination URI (e.g.
+ *   'gs://my_bucket/my_object'). Existing files will be overwritten.
+ *
+ * @typedef GcsDestination
+ * @memberof google.cloud.redis.v1
+ * @see [google.cloud.redis.v1.GcsDestination definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
+ */
+const GcsDestination = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * The output content
+ *
+ * @property {Object} gcsDestination
+ *   Google Cloud Storage destination for output content.
+ *
+ *   This object should have the same structure as [GcsDestination]{@link google.cloud.redis.v1.GcsDestination}
+ *
+ * @typedef OutputConfig
+ * @memberof google.cloud.redis.v1
+ * @see [google.cloud.redis.v1.OutputConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
+ */
+const OutputConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request for Export.
+ *
+ * @property {string} name
+ *   Required. Redis instance resource name using the form:
+ *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+ *   where `location_id` refers to a GCP region.
+ *
+ * @property {Object} outputConfig
+ *   Required. Specify data to be exported.
+ *
+ *   This object should have the same structure as [OutputConfig]{@link google.cloud.redis.v1.OutputConfig}
+ *
+ * @typedef ExportInstanceRequest
+ * @memberof google.cloud.redis.v1
+ * @see [google.cloud.redis.v1.ExportInstanceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/redis/v1/cloud_redis.proto}
+ */
+const ExportInstanceRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Request for Failover.
  *
  * @property {string} name
  *   Required. Redis instance resource name using the form:
  *       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
- *   where `location_id` refers to a GCP region
+ *   where `location_id` refers to a GCP region.
  *
  * @property {number} dataProtectionMode
  *   Optional. Available data protection modes that the user can choose. If it's
@@ -371,6 +497,11 @@ const FailoverInstanceRequest = {
    * @memberof google.cloud.redis.v1
    */
   DataProtectionMode: {
+
+    /**
+     * Defaults to LIMITED_DATA_LOSS if a data protection mode is not
+     * specified.
+     */
     DATA_PROTECTION_MODE_UNSPECIFIED: 0,
 
     /**
