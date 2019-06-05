@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('CloudTasksClient', () => {
+  it('has servicePath', () => {
+    const servicePath = tasksModule.v2beta3.CloudTasksClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = tasksModule.v2beta3.CloudTasksClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = tasksModule.v2beta3.CloudTasksClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new tasksModule.v2beta3.CloudTasksClient();
+    assert(client);
+  });
+
   describe('listQueues', () => {
     it('invokes listQueues without error', done => {
       const client = new tasksModule.v2beta3.CloudTasksClient({
