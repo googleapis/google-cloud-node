@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ClusterManagerClient', () => {
+  it('has servicePath', () => {
+    const servicePath = containerModule.v1.ClusterManagerClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = containerModule.v1.ClusterManagerClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = containerModule.v1.ClusterManagerClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new containerModule.v1.ClusterManagerClient();
+    assert(client);
+  });
+
   describe('listClusters', () => {
     it('invokes listClusters without error', done => {
       const client = new containerModule.v1.ClusterManagerClient({
