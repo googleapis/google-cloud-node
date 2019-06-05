@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('GrafeasClient', () => {
+  it('has servicePath', () => {
+    const servicePath = grafeasModule.v1.GrafeasClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = grafeasModule.v1.GrafeasClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = grafeasModule.v1.GrafeasClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new grafeasModule.v1.GrafeasClient();
+    assert(client);
+  });
+
   describe('getOccurrence', () => {
     it('invokes getOccurrence without error', done => {
       const client = new grafeasModule.v1.GrafeasClient({
