@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-dns/compare/v1.0.1...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint overrides ([#272](https://www.github.com/googleapis/nodejs-dns/issues/272)) ([2c42f20](https://www.github.com/googleapis/nodejs-dns/commit/2c42f20))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-dns/compare/v1.0.0...v1.0.1) (2019-05-24)
 
 
