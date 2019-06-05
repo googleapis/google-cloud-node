@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('DlpServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = dlpModule.v2.DlpServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = dlpModule.v2.DlpServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = dlpModule.v2.DlpServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new dlpModule.v2.DlpServiceClient();
+    assert(client);
+  });
+
   describe('inspectContent', () => {
     it('invokes inspectContent without error', done => {
       const client = new dlpModule.v2.DlpServiceClient({
