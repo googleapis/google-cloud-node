@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.0.0...v1.1.0) (2019-06-05)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#30](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/30)) ([1192afd](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/1192afd))
+
 ## 1.0.0 (2019-05-14)
 
 
