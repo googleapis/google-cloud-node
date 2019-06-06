@@ -33,6 +33,7 @@ for version in versions:
    "package.json",
    "src/index.js",
    "src/v1/grafeas_client.js",
+   "test/gapic-v1.js",
    "protos/google/*"
  ])
 

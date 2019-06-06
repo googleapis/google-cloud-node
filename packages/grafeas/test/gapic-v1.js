@@ -28,11 +28,6 @@ describe('GrafeasClient', () => {
     assert(servicePath);
   });
 
-  it('has apiEndpoint', () => {
-    const apiEndpoint = grafeasModule.v1.GrafeasClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
   it('has port', () => {
     const port = grafeasModule.v1.GrafeasClient.port;
     assert(port);
