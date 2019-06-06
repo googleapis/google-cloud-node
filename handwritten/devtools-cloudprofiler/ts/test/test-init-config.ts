@@ -63,12 +63,8 @@ describe('nodeVersionOkay', () => {
 
 describe('createProfiler', () => {
   let savedEnv: NodeJS.ProcessEnv;
-  let metadataStub:
-    | sinon.SinonStub<
-        [(string | gcpMetadata.Options | undefined)?],
-        Promise<{}>
-      >
-    | undefined;
+  // tslint:disable-next-line no-any
+  let metadataStub: sinon.SinonStub<any>;
   let startStub: sinon.SinonStub<[number, number], void>;
 
   const internalConfigParams = {
