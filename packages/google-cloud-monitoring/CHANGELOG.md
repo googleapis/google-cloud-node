@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.1.0...v1.2.0) (2019-06-06)
+
+
+### Features
+
+* add .repo-metadata for README generation ([#263](https://www.github.com/googleapis/nodejs-monitoring/issues/263)) ([d966bd6](https://www.github.com/googleapis/nodejs-monitoring/commit/d966bd6))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.0.0...v1.1.0) (2019-06-05)
 
 
