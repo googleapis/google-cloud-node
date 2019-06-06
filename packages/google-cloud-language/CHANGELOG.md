@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-language/compare/v3.1.0...v3.2.0) (2019-06-06)
+
+
+### Features
+
+* add .repo-metadata.json and generate README ([#255](https://www.github.com/googleapis/nodejs-language/issues/255)) ([0853696](https://www.github.com/googleapis/nodejs-language/commit/0853696))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-language/compare/v3.0.0...v3.1.0) (2019-06-05)
 
 
