@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.0.1...v1.1.0) (2019-06-06)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#24](https://www.github.com/googleapis/nodejs-web-risk/issues/24)) ([0dc8cde](https://www.github.com/googleapis/nodejs-web-risk/commit/0dc8cde))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.0.0...v1.0.1) (2019-05-14)
 
 
