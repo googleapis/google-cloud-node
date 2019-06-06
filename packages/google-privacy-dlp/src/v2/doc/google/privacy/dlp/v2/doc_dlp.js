@@ -3308,7 +3308,10 @@ const Action = {
   },
 
   /**
-   * Publish the results of a DlpJob to a pub sub channel.
+   * Publish a message into given Pub/Sub topic when DlpJob has completed. The
+   * message contains a single field, `DlpJobName`, which is equal to the
+   * finished job's
+   * [`DlpJob.name`](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
    * Compatible with: Inspect, Risk
    *
    * @property {string} topic
@@ -3723,8 +3726,7 @@ const DeleteJobTriggerRequest = {
  *   template.
  *
  * @property {Object[]} actions
- *   Actions to execute at the completion of the job. Are executed in the order
- *   provided.
+ *   Actions to execute at the completion of the job.
  *
  *   This object should have the same structure as [Action]{@link google.privacy.dlp.v2.Action}
  *
@@ -3860,8 +3862,12 @@ const GetDlpJobRequest = {
  *       - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
  *       - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
  *       - `trigger_name` - The resource name of the trigger that created job.
+ *       - 'end_time` - Corresponds to time the job finished.
+ *       - 'start_time` - Corresponds to time the job finished.
  *   * Supported fields for risk analysis jobs:
  *       - `state` - RUNNING|CANCELED|FINISHED|FAILED
+ *       - 'end_time` - Corresponds to time the job finished.
+ *       - 'start_time` - Corresponds to time the job finished.
  *   * The operator must be `=` or `!=`.
  *
  *   Examples:
@@ -3869,6 +3875,7 @@ const GetDlpJobRequest = {
  *   * inspected_storage = cloud_storage AND state = done
  *   * inspected_storage = cloud_storage OR inspected_storage = bigquery
  *   * inspected_storage = cloud_storage AND (state = done OR state = canceled)
+ *   * end_time > \"2017-12-12T00:00:00+00:00\"
  *
  *   The length of this field should be no more than 500 characters.
  *
@@ -4131,6 +4138,20 @@ const LargeCustomDictionaryConfig = {
 };
 
 /**
+ * Summary statistics of a custom dictionary.
+ *
+ * @property {number} approxNumPhrases
+ *   Approximate number of distinct phrases in the dictionary.
+ *
+ * @typedef LargeCustomDictionaryStats
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.LargeCustomDictionaryStats definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+const LargeCustomDictionaryStats = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Configuration for a StoredInfoType.
  *
  * @property {string} displayName
@@ -4149,6 +4170,22 @@ const LargeCustomDictionaryConfig = {
  * @see [google.privacy.dlp.v2.StoredInfoTypeConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
  */
 const StoredInfoTypeConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Statistics for a StoredInfoType.
+ *
+ * @property {Object} largeCustomDictionary
+ *   StoredInfoType where findings are defined by a dictionary of phrases.
+ *
+ *   This object should have the same structure as [LargeCustomDictionaryStats]{@link google.privacy.dlp.v2.LargeCustomDictionaryStats}
+ *
+ * @typedef StoredInfoTypeStats
+ * @memberof google.privacy.dlp.v2
+ * @see [google.privacy.dlp.v2.StoredInfoTypeStats definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+ */
+const StoredInfoTypeStats = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -4187,6 +4224,11 @@ const StoredInfoTypeConfig = {
  *   not the source of the error.
  *
  *   This object should have the same structure as [Error]{@link google.privacy.dlp.v2.Error}
+ *
+ * @property {Object} stats
+ *   Statistics about this storedInfoType version.
+ *
+ *   This object should have the same structure as [StoredInfoTypeStats]{@link google.privacy.dlp.v2.StoredInfoTypeStats}
  *
  * @typedef StoredInfoTypeVersion
  * @memberof google.privacy.dlp.v2
