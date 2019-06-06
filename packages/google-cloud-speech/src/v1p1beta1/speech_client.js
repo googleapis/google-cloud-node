@@ -257,7 +257,7 @@ class SpeechClient {
    *
    * @example
    *
-   * const speech = require('speech.v1p1beta1');
+   * const speech = require('@google-cloud/speech');
    *
    * const client = new speech.v1p1beta1.SpeechClient({
    *   // optional auth parameters.
@@ -328,7 +328,7 @@ class SpeechClient {
    *
    * @example
    *
-   * const speech = require('speech.v1p1beta1');
+   * const speech = require('@google-cloud/speech');
    *
    * const client = new speech.v1p1beta1.SpeechClient({
    *   // optional auth parameters.
@@ -457,7 +457,7 @@ class SpeechClient {
    *
    * @example
    *
-   * const speech = require('speech.v1p1beta1');
+   * const speech = require('@google-cloud/speech');
    *
    * const client = new speech.v1p1beta1.SpeechClient({
    *   // optional auth parameters.
