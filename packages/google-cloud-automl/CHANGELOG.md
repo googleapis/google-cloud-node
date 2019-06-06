@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-automl/compare/v1.1.0...v1.1.1) (2019-06-06)
+
+
+### Bug Fixes
+
+* default opts to empty object ([#191](https://www.github.com/googleapis/nodejs-automl/issues/191)) ([7846b04](https://www.github.com/googleapis/nodejs-automl/commit/7846b04))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.0.0...v1.1.0) (2019-05-23)
 
 
