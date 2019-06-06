@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.1.1...v3.2.0) (2019-06-06)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#377](https://www.github.com/googleapis/nodejs-speech/issues/377)) ([c77ef77](https://www.github.com/googleapis/nodejs-speech/commit/c77ef77))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-speech/compare/v3.1.0...v3.1.1) (2019-05-29)
 
 
