@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-iot/compare/v1.0.0...v1.1.0) (2019-06-06)
+
+
+### Features
+
+* support apiEndpoint override in client constructor ([#171](https://www.github.com/googleapis/nodejs-iot/issues/171)) ([551751e](https://www.github.com/googleapis/nodejs-iot/commit/551751e))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-iot/compare/v0.2.1...v1.0.0) (2019-05-20)
 
 
