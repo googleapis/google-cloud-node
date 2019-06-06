@@ -23,6 +23,33 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('PhishingProtectionServiceV1Beta1Client', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      phishingprotectionModule.v1beta1.PhishingProtectionServiceV1Beta1Client
+        .servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      phishingprotectionModule.v1beta1.PhishingProtectionServiceV1Beta1Client
+        .apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port =
+      phishingprotectionModule.v1beta1.PhishingProtectionServiceV1Beta1Client
+        .port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new phishingprotectionModule.v1beta1.PhishingProtectionServiceV1Beta1Client();
+    assert(client);
+  });
+
   describe('reportPhishing', () => {
     it('invokes reportPhishing without error', done => {
       const client = new phishingprotectionModule.v1beta1.PhishingProtectionServiceV1Beta1Client(
