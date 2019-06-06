@@ -1,0 +1,4 @@
+introduction: |-
+        [Cloud Natural Language API](https://cloud.google.com/natural-language/docs) provides natural
+        language understanding technologies to developers, including sentiment analysis, entity
+        analysis, and syntax analysis. This API is part of the larger Cloud Machine Learning API family.

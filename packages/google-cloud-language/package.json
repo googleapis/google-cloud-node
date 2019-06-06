@@ -32,14 +32,13 @@
   "scripts": {
     "cover": "nyc --reporter=lcov mocha test/*.js && nyc report",
     "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "lint": "eslint '**/*.js'",
     "samples-test": "cd samples/ && npm test && cd ../",
     "system-test": "mocha system-test/*.js --timeout 600000",
     "test-no-cover": "mocha test/*.js",
     "test": "npm run cover",
     "fix": "eslint --fix '**/*.js'",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip https://github.com/googleapis/nodejs-language/blob/master/samples/.+",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -47,7 +46,6 @@
     "lodash.merge": "^4.6.1"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
     "codecov": "^3.0.2",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^4.0.0",
