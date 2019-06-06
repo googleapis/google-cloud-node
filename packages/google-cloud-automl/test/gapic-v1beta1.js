@@ -23,6 +23,27 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('AutoMlClient', () => {
+  it('has servicePath', () => {
+    const servicePath = automlModule.v1beta1.AutoMlClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = automlModule.v1beta1.AutoMlClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = automlModule.v1beta1.AutoMlClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new automlModule.v1beta1.AutoMlClient();
+    assert(client);
+  });
+
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
       const client = new automlModule.v1beta1.AutoMlClient({
@@ -1988,6 +2009,29 @@ describe('AutoMlClient', () => {
   });
 });
 describe('PredictionServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      automlModule.v1beta1.PredictionServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      automlModule.v1beta1.PredictionServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = automlModule.v1beta1.PredictionServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new automlModule.v1beta1.PredictionServiceClient();
+    assert(client);
+  });
+
   describe('predict', () => {
     it('invokes predict without error', done => {
       const client = new automlModule.v1beta1.PredictionServiceClient({
