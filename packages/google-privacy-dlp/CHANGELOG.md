@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.1.0...v1.2.0) (2019-06-06)
+
+
+### Features
+
+* add statistics about storedInfoType version ([#301](https://www.github.com/googleapis/nodejs-dlp/issues/301)) ([4482d02](https://www.github.com/googleapis/nodejs-dlp/commit/4482d02))
+* support apiEndpoint override in client constructor ([#299](https://www.github.com/googleapis/nodejs-dlp/issues/299)) ([663545c](https://www.github.com/googleapis/nodejs-dlp/commit/663545c))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.0.0...v1.1.0) (2019-05-28)
 
 
