@@ -163,9 +163,7 @@ describe('topics', () => {
       .get({autoCreate: true});
     const startTime = Date.now();
     execSync(
-      `${cmd} publish-batch ${topicNameOne} "${
-        expectedMessage.data
-      }" -w ${waitTime}`
+      `${cmd} publish-batch ${topicNameOne} "${expectedMessage.data}" -w ${waitTime}`
     );
 
     const {data, publishTime} = await _pullOneMessage(subscription);
@@ -181,9 +179,7 @@ describe('topics', () => {
       .subscription(subscriptionNameFour)
       .get({autoCreate: true});
     execSync(
-      `${cmd} publish-retry ${projectId} ${topicNameOne} "${
-        expectedMessage.data
-      }"`
+      `${cmd} publish-retry ${projectId} ${topicNameOne} "${expectedMessage.data}"`
     );
     const receivedMessage = await _pullOneMessage(subscription);
     assert.strictEqual(receivedMessage.data.toString(), expectedMessage.data);

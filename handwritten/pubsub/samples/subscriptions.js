@@ -119,9 +119,7 @@ async function createFlowControlledSubscription(
     autoCreate: true,
   });
   console.log(
-    `Subscription ${
-      newSubscription.name
-    } created with a maximum of ${maxInProgress} unprocessed messages.`
+    `Subscription ${newSubscription.name} created with a maximum of ${maxInProgress} unprocessed messages.`
   );
 
   // [END pubsub_subscriber_flow_settings]
@@ -340,9 +338,7 @@ async function synchronousPull(projectName, subscriptionName) {
       await client.modifyAckDeadline(modifyAckRequest);
 
       console.log(
-        `Reset ack deadline for "${
-          message.message.data
-        }" for ${newAckDeadlineSeconds}s.`
+        `Reset ack deadline for "${message.message.data}" for ${newAckDeadlineSeconds}s.`
       );
     }
   }
