@@ -286,7 +286,7 @@ class Service extends common.ServiceObject {
   getHealth(group, callback) {
     if (!is.string(group)) {
       group = format('{baseUrl}/projects/{p}/zones/{z}/instanceGroups/{n}', {
-        baseUrl: 'https://www.googleapis.com/compute/v1',
+        baseUrl: `https://${this.compute.apiEndpoint}/compute/v1`,
         p: this.parent.projectId,
         z: group.zone.name || group.zone,
         n: group.name,

@@ -62,6 +62,7 @@ describe('VM', function() {
       },
     },
     projectId: 'project-id',
+    apiEndpoint: 'www.googleapis.com',
   };
   const ZONE = {
     compute: COMPUTE,

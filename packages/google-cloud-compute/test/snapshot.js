@@ -41,7 +41,9 @@ describe('Snapshot', function() {
   let Snapshot;
   let snapshot;
 
-  const COMPUTE = {};
+  const COMPUTE = {
+    apiEndpoint: 'www.googleapis.com',
+  };
   const SNAPSHOT_NAME = 'snapshot-name';
 
   before(function() {

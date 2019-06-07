@@ -124,10 +124,12 @@ class Snapshot extends common.ServiceObject {
        */
       getMetadata: true,
     };
+    const compute = isDisk ? scope.zone.compute : scope;
     const config = {
       parent: scope,
-      baseUrl:
-        'https://www.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots',
+      baseUrl: `https://${
+        compute.apiEndpoint
+      }/compute/v1/projects/{{projectId}}/global/snapshots`,
       /**
        * @name Snapshot#id
        * @type {string}
@@ -174,7 +176,7 @@ class Snapshot extends common.ServiceObject {
      * @name Snapshot#compute
      * @type {Compute}
      */
-    this.compute = isDisk ? scope.zone.compute : scope;
+    this.compute = compute;
     /**
      * @name Snapshot#name
      * @type {string}
