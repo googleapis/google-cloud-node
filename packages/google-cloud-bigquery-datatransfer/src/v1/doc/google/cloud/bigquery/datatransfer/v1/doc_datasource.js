@@ -14,19 +14,3 @@
 
 // Note: this file is purely for documentation. Any contents are not expected
 // to be loaded as the JS file.
-
-/**
- * Wrapper message for `double`.
- *
- * The JSON representation for `DoubleValue` is JSON number.
- *
- * @property {number} value
- *   The double value.
- *
- * @typedef DoubleValue
- * @memberof google.protobuf
- * @see [google.protobuf.DoubleValue definition in proto format]{@link https://github.com/google/protobuf/blob/master/src/google/protobuf/wrappers.proto}
- */
-const DoubleValue = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
