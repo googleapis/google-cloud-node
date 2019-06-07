@@ -16,6 +16,40 @@
 // to be loaded as the JS file.
 
 /**
+ * Options customizing the data transfer schedule.
+ *
+ * @property {boolean} disableAutoScheduling
+ *   If true, automatic scheduling of data transfer runs for this configuration
+ *   will be disabled. The runs can be started on ad-hoc basis using
+ *   StartManualTransferRuns API. When automatic scheduling is disabled, the
+ *   TransferConfig.schedule field will be ignored.
+ *
+ * @property {Object} startTime
+ *   Specifies time to start scheduling transfer runs. The first run will be
+ *   scheduled at or after the start time according to a recurrence pattern
+ *   defined in the schedule string. The start time can be changed at any
+ *   moment. The time when a data transfer can be trigerred manually is not
+ *   limited by this option.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} endTime
+ *   Defines time to stop scheduling transfer runs. A transfer run cannot be
+ *   scheduled at or after the end time. The end time can be changed at any
+ *   moment. The time when a data transfer can be trigerred manually is not
+ *   limited by this option.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @typedef ScheduleOptions
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ * @see [google.cloud.bigquery.datatransfer.v1.ScheduleOptions definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/transfer.proto}
+ */
+const ScheduleOptions = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Represents a data transfer configuration. A transfer configuration
  * contains all metadata needed to perform a data transfer. For example,
  * `destination_dataset_id` specifies where data should be stored.
@@ -25,11 +59,12 @@
  *
  * @property {string} name
  *   The resource name of the transfer config.
- *   Transfer config names have the form
- *   `projects/{project_id}/transferConfigs/{config_id}`.
- *   Where `config_id` is usually a uuid, even though it is not
- *   guaranteed or required. The name is ignored when creating a transfer
- *   config.
+ *   Transfer config names have the form of
+ *   `projects/{project_id}/locations/{region}/transferConfigs/{config_id}`.
+ *   The name is automatically generated based on the config_id specified in
+ *   CreateTransferConfigRequest along with project_id and region. If config_id
+ *   is not provided, usually a uuid, even though it is not guaranteed or
+ *   required, will be generated for config_id.
  *
  * @property {string} destinationDatasetId
  *   The BigQuery target dataset id.
@@ -59,6 +94,11 @@
  *   https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
  *   NOTE: the granularity should be at least 8 hours, or less frequent.
  *
+ * @property {Object} scheduleOptions
+ *   Options customizing the data transfer schedule.
+ *
+ *   This object should have the same structure as [ScheduleOptions]{@link google.cloud.bigquery.datatransfer.v1.ScheduleOptions}
+ *
  * @property {number} dataRefreshWindowDays
  *   The number of days to look back to automatically refresh the data.
  *   For example, if `data_refresh_window_days = 10`, then every day
@@ -87,14 +127,30 @@
  *   The number should be among the values of [TransferState]{@link google.cloud.bigquery.datatransfer.v1.TransferState}
  *
  * @property {number} userId
- *   Output only. Unique ID of the user on whose behalf transfer is done.
- *   Applicable only to data sources that do not support service accounts.
- *   When set to 0, the data source service account credentials are used.
- *   May be negative. Note, that this identifier is not stable.
- *   It may change over time even for the same user.
+ *   Deprecated. Unique ID of the user on whose behalf transfer is done.
  *
  * @property {string} datasetRegion
  *   Output only. Region in which BigQuery dataset is located.
+ *
+ * @property {string} partnerToken
+ *   A unique identifier used for identifying a transfer setup stored on
+ *   external partner side. The token is opaque to DTS and can only be
+ *   interpreted by partner. Partner data source should create a mapping between
+ *   the config id and the token to validate that a transfer config/run is
+ *   legitimate.
+ *
+ * @property {Object} partnerConnectionInfo
+ *   Transfer settings managed by partner data sources. It is stored as
+ *   key-value pairs and used for DTS UI display purpose only. Two reasons we
+ *   don't want to store them together with 'params' are:
+ *    - The connection info is provided by partner and not editable in DTS UI
+ *      which is different from the immutable parameter. It will be confusing to
+ *      add another boolean to DataSourceParameter to differentiate them.
+ *    - The connection info can be any arbitrary key-value pairs. Adding them to
+ *      params fields requires partner to provide definition for them in data
+ *      source definition. It will be friendlier to avoid that for partners.
+ *
+ *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
  *
  * @typedef TransferConfig
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -112,6 +168,9 @@ const TransferConfig = {
  *   Transfer run names have the form
  *   `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
  *   The name is ignored when creating a transfer run.
+ *
+ * @property {Object.<string, string>} labels
+ *   User labels.
  *
  * @property {Object} scheduleTime
  *   Minimum time after which a transfer run can be started.
@@ -163,18 +222,22 @@ const TransferConfig = {
  *   The number should be among the values of [TransferState]{@link google.cloud.bigquery.datatransfer.v1.TransferState}
  *
  * @property {number} userId
- *   Output only. Unique ID of the user on whose behalf transfer is done.
- *   Applicable only to data sources that do not support service accounts.
- *   When set to 0, the data source service account credentials are used.
- *   May be negative. Note, that this identifier is not stable.
- *   It may change over time even for the same user.
+ *   Deprecated. Unique ID of the user on whose behalf transfer is done.
  *
  * @property {string} schedule
  *   Output only. Describes the schedule of this transfer run if it was
  *   created as part of a regular schedule. For batch transfer runs that are
  *   scheduled manually, this is empty.
  *   NOTE: the system might choose to delay the schedule depending on the
- *   current load, so `schedule_time` doesn't always matches this.
+ *   current load, so `schedule_time` doesn't always match this.
+ *
+ * @property {string} partnerToken
+ *   Output only. This is the same token initialized from TransferConfig.
+ *   Partner token is a unique identifier used for identifying a transfer setup
+ *   stored on external partner side. The token is opaque to DTS and can only be
+ *   interpreted by partner. Partner data source should create a mapping between
+ *   the config id and the token to validate that a transfer config/run is
+ *   legitimate.
  *
  * @typedef TransferRun
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -233,7 +296,12 @@ const TransferMessage = {
     /**
      * Error message.
      */
-    ERROR: 3
+    ERROR: 3,
+
+    /**
+     * Debug message.
+     */
+    DEBUG: 4
   }
 };
 
@@ -262,7 +330,7 @@ const TransferState = {
   RUNNING: 3,
 
   /**
-   * Data transfer completed successsfully.
+   * Data transfer completed successfully.
    */
   SUCCEEDED: 4,
 

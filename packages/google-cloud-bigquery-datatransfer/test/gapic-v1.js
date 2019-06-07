@@ -77,6 +77,8 @@ describe('DataTransferServiceClient', () => {
       const helpUrl = 'helpUrl-789431439';
       const defaultDataRefreshWindowDays = 1804935157;
       const manualRunsDisabled = true;
+      const partnerLegalName = 'partnerLegalName-1307326424';
+      const redirectUrl = 'redirectUrl951230092';
       const expectedResponse = {
         name: name2,
         dataSourceId: dataSourceId,
@@ -90,6 +92,8 @@ describe('DataTransferServiceClient', () => {
         helpUrl: helpUrl,
         defaultDataRefreshWindowDays: defaultDataRefreshWindowDays,
         manualRunsDisabled: manualRunsDisabled,
+        partnerLegalName: partnerLegalName,
+        redirectUrl: redirectUrl,
       };
 
       // Mock Grpc layer
@@ -236,6 +240,7 @@ describe('DataTransferServiceClient', () => {
       const disabled = true;
       const userId = 147132913;
       const datasetRegion = 'datasetRegion959248539';
+      const partnerToken = 'partnerToken725173186';
       const expectedResponse = {
         name: name,
         destinationDatasetId: destinationDatasetId,
@@ -246,6 +251,7 @@ describe('DataTransferServiceClient', () => {
         disabled: disabled,
         userId: userId,
         datasetRegion: datasetRegion,
+        partnerToken: partnerToken,
       };
 
       // Mock Grpc layer
@@ -320,6 +326,7 @@ describe('DataTransferServiceClient', () => {
       const disabled = true;
       const userId = 147132913;
       const datasetRegion = 'datasetRegion959248539';
+      const partnerToken = 'partnerToken725173186';
       const expectedResponse = {
         name: name,
         destinationDatasetId: destinationDatasetId,
@@ -330,6 +337,7 @@ describe('DataTransferServiceClient', () => {
         disabled: disabled,
         userId: userId,
         datasetRegion: datasetRegion,
+        partnerToken: partnerToken,
       };
 
       // Mock Grpc layer
@@ -466,6 +474,7 @@ describe('DataTransferServiceClient', () => {
       const disabled = true;
       const userId = 147132913;
       const datasetRegion = 'datasetRegion959248539';
+      const partnerToken = 'partnerToken725173186';
       const expectedResponse = {
         name: name2,
         destinationDatasetId: destinationDatasetId,
@@ -476,6 +485,7 @@ describe('DataTransferServiceClient', () => {
         disabled: disabled,
         userId: userId,
         datasetRegion: datasetRegion,
+        partnerToken: partnerToken,
       };
 
       // Mock Grpc layer
@@ -695,12 +705,14 @@ describe('DataTransferServiceClient', () => {
       const dataSourceId = 'dataSourceId-1015796374';
       const userId = 147132913;
       const schedule = 'schedule-697920873';
+      const partnerToken = 'partnerToken725173186';
       const expectedResponse = {
         name: name2,
         destinationDatasetId: destinationDatasetId,
         dataSourceId: dataSourceId,
         userId: userId,
         schedule: schedule,
+        partnerToken: partnerToken,
       };
 
       // Mock Grpc layer
@@ -1029,6 +1041,170 @@ describe('DataTransferServiceClient', () => {
       );
 
       client.checkValidCreds(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('startManualTransferRuns', () => {
+    it('invokes startManualTransferRuns without error', done => {
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const request = {};
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.startManualTransferRuns = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.startManualTransferRuns(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes startManualTransferRuns with error', done => {
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.startManualTransferRuns = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.startManualTransferRuns(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('enableDataTransferService', () => {
+    it('invokes enableDataTransferService without error', done => {
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.enableDataTransferService = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.enableDataTransferService(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes enableDataTransferService with error', done => {
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.enableDataTransferService = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.enableDataTransferService(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('isDataTransferServiceEnabled', () => {
+    it('invokes isDataTransferServiceEnabled without error', done => {
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const request = {};
+
+      // Mock response
+      const enabled = false;
+      const reason = 'reason-934964668';
+      const expectedResponse = {
+        enabled: enabled,
+        reason: reason,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.isDataTransferServiceEnabled = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.isDataTransferServiceEnabled(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes isDataTransferServiceEnabled with error', done => {
+      const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+
+      // Mock request
+      const request = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.isDataTransferServiceEnabled = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.isDataTransferServiceEnabled(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');

@@ -41,7 +41,7 @@
  *   Is parameter required.
  *
  * @property {boolean} repeated
- *   Can parameter have multiple values.
+ *   Deprecated. This field has no effect.
  *
  * @property {string} validationRegex
  *   Regular expression which can be used for parameter validation.
@@ -60,7 +60,7 @@
  *   This object should have the same structure as [DoubleValue]{@link google.protobuf.DoubleValue}
  *
  * @property {Object[]} fields
- *   When parameter is a record, describes child fields.
+ *   Deprecated. This field has no effect.
  *
  *   This object should have the same structure as [DataSourceParameter]{@link google.cloud.bigquery.datatransfer.v1.DataSourceParameter}
  *
@@ -75,8 +75,7 @@
  *   Cannot be changed after initial creation.
  *
  * @property {boolean} recurse
- *   If set to true, schema should be taken from the parent with the same
- *   parameter_id. Only applicable when parameter type is RECORD.
+ *   Deprecated. This field has no effect.
  *
  * @typedef DataSourceParameter
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -120,7 +119,7 @@ const DataSourceParameter = {
     BOOLEAN: 4,
 
     /**
-     * Record parameter.
+     * Deprecated. This field has no effect.
      */
     RECORD: 5,
 
@@ -149,13 +148,11 @@ const DataSourceParameter = {
  *
  * @property {string} clientId
  *   Data source client id which should be used to receive refresh token.
- *   When not supplied, no offline credentials are populated for data transfer.
  *
  * @property {string[]} scopes
- *   Api auth scopes for which refresh token needs to be obtained. Only valid
- *   when `client_id` is specified. Ignored otherwise. These are scopes needed
- *   by a data source to prepare data and ingest them into BigQuery,
- *   e.g., https://www.googleapis.com/auth/bigquery
+ *   Api auth scopes for which refresh token needs to be obtained. These are
+ *   scopes needed by a data source to prepare data and ingest them into
+ *   BigQuery, e.g., https://www.googleapis.com/auth/bigquery
  *
  * @property {number} transferType
  *   Deprecated. This field has no effect.
@@ -163,12 +160,11 @@ const DataSourceParameter = {
  *   The number should be among the values of [TransferType]{@link google.cloud.bigquery.datatransfer.v1.TransferType}
  *
  * @property {boolean} supportsMultipleTransfers
- *   Indicates whether the data source supports multiple transfers
- *   to different BigQuery targets.
+ *   Deprecated. This field has no effect.
  *
  * @property {number} updateDeadlineSeconds
  *   The number of seconds to wait for an update from the data source
- *   before BigQuery marks the transfer as failed.
+ *   before the Data Transfer Service marks the transfer as FAILED.
  *
  * @property {string} defaultSchedule
  *   Default data transfer schedule.
@@ -215,6 +211,12 @@ const DataSourceParameter = {
  *   The minimum interval for scheduler to schedule runs.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {string} partnerLegalName
+ *   Partner's legal name of this data source
+ *
+ * @property {string} redirectUrl
+ *   Redirect URL to complete transfer config setup for 3rd party data sources.
  *
  * @typedef DataSource
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -350,7 +352,7 @@ const ListDataSourcesResponse = {
  *
  * @property {string} parent
  *   The BigQuery project id where the transfer configuration should be created.
- *   Must be in the format /projects/{project_id}/locations/{location_id}
+ *   Must be in the format projects/{project_id}/locations/{location_id}
  *   If specified location and location of the destination bigquery dataset
  *   do not match - the request will fail.
  *
@@ -376,6 +378,14 @@ const ListDataSourcesResponse = {
  *     urn:ietf:wg:oauth:2.0:oob means that authorization code should be
  *     returned in the title bar of the browser, with the page text prompting
  *     the user to copy the code and paste it in the application.
+ *
+ * @property {string} versionInfo
+ *   Optional version info. If users want to find a very recent access token,
+ *   that is, immediately after approving access, users have to set the
+ *   version_info claim in the token request. To obtain the version_info, users
+ *   must use the “none+gsession” response type. which be return a
+ *   version_info back in the authorization response which be be put in a JWT
+ *   claim in the token request.
  *
  * @typedef CreateTransferConfigRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -416,6 +426,14 @@ const CreateTransferConfigRequest = {
  *   Required list of fields to be updated in this request.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @property {string} versionInfo
+ *   Optional version info. If users want to find a very recent access token,
+ *   that is, immediately after approving access, users have to set the
+ *   version_info claim in the token request. To obtain the version_info, users
+ *   must use the “none+gsession” response type. which be return a
+ *   version_info back in the authorization response which be be put in a JWT
+ *   claim in the token request.
  *
  * @typedef UpdateTransferConfigRequest
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -709,6 +727,9 @@ const CheckValidCredsResponse = {
  *   Transfer configuration name in the form:
  *   `projects/{project_id}/transferConfigs/{config_id}`.
  *
+ * @property {Object.<string, string>} labels
+ *   User labels to add to the scheduled runs.
+ *
  * @property {Object} startTime
  *   Start time of the range of transfer runs. For example,
  *   `"2017-05-25T00:00:00+00:00"`.
@@ -742,5 +763,127 @@ const ScheduleTransferRunsRequest = {
  * @see [google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
 const ScheduleTransferRunsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A request to start manual transfer runs.
+ *
+ * @property {string} parent
+ *   Transfer configuration name in the form:
+ *   `projects/{project_id}/transferConfigs/{config_id}`.
+ *
+ * @property {Object.<string, string>} labels
+ *   User labels to add to the backfilled runs.
+ *
+ * @property {Object} requestedTimeRange
+ *   Time range for the transfer runs that should be started.
+ *
+ *   This object should have the same structure as [TimeRange]{@link google.cloud.bigquery.datatransfer.v1.TimeRange}
+ *
+ * @property {Object} requestedRunTime
+ *   Specific run_time for a transfer run to be started. The
+ *   requested_run_time must not be in the future.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @typedef StartManualTransferRunsRequest
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ * @see [google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
+ */
+const StartManualTransferRunsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * A specification for a time range, this will request transfer runs with
+   * run_time between start_time (inclusive) and end_time (exclusive).
+   *
+   * @property {Object} startTime
+   *   Start time of the range of transfer runs. For example,
+   *   `"2017-05-25T00:00:00+00:00"`. The start_time must be strictly less than
+   *   the end_time. Creates transfer runs where run_time is in the range betwen
+   *   start_time (inclusive) and end_time (exlusive).
+   *
+   *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+   *
+   * @property {Object} endTime
+   *   End time of the range of transfer runs. For example,
+   *   `"2017-05-30T00:00:00+00:00"`. The end_time must not be in the future.
+   *   Creates transfer runs where run_time is in the range betwen start_time
+   *   (inclusive) and end_time (exlusive).
+   *
+   *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+   *
+   * @typedef TimeRange
+   * @memberof google.cloud.bigquery.datatransfer.v1
+   * @see [google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
+   */
+  TimeRange: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  }
+};
+
+/**
+ * A response to start manual transfer runs.
+ *
+ * @property {Object[]} runs
+ *   The transfer runs that were created.
+ *
+ *   This object should have the same structure as [TransferRun]{@link google.cloud.bigquery.datatransfer.v1.TransferRun}
+ *
+ * @typedef StartManualTransferRunsResponse
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ * @see [google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
+ */
+const StartManualTransferRunsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A request to enable data transfer service for a project.
+ *
+ * @property {string} name
+ *   The name of the project resource in the form:
+ *   `projects/{project_id}`
+ *
+ * @typedef EnableDataTransferServiceRequest
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ * @see [google.cloud.bigquery.datatransfer.v1.EnableDataTransferServiceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
+ */
+const EnableDataTransferServiceRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A request to determine whether data transfer is enabled for the project.
+ *
+ * @property {string} name
+ *   The name of the project resource in the form:
+ *   `projects/{project_id}`
+ *
+ * @typedef IsDataTransferServiceEnabledRequest
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ * @see [google.cloud.bigquery.datatransfer.v1.IsDataTransferServiceEnabledRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
+ */
+const IsDataTransferServiceEnabledRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * A response to indicate whether data transfer service is enabled
+ * for the project.
+ *
+ * @property {boolean} enabled
+ *   Indicates whether the data transfer service is enabled for the project.
+ *
+ * @property {string} reason
+ *   A string that contains additional information about why the service is
+ *   deemed not enabled. This is only available when `enable` is false.
+ *
+ * @typedef IsDataTransferServiceEnabledResponse
+ * @memberof google.cloud.bigquery.datatransfer.v1
+ * @see [google.cloud.bigquery.datatransfer.v1.IsDataTransferServiceEnabledResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
+ */
+const IsDataTransferServiceEnabledResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
