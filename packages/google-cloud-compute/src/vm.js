@@ -17,7 +17,6 @@
 'use strict';
 
 const common = require('@google-cloud/common');
-const createErrorClass = require('create-error-class');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
@@ -33,7 +32,12 @@ const Disk = require('./disk.js');
  * @param {string} message - Custom error message.
  * @returns {Error}
  */
-const DetachDiskError = createErrorClass('DetachDiskError');
+class DetachDiskError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'DetachDiskError';
+  }
+}
 
 /**
  * Custom error type for when `waitFor()` does not return a status in a timely
@@ -44,7 +48,12 @@ const DetachDiskError = createErrorClass('DetachDiskError');
  * @param {string} message - Custom error message.
  * @returns {Error}
  */
-const WaitForTimeoutError = createErrorClass('WaitForTimeoutError');
+class WaitForTimeoutError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'WaitForTimeoutError';
+  }
+}
 
 /**
  * The statuses that a VM can be in.

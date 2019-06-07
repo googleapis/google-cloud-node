@@ -127,9 +127,7 @@ class Snapshot extends common.ServiceObject {
     const compute = isDisk ? scope.zone.compute : scope;
     const config = {
       parent: scope,
-      baseUrl: `https://${
-        compute.apiEndpoint
-      }/compute/v1/projects/{{projectId}}/global/snapshots`,
+      baseUrl: `https://${compute.apiEndpoint}/compute/v1/projects/{{projectId}}/global/snapshots`,
       /**
        * @name Snapshot#id
        * @type {string}
