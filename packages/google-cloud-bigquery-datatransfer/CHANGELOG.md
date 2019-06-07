@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.1.0...v1.2.0) (2019-06-07)
+
+
+### Features
+
+* adds startManualTransferRuns, enableDataTransferService, and isDataTransferServiceEnabled methods ([4a45c8f](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/4a45c8f))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v1.0.0...v1.1.0) (2019-06-05)
 
 
