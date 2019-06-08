@@ -24,7 +24,7 @@
  *   this format: projects/* /locations/* /glossaries/*
  *
  * @property {boolean} ignoreCase
- *   Optional. Indicates whether we should do a case-insensitive match.
+ *   Optional. Indicates match is case-insensitive.
  *   Default value is false if missing.
  *
  * @typedef TranslateTextGlossaryConfig
@@ -40,51 +40,57 @@ const TranslateTextGlossaryConfig = {
  *
  * @property {string[]} contents
  *   Required. The content of the input in string format.
- *   We recommend the total contents to be less than 30k codepoints.
- *   Please use BatchTranslateText for larger text.
+ *   We recommend the total content be less than 30k codepoints.
+ *   Use BatchTranslateText for larger text.
  *
  * @property {string} mimeType
  *   Optional. The format of the source text, for example, "text/html",
- *    "text/plain". If left blank, the MIME type is assumed to be "text/html".
+ *    "text/plain". If left blank, the MIME type defaults to "text/html".
  *
  * @property {string} sourceLanguageCode
  *   Optional. The BCP-47 language code of the input text if
  *   known, for example, "en-US" or "sr-Latn". Supported language codes are
  *   listed in Language Support. If the source language isn't specified, the API
  *   attempts to identify the source language automatically and returns the
- *   the source language within the response.
+ *   source language within the response.
  *
  * @property {string} targetLanguageCode
  *   Required. The BCP-47 language code to use for translation of the input
  *   text, set to one of the language codes listed in Language Support.
  *
  * @property {string} parent
- *   Optional. Only used when making regionalized call.
- *   Format:
- *   projects/{project-id}/locations/{location-id}.
+ *   Required. Location to make a regional or global call.
  *
- *   Only custom model/glossary within the same location-id can be used.
- *   Otherwise 400 is returned.
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   For global calls, use `projects/{project-id}/locations/global`.
+ *
+ *   Models and glossaries must be within the same region (have same
+ *   location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
  *
  * @property {string} model
  *   Optional. The `model` type requested for this translation.
  *
- *   The format  depends on model type:
- *   1. Custom models:
- *   projects/{project-id}/locations/{location-id}/models/{model-id}.
- *   2. General (built-in) models:
- *   projects/{project-id}/locations/{location-id}/models/general/nmt
- *   projects/{project-id}/locations/{location-id}/models/general/base
+ *   The format depends on model type:
  *
- *   For global (non-regionalized) requests, use {location-id} 'global'.
+ *   - AutoML Translation models:
+ *     `projects/{project-id}/locations/{location-id}/models/{model-id}`
+ *
+ *   - General (built-in) models:
+ *     `projects/{project-id}/locations/{location-id}/models/general/nmt`,
+ *     `projects/{project-id}/locations/{location-id}/models/general/base`
+ *
+ *
+ *   For global (non-regionalized) requests, use `location-id` `global`.
  *   For example,
- *   projects/{project-id}/locations/global/models/general/nmt
+ *   `projects/{project-id}/locations/global/models/general/nmt`.
  *
  *   If missing, the system decides which google base model to use.
  *
  * @property {Object} glossaryConfig
- *   Optional. Glossary to be applied. The glossary needs to be in the same
- *   region as the model, otherwise an INVALID_ARGUMENT error is returned.
+ *   Optional. Glossary to be applied. The glossary must be
+ *   within the same region (have the same location-id) as the model, otherwise
+ *   an INVALID_ARGUMENT (400) error is returned.
  *
  *   This object should have the same structure as [TranslateTextGlossaryConfig]{@link google.cloud.translation.v3beta1.TranslateTextGlossaryConfig}
  *
@@ -97,18 +103,19 @@ const TranslateTextRequest = {
 };
 
 /**
- * The main language translation response message.
- *
  * @property {Object[]} translations
  *   Text translation responses with no glossary applied.
- *   This field has the same length as `contents` in TranslateTextRequest.
+ *   This field has the same length as
+ *   `contents`.
  *
  *   This object should have the same structure as [Translation]{@link google.cloud.translation.v3beta1.Translation}
  *
  * @property {Object[]} glossaryTranslations
  *   Text translation responses if a glossary is provided in the request.
- *   This could be the same as 'translation' above if no terms apply.
- *   This field has the same length as `contents` in TranslateTextRequest.
+ *   This can be the same as
+ *   `translations` if no terms apply.
+ *   This field has the same length as
+ *   `contents`.
  *
  *   This object should have the same structure as [Translation]{@link google.cloud.translation.v3beta1.Translation}
  *
@@ -134,7 +141,7 @@ const TranslateTextResponse = {
  *   The BCP-47 language code of source text in the initial request, detected
  *   automatically, if no source language was passed within the initial
  *   request. If the source language was passed, auto-detection of the language
- *   does not occur and this field will be empty.
+ *   does not occur and this field is empty.
  *
  * @property {Object} glossaryConfig
  *   The `glossary_config` used for this translation.
@@ -153,24 +160,32 @@ const Translation = {
  * The request message for language detection.
  *
  * @property {string} parent
- *   Optional. Only used when making regionalized call.
- *   Format:
- *   projects/{project-id}/locations/{location-id}.
+ *   Required. Location to make a regional or global call.
  *
- *   Only custom model within the same location-id can be used.
- *   Otherwise 400 is returned.
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   For global calls, use `projects/{project-id}/locations/global`.
+ *
+ *   Only models within the same region (has same location-id) can be used.
+ *   Otherwise an INVALID_ARGUMENT (400) error is returned.
  *
  * @property {string} model
  *   Optional. The language detection model to be used.
- *   projects/{project-id}/locations/{location-id}/models/language-detection/{model-id}
- *   If not specified, default will be used.
+ *
+ *   Format:
+ *   `projects/{project-id}/locations/{location-id}/models/language-detection/{model-id}`
+ *
+ *   Only one language detection model is currently supported:
+ *   `projects/{project-id}/locations/{location-id}/models/language-detection/default`.
+ *
+ *   If not specified, the default model is used.
  *
  * @property {string} content
  *   The content of the input stored as a string.
  *
  * @property {string} mimeType
  *   Optional. The format of the source text, for example, "text/html",
- *   "text/plain". If left blank, the MIME type is assumed to be "text/html".
+ *   "text/plain". If left blank, the MIME type defaults to "text/html".
  *
  * @typedef DetectLanguageRequest
  * @memberof google.cloud.translation.v3beta1
@@ -219,28 +234,35 @@ const DetectLanguageResponse = {
  * The request message for discovering supported languages.
  *
  * @property {string} parent
- *   Optional. Used for making regionalized calls.
- *   Format: projects/{project-id}/locations/{location-id}.
- *   For global calls, use projects/{project-id}/locations/global.
- *   If missing, the call is treated as a global call.
+ *   Required. Location to make a regional or global call.
  *
- *   Only custom model within the same location-id can be used.
- *   Otherwise 400 is returned.
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   For global calls, use `projects/{project-id}/locations/global`.
+ *
+ *   Only models within the same region (have same location-id) can be used,
+ *   otherwise an INVALID_ARGUMENT (400) error is returned.
  *
  * @property {string} displayLanguageCode
  *   Optional. The language to use to return localized, human readable names
- *   of supported languages. If missing, default language is ENGLISH.
+ *   of supported languages. If missing, then display names are not returned
+ *   in a response.
  *
  * @property {string} model
  *   Optional. Get supported languages of this model.
+ *
  *   The format depends on model type:
- *   1. Custom models:
- *   projects/{project-id}/locations/{location-id}/models/{model-id}.
- *   2. General (built-in) models:
- *   projects/{project-id}/locations/{location-id}/models/general/nmt
- *   projects/{project-id}/locations/{location-id}/models/general/base
+ *
+ *   - AutoML Translation models:
+ *     `projects/{project-id}/locations/{location-id}/models/{model-id}`
+ *
+ *   - General (built-in) models:
+ *     `projects/{project-id}/locations/{location-id}/models/general/nmt`,
+ *     `projects/{project-id}/locations/{location-id}/models/general/base`
+ *
+ *
  *   Returns languages supported by the specified model.
- *   If missing, we get supported languages of Google general NMT model.
+ *   If missing, we get supported languages of Google general base (PBMT) model.
  *
  * @typedef GetSupportedLanguagesRequest
  * @memberof google.cloud.translation.v3beta1
@@ -296,7 +318,7 @@ const SupportedLanguage = {
 };
 
 /**
- * The GCS location for the input content.
+ * The Google Cloud Storage location for the input content.
  *
  * @property {string} inputUri
  *   Required. Source data URI. For example, `gs://my_bucket/my_object`.
@@ -310,7 +332,7 @@ const GcsSource = {
 };
 
 /**
- * Input configuration.
+ * Input configuration for BatchTranslateText request.
  *
  * @property {string} mimeType
  *   Optional. Can be "text/plain" or "text/html".
@@ -329,6 +351,11 @@ const GcsSource = {
  *   second column is the actual text to be
  *    translated. We recommend each row be <= 10K Unicode codepoints,
  *   otherwise an error might be returned.
+ *   Note that the input tsv must be RFC 4180 compliant.
+ *
+ *   You could use https://github.com/Clever/csvlint to check potential
+ *   formatting errors in your tsv file.
+ *   csvlint --delimiter='\t' your_input_file.tsv
  *
  *   The other supported file extensions are `.txt` or `.html`, which is
  *   treated as a single large chunk of text.
@@ -344,11 +371,12 @@ const InputConfig = {
 };
 
 /**
- * The GCS location for the output content
+ * The Google Cloud Storage location for the output content
  *
  * @property {string} outputUriPrefix
  *   Required. There must be no files under 'output_uri_prefix'.
- *   'output_uri_prefix' must end with "/". Otherwise error 400 is returned.
+ *   'output_uri_prefix' must end with "/", otherwise an INVALID_ARGUMENT (400)
+ *   error is returned..
  *
  * @typedef GcsDestination
  * @memberof google.cloud.translation.v3beta1
@@ -359,7 +387,7 @@ const GcsDestination = {
 };
 
 /**
- * Output configuration.
+ * Output configuration for BatchTranslateText request.
  *
  * @property {Object} gcsDestination
  *   Google Cloud Storage destination for output content.
@@ -385,13 +413,13 @@ const GcsDestination = {
  *   errors_file contains the errors during processing of the file. (details
  *   below). Both translations_file and errors_file could be empty
  *   strings if we have no content to output.
- *   glossary_translations_file,glossary_errors_file are always empty string
- *   if input_file is tsv. They could also be empty if we have no content to
- *   output.
+ *   glossary_translations_file and glossary_errors_file are always empty
+ *   strings if the input_file is tsv. They could also be empty if we have no
+ *   content to output.
  *
  *   Once a row is present in index.csv, the input/output matching never
  *   changes. Callers should also expect all the content in input_file are
- *   processed and ready to be consumed (that is, No partial output file is
+ *   processed and ready to be consumed (that is, no partial output file is
  *   written).
  *
  *   The format of translations_file (for target language code 'trg') is:
@@ -417,8 +445,8 @@ const GcsDestination = {
  *   The format of errors file (for target language code 'trg') is:
  *   gs://translation_test/a_b_c_'trg'_errors.[extension]
  *
- *   If the input file extension is tsv, errors_file has the
- *   following Column 1: ID of the request provided in the input, if it's not
+ *   If the input file extension is tsv, errors_file contains the following:
+ *   Column 1: ID of the request provided in the input, if it's not
  *   provided in the input, then the input row number is used (0-based).
  *   Column 2: source sentence.
  *   Column 3: Error detail for the translation. Could be empty.
@@ -443,12 +471,15 @@ const OutputConfig = {
  * The batch translation request.
  *
  * @property {string} parent
- *   Optional. Only used when making regionalized call.
- *   Format:
- *   projects/{project-id}/locations/{location-id}.
+ *   Required. Location to make a regional call.
  *
- *   Only custom models/glossaries within the same location-id can be used.
- *   Otherwise 400 is returned.
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   The `global` location is not supported for batch translation.
+ *
+ *   Only AutoML Translation models or glossaries within the same region (have
+ *   the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
+ *   error is returned.
  *
  * @property {string} sourceLanguageCode
  *   Required. Source language code.
@@ -459,17 +490,20 @@ const OutputConfig = {
  * @property {Object.<string, string>} models
  *   Optional. The models to use for translation. Map's key is target language
  *   code. Map's value is model name. Value can be a built-in general model,
- *   or a custom model built by AutoML.
+ *   or an AutoML Translation model.
  *
  *   The value format depends on model type:
- *   1. Custom models:
- *   projects/{project-id}/locations/{location-id}/models/{model-id}.
- *   2. General (built-in) models:
- *   projects/{project-id}/locations/{location-id}/models/general/nmt
- *   projects/{project-id}/locations/{location-id}/models/general/base
+ *
+ *   - AutoML Translation models:
+ *     `projects/{project-id}/locations/{location-id}/models/{model-id}`
+ *
+ *   - General (built-in) models:
+ *     `projects/{project-id}/locations/{location-id}/models/general/nmt`,
+ *     `projects/{project-id}/locations/{location-id}/models/general/base`
+ *
  *
  *   If the map is empty or a specific model is
- *   not requested for a language pair, then default google model is used.
+ *   not requested for a language pair, then default google model (nmt) is used.
  *
  * @property {Object[]} inputConfigs
  *   Required. Input configurations.
@@ -516,7 +550,7 @@ const BatchTranslateTextRequest = {
  * @property {number} totalCharacters
  *   Total number of characters (Unicode codepoints).
  *   This is the total number of codepoints from input files times the number of
- *   target languages. It appears here shortly after the call is submitted.
+ *   target languages and appears here shortly after the call is submitted.
  *
  * @property {Object} submitTime
  *   Time when the operation was submitted.
@@ -568,12 +602,12 @@ const BatchTranslateResponse = {
  *
  * @property {Object} gcsSource
  *   Required. Google Cloud Storage location of glossary data.
- *   File format is determined based on file name extension. API returns
+ *   File format is determined based on the filename extension. API returns
  *   [google.rpc.Code.INVALID_ARGUMENT] for unsupported URI-s and file
  *   formats. Wildcards are not allowed. This must be a single file in one of
  *   the following formats:
  *
- *   For `UNIDIRECTIONAL` glossaries:
+ *   For unidirectional glossaries:
  *
  *   - TSV/CSV (`.tsv`/`.csv`): 2 column file, tab- or comma-separated.
  *     The first column is source text. The second column is target text.
@@ -583,12 +617,12 @@ const BatchTranslateResponse = {
  *   - TMX (`.tmx`): TMX file with parallel data defining source/target term
  *   pairs.
  *
- *   For `EQUIVALENT_TERMS_SET` glossaries:
+ *   For equivalent term sets glossaries:
  *
  *   - CSV (`.csv`): Multi-column CSV file defining equivalent glossary terms
  *     in multiple languages. The format is defined for Google Translation
- *     Toolkit and documented here:
- *     `https://support.google.com/translatortoolkit/answer/6306379?hl=en`.
+ *     Toolkit and documented in [Use a
+ *     glossary](https://support.google.com/translatortoolkit/answer/6306379?hl=en).
  *
  *   This object should have the same structure as [GcsSource]{@link google.cloud.translation.v3beta1.GcsSource}
  *
@@ -608,12 +642,12 @@ const GlossaryInputConfig = {
  *   `projects/{project-id}/locations/{location-id}/glossaries/{glossary-id}`.
  *
  * @property {Object} languagePair
- *   Used with UNIDIRECTIONAL.
+ *   Used with unidirectional glossaries.
  *
  *   This object should have the same structure as [LanguageCodePair]{@link google.cloud.translation.v3beta1.LanguageCodePair}
  *
  * @property {Object} languageCodesSet
- *   Used with EQUIVALENT_TERMS_SET.
+ *   Used with equivalent term set glossaries.
  *
  *   This object should have the same structure as [LanguageCodesSet]{@link google.cloud.translation.v3beta1.LanguageCodesSet}
  *
@@ -644,7 +678,7 @@ const Glossary = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Used with UNIDIRECTIONAL.
+   * Used with unidirectional glossaries.
    *
    * @property {string} sourceLanguageCode
    *   Required. The BCP-47 language code of the input text, for example,
@@ -663,7 +697,7 @@ const Glossary = {
   },
 
   /**
-   * Used with EQUIVALENT_TERMS_SET.
+   * Used with equivalent term set glossaries.
    *
    * @property {string[]} languageCodes
    *   The BCP-47 language code(s) for terms defined in the glossary.
@@ -744,7 +778,7 @@ const DeleteGlossaryRequest = {
  *
  * @property {string} filter
  *   Optional. Filter specifying constraints of a list operation.
- *   For example, `tags.glossary_name="products*"`.
+ *   Filtering is not supported yet, and the parameter currently has no effect.
  *   If missing, no filtering is performed.
  *
  * @typedef ListGlossariesRequest

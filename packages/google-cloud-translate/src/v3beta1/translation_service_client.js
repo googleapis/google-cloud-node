@@ -281,45 +281,51 @@ class TranslationServiceClient {
    *   The request object that will be sent.
    * @param {string[]} request.contents
    *   Required. The content of the input in string format.
-   *   We recommend the total contents to be less than 30k codepoints.
-   *   Please use BatchTranslateText for larger text.
+   *   We recommend the total content be less than 30k codepoints.
+   *   Use BatchTranslateText for larger text.
    * @param {string} request.targetLanguageCode
    *   Required. The BCP-47 language code to use for translation of the input
    *   text, set to one of the language codes listed in Language Support.
    * @param {string} [request.mimeType]
    *   Optional. The format of the source text, for example, "text/html",
-   *    "text/plain". If left blank, the MIME type is assumed to be "text/html".
+   *    "text/plain". If left blank, the MIME type defaults to "text/html".
    * @param {string} [request.sourceLanguageCode]
    *   Optional. The BCP-47 language code of the input text if
    *   known, for example, "en-US" or "sr-Latn". Supported language codes are
    *   listed in Language Support. If the source language isn't specified, the API
    *   attempts to identify the source language automatically and returns the
-   *   the source language within the response.
+   *   source language within the response.
    * @param {string} [request.parent]
-   *   Optional. Only used when making regionalized call.
-   *   Format:
-   *   projects/{project-id}/locations/{location-id}.
+   *   Required. Location to make a regional or global call.
    *
-   *   Only custom model/glossary within the same location-id can be used.
-   *   Otherwise 400 is returned.
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   For global calls, use `projects/{project-id}/locations/global`.
+   *
+   *   Models and glossaries must be within the same region (have same
+   *   location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
    * @param {string} [request.model]
    *   Optional. The `model` type requested for this translation.
    *
-   *   The format  depends on model type:
-   *   1. Custom models:
-   *   projects/{project-id}/locations/{location-id}/models/{model-id}.
-   *   2. General (built-in) models:
-   *   projects/{project-id}/locations/{location-id}/models/general/nmt
-   *   projects/{project-id}/locations/{location-id}/models/general/base
+   *   The format depends on model type:
    *
-   *   For global (non-regionalized) requests, use {location-id} 'global'.
+   *   - AutoML Translation models:
+   *     `projects/{project-id}/locations/{location-id}/models/{model-id}`
+   *
+   *   - General (built-in) models:
+   *     `projects/{project-id}/locations/{location-id}/models/general/nmt`,
+   *     `projects/{project-id}/locations/{location-id}/models/general/base`
+   *
+   *
+   *   For global (non-regionalized) requests, use `location-id` `global`.
    *   For example,
-   *   projects/{project-id}/locations/global/models/general/nmt
+   *   `projects/{project-id}/locations/global/models/general/nmt`.
    *
    *   If missing, the system decides which google base model to use.
    * @param {Object} [request.glossaryConfig]
-   *   Optional. Glossary to be applied. The glossary needs to be in the same
-   *   region as the model, otherwise an INVALID_ARGUMENT error is returned.
+   *   Optional. Glossary to be applied. The glossary must be
+   *   within the same region (have the same location-id) as the model, otherwise
+   *   an INVALID_ARGUMENT (400) error is returned.
    *
    *   This object should have the same structure as [TranslateTextGlossaryConfig]{@link google.cloud.translation.v3beta1.TranslateTextGlossaryConfig}
    * @param {Object} [options]
@@ -379,21 +385,29 @@ class TranslationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} [request.parent]
-   *   Optional. Only used when making regionalized call.
-   *   Format:
-   *   projects/{project-id}/locations/{location-id}.
+   *   Required. Location to make a regional or global call.
    *
-   *   Only custom model within the same location-id can be used.
-   *   Otherwise 400 is returned.
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   For global calls, use `projects/{project-id}/locations/global`.
+   *
+   *   Only models within the same region (has same location-id) can be used.
+   *   Otherwise an INVALID_ARGUMENT (400) error is returned.
    * @param {string} [request.model]
    *   Optional. The language detection model to be used.
-   *   projects/{project-id}/locations/{location-id}/models/language-detection/{model-id}
-   *   If not specified, default will be used.
+   *
+   *   Format:
+   *   `projects/{project-id}/locations/{location-id}/models/language-detection/{model-id}`
+   *
+   *   Only one language detection model is currently supported:
+   *   `projects/{project-id}/locations/{location-id}/models/language-detection/default`.
+   *
+   *   If not specified, the default model is used.
    * @param {string} [request.content]
    *   The content of the input stored as a string.
    * @param {string} [request.mimeType]
    *   Optional. The format of the source text, for example, "text/html",
-   *   "text/plain". If left blank, the MIME type is assumed to be "text/html".
+   *   "text/plain". If left blank, the MIME type defaults to "text/html".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -446,26 +460,33 @@ class TranslationServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} [request.parent]
-   *   Optional. Used for making regionalized calls.
-   *   Format: projects/{project-id}/locations/{location-id}.
-   *   For global calls, use projects/{project-id}/locations/global.
-   *   If missing, the call is treated as a global call.
+   *   Required. Location to make a regional or global call.
    *
-   *   Only custom model within the same location-id can be used.
-   *   Otherwise 400 is returned.
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   For global calls, use `projects/{project-id}/locations/global`.
+   *
+   *   Only models within the same region (have same location-id) can be used,
+   *   otherwise an INVALID_ARGUMENT (400) error is returned.
    * @param {string} [request.displayLanguageCode]
    *   Optional. The language to use to return localized, human readable names
-   *   of supported languages. If missing, default language is ENGLISH.
+   *   of supported languages. If missing, then display names are not returned
+   *   in a response.
    * @param {string} [request.model]
    *   Optional. Get supported languages of this model.
+   *
    *   The format depends on model type:
-   *   1. Custom models:
-   *   projects/{project-id}/locations/{location-id}/models/{model-id}.
-   *   2. General (built-in) models:
-   *   projects/{project-id}/locations/{location-id}/models/general/nmt
-   *   projects/{project-id}/locations/{location-id}/models/general/base
+   *
+   *   - AutoML Translation models:
+   *     `projects/{project-id}/locations/{location-id}/models/{model-id}`
+   *
+   *   - General (built-in) models:
+   *     `projects/{project-id}/locations/{location-id}/models/general/nmt`,
+   *     `projects/{project-id}/locations/{location-id}/models/general/base`
+   *
+   *
    *   Returns languages supported by the specified model.
-   *   If missing, we get supported languages of Google general NMT model.
+   *   If missing, we get supported languages of Google general base (PBMT) model.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -545,26 +566,32 @@ class TranslationServiceClient {
    *
    *   This object should have the same structure as [OutputConfig]{@link google.cloud.translation.v3beta1.OutputConfig}
    * @param {string} [request.parent]
-   *   Optional. Only used when making regionalized call.
-   *   Format:
-   *   projects/{project-id}/locations/{location-id}.
+   *   Required. Location to make a regional call.
    *
-   *   Only custom models/glossaries within the same location-id can be used.
-   *   Otherwise 400 is returned.
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   The `global` location is not supported for batch translation.
+   *
+   *   Only AutoML Translation models or glossaries within the same region (have
+   *   the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
+   *   error is returned.
    * @param {Object.<string, string>} [request.models]
    *   Optional. The models to use for translation. Map's key is target language
    *   code. Map's value is model name. Value can be a built-in general model,
-   *   or a custom model built by AutoML.
+   *   or an AutoML Translation model.
    *
    *   The value format depends on model type:
-   *   1. Custom models:
-   *   projects/{project-id}/locations/{location-id}/models/{model-id}.
-   *   2. General (built-in) models:
-   *   projects/{project-id}/locations/{location-id}/models/general/nmt
-   *   projects/{project-id}/locations/{location-id}/models/general/base
+   *
+   *   - AutoML Translation models:
+   *     `projects/{project-id}/locations/{location-id}/models/{model-id}`
+   *
+   *   - General (built-in) models:
+   *     `projects/{project-id}/locations/{location-id}/models/general/nmt`,
+   *     `projects/{project-id}/locations/{location-id}/models/general/base`
+   *
    *
    *   If the map is empty or a specific model is
-   *   not requested for a language pair, then default google model is used.
+   *   not requested for a language pair, then default google model (nmt) is used.
    * @param {Object.<string, Object>} [request.glossaries]
    *   Optional. Glossaries to be applied for translation.
    *   It's keyed by target language code.
@@ -818,7 +845,7 @@ class TranslationServiceClient {
    *   resources in a page.
    * @param {string} [request.filter]
    *   Optional. Filter specifying constraints of a list operation.
-   *   For example, `tags.glossary_name="products*"`.
+   *   Filtering is not supported yet, and the parameter currently has no effect.
    *   If missing, no filtering is performed.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -929,7 +956,7 @@ class TranslationServiceClient {
    *   resources in a page.
    * @param {string} [request.filter]
    *   Optional. Filter specifying constraints of a list operation.
-   *   For example, `tags.glossary_name="products*"`.
+   *   Filtering is not supported yet, and the parameter currently has no effect.
    *   If missing, no filtering is performed.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
