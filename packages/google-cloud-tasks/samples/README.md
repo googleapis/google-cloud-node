@@ -12,8 +12,8 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create Http Task](#create-http-task)
-  * [Create Http Task With Token](#create-http-task-with-token)
+  * [Cloud Tasks Create HTTP Target](#cloud-tasks-create-http-target)
+  * [Cloud Tasks Create HTTP Target with Token](#cloud-tasks-create-http-target-with-token)
   * [Create Queue](#create-queue)
   * [Create Task](#create-task)
   * [Delete Queue](#delete-queue)
@@ -30,7 +30,9 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Create Http Task
+### Cloud Tasks Create HTTP Target
+
+Create Cloud Tasks with a HTTP Target
 
 View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTask.js).
 
@@ -47,7 +49,9 @@ __Usage:__
 
 
 
-### Create Http Task With Token
+### Cloud Tasks Create HTTP Target with Token
+
+Create Cloud Tasks with a HTTP Target with Token
 
 View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTaskWithToken.js).
 
