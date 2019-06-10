@@ -7,3 +7,4 @@ packages/google-cloud/README.md
 packages/*/AUTHORS
 packages/*/CONTRIBUTORS
 packages/*/COPYING
+package-lock.json
