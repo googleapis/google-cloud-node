@@ -560,9 +560,7 @@ describe('error-reporting', () => {
     assert.strictEqual(
       rep.message.indexOf(SRC_ROOT),
       -1,
-      `Expected the error item's representative's message to start with ${SRC_ROOT} but found '${
-        rep.message
-      }'`
+      `Expected the error item's representative's message to start with ${SRC_ROOT} but found '${rep.message}'`
     );
     // Ensure the stack trace in the mssage contains the frame corresponding
     // to the 'expectedTopOfStack' function because that is the name of
@@ -574,9 +572,7 @@ describe('error-reporting', () => {
     assert.notStrictEqual(
       rep.message.indexOf(expectedTopOfStack),
       -1,
-      `Expected the error item's representative's message to not contain ${expectedTopOfStack} but found '${
-        rep.message
-      }'`
+      `Expected the error item's representative's message to not contain ${expectedTopOfStack} but found '${rep.message}'`
     );
     const context = rep.serviceContext;
     assert.ok(
