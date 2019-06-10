@@ -1,6 +1,5 @@
 {
   "name": "google-cloud-node",
-  "version": "1.0.0",
   "private": true,
   "description": "Google Cloud client libraries for Node.js",
   "bin": "bin/generate-readme.js",
