@@ -34,9 +34,7 @@ async function setRetentionPolicy(bucketName, retentionPeriod) {
     .bucket(bucketName)
     .setRetentionPeriod(retentionPeriod);
   console.log(
-    `Bucket ${bucketName} retention period set for ${
-      metadata.retentionPolicy.retentionPeriod
-    } seconds.`
+    `Bucket ${bucketName} retention period set for ${metadata.retentionPolicy.retentionPeriod} seconds.`
   );
   // [END storage_set_retention_policy]
 }
@@ -104,9 +102,7 @@ async function lockRetentionPolicy(bucketName) {
     .lock(unlockedMetadata.metageneration);
   console.log(`Retention policy for ${bucketName} is now locked.`);
   console.log(
-    `Retention policy effective as of ${
-      lockedMetadata.retentionPolicy.effectiveTime
-    }`
+    `Retention policy effective as of ${lockedMetadata.retentionPolicy.effectiveTime}`
   );
 
   return lockedMetadata;
