@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.1.0...v2.1.1) (2019-06-10)
+
+
+### Bug Fixes
+
+* Update example commands to use cloud-storage-samples bucket ([#253](https://www.github.com/googleapis/nodejs-video-intelligence/issues/253)) ([3a80413](https://www.github.com/googleapis/nodejs-video-intelligence/commit/3a80413))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.0.1...v2.1.0) (2019-06-05)
 
 
