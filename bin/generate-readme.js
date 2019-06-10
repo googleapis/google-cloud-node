@@ -70,7 +70,9 @@ async function collectRepoMetadata (repos) {
 function generateReadme (repoMetadata) {
   const template = readFileSync('./bin/README.mustache', 'utf8');
   const libraries = [];
-  // partition libraries by release type.
+
+  // filter libraries to only contain those with Google Cloud api_id,
+  // standardizing naming along the way.
   Object.keys(repoMetadata).forEach(key => {
     const metadata = repoMetadata[key];
     if (metadata.api_id) {
