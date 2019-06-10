@@ -1,15 +1,15 @@
 {
   "name": "google-cloud-node",
   "version": "1.0.0",
+  "private": true,
   "description": "Google Cloud client libraries for Node.js",
-  "main": "bin/generate-readme.js",
   "bin": "bin/generate-readme.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "fix": "standard --fix",
-    "test": "standard",
+    "fix": "semistandard --fix",
+    "test": "semistandard",
     "generate": "./bin/generate-readme.js"
   },
   "repository": {
@@ -34,6 +34,6 @@
     "yargs": "^13.2.4"
   },
   "devDependencies": {
-    "standard": "^12.0.1"
+    "semistandard": "^13.0.1"
   }
 }

@@ -131,5 +131,5 @@ Apache 2.0 - See [LICENSE][license] for more information.
 [devconsole]: https://console.developer.google.com
 [googleapis]: https://github.com/google/google-api-nodejs-client
 [semver]: http://semver.org
-[contributing]: .github/CONTRIBUTING.md
+[contributing]: CONTRIBUTING.md
 [license]: LICENSE
