@@ -3,21 +3,22 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
+  "files": [
+    "*.js"
+  ],
   "repository": "googleapis/nodejs-datastore",
   "engines": {
     "node": ">=8"
   },
   "scripts": {
-    "test": "mocha system-test/*.test.js --timeout=600000"
+    "test": "mocha --timeout=600000"
   },
   "dependencies": {
     "@google-cloud/datastore": "^4.1.0",
-    "sinon": "^7.0.0",
-    "yargs": "^13.0.0"
+    "sinon": "^7.3.2"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^3.0.0",
-    "mocha": "^6.0.0",
-    "proxyquire": "^2.0.1"
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
   }
 }

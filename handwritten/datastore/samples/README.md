@@ -12,10 +12,12 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Add Task](#add-task)
   * [Concepts](#concepts)
   * [Quickstart](#quickstart)
-  * [Tasks](#tasks)
+  * [Add Task](#add-task)
+  * [Delete Task](#delete-task)
+  * [List Tasks](#list-tasks)
+  * [Update Task](#update-task)
 
 ## Before you begin
 
@@ -23,23 +25,6 @@ Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-datastore#using-the-client-library).
 
 ## Samples
-
-
-
-### Add Task
-
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/addTask.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/addTask.js,samples/README.md)
-
-__Usage:__
-
-
-`node addTask.js`
-
-
------
-
 
 
 
@@ -77,16 +62,75 @@ __Usage:__
 
 
 
-### Tasks
+### Add Task
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.js).
+Adds a task with a description <description>.
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.js,samples/README.md)
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.add.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.add.js,samples/README.md)
 
 __Usage:__
 
 
-`node tasks.js`
+`node tasks.add.js <description>`
+
+
+-----
+
+
+
+
+### Delete Task
+
+Deletes task <taskId>.
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.delete.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.delete.js,samples/README.md)
+
+__Usage:__
+
+
+`node tasks.delete.js <taskId>`
+
+
+-----
+
+
+
+
+### List Tasks
+
+Lists all tasks ordered by creation time.
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.list.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.list.js,samples/README.md)
+
+__Usage:__
+
+
+`node tasks.list.js`
+
+
+-----
+
+
+
+
+### Update Task
+
+Marks task <taskId> as Done.
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.markdone.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.markdone.js,samples/README.md)
+
+__Usage:__
+
+
+`node tasks.markdone.js <taskId>`
 
 
 
