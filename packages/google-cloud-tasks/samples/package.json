@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint '**/*.js'"
   },
   "dependencies": {
     "@google-cloud/tasks": "^1.1.0",
