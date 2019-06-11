@@ -365,7 +365,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -461,7 +461,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -507,7 +507,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -586,7 +586,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -737,7 +737,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -886,7 +886,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -1009,7 +1009,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -1129,7 +1129,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
@@ -1244,7 +1244,7 @@ class CloudRedisClient {
    *
    * @example
    *
-   * const redis = require('redis.v1');
+   * const redis = require('@google-cloud/redis');
    *
    * const client = new redis.v1.CloudRedisClient({
    *   // optional auth parameters.
