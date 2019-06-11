@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/vision": "^1.1.0",
-    "mathjs": "^5.0.4",
+    "mathjs": "^6.0.0",
     "natural": "^0.6.1",
     "redis": "^2.8.0",
     "yargs": "^13.0.0",
