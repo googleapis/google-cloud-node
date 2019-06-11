@@ -16,6 +16,7 @@
   * [Quickstart](#quickstart)
   * [Add Task](#add-task)
   * [Delete Task](#delete-task)
+  * [Legacy Samples](#legacy-samples)
   * [List Tasks](#list-tasks)
   * [Update Task](#update-task)
 
@@ -93,6 +94,23 @@ __Usage:__
 
 
 `node tasks.delete.js <taskId>`
+
+
+-----
+
+
+
+
+### Legacy Samples
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.js,samples/README.md)
+
+__Usage:__
+
+
+`node tasks.js`
 
 
 -----

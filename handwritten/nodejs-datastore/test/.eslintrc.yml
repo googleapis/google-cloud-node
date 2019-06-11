@@ -4,3 +4,4 @@ env:
 rules:
   node/no-unpublished-require: off
   node/no-missing-require: off
+  no-warning-comments: off
