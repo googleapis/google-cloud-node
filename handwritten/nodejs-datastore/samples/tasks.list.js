@@ -1,5 +1,5 @@
 /**
- * Copyright 2016, Google, Inc.
+ * Copyright 2018, Google, Inc.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,34 +15,24 @@
 
 'use strict';
 
-// [START datastore_quickstart]
-// Imports the Google Cloud client library
+// sample-metadata:
+//   title: List Tasks
+//   description: Lists all tasks ordered by creation time.
+//   usage: node tasks.list.js
+
+// [START datastore_retrieve_entities]
 const {Datastore} = require('@google-cloud/datastore');
 
-// Creates a client
 const datastore = new Datastore();
 
-async function quickstart() {
-  // The kind for the new entity
-  const kind = 'Task';
-
-  // The name/ID for the new entity
-  const name = 'sampletask1';
-
-  // The Cloud Datastore key for the new entity
-  const taskKey = datastore.key([kind, name]);
-
-  // Prepares the new entity
-  const task = {
-    key: taskKey,
-    data: {
-      description: 'Buy milk',
-    },
-  };
-
-  // Saves the entity
-  await datastore.save(task);
-  console.log(`Saved ${task.key.name}: ${task.data.description}`);
+async function listTasks() {
+  const query = datastore.createQuery('Task').order('created');
+  const [tasks] = await datastore.runQuery(query);
+  console.log('Tasks:');
+  for (const task of tasks) {
+    const taskKey = task[datastore.KEY];
+    console.log(taskKey.id, task);
+  }
 }
-quickstart();
-// [END datastore_quickstart]
+listTasks();
+// [END datastore_retrieve_entities]

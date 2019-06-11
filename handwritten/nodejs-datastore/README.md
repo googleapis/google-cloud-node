@@ -57,19 +57,16 @@ npm install @google-cloud/datastore
 // Imports the Google Cloud client library
 const {Datastore} = require('@google-cloud/datastore');
 
-async function quickStart() {
-  // Your Google Cloud Platform project ID
-  const projectId = 'YOUR_PROJECT_ID';
+// Creates a client
+const datastore = new Datastore();
 
-  // Creates a client
-  const datastore = new Datastore({
-    projectId: projectId,
-  });
-
+async function quickstart() {
   // The kind for the new entity
   const kind = 'Task';
+
   // The name/ID for the new entity
   const name = 'sampletask1';
+
   // The Cloud Datastore key for the new entity
   const taskKey = datastore.key([kind, name]);
 
@@ -85,7 +82,7 @@ async function quickStart() {
   await datastore.save(task);
   console.log(`Saved ${task.key.name}: ${task.data.description}`);
 }
-quickStart().catch(console.error);
+quickstart();
 
 ```
 
@@ -98,10 +95,12 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Add Task | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/addTask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/addTask.js,samples/README.md) |
 | Concepts | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/concepts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/concepts.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Tasks | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.js,samples/README.md) |
+| Add Task | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.add.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.add.js,samples/README.md) |
+| Delete Task | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.delete.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.delete.js,samples/README.md) |
+| List Tasks | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.list.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.list.js,samples/README.md) |
+| Update Task | [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.markdone.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.markdone.js,samples/README.md) |
 
 
 

@@ -41,7 +41,7 @@
     "pretest": "npm run compile",
     "proto": "npm run proto:datastore",
     "proto:datastore": "mkdir -p proto && pbjs -t static-module -w commonjs -p node_modules/google-proto-files google/datastore/v1/datastore.proto | pbts -i long -o proto/datastore.d.ts -",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip https://github.com/googleapis/nodejs-datastore/blob/master/samples/.+",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
