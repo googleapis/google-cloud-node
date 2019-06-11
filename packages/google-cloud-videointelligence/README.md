@@ -123,6 +123,7 @@ has instructions for running the samples.
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | Analyze | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.js,samples/README.md) |
+| Analyze.v1p2beta1 | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.v1p2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.v1p2beta1.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 

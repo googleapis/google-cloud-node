@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Analyze](#analyze)
+  * [Analyze.v1p2beta1](#analyze.v1p2beta1)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -34,6 +35,23 @@ __Usage:__
 
 
 `node analyze.js`
+
+
+-----
+
+
+
+
+### Analyze.v1p2beta1
+
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.v1p2beta1.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.v1p2beta1.js,samples/README.md)
+
+__Usage:__
+
+
+`node analyze.v1p2beta1.js`
 
 
 -----
