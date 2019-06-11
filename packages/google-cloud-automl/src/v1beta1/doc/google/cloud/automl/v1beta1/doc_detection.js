@@ -38,6 +38,47 @@ const ImageObjectDetectionAnnotation = {
 };
 
 /**
+ * Annotation details for video object tracking.
+ *
+ * @property {string} instanceId
+ *   Optional.
+ *   The instance of the object, expressed as a positive integer. Used to tell
+ *   apart objects of the same type (i.e. AnnotationSpec) when multiple are
+ *   present on a single example.
+ *   NOTE: Instance ID prediction quality is not a part of model evaluation and
+ *   is done as best effort. Especially in cases when an entity goes
+ *   off-screen for a longer time (minutes), when it comes back it may be given
+ *   a new instance ID.
+ *
+ * @property {Object} timeOffset
+ *   Required. A time (frame) of a video to which this annotation pertains.
+ *   Represented as the duration since the video's start.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} boundingBox
+ *   Required. The rectangle representing the object location on the frame (i.e.
+ *   at the time_offset of the video).
+ *
+ *   This object should have the same structure as [BoundingPoly]{@link google.cloud.automl.v1beta1.BoundingPoly}
+ *
+ * @property {number} score
+ *   Output only.
+ *   The confidence that this annotation is positive for the video at
+ *   the time_offset, value in [0, 1], higher means higher positivity
+ *   confidence. For annotations created by the user the score is 1. When
+ *   user approves an annotation, the original float score is kept (and not
+ *   changed to 1).
+ *
+ * @typedef VideoObjectTrackingAnnotation
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.VideoObjectTrackingAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/detection.proto}
+ */
+const VideoObjectTrackingAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Bounding box matching model metrics for a single intersection-over-union
  * threshold and multiple label match confidence thresholds.
  *
@@ -111,5 +152,37 @@ const BoundingBoxMetricsEntry = {
  * @see [google.cloud.automl.v1beta1.ImageObjectDetectionEvaluationMetrics definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/detection.proto}
  */
 const ImageObjectDetectionEvaluationMetrics = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Model evaluation metrics for video object tracking problems.
+ * Evaluates prediction quality of both labeled bounding boxes and labeled
+ * tracks (i.e. series of bounding boxes sharing same label and instance ID).
+ *
+ * @property {number} evaluatedFrameCount
+ *   Output only. The number of video frames used to create this evaluation.
+ *
+ * @property {number} evaluatedBoundingBoxCount
+ *   Output only. The total number of bounding boxes (i.e. summed over all
+ *   frames) the ground truth used to create this evaluation had.
+ *
+ * @property {Object[]} boundingBoxMetricsEntries
+ *   Output only. The bounding boxes match metrics for each
+ *   Intersection-over-union threshold 0.05,0.10,...,0.95,0.96,0.97,0.98,0.99
+ *   and each label confidence threshold 0.05,0.10,...,0.95,0.96,0.97,0.98,0.99
+ *   pair.
+ *
+ *   This object should have the same structure as [BoundingBoxMetricsEntry]{@link google.cloud.automl.v1beta1.BoundingBoxMetricsEntry}
+ *
+ * @property {number} boundingBoxMeanAveragePrecision
+ *   Output only. The single metric for bounding boxes evaluation:
+ *   the mean_average_precision averaged over all bounding_box_metrics_entries.
+ *
+ * @typedef VideoObjectTrackingEvaluationMetrics
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.VideoObjectTrackingEvaluationMetrics definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/detection.proto}
+ */
+const VideoObjectTrackingEvaluationMetrics = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

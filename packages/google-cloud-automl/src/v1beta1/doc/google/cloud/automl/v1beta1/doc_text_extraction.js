@@ -18,14 +18,15 @@
 /**
  * Annotation for identifying spans of text.
  *
+ * @property {Object} textSegment
+ *   An entity annotation will set this, which is the part of the original
+ *   text to which the annotation pertains.
+ *
+ *   This object should have the same structure as [TextSegment]{@link google.cloud.automl.v1beta1.TextSegment}
+ *
  * @property {number} score
  *   Output only. A confidence estimate between 0.0 and 1.0. A higher value
  *   means greater confidence in correctness of the annotation.
- *
- * @property {Object} textSegment
- *   Required. The part of the original text to which this annotation pertains.
- *
- *   This object should have the same structure as [TextSegment]{@link google.cloud.automl.v1beta1.TextSegment}
  *
  * @typedef TextExtractionAnnotation
  * @memberof google.cloud.automl.v1beta1

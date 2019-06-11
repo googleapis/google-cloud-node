@@ -77,10 +77,7 @@ const TextSentimentAnnotation = {
  *
  * @property {string[]} annotationSpecId
  *   Output only. The annotation spec ids used for this evaluation.
- *   Deprecated, remove after Boq Migration and use then
- *   TextSentimentModelMetadata.annotation_spec_count for count, and list
- *   all model evaluations to see the exact annotation_spec_ids that were
- *   used.
+ *   Deprecated .
  *
  * @typedef TextSentimentEvaluationMetrics
  * @memberof google.cloud.automl.v1beta1

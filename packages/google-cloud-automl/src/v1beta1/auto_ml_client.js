@@ -844,7 +844,8 @@ class AutoMlClient {
   }
 
   /**
-   * Imports data into a dataset. For Tables this method can only be called on an empty Dataset.
+   * Imports data into a dataset.
+   * For Tables this method can only be called on an empty Dataset.
    *
    * For Tables:
    * *   A
@@ -1541,8 +1542,8 @@ class AutoMlClient {
    * same parameters has no effect. Deploying with different parametrs
    * (as e.g. changing
    *
-   * node_number
-   * ) will update the deployment without pausing the model's availability.
+   * node_number)
+   *  will reset the deployment state without pausing the model's availability.
    *
    * Only applicable for Text Classification, Image Object Detection and Tables;
    * all other domains manage deployment automatically.

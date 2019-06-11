@@ -37,14 +37,14 @@
  *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
  *       makes predictions for an image, it will only produce results that have
  *       at least this confidence score. The default is 0.5.
+ *   *  For Tables:
+ *      `feature_importance` - (boolean) Whether
  *
- *    *  For Image Object Detection:
- *      `score_threshold` - (float) When Model detects objects on the image,
- *          it will only produce bounding boxes which have at least this
- *          confidence score. Value in 0 to 1 range, default is 0.5.
- *      `max_bounding_box_count` - (int64) No more than this number of bounding
- *          boxes will be returned in the response. Default is 100, the
- *          requested value may be limited by server.
+ *   [feature_importance][[google.cloud.automl.v1beta1.TablesModelColumnInfo.feature_importance]
+ *          should be populated in the returned
+ *
+ *   [TablesAnnotation(-s)][[google.cloud.automl.v1beta1.TablesAnnotation].
+ *          The default is false.
  *
  * @typedef PredictRequest
  * @memberof google.cloud.automl.v1beta1
@@ -137,6 +137,17 @@ const PredictResponse = {
  *          metrics provided to describe that quality. The default is
  *          "false".
  *
+ *   *  For Video Object Tracking:
+ *      `score_threshold` - (float) When Model detects objects on video frames,
+ *          it will only produce bounding boxes which have at least this
+ *          confidence score. Value in 0 to 1 range, default is 0.5.
+ *      `max_bounding_box_count` - (int64) No more than this number of bounding
+ *          boxes will be returned per frame. Default is 100, the requested
+ *          value may be limited by server.
+ *      `min_bounding_box_size` - (float) Only bounding boxes with shortest edge
+ *        at least that long as a relative value of video frame size will be
+ *        returned. Value in 0 to 1 range. Default is 0.
+ *
  * @typedef BatchPredictRequest
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.BatchPredictRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/prediction_service.proto}
@@ -146,7 +157,9 @@ const BatchPredictRequest = {
 };
 
 /**
- * Batch predict result.
+ * Result of the Batch Predict. This message is returned in
+ * response of the operation returned
+ * by the PredictionService.BatchPredict.
  * @typedef BatchPredictResult
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.BatchPredictResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/prediction_service.proto}

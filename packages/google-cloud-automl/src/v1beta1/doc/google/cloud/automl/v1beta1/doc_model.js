@@ -43,6 +43,11 @@
  *
  *   This object should have the same structure as [VideoClassificationModelMetadata]{@link google.cloud.automl.v1beta1.VideoClassificationModelMetadata}
  *
+ * @property {Object} videoObjectTrackingModelMetadata
+ *   Metadata for video object tracking models.
+ *
+ *   This object should have the same structure as [VideoObjectTrackingModelMetadata]{@link google.cloud.automl.v1beta1.VideoObjectTrackingModelMetadata}
+ *
  * @property {Object} textExtractionModelMetadata
  *   Metadata for text extraction models.
  *
@@ -76,7 +81,7 @@
  *
  * @property {Object} createTime
  *   Output only.
- *   Timestamp when this model was created.
+ *   Timestamp when the model training finished  and can be used for prediction.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

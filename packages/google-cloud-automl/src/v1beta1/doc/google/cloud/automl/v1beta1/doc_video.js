@@ -27,11 +27,31 @@ const VideoClassificationDatasetMetadata = {
 };
 
 /**
+ * Dataset metadata specific to video object tracking.
+ * @typedef VideoObjectTrackingDatasetMetadata
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.VideoObjectTrackingDatasetMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/video.proto}
+ */
+const VideoObjectTrackingDatasetMetadata = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Model metadata specific to video classification.
  * @typedef VideoClassificationModelMetadata
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.VideoClassificationModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/video.proto}
  */
 const VideoClassificationModelMetadata = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Model metadata specific to video object tracking.
+ * @typedef VideoObjectTrackingModelMetadata
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.VideoObjectTrackingModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/video.proto}
+ */
+const VideoObjectTrackingModelMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

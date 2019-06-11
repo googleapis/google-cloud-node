@@ -54,6 +54,9 @@
  * @property {number} nullValueCount
  *   The number of values that are null.
  *
+ * @property {number} validValueCount
+ *   The number of values that are valid.
+ *
  * @typedef DataStats
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.DataStats definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/data_stats.proto}

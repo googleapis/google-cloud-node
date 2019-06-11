@@ -17,7 +17,6 @@
 
 /**
  * A contiguous part of a text (string), assuming it has an UTF-8 NFC encoding.
- * .
  *
  * @property {string} content
  *   Output only. The content of the TextSegment.

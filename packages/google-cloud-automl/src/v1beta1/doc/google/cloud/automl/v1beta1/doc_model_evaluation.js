@@ -22,7 +22,7 @@
  *   Model evaluation metrics for image, text, video and tables
  *   classification.
  *   Tables problem is considered a classification when the target column
- *   has either CATEGORY or ARRAY(CATEGORY) DataType.
+ *   is CATEGORY DataType.
  *
  *   This object should have the same structure as [ClassificationEvaluationMetrics]{@link google.cloud.automl.v1beta1.ClassificationEvaluationMetrics}
  *
@@ -42,6 +42,11 @@
  *   Model evaluation metrics for image object detection.
  *
  *   This object should have the same structure as [ImageObjectDetectionEvaluationMetrics]{@link google.cloud.automl.v1beta1.ImageObjectDetectionEvaluationMetrics}
+ *
+ * @property {Object} videoObjectTrackingEvaluationMetrics
+ *   Model evaluation metrics for video object tracking.
+ *
+ *   This object should have the same structure as [VideoObjectTrackingEvaluationMetrics]{@link google.cloud.automl.v1beta1.VideoObjectTrackingEvaluationMetrics}
  *
  * @property {Object} textSentimentEvaluationMetrics
  *   Evaluation metrics for text sentiment models.
@@ -64,19 +69,26 @@
  *   Output only.
  *   The ID of the annotation spec that the model evaluation applies to. The
  *   The ID is empty for the overall model evaluation.
- *   For Tables classification these are the distinct values of the target
- *   column at the moment of the evaluation; for this problem annotation specs
- *   in the dataset do not exist.
- *   NOTE: Currently there is no way to obtain the display_name of the
- *   annotation spec from its ID. To see the display_names, review the model
- *   evaluations in the UI.
+ *   For Tables annotation specs in the dataset do not exist and this ID is
+ *   always not set, but for CLASSIFICATION
+ *
+ *   prediction_type-s
+ *   the
+ *   display_name
+ *   field is used.
  *
  * @property {string} displayName
- *   Output only. The value of AnnotationSpec.display_name when the model
- *   was trained. Because this field returns a value at model training time,
- *   for different models trained using the same dataset, the returned value
- *   could be different as model owner could update the display_name between
- *   any two model training.
+ *   Output only. The value of
+ *   display_name at
+ *   the moment when the model was trained. Because this field returns a value
+ *   at model training time, for different models trained from the same dataset,
+ *   the values may differ, since display names could had been changed between
+ *   the two model's trainings.
+ *   For Tables CLASSIFICATION
+ *
+ *   prediction_type-s
+ *   distinct values of the target column at the moment of the model evaluation
+ *   are populated here.
  *   The display_name is empty for the overall model evaluation.
  *
  * @property {Object} createTime

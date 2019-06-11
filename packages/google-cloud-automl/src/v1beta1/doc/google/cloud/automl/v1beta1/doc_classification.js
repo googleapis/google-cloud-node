@@ -105,9 +105,10 @@ const VideoClassificationAnnotation = {
  *   Output only. Metrics for each confidence_threshold in
  *   0.00,0.05,0.10,...,0.95,0.96,0.97,0.98,0.99 and
  *   position_threshold = INT32_MAX_VALUE.
- *   Precision-recall curve is derived from them.
- *   The above metrics may also be supplied for additional values of
- *   position_threshold.
+ *   ROC and precision-recall curves, and other aggregated metrics are derived
+ *   from them. The confidence metrics entries may also be supplied for
+ *   additional values of position_threshold, but from these no aggregated
+ *   metrics are computed.
  *
  *   This object should have the same structure as [ConfidenceMetricsEntry]{@link google.cloud.automl.v1beta1.ConfidenceMetricsEntry}
  *
@@ -201,6 +202,10 @@ const ClassificationEvaluationMetrics = {
    *
    * @property {string[]} annotationSpecId
    *   Output only. IDs of the annotation specs used in the confusion matrix.
+   *   For Tables CLASSIFICATION
+   *
+   *   prediction_type
+   *   only list of annotation_spec_display_name-s is populated.
    *
    * @property {Object[]} row
    *   Output only. Rows in the confusion matrix. The number of rows is equal to
@@ -224,7 +229,8 @@ const ClassificationEvaluationMetrics = {
      * @property {number[]} exampleCount
      *   Output only. Value of the specific cell in the confusion matrix.
      *   The number of values each row has (i.e. the length of the row) is equal
-     *   to the length of the annotation_spec_id field.
+     *   to the length of the `annotation_spec_id` field or, if that one is not
+     *   populated, length of the display_name field.
      *
      * @typedef Row
      * @memberof google.cloud.automl.v1beta1
@@ -245,7 +251,7 @@ const ClassificationEvaluationMetrics = {
 const ClassificationType = {
 
   /**
-   * Should not be used, an un-set enum has this value by default.
+   * An un-set value of this enum.
    */
   CLASSIFICATION_TYPE_UNSPECIFIED: 0,
 

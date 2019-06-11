@@ -44,6 +44,11 @@
  *
  *   This object should have the same structure as [VideoClassificationDatasetMetadata]{@link google.cloud.automl.v1beta1.VideoClassificationDatasetMetadata}
  *
+ * @property {Object} videoObjectTrackingDatasetMetadata
+ *   Metadata for a dataset used for video object tracking.
+ *
+ *   This object should have the same structure as [VideoObjectTrackingDatasetMetadata]{@link google.cloud.automl.v1beta1.VideoObjectTrackingDatasetMetadata}
+ *
  * @property {Object} textExtractionDatasetMetadata
  *   Metadata for a dataset used for text extraction.
  *
@@ -90,33 +95,5 @@
  * @see [google.cloud.automl.v1beta1.Dataset definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/dataset.proto}
  */
 const Dataset = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * A definition of an annotation.
- *
- * @property {string} name
- *   Output only. Resource name of the annotation spec.
- *   Form:
- *
- *   'projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationSpecs/{annotation_spec_id}'
- *
- * @property {string} displayName
- *   Required.
- *   The name of the annotation spec to show in the interface. The name can be
- *   up to 32 characters long and can consist only of ASCII Latin letters A-Z
- *   and a-z, underscores
- *   (_), and ASCII digits 0-9.
- *
- * @property {number} exampleCount
- *   Output only. The number of examples in the parent dataset
- *   labeled by the annotation spec.
- *
- * @typedef AnnotationSpec
- * @memberof google.cloud.automl.v1beta1
- * @see [google.cloud.automl.v1beta1.AnnotationSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/dataset.proto}
- */
-const AnnotationSpec = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

@@ -83,7 +83,7 @@ const TextSentimentDatasetMetadata = {
 };
 
 /**
- * Model metadata that is specific to text classification.
+ * Model metadata that is specific to text sentiment.
  * @typedef TextSentimentModelMetadata
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.TextSentimentModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/text.proto}

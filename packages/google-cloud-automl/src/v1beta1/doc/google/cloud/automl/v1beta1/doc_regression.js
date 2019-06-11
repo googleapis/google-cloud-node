@@ -31,6 +31,9 @@
  * @property {number} rSquared
  *   Output only. R squared.
  *
+ * @property {number} rootMeanSquaredLogError
+ *   Output only. Root mean squared log error.
+ *
  * @typedef RegressionEvaluationMetrics
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.RegressionEvaluationMetrics definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/regression.proto}

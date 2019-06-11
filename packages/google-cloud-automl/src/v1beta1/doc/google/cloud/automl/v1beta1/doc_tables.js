@@ -27,13 +27,9 @@
  *   This column must be non-nullable and have one of following data types
  *   (otherwise model creation will error):
  *   * CATEGORY
- *   * ARRAY(CATEGORY)
  *   * FLOAT64
- *   Furthermore, if the type is CATEGORY or ARRAY(CATEGORY), then only up to
- *   40 unique values may exist in that column across all rows, but for
- *   ARRAY(CATEGORY) unique values are counted as elements of the ARRAY (i.e.
- *   following 3 ARRAY-s: [A, B], [A], [B] are counted as having 2 unique
- *   values).
+ *   Furthermore, if the type is CATEGORY , then only up to
+ *   100 unique values may exist in that column across all rows.
  *
  *   NOTE: Updates of this field will instantly affect any other users
  *   concurrently working with the dataset.
@@ -67,10 +63,10 @@
  * @property {Object.<string, Object>} targetColumnCorrelations
  *   Output only. Correlations between
  *
- *   target_column,
+ *   TablesDatasetMetadata.target_column_spec_id,
  *   and other columns of the
  *
- *   primary_table.
+ *   TablesDatasetMetadataprimary_table.
  *   Only set if the target column is set. Mapping from other column spec id to
  *   its CorrelationStats with the target column.
  *   This field may be stale, see the stats_update_time field for
@@ -136,7 +132,7 @@ const TablesDatasetMetadata = {
  *   creates a model that maximizes/minimizes the value of the objective
  *   function over the validation set.
  *
- *   The supported optimization objectives depend on the prediction_type.
+ *   The supported optimization objectives depend on the prediction type.
  *   If the field is not set, a default objective function is used.
  *
  *   CLASSIFICATION_BINARY:
@@ -148,8 +144,6 @@ const TablesDatasetMetadata = {
  *   CLASSIFICATION_MULTI_CLASS :
  *     "MINIMIZE_LOG_LOSS" (default) - Minimize log loss.
  *
- *   CLASSIFICATION_MULTI_LABEL:
- *     "MINIMIZE_LOG_LOSS" (default) - Minimize log loss.
  *
  *   REGRESSION:
  *     "MINIMIZE_RMSE" (default) - Minimize root-mean-squared error (RMSE).
@@ -162,13 +156,13 @@ const TablesDatasetMetadata = {
  *
  * @property {Object[]} tablesModelColumnInfo
  *   Output only. Auxiliary information for each of the
- *   input_feature_column_specs, with respect to this particular model.
+ *   input_feature_column_specs with respect to this particular model.
  *
  *   This object should have the same structure as [TablesModelColumnInfo]{@link google.cloud.automl.v1beta1.TablesModelColumnInfo}
  *
  * @property {number} trainBudgetMilliNodeHours
- *   The train budget of creating this model, expressed in milli node hours
- *   i.e. 1,000 value in this field means 1 node hour.
+ *   Required. The train budget of creating this model, expressed in milli node
+ *   hours i.e. 1,000 value in this field means 1 node hour.
  *
  *   The training cost of the model will not exceed this budget. The final cost
  *   will be attempted to be close to the budget, though may end up being (even)
@@ -179,10 +173,18 @@ const TablesDatasetMetadata = {
  *   model for the given dataset, the training won't be attempted and
  *   will error.
  *
+ *   The train budget must be between 1,000 and 72,000 milli node hours,
+ *   inclusive.
+ *
  * @property {number} trainCostMilliNodeHours
  *   Output only. The actual training cost of the model, expressed in milli
  *   node hours, i.e. 1,000 value in this field means 1 node hour. Guaranteed
  *   to not exceed the train budget.
+ *
+ * @property {boolean} disableEarlyStopping
+ *   Use the entire training budget. This disables the early stopping feature.
+ *   By default, the early stopping feature is enabled, which means that AutoML
+ *   Tables might stop training before the entire training budget has been used.
  *
  * @typedef TablesModelMetadata
  * @memberof google.cloud.automl.v1beta1
@@ -201,19 +203,14 @@ const TablesModelMetadata = {
  *   For
  *
  *   target_column_spec
- *   of ARRAY(CATEGORY) data type, this is a confidence that one of the values
- *   in the ARRAY would be the provided value.
- *   For
- *
- *   target_column_spec
  *   of FLOAT64 data type the score is not populated.
  *
  * @property {Object} predictionInterval
  *   Output only. Only populated when
  *
  *   target_column_spec
- *   has FLOAT64 data type (i.e. for regression predictions). An interval in
- *   which the exactly correct target value has 95% chance to be in.
+ *   has FLOAT64 data type. An interval in which the exactly correct target
+ *   value has 95% chance to be in.
  *
  *   This object should have the same structure as [DoubleRange]{@link google.cloud.automl.v1beta1.DoubleRange}
  *
@@ -224,17 +221,22 @@ const TablesModelMetadata = {
  *   The value depends on the column's DataType:
  *   CATEGORY - the predicted (with the above confidence `score`) CATEGORY
  *              value.
- *   FLOAT64 - the predicted (with the above confidence `score`) FLOAT64 value.
- *   ARRAY(CATEGORY) - CATEGORY value meaning that this value would be in the
- *                     ARRAY in that column (with the above confidence `score`).
+ *   FLOAT64 - the predicted (with above `prediction_interval`) FLOAT64 value.
  *
  *   This object should have the same structure as [Value]{@link google.protobuf.Value}
  *
  * @property {Object[]} tablesModelColumnInfo
  *   Output only. Auxiliary information for each of the model's
  *
- *   input_feature_column_specs'
+ *   input_feature_column_specs
  *   with respect to this particular prediction.
+ *   If no other fields than
+ *
+ *   column_spec_name
+ *   and
+ *
+ *   column_display_name
+ *   would be populated, then this whole field is not.
  *
  *   This object should have the same structure as [TablesModelColumnInfo]{@link google.cloud.automl.v1beta1.TablesModelColumnInfo}
  *
@@ -261,13 +263,18 @@ const TablesAnnotation = {
  * @property {number} featureImportance
  *   Output only.
  *
- *   When given as part of a Model:
+ *   When given as part of a Model (always populated):
  *   Measurement of how much model predictions correctness on the TEST data
  *   depend on values in this column. A value between 0 and 1, higher means
  *   higher influence. These values are normalized - for all input feature
  *   columns of a given model they add to 1.
  *
- *   When given back by Predict or Batch Predict:
+ *   When given back by Predict (populated iff
+ *   feature_importance
+ *   param is set) or Batch
+ *   Predict (populated iff
+ *   feature_importance
+ *   param is set):
  *   Measurement of how impactful for the prediction returned for the given row
  *   the value in this column was. A value between 0 and 1, higher means larger
  *   impact. These values are normalized - for all input feature columns of a

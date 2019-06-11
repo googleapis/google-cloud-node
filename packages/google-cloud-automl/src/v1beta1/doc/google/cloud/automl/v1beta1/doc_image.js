@@ -129,6 +129,25 @@ const ImageClassificationModelMetadata = {
  *   Output only. An approximate number of online prediction QPS that can
  *   be supported by this model per each node on which it is deployed.
  *
+ * @property {string} stopReason
+ *   Output only. The reason that this create model operation stopped,
+ *   e.g. `BUDGET_REACHED`, `MODEL_CONVERGED`.
+ *
+ * @property {number} trainBudgetMilliNodeHours
+ *   The train budget of creating this model, expressed in milli node
+ *   hours i.e. 1,000 value in this field means 1 node hour. The actual
+ *   `train_cost` will be equal or less than this value. If further model
+ *   training ceases to provide any improvements, it will stop without using
+ *   full budget and the stop_reason will be `MODEL_CONVERGED`.
+ *   Note, node_hour  = actual_hour * number_of_nodes_invovled. The train budget
+ *   must be between 20,000 and 2,000,000 milli node hours, inclusive. The
+ *   default value is 216, 000 which represents one day in wall time.
+ *
+ * @property {number} trainCostMilliNodeHours
+ *   Output only. The actual train cost of creating this model, expressed in
+ *   milli node hours, i.e. 1,000 value in this field means 1 node hour.
+ *   Guaranteed to not exceed the train budget.
+ *
  * @typedef ImageObjectDetectionModelMetadata
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.ImageObjectDetectionModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/image.proto}

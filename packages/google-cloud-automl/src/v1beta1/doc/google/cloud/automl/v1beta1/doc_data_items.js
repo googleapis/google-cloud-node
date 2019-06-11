@@ -83,6 +83,7 @@ const Document = {
  * A representation of a row in a relational table.
  *
  * @property {string[]} columnSpecIds
+ *   Input Only.
  *   The resource IDs of the column specs describing the columns of the row.
  *   If set must contain, but possibly in a different order, all input feature
  *
@@ -92,7 +93,8 @@ const Document = {
  *   field is set.
  *
  * @property {Object[]} values
- *   Required. The values of the row cells, given in the same order as the
+ *   Input Only.
+ *   The values of the row cells, given in the same order as the
  *   column_spec_ids, or, if not set, then in the same order as input feature
  *
  *   column_specs
