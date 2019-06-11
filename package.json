@@ -1,0 +1,38 @@
+{
+  "name": "google-cloud-node",
+  "private": true,
+  "description": "Google Cloud client libraries for Node.js",
+  "bin": "bin/generate-readme.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "fix": "semistandard --fix",
+    "test": "semistandard",
+    "generate": "./bin/generate-readme.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googleapis/google-cloud-node.git"
+  },
+  "keywords": [
+    "google",
+    "cloud",
+    "nodejs"
+  ],
+  "author": "Google Inc.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "figures": "^3.0.0",
+    "node-fetch": "^2.6.0",
+    "yargs": "^13.2.4"
+  },
+  "devDependencies": {
+    "semistandard": "^13.0.1"
+  }
+}
