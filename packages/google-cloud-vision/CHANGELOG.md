@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-vision/compare/v1.1.0...v1.1.1) (2019-06-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mathjs to v6 ([#399](https://www.github.com/googleapis/nodejs-vision/issues/399)) ([6c37196](https://www.github.com/googleapis/nodejs-vision/commit/6c37196))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.0.0...v1.1.0) (2019-06-05)
 
 
