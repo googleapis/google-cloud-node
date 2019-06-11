@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-language/compare/v3.2.0...v3.2.1) (2019-06-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mathjs to v6 ([#261](https://www.github.com/googleapis/nodejs-language/issues/261)) ([eeb2847](https://www.github.com/googleapis/nodejs-language/commit/eeb2847))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-language/compare/v3.1.0...v3.2.0) (2019-06-06)
 
 
