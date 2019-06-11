@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [4.1.1](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.0...v4.1.1) (2019-06-11)
+
+
+### Bug Fixes
+
+* added legacy samples back, until we can update external references ([#428](https://www.github.com/googleapis/nodejs-datastore/issues/428)) ([c282ff7](https://www.github.com/googleapis/nodejs-datastore/commit/c282ff7))
+* **docs:** link to up-to-date googleapis.dev doc site ([#431](https://www.github.com/googleapis/nodejs-datastore/issues/431)) ([58d41a5](https://www.github.com/googleapis/nodejs-datastore/commit/58d41a5))
+
 ## [4.1.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.0.0...v4.1.0) (2019-06-05)
 
 
