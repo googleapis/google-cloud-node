@@ -20,6 +20,7 @@
   "dependencies": {
     "@google-cloud/automl": "^1.2.0",
     "chai": "^4.2.0",
+    "csv": "^5.1.1",
     "execa": "^1.0.0",
     "mathjs": "^6.0.0",
     "yargs": "^13.2.1"
