@@ -21,7 +21,7 @@
     "@google-cloud/automl": "^1.1.1",
     "chai": "^4.2.0",
     "execa": "^1.0.0",
-    "mathjs": "^5.5.0",
+    "mathjs": "^6.0.0",
     "yargs": "^13.2.1"
   },
   "devDependencies": {
