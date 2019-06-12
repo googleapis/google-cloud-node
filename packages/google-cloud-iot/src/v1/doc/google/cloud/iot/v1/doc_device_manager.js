@@ -340,7 +340,7 @@ const ListDevicesResponse = {
  *   does not match this version number. This is used to support multiple
  *   simultaneous updates without losing data.
  *
- * @property {string} binaryData
+ * @property {Buffer} binaryData
  *   The configuration data for the device.
  *
  * @typedef ModifyCloudToDeviceConfigRequest
@@ -435,7 +435,7 @@ const ListDeviceStatesResponse = {
  *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
  *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
  *
- * @property {string} binaryData
+ * @property {Buffer} binaryData
  *   The command data to send to the device.
  *
  * @property {string} subfolder

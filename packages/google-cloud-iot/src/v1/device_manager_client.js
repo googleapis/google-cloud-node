@@ -1079,7 +1079,7 @@ class DeviceManagerClient {
    *   The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {string} request.binaryData
+   * @param {Buffer} request.binaryData
    *   The configuration data for the device.
    * @param {number} [request.versionToUpdate]
    *   The version number to update. If this value is zero, it will not check the
@@ -1107,7 +1107,7 @@ class DeviceManagerClient {
    * });
    *
    * const formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
-   * const binaryData = '';
+   * const binaryData = Buffer.from('');
    * const request = {
    *   name: formattedName,
    *   binaryData: binaryData,
@@ -1476,7 +1476,7 @@ class DeviceManagerClient {
    *   The name of the device. For example,
    *   `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
    *   `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-   * @param {string} request.binaryData
+   * @param {Buffer} request.binaryData
    *   The command data to send to the device.
    * @param {string} [request.subfolder]
    *   Optional subfolder for the command. If empty, the command will be delivered
@@ -1504,7 +1504,7 @@ class DeviceManagerClient {
    * });
    *
    * const formattedName = client.devicePath('[PROJECT]', '[LOCATION]', '[REGISTRY]', '[DEVICE]');
-   * const binaryData = '';
+   * const binaryData = Buffer.from('');
    * const request = {
    *   name: formattedName,
    *   binaryData: binaryData,

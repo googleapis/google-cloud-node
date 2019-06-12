@@ -478,7 +478,7 @@ const PublicKeyCredential = {
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
- * @property {string} binaryData
+ * @property {Buffer} binaryData
  *   The device configuration data.
  *
  * @typedef DeviceConfig
@@ -498,7 +498,7 @@ const DeviceConfig = {
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
- * @property {string} binaryData
+ * @property {Buffer} binaryData
  *   The device state data.
  *
  * @typedef DeviceState
