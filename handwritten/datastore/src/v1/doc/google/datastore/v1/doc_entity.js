@@ -176,7 +176,7 @@ const ArrayValue = {
  *   When `exclude_from_indexes` is false (it is indexed) , may have at most
  *   1500 bytes. Otherwise, may be set to at least 1,000,000 bytes.
  *
- * @property {string} blobValue
+ * @property {Buffer} blobValue
  *   A blob value.
  *   May have at most 1,000,000 bytes.
  *   When `exclude_from_indexes` is false, may have at most 1500 bytes.

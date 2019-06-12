@@ -425,7 +425,7 @@ class DatastoreClient {
    *   entity.
    *
    *   This object should have the same structure as [Mutation]{@link google.datastore.v1.Mutation}
-   * @param {string} [request.transaction]
+   * @param {Buffer} [request.transaction]
    *   The identifier of the transaction associated with the commit. A
    *   transaction identifier is returned by a call to
    *   Datastore.BeginTransaction.
@@ -489,7 +489,7 @@ class DatastoreClient {
    *   The request object that will be sent.
    * @param {string} request.projectId
    *   The ID of the project against which to make the request.
-   * @param {string} request.transaction
+   * @param {Buffer} request.transaction
    *   The transaction identifier, returned by a call to
    *   Datastore.BeginTransaction.
    * @param {Object} [options]
@@ -512,7 +512,7 @@ class DatastoreClient {
    * });
    *
    * const projectId = '';
-   * const transaction = '';
+   * const transaction = Buffer.from('');
    * const request = {
    *   projectId: projectId,
    *   transaction: transaction,
