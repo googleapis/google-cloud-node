@@ -23,7 +23,7 @@
  *
  *   The number should be among the values of [ThreatType]{@link google.cloud.webrisk.v1beta1.ThreatType}
  *
- * @property {string} versionToken
+ * @property {Buffer} versionToken
  *   The current version token of the client for the requested list (the
  *   client version that was received from the last successful diff).
  *
@@ -84,7 +84,7 @@ const ComputeThreatListDiffRequest = {
  *
  *   This object should have the same structure as [ThreatEntryRemovals]{@link google.cloud.webrisk.v1beta1.ThreatEntryRemovals}
  *
- * @property {string} newVersionToken
+ * @property {Buffer} newVersionToken
  *   The new opaque client version token.
  *
  * @property {Object} checksum
@@ -113,7 +113,7 @@ const ComputeThreatListDiffResponse = {
   /**
    * The expected state of a client's local database.
    *
-   * @property {string} sha256
+   * @property {Buffer} sha256
    *   The SHA256 hash of the client state; that is, of the sorted list of all
    *   hashes present in the database.
    *
@@ -210,7 +210,7 @@ const SearchUrisResponse = {
 /**
  * Request to return full hashes matched by the provided hash prefixes.
  *
- * @property {string} hashPrefix
+ * @property {Buffer} hashPrefix
  *   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
  *   hash. For JSON requests, this field is base64-encoded.
  *
@@ -256,7 +256,7 @@ const SearchHashesResponse = {
    *
    *   The number should be among the values of [ThreatType]{@link google.cloud.webrisk.v1beta1.ThreatType}
    *
-   * @property {string} hash
+   * @property {Buffer} hash
    *   A 32 byte SHA256 hash. This field is in binary format. For JSON
    *   requests, hashes are base64-encoded.
    *
@@ -352,7 +352,7 @@ const RawIndices = {
  *   The number of bytes for each prefix encoded below.  This field can be
  *   anywhere from 4 (shortest prefix) to 32 (full SHA256 hash).
  *
- * @property {string} rawHashes
+ * @property {Buffer} rawHashes
  *   The hashes, in binary format, concatenated into one long string. Hashes are
  *   sorted in lexicographic order. For JSON API users, hashes are
  *   base64-encoded.
@@ -383,7 +383,7 @@ const RawHashes = {
  *   single integer was encoded, this will be zero and the single value will be
  *   stored in `first_value`.
  *
- * @property {string} encodedData
+ * @property {Buffer} encodedData
  *   The encoded deltas that are encoded using the Golomb-Rice coder.
  *
  * @typedef RiceDeltaEncoding

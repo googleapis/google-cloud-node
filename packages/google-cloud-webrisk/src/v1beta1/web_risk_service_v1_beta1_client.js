@@ -199,7 +199,7 @@ class WebRiskServiceV1Beta1Client {
    *   The constraints associated with this request.
    *
    *   This object should have the same structure as [Constraints]{@link google.cloud.webrisk.v1beta1.Constraints}
-   * @param {string} [request.versionToken]
+   * @param {Buffer} [request.versionToken]
    *   The current version token of the client for the requested list (the
    *   client version that was received from the last successful diff).
    * @param {Object} [options]
@@ -314,7 +314,7 @@ class WebRiskServiceV1Beta1Client {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} [request.hashPrefix]
+   * @param {Buffer} [request.hashPrefix]
    *   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
    *   hash. For JSON requests, this field is base64-encoded.
    * @param {number[]} [request.threatTypes]
