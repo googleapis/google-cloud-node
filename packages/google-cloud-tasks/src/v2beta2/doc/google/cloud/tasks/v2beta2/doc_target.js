@@ -33,7 +33,7 @@ const PullTarget = {
  * This proto can only be used for tasks in a queue which has
  * pull_target set.
  *
- * @property {string} payload
+ * @property {Buffer} payload
  *   A data payload consumed by the worker to execute the task.
  *
  * @property {string} tag
@@ -237,7 +237,7 @@ const AppEngineHttpTarget = {
  *   CreateTask
  *   documentation.
  *
- * @property {string} payload
+ * @property {Buffer} payload
  *   Payload.
  *
  *   The payload will be sent as the HTTP message body. A message

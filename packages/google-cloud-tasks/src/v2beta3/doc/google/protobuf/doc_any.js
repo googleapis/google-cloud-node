@@ -125,7 +125,7 @@
  *   Schemes other than `http`, `https` (or the empty scheme) might be
  *   used with implementation specific semantics.
  *
- * @property {string} value
+ * @property {Buffer} value
  *   Must be a valid serialized protocol buffer of the above specified type.
  *
  * @typedef Any

@@ -91,7 +91,7 @@
  *
  *   The size of the headers must be less than 80KB.
  *
- * @property {string} body
+ * @property {Buffer} body
  *   HTTP request body.
  *
  *   A request body is allowed only if the
@@ -302,7 +302,7 @@ const AppEngineHttpQueue = {
  *   the size, there is a limit on the maximum size of the Task. For more
  *   information, see the CreateTask documentation.
  *
- * @property {string} body
+ * @property {Buffer} body
  *   HTTP request body.
  *
  *   A request body is allowed only if the HTTP method is POST or PUT. It is

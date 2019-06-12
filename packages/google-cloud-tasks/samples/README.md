@@ -15,7 +15,7 @@
   * [Cloud Tasks Create HTTP Target](#cloud-tasks-create-http-target)
   * [Cloud Tasks Create HTTP Target with Token](#cloud-tasks-create-http-target-with-token)
   * [Create Queue](#create-queue)
-  * [Create Task](#create-task)
+  * [Cloud Tasks Create App Engine Target](#cloud-tasks-create-app-engine-target)
   * [Delete Queue](#delete-queue)
   * [List Queues](#list-queues)
   * [Quickstart](#quickstart)
@@ -41,7 +41,7 @@ View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/sa
 __Usage:__
 
 
-`node createHttpTask.js`
+`node createHttpTask.js <projectId> <queueName> <location> <url> <payload> <delayInSeconds>`
 
 
 -----
@@ -60,7 +60,7 @@ View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/sa
 __Usage:__
 
 
-`node createHttpTaskWithToken.js`
+`node createHttpTaskWithToken.js <projectId> <queueName> <location> <url> <serviceAccountEmail> <payload> <delayInSeconds>`
 
 
 -----
@@ -85,7 +85,9 @@ __Usage:__
 
 
 
-### Create Task
+### Cloud Tasks Create App Engine Target
+
+Create Cloud Tasks with a Google App Engine Target
 
 View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createTask.js).
 
@@ -94,7 +96,7 @@ View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/sa
 __Usage:__
 
 
-`node createTask.js`
+`node createTask.js <projectId> <queueName> <location> <payload> <delayInSeconds>`
 
 
 -----
