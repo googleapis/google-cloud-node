@@ -19,7 +19,7 @@
  * A representation of an image.
  * Only images up to 30MB in size are supported.
  *
- * @property {string} imageBytes
+ * @property {Buffer} imageBytes
  *   Image content represented as a stream of bytes.
  *   Note: As with all `bytes` fields, protobuffers use a pure binary
  *   representation, whereas JSON representations use base64.
