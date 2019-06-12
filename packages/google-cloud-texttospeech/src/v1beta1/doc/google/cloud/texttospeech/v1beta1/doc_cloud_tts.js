@@ -218,7 +218,7 @@ const AudioConfig = {
 /**
  * The message returned to the client by the `SynthesizeSpeech` method.
  *
- * @property {string} audioContent
+ * @property {Buffer} audioContent
  *   The audio data bytes encoded as specified in the request, including the
  *   header (For LINEAR16 audio, we include the WAV header). Note: as
  *   with all bytes fields, protobuffers use a pure binary representation,
