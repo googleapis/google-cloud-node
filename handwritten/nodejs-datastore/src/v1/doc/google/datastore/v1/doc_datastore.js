@@ -154,7 +154,7 @@ const BeginTransactionRequest = {
  * The response for
  * Datastore.BeginTransaction.
  *
- * @property {string} transaction
+ * @property {Buffer} transaction
  *   The transaction identifier (always present).
  *
  * @typedef BeginTransactionResponse
@@ -171,7 +171,7 @@ const BeginTransactionResponse = {
  * @property {string} projectId
  *   The ID of the project against which to make the request.
  *
- * @property {string} transaction
+ * @property {Buffer} transaction
  *   The transaction identifier, returned by a call to
  *   Datastore.BeginTransaction.
  *
@@ -206,7 +206,7 @@ const RollbackResponse = {
  *
  *   The number should be among the values of [Mode]{@link google.datastore.v1.Mode}
  *
- * @property {string} transaction
+ * @property {Buffer} transaction
  *   The identifier of the transaction associated with the commit. A
  *   transaction identifier is returned by a call to
  *   Datastore.BeginTransaction.
@@ -433,7 +433,7 @@ const MutationResult = {
  *
  *   The number should be among the values of [ReadConsistency]{@link google.datastore.v1.ReadConsistency}
  *
- * @property {string} transaction
+ * @property {Buffer} transaction
  *   The identifier of the transaction in which to read. A
  *   transaction identifier is returned by a call to
  *   Datastore.BeginTransaction.
@@ -499,7 +499,7 @@ const TransactionOptions = {
   /**
    * Options specific to read / write transactions.
    *
-   * @property {string} previousTransaction
+   * @property {Buffer} previousTransaction
    *   The transaction identifier of the transaction being retried.
    *
    * @typedef ReadWrite

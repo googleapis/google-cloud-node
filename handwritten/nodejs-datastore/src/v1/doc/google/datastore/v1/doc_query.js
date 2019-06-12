@@ -34,7 +34,7 @@
  *   `LookupResponse`, this is the version of the snapshot that was used to look
  *   up the entity, and it is always set except for eventually consistent reads.
  *
- * @property {string} cursor
+ * @property {Buffer} cursor
  *   A cursor that points to the position after the result entity.
  *   Set only when the `EntityResult` is part of a `QueryResultBatch` message.
  *
@@ -110,13 +110,13 @@ const EntityResult = {
  *
  *   This object should have the same structure as [PropertyReference]{@link google.datastore.v1.PropertyReference}
  *
- * @property {string} startCursor
+ * @property {Buffer} startCursor
  *   A starting point for the query results. Query cursors are
  *   returned in query result batches and
  *   [can only be used to continue the same
  *   query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
  *
- * @property {string} endCursor
+ * @property {Buffer} endCursor
  *   An ending point for the query results. Query cursors are
  *   returned in query result batches and
  *   [can only be used to limit the same
@@ -410,7 +410,7 @@ const GqlQuery = {
  *
  *   This object should have the same structure as [Value]{@link google.datastore.v1.Value}
  *
- * @property {string} cursor
+ * @property {Buffer} cursor
  *   A query cursor. Query cursors are returned in query
  *   result batches.
  *
@@ -428,7 +428,7 @@ const GqlQueryParameter = {
  * @property {number} skippedResults
  *   The number of results skipped, typically because of an offset.
  *
- * @property {string} skippedCursor
+ * @property {Buffer} skippedCursor
  *   A cursor that points to the position after the last skipped result.
  *   Will be set when `skipped_results` != 0.
  *
@@ -442,7 +442,7 @@ const GqlQueryParameter = {
  *
  *   This object should have the same structure as [EntityResult]{@link google.datastore.v1.EntityResult}
  *
- * @property {string} endCursor
+ * @property {Buffer} endCursor
  *   A cursor that points to the position after the last result in the batch.
  *
  * @property {number} moreResults
