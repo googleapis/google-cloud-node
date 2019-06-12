@@ -54,7 +54,7 @@ const BuildNote = {
  *   signed.bin. OpenSSL can then verify the signature:
  *   `openssl sha256 -verify public.pem -signature signature.bin signed.bin`
  *
- * @property {string} signature
+ * @property {Buffer} signature
  *   Required. Signature of the related `BuildProvenance`. In JSON, this is
  *   base-64 encoded.
  *

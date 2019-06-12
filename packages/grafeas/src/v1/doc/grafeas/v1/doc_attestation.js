@@ -69,7 +69,7 @@ const AttestationNote = {
  * verified) and intent (for which authority this attestation was intended to
  * sign.
  *
- * @property {string} serializedPayload
+ * @property {Buffer} serializedPayload
  *   Required. The serialized payload that is verified by one or more
  *   `signatures`.
  *

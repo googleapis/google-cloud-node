@@ -56,7 +56,7 @@ const RelatedUrl = {
  * this Signature, or the canonical serialization of the proto message that
  * holds this signature).
  *
- * @property {string} signature
+ * @property {Buffer} signature
  *   The content of the signature, an opaque bytestring.
  *   The payload that this signature verifies MUST be unambiguously provided
  *   with the Signature during verification. A wrapper message might provide
