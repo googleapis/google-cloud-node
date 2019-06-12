@@ -235,7 +235,7 @@ const InspectConfig = {
  *
  *   The number should be among the values of [BytesType]{@link google.privacy.dlp.v2.BytesType}
  *
- * @property {string} data
+ * @property {Buffer} data
  *   Content data to inspect or redact.
  *
  * @typedef ByteContentItem
@@ -667,7 +667,7 @@ const Color = {
 /**
  * Results of redacting an image.
  *
- * @property {string} redactedImage
+ * @property {Buffer} redactedImage
  *   The redacted image. The type will be the same as the original image.
  *
  * @property {string} extractedText
@@ -2630,7 +2630,7 @@ const TransientCryptoKey = {
  * Using raw keys is prone to security risks due to accidentally
  * leaking the key. Choose another type of key if possible.
  *
- * @property {string} key
+ * @property {Buffer} key
  *   A 128/192/256 bit key. [required]
  *
  * @typedef UnwrappedCryptoKey
@@ -2648,7 +2648,7 @@ const UnwrappedCryptoKey = {
  * to perform a crypto transformation using a kms-wrapped crypto key:
  * dlp.kms.encrypt
  *
- * @property {string} wrappedKey
+ * @property {Buffer} wrappedKey
  *   The wrapped data crypto key. [required]
  *
  * @property {string} cryptoKeyName
