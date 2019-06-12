@@ -239,7 +239,7 @@ class SessionsClient {
    *   configured, no output audio is generated.
    *
    *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
-   * @param {string} [request.inputAudio]
+   * @param {Buffer} [request.inputAudio]
    *   Optional. The natural language speech audio to be processed. This field
    *   should be populated iff `query_input` is set to an input audio config.
    *   A single request can contain up to 1 minute of speech audio data.

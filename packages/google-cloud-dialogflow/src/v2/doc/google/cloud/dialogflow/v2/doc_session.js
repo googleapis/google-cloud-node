@@ -49,7 +49,7 @@
  *
  *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
  *
- * @property {string} inputAudio
+ * @property {Buffer} inputAudio
  *   Optional. The natural language speech audio to be processed. This field
  *   should be populated iff `query_input` is set to an input audio config.
  *   A single request can contain up to 1 minute of speech audio data.
@@ -80,7 +80,7 @@ const DetectIntentRequest = {
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
- * @property {string} outputAudio
+ * @property {Buffer} outputAudio
  *   The audio data bytes encoded as specified in the request.
  *   Note: The output audio is generated based on the values of default platform
  *   text responses found in the `query_result.fulfillment_messages` field. If
@@ -348,7 +348,7 @@ const QueryResult = {
  *
  *   This object should have the same structure as [OutputAudioConfig]{@link google.cloud.dialogflow.v2.OutputAudioConfig}
  *
- * @property {string} inputAudio
+ * @property {Buffer} inputAudio
  *   Optional. The input audio content to be recognized. Must be sent if
  *   `query_input` was set to a streaming input audio config. The complete audio
  *   over all streaming messages must not exceed 1 minute.
@@ -394,7 +394,7 @@ const StreamingDetectIntentRequest = {
  *
  *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
- * @property {string} outputAudio
+ * @property {Buffer} outputAudio
  *   The audio data bytes encoded as specified in the request.
  *
  * @property {Object} outputAudioConfig

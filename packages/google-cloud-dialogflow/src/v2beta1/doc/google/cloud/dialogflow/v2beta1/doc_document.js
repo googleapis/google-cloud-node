@@ -56,7 +56,7 @@
  *   Note: This field is in the process of being deprecated, please use
  *   raw_content instead.
  *
- * @property {string} rawContent
+ * @property {Buffer} rawContent
  *   The raw content of the document. This field is only permitted for
  *   EXTRACTIVE_QA and FAQ knowledge types.
  *

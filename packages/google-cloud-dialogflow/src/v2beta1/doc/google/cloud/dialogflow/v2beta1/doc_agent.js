@@ -205,7 +205,7 @@ const ExportAgentRequest = {
  *   The URI to a file containing the exported agent. This field is populated
  *   only if `agent_uri` is specified in `ExportAgentRequest`.
  *
- * @property {string} agentContent
+ * @property {Buffer} agentContent
  *   The exported agent.
  *
  *   Example for how to export an agent to a zip file via a command line:
@@ -240,7 +240,7 @@ const ExportAgentResponse = {
  *   The URI to a Google Cloud Storage file containing the agent to import.
  *   Note: The URI must start with "gs://".
  *
- * @property {string} agentContent
+ * @property {Buffer} agentContent
  *   The agent to import.
  *
  *   Example for how to import an agent via the command line:
@@ -275,7 +275,7 @@ const ImportAgentRequest = {
  *   The URI to a Google Cloud Storage file containing the agent to restore.
  *   Note: The URI must start with "gs://".
  *
- * @property {string} agentContent
+ * @property {Buffer} agentContent
  *   The agent to restore.
  *
  *   Example for how to restore an agent via the command line:

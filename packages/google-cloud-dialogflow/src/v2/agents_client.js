@@ -734,7 +734,7 @@ class AgentsClient {
    * @param {string} [request.agentUri]
    *   The URI to a Google Cloud Storage file containing the agent to import.
    *   Note: The URI must start with "gs://".
-   * @param {string} [request.agentContent]
+   * @param {Buffer} [request.agentContent]
    *   The agent to import.
    *
    *   Example for how to import an agent via the command line:
@@ -855,7 +855,7 @@ class AgentsClient {
    * @param {string} [request.agentUri]
    *   The URI to a Google Cloud Storage file containing the agent to restore.
    *   Note: The URI must start with "gs://".
-   * @param {string} [request.agentContent]
+   * @param {Buffer} [request.agentContent]
    *   The agent to restore.
    *
    *   Example for how to restore an agent via the command line:
