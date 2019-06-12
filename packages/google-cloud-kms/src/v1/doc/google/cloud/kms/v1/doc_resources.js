@@ -225,7 +225,7 @@ const CryptoKeyVersionTemplate = {
  *
  *   The number should be among the values of [AttestationFormat]{@link google.cloud.kms.v1.AttestationFormat}
  *
- * @property {string} content
+ * @property {Buffer} content
  *   Output only. The attestation data provided by the HSM when the key
  *   operation was performed.
  *

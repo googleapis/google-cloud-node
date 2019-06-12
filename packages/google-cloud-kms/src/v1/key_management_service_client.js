@@ -1338,7 +1338,7 @@ class KeyManagementServiceClient {
    *
    *   If a CryptoKey is specified, the server
    *   will use its primary version.
-   * @param {string} request.plaintext
+   * @param {Buffer} request.plaintext
    *   Required. The data to encrypt. Must be no larger than 64KiB.
    *
    *   The maximum size depends on the key version's
@@ -1348,7 +1348,7 @@ class KeyManagementServiceClient {
    *   HSM keys, the combined length of
    *   the plaintext and additional_authenticated_data fields must be no larger
    *   than 8KiB.
-   * @param {string} [request.additionalAuthenticatedData]
+   * @param {Buffer} [request.additionalAuthenticatedData]
    *   Optional data that, if specified, must also be provided during decryption
    *   through
    *   DecryptRequest.additional_authenticated_data.
@@ -1380,7 +1380,7 @@ class KeyManagementServiceClient {
    * });
    *
    * const formattedName = client.cryptoKeyPathPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY_PATH]');
-   * const plaintext = '';
+   * const plaintext = Buffer.from('');
    * const request = {
    *   name: formattedName,
    *   plaintext: plaintext,
@@ -1423,10 +1423,10 @@ class KeyManagementServiceClient {
    *   Required. The resource name of the
    *   CryptoKey to use for decryption. The
    *   server will choose the appropriate version.
-   * @param {string} request.ciphertext
+   * @param {Buffer} request.ciphertext
    *   Required. The encrypted data originally returned in
    *   EncryptResponse.ciphertext.
-   * @param {string} [request.additionalAuthenticatedData]
+   * @param {Buffer} [request.additionalAuthenticatedData]
    *   Optional data that must match the data originally supplied in
    *   EncryptRequest.additional_authenticated_data.
    * @param {Object} [options]
@@ -1449,7 +1449,7 @@ class KeyManagementServiceClient {
    * });
    *
    * const formattedName = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
-   * const ciphertext = '';
+   * const ciphertext = Buffer.from('');
    * const request = {
    *   name: formattedName,
    *   ciphertext: ciphertext,
@@ -1763,7 +1763,7 @@ class KeyManagementServiceClient {
    *   Required. The resource name of the
    *   CryptoKeyVersion to use for
    *   decryption.
-   * @param {string} request.ciphertext
+   * @param {Buffer} request.ciphertext
    *   Required. The data encrypted with the named
    *   CryptoKeyVersion's public key using
    *   OAEP.
@@ -1787,7 +1787,7 @@ class KeyManagementServiceClient {
    * });
    *
    * const formattedName = client.cryptoKeyVersionPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]', '[CRYPTO_KEY_VERSION]');
-   * const ciphertext = '';
+   * const ciphertext = Buffer.from('');
    * const request = {
    *   name: formattedName,
    *   ciphertext: ciphertext,

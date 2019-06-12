@@ -388,7 +388,7 @@ const UpdateCryptoKeyVersionRequest = {
  *   If a CryptoKey is specified, the server
  *   will use its primary version.
  *
- * @property {string} plaintext
+ * @property {Buffer} plaintext
  *   Required. The data to encrypt. Must be no larger than 64KiB.
  *
  *   The maximum size depends on the key version's
@@ -399,7 +399,7 @@ const UpdateCryptoKeyVersionRequest = {
  *   the plaintext and additional_authenticated_data fields must be no larger
  *   than 8KiB.
  *
- * @property {string} additionalAuthenticatedData
+ * @property {Buffer} additionalAuthenticatedData
  *   Optional data that, if specified, must also be provided during decryption
  *   through
  *   DecryptRequest.additional_authenticated_data.
@@ -429,11 +429,11 @@ const EncryptRequest = {
  *   CryptoKey to use for decryption. The
  *   server will choose the appropriate version.
  *
- * @property {string} ciphertext
+ * @property {Buffer} ciphertext
  *   Required. The encrypted data originally returned in
  *   EncryptResponse.ciphertext.
  *
- * @property {string} additionalAuthenticatedData
+ * @property {Buffer} additionalAuthenticatedData
  *   Optional data that must match the data originally supplied in
  *   EncryptRequest.additional_authenticated_data.
  *
@@ -478,7 +478,7 @@ const AsymmetricSignRequest = {
  *   CryptoKeyVersion to use for
  *   decryption.
  *
- * @property {string} ciphertext
+ * @property {Buffer} ciphertext
  *   Required. The data encrypted with the named
  *   CryptoKeyVersion's public key using
  *   OAEP.
@@ -495,7 +495,7 @@ const AsymmetricDecryptRequest = {
  * Response message for
  * KeyManagementService.Decrypt.
  *
- * @property {string} plaintext
+ * @property {Buffer} plaintext
  *   The decrypted data originally supplied in
  *   EncryptRequest.plaintext.
  *
@@ -516,7 +516,7 @@ const DecryptResponse = {
  *   CryptoKeyVersion used in
  *   encryption.
  *
- * @property {string} ciphertext
+ * @property {Buffer} ciphertext
  *   The encrypted data.
  *
  * @typedef EncryptResponse
@@ -531,7 +531,7 @@ const EncryptResponse = {
  * Response message for
  * KeyManagementService.AsymmetricSign.
  *
- * @property {string} signature
+ * @property {Buffer} signature
  *   The created signature.
  *
  * @typedef AsymmetricSignResponse
@@ -546,7 +546,7 @@ const AsymmetricSignResponse = {
  * Response message for
  * KeyManagementService.AsymmetricDecrypt.
  *
- * @property {string} plaintext
+ * @property {Buffer} plaintext
  *   The decrypted data originally encrypted with the matching public key.
  *
  * @typedef AsymmetricDecryptResponse
@@ -612,13 +612,13 @@ const RestoreCryptoKeyVersionRequest = {
 /**
  * A Digest holds a cryptographic message digest.
  *
- * @property {string} sha256
+ * @property {Buffer} sha256
  *   A message digest produced with the SHA-256 algorithm.
  *
- * @property {string} sha384
+ * @property {Buffer} sha384
  *   A message digest produced with the SHA-384 algorithm.
  *
- * @property {string} sha512
+ * @property {Buffer} sha512
  *   A message digest produced with the SHA-512 algorithm.
  *
  * @typedef Digest
