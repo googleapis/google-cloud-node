@@ -30,7 +30,7 @@
  *   '?' to match 1 character. If unset, the input video should be embedded
  *   in the request as `input_content`. If set, `input_content` should be unset.
  *
- * @property {string} inputContent
+ * @property {Buffer} inputContent
  *   The video data bytes.
  *   If unset, the input video(s) should be specified via `input_uri`.
  *   If set, `input_uri` should be unset.
@@ -1040,7 +1040,7 @@ const LogoRecognitionAnnotation = {
  *
  *   This object should have the same structure as [StreamingVideoConfig]{@link google.cloud.videointelligence.v1p3beta1.StreamingVideoConfig}
  *
- * @property {string} inputContent
+ * @property {Buffer} inputContent
  *   The video data to be annotated. Chunks of video data are sequentially
  *   sent in `StreamingAnnotateVideoRequest` messages. Except the initial
  *   `StreamingAnnotateVideoRequest` message containing only
