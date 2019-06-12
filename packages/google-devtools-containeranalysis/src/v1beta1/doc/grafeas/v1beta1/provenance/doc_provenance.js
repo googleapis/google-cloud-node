@@ -144,7 +144,7 @@ const FileHashes = {
  *
  *   The number should be among the values of [HashType]{@link grafeas.v1beta1.provenance.HashType}
  *
- * @property {string} value
+ * @property {Buffer} value
  *   The hash value.
  *
  * @typedef Hash

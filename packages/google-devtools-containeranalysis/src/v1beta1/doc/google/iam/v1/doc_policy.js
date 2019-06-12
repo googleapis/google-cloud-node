@@ -71,7 +71,7 @@
  *
  *   This object should have the same structure as [Binding]{@link google.iam.v1.Binding}
  *
- * @property {string} etag
+ * @property {Buffer} etag
  *   `etag` is used for optimistic concurrency control as a way to help
  *   prevent simultaneous updates of a policy from overwriting each other.
  *   It is strongly suggested that systems make use of the `etag` in the
