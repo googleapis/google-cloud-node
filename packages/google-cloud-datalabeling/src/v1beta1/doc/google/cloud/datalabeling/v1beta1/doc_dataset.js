@@ -373,7 +373,7 @@ const Example = {
  * @property {string} mimeType
  *   Image format.
  *
- * @property {string} imageThumbnail
+ * @property {Buffer} imageThumbnail
  *   A byte string of a full image.
  *
  * @property {string} imageUri
@@ -404,7 +404,7 @@ const TextPayload = {
 /**
  * Container of information of a video thumbnail.
  *
- * @property {string} thumbnail
+ * @property {Buffer} thumbnail
  *   A byte string of the video frame.
  *
  * @property {Object} timeOffset

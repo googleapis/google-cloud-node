@@ -288,7 +288,7 @@ const ImagePolylineAnnotation = {
  * @property {string} mimeType
  *   Image format.
  *
- * @property {string} imageBytes
+ * @property {Buffer} imageBytes
  *   A byte string of a full image's color map.
  *
  * @typedef ImageSegmentationAnnotation
