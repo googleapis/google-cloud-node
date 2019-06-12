@@ -55,7 +55,7 @@
  *
  *   The total size of headers must be less than 80KB.
  *
- * @property {string} body
+ * @property {Buffer} body
  *   HTTP request body. A request body is allowed only if the HTTP
  *   method is POST, PUT, or PATCH. It is an error to set body on a job with an
  *   incompatible HttpMethod.
@@ -154,7 +154,7 @@ const HttpTarget = {
  *   In addition, some App Engine headers, which contain
  *   job-specific information, are also be sent to the job handler.
  *
- * @property {string} body
+ * @property {Buffer} body
  *   Body.
  *
  *   HTTP request body. A request body is allowed only if the HTTP method is
@@ -184,7 +184,7 @@ const AppEngineHttpTarget = {
  *
  *   The topic must be in the same project as the Cloud Scheduler job.
  *
- * @property {string} data
+ * @property {Buffer} data
  *   The message payload for PubsubMessage.
  *
  *   Pubsub message must contain either non-empty data, or at least one
