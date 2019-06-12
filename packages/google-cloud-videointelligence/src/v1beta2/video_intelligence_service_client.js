@@ -235,7 +235,7 @@ class VideoIntelligenceServiceClient {
    *   videos. Supported wildcards: '*' to match 0 or more characters;
    *   '?' to match 1 character. If unset, the input video should be embedded
    *   in the request as `input_content`. If set, `input_content` should be unset.
-   * @param {string} [request.inputContent]
+   * @param {Buffer} [request.inputContent]
    *   The video data bytes.
    *   If unset, the input video(s) should be specified via `input_uri`.
    *   If set, `input_uri` should be unset.

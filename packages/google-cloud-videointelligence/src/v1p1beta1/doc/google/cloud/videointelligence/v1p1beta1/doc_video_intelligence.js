@@ -30,7 +30,7 @@
  *   '?' to match 1 character. If unset, the input video should be embedded
  *   in the request as `input_content`. If set, `input_content` should be unset.
  *
- * @property {string} inputContent
+ * @property {Buffer} inputContent
  *   The video data bytes.
  *   If unset, the input video(s) should be specified via `input_uri`.
  *   If set, `input_uri` should be unset.
