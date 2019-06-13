@@ -108,6 +108,7 @@ has instructions for running the samples.
 | Infinite Streaming | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/infiniteStreaming.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/infiniteStreaming.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Recognize | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.js,samples/README.md) |
+| Recognize.v1p1beta1 | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md) |
 
 
 
@@ -143,7 +144,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-speech/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/speech/latest/
+[client-docs]: https://googleapis.dev/nodejs/speech/latest
 [product-docs]: https://cloud.google.com/speech-to-text/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
