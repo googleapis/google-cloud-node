@@ -2,7 +2,7 @@
   "name": "web-risk",
   "name_pretty": "Web Risk API",
   "product_documentation": "https://cloud.google.com/web-risk/docs/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/web-risk/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/web-risk/latest",
   "issue_tracker": "",
   "release_level": "beta",
   "language": "nodejs",
@@ -11,4 +11,3 @@
   "api_id": "webrisk.googleapis.com",
   "requires_billing": true
 }
-
