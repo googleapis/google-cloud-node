@@ -2,7 +2,7 @@
   "name": "datalabeling",
   "name_pretty": "Google Cloud Data Labeling",
   "product_documentation": "https://cloud.google.com/data-labeling/docs/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datalabeling/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/datalabeling/latest",
   "issue_tracker": "",
   "release_level": "alpha",
   "language": "nodejs",
