@@ -2,7 +2,7 @@
   "name": "kms",
   "name_pretty": "Google Cloud Key Management Service",
   "product_documentation": "https://cloud.google.com/kms",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/kms/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5264932",
   "release_level": "beta",
   "language": "nodejs",
