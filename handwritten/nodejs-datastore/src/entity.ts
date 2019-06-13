@@ -174,21 +174,28 @@ export namespace entity {
    * @param {string} [options.namespace] Optional namespace.
    *
    * @example
-   * <caption>Create an incomplete key with a kind value of `Company`.</caption>
+   * //-
+   * // Create an incomplete key with a kind value of `Company`.
+   * //-
    * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key('Company');
    *
    * @example
-   * <caption>Create a complete key with a kind value of `Company` and id
-   * `123`.</caption> const {Datastore} = require('@google-cloud/datastore');
+   * //-
+   * // Create a complete key with a kind value of `Company` and id`123`.
+   * //-
+   * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key(['Company', 123]);
    *
    * @example
-   * <caption>If the ID integer is outside the bounds of a JavaScript Number
-   * object, create an Int.</caption> const {Datastore} =
-   * require('@google-cloud/datastore'); const datastore = new Datastore();
+   * //-
+   * // If the ID integer is outside the bounds of a JavaScript Number
+   * // object, create an Int.
+   * //-
+   * const {Datastore} = require('@google-cloud/datastore');
+   * const datastore = new Datastore();
    * const key = datastore.key([
    *   'Company',
    *   datastore.int('100000000000001234')
@@ -202,8 +209,10 @@ export namespace entity {
    * const key = datastore.key(['Company', 'Google']);
    *
    * @example
-   * <caption>Create a complete key from a provided namespace and
-   * path.</caption> const {Datastore} = require('@google-cloud/datastore');
+   * //-
+   * // Create a complete key from a provided namespace and path.
+   * //-
+   * const {Datastore} = require('@google-cloud/datastore');
    * const datastore = new Datastore();
    * const key = datastore.key({
    *   namespace: 'My-NS',
