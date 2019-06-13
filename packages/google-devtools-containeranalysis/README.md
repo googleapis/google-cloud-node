@@ -120,7 +120,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-containeranalysis/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/containeranalysis/latest/
+[client-docs]: https://googleapis.dev/nodejs/containeranalysis/latest
 [product-docs]: https://cloud.google.com/container-registry/docs/container-analysis
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
