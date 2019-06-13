@@ -2,7 +2,7 @@
   "name": "monitoring",
   "name_pretty": "Stackdriver Monitoring",
   "product_documentation": "https://cloud.google.com/monitoring/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/monitoring/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/monitoring/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559785",
   "release_level": "beta",
   "language": "nodejs",
