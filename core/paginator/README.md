@@ -14,7 +14,7 @@
 A result paging utility used by Google node.js modules
 
 
-
+* [Google Cloud Common Paginator Node.js Client API Reference][client-docs]
 
 * [github.com/googleapis/nodejs-paginator](https://github.com/googleapis/nodejs-paginator)
 
@@ -65,6 +65,9 @@ has instructions for running the samples.
 
 
 
+The [Google Cloud Common Paginator Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
 ## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
@@ -94,7 +97,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-paginator/blob/master/LICENSE)
 
-
+[client-docs]: https://googleapis.dev/nodejs/paginator/latest
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -4,5 +4,6 @@
   "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-paginator",
-  "distribution_name": "@google-cloud/paginator"
+  "distribution_name": "@google-cloud/paginator",
+  "client_documentation": "https://googleapis.dev/nodejs/paginator/latest"
 }
