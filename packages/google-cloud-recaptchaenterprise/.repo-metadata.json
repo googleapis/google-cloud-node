@@ -2,7 +2,7 @@
   "name": "recaptcha-enterprise",
   "name_pretty": "Google Cloud reCAPTCHA Enterprise",
   "product_documentation": "https://cloud.google.com/recaptcha-enterprise/docs/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/recaptcha-enterprise/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/recaptcha-enterprise/latest",
   "issue_tracker": "",
   "release_level": "alpha",
   "language": "nodejs",
