@@ -14,7 +14,7 @@
 A simple utility for promisifying functions and classes.
 
 
-
+* [Google Cloud Common Promisify Node.js Client API Reference][client-docs]
 
 * [github.com/googleapis/nodejs-promisify](https://github.com/googleapis/nodejs-promisify)
 
@@ -86,6 +86,9 @@ has instructions for running the samples.
 
 
 
+The [Google Cloud Common Promisify Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
 ## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
@@ -115,7 +118,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-promisify/blob/master/LICENSE)
 
-
+[client-docs]: https://googleapis.dev/nodejs/promisify/latest
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
