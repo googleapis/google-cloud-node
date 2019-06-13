@@ -1,6 +1,6 @@
 {
   "name": "logging-bunyan",
-  "name_pretty": "Stackdriver Logging for Winston",
+  "name_pretty": "Stackdriver Logging for Bunyan",
   "product_documentation": "https://cloud.google.com/logging",
   "client_documentation": "https://googleapis.dev/nodejs/logging-bunyan/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559764",
