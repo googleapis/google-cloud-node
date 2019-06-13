@@ -2,7 +2,7 @@
   "name": "iot",
   "name_pretty": "Google Cloud Internet of Things (IoT) Core",
   "product_documentation": "https://cloud.google.com/iot",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/iot/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/iot/latest",
   "release_level": "alpha",
   "language": "nodejs",
   "repo": "googleapis/nodejs-iot",
