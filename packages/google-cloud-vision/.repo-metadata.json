@@ -2,7 +2,7 @@
   "name": "vision",
   "name_pretty": "Google Cloud Vision API",
   "product_documentation": "https://cloud.google.com/vision",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vision/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/vision/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559765",
   "release_level": "beta",
   "language": "nodejs",
