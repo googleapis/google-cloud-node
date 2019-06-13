@@ -2,7 +2,7 @@
   "name": "grafeas",
   "name_pretty": "Grafeas",
   "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
-  "client_documentation": "https://googleapis.dev/nodejs/grafeas/latest/index.html",
+  "client_documentation": "https://googleapis.dev/nodejs/grafeas/latest",
   "issue_tracker": "",
   "release_level": "beta",
   "language": "nodejs",
