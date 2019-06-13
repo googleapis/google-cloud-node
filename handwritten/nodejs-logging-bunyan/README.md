@@ -16,8 +16,8 @@ compatible with [Bunyan](https://www.npmjs.com/package/bunyan). Simply attach th
 Stackdriver Logging stream for Bunyan
 
 
-* [Stackdriver Logging for Winston Node.js Client API Reference][client-docs]
-* [Stackdriver Logging for Winston Documentation][product-docs]
+* [Stackdriver Logging for Bunyan Node.js Client API Reference][client-docs]
+* [Stackdriver Logging for Bunyan Documentation][product-docs]
 * [github.com/googleapis/nodejs-logging-bunyan](https://github.com/googleapis/nodejs-logging-bunyan)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -42,7 +42,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
-1.  [Enable the Stackdriver Logging for Winston API][enable_api].
+1.  [Enable the Stackdriver Logging for Bunyan API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -229,7 +229,7 @@ has instructions for running the samples.
 
 
 
-The [Stackdriver Logging for Winston Node.js Client API Reference][client-docs] documentation
+The [Stackdriver Logging for Bunyan Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Versioning
