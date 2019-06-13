@@ -17,6 +17,7 @@
   * [Infinite Streaming](#infinite-streaming)
   * [Quickstart](#quickstart)
   * [Recognize](#recognize)
+  * [Recognize.v1p1beta1](#recognize.v1p1beta1)
 
 ## Before you begin
 
@@ -105,6 +106,23 @@ __Usage:__
 
 
 `node recognize.js`
+
+
+-----
+
+
+
+
+### Recognize.v1p1beta1
+
+View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.v1p1beta1.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md)
+
+__Usage:__
+
+
+`node recognize.v1p1beta1.js`
 
 
 
