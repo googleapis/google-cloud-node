@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.1.0...v1.1.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#331](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/331)) ([644f80c](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/644f80c))
+* should read logging Bunyan not Winston ([#330](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/330)) ([d08c03f](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/d08c03f))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.0.0...v1.1.0) (2019-06-05)
 
 
