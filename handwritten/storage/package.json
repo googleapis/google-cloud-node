@@ -50,6 +50,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
+    "async": "^3.0.0",
     "@google-cloud/common": "^2.0.0",
     "@google-cloud/paginator": "^1.0.0",
     "@google-cloud/promisify": "^1.0.0",
@@ -92,7 +93,6 @@
     "@types/tmp": "0.1.0",
     "@types/uuid": "^3.4.4",
     "@types/xdg-basedir": "^2.0.0",
-    "async": "^3.0.0",
     "codecov": "^3.0.0",
     "eslint": "^5.0.0",
     "eslint-config-prettier": "^4.0.0",
