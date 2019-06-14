@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.1.0...v1.1.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#244](https://www.github.com/googleapis/nodejs-tasks/issues/244)) ([da8ddbc](https://www.github.com/googleapis/nodejs-tasks/commit/da8ddbc))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.0.0...v1.1.0) (2019-06-05)
 
 
