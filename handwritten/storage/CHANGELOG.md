@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.0...v3.0.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* async should be dependency ([#743](https://www.github.com/googleapis/nodejs-storage/issues/743)) ([e542b8b](https://www.github.com/googleapis/nodejs-storage/commit/e542b8b))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-storage/compare/v2.5.0...v3.0.0) (2019-06-14)
 
 
