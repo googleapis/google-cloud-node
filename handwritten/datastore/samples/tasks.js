@@ -100,7 +100,7 @@ async function addTask(description) {
 // [START datastore_update_entity]
 async function markDone(taskId) {
   const transaction = datastore.transaction();
-  const taskKey = datastore.key(['Task', taskId]);
+  const taskKey = datastore.key(['Task', datastore.int(taskId)]);
 
   try {
     await transaction.run();
@@ -133,7 +133,7 @@ async function listTasks() {
 
 // [START datastore_delete_entity]
 async function deleteTask(taskId) {
-  const taskKey = datastore.key(['Task', taskId]);
+  const taskKey = datastore.key(['Task', datastore.int(taskId)]);
 
   await datastore.delete(taskKey);
   console.log(`Task ${taskId} deleted successfully.`);
