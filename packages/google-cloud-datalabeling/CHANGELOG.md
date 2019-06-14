@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.1.0...v1.1.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#46](https://www.github.com/googleapis/nodejs-datalabeling/issues/46)) ([d670a96](https://www.github.com/googleapis/nodejs-datalabeling/commit/d670a96))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.0.0...v1.1.0) (2019-06-06)
 
 
