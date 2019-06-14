@@ -4,6 +4,38 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-storage/compare/v2.5.0...v3.0.0) (2019-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#688)
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/common to v1 ([#705](https://www.github.com/googleapis/nodejs-storage/issues/705)) ([72a9f51](https://www.github.com/googleapis/nodejs-storage/commit/72a9f51))
+* **deps:** update dependency @google-cloud/paginator to v1 ([#695](https://www.github.com/googleapis/nodejs-storage/issues/695)) ([ada995e](https://www.github.com/googleapis/nodejs-storage/commit/ada995e))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#693](https://www.github.com/googleapis/nodejs-storage/issues/693)) ([5df2f83](https://www.github.com/googleapis/nodejs-storage/commit/5df2f83))
+* **deps:** update dependency @google-cloud/pubsub to ^0.29.0 ([#714](https://www.github.com/googleapis/nodejs-storage/issues/714)) ([3ee1a2c](https://www.github.com/googleapis/nodejs-storage/commit/3ee1a2c))
+* **deps:** update dependency arrify to v2 ([#667](https://www.github.com/googleapis/nodejs-storage/issues/667)) ([ce02c27](https://www.github.com/googleapis/nodejs-storage/commit/ce02c27))
+* validate action of getSignedUrl() function ([#684](https://www.github.com/googleapis/nodejs-storage/issues/684)) ([1b09d24](https://www.github.com/googleapis/nodejs-storage/commit/1b09d24))
+* **deps:** update dependency date-and-time to ^0.7.0 ([#736](https://www.github.com/googleapis/nodejs-storage/issues/736)) ([7071f26](https://www.github.com/googleapis/nodejs-storage/commit/7071f26))
+* **deps:** update dependency xdg-basedir to v4 ([#681](https://www.github.com/googleapis/nodejs-storage/issues/681)) ([8b40e6a](https://www.github.com/googleapis/nodejs-storage/commit/8b40e6a))
+* **docs:** move to new client docs URL ([#738](https://www.github.com/googleapis/nodejs-storage/issues/738)) ([a637f99](https://www.github.com/googleapis/nodejs-storage/commit/a637f99))
+* **ts:** improve return types for response metadata ([#666](https://www.github.com/googleapis/nodejs-storage/issues/666)) ([da42bed](https://www.github.com/googleapis/nodejs-storage/commit/da42bed))
+* **types:** fix signatures of listing methods ([#703](https://www.github.com/googleapis/nodejs-storage/issues/703)) ([42937a8](https://www.github.com/googleapis/nodejs-storage/commit/42937a8))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#688](https://www.github.com/googleapis/nodejs-storage/issues/688)) ([6a1fa0f](https://www.github.com/googleapis/nodejs-storage/commit/6a1fa0f))
+
+
+### Features
+
+* add file.isPublic() function ([#708](https://www.github.com/googleapis/nodejs-storage/issues/708)) ([f86cadb](https://www.github.com/googleapis/nodejs-storage/commit/f86cadb))
+* support apiEndpoint override ([#728](https://www.github.com/googleapis/nodejs-storage/issues/728)) ([61eeb64](https://www.github.com/googleapis/nodejs-storage/commit/61eeb64))
+
 ## v2.5.0
 
 04-04-2019 12:27 PDT
@@ -420,4 +452,3 @@ request(url).pipe(writeStream);
 - Fix permission of bash script for Kokoro (#223)
 - chore(package): update nyc to version 12.0.2 (#216)
 - chore: fix prettier incompatibility (#211)
-
