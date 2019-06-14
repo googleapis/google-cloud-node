@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [0.10.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.0...v0.10.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#368](https://www.github.com/googleapis/nodejs-dialogflow/issues/368)) ([9e121db](https://www.github.com/googleapis/nodejs-dialogflow/commit/9e121db))
+
 ## [0.10.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.9.1...v0.10.0) (2019-06-05)
 
 
