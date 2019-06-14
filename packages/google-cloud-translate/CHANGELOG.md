@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-translate/compare/v4.0.1...v4.1.0) (2019-06-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency is-html to v2 ([#280](https://www.github.com/googleapis/nodejs-translate/issues/280)) ([00187c9](https://www.github.com/googleapis/nodejs-translate/commit/00187c9))
+* **deps:** update dependency teeny-request to v4 ([#292](https://www.github.com/googleapis/nodejs-translate/issues/292)) ([5d608f2](https://www.github.com/googleapis/nodejs-translate/commit/5d608f2))
+* **docs:** move to new client docs URL ([#294](https://www.github.com/googleapis/nodejs-translate/issues/294)) ([ecb6cab](https://www.github.com/googleapis/nodejs-translate/commit/ecb6cab))
+* **types:** use Metadata types for apiResponse ([#277](https://www.github.com/googleapis/nodejs-translate/issues/277)) ([cf7899f](https://www.github.com/googleapis/nodejs-translate/commit/cf7899f))
+
+
+### Features
+
+* support apiEndpoint override ([#285](https://www.github.com/googleapis/nodejs-translate/issues/285)) ([dc8fe12](https://www.github.com/googleapis/nodejs-translate/commit/dc8fe12))
+* support apiEndpoint override in client constructor ([#289](https://www.github.com/googleapis/nodejs-translate/issues/289)) ([35f1229](https://www.github.com/googleapis/nodejs-translate/commit/35f1229))
+
 ### [4.0.1](https://www.github.com/googleapis/nodejs-translate/compare/v4.0.0...v4.0.1) (2019-05-20)
 
 
