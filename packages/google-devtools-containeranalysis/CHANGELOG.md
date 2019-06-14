@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.0.1...v1.0.2) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#39](https://www.github.com/googleapis/nodejs-containeranalysis/issues/39)) ([debea92](https://www.github.com/googleapis/nodejs-containeranalysis/commit/debea92))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.0.0...v1.0.1) (2019-06-11)
 
 
