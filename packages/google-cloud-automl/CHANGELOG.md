@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-automl/compare/v1.2.0...v1.2.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* parse CSV correctly ([#198](https://www.github.com/googleapis/nodejs-automl/issues/198)) ([8c0eb1c](https://www.github.com/googleapis/nodejs-automl/commit/8c0eb1c))
+* **docs:** move to new client docs URL ([#201](https://www.github.com/googleapis/nodejs-automl/issues/201)) ([3c01587](https://www.github.com/googleapis/nodejs-automl/commit/3c01587))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.1.1...v1.2.0) (2019-06-11)
 
 
