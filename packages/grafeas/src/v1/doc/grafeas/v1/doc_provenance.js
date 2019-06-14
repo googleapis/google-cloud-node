@@ -139,10 +139,8 @@ const FileHashes = {
 /**
  * Container message for hash values.
  *
- * @property {number} type
- *   Required. The type of hash that was performed.
- *
- *   The number should be among the values of [HashType]{@link grafeas.v1.HashType}
+ * @property {string} type
+ *   Required. The type of hash that was performed, e.g. "SHA-256".
  *
  * @property {Buffer} value
  *   Required. The hash value.
@@ -153,25 +151,6 @@ const FileHashes = {
  */
 const Hash = {
   // This is for documentation. Actual contents will be loaded by gRPC.
-
-  /**
-   * Specifies the hash algorithm.
-   *
-   * @enum {number}
-   * @memberof grafeas.v1
-   */
-  HashType: {
-
-    /**
-     * Unknown.
-     */
-    HASH_TYPE_UNSPECIFIED: 0,
-
-    /**
-     * A SHA-256 hash.
-     */
-    SHA256: 1
-  }
 };
 
 /**
