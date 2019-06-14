@@ -162,7 +162,7 @@ const ImageSource = {
 /**
  * Client image to perform Google Cloud Vision API tasks over.
  *
- * @property {string} content
+ * @property {Buffer} content
  *   Image content, represented as a stream of bytes.
  *   Note: As with all `bytes` fields, protobuffers use a pure binary
  *   representation, whereas JSON representations use base64.
