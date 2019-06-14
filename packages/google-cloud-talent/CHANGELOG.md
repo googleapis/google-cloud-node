@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-talent/compare/v1.0.0...v1.0.1) (2019-06-13)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#67](https://www.github.com/googleapis/nodejs-talent/issues/67)) ([6434066](https://www.github.com/googleapis/nodejs-talent/commit/6434066))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-talent/compare/v0.3.0...v1.0.0) (2019-05-14)
 
 
