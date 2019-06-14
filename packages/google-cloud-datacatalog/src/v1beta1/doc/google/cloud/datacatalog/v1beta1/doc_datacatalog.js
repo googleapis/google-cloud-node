@@ -19,8 +19,10 @@
  * Request message for
  * SearchCatalog.
  *
- * @property {string[]} scopeOrgIds
- *   List of organizations to search within.
+ * @property {Object} scope
+ *   Required. The scope of this search request.
+ *
+ *   This object should have the same structure as [Scope]{@link google.cloud.datacatalog.v1beta1.Scope}
  *
  * @property {string} query
  *   Required. The query string in search query syntax. The query must be
@@ -30,38 +32,35 @@
  *
  *   * name:x
  *   * column:x
- *   * desc:x OR description:y
- *   * column_desc:x OR column_description:x
+ *   * description:y
  *
  *   Note: Query tokens need to have a minimum of 3 characters for substring
- *   matching to work correctly. See [Cloud Data Catalog Search
+ *   matching to work correctly. See [Data Catalog Search
  *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.
  *
  * @property {number} pageSize
- *   Number of results in the search page. If <=0 then defaults to 10.
- *   Max limit for page_size is 1000. Throws an invalid argument for page_size >
- *   1000.
+ *   Number of results in the search page. If <=0 then defaults to 10. Max limit
+ *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
  *
  * @property {string} pageToken
- *   Specifies which page is requested. If empty then the first page
- *   is returned.
+ *   Optional pagination token returned in an earlier
+ *   SearchCatalogResponse.next_page_token;
+ *   indicates that this is a continuation of a prior
+ *   SearchCatalog
+ *   call, and that the system should return the next page of data. If empty
+ *   then the first page is returned.
  *
  * @property {string} orderBy
- *   Specifies the ordering of results following syntax at
- *   https://cloud.google.com/apis/design/design_patterns#sorting_order. We only
- *   support ordering by a single metrics field and currently supported choices
- *   are:
- *
- *    * 'relevance'
- *    * 'last_access_timestamp'
- *    * 'last_modified_timestamp' and
- *    * 'title'.
- *
- * @property {boolean} excludeGcpPublicDatasets
- *   To exclude/include content from Google Cloud Platform public datasets in
- *   the search results. Google Cloud Platform public datasets are
- *   https://cloud.google.com/public-datasets/. By default, content from Google
- *   Cloud Platform public datasets are included.
+ *   Specifies the ordering of results, currently supported case-sensitive
+ *   choices are:
+ *   <ul>
+ *     <li> relevance </li>
+ *     <li> last_access_timestamp [asc|desc], defaults to descending if not
+ *     specified, </li>
+ *     <li> last_modified_timestamp [asc|desc], defaults to descending if not
+ *     specified, </li>
+ *     <li> title [asc|desc], defaults to ascending if not specified. </li>
+ *   </ul>
  *
  * @typedef SearchCatalogRequest
  * @memberof google.cloud.datacatalog.v1beta1
@@ -69,6 +68,37 @@
  */
 const SearchCatalogRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * @property {string[]} includeOrgIds
+   *   Data Catalog tries to automatically choose the right corpus of data to
+   *   search through. You can ensure an organization is included by adding it
+   *   to "include_org_ids". You can ensure a project's org is included with
+   *   "include_project_ids". You must specify at least one organization
+   *   using "include_org_ids" or "include_project_ids" in all search requests.
+   *
+   *   List of organization IDs to search within. To find your organization ID,
+   *   follow instructions in
+   *   https://cloud.google.com/resource-manager/docs/creating-managing-organization
+   *
+   * @property {string[]} includeProjectIds
+   *   List of project IDs to search within. To learn more about the
+   *   distinction between project names/IDs/numbers, go to
+   *   https://cloud.google.com/docs/overview/#projects
+   *
+   * @property {boolean} includeGcpPublicDatasets
+   *   If true, include Google Cloud Platform (GCP) public datasets in the
+   *   search results. Info on GCP public datasets is available at
+   *   https://cloud.google.com/public-datasets/. By default, GCP public
+   *   datasets are excluded.
+   *
+   * @typedef Scope
+   * @memberof google.cloud.datacatalog.v1beta1
+   * @see [google.cloud.datacatalog.v1beta1.SearchCatalogRequest.Scope definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
+   */
+  Scope: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  }
 };
 
 /**
@@ -93,102 +123,16 @@ const SearchCatalogResponse = {
 
 /**
  * Request message for
- * CreateEntryGroup.
- *
- * @property {string} parent
- *   Required. The name of the project this entry group is in. Example:
- *   "projects/{project_id}/locations/{location}".
- *
- * @property {string} entryGroupId
- *   Required. The id of the entry group to create.
- *
- * @property {Object} entryGroup
- *   The group to create.
- *
- *   This object should have the same structure as [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}
- *
- * @typedef CreateEntryGroupRequest
- * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
- */
-const CreateEntryGroupRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Request message for
- * GetEntryGroup.
- *
- * @property {string} name
- *   Required. The name of the entry group. For example,
- *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}".
- *
- * @property {Object} readMask
- *   If the FieldMask is not set, all entry contents are returned.
- *   If the FieldMask is set, only fields specified by the mask are returned.
- *
- *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
- *
- * @typedef GetEntryGroupRequest
- * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.GetEntryGroupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
- */
-const GetEntryGroupRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Request message for
- * DeleteEntryGroup.
- *
- * @property {string} name
- *   Required. The name of the entry group. For example,
- *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}".
- *
- * @typedef DeleteEntryGroupRequest
- * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
- */
-const DeleteEntryGroupRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Request message for
- * CreateEntry.
- *
- * @property {string} parent
- *   Required. The name of the entry group this entry is in. Example:
- *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}".
- *
- * @property {string} entryId
- *   Required. The id of the entry to create.
- *
- * @property {Object} entry
- *   The entry to create.
- *
- *   This object should have the same structure as [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}
- *
- * @typedef CreateEntryRequest
- * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.CreateEntryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
- */
-const CreateEntryRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Request message for
  * UpdateEntry.
  *
  * @property {Object} entry
- *   The updated Entry.
+ *   Required. The updated Entry.
  *
  *   This object should have the same structure as [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}
  *
  * @property {Object} updateMask
- *   The fields to update on the entry.  If absent or empty, all modifiable
- *   fields are updated.
+ *   Optional. The fields to update on the entry.  If absent or empty, all
+ *   modifiable fields are updated.
  *
  *   Modifiable fields in synced entries:
  *
@@ -207,22 +151,6 @@ const CreateEntryRequest = {
  * @see [google.cloud.datacatalog.v1beta1.UpdateEntryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
  */
 const UpdateEntryRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Request message for
- * DeleteEntry.
- *
- * @property {string} name
- *   Required. The name of the entry. For example,
- *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}".
- *
- * @typedef DeleteEntryRequest
- * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.DeleteEntryRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
- */
-const DeleteEntryRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -250,15 +178,24 @@ const GetEntryRequest = {
  *   The full name of the Google Cloud Platform resource the Data Catalog
  *   entry represents. See:
  *   https://cloud.google.com/apis/design/resource_names#full_resource_name
- *   Example:
+ *   Full names are case-sensitive.
+ *
+ *   Examples:
  *   "//bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId".
+ *   "//pubsub.googleapis.com/projects/projectId/topics/topicId"
  *
  * @property {string} sqlResource
- *   The SQL name of the entry. Example:
+ *   The SQL name of the entry. SQL names are case-sensitive.
  *
- *   1. cloud_pubsub.project_id.topic_id
- *   2. bigquery.project_id.dataset_id.table_id
- *   3. datacatalog.project_id.location_id.entry_group_id.entry_id
+ *   Examples:
+ *   <ul>
+ *     <li>cloud_pubsub.project_id.topic_id</li>
+ *     <li>pubsub.project_id.`topic.id.with.dots`</li>
+ *     <li>bigquery.project_id.dataset_id.table_id</li>
+ *     <li>datacatalog.project_id.location_id.entry_group_id.entry_id</li>
+ *   </ul>
+ *   *_ids shoud satisfy the standard SQL rules for identifiers.
+ *   https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical
  *
  * @typedef LookupEntryRequest
  * @memberof google.cloud.datacatalog.v1beta1
@@ -280,12 +217,13 @@ const LookupEntryRequest = {
  * Tag.
  *
  * @property {string} name
- *   Output only. The Data Catalog resource name of the entry in URL format. For
- *   example,
+ *   Required when used in
+ *   UpdateEntryRequest.
+ *   The Data Catalog resource name of the entry in URL format. For example,
  *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}".
  *
  * @property {string} linkedResource
- *   The full name of the cloud resource the entry belongs to. See:
+ *   Output only. The full name of the cloud resource the entry belongs to. See:
  *   https://cloud.google.com/apis/design/resource_names#full_resource_name
  *
  *   Data Catalog supports resources from select Google Cloud Platform systems.
@@ -295,15 +233,9 @@ const LookupEntryRequest = {
  *   "//bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId".
  *
  * @property {number} type
- *   Type of entry.
+ *   Required. Type of entry.
  *
  *   The number should be among the values of [EntryType]{@link google.cloud.datacatalog.v1beta1.EntryType}
- *
- * @property {Object} gcsFilesetSpec
- *   Specification that applies to a Cloud Storage fileset. This is only valid
- *   on entries of type FILESET.
- *
- *   This object should have the same structure as [GcsFilesetSpec]{@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec}
  *
  * @property {Object} bigqueryTableSpec
  *   Specification that applies to a BigQuery table. This is only valid on
@@ -311,23 +243,31 @@ const LookupEntryRequest = {
  *
  *   This object should have the same structure as [BigQueryTableSpec]{@link google.cloud.datacatalog.v1beta1.BigQueryTableSpec}
  *
+ * @property {Object} bigqueryDateShardedSpec
+ *   Specification for a group of BigQuery tables with name pattern
+ *   [prefix]YYYYMMDD. Context:
+ *   https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding
+ *
+ *   This object should have the same structure as [BigQueryDateShardedSpec]{@link google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec}
+ *
  * @property {string} displayName
- *   Display information such as title and description.
- *   A short name to identify the entry, for example,
- *   "Analytics Data - Jan 2011".
+ *   Optional. Display information such as title and description. A short name
+ *   to identify the entry, for example, "Analytics Data - Jan 2011". Default
+ *   value is an empty string.
  *
  * @property {string} description
- *   Entry description, which can consist of several sentences or paragraphs
- *   that describe entry contents.
+ *   Optional. Entry description, which can consist of several sentences or
+ *   paragraphs that describe entry contents. Default value is an empty string.
  *
  * @property {Object} schema
- *   Schema of the entry.
+ *   Optional. Schema of the entry. An entry might not have any schema attached
+ *   to it.
  *
  *   This object should have the same structure as [Schema]{@link google.cloud.datacatalog.v1beta1.Schema}
  *
  * @property {Object} sourceSystemTimestamps
- *   Timestamps about the underlying Google Cloud Platform resource -- not about
- *   this Data Catalog Entry.
+ *   Output only. Timestamps about the underlying Google Cloud Platform resource
+ *   -- not about this Data Catalog Entry.
  *
  *   This object should have the same structure as [SystemTimestamps]{@link google.cloud.datacatalog.v1beta1.SystemTimestamps}
  *
@@ -340,44 +280,18 @@ const Entry = {
 };
 
 /**
- * EntryGroup Metadata.
- * An EntryGroup resource represents a logical grouping of zero or more
- * Data Catalog Entry resources.
- *
- * @property {string} displayName
- *   A short name to identify the entry group, for example,
- *   "analytics data - jan 2011".
- *
- * @property {string} description
- *   Entry group description, which can consist of several sentences or
- *   paragraphs that describe entry group contents.
- *
- * @property {Object} dataCatalogTimestamps
- *   Timestamps about this EntryGroup.
- *
- *   This object should have the same structure as [SystemTimestamps]{@link google.cloud.datacatalog.v1beta1.SystemTimestamps}
- *
- * @typedef EntryGroup
- * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.EntryGroup definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/datacatalog.proto}
- */
-const EntryGroup = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Request message for
  * CreateTagTemplate.
  *
  * @property {string} parent
- *   Required. The name of the project this template is in. Example:
- *   "projects/{project_id}".
+ *   Required. The name of the project and the location this template is in.
+ *   Example: "projects/{project_id}/locations/{location}".
  *
  * @property {string} tagTemplateId
  *   Required. The id of the tag template to create.
  *
  * @property {Object} tagTemplate
- *   The tag template to create.
+ *   Required. The tag template to create.
  *
  *   This object should have the same structure as [TagTemplate]{@link google.cloud.datacatalog.v1beta1.TagTemplate}
  *
@@ -395,7 +309,7 @@ const CreateTagTemplateRequest = {
  *
  * @property {string} name
  *   Required. The name of the tag template. For example,
- *   "projects/{project_id}/tagTemplates/{tag_template_id}".
+ *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
  *
  * @typedef GetTagTemplateRequest
  * @memberof google.cloud.datacatalog.v1beta1
@@ -410,19 +324,18 @@ const GetTagTemplateRequest = {
  * UpdateTagTemplate.
  *
  * @property {Object} tagTemplate
- *   The template to update.
+ *   Required. The template to update.
  *
  *   This object should have the same structure as [TagTemplate]{@link google.cloud.datacatalog.v1beta1.TagTemplate}
  *
  * @property {Object} updateMask
- *   The field mask specifies the parts of the template to overwrite.
+ *   Optional. The field mask specifies the parts of the template to overwrite.
  *
  *   Allowed fields:
  *
  *     * display_name
  *
- *   If the field mask is omitted, all of the allowed fields above will be
- *   updated.
+ *   If update_mask is omitted, all of the allowed fields above will be updated.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -439,14 +352,13 @@ const UpdateTagTemplateRequest = {
  * DeleteTagTemplate.
  *
  * @property {string} name
- *   The name of the tag template to delete. For example,
- *   "projects/{project_id}/tagTemplates/{tag_template_id}".
+ *   Required. The name of the tag template to delete. For example,
+ *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
  *
  * @property {boolean} force
- *   Set this field to true to force the deletion of all tags using this
- *   template. If this field is set to false (the default value) and the tag
- *   template is already in use, then this RPC will return a Precondition Failed
- *   error.
+ *   Required. Currently, this field must always be set to <code>true</code>.
+ *   This confirms the deletion of any possible tags using this template.
+ *   <code>force = false</code> will be supported in the future.
  *
  * @typedef DeleteTagTemplateRequest
  * @memberof google.cloud.datacatalog.v1beta1
@@ -467,7 +379,7 @@ const DeleteTagTemplateRequest = {
  *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}").
  *
  * @property {Object} tag
- *   The tag to create.
+ *   Required. The tag to create.
  *
  *   This object should have the same structure as [Tag]{@link google.cloud.datacatalog.v1beta1.Tag}
  *
@@ -484,13 +396,14 @@ const CreateTagRequest = {
  * UpdateTag.
  *
  * @property {Object} tag
- *   The updated tag.
+ *   Required. The updated tag.
  *
  *   This object should have the same structure as [Tag]{@link google.cloud.datacatalog.v1beta1.Tag}
  *
  * @property {Object} updateMask
- *   The fields to update on the Tag.  If absent or empty, all modifiable fields
- *   are updated. Currently the only modifiable field is the field `fields`.
+ *   Optional. The fields to update on the Tag.  If absent or empty, all
+ *   modifiable fields are updated. Currently the only modifiable field is the
+ *   field `fields`.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -507,7 +420,7 @@ const UpdateTagRequest = {
  * DeleteTag.
  *
  * @property {string} name
- *   The name of the tag to delete. For example,
+ *   Required. The name of the tag to delete. For example,
  *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}".
  *
  * @typedef DeleteTagRequest
@@ -524,7 +437,7 @@ const DeleteTagRequest = {
  *
  * @property {string} parent
  *   Required. The name of the project this template is in. Example:
- *   "projects/{project_id}/tagTemplates/{tag_template_id}".
+ *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
  *
  * @property {string} tagTemplateFieldId
  *   Required. The id of the tag template field to create.
@@ -552,7 +465,7 @@ const CreateTagTemplateFieldRequest = {
  *
  * @property {string} name
  *   Required. The name of the tag template field. For example,
- *   "projects/{project_id}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
+ *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
  *
  * @property {Object} tagTemplateField
  *   Required. The template to update.
@@ -560,14 +473,17 @@ const CreateTagTemplateFieldRequest = {
  *   This object should have the same structure as [TagTemplateField]{@link google.cloud.datacatalog.v1beta1.TagTemplateField}
  *
  * @property {Object} updateMask
- *   The field mask specifies the parts of the template to overwrite.
+ *   Optional. The field mask specifies the parts of the template to overwrite.
  *   Allowed fields:
  *
  *     * display_name
  *     * type.enum_type
  *
- *   If the field mask is omitted, all of the allowed fields above will be
- *   updated.
+ *   If update_mask is omitted, all of the allowed fields above will be updated.
+ *
+ *   When updating an enum type, the provided values will be merged with the
+ *   existing values. Therefore, enum values can only be added, existing enum
+ *   values cannot be deleted nor renamed.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -585,10 +501,10 @@ const UpdateTagTemplateFieldRequest = {
  *
  * @property {string} name
  *   Required. The name of the tag template. For example,
- *   "projects/{project_id}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
+ *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
  *
  * @property {string} newTagTemplateFieldId
- *   Required. The new id of this tag template field. For example,
+ *   Required. The new ID of this tag template field. For example,
  *   "my_new_field".
  *
  * @typedef RenameTagTemplateFieldRequest
@@ -605,13 +521,12 @@ const RenameTagTemplateFieldRequest = {
  *
  * @property {string} name
  *   Required. The name of the tag template field to delete. For example,
- *   "projects/{project_id}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
+ *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
  *
  * @property {boolean} force
- *   Set this field to true to force the deletion of all usages of this tag
- *   field. If this field is set to false (the default value) and the tag
- *   template field is already in use, then this RPC will return a Precondition
- *   Failed error.
+ *   Required. Currently, this field must always be set to <code>true</code>.
+ *   This confirms the deletion of this field from any tags using this field.
+ *   <code>force = false</code> will be supported in the future.
  *
  * @typedef DeleteTagTemplateFieldRequest
  * @memberof google.cloud.datacatalog.v1beta1
@@ -626,14 +541,12 @@ const DeleteTagTemplateFieldRequest = {
  * ListTags.
  *
  * @property {string} parent
- *   Required.
- *   The name of the Data Catalog resource to list the tags of. The
- *   resource could be an Entry or a
- *   Dataset.
+ *   Required. The name of the Data Catalog resource to list the tags of. The
+ *   resource could be an Entry.
  *
  * @property {number} pageSize
- *   Optional. The maximum number of tags to return. Default is 10. Max limit
- *   is 1000.
+ *   Optional. The maximum number of tags to return. Default is 10. Max limit is
+ *   1000.
  *
  * @property {string} pageToken
  *   Optional. Token that specifies which page is requested. If empty, the first
@@ -669,9 +582,9 @@ const ListTagsResponse = {
 };
 
 /**
- * Entry resources in Cloud Data Catalog can be of different types e.g. BigQuery
- * Table entry is of type 'TABLE', pubsub topics is of type 'DATA_STREAM'. This
- * enum describes all the possible types Cloud Data Catalog contains.
+ * Entry resources in Data Catalog can be of different types e.g. BigQuery
+ * Table entry is of type 'TABLE'. This enum describes all the possible types
+ * Data Catalog contains.
  *
  * @enum {number}
  * @memberof google.cloud.datacatalog.v1beta1
@@ -689,8 +602,7 @@ const EntryType = {
   TABLE: 2,
 
   /**
-   * An entry type which is a set of files or objects. Example - Cloud Storage
-   * fileset.
+   * An entry type which is used for streaming entries. Example - Pub/Sub.
    */
-  FILESET: 4
+  DATA_STREAM: 3
 };

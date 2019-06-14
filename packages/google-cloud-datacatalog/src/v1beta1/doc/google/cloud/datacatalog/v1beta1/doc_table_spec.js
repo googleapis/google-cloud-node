@@ -19,15 +19,87 @@
  * Describes a BigQuery table.
  *
  * @property {number} tableSourceType
- *   The table source type.
+ *   Output only. The table source type.
  *
  *   The number should be among the values of [TableSourceType]{@link google.cloud.datacatalog.v1beta1.TableSourceType}
+ *
+ * @property {Object} viewSpec
+ *   Table view specification. This field should only be populated if
+ *   table_source_type is BIGQUERY_VIEW.
+ *
+ *   This object should have the same structure as [ViewSpec]{@link google.cloud.datacatalog.v1beta1.ViewSpec}
+ *
+ * @property {Object} tableSpec
+ *   Spec of a BigQuery table. This field should only be populated if
+ *   table_source_type is BIGQUERY_TABLE.
+ *
+ *   This object should have the same structure as [TableSpec]{@link google.cloud.datacatalog.v1beta1.TableSpec}
  *
  * @typedef BigQueryTableSpec
  * @memberof google.cloud.datacatalog.v1beta1
  * @see [google.cloud.datacatalog.v1beta1.BigQueryTableSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/table_spec.proto}
  */
 const BigQueryTableSpec = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Table view specification.
+ *
+ * @property {string} viewQuery
+ *   Output only. The query that defines the table view.
+ *
+ * @typedef ViewSpec
+ * @memberof google.cloud.datacatalog.v1beta1
+ * @see [google.cloud.datacatalog.v1beta1.ViewSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/table_spec.proto}
+ */
+const ViewSpec = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Normal BigQuery table spec.
+ *
+ * @property {string} groupedEntry
+ *   Output only. If the table is a dated shard, i.e. with name pattern
+ *   [prefix]YYYYMMDD, grouped_entry is the Data Catalog resource name of the
+ *   date sharded grouped entry, e.g.
+ *   projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}
+ *   /entries/{entry_id}.
+ *   Otherwise, grouped_entry will be empty.
+ *
+ * @typedef TableSpec
+ * @memberof google.cloud.datacatalog.v1beta1
+ * @see [google.cloud.datacatalog.v1beta1.TableSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/table_spec.proto}
+ */
+const TableSpec = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Spec for a group of BigQuery tables with name pattern [prefix]YYYYMMDD.
+ * Context:
+ * https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding
+ *
+ * @property {string} dataset
+ *   Output only. The Data Catalog resource name of the dataset entry the
+ *   current table belongs to, e.g.
+ *   projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}
+ *   /entries/{entry_id}
+ *
+ * @property {string} tablePrefix
+ *   Output only. The table name prefix of the shards. The name of any given
+ *   shard is [table_prefix]YYYYMMDD, e.g. for shard MyTable20180101, the
+ *   table_prefix is "MyTable"
+ *
+ * @property {number} shardCount
+ *   Output only. Total number of shards.
+ *
+ * @typedef BigQueryDateShardedSpec
+ * @memberof google.cloud.datacatalog.v1beta1
+ * @see [google.cloud.datacatalog.v1beta1.BigQueryDateShardedSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/table_spec.proto}
+ */
+const BigQueryDateShardedSpec = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

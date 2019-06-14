@@ -5,7 +5,7 @@
 # [Google Cloud Data Catalog: Node.js Client](https://github.com/googleapis/nodejs-datacatalog)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/datacatalog.svg)](https://www.npmjs.org/package/datacatalog)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/datacatalog.svg)](https://www.npmjs.org/package/@google-cloud/datacatalog)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-datacatalog/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-datacatalog)
 
 
@@ -26,6 +26,11 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 **Table of contents:**
 
 
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -43,7 +48,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install datacatalog
+npm install @google-cloud/datacatalog
 ```
 
 

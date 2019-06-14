@@ -19,8 +19,8 @@
  * Represents a schema (e.g. BigQuery, GoogleSQL, Avro schema).
  *
  * @property {Object[]} columns
- *   Schema of columns. A maximum of 10,000 columns and sub-columns can be
- *   specified.
+ *   Required. Schema of columns. A maximum of 10,000 columns and sub-columns
+ *   can be specified.
  *
  *   This object should have the same structure as [ColumnSchema]{@link google.cloud.datacatalog.v1beta1.ColumnSchema}
  *
@@ -43,21 +43,16 @@ const Schema = {
  *   Required. Type of the column.
  *
  * @property {string} description
- *   Description of the column.
+ *   Optional. Description of the column. Default value is an empty string.
  *
  * @property {string} mode
- *   A column's mode indicates whether the values in this column are
+ *   Optional. A column's mode indicates whether the values in this column are
  *   required, nullable, etc. Only 'NULLABLE', 'REQUIRED' and 'REPEATED' are
- *   supported, default mode is 'NULLABLE'.
- *
- * @property {Object[]} columns
- *   Schema of sub-columns. This field is deprecated, use subcolumns instead.
- *   Only one of {columns, subcolumns} should be set.
- *
- *   This object should have the same structure as [ColumnSchema]{@link google.cloud.datacatalog.v1beta1.ColumnSchema}
+ *   supported. Default mode is 'NULLABLE'.
  *
  * @property {Object[]} subcolumns
- *   Schema of sub-columns.
+ *   Optional. Schema of sub-columns. A column can have zero or more
+ *   sub-columns.
  *
  *   This object should have the same structure as [ColumnSchema]{@link google.cloud.datacatalog.v1beta1.ColumnSchema}
  *
