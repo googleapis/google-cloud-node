@@ -74,7 +74,7 @@ const LongRunningRecognizeRequest = {
  *
  *   This object should have the same structure as [StreamingRecognitionConfig]{@link google.cloud.speech.v1p1beta1.StreamingRecognitionConfig}
  *
- * @property {string} audioContent
+ * @property {Buffer} audioContent
  *   The audio data to be recognized. Sequential chunks of audio data are sent
  *   in sequential `StreamingRecognizeRequest` messages. The first
  *   `StreamingRecognizeRequest` message must not contain `audio_content` data
@@ -668,7 +668,7 @@ const SpeechContext = {
  * returns google.rpc.Code.INVALID_ARGUMENT.
  * See [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  *
- * @property {string} content
+ * @property {Buffer} content
  *   The audio data bytes encoded as specified in
  *   `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
  *   pure binary representation, whereas JSON representations use base64.
