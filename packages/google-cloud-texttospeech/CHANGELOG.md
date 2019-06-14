@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.1.0...v1.1.1) (2019-06-13)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#239](https://www.github.com/googleapis/nodejs-text-to-speech/issues/239)) ([59a89d9](https://www.github.com/googleapis/nodejs-text-to-speech/commit/59a89d9))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.0.0...v1.1.0) (2019-06-05)
 
 
