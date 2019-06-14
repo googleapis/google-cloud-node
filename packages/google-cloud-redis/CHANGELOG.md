@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-redis/compare/v1.1.1...v1.1.2) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#184](https://www.github.com/googleapis/nodejs-redis/issues/184)) ([0ccd9d8](https://www.github.com/googleapis/nodejs-redis/commit/0ccd9d8))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-redis/compare/v1.1.0...v1.1.1) (2019-06-11)
 
 
