@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.0...v3.2.1) (2019-06-13)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#385](https://www.github.com/googleapis/nodejs-speech/issues/385)) ([da6b1f2](https://www.github.com/googleapis/nodejs-speech/commit/da6b1f2))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.1.1...v3.2.0) (2019-06-06)
 
 
