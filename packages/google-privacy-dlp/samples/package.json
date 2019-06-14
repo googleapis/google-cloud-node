@@ -23,7 +23,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.0.0",
-    "pixelmatch": "^4.0.2",
+    "pixelmatch": "^5.0.0",
     "pngjs": "^3.3.3",
     "uuid": "^3.3.2"
   }
