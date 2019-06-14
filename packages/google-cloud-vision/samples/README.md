@@ -13,6 +13,8 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Detect](#detect)
+  * [Detect.v1p1beta1](#detect.v1p1beta1)
+  * [Detect.v1p3beta1](#detect.v1p3beta1)
   * [Face Detection](#face-detection)
   * [Quickstart](#quickstart)
   * [Text Detection](#text-detection)
@@ -36,6 +38,40 @@ __Usage:__
 
 
 `node detect.js`
+
+
+-----
+
+
+
+
+### Detect.v1p1beta1
+
+View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/detect.v1p1beta1.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p1beta1.js,samples/README.md)
+
+__Usage:__
+
+
+`node detect.v1p1beta1.js`
+
+
+-----
+
+
+
+
+### Detect.v1p3beta1
+
+View the [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/detect.v1p3beta1.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p3beta1.js,samples/README.md)
+
+__Usage:__
+
+
+`node detect.v1p3beta1.js`
 
 
 -----
