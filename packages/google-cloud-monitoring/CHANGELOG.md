@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.2.0...v1.2.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#269](https://www.github.com/googleapis/nodejs-monitoring/issues/269)) ([cba6442](https://www.github.com/googleapis/nodejs-monitoring/commit/cba6442))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.1.0...v1.2.0) (2019-06-06)
 
 
