@@ -59,7 +59,7 @@ describe('VideoIntelligenceServiceClient', () => {
       );
 
       // Mock request
-      const inputUri = 'gs://demomaker/cat.mp4';
+      const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
       const featuresElement = 'LABEL_DETECTION';
       const features = [featuresElement];
       const request = {
@@ -100,7 +100,7 @@ describe('VideoIntelligenceServiceClient', () => {
       );
 
       // Mock request
-      const inputUri = 'gs://demomaker/cat.mp4';
+      const inputUri = 'gs://cloud-samples-data/video/cat.mp4';
       const featuresElement = 'LABEL_DETECTION';
       const features = [featuresElement];
       const request = {
