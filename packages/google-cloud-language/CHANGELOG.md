@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-language/compare/v3.2.1...v3.2.2) (2019-06-14)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#263](https://www.github.com/googleapis/nodejs-language/issues/263)) ([7bbc8a2](https://www.github.com/googleapis/nodejs-language/commit/7bbc8a2))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-language/compare/v3.2.0...v3.2.1) (2019-06-11)
 
 
