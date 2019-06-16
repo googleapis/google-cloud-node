@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-dlp/compare/v1.2.0...v1.2.1) (2019-06-16)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#306](https://www.github.com/googleapis/nodejs-dlp/issues/306)) ([c2c018d](https://www.github.com/googleapis/nodejs-dlp/commit/c2c018d))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.1.0...v1.2.0) (2019-06-06)
 
 
