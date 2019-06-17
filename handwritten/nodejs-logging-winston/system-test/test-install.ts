@@ -76,6 +76,19 @@ winston.createLogger({transports:[loggingWinston]})
     dependencies: ['winston'],
     devDependencies: ['typescript@3'],
   },
+  {
+    code: `import { LoggingWinston } from '@google-cloud/logging-winston';
+    import * as winston from 'winston';
+    
+    winston.createLogger({
+      transports: [
+        new LoggingWinston(),
+      ],
+    });`,
+    description: 'imports transport-stream correctly',
+    dependencies: ['winston', 'winston-transport'],
+    devDependencies: [],
+  },
 ];
 
 const JS_CODE_SAMPLES: check.CodeSample[] = [
