@@ -1,5 +1,5 @@
-import * as TransportStream from 'winston-transport';
 import {LEVEL} from 'triple-beam';
+import TransportStream = require('winston-transport');
 
 import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
 import * as express from './middleware/express';
