@@ -1,6 +1,0 @@
-{
-  "packageWhitelist": [
-    "log-driver",  // https://github.com/googleapis/nodejs-common/issues/16
-    "escape-regexp-component" // https://github.com/googleapis/nodejs-error-reporting/issues/63
-  ]
-}
