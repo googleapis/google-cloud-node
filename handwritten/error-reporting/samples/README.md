@@ -6,7 +6,9 @@
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
+> Node.js idiomatic client for [Error Reporting][product-docs].
 
+[Stackdriver Error Reporting](https://cloud.google.com/error-reporting/docs/) aggregates and displays errors produced in your running cloud services.
 
 ## Table of Contents
 
