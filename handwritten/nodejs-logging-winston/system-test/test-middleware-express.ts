@@ -62,13 +62,26 @@ describe(__filename, () => {
 
         await delay(WRITE_CONSISTENCY_DELAY_MS);
 
-        const log = logging.log(`${LOG_NAME}_applog`);
-        const entries = (await log.getEntries({pageSize: 1}))[0];
-        assert.strictEqual(entries.length, 1);
-        const entry = entries[0];
-        assert.strictEqual(LOG_MESSAGE, entry.data.message);
-        assert(entry.metadata.trace, 'should have a trace property');
-        assert(entry.metadata.trace.match(/projects\/.*\/traces\/.*/));
+        const appLog = logging.log(`${LOG_NAME}_applog`);
+        const appLogEntries = (await appLog.getEntries({pageSize: 1}))[0];
+        assert.strictEqual(appLogEntries.length, 1);
+        const [appLogEntry] = appLogEntries;
+        assert.strictEqual(LOG_MESSAGE, appLogEntry.data.message);
+        assert(appLogEntry.metadata.trace, 'should have a trace property');
+        assert(appLogEntry.metadata.trace.match(/projects\/.*\/traces\/.*/));
+        assert.strictEqual(appLogEntry.metadata.severity, 'INFO');
+
+        const requestLog = logging.log(LOG_NAME);
+        const requestLogEntries = (await requestLog.getEntries({
+          pageSize: 1,
+        }))[0];
+        assert.strictEqual(requestLogEntries.length, 1);
+        const [requestLogEntry] = requestLogEntries;
+        assert.strictEqual(
+          requestLogEntry.metadata.trace,
+          appLogEntry.metadata.trace
+        );
+
         done();
       };
 
