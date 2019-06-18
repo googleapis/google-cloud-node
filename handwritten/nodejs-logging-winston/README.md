@@ -126,7 +126,8 @@ app.get('/', (req, res) => {
     // `req.log` can be used as a winston style log method. All logs generated
     // using `req.log` use the current request context. That is, all logs
     // corresponding to a specific request will be bundled in the Stackdriver
-    // UI.
+    // UI. The log method will accept RFC5424 (syslog) log levels (the same
+    // levels provided by winston.config.syslog.levels).
     req.log.info('this is an info log message');
     res.send('hello world');
 });
