@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v1.0.0...v2.0.0) (2019-06-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove build signature support (#14)
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#12](https://www.github.com/googleapis/nodejs-grafeas/issues/12)) ([12ece17](https://www.github.com/googleapis/nodejs-grafeas/commit/12ece17))
+
+
+### Code Refactoring
+
+* remove build signature support ([#14](https://www.github.com/googleapis/nodejs-grafeas/issues/14)) ([d13ec5f](https://www.github.com/googleapis/nodejs-grafeas/commit/d13ec5f))
+
 ## 1.0.0 (2019-06-06)
 
 
