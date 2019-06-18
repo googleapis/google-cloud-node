@@ -1,8 +1,8 @@
 {
-  "name": "error_reporting",
+  "name": "error-reporting",
   "name_pretty": "Stackdriver Error Reporting",
   "product_documentation": "https://cloud.google.com/error-reporting",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/error-reporting/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/error-reporting/latest/",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559780",
   "release_level": "beta",
   "language": "nodejs",
