@@ -18,6 +18,7 @@ import arrify = require('arrify');
 import * as extend from 'extend';
 import * as is from 'is';
 import {Query, QueryProto} from './query';
+import {PathType} from '.';
 
 // tslint:disable-next-line no-namespace
 export namespace entity {
@@ -162,7 +163,7 @@ export namespace entity {
 
   export interface KeyOptions {
     namespace?: string;
-    path: Array<string | number>;
+    path: PathType[];
   }
 
   /**

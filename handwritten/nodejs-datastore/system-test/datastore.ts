@@ -159,7 +159,7 @@ describe('Datastore', () => {
       const [entity] = await datastore.get(postKey);
       delete entity[datastore.KEY];
       assert.deepStrictEqual(entity, data);
-      await datastore.delete(datastore.key(['Post', assignedId]));
+      await datastore.delete(datastore.key(['Post', assignedId as string]));
     });
 
     it('should save/get/delete with a generated key id', async () => {
