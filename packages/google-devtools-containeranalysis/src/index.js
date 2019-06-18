@@ -22,6 +22,9 @@
  * @namespace google.cloud.containeranalysis
  */
 /**
+ * @namespace google.cloud.containeranalysis.v1
+ */
+/**
  * @namespace google.cloud.containeranalysis.v1beta1
  */
 /**
@@ -74,22 +77,19 @@
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
+  v1: require('./v1'),
   v1beta1: require('./v1beta1'),
 });
 
 /**
  * The `@google-cloud/containeranalysis` package has the following named exports:
  *
- * - `ContainerAnalysisV1Beta1Client` - Reference to
- *   {@link v1beta1.ContainerAnalysisV1Beta1Client}
- * - `GrafeasV1Beta1Client` - Reference to
- *   {@link v1beta1.GrafeasV1Beta1Client}
- * - `v1beta1` - This is used for selecting or pinning a
+ * - `ContainerAnalysisClient` - Reference to
+ *   {@link v1.ContainerAnalysisClient}
+ * - `v1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
- *     - `ContainerAnalysisV1Beta1Client` - Reference to
- *       {@link v1beta1.ContainerAnalysisV1Beta1Client}
- *     - `GrafeasV1Beta1Client` - Reference to
- *       {@link v1beta1.GrafeasV1Beta1Client}
+ *     - `ContainerAnalysisClient` - Reference to
+ *       {@link v1.ContainerAnalysisClient}
  *
  * @module {object} @google-cloud/containeranalysis
  * @alias nodejs-containeranalysis
@@ -101,10 +101,10 @@ const gapic = Object.freeze({
  * const containeranalysis = require('@google-cloud/containeranalysis');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new containeranalysis.ContainerAnalysisV1Beta1Client();
+ * const client = new containeranalysis.ContainerAnalysisClient();
  *
  * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new containeranalysis.ContainerAnalysisV1Beta1Client({
+ * const client = new containeranalysis.ContainerAnalysisClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
@@ -112,20 +112,17 @@ const gapic = Object.freeze({
 
 /**
  * @type {object}
- * @property {constructor} ContainerAnalysisV1Beta1Client
- *   Reference to {@link v1beta1.ContainerAnalysisV1Beta1Client}
- * @property {constructor} GrafeasV1Beta1Client
- *   Reference to {@link v1beta1.GrafeasV1Beta1Client}
+ * @property {constructor} ContainerAnalysisClient
+ *   Reference to {@link v1.ContainerAnalysisClient}
  */
-module.exports = gapic.v1beta1;
+module.exports = gapic.v1;
 
 /**
  * @type {object}
- * @property {constructor} ContainerAnalysisV1Beta1Client
- *   Reference to {@link v1beta1.ContainerAnalysisV1Beta1Client}
- * @property {constructor} GrafeasV1Beta1Client
- *   Reference to {@link v1beta1.GrafeasV1Beta1Client}
+ * @property {constructor} ContainerAnalysisClient
+ *   Reference to {@link v1.ContainerAnalysisClient}
  */
+module.exports.v1 = gapic.v1;
 module.exports.v1beta1 = gapic.v1beta1;
 
 // Alias `module.exports` as `module.exports.default`, for future-proofing.

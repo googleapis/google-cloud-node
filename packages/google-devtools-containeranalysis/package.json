@@ -26,6 +26,7 @@
     "google-gax": "^1.0.0"
   },
   "devDependencies": {
+    "c8": "^5.0.1",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-node": "^9.0.1",
@@ -34,18 +35,17 @@
     "jsdoc-baseline": "^0.1.0",
     "linkinator": "^1.4.2",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1",
     "power-assert": "^1.6.1",
     "prettier": "^1.17.1"
   },
   "scripts": {
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "test": "nyc mocha",
+    "test": "c8 mocha",
     "lint": "eslint '**/*.js'",
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
-    "docs-test": "linkinator docs -r --skip 'www.npmjs.org|cloud.google.com/nodejs/docs/reference/containeranalysis/latest/'",
+    "docs-test": "linkinator docs -r",
     "predocs-test": "npm run docs"
   },
   "license": "Apache-2.0",
