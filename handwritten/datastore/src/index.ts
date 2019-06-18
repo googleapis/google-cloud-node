@@ -37,8 +37,7 @@ import {Transaction} from './transaction';
 
 const {grpc} = new GrpcClient();
 
-// tslint:disable-next-line: no-any
-export type PathType = any;
+export type PathType = string | number | entity.Int;
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
@@ -701,13 +700,13 @@ class Datastore extends DatastoreRequest {
    * });
    */
   key(options: string | entity.KeyOptions | PathType[]): entity.Key {
-    options = is.object(options)
-      ? options
+    const keyOptions = is.object(options)
+      ? (options as entity.KeyOptions)
       : {
           namespace: this.namespace,
           path: arrify(options) as PathType[],
         };
-    return new entity.Key(options as entity.KeyOptions);
+    return new entity.Key(keyOptions);
   }
 
   /**
