@@ -38,7 +38,7 @@ export async function middleware(options?: MiddlewareOptions) {
   const defaultOptions = {
     logName: 'winston_log',
     level: 'info',
-    levels: winston.config.npm.levels,
+    levels: winston.config.syslog.levels,
   };
   options = Object.assign({}, defaultOptions, options);
 
@@ -71,7 +71,11 @@ export async function middleware(options?: MiddlewareOptions) {
       transports: [loggingWinstonReq],
     });
     emitRequestLog = (httpRequest: HttpRequest, trace: string) => {
-      requestLogger.info({[LOGGING_TRACE_KEY]: trace, httpRequest});
+      requestLogger.info({
+        [LOGGING_TRACE_KEY]: trace,
+        httpRequest,
+        message: httpRequest.requestUrl || 'http request',
+      });
     };
   }
 
