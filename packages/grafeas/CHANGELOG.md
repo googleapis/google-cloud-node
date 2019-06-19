@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.0.0...v2.1.0) (2019-06-19)
+
+
+### Features
+
+* add NoteKind enum ([#17](https://www.github.com/googleapis/nodejs-grafeas/issues/17)) ([5738516](https://www.github.com/googleapis/nodejs-grafeas/commit/5738516))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v1.0.0...v2.0.0) (2019-06-18)
 
 
