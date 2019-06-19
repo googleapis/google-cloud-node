@@ -23,6 +23,7 @@
     "Container Analysis API"
   ],
   "dependencies": {
+    "@google-cloud/grafeas": "^2.0.0",
     "google-gax": "^1.0.0"
   },
   "devDependencies": {

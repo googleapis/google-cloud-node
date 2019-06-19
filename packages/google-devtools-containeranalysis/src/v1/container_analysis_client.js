@@ -17,6 +17,7 @@
 const gapicConfig = require('./container_analysis_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
+const {GrafeasClient} = require('@google-cloud/grafeas');
 
 const VERSION = require('../../package.json').version;
 
@@ -155,10 +156,14 @@ class ContainerAnalysisClient {
               throw err;
             }
         ),
+
         defaults[methodName],
         null
       );
     }
+    // expose the fully hydrated options, for the benefit of
+    // the client.getGrafeas() method.
+    this.opts = opts;
   }
 
   /**
@@ -446,6 +451,19 @@ class ContainerAnalysisClient {
    */
   matchNoteFromNoteName(noteName) {
     return this._pathTemplates.notePathTemplate.match(noteName).note;
+  }
+
+  /**
+   * Returns an instance of a @google-cloud/grafeas client, configured to
+   * connect to Google Cloud's Container Analysis API. For documentation
+   * on this client, see:
+   * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
+   *
+   * @returns {GrafeasClient} - An instance of a Grafeas client.
+   *
+   */
+  getGrafeasClient() {
+    return new GrafeasClient(this.opts);
   }
 }
 

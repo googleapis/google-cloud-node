@@ -266,6 +266,8 @@ __Usage:__
 
 ### Quickstart
 
+fetching an instance of Grafeas and creating a note.
+
 View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
@@ -273,7 +275,7 @@ View the [source code](https://github.com/googleapis/nodejs-containeranalysis/bl
 __Usage:__
 
 
-`node quickstart.js`
+`node quickstart.js "project-id" "note-id"`
 
 
 -----

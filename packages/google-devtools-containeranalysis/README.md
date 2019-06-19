@@ -4,7 +4,7 @@
 
 # [Google Container Analysis: Node.js Client](https://github.com/googleapis/nodejs-containeranalysis)
 
-[![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/containeranalysis.svg)](https://www.npmjs.org/package/@google-cloud/containeranalysis)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-containeranalysis/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-containeranalysis)
 
@@ -55,12 +55,48 @@ npm install @google-cloud/containeranalysis
 ### Using the client library
 
 ```javascript
-async function quickstart() {
-  // Imports the @google-cloud/containeranalysis client library
-  const client = require('@google-cloud/containeranalysis');
-  console.log(client);
-}
-quickstart();
+  /**
+   * TODO(developer): Uncomment these variables before running the sample
+   */
+  // const projectId = 'your-project-id', // Your GCP Project ID
+  // const noteId = 'my-note-id' // Id of the note
+
+  // Import the library and create a client
+  const {ContainerAnalysisClient} = require('@google-cloud/containeranalysis');
+  const client = new ContainerAnalysisClient();
+  // Fetch an instance of a Grafeas client:
+  // see: https://googleapis.dev/nodejs/grafeas/latest
+  const grafeasClient = client.getGrafeasClient();
+
+  // Construct request
+  // Associate the Note with a metadata type
+  // https://cloud.google.com/container-registry/docs/container-analysis#supported_metadata_types
+  // Here, we use the type "vulnerabiltity"
+  const formattedParent = grafeasClient.projectPath(projectId);
+
+  // Creates and returns a new Note
+  const [note] = await grafeasClient.createNote({
+    parent: formattedParent,
+    noteId: noteId,
+    note: {
+      vulnerability: {
+        details: [
+          {
+            affectedCpeUri: 'foo.uri',
+            affectedPackage: 'foo',
+            minAffectedVersion: {
+              kind: 'MINIMUM',
+            },
+            fixedVersion: {
+              kind: 'MAXIMUM',
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  console.log(`Note ${note.name} created.`);
 
 ```
 
@@ -98,11 +134,13 @@ also contains samples.
 This library follows [Semantic Versioning](http://semver.org/).
 
 
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
 
 
-This library is considered to be in **alpha**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 

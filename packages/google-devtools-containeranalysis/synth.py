@@ -34,13 +34,61 @@ common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
 s.copy(templates)
 
+# fix the URL of grafeas.io (this is already fixed upstream).
 s.replace('src/v1beta1/*.js',
         'cloud.google.comgrafeas.io',
         'grafeas.io')
 
-s.replace('src/v1/*.js',
-        'cloud.google.comgrafeas.io',
-        'grafeas.io')
+# perform surgery inserting the Grafeas client.
+s.replace("src/v1/container_analysis_client.js",
+r"""const path = require\('path'\);
+""",
+r"""const path = require('path');
+const { GrafeasClient } = require('@google-cloud/grafeas');
+""")
+
+s.replace("src/v1/container_analysis_client.js",
+r"""        defaults\[methodName\],
+        null
+      \);
+    }
+  }""",
+r"""
+        defaults[methodName],
+        null
+      );
+    }
+    // expose the fully hydrated options, for the benefit of
+    // the client.getGrafeas() method.
+    this.opts = opts;
+  }
+""")
+
+s.replace("src/v1/container_analysis_client.js",
+r"""  matchNoteFromNoteName\(noteName\) {
+    return this\._pathTemplates\.notePathTemplate
+      \.match\(noteName\)
+      \.note;
+  }
+""",
+r"""  matchNoteFromNoteName(noteName) {
+    return this._pathTemplates.notePathTemplate.match(noteName).note;
+  }
+
+
+  /**
+   * Returns an instance of a @google-cloud/grafeas client, configured to
+   * connect to Google Cloud's Container Analysis API. For documentation
+   * on this client, see:
+   * <a href="https://googleapis.dev/nodejs/grafeas/latest/index.html">https://googleapis.dev/nodejs/grafeas/latest/index.html</a>
+   *
+   * @returns {GrafeasClient} - An instance of a Grafeas client.
+   *
+   */
+  getGrafeasClient() {
+    return new GrafeasClient(this.opts);
+  }
+""")
 
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
