@@ -256,7 +256,8 @@ const ByteContentItem = {
     IMAGE_BMP: 2,
     IMAGE_PNG: 3,
     IMAGE_SVG: 4,
-    TEXT_UTF8: 5
+    TEXT_UTF8: 5,
+    AVRO: 11
   }
 };
 
