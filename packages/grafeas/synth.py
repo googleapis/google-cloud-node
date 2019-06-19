@@ -31,28 +31,25 @@ for version in versions:
  s.copy(library, excludes=[
    "README.md",
    "package.json",
-   "src/index.js",
    "src/v1/grafeas_client.js",
    "test/gapic-v1.js",
    "protos/google/*"
  ])
 
-# perform surgery inserting the Grafeas client.
 s.replace("src/index.js",
-r"""module.exports\.v1 = gapic\.v1;
-
-""",
-r"""module.exports.v1 = gapic.v1;
-module.exports.NoteKind = {
-  NOTE_KIND_UNSPECIFIED: 0,
-  VULNERABILITY: 1,
-  BUILD: 2,
-  IMAGE: 3,
-  PACKAGE: 4,
-  DEPLOYMENT: 5,
-  DISCOVERY: 6,
-  ATTESTATION: 7
-}
+r"""\/\*\*
+ \* @namespace google
+ \*/""",
+r"""
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace grafeas.v1
+ */
 """)
 
 # Copy common templates
