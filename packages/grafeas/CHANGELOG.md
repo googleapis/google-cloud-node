@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.0...v2.1.1) (2019-06-19)
+
+
+### Bug Fixes
+
+* **revert:** revert exposing NoteKind enum; automate jsdoc fix ([#19](https://www.github.com/googleapis/nodejs-grafeas/issues/19)) ([4366cac](https://www.github.com/googleapis/nodejs-grafeas/commit/4366cac))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.0.0...v2.1.0) (2019-06-19)
 
 
