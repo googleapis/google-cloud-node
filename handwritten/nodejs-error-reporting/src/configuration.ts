@@ -204,6 +204,14 @@ export class Configuration {
    * @returns {Undefined} - does not return anything
    */
   _checkLocalServiceContext() {
+    // Update June 18, 2019: When running on Cloud Run, Cloud Run
+    //                       on GKE, or any Knative install, the
+    //                       K_SERVICE env var should be used as
+    //                       the service and the K_REVISION env var
+    //                       should be used as the version.  See the
+    //                       Knative runtime contract for more info
+    // (https://github.com/knative/serving/blob/master/docs/runtime-contract.md#process)
+    //
     // Note: The GAE_MODULE_NAME environment variable is set on GAE.
     //       If the code is, in particular, running on GCF, then the
     //       FUNCTION_NAME environment variable is set.
@@ -224,7 +232,10 @@ export class Configuration {
     let service;
     let version;
 
-    if (env.FUNCTION_NAME) {
+    if (env.K_SERVICE) {
+      service = env.K_SERVICE;
+      version = env.K_REVISION;
+    } else if (env.FUNCTION_NAME) {
       service = env.FUNCTION_NAME;
     } else if (env.GAE_SERVICE) {
       service = env.GAE_SERVICE;
