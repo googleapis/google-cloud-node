@@ -83,6 +83,15 @@ module.exports = gapic.v1;
  *   Reference to {@link v1.GrafeasClient}
  */
 module.exports.v1 = gapic.v1;
-
+module.exports.NoteKind = {
+  NOTE_KIND_UNSPECIFIED: 0,
+  VULNERABILITY: 1,
+  BUILD: 2,
+  IMAGE: 3,
+  PACKAGE: 4,
+  DEPLOYMENT: 5,
+  DISCOVERY: 6,
+  ATTESTATION: 7,
+};
 // Alias `module.exports` as `module.exports.default`, for future-proofing.
 module.exports.default = Object.assign({}, module.exports);

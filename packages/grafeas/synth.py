@@ -37,6 +37,24 @@ for version in versions:
    "protos/google/*"
  ])
 
+# perform surgery inserting the Grafeas client.
+s.replace("src/index.js",
+r"""module.exports\.v1 = gapic\.v1;
+
+""",
+r"""module.exports.v1 = gapic.v1;
+module.exports.NoteKind = {
+  NOTE_KIND_UNSPECIFIED: 0,
+  VULNERABILITY: 1,
+  BUILD: 2,
+  IMAGE: 3,
+  PACKAGE: 4,
+  DEPLOYMENT: 5,
+  DISCOVERY: 6,
+  ATTESTATION: 7
+}
+""")
+
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
