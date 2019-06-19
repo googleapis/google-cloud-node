@@ -20,8 +20,8 @@ const errorHandler = new ErrorReporting({
   //       option is now invalid.
   onUncaughtException: 'report',
 } as {});
-import * as koa from 'koa';
-const app = (koa as Function)();
+import * as Koa from 'koa';
+const app = new Koa();
 
 app.use(errorHandler.koa);
 
