@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.1.0...v1.2.0) (2019-06-19)
+
+
+### Features
+
+* adds getGrafeasClient() method on ContainerAnalysisClient instance ([#46](https://www.github.com/googleapis/nodejs-containeranalysis/issues/46)) ([0f03c96](https://www.github.com/googleapis/nodejs-containeranalysis/commit/0f03c96))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.0.2...v1.1.0) (2019-06-18)
 
 
