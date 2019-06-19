@@ -1088,6 +1088,36 @@ const StreamingAnnotateVideoResponse = {
 };
 
 /**
+ * Config for AUTOML_CLASSIFICATION in streaming mode.
+ *
+ * @property {string} modelName
+ *   Resource name of AutoML model.
+ *   Format: `projects/{project_id}/locations/{location_id}/models/{model_id}`
+ *
+ * @typedef StreamingAutomlClassificationConfig
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.StreamingAutomlClassificationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const StreamingAutomlClassificationConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Config for AUTOML_OBJECT_TRACKING in streaming mode.
+ *
+ * @property {string} modelName
+ *   Resource name of AutoML model.
+ *   Format: `projects/{project_id}/locations/{location_id}/models/{model_id}`
+ *
+ * @typedef StreamingAutomlObjectTrackingConfig
+ * @memberof google.cloud.videointelligence.v1p3beta1
+ * @see [google.cloud.videointelligence.v1p3beta1.StreamingAutomlObjectTrackingConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/videointelligence/v1p3beta1/video_intelligence.proto}
+ */
+const StreamingAutomlObjectTrackingConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Config for EXPLICIT_CONTENT_DETECTION in streaming mode.
  * No customized config support.
  * @typedef StreamingExplicitContentDetectionConfig
@@ -1222,6 +1252,16 @@ const StreamingVideoAnnotationResults = {
  *   Config for STREAMING_OBJECT_TRACKING.
  *
  *   This object should have the same structure as [StreamingObjectTrackingConfig]{@link google.cloud.videointelligence.v1p3beta1.StreamingObjectTrackingConfig}
+ *
+ * @property {Object} automlClassificationConfig
+ *   Config for STREAMING_AUTOML_CLASSIFICATION.
+ *
+ *   This object should have the same structure as [StreamingAutomlClassificationConfig]{@link google.cloud.videointelligence.v1p3beta1.StreamingAutomlClassificationConfig}
+ *
+ * @property {Object} automlObjectTrackingConfig
+ *   Config for STREAMING_AUTOML_OBJECT_TRACKING.
+ *
+ *   This object should have the same structure as [StreamingAutomlObjectTrackingConfig]{@link google.cloud.videointelligence.v1p3beta1.StreamingAutomlObjectTrackingConfig}
  *
  * @property {Object} storageConfig
  *   Streaming storage option. By default: storage is disabled.
@@ -1384,5 +1424,15 @@ const StreamingFeature = {
   /**
    * Object detection and tracking.
    */
-  STREAMING_OBJECT_TRACKING: 4
+  STREAMING_OBJECT_TRACKING: 4,
+
+  /**
+   * Video classification based on AutoML model.
+   */
+  STREAMING_AUTOML_CLASSIFICATION: 21,
+
+  /**
+   * Object detection and tracking based on AutoML model.
+   */
+  STREAMING_AUTOML_OBJECT_TRACKING: 22
 };
