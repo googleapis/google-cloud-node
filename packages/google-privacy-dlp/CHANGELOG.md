@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.2.1...v1.3.0) (2019-06-19)
+
+
+### Features
+
+* add avro support ([#310](https://www.github.com/googleapis/nodejs-dlp/issues/310)) ([ac4f6d9](https://www.github.com/googleapis/nodejs-dlp/commit/ac4f6d9))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-dlp/compare/v1.2.0...v1.2.1) (2019-06-16)
 
 
