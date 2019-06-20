@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.1.2...v2.2.0) (2019-06-20)
+
+
+### Features
+
+* support streaming automl configs ([#261](https://www.github.com/googleapis/nodejs-video-intelligence/issues/261)) ([ca3e0d3](https://www.github.com/googleapis/nodejs-video-intelligence/commit/ca3e0d3))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.1.1...v2.1.2) (2019-06-13)
 
 
