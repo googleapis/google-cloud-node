@@ -28,7 +28,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "eslint '**/*.js'",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha system-test/*.js --timeout 600000",
+    "system-test": "mocha system-test/*.js --timeout 1200000",
     "test": "nyc mocha",
     "fix": "eslint --fix '**/*.js'",
     "docs-test": "linkinator docs -r --skip www.googleapis.com",
