@@ -25,6 +25,7 @@ import arrify = require('arrify');
 import * as assert from 'assert';
 import * as async from 'async';
 import * as mime from 'mime-types';
+import pLimit from 'p-limit';
 import * as path from 'path';
 import * as proxyquire from 'proxyquire';
 
@@ -84,11 +85,8 @@ class FakeNotification {
   }
 }
 
-let eachLimitOverride: Function | null;
-
-const fakeAsync = Object.assign({}, async);
-fakeAsync.eachLimit = (...args) =>
-  (eachLimitOverride || async.eachLimit).apply(null, args);
+let pLimitOverride: Function | null;
+const fakePLimit = (limit: number) => (pLimitOverride || pLimit)(limit);
 
 let promisified = false;
 const fakePromisify = {
@@ -165,7 +163,7 @@ describe('Bucket', () => {
 
   before(() => {
     Bucket = proxyquire('../src/bucket.js', {
-      async: fakeAsync,
+      'p-limit': {default: fakePLimit},
       '@google-cloud/promisify': fakePromisify,
       '@google-cloud/paginator': fakePaginator,
       '@google-cloud/common': {
@@ -180,7 +178,7 @@ describe('Bucket', () => {
   });
 
   beforeEach(() => {
-    eachLimitOverride = null;
+    pLimitOverride = null;
     bucket = new Bucket(STORAGE, BUCKET_NAME);
   });
 
@@ -968,9 +966,9 @@ describe('Bucket', () => {
 
   describe('deleteFiles', () => {
     it('should accept only a callback', done => {
-      bucket.getFiles = (query: {}, callback: Function) => {
+      bucket.getFiles = (query: {}) => {
         assert.deepStrictEqual(query, {});
-        callback(null, []);
+        return Promise.all([[]]);
       };
 
       bucket.deleteFiles(done);
@@ -981,22 +979,20 @@ describe('Bucket', () => {
 
       bucket.getFiles = (query_: {}) => {
         assert.deepStrictEqual(query_, query);
-        done();
+        return Promise.resolve([[]]);
       };
 
-      bucket.deleteFiles(query, assert.ifError);
+      bucket.deleteFiles(query, done);
     });
 
     it('should process 10 files at a time', done => {
-      eachLimitOverride = (arr: {}, limit: number) => {
+      pLimitOverride = (limit: number) => {
         assert.strictEqual(limit, 10);
-        done();
+        setImmediate(done);
+        return () => {};
       };
 
-      bucket.getFiles = (query: {}, callback: Function) => {
-        callback(null, []);
-      };
-
+      bucket.getFiles = (query: {}) => Promise.resolve([[]]);
       bucket.deleteFiles({}, assert.ifError);
     });
 
@@ -1005,17 +1001,17 @@ describe('Bucket', () => {
       let timesCalled = 0;
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = (query_: {}, callback: Function) => {
+        file.delete = (query_: {}) => {
           timesCalled++;
           assert.strictEqual(query_, query);
-          callback();
+          return Promise.resolve();
         };
         return file;
       });
 
-      bucket.getFiles = (query_: {}, callback: Function) => {
+      bucket.getFiles = (query_: {}) => {
         assert.strictEqual(query_, query);
-        callback(null, files);
+        return Promise.resolve([files]);
       };
 
       bucket.deleteFiles(query, (err: Error) => {
@@ -1028,8 +1024,8 @@ describe('Bucket', () => {
     it('should execute callback with error from getting files', done => {
       const error = new Error('Error.');
 
-      bucket.getFiles = (query: {}, callback: Function) => {
-        callback(error);
+      bucket.getFiles = (query: {}) => {
+        return Promise.reject(error);
       };
 
       bucket.deleteFiles({}, (err: Error) => {
@@ -1042,12 +1038,12 @@ describe('Bucket', () => {
       const error = new Error('Error.');
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = (query: {}, callback: Function) => callback(error);
+        file.delete = (query: {}) => Promise.reject(error);
         return file;
       });
 
-      bucket.getFiles = (query: {}, callback: Function) => {
-        callback(null, files);
+      bucket.getFiles = (query: {}) => {
+        return Promise.resolve([files]);
       };
 
       bucket.deleteFiles({}, (err: Error) => {
@@ -1060,14 +1056,12 @@ describe('Bucket', () => {
       const error = new Error('Error.');
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.delete = (query: {}, callback: Function) => {
-          callback(error);
-        };
+        file.delete = (query: {}) => Promise.reject(error);
         return file;
       });
 
-      bucket.getFiles = (query: {}, callback: Function) => {
-        callback(null, files);
+      bucket.getFiles = (query: {}) => {
+        return Promise.resolve([files]);
       };
 
       bucket.deleteFiles({force: true}, (errs: Array<{}>) => {
@@ -1603,12 +1597,12 @@ describe('Bucket', () => {
       let didSetPredefinedAcl = false;
       let didMakeFilesPrivate = false;
 
-      bucket.setMetadata = (metadata: {}, options: {}, callback: Function) => {
+      bucket.setMetadata = (metadata: {}, options: {}) => {
         assert.deepStrictEqual(metadata, {acl: null});
         assert.deepStrictEqual(options, {predefinedAcl: 'projectPrivate'});
 
         didSetPredefinedAcl = true;
-        callback();
+        return Promise.resolve();
       };
 
       bucket.makeAllFilesPublicPrivate_ = (
@@ -1635,9 +1629,9 @@ describe('Bucket', () => {
       };
       bucket.setMetadata = (metadata: {}, options_: SetFileMetadataOptions) => {
         assert.strictEqual(options_.userProject, options.userProject);
-        done();
+        return Promise.resolve();
       };
-      bucket.makePrivate(options, assert.ifError);
+      bucket.makePrivate(options, done);
     });
 
     it('should not make files private by default', done => {
@@ -1687,18 +1681,18 @@ describe('Bucket', () => {
       let didSetDefaultAcl = false;
       let didMakeFilesPublic = false;
 
-      bucket.acl.add = (opts: AddAclOptions, callback: Function) => {
+      bucket.acl.add = (opts: AddAclOptions) => {
         assert.strictEqual(opts.entity, 'allUsers');
         assert.strictEqual(opts.role, 'READER');
         didSetAcl = true;
-        callback();
+        return Promise.resolve();
       };
 
-      bucket.acl.default.add = (opts: AddAclOptions, callback: Function) => {
+      bucket.acl.default.add = (opts: AddAclOptions) => {
         assert.strictEqual(opts.entity, 'allUsers');
         assert.strictEqual(opts.role, 'READER');
         didSetDefaultAcl = true;
-        callback();
+        return Promise.resolve();
       };
 
       bucket.makeAllFilesPublicPrivate_ = (
@@ -1727,12 +1721,12 @@ describe('Bucket', () => {
     });
 
     it('should not make files public by default', done => {
-      bucket.acl.add = (opts: {}, callback: Function) => {
-        callback();
+      bucket.acl.add = (opts: {}) => {
+        return Promise.resolve();
       };
 
-      bucket.acl.default.add = (opts: {}, callback: Function) => {
-        callback();
+      bucket.acl.default.add = (opts: {}) => {
+        return Promise.resolve();
       };
 
       bucket.makeAllFilesPublicPrivate_ = () => {
@@ -1745,8 +1739,8 @@ describe('Bucket', () => {
     it('should execute callback with error', done => {
       const error = new Error('Error.');
 
-      bucket.acl.add = (opts: {}, callback: Function) => {
-        callback(error);
+      bucket.acl.add = (opts: {}) => {
+        return Promise.reject(error);
       };
 
       bucket.makePublic((err: Error) => {
@@ -2226,34 +2220,34 @@ describe('Bucket', () => {
       const options = {};
       bucket.getFiles = (options_: {}) => {
         assert.strictEqual(options_, options);
-        done();
+        return Promise.resolve([[]]);
       };
-      bucket.makeAllFilesPublicPrivate_(options, assert.ifError);
+      bucket.makeAllFilesPublicPrivate_(options, done);
     });
 
     it('should process 10 files at a time', done => {
-      eachLimitOverride = (arr: {}, limit: number) => {
+      pLimitOverride = (limit: number) => {
         assert.strictEqual(limit, 10);
-        done();
+        setImmediate(done);
+        return () => {};
       };
-      bucket.getFiles = (options: {}, callback: Function) => {
-        callback(null, []);
-      };
+
+      bucket.getFiles = (options: {}) => Promise.resolve([[]]);
       bucket.makeAllFilesPublicPrivate_({}, assert.ifError);
     });
 
     it('should make files public', done => {
       let timesCalled = 0;
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.makePublic = (callback: Function) => {
+        file.makePublic = () => {
           timesCalled++;
-          callback();
+          return Promise.resolve();
         };
         return file;
       });
 
-      bucket.getFiles = (options: {}, callback: Function) => {
-        callback(null, files);
+      bucket.getFiles = (options: {}) => {
+        return Promise.resolve([files]);
       };
 
       bucket.makeAllFilesPublicPrivate_({public: true}, (err: Error) => {
@@ -2270,15 +2264,15 @@ describe('Bucket', () => {
       let timesCalled = 0;
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.makePrivate = (options_: {}, callback: Function) => {
+        file.makePrivate = (options_: {}) => {
           timesCalled++;
-          callback();
+          return Promise.resolve();
         };
         return file;
       });
 
-      bucket.getFiles = (options_: {}, callback: Function) => {
-        callback(null, files);
+      bucket.getFiles = (options_: {}) => {
+        return Promise.resolve([files]);
       };
 
       bucket.makeAllFilesPublicPrivate_(options, (err: Error) => {
@@ -2291,8 +2285,8 @@ describe('Bucket', () => {
     it('should execute callback with error from getting files', done => {
       const error = new Error('Error.');
 
-      bucket.getFiles = (options: {}, callback: Function) => {
-        callback(error);
+      bucket.getFiles = (options: {}) => {
+        return Promise.reject(error);
       };
 
       bucket.makeAllFilesPublicPrivate_({}, (err: Error) => {
@@ -2305,12 +2299,12 @@ describe('Bucket', () => {
       const error = new Error('Error.');
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.makePublic = (callback: Function) => callback(error);
+        file.makePublic = () => Promise.reject(error);
         return file;
       });
 
-      bucket.getFiles = (options: {}, callback: Function) => {
-        callback(null, files);
+      bucket.getFiles = (options: {}) => {
+        return Promise.resolve([files]);
       };
 
       bucket.makeAllFilesPublicPrivate_({public: true}, (err: Error) => {
@@ -2323,12 +2317,12 @@ describe('Bucket', () => {
       const error = new Error('Error.');
 
       const files = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.makePublic = (callback: Function) => callback(error);
+        file.makePublic = () => Promise.reject(error);
         return file;
       });
 
-      bucket.getFiles = (options: {}, callback: Function) => {
-        callback(null, files);
+      bucket.getFiles = (options: {}) => {
+        return Promise.resolve([files]);
       };
 
       bucket.makeAllFilesPublicPrivate_(
@@ -2346,16 +2340,17 @@ describe('Bucket', () => {
     it('should execute callback with files changed', done => {
       const error = new Error('Error.');
       const successFiles = [bucket.file('1'), bucket.file('2')].map(file => {
-        file.makePublic = (callback: Function) => callback();
+        file.makePublic = () => Promise.resolve();
         return file;
       });
       const errorFiles = [bucket.file('3'), bucket.file('4')].map(file => {
-        file.makePublic = (callback: Function) => callback(error);
+        file.makePublic = () => Promise.reject(error);
         return file;
       });
 
-      bucket.getFiles = (options: {}, callback: Function) => {
-        callback(null, successFiles.concat(errorFiles));
+      bucket.getFiles = (options: {}) => {
+        const files = successFiles.concat(errorFiles);
+        return Promise.resolve([files]);
       };
 
       bucket.makeAllFilesPublicPrivate_(

@@ -30,11 +30,12 @@ import {
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
-import * as async from 'async';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as mime from 'mime-types';
 import * as path from 'path';
+import pLimit from 'p-limit';
+import {promisify} from 'util';
 
 const snakeize = require('snakeize');
 
@@ -1626,44 +1627,24 @@ class Bucket extends ServiceObject {
     const MAX_PARALLEL_LIMIT = 10;
     const errors = [] as Error[];
 
-    this.getFiles(query, (err, files) => {
-      if (err) {
-        callback!(err, {});
-        return;
-      }
-
-      const deleteFile = (
-        file: File,
-        callback: (err?: Error | null) => void
-      ) => {
-        file.delete(query, err => {
-          if (err) {
-            if (query.force) {
-              errors.push(err);
-              callback!();
-              return;
-            }
-            callback!(err);
-            return;
-          }
-          callback!(null);
-        });
-      };
-
-      // Iterate through each file and attempt to delete it.
-      async.eachLimit<File, Error | null | undefined>(
-        files!,
-        MAX_PARALLEL_LIMIT,
-        deleteFile,
-        err => {
-          if (err || errors.length > 0) {
-            callback!(err || errors);
-            return;
-          }
-          callback!(null);
+    const deleteFile = (file: File) => {
+      return file.delete(query).catch(err => {
+        if (!query.force) {
+          throw err;
         }
-      );
-    });
+        errors.push(err);
+      });
+    };
+
+    this.getFiles(query)
+      .then(([files]) => {
+        const limit = pLimit(MAX_PARALLEL_LIMIT);
+        const promises = files!.map(file => {
+          return limit(() => deleteFile(file));
+        });
+        return Promise.all(promises);
+      })
+      .then(() => callback!(errors.length > 0 ? errors : null), callback!);
   }
 
   deleteLabels(labels?: string | string[]): Promise<DeleteLabelsResponse>;
@@ -2388,39 +2369,29 @@ class Bucket extends ServiceObject {
 
     options.private = true;
 
-    const setPredefinedAcl = (done: SetBucketMetadataCallback) => {
-      const query: MetadataOptions = {
-        predefinedAcl: 'projectPrivate',
-      };
-
-      if (options.userProject) {
-        query.userProject = options.userProject;
-      }
-
-      this.setMetadata(
-        {
-          // You aren't allowed to set both predefinedAcl & acl properties on
-          // a bucket so acl must explicitly be nullified.
-          acl: null,
-        },
-        query,
-        done
-      );
+    const query: MetadataOptions = {
+      predefinedAcl: 'projectPrivate',
     };
 
-    const makeFilesPrivate = (done: SetBucketMetadataCallback) => {
-      if (!options.includeFiles) {
-        done();
-        return;
-      }
-      this.makeAllFilesPublicPrivate_(
-        options,
-        done as MakeAllFilesPublicPrivateCallback
-      );
-    };
+    if (options.userProject) {
+      query.userProject = options.userProject;
+    }
 
-    // tslint:disable-next-line no-any
-    async.series([setPredefinedAcl, makeFilesPrivate] as any, callback as any);
+    this.setMetadata(
+      {
+        // You aren't allowed to set both predefinedAcl & acl properties on
+        // a bucket so acl must explicitly be nullified.
+        acl: null,
+      },
+      query
+    )
+      .then(() => {
+        if (options.includeFiles) {
+          return promisify(this.makeAllFilesPublicPrivate_).call(this, options);
+        }
+        return [];
+      })
+      .then(files => callback!(null, files), callback!);
   }
 
   makePublic(
@@ -2529,41 +2500,24 @@ class Bucket extends ServiceObject {
 
     const req = extend(true, {public: true}, options);
 
-    const addAclPermissions = (done: AddAclCallback) => {
-      // Allow reading bucket contents while preserving original permissions.
-      this.acl.add(
-        {
+    this.acl
+      .add({
+        entity: 'allUsers',
+        role: 'READER',
+      })
+      .then(() => {
+        return this.acl.default!.add({
           entity: 'allUsers',
           role: 'READER',
-        },
-        done
-      );
-    };
-
-    const addDefaultAclPermissions = (done: AddAclCallback) => {
-      this.acl.default!.add(
-        {
-          entity: 'allUsers',
-          role: 'READER',
-        },
-        done
-      );
-    };
-
-    const makeFilesPublic = (done: MakeAllFilesPublicPrivateCallback) => {
-      if (!req.includeFiles) {
-        done();
-        return;
-      }
-
-      this.makeAllFilesPublicPrivate_(req, done);
-    };
-
-    // tslint:disable-next-line:no-any
-    (async as any).series(
-      [addAclPermissions, addDefaultAclPermissions, makeFilesPublic],
-      callback
-    );
+        });
+      })
+      .then(() => {
+        if (req.includeFiles) {
+          return promisify(this.makeAllFilesPublicPrivate_).call(this, req);
+        }
+        return [];
+      })
+      .then(files => callback!(null, files), callback);
   }
 
   /**
@@ -3234,51 +3188,30 @@ class Bucket extends ServiceObject {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
-    this.getFiles(options, (err, files) => {
-      if (err) {
-        callback!(err);
-        return;
+    const processFile = async (file: File) => {
+      try {
+        await (options.public ? file.makePublic() : file.makePrivate(options));
+        updatedFiles.push(file);
+      } catch (e) {
+        if (!options.force) {
+          throw e;
+        }
+        errors.push(e);
       }
+    };
 
-      const processFile = (file: File, callback: Function) => {
-        const processedCallback = (err?: Error | null) => {
-          if (err) {
-            if (options.force) {
-              errors.push(err);
-              callback();
-              return;
-            }
-
-            callback(err);
-            return;
-          }
-
-          updatedFiles.push(file);
-          callback();
-        };
-
-        if (options.public) {
-          file.makePublic(processedCallback);
-        } else if (options.private) {
-          file.makePrivate(options, processedCallback);
-        }
-      };
-
-      // Iterate through each file and make it public or private.
-      async.eachLimit<File, Error>(
-        files!,
-        MAX_PARALLEL_LIMIT,
-        processFile,
-        (err?: Error | null) => {
-          if (err || errors.length > 0) {
-            callback!(err || errors, updatedFiles);
-            return;
-          }
-
-          callback!(null, updatedFiles);
-        }
+    this.getFiles(options)
+      .then(([files]) => {
+        const limit = pLimit(MAX_PARALLEL_LIMIT);
+        const promises = files.map(file => {
+          return limit(() => processFile(file));
+        });
+        return Promise.all(promises);
+      })
+      .then(
+        () => callback!(errors.length > 0 ? errors : null, updatedFiles),
+        err => callback!(err, updatedFiles)
       );
-    });
   }
 
   getId(): string {
