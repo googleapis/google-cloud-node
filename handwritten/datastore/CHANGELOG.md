@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [4.1.2](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.1...v4.1.2) (2019-06-20)
+
+
+### Bug Fixes
+
+* **docs:** fix <caption> tag rendering in Key doc ([#439](https://www.github.com/googleapis/nodejs-datastore/issues/439)) ([2edd95c](https://www.github.com/googleapis/nodejs-datastore/commit/2edd95c))
+* **docs:** move to new client docs URL ([#437](https://www.github.com/googleapis/nodejs-datastore/issues/437)) ([278c1c5](https://www.github.com/googleapis/nodejs-datastore/commit/278c1c5))
+* add `parseInt` to constructor of task keys ([#436](https://www.github.com/googleapis/nodejs-datastore/issues/436)) ([7ee76b3](https://www.github.com/googleapis/nodejs-datastore/commit/7ee76b3))
+* assign more restrictive type to PathType ([#433](https://www.github.com/googleapis/nodejs-datastore/issues/433)) ([#435](https://www.github.com/googleapis/nodejs-datastore/issues/435)) ([a93ef91](https://www.github.com/googleapis/nodejs-datastore/commit/a93ef91))
+
 ### [4.1.1](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.0...v4.1.1) (2019-06-11)
 
 
