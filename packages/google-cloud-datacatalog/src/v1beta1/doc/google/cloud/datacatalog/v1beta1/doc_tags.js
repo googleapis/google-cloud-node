@@ -17,14 +17,15 @@
 
 /**
  * Tags are used to attach custom metadata to Data Catalog resources. Tags
- * conform to the specifications within their Tag Template.
+ * conform to the specifications within their tag template.
  *
  * @property {string} name
  *   Required when used in
  *   UpdateTagRequest. The
  *   resource name of the tag in URL format. For example,
  *   projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}",
- *   where tag_id is a system-generated identifier.
+ *   where tag_id is a system-generated identifier. Note that this Tag may not
+ *   actually be stored in the location in this name.
  *
  * @property {string} template
  *   Required. The resource name of the tag template that this tag uses. For
@@ -105,22 +106,17 @@ const TagField = {
 };
 
 /**
- * Tag Templates provide the basic format of multiple fields which can be
- * attached to Data Catalog resources as Tags.
- *
- * Tag Templates can be used as a data glossary as tag templates define the
- * list of acceptable fields that can be applied within a Tag. When a Tag is
- * applied to a resource, the Tag Template defines the mapping of accepted field
- * names & types that can be used within the Tag.
- *
- * A Tag Template also allows you to make Tags using that template visible only
- * to a certain group of users.
+ * Tag templates defines the schema of the tags used to attach to Data Catalog
+ * resources. It defines the mapping of accepted field names and types that can
+ * be used within the tag. The tag template also controls the access to the tag.
  *
  * @property {string} name
  *   Required when used in
  *   UpdateTagTemplateRequest.
  *   The resource name of the tag template in URL format. For example,
  *   projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}.
+ *   Note that this TagTemplate and its child resources may not actually be
+ *   stored in the location in this name.
  *
  * @property {string} displayName
  *   Optional. The display name for this template. Default value is an empty
@@ -128,13 +124,13 @@ const TagField = {
  *
  * @property {Object.<string, Object>} fields
  *   Required. Map of tag template field ids to the settings for the field.
- *   This map is an exhaustive list of allowed fields. This map must contain at
- *   least one field and at most 100 fields.
+ *   This map is an exhaustive list of the allowed fields. This map must contain
+ *   at least one field and at most 500 fields.
  *
- *   The keys to this map are tag template field IDs. Field IDs can
- *   contain letters (both uppercase and lowercase), numbers (0-9), and
- *   underscores (_). Field IDs must be at least 1 character long and at most
- *   64 characters long. Field IDs must start with a letter or number.
+ *   The keys to this map are tag template field IDs. Field IDs can contain
+ *   letters (both uppercase and lowercase), numbers (0-9) and underscores (_).
+ *   Field IDs must be at least 1 character long and at most 64 characters long.
+ *   Field IDs must start with a letter or underscore.
  *
  * @typedef TagTemplate
  * @memberof google.cloud.datacatalog.v1beta1
@@ -145,7 +141,7 @@ const TagTemplate = {
 };
 
 /**
- * The template for an individual field within a TagTemplate.
+ * The template for an individual field within a tag template.
  *
  * @property {string} displayName
  *   Optional. The display name for this field. Default value is an empty

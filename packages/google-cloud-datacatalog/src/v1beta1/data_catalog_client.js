@@ -60,9 +60,7 @@ class DataCatalogClient {
     this._descriptors = {};
 
     const servicePath =
-      opts.servicePath ||
-      opts.apiEndpoint ||
-      this.constructor.servicePath;
+      opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
     // Ensure that options include the service address and port.
     opts = Object.assign(
@@ -96,9 +94,7 @@ class DataCatalogClient {
     // Load the applicable protos.
     const protos = gaxGrpc.loadProto(
       path.join(__dirname, '..', '..', 'protos'),
-      [
-        'google/cloud/datacatalog/v1beta1/datacatalog.proto'
-      ]
+      ['google/cloud/datacatalog/v1beta1/datacatalog.proto']
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -131,11 +127,7 @@ class DataCatalogClient {
         'nextPageToken',
         'results'
       ),
-      listTags: new gax.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'tags'
-      ),
+      listTags: new gax.PageDescriptor('pageToken', 'nextPageToken', 'tags'),
     };
 
     // Put together the default options sent with requests.
@@ -227,9 +219,7 @@ class DataCatalogClient {
    * in this service.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   /**
@@ -254,8 +244,13 @@ class DataCatalogClient {
    * the complete resource, only the resource identifier and high level
    * fields. Clients can subsequentally call Get methods.
    *
+   * Note that searches do not have full recall. There may be results that match
+   * your query but are not returned, even in subsequent pages of results. These
+   * missing results may vary across repeated calls to search. Do not rely on
+   * this method if you need to guarantee full recall.
+   *
    * See [Data Catalog Search
-   * Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
+   * Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -290,8 +285,7 @@ class DataCatalogClient {
    *     <li> last_access_timestamp [asc|desc], defaults to descending if not
    *     specified, </li>
    *     <li> last_modified_timestamp [asc|desc], defaults to descending if not
-   *     specified, </li>
-   *     <li> title [asc|desc], defaults to ascending if not specified. </li>
+   *     specified. </li>
    *   </ul>
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -430,8 +424,7 @@ class DataCatalogClient {
    *     <li> last_access_timestamp [asc|desc], defaults to descending if not
    *     specified, </li>
    *     <li> last_modified_timestamp [asc|desc], defaults to descending if not
-   *     specified, </li>
-   *     <li> title [asc|desc], defaults to ascending if not specified. </li>
+   *     specified. </li>
    *   </ul>
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -468,7 +461,7 @@ class DataCatalogClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Updates an existing entry.
@@ -531,10 +524,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'entry.name': request.entry.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'entry.name': request.entry.name,
+    });
 
     return this._innerApiCalls.updateEntry(request, options, callback);
   }
@@ -584,10 +578,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getEntry(request, options, callback);
   }
@@ -666,7 +661,9 @@ class DataCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project and the location this template is in.
-   *   Example: "projects/{project_id}/locations/{location}".
+   *   Example: "projects/{project_id}/locations/{location}". Note that this
+   *   TagTemplate and its child resources may not actually be stored in the
+   *   location in this name.
    * @param {string} request.tagTemplateId
    *   Required. The id of the tag template to create.
    * @param {Object} request.tagTemplate
@@ -717,10 +714,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createTagTemplate(request, options, callback);
   }
@@ -770,10 +768,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.getTagTemplate(request, options, callback);
   }
@@ -836,10 +835,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'tag_template.name': request.tagTemplate.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'tag_template.name': request.tagTemplate.name,
+    });
 
     return this._innerApiCalls.updateTagTemplate(request, options, callback);
   }
@@ -890,10 +890,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteTagTemplate(request, options, callback);
   }
@@ -906,6 +907,8 @@ class DataCatalogClient {
    * @param {string} request.parent
    *   Required. The name of the project this template is in. Example:
    *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
+   *   Note that this TagTemplateField may not actually be stored in the location
+   *   in this name.
    * @param {string} request.tagTemplateFieldId
    *   Required. The id of the tag template field to create.
    *   Field ids can contain letters (both uppercase and lowercase), numbers
@@ -960,12 +963,17 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
-    return this._innerApiCalls.createTagTemplateField(request, options, callback);
+    return this._innerApiCalls.createTagTemplateField(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1037,12 +1045,17 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
-    return this._innerApiCalls.updateTagTemplateField(request, options, callback);
+    return this._innerApiCalls.updateTagTemplateField(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1098,12 +1111,17 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
-    return this._innerApiCalls.renameTagTemplateField(request, options, callback);
+    return this._innerApiCalls.renameTagTemplateField(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1152,12 +1170,17 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
-    return this._innerApiCalls.deleteTagTemplateField(request, options, callback);
+    return this._innerApiCalls.deleteTagTemplateField(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1170,6 +1193,8 @@ class DataCatalogClient {
    *   The name of the resource to attach this tag to. Tags can be attached to
    *   Entries. (example:
    *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}").
+   *   Note that this Tag and its child resources may not actually be stored in
+   *   the location in this name.
    * @param {Object} request.tag
    *   Required. The tag to create.
    *
@@ -1216,10 +1241,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.createTag(request, options, callback);
   }
@@ -1276,10 +1302,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'tag.name': request.tag.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'tag.name': request.tag.name,
+    });
 
     return this._innerApiCalls.updateTag(request, options, callback);
   }
@@ -1321,10 +1348,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'name': request.name
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
 
     return this._innerApiCalls.deleteTag(request, options, callback);
   }
@@ -1422,10 +1450,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'parent': request.parent
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.listTags(request, options, callback);
   }
@@ -1484,7 +1513,7 @@ class DataCatalogClient {
       request,
       options
     );
-  };
+  }
 
   /**
    * Sets the access control policy for a resource. Replaces any existing
@@ -1502,8 +1531,7 @@ class DataCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy is being specified.
-   *   `resource` is usually specified as a path. For example, a Project
-   *   resource is specified as `projects/{project}`.
+   *   See the operation documentation for the appropriate value for this field.
    * @param {Object} request.policy
    *   REQUIRED: The complete policy to be applied to the `resource`. The size of
    *   the policy is limited to a few 10s of KB. An empty policy is a
@@ -1553,10 +1581,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'resource': request.resource
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      resource: request.resource,
+    });
 
     return this._innerApiCalls.setIamPolicy(request, options, callback);
   }
@@ -1579,8 +1608,7 @@ class DataCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy is being requested.
-   *   `resource` is usually specified as a path. For example, a Project
-   *   resource is specified as `projects/{project}`.
+   *   See the operation documentation for the appropriate value for this field.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1618,10 +1646,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'resource': request.resource
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      resource: request.resource,
+    });
 
     return this._innerApiCalls.getIamPolicy(request, options, callback);
   }
@@ -1644,8 +1673,7 @@ class DataCatalogClient {
    *   The request object that will be sent.
    * @param {string} request.resource
    *   REQUIRED: The resource for which the policy detail is being requested.
-   *   `resource` is usually specified as a path. For example, a Project
-   *   resource is specified as `projects/{project}`.
+   *   See the operation documentation for the appropriate value for this field.
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
@@ -1693,10 +1721,11 @@ class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'resource': request.resource
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      resource: request.resource,
+    });
 
     return this._innerApiCalls.testIamPermissions(request, options, callback);
   }
@@ -1799,9 +1828,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromEntryName(entryName) {
-    return this._pathTemplates.entryPathTemplate
-      .match(entryName)
-      .project;
+    return this._pathTemplates.entryPathTemplate.match(entryName).project;
   }
 
   /**
@@ -1812,9 +1839,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromEntryName(entryName) {
-    return this._pathTemplates.entryPathTemplate
-      .match(entryName)
-      .location;
+    return this._pathTemplates.entryPathTemplate.match(entryName).location;
   }
 
   /**
@@ -1825,9 +1850,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the entry_group.
    */
   matchEntryGroupFromEntryName(entryName) {
-    return this._pathTemplates.entryPathTemplate
-      .match(entryName)
-      .entry_group;
+    return this._pathTemplates.entryPathTemplate.match(entryName).entry_group;
   }
 
   /**
@@ -1838,9 +1861,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the entry.
    */
   matchEntryFromEntryName(entryName) {
-    return this._pathTemplates.entryPathTemplate
-      .match(entryName)
-      .entry;
+    return this._pathTemplates.entryPathTemplate.match(entryName).entry;
   }
 
   /**
@@ -1851,9 +1872,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromFieldName(fieldName) {
-    return this._pathTemplates.fieldPathTemplate
-      .match(fieldName)
-      .project;
+    return this._pathTemplates.fieldPathTemplate.match(fieldName).project;
   }
 
   /**
@@ -1864,9 +1883,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromFieldName(fieldName) {
-    return this._pathTemplates.fieldPathTemplate
-      .match(fieldName)
-      .location;
+    return this._pathTemplates.fieldPathTemplate.match(fieldName).location;
   }
 
   /**
@@ -1877,9 +1894,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the tag_template.
    */
   matchTagTemplateFromFieldName(fieldName) {
-    return this._pathTemplates.fieldPathTemplate
-      .match(fieldName)
-      .tag_template;
+    return this._pathTemplates.fieldPathTemplate.match(fieldName).tag_template;
   }
 
   /**
@@ -1890,9 +1905,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the field.
    */
   matchFieldFromFieldName(fieldName) {
-    return this._pathTemplates.fieldPathTemplate
-      .match(fieldName)
-      .field;
+    return this._pathTemplates.fieldPathTemplate.match(fieldName).field;
   }
 
   /**
@@ -1903,9 +1916,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate
-      .match(locationName)
-      .project;
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
@@ -1916,8 +1927,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromLocationName(locationName) {
-    return this._pathTemplates.locationPathTemplate
-      .match(locationName)
+    return this._pathTemplates.locationPathTemplate.match(locationName)
       .location;
   }
 
@@ -1929,9 +1939,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromTagName(tagName) {
-    return this._pathTemplates.tagPathTemplate
-      .match(tagName)
-      .project;
+    return this._pathTemplates.tagPathTemplate.match(tagName).project;
   }
 
   /**
@@ -1942,9 +1950,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromTagName(tagName) {
-    return this._pathTemplates.tagPathTemplate
-      .match(tagName)
-      .location;
+    return this._pathTemplates.tagPathTemplate.match(tagName).location;
   }
 
   /**
@@ -1955,9 +1961,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the entry_group.
    */
   matchEntryGroupFromTagName(tagName) {
-    return this._pathTemplates.tagPathTemplate
-      .match(tagName)
-      .entry_group;
+    return this._pathTemplates.tagPathTemplate.match(tagName).entry_group;
   }
 
   /**
@@ -1968,9 +1972,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the entry.
    */
   matchEntryFromTagName(tagName) {
-    return this._pathTemplates.tagPathTemplate
-      .match(tagName)
-      .entry;
+    return this._pathTemplates.tagPathTemplate.match(tagName).entry;
   }
 
   /**
@@ -1981,9 +1983,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the tag.
    */
   matchTagFromTagName(tagName) {
-    return this._pathTemplates.tagPathTemplate
-      .match(tagName)
-      .tag;
+    return this._pathTemplates.tagPathTemplate.match(tagName).tag;
   }
 
   /**
@@ -1994,8 +1994,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the project.
    */
   matchProjectFromTagTemplateName(tagTemplateName) {
-    return this._pathTemplates.tagTemplatePathTemplate
-      .match(tagTemplateName)
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
       .project;
   }
 
@@ -2007,8 +2006,7 @@ class DataCatalogClient {
    * @returns {String} - A string representing the location.
    */
   matchLocationFromTagTemplateName(tagTemplateName) {
-    return this._pathTemplates.tagTemplatePathTemplate
-      .match(tagTemplateName)
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
       .location;
   }
 
@@ -2020,11 +2018,9 @@ class DataCatalogClient {
    * @returns {String} - A string representing the tag_template.
    */
   matchTagTemplateFromTagTemplateName(tagTemplateName) {
-    return this._pathTemplates.tagTemplatePathTemplate
-      .match(tagTemplateName)
+    return this._pathTemplates.tagTemplatePathTemplate.match(tagTemplateName)
       .tag_template;
   }
 }
-
 
 module.exports = DataCatalogClient;

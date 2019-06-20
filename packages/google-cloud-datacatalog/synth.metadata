@@ -1,19 +1,19 @@
 {
-  "updateTime": "2019-06-19T11:10:00.217449Z",
+  "updateTime": "2019-06-20T19:36:39.059187Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.28.0",
-        "dockerImage": "googleapis/artman@sha256:6ced5a36b08b82a328c69844e629300d58c14067f25cadab47f52542bdef7daf"
+        "version": "0.29.0",
+        "dockerImage": "googleapis/artman@sha256:b79c8c20ee51e5302686c9d1294672d59290df1489be93749ef17d0172cc508d"
       }
     },
     {
       "git": {
-        "name": "googleapis-private",
-        "remote": "https://github.com/googleapis/googleapis-private.git",
-        "sha": "4299d819fab0c8c7fc5829b988d55083409d6a8b",
-        "internalRef": "253898467"
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "45e125f9e30dc5d45b52752b3ab78dd4f6084f2d",
+        "internalRef": "254026509"
       }
     },
     {
@@ -27,7 +27,7 @@
   "destinations": [
     {
       "client": {
-        "source": "googleapis-private",
+        "source": "googleapis",
         "apiName": "datacatalog",
         "apiVersion": "v1beta1",
         "language": "nodejs",

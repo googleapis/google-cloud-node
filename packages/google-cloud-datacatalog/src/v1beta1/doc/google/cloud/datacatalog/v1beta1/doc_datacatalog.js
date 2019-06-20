@@ -58,8 +58,7 @@
  *     <li> last_access_timestamp [asc|desc], defaults to descending if not
  *     specified, </li>
  *     <li> last_modified_timestamp [asc|desc], defaults to descending if not
- *     specified, </li>
- *     <li> title [asc|desc], defaults to ascending if not specified. </li>
+ *     specified. </li>
  *   </ul>
  *
  * @typedef SearchCatalogRequest
@@ -221,6 +220,8 @@ const LookupEntryRequest = {
  *   UpdateEntryRequest.
  *   The Data Catalog resource name of the entry in URL format. For example,
  *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}".
+ *   Note that this Entry and its child resources may not actually be stored in
+ *   the location in this name.
  *
  * @property {string} linkedResource
  *   Output only. The full name of the cloud resource the entry belongs to. See:
@@ -285,7 +286,9 @@ const Entry = {
  *
  * @property {string} parent
  *   Required. The name of the project and the location this template is in.
- *   Example: "projects/{project_id}/locations/{location}".
+ *   Example: "projects/{project_id}/locations/{location}". Note that this
+ *   TagTemplate and its child resources may not actually be stored in the
+ *   location in this name.
  *
  * @property {string} tagTemplateId
  *   Required. The id of the tag template to create.
@@ -377,6 +380,8 @@ const DeleteTagTemplateRequest = {
  *   The name of the resource to attach this tag to. Tags can be attached to
  *   Entries. (example:
  *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}").
+ *   Note that this Tag and its child resources may not actually be stored in
+ *   the location in this name.
  *
  * @property {Object} tag
  *   Required. The tag to create.
@@ -438,6 +443,8 @@ const DeleteTagRequest = {
  * @property {string} parent
  *   Required. The name of the project this template is in. Example:
  *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
+ *   Note that this TagTemplateField may not actually be stored in the location
+ *   in this name.
  *
  * @property {string} tagTemplateFieldId
  *   Required. The id of the tag template field to create.

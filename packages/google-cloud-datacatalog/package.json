@@ -25,35 +25,33 @@
     "Google Cloud Data Catalog API"
   ],
   "dependencies": {
-    "google-gax": "^0.25.3",
-    "lodash.merge": "^4.6.0"
+    "google-gax": "^1.1.2"
   },
   "devDependencies": {
-    "codecov": "^3.2.0",
-    "eslint": "^5.14.1",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "jsdoc": "^3.5.5",
-    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
-    "linkinator": "^1.1.6",
-    "mocha": "^5.2.0",
-    "power-assert": "^1.6.1",
-    "through2": "^2.0.3"
+    "c8": "^5.0.1",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jsdoc": "^3.6.2",
+    "jsdoc-baseline": "^0.1.0",
+    "linkinator": "^1.4.0",
+    "mocha": "^6.1.4",
+    "prettier": "^1.17.0"
   },
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
-    "lint": "eslint '**/*.js'",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha system-test --timeout 600000",
-    "test": "nyc mocha",
+    "fix": "eslint . --fix",
+    "lint": "eslint .",
+    "test": "c8 mocha test/*.js",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
-    "fix": "eslint --fix '**/*.js'"
+    "docs-test": "linkinator docs -r --skip 'www.npmjs.org/package/@google-cloud/datacatalog|googleapis.dev/nodejs/datacatalog/latest|cloud.google.com/data-catalog/docs/how-to/search-reference'",
+    "samples-test": "c8 mocha samples/test/*.js",
+    "system-test": "c8 mocha --timeout=5000 system-test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.10.0"
   }
 }

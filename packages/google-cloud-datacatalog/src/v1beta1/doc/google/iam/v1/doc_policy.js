@@ -20,12 +20,12 @@
  * specify access control policies for Cloud Platform resources.
  *
  *
- * A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
+ * A `Policy` consists of a list of `bindings`. A `binding` binds a list of
  * `members` to a `role`, where the members can be user accounts, Google groups,
  * Google domains, and service accounts. A `role` is a named list of permissions
  * defined by IAM.
  *
- * **Example**
+ * **JSON Example**
  *
  *     {
  *       "bindings": [
@@ -35,7 +35,7 @@
  *             "user:mike@example.com",
  *             "group:admins@example.com",
  *             "domain:google.com",
- *             "serviceAccount:my-other-app@appspot.gserviceaccount.com",
+ *             "serviceAccount:my-other-app@appspot.gserviceaccount.com"
  *           ]
  *         },
  *         {
@@ -45,15 +45,28 @@
  *       ]
  *     }
  *
+ * **YAML Example**
+ *
+ *     bindings:
+ *     - members:
+ *       - user:mike@example.com
+ *       - group:admins@example.com
+ *       - domain:google.com
+ *       - serviceAccount:my-other-app@appspot.gserviceaccount.com
+ *       role: roles/owner
+ *     - members:
+ *       - user:sean@example.com
+ *       role: roles/viewer
+ *
+ *
  * For a description of IAM and its features, see the
- * [IAM developer's guide](https://cloud.google.com/iam).
+ * [IAM developer's guide](https://cloud.google.com/iam/docs).
  *
  * @property {number} version
- *   Version of the `Policy`. The default version is 0.
+ *   Deprecated.
  *
  * @property {Object[]} bindings
  *   Associates a list of `members` to a `role`.
- *   Multiple `bindings` must not be specified for the same `role`.
  *   `bindings` with no members will result in an error.
  *
  *   This object should have the same structure as [Binding]{@link google.iam.v1.Binding}
@@ -84,7 +97,6 @@ const Policy = {
  * @property {string} role
  *   Role that is assigned to `members`.
  *   For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
- *   Required
  *
  * @property {string[]} members
  *   Specifies the identities requesting access for a Cloud Platform resource.
@@ -97,7 +109,7 @@ const Policy = {
  *      who is authenticated with a Google account or a service account.
  *
  *   * `user:{emailid}`: An email address that represents a specific Google
- *      account. For example, `alice@gmail.com` or `joe@example.com`.
+ *      account. For example, `alice@gmail.com` .
  *
  *
  *   * `serviceAccount:{emailid}`: An email address that represents a service
@@ -106,8 +118,17 @@ const Policy = {
  *   * `group:{emailid}`: An email address that represents a Google group.
  *      For example, `admins@example.com`.
  *
- *   * `domain:{domain}`: A Google Apps domain name that represents all the
+ *
+ *   * `domain:{domain}`: The G Suite domain (primary) that represents all the
  *      users of that domain. For example, `google.com` or `example.com`.
+ *
+ * @property {Object} condition
+ *   The condition that is associated with this binding.
+ *   NOTE: An unsatisfied condition will not allow user access via current
+ *   binding. Different bindings, including their conditions, are examined
+ *   independently.
+ *
+ *   This object should have the same structure as [Expr]{@link google.type.Expr}
  *
  * @typedef Binding
  * @memberof google.iam.v1

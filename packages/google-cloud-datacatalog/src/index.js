@@ -16,6 +16,19 @@
  * @namespace google
  */
 /**
+ * @namespace google.iam.v1
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.iam.v1
+ */
+/**
+ * @namespace google.type
+ */
+
+/**
  * @namespace google.cloud
  */
 /**

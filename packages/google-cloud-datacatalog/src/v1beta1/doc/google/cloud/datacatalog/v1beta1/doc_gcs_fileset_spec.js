@@ -37,7 +37,6 @@
  *
  * @typedef GcsFilesetSpec
  * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.GcsFilesetSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/gcs_fileset_spec.proto}
  */
 const GcsFilesetSpec = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -59,7 +58,8 @@ const GcsFilesetSpec = {
  *
  * @typedef GcsFileSpec
  * @memberof google.cloud.datacatalog.v1beta1
- * @see [google.cloud.datacatalog.v1beta1.GcsFileSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/gcs_fileset_spec.proto}
+ 
+
  */
 const GcsFileSpec = {
   // This is for documentation. Actual contents will be loaded by gRPC.

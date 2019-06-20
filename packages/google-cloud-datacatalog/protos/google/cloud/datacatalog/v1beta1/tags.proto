@@ -25,13 +25,14 @@ option java_multiple_files = true;
 option java_package = "com.google.cloud.datacatalog";
 
 // Tags are used to attach custom metadata to Data Catalog resources. Tags
-// conform to the specifications within their Tag Template.
+// conform to the specifications within their tag template.
 message Tag {
   // Required when used in
   // [UpdateTagRequest][google.cloud.datacatalog.v1beta1.UpdateTagRequest]. The
   // resource name of the tag in URL format. For example,
   // projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}",
-  // where tag_id is a system-generated identifier.
+  // where tag_id is a system-generated identifier. Note that this Tag may not
+  // actually be stored in the location in this name.
   string name = 1;
 
   // Required. The resource name of the tag template that this tag uses. For
@@ -94,21 +95,16 @@ message TagField {
   }
 }
 
-// Tag Templates provide the basic format of multiple fields which can be
-// attached to Data Catalog resources as Tags.
-//
-// Tag Templates can be used as a data glossary as tag templates define the
-// list of acceptable fields that can be applied within a Tag. When a Tag is
-// applied to a resource, the Tag Template defines the mapping of accepted field
-// names & types that can be used within the Tag.
-//
-// A Tag Template also allows you to make Tags using that template visible only
-// to a certain group of users.
+// Tag templates defines the schema of the tags used to attach to Data Catalog
+// resources. It defines the mapping of accepted field names and types that can
+// be used within the tag. The tag template also controls the access to the tag.
 message TagTemplate {
   // Required when used in
   // [UpdateTagTemplateRequest][google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest].
   // The resource name of the tag template in URL format. For example,
   // projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}.
+  // Note that this TagTemplate and its child resources may not actually be
+  // stored in the location in this name.
   string name = 1;
 
   // Optional. The display name for this template. Default value is an empty
@@ -116,17 +112,17 @@ message TagTemplate {
   string display_name = 2;
 
   // Required. Map of tag template field ids to the settings for the field.
-  // This map is an exhaustive list of allowed fields. This map must contain at
-  // least one field and at most 100 fields.
+  // This map is an exhaustive list of the allowed fields. This map must contain
+  // at least one field and at most 500 fields.
   //
-  // The keys to this map are tag template field IDs. Field IDs can
-  // contain letters (both uppercase and lowercase), numbers (0-9), and
-  // underscores (_). Field IDs must be at least 1 character long and at most
-  // 64 characters long. Field IDs must start with a letter or number.
+  // The keys to this map are tag template field IDs. Field IDs can contain
+  // letters (both uppercase and lowercase), numbers (0-9) and underscores (_).
+  // Field IDs must be at least 1 character long and at most 64 characters long.
+  // Field IDs must start with a letter or underscore.
   map<string, TagTemplateField> fields = 3;
 }
 
-// The template for an individual field within a TagTemplate.
+// The template for an individual field within a tag template.
 message TagTemplateField {
   // Optional. The display name for this field. Default value is an empty
   // string.

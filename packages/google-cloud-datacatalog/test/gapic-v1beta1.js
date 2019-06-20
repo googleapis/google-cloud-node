@@ -69,7 +69,11 @@ describe('DataCatalogClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.searchCatalog = (actualRequest, options, callback) => {
+      client._innerApiCalls.searchCatalog = (
+        actualRequest,
+        options,
+        callback
+      ) => {
         assert.deepStrictEqual(actualRequest, request);
         callback(null, expectedResponse.results);
       };
@@ -185,7 +189,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.entryPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]');
+      const formattedName = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
       const request = {
         name: formattedName,
       };
@@ -222,7 +231,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.entryPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]');
+      const formattedName = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
       const request = {
         name: formattedName,
       };
@@ -381,7 +395,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedName = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const request = {
         name: formattedName,
       };
@@ -414,7 +432,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedName = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const request = {
         name: formattedName,
       };
@@ -505,7 +527,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedName = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const force = false;
       const request = {
         name: formattedName,
@@ -528,7 +554,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedName = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const force = false;
       const request = {
         name: formattedName,
@@ -558,7 +588,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedParent = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const tagTemplateFieldId = 'tagTemplateFieldId-92144832';
       const tagTemplateField = {};
       const request = {
@@ -593,7 +627,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedParent = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const tagTemplateFieldId = 'tagTemplateFieldId-92144832';
       const tagTemplateField = {};
       const request = {
@@ -626,7 +664,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.fieldPath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]', '[FIELD]');
+      const formattedName = client.fieldPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]',
+        '[FIELD]'
+      );
       const tagTemplateField = {};
       const request = {
         name: formattedName,
@@ -659,7 +702,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.fieldPath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]', '[FIELD]');
+      const formattedName = client.fieldPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]',
+        '[FIELD]'
+      );
       const tagTemplateField = {};
       const request = {
         name: formattedName,
@@ -690,7 +738,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.fieldPath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]', '[FIELD]');
+      const formattedName = client.fieldPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]',
+        '[FIELD]'
+      );
       const newTagTemplateFieldId = 'newTagTemplateFieldId-1668354591';
       const request = {
         name: formattedName,
@@ -723,7 +776,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.fieldPath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]', '[FIELD]');
+      const formattedName = client.fieldPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]',
+        '[FIELD]'
+      );
       const newTagTemplateFieldId = 'newTagTemplateFieldId-1668354591';
       const request = {
         name: formattedName,
@@ -754,7 +812,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.fieldPath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]', '[FIELD]');
+      const formattedName = client.fieldPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]',
+        '[FIELD]'
+      );
       const force = false;
       const request = {
         name: formattedName,
@@ -762,7 +825,9 @@ describe('DataCatalogClient', () => {
       };
 
       // Mock Grpc layer
-      client._innerApiCalls.deleteTagTemplateField = mockSimpleGrpcMethod(request);
+      client._innerApiCalls.deleteTagTemplateField = mockSimpleGrpcMethod(
+        request
+      );
 
       client.deleteTagTemplateField(request, err => {
         assert.ifError(err);
@@ -777,7 +842,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.fieldPath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]', '[FIELD]');
+      const formattedName = client.fieldPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]',
+        '[FIELD]'
+      );
       const force = false;
       const request = {
         name: formattedName,
@@ -807,7 +877,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.entryPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]');
+      const formattedParent = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
       const tag = {};
       const request = {
         parent: formattedParent,
@@ -846,7 +921,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.entryPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]');
+      const formattedParent = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
       const tag = {};
       const request = {
         parent: formattedParent,
@@ -943,7 +1023,13 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.tagPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]', '[TAG]');
+      const formattedName = client.tagPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]',
+        '[TAG]'
+      );
       const request = {
         name: formattedName,
       };
@@ -964,7 +1050,13 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedName = client.tagPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]', '[TAG]');
+      const formattedName = client.tagPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]',
+        '[TAG]'
+      );
       const request = {
         name: formattedName,
       };
@@ -992,7 +1084,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.entryPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]');
+      const formattedParent = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
       const request = {
         parent: formattedParent,
       };
@@ -1026,7 +1123,12 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedParent = client.entryPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]');
+      const formattedParent = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
       const request = {
         parent: formattedParent,
       };
@@ -1055,7 +1157,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedResource = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedResource = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const policy = {};
       const request = {
         resource: formattedResource,
@@ -1090,7 +1196,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedResource = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedResource = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const policy = {};
       const request = {
         resource: formattedResource,
@@ -1121,7 +1231,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedResource = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedResource = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const request = {
         resource: formattedResource,
       };
@@ -1154,7 +1268,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedResource = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedResource = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const request = {
         resource: formattedResource,
       };
@@ -1183,7 +1301,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedResource = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedResource = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const permissions = [];
       const request = {
         resource: formattedResource,
@@ -1213,7 +1335,11 @@ describe('DataCatalogClient', () => {
       });
 
       // Mock request
-      const formattedResource = client.tagTemplatePath('[PROJECT]', '[LOCATION]', '[TAG_TEMPLATE]');
+      const formattedResource = client.tagTemplatePath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[TAG_TEMPLATE]'
+      );
       const permissions = [];
       const request = {
         resource: formattedResource,
@@ -1235,7 +1361,6 @@ describe('DataCatalogClient', () => {
       });
     });
   });
-
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

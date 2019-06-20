@@ -1,10 +1,10 @@
 {
   "name": "datacatalog",
-  "name_pretty": "Google Cloud Data Catalog",
+  "name_pretty": "Data Catalog",
   "product_documentation": "https://cloud.google.com/data-catalog/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datacatalog/latest/",
+  "client_documentation": "https://googleapis.dev/nodejs/datacatalog/latest",
   "issue_tracker": "",
-  "release_level": "alpha",
+  "release_level": "beta",
   "language": "nodejs",
   "repo": "googleapis/nodejs-datacatalog",
   "distribution_name": "@google-cloud/datacatalog",
