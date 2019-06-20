@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-compute/compare/v1.0.1...v1.1.0) (2019-06-20)
+
+
+### Bug Fixes
+
+* **docs:** move to new client docs URL ([#326](https://www.github.com/googleapis/nodejs-compute/issues/326)) ([918e352](https://www.github.com/googleapis/nodejs-compute/commit/918e352))
+
+
+### Features
+
+* support apiEndpoint override ([#322](https://www.github.com/googleapis/nodejs-compute/issues/322)) ([49c5384](https://www.github.com/googleapis/nodejs-compute/commit/49c5384))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-compute/compare/v1.0.0...v1.0.1) (2019-05-22)
 
 
