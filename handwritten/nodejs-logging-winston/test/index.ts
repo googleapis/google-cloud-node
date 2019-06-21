@@ -72,6 +72,7 @@ describe('logging-winston', () => {
     serviceContext: {
       service: 'fake-service',
     },
+    apiEndpoint: 'fake.local',
   };
 
   beforeEach(() => {
@@ -94,6 +95,12 @@ describe('logging-winston', () => {
       new loggingWinstonLib.LoggingWinston(optionsWithScopes);
 
       assert.deepStrictEqual(fakeLoggingOptions_, optionsWithScopes);
+    });
+
+    it('should initialize Log instance using provided apiEndpoint', () => {
+      const options = Object.assign({}, OPTIONS);
+      const logger = new loggingWinstonLib.LoggingWinston(options);
+      assert.deepStrictEqual(fakeLoggingOptions_, options);
     });
 
     it('should pass the provided options.inspectMetadata', () => {
