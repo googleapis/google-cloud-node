@@ -103,6 +103,8 @@ export interface Options {
   prefix?: string;
 
   labels?: {[key: string]: string};
+
+  apiEndpoint?: string;
 }
 
 export interface MonitoredResource {
