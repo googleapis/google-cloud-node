@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v1.0.1...v1.1.0) (2019-06-21)
+
+
+### Bug Fixes
+
+* **docs:** pin to version of compodoc that renders JavaScript/tables ([#344](https://www.github.com/googleapis/nodejs-logging-winston/issues/344)) ([ea9ea9a](https://www.github.com/googleapis/nodejs-logging-winston/commit/ea9ea9a))
+* properly import transport-stream ([#348](https://www.github.com/googleapis/nodejs-logging-winston/issues/348)) ([7eec9dc](https://www.github.com/googleapis/nodejs-logging-winston/commit/7eec9dc)), closes [#341](https://www.github.com/googleapis/nodejs-logging-winston/issues/341) [#342](https://www.github.com/googleapis/nodejs-logging-winston/issues/342)
+* **middleware:** need message in request log message ([#349](https://www.github.com/googleapis/nodejs-logging-winston/issues/349)) ([cb11e4c](https://www.github.com/googleapis/nodejs-logging-winston/commit/cb11e4c))
+
+
+### Features
+
+* add support for apiEndpoint override ([#352](https://www.github.com/googleapis/nodejs-logging-winston/issues/352)) ([6666276](https://www.github.com/googleapis/nodejs-logging-winston/commit/6666276))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-logging-winston/compare/v1.0.0...v1.0.1) (2019-06-15)
 
 
