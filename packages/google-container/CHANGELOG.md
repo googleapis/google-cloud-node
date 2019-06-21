@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.1...v1.1.2) (2019-06-21)
+
+
+### Bug Fixes
+
+* **docs:** provide clarification re: gke vs. Kubernetes ([#207](https://www.github.com/googleapis/nodejs-cloud-container/issues/207)) ([bc8e2cc](https://www.github.com/googleapis/nodejs-cloud-container/commit/bc8e2cc))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.0...v1.1.1) (2019-06-14)
 
 
