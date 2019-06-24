@@ -105,6 +105,7 @@ describe('logging-bunyan', () => {
     serviceContext: {
       service: 'fake-service',
     },
+    apiEndpoint: 'fake.local',
   };
 
   const RECORD = {
