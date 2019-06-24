@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.1.1...v1.2.0) (2019-06-24)
+
+
+### Features
+
+* introduces CreateImportJob, ListImportJob, GetImportJob  ([#180](https://www.github.com/googleapis/nodejs-kms/issues/180)) ([9fb4efb](https://www.github.com/googleapis/nodejs-kms/commit/9fb4efb))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-kms/compare/v1.1.0...v1.1.1) (2019-06-14)
 
 
