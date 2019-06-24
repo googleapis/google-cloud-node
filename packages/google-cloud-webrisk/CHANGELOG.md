@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.1.1...v1.1.2) (2019-06-24)
+
+
+### Bug Fixes
+
+* **build:** switch to using GitHub magic proxy ([#29](https://www.github.com/googleapis/nodejs-web-risk/issues/29)) ([876eea9](https://www.github.com/googleapis/nodejs-web-risk/commit/876eea9))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.1.0...v1.1.1) (2019-06-15)
 
 
