@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.1.1...v1.2.0) (2019-06-24)
+
+
+### Features
+
+* add support for apiEndpoint override ([#336](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/336)) ([5feb3c9](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/5feb3c9))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.1.0...v1.1.1) (2019-06-14)
 
 
