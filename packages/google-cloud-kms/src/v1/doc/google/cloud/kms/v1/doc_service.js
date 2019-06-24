@@ -16,25 +16,28 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for
- * KeyManagementService.ListKeyRings.
+ * Request message for KeyManagementService.ListKeyRings.
  *
  * @property {string} parent
  *   Required. The resource name of the location associated with the
- *   KeyRings, in the format
- *   `projects/* /locations/*`.
+ *   KeyRings, in the format `projects/* /locations/*`.
  *
  * @property {number} pageSize
- *   Optional limit on the number of KeyRings to
- *   include in the response.  Further KeyRings
- *   can subsequently be obtained by including the
- *   ListKeyRingsResponse.next_page_token
- *   in a subsequent request.  If unspecified, the server will pick an
- *   appropriate default.
+ *   Optional limit on the number of KeyRings to include in the
+ *   response.  Further KeyRings can subsequently be obtained by
+ *   including the ListKeyRingsResponse.next_page_token in a subsequent
+ *   request.  If unspecified, the server will pick an appropriate default.
  *
  * @property {string} pageToken
  *   Optional pagination token, returned earlier via
  *   ListKeyRingsResponse.next_page_token.
+ *
+ * @property {string} filter
+ *   Optional. Only include resources that match the filter in the response.
+ *
+ * @property {string} orderBy
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order.
  *
  * @typedef ListKeyRingsRequest
  * @memberof google.cloud.kms.v1
@@ -45,21 +48,17 @@ const ListKeyRingsRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.ListCryptoKeys.
+ * Request message for KeyManagementService.ListCryptoKeys.
  *
  * @property {string} parent
- *   Required. The resource name of the KeyRing
- *   to list, in the format `projects/* /locations/* /keyRings/*`.
+ *   Required. The resource name of the KeyRing to list, in the format
+ *   `projects/* /locations/* /keyRings/*`.
  *
  * @property {number} pageSize
- *   Optional limit on the number of CryptoKeys
- *   to include in the response.  Further
- *   CryptoKeys can subsequently be obtained by
- *   including the
- *   ListCryptoKeysResponse.next_page_token
- *   in a subsequent request.  If unspecified, the server will pick an
- *   appropriate default.
+ *   Optional limit on the number of CryptoKeys to include in the
+ *   response.  Further CryptoKeys can subsequently be obtained by
+ *   including the ListCryptoKeysResponse.next_page_token in a subsequent
+ *   request.  If unspecified, the server will pick an appropriate default.
  *
  * @property {string} pageToken
  *   Optional pagination token, returned earlier via
@@ -70,6 +69,13 @@ const ListKeyRingsRequest = {
  *
  *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
  *
+ * @property {string} filter
+ *   Optional. Only include resources that match the filter in the response.
+ *
+ * @property {string} orderBy
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order.
+ *
  * @typedef ListCryptoKeysRequest
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListCryptoKeysRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
@@ -79,22 +85,18 @@ const ListCryptoKeysRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.ListCryptoKeyVersions.
+ * Request message for KeyManagementService.ListCryptoKeyVersions.
  *
  * @property {string} parent
- *   Required. The resource name of the
- *   CryptoKey to list, in the format
+ *   Required. The resource name of the CryptoKey to list, in the format
  *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
  *
  * @property {number} pageSize
- *   Optional limit on the number of
- *   CryptoKeyVersions to include in the
- *   response. Further CryptoKeyVersions
- *   can subsequently be obtained by including the
- *   ListCryptoKeyVersionsResponse.next_page_token
- *   in a subsequent request. If unspecified, the server will pick an
- *   appropriate default.
+ *   Optional limit on the number of CryptoKeyVersions to
+ *   include in the response. Further CryptoKeyVersions can
+ *   subsequently be obtained by including the
+ *   ListCryptoKeyVersionsResponse.next_page_token in a subsequent request.
+ *   If unspecified, the server will pick an appropriate default.
  *
  * @property {string} pageToken
  *   Optional pagination token, returned earlier via
@@ -105,6 +107,13 @@ const ListCryptoKeysRequest = {
  *
  *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
  *
+ * @property {string} filter
+ *   Optional. Only include resources that match the filter in the response.
+ *
+ * @property {string} orderBy
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order.
+ *
  * @typedef ListCryptoKeyVersionsRequest
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.ListCryptoKeyVersionsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
@@ -114,8 +123,39 @@ const ListCryptoKeyVersionsRequest = {
 };
 
 /**
- * Response message for
- * KeyManagementService.ListKeyRings.
+ * Request message for KeyManagementService.ListImportJobs.
+ *
+ * @property {string} parent
+ *   Required. The resource name of the KeyRing to list, in the format
+ *   `projects/* /locations/* /keyRings/*`.
+ *
+ * @property {number} pageSize
+ *   Optional limit on the number of ImportJobs to include in the
+ *   response. Further ImportJobs can subsequently be obtained by
+ *   including the ListImportJobsResponse.next_page_token in a subsequent
+ *   request. If unspecified, the server will pick an appropriate default.
+ *
+ * @property {string} pageToken
+ *   Optional pagination token, returned earlier via
+ *   ListImportJobsResponse.next_page_token.
+ *
+ * @property {string} filter
+ *   Optional. Only include resources that match the filter in the response.
+ *
+ * @property {string} orderBy
+ *   Optional. Specify how the results should be sorted. If not specified, the
+ *   results will be sorted in the default order.
+ *
+ * @typedef ListImportJobsRequest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.ListImportJobsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+const ListImportJobsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Response message for KeyManagementService.ListKeyRings.
  *
  * @property {Object[]} keyRings
  *   The list of KeyRings.
@@ -124,12 +164,10 @@ const ListCryptoKeyVersionsRequest = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results. Pass this value in
- *   ListKeyRingsRequest.page_token
- *   to retrieve the next page of results.
+ *   ListKeyRingsRequest.page_token to retrieve the next page of results.
  *
  * @property {number} totalSize
- *   The total number of KeyRings that matched
- *   the query.
+ *   The total number of KeyRings that matched the query.
  *
  * @typedef ListKeyRingsResponse
  * @memberof google.cloud.kms.v1
@@ -140,8 +178,7 @@ const ListKeyRingsResponse = {
 };
 
 /**
- * Response message for
- * KeyManagementService.ListCryptoKeys.
+ * Response message for KeyManagementService.ListCryptoKeys.
  *
  * @property {Object[]} cryptoKeys
  *   The list of CryptoKeys.
@@ -150,12 +187,10 @@ const ListKeyRingsResponse = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results. Pass this value in
- *   ListCryptoKeysRequest.page_token
- *   to retrieve the next page of results.
+ *   ListCryptoKeysRequest.page_token to retrieve the next page of results.
  *
  * @property {number} totalSize
- *   The total number of CryptoKeys that
- *   matched the query.
+ *   The total number of CryptoKeys that matched the query.
  *
  * @typedef ListCryptoKeysResponse
  * @memberof google.cloud.kms.v1
@@ -166,8 +201,7 @@ const ListCryptoKeysResponse = {
 };
 
 /**
- * Response message for
- * KeyManagementService.ListCryptoKeyVersions.
+ * Response message for KeyManagementService.ListCryptoKeyVersions.
  *
  * @property {Object[]} cryptoKeyVersions
  *   The list of CryptoKeyVersions.
@@ -176,12 +210,11 @@ const ListCryptoKeysResponse = {
  *
  * @property {string} nextPageToken
  *   A token to retrieve next page of results. Pass this value in
- *   ListCryptoKeyVersionsRequest.page_token
- *   to retrieve the next page of results.
+ *   ListCryptoKeyVersionsRequest.page_token to retrieve the next page of
+ *   results.
  *
  * @property {number} totalSize
- *   The total number of
- *   CryptoKeyVersions that matched the
+ *   The total number of CryptoKeyVersions that matched the
  *   query.
  *
  * @typedef ListCryptoKeyVersionsResponse
@@ -193,12 +226,33 @@ const ListCryptoKeyVersionsResponse = {
 };
 
 /**
- * Request message for
- * KeyManagementService.GetKeyRing.
+ * Response message for KeyManagementService.ListImportJobs.
+ *
+ * @property {Object[]} importJobs
+ *   The list of ImportJobs.
+ *
+ *   This object should have the same structure as [ImportJob]{@link google.cloud.kms.v1.ImportJob}
+ *
+ * @property {string} nextPageToken
+ *   A token to retrieve next page of results. Pass this value in
+ *   ListImportJobsRequest.page_token to retrieve the next page of results.
+ *
+ * @property {number} totalSize
+ *   The total number of ImportJobs that matched the query.
+ *
+ * @typedef ListImportJobsResponse
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.ListImportJobsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+const ListImportJobsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for KeyManagementService.GetKeyRing.
  *
  * @property {string} name
- *   The name of the
- *   KeyRing to get.
+ *   The name of the KeyRing to get.
  *
  * @typedef GetKeyRingRequest
  * @memberof google.cloud.kms.v1
@@ -209,12 +263,10 @@ const GetKeyRingRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.GetCryptoKey.
+ * Request message for KeyManagementService.GetCryptoKey.
  *
  * @property {string} name
- *   The name of the
- *   CryptoKey to get.
+ *   The name of the CryptoKey to get.
  *
  * @typedef GetCryptoKeyRequest
  * @memberof google.cloud.kms.v1
@@ -225,12 +277,10 @@ const GetCryptoKeyRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.GetCryptoKeyVersion.
+ * Request message for KeyManagementService.GetCryptoKeyVersion.
  *
  * @property {string} name
- *   The name of the
- *   CryptoKeyVersion to get.
+ *   The name of the CryptoKeyVersion to get.
  *
  * @typedef GetCryptoKeyVersionRequest
  * @memberof google.cloud.kms.v1
@@ -241,12 +291,11 @@ const GetCryptoKeyVersionRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.GetPublicKey.
+ * Request message for KeyManagementService.GetPublicKey.
  *
  * @property {string} name
- *   The name of the
- *   CryptoKeyVersion public key to get.
+ *   The name of the CryptoKeyVersion public key to
+ *   get.
  *
  * @typedef GetPublicKeyRequest
  * @memberof google.cloud.kms.v1
@@ -257,13 +306,25 @@ const GetPublicKeyRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.CreateKeyRing.
+ * Request message for KeyManagementService.GetImportJob.
+ *
+ * @property {string} name
+ *   The name of the ImportJob to get.
+ *
+ * @typedef GetImportJobRequest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.GetImportJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+const GetImportJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for KeyManagementService.CreateKeyRing.
  *
  * @property {string} parent
  *   Required. The resource name of the location associated with the
- *   KeyRings, in the format
- *   `projects/* /locations/*`.
+ *   KeyRings, in the format `projects/* /locations/*`.
  *
  * @property {string} keyRingId
  *   Required. It must be unique within a location and match the regular
@@ -283,12 +344,11 @@ const CreateKeyRingRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.CreateCryptoKey.
+ * Request message for KeyManagementService.CreateCryptoKey.
  *
  * @property {string} parent
- *   Required. The name of the KeyRing
- *   associated with the CryptoKeys.
+ *   Required. The name of the KeyRing associated with the
+ *   CryptoKeys.
  *
  * @property {string} cryptoKeyId
  *   Required. It must be unique within a KeyRing and match the regular
@@ -299,6 +359,13 @@ const CreateKeyRingRequest = {
  *
  *   This object should have the same structure as [CryptoKey]{@link google.cloud.kms.v1.CryptoKey}
  *
+ * @property {boolean} skipInitialVersionCreation
+ *   If set to true, the request will create a CryptoKey without any
+ *   CryptoKeyVersions. You must manually call
+ *   CreateCryptoKeyVersion or
+ *   ImportCryptoKeyVersion
+ *   before you can use this CryptoKey.
+ *
  * @typedef CreateCryptoKeyRequest
  * @memberof google.cloud.kms.v1
  * @see [google.cloud.kms.v1.CreateCryptoKeyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
@@ -308,17 +375,14 @@ const CreateCryptoKeyRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.CreateCryptoKeyVersion.
+ * Request message for KeyManagementService.CreateCryptoKeyVersion.
  *
  * @property {string} parent
- *   Required. The name of the
- *   CryptoKey associated with the
- *   CryptoKeyVersions.
+ *   Required. The name of the CryptoKey associated with
+ *   the CryptoKeyVersions.
  *
  * @property {Object} cryptoKeyVersion
- *   A CryptoKeyVersion with initial
- *   field values.
+ *   A CryptoKeyVersion with initial field values.
  *
  *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
  *
@@ -331,8 +395,78 @@ const CreateCryptoKeyVersionRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.UpdateCryptoKey.
+ * Request message for KeyManagementService.ImportCryptoKeyVersion.
+ *
+ * @property {string} parent
+ *   Required. The name of the CryptoKey to
+ *   be imported into.
+ *
+ * @property {number} algorithm
+ *   Required. The algorithm of
+ *   the key being imported. This does not need to match the
+ *   version_template of the CryptoKey this
+ *   version imports into.
+ *
+ *   The number should be among the values of [CryptoKeyVersionAlgorithm]{@link google.cloud.kms.v1.CryptoKeyVersionAlgorithm}
+ *
+ * @property {string} importJob
+ *   Required. The name of the ImportJob that was used to
+ *   wrap this key material.
+ *
+ * @property {Buffer} rsaAesWrappedKey
+ *   Wrapped key material produced with
+ *   RSA_OAEP_3072_SHA1_AES_256
+ *   or
+ *   RSA_OAEP_4096_SHA1_AES_256.
+ *
+ *   This field contains the concatenation of two wrapped keys:
+ *   <ol>
+ *     <li>An ephemeral AES-256 wrapping key wrapped with the
+ *         public_key using RSAES-OAEP with SHA-1,
+ *         MGF1 with SHA-1, and an empty label.
+ *     </li>
+ *     <li>The key to be imported, wrapped with the ephemeral AES-256 key
+ *         using AES-KWP (RFC 5649).
+ *     </li>
+ *   </ol>
+ *
+ *   This format is the same as the format produced by PKCS#11 mechanism
+ *   CKM_RSA_AES_KEY_WRAP.
+ *
+ * @typedef ImportCryptoKeyVersionRequest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.ImportCryptoKeyVersionRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+const ImportCryptoKeyVersionRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for KeyManagementService.CreateImportJob.
+ *
+ * @property {string} parent
+ *   Required. The name of the KeyRing associated with the
+ *   ImportJobs.
+ *
+ * @property {string} importJobId
+ *   Required. It must be unique within a KeyRing and match the regular
+ *   expression `[a-zA-Z0-9_-]{1,63}`
+ *
+ * @property {Object} importJob
+ *   Required. An ImportJob with initial field values.
+ *
+ *   This object should have the same structure as [ImportJob]{@link google.cloud.kms.v1.ImportJob}
+ *
+ * @typedef CreateImportJobRequest
+ * @memberof google.cloud.kms.v1
+ * @see [google.cloud.kms.v1.CreateImportJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/kms/v1/service.proto}
+ */
+const CreateImportJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for KeyManagementService.UpdateCryptoKey.
  *
  * @property {Object} cryptoKey
  *   CryptoKey with updated values.
@@ -353,12 +487,10 @@ const UpdateCryptoKeyRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.UpdateCryptoKeyVersion.
+ * Request message for KeyManagementService.UpdateCryptoKeyVersion.
  *
  * @property {Object} cryptoKeyVersion
- *   CryptoKeyVersion with updated
- *   values.
+ *   CryptoKeyVersion with updated values.
  *
  *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
  *
@@ -376,41 +508,35 @@ const UpdateCryptoKeyVersionRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.Encrypt.
+ * Request message for KeyManagementService.Encrypt.
  *
  * @property {string} name
- *   Required. The resource name of the
- *   CryptoKey or
- *   CryptoKeyVersion to use for
- *   encryption.
+ *   Required. The resource name of the CryptoKey or CryptoKeyVersion
+ *   to use for encryption.
  *
- *   If a CryptoKey is specified, the server
- *   will use its primary version.
+ *   If a CryptoKey is specified, the server will use its
+ *   primary version.
  *
  * @property {Buffer} plaintext
  *   Required. The data to encrypt. Must be no larger than 64KiB.
  *
  *   The maximum size depends on the key version's
- *   protection_level.
- *   For SOFTWARE keys, the
- *   plaintext must be no larger than 64KiB. For
- *   HSM keys, the combined length of
- *   the plaintext and additional_authenticated_data fields must be no larger
- *   than 8KiB.
+ *   protection_level. For
+ *   SOFTWARE keys, the plaintext must be no larger
+ *   than 64KiB. For HSM keys, the combined length of the
+ *   plaintext and additional_authenticated_data fields must be no larger than
+ *   8KiB.
  *
  * @property {Buffer} additionalAuthenticatedData
  *   Optional data that, if specified, must also be provided during decryption
- *   through
- *   DecryptRequest.additional_authenticated_data.
+ *   through DecryptRequest.additional_authenticated_data.
  *
  *   The maximum size depends on the key version's
- *   protection_level.
- *   For SOFTWARE keys, the AAD
- *   must be no larger than 64KiB. For
- *   HSM keys, the combined length of
- *   the plaintext and additional_authenticated_data fields must be no larger
- *   than 8KiB.
+ *   protection_level. For
+ *   SOFTWARE keys, the AAD must be no larger than
+ *   64KiB. For HSM keys, the combined length of the
+ *   plaintext and additional_authenticated_data fields must be no larger than
+ *   8KiB.
  *
  * @typedef EncryptRequest
  * @memberof google.cloud.kms.v1
@@ -421,13 +547,11 @@ const EncryptRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.Decrypt.
+ * Request message for KeyManagementService.Decrypt.
  *
  * @property {string} name
- *   Required. The resource name of the
- *   CryptoKey to use for decryption. The
- *   server will choose the appropriate version.
+ *   Required. The resource name of the CryptoKey to use for decryption.
+ *   The server will choose the appropriate version.
  *
  * @property {Buffer} ciphertext
  *   Required. The encrypted data originally returned in
@@ -446,13 +570,10 @@ const DecryptRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.AsymmetricSign.
+ * Request message for KeyManagementService.AsymmetricSign.
  *
  * @property {string} name
- *   Required. The resource name of the
- *   CryptoKeyVersion to use for
- *   signing.
+ *   Required. The resource name of the CryptoKeyVersion to use for signing.
  *
  * @property {Object} digest
  *   Required. The digest of the data to sign. The digest must be produced with
@@ -470,18 +591,15 @@ const AsymmetricSignRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.AsymmetricDecrypt.
+ * Request message for KeyManagementService.AsymmetricDecrypt.
  *
  * @property {string} name
- *   Required. The resource name of the
- *   CryptoKeyVersion to use for
+ *   Required. The resource name of the CryptoKeyVersion to use for
  *   decryption.
  *
  * @property {Buffer} ciphertext
- *   Required. The data encrypted with the named
- *   CryptoKeyVersion's public key using
- *   OAEP.
+ *   Required. The data encrypted with the named CryptoKeyVersion's public
+ *   key using OAEP.
  *
  * @typedef AsymmetricDecryptRequest
  * @memberof google.cloud.kms.v1
@@ -492,12 +610,10 @@ const AsymmetricDecryptRequest = {
 };
 
 /**
- * Response message for
- * KeyManagementService.Decrypt.
+ * Response message for KeyManagementService.Decrypt.
  *
  * @property {Buffer} plaintext
- *   The decrypted data originally supplied in
- *   EncryptRequest.plaintext.
+ *   The decrypted data originally supplied in EncryptRequest.plaintext.
  *
  * @typedef DecryptResponse
  * @memberof google.cloud.kms.v1
@@ -508,13 +624,10 @@ const DecryptResponse = {
 };
 
 /**
- * Response message for
- * KeyManagementService.Encrypt.
+ * Response message for KeyManagementService.Encrypt.
  *
  * @property {string} name
- *   The resource name of the
- *   CryptoKeyVersion used in
- *   encryption.
+ *   The resource name of the CryptoKeyVersion used in encryption.
  *
  * @property {Buffer} ciphertext
  *   The encrypted data.
@@ -528,8 +641,7 @@ const EncryptResponse = {
 };
 
 /**
- * Response message for
- * KeyManagementService.AsymmetricSign.
+ * Response message for KeyManagementService.AsymmetricSign.
  *
  * @property {Buffer} signature
  *   The created signature.
@@ -543,8 +655,7 @@ const AsymmetricSignResponse = {
 };
 
 /**
- * Response message for
- * KeyManagementService.AsymmetricDecrypt.
+ * Response message for KeyManagementService.AsymmetricDecrypt.
  *
  * @property {Buffer} plaintext
  *   The decrypted data originally encrypted with the matching public key.
@@ -558,16 +669,13 @@ const AsymmetricDecryptResponse = {
 };
 
 /**
- * Request message for
- * KeyManagementService.UpdateCryptoKeyPrimaryVersion.
+ * Request message for KeyManagementService.UpdateCryptoKeyPrimaryVersion.
  *
  * @property {string} name
- *   The resource name of the CryptoKey to
- *   update.
+ *   The resource name of the CryptoKey to update.
  *
  * @property {string} cryptoKeyVersionId
- *   The id of the child
- *   CryptoKeyVersion to use as primary.
+ *   The id of the child CryptoKeyVersion to use as primary.
  *
  * @typedef UpdateCryptoKeyPrimaryVersionRequest
  * @memberof google.cloud.kms.v1
@@ -578,12 +686,10 @@ const UpdateCryptoKeyPrimaryVersionRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.DestroyCryptoKeyVersion.
+ * Request message for KeyManagementService.DestroyCryptoKeyVersion.
  *
  * @property {string} name
- *   The resource name of the
- *   CryptoKeyVersion to destroy.
+ *   The resource name of the CryptoKeyVersion to destroy.
  *
  * @typedef DestroyCryptoKeyVersionRequest
  * @memberof google.cloud.kms.v1
@@ -594,12 +700,10 @@ const DestroyCryptoKeyVersionRequest = {
 };
 
 /**
- * Request message for
- * KeyManagementService.RestoreCryptoKeyVersion.
+ * Request message for KeyManagementService.RestoreCryptoKeyVersion.
  *
  * @property {string} name
- *   The resource name of the
- *   CryptoKeyVersion to restore.
+ *   The resource name of the CryptoKeyVersion to restore.
  *
  * @typedef RestoreCryptoKeyVersionRequest
  * @memberof google.cloud.kms.v1
@@ -630,14 +734,12 @@ const Digest = {
 };
 
 /**
- * Cloud KMS metadata for the given
- * google.cloud.location.Location.
+ * Cloud KMS metadata for the given google.cloud.location.Location.
  *
  * @property {boolean} hsmAvailable
  *   Indicates whether CryptoKeys with
  *   protection_level
- *   HSM can be created in this
- *   location.
+ *   HSM can be created in this location.
  *
  * @typedef LocationMetadata
  * @memberof google.cloud.kms.v1

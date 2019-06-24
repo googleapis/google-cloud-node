@@ -35,7 +35,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/ smoke-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs -r --skip cloud.google.com/kms/docs/importing-a-key",
     "predocs-test": "npm run docs"
   },
   "dependencies": {

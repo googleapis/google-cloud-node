@@ -113,6 +113,83 @@ describe('KeyManagementServiceClient', () => {
     });
   });
 
+  describe('listImportJobs', () => {
+    it('invokes listImportJobs without error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.keyRingPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]'
+      );
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const totalSize = 705419236;
+      const importJobsElement = {};
+      const importJobs = [importJobsElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        totalSize: totalSize,
+        importJobs: importJobs,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listImportJobs = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.importJobs);
+      };
+
+      client.listImportJobs(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.importJobs);
+        done();
+      });
+    });
+
+    it('invokes listImportJobs with error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.keyRingPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]'
+      );
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listImportJobs = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listImportJobs(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
   describe('listCryptoKeys', () => {
     it('invokes listCryptoKeys without error', done => {
       const client = new kmsModule.v1.KeyManagementServiceClient({
@@ -337,6 +414,76 @@ describe('KeyManagementServiceClient', () => {
     });
   });
 
+  describe('getImportJob', () => {
+    it('invokes getImportJob without error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.importJobPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[IMPORT_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const expectedResponse = {
+        name: name2,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getImportJob = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getImportJob(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getImportJob with error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.importJobPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[IMPORT_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getImportJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getImportJob(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
   describe('getCryptoKey', () => {
     it('invokes getCryptoKey without error', done => {
       const client = new kmsModule.v1.KeyManagementServiceClient({
@@ -428,8 +575,12 @@ describe('KeyManagementServiceClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
+      const importJob = 'importJob2125587491';
+      const importFailureReason = 'importFailureReason-494073229';
       const expectedResponse = {
         name: name2,
+        importJob: importJob,
+        importFailureReason: importFailureReason,
       };
 
       // Mock Grpc layer
@@ -539,6 +690,92 @@ describe('KeyManagementServiceClient', () => {
       );
 
       client.createKeyRing(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createImportJob', () => {
+    it('invokes createImportJob without error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.keyRingPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]'
+      );
+      const importJobId = 'my-import-job';
+      const importMethod = 'RSA_OAEP_3072_SHA1_AES_256';
+      const protectionLevel = 'HSM';
+      const importJob = {
+        importMethod: importMethod,
+        protectionLevel: protectionLevel,
+      };
+      const request = {
+        parent: formattedParent,
+        importJobId: importJobId,
+        importJob: importJob,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const expectedResponse = {
+        name: name,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createImportJob = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createImportJob(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createImportJob with error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.keyRingPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]'
+      );
+      const importJobId = 'my-import-job';
+      const importMethod = 'RSA_OAEP_3072_SHA1_AES_256';
+      const protectionLevel = 'HSM';
+      const importJob = {
+        importMethod: importMethod,
+        protectionLevel: protectionLevel,
+      };
+      const request = {
+        parent: formattedParent,
+        importJobId: importJobId,
+        importJob: importJob,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createImportJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createImportJob(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
@@ -671,8 +908,12 @@ describe('KeyManagementServiceClient', () => {
 
       // Mock response
       const name = 'name3373707';
+      const importJob = 'importJob2125587491';
+      const importFailureReason = 'importFailureReason-494073229';
       const expectedResponse = {
         name: name,
+        importJob: importJob,
+        importFailureReason: importFailureReason,
       };
 
       // Mock Grpc layer
@@ -715,6 +956,88 @@ describe('KeyManagementServiceClient', () => {
       );
 
       client.createCryptoKeyVersion(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('importCryptoKeyVersion', () => {
+    it('invokes importCryptoKeyVersion without error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.cryptoKeyPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]'
+      );
+      const algorithm = 'CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED';
+      const importJob = 'importJob2125587491';
+      const request = {
+        parent: formattedParent,
+        algorithm: algorithm,
+        importJob: importJob,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const importJob2 = 'importJob2-1714851050';
+      const importFailureReason = 'importFailureReason-494073229';
+      const expectedResponse = {
+        name: name,
+        importJob: importJob2,
+        importFailureReason: importFailureReason,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.importCryptoKeyVersion = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.importCryptoKeyVersion(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes importCryptoKeyVersion with error', done => {
+      const client = new kmsModule.v1.KeyManagementServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.cryptoKeyPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[KEY_RING]',
+        '[CRYPTO_KEY]'
+      );
+      const algorithm = 'CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED';
+      const importJob = 'importJob2125587491';
+      const request = {
+        parent: formattedParent,
+        algorithm: algorithm,
+        importJob: importJob,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.importCryptoKeyVersion = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.importCryptoKeyVersion(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
@@ -804,8 +1127,12 @@ describe('KeyManagementServiceClient', () => {
 
       // Mock response
       const name = 'name3373707';
+      const importJob = 'importJob2125587491';
+      const importFailureReason = 'importFailureReason-494073229';
       const expectedResponse = {
         name: name,
+        importJob: importJob,
+        importFailureReason: importFailureReason,
       };
 
       // Mock Grpc layer
@@ -1096,8 +1423,12 @@ describe('KeyManagementServiceClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
+      const importJob = 'importJob2125587491';
+      const importFailureReason = 'importFailureReason-494073229';
       const expectedResponse = {
         name: name2,
+        importJob: importJob,
+        importFailureReason: importFailureReason,
       };
 
       // Mock Grpc layer
@@ -1168,8 +1499,12 @@ describe('KeyManagementServiceClient', () => {
 
       // Mock response
       const name2 = 'name2-1052831874';
+      const importJob = 'importJob2125587491';
+      const importFailureReason = 'importFailureReason-494073229';
       const expectedResponse = {
         name: name2,
+        importJob: importJob,
+        importFailureReason: importFailureReason,
       };
 
       // Mock Grpc layer

@@ -119,6 +119,9 @@ class KeyManagementServiceClient {
       cryptoKeyVersionPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
       ),
+      importJobPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/importJobs/{import_job}'
+      ),
       keyRingPathTemplate: new gax.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}'
       ),
@@ -135,6 +138,11 @@ class KeyManagementServiceClient {
         'pageToken',
         'nextPageToken',
         'keyRings'
+      ),
+      listImportJobs: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'importJobs'
       ),
       listCryptoKeys: new gax.PageDescriptor(
         'pageToken',
@@ -172,14 +180,18 @@ class KeyManagementServiceClient {
     // and create an API call method for each.
     const keyManagementServiceStubMethods = [
       'listKeyRings',
+      'listImportJobs',
       'listCryptoKeys',
       'listCryptoKeyVersions',
       'getKeyRing',
+      'getImportJob',
       'getCryptoKey',
       'getCryptoKeyVersion',
       'createKeyRing',
+      'createImportJob',
       'createCryptoKey',
       'createCryptoKeyVersion',
+      'importCryptoKeyVersion',
       'updateCryptoKey',
       'updateCryptoKeyVersion',
       'encrypt',
@@ -269,7 +281,10 @@ class KeyManagementServiceClient {
    * in this service.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloudkms',
+    ];
   }
 
   /**
@@ -292,14 +307,18 @@ class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   KeyRings, in the format
-   *   `projects/* /locations/*`.
+   *   KeyRings, in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -405,14 +424,18 @@ class KeyManagementServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   KeyRings, in the format
-   *   `projects/* /locations/*`.
+   *   KeyRings, in the format `projects/* /locations/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -446,13 +469,181 @@ class KeyManagementServiceClient {
   }
 
   /**
+   * Lists ImportJobs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the KeyRing to list, in the format
+   *   `projects/* /locations/* /keyRings/*`.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [ImportJob]{@link google.cloud.kms.v1.ImportJob}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListImportJobsResponse]{@link google.cloud.kms.v1.ListImportJobsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ImportJob]{@link google.cloud.kms.v1.ImportJob}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [ImportJob]{@link google.cloud.kms.v1.ImportJob} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListImportJobsResponse]{@link google.cloud.kms.v1.ListImportJobsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   *
+   * client.listImportJobs({parent: formattedParent})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listImportJobs(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listImportJobs({parent: formattedParent}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listImportJobs(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listImportJobs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listImportJobs}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listImportJobs} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the KeyRing to list, in the format
+   *   `projects/* /locations/* /keyRings/*`.
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ImportJob]{@link google.cloud.kms.v1.ImportJob} on 'data' event.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * client.listImportJobsStream({parent: formattedParent})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listImportJobsStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listImportJobs.createStream(
+      this._innerApiCalls.listImportJobs,
+      request,
+      options
+    );
+  }
+
+  /**
    * Lists CryptoKeys.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the KeyRing
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the KeyRing to list, in the format
+   *   `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -463,6 +654,11 @@ class KeyManagementServiceClient {
    *   The fields of the primary version to include in the response.
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -567,8 +763,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the KeyRing
-   *   to list, in the format `projects/* /locations/* /keyRings/*`.
+   *   Required. The resource name of the KeyRing to list, in the format
+   *   `projects/* /locations/* /keyRings/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -579,6 +775,11 @@ class KeyManagementServiceClient {
    *   The fields of the primary version to include in the response.
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -617,8 +818,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the
-   *   CryptoKey to list, in the format
+   *   Required. The resource name of the CryptoKey to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -630,6 +830,11 @@ class KeyManagementServiceClient {
    *   The fields to include in the response.
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -738,8 +943,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the
-   *   CryptoKey to list, in the format
+   *   Required. The resource name of the CryptoKey to list, in the format
    *   `projects/* /locations/* /keyRings/* /cryptoKeys/*`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -751,6 +955,11 @@ class KeyManagementServiceClient {
    *   The fields to include in the response.
    *
    *   The number should be among the values of [CryptoKeyVersionView]{@link google.cloud.kms.v1.CryptoKeyVersionView}
+   * @param {string} [request.filter]
+   *   Optional. Only include resources that match the filter in the response.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify how the results should be sorted. If not specified, the
+   *   results will be sorted in the default order.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -789,8 +998,7 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the
-   *   KeyRing to get.
+   *   The name of the KeyRing to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -838,15 +1046,66 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Returns metadata for a given CryptoKey, as
-   * well as its primary
-   * CryptoKeyVersion.
+   * Returns metadata for a given ImportJob.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the
-   *   CryptoKey to get.
+   *   The name of the ImportJob to get.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ImportJob]{@link google.cloud.kms.v1.ImportJob}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ImportJob]{@link google.cloud.kms.v1.ImportJob}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.importJobPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[IMPORT_JOB]');
+   * client.getImportJob({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getImportJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getImportJob(request, options, callback);
+  }
+
+  /**
+   * Returns metadata for a given CryptoKey, as well as its
+   * primary CryptoKeyVersion.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The name of the CryptoKey to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -894,14 +1153,12 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Returns metadata for a given
-   * CryptoKeyVersion.
+   * Returns metadata for a given CryptoKeyVersion.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the
-   *   CryptoKeyVersion to get.
+   *   The name of the CryptoKeyVersion to get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -949,15 +1206,13 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Create a new KeyRing in a given Project and
-   * Location.
+   * Create a new KeyRing in a given Project and Location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the location associated with the
-   *   KeyRings, in the format
-   *   `projects/* /locations/*`.
+   *   KeyRings, in the format `projects/* /locations/*`.
    * @param {string} request.keyRingId
    *   Required. It must be unique within a location and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
@@ -1019,8 +1274,82 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Create a new CryptoKey within a
-   * KeyRing.
+   * Create a new ImportJob within a KeyRing.
+   *
+   * ImportJob.import_method is required.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the KeyRing associated with the
+   *   ImportJobs.
+   * @param {string} request.importJobId
+   *   Required. It must be unique within a KeyRing and match the regular
+   *   expression `[a-zA-Z0-9_-]{1,63}`
+   * @param {Object} request.importJob
+   *   Required. An ImportJob with initial field values.
+   *
+   *   This object should have the same structure as [ImportJob]{@link google.cloud.kms.v1.ImportJob}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [ImportJob]{@link google.cloud.kms.v1.ImportJob}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ImportJob]{@link google.cloud.kms.v1.ImportJob}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.keyRingPath('[PROJECT]', '[LOCATION]', '[KEY_RING]');
+   * const importJobId = 'my-import-job';
+   * const importMethod = 'RSA_OAEP_3072_SHA1_AES_256';
+   * const protectionLevel = 'HSM';
+   * const importJob = {
+   *   importMethod: importMethod,
+   *   protectionLevel: protectionLevel,
+   * };
+   * const request = {
+   *   parent: formattedParent,
+   *   importJobId: importJobId,
+   *   importJob: importJob,
+   * };
+   * client.createImportJob(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createImportJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.createImportJob(request, options, callback);
+  }
+
+  /**
+   * Create a new CryptoKey within a KeyRing.
    *
    * CryptoKey.purpose and
    * CryptoKey.version_template.algorithm
@@ -1029,8 +1358,8 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the KeyRing
-   *   associated with the CryptoKeys.
+   *   Required. The name of the KeyRing associated with the
+   *   CryptoKeys.
    * @param {string} request.cryptoKeyId
    *   Required. It must be unique within a KeyRing and match the regular
    *   expression `[a-zA-Z0-9_-]{1,63}`
@@ -1038,6 +1367,12 @@ class KeyManagementServiceClient {
    *   A CryptoKey with initial field values.
    *
    *   This object should have the same structure as [CryptoKey]{@link google.cloud.kms.v1.CryptoKey}
+   * @param {boolean} [request.skipInitialVersionCreation]
+   *   If set to true, the request will create a CryptoKey without any
+   *   CryptoKeyVersions. You must manually call
+   *   CreateCryptoKeyVersion or
+   *   ImportCryptoKeyVersion
+   *   before you can use this CryptoKey.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1105,8 +1440,7 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Create a new CryptoKeyVersion in a
-   * CryptoKey.
+   * Create a new CryptoKeyVersion in a CryptoKey.
    *
    * The server will assign the next sequential id. If unset,
    * state will be set to
@@ -1115,12 +1449,10 @@ class KeyManagementServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the
-   *   CryptoKey associated with the
-   *   CryptoKeyVersions.
+   *   Required. The name of the CryptoKey associated with
+   *   the CryptoKeyVersions.
    * @param {Object} request.cryptoKeyVersion
-   *   A CryptoKeyVersion with initial
-   *   field values.
+   *   A CryptoKeyVersion with initial field values.
    *
    *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
    * @param {Object} [options]
@@ -1172,6 +1504,104 @@ class KeyManagementServiceClient {
     });
 
     return this._innerApiCalls.createCryptoKeyVersion(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Imports a new CryptoKeyVersion into an existing CryptoKey using the
+   * wrapped key material provided in the request.
+   *
+   * The version ID will be assigned the next sequential id within the
+   * CryptoKey.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the CryptoKey to
+   *   be imported into.
+   * @param {number} request.algorithm
+   *   Required. The algorithm of
+   *   the key being imported. This does not need to match the
+   *   version_template of the CryptoKey this
+   *   version imports into.
+   *
+   *   The number should be among the values of [CryptoKeyVersionAlgorithm]{@link google.cloud.kms.v1.CryptoKeyVersionAlgorithm}
+   * @param {string} request.importJob
+   *   Required. The name of the ImportJob that was used to
+   *   wrap this key material.
+   * @param {Buffer} [request.rsaAesWrappedKey]
+   *   Wrapped key material produced with
+   *   RSA_OAEP_3072_SHA1_AES_256
+   *   or
+   *   RSA_OAEP_4096_SHA1_AES_256.
+   *
+   *   This field contains the concatenation of two wrapped keys:
+   *   <ol>
+   *     <li>An ephemeral AES-256 wrapping key wrapped with the
+   *         public_key using RSAES-OAEP with SHA-1,
+   *         MGF1 with SHA-1, and an empty label.
+   *     </li>
+   *     <li>The key to be imported, wrapped with the ephemeral AES-256 key
+   *         using AES-KWP (RFC 5649).
+   *     </li>
+   *   </ol>
+   *
+   *   This format is the same as the format produced by PKCS#11 mechanism
+   *   CKM_RSA_AES_KEY_WRAP.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const kms = require('@google-cloud/kms');
+   *
+   * const client = new kms.v1.KeyManagementServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.cryptoKeyPath('[PROJECT]', '[LOCATION]', '[KEY_RING]', '[CRYPTO_KEY]');
+   * const algorithm = 'CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED';
+   * const importJob = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   algorithm: algorithm,
+   *   importJob: importJob,
+   * };
+   * client.importCryptoKeyVersion(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  importCryptoKeyVersion(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.importCryptoKeyVersion(
       request,
       options,
       callback
@@ -1243,24 +1673,18 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Update a CryptoKeyVersion's
-   * metadata.
+   * Update a CryptoKeyVersion's metadata.
    *
    * state may be changed between
-   * ENABLED
-   * and
-   * DISABLED
-   * using this method. See
-   * DestroyCryptoKeyVersion
-   * and
-   * RestoreCryptoKeyVersion
-   * to move between other states.
+   * ENABLED and
+   * DISABLED using this
+   * method. See DestroyCryptoKeyVersion and RestoreCryptoKeyVersion to
+   * move between other states.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.cryptoKeyVersion
-   *   CryptoKeyVersion with updated
-   *   values.
+   *   CryptoKeyVersion with updated values.
    *
    *   This object should have the same structure as [CryptoKeyVersion]{@link google.cloud.kms.v1.CryptoKeyVersion}
    * @param {Object} request.updateMask
@@ -1323,43 +1747,37 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Encrypts data, so that it can only be recovered by a call to
-   * Decrypt. The
-   * CryptoKey.purpose must be
+   * Encrypts data, so that it can only be recovered by a call to Decrypt.
+   * The CryptoKey.purpose must be
    * ENCRYPT_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the
-   *   CryptoKey or
-   *   CryptoKeyVersion to use for
-   *   encryption.
+   *   Required. The resource name of the CryptoKey or CryptoKeyVersion
+   *   to use for encryption.
    *
-   *   If a CryptoKey is specified, the server
-   *   will use its primary version.
+   *   If a CryptoKey is specified, the server will use its
+   *   primary version.
    * @param {Buffer} request.plaintext
    *   Required. The data to encrypt. Must be no larger than 64KiB.
    *
    *   The maximum size depends on the key version's
-   *   protection_level.
-   *   For SOFTWARE keys, the
-   *   plaintext must be no larger than 64KiB. For
-   *   HSM keys, the combined length of
-   *   the plaintext and additional_authenticated_data fields must be no larger
-   *   than 8KiB.
+   *   protection_level. For
+   *   SOFTWARE keys, the plaintext must be no larger
+   *   than 64KiB. For HSM keys, the combined length of the
+   *   plaintext and additional_authenticated_data fields must be no larger than
+   *   8KiB.
    * @param {Buffer} [request.additionalAuthenticatedData]
    *   Optional data that, if specified, must also be provided during decryption
-   *   through
-   *   DecryptRequest.additional_authenticated_data.
+   *   through DecryptRequest.additional_authenticated_data.
    *
    *   The maximum size depends on the key version's
-   *   protection_level.
-   *   For SOFTWARE keys, the AAD
-   *   must be no larger than 64KiB. For
-   *   HSM keys, the combined length of
-   *   the plaintext and additional_authenticated_data fields must be no larger
-   *   than 8KiB.
+   *   protection_level. For
+   *   SOFTWARE keys, the AAD must be no larger than
+   *   64KiB. For HSM keys, the combined length of the
+   *   plaintext and additional_authenticated_data fields must be no larger than
+   *   8KiB.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1412,17 +1830,14 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Decrypts data that was protected by
-   * Encrypt. The
-   * CryptoKey.purpose must be
-   * ENCRYPT_DECRYPT.
+   * Decrypts data that was protected by Encrypt. The CryptoKey.purpose
+   * must be ENCRYPT_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the
-   *   CryptoKey to use for decryption. The
-   *   server will choose the appropriate version.
+   *   Required. The resource name of the CryptoKey to use for decryption.
+   *   The server will choose the appropriate version.
    * @param {Buffer} request.ciphertext
    *   Required. The encrypted data originally returned in
    *   EncryptResponse.ciphertext.
@@ -1481,20 +1896,16 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Update the version of a CryptoKey that
-   * will be used in
-   * Encrypt.
+   * Update the version of a CryptoKey that will be used in Encrypt.
    *
    * Returns an error if called on an asymmetric key.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the CryptoKey to
-   *   update.
+   *   The resource name of the CryptoKey to update.
    * @param {string} request.cryptoKeyVersionId
-   *   The id of the child
-   *   CryptoKeyVersion to use as primary.
+   *   The id of the child CryptoKeyVersion to use as primary.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1551,30 +1962,23 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Schedule a CryptoKeyVersion for
-   * destruction.
+   * Schedule a CryptoKeyVersion for destruction.
    *
-   * Upon calling this method,
-   * CryptoKeyVersion.state will
-   * be set to
+   * Upon calling this method, CryptoKeyVersion.state will be set to
    * DESTROY_SCHEDULED
-   * and destroy_time will
-   * be set to a time 24 hours in the future, at which point the
-   * state will be changed to
-   * DESTROYED,
-   * and the key material will be irrevocably destroyed.
+   * and destroy_time will be set to a time 24
+   * hours in the future, at which point the state
+   * will be changed to
+   * DESTROYED, and the key
+   * material will be irrevocably destroyed.
    *
-   * Before the
-   * destroy_time is
-   * reached,
-   * RestoreCryptoKeyVersion
-   * may be called to reverse the process.
+   * Before the destroy_time is reached,
+   * RestoreCryptoKeyVersion may be called to reverse the process.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the
-   *   CryptoKeyVersion to destroy.
+   *   The resource name of the CryptoKeyVersion to destroy.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1630,17 +2034,14 @@ class KeyManagementServiceClient {
    * DESTROY_SCHEDULED
    * state.
    *
-   * Upon restoration of the CryptoKeyVersion,
-   * state will be set to
-   * DISABLED,
-   * and destroy_time will
-   * be cleared.
+   * Upon restoration of the CryptoKeyVersion, state
+   * will be set to DISABLED,
+   * and destroy_time will be cleared.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The resource name of the
-   *   CryptoKeyVersion to restore.
+   *   The resource name of the CryptoKeyVersion to restore.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1692,18 +2093,16 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Returns the public key for the given
-   * CryptoKeyVersion. The
+   * Returns the public key for the given CryptoKeyVersion. The
    * CryptoKey.purpose must be
-   * ASYMMETRIC_SIGN
-   * or
+   * ASYMMETRIC_SIGN or
    * ASYMMETRIC_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The name of the
-   *   CryptoKeyVersion public key to get.
+   *   The name of the CryptoKeyVersion public key to
+   *   get.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1752,21 +2151,17 @@ class KeyManagementServiceClient {
 
   /**
    * Decrypts data that was encrypted with a public key retrieved from
-   * GetPublicKey
-   * corresponding to a CryptoKeyVersion
-   * with CryptoKey.purpose
-   * ASYMMETRIC_DECRYPT.
+   * GetPublicKey corresponding to a CryptoKeyVersion with
+   * CryptoKey.purpose ASYMMETRIC_DECRYPT.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the
-   *   CryptoKeyVersion to use for
+   *   Required. The resource name of the CryptoKeyVersion to use for
    *   decryption.
    * @param {Buffer} request.ciphertext
-   *   Required. The data encrypted with the named
-   *   CryptoKeyVersion's public key using
-   *   OAEP.
+   *   Required. The data encrypted with the named CryptoKeyVersion's public
+   *   key using OAEP.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1819,18 +2214,14 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Signs data using a CryptoKeyVersion
-   * with CryptoKey.purpose
+   * Signs data using a CryptoKeyVersion with CryptoKey.purpose
    * ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-   * key retrieved from
-   * GetPublicKey.
+   * key retrieved from GetPublicKey.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the
-   *   CryptoKeyVersion to use for
-   *   signing.
+   *   Required. The resource name of the CryptoKeyVersion to use for signing.
    * @param {Object} request.digest
    *   Required. The digest of the data to sign. The digest must be produced with
    *   the same digest algorithm as specified by the key version's
@@ -1889,8 +2280,8 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Sets the access control policy on the specified resource. Replaces any
-   * existing policy.
+   * Sets the access control policy on the specified resource. Replaces
+   * any existing policy.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1956,9 +2347,8 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Gets the access control policy for a resource.
-   * Returns an empty policy if the resource exists and does not have a policy
-   * set.
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2012,13 +2402,13 @@ class KeyManagementServiceClient {
   }
 
   /**
-   * Returns permissions that a caller has on the specified resource.
-   * If the resource does not exist, this will return an empty set of
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
    * permissions, not a NOT_FOUND error.
    *
-   * Note: This operation is designed to be used for building permission-aware
-   * UIs and command-line tools, not for authorization checking. This operation
-   * may "fail open" without warning.
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2144,6 +2534,24 @@ class KeyManagementServiceClient {
       key_ring: keyRing,
       crypto_key: cryptoKey,
       crypto_key_version: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Return a fully-qualified import_job resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} keyRing
+   * @param {String} importJob
+   * @returns {String}
+   */
+  importJobPath(project, location, keyRing, importJob) {
+    return this._pathTemplates.importJobPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      import_job: importJob,
     });
   }
 
@@ -2340,6 +2748,54 @@ class KeyManagementServiceClient {
     return this._pathTemplates.cryptoKeyVersionPathTemplate.match(
       cryptoKeyVersionName
     ).crypto_key_version;
+  }
+
+  /**
+   * Parse the importJobName from a import_job resource.
+   *
+   * @param {String} importJobName
+   *   A fully-qualified path representing a import_job resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromImportJobName(importJobName) {
+    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+      .project;
+  }
+
+  /**
+   * Parse the importJobName from a import_job resource.
+   *
+   * @param {String} importJobName
+   *   A fully-qualified path representing a import_job resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromImportJobName(importJobName) {
+    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+      .location;
+  }
+
+  /**
+   * Parse the importJobName from a import_job resource.
+   *
+   * @param {String} importJobName
+   *   A fully-qualified path representing a import_job resources.
+   * @returns {String} - A string representing the key_ring.
+   */
+  matchKeyRingFromImportJobName(importJobName) {
+    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the importJobName from a import_job resource.
+   *
+   * @param {String} importJobName
+   *   A fully-qualified path representing a import_job resources.
+   * @returns {String} - A string representing the import_job.
+   */
+  matchImportJobFromImportJobName(importJobName) {
+    return this._pathTemplates.importJobPathTemplate.match(importJobName)
+      .import_job;
   }
 
   /**
