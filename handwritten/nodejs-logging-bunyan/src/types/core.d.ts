@@ -71,6 +71,11 @@ export interface Options {
    */
   // TODO: address the correct type of promise.
   promise?: {}
+  /**
+   * The host name of the service to send requests.
+   * Defaults to `logging.googleapis.com`.
+   */
+  apiEndpoint?: string;
 }
 
 export interface MonitoredResource {
