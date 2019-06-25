@@ -89,7 +89,7 @@ function generateReadme (repoMetadata) {
 
   let partial = '';
   libraries.forEach((lib) => {
-    partial += `| [${lib.name_pretty}](https://github.com/${lib.repo}) | \`npm i ${lib.distribution_name}\` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=${lib.api_id}) | ${lib.requires_billing ? figures.cross : figures.tick} |\n`;
+    partial += `| [${lib.name_pretty}](https://github.com/${lib.repo}) | [:notebook:](${lib.client_documentation}) | \`npm i ${lib.distribution_name}\` | [enable](https://console.cloud.google.com/flows/enableapi?apiid=${lib.api_id}) | ${lib.requires_billing ? figures.cross : figures.tick} |\n`;
   });
 
   writeFileSync('./README.md', template.replace('{{libraries}}', partial), 'utf8');
