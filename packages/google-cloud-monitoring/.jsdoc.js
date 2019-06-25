@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/monitoring',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
