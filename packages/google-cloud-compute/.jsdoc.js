@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/compute',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
