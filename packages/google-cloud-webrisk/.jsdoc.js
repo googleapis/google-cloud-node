@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/web-risk',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
