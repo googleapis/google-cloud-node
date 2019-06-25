@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/security-center',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
