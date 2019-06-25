@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: 'dialogflow',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
