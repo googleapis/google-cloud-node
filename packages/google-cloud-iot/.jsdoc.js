@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/iot',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
