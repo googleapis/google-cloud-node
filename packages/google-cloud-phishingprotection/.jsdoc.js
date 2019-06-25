@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/phishing-protection',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
