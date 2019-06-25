@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/kms',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
