@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/dlp',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
