@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/redis',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
