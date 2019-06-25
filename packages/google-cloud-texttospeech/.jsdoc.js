@@ -41,5 +41,8 @@ module.exports = {
     sourceFiles: false,
     systemName: '@google-cloud/text-to-speech',
     theme: 'lumen'
+  },
+  markdown: {
+    idInHeadings: true
   }
 };
