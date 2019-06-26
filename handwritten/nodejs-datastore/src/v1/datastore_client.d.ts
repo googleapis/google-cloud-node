@@ -268,7 +268,7 @@ declare namespace DatastoreClient {
   }
 
   interface Query {
-    pojection: Projection[];
+    projection: Projection[];
     kind: KindExpression[];
     filter?: Filter;
     order: PropertyOrder[];
