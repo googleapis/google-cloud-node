@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.1...v2.1.2) (2019-06-26)
+
+
+### Bug Fixes
+
+* changes to default values in vulnerability.proto ([de6dcda](https://www.github.com/googleapis/nodejs-grafeas/commit/de6dcda))
+* **docs:** link to reference docs section on googleapis.dev ([#23](https://www.github.com/googleapis/nodejs-grafeas/issues/23)) ([4e8f852](https://www.github.com/googleapis/nodejs-grafeas/commit/4e8f852))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.0...v2.1.1) (2019-06-19)
 
 
