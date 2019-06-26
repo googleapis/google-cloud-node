@@ -14,7 +14,7 @@
     "test": "mocha --timeout=600000"
   },
   "dependencies": {
-    "@google-cloud/error-reporting": "^1.1.0",
+    "@google-cloud/error-reporting": "^1.1.1",
     "express": "^4.16.3"
   },
   "devDependencies": {
