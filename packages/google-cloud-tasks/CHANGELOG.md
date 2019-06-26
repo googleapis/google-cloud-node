@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-tasks/compare/v1.1.1...v1.1.2) (2019-06-26)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#250](https://www.github.com/googleapis/nodejs-tasks/issues/250)) ([a35d76c](https://www.github.com/googleapis/nodejs-tasks/commit/a35d76c))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.1.0...v1.1.1) (2019-06-14)
 
 
