@@ -14,7 +14,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "@google-cloud/os-login": "^1.1.1"
+    "@google-cloud/os-login": "^1.1.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
