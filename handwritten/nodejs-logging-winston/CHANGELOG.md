@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-logging-winston/compare/v1.1.0...v1.1.1) (2019-06-26)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#356](https://www.github.com/googleapis/nodejs-logging-winston/issues/356)) ([9deaea3](https://www.github.com/googleapis/nodejs-logging-winston/commit/9deaea3))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v1.0.1...v1.1.0) (2019-06-21)
 
 
