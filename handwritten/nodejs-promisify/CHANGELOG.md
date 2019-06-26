@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.1...v1.0.2) (2019-06-26)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#128](https://www.github.com/googleapis/nodejs-promisify/issues/128)) ([5a8bd90](https://www.github.com/googleapis/nodejs-promisify/commit/5a8bd90))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-promisify/compare/v1.0.0...v1.0.1) (2019-06-14)
 
 
