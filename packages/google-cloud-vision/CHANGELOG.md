@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-vision/compare/v1.1.2...v1.1.3) (2019-06-26)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#406](https://www.github.com/googleapis/nodejs-vision/issues/406)) ([fa2fb3f](https://www.github.com/googleapis/nodejs-vision/commit/fa2fb3f))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-vision/compare/v1.1.1...v1.1.2) (2019-06-15)
 
 
