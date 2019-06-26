@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.2.0...v2.2.1) (2019-06-26)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#266](https://www.github.com/googleapis/nodejs-video-intelligence/issues/266)) ([f992de6](https://www.github.com/googleapis/nodejs-video-intelligence/commit/f992de6))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.1.2...v2.2.0) (2019-06-20)
 
 
