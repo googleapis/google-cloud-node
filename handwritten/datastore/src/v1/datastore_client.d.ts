@@ -15,7 +15,7 @@
  */
 
 import {CallOptions, GrpcClientOptions} from 'google-gax';
-import {ServiceError} from 'grpc';
+import {ServiceError} from '@grpc/grpc-js';
 import {common as protobuf} from 'protobufjs';
 
 declare class DatastoreClient {
