@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.2...v1.1.3) (2019-06-26)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#210](https://www.github.com/googleapis/nodejs-cloud-container/issues/210)) ([cd81c9c](https://www.github.com/googleapis/nodejs-cloud-container/commit/cd81c9c))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.1...v1.1.2) (2019-06-21)
 
 
