@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-paginator/compare/v1.0.1...v1.0.2) (2019-06-26)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#132](https://www.github.com/googleapis/nodejs-paginator/issues/132)) ([be231be](https://www.github.com/googleapis/nodejs-paginator/commit/be231be))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-paginator/compare/v1.0.0...v1.0.1) (2019-06-14)
 
 
