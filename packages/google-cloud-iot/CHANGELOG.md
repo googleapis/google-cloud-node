@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-iot/compare/v1.1.1...v1.1.2) (2019-06-27)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#179](https://www.github.com/googleapis/nodejs-iot/issues/179)) ([ce86dba](https://www.github.com/googleapis/nodejs-iot/commit/ce86dba))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-iot/compare/v1.1.0...v1.1.1) (2019-06-14)
 
 
