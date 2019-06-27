@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-kms/compare/v1.2.0...v1.2.1) (2019-06-27)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#183](https://www.github.com/googleapis/nodejs-kms/issues/183)) ([7c40adf](https://www.github.com/googleapis/nodejs-kms/commit/7c40adf))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.1.1...v1.2.0) (2019-06-24)
 
 
