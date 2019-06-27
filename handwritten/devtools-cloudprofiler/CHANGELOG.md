@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## v2.0.2
+
+06-26-2019 08:59 PDT
+
+### Dependencies
+- chore(deps): update dependency typescript to ~3.5.0 ([#498](https://github.com/googleapis/cloud-profiler-nodejs/pull/498))
+- chore(deps): update dependency js-green-licenses to v1 ([#503](https://github.com/googleapis/cloud-profiler-nodejs/pull/503))
+- chore(deps): update sinon and @types/sinon ([#504](https://github.com/googleapis/cloud-profiler-nodejs/pull/504))
+- fix(deps): update dependency pprof to v1 ([#487](https://github.com/googleapis/cloud-profiler-nodejs/pull/487))
+
+### Documentation
+- fix(docs): make anchors work in jsdoc ([#513](https://github.com/googleapis/cloud-profiler-nodejs/pull/513))
+- docs: add repo-metadata for docs ([#511](https://github.com/googleapis/cloud-profiler-nodejs/pull/511))
+
+### Internal / Testing Changes
+- build: switch to GitHub magic proxy ([#510](https://github.com/googleapis/cloud-profiler-nodejs/pull/510))
+- build: set correct src path for template ([#508](https://github.com/googleapis/cloud-profiler-nodejs/pull/508))
+- build: use standard kokoro configuration ([#502](https://github.com/googleapis/cloud-profiler-nodejs/pull/502))
+- chore: run gts fix ([#506](https://github.com/googleapis/cloud-profiler-nodejs/pull/506))
+- build: share some code for E2E tests ([#505](https://github.com/googleapis/cloud-profiler-nodejs/pull/505))
+- build: don't run test scripts in verbose mode ([#501](https://github.com/googleapis/cloud-profiler-nodejs/pull/501))
+- build: ignore proto files in test coverage ([#497](https://github.com/googleapis/cloud-profiler-nodejs/pull/497))
+
 ## v2.0.1
 
 05-23-2019 13:08 PDT
