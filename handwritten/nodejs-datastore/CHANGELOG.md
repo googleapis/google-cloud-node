@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [4.1.3](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.2...v4.1.3) (2019-06-27)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#444](https://www.github.com/googleapis/nodejs-datastore/issues/444)) ([0fd5492](https://www.github.com/googleapis/nodejs-datastore/commit/0fd5492))
+* **typescript:** grpc->[@grpc-js](https://www.github.com/grpc-js) ([#446](https://www.github.com/googleapis/nodejs-datastore/issues/446)) ([d8a8c81](https://www.github.com/googleapis/nodejs-datastore/commit/d8a8c81))
+* **typescript:** query pojection -> projection ([#445](https://www.github.com/googleapis/nodejs-datastore/issues/445)) ([32b6311](https://www.github.com/googleapis/nodejs-datastore/commit/32b6311))
+
 ### [4.1.2](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.1...v4.1.2) (2019-06-20)
 
 
