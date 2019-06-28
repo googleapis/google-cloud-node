@@ -34,7 +34,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "jsdoc": "^3.6.2",
     "jsdoc-baseline": "^0.1.0",
-    "linkinator": "^1.4.2",
+    "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
     "power-assert": "^1.6.1",
     "prettier": "^1.17.1"
@@ -46,7 +46,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/ --timeout 600000",
     "fix": "eslint '**/*.js' --fix",
-    "docs-test": "linkinator docs -r",
+    "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
   },
   "license": "Apache-2.0",
