@@ -47,7 +47,7 @@
     "lint": "eslint .",
     "test": "c8 mocha test/*.js",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs -r --skip 'github.com/googleapis/nodejs-phishing-protection/blob/master/samples/quickstart.js|github.com/googleapis/nodejs-phishing-protection/tree/master/samples|www.npmjs.org/package/@google-cloud/phishing-protection|googleapis.dev/nodejs/phishing-protection/latest/index.html'",
+    "docs-test": "linkinator docs",
     "samples-test": "c8 mocha samples/test/*.js",
     "system-test": "c8 mocha --timeout=5000 system-test/*.js"
   },
