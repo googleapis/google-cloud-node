@@ -47,7 +47,7 @@
     "lint": "eslint .",
     "test": "c8 mocha test/*.js",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs -r --skip 'www.npmjs.org/package/@google-cloud/web-risk|cloud.google.com/nodejs/docs/reference/web-risk/latest/'",
+    "docs-test": "linkinator docs",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ..",
     "system-test": "mocha --timeout=5000 system-test/*.js"
   },
