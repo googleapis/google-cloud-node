@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.0.2...v1.1.0) (2019-06-28)
+
+
+### Features
+
+* batch operation support ([#69](https://www.github.com/googleapis/nodejs-talent/issues/69)) ([9c76a71](https://www.github.com/googleapis/nodejs-talent/commit/9c76a71))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-talent/compare/v1.0.1...v1.0.2) (2019-06-26)
 
 
