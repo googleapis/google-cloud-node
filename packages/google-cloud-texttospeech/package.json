@@ -33,7 +33,7 @@
     "system-test": "mocha system-test",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "eslint --fix '**/*.js'",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -52,6 +52,6 @@
     "nyc": "^14.0.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.11.1",
-    "linkinator": "^1.1.2"
+    "linkinator": "^1.5.0"
   }
 }
