@@ -47,7 +47,7 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -77,7 +77,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "gts": "^1.0.0",
     "intelli-espower-loader": "^1.0.1",
-    "linkinator": "^1.4.3",
+    "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "post-install-check": "0.0.1",
