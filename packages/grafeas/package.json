@@ -46,7 +46,7 @@
     "lint": "eslint .",
     "test": "c8 mocha test/*.js",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs -r --skip 'github.com/googleapis/nodejs-grafeas/blob/master/samples/quickstart.js|github.com/googleapis/nodejs-grafeas/tree/master/samples|www.npmjs.org/package/@google-cloud/grafeas|googleapis.dev/nodejs/grafeas/latest/index.html'",
+    "docs-test": "linkinator docs",
     "samples-test": "c8 mocha samples/test/*.js",
     "system-test": "c8 mocha --timeout=15000 system-test/*.js"
   },
