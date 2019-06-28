@@ -154,17 +154,17 @@ export function nodeVersionOkay(version: string | SemVer): boolean {
  * needed. Returns a profiler if creation is successful. Otherwise, returns
  * rejected promise.
  */
-export async function createProfiler(config: Config): Promise<Profiler> {
+export async function createProfiler(config: Config = {}): Promise<Profiler> {
   if (!nodeVersionOkay(process.version)) {
     throw new Error(
       `Could not start profiler: node version ${process.version}` +
         ` does not satisfies "${pjson.engines.node}"` +
-        '\nSee https://github.com/GoogleCloudPlatform/cloud-profiler-nodejs#prerequisites' +
+        '\nSee https://github.com/googleapis/cloud-profiler-nodejs#prerequisites' +
         ' for details.'
     );
   }
 
-  let profilerConfig: ProfilerConfig = initConfigLocal(config);
+  let profilerConfig = initConfigLocal(config);
 
   // Start the heap profiler if profiler config does not indicate heap profiling
   // is disabled. This must be done before any asynchronous calls are made so

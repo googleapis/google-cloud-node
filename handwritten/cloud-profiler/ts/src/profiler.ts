@@ -280,14 +280,17 @@ export class Profiler extends ServiceObject {
   private profileTypes: string[];
   private retryer: Retryer;
   private sourceMapper: SourceMapper | undefined;
+  private baseApiUrl: string;
 
   // Public for testing.
   config: ProfilerConfig;
 
   constructor(config: ProfilerConfig) {
     config = config || ({} as ProfilerConfig);
+    const baseApiUrl = `https://${config.apiEndpoint}/v2`;
     const serviceConfig: ServiceConfig = {
-      baseUrl: config.baseApiUrl,
+      apiEndpoint: config.apiEndpoint,
+      baseUrl: baseApiUrl,
       scopes: [SCOPE],
       packageJson: pjson,
     };
@@ -296,6 +299,7 @@ export class Profiler extends ServiceObject {
       baseUrl: '/',
     });
     this.config = config;
+    this.baseApiUrl = baseApiUrl;
 
     this.logger = createLogger(this.config.logLevel);
 
@@ -471,7 +475,7 @@ export class Profiler extends ServiceObject {
     }
     const options = {
       method: 'PATCH',
-      uri: this.config.baseApiUrl + '/' + prof.name,
+      uri: this.baseApiUrl + '/' + prof.name,
       body: prof,
       json: true,
     };
