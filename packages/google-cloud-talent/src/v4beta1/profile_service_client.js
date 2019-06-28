@@ -56,14 +56,18 @@ class ProfileServiceClient {
    *     API remote host.
    */
   constructor(opts) {
+    opts = opts || {};
     this._descriptors = {};
+
+    const servicePath =
+      opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
     // Ensure that options include the service address and port.
     opts = Object.assign(
       {
         clientConfig: {},
         port: this.constructor.port,
-        servicePath: this.constructor.servicePath,
+        servicePath,
       },
       opts
     );
@@ -174,6 +178,14 @@ class ProfileServiceClient {
    * The DNS address for this API service.
    */
   static get servicePath() {
+    return 'jobs.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service - same as servicePath(),
+   * exists for compatibility reasons.
+   */
+  static get apiEndpoint() {
     return 'jobs.googleapis.com';
   }
 
@@ -674,7 +686,9 @@ class ProfileServiceClient {
    * For example, search by raw queries "software engineer in Mountain View" or
    * search by structured filters (location filter, education filter, etc.).
    *
-   * See SearchProfilesRequest for more information.
+   * See
+   * SearchProfilesRequest
+   * for more information.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -696,7 +710,8 @@ class ProfileServiceClient {
    * @param {Object} [request.profileQuery]
    *   Optional.
    *
-   *   Search query to execute. See ProfileQuery for more details.
+   *   Search query to execute. See
+   *   ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
    * @param {number} [request.pageSize]
@@ -709,7 +724,9 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   An integer that specifies the current offset (that is, starting result) in
-   *   search results. This field is only considered if page_token is unset.
+   *   search results. This field is only considered if
+   *   page_token
+   *   is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -733,18 +750,28 @@ class ProfileServiceClient {
    *
    *   * "relevance desc": By descending relevance, as determined by the API
    *      algorithms.
-   *   * "update_date desc": Sort by Profile.update_date in descending order
+   *   * "update_time desc": Sort by
+   *   Profile.update_time in
+   *   descending order
    *     (recently updated profiles first).
-   *   * "create_date desc": Sort by Profile.create_date in descending order
+   *   * "create_time desc": Sort by
+   *   Profile.create_time in
+   *   descending order
    *     (recently created profiles first).
-   *   * "first_name": Sort by PersonStrcuturedName.given_name in ascending
-   *     order.
-   *   * "first_name desc": Sort by PersonStrcuturedName.given_name in
-   *     descending order.
-   *   * "last_name": Sort by PersonStrcuturedName.family_name in ascending
-   *     order.
-   *   * "last_name desc": Sort by PersonStrcuturedName.family_name in
+   *   * "first_name": Sort by
+   *   PersonName.PersonStructuredName.given_name
+   *   in
    *     ascending order.
+   *   * "first_name desc": Sort by
+   *   PersonName.PersonStructuredName.given_name
+   *     in descending order.
+   *   * "last_name": Sort by
+   *   PersonName.PersonStructuredName.family_name
+   *   in
+   *     ascending order.
+   *   * "last_name desc": Sort by
+   *   PersonName.PersonStructuredName.family_name
+   *     in ascending order.
    * @param {boolean} [request.caseSensitiveSort]
    *   Optional.
    *
@@ -755,7 +782,8 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   A list of expressions specifies histogram requests against matching
-   *   profiles for SearchProfilesRequest.
+   *   profiles for
+   *   SearchProfilesRequest.
    *
    *   The expression syntax looks like a function definition with optional
    *   parameters.
@@ -808,13 +836,19 @@ class ProfileServiceClient {
    *   * experience_in_months: experience in months. 0 means 0 month to 1 month
    *   (exclusive).
    *   * application_date: The application date specifies application start dates.
-   *   See [ApplicationDateFilter for more details.
+   *   See
+   *   [ApplicationDateFilter
+   *   for more details.
    *   * application_outcome_notes: The application outcome reason specifies the
    *   reasons behind the outcome of the job application.
-   *   See ApplicationOutcomeNotesFilter for more details.
+   *   See
+   *   ApplicationOutcomeNotesFilter
+   *   for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
-   *   See ApplicationJobFilter for more details.
+   *   See
+   *   ApplicationJobFilter
+   *   for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].
@@ -962,7 +996,8 @@ class ProfileServiceClient {
    * @param {Object} [request.profileQuery]
    *   Optional.
    *
-   *   Search query to execute. See ProfileQuery for more details.
+   *   Search query to execute. See
+   *   ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
    * @param {number} [request.pageSize]
@@ -975,7 +1010,9 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   An integer that specifies the current offset (that is, starting result) in
-   *   search results. This field is only considered if page_token is unset.
+   *   search results. This field is only considered if
+   *   page_token
+   *   is unset.
    *
    *   The maximum allowed value is 5000. Otherwise an error is thrown.
    *
@@ -999,18 +1036,28 @@ class ProfileServiceClient {
    *
    *   * "relevance desc": By descending relevance, as determined by the API
    *      algorithms.
-   *   * "update_date desc": Sort by Profile.update_date in descending order
+   *   * "update_time desc": Sort by
+   *   Profile.update_time in
+   *   descending order
    *     (recently updated profiles first).
-   *   * "create_date desc": Sort by Profile.create_date in descending order
+   *   * "create_time desc": Sort by
+   *   Profile.create_time in
+   *   descending order
    *     (recently created profiles first).
-   *   * "first_name": Sort by PersonStrcuturedName.given_name in ascending
-   *     order.
-   *   * "first_name desc": Sort by PersonStrcuturedName.given_name in
-   *     descending order.
-   *   * "last_name": Sort by PersonStrcuturedName.family_name in ascending
-   *     order.
-   *   * "last_name desc": Sort by PersonStrcuturedName.family_name in
+   *   * "first_name": Sort by
+   *   PersonName.PersonStructuredName.given_name
+   *   in
    *     ascending order.
+   *   * "first_name desc": Sort by
+   *   PersonName.PersonStructuredName.given_name
+   *     in descending order.
+   *   * "last_name": Sort by
+   *   PersonName.PersonStructuredName.family_name
+   *   in
+   *     ascending order.
+   *   * "last_name desc": Sort by
+   *   PersonName.PersonStructuredName.family_name
+   *     in ascending order.
    * @param {boolean} [request.caseSensitiveSort]
    *   Optional.
    *
@@ -1021,7 +1068,8 @@ class ProfileServiceClient {
    *   Optional.
    *
    *   A list of expressions specifies histogram requests against matching
-   *   profiles for SearchProfilesRequest.
+   *   profiles for
+   *   SearchProfilesRequest.
    *
    *   The expression syntax looks like a function definition with optional
    *   parameters.
@@ -1074,13 +1122,19 @@ class ProfileServiceClient {
    *   * experience_in_months: experience in months. 0 means 0 month to 1 month
    *   (exclusive).
    *   * application_date: The application date specifies application start dates.
-   *   See [ApplicationDateFilter for more details.
+   *   See
+   *   [ApplicationDateFilter
+   *   for more details.
    *   * application_outcome_notes: The application outcome reason specifies the
    *   reasons behind the outcome of the job application.
-   *   See ApplicationOutcomeNotesFilter for more details.
+   *   See
+   *   ApplicationOutcomeNotesFilter
+   *   for more details.
    *   * application_job_title: The application job title specifies the job
    *   applied for in the application.
-   *   See ApplicationJobFilter for more details.
+   *   See
+   *   ApplicationJobFilter
+   *   for more details.
    *   * hirable_status: Hirable status specifies the profile's hirable status.
    *   * string_custom_attribute: String custom attributes. Values can be accessed
    *   via square bracket notation like string_custom_attribute["key1"].

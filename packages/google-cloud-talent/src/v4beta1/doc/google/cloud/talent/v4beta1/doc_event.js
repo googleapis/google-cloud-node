@@ -23,7 +23,7 @@
  * with other calls, such as job searches, issued to the service by the client.
  *
  * @property {string} requestId
- *   Required.
+ *   Optional but highly recommended.
  *
  *   A unique ID generated in the API responses. It can be found in
  *   ResponseMetadata.request_id.
@@ -73,18 +73,35 @@ const ClientEvent = {
  * @property {number} type
  *   Required.
  *
- *   The type of the event (see JobEventType).
+ *   The type of the event (see
+ *   JobEventType).
  *
  *   The number should be among the values of [JobEventType]{@link google.cloud.talent.v4beta1.JobEventType}
  *
  * @property {string[]} jobs
  *   Required.
  *
- *   The job name(s) associated with this event.
- *   For example, if this is an impression event,
- *   this field contains the identifiers of all jobs shown to the job seeker.
- *   If this was a view event, this field contains the
- *   identifier of the viewed job.
+ *   The job name(s) associated with
+ *   this event. For example, if this is an
+ *   impression
+ *   event, this field contains the identifiers of all jobs shown to the job
+ *   seeker. If this was a
+ *   view event, this
+ *   field contains the identifier of the viewed job.
+ *
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+ *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+ *
+ * @property {string} profile
+ *   Optional.
+ *
+ *   The profile name associated
+ *   with this client event.
+ *
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+ *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
  *
  * @typedef JobEvent
  * @memberof google.cloud.talent.v4beta1
@@ -148,7 +165,9 @@ const JobEvent = {
      * submitted an application for a job with a single click without
      * entering information. If a job seeker performs this action, send only
      * this event to the service. Do not also send
-     * JobEventType.APPLICATION_START or JobEventType.APPLICATION_FINISH
+     * JobEventType.APPLICATION_START
+     * or
+     * JobEventType.APPLICATION_FINISH
      * events.
      */
     APPLICATION_QUICK_SUBMISSION: 6,
@@ -174,8 +193,12 @@ const JobEvent = {
      * (without viewing the details of the job posting), and is redirected
      * to a different website to complete the application. If a candidate
      * performs this action, send only this event to the service. Do not also
-     * send JobEventType.APPLICATION_START,
-     * JobEventType.APPLICATION_FINISH or JobEventType.VIEW events.
+     * send
+     * JobEventType.APPLICATION_START,
+     * JobEventType.APPLICATION_FINISH
+     * or
+     * JobEventType.VIEW
+     * events.
      */
     APPLICATION_REDIRECT_FROM_SEARCH: 9,
 
@@ -222,13 +245,7 @@ const JobEvent = {
      * part of an application that was initiated by a search conducted through /
      * recommendation provided by the Cloud Talent Solution service.
      */
-    INTERVIEW_GRANTED: 15,
-
-    /**
-     * The job seeker or other entity interacting with the service showed
-     * no interest in the job.
-     */
-    NOT_INTERESTED: 16
+    INTERVIEW_GRANTED: 15
   }
 };
 
@@ -246,16 +263,22 @@ const JobEvent = {
  * @property {string[]} profiles
  *   Required.
  *
- *   The profile name(s) associated with this client event.
+ *   The profile name(s) associated
+ *   with this client event.
+ *
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
+ *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
  *
  * @property {string[]} jobs
  *   Optional.
  *
- *   The job ID associated with this client event if there is one. Leave it
- *   empty if the event isn't associated with a job.
+ *   The job name(s) associated with
+ *   this client event. Leave it empty if the event isn't associated with a job.
  *
- *   The job ID should be consistent with the
- *   JobApplication.job.requisition_id in the profile.
+ *   The format is
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
+ *   example, "projects/api-test-project/tenants/foo/jobs/1234".
  *
  * @typedef ProfileEvent
  * @memberof google.cloud.talent.v4beta1

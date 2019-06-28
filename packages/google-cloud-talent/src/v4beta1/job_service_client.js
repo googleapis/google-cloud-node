@@ -17,6 +17,7 @@
 const gapicConfig = require('./job_service_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
+const protobuf = require('protobufjs');
 
 const VERSION = require('../../package.json').version;
 
@@ -55,14 +56,18 @@ class JobServiceClient {
    *     API remote host.
    */
   constructor(opts) {
+    opts = opts || {};
     this._descriptors = {};
+
+    const servicePath =
+      opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
     // Ensure that options include the service address and port.
     opts = Object.assign(
       {
         clientConfig: {},
         port: this.constructor.port,
-        servicePath: this.constructor.servicePath,
+        servicePath,
       },
       opts
     );
@@ -123,6 +128,51 @@ class JobServiceClient {
         'matchingJobs'
       ),
     };
+    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
+    protoFilesRoot = protobuf.loadSync(
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        'protos',
+        'google/cloud/talent/v4beta1/job_service.proto'
+      ),
+      protoFilesRoot
+    );
+
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    this.operationsClient = new gax.lro({
+      auth: gaxGrpc.auth,
+      grpc: gaxGrpc.grpc,
+    }).operationsClient(opts);
+
+    const batchCreateJobsResponse = protoFilesRoot.lookup(
+      'google.cloud.talent.v4beta1.JobOperationResult'
+    );
+    const batchCreateJobsMetadata = protoFilesRoot.lookup(
+      'google.cloud.talent.v4beta1.BatchOperationMetadata'
+    );
+    const batchUpdateJobsResponse = protoFilesRoot.lookup(
+      'google.cloud.talent.v4beta1.JobOperationResult'
+    );
+    const batchUpdateJobsMetadata = protoFilesRoot.lookup(
+      'google.cloud.talent.v4beta1.BatchOperationMetadata'
+    );
+
+    this._descriptors.longrunning = {
+      batchCreateJobs: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        batchCreateJobsResponse.decode.bind(batchCreateJobsResponse),
+        batchCreateJobsMetadata.decode.bind(batchCreateJobsMetadata)
+      ),
+      batchUpdateJobs: new gax.LongrunningDescriptor(
+        this.operationsClient,
+        batchUpdateJobsResponse.decode.bind(batchUpdateJobsResponse),
+        batchUpdateJobsMetadata.decode.bind(batchUpdateJobsMetadata)
+      ),
+    };
 
     // Put together the default options sent with requests.
     const defaults = gaxGrpc.constructSettings(
@@ -155,6 +205,8 @@ class JobServiceClient {
       'batchDeleteJobs',
       'searchJobs',
       'searchJobsForAlert',
+      'batchCreateJobs',
+      'batchUpdateJobs',
     ];
     for (const methodName of jobServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -170,7 +222,8 @@ class JobServiceClient {
             }
         ),
         defaults[methodName],
-        this._descriptors.page[methodName]
+        this._descriptors.page[methodName] ||
+          this._descriptors.longrunning[methodName]
       );
     }
   }
@@ -179,6 +232,14 @@ class JobServiceClient {
    * The DNS address for this API service.
    */
   static get servicePath() {
+    return 'jobs.googleapis.com';
+  }
+
+  /**
+   * The DNS address for this API service - same as servicePath(),
+   * exists for compatibility reasons.
+   */
+  static get apiEndpoint() {
     return 'jobs.googleapis.com';
   }
 
@@ -369,8 +430,10 @@ class JobServiceClient {
    *   Optional but strongly recommended to be provided for the best service
    *   experience.
    *
-   *   If update_mask is provided, only the specified fields in
-   *   job are updated. Otherwise all the fields are updated.
+   *   If update_mask
+   *   is provided, only the specified fields in
+   *   job are updated.
+   *   Otherwise all the fields are updated.
    *
    *   A field mask to restrict the fields that are updated. Only
    *   top level fields of Job are supported.
@@ -525,8 +588,9 @@ class JobServiceClient {
    *   Optional.
    *
    *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to JobView.JOB_VIEW_FULL if no value is
-   *   specified.
+   *   search response. Defaults to
+   *   JobView.JOB_VIEW_FULL
+   *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {Object} [options]
@@ -683,8 +747,9 @@ class JobServiceClient {
    *   Optional.
    *
    *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to JobView.JOB_VIEW_FULL if no value is
-   *   specified.
+   *   search response. Defaults to
+   *   JobView.JOB_VIEW_FULL
+   *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {Object} [options]
@@ -797,11 +862,13 @@ class JobServiceClient {
   }
 
   /**
-   * Searches for jobs using the provided SearchJobsRequest.
+   * Searches for jobs using the provided
+   * SearchJobsRequest.
    *
-   * This call constrains the visibility of jobs
-   * present in the database, and only returns jobs that the caller has
-   * permission to search against.
+   * This call constrains the
+   * visibility of jobs present in
+   * the database, and only returns jobs that the caller has permission to
+   * search against.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -828,7 +895,8 @@ class JobServiceClient {
    *
    *   Mode of a search.
    *
-   *   Defaults to SearchMode.JOB_SEARCH.
+   *   Defaults to
+   *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
@@ -892,69 +960,90 @@ class JobServiceClient {
    *
    *   Job histogram facets:
    *
-   *   * company_id: histogram by [Job.distributor_company_id.
-   *   * company_display_name: histogram by Job.company_display_name.
-   *   * employment_type: histogram by Job.employment_types, for example,
-   *   "FULL_TIME", "PART_TIME".
-   *   * company_size: histogram by CompanySize, for example, "SMALL",
-   *   "MEDIUM", "BIG".
-   *   * publish_time_in_month: histogram by the Job.publish_time in months.
-   *   Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the Job.publish_time in years.
-   *   Must specify list of numeric buckets in spec.
-   *   * degree_type: histogram by the Job.degree_type, for example,
-   *   "Bachelors", "Masters".
-   *   * job_level: histogram by the Job.job_level, for example, "Entry
-   *   Level".
+   *   * company_display_name: histogram by
+   *   [Job.company_display_name.
+   *   * employment_type: histogram by
+   *   Job.employment_types,
+   *   for example,
+   *     "FULL_TIME", "PART_TIME".
+   *   * company_size: histogram by
+   *   CompanySize, for example,
+   *   "SMALL", "MEDIUM", "BIG".
+   *   * publish_time_in_month: histogram by the
+   *   Job.posting_publish_time
+   *     in months.
+   *     Must specify list of numeric buckets in spec.
+   *   * publish_time_in_year: histogram by the
+   *   Job.posting_publish_time
+   *     in years.
+   *     Must specify list of numeric buckets in spec.
+   *   * degree_types: histogram by the
+   *   Job.degree_types, for
+   *   example,
+   *     "Bachelors", "Masters".
+   *   * job_level: histogram by the
+   *   Job.job_level, for example,
+   *   "Entry
+   *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
-   *   placeholder referring to the state, province, or the particular term a
-   *   country uses to define the geographic structure below the country level,
-   *   for example, "CA", "IL".
+   *     placeholder referring to the state, province, or the particular term a
+   *     country uses to define the geographic structure below the country level,
+   *     for example, "CA", "IL".
    *   * city: histogram by a combination of the "city name, admin1 code". For
-   *   example,  "Mountain View, CA", "New York, NY".
+   *     example,  "Mountain View, CA", "New York, NY".
    *   * admin1_country: histogram by a combination of the "admin1 code, country",
-   *   for example, "CA, US", "IL, US".
+   *     for example, "CA, US", "IL, US".
    *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
-   *   and longitude), for example, 37.4038522,-122.0987765. Since the coordinates
-   *   of a city center can change, customers may need to refresh them
-   *   periodically.
-   *   * locale: histogram by the Job.language_code, for example, "en-US",
-   *   "fr-FR".
-   *   * language: histogram by the language subtag of the Job.language_code,
-   *   for example, "en", "fr".
-   *   * category: histogram by the JobCategory, for example,
-   *   "COMPUTER_AND_IT", "HEALTHCARE".
-   *   * base_compensation_unit: histogram by the CompensationUnit of base
-   *   salary, for example, "WEEKLY", "MONTHLY".
+   *     and longitude), for example, 37.4038522,-122.0987765. Since the
+   *     coordinates of a city center can change, customers may need to refresh
+   *     them periodically.
+   *   * locale: histogram by the
+   *   Job.language_code, for
+   *   example, "en-US",
+   *     "fr-FR".
+   *   * language: histogram by the language subtag of the
+   *   Job.language_code,
+   *     for example, "en", "fr".
+   *   * category: histogram by the
+   *   JobCategory, for example,
+   *     "COMPUTER_AND_IT", "HEALTHCARE".
+   *   * base_compensation_unit: histogram by the
+   *     CompensationInfo.CompensationUnit
+   *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
-   *   numeric buckets to group results by.
+   *     numeric buckets to group results by.
    *   * annualized_base_compensation: histogram by the base annualized salary.
-   *   Must specify list of numeric buckets to group results by.
+   *     Must specify list of numeric buckets to group results by.
    *   * annualized_total_compensation: histogram by the total annualized salary.
-   *   Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
-   *   group results by.
+   *     Must specify list of numeric buckets to group results by.
+   *   * string_custom_attribute: histogram by string
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     string_custom_attribute["key1"].
+   *   * numeric_custom_attribute: histogram by numeric
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
+   *     group results by.
    *
    *   Example expressions:
-   *   * count(admin1)
-   *   * count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
-   *   bucket(100000, MAX)])
-   *   * count(string_custom_attribute["some-string-custom-attribute"])
-   *   * count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *   [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])
+   *
+   *   * `count(admin1)`
+   *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
+   *   bucket(100000, MAX)])`
+   *   * `count(string_custom_attribute["some-string-custom-attribute"])`
+   *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
    *   Optional.
    *
-   *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to JobView.SMALL if no value is specified.
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
+   *   JobView.JOB_VIEW_SMALL
+   *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
@@ -962,7 +1051,9 @@ class JobServiceClient {
    *
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if page_token is unset.
+   *   results. This field is only considered if
+   *   page_token is
+   *   unset.
    *
    *   For example, 0 means to  return results starting from the first matching
    *   job, and 10 means to return from the 11th job. This can be used for
@@ -983,48 +1074,51 @@ class JobServiceClient {
    *   Supported options are:
    *
    *   * "relevance desc": By relevance descending, as determined by the API
-   *   algorithms. Relevance thresholding of query results is only available
-   *   with this ordering.
-   *   * "posting`_`publish`_`time desc": By Job.posting_publish_time
-   *   descending.
-   *   * "posting`_`update`_`time desc": By Job.posting_update_time
-   *   descending.
+   *     algorithms. Relevance thresholding of query results is only available
+   *     with this ordering.
+   *   * "posting`_`publish`_`time desc": By
+   *   Job.posting_publish_time
+   *     descending.
+   *   * "posting`_`update`_`time desc": By
+   *   Job.posting_update_time
+   *     descending.
    *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title descending.
+   *   * "title desc": By Job.title
+   *   descending.
    *   * "annualized`_`base`_`compensation": By job's
-   *   CompensationInfo.annualized_base_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`base`_`compensation desc": By job's
-   *   CompensationInfo.annualized_base_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "annualized`_`total`_`compensation": By job's
-   *   CompensationInfo.annualized_total_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`total`_`compensation desc": By job's
-   *   CompensationInfo.annualized_total_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "custom`_`ranking desc": By the relevance score adjusted to the
-   *   SearchJobsRequest.custom_ranking_info.ranking_expression with weight
-   *   factor assigned by
-   *   SearchJobsRequest.custom_ranking_info.importance_level in descending
-   *   order.
+   *     SearchJobsRequest.CustomRankingInfo.ranking_expression
+   *     with weight factor assigned by
+   *     SearchJobsRequest.CustomRankingInfo.importance_level
+   *     in descending order.
    *   * "location`_`distance": By the distance between the location on jobs and
-   *    locations specified in the
-   *   SearchJobsRequest.job_query.location_filters.
-   *   When this order is selected, the
-   *   SearchJobsRequest.job_query.location_filters must not be empty. When
-   *   a job has multiple locations, the location closest to one of the locations
-   *   specified in the location filter will be used to calculate location
-   *   distance. Distance is calculated by the distance between two lat/long
-   *   coordinates, with a precision of 10e-4 degrees (11.3 meters).
-   *   Jobs that don't have locations specified will be ranked below jobs having
-   *   locations.
-   *   Diversification strategy is still applied unless explicitly disabled in
-   *   SearchJobsRequest.diversification_level.
+   *     locations specified in the
+   *     JobQuery.location_filters.
+   *     When this order is selected, the
+   *     JobQuery.location_filters
+   *     must not be empty. When a job has multiple locations, the location
+   *     closest to one of the locations specified in the location filter will be
+   *     used to calculate location distance. Distance is calculated by the
+   *     distance between two lat/long coordinates, with a precision of 10e-4
+   *     degrees (11.3 meters). Jobs that don't have locations specified will be
+   *     ranked below jobs having locations. Diversification strategy is still
+   *     applied unless explicitly disabled in
+   *     SearchJobsRequest.diversification_level.
    * @param {number} [request.diversificationLevel]
    *   Optional.
    *
@@ -1035,8 +1129,9 @@ class JobServiceClient {
    *   displayed to the job seeker higher up in the results, with the other jobs
    *   being displayed lower down in the results.
    *
-   *   Defaults to DiversificationLevel.SIMPLE if no value
-   *   is specified.
+   *   Defaults to
+   *   DiversificationLevel.SIMPLE
+   *   if no value is specified.
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
@@ -1049,23 +1144,28 @@ class JobServiceClient {
    * @param {boolean} [request.disableKeywordMatch]
    *   Optional.
    *
-   *   Controls whether to disable exact keyword match on Job.job_title,
-   *   Job.description, Job.company_display_name, [Job.locations][0],
-   *   Job.qualifications. When disable keyword match is turned off, a
-   *   keyword match returns jobs that do not match given category filters when
-   *   there are matching keywords. For example, for the query "program manager,"
-   *   a result is returned even if the job posting has the title "software
-   *   developer," which doesn't fall into "program manager" ontology, but does
-   *   have "program manager" appearing in its description.
+   *   Controls whether to disable exact keyword match on
+   *   Job.title,
+   *   Job.description,
+   *   Job.company_display_name,
+   *   Job.addresses,
+   *   Job.qualifications. When
+   *   disable keyword match is turned off, a keyword match returns jobs that do
+   *   not match given category filters when there are matching keywords. For
+   *   example, for the query "program manager," a result is returned even if the
+   *   job posting has the title "software developer," which doesn't fall into
+   *   "program manager" ontology, but does have "program manager" appearing in
+   *   its description.
    *
    *   For queries like "cloud" that don't contain title or
    *   location specific ontology, jobs with "cloud" keyword matches are returned
    *   regardless of this flag's value.
    *
-   *   Please use Company.keyword_searchable_custom_fields or
-   *   Company.keyword_searchable_custom_attributes if company specific
-   *   globally matched custom field/attribute string values is needed. Enabling
-   *   keyword match improves recall of subsequent search requests.
+   *   Use
+   *   Company.keyword_searchable_job_custom_attributes
+   *   if company-specific globally matched custom field/attribute string values
+   *   are needed. Enabling keyword match improves recall of subsequent search
+   *   requests.
    *
    *   Defaults to false.
    * @param {Object} [options]
@@ -1204,7 +1304,8 @@ class JobServiceClient {
    *
    *   Mode of a search.
    *
-   *   Defaults to SearchMode.JOB_SEARCH.
+   *   Defaults to
+   *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
@@ -1268,69 +1369,90 @@ class JobServiceClient {
    *
    *   Job histogram facets:
    *
-   *   * company_id: histogram by [Job.distributor_company_id.
-   *   * company_display_name: histogram by Job.company_display_name.
-   *   * employment_type: histogram by Job.employment_types, for example,
-   *   "FULL_TIME", "PART_TIME".
-   *   * company_size: histogram by CompanySize, for example, "SMALL",
-   *   "MEDIUM", "BIG".
-   *   * publish_time_in_month: histogram by the Job.publish_time in months.
-   *   Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the Job.publish_time in years.
-   *   Must specify list of numeric buckets in spec.
-   *   * degree_type: histogram by the Job.degree_type, for example,
-   *   "Bachelors", "Masters".
-   *   * job_level: histogram by the Job.job_level, for example, "Entry
-   *   Level".
+   *   * company_display_name: histogram by
+   *   [Job.company_display_name.
+   *   * employment_type: histogram by
+   *   Job.employment_types,
+   *   for example,
+   *     "FULL_TIME", "PART_TIME".
+   *   * company_size: histogram by
+   *   CompanySize, for example,
+   *   "SMALL", "MEDIUM", "BIG".
+   *   * publish_time_in_month: histogram by the
+   *   Job.posting_publish_time
+   *     in months.
+   *     Must specify list of numeric buckets in spec.
+   *   * publish_time_in_year: histogram by the
+   *   Job.posting_publish_time
+   *     in years.
+   *     Must specify list of numeric buckets in spec.
+   *   * degree_types: histogram by the
+   *   Job.degree_types, for
+   *   example,
+   *     "Bachelors", "Masters".
+   *   * job_level: histogram by the
+   *   Job.job_level, for example,
+   *   "Entry
+   *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
-   *   placeholder referring to the state, province, or the particular term a
-   *   country uses to define the geographic structure below the country level,
-   *   for example, "CA", "IL".
+   *     placeholder referring to the state, province, or the particular term a
+   *     country uses to define the geographic structure below the country level,
+   *     for example, "CA", "IL".
    *   * city: histogram by a combination of the "city name, admin1 code". For
-   *   example,  "Mountain View, CA", "New York, NY".
+   *     example,  "Mountain View, CA", "New York, NY".
    *   * admin1_country: histogram by a combination of the "admin1 code, country",
-   *   for example, "CA, US", "IL, US".
+   *     for example, "CA, US", "IL, US".
    *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
-   *   and longitude), for example, 37.4038522,-122.0987765. Since the coordinates
-   *   of a city center can change, customers may need to refresh them
-   *   periodically.
-   *   * locale: histogram by the Job.language_code, for example, "en-US",
-   *   "fr-FR".
-   *   * language: histogram by the language subtag of the Job.language_code,
-   *   for example, "en", "fr".
-   *   * category: histogram by the JobCategory, for example,
-   *   "COMPUTER_AND_IT", "HEALTHCARE".
-   *   * base_compensation_unit: histogram by the CompensationUnit of base
-   *   salary, for example, "WEEKLY", "MONTHLY".
+   *     and longitude), for example, 37.4038522,-122.0987765. Since the
+   *     coordinates of a city center can change, customers may need to refresh
+   *     them periodically.
+   *   * locale: histogram by the
+   *   Job.language_code, for
+   *   example, "en-US",
+   *     "fr-FR".
+   *   * language: histogram by the language subtag of the
+   *   Job.language_code,
+   *     for example, "en", "fr".
+   *   * category: histogram by the
+   *   JobCategory, for example,
+   *     "COMPUTER_AND_IT", "HEALTHCARE".
+   *   * base_compensation_unit: histogram by the
+   *     CompensationInfo.CompensationUnit
+   *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
-   *   numeric buckets to group results by.
+   *     numeric buckets to group results by.
    *   * annualized_base_compensation: histogram by the base annualized salary.
-   *   Must specify list of numeric buckets to group results by.
+   *     Must specify list of numeric buckets to group results by.
    *   * annualized_total_compensation: histogram by the total annualized salary.
-   *   Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
-   *   group results by.
+   *     Must specify list of numeric buckets to group results by.
+   *   * string_custom_attribute: histogram by string
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     string_custom_attribute["key1"].
+   *   * numeric_custom_attribute: histogram by numeric
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
+   *     group results by.
    *
    *   Example expressions:
-   *   * count(admin1)
-   *   * count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
-   *   bucket(100000, MAX)])
-   *   * count(string_custom_attribute["some-string-custom-attribute"])
-   *   * count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *   [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])
+   *
+   *   * `count(admin1)`
+   *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
+   *   bucket(100000, MAX)])`
+   *   * `count(string_custom_attribute["some-string-custom-attribute"])`
+   *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
    *   Optional.
    *
-   *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to JobView.SMALL if no value is specified.
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
+   *   JobView.JOB_VIEW_SMALL
+   *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
@@ -1338,7 +1460,9 @@ class JobServiceClient {
    *
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if page_token is unset.
+   *   results. This field is only considered if
+   *   page_token is
+   *   unset.
    *
    *   For example, 0 means to  return results starting from the first matching
    *   job, and 10 means to return from the 11th job. This can be used for
@@ -1359,48 +1483,51 @@ class JobServiceClient {
    *   Supported options are:
    *
    *   * "relevance desc": By relevance descending, as determined by the API
-   *   algorithms. Relevance thresholding of query results is only available
-   *   with this ordering.
-   *   * "posting`_`publish`_`time desc": By Job.posting_publish_time
-   *   descending.
-   *   * "posting`_`update`_`time desc": By Job.posting_update_time
-   *   descending.
+   *     algorithms. Relevance thresholding of query results is only available
+   *     with this ordering.
+   *   * "posting`_`publish`_`time desc": By
+   *   Job.posting_publish_time
+   *     descending.
+   *   * "posting`_`update`_`time desc": By
+   *   Job.posting_update_time
+   *     descending.
    *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title descending.
+   *   * "title desc": By Job.title
+   *   descending.
    *   * "annualized`_`base`_`compensation": By job's
-   *   CompensationInfo.annualized_base_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`base`_`compensation desc": By job's
-   *   CompensationInfo.annualized_base_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "annualized`_`total`_`compensation": By job's
-   *   CompensationInfo.annualized_total_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`total`_`compensation desc": By job's
-   *   CompensationInfo.annualized_total_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "custom`_`ranking desc": By the relevance score adjusted to the
-   *   SearchJobsRequest.custom_ranking_info.ranking_expression with weight
-   *   factor assigned by
-   *   SearchJobsRequest.custom_ranking_info.importance_level in descending
-   *   order.
+   *     SearchJobsRequest.CustomRankingInfo.ranking_expression
+   *     with weight factor assigned by
+   *     SearchJobsRequest.CustomRankingInfo.importance_level
+   *     in descending order.
    *   * "location`_`distance": By the distance between the location on jobs and
-   *    locations specified in the
-   *   SearchJobsRequest.job_query.location_filters.
-   *   When this order is selected, the
-   *   SearchJobsRequest.job_query.location_filters must not be empty. When
-   *   a job has multiple locations, the location closest to one of the locations
-   *   specified in the location filter will be used to calculate location
-   *   distance. Distance is calculated by the distance between two lat/long
-   *   coordinates, with a precision of 10e-4 degrees (11.3 meters).
-   *   Jobs that don't have locations specified will be ranked below jobs having
-   *   locations.
-   *   Diversification strategy is still applied unless explicitly disabled in
-   *   SearchJobsRequest.diversification_level.
+   *     locations specified in the
+   *     JobQuery.location_filters.
+   *     When this order is selected, the
+   *     JobQuery.location_filters
+   *     must not be empty. When a job has multiple locations, the location
+   *     closest to one of the locations specified in the location filter will be
+   *     used to calculate location distance. Distance is calculated by the
+   *     distance between two lat/long coordinates, with a precision of 10e-4
+   *     degrees (11.3 meters). Jobs that don't have locations specified will be
+   *     ranked below jobs having locations. Diversification strategy is still
+   *     applied unless explicitly disabled in
+   *     SearchJobsRequest.diversification_level.
    * @param {number} [request.diversificationLevel]
    *   Optional.
    *
@@ -1411,8 +1538,9 @@ class JobServiceClient {
    *   displayed to the job seeker higher up in the results, with the other jobs
    *   being displayed lower down in the results.
    *
-   *   Defaults to DiversificationLevel.SIMPLE if no value
-   *   is specified.
+   *   Defaults to
+   *   DiversificationLevel.SIMPLE
+   *   if no value is specified.
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
@@ -1425,23 +1553,28 @@ class JobServiceClient {
    * @param {boolean} [request.disableKeywordMatch]
    *   Optional.
    *
-   *   Controls whether to disable exact keyword match on Job.job_title,
-   *   Job.description, Job.company_display_name, [Job.locations][0],
-   *   Job.qualifications. When disable keyword match is turned off, a
-   *   keyword match returns jobs that do not match given category filters when
-   *   there are matching keywords. For example, for the query "program manager,"
-   *   a result is returned even if the job posting has the title "software
-   *   developer," which doesn't fall into "program manager" ontology, but does
-   *   have "program manager" appearing in its description.
+   *   Controls whether to disable exact keyword match on
+   *   Job.title,
+   *   Job.description,
+   *   Job.company_display_name,
+   *   Job.addresses,
+   *   Job.qualifications. When
+   *   disable keyword match is turned off, a keyword match returns jobs that do
+   *   not match given category filters when there are matching keywords. For
+   *   example, for the query "program manager," a result is returned even if the
+   *   job posting has the title "software developer," which doesn't fall into
+   *   "program manager" ontology, but does have "program manager" appearing in
+   *   its description.
    *
    *   For queries like "cloud" that don't contain title or
    *   location specific ontology, jobs with "cloud" keyword matches are returned
    *   regardless of this flag's value.
    *
-   *   Please use Company.keyword_searchable_custom_fields or
-   *   Company.keyword_searchable_custom_attributes if company specific
-   *   globally matched custom field/attribute string values is needed. Enabling
-   *   keyword match improves recall of subsequent search requests.
+   *   Use
+   *   Company.keyword_searchable_job_custom_attributes
+   *   if company-specific globally matched custom field/attribute string values
+   *   are needed. Enabling keyword match improves recall of subsequent search
+   *   requests.
    *
    *   Defaults to false.
    * @param {Object} [options]
@@ -1482,16 +1615,18 @@ class JobServiceClient {
   }
 
   /**
-   * Searches for jobs using the provided SearchJobsRequest.
+   * Searches for jobs using the provided
+   * SearchJobsRequest.
    *
    * This API call is intended for the use case of targeting passive job
    * seekers (for example, job seekers who have signed up to receive email
    * alerts about potential job opportunities), and has different algorithmic
    * adjustments that are targeted to passive job seekers.
    *
-   * This call constrains the visibility of jobs
-   * present in the database, and only returns jobs the caller has
-   * permission to search against.
+   * This call constrains the
+   * visibility of jobs present in
+   * the database, and only returns jobs the caller has permission to search
+   * against.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1518,7 +1653,8 @@ class JobServiceClient {
    *
    *   Mode of a search.
    *
-   *   Defaults to SearchMode.JOB_SEARCH.
+   *   Defaults to
+   *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
@@ -1582,69 +1718,90 @@ class JobServiceClient {
    *
    *   Job histogram facets:
    *
-   *   * company_id: histogram by [Job.distributor_company_id.
-   *   * company_display_name: histogram by Job.company_display_name.
-   *   * employment_type: histogram by Job.employment_types, for example,
-   *   "FULL_TIME", "PART_TIME".
-   *   * company_size: histogram by CompanySize, for example, "SMALL",
-   *   "MEDIUM", "BIG".
-   *   * publish_time_in_month: histogram by the Job.publish_time in months.
-   *   Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the Job.publish_time in years.
-   *   Must specify list of numeric buckets in spec.
-   *   * degree_type: histogram by the Job.degree_type, for example,
-   *   "Bachelors", "Masters".
-   *   * job_level: histogram by the Job.job_level, for example, "Entry
-   *   Level".
+   *   * company_display_name: histogram by
+   *   [Job.company_display_name.
+   *   * employment_type: histogram by
+   *   Job.employment_types,
+   *   for example,
+   *     "FULL_TIME", "PART_TIME".
+   *   * company_size: histogram by
+   *   CompanySize, for example,
+   *   "SMALL", "MEDIUM", "BIG".
+   *   * publish_time_in_month: histogram by the
+   *   Job.posting_publish_time
+   *     in months.
+   *     Must specify list of numeric buckets in spec.
+   *   * publish_time_in_year: histogram by the
+   *   Job.posting_publish_time
+   *     in years.
+   *     Must specify list of numeric buckets in spec.
+   *   * degree_types: histogram by the
+   *   Job.degree_types, for
+   *   example,
+   *     "Bachelors", "Masters".
+   *   * job_level: histogram by the
+   *   Job.job_level, for example,
+   *   "Entry
+   *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
-   *   placeholder referring to the state, province, or the particular term a
-   *   country uses to define the geographic structure below the country level,
-   *   for example, "CA", "IL".
+   *     placeholder referring to the state, province, or the particular term a
+   *     country uses to define the geographic structure below the country level,
+   *     for example, "CA", "IL".
    *   * city: histogram by a combination of the "city name, admin1 code". For
-   *   example,  "Mountain View, CA", "New York, NY".
+   *     example,  "Mountain View, CA", "New York, NY".
    *   * admin1_country: histogram by a combination of the "admin1 code, country",
-   *   for example, "CA, US", "IL, US".
+   *     for example, "CA, US", "IL, US".
    *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
-   *   and longitude), for example, 37.4038522,-122.0987765. Since the coordinates
-   *   of a city center can change, customers may need to refresh them
-   *   periodically.
-   *   * locale: histogram by the Job.language_code, for example, "en-US",
-   *   "fr-FR".
-   *   * language: histogram by the language subtag of the Job.language_code,
-   *   for example, "en", "fr".
-   *   * category: histogram by the JobCategory, for example,
-   *   "COMPUTER_AND_IT", "HEALTHCARE".
-   *   * base_compensation_unit: histogram by the CompensationUnit of base
-   *   salary, for example, "WEEKLY", "MONTHLY".
+   *     and longitude), for example, 37.4038522,-122.0987765. Since the
+   *     coordinates of a city center can change, customers may need to refresh
+   *     them periodically.
+   *   * locale: histogram by the
+   *   Job.language_code, for
+   *   example, "en-US",
+   *     "fr-FR".
+   *   * language: histogram by the language subtag of the
+   *   Job.language_code,
+   *     for example, "en", "fr".
+   *   * category: histogram by the
+   *   JobCategory, for example,
+   *     "COMPUTER_AND_IT", "HEALTHCARE".
+   *   * base_compensation_unit: histogram by the
+   *     CompensationInfo.CompensationUnit
+   *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
-   *   numeric buckets to group results by.
+   *     numeric buckets to group results by.
    *   * annualized_base_compensation: histogram by the base annualized salary.
-   *   Must specify list of numeric buckets to group results by.
+   *     Must specify list of numeric buckets to group results by.
    *   * annualized_total_compensation: histogram by the total annualized salary.
-   *   Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
-   *   group results by.
+   *     Must specify list of numeric buckets to group results by.
+   *   * string_custom_attribute: histogram by string
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     string_custom_attribute["key1"].
+   *   * numeric_custom_attribute: histogram by numeric
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
+   *     group results by.
    *
    *   Example expressions:
-   *   * count(admin1)
-   *   * count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
-   *   bucket(100000, MAX)])
-   *   * count(string_custom_attribute["some-string-custom-attribute"])
-   *   * count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *   [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])
+   *
+   *   * `count(admin1)`
+   *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
+   *   bucket(100000, MAX)])`
+   *   * `count(string_custom_attribute["some-string-custom-attribute"])`
+   *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
    *   Optional.
    *
-   *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to JobView.SMALL if no value is specified.
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
+   *   JobView.JOB_VIEW_SMALL
+   *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
@@ -1652,7 +1809,9 @@ class JobServiceClient {
    *
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if page_token is unset.
+   *   results. This field is only considered if
+   *   page_token is
+   *   unset.
    *
    *   For example, 0 means to  return results starting from the first matching
    *   job, and 10 means to return from the 11th job. This can be used for
@@ -1673,48 +1832,51 @@ class JobServiceClient {
    *   Supported options are:
    *
    *   * "relevance desc": By relevance descending, as determined by the API
-   *   algorithms. Relevance thresholding of query results is only available
-   *   with this ordering.
-   *   * "posting`_`publish`_`time desc": By Job.posting_publish_time
-   *   descending.
-   *   * "posting`_`update`_`time desc": By Job.posting_update_time
-   *   descending.
+   *     algorithms. Relevance thresholding of query results is only available
+   *     with this ordering.
+   *   * "posting`_`publish`_`time desc": By
+   *   Job.posting_publish_time
+   *     descending.
+   *   * "posting`_`update`_`time desc": By
+   *   Job.posting_update_time
+   *     descending.
    *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title descending.
+   *   * "title desc": By Job.title
+   *   descending.
    *   * "annualized`_`base`_`compensation": By job's
-   *   CompensationInfo.annualized_base_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`base`_`compensation desc": By job's
-   *   CompensationInfo.annualized_base_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "annualized`_`total`_`compensation": By job's
-   *   CompensationInfo.annualized_total_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`total`_`compensation desc": By job's
-   *   CompensationInfo.annualized_total_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "custom`_`ranking desc": By the relevance score adjusted to the
-   *   SearchJobsRequest.custom_ranking_info.ranking_expression with weight
-   *   factor assigned by
-   *   SearchJobsRequest.custom_ranking_info.importance_level in descending
-   *   order.
+   *     SearchJobsRequest.CustomRankingInfo.ranking_expression
+   *     with weight factor assigned by
+   *     SearchJobsRequest.CustomRankingInfo.importance_level
+   *     in descending order.
    *   * "location`_`distance": By the distance between the location on jobs and
-   *    locations specified in the
-   *   SearchJobsRequest.job_query.location_filters.
-   *   When this order is selected, the
-   *   SearchJobsRequest.job_query.location_filters must not be empty. When
-   *   a job has multiple locations, the location closest to one of the locations
-   *   specified in the location filter will be used to calculate location
-   *   distance. Distance is calculated by the distance between two lat/long
-   *   coordinates, with a precision of 10e-4 degrees (11.3 meters).
-   *   Jobs that don't have locations specified will be ranked below jobs having
-   *   locations.
-   *   Diversification strategy is still applied unless explicitly disabled in
-   *   SearchJobsRequest.diversification_level.
+   *     locations specified in the
+   *     JobQuery.location_filters.
+   *     When this order is selected, the
+   *     JobQuery.location_filters
+   *     must not be empty. When a job has multiple locations, the location
+   *     closest to one of the locations specified in the location filter will be
+   *     used to calculate location distance. Distance is calculated by the
+   *     distance between two lat/long coordinates, with a precision of 10e-4
+   *     degrees (11.3 meters). Jobs that don't have locations specified will be
+   *     ranked below jobs having locations. Diversification strategy is still
+   *     applied unless explicitly disabled in
+   *     SearchJobsRequest.diversification_level.
    * @param {number} [request.diversificationLevel]
    *   Optional.
    *
@@ -1725,8 +1887,9 @@ class JobServiceClient {
    *   displayed to the job seeker higher up in the results, with the other jobs
    *   being displayed lower down in the results.
    *
-   *   Defaults to DiversificationLevel.SIMPLE if no value
-   *   is specified.
+   *   Defaults to
+   *   DiversificationLevel.SIMPLE
+   *   if no value is specified.
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
@@ -1739,23 +1902,28 @@ class JobServiceClient {
    * @param {boolean} [request.disableKeywordMatch]
    *   Optional.
    *
-   *   Controls whether to disable exact keyword match on Job.job_title,
-   *   Job.description, Job.company_display_name, [Job.locations][0],
-   *   Job.qualifications. When disable keyword match is turned off, a
-   *   keyword match returns jobs that do not match given category filters when
-   *   there are matching keywords. For example, for the query "program manager,"
-   *   a result is returned even if the job posting has the title "software
-   *   developer," which doesn't fall into "program manager" ontology, but does
-   *   have "program manager" appearing in its description.
+   *   Controls whether to disable exact keyword match on
+   *   Job.title,
+   *   Job.description,
+   *   Job.company_display_name,
+   *   Job.addresses,
+   *   Job.qualifications. When
+   *   disable keyword match is turned off, a keyword match returns jobs that do
+   *   not match given category filters when there are matching keywords. For
+   *   example, for the query "program manager," a result is returned even if the
+   *   job posting has the title "software developer," which doesn't fall into
+   *   "program manager" ontology, but does have "program manager" appearing in
+   *   its description.
    *
    *   For queries like "cloud" that don't contain title or
    *   location specific ontology, jobs with "cloud" keyword matches are returned
    *   regardless of this flag's value.
    *
-   *   Please use Company.keyword_searchable_custom_fields or
-   *   Company.keyword_searchable_custom_attributes if company specific
-   *   globally matched custom field/attribute string values is needed. Enabling
-   *   keyword match improves recall of subsequent search requests.
+   *   Use
+   *   Company.keyword_searchable_job_custom_attributes
+   *   if company-specific globally matched custom field/attribute string values
+   *   are needed. Enabling keyword match improves recall of subsequent search
+   *   requests.
    *
    *   Defaults to false.
    * @param {Object} [options]
@@ -1894,7 +2062,8 @@ class JobServiceClient {
    *
    *   Mode of a search.
    *
-   *   Defaults to SearchMode.JOB_SEARCH.
+   *   Defaults to
+   *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
@@ -1958,69 +2127,90 @@ class JobServiceClient {
    *
    *   Job histogram facets:
    *
-   *   * company_id: histogram by [Job.distributor_company_id.
-   *   * company_display_name: histogram by Job.company_display_name.
-   *   * employment_type: histogram by Job.employment_types, for example,
-   *   "FULL_TIME", "PART_TIME".
-   *   * company_size: histogram by CompanySize, for example, "SMALL",
-   *   "MEDIUM", "BIG".
-   *   * publish_time_in_month: histogram by the Job.publish_time in months.
-   *   Must specify list of numeric buckets in spec.
-   *   * publish_time_in_year: histogram by the Job.publish_time in years.
-   *   Must specify list of numeric buckets in spec.
-   *   * degree_type: histogram by the Job.degree_type, for example,
-   *   "Bachelors", "Masters".
-   *   * job_level: histogram by the Job.job_level, for example, "Entry
-   *   Level".
+   *   * company_display_name: histogram by
+   *   [Job.company_display_name.
+   *   * employment_type: histogram by
+   *   Job.employment_types,
+   *   for example,
+   *     "FULL_TIME", "PART_TIME".
+   *   * company_size: histogram by
+   *   CompanySize, for example,
+   *   "SMALL", "MEDIUM", "BIG".
+   *   * publish_time_in_month: histogram by the
+   *   Job.posting_publish_time
+   *     in months.
+   *     Must specify list of numeric buckets in spec.
+   *   * publish_time_in_year: histogram by the
+   *   Job.posting_publish_time
+   *     in years.
+   *     Must specify list of numeric buckets in spec.
+   *   * degree_types: histogram by the
+   *   Job.degree_types, for
+   *   example,
+   *     "Bachelors", "Masters".
+   *   * job_level: histogram by the
+   *   Job.job_level, for example,
+   *   "Entry
+   *     Level".
    *   * country: histogram by the country code of jobs, for example, "US", "FR".
    *   * admin1: histogram by the admin1 code of jobs, which is a global
-   *   placeholder referring to the state, province, or the particular term a
-   *   country uses to define the geographic structure below the country level,
-   *   for example, "CA", "IL".
+   *     placeholder referring to the state, province, or the particular term a
+   *     country uses to define the geographic structure below the country level,
+   *     for example, "CA", "IL".
    *   * city: histogram by a combination of the "city name, admin1 code". For
-   *   example,  "Mountain View, CA", "New York, NY".
+   *     example,  "Mountain View, CA", "New York, NY".
    *   * admin1_country: histogram by a combination of the "admin1 code, country",
-   *   for example, "CA, US", "IL, US".
+   *     for example, "CA, US", "IL, US".
    *   * city_coordinate: histogram by the city center's GPS coordinates (latitude
-   *   and longitude), for example, 37.4038522,-122.0987765. Since the coordinates
-   *   of a city center can change, customers may need to refresh them
-   *   periodically.
-   *   * locale: histogram by the Job.language_code, for example, "en-US",
-   *   "fr-FR".
-   *   * language: histogram by the language subtag of the Job.language_code,
-   *   for example, "en", "fr".
-   *   * category: histogram by the JobCategory, for example,
-   *   "COMPUTER_AND_IT", "HEALTHCARE".
-   *   * base_compensation_unit: histogram by the CompensationUnit of base
-   *   salary, for example, "WEEKLY", "MONTHLY".
+   *     and longitude), for example, 37.4038522,-122.0987765. Since the
+   *     coordinates of a city center can change, customers may need to refresh
+   *     them periodically.
+   *   * locale: histogram by the
+   *   Job.language_code, for
+   *   example, "en-US",
+   *     "fr-FR".
+   *   * language: histogram by the language subtag of the
+   *   Job.language_code,
+   *     for example, "en", "fr".
+   *   * category: histogram by the
+   *   JobCategory, for example,
+   *     "COMPUTER_AND_IT", "HEALTHCARE".
+   *   * base_compensation_unit: histogram by the
+   *     CompensationInfo.CompensationUnit
+   *     of base salary, for example, "WEEKLY", "MONTHLY".
    *   * base_compensation: histogram by the base salary. Must specify list of
-   *   numeric buckets to group results by.
+   *     numeric buckets to group results by.
    *   * annualized_base_compensation: histogram by the base annualized salary.
-   *   Must specify list of numeric buckets to group results by.
+   *     Must specify list of numeric buckets to group results by.
    *   * annualized_total_compensation: histogram by the total annualized salary.
-   *   Must specify list of numeric buckets to group results by.
-   *   * string_custom_attribute: histogram by string Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   string_custom_attribute["key1"].
-   *   * numeric_custom_attribute: histogram by numeric Job.custom_attributes.
-   *   Values can be accessed via square bracket notations like
-   *   numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
-   *   group results by.
+   *     Must specify list of numeric buckets to group results by.
+   *   * string_custom_attribute: histogram by string
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     string_custom_attribute["key1"].
+   *   * numeric_custom_attribute: histogram by numeric
+   *   Job.custom_attributes.
+   *     Values can be accessed via square bracket notations like
+   *     numeric_custom_attribute["key1"]. Must specify list of numeric buckets to
+   *     group results by.
    *
    *   Example expressions:
-   *   * count(admin1)
-   *   * count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
-   *   bucket(100000, MAX)])
-   *   * count(string_custom_attribute["some-string-custom-attribute"])
-   *   * count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *   [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])
+   *
+   *   * `count(admin1)`
+   *   * `count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000),
+   *   bucket(100000, MAX)])`
+   *   * `count(string_custom_attribute["some-string-custom-attribute"])`
+   *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
    *   Optional.
    *
-   *   The desired job attributes returned for jobs in the
-   *   search response. Defaults to JobView.SMALL if no value is specified.
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
+   *   JobView.JOB_VIEW_SMALL
+   *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
@@ -2028,7 +2218,9 @@ class JobServiceClient {
    *
    *   An integer that specifies the current offset (that is, starting result
    *   location, amongst the jobs deemed by the API as relevant) in search
-   *   results. This field is only considered if page_token is unset.
+   *   results. This field is only considered if
+   *   page_token is
+   *   unset.
    *
    *   For example, 0 means to  return results starting from the first matching
    *   job, and 10 means to return from the 11th job. This can be used for
@@ -2049,48 +2241,51 @@ class JobServiceClient {
    *   Supported options are:
    *
    *   * "relevance desc": By relevance descending, as determined by the API
-   *   algorithms. Relevance thresholding of query results is only available
-   *   with this ordering.
-   *   * "posting`_`publish`_`time desc": By Job.posting_publish_time
-   *   descending.
-   *   * "posting`_`update`_`time desc": By Job.posting_update_time
-   *   descending.
+   *     algorithms. Relevance thresholding of query results is only available
+   *     with this ordering.
+   *   * "posting`_`publish`_`time desc": By
+   *   Job.posting_publish_time
+   *     descending.
+   *   * "posting`_`update`_`time desc": By
+   *   Job.posting_update_time
+   *     descending.
    *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title descending.
+   *   * "title desc": By Job.title
+   *   descending.
    *   * "annualized`_`base`_`compensation": By job's
-   *   CompensationInfo.annualized_base_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`base`_`compensation desc": By job's
-   *   CompensationInfo.annualized_base_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_base_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "annualized`_`total`_`compensation": By job's
-   *   CompensationInfo.annualized_total_compensation_range ascending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     ascending. Jobs whose annualized base compensation is unspecified are put
+   *     at the end of search results.
    *   * "annualized`_`total`_`compensation desc": By job's
-   *   CompensationInfo.annualized_total_compensation_range descending. Jobs
-   *   whose annualized base compensation is unspecified are put at the end of
-   *   search results.
+   *     CompensationInfo.annualized_total_compensation_range
+   *     descending. Jobs whose annualized base compensation is unspecified are
+   *     put at the end of search results.
    *   * "custom`_`ranking desc": By the relevance score adjusted to the
-   *   SearchJobsRequest.custom_ranking_info.ranking_expression with weight
-   *   factor assigned by
-   *   SearchJobsRequest.custom_ranking_info.importance_level in descending
-   *   order.
+   *     SearchJobsRequest.CustomRankingInfo.ranking_expression
+   *     with weight factor assigned by
+   *     SearchJobsRequest.CustomRankingInfo.importance_level
+   *     in descending order.
    *   * "location`_`distance": By the distance between the location on jobs and
-   *    locations specified in the
-   *   SearchJobsRequest.job_query.location_filters.
-   *   When this order is selected, the
-   *   SearchJobsRequest.job_query.location_filters must not be empty. When
-   *   a job has multiple locations, the location closest to one of the locations
-   *   specified in the location filter will be used to calculate location
-   *   distance. Distance is calculated by the distance between two lat/long
-   *   coordinates, with a precision of 10e-4 degrees (11.3 meters).
-   *   Jobs that don't have locations specified will be ranked below jobs having
-   *   locations.
-   *   Diversification strategy is still applied unless explicitly disabled in
-   *   SearchJobsRequest.diversification_level.
+   *     locations specified in the
+   *     JobQuery.location_filters.
+   *     When this order is selected, the
+   *     JobQuery.location_filters
+   *     must not be empty. When a job has multiple locations, the location
+   *     closest to one of the locations specified in the location filter will be
+   *     used to calculate location distance. Distance is calculated by the
+   *     distance between two lat/long coordinates, with a precision of 10e-4
+   *     degrees (11.3 meters). Jobs that don't have locations specified will be
+   *     ranked below jobs having locations. Diversification strategy is still
+   *     applied unless explicitly disabled in
+   *     SearchJobsRequest.diversification_level.
    * @param {number} [request.diversificationLevel]
    *   Optional.
    *
@@ -2101,8 +2296,9 @@ class JobServiceClient {
    *   displayed to the job seeker higher up in the results, with the other jobs
    *   being displayed lower down in the results.
    *
-   *   Defaults to DiversificationLevel.SIMPLE if no value
-   *   is specified.
+   *   Defaults to
+   *   DiversificationLevel.SIMPLE
+   *   if no value is specified.
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
@@ -2115,23 +2311,28 @@ class JobServiceClient {
    * @param {boolean} [request.disableKeywordMatch]
    *   Optional.
    *
-   *   Controls whether to disable exact keyword match on Job.job_title,
-   *   Job.description, Job.company_display_name, [Job.locations][0],
-   *   Job.qualifications. When disable keyword match is turned off, a
-   *   keyword match returns jobs that do not match given category filters when
-   *   there are matching keywords. For example, for the query "program manager,"
-   *   a result is returned even if the job posting has the title "software
-   *   developer," which doesn't fall into "program manager" ontology, but does
-   *   have "program manager" appearing in its description.
+   *   Controls whether to disable exact keyword match on
+   *   Job.title,
+   *   Job.description,
+   *   Job.company_display_name,
+   *   Job.addresses,
+   *   Job.qualifications. When
+   *   disable keyword match is turned off, a keyword match returns jobs that do
+   *   not match given category filters when there are matching keywords. For
+   *   example, for the query "program manager," a result is returned even if the
+   *   job posting has the title "software developer," which doesn't fall into
+   *   "program manager" ontology, but does have "program manager" appearing in
+   *   its description.
    *
    *   For queries like "cloud" that don't contain title or
    *   location specific ontology, jobs with "cloud" keyword matches are returned
    *   regardless of this flag's value.
    *
-   *   Please use Company.keyword_searchable_custom_fields or
-   *   Company.keyword_searchable_custom_attributes if company specific
-   *   globally matched custom field/attribute string values is needed. Enabling
-   *   keyword match improves recall of subsequent search requests.
+   *   Use
+   *   Company.keyword_searchable_job_custom_attributes
+   *   if company-specific globally matched custom field/attribute string values
+   *   are needed. Enabling keyword match improves recall of subsequent search
+   *   requests.
    *
    *   Defaults to false.
    * @param {Object} [options]
@@ -2169,6 +2370,279 @@ class JobServiceClient {
       request,
       options
     );
+  }
+
+  /**
+   * Begins executing a batch create jobs operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *
+   *   The resource name of the tenant under which the job is created.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenant/foo".
+   *
+   *   Tenant id is optional and a default tenant is created if unspecified, for
+   *   example, "projects/api-test-project".
+   * @param {Object[]} request.jobs
+   *   Required.
+   *
+   *   The jobs to be created.
+   *
+   *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const talent = require('@google-cloud/talent');
+   *
+   * const client = new talent.v4beta1.JobServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+   * const jobs = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   jobs: jobs,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.batchCreateJobs(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+   * const jobs = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   jobs: jobs,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.batchCreateJobs(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+   * const jobs = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   jobs: jobs,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchCreateJobs(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  batchCreateJobs(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.batchCreateJobs(request, options, callback);
+  }
+
+  /**
+   * Begins executing a batch update jobs operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required.
+   *
+   *   The resource name of the tenant under which the job is created.
+   *
+   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
+   *   "projects/api-test-project/tenant/foo".
+   *
+   *   Tenant id is optional and the default tenant is used if unspecified, for
+   *   example, "projects/api-test-project".
+   * @param {Object[]} request.jobs
+   *   Required.
+   *
+   *   The jobs to be updated.
+   *
+   *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
+   * @param {Object} [request.updateMask]
+   *   Optional but strongly recommended to be provided for the best service
+   *   experience, also increase latency when checking status of batch operation.
+   *
+   *   If
+   *   update_mask
+   *   is provided, only the specified fields in
+   *   Job are updated. Otherwise all the
+   *   fields are updated.
+   *
+   *   A field mask to restrict the fields that are updated. Only
+   *   top level fields of Job are supported.
+   *
+   *   If
+   *   update_mask
+   *   is provided, The Job inside
+   *   JobResult will only contains fields that is updated, plus the Id of the
+   *   Job. Otherwise,  Job will include all
+   *   fields, which can yield a very large response.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const talent = require('@google-cloud/talent');
+   *
+   * const client = new talent.v4beta1.JobServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+   * const jobs = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   jobs: jobs,
+   * };
+   *
+   * // Handle the operation using the promise pattern.
+   * client.batchUpdateJobs(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Operation#promise starts polling for the completion of the LRO.
+   *     return operation.promise();
+   *   })
+   *   .then(responses => {
+   *     const result = responses[0];
+   *     const metadata = responses[1];
+   *     const finalApiResponse = responses[2];
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+   * const jobs = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   jobs: jobs,
+   * };
+   *
+   * // Handle the operation using the event emitter pattern.
+   * client.batchUpdateJobs(request)
+   *   .then(responses => {
+   *     const [operation, initialApiResponse] = responses;
+   *
+   *     // Adding a listener for the "complete" event starts polling for the
+   *     // completion of the operation.
+   *     operation.on('complete', (result, metadata, finalApiResponse) => {
+   *       // doSomethingWith(result);
+   *     });
+   *
+   *     // Adding a listener for the "progress" event causes the callback to be
+   *     // called on any change in metadata when the operation is polled.
+   *     operation.on('progress', (metadata, apiResponse) => {
+   *       // doSomethingWith(metadata)
+   *     });
+   *
+   *     // Adding a listener for the "error" event handles any errors found during polling.
+   *     operation.on('error', err => {
+   *       // throw(err);
+   *     });
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+   * const jobs = [];
+   * const request = {
+   *   parent: formattedParent,
+   *   jobs: jobs,
+   * };
+   *
+   * // Handle the operation using the await pattern.
+   * const [operation] = await client.batchUpdateJobs(request);
+   *
+   * const [response] = await operation.promise();
+   */
+  batchUpdateJobs(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.batchUpdateJobs(request, options, callback);
   }
 
   // --------------------

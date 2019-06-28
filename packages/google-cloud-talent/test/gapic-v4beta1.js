@@ -23,6 +23,29 @@ const error = new Error();
 error.code = FAKE_STATUS_CODE;
 
 describe('ApplicationServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath =
+      talentModule.v4beta1.ApplicationServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      talentModule.v4beta1.ApplicationServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = talentModule.v4beta1.ApplicationServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new talentModule.v4beta1.ApplicationServiceClient();
+    assert(client);
+  });
+
   describe('createApplication', () => {
     it('invokes createApplication without error', done => {
       const client = new talentModule.v4beta1.ApplicationServiceClient({
@@ -396,6 +419,27 @@ describe('ApplicationServiceClient', () => {
   });
 });
 describe('CompanyServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = talentModule.v4beta1.CompanyServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = talentModule.v4beta1.CompanyServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = talentModule.v4beta1.CompanyServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new talentModule.v4beta1.CompanyServiceClient();
+    assert(client);
+  });
+
   describe('createCompany', () => {
     it('invokes createCompany without error', done => {
       const client = new talentModule.v4beta1.CompanyServiceClient({
@@ -767,6 +811,27 @@ describe('CompanyServiceClient', () => {
   });
 });
 describe('CompletionClient', () => {
+  it('has servicePath', () => {
+    const servicePath = talentModule.v4beta1.CompletionClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = talentModule.v4beta1.CompletionClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = talentModule.v4beta1.CompletionClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new talentModule.v4beta1.CompletionClient();
+    assert(client);
+  });
+
   describe('completeQuery', () => {
     it('invokes completeQuery without error', done => {
       const client = new talentModule.v4beta1.CompletionClient({
@@ -833,6 +898,27 @@ describe('CompletionClient', () => {
   });
 });
 describe('EventServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = talentModule.v4beta1.EventServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = talentModule.v4beta1.EventServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = talentModule.v4beta1.EventServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new talentModule.v4beta1.EventServiceClient();
+    assert(client);
+  });
+
   describe('createClientEvent', () => {
     it('invokes createClientEvent without error', done => {
       const client = new talentModule.v4beta1.EventServiceClient({
@@ -902,6 +988,27 @@ describe('EventServiceClient', () => {
   });
 });
 describe('JobServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = talentModule.v4beta1.JobServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = talentModule.v4beta1.JobServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = talentModule.v4beta1.JobServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new talentModule.v4beta1.JobServiceClient();
+    assert(client);
+  });
+
   describe('createJob', () => {
     it('invokes createJob without error', done => {
       const client = new talentModule.v4beta1.JobServiceClient({
@@ -1466,8 +1573,213 @@ describe('JobServiceClient', () => {
       });
     });
   });
+
+  describe('batchCreateJobs', function() {
+    it('invokes batchCreateJobs without error', done => {
+      const client = new talentModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+      const jobs = [];
+      const request = {
+        parent: formattedParent,
+        jobs: jobs,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchCreateJobs = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .batchCreateJobs(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes batchCreateJobs with error', done => {
+      const client = new talentModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+      const jobs = [];
+      const request = {
+        parent: formattedParent,
+        jobs: jobs,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchCreateJobs = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .batchCreateJobs(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new talentModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.batchCreateJobs
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.batchCreateJobs
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
+
+  describe('batchUpdateJobs', function() {
+    it('invokes batchUpdateJobs without error', done => {
+      const client = new talentModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+      const jobs = [];
+      const request = {
+        parent: formattedParent,
+        jobs: jobs,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchUpdateJobs = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .batchUpdateJobs(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes batchUpdateJobs with error', done => {
+      const client = new talentModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.tenantPath('[PROJECT]', '[TENANT]');
+      const jobs = [];
+      const request = {
+        parent: formattedParent,
+        jobs: jobs,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.batchUpdateJobs = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .batchUpdateJobs(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new talentModule.v4beta1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.batchUpdateJobs
+          .responseDecoder instanceof Function
+      );
+      assert(
+        client._descriptors.longrunning.batchUpdateJobs
+          .metadataDecoder instanceof Function
+      );
+    });
+  });
 });
 describe('ProfileServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = talentModule.v4beta1.ProfileServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = talentModule.v4beta1.ProfileServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = talentModule.v4beta1.ProfileServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new talentModule.v4beta1.ProfileServiceClient();
+    assert(client);
+  });
+
   describe('listProfiles', () => {
     it('invokes listProfiles without error', done => {
       const client = new talentModule.v4beta1.ProfileServiceClient({
@@ -1894,6 +2206,27 @@ describe('ProfileServiceClient', () => {
   });
 });
 describe('TenantServiceClient', () => {
+  it('has servicePath', () => {
+    const servicePath = talentModule.v4beta1.TenantServiceClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = talentModule.v4beta1.TenantServiceClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = talentModule.v4beta1.TenantServiceClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no options', () => {
+    const client = new talentModule.v4beta1.TenantServiceClient();
+    assert(client);
+  });
+
   describe('createTenant', () => {
     it('invokes createTenant without error', done => {
       const client = new talentModule.v4beta1.TenantServiceClient({
@@ -2211,5 +2544,23 @@ function mockSimpleGrpcMethod(expectedRequest, response, error) {
     } else {
       callback(null);
     }
+  };
+}
+
+function mockLongRunningGrpcMethod(expectedRequest, response, error) {
+  return request => {
+    assert.deepStrictEqual(request, expectedRequest);
+    const mockOperation = {
+      promise: function() {
+        return new Promise((resolve, reject) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve([response]);
+          }
+        });
+      },
+    };
+    return Promise.resolve([mockOperation]);
   };
 }

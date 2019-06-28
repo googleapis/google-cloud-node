@@ -16,6 +16,19 @@
  * @namespace google
  */
 /**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.longrunning
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
+
+/**
  * @namespace google.cloud
  */
 /**
@@ -23,12 +36,6 @@
  */
 /**
  * @namespace google.cloud.talent.v4beta1
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.type
  */
 
 'use strict';
@@ -41,6 +48,8 @@ const gapic = Object.freeze({
 /**
  * The `@google-cloud/talent` package has the following named exports:
  *
+ * - `ApplicationServiceClient` - Reference to
+ *   {@link v4beta1.ApplicationServiceClient}
  * - `CompanyServiceClient` - Reference to
  *   {@link v4beta1.CompanyServiceClient}
  * - `CompletionClient` - Reference to
@@ -51,10 +60,12 @@ const gapic = Object.freeze({
  *   {@link v4beta1.JobServiceClient}
  * - `ProfileServiceClient` - Reference to
  *   {@link v4beta1.ProfileServiceClient}
- * - `ResumeServiceClient` - Reference to
- *   {@link v4beta1.ResumeServiceClient}
+ * - `TenantServiceClient` - Reference to
+ *   {@link v4beta1.TenantServiceClient}
  * - `v4beta1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
+ *     - `ApplicationServiceClient` - Reference to
+ *       {@link v4beta1.ApplicationServiceClient}
  *     - `CompanyServiceClient` - Reference to
  *       {@link v4beta1.CompanyServiceClient}
  *     - `CompletionClient` - Reference to
@@ -65,8 +76,8 @@ const gapic = Object.freeze({
  *       {@link v4beta1.JobServiceClient}
  *     - `ProfileServiceClient` - Reference to
  *       {@link v4beta1.ProfileServiceClient}
- *     - `ResumeServiceClient` - Reference to
- *       {@link v4beta1.ResumeServiceClient}
+ *     - `TenantServiceClient` - Reference to
+ *       {@link v4beta1.TenantServiceClient}
  *
  * @module {object} @google-cloud/talent
  * @alias nodejs-talent
@@ -78,10 +89,10 @@ const gapic = Object.freeze({
  * const talent = require('@google-cloud/talent');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new talent.CompanyServiceClient();
+ * const client = new talent.ApplicationServiceClient();
  *
  * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new talent.CompanyServiceClient({
+ * const client = new talent.ApplicationServiceClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
@@ -89,6 +100,8 @@ const gapic = Object.freeze({
 
 /**
  * @type {object}
+ * @property {constructor} ApplicationServiceClient
+ *   Reference to {@link v4beta1.ApplicationServiceClient}
  * @property {constructor} CompanyServiceClient
  *   Reference to {@link v4beta1.CompanyServiceClient}
  * @property {constructor} CompletionClient
@@ -99,13 +112,15 @@ const gapic = Object.freeze({
  *   Reference to {@link v4beta1.JobServiceClient}
  * @property {constructor} ProfileServiceClient
  *   Reference to {@link v4beta1.ProfileServiceClient}
- * @property {constructor} ResumeServiceClient
- *   Reference to {@link v4beta1.ResumeServiceClient}
+ * @property {constructor} TenantServiceClient
+ *   Reference to {@link v4beta1.TenantServiceClient}
  */
 module.exports = gapic.v4beta1;
 
 /**
  * @type {object}
+ * @property {constructor} ApplicationServiceClient
+ *   Reference to {@link v4beta1.ApplicationServiceClient}
  * @property {constructor} CompanyServiceClient
  *   Reference to {@link v4beta1.CompanyServiceClient}
  * @property {constructor} CompletionClient
@@ -116,8 +131,8 @@ module.exports = gapic.v4beta1;
  *   Reference to {@link v4beta1.JobServiceClient}
  * @property {constructor} ProfileServiceClient
  *   Reference to {@link v4beta1.ProfileServiceClient}
- * @property {constructor} ResumeServiceClient
- *   Reference to {@link v4beta1.ResumeServiceClient}
+ * @property {constructor} TenantServiceClient
+ *   Reference to {@link v4beta1.TenantServiceClient}
  */
 module.exports.v4beta1 = gapic.v4beta1;
 

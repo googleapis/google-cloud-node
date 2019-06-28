@@ -24,8 +24,11 @@
  *   An expression specifies a histogram request against matching resources
  *   (for example, jobs, profiles) for searches.
  *
- *   See SearchJobsRequest.histogram_queries and
- *   SearchProfilesRequest.histogram_queries for details about syntax.
+ *   See
+ *   SearchJobsRequest.histogram_queries
+ *   and
+ *   SearchProfilesRequest.histogram_queries
+ *   for details about syntax.
  *
  * @typedef HistogramQuery
  * @memberof google.cloud.talent.v4beta1
@@ -38,7 +41,9 @@ const HistogramQuery = {
 /**
  * Output only.
  *
- * Histogram result that matches HistogramSpec specified in searches.
+ * Histogram result that matches
+ * HistogramQuery specified in
+ * searches.
  *
  * @property {string} histogramQuery
  *   Requested histogram expression.
@@ -48,11 +53,12 @@ const HistogramQuery = {
  *   number of matching entries with corresponding value.
  *
  *   The key format is:
+ *
  *   * (for string histogram) string values stored in the field.
  *   * (for named numeric bucket) name specified in `bucket()` function, like
  *     for `bucket(0, MAX, "non-negative")`, the key will be `non-negative`.
  *   * (for anonymous numeric bucket) range formatted as `<low>-<high>`, for
- *   example, `0-1000`, `MIN-0`, and `0-MAX`.
+ *     example, `0-1000`, `MIN-0`, and `0-MAX`.
  *
  * @typedef HistogramQueryResult
  * @memberof google.cloud.talent.v4beta1

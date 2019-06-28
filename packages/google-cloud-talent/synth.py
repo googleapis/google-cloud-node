@@ -29,12 +29,35 @@ for version in versions:
         "talent", version, config_path="/google/cloud/talent/"
         f"artman_talent_{version}.yaml",
         artman_output_name=f"talent-v4beta1")
-    s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
+    s.copy(library, excludes=['README.md', 'package.json', '.eslintrc.yml'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
-s.copy(templates)
+s.copy(templates, excludes=['.eslintrc.yml'])
+
+# cleanup some hiccups in jsdoc comments.
+s.replace("src/index.js",
+r"""\/\*\*
+ \* @namespace google
+ \*/""",
+r"""
+/**
+ * @namespace google
+ */
+/**
+ * @namespace google.protobuf
+ */
+ /**
+ * @namespace google.longrunning
+ */
+ /**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.type
+ */
+""")
 
 # [START fix-dead-link]
 s.replace('**/doc/google/protobuf/doc_timestamp.js',

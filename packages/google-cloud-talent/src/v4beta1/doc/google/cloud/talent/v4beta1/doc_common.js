@@ -42,9 +42,11 @@ const TimestampRange = {
  *
  * @property {number} locationType
  *   The type of a location, which corresponds to the address lines field of
- *   PostalAddress. For example, "Downtown, Atlanta, GA, USA" has a type of
- *   LocationType#NEIGHBORHOOD, and "Kansas City, KS, USA" has a type of
- *   LocationType#LOCALITY.
+ *   google.type.PostalAddress. For example,
+ *   "Downtown, Atlanta, GA, USA" has a type of
+ *   LocationType.NEIGHBORHOOD,
+ *   and "Kansas City, KS, USA" has a type of
+ *   LocationType.LOCALITY.
  *
  *   The number should be among the values of [LocationType]{@link google.cloud.talent.v4beta1.LocationType}
  *
@@ -64,9 +66,9 @@ const TimestampRange = {
  * @property {number} radiusMiles
  *   Radius in miles of the job location. This value is derived from the
  *   location bounding box in which a circle with the specified radius
- *   centered from LatLng covers the area associated with the job location.
- *   For example, currently, "Mountain View, CA, USA" has a radius of
- *   6.17 miles.
+ *   centered from google.type.LatLng covers the area
+ *   associated with the job location. For example, currently, "Mountain View,
+ *   CA, USA" has a radius of 6.17 miles.
  *
  * @typedef Location
  * @memberof google.cloud.talent.v4beta1
@@ -152,7 +154,9 @@ const Location = {
  * performance of the service.
  *
  * @property {string} domain
- *   Required if allow_missing_ids is unset or `false`.
+ *   Required if
+ *   allow_missing_ids
+ *   is unset or `false`.
  *
  *   The client-defined scope or source of the service call, which typically
  *   is the domain on
@@ -169,7 +173,9 @@ const Location = {
  *   The maximum number of allowed characters is 255.
  *
  * @property {string} sessionId
- *   Required if allow_missing_ids is unset or `false`.
+ *   Required if
+ *   allow_missing_ids
+ *   is unset or `false`.
  *
  *   A unique session identification string. A session is defined as the
  *   duration of an end user's interaction with the service over a certain
@@ -183,7 +189,9 @@ const Location = {
  *   The maximum number of allowed characters is 255.
  *
  * @property {string} userId
- *   Required if allow_missing_ids is unset or `false`.
+ *   Required if
+ *   allow_missing_ids
+ *   is unset or `false`.
  *
  *   A unique user identification string, as determined by the client.
  *   To have the strongest positive impact on search quality
@@ -199,10 +207,16 @@ const Location = {
  * @property {boolean} allowMissingIds
  *   Optional.
  *
- *   If set to `true`, domain, session_id and user_id are optional.
- *   Only set when any of these fields isn't available for some reason. It
- *   is highly recommended not to set this field and provide accurate
- *   domain, session_id and user_id for the best service experience.
+ *   If set to `true`,
+ *   domain,
+ *   session_id and
+ *   user_id are
+ *   optional. Only set when any of these fields isn't available for some
+ *   reason. It is highly recommended not to set this field and provide accurate
+ *   domain,
+ *   session_id and
+ *   user_id for the best
+ *   service experience.
  *
  * @property {Object} deviceInfo
  *   Optional.
@@ -313,8 +327,10 @@ const DeviceInfo = {
  * Custom attribute values that are either filterable or non-filterable.
  *
  * @property {string[]} stringValues
- *   Optional but exactly one of string_values or long_values must
- *   be specified.
+ *   Optional but exactly one of
+ *   string_values
+ *   or long_values
+ *   must be specified.
  *
  *   This field is used to perform a string match (`CASE_SENSITIVE_MATCH` or
  *   `CASE_INSENSITIVE_MATCH`) search.
@@ -326,13 +342,17 @@ const DeviceInfo = {
  *   Empty string isn't allowed.
  *
  * @property {number[]} longValues
- *   Optional but exactly one of string_values or long_values must
- *   be specified.
+ *   Optional but exactly one of
+ *   string_values
+ *   or long_values
+ *   must be specified.
  *
  *   This field is used to perform number range search.
  *   (`EQ`, `GT`, `GE`, `LE`, `LT`) over filterable `long_value`.
  *
- *   Currently at most 1 long_values is supported.
+ *   Currently at most 1
+ *   long_values is
+ *   supported.
  *
  * @property {boolean} filterable
  *   Optional.
@@ -385,26 +405,34 @@ const SpellingCorrection = {
  *   Job compensation information.
  *
  *   At most one entry can be of type
- *   CompensationInfo.CompensationType.BASE, which is
- *   referred as ** base compensation entry ** for the job.
+ *   CompensationInfo.CompensationType.BASE,
+ *   which is referred as **base compensation entry** for the job.
  *
  *   This object should have the same structure as [CompensationEntry]{@link google.cloud.talent.v4beta1.CompensationEntry}
  *
  * @property {Object} annualizedBaseCompensationRange
  *   Output only. Annualized base compensation range. Computed as
- *   base compensation entry's CompensationEntry.compensation times
+ *   base compensation entry's
+ *   CompensationEntry.amount
+ *   times
  *   CompensationEntry.expected_units_per_year.
  *
- *   See CompensationEntry for explanation on compensation annualization.
+ *   See
+ *   CompensationEntry
+ *   for explanation on compensation annualization.
  *
  *   This object should have the same structure as [CompensationRange]{@link google.cloud.talent.v4beta1.CompensationRange}
  *
  * @property {Object} annualizedTotalCompensationRange
  *   Output only. Annualized total compensation range. Computed as
- *   all compensation entries' CompensationEntry.compensation times
+ *   all compensation entries'
+ *   CompensationEntry.amount
+ *   times
  *   CompensationEntry.expected_units_per_year.
  *
- *   See CompensationEntry for explanation on compensation annualization.
+ *   See
+ *   CompensationEntry
+ *   for explanation on compensation annualization.
  *
  *   This object should have the same structure as [CompensationRange]{@link google.cloud.talent.v4beta1.CompensationRange}
  *
@@ -420,9 +448,17 @@ const CompensationInfo = {
    * as base pay, bonus, or other compensation type.
    *
    * Annualization: One compensation entry can be annualized if
-   * - it contains valid amount or range.
-   * - and its expected_units_per_year is set or can be derived.
-   * Its annualized range is determined as (amount or range) times
+   * - it contains valid
+   * amount
+   * or
+   * range.
+   * - and its
+   * expected_units_per_year
+   * is set or can be derived. Its annualized range is determined as
+   * (amount
+   * or
+   * range)
+   * times
    * expected_units_per_year.
    *
    * @property {number} type
@@ -430,7 +466,8 @@ const CompensationInfo = {
    *
    *   Compensation type.
    *
-   *   Default is CompensationUnit.OTHER_COMPENSATION_TYPE.
+   *   Default is
+   *   CompensationType.COMPENSATION_TYPE_UNSPECIFIED.
    *
    *   The number should be among the values of [CompensationType]{@link google.cloud.talent.v4beta1.CompensationType}
    *
@@ -439,7 +476,8 @@ const CompensationInfo = {
    *
    *   Frequency of the specified amount.
    *
-   *   Default is CompensationUnit.OTHER_COMPENSATION_UNIT.
+   *   Default is
+   *   CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED.
    *
    *   The number should be among the values of [CompensationUnit]{@link google.cloud.talent.v4beta1.CompensationUnit}
    *
@@ -468,8 +506,10 @@ const CompensationInfo = {
    *   Optional.
    *
    *   Expected number of units paid each year. If not specified, when
-   *   Job.employment_types is FULLTIME, a default value is inferred
-   *   based on unit. Default values:
+   *   Job.employment_types
+   *   is FULLTIME, a default value is inferred based on
+   *   unit.
+   *   Default values:
    *   - HOURLY: 2080
    *   - DAILY: 260
    *   - WEEKLY: 52
@@ -520,19 +560,30 @@ const CompensationInfo = {
    * The type of compensation.
    *
    * For compensation amounts specified in non-monetary amounts,
-   * describe the compensation scheme in the CompensationEntry.description.
+   * describe the compensation scheme in the
+   * CompensationEntry.description.
    *
    * For example, tipping format is described in
-   * CompensationEntry.description (for example, "expect 15-20% tips based
-   * on customer bill.") and an estimate of the tips provided in
-   * CompensationEntry.amount or CompensationEntry.range ($10 per hour).
+   * CompensationEntry.description
+   * (for example, "expect 15-20% tips based on customer bill.") and an estimate
+   * of the tips provided in
+   * CompensationEntry.amount
+   * or
+   * CompensationEntry.range
+   * ($10 per hour).
    *
-   * For example, equity is described in CompensationEntry.description
+   * For example, equity is described in
+   * CompensationEntry.description
    * (for example, "1% - 2% equity vesting over 4 years, 1 year cliff") and
-   * value estimated in CompensationEntry.amount or
-   * CompensationEntry.range. If no value estimate is possible, units are
-   * CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED and then further
-   * clarified in CompensationEntry.description field.
+   * value estimated in
+   * CompensationEntry.amount
+   * or
+   * CompensationEntry.range.
+   * If no value estimate is possible, units are
+   * CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED
+   * and then further clarified in
+   * CompensationEntry.description
+   * field.
    *
    * @enum {number}
    * @memberof google.cloud.talent.v4beta1
@@ -719,9 +770,11 @@ const Certification = {
  *   Number of characters allowed is 100,000.
  *
  * @property {string} skillNameSnippet
- *   Output only. Skill name snippet shows how the display_name is related
- *   to a search query. It's empty if the display_name isn't related to the
- *   search query.
+ *   Output only. Skill name snippet shows how the
+ *   display_name is related
+ *   to a search query. It's empty if the
+ *   display_name isn't
+ *   related to the search query.
  *
  * @typedef Skill
  * @memberof google.cloud.talent.v4beta1
@@ -1008,7 +1061,8 @@ const EmploymentType = {
    * The job is offered as a contracted position with the understanding
    * that it's converted into a full-time position at the end of the
    * contract. Jobs of this type are also returned by a search for
-   * EmploymentType.CONTRACTOR jobs.
+   * EmploymentType.CONTRACTOR
+   * jobs.
    */
   CONTRACT_TO_HIRE: 4,
 
@@ -1419,10 +1473,11 @@ const PostingRegion = {
 
   /**
    * In addition to exact location matching, job posting is returned when the
-   * LocationFilter in the search query is in the same administrative area
-   * as the returned job posting. For example, if a `ADMINISTRATIVE_AREA` job
-   * is posted in "CA, USA", it's returned if LocationFilter has
-   * "Mountain View".
+   * LocationFilter in the search
+   * query is in the same administrative area as the returned job posting. For
+   * example, if a `ADMINISTRATIVE_AREA` job is posted in "CA, USA", it's
+   * returned if LocationFilter
+   * has "Mountain View".
    *
    * Administrative area refers to top-level administrative subdivision of this
    * country. For example, US state, IT region, UK constituent nation and
@@ -1432,9 +1487,11 @@ const PostingRegion = {
 
   /**
    * In addition to exact location matching, job is returned when
-   * LocationFilter in search query is in the same country as this job.
-   * For example, if a `NATION_WIDE` job is posted in "USA", it's
-   * returned if LocationFilter has 'Mountain View'.
+   * LocationFilter in search
+   * query is in the same country as this job. For example, if a `NATION_WIDE`
+   * job is posted in "USA", it's returned if
+   * LocationFilter has 'Mountain
+   * View'.
    */
   NATION: 2,
 
@@ -1458,6 +1515,11 @@ const SkillProficiencyLevel = {
    * Default value.
    */
   SKILL_PROFICIENCY_LEVEL_UNSPECIFIED: 0,
+
+  /**
+   * Lacks any proficiency in this skill.
+   */
+  UNSKILLED: 6,
 
   /**
    * Have a common knowledge or an understanding of basic techniques and

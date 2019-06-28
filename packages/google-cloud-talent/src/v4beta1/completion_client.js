@@ -55,14 +55,18 @@ class CompletionClient {
    *     API remote host.
    */
   constructor(opts) {
+    opts = opts || {};
     this._descriptors = {};
+
+    const servicePath =
+      opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
     // Ensure that options include the service address and port.
     opts = Object.assign(
       {
         clientConfig: {},
         port: this.constructor.port,
-        servicePath: this.constructor.servicePath,
+        servicePath,
       },
       opts
     );
@@ -154,6 +158,14 @@ class CompletionClient {
   }
 
   /**
+   * The DNS address for this API service - same as servicePath(),
+   * exists for compatibility reasons.
+   */
+  static get apiEndpoint() {
+    return 'jobs.googleapis.com';
+  }
+
+  /**
    * The port for this API service.
    */
   static get port() {
@@ -220,16 +232,25 @@ class CompletionClient {
    *   For more information, see
    *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
    *
-   *   For CompletionType.JOB_TITLE type, only open jobs with the same
-   *   language_codes are returned.
+   *   For
+   *   CompletionType.JOB_TITLE
+   *   type, only open jobs with the same
+   *   language_codes
+   *   are returned.
    *
-   *   For CompletionType.COMPANY_NAME type,
-   *   only companies having open jobs with the same language_codes are
-   *   returned.
+   *   For
+   *   CompletionType.COMPANY_NAME
+   *   type, only companies having open jobs with the same
+   *   language_codes
+   *   are returned.
    *
-   *   For CompletionType.COMBINED type, only open jobs with the same
-   *   language_codes or companies having open jobs with the same
-   *   language_codes are returned.
+   *   For
+   *   CompletionType.COMBINED
+   *   type, only open jobs with the same
+   *   language_codes
+   *   or companies having open jobs with the same
+   *   language_codes
+   *   are returned.
    *
    *   The maximum number of allowed characters is 255.
    * @param {string} [request.company]
@@ -246,13 +267,15 @@ class CompletionClient {
    * @param {number} [request.scope]
    *   Optional.
    *
-   *   The scope of the completion. The defaults is CompletionScope.PUBLIC.
+   *   The scope of the completion. The defaults is
+   *   CompletionScope.PUBLIC.
    *
    *   The number should be among the values of [CompletionScope]{@link google.cloud.talent.v4beta1.CompletionScope}
    * @param {number} [request.type]
    *   Optional.
    *
-   *   The completion topic. The default is CompletionType.COMBINED.
+   *   The completion topic. The default is
+   *   CompletionType.COMBINED.
    *
    *   The number should be among the values of [CompletionType]{@link google.cloud.talent.v4beta1.CompletionType}
    * @param {Object} [options]

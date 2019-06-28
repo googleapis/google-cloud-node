@@ -31,8 +31,9 @@
  *
  *   The token that specifies the current offset (that is, starting result).
  *
- *   Please set the value to ListProfilesResponse.next_page_token to
- *   continue the list.
+ *   Please set the value to
+ *   ListProfilesResponse.next_page_token
+ *   to continue the list.
  *
  * @property {number} pageSize
  *   Optional.
@@ -223,7 +224,8 @@ const DeleteProfileRequest = {
  * @property {Object} profileQuery
  *   Optional.
  *
- *   Search query to execute. See ProfileQuery for more details.
+ *   Search query to execute. See
+ *   ProfileQuery for more details.
  *
  *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
  *
@@ -241,16 +243,18 @@ const DeleteProfileRequest = {
  *   The pageToken, similar to offset enables users of the API to paginate
  *   through the search results. To retrieve the first page of results, set the
  *   pageToken to empty. The search response includes a
- *   nextPageToken field that can be
- *   used to populate the pageToken field for the next page of results. Using
- *   pageToken instead of offset increases the performance of the API,
- *   especially compared to larger offset values.
+ *   nextPageToken
+ *   field that can be used to populate the pageToken field for the next page of
+ *   results. Using pageToken instead of offset increases the performance of the
+ *   API, especially compared to larger offset values.
  *
  * @property {number} offset
  *   Optional.
  *
  *   An integer that specifies the current offset (that is, starting result) in
- *   search results. This field is only considered if page_token is unset.
+ *   search results. This field is only considered if
+ *   page_token
+ *   is unset.
  *
  *   The maximum allowed value is 5000. Otherwise an error is thrown.
  *
@@ -276,18 +280,28 @@ const DeleteProfileRequest = {
  *
  *   * "relevance desc": By descending relevance, as determined by the API
  *      algorithms.
- *   * "update_date desc": Sort by Profile.update_date in descending order
+ *   * "update_time desc": Sort by
+ *   Profile.update_time in
+ *   descending order
  *     (recently updated profiles first).
- *   * "create_date desc": Sort by Profile.create_date in descending order
+ *   * "create_time desc": Sort by
+ *   Profile.create_time in
+ *   descending order
  *     (recently created profiles first).
- *   * "first_name": Sort by PersonStrcuturedName.given_name in ascending
- *     order.
- *   * "first_name desc": Sort by PersonStrcuturedName.given_name in
- *     descending order.
- *   * "last_name": Sort by PersonStrcuturedName.family_name in ascending
- *     order.
- *   * "last_name desc": Sort by PersonStrcuturedName.family_name in
+ *   * "first_name": Sort by
+ *   PersonName.PersonStructuredName.given_name
+ *   in
  *     ascending order.
+ *   * "first_name desc": Sort by
+ *   PersonName.PersonStructuredName.given_name
+ *     in descending order.
+ *   * "last_name": Sort by
+ *   PersonName.PersonStructuredName.family_name
+ *   in
+ *     ascending order.
+ *   * "last_name desc": Sort by
+ *   PersonName.PersonStructuredName.family_name
+ *     in ascending order.
  *
  * @property {boolean} caseSensitiveSort
  *   Optional.
@@ -300,7 +314,8 @@ const DeleteProfileRequest = {
  *   Optional.
  *
  *   A list of expressions specifies histogram requests against matching
- *   profiles for SearchProfilesRequest.
+ *   profiles for
+ *   SearchProfilesRequest.
  *
  *   The expression syntax looks like a function definition with optional
  *   parameters.
@@ -353,13 +368,19 @@ const DeleteProfileRequest = {
  *   * experience_in_months: experience in months. 0 means 0 month to 1 month
  *   (exclusive).
  *   * application_date: The application date specifies application start dates.
- *   See [ApplicationDateFilter for more details.
+ *   See
+ *   [ApplicationDateFilter
+ *   for more details.
  *   * application_outcome_notes: The application outcome reason specifies the
  *   reasons behind the outcome of the job application.
- *   See ApplicationOutcomeNotesFilter for more details.
+ *   See
+ *   ApplicationOutcomeNotesFilter
+ *   for more details.
  *   * application_job_title: The application job title specifies the job
  *   applied for in the application.
- *   See ApplicationJobFilter for more details.
+ *   See
+ *   ApplicationJobFilter
+ *   for more details.
  *   * hirable_status: Hirable status specifies the profile's hirable status.
  *   * string_custom_attribute: String custom attributes. Values can be accessed
  *   via square bracket notation like string_custom_attribute["key1"].
@@ -415,7 +436,8 @@ const SearchProfilesRequest = {
  *   This object should have the same structure as [HistogramQueryResult]{@link google.cloud.talent.v4beta1.HistogramQueryResult}
  *
  * @property {Object[]} summarizedProfiles
- *   The profile entities that match the specified SearchProfilesRequest.
+ *   The profile entities that match the specified
+ *   SearchProfilesRequest.
  *
  *   This object should have the same structure as [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile}
  *
@@ -430,10 +452,12 @@ const SearchProfilesResponse = {
 /**
  * Output only.
  *
- * Profile entry with metadata inside SearchProfilesResponse.
+ * Profile entry with metadata inside
+ * SearchProfilesResponse.
  *
  * @property {Object[]} profiles
- *   A list of profiles that are linked by Profile.cluster_id.
+ *   A list of profiles that are linked by
+ *   Profile.group_id.
  *
  *   This object should have the same structure as [Profile]{@link google.cloud.talent.v4beta1.Profile}
  *
@@ -441,9 +465,10 @@ const SearchProfilesResponse = {
  *   A profile summary shows the profile summary and how the profile matches the
  *   search query.
  *
- *   In profile summary, the profiles with the same Profile.cluster_id are
- *   merged together. Among profiles, same education/employment records may be
- *   slightly different but they are merged into one with best efforts.
+ *   In profile summary, the profiles with the same
+ *   Profile.group_id are merged
+ *   together. Among profiles, same education/employment records may be slightly
+ *   different but they are merged into one with best efforts.
  *
  *   For example, in one profile the school name is "UC Berkeley" and the field
  *   study is "Computer Science" and in another one the school name is

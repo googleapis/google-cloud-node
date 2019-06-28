@@ -13,3 +13,4 @@ rules:
   no-warning-comments: warn
   no-var: error
   prefer-const: error
+  node/no-extraneous-require: off # TODO: remove this exception
