@@ -1154,8 +1154,7 @@ class File extends ServiceObject<File> {
    * remoteFile.createReadStream()
    *   .on('error', function(err) {})
    *   .on('response', function(response) {
-   *     // Server connected and responded with the specified status and
-   * headers.
+   *     // Server connected and responded with the specified status and headers.
    *    })
    *   .on('end', function() {
    *     // The file is fully downloaded.
