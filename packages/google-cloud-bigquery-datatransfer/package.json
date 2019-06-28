@@ -33,7 +33,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "system-test": "mocha system-test/*.js smoke-test/*.js --timeout 600000",
     "fix": "eslint --fix '**/*.js'",
-    "docs-test": "linkinator docs -r --skip 'www.googleapis.com www.gstatic.com/bigquerydatatransfer'",
+    "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -48,7 +48,7 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.6.2",
     "jsdoc-baseline": "^0.1.0",
-    "linkinator": "^1.4.2",
+    "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "power-assert": "^1.6.1",
