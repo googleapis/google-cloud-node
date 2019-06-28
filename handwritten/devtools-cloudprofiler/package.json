@@ -22,7 +22,7 @@
     "proto": "npm run proto:profile && npm run proto:profiler",
     "proto:profiler": "mkdir -p proto && pbjs -t static-module -w commonjs -o proto/profiler.js third_party/googleapis/google/devtools/cloudprofiler/v2/profiler.proto && pbts -o proto/profiler.d.ts proto/profiler.js",
     "license-check": "jsgl --local .",
-    "docs-test": "linkinator docs -r --skip 'circleci.com/gh/googleapis/cloud-profiler-nodejs'",
+    "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
   },
   "author": {
@@ -59,7 +59,7 @@
     "js-green-licenses": "^1.0.0",
     "jsdoc": "^3.6.2",
     "jsdoc-baseline": "^0.1.1",
-    "linkinator": "^1.1.2",
+    "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
     "nock": "^10.0.0",
     "nyc": "^14.1.0",
