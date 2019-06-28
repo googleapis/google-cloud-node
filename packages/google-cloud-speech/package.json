@@ -37,7 +37,7 @@
     "test-no-cover": "mocha test/*.js",
     "test": "npm run cover",
     "fix": "eslint --fix '**/*.js'",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
   },
   "dependencies": {
@@ -63,6 +63,6 @@
     "prettier": "^1.13.5",
     "proxyquire": "^2.1.0",
     "sinon": "^7.0.0",
-    "linkinator": "^1.1.2"
+    "linkinator": "^1.5.0"
   }
 }
