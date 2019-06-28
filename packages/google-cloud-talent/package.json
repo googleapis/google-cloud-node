@@ -33,7 +33,7 @@
     "system-test": "mocha system-test --timeout 600000",
     "test": "nyc mocha",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs -r --skip www.googleapis.com",
+    "docs-test": "linkinator docs",
     "fix": "eslint --fix '**/*.js'"
   },
   "dependencies": {
@@ -48,7 +48,7 @@
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.6.2",
     "jsdoc-baseline": "^0.1.0",
-    "linkinator": "^1.4.2",
+    "linkinator": "^1.5.0",
     "mocha": "^6.1.4",
     "nyc": "^14.0.0",
     "power-assert": "^1.6.0",
