@@ -20,6 +20,12 @@ const parseDuration: (str: string) => number = require('parse-duration');
 
 // Configuration for Profiler.
 export interface Config extends GoogleAuthOptions {
+  /**
+   * The API endpoint of the service used to make requests.
+   * Defaults to `cloudprofiler.googleapis.com`.
+   */
+  apiEndpoint?: string;
+
   // Cloud Console projectId to associate profiles with instead of one read
   // from VM metadata server.
   projectId?: string;
@@ -107,10 +113,6 @@ export interface Config extends GoogleAuthOptions {
   // https://nodejs.org/dist/latest-v9.x/docs/api/timers.html#timers_settimeout_callback_delay_args.
   serverBackoffCapMillis?: number;
 
-  // Allows user to specify API URL other than
-  // https://cloudprofiler.googleapis.com/v2.
-  baseApiUrl?: string;
-
   // Time between profile collection.
   // For testing with startLocal() only.
   localProfilingPeriodMillis?: number;
@@ -148,6 +150,7 @@ export interface Config extends GoogleAuthOptions {
 
 // Interface for an initialized config.
 export interface ProfilerConfig extends GoogleAuthOptions {
+  apiEndpoint: string;
   projectId?: string;
   logLevel: number;
   serviceContext: {service: string; version?: string};
@@ -163,7 +166,6 @@ export interface ProfilerConfig extends GoogleAuthOptions {
   backoffCapMillis: number;
   backoffMultiplier: number;
   serverBackoffCapMillis: number;
-  baseApiUrl: string;
   localProfilingPeriodMillis: number;
   localLogPeriodMillis: number;
   localTimeDurationMillis: number;
@@ -184,7 +186,7 @@ export const defaultConfig = {
   initialBackoffMillis: 60 * 1000, // 1 minute
   backoffCapMillis: parseDuration('1h'),
   backoffMultiplier: 1.3,
-  baseApiUrl: 'https://cloudprofiler.googleapis.com/v2',
+  apiEndpoint: 'cloudprofiler.googleapis.com',
 
   // This is the largest duration for setTimeout which does not cause it to
   // run immediately.

@@ -42,8 +42,11 @@ const parseDuration: (str: string) => number = require('parse-duration');
 
 const fakeCredentials = require('../../ts/test/fixtures/gcloud-credentials.json');
 
-const API = 'https://cloudprofiler.googleapis.com/v2';
-const TEST_API = 'https://test-cloudprofiler.sandbox.googleapis.com/v2';
+const API = 'cloudprofiler.googleapis.com';
+const TEST_API = 'test-cloudprofiler.sandbox.googleapis.com';
+
+const FULL_API = `https://${API}/v2`;
+const FULL_TEST_API = `https://${TEST_API}/v2`;
 
 const testConfig: ProfilerConfig = {
   projectId: 'test-projectId',
@@ -62,12 +65,12 @@ const testConfig: ProfilerConfig = {
   backoffCapMillis: parseDuration('1h'),
   backoffMultiplier: 1.3,
   serverBackoffCapMillis: parseDuration('7d'),
-  baseApiUrl: API,
   localProfilingPeriodMillis: 1000,
   localTimeDurationMillis: 1000,
   localLogPeriodMillis: 1000,
   sourceMapSearchPath: [],
   disableSourceMaps: true,
+  apiEndpoint: API,
 };
 
 nock.disableNetConnect();
@@ -391,7 +394,7 @@ describe('Profiler', () => {
         labels: {instance: 'test-instance'},
       };
       nockOauth2();
-      const apiMock = nock(API)
+      const apiMock = nock(FULL_API)
         .patch('/' + requestProf.name)
         .once()
         .reply(200);
@@ -407,12 +410,12 @@ describe('Profiler', () => {
         labels: {instance: 'test-instance'},
       };
       nockOauth2();
-      const apiMock = nock(TEST_API)
+      const apiMock = nock(FULL_TEST_API)
         .patch('/' + requestProf.name)
         .once()
         .reply(200);
       const config = extend(true, {}, testConfig);
-      config.baseApiUrl = TEST_API;
+      config.apiEndpoint = TEST_API;
       const profiler = new Profiler(config);
       await profiler.profileAndUpload(requestProf);
       assert.strictEqual(apiMock.isDone(), true, 'completed call to test API');
@@ -442,7 +445,7 @@ describe('Profiler', () => {
         labels: {version: config.serviceContext.version},
       };
       nockOauth2();
-      const requestProfileMock = nock(API)
+      const requestProfileMock = nock(FULL_API)
         .post('/projects/' + testConfig.projectId + '/profiles')
         .once()
         .reply(200, response);
@@ -454,7 +457,7 @@ describe('Profiler', () => {
     it('should successfully create profile using non-default api', async () => {
       const config = extend(true, {}, testConfig);
       config.disableHeap = true;
-      config.baseApiUrl = TEST_API;
+      config.apiEndpoint = TEST_API;
       const response = {
         name: 'projects/12345678901/test-projectId',
         profileType: 'WALL',
@@ -467,7 +470,7 @@ describe('Profiler', () => {
         labels: {version: config.serviceContext.version},
       };
       nockOauth2();
-      const requestProfileMock = nock(TEST_API)
+      const requestProfileMock = nock(FULL_TEST_API)
         .post('/projects/' + config.projectId + '/profiles')
         .once()
         .reply(200, response);
@@ -490,7 +493,7 @@ describe('Profiler', () => {
         labels: {version: config.serviceContext.version},
       };
       nockOauth2();
-      const requestProfileMock = nock(API)
+      const requestProfileMock = nock(FULL_API)
         .post('/projects/' + testConfig.projectId + '/profiles')
         .once()
         .reply(200, response);
@@ -504,7 +507,7 @@ describe('Profiler', () => {
       config.disableHeap = true;
       const response = {name: 'projects/12345678901/test-projectId'};
       nockOauth2();
-      const requestProfileMock = nock(API)
+      const requestProfileMock = nock(FULL_API)
         .post('/projects/' + testConfig.projectId + '/profiles')
         .once()
         .reply(200, response);
@@ -597,7 +600,7 @@ describe('Profiler', () => {
         additionalField: 'additionalField',
       };
       nockOauth2();
-      const requestProfileMock = nock(API)
+      const requestProfileMock = nock(FULL_API)
         .post('/projects/' + testConfig.projectId + '/profiles')
         .once()
         .reply(200, response);

@@ -79,9 +79,9 @@ describe('createProfiler', () => {
     localProfilingPeriodMillis: 1000,
     localTimeDurationMillis: 1000,
     localLogPeriodMillis: 10000,
-    baseApiUrl: 'https://cloudprofiler.googleapis.com/v2',
+    apiEndpoint: 'cloudprofiler.googleapis.com',
   };
-  const sourceMapSearchPath: string[] = [];
+
   const disableSourceMapParams = {
     sourceMapSearchPath: ['path'],
     disableSourceMaps: true,
@@ -342,14 +342,14 @@ describe('createProfiler', () => {
     }
   });
 
-  it('should set baseApiUrl to non-default value', async () => {
+  it('should set apiEndpoint to non-default value', async () => {
     metadataStub = sinon.stub(gcpMetadata, 'instance');
     metadataStub.throwsException('cannot access metadata');
 
     const config = Object.assign(
       {
+        apiEndpoint: 'test-cloudprofiler.sandbox.googleapis.com',
         serviceContext: {version: '', service: 'fake-service'},
-        baseApiUrl: 'https://test-cloudprofiler.sandbox.googleapis.com/v2',
       },
       disableSourceMapParams
     );
@@ -358,7 +358,7 @@ describe('createProfiler', () => {
       disableHeap: false,
       disableTime: false,
       logLevel: 2,
-      baseApiUrl: 'https://test-cloudprofiler.sandbox.googleapis.com/v2',
+      apiEndpoint: 'test-cloudprofiler.sandbox.googleapis.com',
     };
     const expConfig = Object.assign(
       {},
