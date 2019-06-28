@@ -46,7 +46,7 @@
     "lint": "eslint .",
     "test": "c8 mocha test/*.js",
     "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs -r --skip 'www.npmjs.org/package/@google-cloud/datacatalog|googleapis.dev/nodejs/datacatalog/latest|cloud.google.com/data-catalog/docs/how-to/search-reference'",
+    "docs-test": "linkinator docs",
     "samples-test": "c8 mocha samples/test/*.js",
     "system-test": "c8 mocha --timeout=5000 system-test/*.js"
   },
