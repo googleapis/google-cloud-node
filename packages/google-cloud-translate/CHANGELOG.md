@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [4.1.1](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.0...v4.1.1) (2019-06-29)
+
+
+### Bug Fixes
+
+* **docs:** link to reference docs section on googleapis.dev ([#298](https://www.github.com/googleapis/nodejs-translate/issues/298)) ([d49a68e](https://www.github.com/googleapis/nodejs-translate/commit/d49a68e))
+
 ## [4.1.0](https://www.github.com/googleapis/nodejs-translate/compare/v4.0.1...v4.1.0) (2019-06-14)
 
 
