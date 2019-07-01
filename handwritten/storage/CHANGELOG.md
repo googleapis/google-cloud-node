@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [3.0.2](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.1...v3.0.2) (2019-07-01)
+
+
+### Bug Fixes
+
+* **docs:** fix sample code in docs ([#759](https://www.github.com/googleapis/nodejs-storage/issues/759)) ([f9e5fd8](https://www.github.com/googleapis/nodejs-storage/commit/f9e5fd8))
+* **docs:** link to reference docs section on googleapis.dev ([#753](https://www.github.com/googleapis/nodejs-storage/issues/753)) ([5e3a96b](https://www.github.com/googleapis/nodejs-storage/commit/5e3a96b))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.0...v3.0.1) (2019-06-14)
 
 
