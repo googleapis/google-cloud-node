@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [0.10.2](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.1...v0.10.2) (2019-07-01)
+
+
+### Bug Fixes
+
+* **docs:** make anchors work in jsdoc ([#375](https://www.github.com/googleapis/nodejs-dialogflow/issues/375)) ([71e9a9c](https://www.github.com/googleapis/nodejs-dialogflow/commit/71e9a9c))
+
 ### [0.10.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.0...v0.10.1) (2019-06-14)
 
 
