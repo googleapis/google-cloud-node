@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-security-center/compare/v0.3.0...v1.0.0) (2019-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade engines field to >=8.10.0 (#93)
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^0.26.0 ([#91](https://www.github.com/googleapis/nodejs-security-center/issues/91)) ([b4708af](https://www.github.com/googleapis/nodejs-security-center/commit/b4708af))
+* **deps:** update dependency google-gax to v1 ([#100](https://www.github.com/googleapis/nodejs-security-center/issues/100)) ([10e455c](https://www.github.com/googleapis/nodejs-security-center/commit/10e455c))
+* drop dependency on lodash.merge ([#105](https://www.github.com/googleapis/nodejs-security-center/issues/105)) ([093822e](https://www.github.com/googleapis/nodejs-security-center/commit/093822e))
+* **docs:** link to reference docs section on googleapis.dev ([#117](https://www.github.com/googleapis/nodejs-security-center/issues/117)) ([df786bf](https://www.github.com/googleapis/nodejs-security-center/commit/df786bf))
+* **docs:** move to new client docs URL ([#114](https://www.github.com/googleapis/nodejs-security-center/issues/114)) ([c8e406e](https://www.github.com/googleapis/nodejs-security-center/commit/c8e406e))
+* import run_asset_discovery_response.proto ([#119](https://www.github.com/googleapis/nodejs-security-center/issues/119)) ([8fed12f](https://www.github.com/googleapis/nodejs-security-center/commit/8fed12f))
+* include 'x-goog-request-params' header in requests ([#77](https://www.github.com/googleapis/nodejs-security-center/issues/77)) ([2556bb7](https://www.github.com/googleapis/nodejs-security-center/commit/2556bb7))
+
+
+### Build System
+
+* upgrade engines field to >=8.10.0 ([#93](https://www.github.com/googleapis/nodejs-security-center/issues/93)) ([3714719](https://www.github.com/googleapis/nodejs-security-center/commit/3714719))
+
+
+### Features
+
+* asset path template & matchers ([#84](https://www.github.com/googleapis/nodejs-security-center/issues/84)) ([3c4bc9a](https://www.github.com/googleapis/nodejs-security-center/commit/3c4bc9a))
+* support apiEndpoint override in client constructor ([#112](https://www.github.com/googleapis/nodejs-security-center/issues/112)) ([58ddc40](https://www.github.com/googleapis/nodejs-security-center/commit/58ddc40))
+
 ## v0.3.0
 
 03-14-2019 07:55 PDT
@@ -104,4 +132,3 @@ This is the initial release of the Cloud Security Center API Node.js client libr
 - remove CONTRIBUTORS
 - license header on npm-install-retry
 - add more scaffolding
-
