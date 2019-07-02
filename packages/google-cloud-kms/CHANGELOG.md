@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.2.1...v1.3.0) (2019-07-02)
+
+
+### Features
+
+* add IAM Policy Options ([#186](https://www.github.com/googleapis/nodejs-kms/issues/186)) ([7474dff](https://www.github.com/googleapis/nodejs-kms/commit/7474dff))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-kms/compare/v1.2.0...v1.2.1) (2019-06-27)
 
 
