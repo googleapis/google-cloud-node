@@ -16,6 +16,10 @@
  * @namespace google
  */
 /**
+ * @namespace google.type
+ */
+
+/**
  * @namespace google.cloud
  */
 /**

@@ -45,6 +45,12 @@ const SetIamPolicyRequest = {
  *   REQUIRED: The resource for which the policy is being requested.
  *   See the operation documentation for the appropriate value for this field.
  *
+ * @property {Object} options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`. This field is only used by Cloud IAM.
+ *
+ *   This object should have the same structure as [GetPolicyOptions]{@link google.iam.v1.GetPolicyOptions}
+ *
  * @typedef GetIamPolicyRequest
  * @memberof google.iam.v1
  * @see [google.iam.v1.GetIamPolicyRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/iam/v1/iam_policy.proto}

@@ -35,6 +35,20 @@ s.replace('src/v1*/doc/google/cloud/securitycenter/v1*/doc_source.js',
         r"\[\\p\{L\}\\p\{N\}\]\(https:\/\/cloud\.google\.com\{\\p\{L\}\\p\{N\}_- \]\{0\,30\}\[\\p\{L\}\\p\{N\}\]\)\?",
         r"`\[\p{L}\p{N}]({\p{L}\p{N}_- ]{0,30}[\p{L}\p{N}])?`")
 
+# cleanup some hiccups in jsdoc comments.
+s.replace("src/index.js",
+r"""\/\*\*
+ \* @namespace google
+ \*/""",
+r"""
+/**
+ * @namespace google
+ */
+/**
+ * @namespace google.type
+ */
+""")
+
 # [START fix-dead-link]
 s.replace('**/doc/google/protobuf/doc_timestamp.js',
         'https:\/\/cloud\.google\.com[\s\*]*http:\/\/(.*)[\s\*]*\)',
