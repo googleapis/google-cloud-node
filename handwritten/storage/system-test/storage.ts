@@ -94,6 +94,10 @@ import {
   Iam,
 } from '../src';
 import * as nock from 'nock';
+
+interface ErrorCallbackFunction {
+  (err: Error | null): void;
+}
 const {PubSub} = require('@google-cloud/pubsub');
 
 // When set to true, skips all tests that is not compatible for
@@ -1523,7 +1527,10 @@ describe('storage', () => {
         it(
           'bucket#createNotification',
           doubleTest(
-            (options: CreateNotificationOptions, done: async.ErrorCallback) => {
+            (
+              options: CreateNotificationOptions,
+              done: ErrorCallbackFunction
+            ) => {
               bucketNonWhitelist.createNotification(
                 topicName,
                 options,
@@ -2118,7 +2125,7 @@ describe('storage', () => {
           });
 
           // tslint:disable-next-line no-any
-          function upload(opts: any, callback: async.ErrorCallback) {
+          function upload(opts: any, callback: ErrorCallbackFunction) {
             const ws = file.createWriteStream();
             let sizeStreamed = 0;
 

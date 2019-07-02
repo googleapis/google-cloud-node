@@ -16,7 +16,6 @@
 
 import {DecorateRequestOptions, Metadata, util} from '@google-cloud/common';
 import * as assert from 'assert';
-import * as async from 'async';
 import * as proxyquire from 'proxyquire';
 
 // tslint:disable-next-line:variable-name no-any
@@ -537,43 +536,30 @@ describe('storage/AclRoleAccessorMethods', () => {
   });
 
   describe('_assignAccessMethods', () => {
-    it('should call parent method', done => {
+    it('should call parent method', async () => {
       const userName = 'email@example.com';
       const role = 'fakerole';
 
-      aclEntity.add = (options: {}, callback: Function) => {
+      aclEntity.add = async (options: {}) => {
         assert.deepStrictEqual(options, {
           entity: 'user-' + userName,
           role,
         });
-
-        callback();
       };
 
-      aclEntity.delete = (options: {}, callback: Function) => {
+      aclEntity.delete = async (options: {}) => {
         assert.deepStrictEqual(options, {
           entity: 'allUsers',
           role,
         });
-
-        callback();
       };
 
       aclEntity._assignAccessMethods(role);
 
-      async.parallel(
-        [
-          next => {
-            // The method name should be in plural form. (fakeroles vs
-            // fakerole)
-            aclEntity.fakeroles.addUser(userName, next);
-          },
-          next => {
-            aclEntity.fakeroles.deleteAllUsers(next);
-          },
-        ],
-        done
-      );
+      await Promise.all([
+        aclEntity.fakeroles.addUser(userName),
+        aclEntity.fakeroles.deleteAllUsers(),
+      ]);
     });
 
     it('should return the parent methods return value', () => {
