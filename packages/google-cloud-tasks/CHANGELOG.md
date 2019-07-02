@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.1.2...v1.2.0) (2019-07-02)
+
+
+### Features
+
+* add support for IAM policy options ([#255](https://www.github.com/googleapis/nodejs-tasks/issues/255)) ([7c7b0be](https://www.github.com/googleapis/nodejs-tasks/commit/7c7b0be))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-tasks/compare/v1.1.1...v1.1.2) (2019-06-26)
 
 
