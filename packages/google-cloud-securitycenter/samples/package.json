@@ -1,12 +1,11 @@
 {
   "name": "nodejs-security-center-samples",
-  "main": "quickstart.js",
   "private": true,
   "engines": {
     "node": ">=8"
   },
   "scripts": {
-    "test": "mocha system-test"
+    "test": "mocha system-test/ --recursive --timeout 6000000"
   },
   "license": "Apache-2.0",
   "dependencies": {
@@ -14,6 +13,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.0.0"
+    "execa": "^1.0.0",
+    "mocha": "^6.0.2"
   }
 }
