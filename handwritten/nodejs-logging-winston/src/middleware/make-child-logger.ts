@@ -17,15 +17,6 @@
 import * as winston from 'winston';
 import {LOGGING_TRACE_KEY} from '../index';
 
-// TODO: winston2 support.
 export function makeChildLogger(logger: winston.Logger, trace: string) {
-  const childLogger = Object.create(logger, {
-    write: {
-      value(info: winston.LogEntry) {
-        info[LOGGING_TRACE_KEY] = trace;
-        return logger.write(info);
-      },
-    },
-  });
-  return childLogger;
+  return logger.child({[LOGGING_TRACE_KEY]: trace});
 }
