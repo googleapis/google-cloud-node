@@ -59,7 +59,7 @@ describe('makeChildLogger', () => {
     assert.strictEqual(trace, FAKE_TRACE);
   });
 
-  it('should overwrite existing LOGGING_TRACE_KEY value', () => {
+  it('should not overwrite existing LOGGING_TRACE_KEY value', () => {
     const child = makeChildLogger(LOGGER, FAKE_TRACE);
     let trace;
     // tslint:disable-next-line:no-any
@@ -67,6 +67,6 @@ describe('makeChildLogger', () => {
       trace = info[LOGGING_TRACE_KEY];
     };
     child.debug('hello world', {[LOGGING_TRACE_KEY]: 'to-be-clobbered'});
-    assert.strictEqual(trace, FAKE_TRACE);
+    assert.notStrictEqual(trace, FAKE_TRACE);
   });
 });
