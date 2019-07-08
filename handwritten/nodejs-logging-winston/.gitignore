@@ -2,6 +2,7 @@
 **/node_modules
 .coverage
 .nyc_output
+.vscode
 docs/
 out/
 build/
