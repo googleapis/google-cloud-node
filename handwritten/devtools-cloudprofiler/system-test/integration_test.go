@@ -235,7 +235,10 @@ func TestAgentIntegration(t *testing.T) {
 				t.Fatalf("failed to initialize startup script: %v", err)
 			}
 
-			gceTr.StartInstance(ctx, &tc.InstanceConfig)
+			err := gceTr.StartInstance(ctx, &tc.InstanceConfig)
+			if err != nil {
+				t.Fatalf("failed to start GCE instance: %v", err)
+			}
 			defer func() {
 				if gceTr.DeleteInstance(ctx, &tc.InstanceConfig); err != nil {
 					t.Fatal(err)
@@ -252,7 +255,7 @@ func TestAgentIntegration(t *testing.T) {
 			endTime := timeNow.Format(time.RFC3339)
 			startTime := timeNow.Add(-1 * time.Hour).Format(time.RFC3339)
 			for _, wantProfile := range tc.wantProfiles {
-				pr, err := gceTr.TestRunner.QueryProfiles(tc.ProjectID, tc.name, startTime, endTime, wantProfile.profileType)
+				pr, err := gceTr.TestRunner.QueryProfilesWithZone(tc.ProjectID, tc.name, startTime, endTime, wantProfile.profileType, tc.Zone)
 				if err != nil {
 					t.Errorf("QueryProfiles(%s, %s, %s, %s, %s) got error: %v", tc.ProjectID, tc.name, startTime, endTime, wantProfile.profileType, err)
 					continue
