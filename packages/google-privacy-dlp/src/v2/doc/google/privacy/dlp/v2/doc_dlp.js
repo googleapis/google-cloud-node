@@ -3278,6 +3278,11 @@ const JobTrigger = {
  *
  *   This object should have the same structure as [PublishSummaryToCscc]{@link google.privacy.dlp.v2.PublishSummaryToCscc}
  *
+ * @property {Object} publishFindingsToCloudDataCatalog
+ *   Publish findings to Cloud Datahub.
+ *
+ *   This object should have the same structure as [PublishFindingsToCloudDataCatalog]{@link google.privacy.dlp.v2.PublishFindingsToCloudDataCatalog}
+ *
  * @property {Object} jobNotificationEmails
  *   Enable email notification to project owners and editors on job's
  *   completion/failure.
@@ -3345,6 +3350,25 @@ const Action = {
    * @see [google.privacy.dlp.v2.Action.PublishSummaryToCscc definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
    */
   PublishSummaryToCscc: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
+   * Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+   * results of the DlpJob will be applied to the entry for the resource scanned
+   * in Cloud Data Catalog. Any labels previously written by another DlpJob will
+   * be deleted. InfoType naming patterns are strictly enforced when using this
+   * feature. Note that the findings will be persisted in Cloud Data Catalog
+   * storage and are governed by Data Catalog service-specific policy, see
+   * https://cloud.google.com/terms/service-terms
+   * Only a single instance of this action can be specified and only allowed if
+   * all resources being scanned are BigQuery tables.
+   * Compatible with: Inspect
+   * @typedef PublishFindingsToCloudDataCatalog
+   * @memberof google.privacy.dlp.v2
+   * @see [google.privacy.dlp.v2.Action.PublishFindingsToCloudDataCatalog definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/privacy/dlp/v2/dlp.proto}
+   */
+  PublishFindingsToCloudDataCatalog: {
     // This is for documentation. Actual contents will be loaded by gRPC.
   },
 
