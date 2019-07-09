@@ -190,7 +190,7 @@ __Usage:__
 
 ### Occurrence PubSub
 
-Polls a specified PubSub subscription for Occurrences.  Requires a subscription to a topic named 'container-analysis-occurrences-v1beta'
+Polls a specified PubSub subscription for Occurrences.  Requires a subscription to a topic named 'container-analysis-occurrences-v1'
 
 View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/occurrencePubSub.js).
 
