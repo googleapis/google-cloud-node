@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.3.1...v1.4.0) (2019-07-09)
+
+
+### Features
+
+* add DataCatalog action to DlpJobs ([#317](https://www.github.com/googleapis/nodejs-dlp/issues/317)) ([92d0252](https://www.github.com/googleapis/nodejs-dlp/commit/92d0252))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-dlp/compare/v1.3.0...v1.3.1) (2019-06-26)
 
 
