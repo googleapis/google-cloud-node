@@ -35,7 +35,7 @@
     "eslint-plugin-node": "^9.0.1",
     "eslint-plugin-prettier": "^3.0.1",
     "jsdoc": "^3.6.2",
-    "jsdoc-baseline": "git+https://github.com/hegemonic/jsdoc-baseline.git",
+    "jsdoc-baseline": "^0.1.1",
     "linkinator": "^1.4.0",
     "mocha": "^6.0.0",
     "prettier": "^1.17.0",
