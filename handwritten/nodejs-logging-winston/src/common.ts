@@ -148,6 +148,12 @@ export class LoggingCommon {
       resource: this.resource,
     };
 
+    // If the metadata contains a logName property, promote it to the entry
+    // metadata.
+    if (metadata.logName) {
+      entryMetadata.logName = metadata.logName;
+    }
+
     // If the metadata contains a httpRequest property, promote it to the
     // entry metadata. This allows Stackdriver to use request log formatting.
     // https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#HttpRequest
@@ -193,6 +199,7 @@ export class LoggingCommon {
       delete data.metadata!.httpRequest;
       delete data.metadata!.labels;
       delete data.metadata!.timestamp;
+      delete data.metadata!.logName;
     }
 
     const entry = this.stackdriverLog.entry(entryMetadata, data);
@@ -208,4 +215,5 @@ type MetadataArg = {
   httpRequest?: types.HttpRequest;
   labels?: {};
   timestamp?: {};
+  logName?: string;
 } & {[key: string]: string | {}};
