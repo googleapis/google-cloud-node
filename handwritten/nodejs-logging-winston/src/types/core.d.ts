@@ -141,6 +141,7 @@ export interface StackdriverEntryMetadata {
   labels?: {};
   trace?: {};
   timestamp?: Date;
+  logName?: string;
 }
 
 export enum STACKDRIVER_LOGGING_LEVELS {

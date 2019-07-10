@@ -18,26 +18,29 @@ import * as assert from 'assert';
 import {GCPEnv} from 'google-auth-library';
 import {LogEntry} from 'winston';
 import * as TransportStream from 'winston-transport';
+import * as winston from 'winston';
+import {Options} from '../../src/types/core';
 
 const proxyquire = require('proxyquire');
 
 // types-only import. Actual require is done through proxyquire below.
-import {MiddlewareOptions} from '../../src/middleware/express';
 
 const FAKE_PROJECT_ID = 'project-🦄';
 const FAKE_GENERATED_MIDDLEWARE = () => {};
 const FAKE_ENVIRONMENT = 'FAKE_ENVIRONMENT';
 
 let authEnvironment: string;
-let passedOptions: Array<MiddlewareOptions | undefined>;
+let passedOptions: Array<Options | undefined>;
+let transport: TransportStream | undefined;
 let loggedEntry: LogEntry;
 
 class FakeLoggingWinston extends TransportStream {
   // tslint:disable-next-line:no-any Doing "just enough" faking.
   common: any;
 
-  constructor(options: MiddlewareOptions) {
+  constructor(options: Options) {
     super(options);
+    transport = this;
     passedOptions.push(options);
     this.common = {
       stackdriverLog: {
@@ -73,18 +76,19 @@ function fakeMakeMiddleware(
   return FAKE_GENERATED_MIDDLEWARE;
 }
 
-const {middleware, APP_LOG_SUFFIX} = proxyquire(
-  '../../src/middleware/express',
-  {
-    '../index': {LoggingWinston: FakeLoggingWinston},
-    '@google-cloud/logging': {
-      middleware: {express: {makeMiddleware: fakeMakeMiddleware}},
-    },
-  }
-);
+const {makeMiddleware} = proxyquire('../../src/middleware/express', {
+  '../index': {LoggingWinston: FakeLoggingWinston},
+  '@google-cloud/logging': {
+    middleware: {express: {makeMiddleware: fakeMakeMiddleware}},
+  },
+});
 
 describe('middleware/express', () => {
+  let logger: winston.Logger;
+
   beforeEach(() => {
+    logger = winston.createLogger();
+    transport = undefined;
     passedOptions = [];
     passedProjectId = undefined;
     passedEmitRequestLog = undefined;
@@ -92,49 +96,33 @@ describe('middleware/express', () => {
   });
 
   it('should create and return a middleware', async () => {
-    const {mw} = await middleware();
+    const mw = await makeMiddleware(logger);
     assert.strictEqual(mw, FAKE_GENERATED_MIDDLEWARE);
   });
 
-  it('should generate two loggers with default logName and level', async () => {
-    await middleware();
-    // Should generate two loggers with the expected names.
-    assert.ok(passedOptions);
-    assert.strictEqual(passedOptions.length, 2);
-    assert.ok(
-      passedOptions.some(
-        option => option!.logName === `winston_log_${APP_LOG_SUFFIX}`
-      )
-    );
-    assert.ok(passedOptions.some(option => option!.logName === `winston_log`));
-    assert.ok(passedOptions.every(option => option!.level === 'info'));
+  it('should add a transport to the logger', async () => {
+    await makeMiddleware(logger);
+    assert.strictEqual(logger.transports.length, 1);
+    assert.strictEqual(logger.transports[0], transport);
   });
 
-  it('should prefer user-provided logName and level', async () => {
-    const LOGNAME = '㏒';
-    const LEVEL = 'fatal';
-    const OPTIONS = {logName: LOGNAME, level: LEVEL};
-    await middleware(OPTIONS);
+  it('should create a transport with the correct logName', async () => {
+    await makeMiddleware(logger);
     assert.ok(passedOptions);
-    assert.strictEqual(passedOptions.length, 2);
-    assert.ok(
-      passedOptions.some(
-        option => option!.logName === `${LOGNAME}_${APP_LOG_SUFFIX}`
-      )
-    );
-    assert.ok(passedOptions.some(option => option!.logName === LOGNAME));
-    assert.ok(passedOptions.every(option => option!.level === LEVEL));
+    assert.strictEqual(passedOptions.length, 1);
+    const [options] = passedOptions;
+    assert.strictEqual(options!.logName, `winston_log`);
   });
 
   it('should acquire the projectId and pass to makeMiddleware', async () => {
-    await middleware();
+    await makeMiddleware(logger);
     assert.strictEqual(passedProjectId, FAKE_PROJECT_ID);
   });
 
   [GCPEnv.APP_ENGINE, GCPEnv.CLOUD_FUNCTIONS].forEach(env => {
     it(`should not generate the request logger on ${env}`, async () => {
       authEnvironment = env;
-      await middleware();
+      await makeMiddleware(logger);
       assert.ok(passedOptions);
       assert.strictEqual(passedOptions.length, 1);
       // emitRequestLog parameter to makeChildLogger should be undefined.

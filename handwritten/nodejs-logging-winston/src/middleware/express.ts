@@ -16,6 +16,7 @@
 
 import {
   HttpRequest,
+  Log,
   middleware as commonMiddleware,
 } from '@google-cloud/logging';
 import {GCPEnv} from 'google-auth-library';
@@ -27,32 +28,18 @@ import * as types from '../types/core';
 
 import {makeChildLogger} from './make-child-logger';
 
-export const APP_LOG_SUFFIX = 'applog';
+export const REQUEST_LOG_SUFFIX = '_reqlog';
 
-export interface MiddlewareOptions extends types.Options {
-  level?: string;
-  levels?: winston.config.AbstractConfigSetLevels;
-}
+export async function makeMiddleware(
+  logger: winston.Logger,
+  options?: types.Options
+) {
+  options = {logName: 'winston_log', ...options};
 
-export async function middleware(options?: MiddlewareOptions) {
-  const defaultOptions = {
-    logName: 'winston_log',
-    level: 'info',
-    levels: winston.config.syslog.levels,
-  };
-  options = Object.assign({}, defaultOptions, options);
+  const transport = new LoggingWinston(options);
+  logger.add(transport);
 
-  const loggingWinstonApp = new LoggingWinston({
-    ...options,
-    logName: `${options.logName}_${APP_LOG_SUFFIX}`,
-  });
-  const logger = winston.createLogger({
-    level: options.level,
-    levels: options.levels,
-    transports: [loggingWinstonApp],
-  });
-
-  const auth = loggingWinstonApp.common.stackdriverLog.logging.auth;
+  const auth = transport.common.stackdriverLog.logging.auth;
   const [env, projectId] = await Promise.all([
     auth.getEnv(),
     auth.getProjectId(),
@@ -62,16 +49,18 @@ export async function middleware(options?: MiddlewareOptions) {
   // parent request log entry that all the request specific logs ("app logs")
   // will nest under. GAE and GCF generate the parent request logs
   // automatically.
-  let emitRequestLog;
+  let emitRequestLogEntry;
   if (env !== GCPEnv.APP_ENGINE && env !== GCPEnv.CLOUD_FUNCTIONS) {
-    const loggingWinstonReq = new LoggingWinston(options);
-    const requestLogger = winston.createLogger({
-      level: options.level,
-      levels: options.levels,
-      transports: [loggingWinstonReq],
-    });
-    emitRequestLog = (httpRequest: HttpRequest, trace: string) => {
-      requestLogger.info({
+    const requestLogName = Log.formatName_(
+      projectId,
+      `${options.logName!}${REQUEST_LOG_SUFFIX}`
+    );
+
+    emitRequestLogEntry = (httpRequest: HttpRequest, trace: string) => {
+      logger.info({
+        // The request logs must have a log name distinct from the app logs
+        // for log correlation to work.
+        logName: requestLogName,
         [LOGGING_TRACE_KEY]: trace,
         httpRequest,
         message: httpRequest.requestUrl || 'http request',
@@ -79,14 +68,9 @@ export async function middleware(options?: MiddlewareOptions) {
     };
   }
 
-  return {
-    logger,
-    mw: commonMiddleware.express.makeMiddleware(
-      projectId,
-      (trace: string) => {
-        return makeChildLogger(logger, trace);
-      },
-      emitRequestLog
-    ),
-  };
+  return commonMiddleware.express.makeMiddleware(
+    projectId,
+    (trace: string) => makeChildLogger(logger, trace),
+    emitRequestLogEntry
+  );
 }

@@ -18,6 +18,8 @@ import * as assert from 'assert';
 import delay from 'delay';
 import * as uuid from 'uuid';
 import {express as elb} from '../src/index';
+import * as winston from 'winston';
+import {REQUEST_LOG_SUFFIX} from '../src/middleware/express';
 
 const {Logging} = require('@google-cloud/logging');
 const logging = new Logging();
@@ -27,23 +29,20 @@ const TEST_TIMEOUT = WRITE_CONSISTENCY_DELAY_MS + 10 * 1000;
 const LOG_NAME = `winston-system-test-${uuid.v4()}`;
 
 describe(__filename, () => {
-  // tslint:disable-next-line:no-any
-  let logger: any;
-  // tslint:disable-next-line:no-any
-  let mw: any;
-
-  before(async () => {
-    ({logger, mw} = await elb.middleware({logName: LOG_NAME, level: 'info'}));
-  });
-
   describe('global logger', () => {
     it('should properly write log entries', async () => {
+      const logger = winston.createLogger();
+      const mw = await elb.makeMiddleware(logger, {
+        logName: LOG_NAME,
+        level: 'info',
+      });
+
       const LOG_MESSAGE = `unique log message ${uuid.v4()}`;
       logger.info(LOG_MESSAGE);
 
       await delay(WRITE_CONSISTENCY_DELAY_MS);
 
-      const log = logging.log(`${LOG_NAME}_applog`);
+      const log = logging.log(LOG_NAME);
       const entries = (await log.getEntries({pageSize: 1}))[0];
       assert.strictEqual(entries.length, 1);
       assert.strictEqual(LOG_MESSAGE, entries[0].data.message);
@@ -51,43 +50,65 @@ describe(__filename, () => {
   });
 
   describe('request logging middleware', () => {
-    it('should write request correlated log entries', done => {
-      const LOG_MESSAGE = `correlated log message ${uuid.v4()}`;
-      const fakeRequest = {headers: {fake: 'header'}};
-      const fakeResponse = {};
-      const next = async () => {
-        // At this point fakeRequest.log should have been installed.
+    it('should write request correlated log entries', () => {
+      return new Promise(async resolve => {
+        const logger = winston.createLogger();
+        const mw = await elb.makeMiddleware(logger, {
+          logName: LOG_NAME,
+          level: 'info',
+        });
+
+        const LOG_MESSAGE = `correlated log message ${uuid.v4()}`;
+        const fakeRequest = {
+          headers: {
+            'user-agent': 'Mocha/test-case',
+          },
+          statusCode: 200,
+          originalUrl: '/foo/bar',
+          method: 'PUSH',
+        };
+        const fakeResponse = {
+          getHeader: (name: string) => {
+            return name === 'Content-Length'
+              ? 4104
+              : `header-value-for-${name}`;
+          },
+        };
+
+        const next = async () => {
+          // At this point fakeRequest.log should have been installed.
+          // tslint:disable-next-line:no-any
+          (fakeRequest as any).log.info(LOG_MESSAGE);
+
+          await delay(WRITE_CONSISTENCY_DELAY_MS);
+
+          const appLog = logging.log(LOG_NAME);
+          const appLogEntries = (await appLog.getEntries({pageSize: 1}))[0];
+          assert.strictEqual(appLogEntries.length, 1);
+          const [appLogEntry] = appLogEntries;
+          assert.strictEqual(LOG_MESSAGE, appLogEntry.data.message);
+          assert(appLogEntry.metadata.trace, 'should have a trace property');
+          assert(appLogEntry.metadata.trace.match(/projects\/.*\/traces\/.*/));
+          assert.strictEqual(appLogEntry.metadata.severity, 'INFO');
+
+          const requestLog = logging.log(`${LOG_NAME}${REQUEST_LOG_SUFFIX}`);
+          const requestLogEntries = (await requestLog.getEntries({
+            pageSize: 1,
+          }))[0];
+          assert.strictEqual(requestLogEntries.length, 1);
+          const [requestLogEntry] = requestLogEntries;
+          assert.strictEqual(
+            requestLogEntry.metadata.trace,
+            appLogEntry.metadata.trace
+          );
+
+          resolve();
+        };
+
+        // Call middleware with mocks.
         // tslint:disable-next-line:no-any
-        (fakeRequest as any).log.info(LOG_MESSAGE);
-
-        await delay(WRITE_CONSISTENCY_DELAY_MS);
-
-        const appLog = logging.log(`${LOG_NAME}_applog`);
-        const appLogEntries = (await appLog.getEntries({pageSize: 1}))[0];
-        assert.strictEqual(appLogEntries.length, 1);
-        const [appLogEntry] = appLogEntries;
-        assert.strictEqual(LOG_MESSAGE, appLogEntry.data.message);
-        assert(appLogEntry.metadata.trace, 'should have a trace property');
-        assert(appLogEntry.metadata.trace.match(/projects\/.*\/traces\/.*/));
-        assert.strictEqual(appLogEntry.metadata.severity, 'INFO');
-
-        const requestLog = logging.log(LOG_NAME);
-        const requestLogEntries = (await requestLog.getEntries({
-          pageSize: 1,
-        }))[0];
-        assert.strictEqual(requestLogEntries.length, 1);
-        const [requestLogEntry] = requestLogEntries;
-        assert.strictEqual(
-          requestLogEntry.metadata.trace,
-          appLogEntry.metadata.trace
-        );
-
-        done();
-      };
-
-      // Call middleware with mocks.
-      // tslint:disable-next-line:no-any
-      mw(fakeRequest as any, fakeResponse as any, next);
+        mw(fakeRequest as any, fakeResponse as any, next);
+      });
     }).timeout(TEST_TIMEOUT);
   });
 });
