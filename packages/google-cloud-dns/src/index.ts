@@ -62,7 +62,7 @@ export type CreateZoneResponse = [Zone, Metadata];
 export interface DNSOptions extends GoogleAuthOptions {
   /**
    * The API endpoint of the service used to make requests.
-   * Defaults to `www.googleapis.com`.
+   * Defaults to `dns.googleapis.com`.
    */
   apiEndpoint?: string;
 }
@@ -127,7 +127,7 @@ export interface DNSOptions extends GoogleAuthOptions {
 class DNS extends Service {
   getZonesStream: (query: GetZonesRequest) => Stream;
   constructor(options: DNSOptions = {}) {
-    options.apiEndpoint = options.apiEndpoint || 'www.googleapis.com';
+    options.apiEndpoint = options.apiEndpoint || 'dns.googleapis.com';
     const config = {
       apiEndpoint: options.apiEndpoint,
       baseUrl: `https://${options.apiEndpoint}/dns/v1`,

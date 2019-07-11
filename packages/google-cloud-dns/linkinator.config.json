@@ -1,7 +1,6 @@
 {
   "recurse": true,
   "skip": [
-    "https://codecov.io/gh/googleapis/",
-    "www.googleapis.com"
+    "https://codecov.io/gh/googleapis/"
   ]
 }
