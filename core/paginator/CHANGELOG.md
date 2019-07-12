@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-paginator/compare/v1.0.2...v2.0.0) (2019-07-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* rewrite streaming logic (#136)
+
+### Code Refactoring
+
+* rewrite streaming logic ([#136](https://www.github.com/googleapis/nodejs-paginator/issues/136)) ([641d82d](https://www.github.com/googleapis/nodejs-paginator/commit/641d82d))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-paginator/compare/v1.0.1...v1.0.2) (2019-06-26)
 
 
