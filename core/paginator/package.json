@@ -52,9 +52,7 @@
   },
   "dependencies": {
     "arrify": "^2.0.0",
-    "extend": "^3.0.1",
-    "split-array-stream": "^2.0.0",
-    "stream-events": "^1.0.4"
+    "extend": "^3.0.1"
   },
   "engines": {
     "node": ">=8.10.0"

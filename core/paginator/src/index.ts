@@ -20,83 +20,8 @@
 
 import arrify = require('arrify');
 import * as extend from 'extend';
-import {split} from 'split-array-stream';
-import {Transform, TransformOptions} from 'stream';
-import * as streamEvents from 'stream-events';
-
-export interface CreateLimiterOptions {
-  /**
-   * The maximum number of API calls to make.
-   */
-  maxApiCalls?: number;
-
-  /**
-   * Options to pass to the Stream constructor.
-   */
-  streamOptions?: TransformOptions;
-}
-
-export interface Limiter {
-  // tslint:disable-next-line no-any
-  makeRequest(...args: any[]): Transform | undefined;
-  stream: Transform;
-}
-
-export type ResourceStream<T> = {
-  addListener(event: 'data', listener: (data: T) => void): ResourceStream<T>;
-  emit(event: 'data', data: T): boolean;
-  on(event: 'data', listener: (data: T) => void): ResourceStream<T>;
-  once(event: 'data', listener: (data: T) => void): ResourceStream<T>;
-  prependListener(
-    event: 'data',
-    listener: (data: T) => void
-  ): ResourceStream<T>;
-  prependOnceListener(
-    event: 'data',
-    listener: (data: T) => void
-  ): ResourceStream<T>;
-  removeListener(event: 'data', listener: (data: T) => void): ResourceStream<T>;
-} & Transform;
-
-/**
- * Limit requests according to a `maxApiCalls` limit.
- *
- * @param {function} makeRequestFn - The function that will be called.
- * @param {object=} options - Configuration object.
- * @param {number} options.maxApiCalls - The maximum number of API calls to make.
- * @param {object} options.streamOptions - Options to pass to the Stream constructor.
- */
-export function createLimiter(
-  makeRequestFn: Function,
-  options?: CreateLimiterOptions
-): Limiter {
-  options = options || {};
-
-  const streamOptions = options.streamOptions || {};
-  streamOptions.objectMode = true;
-  const stream = streamEvents(new Transform(streamOptions)) as Transform;
-
-  let requestsMade = 0;
-  let requestsToMake = -1;
-
-  if (typeof options.maxApiCalls === 'number') {
-    requestsToMake = options.maxApiCalls!;
-  }
-
-  return {
-    // tslint:disable-next-line:no-any
-    makeRequest(...args: any[]) {
-      requestsMade++;
-      if (requestsToMake >= 0 && requestsMade > requestsToMake) {
-        stream.push(null);
-        return;
-      }
-      makeRequestFn.apply(null, args);
-      return stream;
-    },
-    stream,
-  };
-}
+import {TransformOptions} from 'stream';
+import {ResourceStream} from './resource-stream';
 
 export interface ParsedArguments extends TransformOptions {
   /**
@@ -196,7 +121,10 @@ export class Paginator {
     ): ResourceStream<T> {
       const parsedArguments = paginator.parseArguments_(args);
       const originalMethod = this[methodName + '_'] || this[methodName];
-      return paginator.runAsStream_(parsedArguments, originalMethod.bind(this));
+      return paginator.runAsStream_<T>(
+        parsedArguments,
+        originalMethod.bind(this)
+      );
     };
   }
 
@@ -327,52 +255,16 @@ export class Paginator {
    *     and returns `nextQuery` to receive more results.
    * @return {stream} - Readable object stream.
    */
-  runAsStream_(parsedArguments: ParsedArguments, originalMethod: Function) {
-    const query = parsedArguments.query;
-    let resultsToSend = parsedArguments.maxResults!;
-
-    const limiter = exports.createLimiter(makeRequest, {
-      maxApiCalls: parsedArguments.maxApiCalls,
-      streamOptions: parsedArguments.streamOptions,
-    });
-
-    const stream = limiter.stream;
-
-    stream.once('reading', () => {
-      limiter.makeRequest(query);
-    });
-
-    function makeRequest(query?: ParsedArguments | string) {
-      originalMethod(query, onResultSet);
-    }
-
-    // tslint:disable-next-line:no-any
-    function onResultSet(err: Error | null, results?: any[], nextQuery?: any) {
-      if (err) {
-        stream.destroy(err);
-        return;
-      }
-
-      if (resultsToSend >= 0 && results!.length > resultsToSend) {
-        results = results!.splice(0, resultsToSend);
-      }
-
-      resultsToSend -= results!.length;
-
-      split(results!, stream).then(streamEnded => {
-        if (streamEnded) {
-          return;
-        }
-        if (nextQuery && resultsToSend !== 0) {
-          limiter.makeRequest(nextQuery);
-          return;
-        }
-        stream.push(null);
-      });
-    }
-    return limiter.stream;
+  // tslint:disable-next-line:no-any
+  runAsStream_<T = any>(
+    parsedArguments: ParsedArguments,
+    originalMethod: Function
+  ): ResourceStream<T> {
+    return new ResourceStream<T>(parsedArguments, originalMethod);
   }
 }
 
 const paginator = new Paginator();
 export {paginator};
+
+export {ResourceStream};
