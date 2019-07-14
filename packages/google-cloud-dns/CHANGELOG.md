@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-dns/compare/v1.1.2...v1.2.0) (2019-07-14)
+
+
+### Features
+
+* switch to dns endpoint (options.apiEndpoint is available if time is needed to migrate) ([#283](https://www.github.com/googleapis/nodejs-dns/issues/283)) ([5c180b4](https://www.github.com/googleapis/nodejs-dns/commit/5c180b4))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-dns/compare/v1.1.1...v1.1.2) (2019-06-26)
 
 
