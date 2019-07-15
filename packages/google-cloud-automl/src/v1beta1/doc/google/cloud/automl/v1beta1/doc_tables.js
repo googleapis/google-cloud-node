@@ -140,6 +140,10 @@ const TablesDatasetMetadata = {
  *                                   operating characteristic (ROC) curve.
  *     "MINIMIZE_LOG_LOSS" - Minimize log loss.
  *     "MAXIMIZE_AU_PRC" - Maximize the area under the precision-recall curve.
+ *     "MAXIMIZE_PRECISION_AT_RECALL" - Maximize precision for a specified
+ *                                     recall value.
+ *     "MAXIMIZE_RECALL_AT_PRECISION" - Maximize recall for a specified
+ *                                      precision value.
  *
  *   CLASSIFICATION_MULTI_CLASS :
  *     "MINIMIZE_LOG_LOSS" (default) - Minimize log loss.
@@ -153,6 +157,14 @@ const TablesDatasetMetadata = {
  *   FORECASTING:
  *     "MINIMIZE_RMSE" (default) - Minimize root-mean-squared error (RMSE).
  *     "MINIMIZE_MAE" - Minimize mean-absolute error (MAE).
+ *
+ * @property {number} optimizationObjectiveRecallValue
+ *   Required when optimization_objective is "MAXIMIZE_PRECISION_AT_RECALL".
+ *   Must be between 0 and 1, inclusive.
+ *
+ * @property {number} optimizationObjectivePrecisionValue
+ *   Required when optimization_objective is "MAXIMIZE_RECALL_AT_PRECISION".
+ *   Must be between 0 and 1, inclusive.
  *
  * @property {Object[]} tablesModelColumnInfo
  *   Output only. Auxiliary information for each of the
