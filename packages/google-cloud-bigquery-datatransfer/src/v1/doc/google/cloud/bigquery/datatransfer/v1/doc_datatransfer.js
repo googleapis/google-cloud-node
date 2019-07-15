@@ -77,6 +77,10 @@
  * @property {boolean} recurse
  *   Deprecated. This field has no effect.
  *
+ * @property {boolean} deprecated
+ *   If true, it should not be used in new transfers, and it should not be
+ *   visible to users.
+ *
  * @typedef DataSourceParameter
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.DataSourceParameter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
@@ -211,12 +215,6 @@ const DataSourceParameter = {
  *   The minimum interval for scheduler to schedule runs.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @property {string} partnerLegalName
- *   Partner's legal name of this data source
- *
- * @property {string} redirectUrl
- *   Redirect URL to complete transfer config setup for 3rd party data sources.
  *
  * @typedef DataSource
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -727,9 +725,6 @@ const CheckValidCredsResponse = {
  *   Transfer configuration name in the form:
  *   `projects/{project_id}/transferConfigs/{config_id}`.
  *
- * @property {Object.<string, string>} labels
- *   User labels to add to the scheduled runs.
- *
  * @property {Object} startTime
  *   Start time of the range of transfer runs. For example,
  *   `"2017-05-25T00:00:00+00:00"`.
@@ -772,9 +767,6 @@ const ScheduleTransferRunsResponse = {
  * @property {string} parent
  *   Transfer configuration name in the form:
  *   `projects/{project_id}/transferConfigs/{config_id}`.
- *
- * @property {Object.<string, string>} labels
- *   User labels to add to the backfilled runs.
  *
  * @property {Object} requestedTimeRange
  *   Time range for the transfer runs that should be started.
@@ -836,54 +828,5 @@ const StartManualTransferRunsRequest = {
  * @see [google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
  */
 const StartManualTransferRunsResponse = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * A request to enable data transfer service for a project.
- *
- * @property {string} name
- *   The name of the project resource in the form:
- *   `projects/{project_id}`
- *
- * @typedef EnableDataTransferServiceRequest
- * @memberof google.cloud.bigquery.datatransfer.v1
- * @see [google.cloud.bigquery.datatransfer.v1.EnableDataTransferServiceRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
- */
-const EnableDataTransferServiceRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * A request to determine whether data transfer is enabled for the project.
- *
- * @property {string} name
- *   The name of the project resource in the form:
- *   `projects/{project_id}`
- *
- * @typedef IsDataTransferServiceEnabledRequest
- * @memberof google.cloud.bigquery.datatransfer.v1
- * @see [google.cloud.bigquery.datatransfer.v1.IsDataTransferServiceEnabledRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
- */
-const IsDataTransferServiceEnabledRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * A response to indicate whether data transfer service is enabled
- * for the project.
- *
- * @property {boolean} enabled
- *   Indicates whether the data transfer service is enabled for the project.
- *
- * @property {string} reason
- *   A string that contains additional information about why the service is
- *   deemed not enabled. This is only available when `enable` is false.
- *
- * @typedef IsDataTransferServiceEnabledResponse
- * @memberof google.cloud.bigquery.datatransfer.v1
- * @see [google.cloud.bigquery.datatransfer.v1.IsDataTransferServiceEnabledResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/datatransfer.proto}
- */
-const IsDataTransferServiceEnabledResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

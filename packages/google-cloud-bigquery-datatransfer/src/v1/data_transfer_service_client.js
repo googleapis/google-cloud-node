@@ -103,6 +103,18 @@ class DataTransferServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
+      locationPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
+      locationDataSourcePathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/dataSources/{data_source}'
+      ),
+      locationRunPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}'
+      ),
+      locationTransferConfigPathTemplate: new gax.PathTemplate(
+        'projects/{project}/locations/{location}/transferConfigs/{transfer_config}'
+      ),
       projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       projectDataSourcePathTemplate: new gax.PathTemplate(
         'projects/{project}/dataSources/{data_source}'
@@ -178,8 +190,6 @@ class DataTransferServiceClient {
       'listTransferLogs',
       'checkValidCreds',
       'startManualTransferRuns',
-      'enableDataTransferService',
-      'isDataTransferServiceEnabled',
     ];
     for (const methodName of dataTransferServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -920,8 +930,6 @@ class DataTransferServiceClient {
    *   `"2017-05-30T00:00:00+00:00"`.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
-   * @param {Object.<string, string>} [request.labels]
-   *   User labels to add to the scheduled runs.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1489,8 +1497,6 @@ class DataTransferServiceClient {
    * @param {string} [request.parent]
    *   Transfer configuration name in the form:
    *   `projects/{project_id}/transferConfigs/{config_id}`.
-   * @param {Object.<string, string>} [request.labels]
-   *   User labels to add to the backfilled runs.
    * @param {Object} [request.requestedTimeRange]
    *   Time range for the transfer runs that should be started.
    *
@@ -1550,120 +1556,73 @@ class DataTransferServiceClient {
     );
   }
 
-  /**
-   * Enables data transfer service for a given project. This
-   * method requires the additional scope of
-   * 'https://www.googleapis.com/auth/cloudplatformprojects'
-   * to manage the cloud project permissions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} [request.name]
-   *   The name of the project resource in the form:
-   *   `projects/{project_id}`
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
-   * @param {function(?Error)} [callback]
-   *   The function which will be called with the result of the API call.
-   * @returns {Promise} - The promise which resolves when API call finishes.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
-   *
-   * const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
-   *   // optional auth parameters.
-   * });
-   *
-   *
-   * client.enableDataTransferService({}).catch(err => {
-   *   console.error(err);
-   * });
-   */
-  enableDataTransferService(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name,
-    });
-
-    return this._innerApiCalls.enableDataTransferService(
-      request,
-      options,
-      callback
-    );
-  }
-
-  /**
-   * Returns true if data transfer is enabled for a project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} [request.name]
-   *   The name of the project resource in the form:
-   *   `projects/{project_id}`
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is an object representing [IsDataTransferServiceEnabledResponse]{@link google.cloud.bigquery.datatransfer.v1.IsDataTransferServiceEnabledResponse}.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [IsDataTransferServiceEnabledResponse]{@link google.cloud.bigquery.datatransfer.v1.IsDataTransferServiceEnabledResponse}.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const bigqueryDataTransfer = require('@google-cloud/bigquery-data-transfer');
-   *
-   * const client = new bigqueryDataTransfer.v1.DataTransferServiceClient({
-   *   // optional auth parameters.
-   * });
-   *
-   *
-   * client.isDataTransferServiceEnabled({})
-   *   .then(responses => {
-   *     const response = responses[0];
-   *     // doThingsWith(response)
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   */
-  isDataTransferServiceEnabled(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name,
-    });
-
-    return this._innerApiCalls.isDataTransferServiceEnabled(
-      request,
-      options,
-      callback
-    );
-  }
-
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @returns {String}
+   */
+  locationPath(project, location) {
+    return this._pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Return a fully-qualified location_data_source resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} dataSource
+   * @returns {String}
+   */
+  locationDataSourcePath(project, location, dataSource) {
+    return this._pathTemplates.locationDataSourcePathTemplate.render({
+      project: project,
+      location: location,
+      data_source: dataSource,
+    });
+  }
+
+  /**
+   * Return a fully-qualified location_run resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} transferConfig
+   * @param {String} run
+   * @returns {String}
+   */
+  locationRunPath(project, location, transferConfig, run) {
+    return this._pathTemplates.locationRunPathTemplate.render({
+      project: project,
+      location: location,
+      transfer_config: transferConfig,
+      run: run,
+    });
+  }
+
+  /**
+   * Return a fully-qualified location_transfer_config resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} transferConfig
+   * @returns {String}
+   */
+  locationTransferConfigPath(project, location, transferConfig) {
+    return this._pathTemplates.locationTransferConfigPathTemplate.render({
+      project: project,
+      location: location,
+      transfer_config: transferConfig,
+    });
+  }
 
   /**
    * Return a fully-qualified project resource name string.
@@ -1719,6 +1678,157 @@ class DataTransferServiceClient {
       project: project,
       transfer_config: transferConfig,
     });
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the locationName from a location resource.
+   *
+   * @param {String} locationName
+   *   A fully-qualified path representing a location resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationName(locationName) {
+    return this._pathTemplates.locationPathTemplate.match(locationName)
+      .location;
+  }
+
+  /**
+   * Parse the locationDataSourceName from a location_data_source resource.
+   *
+   * @param {String} locationDataSourceName
+   *   A fully-qualified path representing a location_data_source resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationDataSourceName(locationDataSourceName) {
+    return this._pathTemplates.locationDataSourcePathTemplate.match(
+      locationDataSourceName
+    ).project;
+  }
+
+  /**
+   * Parse the locationDataSourceName from a location_data_source resource.
+   *
+   * @param {String} locationDataSourceName
+   *   A fully-qualified path representing a location_data_source resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationDataSourceName(locationDataSourceName) {
+    return this._pathTemplates.locationDataSourcePathTemplate.match(
+      locationDataSourceName
+    ).location;
+  }
+
+  /**
+   * Parse the locationDataSourceName from a location_data_source resource.
+   *
+   * @param {String} locationDataSourceName
+   *   A fully-qualified path representing a location_data_source resources.
+   * @returns {String} - A string representing the data_source.
+   */
+  matchDataSourceFromLocationDataSourceName(locationDataSourceName) {
+    return this._pathTemplates.locationDataSourcePathTemplate.match(
+      locationDataSourceName
+    ).data_source;
+  }
+
+  /**
+   * Parse the locationRunName from a location_run resource.
+   *
+   * @param {String} locationRunName
+   *   A fully-qualified path representing a location_run resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationRunName(locationRunName) {
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
+      .project;
+  }
+
+  /**
+   * Parse the locationRunName from a location_run resource.
+   *
+   * @param {String} locationRunName
+   *   A fully-qualified path representing a location_run resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationRunName(locationRunName) {
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
+      .location;
+  }
+
+  /**
+   * Parse the locationRunName from a location_run resource.
+   *
+   * @param {String} locationRunName
+   *   A fully-qualified path representing a location_run resources.
+   * @returns {String} - A string representing the transfer_config.
+   */
+  matchTransferConfigFromLocationRunName(locationRunName) {
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
+      .transfer_config;
+  }
+
+  /**
+   * Parse the locationRunName from a location_run resource.
+   *
+   * @param {String} locationRunName
+   *   A fully-qualified path representing a location_run resources.
+   * @returns {String} - A string representing the run.
+   */
+  matchRunFromLocationRunName(locationRunName) {
+    return this._pathTemplates.locationRunPathTemplate.match(locationRunName)
+      .run;
+  }
+
+  /**
+   * Parse the locationTransferConfigName from a location_transfer_config resource.
+   *
+   * @param {String} locationTransferConfigName
+   *   A fully-qualified path representing a location_transfer_config resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromLocationTransferConfigName(locationTransferConfigName) {
+    return this._pathTemplates.locationTransferConfigPathTemplate.match(
+      locationTransferConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the locationTransferConfigName from a location_transfer_config resource.
+   *
+   * @param {String} locationTransferConfigName
+   *   A fully-qualified path representing a location_transfer_config resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromLocationTransferConfigName(locationTransferConfigName) {
+    return this._pathTemplates.locationTransferConfigPathTemplate.match(
+      locationTransferConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the locationTransferConfigName from a location_transfer_config resource.
+   *
+   * @param {String} locationTransferConfigName
+   *   A fully-qualified path representing a location_transfer_config resources.
+   * @returns {String} - A string representing the transfer_config.
+   */
+  matchTransferConfigFromLocationTransferConfigName(
+    locationTransferConfigName
+  ) {
+    return this._pathTemplates.locationTransferConfigPathTemplate.match(
+      locationTransferConfigName
+    ).transfer_config;
   }
 
   /**

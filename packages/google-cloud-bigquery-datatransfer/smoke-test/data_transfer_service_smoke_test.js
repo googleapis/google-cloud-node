@@ -28,7 +28,7 @@ describe('DataTransferServiceSmokeTest', () => {
     });
 
     // Iterate over all elements.
-    const formattedParent = client.projectPath(projectId);
+    const formattedParent = client.locationPath(projectId, 'us-central1');
 
     client
       .listDataSources({parent: formattedParent})
@@ -50,7 +50,7 @@ describe('DataTransferServiceSmokeTest', () => {
     });
 
     // Or obtain the paged response.
-    const formattedParent = client.projectPath(projectId);
+    const formattedParent = client.locationPath(projectId, 'us-central1');
 
     const options = {autoPaginate: false};
     const callback = responses => {
@@ -82,7 +82,7 @@ describe('DataTransferServiceSmokeTest', () => {
       // optional auth parameters.
     });
 
-    const formattedParent = client.projectPath(projectId);
+    const formattedParent = client.locationPath(projectId, 'us-central1');
     client
       .listDataSourcesStream({parent: formattedParent})
       .on('data', element => {
