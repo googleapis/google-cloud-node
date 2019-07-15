@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.2.2...v1.3.0) (2019-07-15)
+
+
+### Features
+
+* add occurrencePath template method ([#57](https://www.github.com/googleapis/nodejs-containeranalysis/issues/57)) ([9d66e07](https://www.github.com/googleapis/nodejs-containeranalysis/commit/9d66e07))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.2.1...v1.2.2) (2019-06-26)
 
 
