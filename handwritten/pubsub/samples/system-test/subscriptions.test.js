@@ -1,5 +1,5 @@
 /**
- * Copyright 2017, Google, Inc.
+ * Copyright 2019, Google, LLC.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -61,6 +61,7 @@ describe('subscriptions', () => {
     await rm(pubsub.subscription(subscriptionNameOne));
     await rm(pubsub.subscription(subscriptionNameTwo));
     await rm(pubsub.subscription(subscriptionNameThree));
+    await rm(pubsub.subscription(subscriptionNameFour));
     await rm(pubsub.topic(topicNameOne));
     await rm(pubsub.topic(topicNameTwo));
   });
@@ -131,6 +132,22 @@ describe('subscriptions', () => {
       `${cmd} sync-pull ${projectId} ${subscriptionNameOne}`
     );
     assert.match(output, /Done./);
+  });
+
+  it('should listen to messages with flow control', async () => {
+    const topicTwo = pubsub.topic(topicNameTwo);
+    await topicTwo.subscription(subscriptionNameFour).get({autoCreate: true});
+    await topicTwo.publish(Buffer.from(`Hello, world!`));
+
+    const output = execSync(
+      `${cmd} listen-flow-control ${subscriptionNameFour} -m 5`
+    );
+    assert.include(
+      output,
+      `ready to receive messages at a controlled volume of 5 messages.`
+    );
+    const [subscriptions] = await pubsub.topic(topicNameTwo).getSubscriptions();
+    assert(subscriptions.some(s => s.name === fullSubscriptionNameFour));
   });
 
   it('should listen for ordered messages', async () => {
@@ -241,17 +258,5 @@ describe('subscriptions', () => {
     const [subscriptions] = await pubsub.getSubscriptions();
     assert.ok(subscriptions);
     assert(subscriptions.every(s => s.name !== fullSubscriptionNameOne));
-  });
-
-  it('should create a subscription with flow control', async () => {
-    const output = execSync(
-      `${cmd} create-flow ${topicNameTwo} ${subscriptionNameFour} -m 5 -b 1024`
-    );
-    assert.include(
-      output,
-      `Subscription ${fullSubscriptionNameFour} created with a maximum of 5 unprocessed messages.`
-    );
-    const [subscriptions] = await pubsub.topic(topicNameTwo).getSubscriptions();
-    assert(subscriptions.some(s => s.name === fullSubscriptionNameFour));
   });
 });

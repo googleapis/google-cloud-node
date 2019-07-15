@@ -1,5 +1,5 @@
 /**
- * Copyright 2017, Google, Inc.
+ * Copyright 2019, Google, LLC.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -81,11 +81,10 @@ async function createSubscription(topicName, subscriptionName) {
   // [END pubsub_create_pull_subscription]
 }
 
-async function createFlowControlledSubscription(
-  topicName,
+async function subscribeWithFlowControlSettings(
   subscriptionName,
   maxInProgress,
-  maxBytes
+  timeout
 ) {
   // [START pubsub_subscriber_flow_settings]
   // Imports the Google Cloud client library
@@ -97,30 +96,38 @@ async function createFlowControlledSubscription(
   /**
    * TODO(developer): Uncomment the following lines to run the sample.
    */
-  // const topicName = 'my-topic';
   // const subscriptionName = 'my-sub';
   // const maxInProgress = 5;
-  // const maxBytes = 10000;
+  // const timeout = 10;
 
-  const topic = pubsub.topic(topicName);
-
-  const options = {
+  const subscriberOptions = {
     flowControl: {
-      maxBytes: maxBytes,
       maxMessages: maxInProgress,
     },
   };
 
-  const subscription = topic.subscription(subscriptionName, options);
+  // References an existing subscription.
+  // Note that flow control settings are not persistent across subscribers.
+  const subscription = pubsub.subscription(subscriptionName, subscriberOptions);
 
-  // Creates a new subscription
-  // Note that flow control configurations are not persistent
-  const [newSubscription] = await subscription.get({
-    autoCreate: true,
-  });
   console.log(
-    `Subscription ${newSubscription.name} created with a maximum of ${maxInProgress} unprocessed messages.`
+    `Subscriber to subscription ${subscription.name} is ready to receive messages at a controlled volume of ${maxInProgress} messages.`
   );
+
+  const messageHandler = message => {
+    console.log(`Received message: ${message.id}`);
+    console.log(`\tData: ${message.data}`);
+    console.log(`\tAttributes: ${message.attributes}`);
+
+    // "Ack" (acknowledge receipt of) the message
+    message.ack();
+  };
+
+  subscription.on(`message`, messageHandler);
+
+  setTimeout(() => {
+    subscription.close();
+  }, timeout * 1000);
 
   // [END pubsub_subscriber_flow_settings]
 }
@@ -567,29 +574,6 @@ const cli = require(`yargs`)
     opts => createSubscription(opts.topicName, opts.subscriptionName)
   )
   .command(
-    `create-flow <topicName> <subscriptionName>`,
-    `Creates a new subscription with flow-control limits, which don't persist between subscriptions.`,
-    {
-      maxInProgress: {
-        alias: 'm',
-        type: 'number',
-        default: 0,
-      },
-      maxBytes: {
-        alias: 'b',
-        type: 'number',
-        default: 0,
-      },
-    },
-    opts =>
-      createFlowControlledSubscription(
-        opts.topicName,
-        opts.subscriptionName,
-        opts.maxInProgress,
-        opts.maxBytes
-      )
-  )
-  .command(
     `create-push <topicName> <subscriptionName>`,
     `Creates a new push subscription.`,
     {},
@@ -621,6 +605,28 @@ const cli = require(`yargs`)
       },
     },
     opts => listenForMessages(opts.subscriptionName, opts.timeout)
+  )
+  .command(
+    `listen-flow-control <subscriptionName>`,
+    `Listen to messages with flow control settings, which are properties of the client/listener instance.`,
+    {
+      maxInProgress: {
+        alias: 'm',
+        type: 'number',
+        default: 1,
+      },
+      timeout: {
+        alias: 't',
+        type: 'number',
+        default: 10,
+      },
+    },
+    opts =>
+      subscribeWithFlowControlSettings(
+        opts.subscriptionName,
+        opts.maxInProgress,
+        opts.timeout
+      )
   )
   .command(
     `sync-pull <projectName> <subscriptionName>`,
@@ -661,13 +667,13 @@ const cli = require(`yargs`)
   .example(`node $0 list`)
   .example(`node $0 list my-topic`)
   .example(`node $0 create my-topic worker-1`)
-  .example(`node $0 create-flow my-topic worker-1 -m 5`)
   .example(`node $0 create-push my-topic worker-1`)
   .example(`node $0 modify-config my-topic worker-1`)
   .example(`node $0 get worker-1`)
   .example(`node $0 listen-messages my-subscription`)
   .example(`node $0 sync-pull my-project my-subscription`)
   .example(`node $0 listen-errors my-subscription`)
+  .example(`node $0 listen-flow-control my-subscription -m 5`)
   .example(`node $0 delete worker-1`)
   .example(`node $0 pull worker-1`)
   .example(`node $0 get-policy worker-1`)
