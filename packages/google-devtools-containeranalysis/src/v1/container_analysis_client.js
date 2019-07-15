@@ -114,6 +114,9 @@ class ContainerAnalysisClient {
     // Create useful helper objects for these.
     this._pathTemplates = {
       notePathTemplate: new gax.PathTemplate('projects/{project}/notes/{note}'),
+      occurrencePathTemplate: new gax.PathTemplate(
+        'projects/{project}/occurrences/{occurrence}'
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -437,6 +440,20 @@ class ContainerAnalysisClient {
   }
 
   /**
+   * Return a fully-qualified occurrence resource name string.
+   *
+   * @param {String} project
+   * @param {String} occurrence
+   * @returns {String}
+   */
+  occurrencePath(project, occurrence) {
+    return this._pathTemplates.occurrencePathTemplate.render({
+      project: project,
+      occurrence: occurrence,
+    });
+  }
+
+  /**
    * Parse the noteName from a note resource.
    *
    * @param {String} noteName
@@ -469,6 +486,30 @@ class ContainerAnalysisClient {
    */
   getGrafeasClient() {
     return new GrafeasClient(this.opts);
+  }
+
+  /**
+   * Parse the occurrenceName from a occurrence resource.
+   *
+   * @param {String} occurrenceName
+   *   A fully-qualified path representing a occurrence resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromOccurrenceName(occurrenceName) {
+    return this._pathTemplates.occurrencePathTemplate.match(occurrenceName)
+      .project;
+  }
+
+  /**
+   * Parse the occurrenceName from a occurrence resource.
+   *
+   * @param {String} occurrenceName
+   *   A fully-qualified path representing a occurrence resources.
+   * @returns {String} - A string representing the occurrence.
+   */
+  matchOccurrenceFromOccurrenceName(occurrenceName) {
+    return this._pathTemplates.occurrencePathTemplate.match(occurrenceName)
+      .occurrence;
   }
 }
 
