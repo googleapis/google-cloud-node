@@ -132,26 +132,6 @@ const ScheduleOptions = {
  * @property {string} datasetRegion
  *   Output only. Region in which BigQuery dataset is located.
  *
- * @property {string} partnerToken
- *   A unique identifier used for identifying a transfer setup stored on
- *   external partner side. The token is opaque to DTS and can only be
- *   interpreted by partner. Partner data source should create a mapping between
- *   the config id and the token to validate that a transfer config/run is
- *   legitimate.
- *
- * @property {Object} partnerConnectionInfo
- *   Transfer settings managed by partner data sources. It is stored as
- *   key-value pairs and used for DTS UI display purpose only. Two reasons we
- *   don't want to store them together with 'params' are:
- *    - The connection info is provided by partner and not editable in DTS UI
- *      which is different from the immutable parameter. It will be confusing to
- *      add another boolean to DataSourceParameter to differentiate them.
- *    - The connection info can be any arbitrary key-value pairs. Adding them to
- *      params fields requires partner to provide definition for them in data
- *      source definition. It will be friendlier to avoid that for partners.
- *
- *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
- *
  * @typedef TransferConfig
  * @memberof google.cloud.bigquery.datatransfer.v1
  * @see [google.cloud.bigquery.datatransfer.v1.TransferConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/bigquery/datatransfer/v1/transfer.proto}
@@ -169,17 +149,14 @@ const TransferConfig = {
  *   `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
  *   The name is ignored when creating a transfer run.
  *
- * @property {Object.<string, string>} labels
- *   User labels.
- *
  * @property {Object} scheduleTime
  *   Minimum time after which a transfer run can be started.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} runTime
- *   For batch transfer runs, specifies the date and time that
- *   data should be ingested.
+ *   For batch transfer runs, specifies the date and time of the data should be
+ *   ingested.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -230,14 +207,6 @@ const TransferConfig = {
  *   scheduled manually, this is empty.
  *   NOTE: the system might choose to delay the schedule depending on the
  *   current load, so `schedule_time` doesn't always match this.
- *
- * @property {string} partnerToken
- *   Output only. This is the same token initialized from TransferConfig.
- *   Partner token is a unique identifier used for identifying a transfer setup
- *   stored on external partner side. The token is opaque to DTS and can only be
- *   interpreted by partner. Partner data source should create a mapping between
- *   the config id and the token to validate that a transfer config/run is
- *   legitimate.
  *
  * @typedef TransferRun
  * @memberof google.cloud.bigquery.datatransfer.v1
@@ -296,12 +265,7 @@ const TransferMessage = {
     /**
      * Error message.
      */
-    ERROR: 3,
-
-    /**
-     * Debug message.
-     */
-    DEBUG: 4
+    ERROR: 3
   }
 };
 
