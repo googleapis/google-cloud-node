@@ -29,9 +29,7 @@
  *   "projects/api-test-project/tenants/foo/profiles/bar/applications/baz".
  *
  * @property {string} externalId
- *   Required.
- *
- *   Client side application identifier, used to uniquely identify the
+ *   Required. Client side application identifier, used to uniquely identify the
  *   application.
  *
  *   The maximum number of allowed characters is 255.
@@ -62,71 +60,54 @@
  *   for example, "projects/api-test-project/tenants/foo/companies/bar".
  *
  * @property {Object} applicationDate
- *   Optional.
- *
- *   The application date.
+ *   Optional. The application date.
  *
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
  * @property {number} stage
- *   Required.
- *
- *   What is the most recent stage of the application (that is, new, screen,
- *   send cv, hired, finished work)?  This field is intentionally not
+ *   Required. What is the most recent stage of the application (that is, new,
+ *   screen, send cv, hired, finished work)?  This field is intentionally not
  *   comprehensive of every possible status, but instead, represents statuses
  *   that would be used to indicate to the ML models good / bad matches.
  *
  *   The number should be among the values of [ApplicationStage]{@link google.cloud.talent.v4beta1.ApplicationStage}
  *
  * @property {number} state
- *   Optional.
- *
- *   The application state.
+ *   Optional. The application state.
  *
  *   The number should be among the values of [ApplicationState]{@link google.cloud.talent.v4beta1.ApplicationState}
  *
  * @property {Object[]} interviews
- *   Optional.
- *
- *   All interviews (screen, onsite, and so on) conducted as part of this
- *   application (includes details such as user conducting the interview,
+ *   Optional. All interviews (screen, onsite, and so on) conducted as part of
+ *   this application (includes details such as user conducting the interview,
  *   timestamp, feedback, and so on).
  *
  *   This object should have the same structure as [Interview]{@link google.cloud.talent.v4beta1.Interview}
  *
  * @property {Object} referral
- *   Optional.
- *
- *   If the candidate is referred by a employee.
+ *   Optional. If the candidate is referred by a employee.
  *
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
  * @property {Object} createTime
- *   Required.
- *
- *   Reflects the time that the application was created.
+ *   Required. Reflects the time that the application was created.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   Optional.
- *
- *   The last update timestamp.
+ *   Optional. The last update timestamp.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {string} outcomeNotes
- *   Optional.
- *
- *   Free text reason behind the recruitement outcome (for example, reason for
- *   withdraw / reject, reason for an unsuccessful finish, and so on).
+ *   Optional. Free text reason behind the recruitement outcome (for example,
+ *   reason for withdraw / reject, reason for an unsuccessful finish, and so
+ *   on).
  *
  *   Number of characters allowed is 100.
  *
  * @property {number} outcome
- *   Optional.
- *
- *   Outcome positiveness shows how positive the outcome is.
+ *   Optional. Outcome positiveness shows how positive the outcome is.
  *
  *   The number should be among the values of [Outcome]{@link google.cloud.talent.v4beta1.Outcome}
  *

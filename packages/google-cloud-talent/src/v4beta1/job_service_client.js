@@ -104,9 +104,16 @@ class JobServiceClient {
       companyPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}/companies/{company}'
       ),
+      companyWithoutTenantPathTemplate: new gax.PathTemplate(
+        'projects/{project}/companies/{company}'
+      ),
       jobPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}/jobs/{jobs}'
       ),
+      jobWithoutTenantPathTemplate: new gax.PathTemplate(
+        'projects/{project}/jobs/{jobs}'
+      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       tenantPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}'
       ),
@@ -283,9 +290,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant under which the job is created.
+   *   Required. The resource name of the tenant under which the job is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -293,9 +298,7 @@ class JobServiceClient {
    *   Tenant id is optional and a default tenant is created if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object} request.job
-   *   Required.
-   *
-   *   The Job to be created.
+   *   Required. The Job to be created.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    * @param {Object} [options]
@@ -356,9 +359,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The resource name of the job to retrieve.
+   *   Required. The resource name of the job to retrieve.
    *
    *   The format is
    *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
@@ -421,9 +422,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.job
-   *   Required.
-   *
-   *   The Job to be updated.
+   *   Required. The Job to be updated.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    * @param {Object} [request.updateMask]
@@ -494,9 +493,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The resource name of the job to be deleted.
+   *   Required. The resource name of the job to be deleted.
    *
    *   The format is
    *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
@@ -548,9 +545,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant under which the job is created.
+   *   Required. The resource name of the tenant under which the job is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -558,9 +553,7 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {string} request.filter
-   *   Required.
-   *
-   *   The filter string specifies the jobs to be enumerated.
+   *   Required. The filter string specifies the jobs to be enumerated.
    *
    *   Supported operator: =, AND
    *
@@ -585,9 +578,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {number} [request.jobView]
-   *   Optional.
-   *
-   *   The desired job attributes returned for jobs in the
+   *   Optional. The desired job attributes returned for jobs in the
    *   search response. Defaults to
    *   JobView.JOB_VIEW_FULL
    *   if no value is specified.
@@ -707,9 +698,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant under which the job is created.
+   *   Required. The resource name of the tenant under which the job is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -717,9 +706,7 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {string} request.filter
-   *   Required.
-   *
-   *   The filter string specifies the jobs to be enumerated.
+   *   Required. The filter string specifies the jobs to be enumerated.
    *
    *   Supported operator: =, AND
    *
@@ -744,9 +731,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {number} [request.jobView]
-   *   Optional.
-   *
-   *   The desired job attributes returned for jobs in the
+   *   Optional. The desired job attributes returned for jobs in the
    *   search response. Defaults to
    *   JobView.JOB_VIEW_FULL
    *   if no value is specified.
@@ -795,9 +780,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant under which the job is created.
+   *   Required. The resource name of the tenant under which the job is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -805,9 +788,7 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {string} request.filter
-   *   Required.
-   *
-   *   The filter string specifies the jobs to be deleted.
+   *   Required. The filter string specifies the jobs to be deleted.
    *
    *   Supported operator: =, AND
    *
@@ -873,9 +854,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant to search within.
+   *   Required. The resource name of the tenant to search within.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -883,41 +862,32 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object} request.requestMetadata
-   *   Required.
-   *
-   *   The meta information collected about the job searcher, used to improve the
-   *   search quality of the service.. The identifiers, (such as `user_id`) are
-   *   provided by users, and must be unique and consistent.
+   *   Required. The meta information collected about the job searcher, used to
+   *   improve the search quality of the service. The identifiers (such as
+   *   `user_id`) are provided by users, and must be unique and consistent.
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional.
-   *
-   *   Mode of a search.
+   *   Optional. Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional.
-   *
-   *   Query used to search against jobs, such as keyword, location filters, etc.
+   *   Optional. Query used to search against jobs, such as keyword, location
+   *   filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional.
-   *
-   *   Controls whether to broaden the search when it produces sparse results.
-   *   Broadened queries append results to the end of the matching results
-   *   list.
+   *   Optional. Controls whether to broaden the search when it produces sparse
+   *   results. Broadened queries append results to the end of the matching
+   *   results list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional.
-   *
-   *   Controls if the search job request requires the return of a precise
-   *   count of the first 300 results. Setting this to `true` ensures
+   *   Optional. Controls if the search job request requires the return of a
+   *   precise count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -926,9 +896,8 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional.
-   *
-   *   An expression specifies a histogram request against matching jobs.
+   *   Optional. An expression specifies a histogram request against matching
+   *   jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -1038,19 +1007,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional.
-   *
-   *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to
+   *   Optional. The desired job attributes returned for jobs in the search
+   *   response. Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional.
-   *
-   *   An integer that specifies the current offset (that is, starting result
-   *   location, amongst the jobs deemed by the API as relevant) in search
+   *   Optional. An integer that specifies the current offset (that is, starting
+   *   result location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -1066,64 +1031,64 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional.
-   *
-   *   The criteria determining how search results are sorted. Default is
-   *   "relevance desc".
+   *   Optional. The criteria determining how search results are sorted. Default
+   *   is
+   *   `"relevance desc"`.
    *
    *   Supported options are:
    *
-   *   * "relevance desc": By relevance descending, as determined by the API
+   *   * `"relevance desc"`: By relevance descending, as determined by the API
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
-   *   * "posting`_`publish`_`time desc": By
+   *   * `"posting_publish_time desc"`: By
    *   Job.posting_publish_time
    *     descending.
-   *   * "posting`_`update`_`time desc": By
+   *   * `"posting_update_time desc"`: By
    *   Job.posting_update_time
    *     descending.
-   *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title
+   *   * `"title"`: By Job.title
+   *   ascending.
+   *   * `"title desc"`: By Job.title
    *   descending.
-   *   * "annualized`_`base`_`compensation": By job's
+   *   * `"annualized_base_compensation"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`base`_`compensation desc": By job's
+   *   * `"annualized_base_compensation desc"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "annualized`_`total`_`compensation": By job's
+   *   * `"annualized_total_compensation"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`total`_`compensation desc": By job's
+   *   * `"annualized_total_compensation desc"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "custom`_`ranking desc": By the relevance score adjusted to the
+   *   * `"custom_ranking desc"`: By the relevance score adjusted to the
    *     SearchJobsRequest.CustomRankingInfo.ranking_expression
    *     with weight factor assigned by
    *     SearchJobsRequest.CustomRankingInfo.importance_level
    *     in descending order.
-   *   * "location`_`distance": By the distance between the location on jobs and
-   *     locations specified in the
-   *     JobQuery.location_filters.
-   *     When this order is selected, the
-   *     JobQuery.location_filters
-   *     must not be empty. When a job has multiple locations, the location
-   *     closest to one of the locations specified in the location filter will be
-   *     used to calculate location distance. Distance is calculated by the
-   *     distance between two lat/long coordinates, with a precision of 10e-4
-   *     degrees (11.3 meters). Jobs that don't have locations specified will be
-   *     ranked below jobs having locations. Diversification strategy is still
-   *     applied unless explicitly disabled in
-   *     SearchJobsRequest.diversification_level.
+   *   * Location sorting: Use the special syntax to order jobs by distance:<br>
+   *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+   *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+   *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+   *     multiple locations. See details below.<br>
+   *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+   *     multiple locations. See details below.<br>
+   *     The string can have a maximum of 256 characters. When multiple distance
+   *     centers are provided, a job that is close to any of the distance centers
+   *     would have a high rank. When a job has multiple locations, the job
+   *     location closest to one of the distance centers will be used. Jobs that
+   *     don't have locations will be ranked at the bottom. Distance is calculated
+   *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+   *     still applied unless explicitly disabled in
+   *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional.
-   *
-   *   Controls whether highly similar jobs are returned next to each other in
-   *   the search results. Jobs are identified as highly similar based on
+   *   Optional. Controls whether highly similar jobs are returned next to each
+   *   other in the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -1135,16 +1100,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional.
-   *
-   *   Controls over how job documents get ranked on top of existing relevance
-   *   score (determined by API algorithm).
+   *   Optional. Controls over how job documents get ranked on top of existing
+   *   relevance score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional.
-   *
-   *   Controls whether to disable exact keyword match on
+   *   Optional. Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -1282,9 +1243,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant to search within.
+   *   Required. The resource name of the tenant to search within.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -1292,41 +1251,32 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object} request.requestMetadata
-   *   Required.
-   *
-   *   The meta information collected about the job searcher, used to improve the
-   *   search quality of the service.. The identifiers, (such as `user_id`) are
-   *   provided by users, and must be unique and consistent.
+   *   Required. The meta information collected about the job searcher, used to
+   *   improve the search quality of the service. The identifiers (such as
+   *   `user_id`) are provided by users, and must be unique and consistent.
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional.
-   *
-   *   Mode of a search.
+   *   Optional. Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional.
-   *
-   *   Query used to search against jobs, such as keyword, location filters, etc.
+   *   Optional. Query used to search against jobs, such as keyword, location
+   *   filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional.
-   *
-   *   Controls whether to broaden the search when it produces sparse results.
-   *   Broadened queries append results to the end of the matching results
-   *   list.
+   *   Optional. Controls whether to broaden the search when it produces sparse
+   *   results. Broadened queries append results to the end of the matching
+   *   results list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional.
-   *
-   *   Controls if the search job request requires the return of a precise
-   *   count of the first 300 results. Setting this to `true` ensures
+   *   Optional. Controls if the search job request requires the return of a
+   *   precise count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -1335,9 +1285,8 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional.
-   *
-   *   An expression specifies a histogram request against matching jobs.
+   *   Optional. An expression specifies a histogram request against matching
+   *   jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -1447,19 +1396,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional.
-   *
-   *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to
+   *   Optional. The desired job attributes returned for jobs in the search
+   *   response. Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional.
-   *
-   *   An integer that specifies the current offset (that is, starting result
-   *   location, amongst the jobs deemed by the API as relevant) in search
+   *   Optional. An integer that specifies the current offset (that is, starting
+   *   result location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -1475,64 +1420,64 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional.
-   *
-   *   The criteria determining how search results are sorted. Default is
-   *   "relevance desc".
+   *   Optional. The criteria determining how search results are sorted. Default
+   *   is
+   *   `"relevance desc"`.
    *
    *   Supported options are:
    *
-   *   * "relevance desc": By relevance descending, as determined by the API
+   *   * `"relevance desc"`: By relevance descending, as determined by the API
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
-   *   * "posting`_`publish`_`time desc": By
+   *   * `"posting_publish_time desc"`: By
    *   Job.posting_publish_time
    *     descending.
-   *   * "posting`_`update`_`time desc": By
+   *   * `"posting_update_time desc"`: By
    *   Job.posting_update_time
    *     descending.
-   *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title
+   *   * `"title"`: By Job.title
+   *   ascending.
+   *   * `"title desc"`: By Job.title
    *   descending.
-   *   * "annualized`_`base`_`compensation": By job's
+   *   * `"annualized_base_compensation"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`base`_`compensation desc": By job's
+   *   * `"annualized_base_compensation desc"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "annualized`_`total`_`compensation": By job's
+   *   * `"annualized_total_compensation"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`total`_`compensation desc": By job's
+   *   * `"annualized_total_compensation desc"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "custom`_`ranking desc": By the relevance score adjusted to the
+   *   * `"custom_ranking desc"`: By the relevance score adjusted to the
    *     SearchJobsRequest.CustomRankingInfo.ranking_expression
    *     with weight factor assigned by
    *     SearchJobsRequest.CustomRankingInfo.importance_level
    *     in descending order.
-   *   * "location`_`distance": By the distance between the location on jobs and
-   *     locations specified in the
-   *     JobQuery.location_filters.
-   *     When this order is selected, the
-   *     JobQuery.location_filters
-   *     must not be empty. When a job has multiple locations, the location
-   *     closest to one of the locations specified in the location filter will be
-   *     used to calculate location distance. Distance is calculated by the
-   *     distance between two lat/long coordinates, with a precision of 10e-4
-   *     degrees (11.3 meters). Jobs that don't have locations specified will be
-   *     ranked below jobs having locations. Diversification strategy is still
-   *     applied unless explicitly disabled in
-   *     SearchJobsRequest.diversification_level.
+   *   * Location sorting: Use the special syntax to order jobs by distance:<br>
+   *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+   *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+   *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+   *     multiple locations. See details below.<br>
+   *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+   *     multiple locations. See details below.<br>
+   *     The string can have a maximum of 256 characters. When multiple distance
+   *     centers are provided, a job that is close to any of the distance centers
+   *     would have a high rank. When a job has multiple locations, the job
+   *     location closest to one of the distance centers will be used. Jobs that
+   *     don't have locations will be ranked at the bottom. Distance is calculated
+   *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+   *     still applied unless explicitly disabled in
+   *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional.
-   *
-   *   Controls whether highly similar jobs are returned next to each other in
-   *   the search results. Jobs are identified as highly similar based on
+   *   Optional. Controls whether highly similar jobs are returned next to each
+   *   other in the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -1544,16 +1489,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional.
-   *
-   *   Controls over how job documents get ranked on top of existing relevance
-   *   score (determined by API algorithm).
+   *   Optional. Controls over how job documents get ranked on top of existing
+   *   relevance score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional.
-   *
-   *   Controls whether to disable exact keyword match on
+   *   Optional. Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -1631,9 +1572,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant to search within.
+   *   Required. The resource name of the tenant to search within.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -1641,41 +1580,32 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object} request.requestMetadata
-   *   Required.
-   *
-   *   The meta information collected about the job searcher, used to improve the
-   *   search quality of the service.. The identifiers, (such as `user_id`) are
-   *   provided by users, and must be unique and consistent.
+   *   Required. The meta information collected about the job searcher, used to
+   *   improve the search quality of the service. The identifiers (such as
+   *   `user_id`) are provided by users, and must be unique and consistent.
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional.
-   *
-   *   Mode of a search.
+   *   Optional. Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional.
-   *
-   *   Query used to search against jobs, such as keyword, location filters, etc.
+   *   Optional. Query used to search against jobs, such as keyword, location
+   *   filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional.
-   *
-   *   Controls whether to broaden the search when it produces sparse results.
-   *   Broadened queries append results to the end of the matching results
-   *   list.
+   *   Optional. Controls whether to broaden the search when it produces sparse
+   *   results. Broadened queries append results to the end of the matching
+   *   results list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional.
-   *
-   *   Controls if the search job request requires the return of a precise
-   *   count of the first 300 results. Setting this to `true` ensures
+   *   Optional. Controls if the search job request requires the return of a
+   *   precise count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -1684,9 +1614,8 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional.
-   *
-   *   An expression specifies a histogram request against matching jobs.
+   *   Optional. An expression specifies a histogram request against matching
+   *   jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -1796,19 +1725,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional.
-   *
-   *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to
+   *   Optional. The desired job attributes returned for jobs in the search
+   *   response. Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional.
-   *
-   *   An integer that specifies the current offset (that is, starting result
-   *   location, amongst the jobs deemed by the API as relevant) in search
+   *   Optional. An integer that specifies the current offset (that is, starting
+   *   result location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -1824,64 +1749,64 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional.
-   *
-   *   The criteria determining how search results are sorted. Default is
-   *   "relevance desc".
+   *   Optional. The criteria determining how search results are sorted. Default
+   *   is
+   *   `"relevance desc"`.
    *
    *   Supported options are:
    *
-   *   * "relevance desc": By relevance descending, as determined by the API
+   *   * `"relevance desc"`: By relevance descending, as determined by the API
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
-   *   * "posting`_`publish`_`time desc": By
+   *   * `"posting_publish_time desc"`: By
    *   Job.posting_publish_time
    *     descending.
-   *   * "posting`_`update`_`time desc": By
+   *   * `"posting_update_time desc"`: By
    *   Job.posting_update_time
    *     descending.
-   *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title
+   *   * `"title"`: By Job.title
+   *   ascending.
+   *   * `"title desc"`: By Job.title
    *   descending.
-   *   * "annualized`_`base`_`compensation": By job's
+   *   * `"annualized_base_compensation"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`base`_`compensation desc": By job's
+   *   * `"annualized_base_compensation desc"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "annualized`_`total`_`compensation": By job's
+   *   * `"annualized_total_compensation"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`total`_`compensation desc": By job's
+   *   * `"annualized_total_compensation desc"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "custom`_`ranking desc": By the relevance score adjusted to the
+   *   * `"custom_ranking desc"`: By the relevance score adjusted to the
    *     SearchJobsRequest.CustomRankingInfo.ranking_expression
    *     with weight factor assigned by
    *     SearchJobsRequest.CustomRankingInfo.importance_level
    *     in descending order.
-   *   * "location`_`distance": By the distance between the location on jobs and
-   *     locations specified in the
-   *     JobQuery.location_filters.
-   *     When this order is selected, the
-   *     JobQuery.location_filters
-   *     must not be empty. When a job has multiple locations, the location
-   *     closest to one of the locations specified in the location filter will be
-   *     used to calculate location distance. Distance is calculated by the
-   *     distance between two lat/long coordinates, with a precision of 10e-4
-   *     degrees (11.3 meters). Jobs that don't have locations specified will be
-   *     ranked below jobs having locations. Diversification strategy is still
-   *     applied unless explicitly disabled in
-   *     SearchJobsRequest.diversification_level.
+   *   * Location sorting: Use the special syntax to order jobs by distance:<br>
+   *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+   *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+   *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+   *     multiple locations. See details below.<br>
+   *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+   *     multiple locations. See details below.<br>
+   *     The string can have a maximum of 256 characters. When multiple distance
+   *     centers are provided, a job that is close to any of the distance centers
+   *     would have a high rank. When a job has multiple locations, the job
+   *     location closest to one of the distance centers will be used. Jobs that
+   *     don't have locations will be ranked at the bottom. Distance is calculated
+   *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+   *     still applied unless explicitly disabled in
+   *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional.
-   *
-   *   Controls whether highly similar jobs are returned next to each other in
-   *   the search results. Jobs are identified as highly similar based on
+   *   Optional. Controls whether highly similar jobs are returned next to each
+   *   other in the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -1893,16 +1818,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional.
-   *
-   *   Controls over how job documents get ranked on top of existing relevance
-   *   score (determined by API algorithm).
+   *   Optional. Controls over how job documents get ranked on top of existing
+   *   relevance score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional.
-   *
-   *   Controls whether to disable exact keyword match on
+   *   Optional. Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -2040,9 +1961,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant to search within.
+   *   Required. The resource name of the tenant to search within.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -2050,41 +1969,32 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object} request.requestMetadata
-   *   Required.
-   *
-   *   The meta information collected about the job searcher, used to improve the
-   *   search quality of the service.. The identifiers, (such as `user_id`) are
-   *   provided by users, and must be unique and consistent.
+   *   Required. The meta information collected about the job searcher, used to
+   *   improve the search quality of the service. The identifiers (such as
+   *   `user_id`) are provided by users, and must be unique and consistent.
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional.
-   *
-   *   Mode of a search.
+   *   Optional. Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional.
-   *
-   *   Query used to search against jobs, such as keyword, location filters, etc.
+   *   Optional. Query used to search against jobs, such as keyword, location
+   *   filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional.
-   *
-   *   Controls whether to broaden the search when it produces sparse results.
-   *   Broadened queries append results to the end of the matching results
-   *   list.
+   *   Optional. Controls whether to broaden the search when it produces sparse
+   *   results. Broadened queries append results to the end of the matching
+   *   results list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional.
-   *
-   *   Controls if the search job request requires the return of a precise
-   *   count of the first 300 results. Setting this to `true` ensures
+   *   Optional. Controls if the search job request requires the return of a
+   *   precise count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -2093,9 +2003,8 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional.
-   *
-   *   An expression specifies a histogram request against matching jobs.
+   *   Optional. An expression specifies a histogram request against matching
+   *   jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -2205,19 +2114,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional.
-   *
-   *   The desired job attributes returned for jobs in the search response.
-   *   Defaults to
+   *   Optional. The desired job attributes returned for jobs in the search
+   *   response. Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional.
-   *
-   *   An integer that specifies the current offset (that is, starting result
-   *   location, amongst the jobs deemed by the API as relevant) in search
+   *   Optional. An integer that specifies the current offset (that is, starting
+   *   result location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -2233,64 +2138,64 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional.
-   *
-   *   The criteria determining how search results are sorted. Default is
-   *   "relevance desc".
+   *   Optional. The criteria determining how search results are sorted. Default
+   *   is
+   *   `"relevance desc"`.
    *
    *   Supported options are:
    *
-   *   * "relevance desc": By relevance descending, as determined by the API
+   *   * `"relevance desc"`: By relevance descending, as determined by the API
    *     algorithms. Relevance thresholding of query results is only available
    *     with this ordering.
-   *   * "posting`_`publish`_`time desc": By
+   *   * `"posting_publish_time desc"`: By
    *   Job.posting_publish_time
    *     descending.
-   *   * "posting`_`update`_`time desc": By
+   *   * `"posting_update_time desc"`: By
    *   Job.posting_update_time
    *     descending.
-   *   * "title": By Job.title ascending.
-   *   * "title desc": By Job.title
+   *   * `"title"`: By Job.title
+   *   ascending.
+   *   * `"title desc"`: By Job.title
    *   descending.
-   *   * "annualized`_`base`_`compensation": By job's
+   *   * `"annualized_base_compensation"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`base`_`compensation desc": By job's
+   *   * `"annualized_base_compensation desc"`: By job's
    *     CompensationInfo.annualized_base_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "annualized`_`total`_`compensation": By job's
+   *   * `"annualized_total_compensation"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     ascending. Jobs whose annualized base compensation is unspecified are put
    *     at the end of search results.
-   *   * "annualized`_`total`_`compensation desc": By job's
+   *   * `"annualized_total_compensation desc"`: By job's
    *     CompensationInfo.annualized_total_compensation_range
    *     descending. Jobs whose annualized base compensation is unspecified are
    *     put at the end of search results.
-   *   * "custom`_`ranking desc": By the relevance score adjusted to the
+   *   * `"custom_ranking desc"`: By the relevance score adjusted to the
    *     SearchJobsRequest.CustomRankingInfo.ranking_expression
    *     with weight factor assigned by
    *     SearchJobsRequest.CustomRankingInfo.importance_level
    *     in descending order.
-   *   * "location`_`distance": By the distance between the location on jobs and
-   *     locations specified in the
-   *     JobQuery.location_filters.
-   *     When this order is selected, the
-   *     JobQuery.location_filters
-   *     must not be empty. When a job has multiple locations, the location
-   *     closest to one of the locations specified in the location filter will be
-   *     used to calculate location distance. Distance is calculated by the
-   *     distance between two lat/long coordinates, with a precision of 10e-4
-   *     degrees (11.3 meters). Jobs that don't have locations specified will be
-   *     ranked below jobs having locations. Diversification strategy is still
-   *     applied unless explicitly disabled in
-   *     SearchJobsRequest.diversification_level.
+   *   * Location sorting: Use the special syntax to order jobs by distance:<br>
+   *     `"distance_from('Hawaii')"`: Order by distance from Hawaii.<br>
+   *     `"distance_from(19.89, 155.5)"`: Order by distance from a coordinate.<br>
+   *     `"distance_from('Hawaii'), distance_from('Puerto Rico')"`: Order by
+   *     multiple locations. See details below.<br>
+   *     `"distance_from('Hawaii'), distance_from(19.89, 155.5)"`: Order by
+   *     multiple locations. See details below.<br>
+   *     The string can have a maximum of 256 characters. When multiple distance
+   *     centers are provided, a job that is close to any of the distance centers
+   *     would have a high rank. When a job has multiple locations, the job
+   *     location closest to one of the distance centers will be used. Jobs that
+   *     don't have locations will be ranked at the bottom. Distance is calculated
+   *     with a precision of 11.3 meters (37.4 feet). Diversification strategy is
+   *     still applied unless explicitly disabled in
+   *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional.
-   *
-   *   Controls whether highly similar jobs are returned next to each other in
-   *   the search results. Jobs are identified as highly similar based on
+   *   Optional. Controls whether highly similar jobs are returned next to each
+   *   other in the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -2302,16 +2207,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional.
-   *
-   *   Controls over how job documents get ranked on top of existing relevance
-   *   score (determined by API algorithm).
+   *   Optional. Controls over how job documents get ranked on top of existing
+   *   relevance score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional.
-   *
-   *   Controls whether to disable exact keyword match on
+   *   Optional. Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -2378,9 +2279,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant under which the job is created.
+   *   Required. The resource name of the tenant under which the job is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -2388,9 +2287,7 @@ class JobServiceClient {
    *   Tenant id is optional and a default tenant is created if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object[]} request.jobs
-   *   Required.
-   *
-   *   The jobs to be created.
+   *   Required. The jobs to be created.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    * @param {Object} [options]
@@ -2504,9 +2401,7 @@ class JobServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The resource name of the tenant under which the job is created.
+   *   Required. The resource name of the tenant under which the job is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -2514,9 +2409,7 @@ class JobServiceClient {
    *   Tenant id is optional and the default tenant is used if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object[]} request.jobs
-   *   Required.
-   *
-   *   The jobs to be updated.
+   *   Required. The jobs to be updated.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    * @param {Object} [request.updateMask]
@@ -2666,6 +2559,20 @@ class JobServiceClient {
   }
 
   /**
+   * Return a fully-qualified company_without_tenant resource name string.
+   *
+   * @param {String} project
+   * @param {String} company
+   * @returns {String}
+   */
+  companyWithoutTenantPath(project, company) {
+    return this._pathTemplates.companyWithoutTenantPathTemplate.render({
+      project: project,
+      company: company,
+    });
+  }
+
+  /**
    * Return a fully-qualified job resource name string.
    *
    * @param {String} project
@@ -2678,6 +2585,32 @@ class JobServiceClient {
       project: project,
       tenant: tenant,
       jobs: jobs,
+    });
+  }
+
+  /**
+   * Return a fully-qualified job_without_tenant resource name string.
+   *
+   * @param {String} project
+   * @param {String} jobs
+   * @returns {String}
+   */
+  jobWithoutTenantPath(project, jobs) {
+    return this._pathTemplates.jobWithoutTenantPathTemplate.render({
+      project: project,
+      jobs: jobs,
+    });
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {String} project
+   * @returns {String}
+   */
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
     });
   }
 
@@ -2729,6 +2662,32 @@ class JobServiceClient {
   }
 
   /**
+   * Parse the companyWithoutTenantName from a company_without_tenant resource.
+   *
+   * @param {String} companyWithoutTenantName
+   *   A fully-qualified path representing a company_without_tenant resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromCompanyWithoutTenantName(companyWithoutTenantName) {
+    return this._pathTemplates.companyWithoutTenantPathTemplate.match(
+      companyWithoutTenantName
+    ).project;
+  }
+
+  /**
+   * Parse the companyWithoutTenantName from a company_without_tenant resource.
+   *
+   * @param {String} companyWithoutTenantName
+   *   A fully-qualified path representing a company_without_tenant resources.
+   * @returns {String} - A string representing the company.
+   */
+  matchCompanyFromCompanyWithoutTenantName(companyWithoutTenantName) {
+    return this._pathTemplates.companyWithoutTenantPathTemplate.match(
+      companyWithoutTenantName
+    ).company;
+  }
+
+  /**
    * Parse the jobName from a job resource.
    *
    * @param {String} jobName
@@ -2759,6 +2718,43 @@ class JobServiceClient {
    */
   matchJobsFromJobName(jobName) {
     return this._pathTemplates.jobPathTemplate.match(jobName).jobs;
+  }
+
+  /**
+   * Parse the jobWithoutTenantName from a job_without_tenant resource.
+   *
+   * @param {String} jobWithoutTenantName
+   *   A fully-qualified path representing a job_without_tenant resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromJobWithoutTenantName(jobWithoutTenantName) {
+    return this._pathTemplates.jobWithoutTenantPathTemplate.match(
+      jobWithoutTenantName
+    ).project;
+  }
+
+  /**
+   * Parse the jobWithoutTenantName from a job_without_tenant resource.
+   *
+   * @param {String} jobWithoutTenantName
+   *   A fully-qualified path representing a job_without_tenant resources.
+   * @returns {String} - A string representing the jobs.
+   */
+  matchJobsFromJobWithoutTenantName(jobWithoutTenantName) {
+    return this._pathTemplates.jobWithoutTenantPathTemplate.match(
+      jobWithoutTenantName
+    ).jobs;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

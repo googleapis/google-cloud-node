@@ -39,9 +39,7 @@
  *   value is unique.
  *
  * @property {string} company
- *   Required.
- *
- *   The resource name of the company listing the job.
+ *   Required. The resource name of the company listing the job.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
@@ -51,12 +49,10 @@
  *   example, "projects/api-test-project/companies/bar".
  *
  * @property {string} requisitionId
- *   Required.
- *
- *   The requisition ID, also referred to as the posting ID, is assigned by the
- *   client to identify a job. This field is intended to be used by clients
- *   for client identification and tracking of postings. A job isn't allowed
- *   to be created if there is another job with the same
+ *   Required. The requisition ID, also referred to as the posting ID, is
+ *   assigned by the client to identify a job. This field is intended to be used
+ *   by clients for client identification and tracking of postings. A job isn't
+ *   allowed to be created if there is another job with the same
  *   company,
  *   language_code and
  *   requisition_id.
@@ -64,18 +60,14 @@
  *   The maximum number of allowed characters is 255.
  *
  * @property {string} title
- *   Required.
- *
- *   The title of the job, such as "Software Engineer"
+ *   Required. The title of the job, such as "Software Engineer"
  *
  *   The maximum number of allowed characters is 500.
  *
  * @property {string} description
- *   Required.
- *
- *   The description of the job, which typically includes a multi-paragraph
- *   description of the company and related information. Separate fields are
- *   provided on the job object for
+ *   Required. The description of the job, which typically includes a
+ *   multi-paragraph description of the company and related information.
+ *   Separate fields are provided on the job object for
  *   responsibilities,
  *   qualifications, and other
  *   job characteristics. Use of these separate job fields is recommended.
@@ -109,32 +101,24 @@
  *   The maximum number of allowed characters is 500.
  *
  * @property {Object} applicationInfo
- *   Optional.
- *
- *   Job application information.
+ *   Optional. Job application information.
  *
  *   This object should have the same structure as [ApplicationInfo]{@link google.cloud.talent.v4beta1.ApplicationInfo}
  *
  * @property {number[]} jobBenefits
- *   Optional.
- *
- *   The benefits included with the job.
+ *   Optional. The benefits included with the job.
  *
  *   The number should be among the values of [JobBenefit]{@link google.cloud.talent.v4beta1.JobBenefit}
  *
  * @property {Object} compensationInfo
- *   Optional.
- *
- *   Job compensation information (a.k.a. "pay rate") i.e., the compensation
- *   that will paid to the employee.
+ *   Optional. Job compensation information (a.k.a. "pay rate") i.e., the
+ *   compensation that will paid to the employee.
  *
  *   This object should have the same structure as [CompensationInfo]{@link google.cloud.talent.v4beta1.CompensationInfo}
  *
  * @property {Object.<string, Object>} customAttributes
- *   Optional.
- *
- *   A map of fields to hold both filterable and non-filterable custom job
- *   attributes that are not covered by the provided structured fields.
+ *   Optional. A map of fields to hold both filterable and non-filterable custom
+ *   job attributes that are not covered by the provided structured fields.
  *
  *   The keys of the map are strings up to 64 bytes and must match the
  *   pattern: [a-zA-Z][a-zA-Z0-9_]*. For example, key0LikeThis or
@@ -147,41 +131,32 @@
  *   is 50KB.
  *
  * @property {number[]} degreeTypes
- *   Optional.
- *
- *   The desired education degrees for the job, such as Bachelors, Masters.
+ *   Optional. The desired education degrees for the job, such as Bachelors,
+ *   Masters.
  *
  *   The number should be among the values of [DegreeType]{@link google.cloud.talent.v4beta1.DegreeType}
  *
  * @property {string} department
- *   Optional.
- *
- *   The department or functional area within the company with the open
- *   position.
+ *   Optional. The department or functional area within the company with the
+ *   open position.
  *
  *   The maximum number of allowed characters is 255.
  *
  * @property {number[]} employmentTypes
- *   Optional.
- *
- *   The employment type(s) of a job, for example,
+ *   Optional. The employment type(s) of a job, for example,
  *   full time or
  *   part time.
  *
  *   The number should be among the values of [EmploymentType]{@link google.cloud.talent.v4beta1.EmploymentType}
  *
  * @property {string} incentives
- *   Optional.
- *
- *   A description of bonus, commission, and other compensation
+ *   Optional. A description of bonus, commission, and other compensation
  *   incentives associated with the job not including salary or pay.
  *
  *   The maximum number of allowed characters is 10,000.
  *
  * @property {string} languageCode
- *   Optional.
- *
- *   The language of the posting. This field is distinct from
+ *   Optional. The language of the posting. This field is distinct from
  *   any requirements for fluency that are associated with the job.
  *
  *   Language codes must be in BCP-47 format, such as "en-US" or "sr-Latn".
@@ -196,16 +171,13 @@
  *   otherwise defaults to 'en_US'.
  *
  * @property {number} jobLevel
- *   Optional.
- *
- *   The experience level associated with the job, such as "Entry Level".
+ *   Optional. The experience level associated with the job, such as "Entry
+ *   Level".
  *
  *   The number should be among the values of [JobLevel]{@link google.cloud.talent.v4beta1.JobLevel}
  *
  * @property {number} promotionValue
- *   Optional.
- *
- *   A promotion value of the job, as determined by the client.
+ *   Optional. A promotion value of the job, as determined by the client.
  *   The value determines the sort order of the jobs returned when searching for
  *   jobs using the featured jobs search call, with higher promotional values
  *   being returned first and ties being resolved by relevance sort. Only the
@@ -214,9 +186,7 @@
  *   Default value is 0, and negative values are treated as 0.
  *
  * @property {string} qualifications
- *   Optional.
- *
- *   A description of the qualifications required to perform the
+ *   Optional. A description of the qualifications required to perform the
  *   job. The use of this field is recommended
  *   as an alternative to using the more general
  *   description field.
@@ -227,9 +197,7 @@
  *   The maximum number of allowed characters is 10,000.
  *
  * @property {string} responsibilities
- *   Optional.
- *
- *   A description of job responsibilities. The use of this field is
+ *   Optional. A description of job responsibilities. The use of this field is
  *   recommended as an alternative to using the more general
  *   description field.
  *
@@ -239,14 +207,12 @@
  *   The maximum number of allowed characters is 10,000.
  *
  * @property {number} postingRegion
- *   Optional.
- *
- *   The job PostingRegion (for
- *   example, state, country) throughout which the job is available. If this
- *   field is set, a
- *   LocationFilter in a search
- *   query within the job region finds this job posting if an exact location
- *   match isn't specified. If this field is set to
+ *   Optional. The job
+ *   PostingRegion (for example,
+ *   state, country) throughout which the job is available. If this field is
+ *   set, a LocationFilter in a
+ *   search query within the job region finds this job posting if an exact
+ *   location match isn't specified. If this field is set to
  *   PostingRegion.NATION or
  *   PostingRegion.ADMINISTRATIVE_AREA,
  *   setting job Job.addresses to
@@ -255,9 +221,7 @@
  *   The number should be among the values of [PostingRegion]{@link google.cloud.talent.v4beta1.PostingRegion}
  *
  * @property {number} visibility
- *   Optional.
- *
- *   The visibility of the job.
+ *   Optional. The visibility of the job.
  *
  *   Defaults to
  *   Visibility.ACCOUNT_ONLY
@@ -266,27 +230,21 @@
  *   The number should be among the values of [Visibility]{@link google.cloud.talent.v4beta1.Visibility}
  *
  * @property {Object} jobStartTime
- *   Optional.
- *
- *   The start timestamp of the job in UTC time zone. Typically this field
- *   is used for contracting engagements. Invalid timestamps are ignored.
+ *   Optional. The start timestamp of the job in UTC time zone. Typically this
+ *   field is used for contracting engagements. Invalid timestamps are ignored.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} jobEndTime
- *   Optional.
- *
- *   The end timestamp of the job. Typically this field is used for contracting
- *   engagements. Invalid timestamps are ignored.
+ *   Optional. The end timestamp of the job. Typically this field is used for
+ *   contracting engagements. Invalid timestamps are ignored.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} postingPublishTime
- *   Optional.
- *
- *   The timestamp this job posting was most recently published. The default
- *   value is the time the request arrives at the server. Invalid timestamps are
- *   ignored.
+ *   Optional. The timestamp this job posting was most recently published. The
+ *   default value is the time the request arrives at the server. Invalid
+ *   timestamps are ignored.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -296,12 +254,13 @@
  *
  *   The expiration timestamp of the job. After this timestamp, the
  *   job is marked as expired, and it no longer appears in search results. The
- *   expired job can't be deleted or listed by the
- *   DeleteJob and
- *   ListJobs APIs, but it
- *   can be retrieved with the
+ *   expired job can't be listed by the
+ *   ListJobs API, but it can
+ *   be retrieved with the
  *   GetJob API or updated with
- *   the UpdateJob API. An
+ *   the UpdateJob API or
+ *   deleted with the
+ *   DeleteJob API. An
  *   expired job can be updated and opened again by using a future expiration
  *   timestamp. Updating an expired job fails if there is another existing open
  *   job with same company,
@@ -309,15 +268,24 @@
  *   requisition_id.
  *
  *   The expired jobs are retained in our system for 90 days. However, the
- *   overall expired job count cannot exceed 3 times the maximum of open jobs
- *   count over the past week, otherwise jobs with earlier expire time are
- *   cleaned first. Expired jobs are no longer accessible after they are cleaned
+ *   overall expired job count cannot exceed 3 times the maximum number of
+ *   open jobs over previous 7 days. If this threshold is exceeded,
+ *   expired jobs are cleaned out in order of earliest expire time.
+ *   Expired jobs are no longer accessible after they are cleaned
  *   out.
  *
  *   Invalid timestamps are ignored, and treated as expire time not provided.
  *
- *   Timestamp before the instant request is made is considered valid, the job
- *   will be treated as expired immediately.
+ *   If the timestamp is before the instant request is made, the job
+ *   is treated as expired immediately on creation. This kind of job can
+ *   not be updated. And when creating a job with past timestamp, the
+ *   posting_publish_time
+ *   must be set before
+ *   posting_expire_time.
+ *   The purpose of this feature is to allow other objects, such as
+ *   Application, to refer a job that
+ *   didn't exist in the system prior to becoming expired. If you want to modify
+ *   a job that was expired on creation, delete it and create a new one.
  *
  *   If this value isn't provided at the time of job creation or is invalid,
  *   the job posting expires after 30 days from the job's creation time. For
@@ -354,9 +322,7 @@
  *   This object should have the same structure as [DerivedInfo]{@link google.cloud.talent.v4beta1.DerivedInfo}
  *
  * @property {Object} processingOptions
- *   Optional.
- *
- *   Options for job processing.
+ *   Optional. Options for job processing.
  *
  *   This object should have the same structure as [ProcessingOptions]{@link google.cloud.talent.v4beta1.ProcessingOptions}
  *
@@ -371,18 +337,14 @@ const Job = {
    * Application related details of a job posting.
    *
    * @property {string[]} emails
-   *   Optional.
-   *
-   *   Use this field to specify email address(es) to which resumes or
+   *   Optional. Use this field to specify email address(es) to which resumes or
    *   applications can be sent.
    *
    *   The maximum number of allowed characters for each entry is 255.
    *
    * @property {string} instruction
-   *   Optional.
-   *
-   *   Use this field to provide instructions, such as "Mail your application
-   *   to ...", that a candidate can follow to apply for the job.
+   *   Optional. Use this field to provide instructions, such as "Mail your
+   *   application to ...", that a candidate can follow to apply for the job.
    *
    *   This field accepts and sanitizes HTML input, and also accepts
    *   bold, italic, ordered list, and unordered list markup tags.
@@ -390,10 +352,8 @@ const Job = {
    *   The maximum number of allowed characters is 3,000.
    *
    * @property {string[]} uris
-   *   Optional.
-   *
-   *   Use this URI field to direct an applicant to a website, for example to
-   *   link to an online application form.
+   *   Optional. Use this URI field to direct an applicant to a website, for
+   *   example to link to an online application form.
    *
    *   The maximum number of allowed characters for each entry is 2,000.
    *
@@ -442,15 +402,11 @@ const Job = {
    * Options for job processing.
    *
    * @property {boolean} disableStreetAddressResolution
-   *   Optional.
-   *
-   *   If set to `true`, the service does not attempt to resolve a
+   *   Optional. If set to `true`, the service does not attempt to resolve a
    *   more precise address for the job.
    *
    * @property {number} htmlSanitization
-   *   Optional.
-   *
-   *   Option for job HTML content sanitization. Applied fields are:
+   *   Optional. Option for job HTML content sanitization. Applied fields are:
    *
    *   * description
    *   * applicationInfo.instruction

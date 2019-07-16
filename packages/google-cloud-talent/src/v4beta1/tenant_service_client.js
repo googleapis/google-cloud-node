@@ -217,16 +217,12 @@ class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   Resource name of the project under which the tenant is created.
+   *   Required. Resource name of the project under which the tenant is created.
    *
    *   The format is "projects/{project_id}", for example,
    *   "projects/api-test-project".
    * @param {Object} request.tenant
-   *   Required.
-   *
-   *   The tenant to be created.
+   *   Required. The tenant to be created.
    *
    *   This object should have the same structure as [Tenant]{@link google.cloud.talent.v4beta1.Tenant}
    * @param {Object} [options]
@@ -286,9 +282,7 @@ class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The resource name of the tenant to be retrieved.
+   *   Required. The resource name of the tenant to be retrieved.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenants/foo".
@@ -344,20 +338,23 @@ class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.tenant
-   *   Required.
-   *
-   *   The tenant resource to replace the current resource in the system.
+   *   Required. The tenant resource to replace the current resource in the
+   *   system.
    *
    *   This object should have the same structure as [Tenant]{@link google.cloud.talent.v4beta1.Tenant}
    * @param {Object} [request.updateMask]
    *   Optional but strongly recommended for the best service
    *   experience.
    *
-   *   If update_mask is provided, only the specified fields in
-   *   tenant are updated. Otherwise all the fields are updated.
+   *   If
+   *   update_mask
+   *   is provided, only the specified fields in
+   *   tenant are
+   *   updated. Otherwise all the fields are updated.
    *
    *   A field mask to specify the tenant fields to be updated. Only
-   *   top level fields of Tenant are supported.
+   *   top level fields of Tenant are
+   *   supported.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -412,9 +409,7 @@ class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The resource name of the tenant to be deleted.
+   *   Required. The resource name of the tenant to be deleted.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenants/foo".
@@ -462,9 +457,7 @@ class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   Resource name of the project under which the tenant is created.
+   *   Required. Resource name of the project under which the tenant is created.
    *
    *   The format is "projects/{project_id}", for example,
    *   "projects/api-test-project".
@@ -578,9 +571,7 @@ class TenantServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   Resource name of the project under which the tenant is created.
+   *   Required. Resource name of the project under which the tenant is created.
    *
    *   The format is "projects/{project_id}", for example,
    *   "projects/api-test-project".

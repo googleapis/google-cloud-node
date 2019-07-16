@@ -103,6 +103,10 @@ class CompanyServiceClient {
       companyPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}/companies/{company}'
       ),
+      companyWithoutTenantPathTemplate: new gax.PathTemplate(
+        'projects/{project}/companies/{company}'
+      ),
+      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
       tenantPathTemplate: new gax.PathTemplate(
         'projects/{project}/tenants/{tenant}'
       ),
@@ -219,9 +223,7 @@ class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   Resource name of the tenant under which the company is created.
+   *   Required. Resource name of the tenant under which the company is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -229,9 +231,7 @@ class CompanyServiceClient {
    *   Tenant id is optional and a default tenant is created if unspecified, for
    *   example, "projects/api-test-project".
    * @param {Object} request.company
-   *   Required.
-   *
-   *   The company to be created.
+   *   Required. The company to be created.
    *
    *   This object should have the same structure as [Company]{@link google.cloud.talent.v4beta1.Company}
    * @param {Object} [options]
@@ -291,9 +291,7 @@ class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The resource name of the company to be retrieved.
+   *   Required. The resource name of the company to be retrieved.
    *
    *   The format is
    *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
@@ -353,20 +351,23 @@ class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.company
-   *   Required.
-   *
-   *   The company resource to replace the current resource in the system.
+   *   Required. The company resource to replace the current resource in the
+   *   system.
    *
    *   This object should have the same structure as [Company]{@link google.cloud.talent.v4beta1.Company}
    * @param {Object} [request.updateMask]
    *   Optional but strongly recommended for the best service
    *   experience.
    *
-   *   If update_mask is provided, only the specified fields in
-   *   company are updated. Otherwise all the fields are updated.
+   *   If
+   *   update_mask
+   *   is provided, only the specified fields in
+   *   company are
+   *   updated. Otherwise all the fields are updated.
    *
    *   A field mask to specify the company fields to be updated. Only
-   *   top level fields of Company are supported.
+   *   top level fields of Company are
+   *   supported.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -422,9 +423,7 @@ class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The resource name of the company to be deleted.
+   *   Required. The resource name of the company to be deleted.
    *
    *   The format is
    *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
@@ -476,9 +475,7 @@ class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   Resource name of the tenant under which the company is created.
+   *   Required. Resource name of the tenant under which the company is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -492,14 +489,13 @@ class CompanyServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {boolean} [request.requireOpenJobs]
-   *   Optional.
-   *
-   *   Set to true if the companies requested must have open jobs.
+   *   Optional. Set to true if the companies requested must have open jobs.
    *
    *   Defaults to false.
    *
-   *   If true, at most page_size of companies are fetched, among which
-   *   only those with open jobs are returned.
+   *   If true, at most
+   *   page_size of
+   *   companies are fetched, among which only those with open jobs are returned.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -604,9 +600,7 @@ class CompanyServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   Resource name of the tenant under which the company is created.
+   *   Required. Resource name of the tenant under which the company is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
    *   "projects/api-test-project/tenant/foo".
@@ -620,14 +614,13 @@ class CompanyServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {boolean} [request.requireOpenJobs]
-   *   Optional.
-   *
-   *   Set to true if the companies requested must have open jobs.
+   *   Optional. Set to true if the companies requested must have open jobs.
    *
    *   Defaults to false.
    *
-   *   If true, at most page_size of companies are fetched, among which
-   *   only those with open jobs are returned.
+   *   If true, at most
+   *   page_size of
+   *   companies are fetched, among which only those with open jobs are returned.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -681,6 +674,32 @@ class CompanyServiceClient {
   }
 
   /**
+   * Return a fully-qualified company_without_tenant resource name string.
+   *
+   * @param {String} project
+   * @param {String} company
+   * @returns {String}
+   */
+  companyWithoutTenantPath(project, company) {
+    return this._pathTemplates.companyWithoutTenantPathTemplate.render({
+      project: project,
+      company: company,
+    });
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {String} project
+   * @returns {String}
+   */
+  projectPath(project) {
+    return this._pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
    * Return a fully-qualified tenant resource name string.
    *
    * @param {String} project
@@ -725,6 +744,43 @@ class CompanyServiceClient {
    */
   matchCompanyFromCompanyName(companyName) {
     return this._pathTemplates.companyPathTemplate.match(companyName).company;
+  }
+
+  /**
+   * Parse the companyWithoutTenantName from a company_without_tenant resource.
+   *
+   * @param {String} companyWithoutTenantName
+   *   A fully-qualified path representing a company_without_tenant resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromCompanyWithoutTenantName(companyWithoutTenantName) {
+    return this._pathTemplates.companyWithoutTenantPathTemplate.match(
+      companyWithoutTenantName
+    ).project;
+  }
+
+  /**
+   * Parse the companyWithoutTenantName from a company_without_tenant resource.
+   *
+   * @param {String} companyWithoutTenantName
+   *   A fully-qualified path representing a company_without_tenant resources.
+   * @returns {String} - A string representing the company.
+   */
+  matchCompanyFromCompanyWithoutTenantName(companyWithoutTenantName) {
+    return this._pathTemplates.companyWithoutTenantPathTemplate.match(
+      companyWithoutTenantName
+    ).company;
+  }
+
+  /**
+   * Parse the projectName from a project resource.
+   *
+   * @param {String} projectName
+   *   A fully-qualified path representing a project resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromProjectName(projectName) {
+    return this._pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**

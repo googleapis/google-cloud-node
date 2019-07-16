@@ -34,74 +34,54 @@
  *   example, "projects/api-test-project/companies/bar".
  *
  * @property {string} displayName
- *   Required.
- *
- *   The display name of the company, for example, "Google, LLC".
+ *   Required. The display name of the company, for example, "Google, LLC".
  *
  * @property {string} externalId
- *   Required.
- *
- *   Client side company identifier, used to uniquely identify the
+ *   Required. Client side company identifier, used to uniquely identify the
  *   company.
  *
  *   The maximum number of allowed characters is 255.
  *
  * @property {number} size
- *   Optional.
- *
- *   The employer's company size.
+ *   Optional. The employer's company size.
  *
  *   The number should be among the values of [CompanySize]{@link google.cloud.talent.v4beta1.CompanySize}
  *
  * @property {string} headquartersAddress
- *   Optional.
- *
- *   The street address of the company's main headquarters, which may be
- *   different from the job location. The service attempts
- *   to geolocate the provided address, and populates a more specific
- *   location wherever possible in
+ *   Optional. The street address of the company's main headquarters, which may
+ *   be different from the job location. The service attempts to geolocate the
+ *   provided address, and populates a more specific location wherever possible
+ *   in
  *   DerivedInfo.headquarters_location.
  *
  * @property {boolean} hiringAgency
- *   Optional.
- *
- *   Set to true if it is the hiring agency that post jobs for other
+ *   Optional. Set to true if it is the hiring agency that post jobs for other
  *   employers.
  *
  *   Defaults to false if not provided.
  *
  * @property {string} eeoText
- *   Optional.
- *
- *   Equal Employment Opportunity legal disclaimer text to be
+ *   Optional. Equal Employment Opportunity legal disclaimer text to be
  *   associated with all jobs, and typically to be displayed in all
  *   roles.
  *
  *   The maximum number of allowed characters is 500.
  *
  * @property {string} websiteUri
- *   Optional.
- *
- *   The URI representing the company's primary web site or home page,
+ *   Optional. The URI representing the company's primary web site or home page,
  *   for example, `https://www.google.com`.
  *
  *   The maximum number of allowed characters is 255.
  *
  * @property {string} careerSiteUri
- *   Optional.
- *
- *   The URI to employer's career site or careers page on the employer's web
- *   site, for example, "https://careers.google.com".
+ *   Optional. The URI to employer's career site or careers page on the
+ *   employer's web site, for example, "https://careers.google.com".
  *
  * @property {string} imageUri
- *   Optional.
- *
- *   A URI that hosts the employer's company logo.
+ *   Optional. A URI that hosts the employer's company logo.
  *
  * @property {string[]} keywordSearchableJobCustomAttributes
- *   Optional.
- *
- *   A list of keys of filterable
+ *   Optional. A list of keys of filterable
  *   Job.custom_attributes,
  *   whose corresponding `string_values` are used in keyword searches. Jobs with
  *   `string_values` under these specified field keys are returned if any

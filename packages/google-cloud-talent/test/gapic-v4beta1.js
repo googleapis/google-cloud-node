@@ -2150,11 +2150,13 @@ describe('ProfileServiceClient', () => {
       // Mock response
       const estimatedTotalSize = 1882144769;
       const nextPageToken = '';
+      const resultSetId = 'resultSetId-770306950';
       const summarizedProfilesElement = {};
       const summarizedProfiles = [summarizedProfilesElement];
       const expectedResponse = {
         estimatedTotalSize: estimatedTotalSize,
         nextPageToken: nextPageToken,
+        resultSetId: resultSetId,
         summarizedProfiles: summarizedProfiles,
       };
 

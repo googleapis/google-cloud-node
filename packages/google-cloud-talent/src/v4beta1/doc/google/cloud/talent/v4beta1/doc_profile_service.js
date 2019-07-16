@@ -19,34 +19,28 @@
  * List profiles request.
  *
  * @property {string} parent
- *   Required.
- *
- *   The resource name of the tenant under which the job is created.
+ *   Required. The resource name of the tenant under which the profile is
+ *   created.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
  *   "projects/api-test-project/tenants/foo".
  *
  * @property {string} pageToken
- *   Optional.
- *
- *   The token that specifies the current offset (that is, starting result).
+ *   Optional. The token that specifies the current offset (that is, starting
+ *   result).
  *
  *   Please set the value to
  *   ListProfilesResponse.next_page_token
  *   to continue the list.
  *
  * @property {number} pageSize
- *   Optional.
- *
- *   The maximum number of profiles to be returned, at most 100.
+ *   Optional. The maximum number of profiles to be returned, at most 100.
  *
  *   Default is 100 unless a positive number smaller than 100 is specified.
  *
  * @property {Object} readMask
- *   Optional.
- *
- *   A field mask to specify the profile fields to be listed in response.
- *   All fields are listed if it is unset.
+ *   Optional. A field mask to specify the profile fields to be listed in
+ *   response. All fields are listed if it is unset.
  *
  *   Valid values are:
  *
@@ -86,17 +80,13 @@ const ListProfilesResponse = {
  * Create profile request.
  *
  * @property {string} parent
- *   Required.
- *
- *   The name of the tenant this profile belongs to.
+ *   Required. The name of the tenant this profile belongs to.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
  *   "projects/api-test-project/tenants/foo".
  *
  * @property {Object} profile
- *   Required.
- *
- *   The profile to be created.
+ *   Required. The profile to be created.
  *
  *   This object should have the same structure as [Profile]{@link google.cloud.talent.v4beta1.Profile}
  *
@@ -112,9 +102,7 @@ const CreateProfileRequest = {
  * Get profile request.
  *
  * @property {string} name
- *   Required.
- *
- *   Resource name of the profile to get.
+ *   Required. Resource name of the profile to get.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
@@ -132,44 +120,40 @@ const GetProfileRequest = {
  * Update profile request
  *
  * @property {Object} profile
- *   Required.
- *
- *   Profile to be updated.
+ *   Required. Profile to be updated.
  *
  *   This object should have the same structure as [Profile]{@link google.cloud.talent.v4beta1.Profile}
  *
  * @property {Object} updateMask
- *   Optional.
- *
- *   A field mask to specify the profile fields to update.
+ *   Optional. A field mask to specify the profile fields to update.
  *
  *   A full update is performed if it is unset.
  *
  *   Valid values are:
  *
- *   * externalId
+ *   * external_id
  *   * source
  *   * uri
- *   * isHirable
- *   * createTime
- *   * updateTime
- *   * resumeHrxml
- *   * personNames
+ *   * is_hirable
+ *   * create_time
+ *   * update_time
+ *   * resume
+ *   * person_names
  *   * addresses
- *   * emailAddresses
- *   * phoneNumbers
- *   * personalUris
- *   * additionalContactInfo
- *   * employmentRecords
- *   * educationRecords
+ *   * email_addresses
+ *   * phone_numbers
+ *   * personal_uris
+ *   * additional_contact_info
+ *   * employment_records
+ *   * education_records
  *   * skills
  *   * projects
  *   * publications
  *   * patents
  *   * certifications
- *   * recruitingNotes
- *   * customAttributes
- *   * groupId
+ *   * recruiting_notes
+ *   * custom_attributes
+ *   * group_id
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -185,9 +169,7 @@ const UpdateProfileRequest = {
  * Delete profile request.
  *
  * @property {string} name
- *   Required.
- *
- *   Resource name of the profile to be deleted.
+ *   Required. Resource name of the profile to be deleted.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
@@ -205,54 +187,42 @@ const DeleteProfileRequest = {
  * The request body of the `SearchProfiles` call.
  *
  * @property {string} parent
- *   Required.
- *
- *   The resource name of the tenant to search within.
+ *   Required. The resource name of the tenant to search within.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
  *   "projects/api-test-project/tenants/foo".
  *
  * @property {Object} requestMetadata
- *   Required.
- *
- *   The meta information collected about the profile search user. This is used
- *   to improve the search quality of the service. These values are provided by
- *   users, and must be precise and consistent.
+ *   Required. The meta information collected about the profile search user.
+ *   This is used to improve the search quality of the service. These values are
+ *   provided by users, and must be precise and consistent.
  *
  *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
  *
  * @property {Object} profileQuery
- *   Optional.
- *
- *   Search query to execute. See
+ *   Optional. Search query to execute. See
  *   ProfileQuery for more details.
  *
  *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
  *
  * @property {number} pageSize
- *   Optional.
- *
- *   A limit on the number of profiles returned in the search results.
+ *   Optional. A limit on the number of profiles returned in the search results.
  *   A value above the default value 10 can increase search response time.
  *
  *   The maximum value allowed is 100. Otherwise an error is thrown.
  *
  * @property {string} pageToken
- *   Optional.
- *
- *   The pageToken, similar to offset enables users of the API to paginate
- *   through the search results. To retrieve the first page of results, set the
- *   pageToken to empty. The search response includes a
+ *   Optional. The pageToken, similar to offset enables users of the API to
+ *   paginate through the search results. To retrieve the first page of results,
+ *   set the pageToken to empty. The search response includes a
  *   nextPageToken
  *   field that can be used to populate the pageToken field for the next page of
  *   results. Using pageToken instead of offset increases the performance of the
  *   API, especially compared to larger offset values.
  *
  * @property {number} offset
- *   Optional.
- *
- *   An integer that specifies the current offset (that is, starting result) in
- *   search results. This field is only considered if
+ *   Optional. An integer that specifies the current offset (that is, starting
+ *   result) in search results. This field is only considered if
  *   page_token
  *   is unset.
  *
@@ -263,17 +233,13 @@ const DeleteProfileRequest = {
  *   pageSize = 10 and offset = 10 means to search from the second page.
  *
  * @property {boolean} disableSpellCheck
- *   Optional.
- *
- *   This flag controls the spell-check feature. If `false`, the
+ *   Optional. This flag controls the spell-check feature. If `false`, the
  *   service attempts to correct a misspelled query.
  *
  *   For example, "enginee" is corrected to "engineer".
  *
  * @property {string} orderBy
- *   Optional.
- *
- *   The criteria that determines how search results are sorted.
+ *   Optional. The criteria that determines how search results are sorted.
  *   Defaults is "relevance desc" if no value is specified.
  *
  *   Supported options are:
@@ -304,17 +270,13 @@ const DeleteProfileRequest = {
  *     in ascending order.
  *
  * @property {boolean} caseSensitiveSort
- *   Optional.
- *
- *   When sort by field is based on alphabetical order, sort values case
- *   sensitively (based on ASCII) when the value is set to true. Default value
- *   is case in-sensitive sort (false).
+ *   Optional. When sort by field is based on alphabetical order, sort values
+ *   case sensitively (based on ASCII) when the value is set to true. Default
+ *   value is case in-sensitive sort (false).
  *
  * @property {Object[]} histogramQueries
- *   Optional.
- *
- *   A list of expressions specifies histogram requests against matching
- *   profiles for
+ *   Optional. A list of expressions specifies histogram requests against
+ *   matching profiles for
  *   SearchProfilesRequest.
  *
  *   The expression syntax looks like a function definition with optional
@@ -398,6 +360,34 @@ const DeleteProfileRequest = {
  *
  *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
  *
+ * @property {string} resultSetId
+ *   Optional. An id that uniquely identifies the result set of a
+ *   SearchProfiles call.  The id should be retrieved from the
+ *   SearchProfilesResponse
+ *   message returned from a previous invocation of SearchProfiles.
+ *
+ *   A result set is an ordered list of search results.
+ *
+ *   If this field is not set, a new result set is computed based on the
+ *   profile_query.
+ *   A new
+ *   result_set_id
+ *   is returned as a handle to access this result set.
+ *
+ *   If this field is set, the service will ignore the resource and
+ *   profile_query
+ *   values, and simply retrieve a page of results from the corresponding result
+ *   set.  In this case, one and only one of [page_token] or [offset] must be
+ *   set.
+ *
+ *   A typical use case is to invoke
+ *   SearchProfilesRequest
+ *   without this field, then use the resulting
+ *   result_set_id
+ *   in
+ *   SearchProfilesResponse
+ *   to page through the results.
+ *
  * @typedef SearchProfilesRequest
  * @memberof google.cloud.talent.v4beta1
  * @see [google.cloud.talent.v4beta1.SearchProfilesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/profile_service.proto}
@@ -440,6 +430,11 @@ const SearchProfilesRequest = {
  *   SearchProfilesRequest.
  *
  *   This object should have the same structure as [SummarizedProfile]{@link google.cloud.talent.v4beta1.SummarizedProfile}
+ *
+ * @property {string} resultSetId
+ *   An id that uniquely identifies the result set of a
+ *   SearchProfiles
+ *   call for consistent results.
  *
  * @typedef SearchProfilesResponse
  * @memberof google.cloud.talent.v4beta1

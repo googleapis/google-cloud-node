@@ -19,9 +19,7 @@
  * The report event request.
  *
  * @property {string} parent
- *   Required.
- *
- *   Resource name of the tenant under which the event is created.
+ *   Required. Resource name of the tenant under which the event is created.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
  *   "projects/api-test-project/tenant/foo".
@@ -30,10 +28,8 @@
  *   example, "projects/api-test-project".
  *
  * @property {Object} clientEvent
- *   Required.
- *
- *   Events issued when end user interacts with customer's application that
- *   uses Cloud Talent Solution.
+ *   Required. Events issued when end user interacts with customer's application
+ *   that uses Cloud Talent Solution.
  *
  *   This object should have the same structure as [ClientEvent]{@link google.cloud.talent.v4beta1.ClientEvent}
  *
