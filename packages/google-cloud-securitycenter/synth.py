@@ -24,12 +24,12 @@ gapic = gcp.GAPICGenerator()
 versions = ['v1beta1', 'v1']
 for version in versions:
     library = gapic.node_library('securitycenter', version)
-    s.copy(library, excludes=['src/index.js', 'README.md', 'package.json', '.kokoro/sample-test.sh'])
+    s.copy(library, excludes=['README.md', 'package.json', 'test/gapic-v1beta1.js'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library()
-s.copy(templates)
+s.copy(templates, excludes=['.kokoro/samples-test.sh'])
 
 s.replace('src/v1*/doc/google/cloud/securitycenter/v1*/doc_source.js',
         r"\[\\p\{L\}\\p\{N\}\]\(https:\/\/cloud\.google\.com\{\\p\{L\}\\p\{N\}_- \]\{0\,30\}\[\\p\{L\}\\p\{N\}\]\)\?",
@@ -46,6 +46,27 @@ r"""
  */
 /**
  * @namespace google.type
+ */
+/**
+ * @namespace google.longrunning
+ */
+/**
+ * @namespace google.protobuf
+ */
+/**
+ * @namespace google.type
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.cloud.securitycenter.v1
+ */
+/**
+ * @namespace google.cloud.securitycenter.v1beta1
+ */
+/**
+ * @namespace google.iam.v1
  */
 """)
 

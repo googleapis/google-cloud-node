@@ -107,6 +107,9 @@ class SecurityCenterClient {
       findingPathTemplate: new gax.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
+      findingSecurityMarksPathTemplate: new gax.PathTemplate(
+        'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
+      ),
       organizationPathTemplate: new gax.PathTemplate(
         'organizations/{organization}'
       ),
@@ -2512,6 +2515,22 @@ class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified finding_security_marks resource name string.
+   *
+   * @param {String} organization
+   * @param {String} source
+   * @param {String} finding
+   * @returns {String}
+   */
+  findingSecurityMarksPath(organization, source, finding) {
+    return this._pathTemplates.findingSecurityMarksPathTemplate.render({
+      organization: organization,
+      source: source,
+      finding: finding,
+    });
+  }
+
+  /**
    * Return a fully-qualified organization resource name string.
    *
    * @param {String} organization
@@ -2607,6 +2626,45 @@ class SecurityCenterClient {
    */
   matchFindingFromFindingName(findingName) {
     return this._pathTemplates.findingPathTemplate.match(findingName).finding;
+  }
+
+  /**
+   * Parse the findingSecurityMarksName from a finding_security_marks resource.
+   *
+   * @param {String} findingSecurityMarksName
+   *   A fully-qualified path representing a finding_security_marks resources.
+   * @returns {String} - A string representing the organization.
+   */
+  matchOrganizationFromFindingSecurityMarksName(findingSecurityMarksName) {
+    return this._pathTemplates.findingSecurityMarksPathTemplate.match(
+      findingSecurityMarksName
+    ).organization;
+  }
+
+  /**
+   * Parse the findingSecurityMarksName from a finding_security_marks resource.
+   *
+   * @param {String} findingSecurityMarksName
+   *   A fully-qualified path representing a finding_security_marks resources.
+   * @returns {String} - A string representing the source.
+   */
+  matchSourceFromFindingSecurityMarksName(findingSecurityMarksName) {
+    return this._pathTemplates.findingSecurityMarksPathTemplate.match(
+      findingSecurityMarksName
+    ).source;
+  }
+
+  /**
+   * Parse the findingSecurityMarksName from a finding_security_marks resource.
+   *
+   * @param {String} findingSecurityMarksName
+   *   A fully-qualified path representing a finding_security_marks resources.
+   * @returns {String} - A string representing the finding.
+   */
+  matchFindingFromFindingSecurityMarksName(findingSecurityMarksName) {
+    return this._pathTemplates.findingSecurityMarksPathTemplate.match(
+      findingSecurityMarksName
+    ).finding;
   }
 
   /**

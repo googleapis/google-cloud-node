@@ -1,4 +1,4 @@
-// Copyright 2018 Google LLC
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,68 +18,69 @@
 /**
  * @namespace google.type
  */
-
+/**
+ * @namespace google.longrunning
+ */
+/**
+ * @namespace google.protobuf
+ */
 /**
  * @namespace google.type
+ */
+/**
+ * @namespace google.rpc
+ */
+/**
+ * @namespace google.cloud.securitycenter.v1
+ */
+/**
+ * @namespace google.cloud.securitycenter.v1beta1
+ */
+/**
+ * @namespace google.iam.v1
  */
 
 /**
  * @namespace google.cloud
  */
 /**
- * @namespace google.cloud.securitycenter
+ * @namespace google.cloud.security-center
  */
 /**
- * @namespace google.cloud.securitycenter.v1beta1
- */
-/**
- * @namespace google.cloud.securitycenter.v1
- */
-/**
- * @namespace google.iam.v1
- */
-/**
- * @namespace google.protobuf
- */
-/**
- * @namespace google.longrunning
- */
-/**
- * @namespace google.rpc
+ * @namespace google.cloud.security-center.v1
  */
 
 'use strict';
 
 // Import the clients for each version supported by this package.
 const gapic = Object.freeze({
-  v1beta1: require('./v1beta1'),
   v1: require('./v1'),
 });
 
 /**
- * The `securitycenter` package has the following named exports:
+ * The `@google-cloud/security-center` package has the following named exports:
  *
  * - `SecurityCenterClient` - Reference to
- *   {@link v1beta1.SecurityCenterClient}
- * - `v1beta1` - This is used for selecting or pinning a
+ *   {@link v1.SecurityCenterClient}
+ * - `v1` - This is used for selecting or pinning a
  *   particular backend service version. It exports:
  *     - `SecurityCenterClient` - Reference to
- *       {@link v1beta1.SecurityCenterClient}
+ *       {@link v1.SecurityCenterClient}
  *
  * @module {object} @google-cloud/security-center
- * @alias nodejs-securitycenter
+ * @alias nodejs-security-center
  *
  * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
  * npm install --save @google-cloud/security-center
  *
  * @example <caption>Import the client library:</caption>
- * const securitycenter = require('@google-cloud/security-center');
+ * const security-center = require('@google-cloud/security-center');
  *
  * @example <caption>Create a client that uses <a href="https://goo.gl/64dyYX">Application Default Credentials (ADC)</a>:</caption>
- * const client = new securitycenter.SecurityCenterClient();
+ * const client = new security-center.SecurityCenterClient();
  *
  * @example <caption>Create a client with <a href="https://goo.gl/RXp6VL">explicit credentials</a>:</caption>
- * const client = new securitycenter.SecurityCenterClient({
+ * const client = new security-center.SecurityCenterClient({
  *   projectId: 'your-project-id',
  *   keyFilename: '/path/to/keyfile.json',
  * });
@@ -88,16 +89,9 @@ const gapic = Object.freeze({
 /**
  * @type {object}
  * @property {constructor} SecurityCenterClient
- *   Reference to {@link v1beta1.SecurityCenterClient}
+ *   Reference to {@link v1.SecurityCenterClient}
  */
 module.exports = gapic.v1;
-
-/**
- * @type {object}
- * @property {constructor} SecurityCenterClient
- *   Reference to {@link v1beta1.SecurityCenterClient}
- */
-module.exports.v1beta1 = gapic.v1beta1;
 
 /**
  * @type {object}
