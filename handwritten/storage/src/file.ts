@@ -2304,6 +2304,8 @@ class File extends ServiceObject<File> {
    *     for this HTTP header in its request.
    * @param {*} config.expires A timestamp when this link will expire. Any value
    *     given is passed to `new Date()`.
+   *     Note: 'v4' supports maximum duration of 7 days (604800 seconds) from now.
+   *     See [reference]{@link https://cloud.google.com/storage/docs/access-control/signed-urls#example}
    * @param {object} [config.extensionHeaders] If these headers are used, the
    *     server will check to make sure that the client provides matching
    * values. See [Canonical extension
