@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.1.0...v1.2.0) (2019-07-16)
+
+
+### Features
+
+* add new filters, path templates, and update docs ([#76](https://www.github.com/googleapis/nodejs-talent/issues/76)) ([f28802c](https://www.github.com/googleapis/nodejs-talent/commit/f28802c))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.0.2...v1.1.0) (2019-06-28)
 
 
