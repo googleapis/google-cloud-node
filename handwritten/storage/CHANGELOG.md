@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [3.0.3](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.2...v3.0.3) (2019-07-16)
+
+
+### Bug Fixes
+
+* **typescript:** make SetLabelOptions optional ([#766](https://www.github.com/googleapis/nodejs-storage/issues/766)) ([4336882](https://www.github.com/googleapis/nodejs-storage/commit/4336882))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.1...v3.0.2) (2019-07-01)
 
 
