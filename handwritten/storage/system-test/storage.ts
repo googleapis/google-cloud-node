@@ -959,6 +959,46 @@ describe('storage', () => {
       assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
     });
 
+    describe('locationType', () => {
+      const types = ['multi-region', 'region', 'dual-region'];
+
+      beforeEach(() => {
+        delete bucket.metadata;
+      });
+
+      it('should be available from getting a bucket', async () => {
+        const [metadata] = await bucket.getMetadata();
+        assert(types.includes(metadata.locationType));
+      });
+
+      it('should be available from creating a bucket', async () => {
+        const [bucket] = await storage.createBucket(generateName());
+        assert(types.includes(bucket.metadata.locationType));
+        return bucket.delete();
+      });
+
+      it('should be available from listing buckets', async () => {
+        const [buckets] = await storage.getBuckets();
+
+        assert(buckets.length > 0);
+
+        buckets.forEach(bucket => {
+          assert(types.includes(bucket.metadata.locationType));
+        });
+      });
+
+      it('should be available from setting retention policy', async () => {
+        await bucket.setRetentionPeriod(RETENTION_DURATION_SECONDS);
+        assert(types.includes(bucket.metadata.locationType));
+        await bucket.removeRetentionPeriod();
+      });
+
+      it('should be available from updating a bucket', async () => {
+        await bucket.setLabels({a: 'b'});
+        assert(types.includes(bucket.metadata.locationType));
+      });
+    });
+
     describe('labels', () => {
       const LABELS = {
         label: 'labelvalue', // no caps or spaces allowed (?)
