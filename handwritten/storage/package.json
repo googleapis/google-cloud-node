@@ -66,7 +66,7 @@
     "mime-types": "^2.0.8",
     "onetime": "^5.1.0",
     "p-limit": "^2.2.0",
-    "pumpify": "^1.5.1",
+    "pumpify": "^2.0.0",
     "snakeize": "^0.1.0",
     "stream-events": "^1.0.1",
     "through2": "^3.0.0",

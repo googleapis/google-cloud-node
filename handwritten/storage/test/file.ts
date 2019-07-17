@@ -1148,7 +1148,7 @@ describe('File', () => {
         const error = new Error('Error.');
         const createGunzipStream = through();
         createGunzipOverride = () => {
-          setImmediate(() => {
+          process.nextTick(() => {
             createGunzipStream.emit('error', error);
           });
           return createGunzipStream;
@@ -1166,7 +1166,7 @@ describe('File', () => {
         const error = new Error('Error.');
         const createGunzipStream = through();
         createGunzipOverride = () => {
-          setImmediate(() => {
+          process.nextTick(() => {
             createGunzipStream.emit('error', error);
           });
           return createGunzipStream;
