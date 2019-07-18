@@ -151,6 +151,7 @@ describe('logging-common', () => {
 
       assert.deepStrictEqual(loggingOptions, optionsWithLogName);
       assert.strictEqual(fakeLogName_, logName);
+      assert.strictEqual(loggingCommon.logName, logName);
     });
 
     it('should set removeCircular to true', () => {
