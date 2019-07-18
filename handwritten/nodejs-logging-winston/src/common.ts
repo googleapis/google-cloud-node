@@ -75,6 +75,7 @@ function getCurrentTraceFromAgent(): string | null {
 }
 
 export class LoggingCommon {
+  readonly logName: string;
   private inspectMetadata: boolean;
   private levels: {[name: string]: number};
   stackdriverLog: types.StackdriverLog; // TODO: add type for @google-cloud/logging
@@ -92,11 +93,10 @@ export class LoggingCommon {
       options
     );
 
-    const logName = options.logName || 'winston_log';
-
+    this.logName = options.logName || 'winston_log';
     this.inspectMetadata = options.inspectMetadata === true;
     this.levels = options.levels || NPM_LEVEL_NAME_TO_CODE;
-    this.stackdriverLog = new Logging(options).log(logName, {
+    this.stackdriverLog = new Logging(options).log(this.logName, {
       removeCircular: true,
     });
     this.resource = options.resource;
