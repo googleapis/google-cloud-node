@@ -107,38 +107,48 @@ shown bundled together in the Stackdriver Logging UI.
 
 ```javascript
 const lw = require('@google-cloud/logging-winston');
+const winston = require('winston');
 
 // Import express module and create an http server.
 const express = require('express');
+const logger = winston.createLogger();
 
 async function main() {
-const {logger, mw} = await lw.express.middleware();
-const app = express();
+    // Create a middleware that will use the provided logger.
+    // A Stackdriver Logging transport will be created automatically
+    // and added onto the provided logger.
+    const mw = await lw.express.makeMiddleware(logger);
+    // Alternatively, you can construct a LoggingWinston transport
+    // yourself and pass it int.
+    // const transport = new LoggingWinston({...});
+    // const mw = await lw.express.makeMiddleware(logger, transport);
 
-// Install the logging middleware. This ensures that a Winston-style `log`
-// function is available on the `request` object. Attach this as one of the
-// earliest middleware to make sure that the log function is available in all
-// subsequent middleware and routes.
-app.use(mw);
+    const app = express();
 
-// Setup an http route and a route handler.
-app.get('/', (req, res) => {
-    // `req.log` can be used as a winston style log method. All logs generated
-    // using `req.log` use the current request context. That is, all logs
-    // corresponding to a specific request will be bundled in the Stackdriver
-    // UI.
-    req.log.info('this is an info log message');
-    res.send('hello world');
-});
+    // Install the logging middleware. This ensures that a Winston-style `log`
+    // function is available on the `request` object. Attach this as one of the
+    // earliest middleware to make sure that the log function is available in all
+    // subsequent middleware and routes.
+    app.use(mw);
 
-// `logger` can be used as a global logger, one not correlated to any specific
-// request.
-logger.info('bonjour');
+    // Setup an http route and a route handler.
+    app.get('/', (req, res) => {
+        // `req.log` can be used as a winston style log method. All logs generated
+        // using `req.log` use the current request context. That is, all logs
+        // corresponding to a specific request will be bundled in the Stackdriver
+        // UI.
+        req.log.info('this is an info log message');
+        res.send('hello world');
+    });
 
-// Start listening on the http server.
-app.listen(8080, () => {
-    logger.info('http server listening on port 8080');
-});
+    // `logger` can be used as a global logger, one not correlated to any specific
+    // request.
+    logger.info('bonjour');
+
+    // Start listening on the http server.
+    app.listen(8080, () => {
+        logger.info('http server listening on port 8080');
+    });
 }
 
 main();

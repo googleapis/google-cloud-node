@@ -20,6 +20,7 @@ import {LogEntry} from 'winston';
 import * as TransportStream from 'winston-transport';
 import * as winston from 'winston';
 import {Options} from '../../src/types/core';
+import {LoggingWinston} from '../../src';
 
 const proxyquire = require('proxyquire');
 
@@ -100,7 +101,18 @@ describe('middleware/express', () => {
     assert.strictEqual(mw, FAKE_GENERATED_MIDDLEWARE);
   });
 
-  it('should add a transport to the logger', async () => {
+  it('should not allocate a transport when passed', async () => {
+    const t = new FakeLoggingWinston({});
+    assert.strictEqual(transport, t);
+    await makeMiddleware(logger, t);
+    assert.strictEqual(
+      transport,
+      t,
+      'makeMiddleware should not construct a transport'
+    );
+  });
+
+  it('should add a transport to the logger when not provided', async () => {
     await makeMiddleware(logger);
     assert.strictEqual(logger.transports.length, 1);
     assert.strictEqual(logger.transports[0], transport);

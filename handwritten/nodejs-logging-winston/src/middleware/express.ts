@@ -30,14 +30,31 @@ import {makeChildLogger} from './make-child-logger';
 
 export const REQUEST_LOG_SUFFIX = '_reqlog';
 
+type Middleware = ReturnType<typeof commonMiddleware.express.makeMiddleware>;
+
+export async function makeMiddleware(
+  logger: winston.Logger,
+  transport: LoggingWinston
+): Promise<Middleware>;
 export async function makeMiddleware(
   logger: winston.Logger,
   options?: types.Options
-) {
-  options = {logName: 'winston_log', ...options};
+): Promise<Middleware>;
+export async function makeMiddleware(
+  logger: winston.Logger,
+  optionsOrTransport?: types.Options | LoggingWinston
+): Promise<Middleware> {
+  let transport: LoggingWinston;
 
-  const transport = new LoggingWinston(options);
-  logger.add(transport);
+  // If a transport was not provided, instantiate one.
+  if (!(optionsOrTransport instanceof LoggingWinston)) {
+    const options = {logName: 'winston_log', ...optionsOrTransport};
+
+    transport = new LoggingWinston(options);
+    logger.add(transport);
+  } else {
+    transport = optionsOrTransport;
+  }
 
   const auth = transport.common.stackdriverLog.logging.auth;
   const [env, projectId] = await Promise.all([
@@ -53,7 +70,7 @@ export async function makeMiddleware(
   if (env !== GCPEnv.APP_ENGINE && env !== GCPEnv.CLOUD_FUNCTIONS) {
     const requestLogName = Log.formatName_(
       projectId,
-      `${options.logName!}${REQUEST_LOG_SUFFIX}`
+      `${transport.common.logName}${REQUEST_LOG_SUFFIX}`
     );
 
     emitRequestLogEntry = (httpRequest: HttpRequest, trace: string) => {
