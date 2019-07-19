@@ -18,11 +18,10 @@ import * as pjy from '@google-cloud/projectify';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import * as extend from 'extend';
-import {CallOptions} from '@grpc/grpc-js';
 import * as is from 'is';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import * as through from 'through2';
+import {Transform} from 'stream';
 
 import {google} from '../proto/datastore';
 import * as ds from '../src';
@@ -367,12 +366,11 @@ describe('Request', () => {
 
       it('should end stream', done => {
         const stream = request.createReadStream(key);
-
         stream
           .on('data', () => {})
           .on('error', () => {
             setImmediate(() => {
-              assert.strictEqual((stream as Any)._destroyed, true);
+              assert.strictEqual(stream.destroyed, true);
               done();
             });
           });
@@ -604,7 +602,7 @@ describe('Request', () => {
 
       beforeEach(() => {
         request.createReadStream = sandbox.spy(() => {
-          const stream = through.obj();
+          const stream = new Transform({objectMode: true});
           setImmediate(() => {
             fakeEntities.forEach(entity => stream.push(entity));
             stream.push(null);
@@ -656,7 +654,7 @@ describe('Request', () => {
 
       beforeEach(() => {
         request.createReadStream = sandbox.spy(() => {
-          const stream = through.obj();
+          const stream = new Transform({objectMode: true});
           setImmediate(() => {
             stream.emit('error', error);
           });
@@ -1081,7 +1079,7 @@ describe('Request', () => {
 
       beforeEach(() => {
         request.runQueryStream = sandbox.spy(() => {
-          const stream = through.obj();
+          const stream = new Transform({objectMode: true});
 
           setImmediate(() => {
             stream.emit('info', fakeInfo);
@@ -1139,7 +1137,7 @@ describe('Request', () => {
 
       beforeEach(() => {
         request.runQueryStream = sandbox.spy(() => {
-          const stream = through.obj();
+          const stream = new Transform({objectMode: true});
 
           setImmediate(() => {
             stream.emit('error', error);
