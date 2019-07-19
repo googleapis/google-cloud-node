@@ -22,7 +22,6 @@ const concat = require('concat-stream');
 import * as extend from 'extend';
 import {split} from 'split-array-stream';
 import * as streamEvents from 'stream-events';
-import * as through from 'through2';
 import {google} from '../proto/datastore';
 import {CallOptions} from 'google-gax';
 import {Transform} from 'stream';
@@ -302,7 +301,7 @@ class DatastoreRequest {
       );
     };
 
-    const stream = streamEvents(through.obj());
+    const stream = streamEvents(new Transform({objectMode: true}));
     stream.once('reading', () => {
       makeRequest(keys);
     });
@@ -778,7 +777,7 @@ class DatastoreRequest {
       });
     }
 
-    const stream = streamEvents(through.obj());
+    const stream = streamEvents(new Transform({objectMode: true}));
     stream.once('reading', () => {
       makeRequest(query);
     });
