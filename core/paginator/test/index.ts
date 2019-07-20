@@ -17,8 +17,7 @@
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import * as stream from 'stream';
-import * as through from 'through2';
+import {PassThrough, Transform} from 'stream';
 import * as uuid from 'uuid';
 import * as P from '../src';
 import {paginator, ParsedArguments} from '../src';
@@ -27,7 +26,7 @@ const util = {
   noop: () => {},
 };
 
-class FakeResourceStream extends stream.Transform {
+class FakeResourceStream extends Transform {
   calledWith: IArguments;
   constructor() {
     super({objectMode: true});
@@ -47,7 +46,7 @@ afterEach(() => {
 
 // tslint:disable-next-line no-any
 function createFakeStream<T = any>() {
-  return through.obj() as P.ResourceStream<T>;
+  return new PassThrough({objectMode: true}) as P.ResourceStream<T>;
 }
 
 describe('paginator', () => {
