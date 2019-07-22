@@ -9,7 +9,7 @@
     "resources"
   ],
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "scripts": {
     "test": "mocha system-test --timeout=600000"
@@ -17,8 +17,6 @@
   "dependencies": {
     "dialogflow": "^0.10.2",
     "pb-util": "^0.1.0",
-    "pump": "^3.0.0",
-    "through2": "^3.0.0",
     "uuid": "^3.3.2",
     "yargs": "^13.0.0"
   },
