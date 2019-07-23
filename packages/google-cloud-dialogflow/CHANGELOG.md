@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [0.10.3](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.2...v0.10.3) (2019-07-23)
+
+
+### Bug Fixes
+
+* **deps:** drop dependency on through2 ([#388](https://www.github.com/googleapis/nodejs-dialogflow/issues/388)) ([301c212](https://www.github.com/googleapis/nodejs-dialogflow/commit/301c212))
+
 ### [0.10.2](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.1...v0.10.2) (2019-07-01)
 
 
