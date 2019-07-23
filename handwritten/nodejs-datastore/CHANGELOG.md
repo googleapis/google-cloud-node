@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [4.1.4](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.3...v4.1.4) (2019-07-23)
+
+
+### Bug Fixes
+
+* **deps:** drop dependency on through2 ([#457](https://www.github.com/googleapis/nodejs-datastore/issues/457)) ([e57ed63](https://www.github.com/googleapis/nodejs-datastore/commit/e57ed63))
+
 ### [4.1.3](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.2...v4.1.3) (2019-06-27)
 
 
