@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.2.4](https://www.github.com/googleapis/nodejs-language/compare/v3.2.3...v3.2.4) (2019-07-23)
+
+
+### Bug Fixes
+
+* **deps:** drop unused dependency lodash.merge ([2e53ead](https://www.github.com/googleapis/nodejs-language/commit/2e53ead))
+
 ### [3.2.3](https://www.github.com/googleapis/nodejs-language/compare/v3.2.2...v3.2.3) (2019-06-26)
 
 
