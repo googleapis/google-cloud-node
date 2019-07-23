@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [4.1.2](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.1...v4.1.2) (2019-07-23)
+
+
+### Bug Fixes
+
+* **deps:** drop unused dependency lodash.merge, related to sec vulnerability (fixes [#301](https://www.github.com/googleapis/nodejs-translate/issues/301)) ([#302](https://www.github.com/googleapis/nodejs-translate/issues/302)) ([018efd4](https://www.github.com/googleapis/nodejs-translate/commit/018efd4))
+
 ### [4.1.1](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.0...v4.1.1) (2019-06-29)
 
 
