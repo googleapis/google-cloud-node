@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.2.3](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.2...v3.2.3) (2019-07-23)
+
+
+### Bug Fixes
+
+* **deps:** drop dependency on through2 ([#400](https://www.github.com/googleapis/nodejs-speech/issues/400)) ([0c25310](https://www.github.com/googleapis/nodejs-speech/commit/0c25310))
+
 ### [3.2.2](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.1...v3.2.2) (2019-06-26)
 
 
