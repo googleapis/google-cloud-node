@@ -45,8 +45,7 @@
     "google-gax": "^1.0.0",
     "protobufjs": "^6.8.6",
     "pumpify": "^1.5.1",
-    "stream-events": "^1.0.4",
-    "through2": "^3.0.0"
+    "stream-events": "^1.0.4"
   },
   "devDependencies": {
     "codecov": "^3.0.2",

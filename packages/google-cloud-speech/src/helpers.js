@@ -19,7 +19,7 @@
 const common = require('@google-cloud/common');
 const pumpify = require('pumpify');
 const streamEvents = require('stream-events');
-const through = require('through2');
+const {PassThrough} = require('stream');
 
 /*!
  * Return a dictionary-like object with helpers to augment the Speech
@@ -94,22 +94,26 @@ module.exports = () => {
         // Format the user's input.
         // This entails that the user sends raw audio; it is wrapped in
         // the appropriate request structure.
-        through.obj((audioContent, _, next) => {
-          if (audioContent !== undefined) {
-            next(null, {audioContent});
-            return;
-          }
-
-          next();
+        new PassThrough({
+          objectMode: true,
+          transform: (audioContent, _, next) => {
+            if (audioContent !== undefined) {
+              next(null, {audioContent});
+              return;
+            }
+            next();
+          },
         }),
         requestStream,
-        through.obj((response, enc, next) => {
-          if (response.error) {
-            next(new common.util.ApiError(response.error));
-            return;
-          }
-
-          next(null, response);
+        new PassThrough({
+          objectMode: true,
+          transform: (response, enc, next) => {
+            if (response.error) {
+              next(new common.util.ApiError(response.error));
+              return;
+            }
+            next(null, response);
+          },
         }),
       ]);
     });
