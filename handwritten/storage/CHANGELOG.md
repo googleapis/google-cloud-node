@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [3.0.4](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.3...v3.0.4) (2019-07-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency pumpify to v2 ([#740](https://www.github.com/googleapis/nodejs-storage/issues/740)) ([71a4f59](https://www.github.com/googleapis/nodejs-storage/commit/71a4f59))
+
 ### [3.0.3](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.2...v3.0.3) (2019-07-16)
 
 
