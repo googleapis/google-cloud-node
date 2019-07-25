@@ -107,11 +107,9 @@ shown bundled together in the Stackdriver Logging UI.
 
 ```javascript
 const lw = require('@google-cloud/logging-winston');
-const winston = require('winston');
 
 // Import express module and create an http server.
 const express = require('express');
-const logger = winston.createLogger();
 
 async function main() {
     // Create a middleware that will use the provided logger.
@@ -122,14 +120,6 @@ async function main() {
     // yourself and pass it int.
     // const transport = new LoggingWinston({...});
     // const mw = await lw.express.makeMiddleware(logger, transport);
-
-    const app = express();
-
-    // Install the logging middleware. This ensures that a Winston-style `log`
-    // function is available on the `request` object. Attach this as one of the
-    // earliest middleware to make sure that the log function is available in all
-    // subsequent middleware and routes.
-    app.use(mw);
 
     // Setup an http route and a route handler.
     app.get('/', (req, res) => {
