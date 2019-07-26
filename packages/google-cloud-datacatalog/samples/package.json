@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "execa": "^1.0.0",
+    "execa": "^2.0.0",
     "mocha": "^6.0.0"
   }
 }
