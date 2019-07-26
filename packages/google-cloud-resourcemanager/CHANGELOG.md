@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-resource/compare/v1.1.2...v1.1.3) (2019-07-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/paginator to v2 ([#238](https://www.github.com/googleapis/nodejs-resource/issues/238)) ([42c35d2](https://www.github.com/googleapis/nodejs-resource/commit/42c35d2))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-resource/compare/v1.1.1...v1.1.2) (2019-06-26)
 
 
