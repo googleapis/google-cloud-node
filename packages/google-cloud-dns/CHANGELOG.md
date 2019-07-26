@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.0...v1.2.1) (2019-07-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/paginator to v2 ([#286](https://www.github.com/googleapis/nodejs-dns/issues/286)) ([bc30fcc](https://www.github.com/googleapis/nodejs-dns/commit/bc30fcc))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-dns/compare/v1.1.2...v1.2.0) (2019-07-14)
 
 
