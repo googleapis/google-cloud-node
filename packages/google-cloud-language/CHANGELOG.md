@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.2.5](https://www.github.com/googleapis/nodejs-language/compare/v3.2.4...v3.2.5) (2019-07-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v3 ([#275](https://www.github.com/googleapis/nodejs-language/issues/275)) ([aa7eeaa](https://www.github.com/googleapis/nodejs-language/commit/aa7eeaa))
+
 ### [3.2.4](https://www.github.com/googleapis/nodejs-language/compare/v3.2.3...v3.2.4) (2019-07-23)
 
 
