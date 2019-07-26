@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "@google-cloud/storage": "^2.4.3",
+    "@google-cloud/storage": "^3.0.0",
     "mocha": "^6.0.0",
     "uuid": "^3.3.2"
   }
