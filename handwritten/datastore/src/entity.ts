@@ -552,9 +552,11 @@ export namespace entity {
     function excludePathFromEntity(entity: EntityProto, path: string) {
       const arrayIndex = path.indexOf('[]');
       const entityIndex = path.indexOf('.');
+      const wildcardIndex = path.indexOf('.*');
 
       const hasArrayPath = arrayIndex > -1;
       const hasEntityPath = entityIndex > -1;
+      const hasWildCard = wildcardIndex > -1;
 
       if (!hasArrayPath && !hasEntityPath) {
         // This is the path end node. Traversal ends here in either case.
@@ -589,7 +591,10 @@ export namespace entity {
       const firstPathPart = splitPath.shift()!;
       const remainderPath = splitPath.join(delimiter).replace(/^(\.|\[\])/, '');
 
-      if (!(entity.properties && entity.properties[firstPathPart])) {
+      if (
+        !(entity.properties && entity.properties[firstPathPart]) &&
+        !hasWildCard
+      ) {
         // Either a primitive or an entity for which this path doesn't apply.
         return;
       }
@@ -597,7 +602,9 @@ export namespace entity {
       if (
         firstPathPartIsArray &&
         // check also if the property in question is actually an array value.
-        entity.properties[firstPathPart].arrayValue
+        entity.properties[firstPathPart].arrayValue &&
+        // check if wildcard is not applied
+        !hasWildCard
       ) {
         const array = entity.properties[firstPathPart].arrayValue;
         // tslint:disable-next-line no-any
@@ -619,9 +626,43 @@ export namespace entity {
             );
           }
         });
+      } else if (firstPathPartIsArray && hasWildCard && remainderPath === '*') {
+        const array = entity.properties[firstPathPart].arrayValue;
+        // tslint:disable-next-line no-any
+        array.values.forEach((value: any) => {
+          if (value.entityValue) {
+            excludePathFromEntity(value.entityValue, '.*');
+          } else {
+            excludePathFromEntity(value, '');
+          }
+        });
       } else if (firstPathPartIsEntity) {
-        const parentEntity = entity.properties[firstPathPart].entityValue;
-        excludePathFromEntity(parentEntity, remainderPath);
+        if (firstPathPart === '') {
+          Object.keys(entity.properties).forEach(path => {
+            const newPath = entity.properties[path].arrayValue
+              ? path + '[].*'
+              : path + '.*';
+            excludePathFromEntity(entity, newPath);
+          });
+        } else {
+          if (hasWildCard && remainderPath === '*') {
+            const parentEntity = entity.properties[firstPathPart].entityValue;
+
+            if (parentEntity) {
+              Object.keys(parentEntity.properties).forEach(path => {
+                const newPath = parentEntity.properties[path].arrayValue
+                  ? path + '[].*'
+                  : path + '.*';
+                excludePathFromEntity(parentEntity, newPath);
+              });
+            } else {
+              excludePathFromEntity(entity, firstPathPart);
+            }
+          } else {
+            const parentEntity = entity.properties[firstPathPart].entityValue;
+            excludePathFromEntity(parentEntity, remainderPath);
+          }
+        }
       }
     }
   }
