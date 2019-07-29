@@ -208,7 +208,7 @@ describe('subscriptions', () => {
       expected,
       {counterId: '3'},
     ]);
-    console.log = log;
+    console.log = log; // eslint-disable-line require-atomic-updates
   });
 
   it('should listen for error messages', async () => {
