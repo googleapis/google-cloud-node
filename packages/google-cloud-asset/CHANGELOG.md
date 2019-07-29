@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-asset/compare/v1.1.2...v1.1.3) (2019-07-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v3 ([#168](https://www.github.com/googleapis/nodejs-asset/issues/168)) ([6ba18e7](https://www.github.com/googleapis/nodejs-asset/commit/6ba18e7))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-asset/compare/v1.1.1...v1.1.2) (2019-06-26)
 
 
