@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.2.4](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.3...v3.2.4) (2019-07-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency pumpify to v2 ([#409](https://www.github.com/googleapis/nodejs-speech/issues/409)) ([aea90b3](https://www.github.com/googleapis/nodejs-speech/commit/aea90b3))
+
 ### [3.2.3](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.2...v3.2.3) (2019-07-23)
 
 
