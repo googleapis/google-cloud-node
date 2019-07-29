@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.2.3](https://www.github.com/googleapis/nodejs-automl/compare/v1.2.2...v1.2.3) (2019-07-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency execa to v2 ([#211](https://www.github.com/googleapis/nodejs-automl/issues/211)) ([751265a](https://www.github.com/googleapis/nodejs-automl/commit/751265a))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-automl/compare/v1.2.1...v1.2.2) (2019-06-26)
 
 
