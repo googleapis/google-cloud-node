@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.2...v2.1.3) (2019-07-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @grpc/grpc-js to ^0.5.0 ([#25](https://www.github.com/googleapis/nodejs-grafeas/issues/25)) ([d6681ea](https://www.github.com/googleapis/nodejs-grafeas/commit/d6681ea))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.1...v2.1.2) (2019-06-26)
 
 
