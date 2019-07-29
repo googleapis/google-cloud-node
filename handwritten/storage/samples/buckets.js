@@ -182,7 +182,7 @@ async function getBucketPolicyOnly(bucketName) {
   // Gets Bucket Metadata and checks if BucketPolicyOnly is enabled.
   const [metadata] = await storage.bucket(bucketName).getMetadata();
 
-  if (metadata.hasOwnProperty('iamConfiguration')) {
+  if (metadata.iamConfiguration) {
     const bucketPolicyOnly = metadata.iamConfiguration.bucketPolicyOnly;
     console.log(`Bucket Policy Only is enabled for ${bucketName}.`);
     console.log(`Bucket will be locked on ${bucketPolicyOnly.lockedTime}.`);
