@@ -2754,8 +2754,8 @@ class Bucket extends ServiceObject {
    *
    * @param {string} storageClass The new storage class. (`standard`,
    *     `nearline`, `coldline`, or `durable_reduced_availability`).
-   *     **Note:** The legacy storage classes `multi_regional` and `regional`
-   *     have been deprecated.
+   *     **Note:** The storage classes `multi_regional` and `regional`
+   *     are now legacy and will be deprecated in the future.
    * @param {object} [options] Configuration options.
    * @param {string} [options.userProject] - The ID of the project which will be
    *     billed for the request.
