@@ -576,8 +576,8 @@ class Datastore extends DatastoreRequest {
    * @name Datastore#KEY
    * @type {symbol}
    */
-  static KEY = entity.KEY_SYMBOL;
-  KEY = Datastore.KEY;
+  static KEY: typeof entity.KEY_SYMBOL = entity.KEY_SYMBOL;
+  KEY: typeof entity.KEY_SYMBOL = Datastore.KEY;
 
   /**
    * This is one of three values which may be returned from
