@@ -762,6 +762,7 @@ class VM extends common.ServiceObject {
       );
       const newMetadataJSON = Object.assign(metadataJSON, metadata);
       for (const key in newMetadataJSON) {
+        /* eslint-disable no-prototype-builtins */
         if (newMetadataJSON.hasOwnProperty(key)) {
           const value = newMetadataJSON[key];
           if (value !== null) {
