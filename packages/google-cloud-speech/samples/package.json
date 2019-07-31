@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@google-cloud/speech": "^3.2.4",
-    "@google-cloud/storage": "^2.0.0",
+    "@google-cloud/storage": "^3.0.0",
     "chalk": "^2.4.2",
     "node-record-lpcm16": "^1.0.1",
     "sox": "^0.1.0",
