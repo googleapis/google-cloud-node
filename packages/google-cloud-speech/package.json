@@ -53,7 +53,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^9.0.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "jsdoc-baseline": "^0.1.0",
+    "jsdoc-fresh": "^1.0.1",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.5.5",
     "mocha": "^6.0.0",
