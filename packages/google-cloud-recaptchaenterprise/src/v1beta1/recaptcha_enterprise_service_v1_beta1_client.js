@@ -51,7 +51,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
    *     your project ID will be detected automatically.
    * @param {function} [options.promise] - Custom promise module to use instead
    *     of native Promises.
-   * @param {string} [options.servicePath] - The domain name of the
+   * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
    */
   constructor(opts) {
