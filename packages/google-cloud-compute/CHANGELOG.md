@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.1...v1.1.2) (2019-08-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/paginator to v2 ([#338](https://www.github.com/googleapis/nodejs-compute/issues/338)) ([db5de8c](https://www.github.com/googleapis/nodejs-compute/commit/db5de8c))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.0...v1.1.1) (2019-06-26)
 
 
