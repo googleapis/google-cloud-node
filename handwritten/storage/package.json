@@ -73,7 +73,7 @@
     "xdg-basedir": "^4.0.0"
   },
   "devDependencies": {
-    "@google-cloud/pubsub": "^0.29.0",
+    "@google-cloud/pubsub": "^0.30.0",
     "@types/compressible": "^2.0.0",
     "@types/concat-stream": "^1.6.0",
     "@types/configstore": "^4.0.0",
