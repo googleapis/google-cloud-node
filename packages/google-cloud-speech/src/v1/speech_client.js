@@ -293,6 +293,7 @@ class SpeechClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.recognize(request, options, callback);
@@ -438,6 +439,7 @@ class SpeechClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.longRunningRecognize(request, options, callback);

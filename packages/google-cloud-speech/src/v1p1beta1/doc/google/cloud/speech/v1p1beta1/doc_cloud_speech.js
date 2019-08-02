@@ -237,18 +237,25 @@ const StreamingRecognitionConfig = {
  *   *Optional* If 'true', enables speaker detection for each recognized word in
  *   the top alternative of the recognition result using a speaker_tag provided
  *   in the WordInfo.
- *   Note: When this is true, we send all the words from the beginning of the
+ *   Note: Use diarization_config instead.
+ *
+ * @property {number} diarizationSpeakerCount
+ *   *Optional*
+ *   If set, specifies the estimated number of speakers in the conversation.
+ *   Defaults to '2'. Ignored unless enable_speaker_diarization is set to true.
+ *   Note: Use diarization_config instead.
+ *
+ * @property {Object} diarizationConfig
+ *   *Optional* Config to enable speaker diarization and set additional
+ *   parameters to make diarization better suited for your application.
+ *   Note: When this is enabled, we send all the words from the beginning of the
  *   audio for the top alternative in every consecutive STREAMING responses.
  *   This is done in order to improve our speaker tags as our models learn to
  *   identify the speakers in the conversation over time.
  *   For non-streaming requests, the diarization results will be provided only
  *   in the top alternative of the FINAL SpeechRecognitionResult.
  *
- * @property {number} diarizationSpeakerCount
- *   *Optional*
- *   If set, specifies the estimated number of speakers in the conversation.
- *   If not set, defaults to '2'.
- *   Ignored unless enable_speaker_diarization is set to true."
+ *   This object should have the same structure as [SpeakerDiarizationConfig]{@link google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig}
  *
  * @property {Object} metadata
  *   *Optional* Metadata regarding this request.
@@ -400,6 +407,34 @@ const RecognitionConfig = {
      */
     MP3: 8
   }
+};
+
+/**
+ * *Optional* Config to enable speaker diarization.
+ *
+ * @property {boolean} enableSpeakerDiarization
+ *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   the top alternative of the recognition result using a speaker_tag provided
+ *   in the WordInfo.
+ *
+ * @property {number} minSpeakerCount
+ *   *Optional*
+ *   Minimum number of speakers in the conversation. This range gives you more
+ *   flexibility by allowing the system to automatically determine the correct
+ *   number of speakers. If not set, the default value is 2.
+ *
+ * @property {number} maxSpeakerCount
+ *   *Optional*
+ *   Maximum number of speakers in the conversation. This range gives you more
+ *   flexibility by allowing the system to automatically determine the correct
+ *   number of speakers. If not set, the default value is 6.
+ *
+ * @typedef SpeakerDiarizationConfig
+ * @memberof google.cloud.speech.v1p1beta1
+ * @see [google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1p1beta1/cloud_speech.proto}
+ */
+const SpeakerDiarizationConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
 /**
