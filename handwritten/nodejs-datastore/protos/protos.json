@@ -1,0 +1,1988 @@
+{
+  "nested": {
+    "google": {
+      "nested": {
+        "datastore": {
+          "nested": {
+            "v1": {
+              "options": {
+                "csharp_namespace": "Google.Cloud.Datastore.V1",
+                "go_package": "google.golang.org/genproto/googleapis/datastore/v1;datastore",
+                "java_multiple_files": true,
+                "java_outer_classname": "QueryProto",
+                "java_package": "com.google.datastore.v1",
+                "php_namespace": "Google\\Cloud\\Datastore\\V1"
+              },
+              "nested": {
+                "PartitionId": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "namespaceId": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "Key": {
+                  "fields": {
+                    "partitionId": {
+                      "type": "PartitionId",
+                      "id": 1
+                    },
+                    "path": {
+                      "rule": "repeated",
+                      "type": "PathElement",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "PathElement": {
+                      "oneofs": {
+                        "idType": {
+                          "oneof": [
+                            "id",
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "id": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "ArrayValue": {
+                  "fields": {
+                    "values": {
+                      "rule": "repeated",
+                      "type": "Value",
+                      "id": 1
+                    }
+                  }
+                },
+                "Value": {
+                  "oneofs": {
+                    "valueType": {
+                      "oneof": [
+                        "nullValue",
+                        "booleanValue",
+                        "integerValue",
+                        "doubleValue",
+                        "timestampValue",
+                        "keyValue",
+                        "stringValue",
+                        "blobValue",
+                        "geoPointValue",
+                        "entityValue",
+                        "arrayValue"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "nullValue": {
+                      "type": "google.protobuf.NullValue",
+                      "id": 11
+                    },
+                    "booleanValue": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "integerValue": {
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "doubleValue": {
+                      "type": "double",
+                      "id": 3
+                    },
+                    "timestampValue": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 10
+                    },
+                    "keyValue": {
+                      "type": "Key",
+                      "id": 5
+                    },
+                    "stringValue": {
+                      "type": "string",
+                      "id": 17
+                    },
+                    "blobValue": {
+                      "type": "bytes",
+                      "id": 18
+                    },
+                    "geoPointValue": {
+                      "type": "google.type.LatLng",
+                      "id": 8
+                    },
+                    "entityValue": {
+                      "type": "Entity",
+                      "id": 6
+                    },
+                    "arrayValue": {
+                      "type": "ArrayValue",
+                      "id": 9
+                    },
+                    "meaning": {
+                      "type": "int32",
+                      "id": 14
+                    },
+                    "excludeFromIndexes": {
+                      "type": "bool",
+                      "id": 19
+                    }
+                  }
+                },
+                "Entity": {
+                  "fields": {
+                    "key": {
+                      "type": "Key",
+                      "id": 1
+                    },
+                    "properties": {
+                      "keyType": "string",
+                      "type": "Value",
+                      "id": 3
+                    }
+                  }
+                },
+                "Datastore": {
+                  "methods": {
+                    "Lookup": {
+                      "requestType": "LookupRequest",
+                      "responseType": "LookupResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:lookup",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "RunQuery": {
+                      "requestType": "RunQueryRequest",
+                      "responseType": "RunQueryResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:runQuery",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "BeginTransaction": {
+                      "requestType": "BeginTransactionRequest",
+                      "responseType": "BeginTransactionResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:beginTransaction",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "Commit": {
+                      "requestType": "CommitRequest",
+                      "responseType": "CommitResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:commit",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "Rollback": {
+                      "requestType": "RollbackRequest",
+                      "responseType": "RollbackResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:rollback",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "AllocateIds": {
+                      "requestType": "AllocateIdsRequest",
+                      "responseType": "AllocateIdsResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:allocateIds",
+                        "(google.api.http).body": "*"
+                      }
+                    },
+                    "ReserveIds": {
+                      "requestType": "ReserveIdsRequest",
+                      "responseType": "ReserveIdsResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/projects/{project_id}:reserveIds",
+                        "(google.api.http).body": "*"
+                      }
+                    }
+                  }
+                },
+                "LookupRequest": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "readOptions": {
+                      "type": "ReadOptions",
+                      "id": 1
+                    },
+                    "keys": {
+                      "rule": "repeated",
+                      "type": "Key",
+                      "id": 3
+                    }
+                  }
+                },
+                "LookupResponse": {
+                  "fields": {
+                    "found": {
+                      "rule": "repeated",
+                      "type": "EntityResult",
+                      "id": 1
+                    },
+                    "missing": {
+                      "rule": "repeated",
+                      "type": "EntityResult",
+                      "id": 2
+                    },
+                    "deferred": {
+                      "rule": "repeated",
+                      "type": "Key",
+                      "id": 3
+                    }
+                  }
+                },
+                "RunQueryRequest": {
+                  "oneofs": {
+                    "queryType": {
+                      "oneof": [
+                        "query",
+                        "gqlQuery"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "partitionId": {
+                      "type": "PartitionId",
+                      "id": 2
+                    },
+                    "readOptions": {
+                      "type": "ReadOptions",
+                      "id": 1
+                    },
+                    "query": {
+                      "type": "Query",
+                      "id": 3
+                    },
+                    "gqlQuery": {
+                      "type": "GqlQuery",
+                      "id": 7
+                    }
+                  }
+                },
+                "RunQueryResponse": {
+                  "fields": {
+                    "batch": {
+                      "type": "QueryResultBatch",
+                      "id": 1
+                    },
+                    "query": {
+                      "type": "Query",
+                      "id": 2
+                    }
+                  }
+                },
+                "BeginTransactionRequest": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "transactionOptions": {
+                      "type": "TransactionOptions",
+                      "id": 10
+                    }
+                  }
+                },
+                "BeginTransactionResponse": {
+                  "fields": {
+                    "transaction": {
+                      "type": "bytes",
+                      "id": 1
+                    }
+                  }
+                },
+                "RollbackRequest": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "transaction": {
+                      "type": "bytes",
+                      "id": 1
+                    }
+                  }
+                },
+                "RollbackResponse": {
+                  "fields": {}
+                },
+                "CommitRequest": {
+                  "oneofs": {
+                    "transactionSelector": {
+                      "oneof": [
+                        "transaction"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "mode": {
+                      "type": "Mode",
+                      "id": 5
+                    },
+                    "transaction": {
+                      "type": "bytes",
+                      "id": 1
+                    },
+                    "mutations": {
+                      "rule": "repeated",
+                      "type": "Mutation",
+                      "id": 6
+                    }
+                  },
+                  "nested": {
+                    "Mode": {
+                      "values": {
+                        "MODE_UNSPECIFIED": 0,
+                        "TRANSACTIONAL": 1,
+                        "NON_TRANSACTIONAL": 2
+                      }
+                    }
+                  }
+                },
+                "CommitResponse": {
+                  "fields": {
+                    "mutationResults": {
+                      "rule": "repeated",
+                      "type": "MutationResult",
+                      "id": 3
+                    },
+                    "indexUpdates": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                },
+                "AllocateIdsRequest": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "keys": {
+                      "rule": "repeated",
+                      "type": "Key",
+                      "id": 1
+                    }
+                  }
+                },
+                "AllocateIdsResponse": {
+                  "fields": {
+                    "keys": {
+                      "rule": "repeated",
+                      "type": "Key",
+                      "id": 1
+                    }
+                  }
+                },
+                "ReserveIdsRequest": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "databaseId": {
+                      "type": "string",
+                      "id": 9
+                    },
+                    "keys": {
+                      "rule": "repeated",
+                      "type": "Key",
+                      "id": 1
+                    }
+                  }
+                },
+                "ReserveIdsResponse": {
+                  "fields": {}
+                },
+                "Mutation": {
+                  "oneofs": {
+                    "operation": {
+                      "oneof": [
+                        "insert",
+                        "update",
+                        "upsert",
+                        "delete"
+                      ]
+                    },
+                    "conflictDetectionStrategy": {
+                      "oneof": [
+                        "baseVersion"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "insert": {
+                      "type": "Entity",
+                      "id": 4
+                    },
+                    "update": {
+                      "type": "Entity",
+                      "id": 5
+                    },
+                    "upsert": {
+                      "type": "Entity",
+                      "id": 6
+                    },
+                    "delete": {
+                      "type": "Key",
+                      "id": 7
+                    },
+                    "baseVersion": {
+                      "type": "int64",
+                      "id": 8
+                    }
+                  }
+                },
+                "MutationResult": {
+                  "fields": {
+                    "key": {
+                      "type": "Key",
+                      "id": 3
+                    },
+                    "version": {
+                      "type": "int64",
+                      "id": 4
+                    },
+                    "conflictDetected": {
+                      "type": "bool",
+                      "id": 5
+                    }
+                  }
+                },
+                "ReadOptions": {
+                  "oneofs": {
+                    "consistencyType": {
+                      "oneof": [
+                        "readConsistency",
+                        "transaction"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "readConsistency": {
+                      "type": "ReadConsistency",
+                      "id": 1
+                    },
+                    "transaction": {
+                      "type": "bytes",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "ReadConsistency": {
+                      "values": {
+                        "READ_CONSISTENCY_UNSPECIFIED": 0,
+                        "STRONG": 1,
+                        "EVENTUAL": 2
+                      }
+                    }
+                  }
+                },
+                "TransactionOptions": {
+                  "oneofs": {
+                    "mode": {
+                      "oneof": [
+                        "readWrite",
+                        "readOnly"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "readWrite": {
+                      "type": "ReadWrite",
+                      "id": 1
+                    },
+                    "readOnly": {
+                      "type": "ReadOnly",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "ReadWrite": {
+                      "fields": {
+                        "previousTransaction": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ReadOnly": {
+                      "fields": {}
+                    }
+                  }
+                },
+                "EntityResult": {
+                  "fields": {
+                    "entity": {
+                      "type": "Entity",
+                      "id": 1
+                    },
+                    "version": {
+                      "type": "int64",
+                      "id": 4
+                    },
+                    "cursor": {
+                      "type": "bytes",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "ResultType": {
+                      "values": {
+                        "RESULT_TYPE_UNSPECIFIED": 0,
+                        "FULL": 1,
+                        "PROJECTION": 2,
+                        "KEY_ONLY": 3
+                      }
+                    }
+                  }
+                },
+                "Query": {
+                  "fields": {
+                    "projection": {
+                      "rule": "repeated",
+                      "type": "Projection",
+                      "id": 2
+                    },
+                    "kind": {
+                      "rule": "repeated",
+                      "type": "KindExpression",
+                      "id": 3
+                    },
+                    "filter": {
+                      "type": "Filter",
+                      "id": 4
+                    },
+                    "order": {
+                      "rule": "repeated",
+                      "type": "PropertyOrder",
+                      "id": 5
+                    },
+                    "distinctOn": {
+                      "rule": "repeated",
+                      "type": "PropertyReference",
+                      "id": 6
+                    },
+                    "startCursor": {
+                      "type": "bytes",
+                      "id": 7
+                    },
+                    "endCursor": {
+                      "type": "bytes",
+                      "id": 8
+                    },
+                    "offset": {
+                      "type": "int32",
+                      "id": 10
+                    },
+                    "limit": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 12
+                    }
+                  }
+                },
+                "KindExpression": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "PropertyReference": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "Projection": {
+                  "fields": {
+                    "property": {
+                      "type": "PropertyReference",
+                      "id": 1
+                    }
+                  }
+                },
+                "PropertyOrder": {
+                  "fields": {
+                    "property": {
+                      "type": "PropertyReference",
+                      "id": 1
+                    },
+                    "direction": {
+                      "type": "Direction",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Direction": {
+                      "values": {
+                        "DIRECTION_UNSPECIFIED": 0,
+                        "ASCENDING": 1,
+                        "DESCENDING": 2
+                      }
+                    }
+                  }
+                },
+                "Filter": {
+                  "oneofs": {
+                    "filterType": {
+                      "oneof": [
+                        "compositeFilter",
+                        "propertyFilter"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "compositeFilter": {
+                      "type": "CompositeFilter",
+                      "id": 1
+                    },
+                    "propertyFilter": {
+                      "type": "PropertyFilter",
+                      "id": 2
+                    }
+                  }
+                },
+                "CompositeFilter": {
+                  "fields": {
+                    "op": {
+                      "type": "Operator",
+                      "id": 1
+                    },
+                    "filters": {
+                      "rule": "repeated",
+                      "type": "Filter",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "Operator": {
+                      "values": {
+                        "OPERATOR_UNSPECIFIED": 0,
+                        "AND": 1
+                      }
+                    }
+                  }
+                },
+                "PropertyFilter": {
+                  "fields": {
+                    "property": {
+                      "type": "PropertyReference",
+                      "id": 1
+                    },
+                    "op": {
+                      "type": "Operator",
+                      "id": 2
+                    },
+                    "value": {
+                      "type": "Value",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Operator": {
+                      "values": {
+                        "OPERATOR_UNSPECIFIED": 0,
+                        "LESS_THAN": 1,
+                        "LESS_THAN_OR_EQUAL": 2,
+                        "GREATER_THAN": 3,
+                        "GREATER_THAN_OR_EQUAL": 4,
+                        "EQUAL": 5,
+                        "HAS_ANCESTOR": 11
+                      }
+                    }
+                  }
+                },
+                "GqlQuery": {
+                  "fields": {
+                    "queryString": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "allowLiterals": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "namedBindings": {
+                      "keyType": "string",
+                      "type": "GqlQueryParameter",
+                      "id": 5
+                    },
+                    "positionalBindings": {
+                      "rule": "repeated",
+                      "type": "GqlQueryParameter",
+                      "id": 4
+                    }
+                  }
+                },
+                "GqlQueryParameter": {
+                  "oneofs": {
+                    "parameterType": {
+                      "oneof": [
+                        "value",
+                        "cursor"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "value": {
+                      "type": "Value",
+                      "id": 2
+                    },
+                    "cursor": {
+                      "type": "bytes",
+                      "id": 3
+                    }
+                  }
+                },
+                "QueryResultBatch": {
+                  "fields": {
+                    "skippedResults": {
+                      "type": "int32",
+                      "id": 6
+                    },
+                    "skippedCursor": {
+                      "type": "bytes",
+                      "id": 3
+                    },
+                    "entityResultType": {
+                      "type": "EntityResult.ResultType",
+                      "id": 1
+                    },
+                    "entityResults": {
+                      "rule": "repeated",
+                      "type": "EntityResult",
+                      "id": 2
+                    },
+                    "endCursor": {
+                      "type": "bytes",
+                      "id": 4
+                    },
+                    "moreResults": {
+                      "type": "MoreResultsType",
+                      "id": 5
+                    },
+                    "snapshotVersion": {
+                      "type": "int64",
+                      "id": 7
+                    }
+                  },
+                  "nested": {
+                    "MoreResultsType": {
+                      "values": {
+                        "MORE_RESULTS_TYPE_UNSPECIFIED": 0,
+                        "NOT_FINISHED": 1,
+                        "MORE_RESULTS_AFTER_LIMIT": 2,
+                        "MORE_RESULTS_AFTER_CURSOR": 4,
+                        "NO_MORE_RESULTS": 3
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "HttpProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "phpGenericServices": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "Struct": {
+              "fields": {
+                "fields": {
+                  "keyType": "string",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Value": {
+              "oneofs": {
+                "kind": {
+                  "oneof": [
+                    "nullValue",
+                    "numberValue",
+                    "stringValue",
+                    "boolValue",
+                    "structValue",
+                    "listValue"
+                  ]
+                }
+              },
+              "fields": {
+                "nullValue": {
+                  "type": "NullValue",
+                  "id": 1
+                },
+                "numberValue": {
+                  "type": "double",
+                  "id": 2
+                },
+                "stringValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "boolValue": {
+                  "type": "bool",
+                  "id": 4
+                },
+                "structValue": {
+                  "type": "Struct",
+                  "id": 5
+                },
+                "listValue": {
+                  "type": "ListValue",
+                  "id": 6
+                }
+              }
+            },
+            "NullValue": {
+              "values": {
+                "NULL_VALUE": 0
+              }
+            },
+            "ListValue": {
+              "fields": {
+                "values": {
+                  "rule": "repeated",
+                  "type": "Value",
+                  "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "DoubleValue": {
+              "fields": {
+                "value": {
+                  "type": "double",
+                  "id": 1
+                }
+              }
+            },
+            "FloatValue": {
+              "fields": {
+                "value": {
+                  "type": "float",
+                  "id": 1
+                }
+              }
+            },
+            "Int64Value": {
+              "fields": {
+                "value": {
+                  "type": "int64",
+                  "id": 1
+                }
+              }
+            },
+            "UInt64Value": {
+              "fields": {
+                "value": {
+                  "type": "uint64",
+                  "id": 1
+                }
+              }
+            },
+            "Int32Value": {
+              "fields": {
+                "value": {
+                  "type": "int32",
+                  "id": 1
+                }
+              }
+            },
+            "UInt32Value": {
+              "fields": {
+                "value": {
+                  "type": "uint32",
+                  "id": 1
+                }
+              }
+            },
+            "BoolValue": {
+              "fields": {
+                "value": {
+                  "type": "bool",
+                  "id": 1
+                }
+              }
+            },
+            "StringValue": {
+              "fields": {
+                "value": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BytesValue": {
+              "fields": {
+                "value": {
+                  "type": "bytes",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/latlng;latlng",
+            "java_multiple_files": true,
+            "java_outer_classname": "LatLngProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "LatLng": {
+              "fields": {
+                "latitude": {
+                  "type": "double",
+                  "id": 1
+                },
+                "longitude": {
+                  "type": "double",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
