@@ -45,6 +45,11 @@ it('should list buckets', () => {
   assert.match(output, new RegExp(bucketName));
 });
 
+it('should get bucket metadata', async () => {
+  const output = execSync(`node bucketMetadata.js ${bucketName}`);
+  assert.include(output, bucketName);
+});
+
 it('should set a buckets default KMS key', async () => {
   const output = execSync(
     `${cmd} enable-default-kms-key ${bucketName} ${defaultKmsKeyName}`
