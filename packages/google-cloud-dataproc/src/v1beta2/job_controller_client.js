@@ -262,6 +262,7 @@ class JobControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.submitJob(request, options, callback);
@@ -320,6 +321,7 @@ class JobControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.getJob(request, options, callback);
@@ -452,6 +454,7 @@ class JobControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.listJobs(request, options, callback);
@@ -615,6 +618,7 @@ class JobControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.updateJob(request, options, callback);
@@ -677,6 +681,7 @@ class JobControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.cancelJob(request, options, callback);
@@ -728,6 +733,7 @@ class JobControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.deleteJob(request, options, callback);

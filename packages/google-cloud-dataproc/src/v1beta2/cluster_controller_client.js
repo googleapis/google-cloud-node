@@ -394,6 +394,7 @@ class ClusterControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.createCluster(request, options, callback);
@@ -612,6 +613,7 @@ class ClusterControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.updateCluster(request, options, callback);
@@ -743,6 +745,7 @@ class ClusterControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.deleteCluster(request, options, callback);
@@ -801,6 +804,7 @@ class ClusterControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.getCluster(request, options, callback);
@@ -928,6 +932,7 @@ class ClusterControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.listClusters(request, options, callback);
@@ -1129,6 +1134,7 @@ class ClusterControllerClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.diagnoseCluster(request, options, callback);
