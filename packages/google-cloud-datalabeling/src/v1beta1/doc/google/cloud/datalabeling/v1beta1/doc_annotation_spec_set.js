@@ -21,8 +21,7 @@
  * AnnotationSpecSet. AnnotationSpecSet is immutable upon creation.
  *
  * @property {string} name
- *   Output only.
- *   AnnotationSpecSet resource name, format:
+ *   Output only. AnnotationSpecSet resource name, format:
  *   projects/{project_id}/annotationSpecSets/{annotation_spec_set_id}
  *
  * @property {string} displayName
@@ -37,6 +36,10 @@
  *   Required. The actual spec set defined by the users.
  *
  *   This object should have the same structure as [AnnotationSpec]{@link google.cloud.datalabeling.v1beta1.AnnotationSpec}
+ *
+ * @property {string[]} blockingResources
+ *   Output only. The names of any related resources that are blocking changes
+ *   to the annotation spec set.
  *
  * @typedef AnnotationSpecSet
  * @memberof google.cloud.datalabeling.v1beta1

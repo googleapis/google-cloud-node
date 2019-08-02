@@ -65,10 +65,12 @@ describe('DataLabelingServiceClient', () => {
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
       const description = 'description-1724546052';
+      const dataItemCount = 2014260376;
       const expectedResponse = {
         name: name,
         displayName: displayName,
         description: description,
+        dataItemCount: dataItemCount,
       };
 
       // Mock Grpc layer
@@ -131,10 +133,12 @@ describe('DataLabelingServiceClient', () => {
       const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
       const description = 'description-1724546052';
+      const dataItemCount = 2014260376;
       const expectedResponse = {
         name: name2,
         displayName: displayName,
         description: description,
+        dataItemCount: dataItemCount,
       };
 
       // Mock Grpc layer
@@ -1095,113 +1099,6 @@ describe('DataLabelingServiceClient', () => {
     });
   });
 
-  describe('labelAudio', function() {
-    it('invokes labelAudio without error', done => {
-      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
-      const basicConfig = {};
-      const feature = 'FEATURE_UNSPECIFIED';
-      const request = {
-        parent: formattedParent,
-        basicConfig: basicConfig,
-        feature: feature,
-      };
-
-      // Mock response
-      const name = 'name3373707';
-      const displayName = 'displayName1615086568';
-      const description = 'description-1724546052';
-      const exampleCount = 1517063674;
-      const completedExampleCount = 612567290;
-      const expectedResponse = {
-        name: name,
-        displayName: displayName,
-        description: description,
-        exampleCount: exampleCount,
-        completedExampleCount: completedExampleCount,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.labelAudio = mockLongRunningGrpcMethod(
-        request,
-        expectedResponse
-      );
-
-      client
-        .labelAudio(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(responses => {
-          assert.deepStrictEqual(responses[0], expectedResponse);
-          done();
-        })
-        .catch(err => {
-          done(err);
-        });
-    });
-
-    it('invokes labelAudio with error', done => {
-      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-
-      // Mock request
-      const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
-      const basicConfig = {};
-      const feature = 'FEATURE_UNSPECIFIED';
-      const request = {
-        parent: formattedParent,
-        basicConfig: basicConfig,
-        feature: feature,
-      };
-
-      // Mock Grpc layer
-      client._innerApiCalls.labelAudio = mockLongRunningGrpcMethod(
-        request,
-        null,
-        error
-      );
-
-      client
-        .labelAudio(request)
-        .then(responses => {
-          const operation = responses[0];
-          return operation.promise();
-        })
-        .then(() => {
-          assert.fail();
-        })
-        .catch(err => {
-          assert(err instanceof Error);
-          assert.strictEqual(err.code, FAKE_STATUS_CODE);
-          done();
-        });
-    });
-
-    it('has longrunning decoder functions', () => {
-      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert(
-        client._descriptors.longrunning.labelAudio.responseDecoder instanceof
-          Function
-      );
-      assert(
-        client._descriptors.longrunning.labelAudio.metadataDecoder instanceof
-          Function
-      );
-    });
-  });
-
   describe('getExample', () => {
     it('invokes getExample without error', done => {
       const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
@@ -1895,6 +1792,682 @@ describe('DataLabelingServiceClient', () => {
       client.deleteInstruction(request, err => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('getEvaluation', () => {
+    it('invokes getEvaluation without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationPath(
+        '[PROJECT]',
+        '[DATASET]',
+        '[EVALUATION]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const evaluatedItemCount = 358077111;
+      const expectedResponse = {
+        name: name2,
+        evaluatedItemCount: evaluatedItemCount,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getEvaluation = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getEvaluation(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getEvaluation with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationPath(
+        '[PROJECT]',
+        '[DATASET]',
+        '[EVALUATION]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getEvaluation = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getEvaluation(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('searchEvaluations', () => {
+    it('invokes searchEvaluations without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const filter = 'filter-1274492040';
+      const request = {
+        parent: formattedParent,
+        filter: filter,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const evaluationsElement = {};
+      const evaluations = [evaluationsElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        evaluations: evaluations,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.searchEvaluations = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.evaluations);
+      };
+
+      client.searchEvaluations(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.evaluations);
+        done();
+      });
+    });
+
+    it('invokes searchEvaluations with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const filter = 'filter-1274492040';
+      const request = {
+        parent: formattedParent,
+        filter: filter,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.searchEvaluations = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.searchEvaluations(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('searchExampleComparisons', () => {
+    it('invokes searchExampleComparisons without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.evaluationPath(
+        '[PROJECT]',
+        '[DATASET]',
+        '[EVALUATION]'
+      );
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const exampleComparisonsElement = {};
+      const exampleComparisons = [exampleComparisonsElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        exampleComparisons: exampleComparisons,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.searchExampleComparisons = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.exampleComparisons);
+      };
+
+      client.searchExampleComparisons(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.exampleComparisons);
+        done();
+      });
+    });
+
+    it('invokes searchExampleComparisons with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.evaluationPath(
+        '[PROJECT]',
+        '[DATASET]',
+        '[EVALUATION]'
+      );
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.searchExampleComparisons = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.searchExampleComparisons(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createEvaluationJob', () => {
+    it('invokes createEvaluationJob without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const job = {};
+      const request = {
+        parent: formattedParent,
+        job: job,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const description = 'description-1724546052';
+      const schedule = 'schedule-697920873';
+      const modelVersion = 'modelVersion-1669102142';
+      const annotationSpecSet = 'annotationSpecSet1881405678';
+      const labelMissingGroundTruth = false;
+      const expectedResponse = {
+        name: name,
+        description: description,
+        schedule: schedule,
+        modelVersion: modelVersion,
+        annotationSpecSet: annotationSpecSet,
+        labelMissingGroundTruth: labelMissingGroundTruth,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createEvaluationJob(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createEvaluationJob with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const job = {};
+      const request = {
+        parent: formattedParent,
+        job: job,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createEvaluationJob(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('updateEvaluationJob', () => {
+    it('invokes updateEvaluationJob without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const evaluationJob = {};
+      const updateMask = {};
+      const request = {
+        evaluationJob: evaluationJob,
+        updateMask: updateMask,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const description = 'description-1724546052';
+      const schedule = 'schedule-697920873';
+      const modelVersion = 'modelVersion-1669102142';
+      const annotationSpecSet = 'annotationSpecSet1881405678';
+      const labelMissingGroundTruth = false;
+      const expectedResponse = {
+        name: name,
+        description: description,
+        schedule: schedule,
+        modelVersion: modelVersion,
+        annotationSpecSet: annotationSpecSet,
+        labelMissingGroundTruth: labelMissingGroundTruth,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.updateEvaluationJob(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes updateEvaluationJob with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const evaluationJob = {};
+      const updateMask = {};
+      const request = {
+        evaluationJob: evaluationJob,
+        updateMask: updateMask,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.updateEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.updateEvaluationJob(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getEvaluationJob', () => {
+    it('invokes getEvaluationJob without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const description = 'description-1724546052';
+      const schedule = 'schedule-697920873';
+      const modelVersion = 'modelVersion-1669102142';
+      const annotationSpecSet = 'annotationSpecSet1881405678';
+      const labelMissingGroundTruth = false;
+      const expectedResponse = {
+        name: name2,
+        description: description,
+        schedule: schedule,
+        modelVersion: modelVersion,
+        annotationSpecSet: annotationSpecSet,
+        labelMissingGroundTruth: labelMissingGroundTruth,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getEvaluationJob(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getEvaluationJob with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getEvaluationJob(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('pauseEvaluationJob', () => {
+    it('invokes pauseEvaluationJob without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.pauseEvaluationJob = mockSimpleGrpcMethod(request);
+
+      client.pauseEvaluationJob(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes pauseEvaluationJob with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.pauseEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.pauseEvaluationJob(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('resumeEvaluationJob', () => {
+    it('invokes resumeEvaluationJob without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.resumeEvaluationJob = mockSimpleGrpcMethod(request);
+
+      client.resumeEvaluationJob(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes resumeEvaluationJob with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.resumeEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.resumeEvaluationJob(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('deleteEvaluationJob', () => {
+    it('invokes deleteEvaluationJob without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteEvaluationJob = mockSimpleGrpcMethod(request);
+
+      client.deleteEvaluationJob(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteEvaluationJob with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.evaluationJobPath(
+        '[PROJECT]',
+        '[EVALUATION_JOB]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteEvaluationJob = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteEvaluationJob(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('listEvaluationJobs', () => {
+    it('invokes listEvaluationJobs without error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const filter = 'filter-1274492040';
+      const request = {
+        parent: formattedParent,
+        filter: filter,
+      };
+
+      // Mock response
+      const nextPageToken = '';
+      const evaluationJobsElement = {};
+      const evaluationJobs = [evaluationJobsElement];
+      const expectedResponse = {
+        nextPageToken: nextPageToken,
+        evaluationJobs: evaluationJobs,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listEvaluationJobs = (
+        actualRequest,
+        options,
+        callback
+      ) => {
+        assert.deepStrictEqual(actualRequest, request);
+        callback(null, expectedResponse.evaluationJobs);
+      };
+
+      client.listEvaluationJobs(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse.evaluationJobs);
+        done();
+      });
+    });
+
+    it('invokes listEvaluationJobs with error', done => {
+      const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.projectPath('[PROJECT]');
+      const filter = 'filter-1274492040';
+      const request = {
+        parent: formattedParent,
+        filter: filter,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.listEvaluationJobs = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.listEvaluationJobs(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
         done();
       });
     });

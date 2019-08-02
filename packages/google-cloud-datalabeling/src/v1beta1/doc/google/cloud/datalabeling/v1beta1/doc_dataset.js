@@ -20,8 +20,7 @@
  * tasks for a dataset while each one will generate an AnnotatedDataset.
  *
  * @property {string} name
- *   Output only.
- *   Dataset resource name, format is:
+ *   Output only. Dataset resource name, format is:
  *   projects/{project_id}/datasets/{dataset_id}
  *
  * @property {string} displayName
@@ -43,6 +42,13 @@
  *
  *   This object should have the same structure as [InputConfig]{@link google.cloud.datalabeling.v1beta1.InputConfig}
  *
+ * @property {string[]} blockingResources
+ *   Output only. The names of any related resources that are blocking changes
+ *   to the dataset.
+ *
+ * @property {number} dataItemCount
+ *   Output only. The number of data items in the dataset.
+ *
  * @typedef Dataset
  * @memberof google.cloud.datalabeling.v1beta1
  * @see [google.cloud.datalabeling.v1beta1.Dataset definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
@@ -54,13 +60,37 @@ const Dataset = {
 /**
  * The configuration of input data, including data type, location, etc.
  *
+ * @property {Object} textMetadata
+ *   Required for text import, as language code must be specified.
+ *
+ *   This object should have the same structure as [TextMetadata]{@link google.cloud.datalabeling.v1beta1.TextMetadata}
+ *
  * @property {Object} gcsSource
+ *   Source located in Cloud Storage.
+ *
  *   This object should have the same structure as [GcsSource]{@link google.cloud.datalabeling.v1beta1.GcsSource}
+ *
+ * @property {Object} bigquerySource
+ *   This object should have the same structure as [BigQuerySource]{@link google.cloud.datalabeling.v1beta1.BigQuerySource}
  *
  * @property {number} dataType
  *   Required. Data type must be specifed when user tries to import data.
  *
  *   The number should be among the values of [DataType]{@link google.cloud.datalabeling.v1beta1.DataType}
+ *
+ * @property {number} annotationType
+ *   Optional. If input contains annotation, user needs to specify the
+ *   type and metadata of the annotation when creating it as an annotated
+ *   dataset.
+ *
+ *   The number should be among the values of [AnnotationType]{@link google.cloud.datalabeling.v1beta1.AnnotationType}
+ *
+ * @property {Object} classificationMetadata
+ *   Optional. Metadata about annotations in the input. Each annotation type may
+ *   have different metadata.
+ *   Metadata for classification problem.
+ *
+ *   This object should have the same structure as [ClassificationMetadata]{@link google.cloud.datalabeling.v1beta1.ClassificationMetadata}
  *
  * @typedef InputConfig
  * @memberof google.cloud.datalabeling.v1beta1
@@ -71,14 +101,44 @@ const InputConfig = {
 };
 
 /**
- * Source of the GCS file to be imported. Only gcs path is allowed in
- * input_uri.
+ * Metadata for the text.
+ *
+ * @property {string} languageCode
+ *   The language of this text, as a
+ *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
+ *   Default value is en-US.
+ *
+ * @typedef TextMetadata
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.TextMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
+ */
+const TextMetadata = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Metadata for classification annotations.
+ *
+ * @property {boolean} isMultiLabel
+ *   Whether the classification task is multi-label or not.
+ *
+ * @typedef ClassificationMetadata
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.ClassificationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
+ */
+const ClassificationMetadata = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Source of the Cloud Storage file to be imported.
  *
  * @property {string} inputUri
- *   Required. The input uri of source file.
+ *   Required. The input URI of source file. This must be a Cloud Storage path
+ *   (`gs://...`).
  *
  * @property {string} mimeType
- *   Required. The format of the gcs source. Only "text/csv" is supported.
+ *   Required. The format of the source file. Only "text/csv" is supported.
  *
  * @typedef GcsSource
  * @memberof google.cloud.datalabeling.v1beta1
@@ -89,17 +149,32 @@ const GcsSource = {
 };
 
 /**
+ * The BigQuery location for the input content.
+ *
+ * @property {string} inputUri
+ *   Required. BigQuery URI to a table, up to 2000 characters long.
+ *   Accepted forms: BigQuery gs path e.g. bq://projectId.bqDatasetId.bqTableId
+ *
+ * @typedef BigQuerySource
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.BigQuerySource definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
+ */
+const BigQuerySource = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * The configuration of output data.
  *
  * @property {Object} gcsDestination
- *   Output to a GCS file. Should be used for labeling output other than Audio
- *   transcription.
+ *   Output to a file in Cloud Storage. Should be used for labeling output
+ *   other thanimage segmentation.
  *
  *   This object should have the same structure as [GcsDestination]{@link google.cloud.datalabeling.v1beta1.GcsDestination}
  *
  * @property {Object} gcsFolderDestination
- *   Output to a GCS folder. Should be used for Audio transcription
- *   labeling output.
+ *   Output to a folder in Cloud Storage. Should be used for image
+ *   segmentation labeling output.
  *
  *   This object should have the same structure as [GcsFolderDestination]{@link google.cloud.datalabeling.v1beta1.GcsFolderDestination}
  *
@@ -135,7 +210,7 @@ const GcsDestination = {
  * Export folder destination of the data.
  *
  * @property {string} outputFolderUri
- *   Required. GCS folder to export data to.
+ *   Required. Cloud Storage directory to export data to.
  *
  * @typedef GcsFolderDestination
  * @memberof google.cloud.datalabeling.v1beta1
@@ -163,11 +238,6 @@ const GcsFolderDestination = {
  *
  *   This object should have the same structure as [VideoPayload]{@link google.cloud.datalabeling.v1beta1.VideoPayload}
  *
- * @property {Object} audioPayload
- *   The audio payload, a container of the audio uri.
- *
- *   This object should have the same structure as [AudioPayload]{@link google.cloud.datalabeling.v1beta1.AudioPayload}
- *
  * @property {string} name
  *   Output only. Name of the data item, in format of:
  *   projects/{project_id}/datasets/{dataset_id}/dataItems/{data_item_id}
@@ -186,8 +256,7 @@ const DataItem = {
  * task is requested for.
  *
  * @property {string} name
- *   Output only.
- *   AnnotatedDataset resource name in format of:
+ *   Output only. AnnotatedDataset resource name in format of:
  *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
  *   {annotated_dataset_id}
  *
@@ -234,6 +303,10 @@ const DataItem = {
  *
  *   This object should have the same structure as [AnnotatedDatasetMetadata]{@link google.cloud.datalabeling.v1beta1.AnnotatedDatasetMetadata}
  *
+ * @property {string[]} blockingResources
+ *   Output only. The names of any related resources that are blocking changes
+ *   to the annotated dataset.
+ *
  * @typedef AnnotatedDataset
  * @memberof google.cloud.datalabeling.v1beta1
  * @see [google.cloud.datalabeling.v1beta1.AnnotatedDataset definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
@@ -243,13 +316,25 @@ const AnnotatedDataset = {
 };
 
 /**
+ * Statistics about annotation specs.
+ *
+ * @property {Object.<string, number>} exampleCount
+ *   Map of each annotation spec's example count. Key is the annotation spec
+ *   name and value is the number of examples for that annotation spec.
+ *   If the annotated dataset does not have annotation spec, the map will return
+ *   a pair where the key is empty string and value is the total number of
+ *   annotations.
+ *
+ * @typedef LabelStats
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.LabelStats definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
+ */
+const LabelStats = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Metadata on AnnotatedDataset.
- *
- * @property {Object} humanAnnotationConfig
- *   HumanAnnotationConfig used when requesting the human labeling task for this
- *   AnnotatedDataset.
- *
- *   This object should have the same structure as [HumanAnnotationConfig]{@link google.cloud.datalabeling.v1beta1.HumanAnnotationConfig}
  *
  * @property {Object} imageClassificationConfig
  *   Configuration for image classification task.
@@ -301,26 +386,17 @@ const AnnotatedDataset = {
  *
  *   This object should have the same structure as [TextEntityExtractionConfig]{@link google.cloud.datalabeling.v1beta1.TextEntityExtractionConfig}
  *
+ * @property {Object} humanAnnotationConfig
+ *   HumanAnnotationConfig used when requesting the human labeling task for this
+ *   AnnotatedDataset.
+ *
+ *   This object should have the same structure as [HumanAnnotationConfig]{@link google.cloud.datalabeling.v1beta1.HumanAnnotationConfig}
+ *
  * @typedef AnnotatedDatasetMetadata
  * @memberof google.cloud.datalabeling.v1beta1
  * @see [google.cloud.datalabeling.v1beta1.AnnotatedDatasetMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
  */
 const AnnotatedDatasetMetadata = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Statistics about annotation specs.
- *
- * @property {Object.<string, number>} exampleCount
- *   Map of each annotation spec's example count. Key is the annotation spec
- *   name and value is the number of examples for that annotation spec.
- *
- * @typedef LabelStats
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.LabelStats definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
- */
-const LabelStats = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -343,11 +419,6 @@ const LabelStats = {
  *
  *   This object should have the same structure as [VideoPayload]{@link google.cloud.datalabeling.v1beta1.VideoPayload}
  *
- * @property {Object} audioPayload
- *   The audio payload, a container of the audio uri.
- *
- *   This object should have the same structure as [AudioPayload]{@link google.cloud.datalabeling.v1beta1.AudioPayload}
- *
  * @property {string} name
  *   Output only. Name of the example, in format of:
  *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
@@ -368,105 +439,6 @@ const Example = {
 };
 
 /**
- * Container of information about an image.
- *
- * @property {string} mimeType
- *   Image format.
- *
- * @property {Buffer} imageThumbnail
- *   A byte string of a full image.
- *
- * @property {string} imageUri
- *   Image uri from the user bucket.
- *
- * @typedef ImagePayload
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.ImagePayload definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
- */
-const ImagePayload = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Container of information about a piece of text.
- *
- * @property {string} textContent
- *   Text content.
- *
- * @typedef TextPayload
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.TextPayload definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
- */
-const TextPayload = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Container of information of a video thumbnail.
- *
- * @property {Buffer} thumbnail
- *   A byte string of the video frame.
- *
- * @property {Object} timeOffset
- *   Time offset relative to the beginning of the video, corresponding to the
- *   video frame where the thumbnail has been extracted from.
- *
- *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @typedef VideoThumbnail
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.VideoThumbnail definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
- */
-const VideoThumbnail = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Container of information of a video.
- *
- * @property {string} mimeType
- *   Video format.
- *
- * @property {string} videoUri
- *   Video uri from the user bucket.
- *
- * @property {Object[]} videoThumbnails
- *   The list of video thumbnails.
- *
- *   This object should have the same structure as [VideoThumbnail]{@link google.cloud.datalabeling.v1beta1.VideoThumbnail}
- *
- * @property {number} frameRate
- *   FPS of the video.
- *
- * @typedef VideoPayload
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.VideoPayload definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
- */
-const VideoPayload = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Container of information of an audio.
- *
- * @property {string} audioUri
- *   Audio uri in user bucket.
- *
- * @property {number} sampleRateHertz
- *   Sample rate in Hertz of the audio data sent in all
- *   `RecognitionAudio` messages. This field is optional for `FLAC` and `WAV`
- *   audio files and required for all other audio formats. For details,
- *   see AudioEncoding.
- *
- * @typedef AudioPayload
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.AudioPayload definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/dataset.proto}
- */
-const AudioPayload = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * @enum {number}
  * @memberof google.cloud.datalabeling.v1beta1
  */
@@ -475,5 +447,5 @@ const DataType = {
   IMAGE: 1,
   VIDEO: 2,
   TEXT: 4,
-  AUDIO: 5
+  GENERAL_DATA: 6
 };

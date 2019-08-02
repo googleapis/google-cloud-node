@@ -50,19 +50,25 @@
  *   The number should be among the values of [DataType]{@link google.cloud.datalabeling.v1beta1.DataType}
  *
  * @property {Object} csvInstruction
- *   One of CSV and PDF instruction is required.
- *   Instruction from a csv file, such as for classification task.
- *   Csv file should have exact two columns, in the format of:
- *   The first column is labeled data, such as image reference, text.
- *   The second column is comma separated labels associated with data.
+ *   One of CSV or PDF instruction is required.
+ *   Instruction from a CSV file, such as for classification task.
+ *   The CSV file should have exact two columns, in the following format:
+ *
+ *   * The first column is labeled data, such as an image reference, text.
+ *   * The second column is comma separated labels associated with data.
  *
  *   This object should have the same structure as [CsvInstruction]{@link google.cloud.datalabeling.v1beta1.CsvInstruction}
  *
  * @property {Object} pdfInstruction
- *   One of CSV and PDF instruction is required.
- *   Instruction from a PDF doc. The PDF doc should be in GCS bucket.
+ *   One of CSV or PDF instruction is required.
+ *   Instruction from a PDF document. The PDF should be in a Cloud Storage
+ *   bucket.
  *
  *   This object should have the same structure as [PdfInstruction]{@link google.cloud.datalabeling.v1beta1.PdfInstruction}
+ *
+ * @property {string[]} blockingResources
+ *   Output only. The names of any related resources that are blocking changes
+ *   to the instruction.
  *
  * @typedef Instruction
  * @memberof google.cloud.datalabeling.v1beta1

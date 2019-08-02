@@ -111,6 +111,12 @@ class DataLabelingServiceClient {
       datasetPathTemplate: new gax.PathTemplate(
         'projects/{project}/datasets/{dataset}'
       ),
+      evaluationPathTemplate: new gax.PathTemplate(
+        'projects/{project}/datasets/{dataset}/evaluations/{evaluation}'
+      ),
+      evaluationJobPathTemplate: new gax.PathTemplate(
+        'projects/{project}/evaluationJobs/{evaluation_job}'
+      ),
       examplePathTemplate: new gax.PathTemplate(
         'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}/examples/{example}'
       ),
@@ -153,6 +159,21 @@ class DataLabelingServiceClient {
         'pageToken',
         'nextPageToken',
         'instructions'
+      ),
+      searchEvaluations: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluations'
+      ),
+      searchExampleComparisons: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'exampleComparisons'
+      ),
+      listEvaluationJobs: new gax.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluationJobs'
       ),
     };
     let protoFilesRoot = new gax.GoogleProtoFilesRoot();
@@ -205,12 +226,6 @@ class DataLabelingServiceClient {
     const labelTextMetadata = protoFilesRoot.lookup(
       'google.cloud.datalabeling.v1beta1.LabelOperationMetadata'
     );
-    const labelAudioResponse = protoFilesRoot.lookup(
-      'google.cloud.datalabeling.v1beta1.AnnotatedDataset'
-    );
-    const labelAudioMetadata = protoFilesRoot.lookup(
-      'google.cloud.datalabeling.v1beta1.LabelOperationMetadata'
-    );
     const createInstructionResponse = protoFilesRoot.lookup(
       'google.cloud.datalabeling.v1beta1.Instruction'
     );
@@ -243,11 +258,6 @@ class DataLabelingServiceClient {
         this.operationsClient,
         labelTextResponse.decode.bind(labelTextResponse),
         labelTextMetadata.decode.bind(labelTextMetadata)
-      ),
-      labelAudio: new gax.LongrunningDescriptor(
-        this.operationsClient,
-        labelAudioResponse.decode.bind(labelAudioResponse),
-        labelAudioMetadata.decode.bind(labelAudioMetadata)
       ),
       createInstruction: new gax.LongrunningDescriptor(
         this.operationsClient,
@@ -292,7 +302,6 @@ class DataLabelingServiceClient {
       'labelImage',
       'labelVideo',
       'labelText',
-      'labelAudio',
       'getExample',
       'listExamples',
       'createAnnotationSpecSet',
@@ -303,6 +312,16 @@ class DataLabelingServiceClient {
       'getInstruction',
       'listInstructions',
       'deleteInstruction',
+      'getEvaluation',
+      'searchEvaluations',
+      'searchExampleComparisons',
+      'createEvaluationJob',
+      'updateEvaluationJob',
+      'getEvaluationJob',
+      'pauseEvaluationJob',
+      'resumeEvaluationJob',
+      'deleteEvaluationJob',
+      'listEvaluationJobs',
       'deleteAnnotatedDataset',
     ];
     for (const methodName of dataLabelingServiceStubMethods) {
@@ -393,7 +412,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -419,6 +438,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -452,7 +472,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -473,6 +493,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -526,7 +547,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -577,6 +598,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -623,7 +645,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -665,7 +687,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -681,6 +703,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -709,6 +732,9 @@ class DataLabelingServiceClient {
    *   Required. Specify the input source of the data.
    *
    *   This object should have the same structure as [InputConfig]{@link google.cloud.datalabeling.v1beta1.InputConfig}
+   * @param {string} [request.userEmailAddress]
+   *   Email of the user who started the import task and should be notified by
+   *   email. If empty no notification will be sent.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -722,7 +748,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -802,6 +828,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -834,6 +861,9 @@ class DataLabelingServiceClient {
    *   This object should have the same structure as [OutputConfig]{@link google.cloud.datalabeling.v1beta1.OutputConfig}
    * @param {string} [request.filter]
    *   Optional. Filter is not supported at this moment.
+   * @param {string} [request.userEmailAddress]
+   *   Email of the user who started the export task and should be notified by
+   *   email. If empty no notification will be sent.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -847,7 +877,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -933,6 +963,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -967,7 +998,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -988,6 +1019,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1042,7 +1074,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1093,6 +1125,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1139,7 +1172,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1185,7 +1218,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1206,6 +1239,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1259,7 +1293,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1310,6 +1344,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1360,7 +1395,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1404,25 +1439,25 @@ class DataLabelingServiceClient {
    * @param {Object} [request.imageClassificationConfig]
    *   Configuration for image classification task.
    *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config is required.
+   *   polyline_config and segmentation_config are required.
    *
    *   This object should have the same structure as [ImageClassificationConfig]{@link google.cloud.datalabeling.v1beta1.ImageClassificationConfig}
    * @param {Object} [request.boundingPolyConfig]
    *   Configuration for bounding box and bounding poly task.
    *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config is required.
+   *   polyline_config and segmentation_config are required.
    *
    *   This object should have the same structure as [BoundingPolyConfig]{@link google.cloud.datalabeling.v1beta1.BoundingPolyConfig}
    * @param {Object} [request.polylineConfig]
    *   Configuration for polyline task.
    *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config is required.
+   *   polyline_config and segmentation_config are required.
    *
    *   This object should have the same structure as [PolylineConfig]{@link google.cloud.datalabeling.v1beta1.PolylineConfig}
    * @param {Object} [request.segmentationConfig]
    *   Configuration for segmentation task.
    *   One of image_classification_config, bounding_poly_config,
-   *   polyline_config and segmentation_config is required.
+   *   polyline_config and segmentation_config are required.
    *
    *   This object should have the same structure as [SegmentationConfig]{@link google.cloud.datalabeling.v1beta1.SegmentationConfig}
    * @param {Object} [options]
@@ -1438,7 +1473,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1524,6 +1559,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1590,7 +1626,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1676,6 +1712,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1730,7 +1767,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -1816,6 +1853,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1826,134 +1864,6 @@ class DataLabelingServiceClient {
     });
 
     return this._innerApiCalls.labelText(request, options, callback);
-  }
-
-  /**
-   * Starts a labeling task for audio. The type of audio labeling task is
-   * configured by feature in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Name of the dataset to request labeling task, format:
-   *   projects/{project_id}/datasets/{dataset_id}
-   * @param {Object} request.basicConfig
-   *   Required. Basic human annotation config.
-   *
-   *   This object should have the same structure as [HumanAnnotationConfig]{@link google.cloud.datalabeling.v1beta1.HumanAnnotationConfig}
-   * @param {number} request.feature
-   *   Required. The type of audio labeling task.
-   *
-   *   The number should be among the values of [Feature]{@link google.cloud.datalabeling.v1beta1.Feature}
-   * @param {Object} [options]
-   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
-   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
-   * @param {function(?Error, ?Object)} [callback]
-   *   The function which will be called with the result of the API call.
-   *
-   *   The second parameter to the callback is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is a [gax.Operation]{@link https://googleapis.github.io/gax-nodejs/classes/Operation.html} object.
-   *   The promise has a method named "cancel" which cancels the ongoing API call.
-   *
-   * @example
-   *
-   * const datalabeling = require('@google-cloud/datalabeling');
-   *
-   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
-   *   // optional auth parameters.
-   * });
-   *
-   * const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
-   * const basicConfig = {};
-   * const feature = 'FEATURE_UNSPECIFIED';
-   * const request = {
-   *   parent: formattedParent,
-   *   basicConfig: basicConfig,
-   *   feature: feature,
-   * };
-   *
-   * // Handle the operation using the promise pattern.
-   * client.labelAudio(request)
-   *   .then(responses => {
-   *     const [operation, initialApiResponse] = responses;
-   *
-   *     // Operation#promise starts polling for the completion of the LRO.
-   *     return operation.promise();
-   *   })
-   *   .then(responses => {
-   *     const result = responses[0];
-   *     const metadata = responses[1];
-   *     const finalApiResponse = responses[2];
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   *
-   * const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
-   * const basicConfig = {};
-   * const feature = 'FEATURE_UNSPECIFIED';
-   * const request = {
-   *   parent: formattedParent,
-   *   basicConfig: basicConfig,
-   *   feature: feature,
-   * };
-   *
-   * // Handle the operation using the event emitter pattern.
-   * client.labelAudio(request)
-   *   .then(responses => {
-   *     const [operation, initialApiResponse] = responses;
-   *
-   *     // Adding a listener for the "complete" event starts polling for the
-   *     // completion of the operation.
-   *     operation.on('complete', (result, metadata, finalApiResponse) => {
-   *       // doSomethingWith(result);
-   *     });
-   *
-   *     // Adding a listener for the "progress" event causes the callback to be
-   *     // called on any change in metadata when the operation is polled.
-   *     operation.on('progress', (metadata, apiResponse) => {
-   *       // doSomethingWith(metadata)
-   *     });
-   *
-   *     // Adding a listener for the "error" event handles any errors found during polling.
-   *     operation.on('error', err => {
-   *       // throw(err);
-   *     });
-   *   })
-   *   .catch(err => {
-   *     console.error(err);
-   *   });
-   *
-   * const formattedParent = client.datasetPath('[PROJECT]', '[DATASET]');
-   * const basicConfig = {};
-   * const feature = 'FEATURE_UNSPECIFIED';
-   * const request = {
-   *   parent: formattedParent,
-   *   basicConfig: basicConfig,
-   *   feature: feature,
-   * };
-   *
-   * // Handle the operation using the await pattern.
-   * const [operation] = await client.labelAudio(request);
-   *
-   * const [response] = await operation.promise();
-   */
-  labelAudio(request, options, callback) {
-    if (options instanceof Function && callback === undefined) {
-      callback = options;
-      options = {};
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent,
-    });
-
-    return this._innerApiCalls.labelAudio(request, options, callback);
   }
 
   /**
@@ -1982,7 +1892,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2003,6 +1913,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2058,7 +1969,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2109,6 +2020,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2157,7 +2069,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2208,7 +2120,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2234,6 +2146,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2271,7 +2184,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2292,6 +2205,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2345,7 +2259,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2396,6 +2310,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2446,7 +2361,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2488,7 +2403,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2504,6 +2419,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2545,7 +2461,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2625,6 +2541,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2658,7 +2575,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2679,6 +2596,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2732,7 +2650,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2783,6 +2701,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2829,7 +2748,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2871,7 +2790,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2887,6 +2806,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -2897,6 +2817,927 @@ class DataLabelingServiceClient {
     });
 
     return this._innerApiCalls.deleteInstruction(request, options, callback);
+  }
+
+  /**
+   * Gets an evaluation by resource name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the evaluation. Format:
+   *   'projects/{project_id}/datasets/{dataset_id}/evaluations/{evaluation_id}'
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.evaluationPath('[PROJECT]', '[DATASET]', '[EVALUATION]');
+   * client.getEvaluation({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getEvaluation(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getEvaluation(request, options, callback);
+  }
+
+  /**
+   * Searchs evaluations within a project. Supported filter: evaluation_job,
+   * evaluation_time.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Evaluation search parent. Format:
+   *   projects/{project_id}
+   * @param {string} request.filter
+   *   Optional. Support filtering by model id, job state, start and end time.
+   *   Format:
+   *   "evaluation_job.evaluation_job_id = {evaluation_job_id} AND
+   *   evaluation_job.evaluation_job_run_time_start = {timestamp} AND
+   *   evaluation_job.evaluation_job_run_time_end = {timestamp} AND
+   *   annotation_spec.display_name = {display_name}"
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [SearchEvaluationsResponse]{@link google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [SearchEvaluationsResponse]{@link google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   filter: filter,
+   * };
+   *
+   * client.searchEvaluations(request)
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   filter: filter,
+   * };
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.searchEvaluations(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.searchEvaluations(request, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  searchEvaluations(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.searchEvaluations(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link searchEvaluations}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link searchEvaluations} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Evaluation search parent. Format:
+   *   projects/{project_id}
+   * @param {string} request.filter
+   *   Optional. Support filtering by model id, job state, start and end time.
+   *   Format:
+   *   "evaluation_job.evaluation_job_id = {evaluation_job_id} AND
+   *   evaluation_job.evaluation_job_run_time_start = {timestamp} AND
+   *   evaluation_job.evaluation_job_run_time_end = {timestamp} AND
+   *   annotation_spec.display_name = {display_name}"
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation} on 'data' event.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   filter: filter,
+   * };
+   * client.searchEvaluationsStream(request)
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  searchEvaluationsStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.searchEvaluations.createStream(
+      this._innerApiCalls.searchEvaluations,
+      request,
+      options
+    );
+  }
+
+  /**
+   * Searchs example comparisons in evaluation, in format of examples
+   * of both ground truth and prediction(s). It is represented as a search with
+   * evaluation id.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the Evaluation resource to search example comparison
+   *   from. Format:
+   *   projects/{project_id}/datasets/{dataset_id}/evaluations/{evaluation_id}
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.ExampleComparison}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [SearchExampleComparisonsResponse]{@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.ExampleComparison}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.ExampleComparison} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [SearchExampleComparisonsResponse]{@link google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.evaluationPath('[PROJECT]', '[DATASET]', '[EVALUATION]');
+   *
+   * client.searchExampleComparisons({parent: formattedParent})
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.evaluationPath('[PROJECT]', '[DATASET]', '[EVALUATION]');
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.searchExampleComparisons(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.searchExampleComparisons({parent: formattedParent}, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  searchExampleComparisons(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.searchExampleComparisons(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to {@link searchExampleComparisons}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link searchExampleComparisons} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the Evaluation resource to search example comparison
+   *   from. Format:
+   *   projects/{project_id}/datasets/{dataset_id}/evaluations/{evaluation_id}
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.ExampleComparison} on 'data' event.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.evaluationPath('[PROJECT]', '[DATASET]', '[EVALUATION]');
+   * client.searchExampleComparisonsStream({parent: formattedParent})
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  searchExampleComparisonsStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.searchExampleComparisons.createStream(
+      this._innerApiCalls.searchExampleComparisons,
+      request,
+      options
+    );
+  }
+
+  /**
+   * Creates an evaluation job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Evaluation job resource parent, format:
+   *   projects/{project_id}.
+   * @param {Object} request.job
+   *   Required. The evaluation job to create.
+   *
+   *   This object should have the same structure as [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const job = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   job: job,
+   * };
+   * client.createEvaluationJob(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createEvaluationJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.createEvaluationJob(request, options, callback);
+  }
+
+  /**
+   * Updates an evaluation job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.evaluationJob
+   *   Required. Evaluation job that is going to be updated.
+   *
+   *   This object should have the same structure as [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}
+   * @param {Object} request.updateMask
+   *   Optional. Mask for which field in evaluation_job should be updated.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const evaluationJob = {};
+   * const updateMask = {};
+   * const request = {
+   *   evaluationJob: evaluationJob,
+   *   updateMask: updateMask,
+   * };
+   * client.updateEvaluationJob(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  updateEvaluationJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'evaluation_job.name': request.evaluationJob.name,
+    });
+
+    return this._innerApiCalls.updateEvaluationJob(request, options, callback);
+  }
+
+  /**
+   * Gets an evaluation job by resource name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the evaluation job. Format:
+   *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.evaluationJobPath('[PROJECT]', '[EVALUATION_JOB]');
+   * client.getEvaluationJob({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getEvaluationJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getEvaluationJob(request, options, callback);
+  }
+
+  /**
+   * Pauses an evaluation job. Pausing a evaluation job that is already in
+   * PAUSED state will be a no-op.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the evaluation job that is going to be paused. Format:
+   *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.evaluationJobPath('[PROJECT]', '[EVALUATION_JOB]');
+   * client.pauseEvaluationJob({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  pauseEvaluationJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.pauseEvaluationJob(request, options, callback);
+  }
+
+  /**
+   * Resumes a paused evaluation job. Deleted evaluation job can't be resumed.
+   * Resuming a running evaluation job will be a no-op.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the evaluation job that is going to be resumed. Format:
+   *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.evaluationJobPath('[PROJECT]', '[EVALUATION_JOB]');
+   * client.resumeEvaluationJob({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  resumeEvaluationJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.resumeEvaluationJob(request, options, callback);
+  }
+
+  /**
+   * Stops and deletes an evaluation job.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the evaluation job that is going to be deleted. Format:
+   *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.evaluationJobPath('[PROJECT]', '[EVALUATION_JOB]');
+   * client.deleteEvaluationJob({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteEvaluationJob(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteEvaluationJob(request, options, callback);
+  }
+
+  /**
+   * Lists all evaluation jobs within a project with possible filters.
+   * Pagination is supported.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Evaluation resource parent. Format:
+   *   "projects/{project_id}"
+   * @param {string} request.filter
+   *   Optional. Only support filter by model id and job state. Format:
+   *   "evaluation_job.model_id = {model_id} AND evaluation_job.state =
+   *   {EvaluationJob::State}"
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Array, ?Object, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is Array of [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *
+   *   When autoPaginate: false is specified through options, it contains the result
+   *   in a single response. If the response indicates the next page exists, the third
+   *   parameter is set to be used for the next request object. The fourth parameter keeps
+   *   the raw response object of an object representing [ListEvaluationJobsResponse]{@link google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}.
+   *
+   *   When autoPaginate: false is specified through options, the array has three elements.
+   *   The first element is Array of [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob} in a single response.
+   *   The second element is the next request object if the response
+   *   indicates the next page exists, or null. The third element is
+   *   an object representing [ListEvaluationJobsResponse]{@link google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse}.
+   *
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * // Iterate over all elements.
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   filter: filter,
+   * };
+   *
+   * client.listEvaluationJobs(request)
+   *   .then(responses => {
+   *     const resources = responses[0];
+   *     for (const resource of resources) {
+   *       // doThingsWith(resource)
+   *     }
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   *
+   * // Or obtain the paged response.
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   filter: filter,
+   * };
+   *
+   *
+   * const options = {autoPaginate: false};
+   * const callback = responses => {
+   *   // The actual resources in a response.
+   *   const resources = responses[0];
+   *   // The next request if the response shows that there are more responses.
+   *   const nextRequest = responses[1];
+   *   // The actual response object, if necessary.
+   *   // const rawResponse = responses[2];
+   *   for (const resource of resources) {
+   *     // doThingsWith(resource);
+   *   }
+   *   if (nextRequest) {
+   *     // Fetch the next page.
+   *     return client.listEvaluationJobs(nextRequest, options).then(callback);
+   *   }
+   * }
+   * client.listEvaluationJobs(request, options)
+   *   .then(callback)
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  listEvaluationJobs(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.listEvaluationJobs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to {@link listEvaluationJobs}, but returns a NodeJS Stream object.
+   *
+   * This fetches the paged responses for {@link listEvaluationJobs} continuously
+   * and invokes the callback registered for 'data' event for each element in the
+   * responses.
+   *
+   * The returned object has 'end' method when no more elements are required.
+   *
+   * autoPaginate option will be ignored.
+   *
+   * @see {@link https://nodejs.org/api/stream.html}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Evaluation resource parent. Format:
+   *   "projects/{project_id}"
+   * @param {string} request.filter
+   *   Optional. Only support filter by model id and job state. Format:
+   *   "evaluation_job.model_id = {model_id} AND evaluation_job.state =
+   *   {EvaluationJob::State}"
+   * @param {number} [request.pageSize]
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob} on 'data' event.
+   *
+   * @example
+   *
+   * const datalabeling = require('datalabeling.v1beta1');
+   *
+   * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * const filter = '';
+   * const request = {
+   *   parent: formattedParent,
+   *   filter: filter,
+   * };
+   * client.listEvaluationJobsStream(request)
+   *   .on('data', element => {
+   *     // doThingsWith(element)
+   *   }).on('error', err => {
+   *     console.log(err);
+   *   });
+   */
+  listEvaluationJobsStream(request, options) {
+    options = options || {};
+
+    return this._descriptors.page.listEvaluationJobs.createStream(
+      this._innerApiCalls.listEvaluationJobs,
+      request,
+      options
+    );
   }
 
   /**
@@ -2918,7 +3759,7 @@ class DataLabelingServiceClient {
    *
    * @example
    *
-   * const datalabeling = require('@google-cloud/datalabeling');
+   * const datalabeling = require('datalabeling.v1beta1');
    *
    * const client = new datalabeling.v1beta1.DataLabelingServiceClient({
    *   // optional auth parameters.
@@ -2934,6 +3775,7 @@ class DataLabelingServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -3011,6 +3853,36 @@ class DataLabelingServiceClient {
     return this._pathTemplates.datasetPathTemplate.render({
       project: project,
       dataset: dataset,
+    });
+  }
+
+  /**
+   * Return a fully-qualified evaluation resource name string.
+   *
+   * @param {String} project
+   * @param {String} dataset
+   * @param {String} evaluation
+   * @returns {String}
+   */
+  evaluationPath(project, dataset, evaluation) {
+    return this._pathTemplates.evaluationPathTemplate.render({
+      project: project,
+      dataset: dataset,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Return a fully-qualified evaluation_job resource name string.
+   *
+   * @param {String} project
+   * @param {String} evaluationJob
+   * @returns {String}
+   */
+  evaluationJobPath(project, evaluationJob) {
+    return this._pathTemplates.evaluationJobPathTemplate.render({
+      project: project,
+      evaluation_job: evaluationJob,
     });
   }
 
@@ -3177,6 +4049,68 @@ class DataLabelingServiceClient {
    */
   matchDatasetFromDatasetName(datasetName) {
     return this._pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Parse the evaluationName from a evaluation resource.
+   *
+   * @param {String} evaluationName
+   *   A fully-qualified path representing a evaluation resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromEvaluationName(evaluationName) {
+    return this._pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
+  }
+
+  /**
+   * Parse the evaluationName from a evaluation resource.
+   *
+   * @param {String} evaluationName
+   *   A fully-qualified path representing a evaluation resources.
+   * @returns {String} - A string representing the dataset.
+   */
+  matchDatasetFromEvaluationName(evaluationName) {
+    return this._pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .dataset;
+  }
+
+  /**
+   * Parse the evaluationName from a evaluation resource.
+   *
+   * @param {String} evaluationName
+   *   A fully-qualified path representing a evaluation resources.
+   * @returns {String} - A string representing the evaluation.
+   */
+  matchEvaluationFromEvaluationName(evaluationName) {
+    return this._pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
+  }
+
+  /**
+   * Parse the evaluationJobName from a evaluation_job resource.
+   *
+   * @param {String} evaluationJobName
+   *   A fully-qualified path representing a evaluation_job resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromEvaluationJobName(evaluationJobName) {
+    return this._pathTemplates.evaluationJobPathTemplate.match(
+      evaluationJobName
+    ).project;
+  }
+
+  /**
+   * Parse the evaluationJobName from a evaluation_job resource.
+   *
+   * @param {String} evaluationJobName
+   *   A fully-qualified path representing a evaluation_job resources.
+   * @returns {String} - A string representing the evaluation_job.
+   */
+  matchEvaluationJobFromEvaluationJobName(evaluationJobName) {
+    return this._pathTemplates.evaluationJobPathTemplate.match(
+      evaluationJobName
+    ).evaluation_job;
   }
 
   /**

@@ -60,6 +60,10 @@
  *   emails must be registered in crowdcompute worker UI:
  *   https://crowd-compute.appspot.com/
  *
+ * @property {string} userEmailAddress
+ *   Email of the user who started the labeling task and should be notified by
+ *   email. If empty no notification will be sent.
+ *
  * @typedef HumanAnnotationConfig
  * @memberof google.cloud.datalabeling.v1beta1
  * @see [google.cloud.datalabeling.v1beta1.HumanAnnotationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/human_annotation_config.proto}
@@ -198,9 +202,6 @@ const VideoClassificationConfig = {
  *
  * @property {string} annotationSpecSet
  *   Required. Annotation spec set resource name.
- *
- * @property {string} instructionMessage
- *   Optional. Instruction message showed on labelers UI.
  *
  * @property {number} extractionFrameRate
  *   Required. Number of frames per second to be extracted from the video.

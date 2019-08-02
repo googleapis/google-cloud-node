@@ -67,9 +67,9 @@ const GetDatasetRequest = {
  * @property {string} pageToken
  *   Optional. A token identifying a page of results for the server to return.
  *   Typically obtained by
- *   ListDatasetsResponse.next_page_token of the previous
- *   [DataLabelingService.ListDatasets] call.
- *   Returns the first page if empty.
+ *   ListDatasetsResponse.next_page_token
+ *   of the previous [DataLabelingService.ListDatasets] call. Returns the first
+ *   page if empty.
  *
  * @typedef ListDatasetsRequest
  * @memberof google.cloud.datalabeling.v1beta1
@@ -125,6 +125,10 @@ const DeleteDatasetRequest = {
  *
  *   This object should have the same structure as [InputConfig]{@link google.cloud.datalabeling.v1beta1.InputConfig}
  *
+ * @property {string} userEmailAddress
+ *   Email of the user who started the import task and should be notified by
+ *   email. If empty no notification will be sent.
+ *
  * @typedef ImportDataRequest
  * @memberof google.cloud.datalabeling.v1beta1
  * @see [google.cloud.datalabeling.v1beta1.ImportDataRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
@@ -154,6 +158,10 @@ const ImportDataRequest = {
  *   Required. Specify the output destination.
  *
  *   This object should have the same structure as [OutputConfig]{@link google.cloud.datalabeling.v1beta1.OutputConfig}
+ *
+ * @property {string} userEmailAddress
+ *   Email of the user who started the export task and should be notified by
+ *   email. If empty no notification will be sent.
  *
  * @typedef ExportDataRequest
  * @memberof google.cloud.datalabeling.v1beta1
@@ -195,9 +203,9 @@ const GetDataItemRequest = {
  * @property {string} pageToken
  *   Optional. A token identifying a page of results for the server to return.
  *   Typically obtained by
- *   ListDataItemsResponse.next_page_token of the previous
- *   [DataLabelingService.ListDataItems] call.
- *   Return first page if empty.
+ *   ListDataItemsResponse.next_page_token
+ *   of the previous [DataLabelingService.ListDataItems] call. Return first page
+ *   if empty.
  *
  * @typedef ListDataItemsRequest
  * @memberof google.cloud.datalabeling.v1beta1
@@ -259,31 +267,15 @@ const GetAnnotatedDatasetRequest = {
  * @property {string} pageToken
  *   Optional. A token identifying a page of results for the server to return.
  *   Typically obtained by
- *   ListAnnotatedDatasetsResponse.next_page_token of the previous
- *   [DataLabelingService.ListAnnotatedDatasets] call.
- *   Return first page if empty.
+ *   ListAnnotatedDatasetsResponse.next_page_token
+ *   of the previous [DataLabelingService.ListAnnotatedDatasets] call. Return
+ *   first page if empty.
  *
  * @typedef ListAnnotatedDatasetsRequest
  * @memberof google.cloud.datalabeling.v1beta1
  * @see [google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
  */
 const ListAnnotatedDatasetsRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
- * Request message for DeleteAnnotatedDataset.
- *
- * @property {string} name
- *   Required. Name of the annotated dataset to delete, format:
- *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
- *   {annotated_dataset_id}
- *
- * @typedef DeleteAnnotatedDatasetRequest
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
- */
-const DeleteAnnotatedDatasetRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
@@ -307,33 +299,49 @@ const ListAnnotatedDatasetsResponse = {
 };
 
 /**
+ * Request message for DeleteAnnotatedDataset.
+ *
+ * @property {string} name
+ *   Required. Name of the annotated dataset to delete, format:
+ *   projects/{project_id}/datasets/{dataset_id}/annotatedDatasets/
+ *   {annotated_dataset_id}
+ *
+ * @typedef DeleteAnnotatedDatasetRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const DeleteAnnotatedDatasetRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Request message for starting an image labeling task.
  *
  * @property {Object} imageClassificationConfig
  *   Configuration for image classification task.
  *   One of image_classification_config, bounding_poly_config,
- *   polyline_config and segmentation_config is required.
+ *   polyline_config and segmentation_config are required.
  *
  *   This object should have the same structure as [ImageClassificationConfig]{@link google.cloud.datalabeling.v1beta1.ImageClassificationConfig}
  *
  * @property {Object} boundingPolyConfig
  *   Configuration for bounding box and bounding poly task.
  *   One of image_classification_config, bounding_poly_config,
- *   polyline_config and segmentation_config is required.
+ *   polyline_config and segmentation_config are required.
  *
  *   This object should have the same structure as [BoundingPolyConfig]{@link google.cloud.datalabeling.v1beta1.BoundingPolyConfig}
  *
  * @property {Object} polylineConfig
  *   Configuration for polyline task.
  *   One of image_classification_config, bounding_poly_config,
- *   polyline_config and segmentation_config is required.
+ *   polyline_config and segmentation_config are required.
  *
  *   This object should have the same structure as [PolylineConfig]{@link google.cloud.datalabeling.v1beta1.PolylineConfig}
  *
  * @property {Object} segmentationConfig
  *   Configuration for segmentation task.
  *   One of image_classification_config, bounding_poly_config,
- *   polyline_config and segmentation_config is required.
+ *   polyline_config and segmentation_config are required.
  *
  *   This object should have the same structure as [SegmentationConfig]{@link google.cloud.datalabeling.v1beta1.SegmentationConfig}
  *
@@ -546,46 +554,6 @@ const LabelTextRequest = {
 };
 
 /**
- * Request message for LabelAudio.
- *
- * @property {string} parent
- *   Required. Name of the dataset to request labeling task, format:
- *   projects/{project_id}/datasets/{dataset_id}
- *
- * @property {Object} basicConfig
- *   Required. Basic human annotation config.
- *
- *   This object should have the same structure as [HumanAnnotationConfig]{@link google.cloud.datalabeling.v1beta1.HumanAnnotationConfig}
- *
- * @property {number} feature
- *   Required. The type of audio labeling task.
- *
- *   The number should be among the values of [Feature]{@link google.cloud.datalabeling.v1beta1.Feature}
- *
- * @typedef LabelAudioRequest
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.LabelAudioRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
- */
-const LabelAudioRequest = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-
-  /**
-   * Audio labeling task feature.
-   *
-   * @enum {number}
-   * @memberof google.cloud.datalabeling.v1beta1
-   */
-  Feature: {
-    FEATURE_UNSPECIFIED: 0,
-
-    /**
-     * Transcribe the audios into text.
-     */
-    AUDIO_TRANSCRIPTION: 1
-  }
-};
-
-/**
  * Request message for GetExample
  *
  * @property {string} name
@@ -625,9 +593,9 @@ const GetExampleRequest = {
  * @property {string} pageToken
  *   Optional. A token identifying a page of results for the server to return.
  *   Typically obtained by
- *   ListExamplesResponse.next_page_token of the previous
- *   [DataLabelingService.ListExamples] call.
- *   Return first page if empty.
+ *   ListExamplesResponse.next_page_token
+ *   of the previous [DataLabelingService.ListExamples] call. Return first page
+ *   if empty.
  *
  * @typedef ListExamplesRequest
  * @memberof google.cloud.datalabeling.v1beta1
@@ -710,9 +678,9 @@ const GetAnnotationSpecSetRequest = {
  * @property {string} pageToken
  *   Optional. A token identifying a page of results for the server to return.
  *   Typically obtained by
- *   ListAnnotationSpecSetsResponse.next_page_token of the previous
- *   [DataLabelingService.ListAnnotationSpecSets] call.
- *   Return first page if empty.
+ *   ListAnnotationSpecSetsResponse.next_page_token
+ *   of the previous [DataLabelingService.ListAnnotationSpecSets] call. Return
+ *   first page if empty.
  *
  * @typedef ListAnnotationSpecSetsRequest
  * @memberof google.cloud.datalabeling.v1beta1
@@ -823,9 +791,9 @@ const DeleteInstructionRequest = {
  * @property {string} pageToken
  *   Optional. A token identifying a page of results for the server to return.
  *   Typically obtained by
- *   ListInstructionsResponse.next_page_token of the previous
- *   [DataLabelingService.ListInstructions] call.
- *   Return first page if empty.
+ *   ListInstructionsResponse.next_page_token
+ *   of the previous [DataLabelingService.ListInstructions] call. Return first
+ *   page if empty.
  *
  * @typedef ListInstructionsRequest
  * @memberof google.cloud.datalabeling.v1beta1
@@ -851,5 +819,286 @@ const ListInstructionsRequest = {
  * @see [google.cloud.datalabeling.v1beta1.ListInstructionsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
  */
 const ListInstructionsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for GetEvaluation.
+ *
+ * @property {string} name
+ *   Required. Name of the evaluation. Format:
+ *   'projects/{project_id}/datasets/{dataset_id}/evaluations/{evaluation_id}'
+ *
+ * @typedef GetEvaluationRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.GetEvaluationRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const GetEvaluationRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for SearchEvaluation.
+ *
+ * @property {string} parent
+ *   Required. Evaluation search parent. Format:
+ *   projects/{project_id}
+ *
+ * @property {string} filter
+ *   Optional. Support filtering by model id, job state, start and end time.
+ *   Format:
+ *   "evaluation_job.evaluation_job_id = {evaluation_job_id} AND
+ *   evaluation_job.evaluation_job_run_time_start = {timestamp} AND
+ *   evaluation_job.evaluation_job_run_time_end = {timestamp} AND
+ *   annotation_spec.display_name = {display_name}"
+ *
+ * @property {number} pageSize
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ *
+ * @property {string} pageToken
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   SearchEvaluationsResponse.next_page_token
+ *   of the previous [DataLabelingService.SearchEvaluations] call. Return first
+ *   page if empty.
+ *
+ * @typedef SearchEvaluationsRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const SearchEvaluationsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Results of searching evaluations.
+ *
+ * @property {Object[]} evaluations
+ *   The list of evaluations to return.
+ *
+ *   This object should have the same structure as [Evaluation]{@link google.cloud.datalabeling.v1beta1.Evaluation}
+ *
+ * @property {string} nextPageToken
+ *   A token to retrieve next page of results.
+ *
+ * @typedef SearchEvaluationsResponse
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const SearchEvaluationsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message of SearchExampleComparisons.
+ *
+ * @property {string} parent
+ *   Required. Name of the Evaluation resource to search example comparison
+ *   from. Format:
+ *   projects/{project_id}/datasets/{dataset_id}/evaluations/{evaluation_id}
+ *
+ * @property {number} pageSize
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ *
+ * @property {string} pageToken
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   SearchExampleComparisons.next_page_token of the previous
+ *   [DataLabelingService.SearchExampleComparisons] call.
+ *   Return first page if empty.
+ *
+ * @typedef SearchExampleComparisonsRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const SearchExampleComparisonsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Results of searching example comparisons.
+ *
+ * @property {Object[]} exampleComparisons
+ *   This object should have the same structure as [ExampleComparison]{@link google.cloud.datalabeling.v1beta1.ExampleComparison}
+ *
+ * @property {string} nextPageToken
+ *   A token to retrieve next page of results.
+ *
+ * @typedef SearchExampleComparisonsResponse
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const SearchExampleComparisonsResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * Example comparisons containing annotation comparison between groundtruth
+   * and predictions.
+   *
+   * @property {Object} groundTruthExample
+   *   This object should have the same structure as [Example]{@link google.cloud.datalabeling.v1beta1.Example}
+   *
+   * @property {Object[]} modelCreatedExamples
+   *   This object should have the same structure as [Example]{@link google.cloud.datalabeling.v1beta1.Example}
+   *
+   * @typedef ExampleComparison
+   * @memberof google.cloud.datalabeling.v1beta1
+   * @see [google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.ExampleComparison definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+   */
+  ExampleComparison: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  }
+};
+
+/**
+ * Request message for CreateEvaluationJob.
+ *
+ * @property {string} parent
+ *   Required. Evaluation job resource parent, format:
+ *   projects/{project_id}.
+ *
+ * @property {Object} job
+ *   Required. The evaluation job to create.
+ *
+ *   This object should have the same structure as [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}
+ *
+ * @typedef CreateEvaluationJobRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const CreateEvaluationJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for UpdateEvaluationJob.
+ *
+ * @property {Object} evaluationJob
+ *   Required. Evaluation job that is going to be updated.
+ *
+ *   This object should have the same structure as [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}
+ *
+ * @property {Object} updateMask
+ *   Optional. Mask for which field in evaluation_job should be updated.
+ *
+ *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+ *
+ * @typedef UpdateEvaluationJobRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const UpdateEvaluationJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for GetEvaluationJob.
+ *
+ * @property {string} name
+ *   Required. Name of the evaluation job. Format:
+ *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+ *
+ * @typedef GetEvaluationJobRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const GetEvaluationJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for PauseEvaluationJob.
+ *
+ * @property {string} name
+ *   Required. Name of the evaluation job that is going to be paused. Format:
+ *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+ *
+ * @typedef PauseEvaluationJobRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const PauseEvaluationJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message ResumeEvaluationJob.
+ *
+ * @property {string} name
+ *   Required. Name of the evaluation job that is going to be resumed. Format:
+ *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+ *
+ * @typedef ResumeEvaluationJobRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const ResumeEvaluationJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message DeleteEvaluationJob.
+ *
+ * @property {string} name
+ *   Required. Name of the evaluation job that is going to be deleted. Format:
+ *   'projects/{project_id}/evaluationJobs/{evaluation_job_id}'
+ *
+ * @typedef DeleteEvaluationJobRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const DeleteEvaluationJobRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for ListEvaluationJobs.
+ *
+ * @property {string} parent
+ *   Required. Evaluation resource parent. Format:
+ *   "projects/{project_id}"
+ *
+ * @property {string} filter
+ *   Optional. Only support filter by model id and job state. Format:
+ *   "evaluation_job.model_id = {model_id} AND evaluation_job.state =
+ *   {EvaluationJob::State}"
+ *
+ * @property {number} pageSize
+ *   Optional. Requested page size. Server may return fewer results than
+ *   requested. Default value is 100.
+ *
+ * @property {string} pageToken
+ *   Optional. A token identifying a page of results for the server to return.
+ *   Typically obtained by
+ *   ListEvaluationJobs.next_page_token of the previous
+ *   [DataLabelingService.ListEvaluationJobs] call.
+ *   Return first page if empty.
+ *
+ * @typedef ListEvaluationJobsRequest
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const ListEvaluationJobsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Results for listing evaluation jobs.
+ *
+ * @property {Object[]} evaluationJobs
+ *   The list of evaluation jobs to return.
+ *
+ *   This object should have the same structure as [EvaluationJob]{@link google.cloud.datalabeling.v1beta1.EvaluationJob}
+ *
+ * @property {string} nextPageToken
+ *   A token to retrieve next page of results.
+ *
+ * @typedef ListEvaluationJobsResponse
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/data_labeling_service.proto}
+ */
+const ListEvaluationJobsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };

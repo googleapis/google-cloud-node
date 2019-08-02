@@ -87,6 +87,11 @@ const Annotation = {
  *
  *   This object should have the same structure as [TextClassificationAnnotation]{@link google.cloud.datalabeling.v1beta1.TextClassificationAnnotation}
  *
+ * @property {Object} textEntityExtractionAnnotation
+ *   Annotation value for text entity extraction case.
+ *
+ *   This object should have the same structure as [TextEntityExtractionAnnotation]{@link google.cloud.datalabeling.v1beta1.TextEntityExtractionAnnotation}
+ *
  * @property {Object} videoClassificationAnnotation
  *   Annotation value for video classification case.
  *
@@ -101,11 +106,6 @@ const Annotation = {
  *   Annotation value for video event case.
  *
  *   This object should have the same structure as [VideoEventAnnotation]{@link google.cloud.datalabeling.v1beta1.VideoEventAnnotation}
- *
- * @property {Object} audioRecognitionAnnotation
- *   Annotation value for speech audio recognition case.
- *
- *   This object should have the same structure as [AudioRecognitionAnnotation]{@link google.cloud.datalabeling.v1beta1.AudioRecognitionAnnotation}
  *
  * @typedef AnnotationValue
  * @memberof google.cloud.datalabeling.v1beta1
@@ -316,6 +316,44 @@ const TextClassificationAnnotation = {
 };
 
 /**
+ * Text entity extraction annotation.
+ *
+ * @property {Object} annotationSpec
+ *   Label of the text entities.
+ *
+ *   This object should have the same structure as [AnnotationSpec]{@link google.cloud.datalabeling.v1beta1.AnnotationSpec}
+ *
+ * @property {Object} sequentialSegment
+ *   Position of the entity.
+ *
+ *   This object should have the same structure as [SequentialSegment]{@link google.cloud.datalabeling.v1beta1.SequentialSegment}
+ *
+ * @typedef TextEntityExtractionAnnotation
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.TextEntityExtractionAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/annotation.proto}
+ */
+const TextEntityExtractionAnnotation = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Start and end position in a sequence (e.g. text segment).
+ *
+ * @property {number} start
+ *   Start position (inclusive).
+ *
+ * @property {number} end
+ *   End position (exclusive).
+ *
+ * @typedef SequentialSegment
+ * @memberof google.cloud.datalabeling.v1beta1
+ * @see [google.cloud.datalabeling.v1beta1.SequentialSegment definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/annotation.proto}
+ */
+const SequentialSegment = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * A time period inside of an example that has a time dimension (e.g. video).
  *
  * @property {Object} startTimeOffset
@@ -429,30 +467,6 @@ const VideoEventAnnotation = {
 };
 
 /**
- * Speech audio recognition.
- *
- * @property {string} transcript
- *   Transcript text representing the words spoken.
- *
- * @property {Object} startOffset
- *   Start position in audio file that the transcription corresponds to.
- *
- *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @property {Object} endOffset
- *   End position in audio file that the transcription corresponds to.
- *
- *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
- *
- * @typedef AudioRecognitionAnnotation
- * @memberof google.cloud.datalabeling.v1beta1
- * @see [google.cloud.datalabeling.v1beta1.AudioRecognitionAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datalabeling/v1beta1/annotation.proto}
- */
-const AudioRecognitionAnnotation = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Additional information associated with the annotation.
  *
  * @property {Object} operatorMetadata
@@ -483,6 +497,7 @@ const AnnotationMetadata = {
  *   The total number of contributors that choose this label.
  *
  * @property {string[]} comments
+ *   Comments from contributors.
  *
  * @typedef OperatorMetadata
  * @memberof google.cloud.datalabeling.v1beta1
@@ -584,11 +599,6 @@ const AnnotationType = {
   VIDEO_EVENT_ANNOTATION: 6,
 
   /**
-   * Speech to text annotation.
-   */
-  AUDIO_TRANSCRIPTION_ANNOTATION: 7,
-
-  /**
    * Classification for text.
    */
   TEXT_CLASSIFICATION_ANNOTATION: 8,
@@ -596,5 +606,10 @@ const AnnotationType = {
   /**
    * Entity extraction for text.
    */
-  TEXT_ENTITY_EXTRACTION_ANNOTATION: 9
+  TEXT_ENTITY_EXTRACTION_ANNOTATION: 9,
+
+  /**
+   * General classification.
+   */
+  GENERAL_CLASSIFICATION_ANNOTATION: 14
 };
