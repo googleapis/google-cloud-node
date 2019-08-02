@@ -20,6 +20,7 @@ objects to users via direct download.
 * [Samples](#samples)
   * [Acl](#acl)
   * [Bucket Lock](#bucket-lock)
+  * [Storage Get Bucket Metadata.](#storage-get-bucket-metadata.)
   * [Buckets](#buckets)
   * [Encryption](#encryption)
   * [Files](#files)
@@ -64,6 +65,25 @@ __Usage:__
 
 
 `node bucketLock.js`
+
+
+-----
+
+
+
+
+### Storage Get Bucket Metadata.
+
+Get bucket metadata.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/bucketMetadata.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/bucketMetadata.js,samples/README.md)
+
+__Usage:__
+
+
+`node bucketMetadata.js <BUCKET_NAME>`
 
 
 -----
