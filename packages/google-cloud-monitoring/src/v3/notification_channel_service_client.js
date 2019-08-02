@@ -156,6 +156,9 @@ class NotificationChannelServiceClient {
       'createNotificationChannel',
       'updateNotificationChannel',
       'deleteNotificationChannel',
+      'sendNotificationChannelVerificationCode',
+      'getNotificationChannelVerificationCode',
+      'verifyNotificationChannel',
     ];
     for (const methodName of notificationChannelServiceStubMethods) {
       this._innerApiCalls[methodName] = gax.createApiCall(
@@ -322,6 +325,7 @@ class NotificationChannelServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -444,6 +448,7 @@ class NotificationChannelServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -568,6 +573,7 @@ class NotificationChannelServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -704,6 +710,7 @@ class NotificationChannelServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -778,6 +785,7 @@ class NotificationChannelServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -845,6 +853,7 @@ class NotificationChannelServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -900,6 +909,7 @@ class NotificationChannelServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -910,6 +920,222 @@ class NotificationChannelServiceClient {
     });
 
     return this._innerApiCalls.deleteNotificationChannel(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Causes a verification code to be delivered to the channel. The code
+   * can then be supplied in `VerifyNotificationChannel` to verify the channel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The notification channel to which to send a verification code.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const monitoring = require('@google-cloud/monitoring');
+   *
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.notificationChannelPath('[PROJECT]', '[NOTIFICATION_CHANNEL]');
+   * client.sendNotificationChannelVerificationCode({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  sendNotificationChannelVerificationCode(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.sendNotificationChannelVerificationCode(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Requests a verification code for an already verified channel that can then
+   * be used in a call to VerifyNotificationChannel() on a different channel
+   * with an equivalent identity in the same or in a different project. This
+   * makes it possible to copy a channel between projects without requiring
+   * manual reverification of the channel. If the channel is not in the
+   * verified state, this method will fail (in other words, this may only be
+   * used if the SendNotificationChannelVerificationCode and
+   * VerifyNotificationChannel paths have already been used to put the given
+   * channel into the verified state).
+   *
+   * There is no guarantee that the verification codes returned by this method
+   * will be of a similar structure or form as the ones that are delivered
+   * to the channel via SendNotificationChannelVerificationCode; while
+   * VerifyNotificationChannel() will recognize both the codes delivered via
+   * SendNotificationChannelVerificationCode() and returned from
+   * GetNotificationChannelVerificationCode(), it is typically the case that
+   * the verification codes delivered via
+   * SendNotificationChannelVerificationCode() will be shorter and also
+   * have a shorter expiration (e.g. codes such as "G-123456") whereas
+   * GetVerificationCode() will typically return a much longer, websafe base
+   * 64 encoded string that has a longer expiration time.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The notification channel for which a verification code is to be generated
+   *   and retrieved. This must name a channel that is already verified; if
+   *   the specified channel is not verified, the request will fail.
+   * @param {Object} [request.expireTime]
+   *   The desired expiration time. If specified, the API will guarantee that
+   *   the returned code will not be valid after the specified timestamp;
+   *   however, the API cannot guarantee that the returned code will be
+   *   valid for at least as long as the requested time (the API puts an upper
+   *   bound on the amount of time for which a code may be valid). If omitted,
+   *   a default expiration will be used, which may be less than the max
+   *   permissible expiration (so specifying an expiration may extend the
+   *   code's lifetime over omitting an expiration, even though the API does
+   *   impose an upper limit on the maximum expiration that is permitted).
+   *
+   *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [GetNotificationChannelVerificationCodeResponse]{@link google.monitoring.v3.GetNotificationChannelVerificationCodeResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GetNotificationChannelVerificationCodeResponse]{@link google.monitoring.v3.GetNotificationChannelVerificationCodeResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const monitoring = require('@google-cloud/monitoring');
+   *
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.notificationChannelPath('[PROJECT]', '[NOTIFICATION_CHANNEL]');
+   * client.getNotificationChannelVerificationCode({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getNotificationChannelVerificationCode(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getNotificationChannelVerificationCode(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Verifies a `NotificationChannel` by proving receipt of the code
+   * delivered to the channel as a result of calling
+   * `SendNotificationChannelVerificationCode`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The notification channel to verify.
+   * @param {string} request.code
+   *   The verification code that was delivered to the channel as
+   *   a result of invoking the `SendNotificationChannelVerificationCode` API
+   *   method or that was retrieved from a verified channel via
+   *   `GetNotificationChannelVerificationCode`. For example, one might have
+   *   "G-123456" or "TKNZGhhd2EyN3I1MnRnMjRv" (in general, one is only
+   *   guaranteed that the code is valid UTF-8; one should not
+   *   make any assumptions regarding the structure or format of the code).
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NotificationChannel]{@link google.monitoring.v3.NotificationChannel}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const monitoring = require('@google-cloud/monitoring');
+   *
+   * const client = new monitoring.v3.NotificationChannelServiceClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.notificationChannelPath('[PROJECT]', '[NOTIFICATION_CHANNEL]');
+   * const code = '';
+   * const request = {
+   *   name: formattedName,
+   *   code: code,
+   * };
+   * client.verifyNotificationChannel(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  verifyNotificationChannel(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.verifyNotificationChannel(
       request,
       options,
       callback

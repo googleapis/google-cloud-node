@@ -1832,6 +1832,211 @@ describe('NotificationChannelServiceClient', () => {
       });
     });
   });
+
+  describe('sendNotificationChannelVerificationCode', () => {
+    it('invokes sendNotificationChannelVerificationCode without error', done => {
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.sendNotificationChannelVerificationCode = mockSimpleGrpcMethod(
+        request
+      );
+
+      client.sendNotificationChannelVerificationCode(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes sendNotificationChannelVerificationCode with error', done => {
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.sendNotificationChannelVerificationCode = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.sendNotificationChannelVerificationCode(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('getNotificationChannelVerificationCode', () => {
+    it('invokes getNotificationChannelVerificationCode without error', done => {
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const code = 'code3059181';
+      const expectedResponse = {
+        code: code,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getNotificationChannelVerificationCode = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getNotificationChannelVerificationCode(
+        request,
+        (err, response) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(response, expectedResponse);
+          done();
+        }
+      );
+    });
+
+    it('invokes getNotificationChannelVerificationCode with error', done => {
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getNotificationChannelVerificationCode = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getNotificationChannelVerificationCode(
+        request,
+        (err, response) => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          assert(typeof response === 'undefined');
+          done();
+        }
+      );
+    });
+  });
+
+  describe('verifyNotificationChannel', () => {
+    it('invokes verifyNotificationChannel without error', done => {
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      const code = 'code3059181';
+      const request = {
+        name: formattedName,
+        code: code,
+      };
+
+      // Mock response
+      const type = 'type3575610';
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
+        type: type,
+        name: name2,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.verifyNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.verifyNotificationChannel(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes verifyNotificationChannel with error', done => {
+      const client = new monitoringModule.v3.NotificationChannelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.notificationChannelPath(
+        '[PROJECT]',
+        '[NOTIFICATION_CHANNEL]'
+      );
+      const code = 'code3059181';
+      const request = {
+        name: formattedName,
+        code: code,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.verifyNotificationChannel = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.verifyNotificationChannel(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
 });
 describe('UptimeCheckServiceClient', () => {
   it('has servicePath', () => {
