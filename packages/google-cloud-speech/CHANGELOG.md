@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.2.5](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.4...v3.2.5) (2019-08-02)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([61349c0](https://www.github.com/googleapis/nodejs-speech/commit/61349c0))
+
 ### [3.2.4](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.3...v3.2.4) (2019-07-29)
 
 
