@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.1.3...v1.1.4) (2019-08-02)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([0030bcd](https://www.github.com/googleapis/nodejs-web-risk/commit/0030bcd))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-web-risk/compare/v1.1.2...v1.1.3) (2019-06-27)
 
 
