@@ -507,14 +507,19 @@ const FaceAnnotation = {
  *   Video file location in
  *   [Google Cloud Storage](https://cloud.google.com/storage/).
  *
+ * @property {Object} segment
+ *   Video segment on which the annotation is run.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1.VideoSegment}
+ *
  * @property {Object[]} segmentLabelAnnotations
- *   Label annotations on video level or user specified segment level.
+ *   Topical label annotations on video level or user specified segment level.
  *   There is exactly one element for each unique label.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
  *
  * @property {Object[]} shotLabelAnnotations
- *   Label annotations on shot level.
+ *   Topical label annotations on shot level.
  *   There is exactly one element for each unique label.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
@@ -609,6 +614,18 @@ const AnnotateVideoResponse = {
  *   Time of the most recent update.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {number} feature
+ *   Specifies which feature is being tracked if the request contains more than
+ *   one features.
+ *
+ *   The number should be among the values of [Feature]{@link google.cloud.videointelligence.v1.Feature}
+ *
+ * @property {Object} segment
+ *   Specifies which segment is being tracked if the request contains more than
+ *   one segments.
+ *
+ *   This object should have the same structure as [VideoSegment]{@link google.cloud.videointelligence.v1.VideoSegment}
  *
  * @typedef VideoAnnotationProgress
  * @memberof google.cloud.videointelligence.v1
@@ -756,15 +773,17 @@ const SpeechTranscription = {
  *   Transcript text representing the words that the user spoke.
  *
  * @property {number} confidence
- *   The confidence estimate between 0.0 and 1.0. A higher number
+ *   Output only. The confidence estimate between 0.0 and 1.0. A higher number
  *   indicates an estimated greater likelihood that the recognized words are
- *   correct. This field is typically provided only for the top hypothesis, and
- *   only for `is_final=true` results. Clients should not rely on the
- *   `confidence` field as it is not guaranteed to be accurate or consistent.
+ *   correct. This field is set only for the top alternative.
+ *   This field is not guaranteed to be accurate and users should not rely on it
+ *   to be always provided.
  *   The default of 0.0 is a sentinel value indicating `confidence` was not set.
  *
  * @property {Object[]} words
- *   A list of word-specific information for each recognized word.
+ *   Output only. A list of word-specific information for each recognized word.
+ *   Note: When `enable_speaker_diarization` is true, you will see all the words
+ *   from the beginning of the audio.
  *
  *   This object should have the same structure as [WordInfo]{@link google.cloud.videointelligence.v1.WordInfo}
  *
