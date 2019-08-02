@@ -354,6 +354,7 @@ class VideoIntelligenceServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.annotateVideo(request, options, callback);
