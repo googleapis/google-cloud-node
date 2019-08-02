@@ -241,6 +241,7 @@ class WebRiskServiceV1Beta1Client {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.computeThreatListDiff(
@@ -300,6 +301,7 @@ class WebRiskServiceV1Beta1Client {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.searchUris(request, options, callback);
@@ -355,6 +357,7 @@ class WebRiskServiceV1Beta1Client {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.searchHashes(request, options, callback);
