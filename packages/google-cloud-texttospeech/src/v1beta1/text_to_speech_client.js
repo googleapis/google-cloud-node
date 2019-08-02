@@ -230,6 +230,7 @@ class TextToSpeechClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.listVoices(request, options, callback);
@@ -294,6 +295,7 @@ class TextToSpeechClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.synthesizeSpeech(request, options, callback);
