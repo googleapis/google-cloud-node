@@ -229,6 +229,7 @@ class ImageAnnotatorClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.batchAnnotateImages(request, options, callback);

@@ -288,6 +288,7 @@ class ImageAnnotatorClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.batchAnnotateImages(request, options, callback);
@@ -343,6 +344,7 @@ class ImageAnnotatorClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.batchAnnotateFiles(request, options, callback);
@@ -462,6 +464,7 @@ class ImageAnnotatorClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.asyncBatchAnnotateImages(
@@ -563,6 +566,7 @@ class ImageAnnotatorClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.asyncBatchAnnotateFiles(
