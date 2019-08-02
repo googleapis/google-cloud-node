@@ -246,6 +246,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -310,6 +311,7 @@ class RecaptchaEnterpriseServiceV1Beta1Client {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
