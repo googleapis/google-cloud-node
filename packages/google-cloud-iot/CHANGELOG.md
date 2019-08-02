@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-iot/compare/v1.1.2...v1.1.3) (2019-08-02)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([9449e5a](https://www.github.com/googleapis/nodejs-iot/commit/9449e5a))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-iot/compare/v1.1.1...v1.1.2) (2019-06-27)
 
 
