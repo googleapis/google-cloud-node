@@ -373,6 +373,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.searchCatalog(request, options, callback);
@@ -521,6 +522,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -575,6 +577,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -649,6 +652,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.lookupEntry(request, options, callback);
@@ -711,6 +715,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -765,6 +770,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -832,6 +838,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -887,6 +894,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -960,6 +968,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1042,6 +1051,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1108,6 +1118,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1167,6 +1178,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1238,6 +1250,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1299,6 +1312,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1345,6 +1359,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1447,6 +1462,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1578,6 +1594,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1648,6 +1665,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1723,6 +1741,7 @@ class DataCatalogClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
