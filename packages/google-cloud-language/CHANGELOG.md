@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [3.2.6](https://www.github.com/googleapis/nodejs-language/compare/v3.2.5...v3.2.6) (2019-08-03)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([#282](https://www.github.com/googleapis/nodejs-language/issues/282)) ([c358df9](https://www.github.com/googleapis/nodejs-language/commit/c358df9))
+
 ### [3.2.5](https://www.github.com/googleapis/nodejs-language/compare/v3.2.4...v3.2.5) (2019-07-26)
 
 
