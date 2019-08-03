@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.3.1...v1.3.2) (2019-08-03)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([4483e7e](https://www.github.com/googleapis/nodejs-containeranalysis/commit/4483e7e))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.3.0...v1.3.1) (2019-07-29)
 
 
