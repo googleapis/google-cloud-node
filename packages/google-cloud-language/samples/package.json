@@ -17,7 +17,7 @@
   "dependencies": {
     "@google-cloud/automl": "^1.0.0",
     "mathjs": "^6.0.0",
-    "@google-cloud/language": "^3.2.5",
+    "@google-cloud/language": "^3.2.6",
     "@google-cloud/storage": "^3.0.0",
     "yargs": "^13.0.0"
   },
