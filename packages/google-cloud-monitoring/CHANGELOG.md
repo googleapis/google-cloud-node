@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [1.2.3](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.2.2...v1.2.3) (2019-08-03)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([3a8a89b](https://www.github.com/googleapis/nodejs-monitoring/commit/3a8a89b))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.2.1...v1.2.2) (2019-06-26)
 
 
