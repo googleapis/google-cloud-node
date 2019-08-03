@@ -239,6 +239,7 @@ class LanguageServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.analyzeSentiment(request, options, callback);
@@ -293,6 +294,7 @@ class LanguageServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.analyzeEntities(request, options, callback);
@@ -346,6 +348,7 @@ class LanguageServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.analyzeEntitySentiment(
@@ -404,6 +407,7 @@ class LanguageServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.analyzeSyntax(request, options, callback);
@@ -452,6 +456,7 @@ class LanguageServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.classifyText(request, options, callback);
@@ -514,6 +519,7 @@ class LanguageServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
 
     return this._innerApiCalls.annotateText(request, options, callback);
