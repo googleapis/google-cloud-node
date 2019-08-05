@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-vision/compare/v1.1.3...v1.1.4) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([55c0380](https://www.github.com/googleapis/nodejs-vision/commit/55c0380))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-vision/compare/v1.1.2...v1.1.3) (2019-06-26)
 
 

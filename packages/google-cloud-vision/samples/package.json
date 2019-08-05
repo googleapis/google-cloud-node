@@ -13,7 +13,7 @@
     "test": "mocha system-test --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/vision": "^1.1.3",
+    "@google-cloud/vision": "^1.1.4",
     "mathjs": "^6.0.0",
     "natural": "^0.6.1",
     "redis": "^2.8.0",
