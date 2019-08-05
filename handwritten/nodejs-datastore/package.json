@@ -39,8 +39,9 @@
     "compile": "tsc -p . && cp -r src/v1 build/src && cp -r proto* build && cp test/*.js build/test",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "proto": "npm run proto:datastore",
+    "proto": "npm run proto:datastore && npm run proto:appenginekey",
     "proto:datastore": "mkdir -p proto && pbjs -t static-module -w commonjs -p node_modules/google-proto-files google/datastore/v1/datastore.proto | pbts -i long -o proto/datastore.d.ts -",
+    "proto:appenginekey": "mkdir -p proto && pbjs -t static-module -w commonjs protos/app_engine_key.proto | pbts -o proto/app_engine_key.d.ts -",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs"
   },
