@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [1.2.4](https://www.github.com/googleapis/nodejs-automl/compare/v1.2.3...v1.2.4) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([c7bec4d](https://www.github.com/googleapis/nodejs-automl/commit/c7bec4d))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-automl/compare/v1.2.2...v1.2.3) (2019-07-29)
 
 
