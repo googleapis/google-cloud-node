@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-kms/compare/v1.3.0...v1.3.1) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([e50e0ef](https://www.github.com/googleapis/nodejs-kms/commit/e50e0ef))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.2.1...v1.3.0) (2019-07-02)
 
 
