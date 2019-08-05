@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-os-login/compare/v1.1.2...v1.1.3) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([f8f02ba](https://www.github.com/googleapis/nodejs-os-login/commit/f8f02ba))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-os-login/compare/v1.1.1...v1.1.2) (2019-06-26)
 
 
