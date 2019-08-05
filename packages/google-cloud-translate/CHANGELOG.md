@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [4.1.3](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.2...v4.1.3) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([#313](https://www.github.com/googleapis/nodejs-translate/issues/313)) ([01afc09](https://www.github.com/googleapis/nodejs-translate/commit/01afc09))
+
 ### [4.1.2](https://www.github.com/googleapis/nodejs-translate/compare/v4.1.1...v4.1.2) (2019-07-23)
 
 
