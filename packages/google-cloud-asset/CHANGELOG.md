@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-asset/compare/v1.1.3...v1.1.4) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([0015fbe](https://www.github.com/googleapis/nodejs-asset/commit/0015fbe))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-asset/compare/v1.1.2...v1.1.3) (2019-07-29)
 
 
