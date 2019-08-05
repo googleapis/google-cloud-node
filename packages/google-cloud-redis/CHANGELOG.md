@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-redis/compare/v1.1.3...v1.1.4) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([5d3616b](https://www.github.com/googleapis/nodejs-redis/commit/5d3616b))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-redis/compare/v1.1.2...v1.1.3) (2019-06-26)
 
 
