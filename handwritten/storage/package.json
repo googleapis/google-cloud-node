@@ -47,7 +47,8 @@
     "fix": "gts fix && eslint --fix '**/*.js'",
     "prepare": "npm run compile",
     "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs"
+    "predocs-test": "npm run docs",
+    "benchwrapper": "node bin/benchwrapper.js"
   },
   "dependencies": {
     "@google-cloud/common": "^2.0.0",
@@ -74,6 +75,7 @@
   },
   "devDependencies": {
     "@google-cloud/pubsub": "^0.30.0",
+    "@grpc/proto-loader": "^0.5.1",
     "@types/compressible": "^2.0.0",
     "@types/concat-stream": "^1.6.0",
     "@types/configstore": "^4.0.0",
@@ -97,6 +99,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^9.0.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "grpc": "^1.22.2",
     "gts": "^1.0.0",
     "intelli-espower-loader": "^1.0.1",
     "jsdoc": "^3.6.2",
@@ -114,6 +117,7 @@
     "source-map-support": "^0.5.6",
     "tmp": "^0.1.0",
     "typescript": "~3.5.0",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "yargs": "^13.3.0"
   }
 }
