@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.1.4](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.3...v2.1.4) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([631b896](https://www.github.com/googleapis/nodejs-grafeas/commit/631b896))
+
 ### [2.1.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.2...v2.1.3) (2019-07-29)
 
 
