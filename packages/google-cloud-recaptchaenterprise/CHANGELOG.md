@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.1.2...v1.1.3) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([ab643f8](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/ab643f8))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.1.1...v1.1.2) (2019-06-26)
 
 
