@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.0.1...v1.0.2) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([9a38026](https://www.github.com/googleapis/nodejs-datacatalog/commit/9a38026))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.0.0...v1.0.1) (2019-06-26)
 
 
