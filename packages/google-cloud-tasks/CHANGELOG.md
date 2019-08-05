@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.2.0...v1.2.1) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([01198ea](https://www.github.com/googleapis/nodejs-tasks/commit/01198ea))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.1.2...v1.2.0) (2019-07-02)
 
 
