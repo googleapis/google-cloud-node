@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-security-center/compare/v2.0.0...v2.0.1) (2019-08-05)
+
+
+### Bug Fixes
+
+* allow calls with no request, add JSON proto ([63e4855](https://www.github.com/googleapis/nodejs-security-center/commit/63e4855))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-security-center/compare/v1.0.0...v2.0.0) (2019-07-23)
 
 
