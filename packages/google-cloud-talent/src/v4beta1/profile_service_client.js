@@ -322,6 +322,7 @@ class ProfileServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -455,6 +456,7 @@ class ProfileServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -512,6 +514,7 @@ class ProfileServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -599,6 +602,7 @@ class ProfileServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -650,6 +654,7 @@ class ProfileServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -833,9 +838,11 @@ class ProfileServiceClient {
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {string} [request.resultSetId]
    *   Optional. An id that uniquely identifies the result set of a
-   *   SearchProfiles call.  The id should be retrieved from the
+   *   SearchProfiles
+   *   call. The id should be retrieved from the
    *   SearchProfilesResponse
-   *   message returned from a previous invocation of SearchProfiles.
+   *   message returned from a previous invocation of
+   *   SearchProfiles.
    *
    *   A result set is an ordered list of search results.
    *
@@ -848,8 +855,10 @@ class ProfileServiceClient {
    *   If this field is set, the service will ignore the resource and
    *   profile_query
    *   values, and simply retrieve a page of results from the corresponding result
-   *   set.  In this case, one and only one of [page_token] or [offset] must be
-   *   set.
+   *   set.  In this case, one and only one of
+   *   page_token
+   *   or offset must
+   *   be set.
    *
    *   A typical use case is to invoke
    *   SearchProfilesRequest
@@ -858,6 +867,20 @@ class ProfileServiceClient {
    *   in
    *   SearchProfilesResponse
    *   to page through the results.
+   * @param {boolean} [request.strictKeywordsSearch]
+   *   Optional. This flag is used to indicate whether the service will attempt to
+   *   understand synonyms and terms related to the search query or treat the
+   *   query "as is" when it generates a set of results. By default this flag is
+   *   set to false, thus allowing expanded results to also be returned. For
+   *   example a search for "software engineer" might also return candidates who
+   *   have experience in jobs similar to software engineer positions. By setting
+   *   this flag to true, the service will only attempt to deliver candidates has
+   *   software engineer in his/her global fields by treating "software engineer"
+   *   as a keyword.
+   *
+   *   It is recommended to provide a feature in the UI (such as a checkbox) to
+   *   allow recruiters to set this flag to true if they intend to search for
+   *   longer boolean strings.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -944,6 +967,7 @@ class ProfileServiceClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1130,9 +1154,11 @@ class ProfileServiceClient {
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {string} [request.resultSetId]
    *   Optional. An id that uniquely identifies the result set of a
-   *   SearchProfiles call.  The id should be retrieved from the
+   *   SearchProfiles
+   *   call. The id should be retrieved from the
    *   SearchProfilesResponse
-   *   message returned from a previous invocation of SearchProfiles.
+   *   message returned from a previous invocation of
+   *   SearchProfiles.
    *
    *   A result set is an ordered list of search results.
    *
@@ -1145,8 +1171,10 @@ class ProfileServiceClient {
    *   If this field is set, the service will ignore the resource and
    *   profile_query
    *   values, and simply retrieve a page of results from the corresponding result
-   *   set.  In this case, one and only one of [page_token] or [offset] must be
-   *   set.
+   *   set.  In this case, one and only one of
+   *   page_token
+   *   or offset must
+   *   be set.
    *
    *   A typical use case is to invoke
    *   SearchProfilesRequest
@@ -1155,6 +1183,20 @@ class ProfileServiceClient {
    *   in
    *   SearchProfilesResponse
    *   to page through the results.
+   * @param {boolean} [request.strictKeywordsSearch]
+   *   Optional. This flag is used to indicate whether the service will attempt to
+   *   understand synonyms and terms related to the search query or treat the
+   *   query "as is" when it generates a set of results. By default this flag is
+   *   set to false, thus allowing expanded results to also be returned. For
+   *   example a search for "software engineer" might also return candidates who
+   *   have experience in jobs similar to software engineer positions. By setting
+   *   this flag to true, the service will only attempt to deliver candidates has
+   *   software engineer in his/her global fields by treating "software engineer"
+   *   as a keyword.
+   *
+   *   It is recommended to provide a feature in the UI (such as a checkbox) to
+   *   allow recruiters to set this flag to true if they intend to search for
+   *   longer boolean strings.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

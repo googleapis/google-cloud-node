@@ -328,7 +328,7 @@ const DeviceInfo = {
  *   `CASE_INSENSITIVE_MATCH`) search.
  *   For filterable `string_value`s, a maximum total number of 200 values
  *   is allowed, with each `string_value` has a byte size of no more than
- *   255B. For unfilterable `string_values`, the maximum total byte size of
+ *   500B. For unfilterable `string_values`, the maximum total byte size of
  *   unfilterable `string_values` is 50KB.
  *
  *   Empty string isn't allowed.

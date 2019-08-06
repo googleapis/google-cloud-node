@@ -29,7 +29,9 @@
  *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
  *
  * @property {string} externalId
- *   Optional. Profile's id in client system if available.
+ *   Optional. Profile's id in client system if available. This value is not
+ *   required to be unique to each profile. However, providing unique values
+ *   makes it easier to specify individual profiles when filing support tickets.
  *
  *   The maximum number of bytes allowed is 100.
  *
@@ -90,7 +92,34 @@
  *   This object should have the same structure as [PersonName]{@link google.cloud.talent.v4beta1.PersonName}
  *
  * @property {Object[]} addresses
- *   Optional. The candidate's postal addresses.
+ *   Optional. The candidate's postal addresses. It's highly recommended to
+ *   input this information as accurately as possible to help improve search
+ *   quality. Here are some recommendations:
+ *
+ *   * Provide Address.usage if
+ *   possible, especially if the address is PERSONAL. During a search only
+ *   personal addresses are considered. If there is no such address, all
+ *   addresses with unspecified usage are assumed to be personal.
+ *   * Provide Address.current
+ *   for the current address if possible. During a search, only current
+ *   addresses are considered. If there is no such address, all addresses are
+ *   assumed to be current.
+ *
+ *   When displaying a candidate's addresses, it is sometimes desirable to limit
+ *   the number of addresses shown. In these cases we recommend that you display
+ *   the addresses in the following order of priority:
+ *   1. Address.usage is PERSONAL
+ *   and Address.current is true.
+ *   2. Address.usage is PERSONAL
+ *   and Address.current is false
+ *   or not set.
+ *   3. Address.usage is
+ *   CONTACT_INFO_USAGE_UNSPECIFIED and
+ *   Address.current is true.
+ *   4. Address.usage is
+ *   CONTACT_INFO_USAGE_UNSPECIFIED and
+ *   Address.current is false or
+ *   not set.
  *
  *   This object should have the same structure as [Address]{@link google.cloud.talent.v4beta1.Address}
  *
@@ -134,6 +163,8 @@
  *   for the current employment if possible. If not, it's inferred from user
  *   inputs.
  *
+ *   The limitation for max number of employment records is 100.
+ *
  *   This object should have the same structure as [EmploymentRecord]{@link google.cloud.talent.v4beta1.EmploymentRecord}
  *
  * @property {Object[]} educationRecords
@@ -150,11 +181,15 @@
  *   for the current education if possible. If not, it's inferred from user
  *   inputs.
  *
+ *   The limitation for max number of education records is 100.
+ *
  *   This object should have the same structure as [EducationRecord]{@link google.cloud.talent.v4beta1.EducationRecord}
  *
  * @property {Object[]} skills
  *   Optional. The skill set of the candidate. It's highly recommended to
  *   provide as much information as possible to help improve the search quality.
+ *
+ *   The limitation for max number of skills is 500.
  *
  *   This object should have the same structure as [Skill]{@link google.cloud.talent.v4beta1.Skill}
  *
@@ -164,10 +199,14 @@
  *   that aren't listed in
  *   employment_records.
  *
+ *   The limitation for max number of activities is 50.
+ *
  *   This object should have the same structure as [Activity]{@link google.cloud.talent.v4beta1.Activity}
  *
  * @property {Object[]} publications
  *   Optional. The publications published by the candidate.
+ *
+ *   The limitation for max number of publications is 50.
  *
  *   This object should have the same structure as [Publication]{@link google.cloud.talent.v4beta1.Publication}
  *
@@ -218,6 +257,17 @@
  *   search query.  This is only returned in
  *   SearchProfilesResponse.
  *
+ * @property {Object[]} derivedAddresses
+ *   Output only. Derived locations of the profile, resolved from
+ *   Profile.addresses.
+ *
+ *   derived_addresses
+ *   are exactly matched to
+ *   Profile.addresses in the
+ *   same order.
+ *
+ *   This object should have the same structure as [Location]{@link google.cloud.talent.v4beta1.Location}
+ *
  * @typedef Profile
  * @memberof google.cloud.talent.v4beta1
  * @see [google.cloud.talent.v4beta1.Profile definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/profile.proto}
@@ -234,16 +284,14 @@ const Profile = {
  *   resume_type is
  *   HRXML. For example,
  *   the API parses this field and creates a profile with all structured fields
- *   populated, for example.
+ *   populated.
  *   EmploymentRecord,
  *   EducationRecord, and so on.
  *   An error is thrown if this field cannot be parsed.
  *
- *   If this field is provided during profile creation or update,
- *   any other structured data provided in the profile is ignored. The
- *   API populates these fields by parsing this field. Note that the use of the
- *   functionality offered by this field to extract data from resumes is an
- *   Alpha feature and as such is not covered by any SLA.
+ *   Note that the use of the functionality offered by this field to extract
+ *   data from resumes is an Alpha feature and as such is not covered by any
+ *   SLA.
  *
  * @property {number} resumeType
  *   Optional. The format of
@@ -592,7 +640,7 @@ const AdditionalContactInfo = {
  *
  *   For example, "Google", "Alphabet", and so on.
  *
- *   Number of characters allowed is 100.
+ *   Number of characters allowed is 250.
  *
  * @property {string} divisionName
  *   Optional. The division name of the employment.
@@ -611,7 +659,7 @@ const AdditionalContactInfo = {
  *
  *   For example, "Software Engineer", "Data Scientist", and so on.
  *
- *   Number of characters allowed is 100.
+ *   Number of characters allowed is 250.
  *
  * @property {string} jobDescription
  *   Optional. The description of job content.
@@ -685,7 +733,7 @@ const EmploymentRecord = {
  *
  *   For example, "Stanford University", "UC Berkeley", and so on.
  *
- *   Number of characters allowed is 100.
+ *   Number of characters allowed is 250.
  *
  * @property {Object} address
  *   Optional. The physical address of the education institution.
@@ -801,8 +849,12 @@ const Degree = {
  *
  *   Number of characters allowed is 100.
  *
+ *   The limitation for max number of team members is 50.
+ *
  * @property {Object[]} skillsUsed
  *   Optional. A list of skills used in this activity.
+ *
+ *   The limitation for max number of skills used is 50.
  *
  *   This object should have the same structure as [Skill]{@link google.cloud.talent.v4beta1.Skill}
  *

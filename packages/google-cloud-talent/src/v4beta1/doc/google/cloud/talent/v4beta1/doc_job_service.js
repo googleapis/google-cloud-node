@@ -918,9 +918,10 @@ const BatchCreateJobsRequest = {
  *   If
  *   update_mask
  *   is provided, The Job inside
- *   JobResult will only contains fields that is updated, plus the Id of the
- *   Job. Otherwise,  Job will include all
- *   fields, which can yield a very large response.
+ *   JobResult
+ *   will only contains fields that is updated, plus the Id of the Job.
+ *   Otherwise,  Job will include all fields,
+ *   which can yield a very large response.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
