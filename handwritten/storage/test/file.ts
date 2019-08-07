@@ -1511,6 +1511,7 @@ describe('File', () => {
 
     it('should create a resumable upload URI', done => {
       const options = {
+        configPath: '/Users/user/.config/here',
         metadata: {
           contentType: 'application/json',
         },
@@ -1533,6 +1534,7 @@ describe('File', () => {
 
           assert.strictEqual(opts.authClient, storage.authClient);
           assert.strictEqual(opts.bucket, bucket.name);
+          assert.strictEqual(opts.configPath, options.configPath);
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
           assert.strictEqual(opts.key, file.encryptionKey);
@@ -3671,6 +3673,7 @@ describe('File', () => {
     describe('starting', () => {
       it('should start a resumable upload', done => {
         const options = {
+          configPath: '/Users/user/.config/here',
           metadata: {},
           offset: 1234,
           public: true,
@@ -3693,6 +3696,7 @@ describe('File', () => {
 
             assert.strictEqual(opts.authClient, authClient);
             assert.strictEqual(opts.bucket, bucket.name);
+            assert.strictEqual(opts.configPath, options.configPath);
             assert.strictEqual(opts.file, file.name);
             assert.strictEqual(opts.generation, file.generation);
             assert.strictEqual(opts.key, file.encryptionKey);
