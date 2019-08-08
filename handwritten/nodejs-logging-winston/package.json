@@ -59,7 +59,7 @@
     "winston-transport": "^4.3.0"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "1.1.8",
+    "@compodoc/compodoc": "^1.1.10",
     "@google-cloud/common": "^2.0.0",
     "@types/lodash.mapvalues": "^4.6.6",
     "@types/mocha": "^5.2.7",
