@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.2.0...v1.3.0) (2019-08-08)
+
+
+### Features
+
+* allow calls with no request; adds JSON proto; introduces PersonNameFilter ([51b0a58](https://www.github.com/googleapis/nodejs-talent/commit/51b0a58))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.1.0...v1.2.0) (2019-07-16)
 
 
