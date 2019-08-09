@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.4...v3.1.0) (2019-08-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/paginator to v2 ([#781](https://www.github.com/googleapis/nodejs-storage/issues/781)) ([23244e9](https://www.github.com/googleapis/nodejs-storage/commit/23244e9))
+* **deps:** update dependency @google-cloud/pubsub to ^0.30.0 ([#778](https://www.github.com/googleapis/nodejs-storage/issues/778)) ([7256650](https://www.github.com/googleapis/nodejs-storage/commit/7256650))
+* allow calls with no request, add JSON proto ([30fff15](https://www.github.com/googleapis/nodejs-storage/commit/30fff15))
+* **deps:** update dependency date-and-time to ^0.8.0 ([#779](https://www.github.com/googleapis/nodejs-storage/issues/779)) ([ab2734d](https://www.github.com/googleapis/nodejs-storage/commit/ab2734d))
+* **deps:** upgrade @google-cloud/common version to show original… ([#795](https://www.github.com/googleapis/nodejs-storage/issues/795)) ([ea63cbe](https://www.github.com/googleapis/nodejs-storage/commit/ea63cbe))
+* **deps:** use the latest extend ([#800](https://www.github.com/googleapis/nodejs-storage/issues/800)) ([a7f0172](https://www.github.com/googleapis/nodejs-storage/commit/a7f0172))
+
+
+### Features
+
+* **file:** allow setting configPath of resumable upload ([#642](https://www.github.com/googleapis/nodejs-storage/issues/642)) ([a8ceb78](https://www.github.com/googleapis/nodejs-storage/commit/a8ceb78))
+
 ### [3.0.4](https://www.github.com/googleapis/nodejs-storage/compare/v3.0.3...v3.0.4) (2019-07-25)
 
 
