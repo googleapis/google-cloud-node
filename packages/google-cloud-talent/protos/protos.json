@@ -10,75 +10,126 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/talent/v4beta1;talent",
                     "java_multiple_files": true,
-                    "java_outer_classname": "TenantServiceProto",
+                    "java_outer_classname": "CompletionServiceProto",
                     "java_package": "com.google.cloud.talent.v4beta1",
                     "objc_class_prefix": "CTS"
                   },
                   "nested": {
-                    "Company": {
+                    "TenantService": {
+                      "options": {
+                        "(google.api.default_host)": "jobs.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
+                      },
+                      "methods": {
+                        "CreateTenant": {
+                          "requestType": "CreateTenantRequest",
+                          "responseType": "Tenant",
+                          "options": {
+                            "(google.api.http).post": "/v4beta1/{parent=projects/*}/tenants",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "GetTenant": {
+                          "requestType": "GetTenantRequest",
+                          "responseType": "Tenant",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*}"
+                          }
+                        },
+                        "UpdateTenant": {
+                          "requestType": "UpdateTenantRequest",
+                          "responseType": "Tenant",
+                          "options": {
+                            "(google.api.http).patch": "/v4beta1/{tenant.name=projects/*/tenants/*}",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "DeleteTenant": {
+                          "requestType": "DeleteTenantRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*}"
+                          }
+                        },
+                        "ListTenants": {
+                          "requestType": "ListTenantsRequest",
+                          "responseType": "ListTenantsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*}/tenants"
+                          }
+                        }
+                      }
+                    },
+                    "CreateTenantRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tenant": {
+                          "type": "Tenant",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetTenantRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "UpdateTenantRequest": {
+                      "fields": {
+                        "tenant": {
+                          "type": "Tenant",
+                          "id": 1
                         },
-                        "displayName": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteTenantRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListTenantsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageToken": {
                           "type": "string",
                           "id": 2
                         },
-                        "externalId": {
-                          "type": "string",
+                        "pageSize": {
+                          "type": "int32",
                           "id": 3
-                        },
-                        "size": {
-                          "type": "CompanySize",
-                          "id": 4
-                        },
-                        "headquartersAddress": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "hiringAgency": {
-                          "type": "bool",
-                          "id": 6
-                        },
-                        "eeoText": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "websiteUri": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "careerSiteUri": {
-                          "type": "string",
-                          "id": 9
-                        },
-                        "imageUri": {
-                          "type": "string",
-                          "id": 10
-                        },
-                        "keywordSearchableJobCustomAttributes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 11
-                        },
-                        "derivedInfo": {
-                          "type": "DerivedInfo",
-                          "id": 12
-                        },
-                        "suspended": {
-                          "type": "bool",
-                          "id": 13
                         }
-                      },
-                      "nested": {
-                        "DerivedInfo": {
-                          "fields": {
-                            "headquartersLocation": {
-                              "type": "Location",
-                              "id": 1
-                            }
-                          }
+                      }
+                    },
+                    "ListTenantsResponse": {
+                      "fields": {
+                        "tenants": {
+                          "rule": "repeated",
+                          "type": "Tenant",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "metadata": {
+                          "type": "ResponseMetadata",
+                          "id": 3
                         }
                       }
                     },
@@ -555,315 +606,7 @@
                         "OUTCOME_NOT_AVAILABLE": 4
                       }
                     },
-                    "EventService": {
-                      "options": {
-                        "(google.api.default_host)": "jobs.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
-                      },
-                      "methods": {
-                        "CreateClientEvent": {
-                          "requestType": "CreateClientEventRequest",
-                          "responseType": "ClientEvent",
-                          "options": {
-                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/clientEvents",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/clientEvents",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
-                        }
-                      }
-                    },
-                    "CreateClientEventRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "clientEvent": {
-                          "type": "ClientEvent",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ClientEvent": {
-                      "oneofs": {
-                        "event": {
-                          "oneof": [
-                            "jobEvent",
-                            "profileEvent"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "requestId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "eventId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        },
-                        "jobEvent": {
-                          "type": "JobEvent",
-                          "id": 5
-                        },
-                        "profileEvent": {
-                          "type": "ProfileEvent",
-                          "id": 6
-                        },
-                        "eventNotes": {
-                          "type": "string",
-                          "id": 9
-                        }
-                      }
-                    },
-                    "JobEvent": {
-                      "fields": {
-                        "type": {
-                          "type": "JobEventType",
-                          "id": 1
-                        },
-                        "jobs": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "profile": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "JobEventType": {
-                          "values": {
-                            "JOB_EVENT_TYPE_UNSPECIFIED": 0,
-                            "IMPRESSION": 1,
-                            "VIEW": 2,
-                            "VIEW_REDIRECT": 3,
-                            "APPLICATION_START": 4,
-                            "APPLICATION_FINISH": 5,
-                            "APPLICATION_QUICK_SUBMISSION": 6,
-                            "APPLICATION_REDIRECT": 7,
-                            "APPLICATION_START_FROM_SEARCH": 8,
-                            "APPLICATION_REDIRECT_FROM_SEARCH": 9,
-                            "APPLICATION_COMPANY_SUBMIT": 10,
-                            "BOOKMARK": 11,
-                            "NOTIFICATION": 12,
-                            "HIRED": 13,
-                            "SENT_CV": 14,
-                            "INTERVIEW_GRANTED": 15
-                          }
-                        }
-                      }
-                    },
-                    "ProfileEvent": {
-                      "fields": {
-                        "type": {
-                          "type": "ProfileEventType",
-                          "id": 1
-                        },
-                        "profiles": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "jobs": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "ProfileEventType": {
-                          "values": {
-                            "PROFILE_EVENT_TYPE_UNSPECIFIED": 0,
-                            "IMPRESSION": 1,
-                            "VIEW": 2,
-                            "BOOKMARK": 3
-                          }
-                        }
-                      }
-                    },
-                    "Job": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "company": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "requisitionId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "title": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "addresses": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6
-                        },
-                        "applicationInfo": {
-                          "type": "ApplicationInfo",
-                          "id": 7
-                        },
-                        "jobBenefits": {
-                          "rule": "repeated",
-                          "type": "JobBenefit",
-                          "id": 8
-                        },
-                        "compensationInfo": {
-                          "type": "CompensationInfo",
-                          "id": 9
-                        },
-                        "customAttributes": {
-                          "keyType": "string",
-                          "type": "CustomAttribute",
-                          "id": 10
-                        },
-                        "degreeTypes": {
-                          "rule": "repeated",
-                          "type": "DegreeType",
-                          "id": 11
-                        },
-                        "department": {
-                          "type": "string",
-                          "id": 12
-                        },
-                        "employmentTypes": {
-                          "rule": "repeated",
-                          "type": "EmploymentType",
-                          "id": 13
-                        },
-                        "incentives": {
-                          "type": "string",
-                          "id": 14
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 15
-                        },
-                        "jobLevel": {
-                          "type": "JobLevel",
-                          "id": 16
-                        },
-                        "promotionValue": {
-                          "type": "int32",
-                          "id": 17
-                        },
-                        "qualifications": {
-                          "type": "string",
-                          "id": 18
-                        },
-                        "responsibilities": {
-                          "type": "string",
-                          "id": 19
-                        },
-                        "postingRegion": {
-                          "type": "PostingRegion",
-                          "id": 20
-                        },
-                        "visibility": {
-                          "type": "Visibility",
-                          "id": 21
-                        },
-                        "jobStartTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 22
-                        },
-                        "jobEndTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 23
-                        },
-                        "postingPublishTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 24
-                        },
-                        "postingExpireTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 25
-                        },
-                        "postingCreateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 26
-                        },
-                        "postingUpdateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 27
-                        },
-                        "companyDisplayName": {
-                          "type": "string",
-                          "id": 28
-                        },
-                        "derivedInfo": {
-                          "type": "DerivedInfo",
-                          "id": 29
-                        },
-                        "processingOptions": {
-                          "type": "ProcessingOptions",
-                          "id": 30
-                        }
-                      },
-                      "nested": {
-                        "ApplicationInfo": {
-                          "fields": {
-                            "emails": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1
-                            },
-                            "instruction": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "uris": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "DerivedInfo": {
-                          "fields": {
-                            "locations": {
-                              "rule": "repeated",
-                              "type": "Location",
-                              "id": 1
-                            },
-                            "jobCategories": {
-                              "rule": "repeated",
-                              "type": "JobCategory",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "ProcessingOptions": {
-                          "fields": {
-                            "disableStreetAddressResolution": {
-                              "type": "bool",
-                              "id": 1
-                            },
-                            "htmlSanitization": {
-                              "type": "HtmlSanitization",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Application": {
+                    "Tenant": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -871,87 +614,24 @@
                         },
                         "externalId": {
                           "type": "string",
-                          "id": 31
-                        },
-                        "profile": {
-                          "type": "string",
                           "id": 2
                         },
-                        "job": {
+                        "usageType": {
+                          "type": "DataUsageType",
+                          "id": 3
+                        },
+                        "keywordSearchableProfileCustomAttributes": {
+                          "rule": "repeated",
                           "type": "string",
                           "id": 4
-                        },
-                        "company": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "applicationDate": {
-                          "type": "google.type.Date",
-                          "id": 7
-                        },
-                        "stage": {
-                          "type": "ApplicationStage",
-                          "id": 11
-                        },
-                        "state": {
-                          "type": "ApplicationState",
-                          "id": 13
-                        },
-                        "interviews": {
-                          "rule": "repeated",
-                          "type": "Interview",
-                          "id": 16
-                        },
-                        "referral": {
-                          "type": "google.protobuf.BoolValue",
-                          "id": 18
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 19
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 20
-                        },
-                        "outcomeNotes": {
-                          "type": "string",
-                          "id": 21
-                        },
-                        "outcome": {
-                          "type": "Outcome",
-                          "id": 22
-                        },
-                        "isMatch": {
-                          "type": "google.protobuf.BoolValue",
-                          "id": 28
-                        },
-                        "jobTitleSnippet": {
-                          "type": "string",
-                          "id": 29
                         }
                       },
                       "nested": {
-                        "ApplicationState": {
+                        "DataUsageType": {
                           "values": {
-                            "APPLICATION_STATE_UNSPECIFIED": 0,
-                            "IN_PROGRESS": 1,
-                            "CANDIDATE_WITHDREW": 2,
-                            "EMPLOYER_WITHDREW": 3,
-                            "COMPLETED": 4,
-                            "CLOSED": 5
-                          }
-                        },
-                        "ApplicationStage": {
-                          "values": {
-                            "APPLICATION_STAGE_UNSPECIFIED": 0,
-                            "NEW": 1,
-                            "SCREEN": 2,
-                            "HIRING_MANAGER_REVIEW": 3,
-                            "INTERVIEW": 4,
-                            "OFFER_EXTENDED": 5,
-                            "OFFER_ACCEPTED": 6,
-                            "STARTED": 7
+                            "DATA_USAGE_TYPE_UNSPECIFIED": 0,
+                            "AGGREGATED": 1,
+                            "ISOLATED": 2
                           }
                         }
                       }
@@ -2190,104 +1870,254 @@
                         }
                       }
                     },
-                    "Completion": {
-                      "options": {
-                        "(google.api.default_host)": "jobs.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
-                      },
-                      "methods": {
-                        "CompleteQuery": {
-                          "requestType": "CompleteQueryRequest",
-                          "responseType": "CompleteQueryResponse",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}:complete",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}:complete"
-                          }
-                        }
-                      }
-                    },
-                    "CompleteQueryRequest": {
+                    "Job": {
                       "fields": {
-                        "parent": {
+                        "name": {
                           "type": "string",
                           "id": 1
-                        },
-                        "query": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "languageCodes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 4
                         },
                         "company": {
                           "type": "string",
+                          "id": 2
+                        },
+                        "requisitionId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
                           "id": 5
                         },
-                        "scope": {
-                          "type": "CompletionScope",
+                        "addresses": {
+                          "rule": "repeated",
+                          "type": "string",
                           "id": 6
                         },
-                        "type": {
-                          "type": "CompletionType",
+                        "applicationInfo": {
+                          "type": "ApplicationInfo",
                           "id": 7
-                        }
-                      },
-                      "nested": {
-                        "CompletionScope": {
-                          "values": {
-                            "COMPLETION_SCOPE_UNSPECIFIED": 0,
-                            "TENANT": 1,
-                            "PUBLIC": 2
-                          }
                         },
-                        "CompletionType": {
-                          "values": {
-                            "COMPLETION_TYPE_UNSPECIFIED": 0,
-                            "JOB_TITLE": 1,
-                            "COMPANY_NAME": 2,
-                            "COMBINED": 3
-                          }
-                        }
-                      }
-                    },
-                    "CompleteQueryResponse": {
-                      "fields": {
-                        "completionResults": {
+                        "jobBenefits": {
                           "rule": "repeated",
-                          "type": "CompletionResult",
-                          "id": 1
+                          "type": "JobBenefit",
+                          "id": 8
                         },
-                        "metadata": {
-                          "type": "ResponseMetadata",
-                          "id": 2
+                        "compensationInfo": {
+                          "type": "CompensationInfo",
+                          "id": 9
+                        },
+                        "customAttributes": {
+                          "keyType": "string",
+                          "type": "CustomAttribute",
+                          "id": 10
+                        },
+                        "degreeTypes": {
+                          "rule": "repeated",
+                          "type": "DegreeType",
+                          "id": 11
+                        },
+                        "department": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "employmentTypes": {
+                          "rule": "repeated",
+                          "type": "EmploymentType",
+                          "id": 13
+                        },
+                        "incentives": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "jobLevel": {
+                          "type": "JobLevel",
+                          "id": 16
+                        },
+                        "promotionValue": {
+                          "type": "int32",
+                          "id": 17
+                        },
+                        "qualifications": {
+                          "type": "string",
+                          "id": 18
+                        },
+                        "responsibilities": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "postingRegion": {
+                          "type": "PostingRegion",
+                          "id": 20
+                        },
+                        "visibility": {
+                          "type": "Visibility",
+                          "id": 21
+                        },
+                        "jobStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 22
+                        },
+                        "jobEndTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 23
+                        },
+                        "postingPublishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 24
+                        },
+                        "postingExpireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 25
+                        },
+                        "postingCreateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 26
+                        },
+                        "postingUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 27
+                        },
+                        "companyDisplayName": {
+                          "type": "string",
+                          "id": 28
+                        },
+                        "derivedInfo": {
+                          "type": "DerivedInfo",
+                          "id": 29
+                        },
+                        "processingOptions": {
+                          "type": "ProcessingOptions",
+                          "id": 30
                         }
                       },
                       "nested": {
-                        "CompletionResult": {
+                        "ApplicationInfo": {
                           "fields": {
-                            "suggestion": {
+                            "emails": {
+                              "rule": "repeated",
                               "type": "string",
                               "id": 1
                             },
-                            "type": {
-                              "type": "CompleteQueryRequest.CompletionType",
+                            "instruction": {
+                              "type": "string",
                               "id": 2
                             },
-                            "imageUri": {
+                            "uris": {
+                              "rule": "repeated",
                               "type": "string",
                               "id": 3
+                            }
+                          }
+                        },
+                        "DerivedInfo": {
+                          "fields": {
+                            "locations": {
+                              "rule": "repeated",
+                              "type": "Location",
+                              "id": 1
+                            },
+                            "jobCategories": {
+                              "rule": "repeated",
+                              "type": "JobCategory",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ProcessingOptions": {
+                          "fields": {
+                            "disableStreetAddressResolution": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "htmlSanitization": {
+                              "type": "HtmlSanitization",
+                              "id": 2
                             }
                           }
                         }
                       }
                     },
-                    "Tenant": {
+                    "BatchOperationMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateDescription": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "successCount": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "failureCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "totalCount": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "INITIALIZING": 1,
+                            "PROCESSING": 2,
+                            "SUCCEEDED": 3,
+                            "FAILED": 4,
+                            "CANCELLING": 5,
+                            "CANCELLED": 6
+                          }
+                        }
+                      }
+                    },
+                    "JobOperationResult": {
+                      "fields": {
+                        "jobResults": {
+                          "rule": "repeated",
+                          "type": "JobResult",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "JobResult": {
+                          "fields": {
+                            "job": {
+                              "type": "Job",
+                              "id": 1
+                            },
+                            "status": {
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Application": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2295,25 +2125,535 @@
                         },
                         "externalId": {
                           "type": "string",
+                          "id": 31
+                        },
+                        "profile": {
+                          "type": "string",
                           "id": 2
                         },
-                        "usageType": {
-                          "type": "DataUsageType",
-                          "id": 3
-                        },
-                        "keywordSearchableProfileCustomAttributes": {
-                          "rule": "repeated",
+                        "job": {
                           "type": "string",
                           "id": 4
+                        },
+                        "company": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "applicationDate": {
+                          "type": "google.type.Date",
+                          "id": 7
+                        },
+                        "stage": {
+                          "type": "ApplicationStage",
+                          "id": 11
+                        },
+                        "state": {
+                          "type": "ApplicationState",
+                          "id": 13
+                        },
+                        "interviews": {
+                          "rule": "repeated",
+                          "type": "Interview",
+                          "id": 16
+                        },
+                        "referral": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 18
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 19
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 20
+                        },
+                        "outcomeNotes": {
+                          "type": "string",
+                          "id": 21
+                        },
+                        "outcome": {
+                          "type": "Outcome",
+                          "id": 22
+                        },
+                        "isMatch": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 28
+                        },
+                        "jobTitleSnippet": {
+                          "type": "string",
+                          "id": 29
                         }
                       },
                       "nested": {
-                        "DataUsageType": {
+                        "ApplicationState": {
                           "values": {
-                            "DATA_USAGE_TYPE_UNSPECIFIED": 0,
-                            "AGGREGATED": 1,
-                            "ISOLATED": 2
+                            "APPLICATION_STATE_UNSPECIFIED": 0,
+                            "IN_PROGRESS": 1,
+                            "CANDIDATE_WITHDREW": 2,
+                            "EMPLOYER_WITHDREW": 3,
+                            "COMPLETED": 4,
+                            "CLOSED": 5
                           }
+                        },
+                        "ApplicationStage": {
+                          "values": {
+                            "APPLICATION_STAGE_UNSPECIFIED": 0,
+                            "NEW": 1,
+                            "SCREEN": 2,
+                            "HIRING_MANAGER_REVIEW": 3,
+                            "INTERVIEW": 4,
+                            "OFFER_EXTENDED": 5,
+                            "OFFER_ACCEPTED": 6,
+                            "STARTED": 7
+                          }
+                        }
+                      }
+                    },
+                    "Company": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "externalId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "size": {
+                          "type": "CompanySize",
+                          "id": 4
+                        },
+                        "headquartersAddress": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "hiringAgency": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "eeoText": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "websiteUri": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "careerSiteUri": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "imageUri": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "keywordSearchableJobCustomAttributes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "derivedInfo": {
+                          "type": "DerivedInfo",
+                          "id": 12
+                        },
+                        "suspended": {
+                          "type": "bool",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "DerivedInfo": {
+                          "fields": {
+                            "headquartersLocation": {
+                              "type": "Location",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "EventService": {
+                      "options": {
+                        "(google.api.default_host)": "jobs.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
+                      },
+                      "methods": {
+                        "CreateClientEvent": {
+                          "requestType": "CreateClientEventRequest",
+                          "responseType": "ClientEvent",
+                          "options": {
+                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/clientEvents",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/clientEvents",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        }
+                      }
+                    },
+                    "CreateClientEventRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "clientEvent": {
+                          "type": "ClientEvent",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ClientEvent": {
+                      "oneofs": {
+                        "event": {
+                          "oneof": [
+                            "jobEvent",
+                            "profileEvent"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "eventId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "jobEvent": {
+                          "type": "JobEvent",
+                          "id": 5
+                        },
+                        "profileEvent": {
+                          "type": "ProfileEvent",
+                          "id": 6
+                        },
+                        "eventNotes": {
+                          "type": "string",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "JobEvent": {
+                      "fields": {
+                        "type": {
+                          "type": "JobEventType",
+                          "id": 1
+                        },
+                        "jobs": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "profile": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "JobEventType": {
+                          "values": {
+                            "JOB_EVENT_TYPE_UNSPECIFIED": 0,
+                            "IMPRESSION": 1,
+                            "VIEW": 2,
+                            "VIEW_REDIRECT": 3,
+                            "APPLICATION_START": 4,
+                            "APPLICATION_FINISH": 5,
+                            "APPLICATION_QUICK_SUBMISSION": 6,
+                            "APPLICATION_REDIRECT": 7,
+                            "APPLICATION_START_FROM_SEARCH": 8,
+                            "APPLICATION_REDIRECT_FROM_SEARCH": 9,
+                            "APPLICATION_COMPANY_SUBMIT": 10,
+                            "BOOKMARK": 11,
+                            "NOTIFICATION": 12,
+                            "HIRED": 13,
+                            "SENT_CV": 14,
+                            "INTERVIEW_GRANTED": 15
+                          }
+                        }
+                      }
+                    },
+                    "ProfileEvent": {
+                      "fields": {
+                        "type": {
+                          "type": "ProfileEventType",
+                          "id": 1
+                        },
+                        "profiles": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "jobs": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "ProfileEventType": {
+                          "values": {
+                            "PROFILE_EVENT_TYPE_UNSPECIFIED": 0,
+                            "IMPRESSION": 1,
+                            "VIEW": 2,
+                            "BOOKMARK": 3
+                          }
+                        }
+                      }
+                    },
+                    "ApplicationService": {
+                      "options": {
+                        "(google.api.default_host)": "jobs.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
+                      },
+                      "methods": {
+                        "CreateApplication": {
+                          "requestType": "CreateApplicationRequest",
+                          "responseType": "Application",
+                          "options": {
+                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "GetApplication": {
+                          "requestType": "GetApplicationRequest",
+                          "responseType": "Application",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
+                          }
+                        },
+                        "UpdateApplication": {
+                          "requestType": "UpdateApplicationRequest",
+                          "responseType": "Application",
+                          "options": {
+                            "(google.api.http).patch": "/v4beta1/{application.name=projects/*/tenants/*/profiles/*/applications/*}",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "DeleteApplication": {
+                          "requestType": "DeleteApplicationRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
+                          }
+                        },
+                        "ListApplications": {
+                          "requestType": "ListApplicationsRequest",
+                          "responseType": "ListApplicationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications"
+                          }
+                        }
+                      }
+                    },
+                    "CreateApplicationRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "application": {
+                          "type": "Application",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetApplicationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateApplicationRequest": {
+                      "fields": {
+                        "application": {
+                          "type": "Application",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteApplicationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListApplicationsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListApplicationsResponse": {
+                      "fields": {
+                        "applications": {
+                          "rule": "repeated",
+                          "type": "Application",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "metadata": {
+                          "type": "ResponseMetadata",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CompanyService": {
+                      "options": {
+                        "(google.api.default_host)": "jobs.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
+                      },
+                      "methods": {
+                        "CreateCompany": {
+                          "requestType": "CreateCompanyRequest",
+                          "responseType": "Company",
+                          "options": {
+                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/companies",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/companies",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        },
+                        "GetCompany": {
+                          "requestType": "GetCompanyRequest",
+                          "responseType": "Company",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/companies/*}"
+                          }
+                        },
+                        "UpdateCompany": {
+                          "requestType": "UpdateCompanyRequest",
+                          "responseType": "Company",
+                          "options": {
+                            "(google.api.http).patch": "/v4beta1/{company.name=projects/*/tenants/*/companies/*}",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.patch": "/v4beta1/{company.name=projects/*/companies/*}",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        },
+                        "DeleteCompany": {
+                          "requestType": "DeleteCompanyRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
+                            "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/companies/*}"
+                          }
+                        },
+                        "ListCompanies": {
+                          "requestType": "ListCompaniesRequest",
+                          "responseType": "ListCompaniesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/companies",
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/companies"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCompanyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "company": {
+                          "type": "Company",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetCompanyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateCompanyRequest": {
+                      "fields": {
+                        "company": {
+                          "type": "Company",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteCompanyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListCompaniesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "requireOpenJobs": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListCompaniesResponse": {
+                      "fields": {
+                        "companies": {
+                          "rule": "repeated",
+                          "type": "Company",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "metadata": {
+                          "type": "ResponseMetadata",
+                          "id": 3
                         }
                       }
                     },
@@ -2737,440 +3077,100 @@
                         }
                       }
                     },
-                    "BatchOperationMetadata": {
+                    "Completion": {
+                      "options": {
+                        "(google.api.default_host)": "jobs.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
+                      },
+                      "methods": {
+                        "CompleteQuery": {
+                          "requestType": "CompleteQueryRequest",
+                          "responseType": "CompleteQueryResponse",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}:complete",
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}:complete"
+                          }
+                        }
+                      }
+                    },
+                    "CompleteQueryRequest": {
                       "fields": {
-                        "state": {
-                          "type": "State",
+                        "parent": {
+                          "type": "string",
                           "id": 1
                         },
-                        "stateDescription": {
+                        "query": {
                           "type": "string",
                           "id": 2
                         },
-                        "successCount": {
-                          "type": "int32",
+                        "languageCodes": {
+                          "rule": "repeated",
+                          "type": "string",
                           "id": 3
                         },
-                        "failureCount": {
+                        "pageSize": {
                           "type": "int32",
                           "id": 4
                         },
-                        "totalCount": {
-                          "type": "int32",
+                        "company": {
+                          "type": "string",
                           "id": 5
                         },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
+                        "scope": {
+                          "type": "CompletionScope",
                           "id": 6
                         },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
+                        "type": {
+                          "type": "CompletionType",
                           "id": 7
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8
                         }
                       },
                       "nested": {
-                        "State": {
+                        "CompletionScope": {
                           "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "INITIALIZING": 1,
-                            "PROCESSING": 2,
-                            "SUCCEEDED": 3,
-                            "FAILED": 4,
-                            "CANCELLING": 5,
-                            "CANCELLED": 6
+                            "COMPLETION_SCOPE_UNSPECIFIED": 0,
+                            "TENANT": 1,
+                            "PUBLIC": 2
+                          }
+                        },
+                        "CompletionType": {
+                          "values": {
+                            "COMPLETION_TYPE_UNSPECIFIED": 0,
+                            "JOB_TITLE": 1,
+                            "COMPANY_NAME": 2,
+                            "COMBINED": 3
                           }
                         }
                       }
                     },
-                    "JobOperationResult": {
+                    "CompleteQueryResponse": {
                       "fields": {
-                        "jobResults": {
+                        "completionResults": {
                           "rule": "repeated",
-                          "type": "JobResult",
+                          "type": "CompletionResult",
                           "id": 1
+                        },
+                        "metadata": {
+                          "type": "ResponseMetadata",
+                          "id": 2
                         }
                       },
                       "nested": {
-                        "JobResult": {
+                        "CompletionResult": {
                           "fields": {
-                            "job": {
-                              "type": "Job",
+                            "suggestion": {
+                              "type": "string",
                               "id": 1
                             },
-                            "status": {
-                              "type": "google.rpc.Status",
+                            "type": {
+                              "type": "CompleteQueryRequest.CompletionType",
                               "id": 2
+                            },
+                            "imageUri": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
-                        }
-                      }
-                    },
-                    "ApplicationService": {
-                      "options": {
-                        "(google.api.default_host)": "jobs.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
-                      },
-                      "methods": {
-                        "CreateApplication": {
-                          "requestType": "CreateApplicationRequest",
-                          "responseType": "Application",
-                          "options": {
-                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "GetApplication": {
-                          "requestType": "GetApplicationRequest",
-                          "responseType": "Application",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
-                          }
-                        },
-                        "UpdateApplication": {
-                          "requestType": "UpdateApplicationRequest",
-                          "responseType": "Application",
-                          "options": {
-                            "(google.api.http).patch": "/v4beta1/{application.name=projects/*/tenants/*/profiles/*/applications/*}",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "DeleteApplication": {
-                          "requestType": "DeleteApplicationRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/profiles/*/applications/*}"
-                          }
-                        },
-                        "ListApplications": {
-                          "requestType": "ListApplicationsRequest",
-                          "responseType": "ListApplicationsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*/profiles/*}/applications"
-                          }
-                        }
-                      }
-                    },
-                    "CreateApplicationRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "application": {
-                          "type": "Application",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetApplicationRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateApplicationRequest": {
-                      "fields": {
-                        "application": {
-                          "type": "Application",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteApplicationRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListApplicationsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListApplicationsResponse": {
-                      "fields": {
-                        "applications": {
-                          "rule": "repeated",
-                          "type": "Application",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "metadata": {
-                          "type": "ResponseMetadata",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "CompanyService": {
-                      "options": {
-                        "(google.api.default_host)": "jobs.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
-                      },
-                      "methods": {
-                        "CreateCompany": {
-                          "requestType": "CreateCompanyRequest",
-                          "responseType": "Company",
-                          "options": {
-                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/companies",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/companies",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
-                        },
-                        "GetCompany": {
-                          "requestType": "GetCompanyRequest",
-                          "responseType": "Company",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{name=projects/*/companies/*}"
-                          }
-                        },
-                        "UpdateCompany": {
-                          "requestType": "UpdateCompanyRequest",
-                          "responseType": "Company",
-                          "options": {
-                            "(google.api.http).patch": "/v4beta1/{company.name=projects/*/tenants/*/companies/*}",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.patch": "/v4beta1/{company.name=projects/*/companies/*}",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
-                        },
-                        "DeleteCompany": {
-                          "requestType": "DeleteCompanyRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/companies/*}",
-                            "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/companies/*}"
-                          }
-                        },
-                        "ListCompanies": {
-                          "requestType": "ListCompaniesRequest",
-                          "responseType": "ListCompaniesResponse",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/companies",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/companies"
-                          }
-                        }
-                      }
-                    },
-                    "CreateCompanyRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "company": {
-                          "type": "Company",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetCompanyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateCompanyRequest": {
-                      "fields": {
-                        "company": {
-                          "type": "Company",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteCompanyRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListCompaniesRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "requireOpenJobs": {
-                          "type": "bool",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "ListCompaniesResponse": {
-                      "fields": {
-                        "companies": {
-                          "rule": "repeated",
-                          "type": "Company",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "metadata": {
-                          "type": "ResponseMetadata",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TenantService": {
-                      "options": {
-                        "(google.api.default_host)": "jobs.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/jobs"
-                      },
-                      "methods": {
-                        "CreateTenant": {
-                          "requestType": "CreateTenantRequest",
-                          "responseType": "Tenant",
-                          "options": {
-                            "(google.api.http).post": "/v4beta1/{parent=projects/*}/tenants",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "GetTenant": {
-                          "requestType": "GetTenantRequest",
-                          "responseType": "Tenant",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{name=projects/*/tenants/*}"
-                          }
-                        },
-                        "UpdateTenant": {
-                          "requestType": "UpdateTenantRequest",
-                          "responseType": "Tenant",
-                          "options": {
-                            "(google.api.http).patch": "/v4beta1/{tenant.name=projects/*/tenants/*}",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "DeleteTenant": {
-                          "requestType": "DeleteTenantRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*}"
-                          }
-                        },
-                        "ListTenants": {
-                          "requestType": "ListTenantsRequest",
-                          "responseType": "ListTenantsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*}/tenants"
-                          }
-                        }
-                      }
-                    },
-                    "CreateTenantRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tenant": {
-                          "type": "Tenant",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetTenantRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateTenantRequest": {
-                      "fields": {
-                        "tenant": {
-                          "type": "Tenant",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteTenantRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListTenantsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListTenantsResponse": {
-                      "fields": {
-                        "tenants": {
-                          "rule": "repeated",
-                          "type": "Tenant",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "metadata": {
-                          "type": "ResponseMetadata",
-                          "id": 3
                         }
                       }
                     }
@@ -4286,18 +4286,6 @@
                 }
               }
             },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Empty": {
               "fields": {}
             },
@@ -4307,6 +4295,18 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             },

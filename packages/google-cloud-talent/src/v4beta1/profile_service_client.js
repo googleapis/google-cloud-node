@@ -542,7 +542,6 @@ class ProfileServiceClient {
    *   A full update is performed if it is unset.
    *
    *   Valid values are:
-   *
    *   * external_id
    *   * source
    *   * uri
@@ -559,13 +558,33 @@ class ProfileServiceClient {
    *   * employment_records
    *   * education_records
    *   * skills
-   *   * projects
+   *   * activities
    *   * publications
    *   * patents
    *   * certifications
    *   * recruiting_notes
    *   * custom_attributes
    *   * group_id
+   *   * external_system
+   *   * source_note
+   *   * primary_responsibilities
+   *   * citizenships
+   *   * work_authorizations
+   *   * employee_types
+   *   * language_code
+   *   * qualification_summary
+   *   * allowed_contact_types
+   *   * preferred_contact_types
+   *   * contact_availability
+   *   * language_fluencies
+   *   * work_preference
+   *   * industry_experiences
+   *   * work_environment_experiences
+   *   * work_availability
+   *   * security_clearances
+   *   * references
+   *   * assessments
+   *   * interviews
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
