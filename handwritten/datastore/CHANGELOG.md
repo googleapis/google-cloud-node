@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [4.2.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.4...v4.2.0) (2019-08-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @grpc/grpc-js to ^0.5.0 ([#461](https://www.github.com/googleapis/nodejs-datastore/issues/461)) ([1850f25](https://www.github.com/googleapis/nodejs-datastore/commit/1850f25))
+* **deps:** update dependency google-auth-library to v5 ([#462](https://www.github.com/googleapis/nodejs-datastore/issues/462)) ([1f97053](https://www.github.com/googleapis/nodejs-datastore/commit/1f97053))
+* **types:** correct type of Datastore.KEY ([#459](https://www.github.com/googleapis/nodejs-datastore/issues/459)) ([09def6d](https://www.github.com/googleapis/nodejs-datastore/commit/09def6d))
+* allow calls with no request, add JSON proto ([771b634](https://www.github.com/googleapis/nodejs-datastore/commit/771b634))
+
+
+### Features
+
+* add support for appengine legacy url encoding ([#456](https://www.github.com/googleapis/nodejs-datastore/issues/456)) ([357a9cf](https://www.github.com/googleapis/nodejs-datastore/commit/357a9cf))
+* excludeFromIndex allow for '*' wildcard to catch all properties on object ([#451](https://www.github.com/googleapis/nodejs-datastore/issues/451)) ([215cbee](https://www.github.com/googleapis/nodejs-datastore/commit/215cbee))
+
 ### [4.1.4](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.3...v4.1.4) (2019-07-23)
 
 
