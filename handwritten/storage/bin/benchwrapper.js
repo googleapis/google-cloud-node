@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+const fs = require('fs');
+const path = require('path');
 const grpc = require('grpc');
 const protoLoader = require('@grpc/proto-loader');
 const {Storage} = require('../build/src');
@@ -57,6 +59,13 @@ function write(call, callback) {
   callback(null, null);
 }
 
+const keyPath = path.join(__dirname, 'certificate', 'server.key');
+const key = fs.readFileSync(keyPath);
+const certPath = path.join(__dirname, 'certificate', 'server.pem');
+const cert = fs.readFileSync(certPath);
+const pair = {private_key: key, cert_chain: cert};
+const creds = grpc.ServerCredentials.createSsl(cert, [pair]);
+
 const server = new grpc.Server();
 
 server.addService(storageBenchWrapper['StorageBenchWrapper']['service'], {
@@ -64,5 +73,5 @@ server.addService(storageBenchWrapper['StorageBenchWrapper']['service'], {
   write: write,
 });
 console.log('starting on localhost:' + argv.port);
-server.bind('0.0.0.0:' + argv.port, grpc.ServerCredentials.createInsecure());
+server.bind('0.0.0.0:' + argv.port, creds);
 server.start();
