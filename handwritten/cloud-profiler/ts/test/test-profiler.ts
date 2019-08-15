@@ -297,7 +297,9 @@ describe('Profiler', () => {
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
 
-      const uploaded = requestStub.firstCall.args[0].body;
+      const uploaded = requestStub.firstCall.args[0].body as {
+        profileBytes?: string;
+      };
       const decodedBytes = Buffer.from(
         uploaded.profileBytes as string,
         'base64'
@@ -326,7 +328,9 @@ describe('Profiler', () => {
 
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
-      const uploaded = requestStub.firstCall.args[0].body;
+      const uploaded = requestStub.firstCall.args[0].body as {
+        profileBytes?: string;
+      };
       const decodedBytes = Buffer.from(
         uploaded.profileBytes as string,
         'base64'

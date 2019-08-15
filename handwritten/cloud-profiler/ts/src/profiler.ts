@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
-import {Service, ServiceConfig, ServiceObject} from '@google-cloud/common';
+import {
+  Service,
+  ServiceConfig,
+  ServiceObject,
+  ApiError,
+} from '@google-cloud/common';
 import * as http from 'http';
 import {heap as heapProfiler, SourceMapper, time as timeProfiler} from 'pprof';
 import * as msToStr from 'pretty-ms';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
+import * as r from 'teeny-request';
 
 import {perftools} from '../../proto/profile';
 
@@ -78,7 +84,8 @@ export interface RequestProfile {
  * message.
  */
 function getResponseErrorMessage(
-  response: http.IncomingMessage,
+  // tslint:disable-next-line: no-any
+  response: r.Response<any>,
   err: Error | null
 ): string | undefined {
   if (err && err.message) {
@@ -244,7 +251,8 @@ export class Retryer {
 function responseToProfileOrError(
   err: Error | null,
   body?: object,
-  response?: http.IncomingMessage
+  // tslint:disable-next-line: no-any
+  response?: r.Response<any>
 ): RequestProfile {
   // response.statusCode is guaranteed to exist on client requests.
   if (response && isErrorResponseStatusCode(response.statusCode!)) {
@@ -440,20 +448,22 @@ export class Profiler extends ServiceObject {
 
     this.logger.debug(`Attempting to create profile.`);
     return new Promise<RequestProfile>((resolve, reject) => {
-      this.request(
-        options,
-        (err: Error | null, body?: object, response?: http.IncomingMessage) => {
-          try {
-            const prof = responseToProfileOrError(err, body, response);
-            this.logger.debug(
-              `Successfully created profile ${prof.profileType}.`
-            );
-            resolve(prof);
-          } catch (err) {
-            reject(err);
-          }
+      this.request(options, (
+        err: Error | ApiError | null,
+        body?: object,
+        // tslint:disable-next-line: no-any
+        response?: r.Response<any>
+      ) => {
+        try {
+          const prof = responseToProfileOrError(err, body, response);
+          this.logger.debug(
+            `Successfully created profile ${prof.profileType}.`
+          );
+          resolve(prof);
+        } catch (err) {
+          reject(err);
         }
-      );
+      });
     });
   }
 
