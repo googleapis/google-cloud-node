@@ -368,6 +368,7 @@ export class Profiler extends ServiceObject {
         this.config.disableSourceMaps = true;
       }
     }
+    this.logger.debug(`Profiling agent v${pjson.version} is initialized`);
     this.runLoop();
   }
 
