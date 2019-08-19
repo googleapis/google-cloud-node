@@ -9,5 +9,5 @@ bencharmking purposes.
 cd nodejs-storage
 npm install
 export STORAGE_EMULATOR_HOST=localhost:8080
-npm run benchwrapper -- --port 50051
+npm run benchwrapper -- --port 8081
 ```
