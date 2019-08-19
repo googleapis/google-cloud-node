@@ -1608,6 +1608,94 @@ describe('ProductSearchClient', () => {
       );
     });
   });
+
+  describe('purgeProducts', function() {
+    it('invokes purgeProducts without error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock response
+      const expectedResponse = {};
+
+      // Mock Grpc layer
+      client._innerApiCalls.purgeProducts = mockLongRunningGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client
+        .purgeProducts(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(responses => {
+          assert.deepStrictEqual(responses[0], expectedResponse);
+          done();
+        })
+        .catch(err => {
+          done(err);
+        });
+    });
+
+    it('invokes purgeProducts with error', done => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.purgeProducts = mockLongRunningGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client
+        .purgeProducts(request)
+        .then(responses => {
+          const operation = responses[0];
+          return operation.promise();
+        })
+        .then(() => {
+          assert.fail();
+        })
+        .catch(err => {
+          assert(err instanceof Error);
+          assert.strictEqual(err.code, FAKE_STATUS_CODE);
+          done();
+        });
+    });
+
+    it('has longrunning decoder functions', () => {
+      const client = new visionModule.v1.ProductSearchClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert(
+        client._descriptors.longrunning.purgeProducts.responseDecoder instanceof
+          Function
+      );
+      assert(
+        client._descriptors.longrunning.purgeProducts.metadataDecoder instanceof
+          Function
+      );
+    });
+  });
 });
 
 function mockSimpleGrpcMethod(expectedRequest, response, error) {

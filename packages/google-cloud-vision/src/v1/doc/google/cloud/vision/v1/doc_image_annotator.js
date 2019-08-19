@@ -989,12 +989,19 @@ const AnnotateImageResponse = {
  *   This object should have the same structure as [InputConfig]{@link google.cloud.vision.v1.InputConfig}
  *
  * @property {Object[]} responses
- *   Individual responses to images found within the file.
+ *   Individual responses to images found within the file. This field will be
+ *   empty if the `error` field is set.
  *
  *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1.AnnotateImageResponse}
  *
  * @property {number} totalPages
  *   This field gives the total number of pages in the file.
+ *
+ * @property {Object} error
+ *   If set, represents the error message for the failed request. The
+ *   `responses` field will not be set in this case.
+ *
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
  *
  * @typedef AnnotateFileResponse
  * @memberof google.cloud.vision.v1
@@ -1011,6 +1018,20 @@ const AnnotateFileResponse = {
  *   Individual image annotation requests for this batch.
  *
  *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1.AnnotateImageRequest}
+ *
+ * @property {string} parent
+ *   Optional. Target project and location to make a call.
+ *
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   If no parent is specified, a region will be chosen automatically.
+ *
+ *   Supported location-ids:
+ *       `us`: USA country only,
+ *       `asia`: East asia areas, like Japan, Taiwan,
+ *       `eu`: The European Union.
+ *
+ *   Example: `projects/project-A/locations/eu`.
  *
  * @typedef BatchAnnotateImagesRequest
  * @memberof google.cloud.vision.v1
@@ -1086,6 +1107,20 @@ const AnnotateFileRequest = {
  *   AnnotateFileRequest in BatchAnnotateFilesRequest.
  *
  *   This object should have the same structure as [AnnotateFileRequest]{@link google.cloud.vision.v1.AnnotateFileRequest}
+ *
+ * @property {string} parent
+ *   Optional. Target project and location to make a call.
+ *
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   If no parent is specified, a region will be chosen automatically.
+ *
+ *   Supported location-ids:
+ *       `us`: USA country only,
+ *       `asia`: East asia areas, like Japan, Taiwan,
+ *       `eu`: The European Union.
+ *
+ *   Example: `projects/project-A/locations/eu`.
  *
  * @typedef BatchAnnotateFilesRequest
  * @memberof google.cloud.vision.v1
@@ -1172,6 +1207,20 @@ const AsyncAnnotateFileResponse = {
  *
  *   This object should have the same structure as [OutputConfig]{@link google.cloud.vision.v1.OutputConfig}
  *
+ * @property {string} parent
+ *   Optional. Target project and location to make a call.
+ *
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   If no parent is specified, a region will be chosen automatically.
+ *
+ *   Supported location-ids:
+ *       `us`: USA country only,
+ *       `asia`: East asia areas, like Japan, Taiwan,
+ *       `eu`: The European Union.
+ *
+ *   Example: `projects/project-A/locations/eu`.
+ *
  * @typedef AsyncBatchAnnotateImagesRequest
  * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
@@ -1204,6 +1253,20 @@ const AsyncBatchAnnotateImagesResponse = {
  *   Individual async file annotation requests for this batch.
  *
  *   This object should have the same structure as [AsyncAnnotateFileRequest]{@link google.cloud.vision.v1.AsyncAnnotateFileRequest}
+ *
+ * @property {string} parent
+ *   Optional. Target project and location to make a call.
+ *
+ *   Format: `projects/{project-id}/locations/{location-id}`.
+ *
+ *   If no parent is specified, a region will be chosen automatically.
+ *
+ *   Supported location-ids:
+ *       `us`: USA country only,
+ *       `asia`: East asia areas, like Japan, Taiwan,
+ *       `eu`: The European Union.
+ *
+ *   Example: `projects/project-A/locations/eu`.
  *
  * @typedef AsyncBatchAnnotateFilesRequest
  * @memberof google.cloud.vision.v1
@@ -1412,27 +1475,27 @@ const Likelihood = {
   UNKNOWN: 0,
 
   /**
-   * It is very unlikely that the image belongs to the specified vertical.
+   * It is very unlikely.
    */
   VERY_UNLIKELY: 1,
 
   /**
-   * It is unlikely that the image belongs to the specified vertical.
+   * It is unlikely.
    */
   UNLIKELY: 2,
 
   /**
-   * It is possible that the image belongs to the specified vertical.
+   * It is possible.
    */
   POSSIBLE: 3,
 
   /**
-   * It is likely that the image belongs to the specified vertical.
+   * It is likely.
    */
   LIKELY: 4,
 
   /**
-   * It is very likely that the image belongs to the specified vertical.
+   * It is very likely.
    */
   VERY_LIKELY: 5
 };

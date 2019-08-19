@@ -37,10 +37,8 @@
  * @property {string} productCategory
  *   The category for the product identified by the reference image. This should
  *   be either "homegoods-v2", "apparel-v2", or "toys-v2". The legacy categories
- *   "homegoods", "apparel", and "toys" are still supported but will be
- *   deprecated. For new products, please use "homegoods-v2", "apparel-v2", or
- *   "toys-v2" for better product search accuracy. It is recommended to migrate
- *   existing products to these categories as well.
+ *   "homegoods", "apparel", and "toys" are still supported, but these should
+ *   not be used for new products.
  *
  *   This field is immutable.
  *
@@ -53,7 +51,11 @@
  *   to be supported soon.
  *
  *   Multiple values can be assigned to the same key. One product may have up to
- *   100 product_labels.
+ *   500 product_labels.
+ *
+ *   Notice that the total number of distinct product_labels over all products
+ *   in one ProductSet cannot exceed 1M, otherwise the product search pipeline
+ *   will refuse to work for that ProductSet.
  *
  *   This object should have the same structure as [KeyValue]{@link google.cloud.vision.v1.KeyValue}
  *
@@ -840,4 +842,49 @@ const BatchOperationMetadata = {
      */
     CANCELLED: 4
   }
+};
+
+/**
+ * Config to control which ProductSet contains the Products to be deleted.
+ *
+ * @property {string} productSetId
+ *   The ProductSet that contains the Products to delete. If a Product is a
+ *   member of product_set_id in addition to other ProductSets, the Product will
+ *   still be deleted.
+ *
+ * @typedef ProductSetPurgeConfig
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.ProductSetPurgeConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/product_search_service.proto}
+ */
+const ProductSetPurgeConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Request message for the `PurgeProducts` method.
+ *
+ * @property {Object} productSetPurgeConfig
+ *   Specify which ProductSet contains the Products to be deleted.
+ *
+ *   This object should have the same structure as [ProductSetPurgeConfig]{@link google.cloud.vision.v1.ProductSetPurgeConfig}
+ *
+ * @property {boolean} deleteOrphanProducts
+ *   If delete_orphan_products is true, all Products that are not in any
+ *   ProductSet will be deleted.
+ *
+ * @property {string} parent
+ *   The project and location in which the Products should be deleted.
+ *
+ *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
+ *
+ * @property {boolean} force
+ *   The default value is false. Override this value to true to actually perform
+ *   the purge.
+ *
+ * @typedef PurgeProductsRequest
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.PurgeProductsRequest definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/product_search_service.proto}
+ */
+const PurgeProductsRequest = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
 };

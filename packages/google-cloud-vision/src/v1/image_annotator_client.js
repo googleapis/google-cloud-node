@@ -254,6 +254,19 @@ class ImageAnnotatorClient {
    *   Individual image annotation requests for this batch.
    *
    *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1.AnnotateImageRequest}
+   * @param {string} [request.parent]
+   *   Optional. Target project and location to make a call.
+   *
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   If no parent is specified, a region will be chosen automatically.
+   *
+   *   Supported location-ids:
+   *       `us`: USA country only,
+   *       `asia`: East asia areas, like Japan, Taiwan,
+   *       `eu`: The European Union.
+   *
+   *   Example: `projects/project-A/locations/eu`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -290,6 +303,13 @@ class ImageAnnotatorClient {
     }
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.batchAnnotateImages(request, options, callback);
   }
@@ -310,6 +330,19 @@ class ImageAnnotatorClient {
    *   AnnotateFileRequest in BatchAnnotateFilesRequest.
    *
    *   This object should have the same structure as [AnnotateFileRequest]{@link google.cloud.vision.v1.AnnotateFileRequest}
+   * @param {string} [request.parent]
+   *   Optional. Target project and location to make a call.
+   *
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   If no parent is specified, a region will be chosen automatically.
+   *
+   *   Supported location-ids:
+   *       `us`: USA country only,
+   *       `asia`: East asia areas, like Japan, Taiwan,
+   *       `eu`: The European Union.
+   *
+   *   Example: `projects/project-A/locations/eu`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -346,6 +379,13 @@ class ImageAnnotatorClient {
     }
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.batchAnnotateFiles(request, options, callback);
   }
@@ -371,6 +411,19 @@ class ImageAnnotatorClient {
    *   Required. The desired output location and metadata (e.g. format).
    *
    *   This object should have the same structure as [OutputConfig]{@link google.cloud.vision.v1.OutputConfig}
+   * @param {string} [request.parent]
+   *   Optional. Target project and location to make a call.
+   *
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   If no parent is specified, a region will be chosen automatically.
+   *
+   *   Supported location-ids:
+   *       `us`: USA country only,
+   *       `asia`: East asia areas, like Japan, Taiwan,
+   *       `eu`: The European Union.
+   *
+   *   Example: `projects/project-A/locations/eu`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -466,6 +519,13 @@ class ImageAnnotatorClient {
     }
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.asyncBatchAnnotateImages(
       request,
@@ -488,6 +548,19 @@ class ImageAnnotatorClient {
    *   Individual async file annotation requests for this batch.
    *
    *   This object should have the same structure as [AsyncAnnotateFileRequest]{@link google.cloud.vision.v1.AsyncAnnotateFileRequest}
+   * @param {string} [request.parent]
+   *   Optional. Target project and location to make a call.
+   *
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   If no parent is specified, a region will be chosen automatically.
+   *
+   *   Supported location-ids:
+   *       `us`: USA country only,
+   *       `asia`: East asia areas, like Japan, Taiwan,
+   *       `eu`: The European Union.
+   *
+   *   Example: `projects/project-A/locations/eu`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -568,6 +641,13 @@ class ImageAnnotatorClient {
     }
     request = request || {};
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
 
     return this._innerApiCalls.asyncBatchAnnotateFiles(
       request,

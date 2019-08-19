@@ -113,6 +113,31 @@ const ProductSearchResults = {
   },
 
   /**
+   * Prediction for what the object in the bounding box is.
+   *
+   * @property {string} mid
+   *   Object ID that should align with EntityAnnotation mid.
+   *
+   * @property {string} languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see
+   *   http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+   *
+   * @property {string} name
+   *   Object name, expressed in its `language_code` language.
+   *
+   * @property {number} score
+   *   Score of the result. Range [0, 1].
+   *
+   * @typedef ObjectAnnotation
+   * @memberof google.cloud.vision.v1
+   * @see [google.cloud.vision.v1.ProductSearchResults.ObjectAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/product_search.proto}
+   */
+  ObjectAnnotation: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  },
+
+  /**
    * Information about the products similar to a single product in a query
    * image.
    *
@@ -125,6 +150,11 @@ const ProductSearchResults = {
    *   List of results, one for each product match.
    *
    *   This object should have the same structure as [Result]{@link google.cloud.vision.v1.Result}
+   *
+   * @property {Object[]} objectAnnotations
+   *   List of generic predictions for the object in the bounding box.
+   *
+   *   This object should have the same structure as [ObjectAnnotation]{@link google.cloud.vision.v1.ObjectAnnotation}
    *
    * @typedef GroupedResult
    * @memberof google.cloud.vision.v1
