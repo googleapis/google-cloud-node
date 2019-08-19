@@ -464,12 +464,7 @@ class AutoMlClient {
    *
    *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1beta1.Dataset}
    * @param {Object} [request.updateMask]
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
+   *   The update mask applies to the resource.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -1556,8 +1551,7 @@ class AutoMlClient {
    * node_number)
    *  will reset the deployment state without pausing the model's availability.
    *
-   * Only applicable for Text Classification, Image Object Detection and Tables;
-   * all other domains manage deployment automatically.
+   * Only applicable for Text Classification, Image Object Detection and Tables; all other domains manage deployment automatically.
    *
    * Returns an empty response in the
    * response field when it completes.
@@ -2554,12 +2548,7 @@ class AutoMlClient {
    *
    *   This object should have the same structure as [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}
    * @param {Object} [request.updateMask]
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
+   *   The update mask applies to the resource.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -2846,12 +2835,7 @@ class AutoMlClient {
    *
    *   This object should have the same structure as [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}
    * @param {Object} [request.updateMask]
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
+   *   The update mask applies to the resource.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]

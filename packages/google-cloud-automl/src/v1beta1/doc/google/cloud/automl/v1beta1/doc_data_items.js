@@ -48,9 +48,9 @@ const Image = {
  *   characters long.
  *
  * @property {string} mimeType
- *   The format of the source text. Currently the only two allowed values are
- *   "text/html" and "text/plain". If left blank the format is automatically
- *   determined from the type of the uploaded content.
+ *   Optional. The format of content. Currently the only two allowed
+ *   values are "text/html" and "text/plain". If left blank, the format is
+ *   automatically determined from the type of the uploaded content.
  *
  * @property {string} contentUri
  *   Output only. HTTP URI where you can download the content.
@@ -83,9 +83,9 @@ const Document = {
  * A representation of a row in a relational table.
  *
  * @property {string[]} columnSpecIds
- *   Input Only.
  *   The resource IDs of the column specs describing the columns of the row.
- *   If set must contain, but possibly in a different order, all input feature
+ *   If set must contain, but possibly in a different order, all input
+ *   feature
  *
  *   column_spec_ids
  *   of the Model this row is being passed to.
@@ -93,9 +93,9 @@ const Document = {
  *   field is set.
  *
  * @property {Object[]} values
- *   Input Only.
- *   The values of the row cells, given in the same order as the
- *   column_spec_ids, or, if not set, then in the same order as input feature
+ *   Required. The values of the row cells, given in the same order as the
+ *   column_spec_ids, or, if not set, then in the same order as input
+ *   feature
  *
  *   column_specs
  *   of the Model this row is being passed to.

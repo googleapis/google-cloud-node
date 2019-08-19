@@ -64,8 +64,7 @@
  *   This object should have the same structure as [TextSentimentModelMetadata]{@link google.cloud.automl.v1beta1.TextSentimentModelMetadata}
  *
  * @property {string} name
- *   Output only.
- *   Resource name of the model.
+ *   Output only. Resource name of the model.
  *   Format: `projects/{project_id}/locations/{location_id}/models/{model_id}`
  *
  * @property {string} displayName
@@ -75,19 +74,16 @@
  *   (_), and ASCII digits 0-9. It must start with a letter.
  *
  * @property {string} datasetId
- *   Required.
- *   The resource ID of the dataset used to create the model. The dataset must
+ *   Required. The resource ID of the dataset used to create the model. The dataset must
  *   come from the same ancestor project and location.
  *
  * @property {Object} createTime
- *   Output only.
- *   Timestamp when the model training finished  and can be used for prediction.
+ *   Output only. Timestamp when the model training finished  and can be used for prediction.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   Output only.
- *   Timestamp when this model was last updated.
+ *   Output only. Timestamp when this model was last updated.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

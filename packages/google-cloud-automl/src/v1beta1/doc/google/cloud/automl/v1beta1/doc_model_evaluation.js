@@ -59,15 +59,13 @@
  *   This object should have the same structure as [TextExtractionEvaluationMetrics]{@link google.cloud.automl.v1beta1.TextExtractionEvaluationMetrics}
  *
  * @property {string} name
- *   Output only.
- *   Resource name of the model evaluation.
+ *   Output only. Resource name of the model evaluation.
  *   Format:
  *
  *   `projects/{project_id}/locations/{location_id}/models/{model_id}/modelEvaluations/{model_evaluation_id}`
  *
  * @property {string} annotationSpecId
- *   Output only.
- *   The ID of the annotation spec that the model evaluation applies to. The
+ *   Output only. The ID of the annotation spec that the model evaluation applies to. The
  *   The ID is empty for the overall model evaluation.
  *   For Tables annotation specs in the dataset do not exist and this ID is
  *   always not set, but for CLASSIFICATION
@@ -92,14 +90,12 @@
  *   The display_name is empty for the overall model evaluation.
  *
  * @property {Object} createTime
- *   Output only.
- *   Timestamp when this model evaluation was created.
+ *   Output only. Timestamp when this model evaluation was created.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {number} evaluatedExampleCount
- *   Output only.
- *   The number of examples used for model evaluation, i.e. for
+ *   Output only. The number of examples used for model evaluation, i.e. for
  *   which ground truth from time of model creation is compared against the
  *   predicted annotations created by the model.
  *   For overall ModelEvaluation (i.e. with annotation_spec_id not set) this is

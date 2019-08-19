@@ -22,8 +22,7 @@
  *   Name of the model requested to serve the prediction.
  *
  * @property {Object} payload
- *   Required.
- *   Payload to perform a prediction on. The payload must match the
+ *   Required. Payload to perform a prediction on. The payload must match the
  *   problem type that the model was trained to solve.
  *
  *   This object should have the same structure as [ExamplePayload]{@link google.cloud.automl.v1beta1.ExamplePayload}
@@ -37,6 +36,14 @@
  *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
  *       makes predictions for an image, it will only produce results that have
  *       at least this confidence score. The default is 0.5.
+ *
+ *    *  For Image Object Detection:
+ *      `score_threshold` - (float) When Model detects objects on the image,
+ *          it will only produce bounding boxes which have at least this
+ *          confidence score. Value in 0 to 1 range, default is 0.5.
+ *      `max_bounding_box_count` - (int64) No more than this number of bounding
+ *          boxes will be returned in the response. Default is 100, the
+ *          requested value may be limited by server.
  *   *  For Tables:
  *      `feature_importance` - (boolean) Whether
  *
@@ -109,6 +116,27 @@ const PredictResponse = {
  *   Additional domain-specific parameters for the predictions, any string must
  *   be up to 25000 characters long.
  *
+ *   *  For Text Classification:
+ *
+ *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
+ *           makes predictions for a text snippet, it will only produce results
+ *           that have at least this confidence score. The default is 0.5.
+ *
+ *   *  For Image Classification:
+ *
+ *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
+ *           makes predictions for an image, it will only produce results that
+ *           have at least this confidence score. The default is 0.5.
+ *
+ *   *  For Image Object Detection:
+ *
+ *      `score_threshold` - (float) When Model detects objects on the image,
+ *          it will only produce bounding boxes which have at least this
+ *          confidence score. Value in 0 to 1 range, default is 0.5.
+ *      `max_bounding_box_count` - (int64) No more than this number of bounding
+ *          boxes will be produced per image. Default is 100, the
+ *          requested value may be limited by server.
+ *
  *   *  For Video Classification :
  *      `score_threshold` - (float) A value from 0.0 to 1.0. When the model
  *          makes predictions for a video, it will only produce results that
@@ -160,6 +188,18 @@ const BatchPredictRequest = {
  * Result of the Batch Predict. This message is returned in
  * response of the operation returned
  * by the PredictionService.BatchPredict.
+ *
+ * @property {Object.<string, string>} metadata
+ *   Additional domain-specific prediction response metadata.
+ *
+ *   *  For Image Object Detection:
+ *    `max_bounding_box_count` - (int64) At most that many bounding boxes per
+ *        image could have been returned.
+ *
+ *   *  For Video Object Tracking:
+ *    `max_bounding_box_count` - (int64) At most that many bounding boxes per
+ *        frame could have been returned.
+ *
  * @typedef BatchPredictResult
  * @memberof google.cloud.automl.v1beta1
  * @see [google.cloud.automl.v1beta1.BatchPredictResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/prediction_service.proto}

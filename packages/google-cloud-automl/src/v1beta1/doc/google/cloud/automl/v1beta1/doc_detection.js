@@ -19,14 +19,12 @@
  * Annotation details for image object detection.
  *
  * @property {Object} boundingBox
- *   Output only.
- *   The rectangle representing the object location.
+ *   Output only. The rectangle representing the object location.
  *
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.automl.v1beta1.BoundingPoly}
  *
  * @property {number} score
- *   Output only.
- *   The confidence that this annotation is positive for the parent example,
+ *   Output only. The confidence that this annotation is positive for the parent example,
  *   value in [0, 1], higher means higher positivity confidence.
  *
  * @typedef ImageObjectDetectionAnnotation
@@ -41,8 +39,7 @@ const ImageObjectDetectionAnnotation = {
  * Annotation details for video object tracking.
  *
  * @property {string} instanceId
- *   Optional.
- *   The instance of the object, expressed as a positive integer. Used to tell
+ *   Optional. The instance of the object, expressed as a positive integer. Used to tell
  *   apart objects of the same type (i.e. AnnotationSpec) when multiple are
  *   present on a single example.
  *   NOTE: Instance ID prediction quality is not a part of model evaluation and
@@ -63,8 +60,7 @@ const ImageObjectDetectionAnnotation = {
  *   This object should have the same structure as [BoundingPoly]{@link google.cloud.automl.v1beta1.BoundingPoly}
  *
  * @property {number} score
- *   Output only.
- *   The confidence that this annotation is positive for the video at
+ *   Output only. The confidence that this annotation is positive for the video at
  *   the time_offset, value in [0, 1], higher means higher positivity
  *   confidence. For annotations created by the user the score is 1. When
  *   user approves an annotation, the original float score is kept (and not

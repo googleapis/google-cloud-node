@@ -26,9 +26,12 @@
  *   training & prediction target.
  *   This column must be non-nullable and have one of following data types
  *   (otherwise model creation will error):
+ *
  *   * CATEGORY
+ *
  *   * FLOAT64
- *   Furthermore, if the type is CATEGORY , then only up to
+ *
+ *   If the type is CATEGORY , only up to
  *   100 unique values may exist in that column across all rows.
  *
  *   NOTE: Updates of this field will instantly affect any other users
@@ -73,11 +76,12 @@
  *   for the timestamp at which these stats were last updated.
  *
  * @property {Object} statsUpdateTime
- *   The most recent timestamp when target_column_correlations field and all
- *   descendant ColumnSpec.data_stats and ColumnSpec.top_correlated_columns
- *   fields were last (re-)generated. Any changes that happened to the dataset
- *   afterwards are not reflected in these fields values. The regeneration
- *   happens in the background on a best effort basis.
+ *   Output only. The most recent timestamp when target_column_correlations
+ *   field and all descendant ColumnSpec.data_stats and
+ *   ColumnSpec.top_correlated_columns fields were last (re-)generated. Any
+ *   changes that happened to the dataset afterwards are not reflected in these
+ *   fields values. The regeneration happens in the background on a best effort
+ *   basis.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -118,12 +122,16 @@ const TablesDatasetMetadata = {
  *
  *   ml_use_column
  *   must never be included here.
+ *
  *   Only 3 fields are used:
- *   name - May be set on CreateModel, if set only the columns specified are
- *          used, otherwise all primary table's columns (except the ones listed
- *          above) are used for the training and prediction input.
- *   display_name - Output only.
- *   data_type - Output only.
+ *
+ *   * name - May be set on CreateModel, if set only the columns specified are
+ *     used, otherwise all primary table's columns (except the ones listed
+ *     above) are used for the training and prediction input.
+ *
+ *   * display_name - Output only.
+ *
+ *   * data_type - Output only.
  *
  *   This object should have the same structure as [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}
  *
@@ -153,18 +161,6 @@ const TablesDatasetMetadata = {
  *     "MINIMIZE_RMSE" (default) - Minimize root-mean-squared error (RMSE).
  *     "MINIMIZE_MAE" - Minimize mean-absolute error (MAE).
  *     "MINIMIZE_RMSLE" - Minimize root-mean-squared log error (RMSLE).
- *
- *   FORECASTING:
- *     "MINIMIZE_RMSE" (default) - Minimize root-mean-squared error (RMSE).
- *     "MINIMIZE_MAE" - Minimize mean-absolute error (MAE).
- *
- * @property {number} optimizationObjectiveRecallValue
- *   Required when optimization_objective is "MAXIMIZE_PRECISION_AT_RECALL".
- *   Must be between 0 and 1, inclusive.
- *
- * @property {number} optimizationObjectivePrecisionValue
- *   Required when optimization_objective is "MAXIMIZE_RECALL_AT_PRECISION".
- *   Must be between 0 and 1, inclusive.
  *
  * @property {Object[]} tablesModelColumnInfo
  *   Output only. Auxiliary information for each of the
@@ -231,9 +227,11 @@ const TablesModelMetadata = {
  *
  *   target_column.
  *   The value depends on the column's DataType:
- *   CATEGORY - the predicted (with the above confidence `score`) CATEGORY
- *              value.
- *   FLOAT64 - the predicted (with above `prediction_interval`) FLOAT64 value.
+ *
+ *   * CATEGORY - the predicted (with the above confidence `score`) CATEGORY
+ *     value.
+ *
+ *   * FLOAT64 - the predicted (with above `prediction_interval`) FLOAT64 value.
  *
  *   This object should have the same structure as [Value]{@link google.protobuf.Value}
  *
@@ -273,9 +271,7 @@ const TablesAnnotation = {
  *   its ColumnSpec).
  *
  * @property {number} featureImportance
- *   Output only.
- *
- *   When given as part of a Model (always populated):
+ *   Output only. When given as part of a Model (always populated):
  *   Measurement of how much model predictions correctness on the TEST data
  *   depend on values in this column. A value between 0 and 1, higher means
  *   higher influence. These values are normalized - for all input feature

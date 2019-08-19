@@ -45,6 +45,10 @@
  * @property {number} rowCount
  *   Output only. The number of rows (i.e. examples) in the table.
  *
+ * @property {number} validRowCount
+ *   Output only. The number of valid rows (i.e. without values that don't match
+ *   DataType-s of their columns).
+ *
  * @property {number} columnCount
  *   Output only. The number of columns of the table. That is, the number of
  *   child ColumnSpec-s.

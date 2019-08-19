@@ -23,10 +23,10 @@
  * gcs_source
  * is expected, unless specified otherwise. Additionally any input .CSV file
  * by itself must be 100MB or smaller, unless specified otherwise.
- * If an "example" file (i.e. image, video etc.) with identical content
+ * If an "example" file (that is, image, video etc.) with identical content
  * (even if it had different GCS_FILE_PATH) is mentioned multiple times, then
  * its label, bounding boxes etc. are appended. The same file should be always
- * provided with the same ML_USE and GCS_FILE_PATH, if it is not then
+ * provided with the same ML_USE and GCS_FILE_PATH, if it is not, then
  * these values are nondeterministically selected from the given ones.
  *
  * The formats are represented in EBNF with commas being literal and with
@@ -56,12 +56,16 @@
  *           BOUNDING_BOX-es per image are allowed (one BOUNDING_BOX is defined
  *           per line). If an image has not yet been labeled, then it should be
  *           mentioned just once with no LABEL and the ",,,,,,," in place of the
+ *           BOUNDING_BOX. For images which are known to not contain any
+ *           bounding boxes, they should be labelled explictly as
+ *           "NEGATIVE_IMAGE", followed by ",,,,,,," in place of the
  *           BOUNDING_BOX.
- *         Four sample rows:
+ *         Sample rows:
  *           TRAIN,gs://folder/image1.png,car,0.1,0.1,,,0.3,0.3,,
  *           TRAIN,gs://folder/image1.png,bike,.7,.6,,,.8,.9,,
  *           UNASSIGNED,gs://folder/im2.png,car,0.1,0.1,0.2,0.1,0.2,0.3,0.1,0.3
  *           TEST,gs://folder/im3.png,,,,,,,,,
+ *           TRAIN,gs://folder/im4.png,NEGATIVE_IMAGE,,,,,,,,,
  *
  *  *  For Video Classification:
  *         CSV file(s) with each line in format:
@@ -126,21 +130,21 @@
  *  *  For Text Extraction:
  *         CSV file(s) with each line in format:
  *           ML_USE,GCS_FILE_PATH
- *           GCS_FILE_PATH leads to a .JSONL (i.e. JSON Lines) file which either
- *           imports text in-line or as documents.
+ *           GCS_FILE_PATH leads to a .JSONL (that is, JSON Lines) file which
+ *           either imports text in-line or as documents.
  *           The in-line .JSONL file contains, per line, a proto that wraps a
- *             TextSnippet proto (in json representation) followed by one or
- *             more AnnotationPayload protos (called annotations), which have
- *             display_name and text_extraction detail populated.
- *             The given text is expected to be annotated exhaustively, e.g. if
- *             you look for animals and text contains "dolphin" that is not
- *             labeled, then "dolphin" will be assumed to not be an animal. Any
- *             given text snippet content must have 30,000 characters or less,
- *             and also be UTF-8 NFC encoded (ASCII already is).           The document .JSONL file contains, per line, a proto that wraps a
- *             Document proto with input_config set. Only PDF documents are
- *             supported now, and each document may be up to 2MB large.
- *             Currently annotations on documents cannot be specified at import.
- *           Any given .JSONL file must be 100MB or smaller.
+ *           TextSnippet proto (in json representation) followed by one or more
+ *           AnnotationPayload protos (called annotations), which have
+ *           display_name and text_extraction detail populated. The given text
+ *           is expected to be annotated exhaustively, for example, if you look
+ *           for animals and text contains "dolphin" that is not labeled, then
+ *           "dolphin" is assumed to not be an animal. Any given text snippet
+ *           content must have 30,000 characters or less,  and also be UTF-8 NFC
+ *           encoded (ASCII already is).           The document .JSONL file contains, per line, a proto that wraps a
+ *           Document proto with input_config set. Only PDF documents are
+ *           supported now, and each document may be up to 2MB large. Currently
+ *           annotations on documents cannot be specified at import. Any given
+ *           .JSONL file must be 100MB or smaller.
  *         Three sample CSV rows:
  *           TRAIN,gs://folder/file1.jsonl
  *           VALIDATE,gs://folder/file2.jsonl
@@ -210,44 +214,44 @@
  *           TEXT_SNIPPET and GCS_FILE_PATH are distinguished by a pattern. If
  *           the column content is a valid gcs file path, i.e. prefixed by
  *           "gs://", it will be treated as a GCS_FILE_PATH, else if the content
- *           is enclosed within double quotes (""), it will
- *           be treated as a TEXT_SNIPPET. In the GCS_FILE_PATH case, the path
- *           must lead to a .txt file with UTF-8 encoding, e.g.
- *           "gs://folder/content.txt", and the content in it will be extracted
+ *           is enclosed within double quotes (""), it is
+ *           treated as a TEXT_SNIPPET. In the GCS_FILE_PATH case, the path
+ *           must lead to a .txt file with UTF-8 encoding, for example,
+ *           "gs://folder/content.txt", and the content in it is extracted
  *           as a text snippet. In TEXT_SNIPPET case, the column content
- *           excluding quotes will be treated as to be imported text snippet. In
+ *           excluding quotes is treated as to be imported text snippet. In
  *           both cases, the text snippet/file size must be within 128kB.
  *           Maximum 100 unique labels are allowed per CSV row.
- *         Four sample rows:
- *         TRAIN,"They have bad food and very rude",RudeService,BadFood
- *         TRAIN,gs://folder/content.txt,SlowService
- *         TEST,"Typically always bad service there.",RudeService
- *         VALIDATE,"Stomach ache to go.",BadFood
+ *         Sample rows:
+ *           TRAIN,"They have bad food and very rude",RudeService,BadFood
+ *           TRAIN,gs://folder/content.txt,SlowService
+ *           TEST,"Typically always bad service there.",RudeService
+ *           VALIDATE,"Stomach ache to go.",BadFood
  *
  *  *  For Text Sentiment:
  *         CSV file(s) with each line in format:
  *           ML_USE,(TEXT_SNIPPET | GCS_FILE_PATH),SENTIMENT
  *           TEXT_SNIPPET and GCS_FILE_PATH are distinguished by a pattern. If
- *           the column content is a valid gcs file path, i.e. prefixed by
- *           "gs://", it will be treated as a GCS_FILE_PATH, otherwise it will
- *           be treated as a TEXT_SNIPPET. In the GCS_FILE_PATH case, the path
- *           must lead to a .txt file with UTF-8 encoding, e.g.
- *           "gs://folder/content.txt", and the content in it will be extracted
+ *           the column content is a valid gcs file path, that is, prefixed by
+ *           "gs://", it is treated as a GCS_FILE_PATH, otherwise it is treated
+ *           as a TEXT_SNIPPET. In the GCS_FILE_PATH case, the path
+ *           must lead to a .txt file with UTF-8 encoding, for example,
+ *           "gs://folder/content.txt", and the content in it is extracted
  *           as a text snippet. In TEXT_SNIPPET case, the column content itself
- *           will be treated as to be imported text snippet. In both cases, the
+ *           is treated as to be imported text snippet. In both cases, the
  *           text snippet must be up to 500 characters long.
- *         Four sample rows:
- *         TRAIN,"@freewrytin God is way too good for Claritin",2
- *         TRAIN,"I need Claritin so bad",3
- *         TEST,"Thank god for Claritin.",4
- *         VALIDATE,gs://folder/content.txt,2
+ *         Sample rows:
+ *           TRAIN,"@freewrytin this is way too good for your product",2
+ *           TRAIN,"I need this product so bad",3
+ *           TEST,"Thank you for this product.",4
+ *           VALIDATE,gs://folder/content.txt,2
  *
  *   *  For Tables:
  *         Either
  *         gcs_source or
  *
  * bigquery_source
- *         can be used. All inputs will be concatenated into a single
+ *         can be used. All inputs is concatenated into a single
  *
  * primary_table
  *         For gcs_source:
@@ -270,7 +274,6 @@
  *         An imported table must have between 2 and 1,000 columns, inclusive,
  *         and between 1000 and 100,000,000 rows, inclusive. There are at most 5
  *         import data running in parallel.
- *
  *  Definitions:
  *  ML_USE = "TRAIN" | "VALIDATE" | "TEST" | "UNASSIGNED"
  *           Describes how the given example (file) should be used for model
@@ -329,7 +332,7 @@
  *  If any of the provided CSV files can't be parsed or if more than certain
  *  percent of CSV rows cannot be processed then the operation fails and
  *  nothing is imported. Regardless of overall success or failure the per-row
- *  failures, up to a certain count cap, will be listed in
+ *  failures, up to a certain count cap, is listed in
  *  Operation.metadata.partial_failures.
  *
  * @property {Object} gcsSource
@@ -374,6 +377,28 @@ const InputConfig = {
  * The formats are represented in EBNF with commas being literal and with
  * non-terminal symbols defined near the end of this comment. The formats
  * are:
+ *
+ *  *  For Image Classification:
+ *         CSV file(s) with each line having just a single column:
+ *           GCS_FILE_PATH
+ *           which leads to image of up to 30MB in size. Supported
+ *           extensions: .JPEG, .GIF, .PNG. This path is treated as the ID in
+ *           the Batch predict output.
+ *         Three sample rows:
+ *           gs://folder/image1.jpeg
+ *           gs://folder/image2.gif
+ *           gs://folder/image3.png
+ *
+ *  *  For Image Object Detection:
+ *         CSV file(s) with each line having just a single column:
+ *           GCS_FILE_PATH
+ *           which leads to image of up to 30MB in size. Supported
+ *           extensions: .JPEG, .GIF, .PNG. This path is treated as the ID in
+ *           the Batch predict output.
+ *         Three sample rows:
+ *           gs://folder/image1.jpeg
+ *           gs://folder/image2.gif
+ *           gs://folder/image3.png
  *  *  For Video Classification:
  *         CSV file(s) with each line in format:
  *           GCS_FILE_PATH,TIME_SEGMENT_START,TIME_SEGMENT_END
@@ -397,6 +422,28 @@ const InputConfig = {
  *           gs://folder/video1.mp4,10,240
  *           gs://folder/video1.mp4,300,360
  *           gs://folder/vid2.mov,0,inf
+ *  *  For Text Classification:
+ *         CSV file(s) with each line having just a single column:
+ *           GCS_FILE_PATH | TEXT_SNIPPET
+ *         Any given text file can have size upto 128kB.
+ *         Any given text snippet content must have 60,000 characters or less.
+ *         Three sample rows:
+ *           gs://folder/text1.txt
+ *           "Some text content to predict"
+ *           gs://folder/text3.pdf
+ *         Supported file extensions: .txt, .pdf
+ *
+ *  *  For Text Sentiment:
+ *         CSV file(s) with each line having just a single column:
+ *           GCS_FILE_PATH | TEXT_SNIPPET
+ *         Any given text file can have size upto 128kB.
+ *         Any given text snippet content must have 500 characters or less.
+ *         Three sample rows:
+ *           gs://folder/text1.txt
+ *           "Some text content to predict"
+ *           gs://folder/text3.pdf
+ *         Supported file extensions: .txt, .pdf
+ *
  *  * For Text Extraction
  *         .JSONL (i.e. JSON Lines) file(s) which either provide text in-line or
  *         as documents (for a single BatchPredict call only one of the these
@@ -469,101 +516,51 @@ const InputConfig = {
  *           100GB or smaller, where first file must have a header containing
  *           column names. If the first row of a subsequent file is the same as
  *           the header, then it is also treated as a header. All other rows
- *           contain values for the corresponding columns. For all
- *           CLASSIFICATION and REGRESSION
- *
- * prediction_type-s:
- *             The column names must contain the model's
+ *           contain values for the corresponding columns.
+ *           The column names must contain the model's
  *
  * input_feature_column_specs'
  *
  * display_name-s
- *             (order doesn't matter). The columns corresponding to the model's
- *             input feature column specs must contain values compatible with
- *             the column spec's data types. Prediction on all the rows, i.e.
- *             the CSV lines, will be attempted. First three sample rows of a
- *             CSV file:
+ *           (order doesn't matter). The columns corresponding to the model's
+ *           input feature column specs must contain values compatible with the
+ *           column spec's data types. Prediction on all the rows, i.e. the CSV
+ *           lines, will be attempted. For FORECASTING
+ *
+ * prediction_type:
+ *           all columns having
+ *
+ * TIME_SERIES_AVAILABLE_PAST_ONLY
+ *           type will be ignored.
+ *           First three sample rows of a CSV file:
  *             "First Name","Last Name","Dob","Addresses"
  *
  * "John","Doe","1968-01-22","[{"status":"current","address":"123_First_Avenue","city":"Seattle","state":"WA","zip":"11111","numberOfYears":"1"},{"status":"previous","address":"456_Main_Street","city":"Portland","state":"OR","zip":"22222","numberOfYears":"5"}]"
  *
  * "Jane","Doe","1980-10-16","[{"status":"current","address":"789_Any_Avenue","city":"Albany","state":"NY","zip":"33333","numberOfYears":"2"},{"status":"previous","address":"321_Main_Street","city":"Hoboken","state":"NJ","zip":"44444","numberOfYears":"3"}]}
- *           For FORECASTING
- *
- * prediction_type:
- *             The column names must contain the union of the model's
- *
- * input_feature_column_specs'
- *
- * display_name-s
- *             and
- *
- * target_column_specs'
- *
- * display_name
- *             (order doesn't matter), with values compatible with these column
- *             specs data types, except as specified below.
- *             The input rows must contain not only the to-be-predicted rows
- *             but also the historical data rows, even if they would be
- *             identical as the ones on which the model has been trained.
- *             The historical rows must have non-NULL target column
- *             values. The to-be-predicted rows must have NULL values in the
- *             target column and all columns having
- *
- * TIME_SERIES_AVAILABLE_PAST_ONLY
- *             type, regardless if these columns are
- *             nullable.
- *             Prediction only on the to-be-predicted rows will be attempted.
- *             First four sample rows of a CSV file:
- *
- * "Year","City","OlympicsThatYear","Population","WaterUsedGigaGallons"
- *             "2000","NYC","true","8008278","452.7"
- *             "2001","NYC","false","8024963","432.2"
- *             "2002","NYC","true","",""
  *         BigQuery case:
  *           An URI of a BigQuery table. The user data size of the BigQuery
  *           table must be 100GB or smaller.
- *           For all CLASSIFICATION and REGRESSION
- *
- * prediction_type-s:
- *             The column names must contain the model's
+ *           The column names must contain the model's
  *
  * input_feature_column_specs'
  *
  * display_name-s
- *             (order doesn't matter). The columns corresponding to the model's
- *             input feature column specs must contain values compatible with
- *             the column spec's data types. Prediction on all the rows of the
- *             table will be attempted.
- *           For FORECASTING
+ *           (order doesn't matter). The columns corresponding to the model's
+ *           input feature column specs must contain values compatible with the
+ *           column spec's data types. Prediction on all the rows of the table
+ *           will be attempted. For FORECASTING
  *
  * prediction_type:
- *             The column names must contain the union of the model's
- *
- * input_feature_column_specs'
- *
- * display_name-s
- *             and
- *
- * target_column_specs'
- *
- * display_name
- *             (order doesn't matter), with values compatible with these column
- *             specs data types, except as specified below.
- *             The table's rows must contain not only the to-be-predicted rows
- *             but also the historical data rows, even if they would be
- *             identical as the ones on which the model has been trained.
- *             The historical rows must have non-NULL target column values.
- *             The to-be-predicted rows must have NULL values in the
- *             target column and all columns having
+ *           all columns having
  *
  * TIME_SERIES_AVAILABLE_PAST_ONLY
- *             type, regardless if these columns are
- *             nullable.
- *             Prediction only on the to-be-predicted rows will be attempted.
+ *           type will be ignored.
  *
  *  Definitions:
  *  GCS_FILE_PATH = A path to file on GCS, e.g. "gs://folder/video.avi".
+ *  TEXT_SNIPPET = A content of a text snippet, UTF-8 encoded, enclosed within
+ *                 double quotes ("")
  *  TIME_SEGMENT_START = TIME_OFFSET
  *                       Expresses a beginning, inclusive, of a time segment
  *                       within an
@@ -683,11 +680,55 @@ const OutputConfig = {
  *
  * gcs_destination
  * must be set unless specified otherwise for a domain. If gcs_destination is
- * set then in the given directory a new directory will be created. Its name
+ * set then in the given directory a new directory is created. Its name
  * will be
  * "prediction-<model-display-name>-<timestamp-of-prediction-call>",
  * where timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format. The contents
  * of it depends on the ML problem the predictions are made for.
+ *
+ *  *  For Image Classification:
+ *         In the created directory files `image_classification_1.jsonl`,
+ *         `image_classification_2.jsonl`,...,`image_classification_N.jsonl`
+ *         will be created, where N may be 1, and depends on the
+ *         total number of the successfully predicted images and annotations.
+ *         A single image will be listed only once with all its annotations,
+ *         and its annotations will never be split across files.
+ *         Each .JSONL file will contain, per line, a JSON representation of a
+ *         proto that wraps image's "ID" : "<id_value>" followed by a list of
+ *         zero or more AnnotationPayload protos (called annotations), which
+ *         have classification detail populated.
+ *         If prediction for any image failed (partially or completely), then an
+ *         additional `errors_1.jsonl`, `errors_2.jsonl`,..., `errors_N.jsonl`
+ *         files will be created (N depends on total number of failed
+ *         predictions). These files will have a JSON representation of a proto
+ *         that wraps the same "ID" : "<id_value>" but here followed by
+ *         exactly one
+ *
+ * [`google.rpc.Status`](https:
+ * //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+ *         containing only `code` and `message`fields.
+ *
+ *  *  For Image Object Detection:
+ *         In the created directory files `image_object_detection_1.jsonl`,
+ *         `image_object_detection_2.jsonl`,...,`image_object_detection_N.jsonl`
+ *         will be created, where N may be 1, and depends on the
+ *         total number of the successfully predicted images and annotations.
+ *         Each .JSONL file will contain, per line, a JSON representation of a
+ *         proto that wraps image's "ID" : "<id_value>" followed by a list of
+ *         zero or more AnnotationPayload protos (called annotations), which
+ *         have image_object_detection detail populated. A single image will
+ *         be listed only once with all its annotations, and its annotations
+ *         will never be split across files.
+ *         If prediction for any image failed (partially or completely), then
+ *         additional `errors_1.jsonl`, `errors_2.jsonl`,..., `errors_N.jsonl`
+ *         files will be created (N depends on total number of failed
+ *         predictions). These files will have a JSON representation of a proto
+ *         that wraps the same "ID" : "<id_value>" but here followed by
+ *         exactly one
+ *
+ * [`google.rpc.Status`](https:
+ * //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+ *         containing only `code` and `message`fields.
  *  *  For Video Classification:
  *         In the created directory a video_classification.csv file, and a .JSON
  *         file per each video classification requested in the input (i.e. each
@@ -740,6 +781,54 @@ const OutputConfig = {
  *         for each frame of the video time segment the file is assigned to in
  *         video_object_tracking.csv. All AnnotationPayload protos will have
  *         video_object_tracking field set.
+ *  *  For Text Classification:
+ *         In the created directory files `text_classification_1.jsonl`,
+ *         `text_classification_2.jsonl`,...,`text_classification_N.jsonl`
+ *         will be created, where N may be 1, and depends on the
+ *         total number of inputs and annotations found.
+ *
+ *         Each .JSONL file will contain, per line, a JSON representation of a
+ *         proto that wraps input text snippet or input text file and a list of
+ *         zero or more AnnotationPayload protos (called annotations), which
+ *         have classification detail populated. A single text snippet or file
+ *         will be listed only once with all its annotations, and its
+ *         annotations will never be split across files.
+ *
+ *         If prediction for any text snippet or file failed (partially or
+ *         completely), then additional `errors_1.jsonl`, `errors_2.jsonl`,...,
+ *         `errors_N.jsonl` files will be created (N depends on total number of
+ *         failed predictions). These files will have a JSON representation of a
+ *         proto that wraps input text snippet or input text file followed by
+ *         exactly one
+ *
+ * [`google.rpc.Status`](https:
+ * //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+ *         containing only `code` and `message`.
+ *
+ *  *  For Text Sentiment:
+ *         In the created directory files `text_sentiment_1.jsonl`,
+ *         `text_sentiment_2.jsonl`,...,`text_sentiment_N.jsonl`
+ *         will be created, where N may be 1, and depends on the
+ *         total number of inputs and annotations found.
+ *
+ *         Each .JSONL file will contain, per line, a JSON representation of a
+ *         proto that wraps input text snippet or input text file and a list of
+ *         zero or more AnnotationPayload protos (called annotations), which
+ *         have text_sentiment detail populated. A single text snippet or file
+ *         will be listed only once with all its annotations, and its
+ *         annotations will never be split across files.
+ *
+ *         If prediction for any text snippet or file failed (partially or
+ *         completely), then additional `errors_1.jsonl`, `errors_2.jsonl`,...,
+ *         `errors_N.jsonl` files will be created (N depends on total number of
+ *         failed predictions). These files will have a JSON representation of a
+ *         proto that wraps input text snippet or input text file followed by
+ *         exactly one
+ *
+ * [`google.rpc.Status`](https:
+ * //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+ *         containing only `code` and `message`.
+ *
  *   *  For Text Extraction:
  *         In the created directory files `text_extraction_1.jsonl`,
  *         `text_extraction_2.jsonl`,...,`text_extraction_N.jsonl`
@@ -749,7 +838,8 @@ const OutputConfig = {
  *         used inline text, or documents.
  *         If input was inline, then each .JSONL file will contain, per line,
  *           a JSON representation of a proto that wraps given in request text
- *           snippet's "id" : "<id_value>" followed by a list of zero or more
+ *           snippet's "id" (if specified), followed by input text snippet,
+ *           and a list of zero or more
  *           AnnotationPayload protos (called annotations), which have
  *           text_extraction detail populated. A single text snippet will be
  *           listed only once with all its annotations, and its annotations will
@@ -933,7 +1023,10 @@ const BatchPredictOutputConfig = {
  *   * docker - Used for Docker containers. Use the params field to customize
  *              the container. The container is verified to work correctly on
  *              ubuntu 16.04 operating system. See more at
- *              [containers quickstart](https://cloud.google.com/vision/automl/docs/containers-gcs-quickstart)
+ *              [containers
+ *
+ *   quickstart](https:
+ *   //cloud.google.com/vision/automl/docs/containers-gcs-quickstart)
  *   * core_ml - Used for iOS mobile devices.
  *
  * @property {Object.<string, string>} params

@@ -81,14 +81,6 @@ const StructType = {
  * `TypeCode` is used as a part of
  * DataType.
  *
- * Each legal value of a DataType can be encoded to or decoded from a JSON
- * value, using the encodings listed below, and definitions of which can be
- * found at
- *
- * https:
- * //developers.google.com/protocol-buffers
- * // /docs/reference/google.protobuf#value.
- *
  * @enum {number}
  * @memberof google.cloud.automl.v1beta1
  */

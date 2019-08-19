@@ -110,12 +110,7 @@ const ListDatasetsResponse = {
  *   This object should have the same structure as [Dataset]{@link google.cloud.automl.v1beta1.Dataset}
  *
  * @property {Object} updateMask
- *   The update mask applies to the resource. For the `FieldMask` definition,
- *   see
- *
- *   https:
- *   //developers.google.com/protocol-buffers
- *   // /docs/reference/google.protobuf#fieldmask
+ *   The update mask applies to the resource.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -275,12 +270,7 @@ const ListTableSpecsResponse = {
  *   This object should have the same structure as [TableSpec]{@link google.cloud.automl.v1beta1.TableSpec}
  *
  * @property {Object} updateMask
- *   The update mask applies to the resource. For the `FieldMask` definition,
- *   see
- *
- *   https:
- *   //developers.google.com/protocol-buffers
- *   // /docs/reference/google.protobuf#fieldmask
+ *   The update mask applies to the resource.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -372,12 +362,7 @@ const ListColumnSpecsResponse = {
  *   This object should have the same structure as [ColumnSpec]{@link google.cloud.automl.v1beta1.ColumnSpec}
  *
  * @property {Object} updateMask
- *   The update mask applies to the resource. For the `FieldMask` definition,
- *   see
- *
- *   https:
- *   //developers.google.com/protocol-buffers
- *   // /docs/reference/google.protobuf#fieldmask
+ *   The update mask applies to the resource.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *

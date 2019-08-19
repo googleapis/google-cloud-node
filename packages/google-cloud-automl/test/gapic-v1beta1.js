@@ -1592,12 +1592,14 @@ describe('AutoMlClient', () => {
       const name2 = 'name2-1052831874';
       const timeColumnSpecId = 'timeColumnSpecId1558734824';
       const rowCount = 1340416618;
+      const validRowCount = 406068761;
       const columnCount = 122671386;
       const etag = 'etag3123477';
       const expectedResponse = {
         name: name2,
         timeColumnSpecId: timeColumnSpecId,
         rowCount: rowCount,
+        validRowCount: validRowCount,
         columnCount: columnCount,
         etag: etag,
       };
@@ -1740,12 +1742,14 @@ describe('AutoMlClient', () => {
       const name = 'name3373707';
       const timeColumnSpecId = 'timeColumnSpecId1558734824';
       const rowCount = 1340416618;
+      const validRowCount = 406068761;
       const columnCount = 122671386;
       const etag = 'etag3123477';
       const expectedResponse = {
         name: name,
         timeColumnSpecId: timeColumnSpecId,
         rowCount: rowCount,
+        validRowCount: validRowCount,
         columnCount: columnCount,
         etag: etag,
       };

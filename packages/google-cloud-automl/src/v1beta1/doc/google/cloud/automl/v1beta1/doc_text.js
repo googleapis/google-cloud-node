@@ -19,8 +19,7 @@
  * Dataset metadata for classification.
  *
  * @property {number} classificationType
- *   Required.
- *   Type of the classification problem.
+ *   Required. Type of the classification problem.
  *
  *   The number should be among the values of [ClassificationType]{@link google.cloud.automl.v1beta1.ClassificationType}
  *
@@ -66,8 +65,7 @@ const TextExtractionModelMetadata = {
  * Dataset metadata for text sentiment.
  *
  * @property {number} sentimentMax
- *   Required.
- *   A sentiment is expressed as an integer ordinal, where higher value
+ *   Required. A sentiment is expressed as an integer ordinal, where higher value
  *   means a more positive sentiment. The range of sentiments that will be used
  *   is between 0 and sentiment_max (inclusive on both ends), and all the values
  *   in the range must be represented in the dataset before a model can be
