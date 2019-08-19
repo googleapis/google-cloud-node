@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.1.4...v1.2.0) (2019-08-19)
+
+
+### Features
+
+* adds support for multiple regions ([244e21e](https://www.github.com/googleapis/nodejs-vision/commit/244e21e))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-vision/compare/v1.1.3...v1.1.4) (2019-08-05)
 
 
