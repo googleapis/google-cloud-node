@@ -23,7 +23,7 @@
     "csv": "^5.1.1",
     "execa": "^2.0.0",
     "mathjs": "^6.0.0",
-    "yargs": "^13.2.1"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "mocha": "^6.0.1"
