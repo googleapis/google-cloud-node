@@ -6,99 +6,28 @@
           "nested": {
             "asset": {
               "nested": {
-                "v1": {
+                "v1p2beta1": {
                   "options": {
-                    "csharp_namespace": "Google.Cloud.Asset.V1",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1;asset",
+                    "csharp_namespace": "Google.Cloud.Asset.v1p2beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/asset/v1p2beta1;asset",
                     "java_multiple_files": true,
-                    "java_outer_classname": "AssetServiceProto",
-                    "java_package": "com.google.cloud.asset.v1",
-                    "php_namespace": "Google\\Cloud\\Asset\\V1"
+                    "java_outer_classname": "AssetProto",
+                    "java_package": "com.google.cloud.asset.v1p2beta1",
+                    "php_namespace": "Google\\Cloud\\Asset\\v1p2beta1",
+                    "cc_enable_arenas": true
                   },
                   "nested": {
-                    "TemporalAsset": {
-                      "fields": {
-                        "window": {
-                          "type": "TimeWindow",
-                          "id": 1
-                        },
-                        "deleted": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "asset": {
-                          "type": "Asset",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TimeWindow": {
-                      "fields": {
-                        "startTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Asset": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "assetType": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "resource": {
-                          "type": "Resource",
-                          "id": 3
-                        },
-                        "iamPolicy": {
-                          "type": "google.iam.v1.Policy",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "Resource": {
-                      "fields": {
-                        "version": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "discoveryDocumentUri": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "discoveryName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "resourceUrl": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "data": {
-                          "type": "google.protobuf.Struct",
-                          "id": 6
-                        }
-                      }
-                    },
                     "AssetService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudasset.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "ExportAssets": {
                           "requestType": "ExportAssetsRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).post": "/v1/{parent=*/*}:exportAssets",
+                            "(google.api.http).post": "/v1p2beta1/{parent=*/*}:exportAssets",
                             "(google.api.http).body": "*"
                           }
                         },
@@ -106,7 +35,44 @@
                           "requestType": "BatchGetAssetsHistoryRequest",
                           "responseType": "BatchGetAssetsHistoryResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=*/*}:batchGetAssetsHistory"
+                            "(google.api.http).get": "/v1p2beta1/{parent=*/*}:batchGetAssetsHistory"
+                          }
+                        },
+                        "CreateFeed": {
+                          "requestType": "CreateFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).post": "/v1p2beta1/{parent=*/*}/feeds",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "GetFeed": {
+                          "requestType": "GetFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).get": "/v1p2beta1/{name=*/*/feeds/*}"
+                          }
+                        },
+                        "ListFeeds": {
+                          "requestType": "ListFeedsRequest",
+                          "responseType": "ListFeedsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1p2beta1/{parent=*/*}/feeds"
+                          }
+                        },
+                        "UpdateFeed": {
+                          "requestType": "UpdateFeedRequest",
+                          "responseType": "Feed",
+                          "options": {
+                            "(google.api.http).patch": "/v1p2beta1/{feed.name=*/*/feeds/*}",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "DeleteFeed": {
+                          "requestType": "DeleteFeedRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1p2beta1/{name=*/*/feeds/*}"
                           }
                         }
                       }
@@ -178,11 +144,73 @@
                         }
                       }
                     },
+                    "CreateFeedRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "feedId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "feed": {
+                          "type": "Feed",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetFeedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListFeedsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListFeedsResponse": {
+                      "fields": {
+                        "feeds": {
+                          "rule": "repeated",
+                          "type": "Feed",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateFeedRequest": {
+                      "fields": {
+                        "feed": {
+                          "type": "Feed",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteFeedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "OutputConfig": {
                       "oneofs": {
                         "destination": {
                           "oneof": [
-                            "gcsDestination"
+                            "gcsDestination",
+                            "bigqueryDestination"
                           ]
                         }
                       },
@@ -190,6 +218,10 @@
                         "gcsDestination": {
                           "type": "GcsDestination",
                           "id": 1
+                        },
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 2
                         }
                       }
                     },
@@ -197,12 +229,41 @@
                       "oneofs": {
                         "objectUri": {
                           "oneof": [
-                            "uri"
+                            "uri",
+                            "uriPrefix"
                           ]
                         }
                       },
                       "fields": {
                         "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uriPrefix": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BigQueryDestination": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "table": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PubsubDestination": {
+                      "fields": {
+                        "topic": {
                           "type": "string",
                           "id": 1
                         }
@@ -212,7 +273,140 @@
                       "values": {
                         "CONTENT_TYPE_UNSPECIFIED": 0,
                         "RESOURCE": 1,
-                        "IAM_POLICY": 2
+                        "IAM_POLICY": 2,
+                        "IAM_POLICY_NAME": 3,
+                        "ORG_POLICY": 4,
+                        "ACCESS_POLICY": 5
+                      }
+                    },
+                    "FeedOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "pubsubDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pubsubDestination": {
+                          "type": "PubsubDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Feed": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetNames": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "assetTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "contentType": {
+                          "type": "ContentType",
+                          "id": 4
+                        },
+                        "feedOutputConfig": {
+                          "type": "FeedOutputConfig",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "TemporalAsset": {
+                      "fields": {
+                        "window": {
+                          "type": "TimeWindow",
+                          "id": 1
+                        },
+                        "deleted": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "asset": {
+                          "type": "Asset",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TimeWindow": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Asset": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resource": {
+                          "type": "Resource",
+                          "id": 3
+                        },
+                        "iamPolicy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 4
+                        },
+                        "iamPolicyName": {
+                          "type": "bytes",
+                          "id": 5
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "Resource": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "discoveryDocumentUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "discoveryName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "resourceUrl": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "data": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        },
+                        "internalData": {
+                          "type": "google.protobuf.Any",
+                          "id": 7
+                        }
                       }
                     }
                   }
@@ -225,7 +419,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -317,6 +511,22 @@
                   "id": 2
                 }
               }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },
@@ -1312,6 +1522,15 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
             }
           }
         },
