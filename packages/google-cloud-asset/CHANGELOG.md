@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.1.4...v1.2.0) (2019-08-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([e3e5872](https://www.github.com/googleapis/nodejs-asset/commit/e3e5872))
+
+
+### Features
+
+* introduce v1p2beta1 client ([#181](https://www.github.com/googleapis/nodejs-asset/issues/181)) ([675ae04](https://www.github.com/googleapis/nodejs-asset/commit/675ae04))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-asset/compare/v1.1.3...v1.1.4) (2019-08-05)
 
 
