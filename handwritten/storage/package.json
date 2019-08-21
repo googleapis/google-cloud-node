@@ -106,7 +106,7 @@
     "jsdoc-fresh": "^1.0.1",
     "linkinator": "^1.5.0",
     "mocha": "^6.0.0",
-    "nock": "^11.0.0",
+    "nock": "~11.0.0",
     "node-fetch": "^2.2.0",
     "normalize-newline": "^3.0.0",
     "nyc": "^14.0.0",
