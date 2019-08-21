@@ -4,6 +4,41 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v1.1.1...v2.0.0) (2019-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **middleware:** We now promote the `logEntry` metadata field in a
+winston log info object to be the `logName` reported to Stackdriver. This means
+that the logs will show up under the log name specified by the `logName`. In addition
+there are several breaking changes to users of the express middleware:
+
+* The middleware function has been replaced by makeMiddleware.
+* makeMiddleware expects a winston logger to be passed in.
+* Previously, we would append a `_applog` suffix to the user provided
+  application log name. We no longer do that. We use the user provided
+  log name for the application logs. The request logs now have a suffix.
+
+Rationale:
+Let the middleware users provide a winston logger that we annotate with a transport
+rather than creating two winston loggers on user's behalf. We avoid the
+need for having two transports by pomoting the `logName` field from the
+winston metadata into the LogEntry. This allows a child logger to write
+to a different stackdriver log stream - as needed for request bundling.
+
+### Bug Fixes
+
+* **deps:** update dependency google-auth-library to v5 ([#375](https://www.github.com/googleapis/nodejs-logging-winston/issues/375)) ([f0ec607](https://www.github.com/googleapis/nodejs-logging-winston/commit/f0ec607))
+* **docs:** generate correct examples in README.md ([#376](https://www.github.com/googleapis/nodejs-logging-winston/issues/376)) ([7517462](https://www.github.com/googleapis/nodejs-logging-winston/commit/7517462))
+* **middleware:** allow users to provide middleware ([#369](https://www.github.com/googleapis/nodejs-logging-winston/issues/369)) ([e61dad9](https://www.github.com/googleapis/nodejs-logging-winston/commit/e61dad9))
+* **middleware:** use winston provided child logger api ([#359](https://www.github.com/googleapis/nodejs-logging-winston/issues/359)) ([5d83565](https://www.github.com/googleapis/nodejs-logging-winston/commit/5d83565))
+
+
+### Features
+
+* **middleware:** make API more ergonomic ([#364](https://www.github.com/googleapis/nodejs-logging-winston/issues/364)) ([5ecdeb4](https://www.github.com/googleapis/nodejs-logging-winston/commit/5ecdeb4))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-logging-winston/compare/v1.1.0...v1.1.1) (2019-06-26)
 
 
