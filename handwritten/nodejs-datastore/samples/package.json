@@ -2,7 +2,7 @@
   "name": "nodejs-docs-samples-datastore",
   "private": true,
   "license": "Apache-2.0",
-  "author": "Google Inc.",
+  "author": "Google LLC.",
   "files": [
     "*.js"
   ],
