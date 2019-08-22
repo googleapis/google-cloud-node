@@ -3,7 +3,7 @@
   "description": "Cloud Datastore Client Library for Node.js",
   "version": "4.2.0",
   "license": "Apache-2.0",
-  "author": "Google Inc.",
+  "author": "Google LLC.",
   "engines": {
     "node": ">=8.10.0"
   },
