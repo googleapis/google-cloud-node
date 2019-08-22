@@ -15,3 +15,8 @@
 # limitations under the License.
 
 . .kokoro/setup-vars.sh
+
+# Lease a second service account for testing listing with multiple service accounts
+export HMAC_KEY_TEST_SECOND_SERVICE_ACCOUNT=$(./gimmeproj -project=$HMAC_PROJECT lease 15m)
+# Add to the list of leased service account for clean up after tests
+export LEASED_SERVICE_ACCOUNTS="$LEASED_SERVICE_ACCOUNTS $HMAC_KEY_TEST_SECOND_SERVICE_ACCOUNT"

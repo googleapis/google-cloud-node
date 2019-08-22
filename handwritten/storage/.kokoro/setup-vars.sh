@@ -22,3 +22,21 @@ export GCN_STORAGE_2ND_PROJECT_KEY=${KOKORO_GFILE_DIR}/no-whitelist-key.json
 
 export GOOGLE_CLOUD_KMS_KEY_ASIA="projects/long-door-651/locations/asia/keyRings/test-key-asia/cryptoKeys/test-key-asia"
 export GOOGLE_CLOUD_KMS_KEY_US="projects/long-door-651/locations/us/keyRings/test-key-us/cryptoKeys/test-key-us"
+
+# For testing SA HMAC
+export HMAC_PROJECT=gimme-acc
+curl https://storage.googleapis.com/gimme-proj/linux_amd64/gimmeproj > gimmeproj
+chmod +x gimmeproj
+./gimmeproj version
+
+export HMAC_KEY_TEST_SERVICE_ACCOUNT=$(./gimmeproj -project=$HMAC_PROJECT lease 15m)
+echo Leased service account: $HMAC_KEY_TEST_SERVICE_ACCOUNT
+export LEASED_SERVICE_ACCOUNTS=$HMAC_KEY_TEST_SERVICE_ACCOUNT
+
+cleanup_service_accounts () {
+    for i in $LEASED_SERVICE_ACCOUNTS; do
+        ./gimmeproj -project=$HMAC_PROJECT "done" $i
+    done
+}
+
+trap cleanup_service_accounts EXIT

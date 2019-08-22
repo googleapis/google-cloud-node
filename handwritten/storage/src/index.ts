@@ -1,5 +1,5 @@
 /**
- * Copyright 2014-2017 Google Inc. All Rights Reserved.
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -182,6 +182,14 @@ export {
   SetStorageClassResponse,
 } from './file';
 export {
+  HmacKey,
+  HmacKeyMetadata,
+  HmacKeyMetadataCallback,
+  HmacKeyMetadataResponse,
+  SetHmacKeyMetadata,
+  SetHmacKeyMetadataOptions,
+} from './hmacKey';
+export {
   GetPolicyCallback,
   GetPolicyOptions,
   GetPolicyResponse,
@@ -210,12 +218,20 @@ export {
   BucketOptions,
   CreateBucketQuery,
   CreateBucketRequest,
+  CreateBucketResponse,
+  CreateHmacKeyCallback,
+  CreateHmacKeyOptions,
+  CreateHmacKeyResponse,
   GetBucketsCallback,
   GetBucketsRequest,
   GetBucketsResponse,
+  GetHmacKeysCallback,
+  GetHmacKeysOptions,
+  GetHmacKeysResponse,
   GetServiceAccountCallback,
   GetServiceAccountOptions,
   GetServiceAccountResponse,
+  HmacKeyResourceResponse,
   ServiceAccount,
   Storage,
   StorageOptions,

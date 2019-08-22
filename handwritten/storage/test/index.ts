@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 Google Inc. All Rights Reserved.
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,11 @@ import * as proxyquire from 'proxyquire';
 
 import {Bucket} from '../src';
 import {GetFilesOptions} from '../src/bucket';
+import sinon = require('sinon');
+import {HmacKey} from '../src/hmacKey';
+import {HmacKeyResourceResponse} from '../src/storage';
+
+const hmacKeyModule = require('../src/hmacKey');
 
 class FakeChannel {
   calledWith_: Array<{}>;
@@ -56,7 +61,7 @@ const fakePaginator = {
 
       methods = arrify(methods);
       assert.strictEqual(Class.name, 'Storage');
-      assert.deepStrictEqual(methods, ['getBuckets']);
+      assert.deepStrictEqual(methods, ['getBuckets', 'getHmacKeys']);
       extended = true;
     },
     streamify(methodName: string) {
@@ -74,7 +79,7 @@ const fakePromisify = {
     }
 
     promisified = true;
-    assert.deepStrictEqual(options.exclude, ['bucket', 'channel']);
+    assert.deepStrictEqual(options.exclude, ['bucket', 'channel', 'hmacKey']);
   },
 };
 
@@ -95,6 +100,7 @@ describe('Storage', () => {
         Service: FakeService,
       },
       './channel.js': {Channel: FakeChannel},
+      './hmacKey': hmacKeyModule,
     }).Storage;
     Bucket = Storage.Bucket;
   });
@@ -110,6 +116,7 @@ describe('Storage', () => {
 
     it('should streamify the correct methods', () => {
       assert.strictEqual(storage.getBucketsStream, 'getBuckets');
+      assert.strictEqual(storage.getHmacKeysStream, 'getHmacKeys');
     });
 
     it('should promisify all the things', () => {
@@ -186,6 +193,186 @@ describe('Storage', () => {
       assert.strictEqual(channel.calledWith_[0], storage);
       assert.strictEqual(channel.calledWith_[1], ID);
       assert.strictEqual(channel.calledWith_[2], RESOURCE_ID);
+    });
+  });
+
+  describe('hmacKey', () => {
+    let hmacKeyCtor: sinon.SinonSpy;
+    beforeEach(() => {
+      hmacKeyCtor = sinon.spy(hmacKeyModule, 'HmacKey');
+    });
+
+    afterEach(() => {
+      hmacKeyCtor.restore();
+    });
+
+    it('should throw if accessId is not provided', () => {
+      assert.throws(() => {
+        storage.hmacKey();
+      }, /An access ID is needed to create an HmacKey object./);
+    });
+
+    it('should pass options object to HmacKey constructor', () => {
+      const options = {myOpts: 'a'};
+      storage.hmacKey('access-id', options);
+      assert.deepStrictEqual(hmacKeyCtor.getCall(0).args, [
+        storage,
+        'access-id',
+        options,
+      ]);
+    });
+  });
+
+  describe('createHmacKey', () => {
+    const SERVICE_ACCOUNT_EMAIL = 'service-account@gserviceaccount.com';
+    const ACCESS_ID = 'some-access-id';
+    const metadataResponse = {
+      accessId: ACCESS_ID,
+      etag: 'etag',
+      id: ACCESS_ID,
+      projectId: 'project-id',
+      serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+      state: 'ACTIVE',
+      timeCreated: '20190101T00:00:00Z',
+      updated: '20190101T00:00:00Z',
+    };
+    const response = {
+      secret: 'my-secret',
+      metadata: metadataResponse,
+    };
+    const OPTIONS = {
+      some: 'value',
+    };
+
+    let hmacKeyCtor: sinon.SinonSpy;
+    beforeEach(() => {
+      hmacKeyCtor = sinon.spy(hmacKeyModule, 'HmacKey');
+    });
+
+    afterEach(() => {
+      hmacKeyCtor.restore();
+    });
+
+    it('should make correct API request', done => {
+      storage.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(
+          reqOpts.uri,
+          `/projects/${storage.projectId}/hmacKeys`
+        );
+        assert.strictEqual(
+          reqOpts.qs.serviceAccountEmail,
+          SERVICE_ACCOUNT_EMAIL
+        );
+
+        callback(null, response);
+      };
+
+      storage.createHmacKey(SERVICE_ACCOUNT_EMAIL, done);
+    });
+
+    it('should throw without a serviceAccountEmail', () => {
+      assert.throws(
+        () => storage.createHmacKey(),
+        /The first argument must be a service account email to create an HMAC key\./
+      );
+    });
+
+    it('should throw when first argument is not a string', () => {
+      assert.throws(
+        () =>
+          storage.createHmacKey({
+            userProject: 'my-project',
+          }),
+        /The first argument must be a service account email to create an HMAC key\./
+      );
+    });
+
+    it('should make request with method options as query parameter', async () => {
+      storage.request = sinon
+        .stub()
+        .returns((_reqOpts: {}, callback: Function) => callback());
+
+      await storage.createHmacKey(SERVICE_ACCOUNT_EMAIL, OPTIONS);
+      const reqArg = storage.request.firstCall.args[0];
+      assert.deepStrictEqual(reqArg.qs, {
+        serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        ...OPTIONS,
+      });
+    });
+
+    it('should not modify the options object', done => {
+      storage.request = (_reqOpts: {}, callback: Function) => {
+        callback(null, response);
+      };
+      const originalOptions = Object.assign({}, OPTIONS);
+
+      storage.createHmacKey(SERVICE_ACCOUNT_EMAIL, OPTIONS, (err: Error) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(OPTIONS, originalOptions);
+        done();
+      });
+    });
+
+    it('should invoke callback with a secret and an HmacKey instance', done => {
+      storage.request = (_reqOpts: {}, callback: Function) => {
+        callback(null, response);
+      };
+
+      storage.createHmacKey(
+        SERVICE_ACCOUNT_EMAIL,
+        (err: Error, hmacKey: HmacKey, secret: string) => {
+          assert.ifError(err);
+          assert.strictEqual(secret, response.secret);
+          assert.deepStrictEqual(hmacKeyCtor.getCall(0).args, [
+            storage,
+            response.metadata.accessId,
+            {projectId: response.metadata.projectId},
+          ]);
+          assert.strictEqual(hmacKey.metadata, metadataResponse);
+          done();
+        }
+      );
+    });
+
+    it('should invoke callback with raw apiResponse', done => {
+      storage.request = (_reqOpts: {}, callback: Function) => {
+        callback(null, response);
+      };
+
+      storage.createHmacKey(
+        SERVICE_ACCOUNT_EMAIL,
+        (
+          err: Error,
+          _hmacKey: HmacKey,
+          _secret: string,
+          apiResponse: HmacKeyResourceResponse
+        ) => {
+          assert.ifError(err);
+          assert.strictEqual(apiResponse, response);
+          done();
+        }
+      );
+    });
+
+    it('should execute callback with request error', done => {
+      const error = new Error('Request error');
+      const response = {success: false};
+      storage.request = (_reqOpts: {}, callback: Function) => {
+        callback(error, response);
+      };
+
+      storage.createHmacKey(
+        SERVICE_ACCOUNT_EMAIL,
+        (err: Error, _hmacKey: HmacKey, _secret: string, apiResponse: {}) => {
+          assert.strictEqual(err, error);
+          assert.strictEqual(apiResponse, response);
+          done();
+        }
+      );
     });
   });
 
@@ -503,6 +690,156 @@ describe('Storage', () => {
       storage.getBuckets((err: Error, buckets: Bucket[]) => {
         assert.ifError(err);
         assert.deepStrictEqual(buckets[0].metadata, bucketMetadata);
+        done();
+      });
+    });
+  });
+
+  describe('getHmacKeys', () => {
+    // tslint:disable-next-line: no-any
+    let storageRequestStub: sinon.SinonStub<any, any>;
+    const SERVICE_ACCOUNT_EMAIL = 'service-account@gserviceaccount.com';
+    const ACCESS_ID = 'some-access-id';
+    const metadataResponse = {
+      accessId: ACCESS_ID,
+      etag: 'etag',
+      id: ACCESS_ID,
+      projectId: 'project-id',
+      serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+      state: 'ACTIVE',
+      timeCreated: '20190101T00:00:00Z',
+      updated: '20190101T00:00:00Z',
+    };
+
+    beforeEach(() => {
+      storageRequestStub = sinon.stub(storage, 'request');
+      storageRequestStub.callsFake((_opts: {}, callback: Function) => {
+        callback(null, {});
+      });
+    });
+
+    let hmacKeyCtor: sinon.SinonSpy;
+    beforeEach(() => {
+      hmacKeyCtor = sinon.spy(hmacKeyModule, 'HmacKey');
+    });
+
+    afterEach(() => {
+      hmacKeyCtor.restore();
+    });
+
+    it('should get HmacKeys without a query', done => {
+      storage.getHmacKeys(() => {
+        const firstArg = storage.request.firstCall.args[0];
+        assert.strictEqual(
+          firstArg.uri,
+          `/projects/${storage.projectId}/hmacKeys`
+        );
+        assert.deepStrictEqual(firstArg.qs, {});
+        done();
+      });
+    });
+
+    it('should get HmacKeys with a query', done => {
+      const query = {
+        maxResults: 5,
+        pageToken: 'next-page-token',
+        serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        showDeletedKeys: false,
+      };
+
+      storage.getHmacKeys(query, () => {
+        const firstArg = storage.request.firstCall.args[0];
+        assert.strictEqual(
+          firstArg.uri,
+          `/projects/${storage.projectId}/hmacKeys`
+        );
+        assert.deepStrictEqual(firstArg.qs, query);
+        done();
+      });
+    });
+
+    it('should execute callback with error', done => {
+      const error = new Error('Error.');
+      const apiResponse = {};
+
+      storageRequestStub.callsFake((_opts: {}, callback: Function) => {
+        callback(error, apiResponse);
+      });
+
+      storage.getHmacKeys(
+        {},
+        (err: Error, hmacKeys: HmacKey[], nextQuery: {}, resp: Metadata) => {
+          assert.strictEqual(err, error);
+          assert.strictEqual(hmacKeys, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        }
+      );
+    });
+
+    it('should return nextQuery if more results exist', done => {
+      const token = 'next-page-token';
+      const query = {
+        param1: 'a',
+        param2: 'b',
+      };
+      const expectedNextQuery = Object.assign({}, query, {pageToken: token});
+      storageRequestStub.callsFake((_opts: {}, callback: Function) => {
+        callback(null, {nextPageToken: token, items: []});
+      });
+
+      storage.getHmacKeys(
+        query,
+        // tslint:disable-next-line: no-any
+        (err: Error, _hmacKeys: [], nextQuery: any) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
+          done();
+        }
+      );
+    });
+
+    it('should return null nextQuery if there are no more results', done => {
+      storageRequestStub.callsFake((_opts: {}, callback: Function) => {
+        callback(null, {items: []});
+      });
+
+      storage.getHmacKeys({}, (err: Error, _hmacKeys: [], nextQuery: {}) => {
+        assert.ifError(err);
+        assert.strictEqual(nextQuery, null);
+        done();
+      });
+    });
+
+    it('should return apiResponse', done => {
+      const resp = {items: [metadataResponse]};
+      storageRequestStub.callsFake((_opts: {}, callback: Function) => {
+        callback(null, resp);
+      });
+
+      storage.getHmacKeys(
+        (err: Error, _hmacKeys: [], _nextQuery: {}, apiResponse: Metadata) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(resp, apiResponse);
+          done();
+        }
+      );
+    });
+
+    it('should populate returned HmacKey object with accessId and metadata', done => {
+      storageRequestStub.callsFake((_opts: {}, callback: Function) => {
+        callback(null, {items: [metadataResponse]});
+      });
+
+      storage.getHmacKeys((err: Error, hmacKeys: HmacKey[]) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(hmacKeyCtor.getCall(0).args, [
+          storage,
+          metadataResponse.accessId,
+          {projectId: metadataResponse.projectId},
+        ]);
+        assert.deepStrictEqual(hmacKeys[0].metadata, metadataResponse);
         done();
       });
     });
