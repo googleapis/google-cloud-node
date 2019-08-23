@@ -19,6 +19,7 @@ import {Key} from 'readline';
 import {Datastore} from '.';
 import {Entity} from './entity';
 import {Transaction} from './transaction';
+import {CallOptions} from 'google-gax';
 
 export type Operator = '=' | '<' | '>' | '<=' | '>=' | 'HAS_ANCESTOR';
 
@@ -518,6 +519,7 @@ export {Query};
 
 export interface RunQueryOptions {
   consistency?: 'strong' | 'eventual';
+  gaxOptions?: CallOptions;
 }
 
 export interface RunQueryCallback {
@@ -529,6 +531,8 @@ export type RunQueryResponse = [Entity[], RunQueryInfo];
 export interface RunQueryInfo {
   endCursor?: string;
   moreResults?:
+    | 'MORE_RESULTS_TYPE_UNSPECIFIED'
+    | 'NOT_FINISHED'
     | 'MORE_RESULTS_AFTER_LIMIT'
     | 'MORE_RESULTS_AFTER_CURSOR'
     | 'NO_MORE_RESULTS';
