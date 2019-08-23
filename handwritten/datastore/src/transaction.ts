@@ -23,7 +23,12 @@ import {google} from '../proto/datastore';
 import {Datastore, TransactionOptions} from '.';
 import {entity, Entity} from './entity';
 import {Query} from './query';
-import {CommitResponse, DatastoreRequest, RequestOptions} from './request';
+import {
+  CommitCallback,
+  CommitResponse,
+  DatastoreRequest,
+  RequestOptions,
+} from './request';
 
 /**
  * A transaction is a set of Datastore operations on one or more entities. Each
@@ -497,7 +502,7 @@ class Transaction extends DatastoreRequest {
           callback(err, null, resp);
           return;
         }
-        this.id = resp.transaction;
+        this.id = resp!.transaction;
         callback(null, this, resp);
       }
     );
@@ -652,7 +657,6 @@ export type ModifiedEntities = Array<{
   method: string;
   args: Entity[];
 }>;
-export type CommitCallback = google.datastore.v1.Datastore.CommitCallback;
 export type BeginTransactionResponse = [
   google.datastore.v1.BeginTransactionResponse
 ];

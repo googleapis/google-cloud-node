@@ -164,7 +164,7 @@ describe('Transaction', () => {
       transaction.request_ = config => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'commit');
-        assert.strictEqual(config.gaxOptions, undefined);
+        assert.deepStrictEqual(config.gaxOpts, {});
         done();
       };
       transaction.commit();
@@ -393,7 +393,7 @@ describe('Transaction', () => {
       transaction.request_ = config => {
         assert.strictEqual(config.client, 'DatastoreClient');
         assert.strictEqual(config.method, 'rollback');
-        assert.strictEqual(config.gaxOptions, undefined);
+        assert.deepStrictEqual(config.gaxOpts, {});
         done();
       };
       transaction.rollback();

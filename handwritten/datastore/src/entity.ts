@@ -22,6 +22,7 @@ import {PathType} from '.';
 import * as Protobuf from 'protobufjs';
 import * as path from 'path';
 import * as appengine from '../proto/app_engine_key';
+import {google} from '../proto/datastore';
 
 // tslint:disable-next-line no-namespace
 export namespace entity {
@@ -527,7 +528,7 @@ export namespace entity {
    * //   }
    * // }
    */
-  export function entityToEntityProto(entityObject: Entity): EntityProto {
+  export function entityToEntityProto(entityObject: EntityObject): EntityProto {
     const properties = entityObject.data;
     const excludeFromIndexes = entityObject.excludeFromIndexes;
 
@@ -605,11 +606,11 @@ export namespace entity {
       if (
         firstPathPartIsArray &&
         // check also if the property in question is actually an array value.
-        entity.properties[firstPathPart].arrayValue &&
+        entity.properties![firstPathPart].arrayValue &&
         // check if wildcard is not applied
         !hasWildCard
       ) {
-        const array = entity.properties[firstPathPart].arrayValue;
+        const array = entity.properties![firstPathPart].arrayValue;
         // tslint:disable-next-line no-any
         array.values.forEach((value: any) => {
           if (remainderPath === '') {
@@ -630,7 +631,7 @@ export namespace entity {
           }
         });
       } else if (firstPathPartIsArray && hasWildCard && remainderPath === '*') {
-        const array = entity.properties[firstPathPart].arrayValue;
+        const array = entity.properties![firstPathPart].arrayValue;
         // tslint:disable-next-line no-any
         array.values.forEach((value: any) => {
           if (value.entityValue) {
@@ -641,15 +642,15 @@ export namespace entity {
         });
       } else if (firstPathPartIsEntity) {
         if (firstPathPart === '') {
-          Object.keys(entity.properties).forEach(path => {
-            const newPath = entity.properties[path].arrayValue
+          Object.keys(entity.properties!).forEach(path => {
+            const newPath = entity.properties![path].arrayValue
               ? path + '[].*'
               : path + '.*';
             excludePathFromEntity(entity, newPath);
           });
         } else {
           if (hasWildCard && remainderPath === '*') {
-            const parentEntity = entity.properties[firstPathPart].entityValue;
+            const parentEntity = entity.properties![firstPathPart].entityValue;
 
             if (parentEntity) {
               Object.keys(parentEntity.properties).forEach(path => {
@@ -662,7 +663,7 @@ export namespace entity {
               excludePathFromEntity(entity, firstPathPart);
             }
           } else {
-            const parentEntity = entity.properties[firstPathPart].entityValue;
+            const parentEntity = entity.properties![firstPathPart].entityValue;
             excludePathFromEntity(parentEntity, remainderPath);
           }
         }
@@ -693,8 +694,8 @@ export namespace entity {
    */
   export function formatArray(results: ResponseResult[]) {
     return results.map(result => {
-      const ent = entity.entityFromEntityProto(result.entity);
-      ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity.key!);
+      const ent = entity.entityFromEntityProto(result.entity!);
+      ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity!.key!);
       return ent;
     });
   }
@@ -711,7 +712,7 @@ export namespace entity {
    * isKeyComplete(new Key('Company')); // false
    */
   export function isKeyComplete(key: Key) {
-    const lastPathElement = entity.keyToKeyProto(key).path.pop()!;
+    const lastPathElement = entity.keyToKeyProto(key).path!.pop()!;
     return !!(lastPathElement.id || lastPathElement.name);
   }
 
@@ -746,7 +747,7 @@ export namespace entity {
       keyOptions.namespace = keyProto.partitionId.namespaceId;
     }
 
-    keyProto.path.forEach((path, index) => {
+    keyProto.path!.forEach((path, index) => {
       keyOptions.path.push(path.kind);
 
       let id = path[path.idType!];
@@ -757,7 +758,7 @@ export namespace entity {
 
       if (is.defined(id)) {
         keyOptions.path.push(id);
-      } else if (index < keyProto.path.length - 1) {
+      } else if (index < keyProto.path!.length - 1) {
         throw new InvalidKeyError({
           code: 'MISSING_ANCESTOR_ID',
         });
@@ -827,7 +828,7 @@ export namespace entity {
         pathElement.name = key.name;
       }
 
-      keyProto.path.unshift(pathElement);
+      keyProto.path!.unshift(pathElement);
       // tslint:disable-next-line no-conditional-assignment
     } while ((key = key.parent!) && ++numKeysWalked);
 
@@ -1137,27 +1138,30 @@ export interface ValueProto {
 }
 
 export interface EntityProto {
-  key: KeyProto | null;
-  // tslint:disable-next-line no-any
-  properties: any;
+  key?: KeyProto | null;
+  properties?: {[k: string]: ValueProto};
   excludeFromIndexes?: boolean;
 }
 
 // tslint:disable-next-line no-any
 export type Entity = any;
 
+interface KeyProtoPathElement extends google.datastore.v1.Key.IPathElement {
+  // tslint:disable-next-line no-any
+  [index: string]: any;
+  idType?: string;
+}
+
 export interface KeyProto {
-  path: Array<{
-    // tslint:disable-next-line no-any
-    [index: string]: any;
-    id: string;
-    name: string;
-    kind?: string;
-    idType?: string;
-  }>;
-  partitionId?: {namespaceId: {}};
+  partitionId?: google.datastore.v1.IPartitionId | null;
+  path?: KeyProtoPathElement[] | null;
 }
 
 export interface ResponseResult {
   entity: EntityProto;
+}
+
+export interface EntityObject {
+  data: {[k: string]: Entity};
+  excludeFromIndexes: string[];
 }
