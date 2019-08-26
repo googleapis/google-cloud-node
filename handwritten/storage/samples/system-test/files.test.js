@@ -37,6 +37,7 @@ const copiedFileName = 'test3.txt';
 const signedFileName = 'signed-upload.txt';
 const kmsKeyName = process.env.GOOGLE_CLOUD_KMS_KEY_US;
 const filePath = path.join(cwd, 'resources', fileName);
+const folderPath = path.join(cwd, 'resources');
 const downloadFilePath = path.join(cwd, 'downloaded.txt');
 const cmd = `node files.js`;
 
@@ -71,6 +72,49 @@ it('should upload a file with a kms key', async () => {
   );
   const [exists] = await bucket.file(fileName).exists();
   assert.strictEqual(exists, true);
+});
+
+it('should upload a local directory', done => {
+  const output = execSync(
+    `${cmd} upload-directory ${bucketName} ${folderPath}`
+  );
+
+  const fileList = [];
+  getFileList(folderPath);
+
+  function getFileList(directory) {
+    const items = fs.readdirSync(directory);
+    items.forEach(item => {
+      const fullPath = path.join(directory, item);
+      const stat = fs.lstatSync(fullPath);
+      if (stat.isFile()) {
+        fileList.push(fullPath);
+      } else {
+        getFileList(fullPath);
+      }
+    });
+  }
+
+  assert.match(
+    output,
+    new RegExp(
+      `${fileList.length} files uploaded to ${bucketName} successfully.`
+    )
+  );
+
+  Promise.all(
+    fileList.map(file =>
+      bucket
+        .file(path.relative(path.dirname(folderPath), file).replace(/\\/g, '/'))
+        .exists()
+    )
+  ).then(resps => {
+    const ctr = resps.reduce((acc, cur) => {
+      return acc + cur[0];
+    }, 0);
+    assert.strictEqual(ctr, fileList.length);
+    done();
+  }, assert.ifError);
 });
 
 it('should download a file', () => {

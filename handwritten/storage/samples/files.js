@@ -155,6 +155,84 @@ async function uploadFileWithKmsKey(bucketName, filename, kmsKeyName) {
   // [END storage_upload_with_kms_key]
 }
 
+// sample-metadata:
+//   title: Upload a diretory to a bucket.
+//   description: Uploads full hierarchy of a local directory to a bucket.
+//   usage: node files.js upload-directory <bucketName> <directoryPath>
+
+async function uploadDirectory(bucketName, directoryPath) {
+  // [START upload_directory]
+  // Imports the Google Cloud client library
+  const {Storage} = require('@google-cloud/storage');
+  const fs = require('fs');
+  const path = require('path');
+
+  // Creates a client
+  const storage = new Storage();
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const bucketName = 'Name of a bucket, e.g. my-bucket';
+  // const directoryPath = 'Local directory to upload, e.g. ./local/path/to/direcotry';
+
+  // get the list of files from the specified directory
+  const fileList = [];
+  let dirCtr = 1;
+  let itemCtr = 0;
+  const pathDirName = path.dirname(directoryPath);
+
+  getFiles(directoryPath);
+
+  function getFiles(directory) {
+    fs.readdir(directory, (err, items) => {
+      dirCtr--;
+      itemCtr += items.length;
+      items.forEach(item => {
+        const fullPath = path.join(directory, item);
+        fs.stat(fullPath, (err, stat) => {
+          itemCtr--;
+          if (stat.isFile()) {
+            fileList.push(fullPath);
+          } else if (stat.isDirectory()) {
+            dirCtr++;
+            getFiles(fullPath);
+          }
+          if (dirCtr === 0 && itemCtr === 0) {
+            onComplete();
+          }
+        });
+      });
+    });
+  }
+
+  async function onComplete() {
+    const resp = await Promise.all(
+      fileList.map(filePath => {
+        let destination = path.relative(pathDirName, filePath);
+        // If running on Windows
+        if (process.platform === 'win32') {
+          destination = destination.replace(/\\/g, '/');
+        }
+        return storage
+          .bucket(bucketName)
+          .upload(filePath, {destination})
+          .then(
+            uploadResp => ({fileName: destination, status: uploadResp[0]}),
+            err => ({fileName: destination, response: err})
+          );
+      })
+    );
+
+    const successfulUploads =
+      fileList.length - resp.filter(r => r.status instanceof Error).length;
+    console.log(
+      `${successfulUploads} files uploaded to ${bucketName} successfully.`
+    );
+  }
+  // [END upload_directory]
+}
+
 async function downloadFile(bucketName, srcFilename, destFilename) {
   // [START storage_download_file]
   // Imports the Google Cloud client library
@@ -475,6 +553,12 @@ require(`yargs`)
       uploadFileWithKmsKey(opts.bucketName, opts.srcFileName, opts.kmsKeyName)
   )
   .command(
+    `upload-directory <bucketName> <srcDirectoryPath>`,
+    `Uploads full hierarchy of a local directory to a bucket.`,
+    {},
+    opts => uploadDirectory(opts.bucketName, opts.srcDirectoryPath)
+  )
+  .command(
     `download <bucketName> <srcFileName> <destFileName>`,
     `Downloads a file from a bucket.`,
     {},
@@ -546,6 +630,10 @@ require(`yargs`)
   .example(
     `node $0 upload-with-kms-key my-bucket ./file.txt my-key`,
     `Uploads "./file.txt" to "my-bucket" using "my-key".`
+  )
+  .example(
+    `node $0 upload-directory my-bucket ./my-folder`,
+    `Uploads full hierarchy of "./my-folder directory to "my-bucket.`
   )
   .example(
     `node $0 download my-bucket file.txt ./file.txt`,
