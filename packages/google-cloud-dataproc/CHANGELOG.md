@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [1.2.4](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.2.3...v1.2.4) (2019-08-26)
+
+
+### Bug Fixes
+
+* set proper version # for x-goog-api-client ([c62b355](https://www.github.com/googleapis/nodejs-dataproc/commit/c62b355))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.2.2...v1.2.3) (2019-08-05)
 
 
