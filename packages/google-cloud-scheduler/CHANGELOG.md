@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.1.3...v1.1.4) (2019-08-26)
+
+
+### Bug Fixes
+
+* include the correct version of node in a header ([#122](https://www.github.com/googleapis/nodejs-scheduler/issues/122)) ([e8d3015](https://www.github.com/googleapis/nodejs-scheduler/commit/e8d3015))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.1.2...v1.1.3) (2019-08-05)
 
 
