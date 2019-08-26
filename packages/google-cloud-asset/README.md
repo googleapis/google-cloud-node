@@ -93,9 +93,14 @@ has instructions for running the samples.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Create Feed | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/createFeed.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/createFeed.js,samples/README.md) |
+| Delete Feed | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/deleteFeed.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/deleteFeed.js,samples/README.md) |
 | Export Assets | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/exportAssets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/exportAssets.js,samples/README.md) |
 | Get Batch Asset History | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/getBatchAssetHistory.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/getBatchAssetHistory.js,samples/README.md) |
+| Get Feed | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/getFeed.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/getFeed.js,samples/README.md) |
+| List Feeds | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/listFeeds.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/listFeeds.js,samples/README.md) |
 | Asset History Quickstart | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Update Feed | [source code](https://github.com/googleapis/nodejs-asset/blob/master/samples/updateFeed.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-asset&page=editor&open_in_editor=samples/updateFeed.js,samples/README.md) |
 
 
 
