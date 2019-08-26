@@ -1217,11 +1217,92 @@
                         }
                       }
                     },
+                    "DocumentDimensions": {
+                      "fields": {
+                        "unit": {
+                          "type": "DocumentDimensionUnit",
+                          "id": 1
+                        },
+                        "width": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "height": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "DocumentDimensionUnit": {
+                          "values": {
+                            "DOCUMENT_DIMENSION_UNIT_UNSPECIFIED": 0,
+                            "INCH": 1,
+                            "CENTIMETER": 2,
+                            "POINT": 3
+                          }
+                        }
+                      }
+                    },
                     "Document": {
                       "fields": {
                         "inputConfig": {
                           "type": "DocumentInputConfig",
                           "id": 1
+                        },
+                        "documentText": {
+                          "type": "TextSnippet",
+                          "id": 2
+                        },
+                        "layout": {
+                          "rule": "repeated",
+                          "type": "Layout",
+                          "id": 3
+                        },
+                        "documentDimensions": {
+                          "type": "DocumentDimensions",
+                          "id": 4
+                        },
+                        "pageCount": {
+                          "type": "int32",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Layout": {
+                          "fields": {
+                            "textSegment": {
+                              "type": "TextSegment",
+                              "id": 1
+                            },
+                            "pageNumber": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "boundingPoly": {
+                              "type": "BoundingPoly",
+                              "id": 3
+                            },
+                            "textSegmentType": {
+                              "type": "TextSegmentType",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "TextSegmentType": {
+                              "values": {
+                                "TEXT_SEGMENT_TYPE_UNSPECIFIED": 0,
+                                "TOKEN": 1,
+                                "PARAGRAPH": 2,
+                                "FORM_FIELD": 3,
+                                "FORM_FIELD_NAME": 4,
+                                "FORM_FIELD_CONTENTS": 5,
+                                "TABLE": 6,
+                                "TABLE_HEADER": 7,
+                                "TABLE_ROW": 8,
+                                "TABLE_CELL": 9
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -1266,6 +1347,27 @@
                         "row": {
                           "type": "Row",
                           "id": 3
+                        }
+                      }
+                    },
+                    "NormalizedVertex": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 2
                         }
                       }
                     },
@@ -1540,27 +1642,6 @@
                         "boundingBoxMeanAveragePrecision": {
                           "type": "float",
                           "id": 6
-                        }
-                      }
-                    },
-                    "NormalizedVertex": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 2
                         }
                       }
                     },
@@ -2424,6 +2505,10 @@
                           "rule": "repeated",
                           "type": "AnnotationPayload",
                           "id": 1
+                        },
+                        "preprocessedInput": {
+                          "type": "ExamplePayload",
+                          "id": 3
                         },
                         "metadata": {
                           "keyType": "string",

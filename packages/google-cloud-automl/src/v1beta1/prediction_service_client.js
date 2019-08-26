@@ -336,12 +336,14 @@ class PredictionServiceClient {
   }
 
   /**
-   * Perform a batch prediction. Unlike the online Predict, batch
+   * Perform a batch prediction. Unlike the online
+   * Predict, batch
    * prediction result won't be immediately available in the response. Instead,
    * a long running operation object is returned. User can poll the operation
    * result via GetOperation
-   * method. Once the operation is done, BatchPredictResult is returned in
-   * the response field.
+   * method. Once the operation is done,
+   * BatchPredictResult is
+   * returned in the response field.
    * Available for following ML problems:
    * * Image Classification
    * * Image Object Detection

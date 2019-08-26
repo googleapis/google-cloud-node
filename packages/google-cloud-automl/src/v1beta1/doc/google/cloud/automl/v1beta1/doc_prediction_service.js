@@ -16,7 +16,8 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for PredictionService.Predict.
+ * Request message for
+ * PredictionService.Predict.
  *
  * @property {string} name
  *   Name of the model requested to serve the prediction.
@@ -62,13 +63,23 @@ const PredictRequest = {
 };
 
 /**
- * Response message for PredictionService.Predict.
+ * Response message for
+ * PredictionService.Predict.
  *
  * @property {Object[]} payload
  *   Prediction result.
  *   Translation and Text Sentiment will return precisely one payload.
  *
  *   This object should have the same structure as [AnnotationPayload]{@link google.cloud.automl.v1beta1.AnnotationPayload}
+ *
+ * @property {Object} preprocessedInput
+ *   The preprocessed example that AutoML actually makes prediction on.
+ *   Empty if AutoML does not preprocess the input example.
+ *   * For Text Extraction:
+ *     If the input is a .pdf file, the OCR'ed text will be provided in
+ *     document_text.
+ *
+ *   This object should have the same structure as [ExamplePayload]{@link google.cloud.automl.v1beta1.ExamplePayload}
  *
  * @property {Object.<string, string>} metadata
  *   Additional domain-specific prediction response metadata.
@@ -96,7 +107,8 @@ const PredictResponse = {
 };
 
 /**
- * Request message for PredictionService.BatchPredict.
+ * Request message for
+ * PredictionService.BatchPredict.
  *
  * @property {string} name
  *   Name of the model requested to serve the batch prediction.
@@ -187,7 +199,8 @@ const BatchPredictRequest = {
 /**
  * Result of the Batch Predict. This message is returned in
  * response of the operation returned
- * by the PredictionService.BatchPredict.
+ * by the
+ * PredictionService.BatchPredict.
  *
  * @property {Object.<string, string>} metadata
  *   Additional domain-specific prediction response metadata.
