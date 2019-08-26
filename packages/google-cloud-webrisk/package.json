@@ -34,6 +34,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-node": "^9.0.1",
     "eslint-plugin-prettier": "^3.0.1",
+    "http2spy": "^1.0.0",
     "jsdoc": "^3.5.5",
     "jsdoc-fresh": "^1.0.1",
     "linkinator": "^1.4.0",
