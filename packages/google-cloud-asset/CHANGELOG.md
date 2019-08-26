@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-asset/compare/v1.2.0...v1.2.1) (2019-08-26)
+
+
+### Bug Fixes
+
+* **docs:** update READMEs with new samples ([#185](https://www.github.com/googleapis/nodejs-asset/issues/185)) ([775a5a0](https://www.github.com/googleapis/nodejs-asset/commit/775a5a0))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.1.4...v1.2.0) (2019-08-20)
 
 
