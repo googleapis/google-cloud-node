@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-os-login/compare/v1.1.3...v1.1.4) (2019-08-26)
+
+
+### Bug Fixes
+
+* include the correct version of node in a header ([#220](https://www.github.com/googleapis/nodejs-os-login/issues/220)) ([0c2ada9](https://www.github.com/googleapis/nodejs-os-login/commit/0c2ada9))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-os-login/compare/v1.1.2...v1.1.3) (2019-08-05)
 
 
