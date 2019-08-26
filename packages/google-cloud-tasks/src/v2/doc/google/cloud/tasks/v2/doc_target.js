@@ -44,11 +44,10 @@
  * The AppEngineRouting used to construct the URL that the task is
  * delivered to can be set at the queue-level or task-level:
  *
- * * If set,
- *    app_engine_routing_override
- *    is used for all tasks in the queue, no matter what the setting
- *    is for the
- *    task-level app_engine_routing.
+ * * If app_engine_routing_override is set on the
+ *    queue, this value is used for all
+ *    tasks in the queue, no matter what the setting is for the task-level
+ *    app_engine_routing.
  *
  *
  * The `url` that the task will be sent to is:
@@ -96,10 +95,10 @@
  * @property {Object} appEngineRouting
  *   Task-level setting for App Engine routing.
  *
- *   If set,
- *   app_engine_routing_override
- *   is used for all tasks in the queue, no matter what the setting is for the
- *   task-level app_engine_routing.
+ *   * If app_engine_routing_override is set on the
+ *      queue, this value is used for all
+ *      tasks in the queue, no matter what the setting is for the task-level
+ *      app_engine_routing.
  *
  *   This object should have the same structure as [AppEngineRouting]{@link google.cloud.tasks.v2.AppEngineRouting}
  *
@@ -184,6 +183,13 @@ const AppEngineHttpRequest = {
  * routing](https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed),
  * and [App Engine Flex request
  * routing](https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed).
+ *
+ * Using AppEngineRouting requires
+ * [`appengine.applications.get`](https://cloud.google.com/appengine/docs/admin-api/access-control)
+ * Google IAM permission for the project
+ * and the following scope:
+ *
+ * `https://www.googleapis.com/auth/cloud-platform`
  *
  * @property {string} service
  *   App service.

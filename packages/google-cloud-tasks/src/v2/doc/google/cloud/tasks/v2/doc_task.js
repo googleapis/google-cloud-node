@@ -48,9 +48,7 @@
  *   This object should have the same structure as [AppEngineHttpRequest]{@link google.cloud.tasks.v2.AppEngineHttpRequest}
  *
  * @property {Object} scheduleTime
- *   The time when the task is scheduled to be attempted.
- *
- *   For App Engine queues, this is when the task will be attempted or retried.
+ *   The time when the task is scheduled to be attempted or retried.
  *
  *   `schedule_time` will be truncated to the nearest microsecond.
  *

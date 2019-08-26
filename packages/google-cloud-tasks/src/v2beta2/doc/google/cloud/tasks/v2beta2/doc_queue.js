@@ -21,9 +21,8 @@
  * retry options, target types, and others.
  *
  * @property {string} name
- *   Caller-specified and required in
- *   CreateQueue, after
- *   which it becomes output only.
+ *   Caller-specified and required in CreateQueue,
+ *   after which it becomes output only.
  *
  *   The queue name.
  *
@@ -45,16 +44,14 @@
  * @property {Object} appEngineHttpTarget
  *   App Engine HTTP target.
  *
- *   An App Engine queue is a queue that has an
- *   AppEngineHttpTarget.
+ *   An App Engine queue is a queue that has an AppEngineHttpTarget.
  *
  *   This object should have the same structure as [AppEngineHttpTarget]{@link google.cloud.tasks.v2beta2.AppEngineHttpTarget}
  *
  * @property {Object} pullTarget
  *   Pull target.
  *
- *   A pull queue is a queue that has a
- *   PullTarget.
+ *   A pull queue is a queue that has a PullTarget.
  *
  *   This object should have the same structure as [PullTarget]{@link google.cloud.tasks.v2beta2.PullTarget}
  *
@@ -62,20 +59,18 @@
  *   Rate limits for task dispatches.
  *
  *   rate_limits and
- *   retry_config are related
- *   because they both control task attempts however they control how tasks are
+ *   retry_config are related because they both
+ *   control task attempts however they control how tasks are
  *   attempted in different ways:
  *
- *   * rate_limits controls the
- *   total rate of
+ *   * rate_limits controls the total rate of
  *     dispatches from a queue (i.e. all traffic dispatched from the
  *     queue, regardless of whether the dispatch is from a first
  *     attempt or a retry).
- *   * retry_config controls
- *   what happens to
+ *   * retry_config controls what happens to
  *     particular a task after its first attempt fails. That is,
- *     retry_config controls
- *     task retries (the second attempt, third attempt, etc).
+ *     retry_config controls task retries (the
+ *     second attempt, third attempt, etc).
  *
  *   This object should have the same structure as [RateLimits]{@link google.cloud.tasks.v2beta2.RateLimits}
  *
@@ -98,23 +93,20 @@
  *
  *   `state` can only be changed by called
  *   PauseQueue,
- *   ResumeQueue, or
- *   uploading
+ *   ResumeQueue, or uploading
  *   [queue.yaml/xml](https://cloud.google.com/appengine/docs/python/config/queueref).
- *   UpdateQueue cannot be
- *   used to change `state`.
+ *   UpdateQueue cannot be used to change `state`.
  *
  *   The number should be among the values of [State]{@link google.cloud.tasks.v2beta2.State}
  *
  * @property {Object} purgeTime
  *   Output only. The last time this queue was purged.
  *
- *   All tasks that were created
- *   before this time were purged.
+ *   All tasks that were created before this time
+ *   were purged.
  *
- *   A queue can be purged using
- *   PurgeQueue, the [App
- *   Engine Task Queue SDK, or the Cloud
+ *   A queue can be purged using PurgeQueue, the
+ *   [App Engine Task Queue SDK, or the Cloud
  *   Console](https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).
  *
  *   Purge time will be truncated to the nearest microsecond. Purge
@@ -158,8 +150,8 @@ const Queue = {
      * Tasks are paused by the user. If the queue is paused then Cloud
      * Tasks will stop delivering tasks from it, but more tasks can
      * still be added to it by the user. When a pull queue is paused,
-     * all LeaseTasks calls
-     * will return a FAILED_PRECONDITION.
+     * all LeaseTasks calls will return a
+     * FAILED_PRECONDITION.
      */
     PAUSED: 2,
 
@@ -175,8 +167,8 @@ const Queue = {
      *
      * When a queue is disabled, tasks can still be added to a queue
      * but the tasks are not dispatched and
-     * LeaseTasks calls
-     * return a `FAILED_PRECONDITION` error.
+     * LeaseTasks calls return a
+     * `FAILED_PRECONDITION` error.
      *
      * To permanently delete this queue and all of its tasks, call
      * DeleteQueue.
@@ -191,10 +183,8 @@ const Queue = {
  * This message determines the maximum rate that tasks can be dispatched by a
  * queue, regardless of whether the dispatch is a first task attempt or a retry.
  *
- * Note: The debugging command,
- * RunTask, will run a task
- * even if the queue has reached its
- * RateLimits.
+ * Note: The debugging command, RunTask, will run a task
+ * even if the queue has reached its RateLimits.
  *
  * @property {number} maxTasksDispatchedPerSecond
  *   The maximum rate at which tasks are dispatched from this queue.
@@ -202,14 +192,11 @@ const Queue = {
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   * For App Engine queues,
- *   the maximum allowed value
+ *   * For App Engine queues, the maximum allowed value
  *     is 500.
- *   * This field is output only   for pull
- *   queues. In addition to the
+ *   * This field is output only   for pull queues. In addition to the
  *     `max_tasks_dispatched_per_second` limit, a maximum of 10 QPS of
- *     LeaseTasks requests
- *     are allowed per pull queue.
+ *     LeaseTasks requests are allowed per pull queue.
  *
  *
  *   This field has the same meaning as
@@ -242,9 +229,9 @@ const Queue = {
  *   `queue.yaml/xml`, `max_burst_size` is equal to
  *   [bucket_size](https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size).
  *   Since `max_burst_size` is output only, if
- *   UpdateQueue is called
- *   on a queue created by `queue.yaml/xml`, `max_burst_size` will be reset
- *   based on the value of
+ *   UpdateQueue is called on a queue
+ *   created by `queue.yaml/xml`, `max_burst_size` will be reset based
+ *   on the value of
  *   max_tasks_dispatched_per_second,
  *   regardless of whether
  *   max_tasks_dispatched_per_second
@@ -263,9 +250,8 @@ const Queue = {
  *   The maximum allowed value is 5,000.
  *
  *   This field is output only for
- *   pull queues and always -1, which
- *   indicates no limit. No other queue types can have `max_concurrent_tasks`
- *   set to -1.
+ *   pull queues and always -1, which indicates no limit. No other
+ *   queue types can have `max_concurrent_tasks` set to -1.
  *
  *
  *   This field has the same meaning as
@@ -299,17 +285,16 @@ const RateLimits = {
  *   If positive, `max_retry_duration` specifies the time limit for
  *   retrying a failed task, measured from when the task was first
  *   attempted. Once `max_retry_duration` time has passed *and* the
- *   task has been attempted
- *   max_attempts times,
- *   no further attempts will be made and the task will be deleted.
+ *   task has been attempted max_attempts
+ *   times, no further attempts will be made and the task will be
+ *   deleted.
  *
  *   If zero, then the task age is unlimited.
  *
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for pull
- *   queues.
+ *   This field is output only for pull queues.
  *
  *
  *   `max_retry_duration` will be truncated to the nearest second.
@@ -321,19 +306,16 @@ const RateLimits = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} minBackoff
- *   A task will be scheduled
- *   for retry between
+ *   A task will be scheduled for retry between
  *   min_backoff and
- *   max_backoff duration
- *   after it fails, if the queue's
- *   RetryConfig specifies that the
- *   task should be retried.
+ *   max_backoff duration after it fails,
+ *   if the queue's RetryConfig specifies that the task should be
+ *   retried.
  *
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for pull
- *   queues.
+ *   This field is output only for pull queues.
  *
  *
  *   `min_backoff` will be truncated to the nearest second.
@@ -345,19 +327,16 @@ const RateLimits = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {Object} maxBackoff
- *   A task will be scheduled
- *   for retry between
+ *   A task will be scheduled for retry between
  *   min_backoff and
- *   max_backoff duration
- *   after it fails, if the queue's
- *   RetryConfig specifies that the
- *   task should be retried.
+ *   max_backoff duration after it fails,
+ *   if the queue's RetryConfig specifies that the task should be
+ *   retried.
  *
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for pull
- *   queues.
+ *   This field is output only for pull queues.
  *
  *
  *   `max_backoff` will be truncated to the nearest second.
@@ -372,29 +351,26 @@ const RateLimits = {
  *   The time between retries will double `max_doublings` times.
  *
  *   A task's retry interval starts at
- *   min_backoff, then
- *   doubles `max_doublings` times, then increases linearly, and finally retries
- *   retries at intervals of
+ *   min_backoff, then doubles
+ *   `max_doublings` times, then increases linearly, and finally
+ *   retries retries at intervals of
  *   max_backoff up to
  *   max_attempts times.
  *
- *   For example, if
- *   min_backoff is 10s,
- *   max_backoff is 300s,
- *   and `max_doublings` is 3, then the a task will first be retried in 10s. The
- *   retry interval will double three times, and then increase linearly by 2^3 *
- *   10s.  Finally, the task will retry at intervals of
- *   max_backoff until the
- *   task has been attempted
- *   max_attempts times.
- *   Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s,
- *   300s, ....
+ *   For example, if min_backoff is 10s,
+ *   max_backoff is 300s, and
+ *   `max_doublings` is 3, then the a task will first be retried in
+ *   10s. The retry interval will double three times, and then
+ *   increase linearly by 2^3 * 10s.  Finally, the task will retry at
+ *   intervals of max_backoff until the
+ *   task has been attempted max_attempts
+ *   times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s,
+ *   240s, 300s, 300s, ....
  *
  *   If unspecified when the queue is created, Cloud Tasks will pick the
  *   default.
  *
- *   This field is output only for pull
- *   queues.
+ *   This field is output only for pull queues.
  *
  *
  *   This field has the same meaning as

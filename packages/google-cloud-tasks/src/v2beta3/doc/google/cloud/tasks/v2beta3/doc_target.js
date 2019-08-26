@@ -33,7 +33,7 @@
  *
  *  System throttling happens because:
  *
- *   * Cloud Tasks backoffs on all errors. Normally the backoff specified in
+ *   * Cloud Tasks backs off on all errors. Normally the backoff specified in
  *     rate limits will be used. But if the worker returns
  *     `429` (Too Many Requests), `503` (Service Unavailable), or the rate of
  *     errors is high, Cloud Tasks will use a higher backoff rate. The retry

@@ -19,9 +19,7 @@
  * Request message for ListQueues.
  *
  * @property {string} parent
- *   Required.
- *
- *   The location name.
+ *   Required. The location name.
  *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
  *
  * @property {string} filter
@@ -95,9 +93,7 @@ const ListQueuesResponse = {
  * Request message for GetQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The resource name of the queue. For example:
+ *   Required. The resource name of the queue. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef GetQueueRequest
@@ -112,9 +108,7 @@ const GetQueueRequest = {
  * Request message for CreateQueue.
  *
  * @property {string} parent
- *   Required.
- *
- *   The location name in which the queue will be created.
+ *   Required. The location name in which the queue will be created.
  *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
  *
  *   The list of allowed locations can be obtained by calling Cloud
@@ -122,9 +116,7 @@ const GetQueueRequest = {
  *   ListLocations.
  *
  * @property {Object} queue
- *   Required.
- *
- *   The queue to create.
+ *   Required. The queue to create.
  *
  *   Queue's name cannot be the same as an existing queue.
  *
@@ -142,9 +134,7 @@ const CreateQueueRequest = {
  * Request message for UpdateQueue.
  *
  * @property {Object} queue
- *   Required.
- *
- *   The queue to create or update.
+ *   Required. The queue to create or update.
  *
  *   The queue's name must be specified.
  *
@@ -173,9 +163,7 @@ const UpdateQueueRequest = {
  * Request message for DeleteQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef DeleteQueueRequest
@@ -190,9 +178,7 @@ const DeleteQueueRequest = {
  * Request message for PurgeQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef PurgeQueueRequest
@@ -207,9 +193,7 @@ const PurgeQueueRequest = {
  * Request message for PauseQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef PauseQueueRequest
@@ -224,9 +208,7 @@ const PauseQueueRequest = {
  * Request message for ResumeQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef ResumeQueueRequest
@@ -241,9 +223,7 @@ const ResumeQueueRequest = {
  * Request message for listing tasks using ListTasks.
  *
  * @property {string} parent
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  * @property {number} responseView
@@ -320,9 +300,7 @@ const ListTasksResponse = {
  * Request message for getting a task using GetTask.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @property {number} responseView
@@ -353,17 +331,13 @@ const GetTaskRequest = {
  * Request message for CreateTask.
  *
  * @property {string} parent
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  *   The queue must already exist.
  *
  * @property {Object} task
- *   Required.
- *
- *   The task to add.
+ *   Required. The task to add.
  *
  *   Task names have the following format:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
@@ -428,9 +402,7 @@ const CreateTaskRequest = {
  * DeleteTask.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @typedef DeleteTaskRequest
@@ -446,9 +418,7 @@ const DeleteTaskRequest = {
  * RunTask.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @property {number} responseView

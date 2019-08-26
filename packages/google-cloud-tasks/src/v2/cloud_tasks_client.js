@@ -82,7 +82,7 @@ class CloudTasksClient {
 
     // Determine the client header string.
     const clientHeader = [
-      `gl-node/${process.version}`,
+      `gl-node/${process.versions.node}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,
@@ -235,9 +235,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name.
+   *   Required. The location name.
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} [request.filter]
    *   `filter` can be used to specify a subset of queues. Any Queue
@@ -362,9 +360,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name.
+   *   Required. The location name.
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    * @param {string} [request.filter]
    *   `filter` can be used to specify a subset of queues. Any Queue
@@ -422,9 +418,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The resource name of the queue. For example:
+   *   Required. The resource name of the queue. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -490,18 +484,14 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The location name in which the queue will be created.
+   *   Required. The location name in which the queue will be created.
    *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
    *
    *   The list of allowed locations can be obtained by calling Cloud
    *   Tasks' implementation of
    *   ListLocations.
    * @param {Object} request.queue
-   *   Required.
-   *
-   *   The queue to create.
+   *   Required. The queue to create.
    *
    *   Queue's name cannot be the same as an existing queue.
    *
@@ -578,9 +568,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.queue
-   *   Required.
-   *
-   *   The queue to create or update.
+   *   Required. The queue to create or update.
    *
    *   The queue's name must be specified.
    *
@@ -660,9 +648,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The queue name. For example:
+   *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -714,9 +700,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The queue name. For example:
+   *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -777,9 +761,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The queue name. For example:
+   *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -846,9 +828,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The queue name. For example:
+   *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1127,9 +1107,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The queue name. For example:
+   *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {number} [request.responseView]
    *   The response_view specifies which subset of the Task will be
@@ -1257,9 +1235,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The queue name. For example:
+   *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    * @param {number} [request.responseView]
    *   The response_view specifies which subset of the Task will be
@@ -1320,9 +1296,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The task name. For example:
+   *   Required. The task name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {number} [request.responseView]
    *   The response_view specifies which subset of the Task will be
@@ -1396,16 +1370,12 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *
-   *   The queue name. For example:
+   *   Required. The queue name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
    *
    *   The queue must already exist.
    * @param {Object} request.task
-   *   Required.
-   *
-   *   The task to add.
+   *   Required. The task to add.
    *
    *   Task names have the following format:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
@@ -1517,9 +1487,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The task name. For example:
+   *   Required. The task name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1589,9 +1557,7 @@ class CloudTasksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required.
-   *
-   *   The task name. For example:
+   *   Required. The task name. For example:
    *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
    * @param {number} [request.responseView]
    *   The response_view specifies which subset of the Task will be

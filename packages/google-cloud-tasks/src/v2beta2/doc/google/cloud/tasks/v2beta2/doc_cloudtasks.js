@@ -16,20 +16,18 @@
 // to be loaded as the JS file.
 
 /**
- * Request message for
- * ListQueues.
+ * Request message for ListQueues.
  *
  * @property {string} parent
- *   Required.
- *
- *   The location name.
+ *   Required. The location name.
  *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
  *
  * @property {string} filter
- *   `filter` can be used to specify a subset of queues. Any
- *   Queue field can be used as a filter and
- *   several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
- *   filter syntax is the same as described in [Stackdriver's Advanced Logs
+ *   `filter` can be used to specify a subset of queues. Any Queue
+ *   field can be used as a filter and several operators as supported.
+ *   For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
+ *   described in
+ *   [Stackdriver's Advanced Logs
  *   Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
  *
  *   Sample filter "app_engine_http_target: *".
@@ -43,20 +41,18 @@
  *   The maximum page size is 9800. If unspecified, the page size will
  *   be the maximum. Fewer queues than requested might be returned,
  *   even if more queues exist; use the
- *   next_page_token
- *   in the response to determine if more queues exist.
+ *   next_page_token in the
+ *   response to determine if more queues exist.
  *
  * @property {string} pageToken
  *   A token identifying the page of results to return.
  *
  *   To request the first page results, page_token must be empty. To
  *   request the next page of results, page_token must be the value of
- *   next_page_token
- *   returned from the previous call to
- *   ListQueues method. It
- *   is an error to switch the value of the
- *   filter while
- *   iterating through pages.
+ *   next_page_token returned
+ *   from the previous call to ListQueues
+ *   method. It is an error to switch the value of the
+ *   filter while iterating through pages.
  *
  * @typedef ListQueuesRequest
  * @memberof google.cloud.tasks.v2beta2
@@ -67,8 +63,7 @@ const ListQueuesRequest = {
 };
 
 /**
- * Response message for
- * ListQueues.
+ * Response message for ListQueues.
  *
  * @property {Object[]} queues
  *   The list of queues.
@@ -79,8 +74,7 @@ const ListQueuesRequest = {
  *   A token to retrieve next page of results.
  *
  *   To return the next page of results, call
- *   ListQueues with this
- *   value as the
+ *   ListQueues with this value as the
  *   page_token.
  *
  *   If the next_page_token is empty, there are no more results.
@@ -96,13 +90,10 @@ const ListQueuesResponse = {
 };
 
 /**
- * Request message for
- * GetQueue.
+ * Request message for GetQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The resource name of the queue. For example:
+ *   Required. The resource name of the queue. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef GetQueueRequest
@@ -114,13 +105,10 @@ const GetQueueRequest = {
 };
 
 /**
- * Request message for
- * CreateQueue.
+ * Request message for CreateQueue.
  *
  * @property {string} parent
- *   Required.
- *
- *   The location name in which the queue will be created.
+ *   Required. The location name in which the queue will be created.
  *   For example: `projects/PROJECT_ID/locations/LOCATION_ID`
  *
  *   The list of allowed locations can be obtained by calling Cloud
@@ -128,12 +116,9 @@ const GetQueueRequest = {
  *   ListLocations.
  *
  * @property {Object} queue
- *   Required.
+ *   Required. The queue to create.
  *
- *   The queue to create.
- *
- *   Queue's name cannot be the same as
- *   an existing queue.
+ *   Queue's name cannot be the same as an existing queue.
  *
  *   This object should have the same structure as [Queue]{@link google.cloud.tasks.v2beta2.Queue}
  *
@@ -146,21 +131,16 @@ const CreateQueueRequest = {
 };
 
 /**
- * Request message for
- * UpdateQueue.
+ * Request message for UpdateQueue.
  *
  * @property {Object} queue
- *   Required.
+ *   Required. The queue to create or update.
  *
- *   The queue to create or update.
- *
- *   The queue's name must be
- *   specified.
+ *   The queue's name must be specified.
  *
  *   Output only fields cannot be modified using UpdateQueue.
  *   Any value specified for an output only field will be ignored.
- *   The queue's name cannot be
- *   changed.
+ *   The queue's name cannot be changed.
  *
  *   This object should have the same structure as [Queue]{@link google.cloud.tasks.v2beta2.Queue}
  *
@@ -180,13 +160,10 @@ const UpdateQueueRequest = {
 };
 
 /**
- * Request message for
- * DeleteQueue.
+ * Request message for DeleteQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef DeleteQueueRequest
@@ -198,13 +175,10 @@ const DeleteQueueRequest = {
 };
 
 /**
- * Request message for
- * PurgeQueue.
+ * Request message for PurgeQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef PurgeQueueRequest
@@ -216,13 +190,10 @@ const PurgeQueueRequest = {
 };
 
 /**
- * Request message for
- * PauseQueue.
+ * Request message for PauseQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef PauseQueueRequest
@@ -234,13 +205,10 @@ const PauseQueueRequest = {
 };
 
 /**
- * Request message for
- * ResumeQueue.
+ * Request message for ResumeQueue.
  *
  * @property {string} name
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
  *
  * @typedef ResumeQueueRequest
@@ -252,49 +220,46 @@ const ResumeQueueRequest = {
 };
 
 /**
- * Request message for listing tasks using
- * ListTasks.
+ * Request message for listing tasks using ListTasks.
  *
  * @property {string} parent
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  * @property {number} responseView
- *   The response_view specifies which subset of the
- *   Task will be returned.
+ *   The response_view specifies which subset of the Task will be
+ *   returned.
  *
- *   By default response_view is
- *   BASIC; not all information is
- *   retrieved by default because some data, such as payloads, might be
- *   desirable to return only when needed because of its large size or because
- *   of the sensitivity of data that it contains.
+ *   By default response_view is BASIC; not all
+ *   information is retrieved by default because some data, such as
+ *   payloads, might be desirable to return only when needed because
+ *   of its large size or because of the sensitivity of data that it
+ *   contains.
  *
- *   Authorization for FULL
- *   requires `cloudtasks.tasks.fullView` [Google
- *   IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   Authorization for FULL requires
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
  * @property {number} pageSize
- *   Requested page size. Fewer tasks than requested might be returned.
+ *   Maximum page size.
  *
- *   The maximum page size is 1000. If unspecified, the page size will
- *   be the maximum. Fewer tasks than requested might be returned,
- *   even if more tasks exist; use
- *   next_page_token
- *   in the response to determine if more tasks exist.
+ *   Fewer tasks than requested might be returned, even if more tasks exist; use
+ *   next_page_token in the response to
+ *   determine if more tasks exist.
+ *
+ *   The maximum page size is 1000. If unspecified, the page size will be the
+ *   maximum.
  *
  * @property {string} pageToken
  *   A token identifying the page of results to return.
  *
  *   To request the first page results, page_token must be empty. To
  *   request the next page of results, page_token must be the value of
- *   next_page_token
- *   returned from the previous call to
- *   ListTasks method.
+ *   next_page_token returned
+ *   from the previous call to ListTasks
+ *   method.
  *
  *   The page token is valid for only 2 hours.
  *
@@ -307,8 +272,7 @@ const ListTasksRequest = {
 };
 
 /**
- * Response message for listing tasks using
- * ListTasks.
+ * Response message for listing tasks using ListTasks.
  *
  * @property {Object[]} tasks
  *   The list of tasks.
@@ -319,8 +283,7 @@ const ListTasksRequest = {
  *   A token to retrieve next page of results.
  *
  *   To return the next page of results, call
- *   ListTasks with this
- *   value as the
+ *   ListTasks with this value as the
  *   page_token.
  *
  *   If the next_page_token is empty, there are no more results.
@@ -334,29 +297,25 @@ const ListTasksResponse = {
 };
 
 /**
- * Request message for getting a task using
- * GetTask.
+ * Request message for getting a task using GetTask.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @property {number} responseView
- *   The response_view specifies which subset of the
- *   Task will be returned.
+ *   The response_view specifies which subset of the Task will be
+ *   returned.
  *
- *   By default response_view is
- *   BASIC; not all information is
- *   retrieved by default because some data, such as payloads, might be
- *   desirable to return only when needed because of its large size or because
- *   of the sensitivity of data that it contains.
+ *   By default response_view is BASIC; not all
+ *   information is retrieved by default because some data, such as
+ *   payloads, might be desirable to return only when needed because
+ *   of its large size or because of the sensitivity of data that it
+ *   contains.
  *
- *   Authorization for FULL
- *   requires `cloudtasks.tasks.fullView` [Google
- *   IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   Authorization for FULL requires
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -369,31 +328,26 @@ const GetTaskRequest = {
 };
 
 /**
- * Request message for
- * CreateTask.
+ * Request message for CreateTask.
  *
  * @property {string} parent
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  *   The queue must already exist.
  *
  * @property {Object} task
- *   Required.
- *
- *   The task to add.
+ *   Required. The task to add.
  *
  *   Task names have the following format:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
- *   The user can optionally specify a task
- *   name. If a name is not specified
- *   then the system will generate a random unique task id, which will be set in
- *   the task returned in the response.
+ *   The user can optionally specify a task name. If a
+ *   name is not specified then the system will generate a random
+ *   unique task id, which will be set in the task returned in the
+ *   response.
  *
- *   If schedule_time is not
- *   set or is in the past then Cloud Tasks will set it to the current time.
+ *   If schedule_time is not set or is in the
+ *   past then Cloud Tasks will set it to the current time.
  *
  *   Task De-duplication:
  *
@@ -408,10 +362,10 @@ const GetTaskRequest = {
  *   for ~9days after the original task was deleted or completed.
  *
  *   Because there is an extra lookup cost to identify duplicate task
- *   names, these CreateTask
- *   calls have significantly increased latency. Using hashed strings for the
- *   task id or for the prefix of the task id is recommended. Choosing task ids
- *   that are sequential or have sequential prefixes, for example using a
+ *   names, these CreateTask calls have significantly
+ *   increased latency. Using hashed strings for the task id or for
+ *   the prefix of the task id is recommended. Choosing task ids that
+ *   are sequential or have sequential prefixes, for example using a
  *   timestamp, causes an increase in latency and error rates in all
  *   task commands. The infrastructure relies on an approximately
  *   uniform distribution of task ids to store and serve tasks
@@ -420,19 +374,18 @@ const GetTaskRequest = {
  *   This object should have the same structure as [Task]{@link google.cloud.tasks.v2beta2.Task}
  *
  * @property {number} responseView
- *   The response_view specifies which subset of the
- *   Task will be returned.
+ *   The response_view specifies which subset of the Task will be
+ *   returned.
  *
- *   By default response_view is
- *   BASIC; not all information is
- *   retrieved by default because some data, such as payloads, might be
- *   desirable to return only when needed because of its large size or because
- *   of the sensitivity of data that it contains.
+ *   By default response_view is BASIC; not all
+ *   information is retrieved by default because some data, such as
+ *   payloads, might be desirable to return only when needed because
+ *   of its large size or because of the sensitivity of data that it
+ *   contains.
  *
- *   Authorization for FULL
- *   requires `cloudtasks.tasks.fullView` [Google
- *   IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   Authorization for FULL requires
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -449,9 +402,7 @@ const CreateTaskRequest = {
  * DeleteTask.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @typedef DeleteTaskRequest
@@ -463,13 +414,10 @@ const DeleteTaskRequest = {
 };
 
 /**
- * Request message for leasing tasks using
- * LeaseTasks.
+ * Request message for leasing tasks using LeaseTasks.
  *
  * @property {string} parent
- *   Required.
- *
- *   The queue name. For example:
+ *   Required. The queue name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
  *
  * @property {number} maxTasks
@@ -480,14 +428,27 @@ const DeleteTaskRequest = {
  *
  *   The largest that `max_tasks` can be is 1000.
  *
+ *   The maximum total size of a lease tasks response is
+ *   32 MB. If the sum of all task sizes requested reaches this limit,
+ *   fewer tasks than requested are returned.
+ *
  * @property {Object} leaseDuration
+ *   Required. The duration of the lease.
+ *
+ *   Each task returned in the response will
+ *   have its schedule_time set to the current
+ *   time plus the `lease_duration`. The task is leased until its
+ *   schedule_time; thus, the task will not be
+ *   returned to another LeaseTasks call
+ *   before its schedule_time.
+ *
+ *
  *   After the worker has successfully finished the work associated
  *   with the task, the worker must call via
- *   AcknowledgeTask
- *   before the schedule_time.
- *   Otherwise the task will be returned to a later
- *   LeaseTasks call so that
- *   another worker can retry it.
+ *   AcknowledgeTask before the
+ *   schedule_time. Otherwise the task will be
+ *   returned to a later LeaseTasks call so
+ *   that another worker can retry it.
  *
  *   The maximum lease duration is 1 week.
  *   `lease_duration` will be truncated to the nearest second.
@@ -495,19 +456,18 @@ const DeleteTaskRequest = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {number} responseView
- *   The response_view specifies which subset of the
- *   Task will be returned.
+ *   The response_view specifies which subset of the Task will be
+ *   returned.
  *
- *   By default response_view is
- *   BASIC; not all information is
- *   retrieved by default because some data, such as payloads, might be
- *   desirable to return only when needed because of its large size or because
- *   of the sensitivity of data that it contains.
+ *   By default response_view is BASIC; not all
+ *   information is retrieved by default because some data, such as
+ *   payloads, might be desirable to return only when needed because
+ *   of its large size or because of the sensitivity of data that it
+ *   contains.
  *
- *   Authorization for FULL
- *   requires `cloudtasks.tasks.fullView` [Google
- *   IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   Authorization for FULL requires
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -515,14 +475,13 @@ const DeleteTaskRequest = {
  *   `filter` can be used to specify a subset of tasks to lease.
  *
  *   When `filter` is set to `tag=<my-tag>` then the
- *   response will contain only
- *   tasks whose tag is equal to
- *   `<my-tag>`. `<my-tag>` must be less than 500 characters.
+ *   response will contain only tasks whose
+ *   tag is equal to `<my-tag>`. `<my-tag>` must be
+ *   less than 500 characters.
  *
  *   When `filter` is set to `tag_function=oldest_tag()`, only tasks which have
  *   the same tag as the task with the oldest
- *   schedule_time will be
- *   returned.
+ *   schedule_time will be returned.
  *
  *   Grammar Syntax:
  *
@@ -540,9 +499,8 @@ const DeleteTaskRequest = {
  *   [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-),
  *   only UTF-8 encoded tags can be used in Cloud Tasks. Tag which
  *   aren't UTF-8 encoded can't be used in the
- *   filter and the
- *   task's tag will be displayed
- *   as empty in Cloud Tasks.
+ *   filter and the task's
+ *   tag will be displayed as empty in Cloud Tasks.
  *
  * @typedef LeaseTasksRequest
  * @memberof google.cloud.tasks.v2beta2
@@ -553,8 +511,7 @@ const LeaseTasksRequest = {
 };
 
 /**
- * Response message for leasing tasks using
- * LeaseTasks.
+ * Response message for leasing tasks using LeaseTasks.
  *
  * @property {Object[]} tasks
  *   The leased tasks.
@@ -574,19 +531,15 @@ const LeaseTasksResponse = {
  * AcknowledgeTask.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @property {Object} scheduleTime
- *   Required.
- *
- *   The task's current schedule time, available in the
+ *   Required. The task's current schedule time, available in the
  *   schedule_time returned by
  *   LeaseTasks response or
- *   RenewLease response.
- *   This restriction is to ensure that your worker currently holds the lease.
+ *   RenewLease response. This restriction is
+ *   to ensure that your worker currently holds the lease.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -603,26 +556,20 @@ const AcknowledgeTaskRequest = {
  * RenewLease.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @property {Object} scheduleTime
- *   Required.
- *
- *   The task's current schedule time, available in the
+ *   Required. The task's current schedule time, available in the
  *   schedule_time returned by
  *   LeaseTasks response or
- *   RenewLease response.
- *   This restriction is to ensure that your worker currently holds the lease.
+ *   RenewLease response. This restriction is
+ *   to ensure that your worker currently holds the lease.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} leaseDuration
- *   Required.
- *
- *   The desired new lease duration, starting from now.
+ *   Required. The desired new lease duration, starting from now.
  *
  *
  *   The maximum lease duration is 1 week.
@@ -631,19 +578,18 @@ const AcknowledgeTaskRequest = {
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
  * @property {number} responseView
- *   The response_view specifies which subset of the
- *   Task will be returned.
+ *   The response_view specifies which subset of the Task will be
+ *   returned.
  *
- *   By default response_view is
- *   BASIC; not all information is
- *   retrieved by default because some data, such as payloads, might be
- *   desirable to return only when needed because of its large size or because
- *   of the sensitivity of data that it contains.
+ *   By default response_view is BASIC; not all
+ *   information is retrieved by default because some data, such as
+ *   payloads, might be desirable to return only when needed because
+ *   of its large size or because of the sensitivity of data that it
+ *   contains.
  *
- *   Authorization for FULL
- *   requires `cloudtasks.tasks.fullView` [Google
- *   IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   Authorization for FULL requires
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -660,36 +606,31 @@ const RenewLeaseRequest = {
  * CancelLease.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @property {Object} scheduleTime
- *   Required.
- *
- *   The task's current schedule time, available in the
+ *   Required. The task's current schedule time, available in the
  *   schedule_time returned by
  *   LeaseTasks response or
- *   RenewLease response.
- *   This restriction is to ensure that your worker currently holds the lease.
+ *   RenewLease response. This restriction is
+ *   to ensure that your worker currently holds the lease.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {number} responseView
- *   The response_view specifies which subset of the
- *   Task will be returned.
+ *   The response_view specifies which subset of the Task will be
+ *   returned.
  *
- *   By default response_view is
- *   BASIC; not all information is
- *   retrieved by default because some data, such as payloads, might be
- *   desirable to return only when needed because of its large size or because
- *   of the sensitivity of data that it contains.
+ *   By default response_view is BASIC; not all
+ *   information is retrieved by default because some data, such as
+ *   payloads, might be desirable to return only when needed because
+ *   of its large size or because of the sensitivity of data that it
+ *   contains.
  *
- *   Authorization for FULL
- *   requires `cloudtasks.tasks.fullView` [Google
- *   IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   Authorization for FULL requires
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *
@@ -706,25 +647,22 @@ const CancelLeaseRequest = {
  * RunTask.
  *
  * @property {string} name
- *   Required.
- *
- *   The task name. For example:
+ *   Required. The task name. For example:
  *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
  *
  * @property {number} responseView
- *   The response_view specifies which subset of the
- *   Task will be returned.
+ *   The response_view specifies which subset of the Task will be
+ *   returned.
  *
- *   By default response_view is
- *   BASIC; not all information is
- *   retrieved by default because some data, such as payloads, might be
- *   desirable to return only when needed because of its large size or because
- *   of the sensitivity of data that it contains.
+ *   By default response_view is BASIC; not all
+ *   information is retrieved by default because some data, such as
+ *   payloads, might be desirable to return only when needed because
+ *   of its large size or because of the sensitivity of data that it
+ *   contains.
  *
- *   Authorization for FULL
- *   requires `cloudtasks.tasks.fullView` [Google
- *   IAM](https://cloud.google.com/iam/) permission on the
- *   Task resource.
+ *   Authorization for FULL requires
+ *   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
+ *   permission on the Task resource.
  *
  *   The number should be among the values of [View]{@link google.cloud.tasks.v2beta2.View}
  *

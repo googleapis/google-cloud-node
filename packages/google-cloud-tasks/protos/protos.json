@@ -16,19 +16,25 @@
                   },
                   "nested": {
                     "CloudTasks": {
+                      "options": {
+                        "(google.api.default_host)": "cloudtasks.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "ListQueues": {
                           "requestType": "ListQueuesRequest",
                           "responseType": "ListQueuesResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/queues"
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/queues",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetQueue": {
                           "requestType": "GetQueueRequest",
                           "responseType": "Queue",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/queues/*}"
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/queues/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateQueue": {
@@ -36,7 +42,8 @@
                           "responseType": "Queue",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/queues",
-                            "(google.api.http).body": "queue"
+                            "(google.api.http).body": "queue",
+                            "(google.api.method_signature)": "parent,queue"
                           }
                         },
                         "UpdateQueue": {
@@ -44,14 +51,16 @@
                           "responseType": "Queue",
                           "options": {
                             "(google.api.http).patch": "/v2/{queue.name=projects/*/locations/*/queues/*}",
-                            "(google.api.http).body": "queue"
+                            "(google.api.http).body": "queue",
+                            "(google.api.method_signature)": "queue,update_mask"
                           }
                         },
                         "DeleteQueue": {
                           "requestType": "DeleteQueueRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/queues/*}"
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/queues/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "PurgeQueue": {
@@ -59,7 +68,8 @@
                           "responseType": "Queue",
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*}:purge",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "PauseQueue": {
@@ -67,7 +77,8 @@
                           "responseType": "Queue",
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*}:pause",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ResumeQueue": {
@@ -75,7 +86,8 @@
                           "responseType": "Queue",
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*}:resume",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetIamPolicy": {
@@ -83,7 +95,8 @@
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).post": "/v2/{resource=projects/*/locations/*/queues/*}:getIamPolicy",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "resource"
                           }
                         },
                         "SetIamPolicy": {
@@ -91,7 +104,8 @@
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).post": "/v2/{resource=projects/*/locations/*/queues/*}:setIamPolicy",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "resource,policy"
                           }
                         },
                         "TestIamPermissions": {
@@ -99,21 +113,24 @@
                           "responseType": "google.iam.v1.TestIamPermissionsResponse",
                           "options": {
                             "(google.api.http).post": "/v2/{resource=projects/*/locations/*/queues/*}:testIamPermissions",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "resource,permissions"
                           }
                         },
                         "ListTasks": {
                           "requestType": "ListTasksRequest",
                           "responseType": "ListTasksResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/queues/*}/tasks"
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/queues/*}/tasks",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetTask": {
                           "requestType": "GetTaskRequest",
                           "responseType": "Task",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}"
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateTask": {
@@ -121,14 +138,16 @@
                           "responseType": "Task",
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/locations/*/queues/*}/tasks",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,task"
                           }
                         },
                         "DeleteTask": {
                           "requestType": "DeleteTaskRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}"
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "RunTask": {
@@ -136,7 +155,8 @@
                           "responseType": "Task",
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}:run",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
                           }
                         }
                       }
@@ -145,7 +165,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                          }
                         },
                         "filter": {
                           "type": "string",
@@ -178,7 +202,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Queue"
+                          }
                         }
                       }
                     },
@@ -186,11 +214,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                          }
                         },
                         "queue": {
                           "type": "Queue",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -198,7 +233,10 @@
                       "fields": {
                         "queue": {
                           "type": "Queue",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -210,7 +248,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Queue"
+                          }
                         }
                       }
                     },
@@ -218,7 +260,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Queue"
+                          }
                         }
                       }
                     },
@@ -226,7 +272,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Queue"
+                          }
                         }
                       }
                     },
@@ -234,7 +284,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Queue"
+                          }
                         }
                       }
                     },
@@ -242,7 +296,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                          }
                         },
                         "responseView": {
                           "type": "Task.View",
@@ -275,7 +333,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Task"
+                          }
                         },
                         "responseView": {
                           "type": "Task.View",
@@ -287,11 +349,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                          }
                         },
                         "task": {
                           "type": "Task",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "responseView": {
                           "type": "Task.View",
@@ -303,7 +372,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Task"
+                          }
                         }
                       }
                     },
@@ -311,7 +384,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Task"
+                          }
                         },
                         "responseView": {
                           "type": "Task.View",
@@ -320,6 +397,10 @@
                       }
                     },
                     "Queue": {
+                      "options": {
+                        "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -455,6 +536,10 @@
                       }
                     },
                     "Task": {
+                      "options": {
+                        "(google.api.resource).type": "cloudtasks.googleapis.com/Task",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/queues/{queue}/tasks/{task}"
+                      },
                       "oneofs": {
                         "messageType": {
                           "oneof": [
@@ -635,6 +720,38 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
               }
             },
             "resourceReference": {
@@ -1634,9 +1751,9 @@
         },
         "rpc": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/rpc/code;code",
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
             "java_multiple_files": true,
-            "java_outer_classname": "CodeProto",
+            "java_outer_classname": "StatusProto",
             "java_package": "com.google.rpc",
             "objc_class_prefix": "RPC"
           },
@@ -1656,27 +1773,6 @@
                   "type": "google.protobuf.Any",
                   "id": 3
                 }
-              }
-            },
-            "Code": {
-              "values": {
-                "OK": 0,
-                "CANCELLED": 1,
-                "UNKNOWN": 2,
-                "INVALID_ARGUMENT": 3,
-                "DEADLINE_EXCEEDED": 4,
-                "NOT_FOUND": 5,
-                "ALREADY_EXISTS": 6,
-                "PERMISSION_DENIED": 7,
-                "UNAUTHENTICATED": 16,
-                "RESOURCE_EXHAUSTED": 8,
-                "FAILED_PRECONDITION": 9,
-                "ABORTED": 10,
-                "OUT_OF_RANGE": 11,
-                "UNIMPLEMENTED": 12,
-                "INTERNAL": 13,
-                "UNAVAILABLE": 14,
-                "DATA_LOSS": 15
               }
             }
           }
