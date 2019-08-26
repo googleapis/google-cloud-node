@@ -89,7 +89,7 @@ class AlertPolicyServiceClient {
 
     // Determine the client header string.
     const clientHeader = [
-      `gl-node/${process.version}`,
+      `gl-node/${process.versions.node}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,
