@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.1.3...v1.1.4) (2019-08-26)
+
+
+### Bug Fixes
+
+* include the correct version of node in a header ([#46](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/46)) ([2cc8099](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/2cc8099))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v1.1.2...v1.1.3) (2019-08-05)
 
 
