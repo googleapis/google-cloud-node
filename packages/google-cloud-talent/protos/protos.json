@@ -292,6 +292,9 @@
                       }
                     },
                     "Visibility": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "values": {
                         "VISIBILITY_UNSPECIFIED": 0,
                         "ACCOUNT_ONLY": 1,
@@ -583,6 +586,55 @@
                         "interval": {
                           "type": "double",
                           "id": 4
+                        }
+                      }
+                    },
+                    "BatchOperationMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "stateDescription": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "successCount": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "failureCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "totalCount": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "INITIALIZING": 1,
+                            "PROCESSING": 2,
+                            "SUCCEEDED": 3,
+                            "FAILED": 4,
+                            "CANCELLING": 5,
+                            "CANCELLED": 6
+                          }
                         }
                       }
                     },
@@ -1959,7 +2011,10 @@
                         },
                         "visibility": {
                           "type": "Visibility",
-                          "id": 21
+                          "id": 21,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "jobStartTime": {
                           "type": "google.protobuf.Timestamp",
@@ -2039,78 +2094,6 @@
                             },
                             "htmlSanitization": {
                               "type": "HtmlSanitization",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "BatchOperationMetadata": {
-                      "fields": {
-                        "state": {
-                          "type": "State",
-                          "id": 1
-                        },
-                        "stateDescription": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "successCount": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "failureCount": {
-                          "type": "int32",
-                          "id": 4
-                        },
-                        "totalCount": {
-                          "type": "int32",
-                          "id": 5
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 6
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        },
-                        "endTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "INITIALIZING": 1,
-                            "PROCESSING": 2,
-                            "SUCCEEDED": 3,
-                            "FAILED": 4,
-                            "CANCELLING": 5,
-                            "CANCELLED": 6
-                          }
-                        }
-                      }
-                    },
-                    "JobOperationResult": {
-                      "fields": {
-                        "jobResults": {
-                          "rule": "repeated",
-                          "type": "JobResult",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "JobResult": {
-                          "fields": {
-                            "job": {
-                              "type": "Job",
-                              "id": 1
-                            },
-                            "status": {
-                              "type": "google.rpc.Status",
                               "id": 2
                             }
                           }
@@ -3074,6 +3057,29 @@
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 3
+                        }
+                      }
+                    },
+                    "JobOperationResult": {
+                      "fields": {
+                        "jobResults": {
+                          "rule": "repeated",
+                          "type": "JobResult",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "JobResult": {
+                          "fields": {
+                            "job": {
+                              "type": "Job",
+                              "id": 1
+                            },
+                            "status": {
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -4450,34 +4456,6 @@
             }
           }
         },
-        "rpc": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
-                }
-              }
-            }
-          }
-        },
         "longrunning": {
           "options": {
             "cc_enable_arenas": true,
@@ -4641,6 +4619,34 @@
                 "metadataType": {
                   "type": "string",
                   "id": 2
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

@@ -199,26 +199,44 @@ const JobQuery = {
  *
  * @property {Object[]} locationFilters
  *   Optional. The location filter specifies geo-regions containing the profiles
- *   to search against. It filters against all of a profile's
+ *   to search against.
+ *
+ *   One of
+ *   LocationFilter.address
+ *   or
+ *   LocationFilter.lat_lng
+ *   must be provided or an error is thrown. If both
+ *   LocationFilter.address
+ *   and
+ *   LocationFilter.lat_lng
+ *   are provided, an error is thrown.
+ *
+ *   The following logic is used to determine which locations in
+ *   the profile to filter against:
+ *   1. All of the profile's geocoded
  *   Profile.addresses where
  *   Address.usage is PERSONAL and
- *   Address.current is true. If
- *   no such address exists, a fallback logic is applied in an attempt to
- *   determine the profile's primary address.
- *
- *   The fallback logic selects an address from a profile's
- *   Profile.addresses in the
- *   following order of priority:
- *   1. Address.usage is PERSONAL
- *   and Address.current is false
- *   or not set.
- *   2. Address.usage is
+ *   Address.current is true.
+ *   2. If the above set of locations is empty, all of the profile's geocoded
+ *   Profile.addresses where
+ *   Address.usage is
  *   CONTACT_INFO_USAGE_UNSPECIFIED and
  *   Address.current is true.
- *   3. Address.usage is
+ *   3. If the above set of locations is empty, all of the profile's geocoded
+ *   Profile.addresses where
+ *   Address.usage is PERSONAL or
  *   CONTACT_INFO_USAGE_UNSPECIFIED and
- *   Address.current is false or
- *   not set.
+ *   Address.current is not set.
+ *
+ *   This means that any profiles without any
+ *   Profile.addresses that
+ *   match any of the above criteria will not be included in a search with
+ *   location filter. Furthermore, any
+ *   Profile.addresses where
+ *   Address.usage is WORK or
+ *   SCHOOL or where
+ *   Address.current is false are
+ *   not considered for location filter.
  *
  *   If a location filter isn't specified, profiles fitting the other search
  *   criteria are retrieved regardless of where they're located.
@@ -227,7 +245,58 @@ const JobQuery = {
  *   LocationFilter.negated
  *   is specified, the result doesn't contain profiles from that location.
  *
- *   For example, search for profiles with addresses in "New York City".
+ *   If
+ *   LocationFilter.address
+ *   is provided, the
+ *   LocationType, center
+ *   point (latitude and longitude), and radius are automatically detected by
+ *   the Google Maps Geocoding API and included as well. If
+ *   LocationFilter.address
+ *   cannot be geocoded, the filter falls back to keyword search.
+ *
+ *   If the detected
+ *   LocationType is
+ *   LocationType.SUB_ADMINISTRATIVE_AREA,
+ *   LocationType.ADMINISTRATIVE_AREA,
+ *   or
+ *   LocationType.COUNTRY,
+ *   the filter is performed against the detected location name (using exact
+ *   text matching). Otherwise, the filter is performed against the detected
+ *   center point and a radius of detected location radius +
+ *   LocationFilter.distance_in_miles.
+ *
+ *   If
+ *   LocationFilter.address
+ *   is provided,
+ *   LocationFilter.distance_in_miles
+ *   is the additional radius on top of the radius of the location geocoded from
+ *   LocationFilter.address.
+ *   If
+ *   LocationFilter.lat_lng
+ *   is provided,
+ *   LocationFilter.distance_in_miles
+ *   is the only radius that is used.
+ *
+ *   LocationFilter.distance_in_miles
+ *   is 10 by default. Note that the value of
+ *   LocationFilter.distance_in_miles
+ *   is 0 if it is unset, so the server does not differentiate
+ *   LocationFilter.distance_in_miles
+ *   that is explicitly set to 0 and
+ *   LocationFilter.distance_in_miles
+ *   that is not set. Which means that if
+ *   LocationFilter.distance_in_miles
+ *   is explicitly set to 0, the server will use the default value of
+ *   LocationFilter.distance_in_miles
+ *   which is 10. To work around this and effectively set
+ *   LocationFilter.distance_in_miles
+ *   to 0, we recommend setting
+ *   LocationFilter.distance_in_miles
+ *   to a very small decimal number (such as 0.00001).
+ *
+ *   If
+ *   LocationFilter.distance_in_miles
+ *   is negative, an error is thrown.
  *
  *   This object should have the same structure as [LocationFilter]{@link google.cloud.talent.v4beta1.LocationFilter}
  *
@@ -432,15 +501,15 @@ const ProfileQuery = {
  *   Note that this filter is not applicable for Profile Search related queries.
  *
  * @property {Object} latLng
- *   Optional. The latitude and longitude of the geographic center from which to
- *   search. This field's ignored if `address` is provided.
+ *   Optional. The latitude and longitude of the geographic center to search
+ *   from. This field is ignored if `address` is provided.
  *
  *   This object should have the same structure as [LatLng]{@link google.type.LatLng}
  *
  * @property {number} distanceInMiles
  *   Optional. The distance_in_miles is applied when the location being searched
- *   for is identified as a city or smaller. When the location being searched
- *   for is a state or larger, this field is ignored.
+ *   for is identified as a city or smaller. This field is ignored if the
+ *   location being searched for is a state or larger.
  *
  * @property {number} telecommutePreference
  *   Optional. Allows the client to return jobs without a
@@ -463,6 +532,8 @@ const ProfileQuery = {
  *   combination with other location filters, telecommuting jobs can be
  *   treated as less relevant than other jobs in the search response.
  *
+ *   This field is only used for job search requests.
+ *
  *   The number should be among the values of [TelecommutePreference]{@link google.cloud.talent.v4beta1.TelecommutePreference}
  *
  * @property {boolean} negated
@@ -479,7 +550,7 @@ const LocationFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Specify whether including telecommute jobs.
+   * Specify whether to include telecommute jobs.
    *
    * @enum {number}
    * @memberof google.cloud.talent.v4beta1

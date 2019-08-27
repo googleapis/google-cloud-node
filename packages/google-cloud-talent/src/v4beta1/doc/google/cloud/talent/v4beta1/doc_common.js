@@ -784,6 +784,105 @@ const Rating = {
 };
 
 /**
+ * Output only.
+ *
+ * Metadata used for long running operations returned by CTS batch APIs.
+ * It's used to replace
+ * google.longrunning.Operation.metadata.
+ *
+ * @property {number} state
+ *   The state of a long running operation.
+ *
+ *   The number should be among the values of [State]{@link google.cloud.talent.v4beta1.State}
+ *
+ * @property {string} stateDescription
+ *   More detailed information about operation state.
+ *
+ * @property {number} successCount
+ *   Count of successful item(s) inside an operation.
+ *
+ * @property {number} failureCount
+ *   Count of failed item(s) inside an operation.
+ *
+ * @property {number} totalCount
+ *   Count of total item(s) inside an operation.
+ *
+ * @property {Object} createTime
+ *   The time when the batch operation is created.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} updateTime
+ *   The time when the batch operation status is updated. The metadata and the
+ *   update_time
+ *   is refreshed every minute otherwise cached data is returned.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} endTime
+ *   The time when the batch operation is finished and
+ *   google.longrunning.Operation.done is
+ *   set to `true`.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @typedef BatchOperationMetadata
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.BatchOperationMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/common.proto}
+ */
+const BatchOperationMetadata = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * @enum {number}
+   * @memberof google.cloud.talent.v4beta1
+   */
+  State: {
+
+    /**
+     * Default value.
+     */
+    STATE_UNSPECIFIED: 0,
+
+    /**
+     * The batch operation is being prepared for processing.
+     */
+    INITIALIZING: 1,
+
+    /**
+     * The batch operation is actively being processed.
+     */
+    PROCESSING: 2,
+
+    /**
+     * The batch operation is processed, and at least one item has been
+     * successfully processed.
+     */
+    SUCCEEDED: 3,
+
+    /**
+     * The batch operation is done and no item has been successfully processed.
+     */
+    FAILED: 4,
+
+    /**
+     * The batch operation is in the process of cancelling after
+     * google.longrunning.Operations.CancelOperation
+     * is called.
+     */
+    CANCELLING: 5,
+
+    /**
+     * The batch operation is done after
+     * google.longrunning.Operations.CancelOperation
+     * is called. Any items processed before cancelling are returned in the
+     * response.
+     */
+    CANCELLED: 6
+  }
+};
+
+/**
  * Method for commute.
  *
  * @enum {number}
@@ -1501,6 +1600,8 @@ const SkillProficiencyLevel = {
 };
 
 /**
+ * Deprecated. All resources are only visible to the owner.
+ *
  * An enum that represents who has view access to the resource.
  *
  * @enum {number}

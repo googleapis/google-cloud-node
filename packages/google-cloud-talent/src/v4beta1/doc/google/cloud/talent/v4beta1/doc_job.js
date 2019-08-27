@@ -221,7 +221,9 @@
  *   The number should be among the values of [PostingRegion]{@link google.cloud.talent.v4beta1.PostingRegion}
  *
  * @property {number} visibility
- *   Optional. The visibility of the job.
+ *   Deprecated. The job is only visible to the owner.
+ *
+ *   The visibility of the job.
  *
  *   Defaults to
  *   Visibility.ACCOUNT_ONLY

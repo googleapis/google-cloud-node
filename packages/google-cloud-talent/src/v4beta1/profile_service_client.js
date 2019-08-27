@@ -82,7 +82,7 @@ class ProfileServiceClient {
 
     // Determine the client header string.
     const clientHeader = [
-      `gl-node/${process.version}`,
+      `gl-node/${process.versions.node}`,
       `grpc/${gaxGrpc.grpcVersion}`,
       `gax/${gax.version}`,
       `gapic/${VERSION}`,
@@ -542,6 +542,7 @@ class ProfileServiceClient {
    *   A full update is performed if it is unset.
    *
    *   Valid values are:
+   *
    *   * external_id
    *   * source
    *   * uri
@@ -744,11 +745,11 @@ class ProfileServiceClient {
    *
    *   * "relevance desc": By descending relevance, as determined by the API
    *      algorithms.
-   *   * "update_time desc": Sort by
+   *   * "update_date desc": Sort by
    *   Profile.update_time in
    *   descending order
    *     (recently updated profiles first).
-   *   * "create_time desc": Sort by
+   *   * "create_date desc": Sort by
    *   Profile.create_time in
    *   descending order
    *     (recently created profiles first).
@@ -1060,11 +1061,11 @@ class ProfileServiceClient {
    *
    *   * "relevance desc": By descending relevance, as determined by the API
    *      algorithms.
-   *   * "update_time desc": Sort by
+   *   * "update_date desc": Sort by
    *   Profile.update_time in
    *   descending order
    *     (recently updated profiles first).
-   *   * "create_time desc": Sort by
+   *   * "create_date desc": Sort by
    *   Profile.create_time in
    *   descending order
    *     (recently created profiles first).

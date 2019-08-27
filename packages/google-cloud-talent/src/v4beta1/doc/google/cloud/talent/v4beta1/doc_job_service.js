@@ -934,6 +934,61 @@ const BatchUpdateJobsRequest = {
 };
 
 /**
+ * Output only.
+ *
+ * The result of
+ * JobService.BatchCreateJobs
+ * or
+ * JobService.BatchUpdateJobs
+ * APIs. It's used to replace
+ * google.longrunning.Operation.response
+ * in case of success.
+ *
+ * @property {Object[]} jobResults
+ *   List of job mutation results from a batch mutate operation. It can change
+ *   until operation status is FINISHED, FAILED or CANCELLED.
+ *
+ *   This object should have the same structure as [JobResult]{@link google.cloud.talent.v4beta1.JobResult}
+ *
+ * @typedef JobOperationResult
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.JobOperationResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/job_service.proto}
+ */
+const JobOperationResult = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * Mutation result of a job.
+   *
+   * @property {Object} job
+   *   Here Job only contains basic
+   *   information including name,
+   *   company,
+   *   language_code and
+   *   requisition_id, use
+   *   getJob method to retrieve detailed information of the created/updated
+   *   job.
+   *
+   *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
+   *
+   * @property {Object} status
+   *   The status of the job processed. This field is populated if the
+   *   processing of the
+   *   job
+   *   fails.
+   *
+   *   This object should have the same structure as [Status]{@link google.rpc.Status}
+   *
+   * @typedef JobResult
+   * @memberof google.cloud.talent.v4beta1
+   * @see [google.cloud.talent.v4beta1.JobOperationResult.JobResult definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/job_service.proto}
+   */
+  JobResult: {
+    // This is for documentation. Actual contents will be loaded by gRPC.
+  }
+};
+
+/**
  * An enum that specifies the job attributes that are returned in the
  * MatchingJob.job
  * or ListJobsResponse.jobs
