@@ -76,7 +76,7 @@ it('should upload a file with a kms key', async () => {
 
 it('should upload a local directory', done => {
   const output = execSync(
-    `${cmd} upload-directory ${bucketName} ${folderPath}`
+    `node uploadDirectory.js ${bucketName} ${folderPath}`
   );
 
   const fileList = [];
