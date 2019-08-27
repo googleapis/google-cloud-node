@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [3.2.6](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.5...v3.2.6) (2019-08-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([254e9d9](https://www.github.com/googleapis/nodejs-speech/commit/254e9d9))
+* use correct version for x-goog-api-client header ([6fa0c13](https://www.github.com/googleapis/nodejs-speech/commit/6fa0c13))
+
 ### [3.2.5](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.4...v3.2.5) (2019-08-02)
 
 
