@@ -63,7 +63,14 @@
  * [IAM developer's guide](https://cloud.google.com/iam/docs).
  *
  * @property {number} version
- *   Deprecated.
+ *   Specifies the format of the policy.
+ *
+ *   Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+ *   rejected.
+ *
+ *   Policies with any conditional bindings must specify version 3. Policies
+ *   without any conditional bindings may specify any valid value or leave the
+ *   field unset.
  *
  * @property {Object[]} bindings
  *   Associates a list of `members` to a `role`.
