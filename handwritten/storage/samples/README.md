@@ -34,6 +34,7 @@ objects to users via direct download.
   * [Notifications](#notifications)
   * [Quickstart](#quickstart)
   * [Requester Pays](#requester-pays)
+  * [Upload a directory to a bucket.](#upload-a-directory-to-a-bucket.)
 
 ## Before you begin
 
@@ -323,6 +324,25 @@ __Usage:__
 
 
 `node requesterPays.js`
+
+
+-----
+
+
+
+
+### Upload a directory to a bucket.
+
+Uploads full hierarchy of a local directory to a bucket.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/uploadDirectory.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/uploadDirectory.js,samples/README.md)
+
+__Usage:__
+
+
+`node files.js upload-directory <bucketName> <directoryPath>`
 
 
 
