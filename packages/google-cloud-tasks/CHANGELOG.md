@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.2.1...v1.3.0) (2019-08-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([d959ff7](https://www.github.com/googleapis/nodejs-tasks/commit/d959ff7))
+* **docs:** stop linking reference documents to anchor ([06f8c26](https://www.github.com/googleapis/nodejs-tasks/commit/06f8c26))
+
+
+### Features
+
+* switch to cloudtasks.googleapis.com default host ([#268](https://www.github.com/googleapis/nodejs-tasks/issues/268)) ([4f4c66b](https://www.github.com/googleapis/nodejs-tasks/commit/4f4c66b))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-tasks/compare/v1.2.0...v1.2.1) (2019-08-05)
 
 
