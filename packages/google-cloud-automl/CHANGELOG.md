@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.3.0...v1.4.0) (2019-08-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([01aa9d6](https://www.github.com/googleapis/nodejs-automl/commit/01aa9d6))
+* **docs:** remove reference-docs anchor ([ee86e1d](https://www.github.com/googleapis/nodejs-automl/commit/ee86e1d))
+
+
+### Features
+
+* introduces configuration, e.g., dimensions, for doc prediction ([9c8ce64](https://www.github.com/googleapis/nodejs-automl/commit/9c8ce64))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.2.4...v1.3.0) (2019-08-19)
 
 
