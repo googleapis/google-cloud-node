@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-storage/compare/v3.2.0...v3.2.1) (2019-08-28)
+
+
+### Bug Fixes
+
+* **docs:** stop redirecting reference docs to anchor, add new sample to README ([bbb5537](https://www.github.com/googleapis/nodejs-storage/commit/bbb5537))
+* **samples:** fix failing sample view IAM member-role groups ([1c4f21f](https://www.github.com/googleapis/nodejs-storage/commit/1c4f21f))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.1.0...v3.2.0) (2019-08-22)
 
 
