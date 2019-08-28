@@ -145,12 +145,10 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-automl/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/automl/latest#reference
+[client-docs]: https://googleapis.dev/nodejs/automl/latest
 [product-docs]: https://cloud.google.com/automl/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=automl.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
-
-<a name="reference"></a>
