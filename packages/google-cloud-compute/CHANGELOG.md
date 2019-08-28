@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.3...v1.1.4) (2019-08-28)
+
+
+### Bug Fixes
+
+* **docs:** stop linking reference documents to anchor ([48f90a0](https://www.github.com/googleapis/nodejs-compute/commit/48f90a0))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.2...v1.1.3) (2019-08-26)
 
 
