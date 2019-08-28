@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [2.0.1](https://www.github.com/googleapis/nodejs-logging-winston/compare/v2.0.0...v2.0.1) (2019-08-28)
+
+
+### Bug Fixes
+
+* **docs:** stop linking reference documents to anchor ([4bc78ab](https://www.github.com/googleapis/nodejs-logging-winston/commit/4bc78ab))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v1.1.1...v2.0.0) (2019-08-21)
 
 
