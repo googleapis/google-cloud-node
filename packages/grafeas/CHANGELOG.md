@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [2.1.5](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.4...v2.1.5) (2019-08-28)
+
+
+### Bug Fixes
+
+* **docs:** stop linking reference documents to anchor ([4551cdf](https://www.github.com/googleapis/nodejs-grafeas/commit/4551cdf))
+
 ### [2.1.4](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.3...v2.1.4) (2019-08-05)
 
 
