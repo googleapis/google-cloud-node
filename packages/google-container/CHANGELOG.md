@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.3...v1.1.4) (2019-08-28)
+
+
+### Bug Fixes
+
+* include node version with headers ([#221](https://www.github.com/googleapis/nodejs-cloud-container/issues/221)) ([28892af](https://www.github.com/googleapis/nodejs-cloud-container/commit/28892af))
+* **docs:** stop linking reference documents to anchor ([2934b37](https://www.github.com/googleapis/nodejs-cloud-container/commit/2934b37))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.2...v1.1.3) (2019-06-26)
 
 
