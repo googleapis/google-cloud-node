@@ -90,6 +90,6 @@
     "proxyquire": "^2.1.0",
     "sinon": "^7.3.2",
     "tmp": "0.1.0",
-    "typescript": "~3.5.0"
+    "typescript": "~3.6.0"
   }
 }
