@@ -295,7 +295,6 @@ export interface FileOptions {
 
 export interface CopyOptions {
   destinationKmsKeyName?: string;
-  keepAcl?: string;
   predefinedAcl?: string;
   token?: string;
   userProject?: string;
@@ -859,7 +858,6 @@ class File extends ServiceObject<File> {
    *     `projects/my-project/locations/location/keyRings/my-kr/cryptoKeys/my-key`,
    *     that will be used to encrypt the object. Overwrites the object
    * metadata's `kms_key_name` value, if any.
-   * @property {string} [keepAcl] Retain the ACL for the new file.
    * @property {string} [predefinedAcl] Set the ACL for the new file.
    * @property {string} [token] A previously-returned `rewriteToken` from an
    *     unfinished rewrite request.
