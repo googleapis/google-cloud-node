@@ -10,1854 +10,12 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/automl/v1beta1;automl",
                     "java_multiple_files": true,
+                    "java_outer_classname": "PredictionServiceProto",
                     "java_package": "com.google.cloud.automl.v1beta1",
                     "php_namespace": "Google\\Cloud\\AutoMl\\V1beta1",
-                    "ruby_package": "Google::Cloud::AutoML::V1beta1",
-                    "java_outer_classname": "PredictionServiceProto"
+                    "ruby_package": "Google::Cloud::AutoML::V1beta1"
                   },
                   "nested": {
-                    "TextExtractionAnnotation": {
-                      "oneofs": {
-                        "annotation": {
-                          "oneof": [
-                            "textSegment"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "textSegment": {
-                          "type": "TextSegment",
-                          "id": 3
-                        },
-                        "score": {
-                          "type": "float",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextExtractionEvaluationMetrics": {
-                      "fields": {
-                        "auPrc": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "confidenceMetricsEntries": {
-                          "rule": "repeated",
-                          "type": "ConfidenceMetricsEntry",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "ConfidenceMetricsEntry": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "recall": {
-                              "type": "float",
-                              "id": 3
-                            },
-                            "precision": {
-                              "type": "float",
-                              "id": 4
-                            },
-                            "f1Score": {
-                              "type": "float",
-                              "id": 5
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TextSegment": {
-                      "fields": {
-                        "content": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "startOffset": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "endOffset": {
-                          "type": "int64",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "InputConfig": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "gcsSource",
-                            "bigquerySource"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsSource": {
-                          "type": "GcsSource",
-                          "id": 1
-                        },
-                        "bigquerySource": {
-                          "type": "BigQuerySource",
-                          "id": 3
-                        },
-                        "params": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchPredictInputConfig": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "gcsSource",
-                            "bigquerySource"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsSource": {
-                          "type": "GcsSource",
-                          "id": 1
-                        },
-                        "bigquerySource": {
-                          "type": "BigQuerySource",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DocumentInputConfig": {
-                      "fields": {
-                        "gcsSource": {
-                          "type": "GcsSource",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "OutputConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "gcsDestination",
-                            "bigqueryDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsDestination": {
-                          "type": "GcsDestination",
-                          "id": 1
-                        },
-                        "bigqueryDestination": {
-                          "type": "BigQueryDestination",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BatchPredictOutputConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "gcsDestination",
-                            "bigqueryDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsDestination": {
-                          "type": "GcsDestination",
-                          "id": 1
-                        },
-                        "bigqueryDestination": {
-                          "type": "BigQueryDestination",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ModelExportOutputConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "gcsDestination",
-                            "gcrDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsDestination": {
-                          "type": "GcsDestination",
-                          "id": 1
-                        },
-                        "gcrDestination": {
-                          "type": "GcrDestination",
-                          "id": 3
-                        },
-                        "modelFormat": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "params": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ExportEvaluatedExamplesOutputConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "bigqueryDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "bigqueryDestination": {
-                          "type": "BigQueryDestination",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GcsSource": {
-                      "fields": {
-                        "inputUris": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "BigQuerySource": {
-                      "fields": {
-                        "inputUri": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GcsDestination": {
-                      "fields": {
-                        "outputUriPrefix": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "BigQueryDestination": {
-                      "fields": {
-                        "outputUri": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GcrDestination": {
-                      "fields": {
-                        "outputUri": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ClassificationType": {
-                      "values": {
-                        "CLASSIFICATION_TYPE_UNSPECIFIED": 0,
-                        "MULTICLASS": 1,
-                        "MULTILABEL": 2
-                      }
-                    },
-                    "ClassificationAnnotation": {
-                      "fields": {
-                        "score": {
-                          "type": "float",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "VideoClassificationAnnotation": {
-                      "fields": {
-                        "type": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "classificationAnnotation": {
-                          "type": "ClassificationAnnotation",
-                          "id": 2
-                        },
-                        "timeSegment": {
-                          "type": "TimeSegment",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ClassificationEvaluationMetrics": {
-                      "fields": {
-                        "auPrc": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "baseAuPrc": {
-                          "type": "float",
-                          "id": 2,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
-                        "auRoc": {
-                          "type": "float",
-                          "id": 6
-                        },
-                        "logLoss": {
-                          "type": "float",
-                          "id": 7
-                        },
-                        "confidenceMetricsEntry": {
-                          "rule": "repeated",
-                          "type": "ConfidenceMetricsEntry",
-                          "id": 3
-                        },
-                        "confusionMatrix": {
-                          "type": "ConfusionMatrix",
-                          "id": 4
-                        },
-                        "annotationSpecId": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "ConfidenceMetricsEntry": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "positionThreshold": {
-                              "type": "int32",
-                              "id": 14
-                            },
-                            "recall": {
-                              "type": "float",
-                              "id": 2
-                            },
-                            "precision": {
-                              "type": "float",
-                              "id": 3
-                            },
-                            "falsePositiveRate": {
-                              "type": "float",
-                              "id": 8
-                            },
-                            "f1Score": {
-                              "type": "float",
-                              "id": 4
-                            },
-                            "recallAt1": {
-                              "type": "float",
-                              "id": 5
-                            },
-                            "precisionAt1": {
-                              "type": "float",
-                              "id": 6
-                            },
-                            "falsePositiveRateAt1": {
-                              "type": "float",
-                              "id": 9
-                            },
-                            "f1ScoreAt1": {
-                              "type": "float",
-                              "id": 7
-                            },
-                            "truePositiveCount": {
-                              "type": "int64",
-                              "id": 10
-                            },
-                            "falsePositiveCount": {
-                              "type": "int64",
-                              "id": 11
-                            },
-                            "falseNegativeCount": {
-                              "type": "int64",
-                              "id": 12
-                            },
-                            "trueNegativeCount": {
-                              "type": "int64",
-                              "id": 13
-                            }
-                          }
-                        },
-                        "ConfusionMatrix": {
-                          "fields": {
-                            "annotationSpecId": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1
-                            },
-                            "displayName": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 3
-                            },
-                            "row": {
-                              "rule": "repeated",
-                              "type": "Row",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "Row": {
-                              "fields": {
-                                "exampleCount": {
-                                  "rule": "repeated",
-                                  "type": "int32",
-                                  "id": 1
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TimeSegment": {
-                      "fields": {
-                        "startTimeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 1
-                        },
-                        "endTimeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "OperationMetadata": {
-                      "oneofs": {
-                        "details": {
-                          "oneof": [
-                            "deleteDetails",
-                            "deployModelDetails",
-                            "undeployModelDetails",
-                            "createModelDetails",
-                            "importDataDetails",
-                            "batchPredictDetails",
-                            "exportDataDetails",
-                            "exportModelDetails",
-                            "exportEvaluatedExamplesDetails"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "deleteDetails": {
-                          "type": "DeleteOperationMetadata",
-                          "id": 8
-                        },
-                        "deployModelDetails": {
-                          "type": "DeployModelOperationMetadata",
-                          "id": 24
-                        },
-                        "undeployModelDetails": {
-                          "type": "UndeployModelOperationMetadata",
-                          "id": 25
-                        },
-                        "createModelDetails": {
-                          "type": "CreateModelOperationMetadata",
-                          "id": 10
-                        },
-                        "importDataDetails": {
-                          "type": "ImportDataOperationMetadata",
-                          "id": 15
-                        },
-                        "batchPredictDetails": {
-                          "type": "BatchPredictOperationMetadata",
-                          "id": 16
-                        },
-                        "exportDataDetails": {
-                          "type": "ExportDataOperationMetadata",
-                          "id": 21
-                        },
-                        "exportModelDetails": {
-                          "type": "ExportModelOperationMetadata",
-                          "id": 22
-                        },
-                        "exportEvaluatedExamplesDetails": {
-                          "type": "ExportEvaluatedExamplesOperationMetadata",
-                          "id": 26
-                        },
-                        "progressPercent": {
-                          "type": "int32",
-                          "id": 13
-                        },
-                        "partialFailures": {
-                          "rule": "repeated",
-                          "type": "google.rpc.Status",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "DeleteOperationMetadata": {
-                      "fields": {}
-                    },
-                    "DeployModelOperationMetadata": {
-                      "fields": {}
-                    },
-                    "UndeployModelOperationMetadata": {
-                      "fields": {}
-                    },
-                    "CreateModelOperationMetadata": {
-                      "fields": {}
-                    },
-                    "ImportDataOperationMetadata": {
-                      "fields": {}
-                    },
-                    "ExportDataOperationMetadata": {
-                      "fields": {
-                        "outputInfo": {
-                          "type": "ExportDataOutputInfo",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "ExportDataOutputInfo": {
-                          "oneofs": {
-                            "outputLocation": {
-                              "oneof": [
-                                "gcsOutputDirectory",
-                                "bigqueryOutputDataset"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "gcsOutputDirectory": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "bigqueryOutputDataset": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "BatchPredictOperationMetadata": {
-                      "fields": {
-                        "inputConfig": {
-                          "type": "BatchPredictInputConfig",
-                          "id": 1
-                        },
-                        "outputInfo": {
-                          "type": "BatchPredictOutputInfo",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "BatchPredictOutputInfo": {
-                          "oneofs": {
-                            "outputLocation": {
-                              "oneof": [
-                                "gcsOutputDirectory",
-                                "bigqueryOutputDataset"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "gcsOutputDirectory": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "bigqueryOutputDataset": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ExportModelOperationMetadata": {
-                      "fields": {
-                        "outputInfo": {
-                          "type": "ExportModelOutputInfo",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "ExportModelOutputInfo": {
-                          "fields": {
-                            "gcsOutputDirectory": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ExportEvaluatedExamplesOperationMetadata": {
-                      "fields": {
-                        "outputInfo": {
-                          "type": "ExportEvaluatedExamplesOutputInfo",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "ExportEvaluatedExamplesOutputInfo": {
-                          "fields": {
-                            "bigqueryOutputDataset": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Model": {
-                      "oneofs": {
-                        "modelMetadata": {
-                          "oneof": [
-                            "translationModelMetadata",
-                            "imageClassificationModelMetadata",
-                            "textClassificationModelMetadata",
-                            "imageObjectDetectionModelMetadata",
-                            "videoClassificationModelMetadata",
-                            "videoObjectTrackingModelMetadata",
-                            "textExtractionModelMetadata",
-                            "tablesModelMetadata",
-                            "textSentimentModelMetadata"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "translationModelMetadata": {
-                          "type": "TranslationModelMetadata",
-                          "id": 15
-                        },
-                        "imageClassificationModelMetadata": {
-                          "type": "ImageClassificationModelMetadata",
-                          "id": 13
-                        },
-                        "textClassificationModelMetadata": {
-                          "type": "TextClassificationModelMetadata",
-                          "id": 14
-                        },
-                        "imageObjectDetectionModelMetadata": {
-                          "type": "ImageObjectDetectionModelMetadata",
-                          "id": 20
-                        },
-                        "videoClassificationModelMetadata": {
-                          "type": "VideoClassificationModelMetadata",
-                          "id": 23
-                        },
-                        "videoObjectTrackingModelMetadata": {
-                          "type": "VideoObjectTrackingModelMetadata",
-                          "id": 21
-                        },
-                        "textExtractionModelMetadata": {
-                          "type": "TextExtractionModelMetadata",
-                          "id": 19
-                        },
-                        "tablesModelMetadata": {
-                          "type": "TablesModelMetadata",
-                          "id": 24
-                        },
-                        "textSentimentModelMetadata": {
-                          "type": "TextSentimentModelMetadata",
-                          "id": 22
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "datasetId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 11
-                        },
-                        "deploymentState": {
-                          "type": "DeploymentState",
-                          "id": 8
-                        }
-                      },
-                      "nested": {
-                        "DeploymentState": {
-                          "values": {
-                            "DEPLOYMENT_STATE_UNSPECIFIED": 0,
-                            "DEPLOYED": 1,
-                            "UNDEPLOYED": 2
-                          }
-                        }
-                      }
-                    },
-                    "ImageClassificationDatasetMetadata": {
-                      "fields": {
-                        "classificationType": {
-                          "type": "ClassificationType",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImageObjectDetectionDatasetMetadata": {
-                      "fields": {}
-                    },
-                    "ImageClassificationModelMetadata": {
-                      "fields": {
-                        "baseModelId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "trainBudget": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "trainCost": {
-                          "type": "int64",
-                          "id": 3
-                        },
-                        "stopReason": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "modelType": {
-                          "type": "string",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "ImageObjectDetectionModelMetadata": {
-                      "fields": {
-                        "modelType": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "nodeCount": {
-                          "type": "int64",
-                          "id": 3
-                        },
-                        "nodeQps": {
-                          "type": "double",
-                          "id": 4
-                        },
-                        "stopReason": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "trainBudgetMilliNodeHours": {
-                          "type": "int64",
-                          "id": 6
-                        },
-                        "trainCostMilliNodeHours": {
-                          "type": "int64",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "ImageObjectDetectionModelDeploymentMetadata": {
-                      "fields": {
-                        "nodeCount": {
-                          "type": "int64",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "AnnotationSpec": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "exampleCount": {
-                          "type": "int32",
-                          "id": 9
-                        }
-                      }
-                    },
-                    "TablesDatasetMetadata": {
-                      "fields": {
-                        "primaryTableSpecId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "targetColumnSpecId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "weightColumnSpecId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "mlUseColumnSpecId": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "targetColumnCorrelations": {
-                          "keyType": "string",
-                          "type": "CorrelationStats",
-                          "id": 6
-                        },
-                        "statsUpdateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "TablesModelMetadata": {
-                      "fields": {
-                        "targetColumnSpec": {
-                          "type": "ColumnSpec",
-                          "id": 2
-                        },
-                        "inputFeatureColumnSpecs": {
-                          "rule": "repeated",
-                          "type": "ColumnSpec",
-                          "id": 3
-                        },
-                        "optimizationObjective": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "tablesModelColumnInfo": {
-                          "rule": "repeated",
-                          "type": "TablesModelColumnInfo",
-                          "id": 5
-                        },
-                        "trainBudgetMilliNodeHours": {
-                          "type": "int64",
-                          "id": 6
-                        },
-                        "trainCostMilliNodeHours": {
-                          "type": "int64",
-                          "id": 7
-                        },
-                        "disableEarlyStopping": {
-                          "type": "bool",
-                          "id": 12
-                        }
-                      }
-                    },
-                    "TablesAnnotation": {
-                      "fields": {
-                        "score": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "predictionInterval": {
-                          "type": "DoubleRange",
-                          "id": 4
-                        },
-                        "value": {
-                          "type": "google.protobuf.Value",
-                          "id": 2
-                        },
-                        "tablesModelColumnInfo": {
-                          "rule": "repeated",
-                          "type": "TablesModelColumnInfo",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TablesModelColumnInfo": {
-                      "fields": {
-                        "columnSpecName": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "columnDisplayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "featureImportance": {
-                          "type": "float",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ColumnSpec": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "dataType": {
-                          "type": "DataType",
-                          "id": 2
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "dataStats": {
-                          "type": "DataStats",
-                          "id": 4
-                        },
-                        "topCorrelatedColumns": {
-                          "rule": "repeated",
-                          "type": "CorrelatedColumn",
-                          "id": 5
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "CorrelatedColumn": {
-                          "fields": {
-                            "columnSpecId": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "correlationStats": {
-                              "type": "CorrelationStats",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "DataStats": {
-                      "oneofs": {
-                        "stats": {
-                          "oneof": [
-                            "float64Stats",
-                            "stringStats",
-                            "timestampStats",
-                            "arrayStats",
-                            "structStats",
-                            "categoryStats"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "float64Stats": {
-                          "type": "Float64Stats",
-                          "id": 3
-                        },
-                        "stringStats": {
-                          "type": "StringStats",
-                          "id": 4
-                        },
-                        "timestampStats": {
-                          "type": "TimestampStats",
-                          "id": 5
-                        },
-                        "arrayStats": {
-                          "type": "ArrayStats",
-                          "id": 6
-                        },
-                        "structStats": {
-                          "type": "StructStats",
-                          "id": 7
-                        },
-                        "categoryStats": {
-                          "type": "CategoryStats",
-                          "id": 8
-                        },
-                        "distinctValueCount": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "nullValueCount": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "validValueCount": {
-                          "type": "int64",
-                          "id": 9
-                        }
-                      }
-                    },
-                    "Float64Stats": {
-                      "fields": {
-                        "mean": {
-                          "type": "double",
-                          "id": 1
-                        },
-                        "standardDeviation": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "quantiles": {
-                          "rule": "repeated",
-                          "type": "double",
-                          "id": 3
-                        },
-                        "histogramBuckets": {
-                          "rule": "repeated",
-                          "type": "HistogramBucket",
-                          "id": 4
-                        }
-                      },
-                      "nested": {
-                        "HistogramBucket": {
-                          "fields": {
-                            "min": {
-                              "type": "double",
-                              "id": 1
-                            },
-                            "max": {
-                              "type": "double",
-                              "id": 2
-                            },
-                            "count": {
-                              "type": "int64",
-                              "id": 3
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "StringStats": {
-                      "fields": {
-                        "topUnigramStats": {
-                          "rule": "repeated",
-                          "type": "UnigramStats",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "UnigramStats": {
-                          "fields": {
-                            "value": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "count": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TimestampStats": {
-                      "fields": {
-                        "granularStats": {
-                          "keyType": "string",
-                          "type": "GranularStats",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "GranularStats": {
-                          "fields": {
-                            "buckets": {
-                              "keyType": "int32",
-                              "type": "int64",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ArrayStats": {
-                      "fields": {
-                        "memberStats": {
-                          "type": "DataStats",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "StructStats": {
-                      "fields": {
-                        "fieldStats": {
-                          "keyType": "string",
-                          "type": "DataStats",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "CategoryStats": {
-                      "fields": {
-                        "topCategoryStats": {
-                          "rule": "repeated",
-                          "type": "SingleCategoryStats",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "SingleCategoryStats": {
-                          "fields": {
-                            "value": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "count": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "CorrelationStats": {
-                      "fields": {
-                        "cramersV": {
-                          "type": "double",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TypeCode": {
-                      "values": {
-                        "TYPE_CODE_UNSPECIFIED": 0,
-                        "FLOAT64": 3,
-                        "TIMESTAMP": 4,
-                        "STRING": 6,
-                        "ARRAY": 8,
-                        "STRUCT": 9,
-                        "CATEGORY": 10
-                      }
-                    },
-                    "DataType": {
-                      "oneofs": {
-                        "details": {
-                          "oneof": [
-                            "listElementType",
-                            "structType",
-                            "timeFormat"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "listElementType": {
-                          "type": "DataType",
-                          "id": 2
-                        },
-                        "structType": {
-                          "type": "StructType",
-                          "id": 3
-                        },
-                        "timeFormat": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "typeCode": {
-                          "type": "TypeCode",
-                          "id": 1
-                        },
-                        "nullable": {
-                          "type": "bool",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "StructType": {
-                      "fields": {
-                        "fields": {
-                          "keyType": "string",
-                          "type": "DataType",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Image": {
-                      "oneofs": {
-                        "data": {
-                          "oneof": [
-                            "imageBytes",
-                            "inputConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "imageBytes": {
-                          "type": "bytes",
-                          "id": 1
-                        },
-                        "inputConfig": {
-                          "type": "InputConfig",
-                          "id": 6
-                        },
-                        "thumbnailUri": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "TextSnippet": {
-                      "fields": {
-                        "content": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "mimeType": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "contentUri": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "DocumentDimensions": {
-                      "fields": {
-                        "unit": {
-                          "type": "DocumentDimensionUnit",
-                          "id": 1
-                        },
-                        "width": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "height": {
-                          "type": "float",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "DocumentDimensionUnit": {
-                          "values": {
-                            "DOCUMENT_DIMENSION_UNIT_UNSPECIFIED": 0,
-                            "INCH": 1,
-                            "CENTIMETER": 2,
-                            "POINT": 3
-                          }
-                        }
-                      }
-                    },
-                    "Document": {
-                      "fields": {
-                        "inputConfig": {
-                          "type": "DocumentInputConfig",
-                          "id": 1
-                        },
-                        "documentText": {
-                          "type": "TextSnippet",
-                          "id": 2
-                        },
-                        "layout": {
-                          "rule": "repeated",
-                          "type": "Layout",
-                          "id": 3
-                        },
-                        "documentDimensions": {
-                          "type": "DocumentDimensions",
-                          "id": 4
-                        },
-                        "pageCount": {
-                          "type": "int32",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "Layout": {
-                          "fields": {
-                            "textSegment": {
-                              "type": "TextSegment",
-                              "id": 1
-                            },
-                            "pageNumber": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "boundingPoly": {
-                              "type": "BoundingPoly",
-                              "id": 3
-                            },
-                            "textSegmentType": {
-                              "type": "TextSegmentType",
-                              "id": 4
-                            }
-                          },
-                          "nested": {
-                            "TextSegmentType": {
-                              "values": {
-                                "TEXT_SEGMENT_TYPE_UNSPECIFIED": 0,
-                                "TOKEN": 1,
-                                "PARAGRAPH": 2,
-                                "FORM_FIELD": 3,
-                                "FORM_FIELD_NAME": 4,
-                                "FORM_FIELD_CONTENTS": 5,
-                                "TABLE": 6,
-                                "TABLE_HEADER": 7,
-                                "TABLE_ROW": 8,
-                                "TABLE_CELL": 9
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Row": {
-                      "fields": {
-                        "columnSpecIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "values": {
-                          "rule": "repeated",
-                          "type": "google.protobuf.Value",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ExamplePayload": {
-                      "oneofs": {
-                        "payload": {
-                          "oneof": [
-                            "image",
-                            "textSnippet",
-                            "document",
-                            "row"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "image": {
-                          "type": "Image",
-                          "id": 1
-                        },
-                        "textSnippet": {
-                          "type": "TextSnippet",
-                          "id": 2
-                        },
-                        "document": {
-                          "type": "Document",
-                          "id": 4
-                        },
-                        "row": {
-                          "type": "Row",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "NormalizedVertex": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DoubleRange": {
-                      "fields": {
-                        "start": {
-                          "type": "double",
-                          "id": 1
-                        },
-                        "end": {
-                          "type": "double",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "TextClassificationDatasetMetadata": {
-                      "fields": {
-                        "classificationType": {
-                          "type": "ClassificationType",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextClassificationModelMetadata": {
-                      "fields": {}
-                    },
-                    "TextExtractionDatasetMetadata": {
-                      "fields": {}
-                    },
-                    "TextExtractionModelMetadata": {
-                      "fields": {}
-                    },
-                    "TextSentimentDatasetMetadata": {
-                      "fields": {
-                        "sentimentMax": {
-                          "type": "int32",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextSentimentModelMetadata": {
-                      "fields": {}
-                    },
-                    "TranslationDatasetMetadata": {
-                      "fields": {
-                        "sourceLanguageCode": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "targetLanguageCode": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "TranslationEvaluationMetrics": {
-                      "fields": {
-                        "bleuScore": {
-                          "type": "double",
-                          "id": 1
-                        },
-                        "baseBleuScore": {
-                          "type": "double",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "TranslationModelMetadata": {
-                      "fields": {
-                        "baseModel": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "sourceLanguageCode": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "targetLanguageCode": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TranslationAnnotation": {
-                      "fields": {
-                        "translatedContent": {
-                          "type": "TextSnippet",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "VideoClassificationDatasetMetadata": {
-                      "fields": {}
-                    },
-                    "VideoObjectTrackingDatasetMetadata": {
-                      "fields": {}
-                    },
-                    "VideoClassificationModelMetadata": {
-                      "fields": {}
-                    },
-                    "VideoObjectTrackingModelMetadata": {
-                      "fields": {}
-                    },
-                    "ModelEvaluation": {
-                      "oneofs": {
-                        "metrics": {
-                          "oneof": [
-                            "classificationEvaluationMetrics",
-                            "regressionEvaluationMetrics",
-                            "translationEvaluationMetrics",
-                            "imageObjectDetectionEvaluationMetrics",
-                            "videoObjectTrackingEvaluationMetrics",
-                            "textSentimentEvaluationMetrics",
-                            "textExtractionEvaluationMetrics"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "classificationEvaluationMetrics": {
-                          "type": "ClassificationEvaluationMetrics",
-                          "id": 8
-                        },
-                        "regressionEvaluationMetrics": {
-                          "type": "RegressionEvaluationMetrics",
-                          "id": 24
-                        },
-                        "translationEvaluationMetrics": {
-                          "type": "TranslationEvaluationMetrics",
-                          "id": 9
-                        },
-                        "imageObjectDetectionEvaluationMetrics": {
-                          "type": "ImageObjectDetectionEvaluationMetrics",
-                          "id": 12
-                        },
-                        "videoObjectTrackingEvaluationMetrics": {
-                          "type": "VideoObjectTrackingEvaluationMetrics",
-                          "id": 14
-                        },
-                        "textSentimentEvaluationMetrics": {
-                          "type": "TextSentimentEvaluationMetrics",
-                          "id": 11
-                        },
-                        "textExtractionEvaluationMetrics": {
-                          "type": "TextExtractionEvaluationMetrics",
-                          "id": 13
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "annotationSpecId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 15
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5
-                        },
-                        "evaluatedExampleCount": {
-                          "type": "int32",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "ImageObjectDetectionAnnotation": {
-                      "fields": {
-                        "boundingBox": {
-                          "type": "BoundingPoly",
-                          "id": 1
-                        },
-                        "score": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "VideoObjectTrackingAnnotation": {
-                      "fields": {
-                        "instanceId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "timeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        },
-                        "boundingBox": {
-                          "type": "BoundingPoly",
-                          "id": 3
-                        },
-                        "score": {
-                          "type": "float",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "BoundingBoxMetricsEntry": {
-                      "fields": {
-                        "iouThreshold": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "meanAveragePrecision": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "confidenceMetricsEntries": {
-                          "rule": "repeated",
-                          "type": "ConfidenceMetricsEntry",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "ConfidenceMetricsEntry": {
-                          "fields": {
-                            "confidenceThreshold": {
-                              "type": "float",
-                              "id": 1
-                            },
-                            "recall": {
-                              "type": "float",
-                              "id": 2
-                            },
-                            "precision": {
-                              "type": "float",
-                              "id": 3
-                            },
-                            "f1Score": {
-                              "type": "float",
-                              "id": 4
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ImageObjectDetectionEvaluationMetrics": {
-                      "fields": {
-                        "evaluatedBoundingBoxCount": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "boundingBoxMetricsEntries": {
-                          "rule": "repeated",
-                          "type": "BoundingBoxMetricsEntry",
-                          "id": 2
-                        },
-                        "boundingBoxMeanAveragePrecision": {
-                          "type": "float",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "VideoObjectTrackingEvaluationMetrics": {
-                      "fields": {
-                        "evaluatedFrameCount": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "evaluatedBoundingBoxCount": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "boundingBoxMetricsEntries": {
-                          "rule": "repeated",
-                          "type": "BoundingBoxMetricsEntry",
-                          "id": 4
-                        },
-                        "boundingBoxMeanAveragePrecision": {
-                          "type": "float",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "RegressionEvaluationMetrics": {
-                      "fields": {
-                        "rootMeanSquaredError": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "meanAbsoluteError": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "meanAbsolutePercentageError": {
-                          "type": "float",
-                          "id": 3
-                        },
-                        "rSquared": {
-                          "type": "float",
-                          "id": 4
-                        },
-                        "rootMeanSquaredLogError": {
-                          "type": "float",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "TextSentimentAnnotation": {
-                      "fields": {
-                        "sentiment": {
-                          "type": "int32",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextSentimentEvaluationMetrics": {
-                      "fields": {
-                        "precision": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "recall": {
-                          "type": "float",
-                          "id": 2
-                        },
-                        "f1Score": {
-                          "type": "float",
-                          "id": 3
-                        },
-                        "meanAbsoluteError": {
-                          "type": "float",
-                          "id": 4
-                        },
-                        "meanSquaredError": {
-                          "type": "float",
-                          "id": 5
-                        },
-                        "linearKappa": {
-                          "type": "float",
-                          "id": 6
-                        },
-                        "quadraticKappa": {
-                          "type": "float",
-                          "id": 7
-                        },
-                        "confusionMatrix": {
-                          "type": "ClassificationEvaluationMetrics.ConfusionMatrix",
-                          "id": 8
-                        },
-                        "annotationSpecId": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "deprecated": true
-                          }
-                        }
-                      }
-                    },
-                    "Dataset": {
-                      "oneofs": {
-                        "datasetMetadata": {
-                          "oneof": [
-                            "translationDatasetMetadata",
-                            "imageClassificationDatasetMetadata",
-                            "textClassificationDatasetMetadata",
-                            "imageObjectDetectionDatasetMetadata",
-                            "videoClassificationDatasetMetadata",
-                            "videoObjectTrackingDatasetMetadata",
-                            "textExtractionDatasetMetadata",
-                            "textSentimentDatasetMetadata",
-                            "tablesDatasetMetadata"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "translationDatasetMetadata": {
-                          "type": "TranslationDatasetMetadata",
-                          "id": 23
-                        },
-                        "imageClassificationDatasetMetadata": {
-                          "type": "ImageClassificationDatasetMetadata",
-                          "id": 24
-                        },
-                        "textClassificationDatasetMetadata": {
-                          "type": "TextClassificationDatasetMetadata",
-                          "id": 25
-                        },
-                        "imageObjectDetectionDatasetMetadata": {
-                          "type": "ImageObjectDetectionDatasetMetadata",
-                          "id": 26
-                        },
-                        "videoClassificationDatasetMetadata": {
-                          "type": "VideoClassificationDatasetMetadata",
-                          "id": 31
-                        },
-                        "videoObjectTrackingDatasetMetadata": {
-                          "type": "VideoObjectTrackingDatasetMetadata",
-                          "id": 29
-                        },
-                        "textExtractionDatasetMetadata": {
-                          "type": "TextExtractionDatasetMetadata",
-                          "id": 28
-                        },
-                        "textSentimentDatasetMetadata": {
-                          "type": "TextSentimentDatasetMetadata",
-                          "id": 30
-                        },
-                        "tablesDatasetMetadata": {
-                          "type": "TablesDatasetMetadata",
-                          "id": 33
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "exampleCount": {
-                          "type": "int32",
-                          "id": 21
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 14
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 17
-                        }
-                      }
-                    },
-                    "AnnotationPayload": {
-                      "oneofs": {
-                        "detail": {
-                          "oneof": [
-                            "translation",
-                            "classification",
-                            "imageObjectDetection",
-                            "videoClassification",
-                            "videoObjectTracking",
-                            "textExtraction",
-                            "textSentiment",
-                            "tables"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "translation": {
-                          "type": "TranslationAnnotation",
-                          "id": 2
-                        },
-                        "classification": {
-                          "type": "ClassificationAnnotation",
-                          "id": 3
-                        },
-                        "imageObjectDetection": {
-                          "type": "ImageObjectDetectionAnnotation",
-                          "id": 4
-                        },
-                        "videoClassification": {
-                          "type": "VideoClassificationAnnotation",
-                          "id": 9
-                        },
-                        "videoObjectTracking": {
-                          "type": "VideoObjectTrackingAnnotation",
-                          "id": 8
-                        },
-                        "textExtraction": {
-                          "type": "TextExtractionAnnotation",
-                          "id": 6
-                        },
-                        "textSentiment": {
-                          "type": "TextSentimentAnnotation",
-                          "id": 7
-                        },
-                        "tables": {
-                          "type": "TablesAnnotation",
-                          "id": 10
-                        },
-                        "annotationSpecId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
                     "AutoMl": {
                       "options": {
                         "(google.api.default_host)": "automl.googleapis.com",
@@ -2422,6 +580,1848 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "AnnotationPayload": {
+                      "oneofs": {
+                        "detail": {
+                          "oneof": [
+                            "translation",
+                            "classification",
+                            "imageObjectDetection",
+                            "videoClassification",
+                            "videoObjectTracking",
+                            "textExtraction",
+                            "textSentiment",
+                            "tables"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translation": {
+                          "type": "TranslationAnnotation",
+                          "id": 2
+                        },
+                        "classification": {
+                          "type": "ClassificationAnnotation",
+                          "id": 3
+                        },
+                        "imageObjectDetection": {
+                          "type": "ImageObjectDetectionAnnotation",
+                          "id": 4
+                        },
+                        "videoClassification": {
+                          "type": "VideoClassificationAnnotation",
+                          "id": 9
+                        },
+                        "videoObjectTracking": {
+                          "type": "VideoObjectTrackingAnnotation",
+                          "id": 8
+                        },
+                        "textExtraction": {
+                          "type": "TextExtractionAnnotation",
+                          "id": 6
+                        },
+                        "textSentiment": {
+                          "type": "TextSentimentAnnotation",
+                          "id": 7
+                        },
+                        "tables": {
+                          "type": "TablesAnnotation",
+                          "id": 10
+                        },
+                        "annotationSpecId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ClassificationType": {
+                      "values": {
+                        "CLASSIFICATION_TYPE_UNSPECIFIED": 0,
+                        "MULTICLASS": 1,
+                        "MULTILABEL": 2
+                      }
+                    },
+                    "ClassificationAnnotation": {
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VideoClassificationAnnotation": {
+                      "fields": {
+                        "type": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "classificationAnnotation": {
+                          "type": "ClassificationAnnotation",
+                          "id": 2
+                        },
+                        "timeSegment": {
+                          "type": "TimeSegment",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ClassificationEvaluationMetrics": {
+                      "fields": {
+                        "auPrc": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "baseAuPrc": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "auRoc": {
+                          "type": "float",
+                          "id": 6
+                        },
+                        "logLoss": {
+                          "type": "float",
+                          "id": 7
+                        },
+                        "confidenceMetricsEntry": {
+                          "rule": "repeated",
+                          "type": "ConfidenceMetricsEntry",
+                          "id": 3
+                        },
+                        "confusionMatrix": {
+                          "type": "ConfusionMatrix",
+                          "id": 4
+                        },
+                        "annotationSpecId": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "ConfidenceMetricsEntry": {
+                          "fields": {
+                            "confidenceThreshold": {
+                              "type": "float",
+                              "id": 1
+                            },
+                            "positionThreshold": {
+                              "type": "int32",
+                              "id": 14
+                            },
+                            "recall": {
+                              "type": "float",
+                              "id": 2
+                            },
+                            "precision": {
+                              "type": "float",
+                              "id": 3
+                            },
+                            "falsePositiveRate": {
+                              "type": "float",
+                              "id": 8
+                            },
+                            "f1Score": {
+                              "type": "float",
+                              "id": 4
+                            },
+                            "recallAt1": {
+                              "type": "float",
+                              "id": 5
+                            },
+                            "precisionAt1": {
+                              "type": "float",
+                              "id": 6
+                            },
+                            "falsePositiveRateAt1": {
+                              "type": "float",
+                              "id": 9
+                            },
+                            "f1ScoreAt1": {
+                              "type": "float",
+                              "id": 7
+                            },
+                            "truePositiveCount": {
+                              "type": "int64",
+                              "id": 10
+                            },
+                            "falsePositiveCount": {
+                              "type": "int64",
+                              "id": 11
+                            },
+                            "falseNegativeCount": {
+                              "type": "int64",
+                              "id": 12
+                            },
+                            "trueNegativeCount": {
+                              "type": "int64",
+                              "id": 13
+                            }
+                          }
+                        },
+                        "ConfusionMatrix": {
+                          "fields": {
+                            "annotationSpecId": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "row": {
+                              "rule": "repeated",
+                              "type": "Row",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Row": {
+                              "fields": {
+                                "exampleCount": {
+                                  "rule": "repeated",
+                                  "type": "int32",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TimeSegment": {
+                      "fields": {
+                        "startTimeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "endTimeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImageObjectDetectionAnnotation": {
+                      "fields": {
+                        "boundingBox": {
+                          "type": "BoundingPoly",
+                          "id": 1
+                        },
+                        "score": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VideoObjectTrackingAnnotation": {
+                      "fields": {
+                        "instanceId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "timeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "boundingBox": {
+                          "type": "BoundingPoly",
+                          "id": 3
+                        },
+                        "score": {
+                          "type": "float",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "BoundingBoxMetricsEntry": {
+                      "fields": {
+                        "iouThreshold": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "meanAveragePrecision": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "confidenceMetricsEntries": {
+                          "rule": "repeated",
+                          "type": "ConfidenceMetricsEntry",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ConfidenceMetricsEntry": {
+                          "fields": {
+                            "confidenceThreshold": {
+                              "type": "float",
+                              "id": 1
+                            },
+                            "recall": {
+                              "type": "float",
+                              "id": 2
+                            },
+                            "precision": {
+                              "type": "float",
+                              "id": 3
+                            },
+                            "f1Score": {
+                              "type": "float",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImageObjectDetectionEvaluationMetrics": {
+                      "fields": {
+                        "evaluatedBoundingBoxCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "boundingBoxMetricsEntries": {
+                          "rule": "repeated",
+                          "type": "BoundingBoxMetricsEntry",
+                          "id": 2
+                        },
+                        "boundingBoxMeanAveragePrecision": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "VideoObjectTrackingEvaluationMetrics": {
+                      "fields": {
+                        "evaluatedFrameCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "evaluatedBoundingBoxCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "boundingBoxMetricsEntries": {
+                          "rule": "repeated",
+                          "type": "BoundingBoxMetricsEntry",
+                          "id": 4
+                        },
+                        "boundingBoxMeanAveragePrecision": {
+                          "type": "float",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "NormalizedVertex": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TablesDatasetMetadata": {
+                      "fields": {
+                        "primaryTableSpecId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "targetColumnSpecId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "weightColumnSpecId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "mlUseColumnSpecId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "targetColumnCorrelations": {
+                          "keyType": "string",
+                          "type": "CorrelationStats",
+                          "id": 6
+                        },
+                        "statsUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "TablesModelMetadata": {
+                      "fields": {
+                        "targetColumnSpec": {
+                          "type": "ColumnSpec",
+                          "id": 2
+                        },
+                        "inputFeatureColumnSpecs": {
+                          "rule": "repeated",
+                          "type": "ColumnSpec",
+                          "id": 3
+                        },
+                        "optimizationObjective": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "tablesModelColumnInfo": {
+                          "rule": "repeated",
+                          "type": "TablesModelColumnInfo",
+                          "id": 5
+                        },
+                        "trainBudgetMilliNodeHours": {
+                          "type": "int64",
+                          "id": 6
+                        },
+                        "trainCostMilliNodeHours": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "disableEarlyStopping": {
+                          "type": "bool",
+                          "id": 12
+                        }
+                      }
+                    },
+                    "TablesAnnotation": {
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "predictionInterval": {
+                          "type": "DoubleRange",
+                          "id": 4
+                        },
+                        "value": {
+                          "type": "google.protobuf.Value",
+                          "id": 2
+                        },
+                        "tablesModelColumnInfo": {
+                          "rule": "repeated",
+                          "type": "TablesModelColumnInfo",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TablesModelColumnInfo": {
+                      "fields": {
+                        "columnSpecName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "columnDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "featureImportance": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ColumnSpec": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataType": {
+                          "type": "DataType",
+                          "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataStats": {
+                          "type": "DataStats",
+                          "id": 4
+                        },
+                        "topCorrelatedColumns": {
+                          "rule": "repeated",
+                          "type": "CorrelatedColumn",
+                          "id": 5
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "CorrelatedColumn": {
+                          "fields": {
+                            "columnSpecId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "correlationStats": {
+                              "type": "CorrelationStats",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DataStats": {
+                      "oneofs": {
+                        "stats": {
+                          "oneof": [
+                            "float64Stats",
+                            "stringStats",
+                            "timestampStats",
+                            "arrayStats",
+                            "structStats",
+                            "categoryStats"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "float64Stats": {
+                          "type": "Float64Stats",
+                          "id": 3
+                        },
+                        "stringStats": {
+                          "type": "StringStats",
+                          "id": 4
+                        },
+                        "timestampStats": {
+                          "type": "TimestampStats",
+                          "id": 5
+                        },
+                        "arrayStats": {
+                          "type": "ArrayStats",
+                          "id": 6
+                        },
+                        "structStats": {
+                          "type": "StructStats",
+                          "id": 7
+                        },
+                        "categoryStats": {
+                          "type": "CategoryStats",
+                          "id": 8
+                        },
+                        "distinctValueCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "nullValueCount": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "validValueCount": {
+                          "type": "int64",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "Float64Stats": {
+                      "fields": {
+                        "mean": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "standardDeviation": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "quantiles": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 3
+                        },
+                        "histogramBuckets": {
+                          "rule": "repeated",
+                          "type": "HistogramBucket",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "HistogramBucket": {
+                          "fields": {
+                            "min": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "max": {
+                              "type": "double",
+                              "id": 2
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "StringStats": {
+                      "fields": {
+                        "topUnigramStats": {
+                          "rule": "repeated",
+                          "type": "UnigramStats",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "UnigramStats": {
+                          "fields": {
+                            "value": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TimestampStats": {
+                      "fields": {
+                        "granularStats": {
+                          "keyType": "string",
+                          "type": "GranularStats",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "GranularStats": {
+                          "fields": {
+                            "buckets": {
+                              "keyType": "int32",
+                              "type": "int64",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ArrayStats": {
+                      "fields": {
+                        "memberStats": {
+                          "type": "DataStats",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StructStats": {
+                      "fields": {
+                        "fieldStats": {
+                          "keyType": "string",
+                          "type": "DataStats",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CategoryStats": {
+                      "fields": {
+                        "topCategoryStats": {
+                          "rule": "repeated",
+                          "type": "SingleCategoryStats",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SingleCategoryStats": {
+                          "fields": {
+                            "value": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CorrelationStats": {
+                      "fields": {
+                        "cramersV": {
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TypeCode": {
+                      "values": {
+                        "TYPE_CODE_UNSPECIFIED": 0,
+                        "FLOAT64": 3,
+                        "TIMESTAMP": 4,
+                        "STRING": 6,
+                        "ARRAY": 8,
+                        "STRUCT": 9,
+                        "CATEGORY": 10
+                      }
+                    },
+                    "DataType": {
+                      "oneofs": {
+                        "details": {
+                          "oneof": [
+                            "listElementType",
+                            "structType",
+                            "timeFormat"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "listElementType": {
+                          "type": "DataType",
+                          "id": 2
+                        },
+                        "structType": {
+                          "type": "StructType",
+                          "id": 3
+                        },
+                        "timeFormat": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "typeCode": {
+                          "type": "TypeCode",
+                          "id": 1
+                        },
+                        "nullable": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "StructType": {
+                      "fields": {
+                        "fields": {
+                          "keyType": "string",
+                          "type": "DataType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Image": {
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "imageBytes",
+                            "inputConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "imageBytes": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "inputConfig": {
+                          "type": "InputConfig",
+                          "id": 6
+                        },
+                        "thumbnailUri": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "TextSnippet": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "contentUri": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DocumentDimensions": {
+                      "fields": {
+                        "unit": {
+                          "type": "DocumentDimensionUnit",
+                          "id": 1
+                        },
+                        "width": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "height": {
+                          "type": "float",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "DocumentDimensionUnit": {
+                          "values": {
+                            "DOCUMENT_DIMENSION_UNIT_UNSPECIFIED": 0,
+                            "INCH": 1,
+                            "CENTIMETER": 2,
+                            "POINT": 3
+                          }
+                        }
+                      }
+                    },
+                    "Document": {
+                      "fields": {
+                        "inputConfig": {
+                          "type": "DocumentInputConfig",
+                          "id": 1
+                        },
+                        "documentText": {
+                          "type": "TextSnippet",
+                          "id": 2
+                        },
+                        "layout": {
+                          "rule": "repeated",
+                          "type": "Layout",
+                          "id": 3
+                        },
+                        "documentDimensions": {
+                          "type": "DocumentDimensions",
+                          "id": 4
+                        },
+                        "pageCount": {
+                          "type": "int32",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Layout": {
+                          "fields": {
+                            "textSegment": {
+                              "type": "TextSegment",
+                              "id": 1
+                            },
+                            "pageNumber": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "boundingPoly": {
+                              "type": "BoundingPoly",
+                              "id": 3
+                            },
+                            "textSegmentType": {
+                              "type": "TextSegmentType",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "TextSegmentType": {
+                              "values": {
+                                "TEXT_SEGMENT_TYPE_UNSPECIFIED": 0,
+                                "TOKEN": 1,
+                                "PARAGRAPH": 2,
+                                "FORM_FIELD": 3,
+                                "FORM_FIELD_NAME": 4,
+                                "FORM_FIELD_CONTENTS": 5,
+                                "TABLE": 6,
+                                "TABLE_HEADER": 7,
+                                "TABLE_ROW": 8,
+                                "TABLE_CELL": 9
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Row": {
+                      "fields": {
+                        "columnSpecIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExamplePayload": {
+                      "oneofs": {
+                        "payload": {
+                          "oneof": [
+                            "image",
+                            "textSnippet",
+                            "document",
+                            "row"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "image": {
+                          "type": "Image",
+                          "id": 1
+                        },
+                        "textSnippet": {
+                          "type": "TextSnippet",
+                          "id": 2
+                        },
+                        "document": {
+                          "type": "Document",
+                          "id": 4
+                        },
+                        "row": {
+                          "type": "Row",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "InputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource",
+                            "bigquerySource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        },
+                        "bigquerySource": {
+                          "type": "BigQuerySource",
+                          "id": 3
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BatchPredictInputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource",
+                            "bigquerySource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        },
+                        "bigquerySource": {
+                          "type": "BigQuerySource",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DocumentInputConfig": {
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination",
+                            "bigqueryDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        },
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BatchPredictOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination",
+                            "bigqueryDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        },
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ModelExportOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination",
+                            "gcrDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        },
+                        "gcrDestination": {
+                          "type": "GcrDestination",
+                          "id": 3
+                        },
+                        "modelFormat": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "params": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ExportEvaluatedExamplesOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "bigqueryDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bigqueryDestination": {
+                          "type": "BigQueryDestination",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsSource": {
+                      "fields": {
+                        "inputUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BigQuerySource": {
+                      "fields": {
+                        "inputUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsDestination": {
+                      "fields": {
+                        "outputUriPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BigQueryDestination": {
+                      "fields": {
+                        "outputUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcrDestination": {
+                      "fields": {
+                        "outputUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextSegment": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "startOffset": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "endOffset": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DoubleRange": {
+                      "fields": {
+                        "start": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "end": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TextExtractionAnnotation": {
+                      "oneofs": {
+                        "annotation": {
+                          "oneof": [
+                            "textSegment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "textSegment": {
+                          "type": "TextSegment",
+                          "id": 3
+                        },
+                        "score": {
+                          "type": "float",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextExtractionEvaluationMetrics": {
+                      "fields": {
+                        "auPrc": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "confidenceMetricsEntries": {
+                          "rule": "repeated",
+                          "type": "ConfidenceMetricsEntry",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ConfidenceMetricsEntry": {
+                          "fields": {
+                            "confidenceThreshold": {
+                              "type": "float",
+                              "id": 1
+                            },
+                            "recall": {
+                              "type": "float",
+                              "id": 3
+                            },
+                            "precision": {
+                              "type": "float",
+                              "id": 4
+                            },
+                            "f1Score": {
+                              "type": "float",
+                              "id": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TextSentimentAnnotation": {
+                      "fields": {
+                        "sentiment": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextSentimentEvaluationMetrics": {
+                      "fields": {
+                        "precision": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "recall": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "f1Score": {
+                          "type": "float",
+                          "id": 3
+                        },
+                        "meanAbsoluteError": {
+                          "type": "float",
+                          "id": 4
+                        },
+                        "meanSquaredError": {
+                          "type": "float",
+                          "id": 5
+                        },
+                        "linearKappa": {
+                          "type": "float",
+                          "id": 6
+                        },
+                        "quadraticKappa": {
+                          "type": "float",
+                          "id": 7
+                        },
+                        "confusionMatrix": {
+                          "type": "ClassificationEvaluationMetrics.ConfusionMatrix",
+                          "id": 8
+                        },
+                        "annotationSpecId": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      }
+                    },
+                    "TranslationDatasetMetadata": {
+                      "fields": {
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TranslationEvaluationMetrics": {
+                      "fields": {
+                        "bleuScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "baseBleuScore": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TranslationModelMetadata": {
+                      "fields": {
+                        "baseModel": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TranslationAnnotation": {
+                      "fields": {
+                        "translatedContent": {
+                          "type": "TextSnippet",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AnnotationSpec": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "exampleCount": {
+                          "type": "int32",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "Dataset": {
+                      "oneofs": {
+                        "datasetMetadata": {
+                          "oneof": [
+                            "translationDatasetMetadata",
+                            "imageClassificationDatasetMetadata",
+                            "textClassificationDatasetMetadata",
+                            "imageObjectDetectionDatasetMetadata",
+                            "videoClassificationDatasetMetadata",
+                            "videoObjectTrackingDatasetMetadata",
+                            "textExtractionDatasetMetadata",
+                            "textSentimentDatasetMetadata",
+                            "tablesDatasetMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translationDatasetMetadata": {
+                          "type": "TranslationDatasetMetadata",
+                          "id": 23
+                        },
+                        "imageClassificationDatasetMetadata": {
+                          "type": "ImageClassificationDatasetMetadata",
+                          "id": 24
+                        },
+                        "textClassificationDatasetMetadata": {
+                          "type": "TextClassificationDatasetMetadata",
+                          "id": 25
+                        },
+                        "imageObjectDetectionDatasetMetadata": {
+                          "type": "ImageObjectDetectionDatasetMetadata",
+                          "id": 26
+                        },
+                        "videoClassificationDatasetMetadata": {
+                          "type": "VideoClassificationDatasetMetadata",
+                          "id": 31
+                        },
+                        "videoObjectTrackingDatasetMetadata": {
+                          "type": "VideoObjectTrackingDatasetMetadata",
+                          "id": 29
+                        },
+                        "textExtractionDatasetMetadata": {
+                          "type": "TextExtractionDatasetMetadata",
+                          "id": 28
+                        },
+                        "textSentimentDatasetMetadata": {
+                          "type": "TextSentimentDatasetMetadata",
+                          "id": 30
+                        },
+                        "tablesDatasetMetadata": {
+                          "type": "TablesDatasetMetadata",
+                          "id": 33
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "exampleCount": {
+                          "type": "int32",
+                          "id": 21
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 17
+                        }
+                      }
+                    },
+                    "ImageClassificationDatasetMetadata": {
+                      "fields": {
+                        "classificationType": {
+                          "type": "ClassificationType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImageObjectDetectionDatasetMetadata": {
+                      "fields": {}
+                    },
+                    "ImageClassificationModelMetadata": {
+                      "fields": {
+                        "baseModelId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "trainBudget": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "trainCost": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "stopReason": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "modelType": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "ImageObjectDetectionModelMetadata": {
+                      "fields": {
+                        "modelType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "nodeCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "nodeQps": {
+                          "type": "double",
+                          "id": 4
+                        },
+                        "stopReason": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "trainBudgetMilliNodeHours": {
+                          "type": "int64",
+                          "id": 6
+                        },
+                        "trainCostMilliNodeHours": {
+                          "type": "int64",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "ImageObjectDetectionModelDeploymentMetadata": {
+                      "fields": {
+                        "nodeCount": {
+                          "type": "int64",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextClassificationDatasetMetadata": {
+                      "fields": {
+                        "classificationType": {
+                          "type": "ClassificationType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextClassificationModelMetadata": {
+                      "fields": {}
+                    },
+                    "TextExtractionDatasetMetadata": {
+                      "fields": {}
+                    },
+                    "TextExtractionModelMetadata": {
+                      "fields": {}
+                    },
+                    "TextSentimentDatasetMetadata": {
+                      "fields": {
+                        "sentimentMax": {
+                          "type": "int32",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextSentimentModelMetadata": {
+                      "fields": {}
+                    },
+                    "VideoClassificationDatasetMetadata": {
+                      "fields": {}
+                    },
+                    "VideoObjectTrackingDatasetMetadata": {
+                      "fields": {}
+                    },
+                    "VideoClassificationModelMetadata": {
+                      "fields": {}
+                    },
+                    "VideoObjectTrackingModelMetadata": {
+                      "fields": {}
+                    },
+                    "Model": {
+                      "oneofs": {
+                        "modelMetadata": {
+                          "oneof": [
+                            "translationModelMetadata",
+                            "imageClassificationModelMetadata",
+                            "textClassificationModelMetadata",
+                            "imageObjectDetectionModelMetadata",
+                            "videoClassificationModelMetadata",
+                            "videoObjectTrackingModelMetadata",
+                            "textExtractionModelMetadata",
+                            "tablesModelMetadata",
+                            "textSentimentModelMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "translationModelMetadata": {
+                          "type": "TranslationModelMetadata",
+                          "id": 15
+                        },
+                        "imageClassificationModelMetadata": {
+                          "type": "ImageClassificationModelMetadata",
+                          "id": 13
+                        },
+                        "textClassificationModelMetadata": {
+                          "type": "TextClassificationModelMetadata",
+                          "id": 14
+                        },
+                        "imageObjectDetectionModelMetadata": {
+                          "type": "ImageObjectDetectionModelMetadata",
+                          "id": 20
+                        },
+                        "videoClassificationModelMetadata": {
+                          "type": "VideoClassificationModelMetadata",
+                          "id": 23
+                        },
+                        "videoObjectTrackingModelMetadata": {
+                          "type": "VideoObjectTrackingModelMetadata",
+                          "id": 21
+                        },
+                        "textExtractionModelMetadata": {
+                          "type": "TextExtractionModelMetadata",
+                          "id": 19
+                        },
+                        "tablesModelMetadata": {
+                          "type": "TablesModelMetadata",
+                          "id": 24
+                        },
+                        "textSentimentModelMetadata": {
+                          "type": "TextSentimentModelMetadata",
+                          "id": 22
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "datasetId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11
+                        },
+                        "deploymentState": {
+                          "type": "DeploymentState",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "DeploymentState": {
+                          "values": {
+                            "DEPLOYMENT_STATE_UNSPECIFIED": 0,
+                            "DEPLOYED": 1,
+                            "UNDEPLOYED": 2
+                          }
+                        }
+                      }
+                    },
+                    "ModelEvaluation": {
+                      "oneofs": {
+                        "metrics": {
+                          "oneof": [
+                            "classificationEvaluationMetrics",
+                            "regressionEvaluationMetrics",
+                            "translationEvaluationMetrics",
+                            "imageObjectDetectionEvaluationMetrics",
+                            "videoObjectTrackingEvaluationMetrics",
+                            "textSentimentEvaluationMetrics",
+                            "textExtractionEvaluationMetrics"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "classificationEvaluationMetrics": {
+                          "type": "ClassificationEvaluationMetrics",
+                          "id": 8
+                        },
+                        "regressionEvaluationMetrics": {
+                          "type": "RegressionEvaluationMetrics",
+                          "id": 24
+                        },
+                        "translationEvaluationMetrics": {
+                          "type": "TranslationEvaluationMetrics",
+                          "id": 9
+                        },
+                        "imageObjectDetectionEvaluationMetrics": {
+                          "type": "ImageObjectDetectionEvaluationMetrics",
+                          "id": 12
+                        },
+                        "videoObjectTrackingEvaluationMetrics": {
+                          "type": "VideoObjectTrackingEvaluationMetrics",
+                          "id": 14
+                        },
+                        "textSentimentEvaluationMetrics": {
+                          "type": "TextSentimentEvaluationMetrics",
+                          "id": 11
+                        },
+                        "textExtractionEvaluationMetrics": {
+                          "type": "TextExtractionEvaluationMetrics",
+                          "id": 13
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "annotationSpecId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "evaluatedExampleCount": {
+                          "type": "int32",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RegressionEvaluationMetrics": {
+                      "fields": {
+                        "rootMeanSquaredError": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "meanAbsoluteError": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "meanAbsolutePercentageError": {
+                          "type": "float",
+                          "id": 3
+                        },
+                        "rSquared": {
+                          "type": "float",
+                          "id": 4
+                        },
+                        "rootMeanSquaredLogError": {
+                          "type": "float",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "oneofs": {
+                        "details": {
+                          "oneof": [
+                            "deleteDetails",
+                            "deployModelDetails",
+                            "undeployModelDetails",
+                            "createModelDetails",
+                            "importDataDetails",
+                            "batchPredictDetails",
+                            "exportDataDetails",
+                            "exportModelDetails",
+                            "exportEvaluatedExamplesDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "deleteDetails": {
+                          "type": "DeleteOperationMetadata",
+                          "id": 8
+                        },
+                        "deployModelDetails": {
+                          "type": "DeployModelOperationMetadata",
+                          "id": 24
+                        },
+                        "undeployModelDetails": {
+                          "type": "UndeployModelOperationMetadata",
+                          "id": 25
+                        },
+                        "createModelDetails": {
+                          "type": "CreateModelOperationMetadata",
+                          "id": 10
+                        },
+                        "importDataDetails": {
+                          "type": "ImportDataOperationMetadata",
+                          "id": 15
+                        },
+                        "batchPredictDetails": {
+                          "type": "BatchPredictOperationMetadata",
+                          "id": 16
+                        },
+                        "exportDataDetails": {
+                          "type": "ExportDataOperationMetadata",
+                          "id": 21
+                        },
+                        "exportModelDetails": {
+                          "type": "ExportModelOperationMetadata",
+                          "id": 22
+                        },
+                        "exportEvaluatedExamplesDetails": {
+                          "type": "ExportEvaluatedExamplesOperationMetadata",
+                          "id": 26
+                        },
+                        "progressPercent": {
+                          "type": "int32",
+                          "id": 13
+                        },
+                        "partialFailures": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeleteOperationMetadata": {
+                      "fields": {}
+                    },
+                    "DeployModelOperationMetadata": {
+                      "fields": {}
+                    },
+                    "UndeployModelOperationMetadata": {
+                      "fields": {}
+                    },
+                    "CreateModelOperationMetadata": {
+                      "fields": {}
+                    },
+                    "ImportDataOperationMetadata": {
+                      "fields": {}
+                    },
+                    "ExportDataOperationMetadata": {
+                      "fields": {
+                        "outputInfo": {
+                          "type": "ExportDataOutputInfo",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ExportDataOutputInfo": {
+                          "oneofs": {
+                            "outputLocation": {
+                              "oneof": [
+                                "gcsOutputDirectory",
+                                "bigqueryOutputDataset"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gcsOutputDirectory": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "bigqueryOutputDataset": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "BatchPredictOperationMetadata": {
+                      "fields": {
+                        "inputConfig": {
+                          "type": "BatchPredictInputConfig",
+                          "id": 1
+                        },
+                        "outputInfo": {
+                          "type": "BatchPredictOutputInfo",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "BatchPredictOutputInfo": {
+                          "oneofs": {
+                            "outputLocation": {
+                              "oneof": [
+                                "gcsOutputDirectory",
+                                "bigqueryOutputDataset"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gcsOutputDirectory": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "bigqueryOutputDataset": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportModelOperationMetadata": {
+                      "fields": {
+                        "outputInfo": {
+                          "type": "ExportModelOutputInfo",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ExportModelOutputInfo": {
+                          "fields": {
+                            "gcsOutputDirectory": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportEvaluatedExamplesOperationMetadata": {
+                      "fields": {
+                        "outputInfo": {
+                          "type": "ExportEvaluatedExamplesOutputInfo",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "ExportEvaluatedExamplesOutputInfo": {
+                          "fields": {
+                            "bigqueryOutputDataset": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -3571,18 +3571,6 @@
                 }
               }
             },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -3655,6 +3643,18 @@
                   "rule": "repeated",
                   "type": "Value",
                   "id": 1
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             },

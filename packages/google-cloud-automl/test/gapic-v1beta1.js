@@ -44,6 +44,11 @@ describe('AutoMlClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new automlModule.v1beta1.AutoMlClient({fallback: true});
+    assert(client);
+  });
+
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
       const client = new automlModule.v1beta1.AutoMlClient({
@@ -2033,6 +2038,13 @@ describe('PredictionServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new automlModule.v1beta1.PredictionServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new automlModule.v1beta1.PredictionServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 

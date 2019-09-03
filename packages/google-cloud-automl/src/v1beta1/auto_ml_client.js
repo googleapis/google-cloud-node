@@ -17,7 +17,6 @@
 const gapicConfig = require('./auto_ml_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
-const protobuf = require('protobufjs');
 
 const VERSION = require('../../package.json').version;
 
@@ -72,6 +71,16 @@ class AutoMlClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -88,51 +97,66 @@ class AutoMlClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.versions.node}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/automl/v1beta1/service.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      annotationSpecPathTemplate: new gax.PathTemplate(
+      annotationSpecPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
-      columnSpecPathTemplate: new gax.PathTemplate(
+      columnSpecPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}/columnSpecs/{column_spec}'
       ),
-      datasetPathTemplate: new gax.PathTemplate(
+      datasetPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
-      locationPathTemplate: new gax.PathTemplate(
+      locationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
-      modelPathTemplate: new gax.PathTemplate(
+      modelPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
-      modelEvaluationPathTemplate: new gax.PathTemplate(
+      modelEvaluationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/modelEvaluations/{model_evaluation}'
       ),
-      tableSpecPathTemplate: new gax.PathTemplate(
+      tableSpecPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/tableSpecs/{table_spec}'
       ),
     };
@@ -141,44 +165,41 @@ class AutoMlClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listDatasets: new gax.PageDescriptor(
+      listDatasets: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'datasets'
       ),
-      listModels: new gax.PageDescriptor('pageToken', 'nextPageToken', 'model'),
-      listModelEvaluations: new gax.PageDescriptor(
+      listModels: new gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'model'
+      ),
+      listModelEvaluations: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'modelEvaluation'
       ),
-      listTableSpecs: new gax.PageDescriptor(
+      listTableSpecs: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'tableSpecs'
       ),
-      listColumnSpecs: new gax.PageDescriptor(
+      listColumnSpecs: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'columnSpecs'
       ),
     };
-    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
-    protoFilesRoot = protobuf.loadSync(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        'protos',
-        'google/cloud/automl/v1beta1/service.proto'
-      ),
-      protoFilesRoot
-    );
+
+    const protoFilesRoot = opts.fallback
+      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
+      : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    this.operationsClient = new gax.lro({
+    this.operationsClient = new gaxModule.lro({
       auth: gaxGrpc.auth,
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
@@ -229,47 +250,47 @@ class AutoMlClient {
     );
 
     this._descriptors.longrunning = {
-      deleteDataset: new gax.LongrunningDescriptor(
+      deleteDataset: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDatasetResponse.decode.bind(deleteDatasetResponse),
         deleteDatasetMetadata.decode.bind(deleteDatasetMetadata)
       ),
-      importData: new gax.LongrunningDescriptor(
+      importData: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataResponse.decode.bind(importDataResponse),
         importDataMetadata.decode.bind(importDataMetadata)
       ),
-      exportData: new gax.LongrunningDescriptor(
+      exportData: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
       ),
-      createModel: new gax.LongrunningDescriptor(
+      createModel: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createModelResponse.decode.bind(createModelResponse),
         createModelMetadata.decode.bind(createModelMetadata)
       ),
-      deleteModel: new gax.LongrunningDescriptor(
+      deleteModel: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteModelResponse.decode.bind(deleteModelResponse),
         deleteModelMetadata.decode.bind(deleteModelMetadata)
       ),
-      deployModel: new gax.LongrunningDescriptor(
+      deployModel: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deployModelResponse.decode.bind(deployModelResponse),
         deployModelMetadata.decode.bind(deployModelMetadata)
       ),
-      undeployModel: new gax.LongrunningDescriptor(
+      undeployModel: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         undeployModelResponse.decode.bind(undeployModelResponse),
         undeployModelMetadata.decode.bind(undeployModelMetadata)
       ),
-      exportModel: new gax.LongrunningDescriptor(
+      exportModel: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportModelResponse.decode.bind(exportModelResponse),
         exportModelMetadata.decode.bind(exportModelMetadata)
       ),
-      exportEvaluatedExamples: new gax.LongrunningDescriptor(
+      exportEvaluatedExamples: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportEvaluatedExamplesResponse.decode.bind(
           exportEvaluatedExamplesResponse
@@ -296,7 +317,9 @@ class AutoMlClient {
     // Put together the "service stub" for
     // google.cloud.automl.v1beta1.AutoMl.
     const autoMlStub = gaxGrpc.createStub(
-      protos.google.cloud.automl.v1beta1.AutoMl,
+      opts.fallback
+        ? protos.lookupService('google.cloud.automl.v1beta1.AutoMl')
+        : protos.google.cloud.automl.v1beta1.AutoMl,
       opts
     );
 
@@ -329,18 +352,16 @@ class AutoMlClient {
       'updateColumnSpec',
     ];
     for (const methodName of autoMlStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        autoMlStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = autoMlStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.longrunning[methodName]
