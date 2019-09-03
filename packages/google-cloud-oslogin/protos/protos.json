@@ -6,73 +6,6 @@
           "nested": {
             "oslogin": {
               "nested": {
-                "common": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.OsLogin.Common",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/oslogin/common;common",
-                    "java_outer_classname": "OsLoginProto",
-                    "java_package": "com.google.cloud.oslogin.common",
-                    "php_namespace": "Google\\Cloud\\OsLogin\\Common"
-                  },
-                  "nested": {
-                    "PosixAccount": {
-                      "fields": {
-                        "primary": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "username": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "uid": {
-                          "type": "int64",
-                          "id": 3
-                        },
-                        "gid": {
-                          "type": "int64",
-                          "id": 4
-                        },
-                        "homeDirectory": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "shell": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "gecos": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "systemId": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "accountId": {
-                          "type": "string",
-                          "id": 9
-                        }
-                      }
-                    },
-                    "SshPublicKey": {
-                      "fields": {
-                        "key": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "expirationTimeUsec": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "fingerprint": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    }
-                  }
-                },
                 "v1beta": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsLogin.V1Beta",
@@ -221,6 +154,73 @@
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "common": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.OsLogin.Common",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/oslogin/common;common",
+                    "java_outer_classname": "OsLoginProto",
+                    "java_package": "com.google.cloud.oslogin.common",
+                    "php_namespace": "Google\\Cloud\\OsLogin\\Common"
+                  },
+                  "nested": {
+                    "PosixAccount": {
+                      "fields": {
+                        "primary": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uid": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "gid": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "homeDirectory": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "shell": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "gecos": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "systemId": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "accountId": {
+                          "type": "string",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "SshPublicKey": {
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expirationTimeUsec": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "fingerprint": {
+                          "type": "string",
                           "id": 3
                         }
                       }
