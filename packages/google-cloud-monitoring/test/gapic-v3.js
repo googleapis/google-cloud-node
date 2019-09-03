@@ -46,6 +46,13 @@ describe('AlertPolicyServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new monitoringModule.v3.AlertPolicyServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('listAlertPolicies', () => {
     it('invokes listAlertPolicies without error', done => {
       const client = new monitoringModule.v3.AlertPolicyServiceClient({
@@ -383,6 +390,11 @@ describe('GroupServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new monitoringModule.v3.GroupServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new monitoringModule.v3.GroupServiceClient({fallback: true});
     assert(client);
   });
 
@@ -794,6 +806,13 @@ describe('MetricServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new monitoringModule.v3.MetricServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new monitoringModule.v3.MetricServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 
@@ -1359,6 +1378,13 @@ describe('NotificationChannelServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new monitoringModule.v3.NotificationChannelServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new monitoringModule.v3.NotificationChannelServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 
@@ -2059,6 +2085,13 @@ describe('UptimeCheckServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new monitoringModule.v3.UptimeCheckServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new monitoringModule.v3.UptimeCheckServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 
