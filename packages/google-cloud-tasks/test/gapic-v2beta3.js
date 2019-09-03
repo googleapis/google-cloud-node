@@ -44,6 +44,11 @@ describe('CloudTasksClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new tasksModule.v2beta3.CloudTasksClient({fallback: true});
+    assert(client);
+  });
+
   describe('listQueues', () => {
     it('invokes listQueues without error', done => {
       const client = new tasksModule.v2beta3.CloudTasksClient({
