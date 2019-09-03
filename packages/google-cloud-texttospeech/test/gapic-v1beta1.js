@@ -46,6 +46,13 @@ describe('TextToSpeechClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new textToSpeechModule.v1beta1.TextToSpeechClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('listVoices', () => {
     it('invokes listVoices without error', done => {
       const client = new textToSpeechModule.v1beta1.TextToSpeechClient({

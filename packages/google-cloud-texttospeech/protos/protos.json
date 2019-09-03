@@ -6,6 +6,181 @@
           "nested": {
             "texttospeech": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.TextToSpeech.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/texttospeech/v1;texttospeech",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "TextToSpeechProto",
+                    "java_package": "com.google.cloud.texttospeech.v1",
+                    "php_namespace": "Google\\Cloud\\TextToSpeech\\V1"
+                  },
+                  "nested": {
+                    "TextToSpeech": {
+                      "methods": {
+                        "ListVoices": {
+                          "requestType": "ListVoicesRequest",
+                          "responseType": "ListVoicesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/voices"
+                          }
+                        },
+                        "SynthesizeSpeech": {
+                          "requestType": "SynthesizeSpeechRequest",
+                          "responseType": "SynthesizeSpeechResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/text:synthesize",
+                            "(google.api.http).body": "*"
+                          }
+                        }
+                      }
+                    },
+                    "ListVoicesRequest": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListVoicesResponse": {
+                      "fields": {
+                        "voices": {
+                          "rule": "repeated",
+                          "type": "Voice",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Voice": {
+                      "fields": {
+                        "languageCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ssmlGender": {
+                          "type": "SsmlVoiceGender",
+                          "id": 3
+                        },
+                        "naturalSampleRateHertz": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SynthesizeSpeechRequest": {
+                      "fields": {
+                        "input": {
+                          "type": "SynthesisInput",
+                          "id": 1
+                        },
+                        "voice": {
+                          "type": "VoiceSelectionParams",
+                          "id": 2
+                        },
+                        "audioConfig": {
+                          "type": "AudioConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SynthesisInput": {
+                      "oneofs": {
+                        "inputSource": {
+                          "oneof": [
+                            "text",
+                            "ssml"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ssml": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VoiceSelectionParams": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ssmlGender": {
+                          "type": "SsmlVoiceGender",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AudioConfig": {
+                      "fields": {
+                        "audioEncoding": {
+                          "type": "AudioEncoding",
+                          "id": 1
+                        },
+                        "speakingRate": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "pitch": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "volumeGainDb": {
+                          "type": "double",
+                          "id": 4
+                        },
+                        "sampleRateHertz": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "effectsProfileId": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "SynthesizeSpeechResponse": {
+                      "fields": {
+                        "audioContent": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SsmlVoiceGender": {
+                      "values": {
+                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                        "MALE": 1,
+                        "FEMALE": 2,
+                        "NEUTRAL": 3
+                      }
+                    },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "LINEAR16": 1,
+                        "MP3": 2,
+                        "OGG_OPUS": 3
+                      }
+                    }
+                  }
+                },
                 "v1beta1": {
                   "options": {
                     "cc_enable_arenas": true,

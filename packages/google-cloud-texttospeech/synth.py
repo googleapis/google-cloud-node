@@ -46,3 +46,4 @@ s.replace('src/v1/doc/google/cloud/texttospeech/v1/doc_cloud_tts.js',
 # Node.js specific cleanup
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])
