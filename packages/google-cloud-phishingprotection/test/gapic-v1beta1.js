@@ -50,6 +50,13 @@ describe('PhishingProtectionServiceV1Beta1Client', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new phishingprotectionModule.v1beta1.PhishingProtectionServiceV1Beta1Client(
+      {fallback: true}
+    );
+    assert(client);
+  });
+
   describe('reportPhishing', () => {
     it('invokes reportPhishing without error', done => {
       const client = new phishingprotectionModule.v1beta1.PhishingProtectionServiceV1Beta1Client(
