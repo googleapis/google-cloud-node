@@ -1,0 +1,4 @@
+[
+  "../../protos/google/cloud/kms/v1/service.proto",
+  "../../protos/google/iam/v1/iam_policy.proto"
+]

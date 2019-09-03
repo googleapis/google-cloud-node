@@ -44,6 +44,13 @@ describe('KeyManagementServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new kmsModule.v1.KeyManagementServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('listKeyRings', () => {
     it('invokes listKeyRings without error', done => {
       const client = new kmsModule.v1.KeyManagementServiceClient({
