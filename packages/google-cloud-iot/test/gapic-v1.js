@@ -44,6 +44,11 @@ describe('DeviceManagerClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new iotModule.v1.DeviceManagerClient({fallback: true});
+    assert(client);
+  });
+
   describe('createDeviceRegistry', () => {
     it('invokes createDeviceRegistry without error', done => {
       const client = new iotModule.v1.DeviceManagerClient({
