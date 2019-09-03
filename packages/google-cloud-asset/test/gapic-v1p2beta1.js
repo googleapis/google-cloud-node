@@ -44,6 +44,13 @@ describe('AssetServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new assetModule.v1p2beta1.AssetServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('exportAssets', function() {
     it('invokes exportAssets without error', done => {
       const client = new assetModule.v1p2beta1.AssetServiceClient({
