@@ -33,15 +33,15 @@
  * @property {string} languageCode
  *   Required. The language of the supplied audio. Dialogflow does not do
  *   translations. See [Language
- *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   Support](https://cloud.google.com/dialogflow/docs/reference/language)
  *   for a list of the currently supported language codes. Note that queries in
  *   the same session do not necessarily need to specify the same language.
  *
  * @property {string[]} phraseHints
- *   Optional. The collection of phrase hints which are used to boost accuracy
- *   of speech recognition.
- *   Refer to
- *   [Cloud Speech API
+ *   Optional. A list of strings containing words and phrases that the speech
+ *   recognizer should recognize with higher likelihood.
+ *
+ *   See [the Cloud Speech
  *   documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
  *   for more details.
  *
@@ -49,6 +49,18 @@
  *   Optional. Which variant of the Speech model to use.
  *
  *   The number should be among the values of [SpeechModelVariant]{@link google.cloud.dialogflow.v2.SpeechModelVariant}
+ *
+ * @property {boolean} singleUtterance
+ *   Optional. If `false` (default), recognition does not cease until the
+ *   client closes the stream.
+ *   If `true`, the recognizer will detect a single spoken utterance in input
+ *   audio. Recognition ceases when it detects the audio's voice has
+ *   stopped or paused. In this case, once a detected intent is received, the
+ *   client should close the stream and start a new request with a new stream as
+ *   needed.
+ *   Note: This setting is relevant only for streaming methods.
+ *   Note: When specified, InputAudioConfig.single_utterance takes precedence
+ *   over StreamingDetectIntentRequest.single_utterance.
  *
  * @typedef InputAudioConfig
  * @memberof google.cloud.dialogflow.v2
@@ -281,7 +293,7 @@ const SpeechModelVariant = {
    * model that the caller is eligible for.
    *
    * Please see the [Dialogflow
-   * docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging) for
+   * docs](https://cloud.google.com/dialogflow/docs/data-logging) for
    * how to make your project eligible for enhanced models.
    */
   USE_BEST_AVAILABLE: 1,
@@ -307,7 +319,7 @@ const SpeechModelVariant = {
    *
    * * If the API caller isn't eligible for enhanced models, Dialogflow returns
    *   an error. Please see the [Dialogflow
-   *   docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging)
+   *   docs](https://cloud.google.com/dialogflow/docs/data-logging)
    *   for how to make your project eligible.
    */
   USE_ENHANCED: 3

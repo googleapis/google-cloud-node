@@ -17,6 +17,7 @@ syntax = "proto3";
 
 package google.cloud.dialogflow.v2beta1;
 
+import "google/protobuf/duration.proto";
 import "google/api/annotations.proto";
 
 option cc_enable_arenas = true;
@@ -76,6 +77,34 @@ enum AudioEncoding {
   AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7;
 }
 
+// Hints for the speech recognizer to help with recognition in a specific
+// conversation state.
+message SpeechContext {
+  // Optional. A list of strings containing words and phrases that the speech
+  // recognizer should recognize with higher likelihood.
+  //
+  // This list can be used to:
+  // * improve accuracy for words and phrases you expect the user to say,
+  //   e.g. typical commands for your Dialogflow agent
+  // * add additional words to the speech recognizer vocabulary
+  // * ...
+  //
+  // See the [Cloud Speech
+  // documentation](https://cloud.google.com/speech-to-text/quotas) for usage
+  // limits.
+  repeated string phrases = 1;
+
+  // Optional. Boost for this context compared to other contexts:
+  // * If the boost is positive, Dialogflow will increase the probability that
+  //   the phrases in this context are recognized over similar sounding phrases.
+  // * If the boost is unspecified or non-positive, Dialogflow will not apply
+  //   any boost.
+  //
+  // Dialogflow recommends that you use boosts in the range (0, 20] and that you
+  // find a value that fits your use case with binary search.
+  float boost = 2;
+}
+
 // Variant of the specified [Speech model][google.cloud.dialogflow.v2beta1.InputAudioConfig.model] to use.
 //
 // See the [Cloud Speech
@@ -92,7 +121,7 @@ enum SpeechModelVariant {
   // model][InputAudioConfig.model] that the caller is eligible for.
   //
   // Please see the [Dialogflow
-  // docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging) for
+  // docs](https://cloud.google.com/dialogflow/docs/data-logging) for
   // how to make your project eligible for enhanced models.
   USE_BEST_AVAILABLE = 1;
 
@@ -114,9 +143,34 @@ enum SpeechModelVariant {
   //
   // * If the API caller isn't eligible for enhanced models, Dialogflow returns
   //   an error.  Please see the [Dialogflow
-  //   docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging)
+  //   docs](https://cloud.google.com/dialogflow/docs/data-logging)
   //   for how to make your project eligible.
   USE_ENHANCED = 3;
+}
+
+// Information for a word recognized by the speech recognizer.
+message SpeechWordInfo {
+  // The word this info is for.
+  string word = 3;
+
+  // Time offset relative to the beginning of the audio that corresponds to the
+  // start of the spoken word. This is an experimental feature and the accuracy
+  // of the time offset can vary.
+  google.protobuf.Duration start_offset = 1;
+
+  // Time offset relative to the beginning of the audio that corresponds to the
+  // end of the spoken word. This is an experimental feature and the accuracy of
+  // the time offset can vary.
+  google.protobuf.Duration end_offset = 2;
+
+  // The Speech confidence between 0.0 and 1.0 for this word. A higher number
+  // indicates an estimated greater likelihood that the recognized word is
+  // correct. The default of 0.0 is a sentinel value indicating that confidence
+  // was not set.
+  //
+  // This field is not guaranteed to be fully stable over time for the same
+  // audio input. Users should also not rely on it to always be provided.
+  float confidence = 4;
 }
 
 // Instructs the speech recognizer on how to process the audio content.
@@ -133,18 +187,31 @@ message InputAudioConfig {
 
   // Required. The language of the supplied audio. Dialogflow does not do
   // translations. See [Language
-  // Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // Support](https://cloud.google.com/dialogflow/docs/reference/language)
   // for a list of the currently supported language codes. Note that queries in
   // the same session do not necessarily need to specify the same language.
   string language_code = 3;
 
-  // Optional. The collection of phrase hints which are used to boost accuracy
-  // of speech recognition.
-  // Refer to
-  // [Cloud Speech API
+  // Optional. If `true`, Dialogflow returns [SpeechWordInfo][google.cloud.dialogflow.v2beta1.SpeechWordInfo] in
+  // [StreamingRecognitionResult][google.cloud.dialogflow.v2beta1.StreamingRecognitionResult] with information about the recognized speech
+  // words, e.g. start and end time offsets. If false or unspecified, Speech
+  // doesn't return any word-level information.
+  bool enable_word_info = 13;
+
+  // Optional. A list of strings containing words and phrases that the speech
+  // recognizer should recognize with higher likelihood.
+  //
+  // See [the Cloud Speech
   // documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
   // for more details.
   repeated string phrase_hints = 4;
+
+  // Optional. Context information to assist speech recognition.
+  //
+  // See [the Cloud Speech
+  // documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
+  // for more details.
+  repeated SpeechContext speech_contexts = 11;
 
   // Optional. Which Speech model to select for the given request. Select the
   // model best suited to your domain to get best results. If a model is not
@@ -161,6 +228,18 @@ message InputAudioConfig {
 
   // Optional. Which variant of the [Speech model][google.cloud.dialogflow.v2beta1.InputAudioConfig.model] to use.
   SpeechModelVariant model_variant = 10;
+
+  // Optional. If `false` (default), recognition does not cease until the
+  // client closes the stream.
+  // If `true`, the recognizer will detect a single spoken utterance in input
+  // audio. Recognition ceases when it detects the audio's voice has
+  // stopped or paused. In this case, once a detected intent is received, the
+  // client should close the stream and start a new request with a new stream as
+  // needed.
+  // Note: This setting is relevant only for streaming methods.
+  // Note: When specified, InputAudioConfig.single_utterance takes precedence
+  // over StreamingDetectIntentRequest.single_utterance.
+  bool single_utterance = 8;
 }
 
 // Gender of the voice as described in

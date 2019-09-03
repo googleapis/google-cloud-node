@@ -17,7 +17,6 @@
 const gapicConfig = require('./intents_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
-const protobuf = require('protobufjs');
 
 const VERSION = require('../../package.json').version;
 
@@ -53,7 +52,7 @@ const VERSION = require('../../package.json').version;
  *
  * For more information about intents, see the
  * [Dialogflow
- * documentation](https://cloud.google.com/dialogflow-enterprise/docs/intents-overview).
+ * documentation](https://cloud.google.com/dialogflow/docs/intents-overview).
  *
  * @class
  * @memberof v2
@@ -90,6 +89,16 @@ class IntentsClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -106,39 +115,54 @@ class IntentsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.version}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/dialogflow/v2/intent.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      agentPathTemplate: new gax.PathTemplate(
+      agentPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/agents/{agent}'
       ),
-      intentPathTemplate: new gax.PathTemplate(
+      intentPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/agent/intents/{intent}'
       ),
-      projectAgentPathTemplate: new gax.PathTemplate(
+      projectAgentPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/agent'
       ),
     };
@@ -147,28 +171,21 @@ class IntentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listIntents: new gax.PageDescriptor(
+      listIntents: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'intents'
       ),
     };
-    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
-    protoFilesRoot = protobuf.loadSync(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        'protos',
-        'google/cloud/dialogflow/v2/intent.proto'
-      ),
-      protoFilesRoot
-    );
+
+    const protoFilesRoot = opts.fallback
+      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
+      : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    this.operationsClient = new gax.lro({
+    this.operationsClient = new gaxModule.lro({
       auth: gaxGrpc.auth,
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
@@ -187,12 +204,12 @@ class IntentsClient {
     );
 
     this._descriptors.longrunning = {
-      batchUpdateIntents: new gax.LongrunningDescriptor(
+      batchUpdateIntents: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchUpdateIntentsResponse.decode.bind(batchUpdateIntentsResponse),
         batchUpdateIntentsMetadata.decode.bind(batchUpdateIntentsMetadata)
       ),
-      batchDeleteIntents: new gax.LongrunningDescriptor(
+      batchDeleteIntents: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchDeleteIntentsResponse.decode.bind(batchDeleteIntentsResponse),
         batchDeleteIntentsMetadata.decode.bind(batchDeleteIntentsMetadata)
@@ -215,7 +232,9 @@ class IntentsClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Intents.
     const intentsStub = gaxGrpc.createStub(
-      protos.google.cloud.dialogflow.v2.Intents,
+      opts.fallback
+        ? protos.lookupService('google.cloud.dialogflow.v2.Intents')
+        : protos.google.cloud.dialogflow.v2.Intents,
       opts
     );
 
@@ -231,18 +250,16 @@ class IntentsClient {
       'batchDeleteIntents',
     ];
     for (const methodName of intentsStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        intentsStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = intentsStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -308,7 +325,7 @@ class IntentsClient {
    *   Optional. The language to list training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
    *   [Many
-   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
    *   are supported. Note: languages must be enabled in the agent before they can
    *   be used.
    * @param {number} [request.intentView]
@@ -397,6 +414,7 @@ class IntentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -431,7 +449,7 @@ class IntentsClient {
    *   Optional. The language to list training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
    *   [Many
-   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
    *   are supported. Note: languages must be enabled in the agent before they can
    *   be used.
    * @param {number} [request.intentView]
@@ -488,7 +506,7 @@ class IntentsClient {
    *   Optional. The language to retrieve training phrases, parameters and rich
    *   messages for. If not specified, the agent's default language is used.
    *   [Many
-   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
    *   are supported. Note: languages must be enabled in the agent before they can
    *   be used.
    * @param {number} [request.intentView]
@@ -529,6 +547,7 @@ class IntentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -557,7 +576,7 @@ class IntentsClient {
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intent`. If not specified, the agent's default language is
    *   used. [Many
-   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
    *   are supported. Note: languages must be enabled in the agent before they can
    *   be used.
    * @param {number} [request.intentView]
@@ -603,6 +622,7 @@ class IntentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -628,7 +648,7 @@ class IntentsClient {
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intent`. If not specified, the agent's default language is
    *   used. [Many
-   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
    *   are supported. Note: languages must be enabled in the agent before they can
    *   be used.
    * @param {Object} [request.updateMask]
@@ -678,6 +698,7 @@ class IntentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -725,6 +746,7 @@ class IntentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -751,7 +773,7 @@ class IntentsClient {
    *   Optional. The language of training phrases, parameters and rich messages
    *   defined in `intents`. If not specified, the agent's default language is
    *   used. [Many
-   *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
    *   are supported. Note: languages must be enabled in the agent before they can
    *   be used.
    * @param {string} [request.intentBatchUri]
@@ -863,6 +885,7 @@ class IntentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -983,6 +1006,7 @@ class IntentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

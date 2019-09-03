@@ -22,6 +22,7 @@ import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
+import "google/api/client.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2beta1";
@@ -58,12 +59,20 @@ option objc_class_prefix = "DF";
 //
 // For more information about entity types, see the
 // [Dialogflow
-// documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
+// documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
 service EntityTypes {
+  option (google.api.default_host) = "dialogflow.googleapis.com";
+  option (google.api.oauth_scopes) =
+      "https://www.googleapis.com/auth/cloud-platform,"
+      "https://www.googleapis.com/auth/dialogflow";
+
   // Returns the list of all entity types in the specified agent.
   rpc ListEntityTypes(ListEntityTypesRequest) returns (ListEntityTypesResponse) {
     option (google.api.http) = {
       get: "/v2beta1/{parent=projects/*/agent}/entityTypes"
+      additional_bindings {
+        get: "/v2beta1/{parent=projects/*/locations/*/agent}/entityTypes"
+      }
     };
   }
 
@@ -71,6 +80,9 @@ service EntityTypes {
   rpc GetEntityType(GetEntityTypeRequest) returns (EntityType) {
     option (google.api.http) = {
       get: "/v2beta1/{name=projects/*/agent/entityTypes/*}"
+      additional_bindings {
+        get: "/v2beta1/{name=projects/*/locations/*/agent/entityTypes/*}"
+      }
     };
   }
 
@@ -79,6 +91,10 @@ service EntityTypes {
     option (google.api.http) = {
       post: "/v2beta1/{parent=projects/*/agent}/entityTypes"
       body: "entity_type"
+      additional_bindings {
+        post: "/v2beta1/{parent=projects/*/locations/*/agent}/entityTypes"
+        body: "entity_type"
+      }
     };
   }
 
@@ -87,6 +103,10 @@ service EntityTypes {
     option (google.api.http) = {
       patch: "/v2beta1/{entity_type.name=projects/*/agent/entityTypes/*}"
       body: "entity_type"
+      additional_bindings {
+        patch: "/v2beta1/{entity_type.name=projects/*/locations/*/agent/entityTypes/*}"
+        body: "entity_type"
+      }
     };
   }
 
@@ -94,6 +114,9 @@ service EntityTypes {
   rpc DeleteEntityType(DeleteEntityTypeRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v2beta1/{name=projects/*/agent/entityTypes/*}"
+      additional_bindings {
+        delete: "/v2beta1/{name=projects/*/locations/*/agent/entityTypes/*}"
+      }
     };
   }
 
@@ -104,6 +127,10 @@ service EntityTypes {
     option (google.api.http) = {
       post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchUpdate"
       body: "*"
+      additional_bindings {
+        post: "/v2beta1/{parent=projects/*/locations/*/agent}/entityTypes:batchUpdate"
+        body: "*"
+      }
     };
   }
 
@@ -114,6 +141,10 @@ service EntityTypes {
     option (google.api.http) = {
       post: "/v2beta1/{parent=projects/*/agent}/entityTypes:batchDelete"
       body: "*"
+      additional_bindings {
+        post: "/v2beta1/{parent=projects/*/locations/*/agent}/entityTypes:batchDelete"
+        body: "*"
+      }
     };
   }
 
@@ -124,6 +155,10 @@ service EntityTypes {
     option (google.api.http) = {
       post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchCreate"
       body: "*"
+      additional_bindings {
+        post: "/v2beta1/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchCreate"
+        body: "*"
+      }
     };
   }
 
@@ -136,6 +171,10 @@ service EntityTypes {
     option (google.api.http) = {
       post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate"
       body: "*"
+      additional_bindings {
+        post: "/v2beta1/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchUpdate"
+        body: "*"
+      }
     };
   }
 
@@ -146,6 +185,10 @@ service EntityTypes {
     option (google.api.http) = {
       post: "/v2beta1/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete"
       body: "*"
+      additional_bindings {
+        post: "/v2beta1/{parent=projects/*/locations/*/agent/entityTypes/*}/entities:batchDelete"
+        body: "*"
+      }
     };
   }
 }
@@ -236,7 +279,7 @@ message ListEntityTypesRequest {
   // Optional. The language to list entity synonyms for. If not specified,
   // the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 2;
@@ -269,7 +312,7 @@ message GetEntityTypeRequest {
   // Optional. The language to retrieve entity synonyms for. If not specified,
   // the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 2;
@@ -287,7 +330,7 @@ message CreateEntityTypeRequest {
   // Optional. The language of entity synonyms defined in `entity_type`. If not
   // specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 3;
@@ -301,7 +344,7 @@ message UpdateEntityTypeRequest {
   // Optional. The language of entity synonyms defined in `entity_type`. If not
   // specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 2;
@@ -343,7 +386,7 @@ message BatchUpdateEntityTypesRequest {
   // Optional. The language of entity synonyms defined in `entity_types`. If not
   // specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 4;
@@ -381,7 +424,7 @@ message BatchCreateEntitiesRequest {
   // Optional. The language of entity synonyms defined in `entities`. If not
   // specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 3;
@@ -399,7 +442,7 @@ message BatchUpdateEntitiesRequest {
   // Optional. The language of entity synonyms defined in `entities`. If not
   // specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 3;
@@ -422,7 +465,7 @@ message BatchDeleteEntitiesRequest {
   // Optional. The language of entity synonyms defined in `entities`. If not
   // specified, the agent's default language is used.
   // [Many
-  // languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+  // languages](https://cloud.google.com/dialogflow/docs/reference/language)
   // are supported. Note: languages must be enabled in the agent before they can
   // be used.
   string language_code = 3;

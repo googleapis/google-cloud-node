@@ -16,6 +16,79 @@
 // to be loaded as the JS file.
 
 /**
+ * Hints for the speech recognizer to help with recognition in a specific
+ * conversation state.
+ *
+ * @property {string[]} phrases
+ *   Optional. A list of strings containing words and phrases that the speech
+ *   recognizer should recognize with higher likelihood.
+ *
+ *   This list can be used to:
+ *   * improve accuracy for words and phrases you expect the user to say,
+ *     e.g. typical commands for your Dialogflow agent
+ *   * add additional words to the speech recognizer vocabulary
+ *   * ...
+ *
+ *   See the [Cloud Speech
+ *   documentation](https://cloud.google.com/speech-to-text/quotas) for usage
+ *   limits.
+ *
+ * @property {number} boost
+ *   Optional. Boost for this context compared to other contexts:
+ *   * If the boost is positive, Dialogflow will increase the probability that
+ *     the phrases in this context are recognized over similar sounding phrases.
+ *   * If the boost is unspecified or non-positive, Dialogflow will not apply
+ *     any boost.
+ *
+ *   Dialogflow recommends that you use boosts in the range (0, 20] and that you
+ *   find a value that fits your use case with binary search.
+ *
+ * @typedef SpeechContext
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.SpeechContext definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/audio_config.proto}
+ */
+const SpeechContext = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Information for a word recognized by the speech recognizer.
+ *
+ * @property {string} word
+ *   The word this info is for.
+ *
+ * @property {Object} startOffset
+ *   Time offset relative to the beginning of the audio that corresponds to the
+ *   start of the spoken word. This is an experimental feature and the accuracy
+ *   of the time offset can vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {Object} endOffset
+ *   Time offset relative to the beginning of the audio that corresponds to the
+ *   end of the spoken word. This is an experimental feature and the accuracy of
+ *   the time offset can vary.
+ *
+ *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
+ *
+ * @property {number} confidence
+ *   The Speech confidence between 0.0 and 1.0 for this word. A higher number
+ *   indicates an estimated greater likelihood that the recognized word is
+ *   correct. The default of 0.0 is a sentinel value indicating that confidence
+ *   was not set.
+ *
+ *   This field is not guaranteed to be fully stable over time for the same
+ *   audio input. Users should also not rely on it to always be provided.
+ *
+ * @typedef SpeechWordInfo
+ * @memberof google.cloud.dialogflow.v2beta1
+ * @see [google.cloud.dialogflow.v2beta1.SpeechWordInfo definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/audio_config.proto}
+ */
+const SpeechWordInfo = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * Instructs the speech recognizer on how to process the audio content.
  *
  * @property {number} audioEncoding
@@ -33,17 +106,32 @@
  * @property {string} languageCode
  *   Required. The language of the supplied audio. Dialogflow does not do
  *   translations. See [Language
- *   Support](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   Support](https://cloud.google.com/dialogflow/docs/reference/language)
  *   for a list of the currently supported language codes. Note that queries in
  *   the same session do not necessarily need to specify the same language.
  *
+ * @property {boolean} enableWordInfo
+ *   Optional. If `true`, Dialogflow returns SpeechWordInfo in
+ *   StreamingRecognitionResult with information about the recognized speech
+ *   words, e.g. start and end time offsets. If false or unspecified, Speech
+ *   doesn't return any word-level information.
+ *
  * @property {string[]} phraseHints
- *   Optional. The collection of phrase hints which are used to boost accuracy
- *   of speech recognition.
- *   Refer to
- *   [Cloud Speech API
+ *   Optional. A list of strings containing words and phrases that the speech
+ *   recognizer should recognize with higher likelihood.
+ *
+ *   See [the Cloud Speech
  *   documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
  *   for more details.
+ *
+ * @property {Object[]} speechContexts
+ *   Optional. Context information to assist speech recognition.
+ *
+ *   See [the Cloud Speech
+ *   documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
+ *   for more details.
+ *
+ *   This object should have the same structure as [SpeechContext]{@link google.cloud.dialogflow.v2beta1.SpeechContext}
  *
  * @property {string} model
  *   Optional. Which Speech model to select for the given request. Select the
@@ -62,6 +150,18 @@
  *   Optional. Which variant of the Speech model to use.
  *
  *   The number should be among the values of [SpeechModelVariant]{@link google.cloud.dialogflow.v2beta1.SpeechModelVariant}
+ *
+ * @property {boolean} singleUtterance
+ *   Optional. If `false` (default), recognition does not cease until the
+ *   client closes the stream.
+ *   If `true`, the recognizer will detect a single spoken utterance in input
+ *   audio. Recognition ceases when it detects the audio's voice has
+ *   stopped or paused. In this case, once a detected intent is received, the
+ *   client should close the stream and start a new request with a new stream as
+ *   needed.
+ *   Note: This setting is relevant only for streaming methods.
+ *   Note: When specified, InputAudioConfig.single_utterance takes precedence
+ *   over StreamingDetectIntentRequest.single_utterance.
  *
  * @typedef InputAudioConfig
  * @memberof google.cloud.dialogflow.v2beta1
@@ -294,7 +394,7 @@ const SpeechModelVariant = {
    * model that the caller is eligible for.
    *
    * Please see the [Dialogflow
-   * docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging) for
+   * docs](https://cloud.google.com/dialogflow/docs/data-logging) for
    * how to make your project eligible for enhanced models.
    */
   USE_BEST_AVAILABLE: 1,
@@ -320,7 +420,7 @@ const SpeechModelVariant = {
    *
    * * If the API caller isn't eligible for enhanced models, Dialogflow returns
    *   an error.  Please see the [Dialogflow
-   *   docs](https://cloud.google.com/dialogflow-enterprise/docs/data-logging)
+   *   docs](https://cloud.google.com/dialogflow/docs/data-logging)
    *   for how to make your project eligible.
    */
   USE_ENHANCED: 3

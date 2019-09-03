@@ -147,7 +147,7 @@ const EntityType = {
  *   Optional. The language to list entity synonyms for. If not specified,
  *   the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -198,7 +198,7 @@ const ListEntityTypesResponse = {
  *   Optional. The language to retrieve entity synonyms for. If not specified,
  *   the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -226,7 +226,7 @@ const GetEntityTypeRequest = {
  *   Optional. The language of entity synonyms defined in `entity_type`. If not
  *   specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -250,7 +250,7 @@ const CreateEntityTypeRequest = {
  *   Optional. The language of entity synonyms defined in `entity_type`. If not
  *   specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -304,7 +304,7 @@ const DeleteEntityTypeRequest = {
  *   Optional. The language of entity synonyms defined in `entity_types`. If not
  *   specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -372,7 +372,7 @@ const BatchDeleteEntityTypesRequest = {
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -400,7 +400,7 @@ const BatchCreateEntitiesRequest = {
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -433,7 +433,7 @@ const BatchUpdateEntitiesRequest = {
  *   Optional. The language of entity synonyms defined in `entities`. If not
  *   specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *

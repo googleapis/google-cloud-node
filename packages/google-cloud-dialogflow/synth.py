@@ -36,3 +36,4 @@ s.replace("src/**/*",
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])

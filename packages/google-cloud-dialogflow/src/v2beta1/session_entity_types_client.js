@@ -31,9 +31,13 @@ const VERSION = require('../../package.json').version;
  * favorites, preferences, playlists, and so on. You can redefine a session
  * entity type at the session level.
  *
+ * Session entity methods do not work with Google Assistant integration.
+ * Contact Dialogflow support if you need to use session entities
+ * with Google Assistant integration.
+ *
  * For more information about entity types, see the
  * [Dialogflow
- * documentation](https://cloud.google.com/dialogflow-enterprise/docs/entities-overview).
+ * documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
  *
  * @class
  * @memberof v2beta1
@@ -70,6 +74,16 @@ class SessionEntityTypesClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -86,42 +100,57 @@ class SessionEntityTypesClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.version}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/dialogflow/v2beta1/session_entity_type.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      environmentSessionPathTemplate: new gax.PathTemplate(
+      environmentSessionPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}'
       ),
-      environmentSessionEntityTypePathTemplate: new gax.PathTemplate(
+      environmentSessionEntityTypePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
       ),
-      sessionPathTemplate: new gax.PathTemplate(
+      sessionPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}'
       ),
-      sessionEntityTypePathTemplate: new gax.PathTemplate(
+      sessionEntityTypePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
       ),
     };
@@ -130,7 +159,7 @@ class SessionEntityTypesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listSessionEntityTypes: new gax.PageDescriptor(
+      listSessionEntityTypes: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'sessionEntityTypes'
@@ -153,7 +182,11 @@ class SessionEntityTypesClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.SessionEntityTypes.
     const sessionEntityTypesStub = gaxGrpc.createStub(
-      protos.google.cloud.dialogflow.v2beta1.SessionEntityTypes,
+      opts.fallback
+        ? protos.lookupService(
+            'google.cloud.dialogflow.v2beta1.SessionEntityTypes'
+          )
+        : protos.google.cloud.dialogflow.v2beta1.SessionEntityTypes,
       opts
     );
 
@@ -167,18 +200,16 @@ class SessionEntityTypesClient {
       'deleteSessionEntityType',
     ];
     for (const methodName of sessionEntityTypesStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        sessionEntityTypesStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = sessionEntityTypesStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName]
       );
@@ -233,6 +264,10 @@ class SessionEntityTypesClient {
 
   /**
    * Returns the list of all session entity types in the specified session.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -325,6 +360,7 @@ class SessionEntityTypesClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -404,6 +440,10 @@ class SessionEntityTypesClient {
   /**
    * Retrieves the specified session entity type.
    *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -447,6 +487,7 @@ class SessionEntityTypesClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -464,6 +505,10 @@ class SessionEntityTypesClient {
    *
    * If the specified session entity type already exists, overrides the
    * session entity type.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -517,6 +562,7 @@ class SessionEntityTypesClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -535,6 +581,10 @@ class SessionEntityTypesClient {
 
   /**
    * Updates the specified session entity type.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -585,6 +635,7 @@ class SessionEntityTypesClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -603,6 +654,10 @@ class SessionEntityTypesClient {
 
   /**
    * Deletes the specified session entity type.
+   *
+   * This method doesn't work with Google Assistant integration.
+   * Contact Dialogflow support if you need to use session entities
+   * with Google Assistant integration.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -639,6 +694,7 @@ class SessionEntityTypesClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

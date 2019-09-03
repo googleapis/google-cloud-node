@@ -17,7 +17,6 @@
 const gapicConfig = require('./agents_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
-const protobuf = require('protobufjs');
 
 const VERSION = require('../../package.json').version;
 
@@ -35,7 +34,7 @@ const VERSION = require('../../package.json').version;
  * You can create an agent using both Dialogflow Standard Edition and
  * Dialogflow Enterprise Edition. For details, see
  * [Dialogflow
- * Editions](https://cloud.google.com/dialogflow-enterprise/docs/editions).
+ * Editions](https://cloud.google.com/dialogflow/docs/editions).
  *
  * You can save your agent for backup or versioning by exporting the agent by
  * using the ExportAgent method. You can import a saved
@@ -43,13 +42,13 @@ const VERSION = require('../../package.json').version;
  *
  * Dialogflow provides several
  * [prebuilt
- * agents](https://cloud.google.com/dialogflow-enterprise/docs/agents-prebuilt)
+ * agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
  * for common conversation scenarios such as determining a date and time,
  * converting currency, and so on.
  *
  * For more information about agents, see the
  * [Dialogflow
- * documentation](https://cloud.google.com/dialogflow-enterprise/docs/agents-overview).
+ * documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
  *
  * @class
  * @memberof v2beta1
@@ -86,6 +85,16 @@ class AgentsClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -102,61 +111,69 @@ class AgentsClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.version}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/dialogflow/v2beta1/agent.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      searchAgents: new gax.PageDescriptor(
+      searchAgents: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'agents'
       ),
     };
-    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
-    protoFilesRoot = protobuf.loadSync(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        'protos',
-        'google/cloud/dialogflow/v2beta1/agent.proto'
-      ),
-      protoFilesRoot
-    );
+
+    const protoFilesRoot = opts.fallback
+      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
+      : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    this.operationsClient = new gax.lro({
+    this.operationsClient = new gaxModule.lro({
       auth: gaxGrpc.auth,
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
@@ -175,22 +192,22 @@ class AgentsClient {
     );
 
     this._descriptors.longrunning = {
-      trainAgent: new gax.LongrunningDescriptor(
+      trainAgent: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         trainAgentResponse.decode.bind(trainAgentResponse),
         trainAgentMetadata.decode.bind(trainAgentMetadata)
       ),
-      exportAgent: new gax.LongrunningDescriptor(
+      exportAgent: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportAgentResponse.decode.bind(exportAgentResponse),
         exportAgentMetadata.decode.bind(exportAgentMetadata)
       ),
-      importAgent: new gax.LongrunningDescriptor(
+      importAgent: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importAgentResponse.decode.bind(importAgentResponse),
         importAgentMetadata.decode.bind(importAgentMetadata)
       ),
-      restoreAgent: new gax.LongrunningDescriptor(
+      restoreAgent: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restoreAgentResponse.decode.bind(restoreAgentResponse),
         restoreAgentMetadata.decode.bind(restoreAgentMetadata)
@@ -213,13 +230,17 @@ class AgentsClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2beta1.Agents.
     const agentsStub = gaxGrpc.createStub(
-      protos.google.cloud.dialogflow.v2beta1.Agents,
+      opts.fallback
+        ? protos.lookupService('google.cloud.dialogflow.v2beta1.Agents')
+        : protos.google.cloud.dialogflow.v2beta1.Agents,
       opts
     );
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const agentsStubMethods = [
+      'setAgent',
+      'deleteAgent',
       'getAgent',
       'searchAgents',
       'trainAgent',
@@ -228,18 +249,16 @@ class AgentsClient {
       'restoreAgent',
     ];
     for (const methodName of agentsStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        agentsStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = agentsStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.longrunning[methodName]
@@ -294,6 +313,113 @@ class AgentsClient {
   // -------------------
 
   /**
+   * Creates/updates the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {Object} request.agent
+   *   Required. The agent to update.
+   *
+   *   This object should have the same structure as [Agent]{@link google.cloud.dialogflow.v2beta1.Agent}
+   * @param {Object} [request.updateMask]
+   *   Optional. The mask to control which fields get updated.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Agent]{@link google.cloud.dialogflow.v2beta1.Agent}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Agent]{@link google.cloud.dialogflow.v2beta1.Agent}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dialogflow = require('dialogflow');
+   *
+   * const client = new dialogflow.v2beta1.AgentsClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const agent = {};
+   * client.setAgent({agent: agent})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  setAgent(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'agent.parent': request.agent.parent,
+    });
+
+    return this._innerApiCalls.setAgent(request, options, callback);
+  }
+
+  /**
+   * Deletes the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to delete is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const dialogflow = require('dialogflow');
+   *
+   * const client = new dialogflow.v2beta1.AgentsClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.projectPath('[PROJECT]');
+   * client.deleteAgent({parent: formattedParent}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteAgent(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.deleteAgent(request, options, callback);
+  }
+
+  /**
    * Retrieves the specified agent.
    *
    * @param {Object} request
@@ -335,6 +461,7 @@ class AgentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -443,6 +570,7 @@ class AgentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -600,6 +728,7 @@ class AgentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -707,6 +836,7 @@ class AgentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -830,6 +960,7 @@ class AgentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -952,6 +1083,7 @@ class AgentsClient {
       callback = options;
       options = {};
     }
+    request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

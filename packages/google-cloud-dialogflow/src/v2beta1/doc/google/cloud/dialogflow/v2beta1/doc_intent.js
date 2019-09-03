@@ -288,7 +288,7 @@ const Intent = {
    *
    * @property {string[]} prompts
    *   Optional. The collection of prompts that the agent can present to the
-   *   user in order to collect value for the parameter.
+   *   user in order to collect a value for the parameter.
    *
    * @property {boolean} isList
    *   Optional. Indicates whether the parameter represents a list of values.
@@ -375,6 +375,24 @@ const Intent = {
    *   Transfers the call in Telephony Gateway.
    *
    *   This object should have the same structure as [TelephonyTransferCall]{@link google.cloud.dialogflow.v2beta1.TelephonyTransferCall}
+   *
+   * @property {Object} rbmText
+   *   Rich Business Messaging (RBM) text response.
+   *
+   *   RBM allows businesses to send enriched and branded versions of SMS. See
+   *   https://jibe.google.com/business-messaging.
+   *
+   *   This object should have the same structure as [RbmText]{@link google.cloud.dialogflow.v2beta1.RbmText}
+   *
+   * @property {Object} rbmStandaloneRichCard
+   *   Standalone Rich Business Messaging (RBM) rich card response.
+   *
+   *   This object should have the same structure as [RbmStandaloneCard]{@link google.cloud.dialogflow.v2beta1.RbmStandaloneCard}
+   *
+   * @property {Object} rbmCarouselRichCard
+   *   Rich Business Messaging (RBM) carousel rich card response.
+   *
+   *   This object should have the same structure as [RbmCarouselCard]{@link google.cloud.dialogflow.v2beta1.RbmCarouselCard}
    *
    * @property {number} platform
    *   Optional. The platform that this message is intended for.
@@ -811,6 +829,398 @@ const Intent = {
     },
 
     /**
+     * Rich Business Messaging (RBM) text response with suggestions.
+     *
+     * @property {string} text
+     *   Required. Text sent and displayed to the user.
+     *
+     * @property {Object[]} rbmSuggestion
+     *   Optional. One or more suggestions to show to the user.
+     *
+     *   This object should have the same structure as [RbmSuggestion]{@link google.cloud.dialogflow.v2beta1.RbmSuggestion}
+     *
+     * @typedef RbmText
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmText definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    RbmText: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * Carousel Rich Business Messaging (RBM) rich card.
+     *
+     * Rich cards allow you to respond to users with more vivid content, e.g.
+     * with media and suggestions.
+     *
+     * For more details about RBM rich cards, please see:
+     * https://developers.google.com/rcs-business-messaging/rbm/guides/build/send-messages#rich-cards.
+     * If you want to show a single card with more control over the layout,
+     * please use RbmStandaloneCard instead.
+     *
+     * @property {number} cardWidth
+     *   Required. The width of the cards in the carousel.
+     *
+     *   The number should be among the values of [CardWidth]{@link google.cloud.dialogflow.v2beta1.CardWidth}
+     *
+     * @property {Object[]} cardContents
+     *   Required. The cards in the carousel. A carousel must have at least
+     *   2 cards and at most 10.
+     *
+     *   This object should have the same structure as [RbmCardContent]{@link google.cloud.dialogflow.v2beta1.RbmCardContent}
+     *
+     * @typedef RbmCarouselCard
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmCarouselCard definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    RbmCarouselCard: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+
+      /**
+       * The width of the cards in the carousel.
+       *
+       * @enum {number}
+       * @memberof google.cloud.dialogflow.v2beta1
+       */
+      CardWidth: {
+
+        /**
+         * Not specified.
+         */
+        CARD_WIDTH_UNSPECIFIED: 0,
+
+        /**
+         * 120 DP. Note that tall media cannot be used.
+         */
+        SMALL: 1,
+
+        /**
+         * 232 DP.
+         */
+        MEDIUM: 2
+      }
+    },
+
+    /**
+     * Standalone Rich Business Messaging (RBM) rich card.
+     *
+     * Rich cards allow you to respond to users with more vivid content, e.g.
+     * with media and suggestions.
+     *
+     * For more details about RBM rich cards, please see:
+     * https://developers.google.com/rcs-business-messaging/rbm/guides/build/send-messages#rich-cards.
+     * You can group multiple rich cards into one using RbmCarouselCard but
+     * carousel cards will give you less control over the card layout.
+     *
+     * @property {number} cardOrientation
+     *   Required. Orientation of the card.
+     *
+     *   The number should be among the values of [CardOrientation]{@link google.cloud.dialogflow.v2beta1.CardOrientation}
+     *
+     * @property {number} thumbnailImageAlignment
+     *   Required if orientation is horizontal.
+     *   Image preview alignment for standalone cards with horizontal layout.
+     *
+     *   The number should be among the values of [ThumbnailImageAlignment]{@link google.cloud.dialogflow.v2beta1.ThumbnailImageAlignment}
+     *
+     * @property {Object} cardContent
+     *   Required. Card content.
+     *
+     *   This object should have the same structure as [RbmCardContent]{@link google.cloud.dialogflow.v2beta1.RbmCardContent}
+     *
+     * @typedef RbmStandaloneCard
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmStandaloneCard definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    RbmStandaloneCard: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+
+      /**
+       * Orientation of the card.
+       *
+       * @enum {number}
+       * @memberof google.cloud.dialogflow.v2beta1
+       */
+      CardOrientation: {
+
+        /**
+         * Not specified.
+         */
+        CARD_ORIENTATION_UNSPECIFIED: 0,
+
+        /**
+         * Horizontal layout.
+         */
+        HORIZONTAL: 1,
+
+        /**
+         * Vertical layout.
+         */
+        VERTICAL: 2
+      },
+
+      /**
+       * Thumbnail preview alignment for standalone cards with horizontal
+       * layout.
+       *
+       * @enum {number}
+       * @memberof google.cloud.dialogflow.v2beta1
+       */
+      ThumbnailImageAlignment: {
+
+        /**
+         * Not specified.
+         */
+        THUMBNAIL_IMAGE_ALIGNMENT_UNSPECIFIED: 0,
+
+        /**
+         * Thumbnail preview is left-aligned.
+         */
+        LEFT: 1,
+
+        /**
+         * Thumbnail preview is right-aligned.
+         */
+        RIGHT: 2
+      }
+    },
+
+    /**
+     * Rich Business Messaging (RBM) Card content
+     *
+     * @property {string} title
+     *   Optional. Title of the card (at most 200 bytes).
+     *
+     *   At least one of the title, description or media must be set.
+     *
+     * @property {string} description
+     *   Optional. Description of the card (at most 2000 bytes).
+     *
+     *   At least one of the title, description or media must be set.
+     *
+     * @property {Object} media
+     *   Optional. However at least one of the title, description or media must
+     *   be set. Media (image, GIF or a video) to include in the card.
+     *
+     *   This object should have the same structure as [RbmMedia]{@link google.cloud.dialogflow.v2beta1.RbmMedia}
+     *
+     * @property {Object[]} suggestions
+     *   Optional. List of suggestions to include in the card.
+     *
+     *   This object should have the same structure as [RbmSuggestion]{@link google.cloud.dialogflow.v2beta1.RbmSuggestion}
+     *
+     * @typedef RbmCardContent
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    RbmCardContent: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+
+      /**
+       * Rich Business Messaging (RBM) Media displayed in Cards
+       * The following media-types are currently supported:
+       *
+       * ## Image Types
+       *
+       *  image/jpeg
+       *  image/jpg'
+       *  image/gif
+       *  image/png
+       *
+       * ## Video Types
+       *
+       *  video/h263
+       *  video/m4v
+       *  video/mp4
+       *  video/mpeg
+       *  video/mpeg4
+       *  video/webm
+       *
+       * @property {string} fileUri
+       *   Required. Publicly reachable URI of the file. The RBM platform
+       *   determines the MIME type of the file from the content-type field in
+       *   the HTTP headers when the platform fetches the file. The content-type
+       *   field must be present and accurate in the HTTP response from the URL.
+       *
+       * @property {string} thumbnailUri
+       *   Optional. Publicly reachable URI of the thumbnail.If you don't
+       *   provide a thumbnail URI, the RBM platform displays a blank
+       *   placeholder thumbnail until the user's device downloads the file.
+       *   Depending on the user's setting, the file may not download
+       *   automatically and may require the user to tap a download button.
+       *
+       * @property {number} height
+       *   Required for cards with vertical orientation. The height of the media
+       *   within a rich card with a vertical layout. (https://goo.gl/NeFCjz).
+       *   For a standalone card with horizontal layout, height is not
+       *   customizable, and this field is ignored.
+       *
+       *   The number should be among the values of [Height]{@link google.cloud.dialogflow.v2beta1.Height}
+       *
+       * @typedef RbmMedia
+       * @memberof google.cloud.dialogflow.v2beta1
+       * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmCardContent.RbmMedia definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+       */
+      RbmMedia: {
+        // This is for documentation. Actual contents will be loaded by gRPC.
+
+        /**
+         * Media height
+         *
+         * @enum {number}
+         * @memberof google.cloud.dialogflow.v2beta1
+         */
+        Height: {
+
+          /**
+           * Not specified.
+           */
+          HEIGHT_UNSPECIFIED: 0,
+
+          /**
+           * 112 DP.
+           */
+          SHORT: 1,
+
+          /**
+           * 168 DP.
+           */
+          MEDIUM: 2,
+
+          /**
+           * 264 DP. Not available for rich card carousels when the card width
+           * is set to small.
+           */
+          TALL: 3
+        }
+      }
+    },
+
+    /**
+     * Rich Business Messaging (RBM) suggestion. Suggestions allow user to
+     * easily select/click a predefined response or perform an action (like
+     * opening a web uri).
+     *
+     * @property {Object} reply
+     *   Predefined replies for user to select instead of typing
+     *
+     *   This object should have the same structure as [RbmSuggestedReply]{@link google.cloud.dialogflow.v2beta1.RbmSuggestedReply}
+     *
+     * @property {Object} action
+     *   Predefined client side actions that user can choose
+     *
+     *   This object should have the same structure as [RbmSuggestedAction]{@link google.cloud.dialogflow.v2beta1.RbmSuggestedAction}
+     *
+     * @typedef RbmSuggestion
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmSuggestion definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    RbmSuggestion: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * Rich Business Messaging (RBM) suggested reply that the user can click
+     * instead of typing in their own response.
+     *
+     * @property {string} text
+     *   Suggested reply text.
+     *
+     * @property {string} postbackData
+     *   Opaque payload that the Dialogflow receives in a user event
+     *   when the user taps the suggested reply. This data will be also
+     *   forwarded to webhook to allow performing custom business logic.
+     *
+     * @typedef RbmSuggestedReply
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmSuggestedReply definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    RbmSuggestedReply: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+    },
+
+    /**
+     * Rich Business Messaging (RBM) suggested client-side action that the user
+     * can choose from the card.
+     *
+     * @property {string} text
+     *   Text to display alongside the action.
+     *
+     * @property {string} postbackData
+     *   Opaque payload that the Dialogflow receives in a user event
+     *   when the user taps the suggested action. This data will be also
+     *   forwarded to webhook to allow performing custom business logic.
+     *
+     * @property {Object} dial
+     *   Suggested client side action: Dial a phone number
+     *
+     *   This object should have the same structure as [RbmSuggestedActionDial]{@link google.cloud.dialogflow.v2beta1.RbmSuggestedActionDial}
+     *
+     * @property {Object} openUrl
+     *   Suggested client side action: Open a URI on device
+     *
+     *   This object should have the same structure as [RbmSuggestedActionOpenUri]{@link google.cloud.dialogflow.v2beta1.RbmSuggestedActionOpenUri}
+     *
+     * @property {Object} shareLocation
+     *   Suggested client side action: Share user location
+     *
+     *   This object should have the same structure as [RbmSuggestedActionShareLocation]{@link google.cloud.dialogflow.v2beta1.RbmSuggestedActionShareLocation}
+     *
+     * @typedef RbmSuggestedAction
+     * @memberof google.cloud.dialogflow.v2beta1
+     * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmSuggestedAction definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+     */
+    RbmSuggestedAction: {
+      // This is for documentation. Actual contents will be loaded by gRPC.
+
+      /**
+       * Opens the user's default dialer app with the specified phone number
+       * but does not dial automatically (https://goo.gl/ergbB2).
+       *
+       * @property {string} phoneNumber
+       *   Required. The phone number to fill in the default dialer app.
+       *   This field should be in [E.164](https://en.wikipedia.org/wiki/E.164)
+       *   format. An example of a correctly formatted phone number:
+       *   +15556767888.
+       *
+       * @typedef RbmSuggestedActionDial
+       * @memberof google.cloud.dialogflow.v2beta1
+       * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmSuggestedAction.RbmSuggestedActionDial definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+       */
+      RbmSuggestedActionDial: {
+        // This is for documentation. Actual contents will be loaded by gRPC.
+      },
+
+      /**
+       * Opens the user's default web browser app to the specified uri
+       * (https://goo.gl/6GLJD2). If the user has an app installed that is
+       * registered as the default handler for the URL, then this app will be
+       * opened instead, and its icon will be used in the suggested action UI.
+       *
+       * @property {string} uri
+       *   Required. The uri to open on the user device
+       *
+       * @typedef RbmSuggestedActionOpenUri
+       * @memberof google.cloud.dialogflow.v2beta1
+       * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmSuggestedAction.RbmSuggestedActionOpenUri definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+       */
+      RbmSuggestedActionOpenUri: {
+        // This is for documentation. Actual contents will be loaded by gRPC.
+      },
+
+      /**
+       * Opens the device's location chooser so the user can pick a location
+       * to send back to the agent (https://goo.gl/GXotJW).
+       * @typedef RbmSuggestedActionShareLocation
+       * @memberof google.cloud.dialogflow.v2beta1
+       * @see [google.cloud.dialogflow.v2beta1.Intent.Message.RbmSuggestedAction.RbmSuggestedActionShareLocation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2beta1/intent.proto}
+       */
+      RbmSuggestedActionShareLocation: {
+        // This is for documentation. Actual contents will be loaded by gRPC.
+      }
+    },
+
+    /**
      * Represents different platforms that a rich message can be intended for.
      *
      * @enum {number}
@@ -991,7 +1401,7 @@ const Intent = {
  *   Optional. The language to list training phrases, parameters and rich
  *   messages for. If not specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -1047,7 +1457,7 @@ const ListIntentsResponse = {
  *   Optional. The language to retrieve training phrases, parameters and rich
  *   messages for. If not specified, the agent's default language is used.
  *   [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -1080,7 +1490,7 @@ const GetIntentRequest = {
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intent`. If not specified, the agent's default language is
  *   used. [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -1109,7 +1519,7 @@ const CreateIntentRequest = {
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intent`. If not specified, the agent's default language is
  *   used. [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *
@@ -1169,7 +1579,7 @@ const DeleteIntentRequest = {
  *   Optional. The language of training phrases, parameters and rich messages
  *   defined in `intents`. If not specified, the agent's default language is
  *   used. [Many
- *   languages](https://cloud.google.com/dialogflow-enterprise/docs/reference/language)
+ *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
  *   are supported. Note: languages must be enabled in the agent before they can
  *   be used.
  *

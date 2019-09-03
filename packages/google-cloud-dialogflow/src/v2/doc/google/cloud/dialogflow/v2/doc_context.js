@@ -34,7 +34,7 @@
  * @property {Object} parameters
  *   Optional. The collection of parameters associated with this context.
  *   Refer to [this
- *   doc](https://cloud.google.com/dialogflow-enterprise/docs/intents-actions-parameters)
+ *   doc](https://cloud.google.com/dialogflow/docs/intents-actions-parameters)
  *   for syntax.
  *
  *   This object should have the same structure as [Struct]{@link google.protobuf.Struct}
