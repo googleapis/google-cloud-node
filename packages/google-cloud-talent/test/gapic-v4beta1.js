@@ -46,6 +46,13 @@ describe('ApplicationServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new talentModule.v4beta1.ApplicationServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('createApplication', () => {
     it('invokes createApplication without error', done => {
       const client = new talentModule.v4beta1.ApplicationServiceClient({
@@ -437,6 +444,13 @@ describe('CompanyServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new talentModule.v4beta1.CompanyServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new talentModule.v4beta1.CompanyServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 
@@ -832,6 +846,11 @@ describe('CompletionClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new talentModule.v4beta1.CompletionClient({fallback: true});
+    assert(client);
+  });
+
   describe('completeQuery', () => {
     it('invokes completeQuery without error', done => {
       const client = new talentModule.v4beta1.CompletionClient({
@@ -916,6 +935,13 @@ describe('EventServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new talentModule.v4beta1.EventServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new talentModule.v4beta1.EventServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 
@@ -1006,6 +1032,11 @@ describe('JobServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new talentModule.v4beta1.JobServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new talentModule.v4beta1.JobServiceClient({fallback: true});
     assert(client);
   });
 
@@ -1780,6 +1811,13 @@ describe('ProfileServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new talentModule.v4beta1.ProfileServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('listProfiles', () => {
     it('invokes listProfiles without error', done => {
       const client = new talentModule.v4beta1.ProfileServiceClient({
@@ -2226,6 +2264,13 @@ describe('TenantServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new talentModule.v4beta1.TenantServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new talentModule.v4beta1.TenantServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 
