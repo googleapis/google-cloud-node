@@ -46,6 +46,13 @@ describe('LanguageServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new languageModule.v1beta2.LanguageServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('analyzeSentiment', () => {
     it('invokes analyzeSentiment without error', done => {
       const client = new languageModule.v1beta2.LanguageServiceClient({
