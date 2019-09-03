@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [1.2.3](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.2.2...v1.2.3) (2019-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([#346](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/346)) ([93f7deb](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/93f7deb))
+* **docs:** remove anchor from reference doc link ([#348](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/348)) ([6937d45](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/6937d45))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v1.2.1...v1.2.2) (2019-08-13)
 
 
