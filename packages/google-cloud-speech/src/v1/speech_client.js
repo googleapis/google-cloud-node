@@ -17,7 +17,6 @@
 const gapicConfig = require('./speech_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
-const protobuf = require('protobufjs');
 
 const VERSION = require('../../package.json').version;
 
@@ -59,6 +58,16 @@ class SpeechClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -75,51 +84,59 @@ class SpeechClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.versions.node}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/speech/v1/cloud_speech.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this._descriptors.stream = {
-      streamingRecognize: new gax.StreamDescriptor(
+      streamingRecognize: new gaxModule.StreamDescriptor(
         gax.StreamType.BIDI_STREAMING
       ),
     };
-    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
-    protoFilesRoot = protobuf.loadSync(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        'protos',
-        'google/cloud/speech/v1/cloud_speech.proto'
-      ),
-      protoFilesRoot
-    );
+
+    const protoFilesRoot = opts.fallback
+      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
+      : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    this.operationsClient = new gax.lro({
+    this.operationsClient = new gaxModule.lro({
       auth: gaxGrpc.auth,
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
@@ -132,7 +149,7 @@ class SpeechClient {
     );
 
     this._descriptors.longrunning = {
-      longRunningRecognize: new gax.LongrunningDescriptor(
+      longRunningRecognize: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         longRunningRecognizeResponse.decode.bind(longRunningRecognizeResponse),
         longRunningRecognizeMetadata.decode.bind(longRunningRecognizeMetadata)
@@ -155,7 +172,9 @@ class SpeechClient {
     // Put together the "service stub" for
     // google.cloud.speech.v1.Speech.
     const speechStub = gaxGrpc.createStub(
-      protos.google.cloud.speech.v1.Speech,
+      opts.fallback
+        ? protos.lookupService('google.cloud.speech.v1.Speech')
+        : protos.google.cloud.speech.v1.Speech,
       opts
     );
 
@@ -167,18 +186,16 @@ class SpeechClient {
       'streamingRecognize',
     ];
     for (const methodName of speechStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        speechStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = speechStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.stream[methodName] ||
           this._descriptors.longrunning[methodName]

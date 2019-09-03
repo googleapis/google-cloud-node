@@ -6,6 +6,414 @@
           "nested": {
             "speech": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/speech/v1;speech",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "SpeechProto",
+                    "java_package": "com.google.cloud.speech.v1"
+                  },
+                  "nested": {
+                    "Speech": {
+                      "methods": {
+                        "Recognize": {
+                          "requestType": "RecognizeRequest",
+                          "responseType": "RecognizeResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/speech:recognize",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "LongRunningRecognize": {
+                          "requestType": "LongRunningRecognizeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/speech:longrunningrecognize",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "StreamingRecognize": {
+                          "requestType": "StreamingRecognizeRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingRecognizeResponse",
+                          "responseStream": true
+                        }
+                      }
+                    },
+                    "RecognizeRequest": {
+                      "fields": {
+                        "config": {
+                          "type": "RecognitionConfig",
+                          "id": 1
+                        },
+                        "audio": {
+                          "type": "RecognitionAudio",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LongRunningRecognizeRequest": {
+                      "fields": {
+                        "config": {
+                          "type": "RecognitionConfig",
+                          "id": 1
+                        },
+                        "audio": {
+                          "type": "RecognitionAudio",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingRecognizeRequest": {
+                      "oneofs": {
+                        "streamingRequest": {
+                          "oneof": [
+                            "streamingConfig",
+                            "audioContent"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "streamingConfig": {
+                          "type": "StreamingRecognitionConfig",
+                          "id": 1
+                        },
+                        "audioContent": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingRecognitionConfig": {
+                      "fields": {
+                        "config": {
+                          "type": "RecognitionConfig",
+                          "id": 1
+                        },
+                        "singleUtterance": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "interimResults": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RecognitionConfig": {
+                      "fields": {
+                        "encoding": {
+                          "type": "AudioEncoding",
+                          "id": 1
+                        },
+                        "sampleRateHertz": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "audioChannelCount": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "enableSeparateRecognitionPerChannel": {
+                          "type": "bool",
+                          "id": 12
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "maxAlternatives": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "profanityFilter": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "speechContexts": {
+                          "rule": "repeated",
+                          "type": "SpeechContext",
+                          "id": 6
+                        },
+                        "enableWordTimeOffsets": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "enableAutomaticPunctuation": {
+                          "type": "bool",
+                          "id": 11
+                        },
+                        "metadata": {
+                          "type": "RecognitionMetadata",
+                          "id": 9
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "useEnhanced": {
+                          "type": "bool",
+                          "id": 14
+                        }
+                      },
+                      "nested": {
+                        "AudioEncoding": {
+                          "values": {
+                            "ENCODING_UNSPECIFIED": 0,
+                            "LINEAR16": 1,
+                            "FLAC": 2,
+                            "MULAW": 3,
+                            "AMR": 4,
+                            "AMR_WB": 5,
+                            "OGG_OPUS": 6,
+                            "SPEEX_WITH_HEADER_BYTE": 7
+                          }
+                        }
+                      }
+                    },
+                    "RecognitionMetadata": {
+                      "fields": {
+                        "interactionType": {
+                          "type": "InteractionType",
+                          "id": 1
+                        },
+                        "industryNaicsCodeOfAudio": {
+                          "type": "uint32",
+                          "id": 3
+                        },
+                        "microphoneDistance": {
+                          "type": "MicrophoneDistance",
+                          "id": 4
+                        },
+                        "originalMediaType": {
+                          "type": "OriginalMediaType",
+                          "id": 5
+                        },
+                        "recordingDeviceType": {
+                          "type": "RecordingDeviceType",
+                          "id": 6
+                        },
+                        "recordingDeviceName": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "originalMimeType": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "audioTopic": {
+                          "type": "string",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "InteractionType": {
+                          "values": {
+                            "INTERACTION_TYPE_UNSPECIFIED": 0,
+                            "DISCUSSION": 1,
+                            "PRESENTATION": 2,
+                            "PHONE_CALL": 3,
+                            "VOICEMAIL": 4,
+                            "PROFESSIONALLY_PRODUCED": 5,
+                            "VOICE_SEARCH": 6,
+                            "VOICE_COMMAND": 7,
+                            "DICTATION": 8
+                          }
+                        },
+                        "MicrophoneDistance": {
+                          "values": {
+                            "MICROPHONE_DISTANCE_UNSPECIFIED": 0,
+                            "NEARFIELD": 1,
+                            "MIDFIELD": 2,
+                            "FARFIELD": 3
+                          }
+                        },
+                        "OriginalMediaType": {
+                          "values": {
+                            "ORIGINAL_MEDIA_TYPE_UNSPECIFIED": 0,
+                            "AUDIO": 1,
+                            "VIDEO": 2
+                          }
+                        },
+                        "RecordingDeviceType": {
+                          "values": {
+                            "RECORDING_DEVICE_TYPE_UNSPECIFIED": 0,
+                            "SMARTPHONE": 1,
+                            "PC": 2,
+                            "PHONE_LINE": 3,
+                            "VEHICLE": 4,
+                            "OTHER_OUTDOOR_DEVICE": 5,
+                            "OTHER_INDOOR_DEVICE": 6
+                          }
+                        }
+                      }
+                    },
+                    "SpeechContext": {
+                      "fields": {
+                        "phrases": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RecognitionAudio": {
+                      "oneofs": {
+                        "audioSource": {
+                          "oneof": [
+                            "content",
+                            "uri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "content": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RecognizeResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SpeechRecognitionResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LongRunningRecognizeResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SpeechRecognitionResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LongRunningRecognizeMetadata": {
+                      "fields": {
+                        "progressPercent": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "lastUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "StreamingRecognizeResponse": {
+                      "fields": {
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "results": {
+                          "rule": "repeated",
+                          "type": "StreamingRecognitionResult",
+                          "id": 2
+                        },
+                        "speechEventType": {
+                          "type": "SpeechEventType",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "SpeechEventType": {
+                          "values": {
+                            "SPEECH_EVENT_UNSPECIFIED": 0,
+                            "END_OF_SINGLE_UTTERANCE": 1
+                          }
+                        }
+                      }
+                    },
+                    "StreamingRecognitionResult": {
+                      "fields": {
+                        "alternatives": {
+                          "rule": "repeated",
+                          "type": "SpeechRecognitionAlternative",
+                          "id": 1
+                        },
+                        "isFinal": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "stability": {
+                          "type": "float",
+                          "id": 3
+                        },
+                        "resultEndTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "channelTag": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "SpeechRecognitionResult": {
+                      "fields": {
+                        "alternatives": {
+                          "rule": "repeated",
+                          "type": "SpeechRecognitionAlternative",
+                          "id": 1
+                        },
+                        "channelTag": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SpeechRecognitionAlternative": {
+                      "fields": {
+                        "transcript": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "words": {
+                          "rule": "repeated",
+                          "type": "WordInfo",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "WordInfo": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "word": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1p1beta1": {
                   "options": {
                     "cc_enable_arenas": true,

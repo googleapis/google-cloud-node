@@ -45,6 +45,11 @@ describe('SpeechClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new speechModule.v1p1beta1.SpeechClient({fallback: true});
+    assert(client);
+  });
+
   describe('recognize', () => {
     it('invokes recognize without error', done => {
       const client = new speechModule.v1p1beta1.SpeechClient({
