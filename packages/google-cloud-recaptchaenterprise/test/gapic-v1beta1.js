@@ -50,6 +50,13 @@ describe('RecaptchaEnterpriseServiceV1Beta1Client', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
+      {fallback: true}
+    );
+    assert(client);
+  });
+
   describe('createAssessment', () => {
     it('invokes createAssessment without error', done => {
       const client = new recaptchaenterpriseModule.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client(
