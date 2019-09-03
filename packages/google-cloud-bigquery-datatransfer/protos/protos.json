@@ -13,604 +13,12 @@
                         "csharp_namespace": "Google.Cloud.BigQuery.DataTransfer.V1",
                         "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/datatransfer/v1;datatransfer",
                         "java_multiple_files": true,
-                        "java_outer_classname": "DataTransferProto",
+                        "java_outer_classname": "TransferProto",
                         "java_package": "com.google.cloud.bigquery.datatransfer.v1",
-                        "objc_class_prefix": "GCBDT",
-                        "php_namespace": "Google\\Cloud\\BigQuery\\DataTransfer\\V1"
+                        "php_namespace": "Google\\Cloud\\BigQuery\\DataTransfer\\V1",
+                        "objc_class_prefix": "GCBDT"
                       },
                       "nested": {
-                        "TransferType": {
-                          "options": {
-                            "deprecated": true
-                          },
-                          "values": {
-                            "TRANSFER_TYPE_UNSPECIFIED": 0,
-                            "BATCH": 1,
-                            "STREAMING": 2
-                          }
-                        },
-                        "TransferState": {
-                          "values": {
-                            "TRANSFER_STATE_UNSPECIFIED": 0,
-                            "PENDING": 2,
-                            "RUNNING": 3,
-                            "SUCCEEDED": 4,
-                            "FAILED": 5,
-                            "CANCELLED": 6
-                          }
-                        },
-                        "ScheduleOptions": {
-                          "fields": {
-                            "disableAutoScheduling": {
-                              "type": "bool",
-                              "id": 3
-                            },
-                            "startTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1
-                            },
-                            "endTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "TransferConfig": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "destinationDatasetId": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "displayName": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "dataSourceId": {
-                              "type": "string",
-                              "id": 5
-                            },
-                            "params": {
-                              "type": "google.protobuf.Struct",
-                              "id": 9
-                            },
-                            "schedule": {
-                              "type": "string",
-                              "id": 7
-                            },
-                            "scheduleOptions": {
-                              "type": "ScheduleOptions",
-                              "id": 24
-                            },
-                            "dataRefreshWindowDays": {
-                              "type": "int32",
-                              "id": 12
-                            },
-                            "disabled": {
-                              "type": "bool",
-                              "id": 13
-                            },
-                            "updateTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 4
-                            },
-                            "nextRunTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 8
-                            },
-                            "state": {
-                              "type": "TransferState",
-                              "id": 10
-                            },
-                            "userId": {
-                              "type": "int64",
-                              "id": 11
-                            },
-                            "datasetRegion": {
-                              "type": "string",
-                              "id": 14
-                            }
-                          }
-                        },
-                        "TransferRun": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "scheduleTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 3
-                            },
-                            "runTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 10
-                            },
-                            "errorStatus": {
-                              "type": "google.rpc.Status",
-                              "id": 21
-                            },
-                            "startTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 4
-                            },
-                            "endTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 5
-                            },
-                            "updateTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 6
-                            },
-                            "params": {
-                              "type": "google.protobuf.Struct",
-                              "id": 9
-                            },
-                            "destinationDatasetId": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "dataSourceId": {
-                              "type": "string",
-                              "id": 7
-                            },
-                            "state": {
-                              "type": "TransferState",
-                              "id": 8
-                            },
-                            "userId": {
-                              "type": "int64",
-                              "id": 11
-                            },
-                            "schedule": {
-                              "type": "string",
-                              "id": 12
-                            }
-                          }
-                        },
-                        "TransferMessage": {
-                          "fields": {
-                            "messageTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1
-                            },
-                            "severity": {
-                              "type": "MessageSeverity",
-                              "id": 2
-                            },
-                            "messageText": {
-                              "type": "string",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "MessageSeverity": {
-                              "values": {
-                                "MESSAGE_SEVERITY_UNSPECIFIED": 0,
-                                "INFO": 1,
-                                "WARNING": 2,
-                                "ERROR": 3
-                              }
-                            }
-                          }
-                        },
-                        "DataSourceService": {
-                          "options": {
-                            "(google.api.default_host)": "bigquerydatatransfer.googleapis.com"
-                          },
-                          "methods": {
-                            "UpdateTransferRun": {
-                              "requestType": "UpdateTransferRunRequest",
-                              "responseType": "TransferRun",
-                              "options": {
-                                "(google.api.http).patch": "/v1/{transfer_run.name=projects/*/locations/*/transferConfigs/*/runs/*}",
-                                "(google.api.http).body": "transfer_run"
-                              }
-                            },
-                            "LogTransferRunMessages": {
-                              "requestType": "LogTransferRunMessagesRequest",
-                              "responseType": "google.protobuf.Empty",
-                              "options": {
-                                "(google.api.http).post": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}:logMessages",
-                                "(google.api.http).body": "*"
-                              }
-                            },
-                            "StartBigQueryJobs": {
-                              "requestType": "StartBigQueryJobsRequest",
-                              "responseType": "google.protobuf.Empty",
-                              "options": {
-                                "(google.api.http).post": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}:startBigQueryJobs",
-                                "(google.api.http).body": "*"
-                              }
-                            },
-                            "FinishRun": {
-                              "requestType": "FinishRunRequest",
-                              "responseType": "google.protobuf.Empty",
-                              "options": {
-                                "(google.api.http).post": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}:finishRun",
-                                "(google.api.http).body": "*"
-                              }
-                            },
-                            "CreateDataSourceDefinition": {
-                              "requestType": "CreateDataSourceDefinitionRequest",
-                              "responseType": "DataSourceDefinition",
-                              "options": {
-                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/dataSourceDefinitions",
-                                "(google.api.http).body": "data_source_definition"
-                              }
-                            },
-                            "UpdateDataSourceDefinition": {
-                              "requestType": "UpdateDataSourceDefinitionRequest",
-                              "responseType": "DataSourceDefinition",
-                              "options": {
-                                "(google.api.http).patch": "/v1/{data_source_definition.name=projects/*/locations/*/dataSourceDefinitions/*}",
-                                "(google.api.http).body": "data_source_definition"
-                              }
-                            },
-                            "DeleteDataSourceDefinition": {
-                              "requestType": "DeleteDataSourceDefinitionRequest",
-                              "responseType": "google.protobuf.Empty",
-                              "options": {
-                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/dataSourceDefinitions/*}"
-                              }
-                            },
-                            "GetDataSourceDefinition": {
-                              "requestType": "GetDataSourceDefinitionRequest",
-                              "responseType": "DataSourceDefinition",
-                              "options": {
-                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/dataSourceDefinitions/*}"
-                              }
-                            },
-                            "ListDataSourceDefinitions": {
-                              "requestType": "ListDataSourceDefinitionsRequest",
-                              "responseType": "ListDataSourceDefinitionsResponse",
-                              "options": {
-                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/dataSourceDefinitions"
-                              }
-                            }
-                          }
-                        },
-                        "ImportedDataInfo": {
-                          "fields": {
-                            "sql": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "destinationTableId": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "destinationTableDescription": {
-                              "type": "string",
-                              "id": 10
-                            },
-                            "tableDefs": {
-                              "rule": "repeated",
-                              "type": "TableDefinition",
-                              "id": 3
-                            },
-                            "userDefinedFunctions": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 4
-                            },
-                            "writeDisposition": {
-                              "type": "WriteDisposition",
-                              "id": 6
-                            }
-                          },
-                          "nested": {
-                            "FieldSchema": {
-                              "fields": {
-                                "fieldName": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "type": {
-                                  "type": "Type",
-                                  "id": 2
-                                },
-                                "isRepeated": {
-                                  "type": "bool",
-                                  "id": 3
-                                },
-                                "description": {
-                                  "type": "string",
-                                  "id": 4
-                                },
-                                "schema": {
-                                  "type": "RecordSchema",
-                                  "id": 5
-                                }
-                              },
-                              "nested": {
-                                "Type": {
-                                  "values": {
-                                    "TYPE_UNSPECIFIED": 0,
-                                    "STRING": 1,
-                                    "INTEGER": 2,
-                                    "FLOAT": 3,
-                                    "RECORD": 4,
-                                    "BYTES": 5,
-                                    "BOOLEAN": 6,
-                                    "TIMESTAMP": 7,
-                                    "DATE": 8,
-                                    "TIME": 9,
-                                    "DATETIME": 10,
-                                    "NUMERIC": 11,
-                                    "GEOGRAPHY": 12
-                                  }
-                                }
-                              }
-                            },
-                            "RecordSchema": {
-                              "fields": {
-                                "fields": {
-                                  "rule": "repeated",
-                                  "type": "FieldSchema",
-                                  "id": 1
-                                }
-                              }
-                            },
-                            "TableDefinition": {
-                              "fields": {
-                                "tableId": {
-                                  "type": "string",
-                                  "id": 1
-                                },
-                                "sourceUris": {
-                                  "rule": "repeated",
-                                  "type": "string",
-                                  "id": 2
-                                },
-                                "format": {
-                                  "type": "Format",
-                                  "id": 3
-                                },
-                                "maxBadRecords": {
-                                  "type": "int32",
-                                  "id": 4
-                                },
-                                "encoding": {
-                                  "type": "Encoding",
-                                  "id": 5
-                                },
-                                "csvOptions": {
-                                  "type": "CsvOptions",
-                                  "id": 6
-                                },
-                                "schema": {
-                                  "type": "RecordSchema",
-                                  "id": 7
-                                },
-                                "ignoreUnknownValues": {
-                                  "type": "google.protobuf.BoolValue",
-                                  "id": 10
-                                }
-                              },
-                              "nested": {
-                                "CsvOptions": {
-                                  "fields": {
-                                    "fieldDelimiter": {
-                                      "type": "google.protobuf.StringValue",
-                                      "id": 1
-                                    },
-                                    "allowQuotedNewlines": {
-                                      "type": "google.protobuf.BoolValue",
-                                      "id": 2
-                                    },
-                                    "quoteChar": {
-                                      "type": "google.protobuf.StringValue",
-                                      "id": 3
-                                    },
-                                    "skipLeadingRows": {
-                                      "type": "google.protobuf.Int64Value",
-                                      "id": 4
-                                    },
-                                    "allowJaggedRows": {
-                                      "type": "google.protobuf.BoolValue",
-                                      "id": 5
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "Format": {
-                              "values": {
-                                "FORMAT_UNSPECIFIED": 0,
-                                "CSV": 1,
-                                "JSON": 2,
-                                "AVRO": 3,
-                                "RECORDIO": 4,
-                                "COLUMNIO": 5,
-                                "CAPACITOR": 6,
-                                "PARQUET": 7,
-                                "ORC": 8
-                              }
-                            },
-                            "Encoding": {
-                              "values": {
-                                "ENCODING_UNSPECIFIED": 0,
-                                "ISO_8859_1": 1,
-                                "UTF8": 2
-                              }
-                            }
-                          }
-                        },
-                        "UpdateTransferRunRequest": {
-                          "fields": {
-                            "transferRun": {
-                              "type": "TransferRun",
-                              "id": 1
-                            },
-                            "updateMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "LogTransferRunMessagesRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "transferMessages": {
-                              "rule": "repeated",
-                              "type": "TransferMessage",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "StartBigQueryJobsRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "importedData": {
-                              "rule": "repeated",
-                              "type": "ImportedDataInfo",
-                              "id": 2
-                            },
-                            "userCredentials": {
-                              "type": "bytes",
-                              "id": 3
-                            },
-                            "maxParallelism": {
-                              "type": "int32",
-                              "id": 8
-                            }
-                          }
-                        },
-                        "FinishRunRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "CreateDataSourceDefinitionRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "dataSourceDefinition": {
-                              "type": "DataSourceDefinition",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "UpdateDataSourceDefinitionRequest": {
-                          "fields": {
-                            "dataSourceDefinition": {
-                              "type": "DataSourceDefinition",
-                              "id": 1
-                            },
-                            "updateMask": {
-                              "type": "google.protobuf.FieldMask",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "DeleteDataSourceDefinitionRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "GetDataSourceDefinitionRequest": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        },
-                        "WriteDisposition": {
-                          "values": {
-                            "WRITE_DISPOSITION_UNSPECIFIED": 0,
-                            "WRITE_TRUNCATE": 1,
-                            "WRITE_APPEND": 2
-                          }
-                        },
-                        "ListDataSourceDefinitionsRequest": {
-                          "fields": {
-                            "parent": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "pageToken": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "pageSize": {
-                              "type": "int32",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "ListDataSourceDefinitionsResponse": {
-                          "fields": {
-                            "dataSourceDefinitions": {
-                              "rule": "repeated",
-                              "type": "DataSourceDefinition",
-                              "id": 1
-                            },
-                            "nextPageToken": {
-                              "type": "string",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "DataSourceDefinition": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 21
-                            },
-                            "dataSource": {
-                              "type": "DataSource",
-                              "id": 1
-                            },
-                            "transferRunPubsubTopic": {
-                              "type": "string",
-                              "id": 13
-                            },
-                            "runTimeOffset": {
-                              "type": "google.protobuf.Duration",
-                              "id": 16
-                            },
-                            "supportEmail": {
-                              "type": "string",
-                              "id": 22
-                            },
-                            "serviceAccount": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "disabled": {
-                              "type": "bool",
-                              "id": 5
-                            },
-                            "transferConfigPubsubTopic": {
-                              "type": "string",
-                              "id": 12
-                            },
-                            "supportedLocationIds": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 23
-                            }
-                          }
-                        },
                         "DataTransferService": {
                           "options": {
                             "(google.api.default_host)": "bigquerydatatransfer.googleapis.com",
@@ -1233,6 +641,184 @@
                               "rule": "repeated",
                               "type": "TransferRun",
                               "id": 1
+                            }
+                          }
+                        },
+                        "TransferType": {
+                          "options": {
+                            "deprecated": true
+                          },
+                          "values": {
+                            "TRANSFER_TYPE_UNSPECIFIED": 0,
+                            "BATCH": 1,
+                            "STREAMING": 2
+                          }
+                        },
+                        "TransferState": {
+                          "values": {
+                            "TRANSFER_STATE_UNSPECIFIED": 0,
+                            "PENDING": 2,
+                            "RUNNING": 3,
+                            "SUCCEEDED": 4,
+                            "FAILED": 5,
+                            "CANCELLED": 6
+                          }
+                        },
+                        "ScheduleOptions": {
+                          "fields": {
+                            "disableAutoScheduling": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "TransferConfig": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "destinationDatasetId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "dataSourceId": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "params": {
+                              "type": "google.protobuf.Struct",
+                              "id": 9
+                            },
+                            "schedule": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "scheduleOptions": {
+                              "type": "ScheduleOptions",
+                              "id": 24
+                            },
+                            "dataRefreshWindowDays": {
+                              "type": "int32",
+                              "id": 12
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 13
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            },
+                            "nextRunTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8
+                            },
+                            "state": {
+                              "type": "TransferState",
+                              "id": 10
+                            },
+                            "userId": {
+                              "type": "int64",
+                              "id": 11
+                            },
+                            "datasetRegion": {
+                              "type": "string",
+                              "id": 14
+                            }
+                          }
+                        },
+                        "TransferRun": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "scheduleTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3
+                            },
+                            "runTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 10
+                            },
+                            "errorStatus": {
+                              "type": "google.rpc.Status",
+                              "id": 21
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 6
+                            },
+                            "params": {
+                              "type": "google.protobuf.Struct",
+                              "id": 9
+                            },
+                            "destinationDatasetId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "dataSourceId": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "state": {
+                              "type": "TransferState",
+                              "id": 8
+                            },
+                            "userId": {
+                              "type": "int64",
+                              "id": 11
+                            },
+                            "schedule": {
+                              "type": "string",
+                              "id": 12
+                            }
+                          }
+                        },
+                        "TransferMessage": {
+                          "fields": {
+                            "messageTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "severity": {
+                              "type": "MessageSeverity",
+                              "id": 2
+                            },
+                            "messageText": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "MessageSeverity": {
+                              "values": {
+                                "MESSAGE_SEVERITY_UNSPECIFIED": 0,
+                                "INFO": 1,
+                                "WARNING": 2,
+                                "ERROR": 3
+                              }
                             }
                           }
                         }

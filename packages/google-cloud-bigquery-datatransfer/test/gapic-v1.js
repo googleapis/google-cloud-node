@@ -46,6 +46,13 @@ describe('DataTransferServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('getDataSource', () => {
     it('invokes getDataSource without error', done => {
       const client = new bigqueryDataTransferModule.v1.DataTransferServiceClient(
