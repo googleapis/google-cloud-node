@@ -46,6 +46,13 @@ describe('CloudSchedulerClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new schedulerModule.v1beta1.CloudSchedulerClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('listJobs', () => {
     it('invokes listJobs without error', done => {
       const client = new schedulerModule.v1beta1.CloudSchedulerClient({

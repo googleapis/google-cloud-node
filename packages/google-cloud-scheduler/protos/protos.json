@@ -10,11 +10,169 @@
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/scheduler/v1;scheduler",
                     "java_multiple_files": true,
-                    "java_outer_classname": "SchedulerProto",
+                    "java_outer_classname": "TargetProto",
                     "java_package": "com.google.cloud.scheduler.v1",
                     "objc_class_prefix": "SCHEDULER"
                   },
                   "nested": {
+                    "CloudScheduler": {
+                      "methods": {
+                        "ListJobs": {
+                          "requestType": "ListJobsRequest",
+                          "responseType": "ListJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/jobs"
+                          }
+                        },
+                        "GetJob": {
+                          "requestType": "GetJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobs/*}"
+                          }
+                        },
+                        "CreateJob": {
+                          "requestType": "CreateJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/jobs",
+                            "(google.api.http).body": "job"
+                          }
+                        },
+                        "UpdateJob": {
+                          "requestType": "UpdateJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{job.name=projects/*/locations/*/jobs/*}",
+                            "(google.api.http).body": "job"
+                          }
+                        },
+                        "DeleteJob": {
+                          "requestType": "DeleteJobRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/jobs/*}"
+                          }
+                        },
+                        "PauseJob": {
+                          "requestType": "PauseJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:pause",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "ResumeJob": {
+                          "requestType": "ResumeJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:resume",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "RunJob": {
+                          "requestType": "RunJobRequest",
+                          "responseType": "Job",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:run",
+                            "(google.api.http).body": "*"
+                          }
+                        }
+                      }
+                    },
+                    "ListJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListJobsResponse": {
+                      "fields": {
+                        "jobs": {
+                          "rule": "repeated",
+                          "type": "Job",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "job": {
+                          "type": "Job",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateJobRequest": {
+                      "fields": {
+                        "job": {
+                          "type": "Job",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PauseJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ResumeJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RunJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "Job": {
                       "oneofs": {
                         "target": {
@@ -253,28 +411,39 @@
                           "id": 2
                         }
                       }
-                    },
+                    }
+                  }
+                },
+                "v1beta1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/scheduler/v1beta1;scheduler",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "TargetProto",
+                    "java_package": "com.google.cloud.scheduler.v1beta1",
+                    "objc_class_prefix": "SCHEDULER"
+                  },
+                  "nested": {
                     "CloudScheduler": {
                       "methods": {
                         "ListJobs": {
                           "requestType": "ListJobsRequest",
                           "responseType": "ListJobsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/jobs"
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/jobs"
                           }
                         },
                         "GetJob": {
                           "requestType": "GetJobRequest",
                           "responseType": "Job",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/jobs/*}"
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/jobs/*}"
                           }
                         },
                         "CreateJob": {
                           "requestType": "CreateJobRequest",
                           "responseType": "Job",
                           "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/jobs",
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/jobs",
                             "(google.api.http).body": "job"
                           }
                         },
@@ -282,7 +451,7 @@
                           "requestType": "UpdateJobRequest",
                           "responseType": "Job",
                           "options": {
-                            "(google.api.http).patch": "/v1/{job.name=projects/*/locations/*/jobs/*}",
+                            "(google.api.http).patch": "/v1beta1/{job.name=projects/*/locations/*/jobs/*}",
                             "(google.api.http).body": "job"
                           }
                         },
@@ -290,14 +459,14 @@
                           "requestType": "DeleteJobRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/jobs/*}"
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/jobs/*}"
                           }
                         },
                         "PauseJob": {
                           "requestType": "PauseJobRequest",
                           "responseType": "Job",
                           "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:pause",
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:pause",
                             "(google.api.http).body": "*"
                           }
                         },
@@ -305,7 +474,7 @@
                           "requestType": "ResumeJobRequest",
                           "responseType": "Job",
                           "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:resume",
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:resume",
                             "(google.api.http).body": "*"
                           }
                         },
@@ -313,7 +482,7 @@
                           "requestType": "RunJobRequest",
                           "responseType": "Job",
                           "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/jobs/*}:run",
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/jobs/*}:run",
                             "(google.api.http).body": "*"
                           }
                         }
@@ -409,6 +578,245 @@
                         "name": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Job": {
+                      "oneofs": {
+                        "target": {
+                          "oneof": [
+                            "pubsubTarget",
+                            "appEngineHttpTarget",
+                            "httpTarget"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pubsubTarget": {
+                          "type": "PubsubTarget",
+                          "id": 4
+                        },
+                        "appEngineHttpTarget": {
+                          "type": "AppEngineHttpTarget",
+                          "id": 5
+                        },
+                        "httpTarget": {
+                          "type": "HttpTarget",
+                          "id": 6
+                        },
+                        "schedule": {
+                          "type": "string",
+                          "id": 20
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 21
+                        },
+                        "userUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 10
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 11
+                        },
+                        "scheduleTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 17
+                        },
+                        "lastAttemptTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 18
+                        },
+                        "retryConfig": {
+                          "type": "RetryConfig",
+                          "id": 19
+                        },
+                        "attemptDeadline": {
+                          "type": "google.protobuf.Duration",
+                          "id": 22
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "PAUSED": 2,
+                            "DISABLED": 3,
+                            "UPDATE_FAILED": 4
+                          }
+                        }
+                      }
+                    },
+                    "RetryConfig": {
+                      "fields": {
+                        "retryCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "maxRetryDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        },
+                        "minBackoffDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        },
+                        "maxBackoffDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "maxDoublings": {
+                          "type": "int32",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "HttpTarget": {
+                      "oneofs": {
+                        "authorizationHeader": {
+                          "oneof": [
+                            "oauthToken",
+                            "oidcToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "httpMethod": {
+                          "type": "HttpMethod",
+                          "id": 2
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "body": {
+                          "type": "bytes",
+                          "id": 4
+                        },
+                        "oauthToken": {
+                          "type": "OAuthToken",
+                          "id": 5
+                        },
+                        "oidcToken": {
+                          "type": "OidcToken",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AppEngineHttpTarget": {
+                      "fields": {
+                        "httpMethod": {
+                          "type": "HttpMethod",
+                          "id": 1
+                        },
+                        "appEngineRouting": {
+                          "type": "AppEngineRouting",
+                          "id": 2
+                        },
+                        "relativeUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "headers": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "body": {
+                          "type": "bytes",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "PubsubTarget": {
+                      "fields": {
+                        "topicName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "data": {
+                          "type": "bytes",
+                          "id": 3
+                        },
+                        "attributes": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AppEngineRouting": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "HttpMethod": {
+                      "values": {
+                        "HTTP_METHOD_UNSPECIFIED": 0,
+                        "POST": 1,
+                        "GET": 2,
+                        "HEAD": 3,
+                        "PUT": 4,
+                        "DELETE": 5,
+                        "PATCH": 6,
+                        "OPTIONS": 7
+                      }
+                    },
+                    "OAuthToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OidcToken": {
+                      "fields": {
+                        "serviceAccountEmail": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     }
