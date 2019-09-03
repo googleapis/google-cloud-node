@@ -44,6 +44,13 @@ describe('ClusterManagerClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new containerModule.v1.ClusterManagerClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('listClusters', () => {
     it('invokes listClusters without error', done => {
       const client = new containerModule.v1.ClusterManagerClient({
