@@ -16,163 +16,6 @@
                     "ruby_package": "Google::Cloud::SecurityCenter::V1"
                   },
                   "nested": {
-                    "Finding": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "resourceName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 4
-                        },
-                        "category": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "externalUri": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "sourceProperties": {
-                          "keyType": "string",
-                          "type": "google.protobuf.Value",
-                          "id": 7
-                        },
-                        "securityMarks": {
-                          "type": "SecurityMarks",
-                          "id": 8
-                        },
-                        "eventTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 9
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 10
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "ACTIVE": 1,
-                            "INACTIVE": 2
-                          }
-                        }
-                      }
-                    },
-                    "SecurityMarks": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "marks": {
-                          "keyType": "string",
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "Asset": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "securityCenterProperties": {
-                          "type": "SecurityCenterProperties",
-                          "id": 2
-                        },
-                        "resourceProperties": {
-                          "keyType": "string",
-                          "type": "google.protobuf.Value",
-                          "id": 7
-                        },
-                        "securityMarks": {
-                          "type": "SecurityMarks",
-                          "id": 8
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 9
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 10
-                        },
-                        "iamPolicy": {
-                          "type": "IamPolicy",
-                          "id": 11
-                        }
-                      },
-                      "nested": {
-                        "SecurityCenterProperties": {
-                          "fields": {
-                            "resourceName": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "resourceType": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "resourceParent": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "resourceProject": {
-                              "type": "string",
-                              "id": 4
-                            },
-                            "resourceOwners": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 5
-                            }
-                          }
-                        },
-                        "IamPolicy": {
-                          "fields": {
-                            "policyBlob": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Source": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      },
-                      "reserved": [
-                        [
-                          4,
-                          4
-                        ]
-                      ]
-                    },
                     "SecurityCenter": {
                       "methods": {
                         "CreateSource": {
@@ -773,6 +616,141 @@
                         }
                       }
                     },
+                    "Asset": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "securityCenterProperties": {
+                          "type": "SecurityCenterProperties",
+                          "id": 2
+                        },
+                        "resourceProperties": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 7
+                        },
+                        "securityMarks": {
+                          "type": "SecurityMarks",
+                          "id": 8
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        },
+                        "iamPolicy": {
+                          "type": "IamPolicy",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "SecurityCenterProperties": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resourceType": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "resourceParent": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "resourceProject": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "resourceOwners": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "IamPolicy": {
+                          "fields": {
+                            "policyBlob": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SecurityMarks": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "marks": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Finding": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "sourceProperties": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 7
+                        },
+                        "securityMarks": {
+                          "type": "SecurityMarks",
+                          "id": 8
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "INACTIVE": 2
+                          }
+                        }
+                      }
+                    },
                     "OrganizationSettings": {
                       "fields": {
                         "name": {
@@ -844,6 +822,752 @@
                           }
                         }
                       }
+                    },
+                    "Source": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "reserved": [
+                        [
+                          4,
+                          4
+                        ]
+                      ]
+                    }
+                  }
+                },
+                "v1beta1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/securitycenter/v1beta1;securitycenter",
+                    "java_multiple_files": true,
+                    "java_package": "com.google.cloud.securitycenter.v1beta1"
+                  },
+                  "nested": {
+                    "SecurityCenter": {
+                      "methods": {
+                        "CreateSource": {
+                          "requestType": "CreateSourceRequest",
+                          "responseType": "Source",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=organizations/*}/sources",
+                            "(google.api.http).body": "source"
+                          }
+                        },
+                        "CreateFinding": {
+                          "requestType": "CreateFindingRequest",
+                          "responseType": "Finding",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=organizations/*/sources/*}/findings",
+                            "(google.api.http).body": "finding"
+                          }
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=organizations/*/sources/*}:getIamPolicy",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "GetOrganizationSettings": {
+                          "requestType": "GetOrganizationSettingsRequest",
+                          "responseType": "OrganizationSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=organizations/*/organizationSettings}"
+                          }
+                        },
+                        "GetSource": {
+                          "requestType": "GetSourceRequest",
+                          "responseType": "Source",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=organizations/*/sources/*}"
+                          }
+                        },
+                        "GroupAssets": {
+                          "requestType": "GroupAssetsRequest",
+                          "responseType": "GroupAssetsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=organizations/*}/assets:group",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "GroupFindings": {
+                          "requestType": "GroupFindingsRequest",
+                          "responseType": "GroupFindingsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=organizations/*/sources/*}/findings:group",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "ListAssets": {
+                          "requestType": "ListAssetsRequest",
+                          "responseType": "ListAssetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=organizations/*}/assets"
+                          }
+                        },
+                        "ListFindings": {
+                          "requestType": "ListFindingsRequest",
+                          "responseType": "ListFindingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=organizations/*/sources/*}/findings"
+                          }
+                        },
+                        "ListSources": {
+                          "requestType": "ListSourcesRequest",
+                          "responseType": "ListSourcesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=organizations/*}/sources"
+                          }
+                        },
+                        "RunAssetDiscovery": {
+                          "requestType": "RunAssetDiscoveryRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=organizations/*}/assets:runDiscovery",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "SetFindingState": {
+                          "requestType": "SetFindingStateRequest",
+                          "responseType": "Finding",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=organizations/*/sources/*/findings/*}:setState",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=organizations/*/sources/*}:setIamPolicy",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=organizations/*/sources/*}:testIamPermissions",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "UpdateFinding": {
+                          "requestType": "UpdateFindingRequest",
+                          "responseType": "Finding",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{finding.name=organizations/*/sources/*/findings/*}",
+                            "(google.api.http).body": "finding"
+                          }
+                        },
+                        "UpdateOrganizationSettings": {
+                          "requestType": "UpdateOrganizationSettingsRequest",
+                          "responseType": "OrganizationSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{organization_settings.name=organizations/*/organizationSettings}",
+                            "(google.api.http).body": "organization_settings"
+                          }
+                        },
+                        "UpdateSource": {
+                          "requestType": "UpdateSourceRequest",
+                          "responseType": "Source",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{source.name=organizations/*/sources/*}",
+                            "(google.api.http).body": "source"
+                          }
+                        },
+                        "UpdateSecurityMarks": {
+                          "requestType": "UpdateSecurityMarksRequest",
+                          "responseType": "SecurityMarks",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{security_marks.name=organizations/*/assets/*/securityMarks}",
+                            "(google.api.http).body": "security_marks",
+                            "(google.api.http).additional_bindings.patch": "/v1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
+                            "(google.api.http).additional_bindings.body": "security_marks"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFindingRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "findingId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "finding": {
+                          "type": "Finding",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CreateSourceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "source": {
+                          "type": "Source",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetOrganizationSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetSourceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GroupAssetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "groupBy": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "compareDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "GroupAssetsResponse": {
+                      "fields": {
+                        "groupByResults": {
+                          "rule": "repeated",
+                          "type": "GroupResult",
+                          "id": 1
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GroupFindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "groupBy": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "GroupFindingsResponse": {
+                      "fields": {
+                        "groupByResults": {
+                          "rule": "repeated",
+                          "type": "GroupResult",
+                          "id": 1
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GroupResult": {
+                      "fields": {
+                        "properties": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 1
+                        },
+                        "count": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListSourcesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "ListSourcesResponse": {
+                      "fields": {
+                        "sources": {
+                          "rule": "repeated",
+                          "type": "Source",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListAssetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "compareDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
+                        },
+                        "fieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 7
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "ListAssetsResponse": {
+                      "fields": {
+                        "listAssetsResults": {
+                          "rule": "repeated",
+                          "type": "ListAssetsResult",
+                          "id": 1
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ListAssetsResult": {
+                          "fields": {
+                            "asset": {
+                              "type": "Asset",
+                              "id": 1
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "UNUSED": 1,
+                                "ADDED": 2,
+                                "REMOVED": 3,
+                                "ACTIVE": 4
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ListFindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "fieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "ListFindingsResponse": {
+                      "fields": {
+                        "findings": {
+                          "rule": "repeated",
+                          "type": "Finding",
+                          "id": 1
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SetFindingStateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "Finding.State",
+                          "id": 2
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RunAssetDiscoveryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateFindingRequest": {
+                      "fields": {
+                        "finding": {
+                          "type": "Finding",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateOrganizationSettingsRequest": {
+                      "fields": {
+                        "organizationSettings": {
+                          "type": "OrganizationSettings",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateSourceRequest": {
+                      "fields": {
+                        "source": {
+                          "type": "Source",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateSecurityMarksRequest": {
+                      "fields": {
+                        "securityMarks": {
+                          "type": "SecurityMarks",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Asset": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "securityCenterProperties": {
+                          "type": "SecurityCenterProperties",
+                          "id": 2
+                        },
+                        "resourceProperties": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 7
+                        },
+                        "securityMarks": {
+                          "type": "SecurityMarks",
+                          "id": 8
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "SecurityCenterProperties": {
+                          "fields": {
+                            "resourceName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resourceType": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "resourceParent": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "resourceProject": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "resourceOwners": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SecurityMarks": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "marks": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Finding": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resourceName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "sourceProperties": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 7
+                        },
+                        "securityMarks": {
+                          "type": "SecurityMarks",
+                          "id": 8
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "INACTIVE": 2
+                          }
+                        }
+                      }
+                    },
+                    "OrganizationSettings": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "enableAssetDiscovery": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "assetDiscoveryConfig": {
+                          "type": "AssetDiscoveryConfig",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "AssetDiscoveryConfig": {
+                          "fields": {
+                            "projectIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "inclusionMode": {
+                              "type": "InclusionMode",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "InclusionMode": {
+                              "values": {
+                                "INCLUSION_MODE_UNSPECIFIED": 0,
+                                "INCLUDE_ONLY": 1,
+                                "EXCLUDE": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Source": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
                     }
                   }
                 }
@@ -855,7 +1579,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -948,57 +1672,21 @@
                 }
               }
             },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
             },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
             },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },
@@ -2020,6 +2708,9 @@
               },
               "nested": {
                 "IAMPolicy": {
+                  "options": {
+                    "(google.api.default_host)": "iam-meta-api.googleapis.com"
+                  },
                   "methods": {
                     "SetIamPolicy": {
                       "requestType": "SetIamPolicyRequest",
@@ -2064,6 +2755,10 @@
                     "resource": {
                       "type": "string",
                       "id": 1
+                    },
+                    "options": {
+                      "type": "google.iam.v1.GetPolicyOptions",
+                      "id": 2
                     }
                   }
                 },
@@ -2085,6 +2780,14 @@
                     "permissions": {
                       "rule": "repeated",
                       "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "GetPolicyOptions": {
+                  "fields": {
+                    "requestedPolicyVersion": {
+                      "type": "int32",
                       "id": 1
                     }
                   }

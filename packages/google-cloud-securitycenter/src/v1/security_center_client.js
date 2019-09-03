@@ -17,7 +17,6 @@
 const gapicConfig = require('./security_center_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
-const protobuf = require('protobufjs');
 
 const VERSION = require('../../package.json').version;
 
@@ -59,6 +58,16 @@ class SecurityCenterClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -75,54 +84,69 @@ class SecurityCenterClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.versions.node}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/securitycenter/v1/securitycenter_service.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      assetPathTemplate: new gax.PathTemplate(
+      assetPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/assets/{asset}'
       ),
-      assetSecurityMarksPathTemplate: new gax.PathTemplate(
+      assetSecurityMarksPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/assets/{asset}/securityMarks'
       ),
-      findingPathTemplate: new gax.PathTemplate(
+      findingPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}'
       ),
-      findingSecurityMarksPathTemplate: new gax.PathTemplate(
+      findingSecurityMarksPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
       ),
-      organizationPathTemplate: new gax.PathTemplate(
+      organizationPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      organizationSettingsPathTemplate: new gax.PathTemplate(
+      organizationSettingsPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
-      organizationSourcesPathTemplate: new gax.PathTemplate(
+      organizationSourcesPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/sources/-'
       ),
-      sourcePathTemplate: new gax.PathTemplate(
+      sourcePathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}'
       ),
     };
@@ -131,48 +155,41 @@ class SecurityCenterClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      groupAssets: new gax.PageDescriptor(
+      groupAssets: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'groupByResults'
       ),
-      groupFindings: new gax.PageDescriptor(
+      groupFindings: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'groupByResults'
       ),
-      listAssets: new gax.PageDescriptor(
+      listAssets: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'listAssetsResults'
       ),
-      listFindings: new gax.PageDescriptor(
+      listFindings: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'listFindingsResults'
       ),
-      listSources: new gax.PageDescriptor(
+      listSources: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'sources'
       ),
     };
-    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
-    protoFilesRoot = protobuf.loadSync(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        'protos',
-        'google/cloud/securitycenter/v1/securitycenter_service.proto'
-      ),
-      protoFilesRoot
-    );
+
+    const protoFilesRoot = opts.fallback
+      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
+      : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    this.operationsClient = new gax.lro({
+    this.operationsClient = new gaxModule.lro({
       auth: gaxGrpc.auth,
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
@@ -185,7 +202,7 @@ class SecurityCenterClient {
     );
 
     this._descriptors.longrunning = {
-      runAssetDiscovery: new gax.LongrunningDescriptor(
+      runAssetDiscovery: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runAssetDiscoveryResponse.decode.bind(runAssetDiscoveryResponse),
         runAssetDiscoveryMetadata.decode.bind(runAssetDiscoveryMetadata)
@@ -208,7 +225,9 @@ class SecurityCenterClient {
     // Put together the "service stub" for
     // google.cloud.securitycenter.v1.SecurityCenter.
     const securityCenterStub = gaxGrpc.createStub(
-      protos.google.cloud.securitycenter.v1.SecurityCenter,
+      opts.fallback
+        ? protos.lookupService('google.cloud.securitycenter.v1.SecurityCenter')
+        : protos.google.cloud.securitycenter.v1.SecurityCenter,
       opts
     );
 
@@ -235,18 +254,16 @@ class SecurityCenterClient {
       'updateSecurityMarks',
     ];
     for (const methodName of securityCenterStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        securityCenterStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = securityCenterStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.longrunning[methodName]

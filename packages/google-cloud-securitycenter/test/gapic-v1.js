@@ -46,6 +46,13 @@ describe('SecurityCenterClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new securityCenterModule.v1.SecurityCenterClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('createSource', () => {
     it('invokes createSource without error', done => {
       const client = new securityCenterModule.v1.SecurityCenterClient({
