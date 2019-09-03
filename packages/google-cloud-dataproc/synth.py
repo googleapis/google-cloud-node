@@ -36,3 +36,4 @@ s.replace('src/**/doc/google/cloud/dataproc/v1beta2/doc_clusters.js',
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])

@@ -46,6 +46,13 @@ describe('AutoscalingPolicyServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('createAutoscalingPolicy', () => {
     it('invokes createAutoscalingPolicy without error', done => {
       const client = new dataprocModule.v1beta2.AutoscalingPolicyServiceClient({
@@ -391,6 +398,13 @@ describe('ClusterControllerClient', () => {
 
   it('should create a client with no options', () => {
     const client = new dataprocModule.v1beta2.ClusterControllerClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new dataprocModule.v1beta2.ClusterControllerClient({
+      fallback: true,
+    });
     assert(client);
   });
 
@@ -965,6 +979,13 @@ describe('JobControllerClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new dataprocModule.v1beta2.JobControllerClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('submitJob', () => {
     it('invokes submitJob without error', done => {
       const client = new dataprocModule.v1beta2.JobControllerClient({
@@ -1410,6 +1431,13 @@ describe('WorkflowTemplateServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new dataprocModule.v1beta2.WorkflowTemplateServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new dataprocModule.v1beta2.WorkflowTemplateServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 

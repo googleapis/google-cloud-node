@@ -44,6 +44,13 @@ describe('ClusterControllerClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new dataprocModule.v1.ClusterControllerClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('createCluster', function() {
     it('invokes createCluster without error', done => {
       const client = new dataprocModule.v1.ClusterControllerClient({
@@ -615,6 +622,11 @@ describe('JobControllerClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new dataprocModule.v1.JobControllerClient({fallback: true});
+    assert(client);
+  });
+
   describe('submitJob', () => {
     it('invokes submitJob without error', done => {
       const client = new dataprocModule.v1.JobControllerClient({
@@ -1052,6 +1064,13 @@ describe('WorkflowTemplateServiceClient', () => {
 
   it('should create a client with no options', () => {
     const client = new dataprocModule.v1.WorkflowTemplateServiceClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new dataprocModule.v1.WorkflowTemplateServiceClient({
+      fallback: true,
+    });
     assert(client);
   });
 
