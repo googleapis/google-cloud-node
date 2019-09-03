@@ -2,6 +2,910 @@
   "nested": {
     "google": {
       "nested": {
+        "cloud": {
+          "nested": {
+            "datacatalog": {
+              "nested": {
+                "v1beta1": {
+                  "options": {
+                    "cc_enable_arenas": true,
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/datacatalog/v1beta1;datacatalog",
+                    "java_multiple_files": true,
+                    "java_package": "com.google.cloud.datacatalog"
+                  },
+                  "nested": {
+                    "DataCatalog": {
+                      "options": {
+                        "(google.api.default_host)": "datacatalog.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "SearchCatalog": {
+                          "requestType": "SearchCatalogRequest",
+                          "responseType": "SearchCatalogResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/catalog:search",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "UpdateEntry": {
+                          "requestType": "UpdateEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{entry.name=projects/*/locations/*/entryGroups/*/entries/*}",
+                            "(google.api.http).body": "entry"
+                          }
+                        },
+                        "GetEntry": {
+                          "requestType": "GetEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}"
+                          }
+                        },
+                        "LookupEntry": {
+                          "requestType": "LookupEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/entries:lookup"
+                          }
+                        },
+                        "CreateTagTemplate": {
+                          "requestType": "CreateTagTemplateRequest",
+                          "responseType": "TagTemplate",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/tagTemplates",
+                            "(google.api.http).body": "tag_template"
+                          }
+                        },
+                        "GetTagTemplate": {
+                          "requestType": "GetTagTemplateRequest",
+                          "responseType": "TagTemplate",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}"
+                          }
+                        },
+                        "UpdateTagTemplate": {
+                          "requestType": "UpdateTagTemplateRequest",
+                          "responseType": "TagTemplate",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{tag_template.name=projects/*/locations/*/tagTemplates/*}",
+                            "(google.api.http).body": "tag_template"
+                          }
+                        },
+                        "DeleteTagTemplate": {
+                          "requestType": "DeleteTagTemplateRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}"
+                          }
+                        },
+                        "CreateTagTemplateField": {
+                          "requestType": "CreateTagTemplateFieldRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/tagTemplates/*}/fields",
+                            "(google.api.http).body": "tag_template_field"
+                          }
+                        },
+                        "UpdateTagTemplateField": {
+                          "requestType": "UpdateTagTemplateFieldRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
+                            "(google.api.http).body": "tag_template_field"
+                          }
+                        },
+                        "RenameTagTemplateField": {
+                          "requestType": "RenameTagTemplateFieldRequest",
+                          "responseType": "TagTemplateField",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}:rename",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "DeleteTagTemplateField": {
+                          "requestType": "DeleteTagTemplateFieldRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}"
+                          }
+                        },
+                        "CreateTag": {
+                          "requestType": "CreateTagRequest",
+                          "responseType": "Tag",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
+                            "(google.api.http).body": "tag"
+                          }
+                        },
+                        "UpdateTag": {
+                          "requestType": "UpdateTagRequest",
+                          "responseType": "Tag",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{tag.name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
+                            "(google.api.http).body": "tag"
+                          }
+                        },
+                        "DeleteTag": {
+                          "requestType": "DeleteTagRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}"
+                          }
+                        },
+                        "ListTags": {
+                          "requestType": "ListTagsRequest",
+                          "responseType": "ListTagsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags"
+                          }
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "google.iam.v1.SetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:setIamPolicy",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "GetIamPolicy": {
+                          "requestType": "google.iam.v1.GetIamPolicyRequest",
+                          "responseType": "google.iam.v1.Policy",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:getIamPolicy",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
+                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:testIamPermissions",
+                            "(google.api.http).body": "*"
+                          }
+                        }
+                      }
+                    },
+                    "SearchCatalogRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "Scope",
+                          "id": 6
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Scope": {
+                          "fields": {
+                            "includeOrgIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "includeProjectIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "includeGcpPublicDatasets": {
+                              "type": "bool",
+                              "id": 7
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchCatalogResponse": {
+                      "fields": {
+                        "results": {
+                          "rule": "repeated",
+                          "type": "SearchCatalogResult",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateEntryRequest": {
+                      "fields": {
+                        "entry": {
+                          "type": "Entry",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LookupEntryRequest": {
+                      "oneofs": {
+                        "targetName": {
+                          "oneof": [
+                            "linkedResource",
+                            "sqlResource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "linkedResource": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "sqlResource": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Entry": {
+                      "oneofs": {
+                        "typeSpec": {
+                          "oneof": [
+                            "bigqueryTableSpec",
+                            "bigqueryDateShardedSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "linkedResource": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "type": {
+                          "type": "EntryType",
+                          "id": 2
+                        },
+                        "bigqueryTableSpec": {
+                          "type": "BigQueryTableSpec",
+                          "id": 12
+                        },
+                        "bigqueryDateShardedSpec": {
+                          "type": "BigQueryDateShardedSpec",
+                          "id": 15
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "schema": {
+                          "type": "Schema",
+                          "id": 5
+                        },
+                        "sourceSystemTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "CreateTagTemplateRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tagTemplateId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "tagTemplate": {
+                          "type": "TagTemplate",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetTagTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateTagTemplateRequest": {
+                      "fields": {
+                        "tagTemplate": {
+                          "type": "TagTemplate",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteTagTemplateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateTagRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tag": {
+                          "type": "Tag",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateTagRequest": {
+                      "fields": {
+                        "tag": {
+                          "type": "Tag",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteTagRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateTagTemplateFieldRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tagTemplateFieldId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "tagTemplateField": {
+                          "type": "TagTemplateField",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateTagTemplateFieldRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tagTemplateField": {
+                          "type": "TagTemplateField",
+                          "id": 2
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RenameTagTemplateFieldRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "newTagTemplateFieldId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EntryType": {
+                      "values": {
+                        "ENTRY_TYPE_UNSPECIFIED": 0,
+                        "TABLE": 2,
+                        "DATA_STREAM": 3
+                      }
+                    },
+                    "DeleteTagTemplateFieldRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListTagsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListTagsResponse": {
+                      "fields": {
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Schema": {
+                      "fields": {
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "ColumnSchema",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ColumnSchema": {
+                      "fields": {
+                        "column": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "mode": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "subcolumns": {
+                          "rule": "repeated",
+                          "type": "ColumnSchema",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "SearchCatalogResult": {
+                      "fields": {
+                        "searchResultType": {
+                          "type": "SearchResultType",
+                          "id": 1
+                        },
+                        "searchResultSubtype": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "relativeResourceName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "linkedResource": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "SearchResultType": {
+                      "values": {
+                        "SEARCH_RESULT_TYPE_UNSPECIFIED": 0,
+                        "ENTRY": 1,
+                        "TAG_TEMPLATE": 2,
+                        "ENTRY_GROUP": 3
+                      }
+                    },
+                    "BigQueryTableSpec": {
+                      "oneofs": {
+                        "typeSpec": {
+                          "oneof": [
+                            "viewSpec",
+                            "tableSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tableSourceType": {
+                          "type": "TableSourceType",
+                          "id": 1
+                        },
+                        "viewSpec": {
+                          "type": "ViewSpec",
+                          "id": 2
+                        },
+                        "tableSpec": {
+                          "type": "TableSpec",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TableSourceType": {
+                      "values": {
+                        "TABLE_SOURCE_TYPE_UNSPECIFIED": 0,
+                        "BIGQUERY_VIEW": 2,
+                        "BIGQUERY_TABLE": 5
+                      }
+                    },
+                    "ViewSpec": {
+                      "fields": {
+                        "viewQuery": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TableSpec": {
+                      "fields": {
+                        "groupedEntry": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BigQueryDateShardedSpec": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "tablePrefix": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "shardCount": {
+                          "type": "int64",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Tag": {
+                      "oneofs": {
+                        "scope": {
+                          "oneof": [
+                            "column"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "template": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "templateDisplayName": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "column": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "fields": {
+                          "keyType": "string",
+                          "type": "TagField",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TagField": {
+                      "oneofs": {
+                        "kind": {
+                          "oneof": [
+                            "doubleValue",
+                            "stringValue",
+                            "boolValue",
+                            "timestampValue",
+                            "enumValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "doubleValue": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "stringValue": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "boolValue": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "timestampValue": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5
+                        },
+                        "enumValue": {
+                          "type": "EnumValue",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "EnumValue": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TagTemplate": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "fields": {
+                          "keyType": "string",
+                          "type": "TagTemplateField",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TagTemplateField": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "FieldType",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FieldType": {
+                      "oneofs": {
+                        "typeDecl": {
+                          "oneof": [
+                            "primitiveType",
+                            "enumType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "primitiveType": {
+                          "type": "PrimitiveType",
+                          "id": 1
+                        },
+                        "enumType": {
+                          "type": "EnumType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "EnumType": {
+                          "fields": {
+                            "allowedValues": {
+                              "rule": "repeated",
+                              "type": "EnumValue",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "EnumValue": {
+                              "fields": {
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "PrimitiveType": {
+                          "values": {
+                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
+                            "DOUBLE": 1,
+                            "STRING": 2,
+                            "BOOL": 3,
+                            "TIMESTAMP": 4
+                          }
+                        }
+                      }
+                    },
+                    "SystemTimestamps": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "ClientProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            }
+          }
+        },
         "protobuf": {
           "options": {
             "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
@@ -13,18 +917,6 @@
             "optimize_for": "SPEED"
           },
           "nested": {
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "FileDescriptorSet": {
               "fields": {
                 "file": {
@@ -905,6 +1797,18 @@
                 }
               }
             },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Empty": {
               "fields": {}
             },
@@ -916,962 +1820,6 @@
                   "id": 1
                 }
               }
-            }
-          }
-        },
-        "cloud": {
-          "nested": {
-            "datacatalog": {
-              "nested": {
-                "v1beta1": {
-                  "options": {
-                    "cc_enable_arenas": true,
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/datacatalog/v1beta1;datacatalog",
-                    "java_multiple_files": true,
-                    "java_package": "com.google.cloud.datacatalog"
-                  },
-                  "nested": {
-                    "SystemTimestamps": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        },
-                        "expireTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "Schema": {
-                      "fields": {
-                        "columns": {
-                          "rule": "repeated",
-                          "type": "ColumnSchema",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ColumnSchema": {
-                      "fields": {
-                        "column": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "type": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "mode": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "subcolumns": {
-                          "rule": "repeated",
-                          "type": "ColumnSchema",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "Tag": {
-                      "oneofs": {
-                        "scope": {
-                          "oneof": [
-                            "column"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "template": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "templateDisplayName": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "column": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "fields": {
-                          "keyType": "string",
-                          "type": "TagField",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TagField": {
-                      "oneofs": {
-                        "kind": {
-                          "oneof": [
-                            "doubleValue",
-                            "stringValue",
-                            "boolValue",
-                            "timestampValue",
-                            "enumValue"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "displayName": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "doubleValue": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "stringValue": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "boolValue": {
-                          "type": "bool",
-                          "id": 4
-                        },
-                        "timestampValue": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 5
-                        },
-                        "enumValue": {
-                          "type": "EnumValue",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "EnumValue": {
-                          "fields": {
-                            "displayName": {
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TagTemplate": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "fields": {
-                          "keyType": "string",
-                          "type": "TagTemplateField",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TagTemplateField": {
-                      "fields": {
-                        "displayName": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "type": {
-                          "type": "FieldType",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "FieldType": {
-                      "oneofs": {
-                        "typeDecl": {
-                          "oneof": [
-                            "primitiveType",
-                            "enumType"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "primitiveType": {
-                          "type": "PrimitiveType",
-                          "id": 1
-                        },
-                        "enumType": {
-                          "type": "EnumType",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "EnumType": {
-                          "fields": {
-                            "allowedValues": {
-                              "rule": "repeated",
-                              "type": "EnumValue",
-                              "id": 1
-                            }
-                          },
-                          "nested": {
-                            "EnumValue": {
-                              "fields": {
-                                "displayName": {
-                                  "type": "string",
-                                  "id": 1
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "PrimitiveType": {
-                          "values": {
-                            "PRIMITIVE_TYPE_UNSPECIFIED": 0,
-                            "DOUBLE": 1,
-                            "STRING": 2,
-                            "BOOL": 3,
-                            "TIMESTAMP": 4
-                          }
-                        }
-                      }
-                    },
-                    "BigQueryTableSpec": {
-                      "oneofs": {
-                        "typeSpec": {
-                          "oneof": [
-                            "viewSpec",
-                            "tableSpec"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "tableSourceType": {
-                          "type": "TableSourceType",
-                          "id": 1
-                        },
-                        "viewSpec": {
-                          "type": "ViewSpec",
-                          "id": 2
-                        },
-                        "tableSpec": {
-                          "type": "TableSpec",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TableSourceType": {
-                      "values": {
-                        "TABLE_SOURCE_TYPE_UNSPECIFIED": 0,
-                        "BIGQUERY_VIEW": 2,
-                        "BIGQUERY_TABLE": 5
-                      }
-                    },
-                    "ViewSpec": {
-                      "fields": {
-                        "viewQuery": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TableSpec": {
-                      "fields": {
-                        "groupedEntry": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "BigQueryDateShardedSpec": {
-                      "fields": {
-                        "dataset": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tablePrefix": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "shardCount": {
-                          "type": "int64",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "SearchCatalogResult": {
-                      "fields": {
-                        "searchResultType": {
-                          "type": "SearchResultType",
-                          "id": 1
-                        },
-                        "searchResultSubtype": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "relativeResourceName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "linkedResource": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "SearchResultType": {
-                      "values": {
-                        "SEARCH_RESULT_TYPE_UNSPECIFIED": 0,
-                        "ENTRY": 1,
-                        "TAG_TEMPLATE": 2,
-                        "ENTRY_GROUP": 3
-                      }
-                    },
-                    "DataCatalog": {
-                      "options": {
-                        "(google.api.default_host)": "datacatalog.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
-                      },
-                      "methods": {
-                        "SearchCatalog": {
-                          "requestType": "SearchCatalogRequest",
-                          "responseType": "SearchCatalogResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/catalog:search",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "UpdateEntry": {
-                          "requestType": "UpdateEntryRequest",
-                          "responseType": "Entry",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{entry.name=projects/*/locations/*/entryGroups/*/entries/*}",
-                            "(google.api.http).body": "entry"
-                          }
-                        },
-                        "GetEntry": {
-                          "requestType": "GetEntryRequest",
-                          "responseType": "Entry",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}"
-                          }
-                        },
-                        "LookupEntry": {
-                          "requestType": "LookupEntryRequest",
-                          "responseType": "Entry",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/entries:lookup"
-                          }
-                        },
-                        "CreateTagTemplate": {
-                          "requestType": "CreateTagTemplateRequest",
-                          "responseType": "TagTemplate",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/tagTemplates",
-                            "(google.api.http).body": "tag_template"
-                          }
-                        },
-                        "GetTagTemplate": {
-                          "requestType": "GetTagTemplateRequest",
-                          "responseType": "TagTemplate",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}"
-                          }
-                        },
-                        "UpdateTagTemplate": {
-                          "requestType": "UpdateTagTemplateRequest",
-                          "responseType": "TagTemplate",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{tag_template.name=projects/*/locations/*/tagTemplates/*}",
-                            "(google.api.http).body": "tag_template"
-                          }
-                        },
-                        "DeleteTagTemplate": {
-                          "requestType": "DeleteTagTemplateRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}"
-                          }
-                        },
-                        "CreateTagTemplateField": {
-                          "requestType": "CreateTagTemplateFieldRequest",
-                          "responseType": "TagTemplateField",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/tagTemplates/*}/fields",
-                            "(google.api.http).body": "tag_template_field"
-                          }
-                        },
-                        "UpdateTagTemplateField": {
-                          "requestType": "UpdateTagTemplateFieldRequest",
-                          "responseType": "TagTemplateField",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
-                            "(google.api.http).body": "tag_template_field"
-                          }
-                        },
-                        "RenameTagTemplateField": {
-                          "requestType": "RenameTagTemplateFieldRequest",
-                          "responseType": "TagTemplateField",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}:rename",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "DeleteTagTemplateField": {
-                          "requestType": "DeleteTagTemplateFieldRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}"
-                          }
-                        },
-                        "CreateTag": {
-                          "requestType": "CreateTagRequest",
-                          "responseType": "Tag",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
-                            "(google.api.http).body": "tag"
-                          }
-                        },
-                        "UpdateTag": {
-                          "requestType": "UpdateTagRequest",
-                          "responseType": "Tag",
-                          "options": {
-                            "(google.api.http).patch": "/v1beta1/{tag.name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
-                            "(google.api.http).body": "tag"
-                          }
-                        },
-                        "DeleteTag": {
-                          "requestType": "DeleteTagRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}"
-                          }
-                        },
-                        "ListTags": {
-                          "requestType": "ListTagsRequest",
-                          "responseType": "ListTagsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags"
-                          }
-                        },
-                        "SetIamPolicy": {
-                          "requestType": "google.iam.v1.SetIamPolicyRequest",
-                          "responseType": "google.iam.v1.Policy",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:setIamPolicy",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "GetIamPolicy": {
-                          "requestType": "google.iam.v1.GetIamPolicyRequest",
-                          "responseType": "google.iam.v1.Policy",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:getIamPolicy",
-                            "(google.api.http).body": "*"
-                          }
-                        },
-                        "TestIamPermissions": {
-                          "requestType": "google.iam.v1.TestIamPermissionsRequest",
-                          "responseType": "google.iam.v1.TestIamPermissionsResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:testIamPermissions",
-                            "(google.api.http).body": "*"
-                          }
-                        }
-                      }
-                    },
-                    "SearchCatalogRequest": {
-                      "fields": {
-                        "scope": {
-                          "type": "Scope",
-                          "id": 6
-                        },
-                        "query": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "orderBy": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "Scope": {
-                          "fields": {
-                            "includeOrgIds": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 2
-                            },
-                            "includeProjectIds": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 3
-                            },
-                            "includeGcpPublicDatasets": {
-                              "type": "bool",
-                              "id": 7
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "SearchCatalogResponse": {
-                      "fields": {
-                        "results": {
-                          "rule": "repeated",
-                          "type": "SearchCatalogResult",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "UpdateEntryRequest": {
-                      "fields": {
-                        "entry": {
-                          "type": "Entry",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetEntryRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LookupEntryRequest": {
-                      "oneofs": {
-                        "targetName": {
-                          "oneof": [
-                            "linkedResource",
-                            "sqlResource"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "linkedResource": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "sqlResource": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "Entry": {
-                      "oneofs": {
-                        "typeSpec": {
-                          "oneof": [
-                            "bigqueryTableSpec",
-                            "bigqueryDateShardedSpec"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "linkedResource": {
-                          "type": "string",
-                          "id": 9
-                        },
-                        "type": {
-                          "type": "EntryType",
-                          "id": 2
-                        },
-                        "bigqueryTableSpec": {
-                          "type": "BigQueryTableSpec",
-                          "id": 12
-                        },
-                        "bigqueryDateShardedSpec": {
-                          "type": "BigQueryDateShardedSpec",
-                          "id": 15
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "schema": {
-                          "type": "Schema",
-                          "id": 5
-                        },
-                        "sourceSystemTimestamps": {
-                          "type": "SystemTimestamps",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "CreateTagTemplateRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tagTemplateId": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "tagTemplate": {
-                          "type": "TagTemplate",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetTagTemplateRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateTagTemplateRequest": {
-                      "fields": {
-                        "tagTemplate": {
-                          "type": "TagTemplate",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteTagTemplateRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "CreateTagRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tag": {
-                          "type": "Tag",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "UpdateTagRequest": {
-                      "fields": {
-                        "tag": {
-                          "type": "Tag",
-                          "id": 1
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "DeleteTagRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "CreateTagTemplateFieldRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tagTemplateFieldId": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "tagTemplateField": {
-                          "type": "TagTemplateField",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "UpdateTagTemplateFieldRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "tagTemplateField": {
-                          "type": "TagTemplateField",
-                          "id": 2
-                        },
-                        "updateMask": {
-                          "type": "google.protobuf.FieldMask",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "RenameTagTemplateFieldRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "newTagTemplateFieldId": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "EntryType": {
-                      "values": {
-                        "ENTRY_TYPE_UNSPECIFIED": 0,
-                        "TABLE": 2,
-                        "DATA_STREAM": 3
-                      }
-                    },
-                    "DeleteTagTemplateFieldRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "force": {
-                          "type": "bool",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ListTagsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListTagsResponse": {
-                      "fields": {
-                        "tags": {
-                          "rule": "repeated",
-                          "type": "Tag",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "api": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
-            "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
-            "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
-          },
-          "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },
@@ -1889,6 +1837,9 @@
               },
               "nested": {
                 "IAMPolicy": {
+                  "options": {
+                    "(google.api.default_host)": "iam-meta-api.googleapis.com"
+                  },
                   "methods": {
                     "SetIamPolicy": {
                       "requestType": "SetIamPolicyRequest",
@@ -1933,6 +1884,10 @@
                     "resource": {
                       "type": "string",
                       "id": 1
+                    },
+                    "options": {
+                      "type": "google.iam.v1.GetPolicyOptions",
+                      "id": 2
                     }
                   }
                 },
@@ -1954,6 +1909,14 @@
                     "permissions": {
                       "rule": "repeated",
                       "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "GetPolicyOptions": {
+                  "fields": {
+                    "requestedPolicyVersion": {
+                      "type": "int32",
                       "id": 1
                     }
                   }

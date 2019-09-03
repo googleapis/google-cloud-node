@@ -44,6 +44,13 @@ describe('DataCatalogClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new datacatalogModule.v1beta1.DataCatalogClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('searchCatalog', () => {
     it('invokes searchCatalog without error', done => {
       const client = new datacatalogModule.v1beta1.DataCatalogClient({
