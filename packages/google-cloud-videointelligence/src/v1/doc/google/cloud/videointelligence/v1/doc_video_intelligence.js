@@ -518,9 +518,23 @@ const FaceAnnotation = {
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
  *
+ * @property {Object[]} segmentPresenceLabelAnnotations
+ *   Presence label annotations on video level or user specified segment level.
+ *   There is exactly one element for each unique label. This will eventually
+ *   get publicly exposed and the restriction will be removed.
+ *
+ *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
+ *
  * @property {Object[]} shotLabelAnnotations
  *   Topical label annotations on shot level.
  *   There is exactly one element for each unique label.
+ *
+ *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
+ *
+ * @property {Object[]} shotPresenceLabelAnnotations
+ *   Presence label annotations on shot level. There is exactly one element for
+ *   each unique label. This will eventually get publicly exposed and the
+ *   restriction will be removed.
  *
  *   This object should have the same structure as [LabelAnnotation]{@link google.cloud.videointelligence.v1.LabelAnnotation}
  *
