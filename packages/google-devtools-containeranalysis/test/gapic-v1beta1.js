@@ -49,6 +49,13 @@ describe('ContainerAnalysisV1Beta1Client', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
+      {fallback: true}
+    );
+    assert(client);
+  });
+
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
       const client = new containeranalysisModule.v1beta1.ContainerAnalysisV1Beta1Client(
@@ -482,6 +489,13 @@ describe('GrafeasV1Beta1Client', () => {
 
   it('should create a client with no options', () => {
     const client = new containeranalysisModule.v1beta1.GrafeasV1Beta1Client();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new containeranalysisModule.v1beta1.GrafeasV1Beta1Client({
+      fallback: true,
+    });
     assert(client);
   });
 

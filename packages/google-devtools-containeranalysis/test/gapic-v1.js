@@ -46,6 +46,13 @@ describe('ContainerAnalysisClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new containeranalysisModule.v1.ContainerAnalysisClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', done => {
       const client = new containeranalysisModule.v1.ContainerAnalysisClient({
