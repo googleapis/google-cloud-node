@@ -44,6 +44,11 @@ describe('CloudRedisClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new redisModule.v1.CloudRedisClient({fallback: true});
+    assert(client);
+  });
+
   describe('listInstances', () => {
     it('invokes listInstances without error', done => {
       const client = new redisModule.v1.CloudRedisClient({

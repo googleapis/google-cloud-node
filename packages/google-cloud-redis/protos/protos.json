@@ -396,6 +396,365 @@
                       "fields": {}
                     }
                   }
+                },
+                "v1beta1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/redis/v1beta1;redis",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "CloudRedisServiceBetaProto",
+                    "java_package": "com.google.cloud.redis.v1beta1"
+                  },
+                  "nested": {
+                    "CloudRedis": {
+                      "options": {
+                        "(google.api.default_host)": "redis.googleapis.com"
+                      },
+                      "methods": {
+                        "ListInstances": {
+                          "requestType": "ListInstancesRequest",
+                          "responseType": "ListInstancesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/instances"
+                          }
+                        },
+                        "GetInstance": {
+                          "requestType": "GetInstanceRequest",
+                          "responseType": "Instance",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/instances/*}"
+                          }
+                        },
+                        "CreateInstance": {
+                          "requestType": "CreateInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/instances",
+                            "(google.api.http).body": "instance"
+                          }
+                        },
+                        "UpdateInstance": {
+                          "requestType": "UpdateInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{instance.name=projects/*/locations/*/instances/*}",
+                            "(google.api.http).body": "instance"
+                          }
+                        },
+                        "ImportInstance": {
+                          "requestType": "ImportInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:import",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "ExportInstance": {
+                          "requestType": "ExportInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:export",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "FailoverInstance": {
+                          "requestType": "FailoverInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/instances/*}:failover",
+                            "(google.api.http).body": "*"
+                          }
+                        },
+                        "DeleteInstance": {
+                          "requestType": "DeleteInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/instances/*}"
+                          }
+                        }
+                      }
+                    },
+                    "Instance": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "locationId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "alternativeLocationId": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "redisVersion": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "reservedIpRange": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 11
+                        },
+                        "currentLocationId": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 13
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 14
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "redisConfigs": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 16
+                        },
+                        "tier": {
+                          "type": "Tier",
+                          "id": 17
+                        },
+                        "memorySizeGb": {
+                          "type": "int32",
+                          "id": 18
+                        },
+                        "authorizedNetwork": {
+                          "type": "string",
+                          "id": 20
+                        },
+                        "persistenceIamIdentity": {
+                          "type": "string",
+                          "id": 21
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "READY": 2,
+                            "UPDATING": 3,
+                            "DELETING": 4,
+                            "REPAIRING": 5,
+                            "MAINTENANCE": 6,
+                            "IMPORTING": 8,
+                            "FAILING_OVER": 10
+                          }
+                        },
+                        "Tier": {
+                          "values": {
+                            "TIER_UNSPECIFIED": 0,
+                            "BASIC": 1,
+                            "STANDARD_HA": 3
+                          }
+                        }
+                      }
+                    },
+                    "ListInstancesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListInstancesResponse": {
+                      "fields": {
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateInstanceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "instance": {
+                          "type": "Instance",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateInstanceRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1
+                        },
+                        "instance": {
+                          "type": "Instance",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsSource": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "InputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImportInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "inputConfig": {
+                          "type": "InputConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GcsDestination": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FailoverInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataProtectionMode": {
+                          "type": "DataProtectionMode",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "DataProtectionMode": {
+                          "values": {
+                            "DATA_PROTECTION_MODE_UNSPECIFIED": 0,
+                            "LIMITED_DATA_LOSS": 1,
+                            "FORCE_DATA_LOSS": 2
+                          }
+                        }
+                      }
+                    },
+                    "LocationMetadata": {
+                      "fields": {
+                        "availableZones": {
+                          "keyType": "string",
+                          "type": "ZoneMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ZoneMetadata": {
+                      "fields": {}
+                    }
+                  }
                 }
               }
             }

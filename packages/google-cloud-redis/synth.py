@@ -32,3 +32,4 @@ s.replace('**/doc/google/protobuf/doc_timestamp.js',
 
 subprocess.run(['npm', 'install'])
 subprocess.run(['npm', 'run', 'fix'])
+subprocess.run(['npx', 'compileProtos', 'src'])
