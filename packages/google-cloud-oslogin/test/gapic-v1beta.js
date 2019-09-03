@@ -44,6 +44,13 @@ describe('OsLoginServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new osLoginModule.v1beta.OsLoginServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', done => {
       const client = new osLoginModule.v1beta.OsLoginServiceClient({
