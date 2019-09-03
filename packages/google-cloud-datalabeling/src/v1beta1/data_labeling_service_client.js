@@ -17,7 +17,6 @@
 const gapicConfig = require('./data_labeling_service_client_config.json');
 const gax = require('google-gax');
 const path = require('path');
-const protobuf = require('protobufjs');
 
 const VERSION = require('../../package.json').version;
 
@@ -57,6 +56,16 @@ class DataLabelingServiceClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -73,125 +82,133 @@ class DataLabelingServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.versions.node}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/datalabeling/v1beta1/data_labeling_service.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      annotatedDatasetPathTemplate: new gax.PathTemplate(
+      annotatedDatasetPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}'
       ),
-      annotationSpecSetPathTemplate: new gax.PathTemplate(
+      annotationSpecSetPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/annotationSpecSets/{annotation_spec_set}'
       ),
-      dataItemPathTemplate: new gax.PathTemplate(
+      dataItemPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/dataItems/{data_item}'
       ),
-      datasetPathTemplate: new gax.PathTemplate(
+      datasetPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}'
       ),
-      evaluationPathTemplate: new gax.PathTemplate(
+      evaluationPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/evaluations/{evaluation}'
       ),
-      evaluationJobPathTemplate: new gax.PathTemplate(
+      evaluationJobPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/evaluationJobs/{evaluation_job}'
       ),
-      examplePathTemplate: new gax.PathTemplate(
+      examplePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}/examples/{example}'
       ),
-      instructionPathTemplate: new gax.PathTemplate(
+      instructionPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/instructions/{instruction}'
       ),
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listDatasets: new gax.PageDescriptor(
+      listDatasets: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'datasets'
       ),
-      listDataItems: new gax.PageDescriptor(
+      listDataItems: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'dataItems'
       ),
-      listAnnotatedDatasets: new gax.PageDescriptor(
+      listAnnotatedDatasets: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'annotatedDatasets'
       ),
-      listExamples: new gax.PageDescriptor(
+      listExamples: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'examples'
       ),
-      listAnnotationSpecSets: new gax.PageDescriptor(
+      listAnnotationSpecSets: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'annotationSpecSets'
       ),
-      listInstructions: new gax.PageDescriptor(
+      listInstructions: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'instructions'
       ),
-      searchEvaluations: new gax.PageDescriptor(
+      searchEvaluations: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'evaluations'
       ),
-      searchExampleComparisons: new gax.PageDescriptor(
+      searchExampleComparisons: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'exampleComparisons'
       ),
-      listEvaluationJobs: new gax.PageDescriptor(
+      listEvaluationJobs: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'evaluationJobs'
       ),
     };
-    let protoFilesRoot = new gax.GoogleProtoFilesRoot();
-    protoFilesRoot = protobuf.loadSync(
-      path.join(
-        __dirname,
-        '..',
-        '..',
-        'protos',
-        'google/cloud/datalabeling/v1beta1/data_labeling_service.proto'
-      ),
-      protoFilesRoot
-    );
+
+    const protoFilesRoot = opts.fallback
+      ? gaxModule.protobuf.Root.fromJSON(require('../../protos/protos.json'))
+      : gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    this.operationsClient = new gax.lro({
+    this.operationsClient = new gaxModule.lro({
       auth: gaxGrpc.auth,
       grpc: gaxGrpc.grpc,
     }).operationsClient(opts);
@@ -234,32 +251,32 @@ class DataLabelingServiceClient {
     );
 
     this._descriptors.longrunning = {
-      importData: new gax.LongrunningDescriptor(
+      importData: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataResponse.decode.bind(importDataResponse),
         importDataMetadata.decode.bind(importDataMetadata)
       ),
-      exportData: new gax.LongrunningDescriptor(
+      exportData: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
       ),
-      labelImage: new gax.LongrunningDescriptor(
+      labelImage: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelImageResponse.decode.bind(labelImageResponse),
         labelImageMetadata.decode.bind(labelImageMetadata)
       ),
-      labelVideo: new gax.LongrunningDescriptor(
+      labelVideo: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelVideoResponse.decode.bind(labelVideoResponse),
         labelVideoMetadata.decode.bind(labelVideoMetadata)
       ),
-      labelText: new gax.LongrunningDescriptor(
+      labelText: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         labelTextResponse.decode.bind(labelTextResponse),
         labelTextMetadata.decode.bind(labelTextMetadata)
       ),
-      createInstruction: new gax.LongrunningDescriptor(
+      createInstruction: new gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstructionResponse.decode.bind(createInstructionResponse),
         createInstructionMetadata.decode.bind(createInstructionMetadata)
@@ -282,7 +299,11 @@ class DataLabelingServiceClient {
     // Put together the "service stub" for
     // google.cloud.datalabeling.v1beta1.DataLabelingService.
     const dataLabelingServiceStub = gaxGrpc.createStub(
-      protos.google.cloud.datalabeling.v1beta1.DataLabelingService,
+      opts.fallback
+        ? protos.lookupService(
+            'google.cloud.datalabeling.v1beta1.DataLabelingService'
+          )
+        : protos.google.cloud.datalabeling.v1beta1.DataLabelingService,
       opts
     );
 
@@ -325,18 +346,16 @@ class DataLabelingServiceClient {
       'deleteAnnotatedDataset',
     ];
     for (const methodName of dataLabelingServiceStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        dataLabelingServiceStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = dataLabelingServiceStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName] ||
           this._descriptors.longrunning[methodName]

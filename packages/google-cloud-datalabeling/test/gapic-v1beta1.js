@@ -46,6 +46,13 @@ describe('DataLabelingServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('createDataset', () => {
     it('invokes createDataset without error', done => {
       const client = new datalabelingModule.v1beta1.DataLabelingServiceClient({

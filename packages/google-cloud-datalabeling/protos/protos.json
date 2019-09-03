@@ -13,1294 +13,6 @@
                     "java_package": "com.google.cloud.datalabeling.v1beta1"
                   },
                   "nested": {
-                    "ImagePayload": {
-                      "fields": {
-                        "mimeType": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "imageThumbnail": {
-                          "type": "bytes",
-                          "id": 2
-                        },
-                        "imageUri": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "signedUri": {
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "TextPayload": {
-                      "fields": {
-                        "textContent": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "VideoThumbnail": {
-                      "fields": {
-                        "thumbnail": {
-                          "type": "bytes",
-                          "id": 1
-                        },
-                        "timeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "VideoPayload": {
-                      "fields": {
-                        "mimeType": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "videoUri": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "videoThumbnails": {
-                          "rule": "repeated",
-                          "type": "VideoThumbnail",
-                          "id": 3
-                        },
-                        "frameRate": {
-                          "type": "float",
-                          "id": 4
-                        },
-                        "signedUri": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ImportDataOperationResponse": {
-                      "fields": {
-                        "dataset": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "totalCount": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "importCount": {
-                          "type": "int32",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ExportDataOperationResponse": {
-                      "fields": {
-                        "dataset": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "totalCount": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "exportCount": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "labelStats": {
-                          "type": "LabelStats",
-                          "id": 4
-                        },
-                        "outputConfig": {
-                          "type": "OutputConfig",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "ImportDataOperationMetadata": {
-                      "fields": {
-                        "dataset": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "partialFailures": {
-                          "rule": "repeated",
-                          "type": "google.rpc.Status",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ExportDataOperationMetadata": {
-                      "fields": {
-                        "dataset": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "partialFailures": {
-                          "rule": "repeated",
-                          "type": "google.rpc.Status",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "LabelOperationMetadata": {
-                      "oneofs": {
-                        "details": {
-                          "oneof": [
-                            "imageClassificationDetails",
-                            "imageBoundingBoxDetails",
-                            "imageBoundingPolyDetails",
-                            "imageOrientedBoundingBoxDetails",
-                            "imagePolylineDetails",
-                            "imageSegmentationDetails",
-                            "videoClassificationDetails",
-                            "videoObjectDetectionDetails",
-                            "videoObjectTrackingDetails",
-                            "videoEventDetails",
-                            "textClassificationDetails",
-                            "textEntityExtractionDetails"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "imageClassificationDetails": {
-                          "type": "LabelImageClassificationOperationMetadata",
-                          "id": 3
-                        },
-                        "imageBoundingBoxDetails": {
-                          "type": "LabelImageBoundingBoxOperationMetadata",
-                          "id": 4
-                        },
-                        "imageBoundingPolyDetails": {
-                          "type": "LabelImageBoundingPolyOperationMetadata",
-                          "id": 11
-                        },
-                        "imageOrientedBoundingBoxDetails": {
-                          "type": "LabelImageOrientedBoundingBoxOperationMetadata",
-                          "id": 14
-                        },
-                        "imagePolylineDetails": {
-                          "type": "LabelImagePolylineOperationMetadata",
-                          "id": 12
-                        },
-                        "imageSegmentationDetails": {
-                          "type": "LabelImageSegmentationOperationMetadata",
-                          "id": 15
-                        },
-                        "videoClassificationDetails": {
-                          "type": "LabelVideoClassificationOperationMetadata",
-                          "id": 5
-                        },
-                        "videoObjectDetectionDetails": {
-                          "type": "LabelVideoObjectDetectionOperationMetadata",
-                          "id": 6
-                        },
-                        "videoObjectTrackingDetails": {
-                          "type": "LabelVideoObjectTrackingOperationMetadata",
-                          "id": 7
-                        },
-                        "videoEventDetails": {
-                          "type": "LabelVideoEventOperationMetadata",
-                          "id": 8
-                        },
-                        "textClassificationDetails": {
-                          "type": "LabelTextClassificationOperationMetadata",
-                          "id": 9
-                        },
-                        "textEntityExtractionDetails": {
-                          "type": "LabelTextEntityExtractionOperationMetadata",
-                          "id": 13
-                        },
-                        "progressPercent": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "partialFailures": {
-                          "rule": "repeated",
-                          "type": "google.rpc.Status",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 16
-                        }
-                      }
-                    },
-                    "LabelImageClassificationOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelImageBoundingBoxOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelImageOrientedBoundingBoxOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelImageBoundingPolyOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelImagePolylineOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelImageSegmentationOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelVideoClassificationOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelVideoObjectDetectionOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelVideoObjectTrackingOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelVideoEventOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelTextClassificationOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "LabelTextEntityExtractionOperationMetadata": {
-                      "fields": {
-                        "basicConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "CreateInstructionMetadata": {
-                      "fields": {
-                        "instruction": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "partialFailures": {
-                          "rule": "repeated",
-                          "type": "google.rpc.Status",
-                          "id": 2
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "DataType": {
-                      "values": {
-                        "DATA_TYPE_UNSPECIFIED": 0,
-                        "IMAGE": 1,
-                        "VIDEO": 2,
-                        "TEXT": 4,
-                        "GENERAL_DATA": 6
-                      }
-                    },
-                    "Dataset": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4
-                        },
-                        "inputConfigs": {
-                          "rule": "repeated",
-                          "type": "InputConfig",
-                          "id": 5
-                        },
-                        "blockingResources": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6
-                        },
-                        "dataItemCount": {
-                          "type": "int64",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "InputConfig": {
-                      "oneofs": {
-                        "dataTypeMetadata": {
-                          "oneof": [
-                            "textMetadata"
-                          ]
-                        },
-                        "source": {
-                          "oneof": [
-                            "gcsSource",
-                            "bigquerySource"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "textMetadata": {
-                          "type": "TextMetadata",
-                          "id": 6
-                        },
-                        "gcsSource": {
-                          "type": "GcsSource",
-                          "id": 2
-                        },
-                        "bigquerySource": {
-                          "type": "BigQuerySource",
-                          "id": 5
-                        },
-                        "dataType": {
-                          "type": "DataType",
-                          "id": 1
-                        },
-                        "annotationType": {
-                          "type": "AnnotationType",
-                          "id": 3
-                        },
-                        "classificationMetadata": {
-                          "type": "ClassificationMetadata",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "TextMetadata": {
-                      "fields": {
-                        "languageCode": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ClassificationMetadata": {
-                      "fields": {
-                        "isMultiLabel": {
-                          "type": "bool",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "GcsSource": {
-                      "fields": {
-                        "inputUri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "mimeType": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BigQuerySource": {
-                      "fields": {
-                        "inputUri": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "OutputConfig": {
-                      "oneofs": {
-                        "destination": {
-                          "oneof": [
-                            "gcsDestination",
-                            "gcsFolderDestination"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "gcsDestination": {
-                          "type": "GcsDestination",
-                          "id": 1
-                        },
-                        "gcsFolderDestination": {
-                          "type": "GcsFolderDestination",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GcsDestination": {
-                      "fields": {
-                        "outputUri": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "mimeType": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GcsFolderDestination": {
-                      "fields": {
-                        "outputFolderUri": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "DataItem": {
-                      "oneofs": {
-                        "payload": {
-                          "oneof": [
-                            "imagePayload",
-                            "textPayload",
-                            "videoPayload"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "imagePayload": {
-                          "type": "ImagePayload",
-                          "id": 2
-                        },
-                        "textPayload": {
-                          "type": "TextPayload",
-                          "id": 3
-                        },
-                        "videoPayload": {
-                          "type": "VideoPayload",
-                          "id": 4
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "AnnotatedDataset": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 9
-                        },
-                        "annotationSource": {
-                          "type": "AnnotationSource",
-                          "id": 3
-                        },
-                        "annotationType": {
-                          "type": "AnnotationType",
-                          "id": 8
-                        },
-                        "exampleCount": {
-                          "type": "int64",
-                          "id": 4
-                        },
-                        "completedExampleCount": {
-                          "type": "int64",
-                          "id": 5
-                        },
-                        "labelStats": {
-                          "type": "LabelStats",
-                          "id": 6
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7
-                        },
-                        "metadata": {
-                          "type": "AnnotatedDatasetMetadata",
-                          "id": 10
-                        },
-                        "blockingResources": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 11
-                        }
-                      }
-                    },
-                    "LabelStats": {
-                      "fields": {
-                        "exampleCount": {
-                          "keyType": "string",
-                          "type": "int64",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "AnnotatedDatasetMetadata": {
-                      "oneofs": {
-                        "annotationRequestConfig": {
-                          "oneof": [
-                            "imageClassificationConfig",
-                            "boundingPolyConfig",
-                            "polylineConfig",
-                            "segmentationConfig",
-                            "videoClassificationConfig",
-                            "objectDetectionConfig",
-                            "objectTrackingConfig",
-                            "eventConfig",
-                            "textClassificationConfig",
-                            "textEntityExtractionConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "imageClassificationConfig": {
-                          "type": "ImageClassificationConfig",
-                          "id": 2
-                        },
-                        "boundingPolyConfig": {
-                          "type": "BoundingPolyConfig",
-                          "id": 3
-                        },
-                        "polylineConfig": {
-                          "type": "PolylineConfig",
-                          "id": 4
-                        },
-                        "segmentationConfig": {
-                          "type": "SegmentationConfig",
-                          "id": 5
-                        },
-                        "videoClassificationConfig": {
-                          "type": "VideoClassificationConfig",
-                          "id": 6
-                        },
-                        "objectDetectionConfig": {
-                          "type": "ObjectDetectionConfig",
-                          "id": 7
-                        },
-                        "objectTrackingConfig": {
-                          "type": "ObjectTrackingConfig",
-                          "id": 8
-                        },
-                        "eventConfig": {
-                          "type": "EventConfig",
-                          "id": 9
-                        },
-                        "textClassificationConfig": {
-                          "type": "TextClassificationConfig",
-                          "id": 10
-                        },
-                        "textEntityExtractionConfig": {
-                          "type": "TextEntityExtractionConfig",
-                          "id": 11
-                        },
-                        "humanAnnotationConfig": {
-                          "type": "HumanAnnotationConfig",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Example": {
-                      "oneofs": {
-                        "payload": {
-                          "oneof": [
-                            "imagePayload",
-                            "textPayload",
-                            "videoPayload"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "imagePayload": {
-                          "type": "ImagePayload",
-                          "id": 2
-                        },
-                        "textPayload": {
-                          "type": "TextPayload",
-                          "id": 6
-                        },
-                        "videoPayload": {
-                          "type": "VideoPayload",
-                          "id": 7
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "annotations": {
-                          "rule": "repeated",
-                          "type": "Annotation",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "AnnotationSource": {
-                      "values": {
-                        "ANNOTATION_SOURCE_UNSPECIFIED": 0,
-                        "OPERATOR": 3
-                      }
-                    },
-                    "Annotation": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "annotationSource": {
-                          "type": "AnnotationSource",
-                          "id": 2
-                        },
-                        "annotationValue": {
-                          "type": "AnnotationValue",
-                          "id": 3
-                        },
-                        "annotationMetadata": {
-                          "type": "AnnotationMetadata",
-                          "id": 4
-                        },
-                        "annotationSentiment": {
-                          "type": "AnnotationSentiment",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "AnnotationSentiment": {
-                      "values": {
-                        "ANNOTATION_SENTIMENT_UNSPECIFIED": 0,
-                        "NEGATIVE": 1,
-                        "POSITIVE": 2
-                      }
-                    },
-                    "AnnotationType": {
-                      "values": {
-                        "ANNOTATION_TYPE_UNSPECIFIED": 0,
-                        "IMAGE_CLASSIFICATION_ANNOTATION": 1,
-                        "IMAGE_BOUNDING_BOX_ANNOTATION": 2,
-                        "IMAGE_ORIENTED_BOUNDING_BOX_ANNOTATION": 13,
-                        "IMAGE_BOUNDING_POLY_ANNOTATION": 10,
-                        "IMAGE_POLYLINE_ANNOTATION": 11,
-                        "IMAGE_SEGMENTATION_ANNOTATION": 12,
-                        "VIDEO_SHOTS_CLASSIFICATION_ANNOTATION": 3,
-                        "VIDEO_OBJECT_TRACKING_ANNOTATION": 4,
-                        "VIDEO_OBJECT_DETECTION_ANNOTATION": 5,
-                        "VIDEO_EVENT_ANNOTATION": 6,
-                        "TEXT_CLASSIFICATION_ANNOTATION": 8,
-                        "TEXT_ENTITY_EXTRACTION_ANNOTATION": 9,
-                        "GENERAL_CLASSIFICATION_ANNOTATION": 14
-                      }
-                    },
-                    "AnnotationValue": {
-                      "oneofs": {
-                        "valueType": {
-                          "oneof": [
-                            "imageClassificationAnnotation",
-                            "imageBoundingPolyAnnotation",
-                            "imagePolylineAnnotation",
-                            "imageSegmentationAnnotation",
-                            "textClassificationAnnotation",
-                            "textEntityExtractionAnnotation",
-                            "videoClassificationAnnotation",
-                            "videoObjectTrackingAnnotation",
-                            "videoEventAnnotation"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "imageClassificationAnnotation": {
-                          "type": "ImageClassificationAnnotation",
-                          "id": 1
-                        },
-                        "imageBoundingPolyAnnotation": {
-                          "type": "ImageBoundingPolyAnnotation",
-                          "id": 2
-                        },
-                        "imagePolylineAnnotation": {
-                          "type": "ImagePolylineAnnotation",
-                          "id": 8
-                        },
-                        "imageSegmentationAnnotation": {
-                          "type": "ImageSegmentationAnnotation",
-                          "id": 9
-                        },
-                        "textClassificationAnnotation": {
-                          "type": "TextClassificationAnnotation",
-                          "id": 3
-                        },
-                        "textEntityExtractionAnnotation": {
-                          "type": "TextEntityExtractionAnnotation",
-                          "id": 10
-                        },
-                        "videoClassificationAnnotation": {
-                          "type": "VideoClassificationAnnotation",
-                          "id": 4
-                        },
-                        "videoObjectTrackingAnnotation": {
-                          "type": "VideoObjectTrackingAnnotation",
-                          "id": 5
-                        },
-                        "videoEventAnnotation": {
-                          "type": "VideoEventAnnotation",
-                          "id": 6
-                        }
-                      }
-                    },
-                    "ImageClassificationAnnotation": {
-                      "fields": {
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Vertex": {
-                      "fields": {
-                        "x": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "NormalizedVertex": {
-                      "fields": {
-                        "x": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "y": {
-                          "type": "float",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "BoundingPoly": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "Vertex",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "NormalizedBoundingPoly": {
-                      "fields": {
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImageBoundingPolyAnnotation": {
-                      "oneofs": {
-                        "boundedArea": {
-                          "oneof": [
-                            "boundingPoly",
-                            "normalizedBoundingPoly"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "boundingPoly": {
-                          "type": "BoundingPoly",
-                          "id": 2
-                        },
-                        "normalizedBoundingPoly": {
-                          "type": "NormalizedBoundingPoly",
-                          "id": 3
-                        },
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "Polyline": {
-                      "fields": {
-                        "vertices": {
-                          "rule": "repeated",
-                          "type": "Vertex",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "NormalizedPolyline": {
-                      "fields": {
-                        "normalizedVertices": {
-                          "rule": "repeated",
-                          "type": "NormalizedVertex",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImagePolylineAnnotation": {
-                      "oneofs": {
-                        "poly": {
-                          "oneof": [
-                            "polyline",
-                            "normalizedPolyline"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "polyline": {
-                          "type": "Polyline",
-                          "id": 2
-                        },
-                        "normalizedPolyline": {
-                          "type": "NormalizedPolyline",
-                          "id": 3
-                        },
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ImageSegmentationAnnotation": {
-                      "fields": {
-                        "annotationColors": {
-                          "keyType": "string",
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        },
-                        "mimeType": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "imageBytes": {
-                          "type": "bytes",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "TextClassificationAnnotation": {
-                      "fields": {
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextEntityExtractionAnnotation": {
-                      "fields": {
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        },
-                        "sequentialSegment": {
-                          "type": "SequentialSegment",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "SequentialSegment": {
-                      "fields": {
-                        "start": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "end": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "TimeSegment": {
-                      "fields": {
-                        "startTimeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 1
-                        },
-                        "endTimeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "VideoClassificationAnnotation": {
-                      "fields": {
-                        "timeSegment": {
-                          "type": "TimeSegment",
-                          "id": 1
-                        },
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ObjectTrackingFrame": {
-                      "oneofs": {
-                        "boundedArea": {
-                          "oneof": [
-                            "boundingPoly",
-                            "normalizedBoundingPoly"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "boundingPoly": {
-                          "type": "BoundingPoly",
-                          "id": 1
-                        },
-                        "normalizedBoundingPoly": {
-                          "type": "NormalizedBoundingPoly",
-                          "id": 2
-                        },
-                        "timeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "VideoObjectTrackingAnnotation": {
-                      "fields": {
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        },
-                        "timeSegment": {
-                          "type": "TimeSegment",
-                          "id": 2
-                        },
-                        "objectTrackingFrames": {
-                          "rule": "repeated",
-                          "type": "ObjectTrackingFrame",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "VideoEventAnnotation": {
-                      "fields": {
-                        "annotationSpec": {
-                          "type": "AnnotationSpec",
-                          "id": 1
-                        },
-                        "timeSegment": {
-                          "type": "TimeSegment",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "AnnotationMetadata": {
-                      "fields": {
-                        "operatorMetadata": {
-                          "type": "OperatorMetadata",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "OperatorMetadata": {
-                      "fields": {
-                        "score": {
-                          "type": "float",
-                          "id": 1
-                        },
-                        "totalVotes": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "labelVotes": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "comments": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 4
-                        }
-                      }
-                    },
-                    "AnnotationSpecSet": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "annotationSpecs": {
-                          "rule": "repeated",
-                          "type": "AnnotationSpec",
-                          "id": 4
-                        },
-                        "blockingResources": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "AnnotationSpec": {
-                      "fields": {
-                        "displayName": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "StringAggregationType": {
-                      "values": {
-                        "STRING_AGGREGATION_TYPE_UNSPECIFIED": 0,
-                        "MAJORITY_VOTE": 1,
-                        "UNANIMOUS_VOTE": 2,
-                        "NO_AGGREGATION": 3
-                      }
-                    },
-                    "HumanAnnotationConfig": {
-                      "fields": {
-                        "instruction": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "annotatedDatasetDisplayName": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "annotatedDatasetDescription": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "labelGroup": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "languageCode": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "replicaCount": {
-                          "type": "int32",
-                          "id": 6
-                        },
-                        "questionDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 7
-                        },
-                        "contributorEmails": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 9
-                        },
-                        "userEmailAddress": {
-                          "type": "string",
-                          "id": 10
-                        }
-                      }
-                    },
-                    "ImageClassificationConfig": {
-                      "fields": {
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "allowMultiLabel": {
-                          "type": "bool",
-                          "id": 2
-                        },
-                        "answerAggregationType": {
-                          "type": "StringAggregationType",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "BoundingPolyConfig": {
-                      "fields": {
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "instructionMessage": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "PolylineConfig": {
-                      "fields": {
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "instructionMessage": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "SegmentationConfig": {
-                      "fields": {
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "instructionMessage": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "VideoClassificationConfig": {
-                      "fields": {
-                        "annotationSpecSetConfigs": {
-                          "rule": "repeated",
-                          "type": "AnnotationSpecSetConfig",
-                          "id": 1
-                        },
-                        "applyShotDetection": {
-                          "type": "bool",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "AnnotationSpecSetConfig": {
-                          "fields": {
-                            "annotationSpecSet": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "allowMultiLabel": {
-                              "type": "bool",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ObjectDetectionConfig": {
-                      "fields": {
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "extractionFrameRate": {
-                          "type": "double",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ObjectTrackingConfig": {
-                      "fields": {
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "EventConfig": {
-                      "fields": {
-                        "annotationSpecSets": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextClassificationConfig": {
-                      "fields": {
-                        "allowMultiLabel": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "sentimentConfig": {
-                          "type": "SentimentConfig",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "SentimentConfig": {
-                      "fields": {
-                        "enableLabelSentimentSelection": {
-                          "type": "bool",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "TextEntityExtractionConfig": {
-                      "fields": {
-                        "annotationSpecSet": {
-                          "type": "string",
-                          "id": 1
-                        }
-                      }
-                    },
                     "DataLabelingService": {
                       "options": {
                         "(google.api.default_host)": "datalabeling.googleapis.com",
@@ -2241,6 +953,1024 @@
                         }
                       }
                     },
+                    "AnnotationSource": {
+                      "values": {
+                        "ANNOTATION_SOURCE_UNSPECIFIED": 0,
+                        "OPERATOR": 3
+                      }
+                    },
+                    "Annotation": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "annotationSource": {
+                          "type": "AnnotationSource",
+                          "id": 2
+                        },
+                        "annotationValue": {
+                          "type": "AnnotationValue",
+                          "id": 3
+                        },
+                        "annotationMetadata": {
+                          "type": "AnnotationMetadata",
+                          "id": 4
+                        },
+                        "annotationSentiment": {
+                          "type": "AnnotationSentiment",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AnnotationSentiment": {
+                      "values": {
+                        "ANNOTATION_SENTIMENT_UNSPECIFIED": 0,
+                        "NEGATIVE": 1,
+                        "POSITIVE": 2
+                      }
+                    },
+                    "AnnotationType": {
+                      "values": {
+                        "ANNOTATION_TYPE_UNSPECIFIED": 0,
+                        "IMAGE_CLASSIFICATION_ANNOTATION": 1,
+                        "IMAGE_BOUNDING_BOX_ANNOTATION": 2,
+                        "IMAGE_ORIENTED_BOUNDING_BOX_ANNOTATION": 13,
+                        "IMAGE_BOUNDING_POLY_ANNOTATION": 10,
+                        "IMAGE_POLYLINE_ANNOTATION": 11,
+                        "IMAGE_SEGMENTATION_ANNOTATION": 12,
+                        "VIDEO_SHOTS_CLASSIFICATION_ANNOTATION": 3,
+                        "VIDEO_OBJECT_TRACKING_ANNOTATION": 4,
+                        "VIDEO_OBJECT_DETECTION_ANNOTATION": 5,
+                        "VIDEO_EVENT_ANNOTATION": 6,
+                        "TEXT_CLASSIFICATION_ANNOTATION": 8,
+                        "TEXT_ENTITY_EXTRACTION_ANNOTATION": 9,
+                        "GENERAL_CLASSIFICATION_ANNOTATION": 14
+                      }
+                    },
+                    "AnnotationValue": {
+                      "oneofs": {
+                        "valueType": {
+                          "oneof": [
+                            "imageClassificationAnnotation",
+                            "imageBoundingPolyAnnotation",
+                            "imagePolylineAnnotation",
+                            "imageSegmentationAnnotation",
+                            "textClassificationAnnotation",
+                            "textEntityExtractionAnnotation",
+                            "videoClassificationAnnotation",
+                            "videoObjectTrackingAnnotation",
+                            "videoEventAnnotation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "imageClassificationAnnotation": {
+                          "type": "ImageClassificationAnnotation",
+                          "id": 1
+                        },
+                        "imageBoundingPolyAnnotation": {
+                          "type": "ImageBoundingPolyAnnotation",
+                          "id": 2
+                        },
+                        "imagePolylineAnnotation": {
+                          "type": "ImagePolylineAnnotation",
+                          "id": 8
+                        },
+                        "imageSegmentationAnnotation": {
+                          "type": "ImageSegmentationAnnotation",
+                          "id": 9
+                        },
+                        "textClassificationAnnotation": {
+                          "type": "TextClassificationAnnotation",
+                          "id": 3
+                        },
+                        "textEntityExtractionAnnotation": {
+                          "type": "TextEntityExtractionAnnotation",
+                          "id": 10
+                        },
+                        "videoClassificationAnnotation": {
+                          "type": "VideoClassificationAnnotation",
+                          "id": 4
+                        },
+                        "videoObjectTrackingAnnotation": {
+                          "type": "VideoObjectTrackingAnnotation",
+                          "id": 5
+                        },
+                        "videoEventAnnotation": {
+                          "type": "VideoEventAnnotation",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ImageClassificationAnnotation": {
+                      "fields": {
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Vertex": {
+                      "fields": {
+                        "x": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "NormalizedVertex": {
+                      "fields": {
+                        "x": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "y": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BoundingPoly": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "Vertex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "NormalizedBoundingPoly": {
+                      "fields": {
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImageBoundingPolyAnnotation": {
+                      "oneofs": {
+                        "boundedArea": {
+                          "oneof": [
+                            "boundingPoly",
+                            "normalizedBoundingPoly"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "boundingPoly": {
+                          "type": "BoundingPoly",
+                          "id": 2
+                        },
+                        "normalizedBoundingPoly": {
+                          "type": "NormalizedBoundingPoly",
+                          "id": 3
+                        },
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Polyline": {
+                      "fields": {
+                        "vertices": {
+                          "rule": "repeated",
+                          "type": "Vertex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "NormalizedPolyline": {
+                      "fields": {
+                        "normalizedVertices": {
+                          "rule": "repeated",
+                          "type": "NormalizedVertex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImagePolylineAnnotation": {
+                      "oneofs": {
+                        "poly": {
+                          "oneof": [
+                            "polyline",
+                            "normalizedPolyline"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "polyline": {
+                          "type": "Polyline",
+                          "id": 2
+                        },
+                        "normalizedPolyline": {
+                          "type": "NormalizedPolyline",
+                          "id": 3
+                        },
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ImageSegmentationAnnotation": {
+                      "fields": {
+                        "annotationColors": {
+                          "keyType": "string",
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "imageBytes": {
+                          "type": "bytes",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TextClassificationAnnotation": {
+                      "fields": {
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextEntityExtractionAnnotation": {
+                      "fields": {
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        },
+                        "sequentialSegment": {
+                          "type": "SequentialSegment",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SequentialSegment": {
+                      "fields": {
+                        "start": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "end": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TimeSegment": {
+                      "fields": {
+                        "startTimeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "endTimeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VideoClassificationAnnotation": {
+                      "fields": {
+                        "timeSegment": {
+                          "type": "TimeSegment",
+                          "id": 1
+                        },
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ObjectTrackingFrame": {
+                      "oneofs": {
+                        "boundedArea": {
+                          "oneof": [
+                            "boundingPoly",
+                            "normalizedBoundingPoly"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "boundingPoly": {
+                          "type": "BoundingPoly",
+                          "id": 1
+                        },
+                        "normalizedBoundingPoly": {
+                          "type": "NormalizedBoundingPoly",
+                          "id": 2
+                        },
+                        "timeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "VideoObjectTrackingAnnotation": {
+                      "fields": {
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        },
+                        "timeSegment": {
+                          "type": "TimeSegment",
+                          "id": 2
+                        },
+                        "objectTrackingFrames": {
+                          "rule": "repeated",
+                          "type": "ObjectTrackingFrame",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "VideoEventAnnotation": {
+                      "fields": {
+                        "annotationSpec": {
+                          "type": "AnnotationSpec",
+                          "id": 1
+                        },
+                        "timeSegment": {
+                          "type": "TimeSegment",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AnnotationMetadata": {
+                      "fields": {
+                        "operatorMetadata": {
+                          "type": "OperatorMetadata",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OperatorMetadata": {
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "totalVotes": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "labelVotes": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "comments": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AnnotationSpecSet": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "annotationSpecs": {
+                          "rule": "repeated",
+                          "type": "AnnotationSpec",
+                          "id": 4
+                        },
+                        "blockingResources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "AnnotationSpec": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImagePayload": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "imageThumbnail": {
+                          "type": "bytes",
+                          "id": 2
+                        },
+                        "imageUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "signedUri": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "TextPayload": {
+                      "fields": {
+                        "textContent": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VideoThumbnail": {
+                      "fields": {
+                        "thumbnail": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "timeOffset": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VideoPayload": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "videoUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "videoThumbnails": {
+                          "rule": "repeated",
+                          "type": "VideoThumbnail",
+                          "id": 3
+                        },
+                        "frameRate": {
+                          "type": "float",
+                          "id": 4
+                        },
+                        "signedUri": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DataType": {
+                      "values": {
+                        "DATA_TYPE_UNSPECIFIED": 0,
+                        "IMAGE": 1,
+                        "VIDEO": 2,
+                        "TEXT": 4,
+                        "GENERAL_DATA": 6
+                      }
+                    },
+                    "Dataset": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        },
+                        "inputConfigs": {
+                          "rule": "repeated",
+                          "type": "InputConfig",
+                          "id": 5
+                        },
+                        "blockingResources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "dataItemCount": {
+                          "type": "int64",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "InputConfig": {
+                      "oneofs": {
+                        "dataTypeMetadata": {
+                          "oneof": [
+                            "textMetadata"
+                          ]
+                        },
+                        "source": {
+                          "oneof": [
+                            "gcsSource",
+                            "bigquerySource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "textMetadata": {
+                          "type": "TextMetadata",
+                          "id": 6
+                        },
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        },
+                        "bigquerySource": {
+                          "type": "BigQuerySource",
+                          "id": 5
+                        },
+                        "dataType": {
+                          "type": "DataType",
+                          "id": 1
+                        },
+                        "annotationType": {
+                          "type": "AnnotationType",
+                          "id": 3
+                        },
+                        "classificationMetadata": {
+                          "type": "ClassificationMetadata",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "TextMetadata": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ClassificationMetadata": {
+                      "fields": {
+                        "isMultiLabel": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcsSource": {
+                      "fields": {
+                        "inputUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BigQuerySource": {
+                      "fields": {
+                        "inputUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination",
+                            "gcsFolderDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        },
+                        "gcsFolderDestination": {
+                          "type": "GcsFolderDestination",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsDestination": {
+                      "fields": {
+                        "outputUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GcsFolderDestination": {
+                      "fields": {
+                        "outputFolderUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DataItem": {
+                      "oneofs": {
+                        "payload": {
+                          "oneof": [
+                            "imagePayload",
+                            "textPayload",
+                            "videoPayload"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "imagePayload": {
+                          "type": "ImagePayload",
+                          "id": 2
+                        },
+                        "textPayload": {
+                          "type": "TextPayload",
+                          "id": 3
+                        },
+                        "videoPayload": {
+                          "type": "VideoPayload",
+                          "id": 4
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AnnotatedDataset": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "annotationSource": {
+                          "type": "AnnotationSource",
+                          "id": 3
+                        },
+                        "annotationType": {
+                          "type": "AnnotationType",
+                          "id": 8
+                        },
+                        "exampleCount": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "completedExampleCount": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "labelStats": {
+                          "type": "LabelStats",
+                          "id": 6
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "metadata": {
+                          "type": "AnnotatedDatasetMetadata",
+                          "id": 10
+                        },
+                        "blockingResources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "LabelStats": {
+                      "fields": {
+                        "exampleCount": {
+                          "keyType": "string",
+                          "type": "int64",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AnnotatedDatasetMetadata": {
+                      "oneofs": {
+                        "annotationRequestConfig": {
+                          "oneof": [
+                            "imageClassificationConfig",
+                            "boundingPolyConfig",
+                            "polylineConfig",
+                            "segmentationConfig",
+                            "videoClassificationConfig",
+                            "objectDetectionConfig",
+                            "objectTrackingConfig",
+                            "eventConfig",
+                            "textClassificationConfig",
+                            "textEntityExtractionConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "imageClassificationConfig": {
+                          "type": "ImageClassificationConfig",
+                          "id": 2
+                        },
+                        "boundingPolyConfig": {
+                          "type": "BoundingPolyConfig",
+                          "id": 3
+                        },
+                        "polylineConfig": {
+                          "type": "PolylineConfig",
+                          "id": 4
+                        },
+                        "segmentationConfig": {
+                          "type": "SegmentationConfig",
+                          "id": 5
+                        },
+                        "videoClassificationConfig": {
+                          "type": "VideoClassificationConfig",
+                          "id": 6
+                        },
+                        "objectDetectionConfig": {
+                          "type": "ObjectDetectionConfig",
+                          "id": 7
+                        },
+                        "objectTrackingConfig": {
+                          "type": "ObjectTrackingConfig",
+                          "id": 8
+                        },
+                        "eventConfig": {
+                          "type": "EventConfig",
+                          "id": 9
+                        },
+                        "textClassificationConfig": {
+                          "type": "TextClassificationConfig",
+                          "id": 10
+                        },
+                        "textEntityExtractionConfig": {
+                          "type": "TextEntityExtractionConfig",
+                          "id": 11
+                        },
+                        "humanAnnotationConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Example": {
+                      "oneofs": {
+                        "payload": {
+                          "oneof": [
+                            "imagePayload",
+                            "textPayload",
+                            "videoPayload"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "imagePayload": {
+                          "type": "ImagePayload",
+                          "id": 2
+                        },
+                        "textPayload": {
+                          "type": "TextPayload",
+                          "id": 6
+                        },
+                        "videoPayload": {
+                          "type": "VideoPayload",
+                          "id": 7
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "annotations": {
+                          "rule": "repeated",
+                          "type": "Annotation",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "StringAggregationType": {
+                      "values": {
+                        "STRING_AGGREGATION_TYPE_UNSPECIFIED": 0,
+                        "MAJORITY_VOTE": 1,
+                        "UNANIMOUS_VOTE": 2,
+                        "NO_AGGREGATION": 3
+                      }
+                    },
+                    "HumanAnnotationConfig": {
+                      "fields": {
+                        "instruction": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "annotatedDatasetDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "annotatedDatasetDescription": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "labelGroup": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "replicaCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "questionDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 7
+                        },
+                        "contributorEmails": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "userEmailAddress": {
+                          "type": "string",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "ImageClassificationConfig": {
+                      "fields": {
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "allowMultiLabel": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "answerAggregationType": {
+                          "type": "StringAggregationType",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "BoundingPolyConfig": {
+                      "fields": {
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instructionMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "PolylineConfig": {
+                      "fields": {
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instructionMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SegmentationConfig": {
+                      "fields": {
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instructionMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "VideoClassificationConfig": {
+                      "fields": {
+                        "annotationSpecSetConfigs": {
+                          "rule": "repeated",
+                          "type": "AnnotationSpecSetConfig",
+                          "id": 1
+                        },
+                        "applyShotDetection": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "AnnotationSpecSetConfig": {
+                          "fields": {
+                            "annotationSpecSet": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "allowMultiLabel": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ObjectDetectionConfig": {
+                      "fields": {
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "extractionFrameRate": {
+                          "type": "double",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ObjectTrackingConfig": {
+                      "fields": {
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "EventConfig": {
+                      "fields": {
+                        "annotationSpecSets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextClassificationConfig": {
+                      "fields": {
+                        "allowMultiLabel": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sentimentConfig": {
+                          "type": "SentimentConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SentimentConfig": {
+                      "fields": {
+                        "enableLabelSentimentSelection": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TextEntityExtractionConfig": {
+                      "fields": {
+                        "annotationSpecSet": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "Evaluation": {
                       "fields": {
                         "name": {
@@ -2643,6 +2373,276 @@
                         "gcsFileUri": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ImportDataOperationResponse": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "totalCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "importCount": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExportDataOperationResponse": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "totalCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "exportCount": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "labelStats": {
+                          "type": "LabelStats",
+                          "id": 4
+                        },
+                        "outputConfig": {
+                          "type": "OutputConfig",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ImportDataOperationMetadata": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "partialFailures": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ExportDataOperationMetadata": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "partialFailures": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "LabelOperationMetadata": {
+                      "oneofs": {
+                        "details": {
+                          "oneof": [
+                            "imageClassificationDetails",
+                            "imageBoundingBoxDetails",
+                            "imageBoundingPolyDetails",
+                            "imageOrientedBoundingBoxDetails",
+                            "imagePolylineDetails",
+                            "imageSegmentationDetails",
+                            "videoClassificationDetails",
+                            "videoObjectDetectionDetails",
+                            "videoObjectTrackingDetails",
+                            "videoEventDetails",
+                            "textClassificationDetails",
+                            "textEntityExtractionDetails"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "imageClassificationDetails": {
+                          "type": "LabelImageClassificationOperationMetadata",
+                          "id": 3
+                        },
+                        "imageBoundingBoxDetails": {
+                          "type": "LabelImageBoundingBoxOperationMetadata",
+                          "id": 4
+                        },
+                        "imageBoundingPolyDetails": {
+                          "type": "LabelImageBoundingPolyOperationMetadata",
+                          "id": 11
+                        },
+                        "imageOrientedBoundingBoxDetails": {
+                          "type": "LabelImageOrientedBoundingBoxOperationMetadata",
+                          "id": 14
+                        },
+                        "imagePolylineDetails": {
+                          "type": "LabelImagePolylineOperationMetadata",
+                          "id": 12
+                        },
+                        "imageSegmentationDetails": {
+                          "type": "LabelImageSegmentationOperationMetadata",
+                          "id": 15
+                        },
+                        "videoClassificationDetails": {
+                          "type": "LabelVideoClassificationOperationMetadata",
+                          "id": 5
+                        },
+                        "videoObjectDetectionDetails": {
+                          "type": "LabelVideoObjectDetectionOperationMetadata",
+                          "id": 6
+                        },
+                        "videoObjectTrackingDetails": {
+                          "type": "LabelVideoObjectTrackingOperationMetadata",
+                          "id": 7
+                        },
+                        "videoEventDetails": {
+                          "type": "LabelVideoEventOperationMetadata",
+                          "id": 8
+                        },
+                        "textClassificationDetails": {
+                          "type": "LabelTextClassificationOperationMetadata",
+                          "id": 9
+                        },
+                        "textEntityExtractionDetails": {
+                          "type": "LabelTextEntityExtractionOperationMetadata",
+                          "id": 13
+                        },
+                        "progressPercent": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "partialFailures": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 16
+                        }
+                      }
+                    },
+                    "LabelImageClassificationOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelImageBoundingBoxOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelImageOrientedBoundingBoxOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelImageBoundingPolyOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelImagePolylineOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelImageSegmentationOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelVideoClassificationOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelVideoObjectDetectionOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelVideoObjectTrackingOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelVideoEventOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelTextClassificationOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LabelTextEntityExtractionOperationMetadata": {
+                      "fields": {
+                        "basicConfig": {
+                          "type": "HumanAnnotationConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CreateInstructionMetadata": {
+                      "fields": {
+                        "instruction": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "partialFailures": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
                         }
                       }
                     }
