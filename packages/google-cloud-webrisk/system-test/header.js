@@ -29,7 +29,7 @@ describe('header', () => {
     };
     await client.searchUris(request);
     assert.ok(
-      /^gl-node\/[0-9]+\.[\w.-]+ grpc\/[\w.-]+ gax\/[\w.-]+ gapic\/[\w.-]+$/.test(
+      /^gl-node\/[0-9]+\.[\w.-]+ gax\/[\w.-]+ grpc\/[\w.-]+ gapic\/[\w.-]+$/.test(
         http2spy.requests[0]['x-goog-api-client'][0]
       )
     );

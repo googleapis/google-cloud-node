@@ -59,6 +59,16 @@ class WebRiskServiceV1Beta1Client {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -75,26 +85,41 @@ class WebRiskServiceV1Beta1Client {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.versions.node}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/cloud/webrisk/v1beta1/webrisk.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // Put together the default options sent with requests.
@@ -113,7 +138,11 @@ class WebRiskServiceV1Beta1Client {
     // Put together the "service stub" for
     // google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1.
     const webRiskServiceV1Beta1Stub = gaxGrpc.createStub(
-      protos.google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1,
+      opts.fallback
+        ? protos.lookupService(
+            'google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1'
+          )
+        : protos.google.cloud.webrisk.v1beta1.WebRiskServiceV1Beta1,
       opts
     );
 
@@ -125,18 +154,16 @@ class WebRiskServiceV1Beta1Client {
       'searchHashes',
     ];
     for (const methodName of webRiskServiceV1Beta1StubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        webRiskServiceV1Beta1Stub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = webRiskServiceV1Beta1Stub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         null
       );

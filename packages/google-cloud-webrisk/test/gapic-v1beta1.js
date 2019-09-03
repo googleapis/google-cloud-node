@@ -46,6 +46,13 @@ describe('WebRiskServiceV1Beta1Client', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('computeThreatListDiff', () => {
     it('invokes computeThreatListDiff without error', done => {
       const client = new webRiskModule.v1beta1.WebRiskServiceV1Beta1Client({
