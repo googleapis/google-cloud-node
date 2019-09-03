@@ -46,6 +46,13 @@ describe('TranslationServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new translateModule.v3beta1.TranslationServiceClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('translateText', () => {
     it('invokes translateText without error', done => {
       const client = new translateModule.v3beta1.TranslationServiceClient({

@@ -24,7 +24,8 @@ gapic = gcp.GAPICGenerator()
 versions = ['v3beta1']
 for version in versions:
     library = gapic.node_library('translate', version)
-    s.copy(library, excludes=['src/index.js', 'README.md', 'package.json'])
+    s.copy(library, excludes=['src/index.js', 'src/browser.js', 'README.md', 'package.json'])
+# note: no browser.js support until we fully support TypeScript
 
 # Update path discovery due to build/ dir and TypeScript conversion.
 s.replace("src/v3beta1/translation_service_client.js", "../../package.json", "../../../package.json")
