@@ -10,952 +10,6 @@
             "objc_class_prefix": "GRA"
           },
           "nested": {
-            "AttestationNote": {
-              "fields": {
-                "hint": {
-                  "type": "Hint",
-                  "id": 1
-                }
-              },
-              "nested": {
-                "Hint": {
-                  "fields": {
-                    "humanReadableName": {
-                      "type": "string",
-                      "id": 1
-                    }
-                  }
-                }
-              }
-            },
-            "AttestationOccurrence": {
-              "fields": {
-                "serializedPayload": {
-                  "type": "bytes",
-                  "id": 1
-                },
-                "signatures": {
-                  "rule": "repeated",
-                  "type": "Signature",
-                  "id": 2
-                }
-              }
-            },
-            "NoteKind": {
-              "values": {
-                "NOTE_KIND_UNSPECIFIED": 0,
-                "VULNERABILITY": 1,
-                "BUILD": 2,
-                "IMAGE": 3,
-                "PACKAGE": 4,
-                "DEPLOYMENT": 5,
-                "DISCOVERY": 6,
-                "ATTESTATION": 7
-              }
-            },
-            "RelatedUrl": {
-              "fields": {
-                "url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "label": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "Signature": {
-              "fields": {
-                "signature": {
-                  "type": "bytes",
-                  "id": 1
-                },
-                "publicKeyId": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "BuildProvenance": {
-              "fields": {
-                "id": {
-                  "type": "string",
-                  "id": 1
-                },
-                "projectId": {
-                  "type": "string",
-                  "id": 2
-                },
-                "commands": {
-                  "rule": "repeated",
-                  "type": "Command",
-                  "id": 3
-                },
-                "builtArtifacts": {
-                  "rule": "repeated",
-                  "type": "Artifact",
-                  "id": 4
-                },
-                "createTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 5
-                },
-                "startTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 6
-                },
-                "endTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 7
-                },
-                "creator": {
-                  "type": "string",
-                  "id": 8
-                },
-                "logsUri": {
-                  "type": "string",
-                  "id": 9
-                },
-                "sourceProvenance": {
-                  "type": "Source",
-                  "id": 10
-                },
-                "triggerId": {
-                  "type": "string",
-                  "id": 11
-                },
-                "buildOptions": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 12
-                },
-                "builderVersion": {
-                  "type": "string",
-                  "id": 13
-                }
-              }
-            },
-            "Source": {
-              "fields": {
-                "artifactStorageSourceUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "fileHashes": {
-                  "keyType": "string",
-                  "type": "FileHashes",
-                  "id": 2
-                },
-                "context": {
-                  "type": "SourceContext",
-                  "id": 3
-                },
-                "additionalContexts": {
-                  "rule": "repeated",
-                  "type": "SourceContext",
-                  "id": 4
-                }
-              }
-            },
-            "FileHashes": {
-              "fields": {
-                "fileHash": {
-                  "rule": "repeated",
-                  "type": "Hash",
-                  "id": 1
-                }
-              }
-            },
-            "Hash": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Command": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "env": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "args": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 3
-                },
-                "dir": {
-                  "type": "string",
-                  "id": 4
-                },
-                "id": {
-                  "type": "string",
-                  "id": 5
-                },
-                "waitFor": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 6
-                }
-              }
-            },
-            "Artifact": {
-              "fields": {
-                "checksum": {
-                  "type": "string",
-                  "id": 1
-                },
-                "id": {
-                  "type": "string",
-                  "id": 2
-                },
-                "names": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "SourceContext": {
-              "oneofs": {
-                "context": {
-                  "oneof": [
-                    "cloudRepo",
-                    "gerrit",
-                    "git"
-                  ]
-                }
-              },
-              "fields": {
-                "cloudRepo": {
-                  "type": "CloudRepoSourceContext",
-                  "id": 1
-                },
-                "gerrit": {
-                  "type": "GerritSourceContext",
-                  "id": 2
-                },
-                "git": {
-                  "type": "GitSourceContext",
-                  "id": 3
-                },
-                "labels": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 4
-                }
-              }
-            },
-            "AliasContext": {
-              "fields": {
-                "kind": {
-                  "type": "Kind",
-                  "id": 1
-                },
-                "name": {
-                  "type": "string",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "Kind": {
-                  "values": {
-                    "KIND_UNSPECIFIED": 0,
-                    "FIXED": 1,
-                    "MOVABLE": 2,
-                    "OTHER": 4
-                  }
-                }
-              }
-            },
-            "CloudRepoSourceContext": {
-              "oneofs": {
-                "revision": {
-                  "oneof": [
-                    "revisionId",
-                    "aliasContext"
-                  ]
-                }
-              },
-              "fields": {
-                "repoId": {
-                  "type": "RepoId",
-                  "id": 1
-                },
-                "revisionId": {
-                  "type": "string",
-                  "id": 2
-                },
-                "aliasContext": {
-                  "type": "AliasContext",
-                  "id": 3
-                }
-              }
-            },
-            "GerritSourceContext": {
-              "oneofs": {
-                "revision": {
-                  "oneof": [
-                    "revisionId",
-                    "aliasContext"
-                  ]
-                }
-              },
-              "fields": {
-                "hostUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "gerritProject": {
-                  "type": "string",
-                  "id": 2
-                },
-                "revisionId": {
-                  "type": "string",
-                  "id": 3
-                },
-                "aliasContext": {
-                  "type": "AliasContext",
-                  "id": 4
-                }
-              }
-            },
-            "GitSourceContext": {
-              "fields": {
-                "url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "revisionId": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "RepoId": {
-              "oneofs": {
-                "id": {
-                  "oneof": [
-                    "projectRepoId",
-                    "uid"
-                  ]
-                }
-              },
-              "fields": {
-                "projectRepoId": {
-                  "type": "ProjectRepoId",
-                  "id": 1
-                },
-                "uid": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "ProjectRepoId": {
-              "fields": {
-                "projectId": {
-                  "type": "string",
-                  "id": 1
-                },
-                "repoName": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "DeploymentNote": {
-              "fields": {
-                "resourceUri": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "DeploymentOccurrence": {
-              "fields": {
-                "userEmail": {
-                  "type": "string",
-                  "id": 1
-                },
-                "deployTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 2
-                },
-                "undeployTime": {
-                  "type": "google.protobuf.Timestamp",
-                  "id": 3
-                },
-                "config": {
-                  "type": "string",
-                  "id": 4
-                },
-                "address": {
-                  "type": "string",
-                  "id": 5
-                },
-                "resourceUri": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 6
-                },
-                "platform": {
-                  "type": "Platform",
-                  "id": 7
-                }
-              },
-              "nested": {
-                "Platform": {
-                  "values": {
-                    "PLATFORM_UNSPECIFIED": 0,
-                    "GKE": 1,
-                    "FLEX": 2,
-                    "CUSTOM": 3
-                  }
-                }
-              }
-            },
-            "Severity": {
-              "values": {
-                "SEVERITY_UNSPECIFIED": 0,
-                "MINIMAL": 1,
-                "LOW": 2,
-                "MEDIUM": 3,
-                "HIGH": 4,
-                "CRITICAL": 5
-              }
-            },
-            "VulnerabilityNote": {
-              "fields": {
-                "cvssScore": {
-                  "type": "float",
-                  "id": 1
-                },
-                "severity": {
-                  "type": "Severity",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "Detail",
-                  "id": 3
-                },
-                "cvssV3": {
-                  "type": "CVSSv3",
-                  "id": 4
-                },
-                "windowsDetails": {
-                  "rule": "repeated",
-                  "type": "WindowsDetail",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "Detail": {
-                  "fields": {
-                    "severityName": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "description": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "packageType": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "affectedCpeUri": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "affectedPackage": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "affectedVersionStart": {
-                      "type": "grafeas.v1.Version",
-                      "id": 6
-                    },
-                    "affectedVersionEnd": {
-                      "type": "grafeas.v1.Version",
-                      "id": 7
-                    },
-                    "fixedCpeUri": {
-                      "type": "string",
-                      "id": 8
-                    },
-                    "fixedPackage": {
-                      "type": "string",
-                      "id": 9
-                    },
-                    "fixedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 10
-                    },
-                    "isObsolete": {
-                      "type": "bool",
-                      "id": 11
-                    }
-                  }
-                },
-                "WindowsDetail": {
-                  "fields": {
-                    "cpeUri": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "name": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "description": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "fixingKbs": {
-                      "rule": "repeated",
-                      "type": "KnowledgeBase",
-                      "id": 4
-                    }
-                  },
-                  "nested": {
-                    "KnowledgeBase": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "url": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "VulnerabilityOccurrence": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "severity": {
-                  "type": "Severity",
-                  "id": 2
-                },
-                "cvssScore": {
-                  "type": "float",
-                  "id": 3
-                },
-                "packageIssue": {
-                  "rule": "repeated",
-                  "type": "PackageIssue",
-                  "id": 4
-                },
-                "shortDescription": {
-                  "type": "string",
-                  "id": 5
-                },
-                "longDescription": {
-                  "type": "string",
-                  "id": 6
-                },
-                "relatedUrls": {
-                  "rule": "repeated",
-                  "type": "grafeas.v1.RelatedUrl",
-                  "id": 7
-                },
-                "effectiveSeverity": {
-                  "type": "Severity",
-                  "id": 8
-                },
-                "fixAvailable": {
-                  "type": "bool",
-                  "id": 9
-                }
-              },
-              "nested": {
-                "PackageIssue": {
-                  "fields": {
-                    "affectedCpeUri": {
-                      "type": "string",
-                      "id": 1
-                    },
-                    "affectedPackage": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "affectedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 3
-                    },
-                    "fixedCpeUri": {
-                      "type": "string",
-                      "id": 4
-                    },
-                    "fixedPackage": {
-                      "type": "string",
-                      "id": 5
-                    },
-                    "fixedVersion": {
-                      "type": "grafeas.v1.Version",
-                      "id": 6
-                    },
-                    "fixAvailable": {
-                      "type": "bool",
-                      "id": 7
-                    }
-                  }
-                }
-              }
-            },
-            "CVSSv3": {
-              "fields": {
-                "baseScore": {
-                  "type": "float",
-                  "id": 1
-                },
-                "exploitabilityScore": {
-                  "type": "float",
-                  "id": 2
-                },
-                "impactScore": {
-                  "type": "float",
-                  "id": 3
-                },
-                "attackVector": {
-                  "type": "AttackVector",
-                  "id": 5
-                },
-                "attackComplexity": {
-                  "type": "AttackComplexity",
-                  "id": 6
-                },
-                "privilegesRequired": {
-                  "type": "PrivilegesRequired",
-                  "id": 7
-                },
-                "userInteraction": {
-                  "type": "UserInteraction",
-                  "id": 8
-                },
-                "scope": {
-                  "type": "Scope",
-                  "id": 9
-                },
-                "confidentialityImpact": {
-                  "type": "Impact",
-                  "id": 10
-                },
-                "integrityImpact": {
-                  "type": "Impact",
-                  "id": 11
-                },
-                "availabilityImpact": {
-                  "type": "Impact",
-                  "id": 12
-                }
-              },
-              "nested": {
-                "AttackVector": {
-                  "values": {
-                    "ATTACK_VECTOR_UNSPECIFIED": 0,
-                    "ATTACK_VECTOR_NETWORK": 1,
-                    "ATTACK_VECTOR_ADJACENT": 2,
-                    "ATTACK_VECTOR_LOCAL": 3,
-                    "ATTACK_VECTOR_PHYSICAL": 4
-                  }
-                },
-                "AttackComplexity": {
-                  "values": {
-                    "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
-                    "ATTACK_COMPLEXITY_LOW": 1,
-                    "ATTACK_COMPLEXITY_HIGH": 2
-                  }
-                },
-                "PrivilegesRequired": {
-                  "values": {
-                    "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
-                    "PRIVILEGES_REQUIRED_NONE": 1,
-                    "PRIVILEGES_REQUIRED_LOW": 2,
-                    "PRIVILEGES_REQUIRED_HIGH": 3
-                  }
-                },
-                "UserInteraction": {
-                  "values": {
-                    "USER_INTERACTION_UNSPECIFIED": 0,
-                    "USER_INTERACTION_NONE": 1,
-                    "USER_INTERACTION_REQUIRED": 2
-                  }
-                },
-                "Scope": {
-                  "values": {
-                    "SCOPE_UNSPECIFIED": 0,
-                    "SCOPE_UNCHANGED": 1,
-                    "SCOPE_CHANGED": 2
-                  }
-                },
-                "Impact": {
-                  "values": {
-                    "IMPACT_UNSPECIFIED": 0,
-                    "IMPACT_HIGH": 1,
-                    "IMPACT_LOW": 2,
-                    "IMPACT_NONE": 3
-                  }
-                }
-              }
-            },
-            "Architecture": {
-              "values": {
-                "ARCHITECTURE_UNSPECIFIED": 0,
-                "X86": 1,
-                "X64": 2
-              }
-            },
-            "Distribution": {
-              "fields": {
-                "cpeUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "architecture": {
-                  "type": "Architecture",
-                  "id": 2
-                },
-                "latestVersion": {
-                  "type": "Version",
-                  "id": 3
-                },
-                "maintainer": {
-                  "type": "string",
-                  "id": 4
-                },
-                "url": {
-                  "type": "string",
-                  "id": 5
-                },
-                "description": {
-                  "type": "string",
-                  "id": 6
-                }
-              }
-            },
-            "Location": {
-              "fields": {
-                "cpeUri": {
-                  "type": "string",
-                  "id": 1
-                },
-                "version": {
-                  "type": "Version",
-                  "id": 2
-                },
-                "path": {
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "PackageNote": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "distribution": {
-                  "rule": "repeated",
-                  "type": "Distribution",
-                  "id": 10
-                }
-              }
-            },
-            "PackageOccurrence": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "location": {
-                  "rule": "repeated",
-                  "type": "Location",
-                  "id": 2
-                }
-              }
-            },
-            "Version": {
-              "fields": {
-                "epoch": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "name": {
-                  "type": "string",
-                  "id": 2
-                },
-                "revision": {
-                  "type": "string",
-                  "id": 3
-                },
-                "kind": {
-                  "type": "VersionKind",
-                  "id": 4
-                },
-                "fullName": {
-                  "type": "string",
-                  "id": 5
-                }
-              },
-              "nested": {
-                "VersionKind": {
-                  "values": {
-                    "VERSION_KIND_UNSPECIFIED": 0,
-                    "NORMAL": 1,
-                    "MINIMUM": 2,
-                    "MAXIMUM": 3
-                  }
-                }
-              }
-            },
-            "DiscoveryNote": {
-              "fields": {
-                "analysisKind": {
-                  "type": "grafeas.v1.NoteKind",
-                  "id": 1
-                }
-              }
-            },
-            "DiscoveryOccurrence": {
-              "fields": {
-                "continuousAnalysis": {
-                  "type": "ContinuousAnalysis",
-                  "id": 1
-                },
-                "analysisStatus": {
-                  "type": "AnalysisStatus",
-                  "id": 2
-                },
-                "analysisStatusError": {
-                  "type": "google.rpc.Status",
-                  "id": 3
-                }
-              },
-              "nested": {
-                "ContinuousAnalysis": {
-                  "values": {
-                    "CONTINUOUS_ANALYSIS_UNSPECIFIED": 0,
-                    "ACTIVE": 1,
-                    "INACTIVE": 2
-                  }
-                },
-                "AnalysisStatus": {
-                  "values": {
-                    "ANALYSIS_STATUS_UNSPECIFIED": 0,
-                    "PENDING": 1,
-                    "SCANNING": 2,
-                    "FINISHED_SUCCESS": 3,
-                    "FINISHED_FAILED": 4,
-                    "FINISHED_UNSUPPORTED": 5
-                  }
-                }
-              }
-            },
-            "Layer": {
-              "fields": {
-                "directive": {
-                  "type": "string",
-                  "id": 1
-                },
-                "arguments": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "Fingerprint": {
-              "fields": {
-                "v1Name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "v2Blob": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "v2Name": {
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "ImageNote": {
-              "fields": {
-                "resourceUrl": {
-                  "type": "string",
-                  "id": 1
-                },
-                "fingerprint": {
-                  "type": "Fingerprint",
-                  "id": 2
-                }
-              }
-            },
-            "ImageOccurrence": {
-              "fields": {
-                "fingerprint": {
-                  "type": "Fingerprint",
-                  "id": 1
-                },
-                "distance": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "layerInfo": {
-                  "rule": "repeated",
-                  "type": "Layer",
-                  "id": 3
-                },
-                "baseResourceUrl": {
-                  "type": "string",
-                  "id": 4
-                }
-              }
-            },
-            "BuildNote": {
-              "fields": {
-                "builderVersion": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "BuildOccurrence": {
-              "fields": {
-                "provenance": {
-                  "type": "grafeas.v1.BuildProvenance",
-                  "id": 1
-                },
-                "provenanceBytes": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "Grafeas": {
               "methods": {
                 "GetOccurrence": {
@@ -1462,6 +516,952 @@
                   "id": 1
                 }
               }
+            },
+            "AttestationNote": {
+              "fields": {
+                "hint": {
+                  "type": "Hint",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Hint": {
+                  "fields": {
+                    "humanReadableName": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                }
+              }
+            },
+            "AttestationOccurrence": {
+              "fields": {
+                "serializedPayload": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "signatures": {
+                  "rule": "repeated",
+                  "type": "Signature",
+                  "id": 2
+                }
+              }
+            },
+            "NoteKind": {
+              "values": {
+                "NOTE_KIND_UNSPECIFIED": 0,
+                "VULNERABILITY": 1,
+                "BUILD": 2,
+                "IMAGE": 3,
+                "PACKAGE": 4,
+                "DEPLOYMENT": 5,
+                "DISCOVERY": 6,
+                "ATTESTATION": 7
+              }
+            },
+            "RelatedUrl": {
+              "fields": {
+                "url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "label": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Signature": {
+              "fields": {
+                "signature": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "publicKeyId": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "BuildNote": {
+              "fields": {
+                "builderVersion": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "BuildOccurrence": {
+              "fields": {
+                "provenance": {
+                  "type": "grafeas.v1.BuildProvenance",
+                  "id": 1
+                },
+                "provenanceBytes": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "BuildProvenance": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "projectId": {
+                  "type": "string",
+                  "id": 2
+                },
+                "commands": {
+                  "rule": "repeated",
+                  "type": "Command",
+                  "id": 3
+                },
+                "builtArtifacts": {
+                  "rule": "repeated",
+                  "type": "Artifact",
+                  "id": 4
+                },
+                "createTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 5
+                },
+                "startTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 6
+                },
+                "endTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 7
+                },
+                "creator": {
+                  "type": "string",
+                  "id": 8
+                },
+                "logsUri": {
+                  "type": "string",
+                  "id": 9
+                },
+                "sourceProvenance": {
+                  "type": "Source",
+                  "id": 10
+                },
+                "triggerId": {
+                  "type": "string",
+                  "id": 11
+                },
+                "buildOptions": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 12
+                },
+                "builderVersion": {
+                  "type": "string",
+                  "id": 13
+                }
+              }
+            },
+            "Source": {
+              "fields": {
+                "artifactStorageSourceUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "fileHashes": {
+                  "keyType": "string",
+                  "type": "FileHashes",
+                  "id": 2
+                },
+                "context": {
+                  "type": "SourceContext",
+                  "id": 3
+                },
+                "additionalContexts": {
+                  "rule": "repeated",
+                  "type": "SourceContext",
+                  "id": 4
+                }
+              }
+            },
+            "FileHashes": {
+              "fields": {
+                "fileHash": {
+                  "rule": "repeated",
+                  "type": "Hash",
+                  "id": 1
+                }
+              }
+            },
+            "Hash": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Command": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "env": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "args": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "dir": {
+                  "type": "string",
+                  "id": 4
+                },
+                "id": {
+                  "type": "string",
+                  "id": 5
+                },
+                "waitFor": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
+                }
+              }
+            },
+            "Artifact": {
+              "fields": {
+                "checksum": {
+                  "type": "string",
+                  "id": 1
+                },
+                "id": {
+                  "type": "string",
+                  "id": 2
+                },
+                "names": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "SourceContext": {
+              "oneofs": {
+                "context": {
+                  "oneof": [
+                    "cloudRepo",
+                    "gerrit",
+                    "git"
+                  ]
+                }
+              },
+              "fields": {
+                "cloudRepo": {
+                  "type": "CloudRepoSourceContext",
+                  "id": 1
+                },
+                "gerrit": {
+                  "type": "GerritSourceContext",
+                  "id": 2
+                },
+                "git": {
+                  "type": "GitSourceContext",
+                  "id": 3
+                },
+                "labels": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "AliasContext": {
+              "fields": {
+                "kind": {
+                  "type": "Kind",
+                  "id": 1
+                },
+                "name": {
+                  "type": "string",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Kind": {
+                  "values": {
+                    "KIND_UNSPECIFIED": 0,
+                    "FIXED": 1,
+                    "MOVABLE": 2,
+                    "OTHER": 4
+                  }
+                }
+              }
+            },
+            "CloudRepoSourceContext": {
+              "oneofs": {
+                "revision": {
+                  "oneof": [
+                    "revisionId",
+                    "aliasContext"
+                  ]
+                }
+              },
+              "fields": {
+                "repoId": {
+                  "type": "RepoId",
+                  "id": 1
+                },
+                "revisionId": {
+                  "type": "string",
+                  "id": 2
+                },
+                "aliasContext": {
+                  "type": "AliasContext",
+                  "id": 3
+                }
+              }
+            },
+            "GerritSourceContext": {
+              "oneofs": {
+                "revision": {
+                  "oneof": [
+                    "revisionId",
+                    "aliasContext"
+                  ]
+                }
+              },
+              "fields": {
+                "hostUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "gerritProject": {
+                  "type": "string",
+                  "id": 2
+                },
+                "revisionId": {
+                  "type": "string",
+                  "id": 3
+                },
+                "aliasContext": {
+                  "type": "AliasContext",
+                  "id": 4
+                }
+              }
+            },
+            "GitSourceContext": {
+              "fields": {
+                "url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "revisionId": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "RepoId": {
+              "oneofs": {
+                "id": {
+                  "oneof": [
+                    "projectRepoId",
+                    "uid"
+                  ]
+                }
+              },
+              "fields": {
+                "projectRepoId": {
+                  "type": "ProjectRepoId",
+                  "id": 1
+                },
+                "uid": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ProjectRepoId": {
+              "fields": {
+                "projectId": {
+                  "type": "string",
+                  "id": 1
+                },
+                "repoName": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "DeploymentNote": {
+              "fields": {
+                "resourceUri": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeploymentOccurrence": {
+              "fields": {
+                "userEmail": {
+                  "type": "string",
+                  "id": 1
+                },
+                "deployTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2
+                },
+                "undeployTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 3
+                },
+                "config": {
+                  "type": "string",
+                  "id": 4
+                },
+                "address": {
+                  "type": "string",
+                  "id": 5
+                },
+                "resourceUri": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
+                },
+                "platform": {
+                  "type": "Platform",
+                  "id": 7
+                }
+              },
+              "nested": {
+                "Platform": {
+                  "values": {
+                    "PLATFORM_UNSPECIFIED": 0,
+                    "GKE": 1,
+                    "FLEX": 2,
+                    "CUSTOM": 3
+                  }
+                }
+              }
+            },
+            "DiscoveryNote": {
+              "fields": {
+                "analysisKind": {
+                  "type": "grafeas.v1.NoteKind",
+                  "id": 1
+                }
+              }
+            },
+            "DiscoveryOccurrence": {
+              "fields": {
+                "continuousAnalysis": {
+                  "type": "ContinuousAnalysis",
+                  "id": 1
+                },
+                "analysisStatus": {
+                  "type": "AnalysisStatus",
+                  "id": 2
+                },
+                "analysisStatusError": {
+                  "type": "google.rpc.Status",
+                  "id": 3
+                }
+              },
+              "nested": {
+                "ContinuousAnalysis": {
+                  "values": {
+                    "CONTINUOUS_ANALYSIS_UNSPECIFIED": 0,
+                    "ACTIVE": 1,
+                    "INACTIVE": 2
+                  }
+                },
+                "AnalysisStatus": {
+                  "values": {
+                    "ANALYSIS_STATUS_UNSPECIFIED": 0,
+                    "PENDING": 1,
+                    "SCANNING": 2,
+                    "FINISHED_SUCCESS": 3,
+                    "FINISHED_FAILED": 4,
+                    "FINISHED_UNSUPPORTED": 5
+                  }
+                }
+              }
+            },
+            "Layer": {
+              "fields": {
+                "directive": {
+                  "type": "string",
+                  "id": 1
+                },
+                "arguments": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Fingerprint": {
+              "fields": {
+                "v1Name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "v2Blob": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "v2Name": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ImageNote": {
+              "fields": {
+                "resourceUrl": {
+                  "type": "string",
+                  "id": 1
+                },
+                "fingerprint": {
+                  "type": "Fingerprint",
+                  "id": 2
+                }
+              }
+            },
+            "ImageOccurrence": {
+              "fields": {
+                "fingerprint": {
+                  "type": "Fingerprint",
+                  "id": 1
+                },
+                "distance": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "layerInfo": {
+                  "rule": "repeated",
+                  "type": "Layer",
+                  "id": 3
+                },
+                "baseResourceUrl": {
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "Architecture": {
+              "values": {
+                "ARCHITECTURE_UNSPECIFIED": 0,
+                "X86": 1,
+                "X64": 2
+              }
+            },
+            "Distribution": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "architecture": {
+                  "type": "Architecture",
+                  "id": 2
+                },
+                "latestVersion": {
+                  "type": "Version",
+                  "id": 3
+                },
+                "maintainer": {
+                  "type": "string",
+                  "id": 4
+                },
+                "url": {
+                  "type": "string",
+                  "id": 5
+                },
+                "description": {
+                  "type": "string",
+                  "id": 6
+                }
+              }
+            },
+            "Location": {
+              "fields": {
+                "cpeUri": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "Version",
+                  "id": 2
+                },
+                "path": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "PackageNote": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "distribution": {
+                  "rule": "repeated",
+                  "type": "Distribution",
+                  "id": 10
+                }
+              }
+            },
+            "PackageOccurrence": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 2
+                }
+              }
+            },
+            "Version": {
+              "fields": {
+                "epoch": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "name": {
+                  "type": "string",
+                  "id": 2
+                },
+                "revision": {
+                  "type": "string",
+                  "id": 3
+                },
+                "kind": {
+                  "type": "VersionKind",
+                  "id": 4
+                },
+                "fullName": {
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "VersionKind": {
+                  "values": {
+                    "VERSION_KIND_UNSPECIFIED": 0,
+                    "NORMAL": 1,
+                    "MINIMUM": 2,
+                    "MAXIMUM": 3
+                  }
+                }
+              }
+            },
+            "Severity": {
+              "values": {
+                "SEVERITY_UNSPECIFIED": 0,
+                "MINIMAL": 1,
+                "LOW": 2,
+                "MEDIUM": 3,
+                "HIGH": 4,
+                "CRITICAL": 5
+              }
+            },
+            "VulnerabilityNote": {
+              "fields": {
+                "cvssScore": {
+                  "type": "float",
+                  "id": 1
+                },
+                "severity": {
+                  "type": "Severity",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "Detail",
+                  "id": 3
+                },
+                "cvssV3": {
+                  "type": "CVSSv3",
+                  "id": 4
+                },
+                "windowsDetails": {
+                  "rule": "repeated",
+                  "type": "WindowsDetail",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "Detail": {
+                  "fields": {
+                    "severityName": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "packageType": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "affectedCpeUri": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "affectedPackage": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "affectedVersionStart": {
+                      "type": "grafeas.v1.Version",
+                      "id": 6
+                    },
+                    "affectedVersionEnd": {
+                      "type": "grafeas.v1.Version",
+                      "id": 7
+                    },
+                    "fixedCpeUri": {
+                      "type": "string",
+                      "id": 8
+                    },
+                    "fixedPackage": {
+                      "type": "string",
+                      "id": 9
+                    },
+                    "fixedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 10
+                    },
+                    "isObsolete": {
+                      "type": "bool",
+                      "id": 11
+                    }
+                  }
+                },
+                "WindowsDetail": {
+                  "fields": {
+                    "cpeUri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "fixingKbs": {
+                      "rule": "repeated",
+                      "type": "KnowledgeBase",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "KnowledgeBase": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "VulnerabilityOccurrence": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "severity": {
+                  "type": "Severity",
+                  "id": 2
+                },
+                "cvssScore": {
+                  "type": "float",
+                  "id": 3
+                },
+                "packageIssue": {
+                  "rule": "repeated",
+                  "type": "PackageIssue",
+                  "id": 4
+                },
+                "shortDescription": {
+                  "type": "string",
+                  "id": 5
+                },
+                "longDescription": {
+                  "type": "string",
+                  "id": 6
+                },
+                "relatedUrls": {
+                  "rule": "repeated",
+                  "type": "grafeas.v1.RelatedUrl",
+                  "id": 7
+                },
+                "effectiveSeverity": {
+                  "type": "Severity",
+                  "id": 8
+                },
+                "fixAvailable": {
+                  "type": "bool",
+                  "id": 9
+                }
+              },
+              "nested": {
+                "PackageIssue": {
+                  "fields": {
+                    "affectedCpeUri": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "affectedPackage": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "affectedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 3
+                    },
+                    "fixedCpeUri": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "fixedPackage": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "fixedVersion": {
+                      "type": "grafeas.v1.Version",
+                      "id": 6
+                    },
+                    "fixAvailable": {
+                      "type": "bool",
+                      "id": 7
+                    }
+                  }
+                }
+              }
+            },
+            "CVSSv3": {
+              "fields": {
+                "baseScore": {
+                  "type": "float",
+                  "id": 1
+                },
+                "exploitabilityScore": {
+                  "type": "float",
+                  "id": 2
+                },
+                "impactScore": {
+                  "type": "float",
+                  "id": 3
+                },
+                "attackVector": {
+                  "type": "AttackVector",
+                  "id": 5
+                },
+                "attackComplexity": {
+                  "type": "AttackComplexity",
+                  "id": 6
+                },
+                "privilegesRequired": {
+                  "type": "PrivilegesRequired",
+                  "id": 7
+                },
+                "userInteraction": {
+                  "type": "UserInteraction",
+                  "id": 8
+                },
+                "scope": {
+                  "type": "Scope",
+                  "id": 9
+                },
+                "confidentialityImpact": {
+                  "type": "Impact",
+                  "id": 10
+                },
+                "integrityImpact": {
+                  "type": "Impact",
+                  "id": 11
+                },
+                "availabilityImpact": {
+                  "type": "Impact",
+                  "id": 12
+                }
+              },
+              "nested": {
+                "AttackVector": {
+                  "values": {
+                    "ATTACK_VECTOR_UNSPECIFIED": 0,
+                    "ATTACK_VECTOR_NETWORK": 1,
+                    "ATTACK_VECTOR_ADJACENT": 2,
+                    "ATTACK_VECTOR_LOCAL": 3,
+                    "ATTACK_VECTOR_PHYSICAL": 4
+                  }
+                },
+                "AttackComplexity": {
+                  "values": {
+                    "ATTACK_COMPLEXITY_UNSPECIFIED": 0,
+                    "ATTACK_COMPLEXITY_LOW": 1,
+                    "ATTACK_COMPLEXITY_HIGH": 2
+                  }
+                },
+                "PrivilegesRequired": {
+                  "values": {
+                    "PRIVILEGES_REQUIRED_UNSPECIFIED": 0,
+                    "PRIVILEGES_REQUIRED_NONE": 1,
+                    "PRIVILEGES_REQUIRED_LOW": 2,
+                    "PRIVILEGES_REQUIRED_HIGH": 3
+                  }
+                },
+                "UserInteraction": {
+                  "values": {
+                    "USER_INTERACTION_UNSPECIFIED": 0,
+                    "USER_INTERACTION_NONE": 1,
+                    "USER_INTERACTION_REQUIRED": 2
+                  }
+                },
+                "Scope": {
+                  "values": {
+                    "SCOPE_UNSPECIFIED": 0,
+                    "SCOPE_UNCHANGED": 1,
+                    "SCOPE_CHANGED": 2
+                  }
+                },
+                "Impact": {
+                  "values": {
+                    "IMPACT_UNSPECIFIED": 0,
+                    "IMPACT_HIGH": 1,
+                    "IMPACT_LOW": 2,
+                    "IMPACT_NONE": 3
+                  }
+                }
+              }
             }
           }
         }
@@ -1469,6 +1469,105 @@
     },
     "google": {
       "nested": {
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "HttpProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        },
         "protobuf": {
           "options": {
             "go_package": "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor",
@@ -1480,30 +1579,6 @@
             "optimize_for": "SPEED"
           },
           "nested": {
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "FileDescriptorSet": {
               "fields": {
                 "file": {
@@ -2395,6 +2470,30 @@
                   "id": 1
                 }
               }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
             }
           }
         },
@@ -2421,105 +2520,6 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
-                }
-              }
-            }
-          }
-        },
-        "api": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
-            "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
-            "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
-          },
-          "nested": {
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
                 }
               }
             }
