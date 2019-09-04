@@ -14,152 +14,6 @@
                 "php_namespace": "Google\\Cloud\\Datastore\\V1"
               },
               "nested": {
-                "PartitionId": {
-                  "fields": {
-                    "projectId": {
-                      "type": "string",
-                      "id": 2
-                    },
-                    "namespaceId": {
-                      "type": "string",
-                      "id": 4
-                    }
-                  }
-                },
-                "Key": {
-                  "fields": {
-                    "partitionId": {
-                      "type": "PartitionId",
-                      "id": 1
-                    },
-                    "path": {
-                      "rule": "repeated",
-                      "type": "PathElement",
-                      "id": 2
-                    }
-                  },
-                  "nested": {
-                    "PathElement": {
-                      "oneofs": {
-                        "idType": {
-                          "oneof": [
-                            "id",
-                            "name"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "kind": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "id": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                "ArrayValue": {
-                  "fields": {
-                    "values": {
-                      "rule": "repeated",
-                      "type": "Value",
-                      "id": 1
-                    }
-                  }
-                },
-                "Value": {
-                  "oneofs": {
-                    "valueType": {
-                      "oneof": [
-                        "nullValue",
-                        "booleanValue",
-                        "integerValue",
-                        "doubleValue",
-                        "timestampValue",
-                        "keyValue",
-                        "stringValue",
-                        "blobValue",
-                        "geoPointValue",
-                        "entityValue",
-                        "arrayValue"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "nullValue": {
-                      "type": "google.protobuf.NullValue",
-                      "id": 11
-                    },
-                    "booleanValue": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "integerValue": {
-                      "type": "int64",
-                      "id": 2
-                    },
-                    "doubleValue": {
-                      "type": "double",
-                      "id": 3
-                    },
-                    "timestampValue": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 10
-                    },
-                    "keyValue": {
-                      "type": "Key",
-                      "id": 5
-                    },
-                    "stringValue": {
-                      "type": "string",
-                      "id": 17
-                    },
-                    "blobValue": {
-                      "type": "bytes",
-                      "id": 18
-                    },
-                    "geoPointValue": {
-                      "type": "google.type.LatLng",
-                      "id": 8
-                    },
-                    "entityValue": {
-                      "type": "Entity",
-                      "id": 6
-                    },
-                    "arrayValue": {
-                      "type": "ArrayValue",
-                      "id": 9
-                    },
-                    "meaning": {
-                      "type": "int32",
-                      "id": 14
-                    },
-                    "excludeFromIndexes": {
-                      "type": "bool",
-                      "id": 19
-                    }
-                  }
-                },
-                "Entity": {
-                  "fields": {
-                    "key": {
-                      "type": "Key",
-                      "id": 1
-                    },
-                    "properties": {
-                      "keyType": "string",
-                      "type": "Value",
-                      "id": 3
-                    }
-                  }
-                },
                 "Datastore": {
                   "methods": {
                     "Lookup": {
@@ -541,6 +395,152 @@
                     },
                     "ReadOnly": {
                       "fields": {}
+                    }
+                  }
+                },
+                "PartitionId": {
+                  "fields": {
+                    "projectId": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "namespaceId": {
+                      "type": "string",
+                      "id": 4
+                    }
+                  }
+                },
+                "Key": {
+                  "fields": {
+                    "partitionId": {
+                      "type": "PartitionId",
+                      "id": 1
+                    },
+                    "path": {
+                      "rule": "repeated",
+                      "type": "PathElement",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "PathElement": {
+                      "oneofs": {
+                        "idType": {
+                          "oneof": [
+                            "id",
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "id": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "ArrayValue": {
+                  "fields": {
+                    "values": {
+                      "rule": "repeated",
+                      "type": "Value",
+                      "id": 1
+                    }
+                  }
+                },
+                "Value": {
+                  "oneofs": {
+                    "valueType": {
+                      "oneof": [
+                        "nullValue",
+                        "booleanValue",
+                        "integerValue",
+                        "doubleValue",
+                        "timestampValue",
+                        "keyValue",
+                        "stringValue",
+                        "blobValue",
+                        "geoPointValue",
+                        "entityValue",
+                        "arrayValue"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "nullValue": {
+                      "type": "google.protobuf.NullValue",
+                      "id": 11
+                    },
+                    "booleanValue": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "integerValue": {
+                      "type": "int64",
+                      "id": 2
+                    },
+                    "doubleValue": {
+                      "type": "double",
+                      "id": 3
+                    },
+                    "timestampValue": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 10
+                    },
+                    "keyValue": {
+                      "type": "Key",
+                      "id": 5
+                    },
+                    "stringValue": {
+                      "type": "string",
+                      "id": 17
+                    },
+                    "blobValue": {
+                      "type": "bytes",
+                      "id": 18
+                    },
+                    "geoPointValue": {
+                      "type": "google.type.LatLng",
+                      "id": 8
+                    },
+                    "entityValue": {
+                      "type": "Entity",
+                      "id": 6
+                    },
+                    "arrayValue": {
+                      "type": "ArrayValue",
+                      "id": 9
+                    },
+                    "meaning": {
+                      "type": "int32",
+                      "id": 14
+                    },
+                    "excludeFromIndexes": {
+                      "type": "bool",
+                      "id": 19
+                    }
+                  }
+                },
+                "Entity": {
+                  "fields": {
+                    "key": {
+                      "type": "Key",
+                      "id": 1
+                    },
+                    "properties": {
+                      "keyType": "string",
+                      "type": "Value",
+                      "id": 3
                     }
                   }
                 },
