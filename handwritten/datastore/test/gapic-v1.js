@@ -44,6 +44,11 @@ describe('DatastoreClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new datastoreModule.v1.DatastoreClient({fallback: true});
+    assert(client);
+  });
+
   describe('lookup', () => {
     it('invokes lookup without error', done => {
       const client = new datastoreModule.v1.DatastoreClient({
