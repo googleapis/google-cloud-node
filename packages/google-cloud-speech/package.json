@@ -51,7 +51,7 @@
     "codecov": "^3.0.2",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-node": "^9.0.0",
+    "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.0.0",
     "jsdoc-fresh": "^1.0.1",
     "intelli-espower-loader": "^1.0.1",
