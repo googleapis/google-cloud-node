@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.4.0...v1.5.0) (2019-09-05)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([ff43ecf](https://www.github.com/googleapis/nodejs-automl/commit/ff43ecf))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.3.0...v1.4.0) (2019-08-28)
 
 
