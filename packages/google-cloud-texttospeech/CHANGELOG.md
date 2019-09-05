@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.1.4...v1.2.0) (2019-09-05)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([c9a203d](https://www.github.com/googleapis/nodejs-text-to-speech/commit/c9a203d))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.1.3...v1.1.4) (2019-08-28)
 
 
