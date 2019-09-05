@@ -32,7 +32,7 @@
     "chai": "^4.2.0",
     "eslint": "^6.0.0",
     "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "jsdoc": "^3.6.2",
     "jsdoc-fresh": "^1.0.1",
