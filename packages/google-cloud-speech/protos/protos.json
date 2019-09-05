@@ -144,6 +144,10 @@
                           "type": "bool",
                           "id": 11
                         },
+                        "diarizationConfig": {
+                          "type": "SpeakerDiarizationConfig",
+                          "id": 19
+                        },
                         "metadata": {
                           "type": "RecognitionMetadata",
                           "id": 9
@@ -169,6 +173,26 @@
                             "OGG_OPUS": 6,
                             "SPEEX_WITH_HEADER_BYTE": 7
                           }
+                        }
+                      }
+                    },
+                    "SpeakerDiarizationConfig": {
+                      "fields": {
+                        "enableSpeakerDiarization": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "minSpeakerCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "maxSpeakerCount": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "speakerTag": {
+                          "type": "int32",
+                          "id": 5
                         }
                       }
                     },

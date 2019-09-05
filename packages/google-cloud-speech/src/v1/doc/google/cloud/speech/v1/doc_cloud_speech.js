@@ -213,6 +213,18 @@ const StreamingRecognitionConfig = {
  *   to all users. In the future this may be exclusively available as a
  *   premium feature.
  *
+ * @property {Object} diarizationConfig
+ *   *Optional* Config to enable speaker diarization and set additional
+ *   parameters to make diarization better suited for your application.
+ *   Note: When this is enabled, we send all the words from the beginning of the
+ *   audio for the top alternative in every consecutive STREAMING responses.
+ *   This is done in order to improve our speaker tags as our models learn to
+ *   identify the speakers in the conversation over time.
+ *   For non-streaming requests, the diarization results will be provided only
+ *   in the top alternative of the FINAL SpeechRecognitionResult.
+ *
+ *   This object should have the same structure as [SpeakerDiarizationConfig]{@link google.cloud.speech.v1.SpeakerDiarizationConfig}
+ *
  * @property {Object} metadata
  *   *Optional* Metadata regarding this request.
  *
@@ -356,6 +368,41 @@ const RecognitionConfig = {
      */
     SPEEX_WITH_HEADER_BYTE: 7
   }
+};
+
+/**
+ * *Optional* Config to enable speaker diarization.
+ *
+ * @property {boolean} enableSpeakerDiarization
+ *   *Optional* If 'true', enables speaker detection for each recognized word in
+ *   the top alternative of the recognition result using a speaker_tag provided
+ *   in the WordInfo.
+ *
+ * @property {number} minSpeakerCount
+ *   *Optional*
+ *   Minimum number of speakers in the conversation. This range gives you more
+ *   flexibility by allowing the system to automatically determine the correct
+ *   number of speakers. If not set, the default value is 2.
+ *
+ * @property {number} maxSpeakerCount
+ *   *Optional*
+ *   Maximum number of speakers in the conversation. This range gives you more
+ *   flexibility by allowing the system to automatically determine the correct
+ *   number of speakers. If not set, the default value is 6.
+ *
+ * @property {number} speakerTag
+ *   Output only. A distinct integer value is assigned for every speaker within
+ *   the audio. This field specifies which one of those speakers was detected to
+ *   have spoken this word. Value ranges from '1' to diarization_speaker_count.
+ *   speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+ *   top alternative.
+ *
+ * @typedef SpeakerDiarizationConfig
+ * @memberof google.cloud.speech.v1
+ * @see [google.cloud.speech.v1.SpeakerDiarizationConfig definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/speech/v1/cloud_speech.proto}
+ */
+const SpeakerDiarizationConfig = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
 };
 
 /**
