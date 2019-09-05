@@ -119,7 +119,7 @@ async function main() {
     // and added onto the provided logger.
     const mw = await lw.express.makeMiddleware(logger);
     // Alternatively, you can construct a LoggingWinston transport
-    // yourself and pass it in.
+    // yourself and pass it int.
     // const transport = new LoggingWinston({...});
     // const mw = await lw.express.makeMiddleware(logger, transport);
 
