@@ -192,10 +192,12 @@ describe('topics', () => {
       {
         role: `roles/pubsub.editor`,
         members: [`group:cloud-logs@google.com`],
+        condition: null,
       },
       {
         role: `roles/pubsub.viewer`,
         members: [`allUsers`],
+        condition: null,
       },
     ]);
   });
