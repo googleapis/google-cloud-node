@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.1.4...v1.2.0) (2019-09-06)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([d3e8ac6](https://www.github.com/googleapis/nodejs-scheduler/commit/d3e8ac6))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-scheduler/compare/v1.1.3...v1.1.4) (2019-08-26)
 
 
