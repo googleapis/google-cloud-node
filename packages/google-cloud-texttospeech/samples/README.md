@@ -15,6 +15,7 @@
   * [Audio Profile](#audio-profile)
   * [List Voices](#list-voices)
   * [Quickstart](#quickstart)
+  * [Ssml Addresses](#ssml-addresses)
   * [Synthesize](#synthesize)
 
 ## Before you begin
@@ -70,6 +71,23 @@ __Usage:__
 
 
 `node quickstart.js`
+
+
+-----
+
+
+
+
+### Ssml Addresses
+
+View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/master/samples/ssmlAddresses.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/ssmlAddresses.js,samples/README.md)
+
+__Usage:__
+
+
+`node ssmlAddresses.js`
 
 
 -----
