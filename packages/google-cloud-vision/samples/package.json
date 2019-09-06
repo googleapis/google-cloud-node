@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@google-cloud/vision": "^1.2.0",
+    "canvas": "^2.0.0",
     "mathjs": "^6.0.0",
     "natural": "^0.6.1",
     "redis": "^2.8.0",
-    "yargs": "^13.0.0",
-    "canvas": "^2.0.0"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "^2.0.0",
