@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.1...v1.2.2) (2019-09-06)
+
+
+### Bug Fixes
+
+* **docs:** remove anchor from reference doc link ([8e68f6e](https://www.github.com/googleapis/nodejs-dns/commit/8e68f6e))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-dns/compare/v1.2.0...v1.2.1) (2019-07-26)
 
 
