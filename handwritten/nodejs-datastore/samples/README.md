@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Concepts](#concepts)
+  * [Error](#error)
   * [Quickstart](#quickstart)
   * [Add Task](#add-task)
   * [Delete Task](#delete-task)
@@ -39,6 +40,23 @@ __Usage:__
 
 
 `node concepts.js`
+
+
+-----
+
+
+
+
+### Error
+
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/error.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/error.js,samples/README.md)
+
+__Usage:__
+
+
+`node error.js`
 
 
 -----
