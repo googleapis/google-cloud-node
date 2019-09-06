@@ -1190,6 +1190,9 @@ class File extends ServiceObject<File> {
 
     // tslint:disable-next-line:no-any
     let validateStream: any; // Created later, if necessary.
+
+    // TODO: remove `through2` dependency in favor of native PassThrough
+    // once Node 8 support is discontinued
     const throughStream = streamEvents(through()) as Duplex;
 
     let crc32c = true;
