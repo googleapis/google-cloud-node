@@ -44,6 +44,13 @@ describe('ImageAnnotatorClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new visionModule.v1p2beta1.ImageAnnotatorClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('batchAnnotateImages', () => {
     it('invokes batchAnnotateImages without error', done => {
       const client = new visionModule.v1p2beta1.ImageAnnotatorClient({

@@ -44,6 +44,13 @@ describe('ProductSearchClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new visionModule.v1p3beta1.ProductSearchClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
   describe('createProductSet', () => {
     it('invokes createProductSet without error', done => {
       const client = new visionModule.v1p3beta1.ProductSearchClient({
@@ -1316,6 +1323,13 @@ describe('ImageAnnotatorClient', () => {
 
   it('should create a client with no options', () => {
     const client = new visionModule.v1p3beta1.ImageAnnotatorClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new visionModule.v1p3beta1.ImageAnnotatorClient({
+      fallback: true,
+    });
     assert(client);
   });
 
