@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-os-login/compare/v1.1.4...v1.2.0) (2019-09-09)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([da55493](https://www.github.com/googleapis/nodejs-os-login/commit/da55493))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-os-login/compare/v1.1.3...v1.1.4) (2019-08-26)
 
 
