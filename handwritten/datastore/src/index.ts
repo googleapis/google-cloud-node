@@ -642,7 +642,7 @@ class Datastore extends DatastoreRequest {
     kind?: string | string[]
   ): Query {
     let namespace = namespaceOrKind as string;
-    if (arguments.length < 2) {
+    if (!kind) {
       kind = namespaceOrKind;
       namespace = this.namespace!;
     }

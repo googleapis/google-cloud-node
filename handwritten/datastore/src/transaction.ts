@@ -262,6 +262,10 @@ class Transaction extends DatastoreRequest {
     );
   }
 
+  createQuery(kind?: string): Query;
+  createQuery(kind?: string[]): Query;
+  createQuery(namespace: string, kind: string): Query;
+  createQuery(namespace: string, kind: string[]): Query;
   /**
    * Create a query for the specified kind. See {module:datastore/query} for all
    * of the available methods.
@@ -284,8 +288,33 @@ class Transaction extends DatastoreRequest {
    *   if (err) {
    *     // Error handling omitted.
    *   }
+   *   const ancestorKey = datastore.key(['ParentCompany', 'Alphabet']);
    *
-   *   const query = transaction.createQuery('Company');
+   *   const query = transaction.createQuery('Company')
+   *       .hasAncestor(ancestorKey);
+   *
+   *   query.run((err, entities) => {
+   *     if (err) {
+   *       // Error handling omitted.
+   *     }
+   *
+   *     transaction.commit((err) => {
+   *       if (!err) {
+   *         // Transaction committed successfully.
+   *       }
+   *     });
+   *   });
+   * });
+   *
+   * // Run the query inside the transaction.with namespace
+   * transaction.run((err) => {
+   *   if (err) {
+   *     // Error handling omitted.
+   *   }
+   *   const ancestorKey = datastore.key(['ParentCompany', 'Alphabet']);
+   *
+   *   const query = transaction.createQuery('CompanyNamespace', 'Company')
+   *       .hasAncestor(ancestorKey);
    *
    *   query.run((err, entities) => {
    *     if (err) {
@@ -300,8 +329,15 @@ class Transaction extends DatastoreRequest {
    *   });
    * });
    */
-  createQuery(namespace: string, kind?: string | string[]): Query {
-    return this.datastore.createQuery.call(this, namespace, kind as string[]);
+  createQuery(
+    namespaceOrKind?: string | string[],
+    kind?: string | string[]
+  ): Query {
+    return this.datastore.createQuery.call(
+      this,
+      namespaceOrKind as string,
+      kind as string[]
+    );
   }
 
   delete(): Promise<CommitResponse>;
