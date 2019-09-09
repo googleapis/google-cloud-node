@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [0.11.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.3...v0.11.0) (2019-09-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([a9458de](https://www.github.com/googleapis/nodejs-dialogflow/commit/a9458de))
+* add newlines to JSON protos ([bc9bc73](https://www.github.com/googleapis/nodejs-dialogflow/commit/bc9bc73))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([8683933](https://www.github.com/googleapis/nodejs-dialogflow/commit/8683933))
+
 ### [0.10.3](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.2...v0.10.3) (2019-07-23)
 
 
