@@ -160,12 +160,10 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-video-intelligence/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/video/latest#reference
+[client-docs]: https://googleapis.dev/nodejs/video/latest
 [product-docs]: https://cloud.google.com/video-intelligence
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=videointelligence.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/getting-started
-
-<a name="reference"></a>

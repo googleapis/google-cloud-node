@@ -49,6 +49,13 @@ describe('VideoIntelligenceServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
+      {fallback: true}
+    );
+    assert(client);
+  });
+
   describe('annotateVideo', function() {
     it('invokes annotateVideo without error', done => {
       const client = new videointelligenceModule.v1beta1.VideoIntelligenceServiceClient(
