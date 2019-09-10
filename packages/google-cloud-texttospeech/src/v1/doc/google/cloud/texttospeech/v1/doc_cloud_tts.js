@@ -19,7 +19,7 @@
  * The top-level message sent by the client for the `ListVoices` method.
  *
  * @property {string} languageCode
- *   Optional (but recommended)
+ *   Optional. Recommended.
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
  *   specified, the ListVoices call will only return voices that can be used to
  *   synthesize this language_code. E.g. when specifying "en-NZ", you will get
@@ -132,9 +132,9 @@ const SynthesisInput = {
  * Description of which voice to use for a synthesis request.
  *
  * @property {string} languageCode
- *   The language (and optionally also the region) of the voice expressed as a
+ *   Required. The language (and potentially also the region) of the voice expressed as a
  *   [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag, e.g.
- *   "en-US". Required. This should not include a script tag (e.g. use
+ *   "en-US". This should not include a script tag (e.g. use
  *   "cmn-cn" rather than "cmn-Hant-cn"), because the script will be inferred
  *   from the input provided in the SynthesisInput.  The TTS service
  *   will use this parameter to help choose an appropriate voice.  Note that
@@ -145,11 +145,11 @@ const SynthesisInput = {
  *   Bokmal) instead of "no" (Norwegian)".
  *
  * @property {string} name
- *   The name of the voice. Optional; if not set, the service will choose a
+ *   The name of the voice. If not set, the service will choose a
  *   voice based on the other parameters such as language_code and gender.
  *
  * @property {number} ssmlGender
- *   The preferred gender of the voice. Optional; if not set, the service will
+ *   The preferred gender of the voice. If not set, the service will
  *   choose a voice based on the other parameters such as language_code and
  *   name. Note that this is only a preference, not requirement; if a
  *   voice of the appropriate gender is not available, the synthesizer should
@@ -169,47 +169,47 @@ const VoiceSelectionParams = {
  * Description of audio data to be synthesized.
  *
  * @property {number} audioEncoding
- *   Required. The format of the requested audio byte stream.
+ *   Required. The format of the audio byte stream.
  *
  *   The number should be among the values of [AudioEncoding]{@link google.cloud.texttospeech.v1.AudioEncoding}
  *
  * @property {number} speakingRate
- *   Optional speaking rate/speed, in the range [0.25, 4.0]. 1.0 is the normal
- *   native speed supported by the specific voice. 2.0 is twice as fast, and
- *   0.5 is half as fast. If unset(0.0), defaults to the native 1.0 speed. Any
- *   other values < 0.25 or > 4.0 will return an error.
+ *   Optional. Input only. Speaking rate/speed, in the range [0.25, 4.0]. 1.0 is
+ *   the normal native speed supported by the specific voice. 2.0 is twice as
+ *   fast, and 0.5 is half as fast. If unset(0.0), defaults to the native 1.0
+ *   speed. Any other values < 0.25 or > 4.0 will return an error.
  *
  * @property {number} pitch
- *   Optional speaking pitch, in the range [-20.0, 20.0]. 20 means increase 20
- *   semitones from the original pitch. -20 means decrease 20 semitones from the
- *   original pitch.
+ *   Optional. Input only. Speaking pitch, in the range [-20.0, 20.0]. 20 means
+ *   increase 20 semitones from the original pitch. -20 means decrease 20
+ *   semitones from the original pitch.
  *
  * @property {number} volumeGainDb
- *   Optional volume gain (in dB) of the normal native volume supported by the
- *   specific voice, in the range [-96.0, 16.0]. If unset, or set to a value of
- *   0.0 (dB), will play at normal native signal amplitude. A value of -6.0 (dB)
- *   will play at approximately half the amplitude of the normal native signal
- *   amplitude. A value of +6.0 (dB) will play at approximately twice the
- *   amplitude of the normal native signal amplitude. Strongly recommend not to
- *   exceed +10 (dB) as there's usually no effective increase in loudness for
- *   any value greater than that.
+ *   Optional. Input only. Volume gain (in dB) of the normal native volume
+ *   supported by the specific voice, in the range [-96.0, 16.0]. If unset, or
+ *   set to a value of 0.0 (dB), will play at normal native signal amplitude. A
+ *   value of -6.0 (dB) will play at approximately half the amplitude of the
+ *   normal native signal amplitude. A value of +6.0 (dB) will play at
+ *   approximately twice the amplitude of the normal native signal amplitude.
+ *   Strongly recommend not to exceed +10 (dB) as there's usually no effective
+ *   increase in loudness for any value greater than that.
  *
  * @property {number} sampleRateHertz
- *   The synthesis sample rate (in hertz) for this audio. Optional.  If this is
- *   different from the voice's natural sample rate, then the synthesizer will
- *   honor this request by converting to the desired sample rate (which might
- *   result in worse audio quality), unless the specified sample rate is not
- *   supported for the encoding chosen, in which case it will fail the request
- *   and return google.rpc.Code.INVALID_ARGUMENT.
+ *   Optional. The synthesis sample rate (in hertz) for this audio. When this is
+ *   specified in SynthesizeSpeechRequest, if this is different from the voice's
+ *   natural sample rate, then the synthesizer will honor this request by
+ *   converting to the desired sample rate (which might result in worse audio
+ *   quality), unless the specified sample rate is not supported for the
+ *   encoding chosen, in which case it will fail the request and return
+ *   google.rpc.Code.INVALID_ARGUMENT.
  *
  * @property {string[]} effectsProfileId
- *   An identifier which selects 'audio effects' profiles that are applied on
- *   (post synthesized) text to speech.
- *   Effects are applied on top of each other in the order they are given.
- *   See
- *
- *   [audio-profiles](https://cloud.google.com/text-to-speech/docs/audio-profiles)
- *   for current supported profile ids.
+ *   Optional. Input only. An identifier which selects 'audio effects' profiles
+ *   that are applied on (post synthesized) text to speech. Effects are applied
+ *   on top of each other in the order they are given. See
+ *   [audio
+ *   profiles](https://cloud.google.com/text-to-speech/docs/audio-profiles) for
+ *   current supported profile ids.
  *
  * @typedef AudioConfig
  * @memberof google.cloud.texttospeech.v1
@@ -224,7 +224,8 @@ const AudioConfig = {
  *
  * @property {Buffer} audioContent
  *   The audio data bytes encoded as specified in the request, including the
- *   header (For LINEAR16 audio, we include the WAV header). Note: as
+ *   header for encodings that are wrapped in containers (e.g. MP3, OGG_OPUS).
+ *   For LINEAR16 audio, we include the WAV header. Note: as
  *   with all bytes fields, protobuffers use a pure binary representation,
  *   whereas JSON representations use base64.
  *
@@ -257,7 +258,7 @@ const AudioEncoding = {
   LINEAR16: 1,
 
   /**
-   * MP3 audio.
+   * MP3 audio at 32kbps.
    */
   MP3: 2,
 

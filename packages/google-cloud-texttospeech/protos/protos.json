@@ -18,12 +18,17 @@
                   },
                   "nested": {
                     "TextToSpeech": {
+                      "options": {
+                        "(google.api.default_host)": "texttospeech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "ListVoices": {
                           "requestType": "ListVoicesRequest",
                           "responseType": "ListVoicesResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/voices"
+                            "(google.api.http).get": "/v1/voices",
+                            "(google.api.method_signature)": "language_code"
                           }
                         },
                         "SynthesizeSpeech": {
@@ -31,7 +36,8 @@
                           "responseType": "SynthesizeSpeechResponse",
                           "options": {
                             "(google.api.http).post": "/v1/text:synthesize",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input,voice,audio_config"
                           }
                         }
                       }
@@ -40,8 +46,27 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
+                      }
+                    },
+                    "SsmlVoiceGender": {
+                      "values": {
+                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                        "MALE": 1,
+                        "FEMALE": 2,
+                        "NEUTRAL": 3
+                      }
+                    },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "LINEAR16": 1,
+                        "MP3": 2,
+                        "OGG_OPUS": 3
                       }
                     },
                     "ListVoicesResponse": {
@@ -78,15 +103,24 @@
                       "fields": {
                         "input": {
                           "type": "SynthesisInput",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "voice": {
                           "type": "VoiceSelectionParams",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "audioConfig": {
                           "type": "AudioConfig",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -114,7 +148,10 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "name": {
                           "type": "string",
@@ -130,28 +167,46 @@
                       "fields": {
                         "audioEncoding": {
                           "type": "AudioEncoding",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "speakingRate": {
                           "type": "double",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pitch": {
                           "type": "double",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "volumeGainDb": {
                           "type": "double",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sampleRateHertz": {
                           "type": "int32",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "effectsProfileId": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -161,22 +216,6 @@
                           "type": "bytes",
                           "id": 1
                         }
-                      }
-                    },
-                    "SsmlVoiceGender": {
-                      "values": {
-                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                        "MALE": 1,
-                        "FEMALE": 2,
-                        "NEUTRAL": 3
-                      }
-                    },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "LINEAR16": 1,
-                        "MP3": 2,
-                        "OGG_OPUS": 3
                       }
                     }
                   }
@@ -184,19 +223,26 @@
                 "v1beta1": {
                   "options": {
                     "cc_enable_arenas": true,
+                    "csharp_namespace": "Google.Cloud.TextToSpeech.V1beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/texttospeech/v1beta1;texttospeech",
                     "java_multiple_files": true,
                     "java_outer_classname": "TextToSpeechProto",
-                    "java_package": "com.google.cloud.texttospeech.v1beta1"
+                    "java_package": "com.google.cloud.texttospeech.v1beta1",
+                    "php_namespace": "Google\\Cloud\\TextToSpeech\\V1beta1"
                   },
                   "nested": {
                     "TextToSpeech": {
+                      "options": {
+                        "(google.api.default_host)": "texttospeech.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "ListVoices": {
                           "requestType": "ListVoicesRequest",
                           "responseType": "ListVoicesResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/voices"
+                            "(google.api.http).get": "/v1beta1/voices",
+                            "(google.api.method_signature)": "language_code"
                           }
                         },
                         "SynthesizeSpeech": {
@@ -204,7 +250,8 @@
                           "responseType": "SynthesizeSpeechResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/text:synthesize",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "input,voice,audio_config"
                           }
                         }
                       }
@@ -213,8 +260,27 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
+                      }
+                    },
+                    "SsmlVoiceGender": {
+                      "values": {
+                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
+                        "MALE": 1,
+                        "FEMALE": 2,
+                        "NEUTRAL": 3
+                      }
+                    },
+                    "AudioEncoding": {
+                      "values": {
+                        "AUDIO_ENCODING_UNSPECIFIED": 0,
+                        "LINEAR16": 1,
+                        "MP3": 2,
+                        "OGG_OPUS": 3
                       }
                     },
                     "ListVoicesResponse": {
@@ -251,15 +317,24 @@
                       "fields": {
                         "input": {
                           "type": "SynthesisInput",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "voice": {
                           "type": "VoiceSelectionParams",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "audioConfig": {
                           "type": "AudioConfig",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -287,7 +362,10 @@
                       "fields": {
                         "languageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "name": {
                           "type": "string",
@@ -303,28 +381,46 @@
                       "fields": {
                         "audioEncoding": {
                           "type": "AudioEncoding",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "speakingRate": {
                           "type": "double",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pitch": {
                           "type": "double",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "volumeGainDb": {
                           "type": "double",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sampleRateHertz": {
                           "type": "int32",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "effectsProfileId": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -334,22 +430,6 @@
                           "type": "bytes",
                           "id": 1
                         }
-                      }
-                    },
-                    "SsmlVoiceGender": {
-                      "values": {
-                        "SSML_VOICE_GENDER_UNSPECIFIED": 0,
-                        "MALE": 1,
-                        "FEMALE": 2,
-                        "NEUTRAL": 3
-                      }
-                    },
-                    "AudioEncoding": {
-                      "values": {
-                        "AUDIO_ENCODING_UNSPECIFIED": 0,
-                        "LINEAR16": 1,
-                        "MP3": 2,
-                        "OGG_OPUS": 3
                       }
                     }
                   }
@@ -362,7 +442,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "HttpProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -453,6 +533,38 @@
                   "type": "string",
                   "id": 2
                 }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
               }
             }
           }
