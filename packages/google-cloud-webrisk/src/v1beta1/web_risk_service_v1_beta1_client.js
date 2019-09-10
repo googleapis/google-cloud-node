@@ -343,13 +343,13 @@ class WebRiskServiceV1Beta1Client {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {Buffer} [request.hashPrefix]
-   *   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
-   *   hash. For JSON requests, this field is base64-encoded.
-   * @param {number[]} [request.threatTypes]
+   * @param {number[]} request.threatTypes
    *   Required. The ThreatLists to search in.
    *
    *   The number should be among the values of [ThreatType]{@link google.cloud.webrisk.v1beta1.ThreatType}
+   * @param {Buffer} [request.hashPrefix]
+   *   A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
+   *   hash. For JSON requests, this field is base64-encoded.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -369,8 +369,8 @@ class WebRiskServiceV1Beta1Client {
    *   // optional auth parameters.
    * });
    *
-   *
-   * client.searchHashes({})
+   * const threatTypes = [];
+   * client.searchHashes({threatTypes: threatTypes})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)

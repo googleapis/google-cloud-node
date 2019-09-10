@@ -186,7 +186,10 @@ describe('WebRiskServiceV1Beta1Client', () => {
       });
 
       // Mock request
-      const request = {};
+      const threatTypes = [];
+      const request = {
+        threatTypes: threatTypes,
+      };
 
       // Mock response
       const expectedResponse = {};
@@ -211,7 +214,10 @@ describe('WebRiskServiceV1Beta1Client', () => {
       });
 
       // Mock request
-      const request = {};
+      const threatTypes = [];
+      const request = {
+        threatTypes: threatTypes,
+      };
 
       // Mock Grpc layer
       client._innerApiCalls.searchHashes = mockSimpleGrpcMethod(
