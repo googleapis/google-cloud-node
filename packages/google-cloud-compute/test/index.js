@@ -213,7 +213,7 @@ describe('Compute', function() {
 
       const calledWith = compute.calledWith_[0];
 
-      const baseUrl = 'https://www.googleapis.com/compute/v1';
+      const baseUrl = 'https://compute.googleapis.com/compute/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute',

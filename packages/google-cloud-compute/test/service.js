@@ -46,7 +46,7 @@ describe('Service', function() {
   const COMPUTE = {
     projectId: 'project-id',
     createService: util.noop,
-    apiEndpoint: 'www.googleapis.com',
+    apiEndpoint: 'compute.googleapis.com',
   };
 
   before(function() {

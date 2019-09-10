@@ -42,7 +42,7 @@ describe('Snapshot', function() {
   let snapshot;
 
   const COMPUTE = {
-    apiEndpoint: 'www.googleapis.com',
+    apiEndpoint: 'compute.googleapis.com',
   };
   const SNAPSHOT_NAME = 'snapshot-name';
 
@@ -74,7 +74,7 @@ describe('Snapshot', function() {
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(
         calledWith.baseUrl,
-        'https://www.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots'
+        'https://compute.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots'
       );
       assert.strictEqual(calledWith.id, SNAPSHOT_NAME);
       assert.deepStrictEqual(calledWith.methods, {

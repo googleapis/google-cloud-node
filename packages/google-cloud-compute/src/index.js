@@ -58,7 +58,7 @@ const Image = require('./image.js');
  *     attempted before returning the error.
  * @property {Constructor} [promise] Custom promise module to use instead of
  *     native Promises.
- * @property {string} [apiEndpoint] The API endpoint of the service used to make requests. Defaults to `www.googleapis.com`
+ * @property {string} [apiEndpoint] The API endpoint of the service used to make requests. Defaults to `compute.googleapis.com`
  */
 /**
  * @see [What is Google Compute Engine?]{@link https://cloud.google.com/compute/docs}
@@ -80,7 +80,7 @@ const Image = require('./image.js');
  */
 class Compute extends common.Service {
   constructor(options = {}) {
-    options.apiEndpoint = options.apiEndpoint || 'www.googleapis.com';
+    options.apiEndpoint = options.apiEndpoint || 'compute.googleapis.com';
     const config = {
       apiEndpoint: options.apiEndpoint,
       baseUrl: `https://${options.apiEndpoint}/compute/v1`,
