@@ -192,6 +192,61 @@ describe('Datastore', () => {
       await datastore.delete(postKey);
     });
 
+    it('should auto remove index with excludeLargeProperties enabled', async () => {
+      const longString = Buffer.alloc(1501, '.').toString();
+      const postKey = datastore.key(['Post', 'post2']);
+      const data = {
+        longString,
+        notMetadata: true,
+        longStringArray: [longString],
+        metadata: {
+          longString,
+          otherProperty: 'value',
+          obj: {
+            longStringArray: [
+              {
+                longString,
+                nestedLongStringArray: [
+                  {
+                    longString,
+                    nestedProperty: true,
+                  },
+                  {
+                    longString,
+                  },
+                ],
+              },
+            ],
+          },
+          longStringArray: [
+            {
+              longString,
+              nestedLongStringArray: [
+                {
+                  longString,
+                  nestedProperty: true,
+                },
+                {
+                  longString,
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      await datastore.save({
+        key: postKey,
+        data,
+        excludeLargeProperties: true,
+      });
+      const [entity] = await datastore.get(postKey);
+      assert.deepStrictEqual(entity[datastore.KEY], postKey);
+      delete entity[datastore.KEY];
+      assert.deepStrictEqual(entity, data);
+      await datastore.delete(postKey);
+    });
+
     it('should save/get/delete with a key name', async () => {
       const postKey = datastore.key(['Post', 'post1']);
       await datastore.save({key: postKey, data: post});
