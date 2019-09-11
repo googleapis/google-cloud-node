@@ -16,7 +16,7 @@
     "test": "mocha system-test/*.js --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "^0.31.0",
+    "@google-cloud/pubsub": "^0.32.0",
     "@google-cloud/storage": "^3.2.1",
     "uuid": "^3.3.2",
     "yargs": "^14.0.0"
