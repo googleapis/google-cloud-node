@@ -44,6 +44,11 @@ describe('DlpServiceClient', () => {
     assert(client);
   });
 
+  it('should create a client with gRPC fallback', () => {
+    const client = new dlpModule.v2.DlpServiceClient({fallback: true});
+    assert(client);
+  });
+
   describe('inspectContent', () => {
     it('invokes inspectContent without error', done => {
       const client = new dlpModule.v2.DlpServiceClient({

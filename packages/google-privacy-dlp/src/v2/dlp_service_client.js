@@ -66,6 +66,16 @@ class DlpServiceClient {
     opts = opts || {};
     this._descriptors = {};
 
+    if (global.isBrowser) {
+      // If we're in browser, we use gRPC fallback.
+      opts.fallback = true;
+    }
+
+    // If we are in browser, we are already using fallback because of the
+    // "browser" field in package.json.
+    // But if we were explicitly requested to use fallback, let's do it now.
+    const gaxModule = !global.isBrowser && opts.fallback ? gax.fallback : gax;
+
     const servicePath =
       opts.servicePath || opts.apiEndpoint || this.constructor.servicePath;
 
@@ -82,58 +92,73 @@ class DlpServiceClient {
     // Create a `gaxGrpc` object, with any grpc-specific options
     // sent to the client.
     opts.scopes = this.constructor.scopes;
-    const gaxGrpc = new gax.GrpcClient(opts);
+    const gaxGrpc = new gaxModule.GrpcClient(opts);
 
     // Save the auth object to the client, for use by other methods.
     this.auth = gaxGrpc.auth;
 
     // Determine the client header string.
-    const clientHeader = [
-      `gl-node/${process.versions.node}`,
-      `grpc/${gaxGrpc.grpcVersion}`,
-      `gax/${gax.version}`,
-      `gapic/${VERSION}`,
-    ];
+    const clientHeader = [];
+
+    if (typeof process !== 'undefined' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    }
+    clientHeader.push(`gax/${gaxModule.version}`);
+    if (opts.fallback) {
+      clientHeader.push(`gl-web/${gaxModule.version}`);
+    } else {
+      clientHeader.push(`grpc/${gaxGrpc.grpcVersion}`);
+    }
+    clientHeader.push(`gapic/${VERSION}`);
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
 
     // Load the applicable protos.
+    // For Node.js, pass the path to JSON proto file.
+    // For browsers, pass the JSON content.
+
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     const protos = gaxGrpc.loadProto(
-      path.join(__dirname, '..', '..', 'protos'),
-      ['google/privacy/dlp/v2/dlp.proto']
+      opts.fallback ? require('../../protos/protos.json') : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this._pathTemplates = {
-      dlpJobPathTemplate: new gax.PathTemplate(
+      dlpJobPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/dlpJobs/{dlp_job}'
       ),
-      organizationPathTemplate: new gax.PathTemplate(
+      organizationPathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
-      organizationDeidentifyTemplatePathTemplate: new gax.PathTemplate(
+      organizationDeidentifyTemplatePathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/deidentifyTemplates/{deidentify_template}'
       ),
-      organizationInspectTemplatePathTemplate: new gax.PathTemplate(
+      organizationInspectTemplatePathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/inspectTemplates/{inspect_template}'
       ),
-      organizationStoredInfoTypePathTemplate: new gax.PathTemplate(
+      organizationStoredInfoTypePathTemplate: new gaxModule.PathTemplate(
         'organizations/{organization}/storedInfoTypes/{stored_info_type}'
       ),
-      projectPathTemplate: new gax.PathTemplate('projects/{project}'),
-      projectDeidentifyTemplatePathTemplate: new gax.PathTemplate(
+      projectPathTemplate: new gaxModule.PathTemplate('projects/{project}'),
+      projectDeidentifyTemplatePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/deidentifyTemplates/{deidentify_template}'
       ),
-      projectInspectTemplatePathTemplate: new gax.PathTemplate(
+      projectInspectTemplatePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/inspectTemplates/{inspect_template}'
       ),
-      projectJobTriggerPathTemplate: new gax.PathTemplate(
+      projectJobTriggerPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/jobTriggers/{job_trigger}'
       ),
-      projectStoredInfoTypePathTemplate: new gax.PathTemplate(
+      projectStoredInfoTypePathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/storedInfoTypes/{stored_info_type}'
       ),
     };
@@ -142,23 +167,27 @@ class DlpServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this._descriptors.page = {
-      listInspectTemplates: new gax.PageDescriptor(
+      listInspectTemplates: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'inspectTemplates'
       ),
-      listDeidentifyTemplates: new gax.PageDescriptor(
+      listDeidentifyTemplates: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'deidentifyTemplates'
       ),
-      listDlpJobs: new gax.PageDescriptor('pageToken', 'nextPageToken', 'jobs'),
-      listJobTriggers: new gax.PageDescriptor(
+      listDlpJobs: new gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'jobs'
+      ),
+      listJobTriggers: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'jobTriggers'
       ),
-      listStoredInfoTypes: new gax.PageDescriptor(
+      listStoredInfoTypes: new gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'storedInfoTypes'
@@ -181,7 +210,9 @@ class DlpServiceClient {
     // Put together the "service stub" for
     // google.privacy.dlp.v2.DlpService.
     const dlpServiceStub = gaxGrpc.createStub(
-      protos.google.privacy.dlp.v2.DlpService,
+      opts.fallback
+        ? protos.lookupService('google.privacy.dlp.v2.DlpService')
+        : protos.google.privacy.dlp.v2.DlpService,
       opts
     );
 
@@ -220,18 +251,16 @@ class DlpServiceClient {
       'deleteStoredInfoType',
     ];
     for (const methodName of dlpServiceStubMethods) {
-      this._innerApiCalls[methodName] = gax.createApiCall(
-        dlpServiceStub.then(
-          stub =>
-            function() {
-              const args = Array.prototype.slice.call(arguments, 0);
-              return stub[methodName].apply(stub, args);
-            },
-          err =>
-            function() {
-              throw err;
-            }
-        ),
+      const innerCallPromise = dlpServiceStub.then(
+        stub => (...args) => {
+          return stub[methodName].apply(stub, args);
+        },
+        err => () => {
+          throw err;
+        }
+      );
+      this._innerApiCalls[methodName] = gaxModule.createApiCall(
+        innerCallPromise,
         defaults[methodName],
         this._descriptors.page[methodName]
       );
