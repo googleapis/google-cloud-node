@@ -1185,6 +1185,7 @@ export interface EntityProto {
 
 // tslint:disable-next-line no-any
 export type Entity = any;
+export type Entities = Entity | Entity[];
 
 interface KeyProtoPathElement extends google.datastore.v1.Key.IPathElement {
   // tslint:disable-next-line no-any

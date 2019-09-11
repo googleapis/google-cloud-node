@@ -448,13 +448,13 @@ class Query {
     optionsOrCallback?: RunQueryOptions | RunQueryCallback,
     cb?: RunQueryCallback
   ): void | Promise<RunQueryResponse> {
-    const query = this as Query;
+    const query = this;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
     const runQuery = this.scope!.runQuery.bind(this.scope);
-    return (runQuery as Function)(query, options, callback);
+    return runQuery(query, options, callback);
   }
 
   /**
