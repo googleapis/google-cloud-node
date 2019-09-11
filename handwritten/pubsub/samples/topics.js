@@ -218,9 +218,9 @@ async function publishWithRetrySettings(projectId, topicName, data) {
       initialRetryDelayMillis: 100,
       retryDelayMultiplier: 1.3,
       maxRetryDelayMillis: 60000,
-      initialRpcTimeoutMillis: 12000,
+      initialRpcTimeoutMillis: 5000,
       rpcTimeoutMultiplier: 1.0,
-      maxRpcTimeoutMillis: 30000,
+      maxRpcTimeoutMillis: 600000,
       totalTimeoutMillis: 600000,
     },
   };
