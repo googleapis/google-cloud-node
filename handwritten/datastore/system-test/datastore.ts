@@ -693,7 +693,7 @@ describe('Datastore', () => {
       await transaction.run();
       transaction.delete(deleteKey);
 
-      await transaction.save([
+      transaction.save([
         {
           key,
           data: {rating: 10},
