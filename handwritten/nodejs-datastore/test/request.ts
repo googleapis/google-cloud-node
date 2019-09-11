@@ -819,6 +819,18 @@ describe('Request', () => {
           })
           .emit('reading');
       });
+
+      it('should emit an error when encoding fails', done => {
+        const error = new Error('Encoding error.');
+        sandbox.stub(entity, 'queryToQueryProto').throws(error);
+        request
+          .runQueryStream({})
+          .on('error', (err: Error) => {
+            assert.strictEqual(err, error);
+            done();
+          })
+          .emit('reading');
+      });
     });
 
     describe('success', () => {
