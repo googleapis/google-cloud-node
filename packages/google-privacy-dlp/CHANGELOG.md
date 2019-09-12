@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.4.0...v1.5.0) (2019-09-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([#328](https://www.github.com/googleapis/nodejs-dlp/issues/328)) ([92e53b9](https://www.github.com/googleapis/nodejs-dlp/commit/92e53b9))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([#330](https://www.github.com/googleapis/nodejs-dlp/issues/330)) ([9403ebe](https://www.github.com/googleapis/nodejs-dlp/commit/9403ebe))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-dlp/compare/v1.3.1...v1.4.0) (2019-07-09)
 
 
