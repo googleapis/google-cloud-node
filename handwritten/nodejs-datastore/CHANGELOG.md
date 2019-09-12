@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [4.3.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.2.0...v4.3.0) (2019-09-12)
+
+
+### Bug Fixes
+
+* **types:** fix and clean up types for request.ts ([#472](https://www.github.com/googleapis/nodejs-datastore/issues/472)) ([928f237](https://www.github.com/googleapis/nodejs-datastore/commit/928f237))
+* added overload method for transaction.createQuery to handle namespace issue ([#486](https://www.github.com/googleapis/nodejs-datastore/issues/486)) ([28568c1](https://www.github.com/googleapis/nodejs-datastore/commit/28568c1))
+* emit encoding errors on user stream ([#492](https://www.github.com/googleapis/nodejs-datastore/issues/492)) ([8d3b552](https://www.github.com/googleapis/nodejs-datastore/commit/8d3b552))
+* refactor and clean up types ([#476](https://www.github.com/googleapis/nodejs-datastore/issues/476)) ([5971c4a](https://www.github.com/googleapis/nodejs-datastore/commit/5971c4a))
+* update node version in HTTP headers ([#475](https://www.github.com/googleapis/nodejs-datastore/issues/475)) ([b6e65bb](https://www.github.com/googleapis/nodejs-datastore/commit/b6e65bb))
+
+
+### Features
+
+* add support for auto-unindex  ([#453](https://www.github.com/googleapis/nodejs-datastore/issues/453)) ([33292d2](https://www.github.com/googleapis/nodejs-datastore/commit/33292d2))
+* load protos from JSON, grpc-fallback support ([#485](https://www.github.com/googleapis/nodejs-datastore/issues/485)) ([1cf85ea](https://www.github.com/googleapis/nodejs-datastore/commit/1cf85ea))
+* support key re-use from serialized path ([#474](https://www.github.com/googleapis/nodejs-datastore/issues/474)) ([b36c90f](https://www.github.com/googleapis/nodejs-datastore/commit/b36c90f))
+
 ## [4.2.0](https://www.github.com/googleapis/nodejs-datastore/compare/v4.1.4...v4.2.0) (2019-08-09)
 
 
