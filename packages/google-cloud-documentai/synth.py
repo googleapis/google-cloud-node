@@ -22,12 +22,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 # run the gapic generator
 gapic = gcp.GAPICGenerator()
-versions = ['CHANGE-ME']
+versions = ['v1beta1']
 for version in versions:
  library = gapic.node_library(
    'document',
-   version)
- s.copy(library, excludes=[])
+   version,
+   private=True)
+ s.copy(library, excludes=['README.md', 'package.json'])
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

@@ -1,0 +1,39 @@
+{
+  "updateTime": "2019-09-12T00:21:07.274473Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.36.2",
+        "dockerImage": "googleapis/artman@sha256:0e6f3a668cd68afc768ecbe08817cf6e56a0e64fcbdb1c58c3b97492d12418a1"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis-private",
+        "remote": "git@github.com:googleapis/googleapis-private.git",
+        "sha": "908d03b76ca97370420bd23a282847f0ad175e6d",
+        "internalRef": "267478864"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.5.2"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis-private",
+        "apiName": "document",
+        "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/document/artman_document_v1beta1.yaml"
+      }
+    }
+  ]
+}
