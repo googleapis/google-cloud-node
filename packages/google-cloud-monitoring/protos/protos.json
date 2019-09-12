@@ -15,6 +15,10 @@
               },
               "nested": {
                 "AlertPolicyService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
                   "methods": {
                     "ListAlertPolicies": {
                       "requestType": "ListAlertPoliciesRequest",
@@ -455,6 +459,10 @@
                   }
                 },
                 "GroupService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
                   "methods": {
                     "ListGroups": {
                       "requestType": "ListGroupsRequest",
@@ -593,6 +601,10 @@
                     "name": {
                       "type": "string",
                       "id": 3
+                    },
+                    "recursive": {
+                      "type": "bool",
+                      "id": 4
                     }
                   }
                 },
@@ -662,6 +674,10 @@
                   }
                 },
                 "MetricService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read,https://www.googleapis.com/auth/monitoring.write"
+                  },
                   "methods": {
                     "ListMonitoredResourceDescriptors": {
                       "requestType": "ListMonitoredResourceDescriptorsRequest",
@@ -954,6 +970,10 @@
                   }
                 },
                 "NotificationChannelService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
                   "methods": {
                     "ListNotificationChannelDescriptors": {
                       "requestType": "ListNotificationChannelDescriptorsRequest",
@@ -1275,6 +1295,10 @@
                   }
                 },
                 "UptimeCheckService": {
+                  "options": {
+                    "(google.api.default_host)": "monitoring.googleapis.com",
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read"
+                  },
                   "methods": {
                     "ListUptimeCheckConfigs": {
                       "requestType": "ListUptimeCheckConfigsRequest",
@@ -1851,6 +1875,22 @@
                   }
                 }
               }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
             },
             "MonitoredResourceDescriptor": {
               "fields": {

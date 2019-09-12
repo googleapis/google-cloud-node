@@ -22,7 +22,6 @@
  * @property {string} name
  *   A unique resource name for this InternalChecker. The format is:
  *
- *
  *     `projects/[PROJECT_ID]/internalCheckers/[INTERNAL_CHECKER_ID]`.
  *
  *   PROJECT_ID is the stackdriver workspace project for the
@@ -45,12 +44,47 @@
  *   The GCP project_id where the internal checker lives. Not necessary
  *   the same as the workspace project.
  *
+ * @property {number} state
+ *   The current operational state of the internal checker.
+ *
+ *   The number should be among the values of [State]{@link google.monitoring.v3.State}
+ *
  * @typedef InternalChecker
  * @memberof google.monitoring.v3
  * @see [google.monitoring.v3.InternalChecker definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
  */
 const InternalChecker = {
   // This is for documentation. Actual contents will be loaded by gRPC.
+
+  /**
+   * Operational states for an internal checker.
+   *
+   * @enum {number}
+   * @memberof google.monitoring.v3
+   */
+  State: {
+
+    /**
+     * An internal checker should never be in the unspecified state.
+     */
+    UNSPECIFIED: 0,
+
+    /**
+     * The checker is being created, provisioned, and configured. A checker in
+     * this state can be returned by ListInternalCheckers or GetInternalChecker,
+     * as well as by examining the longrunning.Operation that created it.
+     */
+    CREATING: 1,
+
+    /**
+     * The checker is running and available for use. A checker in this state
+     * can be returned by ListInternalCheckers or GetInternalChecker as well
+     * as by examining the longrunning.Operation that created it.
+     * If a checker is being torn down, it is neither visible nor usable, so
+     * there is no "deleting" or "down" state.
+     */
+    RUNNING: 2
+  }
 };
 
 /**
@@ -104,7 +138,7 @@ const InternalChecker = {
  *   How often, in seconds, the uptime check is performed.
  *   Currently, the only supported values are `60s` (1 minute), `300s`
  *   (5 minutes), `600s` (10 minutes), and `900s` (15 minutes). Optional,
- *   defaults to `300s`.
+ *   defaults to `60s`.
  *
  *   This object should have the same structure as [Duration]{@link google.protobuf.Duration}
  *
@@ -132,12 +166,6 @@ const InternalChecker = {
  *   regions.
  *
  *   The number should be among the values of [UptimeCheckRegion]{@link google.monitoring.v3.UptimeCheckRegion}
- *
- * @property {boolean} isInternal
- *   If this is true, then checks are made only from the 'internal_checkers'.
- *   If it is false, then checks are made only from the 'selected_regions'.
- *   It is an error to provide 'selected_regions' when is_internal is true,
- *   or to provide 'internal_checkers' when is_internal is false.
  *
  * @property {Object[]} internalCheckers
  *   The internal checkers that this check will egress from. If `is_internal` is
@@ -183,7 +211,8 @@ const UptimeCheckConfig = {
    * @property {string} path
    *   The path to the page to run the check against. Will be combined with the
    *   host (specified within the MonitoredResource) and port to construct the
-   *   full URL. Optional (defaults to "/").
+   *   full URL. Optional (defaults to "/"). If the provided path does not
+   *   begin with "/", it will be prepended automatically.
    *
    * @property {number} port
    *   The port to the page to run the check against. Will be combined with host
@@ -213,6 +242,11 @@ const UptimeCheckConfig = {
    *   Entering two separate headers with the same key in a Create call will
    *   cause the first to be overwritten by the second.
    *   The maximum number of headers allowed is 100.
+   *
+   * @property {boolean} validateSsl
+   *   Boolean specifying whether to validate SSL certificates.
+   *   Only applies to uptime_url checks. If use_ssl is false, setting this to
+   *   true has no effect.
    *
    * @typedef HttpCheck
    * @memberof google.monitoring.v3
@@ -264,12 +298,55 @@ const UptimeCheckConfig = {
    * @property {string} content
    *   String or regex content to match (max 1024 bytes)
    *
+   * @property {number} matcher
+   *   The matcher representing content match options which the check will run
+   *   with. If the field is not specified (in previous versions), the option is
+   *   set to be CONTAINS_STRING which performs content substring matching.
+   *
+   *   The number should be among the values of [ContentMatcherOption]{@link google.monitoring.v3.ContentMatcherOption}
+   *
    * @typedef ContentMatcher
    * @memberof google.monitoring.v3
    * @see [google.monitoring.v3.UptimeCheckConfig.ContentMatcher definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/monitoring/v3/uptime.proto}
    */
   ContentMatcher: {
     // This is for documentation. Actual contents will be loaded by gRPC.
+
+    /**
+     * Options to perform content matching.
+     *
+     * @enum {number}
+     * @memberof google.monitoring.v3
+     */
+    ContentMatcherOption: {
+
+      /**
+       * No content macher option specified. Treated as CONTAINS_STRING.
+       */
+      CONTENT_MATCHER_OPTION_UNSPECIFIED: 0,
+
+      /**
+       * Allows checking substring matching.
+       * Default value for previous versions without option.
+       */
+      CONTAINS_STRING: 1,
+
+      /**
+       * Allows checking negation of substring matching (doesn't contain the
+       * substring).
+       */
+      NOT_CONTAINS_STRING: 2,
+
+      /**
+       * Allows checking regular expression matching.
+       */
+      MATCHES_REGEX: 3,
+
+      /**
+       * Allows checking negation of regular expression matching.
+       */
+      NOT_MATCHES_REGEX: 4
+    }
   }
 };
 

@@ -70,9 +70,7 @@ const NotificationChannelDescriptor = {
  *
  * @property {string} type
  *   The type of the notification channel. This field matches the
- *   value of the
- *   NotificationChannelDescriptor.type
- *   field.
+ *   value of the NotificationChannelDescriptor.type field.
  *
  * @property {string} name
  *   The full REST resource name for this channel. The syntax is:
@@ -90,13 +88,13 @@ const NotificationChannelDescriptor = {
  * @property {string} description
  *   An optional human-readable description of this notification channel. This
  *   description may provide additional details, beyond the display
- *   name, for the channel. This may not exceeed 1024 Unicode characters.
+ *   name, for the channel. This may not exceed 1024 Unicode characters.
  *
  * @property {Object.<string, string>} labels
  *   Configuration fields that define the channel and its behavior. The
  *   permissible and required labels are specified in the
- *   NotificationChannelDescriptor.labels
- *   of the `NotificationChannelDescriptor` corresponding to the `type` field.
+ *   NotificationChannelDescriptor.labels of the
+ *   `NotificationChannelDescriptor` corresponding to the `type` field.
  *
  * @property {Object.<string, string>} userLabels
  *   User-supplied key/value data that does not need to conform to

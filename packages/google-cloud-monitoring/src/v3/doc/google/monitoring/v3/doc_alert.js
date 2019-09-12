@@ -80,6 +80,12 @@
  *
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
+ * @property {Object} validity
+ *   Read-only description of how the alert policy is invalid. OK if the alert
+ *   policy is valid. If not OK, the alert policy will not generate incidents.
+ *
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
+ *
  * @property {string[]} notificationChannels
  *   Identifies the notification channels to which notifications should be sent
  *   when incidents are opened or closed or when new violations occur on

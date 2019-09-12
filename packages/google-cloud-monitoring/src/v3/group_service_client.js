@@ -634,6 +634,10 @@ class GroupServiceClient {
    * @param {string} request.name
    *   The group to delete. The format is
    *   `"projects/{project_id_or_number}/groups/{group_id}"`.
+   * @param {boolean} [request.recursive]
+   *   If this field is true, then the request means to delete a group with all
+   *   its descendants. Otherwise, the request means to delete a group only when
+   *   it has no descendants. The default value is false.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
