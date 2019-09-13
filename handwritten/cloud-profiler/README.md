@@ -24,6 +24,7 @@ of Node.js.
     [this](https://bugs.chromium.org/p/chromium/issues/detail?id=847863) issue,
     which can cause garbage collection to take several minutes when heap
     profiling is enabled.
+    * Node.js 12.
 
 1. `@google-cloud/profiler` depends on the
 [`pprof`](https://www.npmjs.com/package/pprof) module, a module with a native
