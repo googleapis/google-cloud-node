@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.3.0...v1.4.0) (2019-09-14)
+
+
+### Features
+
+* make vision helpers work with JSON proto ([#441](https://www.github.com/googleapis/nodejs-vision/issues/441)) ([5b7a249](https://www.github.com/googleapis/nodejs-vision/commit/5b7a249))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-vision/compare/v1.2.0...v1.3.0) (2019-09-09)
 
 
