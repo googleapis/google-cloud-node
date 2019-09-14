@@ -18,11 +18,13 @@
 
 const fs = require('fs');
 const is = require('is');
-const path = require('path');
 const {promisify} = require('@google-cloud/promisify');
-const protobuf = require('protobufjs');
-
 const gax = require('google-gax');
+
+// We only need to have a Feature enum from the protos, and we want
+// this enum to work for both gRPC and fallback scenarios.
+// It's enough to have the contents of JSON proto for this purpose.
+const jsonProto = require('../protos/protos.json');
 
 /*!
  * Convert non-object request forms into a correctly-formatted object.
@@ -244,16 +246,7 @@ module.exports = apiVersion => {
     });
   });
 
-  let protoFilesRoot = new gax.GoogleProtoFilesRoot();
-  protoFilesRoot = protobuf.loadSync(
-    path.join(
-      __dirname,
-      '..',
-      'protos',
-      `google/cloud/vision/${apiVersion}/image_annotator.proto`
-    ),
-    protoFilesRoot
-  );
+  const protoFilesRoot = gax.protobuf.Root.fromJSON(jsonProto);
   const features = protoFilesRoot.lookup(
     `google.cloud.vision.${apiVersion}.Feature.Type`
   ).values;
