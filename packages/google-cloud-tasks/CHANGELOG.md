@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.3.0...v1.4.0) (2019-09-16)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([1c735c3](https://www.github.com/googleapis/nodejs-tasks/commit/1c735c3))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.2.1...v1.3.0) (2019-08-28)
 
 
