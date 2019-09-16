@@ -23,8 +23,8 @@
  *   created.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
- *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}".
+ *   For example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @property {Object} application
  *   Required. The application to be created.
@@ -46,9 +46,8 @@ const CreateApplicationRequest = {
  *   Required. The resource name of the application to be retrieved.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
- *   for example,
- *   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+ *   For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
  *
  * @typedef GetApplicationRequest
  * @memberof google.cloud.talent.v4beta1
@@ -68,8 +67,7 @@ const GetApplicationRequest = {
  *   This object should have the same structure as [Application]{@link google.cloud.talent.v4beta1.Application}
  *
  * @property {Object} updateMask
- *   Optional but strongly recommended for the best service
- *   experience.
+ *   Strongly recommended for the best service experience.
  *
  *   If
  *   update_mask
@@ -98,9 +96,8 @@ const UpdateApplicationRequest = {
  *   Required. The resource name of the application to be deleted.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
- *   for example,
- *   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+ *   For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
  *
  * @typedef DeleteApplicationRequest
  * @memberof google.cloud.talent.v4beta1
@@ -119,13 +116,13 @@ const DeleteApplicationRequest = {
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
- *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+ *   example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @property {string} pageToken
- *   Optional. The starting indicator from which to return results.
+ *   The starting indicator from which to return results.
  *
  * @property {number} pageSize
- *   Optional. The maximum number of applications to be returned, at most 100.
+ *   The maximum number of applications to be returned, at most 100.
  *   Default is 100 if a non-positive number is provided.
  *
  * @typedef ListApplicationsRequest
@@ -137,8 +134,6 @@ const ListApplicationsRequest = {
 };
 
 /**
- * Output only.
- *
  * The List applications response object.
  *
  * @property {Object[]} applications

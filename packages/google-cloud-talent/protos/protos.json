@@ -64,11 +64,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "application": {
                           "type": "Application",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -76,7 +82,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -84,7 +93,10 @@
                       "fields": {
                         "application": {
                           "type": "Application",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -96,7 +108,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -104,7 +119,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
@@ -141,11 +159,17 @@
                         },
                         "externalId": {
                           "type": "string",
-                          "id": 31
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "profile": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "job": {
                           "type": "string",
@@ -161,7 +185,10 @@
                         },
                         "stage": {
                           "type": "ApplicationStage",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "state": {
                           "type": "ApplicationState",
@@ -178,7 +205,10 @@
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 19
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
@@ -194,11 +224,17 @@
                         },
                         "isMatch": {
                           "type": "google.protobuf.BoolValue",
-                          "id": 28
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "jobTitleSnippet": {
                           "type": "string",
-                          "id": 29
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -519,11 +555,17 @@
                         },
                         "annualizedBaseCompensationRange": {
                           "type": "CompensationRange",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "annualizedTotalCompensationRange": {
                           "type": "CompensationRange",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -646,7 +688,10 @@
                         },
                         "skillNameSnippet": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -658,7 +703,10 @@
                         },
                         "outcome": {
                           "type": "Outcome",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -807,11 +855,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "company": {
                           "type": "Company",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -819,7 +873,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -827,7 +884,10 @@
                       "fields": {
                         "company": {
                           "type": "Company",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -839,7 +899,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -847,7 +910,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
@@ -888,11 +954,17 @@
                         },
                         "displayName": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "externalId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "size": {
                           "type": "CompanySize",
@@ -929,11 +1001,17 @@
                         },
                         "derivedInfo": {
                           "type": "DerivedInfo",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "suspended": {
                           "type": "bool",
-                          "id": 13
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -967,11 +1045,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "query": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "languageCodes": {
                           "rule": "repeated",
@@ -980,7 +1064,10 @@
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "company": {
                           "type": "string",
@@ -1066,11 +1153,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "clientEvent": {
                           "type": "ClientEvent",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1090,11 +1183,17 @@
                         },
                         "eventId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "jobEvent": {
                           "type": "JobEvent",
@@ -1114,12 +1213,18 @@
                       "fields": {
                         "type": {
                           "type": "JobEventType",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "jobs": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "profile": {
                           "type": "string",
@@ -1153,12 +1258,18 @@
                       "fields": {
                         "type": {
                           "type": "ProfileEventType",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "profiles": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "jobs": {
                           "rule": "repeated",
@@ -1193,6 +1304,16 @@
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
+                        "BatchCreateJobs": {
+                          "requestType": "BatchCreateJobsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchCreate",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        },
                         "GetJob": {
                           "requestType": "GetJobRequest",
                           "responseType": "Job",
@@ -1211,20 +1332,22 @@
                             "(google.api.http).additional_bindings.body": "*"
                           }
                         },
+                        "BatchUpdateJobs": {
+                          "requestType": "BatchUpdateJobsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchUpdate",
+                            "(google.api.http).additional_bindings.body": "*"
+                          }
+                        },
                         "DeleteJob": {
                           "requestType": "DeleteJobRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v4beta1/{name=projects/*/tenants/*/jobs/*}",
                             "(google.api.http).additional_bindings.delete": "/v4beta1/{name=projects/*/jobs/*}"
-                          }
-                        },
-                        "ListJobs": {
-                          "requestType": "ListJobsRequest",
-                          "responseType": "ListJobsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/jobs",
-                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/jobs"
                           }
                         },
                         "BatchDeleteJobs": {
@@ -1234,6 +1357,14 @@
                             "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchDelete",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchDelete"
+                          }
+                        },
+                        "ListJobs": {
+                          "requestType": "ListJobsRequest",
+                          "responseType": "ListJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v4beta1/{parent=projects/*/tenants/*}/jobs",
+                            "(google.api.http).additional_bindings.get": "/v4beta1/{parent=projects/*}/jobs"
                           }
                         },
                         "SearchJobs": {
@@ -1255,26 +1386,6 @@
                             "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:searchForAlert",
                             "(google.api.http).additional_bindings.body": "*"
                           }
-                        },
-                        "BatchCreateJobs": {
-                          "requestType": "BatchCreateJobsRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchCreate",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchCreate",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
-                        },
-                        "BatchUpdateJobs": {
-                          "requestType": "BatchUpdateJobsRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v4beta1/{parent=projects/*/tenants/*}/jobs:batchUpdate",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v4beta1/{parent=projects/*}/jobs:batchUpdate",
-                            "(google.api.http).additional_bindings.body": "*"
-                          }
                         }
                       }
                     },
@@ -1282,11 +1393,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "job": {
                           "type": "Job",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1294,7 +1411,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1302,7 +1422,10 @@
                       "fields": {
                         "job": {
                           "type": "Job",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -1314,7 +1437,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1322,11 +1448,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "filter": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1334,11 +1466,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "filter": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
@@ -1384,7 +1522,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "searchMode": {
                           "type": "SearchMode",
@@ -1392,7 +1533,10 @@
                         },
                         "requestMetadata": {
                           "type": "RequestMetadata",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "jobQuery": {
                           "type": "JobQuery",
@@ -1449,11 +1593,17 @@
                           "fields": {
                             "importanceLevel": {
                               "type": "ImportanceLevel",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "rankingExpression": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           },
                           "nested": {
@@ -1571,12 +1721,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "jobs": {
                           "rule": "repeated",
                           "type": "Job",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1584,7 +1740,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "jobs": {
                           "rule": "repeated",
@@ -1799,12 +1958,18 @@
                       "fields": {
                         "type": {
                           "type": "FilterType",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "units": {
                           "rule": "repeated",
                           "type": "CompensationInfo.CompensationUnit",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "range": {
                           "type": "CompensationInfo.CompensationRange",
@@ -1839,15 +2004,24 @@
                       "fields": {
                         "commuteMethod": {
                           "type": "CommuteMethod",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "startCoordinates": {
                           "type": "google.type.LatLng",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "travelDuration": {
                           "type": "google.protobuf.Duration",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "allowImpreciseAddresses": {
                           "type": "bool",
@@ -1876,7 +2050,10 @@
                       "fields": {
                         "jobTitle": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "negated": {
                           "type": "bool",
@@ -1888,7 +2065,10 @@
                       "fields": {
                         "skill": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "negated": {
                           "type": "bool",
@@ -1900,7 +2080,10 @@
                       "fields": {
                         "employer": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "mode": {
                           "type": "EmployerFilterMode",
@@ -1970,7 +2153,10 @@
                       "fields": {
                         "outcomeNotes": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "negated": {
                           "type": "bool",
@@ -2031,7 +2217,10 @@
                       "fields": {
                         "personName": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2064,19 +2253,31 @@
                         },
                         "company": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requisitionId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "title": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "description": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "addresses": {
                           "rule": "repeated",
@@ -2168,19 +2369,31 @@
                         },
                         "postingCreateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 26
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "postingUpdateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 27
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "companyDisplayName": {
                           "type": "string",
-                          "id": 28
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "derivedInfo": {
                           "type": "DerivedInfo",
-                          "id": 29
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "processingOptions": {
                           "type": "ProcessingOptions",
@@ -2291,7 +2504,14 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
                         },
                         "pageToken": {
                           "type": "string",
@@ -2324,11 +2544,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "profile": {
                           "type": "Profile",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2336,7 +2562,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2344,7 +2573,10 @@
                       "fields": {
                         "profile": {
                           "type": "Profile",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -2356,7 +2588,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2364,11 +2599,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestMetadata": {
                           "type": "RequestMetadata",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "profileQuery": {
                           "type": "ProfileQuery",
@@ -2563,16 +2804,6 @@
                           "type": "Certification",
                           "id": 23
                         },
-                        "applications": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 47
-                        },
-                        "assignments": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 48
-                        },
                         "customAttributes": {
                           "keyType": "string",
                           "type": "CustomAttribute",
@@ -2580,11 +2811,17 @@
                         },
                         "processed": {
                           "type": "bool",
-                          "id": 27
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "keywordSnippet": {
                           "type": "string",
-                          "id": 28
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "derivedAddresses": {
                           "rule": "repeated",
@@ -2817,15 +3054,24 @@
                         },
                         "jobTitleSnippet": {
                           "type": "string",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "jobDescriptionSnippet": {
                           "type": "string",
-                          "id": 12
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "employerNameSnippet": {
                           "type": "string",
-                          "id": 13
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2877,11 +3123,17 @@
                         },
                         "schoolNameSnippet": {
                           "type": "string",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "degreeSnippet": {
                           "type": "string",
-                          "id": 11
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2936,16 +3188,25 @@
                         },
                         "activityNameSnippet": {
                           "type": "string",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "activityDescriptionSnippet": {
                           "type": "string",
-                          "id": 9
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "skillsUsedSnippet": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 10
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3081,11 +3342,17 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "tenant": {
                           "type": "Tenant",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3093,7 +3360,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3101,7 +3371,10 @@
                       "fields": {
                         "tenant": {
                           "type": "Tenant",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -3113,7 +3386,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -3121,7 +3397,10 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
@@ -3158,7 +3437,10 @@
                         },
                         "externalId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "usageType": {
                           "type": "DataUsageType",

@@ -249,8 +249,8 @@ class ApplicationServiceClient {
    *   created.
    *
    *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
-   *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}".
+   *   For example, "projects/foo/tenants/bar/profiles/baz".
    * @param {Object} request.application
    *   Required. The application to be created.
    *
@@ -316,9 +316,8 @@ class ApplicationServiceClient {
    *   Required. The resource name of the application to be retrieved.
    *
    *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
-   *   for example,
-   *   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+   *   For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -377,8 +376,7 @@ class ApplicationServiceClient {
    *
    *   This object should have the same structure as [Application]{@link google.cloud.talent.v4beta1.Application}
    * @param {Object} [request.updateMask]
-   *   Optional but strongly recommended for the best service
-   *   experience.
+   *   Strongly recommended for the best service experience.
    *
    *   If
    *   update_mask
@@ -447,9 +445,8 @@ class ApplicationServiceClient {
    *   Required. The resource name of the application to be deleted.
    *
    *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
-   *   for example,
-   *   "projects/test-project/tenants/test-tenant/profiles/test-profile/applications/test-application".
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+   *   For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -500,7 +497,7 @@ class ApplicationServiceClient {
    *
    *   The format is
    *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
-   *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+   *   example, "projects/foo/tenants/bar/profiles/baz".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -617,7 +614,7 @@ class ApplicationServiceClient {
    *
    *   The format is
    *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}", for
-   *   example, "projects/test-project/tenants/test-tenant/profiles/test-profile".
+   *   example, "projects/foo/tenants/bar/profiles/baz".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this

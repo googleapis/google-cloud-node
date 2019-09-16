@@ -37,8 +37,7 @@ const TimestampRange = {
 };
 
 /**
- * Output only. A resource that represents a location with full geographic
- * information.
+ * A resource that represents a location with full geographic information.
  *
  * @property {number} locationType
  *   The type of a location, which corresponds to the address lines field of
@@ -147,8 +146,6 @@ const Location = {
 };
 
 /**
- * Input only.
- *
  * Meta information related to the job searcher or entity
  * conducting the job search. This information is used to improve the
  * performance of the service.
@@ -205,20 +202,20 @@ const Location = {
  *   The maximum number of allowed characters is 255.
  *
  * @property {boolean} allowMissingIds
- *   Optional. If set to `true`,
+ *   Only set when any of
  *   domain,
  *   session_id and
- *   user_id are
- *   optional. Only set when any of these fields isn't available for some
- *   reason. It is highly recommended not to set this field and provide accurate
+ *   user_id isn't
+ *   available for some reason. It is highly recommended not to set this field
+ *   and provide accurate
  *   domain,
  *   session_id and
  *   user_id for the best
  *   service experience.
  *
  * @property {Object} deviceInfo
- *   Optional. The type of device used by the job seeker at the time of the call
- *   to the service.
+ *   The type of device used by the job seeker at the time of the call to the
+ *   service.
  *
  *   This object should have the same structure as [DeviceInfo]{@link google.cloud.talent.v4beta1.DeviceInfo}
  *
@@ -231,8 +228,7 @@ const RequestMetadata = {
 };
 
 /**
- * Output only. Additional information returned to client, such as debugging
- * information.
+ * Additional information returned to client, such as debugging information.
  *
  * @property {string} requestId
  *   A unique id associated with this call.
@@ -252,12 +248,12 @@ const ResponseMetadata = {
  * the quality of the search results across devices.
  *
  * @property {number} deviceType
- *   Optional. Type of the device.
+ *   Type of the device.
  *
  *   The number should be among the values of [DeviceType]{@link google.cloud.talent.v4beta1.DeviceType}
  *
  * @property {string} id
- *   Optional. A device-specific ID. The ID must be a unique identifier that
+ *   A device-specific ID. The ID must be a unique identifier that
  *   distinguishes the device from other devices.
  *
  * @typedef DeviceInfo
@@ -319,7 +315,7 @@ const DeviceInfo = {
  * Custom attribute values that are either filterable or non-filterable.
  *
  * @property {string[]} stringValues
- *   Optional but exactly one of
+ *   Exactly one of
  *   string_values
  *   or long_values
  *   must be specified.
@@ -334,7 +330,7 @@ const DeviceInfo = {
  *   Empty string isn't allowed.
  *
  * @property {number[]} longValues
- *   Optional but exactly one of
+ *   Exactly one of
  *   string_values
  *   or long_values
  *   must be specified.
@@ -347,8 +343,8 @@ const DeviceInfo = {
  *   supported.
  *
  * @property {boolean} filterable
- *   Optional. If the `filterable` flag is true, custom field values are
- *   searchable. If false, values are not searchable.
+ *   If the `filterable` flag is true, custom field values are searchable.
+ *   If false, values are not searchable.
  *
  *   Default is false.
  *
@@ -361,7 +357,7 @@ const CustomAttribute = {
 };
 
 /**
- * Output only. Spell check result.
+ * Spell check result.
  *
  * @property {boolean} corrected
  *   Indicates if the query was corrected by the spell checker.
@@ -390,7 +386,7 @@ const SpellingCorrection = {
  * Job compensation details.
  *
  * @property {Object[]} entries
- *   Optional. Job compensation information.
+ *   Job compensation information.
  *
  *   At most one entry can be of type
  *   CompensationInfo.CompensationType.BASE,
@@ -399,8 +395,8 @@ const SpellingCorrection = {
  *   This object should have the same structure as [CompensationEntry]{@link google.cloud.talent.v4beta1.CompensationEntry}
  *
  * @property {Object} annualizedBaseCompensationRange
- *   Output only. Annualized base compensation range. Computed as
- *   base compensation entry's
+ *   Output only. Annualized base compensation range. Computed as base
+ *   compensation entry's
  *   CompensationEntry.amount
  *   times
  *   CompensationEntry.expected_units_per_year.
@@ -412,8 +408,8 @@ const SpellingCorrection = {
  *   This object should have the same structure as [CompensationRange]{@link google.cloud.talent.v4beta1.CompensationRange}
  *
  * @property {Object} annualizedTotalCompensationRange
- *   Output only. Annualized total compensation range. Computed as
- *   all compensation entries'
+ *   Output only. Annualized total compensation range. Computed as all
+ *   compensation entries'
  *   CompensationEntry.amount
  *   times
  *   CompensationEntry.expected_units_per_year.
@@ -450,7 +446,7 @@ const CompensationInfo = {
    * expected_units_per_year.
    *
    * @property {number} type
-   *   Optional. Compensation type.
+   *   Compensation type.
    *
    *   Default is
    *   CompensationType.COMPENSATION_TYPE_UNSPECIFIED.
@@ -458,7 +454,7 @@ const CompensationInfo = {
    *   The number should be among the values of [CompensationType]{@link google.cloud.talent.v4beta1.CompensationType}
    *
    * @property {number} unit
-   *   Optional. Frequency of the specified amount.
+   *   Frequency of the specified amount.
    *
    *   Default is
    *   CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED.
@@ -466,22 +462,22 @@ const CompensationInfo = {
    *   The number should be among the values of [CompensationUnit]{@link google.cloud.talent.v4beta1.CompensationUnit}
    *
    * @property {Object} amount
-   *   Optional. Compensation amount.
+   *   Compensation amount.
    *
    *   This object should have the same structure as [Money]{@link google.type.Money}
    *
    * @property {Object} range
-   *   Optional. Compensation range.
+   *   Compensation range.
    *
    *   This object should have the same structure as [CompensationRange]{@link google.cloud.talent.v4beta1.CompensationRange}
    *
    * @property {string} description
-   *   Optional. Compensation description.  For example, could
+   *   Compensation description.  For example, could
    *   indicate equity terms or provide additional context to an estimated
    *   bonus.
    *
    * @property {Object} expectedUnitsPerYear
-   *   Optional. Expected number of units paid each year. If not specified, when
+   *   Expected number of units paid each year. If not specified, when
    *   Job.employment_types
    *   is FULLTIME, a default value is inferred based on
    *   unit.
@@ -506,16 +502,17 @@ const CompensationInfo = {
    * Compensation range.
    *
    * @property {Object} maxCompensation
-   *   Optional. The maximum amount of compensation. If left empty, the value is
-   *   set to a maximal compensation value and the currency code is set to match
-   *   the currency code of min_compensation.
+   *   The maximum amount of compensation. If left empty, the value is set
+   *   to a maximal compensation value and the currency code is set to
+   *   match the currency code of
+   *   min_compensation.
    *
    *   This object should have the same structure as [Money]{@link google.type.Money}
    *
    * @property {Object} minCompensation
-   *   Optional. The minimum amount of compensation. If left empty, the value is
-   *   set to zero and the currency code is set to match the currency
-   *   code of max_compensation.
+   *   The minimum amount of compensation. If left empty, the value is set
+   *   to zero and the currency code is set to match the
+   *   currency code of max_compensation.
    *
    *   This object should have the same structure as [Money]{@link google.type.Money}
    *
@@ -664,27 +661,27 @@ const CompensationInfo = {
  * Resource that represents a license or certification.
  *
  * @property {string} displayName
- *   Optional. Name of license or certification.
+ *   Name of license or certification.
  *
  *   Number of characters allowed is 100.
  *
  * @property {Object} acquireDate
- *   Optional. Acquisition date or effective date of license or certification.
+ *   Acquisition date or effective date of license or certification.
  *
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
  * @property {Object} expireDate
- *   Optional. Expiration date of license of certification.
+ *   Expiration date of license of certification.
  *
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
  * @property {string} authority
- *   Optional. Authority of license, such as government.
+ *   Authority of license, such as government.
  *
  *   Number of characters allowed is 100.
  *
  * @property {string} description
- *   Optional. Description of license or certification.
+ *   Description of license or certification.
  *
  *   Number of characters allowed is 100,000.
  *
@@ -700,25 +697,25 @@ const Certification = {
  * Resource that represents a skill of a candidate.
  *
  * @property {string} displayName
- *   Optional. Skill display name.
+ *   Skill display name.
  *
  *   For example, "Java", "Python".
  *
  *   Number of characters allowed is 100.
  *
  * @property {Object} lastUsedDate
- *   Optional. The last time this skill was used.
+ *   The last time this skill was used.
  *
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
  * @property {number} level
- *   Optional. Skill proficiency level which indicates how proficient the
- *   candidate is at this skill.
+ *   Skill proficiency level which indicates how proficient the candidate is at
+ *   this skill.
  *
  *   The number should be among the values of [SkillProficiencyLevel]{@link google.cloud.talent.v4beta1.SkillProficiencyLevel}
  *
  * @property {string} context
- *   Optional. A paragraph describes context of this skill.
+ *   A paragraph describes context of this skill.
  *
  *   Number of characters allowed is 100,000.
  *
@@ -741,7 +738,7 @@ const Skill = {
  * Details of an interview.
  *
  * @property {Object} rating
- *   Optional. The rating on this interview.
+ *   The rating on this interview.
  *
  *   This object should have the same structure as [Rating]{@link google.cloud.talent.v4beta1.Rating}
  *
@@ -784,8 +781,6 @@ const Rating = {
 };
 
 /**
- * Output only.
- *
  * Metadata used for long running operations returned by CTS batch APIs.
  * It's used to replace
  * google.longrunning.Operation.metadata.
@@ -1153,8 +1148,6 @@ const EmploymentType = {
 };
 
 /**
- * Input only.
- *
  * Option for HTML content sanitization on user input fields, for example, job
  * description. By setting this option, user can determine whether and how
  * sanitization is performed on these fields.

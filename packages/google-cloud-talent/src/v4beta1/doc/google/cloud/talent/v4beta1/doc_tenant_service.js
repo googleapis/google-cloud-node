@@ -22,7 +22,7 @@
  *   Required. Resource name of the project under which the tenant is created.
  *
  *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   "projects/foo".
  *
  * @property {Object} tenant
  *   Required. The tenant to be created.
@@ -44,7 +44,7 @@ const CreateTenantRequest = {
  *   Required. The resource name of the tenant to be retrieved.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenants/foo".
+ *   "projects/foo/tenants/bar".
  *
  * @typedef GetTenantRequest
  * @memberof google.cloud.talent.v4beta1
@@ -64,8 +64,7 @@ const GetTenantRequest = {
  *   This object should have the same structure as [Tenant]{@link google.cloud.talent.v4beta1.Tenant}
  *
  * @property {Object} updateMask
- *   Optional but strongly recommended for the best service
- *   experience.
+ *   Strongly recommended for the best service experience.
  *
  *   If
  *   update_mask
@@ -94,7 +93,7 @@ const UpdateTenantRequest = {
  *   Required. The resource name of the tenant to be deleted.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenants/foo".
+ *   "projects/foo/tenants/bar".
  *
  * @typedef DeleteTenantRequest
  * @memberof google.cloud.talent.v4beta1
@@ -111,13 +110,13 @@ const DeleteTenantRequest = {
  *   Required. Resource name of the project under which the tenant is created.
  *
  *   The format is "projects/{project_id}", for example,
- *   "projects/api-test-project".
+ *   "projects/foo".
  *
  * @property {string} pageToken
- *   Optional. The starting indicator from which to return results.
+ *   The starting indicator from which to return results.
  *
  * @property {number} pageSize
- *   Optional. The maximum number of tenants to be returned, at most 100.
+ *   The maximum number of tenants to be returned, at most 100.
  *   Default is 100 if a non-positive number is provided.
  *
  * @typedef ListTenantsRequest
@@ -129,8 +128,6 @@ const ListTenantsRequest = {
 };
 
 /**
- * Output only.
- *
  * The List tenants response object.
  *
  * @property {Object[]} tenants

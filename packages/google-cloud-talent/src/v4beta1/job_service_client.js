@@ -313,11 +313,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and a default tenant is created if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified a default tenant
+   *   is created. For example, "projects/foo".
    * @param {Object} request.job
    *   Required. The Job to be created.
    *
@@ -384,11 +382,11 @@ class JobServiceClient {
    *   Required. The resource name of the job to retrieve.
    *
    *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-   *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+   *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+   *   example, "projects/foo/tenants/bar/jobs/baz".
    *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project/jobs/1234".
+   *   If tenant id is unspecified, the default tenant is used. For
+   *   example, "projects/foo/jobs/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -449,8 +447,7 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    * @param {Object} [request.updateMask]
-   *   Optional but strongly recommended to be provided for the best service
-   *   experience.
+   *   Strongly recommended for the best service experience.
    *
    *   If update_mask
    *   is provided, only the specified fields in
@@ -520,11 +517,11 @@ class JobServiceClient {
    *   Required. The resource name of the job to be deleted.
    *
    *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
-   *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+   *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+   *   example, "projects/foo/tenants/bar/jobs/baz".
    *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project/jobs/1234".
+   *   If tenant id is unspecified, the default tenant is used. For
+   *   example, "projects/foo/jobs/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -572,11 +569,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {string} request.filter
    *   Required. The filter string specifies the jobs to be enumerated.
    *
@@ -585,16 +580,16 @@ class JobServiceClient {
    *   The fields eligible for filtering are:
    *
    *   * `companyName` (Required)
-   *   * `requisitionId` (Optional)
-   *   * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+   *   * `requisitionId`
+   *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
    *
    *   Sample Query:
    *
-   *   * companyName = "projects/api-test-project/tenants/foo/companies/bar"
-   *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+   *   * companyName = "projects/foo/tenants/bar/companies/baz"
+   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   requisitionId = "req-1"
-   *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -603,7 +598,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {number} [request.jobView]
-   *   Optional. The desired job attributes returned for jobs in the
+   *   The desired job attributes returned for jobs in the
    *   search response. Defaults to
    *   JobView.JOB_VIEW_FULL
    *   if no value is specified.
@@ -726,11 +721,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {string} request.filter
    *   Required. The filter string specifies the jobs to be enumerated.
    *
@@ -739,16 +732,16 @@ class JobServiceClient {
    *   The fields eligible for filtering are:
    *
    *   * `companyName` (Required)
-   *   * `requisitionId` (Optional)
-   *   * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+   *   * `requisitionId`
+   *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
    *
    *   Sample Query:
    *
-   *   * companyName = "projects/api-test-project/tenants/foo/companies/bar"
-   *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+   *   * companyName = "projects/foo/tenants/bar/companies/baz"
+   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   requisitionId = "req-1"
-   *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+   *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -757,7 +750,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {number} [request.jobView]
-   *   Optional. The desired job attributes returned for jobs in the
+   *   The desired job attributes returned for jobs in the
    *   search response. Defaults to
    *   JobView.JOB_VIEW_FULL
    *   if no value is specified.
@@ -808,11 +801,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {string} request.filter
    *   Required. The filter string specifies the jobs to be deleted.
    *
@@ -823,7 +814,7 @@ class JobServiceClient {
    *   * `companyName` (Required)
    *   * `requisitionId` (Required)
    *
-   *   Sample Query: companyName = "projects/api-test-project/companies/123" AND
+   *   Sample Query: companyName = "projects/foo/companies/bar" AND
    *   requisitionId = "req-1"
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -883,11 +874,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {Object} request.requestMetadata
    *   Required. The meta information collected about the job searcher, used to
    *   improve the search quality of the service. The identifiers (such as
@@ -895,26 +884,25 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional. Mode of a search.
+   *   Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional. Query used to search against jobs, such as keyword, location
-   *   filters, etc.
+   *   Query used to search against jobs, such as keyword, location filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional. Controls whether to broaden the search when it produces sparse
-   *   results. Broadened queries append results to the end of the matching
-   *   results list.
+   *   Controls whether to broaden the search when it produces sparse results.
+   *   Broadened queries append results to the end of the matching results
+   *   list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional. Controls if the search job request requires the return of a
-   *   precise count of the first 300 results. Setting this to `true` ensures
+   *   Controls if the search job request requires the return of a precise
+   *   count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -923,8 +911,7 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional. An expression specifies a histogram request against matching
-   *   jobs.
+   *   An expression specifies a histogram request against matching jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -1034,15 +1021,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional. The desired job attributes returned for jobs in the search
-   *   response. Defaults to
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional. An integer that specifies the current offset (that is, starting
-   *   result location, amongst the jobs deemed by the API as relevant) in search
+   *   An integer that specifies the current offset (that is, starting result
+   *   location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -1058,8 +1045,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional. The criteria determining how search results are sorted. Default
-   *   is
+   *   The criteria determining how search results are sorted. Default is
    *   `"relevance desc"`.
    *
    *   Supported options are:
@@ -1114,8 +1100,8 @@ class JobServiceClient {
    *     still applied unless explicitly disabled in
    *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional. Controls whether highly similar jobs are returned next to each
-   *   other in the search results. Jobs are identified as highly similar based on
+   *   Controls whether highly similar jobs are returned next to each other in
+   *   the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -1127,12 +1113,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional. Controls over how job documents get ranked on top of existing
-   *   relevance score (determined by API algorithm).
+   *   Controls over how job documents get ranked on top of existing relevance
+   *   score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional. Controls whether to disable exact keyword match on
+   *   Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -1273,11 +1259,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {Object} request.requestMetadata
    *   Required. The meta information collected about the job searcher, used to
    *   improve the search quality of the service. The identifiers (such as
@@ -1285,26 +1269,25 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional. Mode of a search.
+   *   Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional. Query used to search against jobs, such as keyword, location
-   *   filters, etc.
+   *   Query used to search against jobs, such as keyword, location filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional. Controls whether to broaden the search when it produces sparse
-   *   results. Broadened queries append results to the end of the matching
-   *   results list.
+   *   Controls whether to broaden the search when it produces sparse results.
+   *   Broadened queries append results to the end of the matching results
+   *   list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional. Controls if the search job request requires the return of a
-   *   precise count of the first 300 results. Setting this to `true` ensures
+   *   Controls if the search job request requires the return of a precise
+   *   count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -1313,8 +1296,7 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional. An expression specifies a histogram request against matching
-   *   jobs.
+   *   An expression specifies a histogram request against matching jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -1424,15 +1406,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional. The desired job attributes returned for jobs in the search
-   *   response. Defaults to
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional. An integer that specifies the current offset (that is, starting
-   *   result location, amongst the jobs deemed by the API as relevant) in search
+   *   An integer that specifies the current offset (that is, starting result
+   *   location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -1448,8 +1430,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional. The criteria determining how search results are sorted. Default
-   *   is
+   *   The criteria determining how search results are sorted. Default is
    *   `"relevance desc"`.
    *
    *   Supported options are:
@@ -1504,8 +1485,8 @@ class JobServiceClient {
    *     still applied unless explicitly disabled in
    *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional. Controls whether highly similar jobs are returned next to each
-   *   other in the search results. Jobs are identified as highly similar based on
+   *   Controls whether highly similar jobs are returned next to each other in
+   *   the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -1517,12 +1498,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional. Controls over how job documents get ranked on top of existing
-   *   relevance score (determined by API algorithm).
+   *   Controls over how job documents get ranked on top of existing relevance
+   *   score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional. Controls whether to disable exact keyword match on
+   *   Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -1602,11 +1583,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {Object} request.requestMetadata
    *   Required. The meta information collected about the job searcher, used to
    *   improve the search quality of the service. The identifiers (such as
@@ -1614,26 +1593,25 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional. Mode of a search.
+   *   Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional. Query used to search against jobs, such as keyword, location
-   *   filters, etc.
+   *   Query used to search against jobs, such as keyword, location filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional. Controls whether to broaden the search when it produces sparse
-   *   results. Broadened queries append results to the end of the matching
-   *   results list.
+   *   Controls whether to broaden the search when it produces sparse results.
+   *   Broadened queries append results to the end of the matching results
+   *   list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional. Controls if the search job request requires the return of a
-   *   precise count of the first 300 results. Setting this to `true` ensures
+   *   Controls if the search job request requires the return of a precise
+   *   count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -1642,8 +1620,7 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional. An expression specifies a histogram request against matching
-   *   jobs.
+   *   An expression specifies a histogram request against matching jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -1753,15 +1730,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional. The desired job attributes returned for jobs in the search
-   *   response. Defaults to
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional. An integer that specifies the current offset (that is, starting
-   *   result location, amongst the jobs deemed by the API as relevant) in search
+   *   An integer that specifies the current offset (that is, starting result
+   *   location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -1777,8 +1754,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional. The criteria determining how search results are sorted. Default
-   *   is
+   *   The criteria determining how search results are sorted. Default is
    *   `"relevance desc"`.
    *
    *   Supported options are:
@@ -1833,8 +1809,8 @@ class JobServiceClient {
    *     still applied unless explicitly disabled in
    *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional. Controls whether highly similar jobs are returned next to each
-   *   other in the search results. Jobs are identified as highly similar based on
+   *   Controls whether highly similar jobs are returned next to each other in
+   *   the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -1846,12 +1822,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional. Controls over how job documents get ranked on top of existing
-   *   relevance score (determined by API algorithm).
+   *   Controls over how job documents get ranked on top of existing relevance
+   *   score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional. Controls whether to disable exact keyword match on
+   *   Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -1992,11 +1968,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {Object} request.requestMetadata
    *   Required. The meta information collected about the job searcher, used to
    *   improve the search quality of the service. The identifiers (such as
@@ -2004,26 +1978,25 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {number} [request.searchMode]
-   *   Optional. Mode of a search.
+   *   Mode of a search.
    *
    *   Defaults to
    *   SearchMode.JOB_SEARCH.
    *
    *   The number should be among the values of [SearchMode]{@link google.cloud.talent.v4beta1.SearchMode}
    * @param {Object} [request.jobQuery]
-   *   Optional. Query used to search against jobs, such as keyword, location
-   *   filters, etc.
+   *   Query used to search against jobs, such as keyword, location filters, etc.
    *
    *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
    * @param {boolean} [request.enableBroadening]
-   *   Optional. Controls whether to broaden the search when it produces sparse
-   *   results. Broadened queries append results to the end of the matching
-   *   results list.
+   *   Controls whether to broaden the search when it produces sparse results.
+   *   Broadened queries append results to the end of the matching results
+   *   list.
    *
    *   Defaults to false.
    * @param {boolean} [request.requirePreciseResultSize]
-   *   Optional. Controls if the search job request requires the return of a
-   *   precise count of the first 300 results. Setting this to `true` ensures
+   *   Controls if the search job request requires the return of a precise
+   *   count of the first 300 results. Setting this to `true` ensures
    *   consistency in the number of results per page. Best practice is to set this
    *   value to true if a client allows users to jump directly to a
    *   non-sequential search results page.
@@ -2032,8 +2005,7 @@ class JobServiceClient {
    *
    *   Defaults to false.
    * @param {Object[]} [request.histogramQueries]
-   *   Optional. An expression specifies a histogram request against matching
-   *   jobs.
+   *   An expression specifies a histogram request against matching jobs.
    *
    *   Expression syntax is an aggregation function call with histogram facets and
    *   other options.
@@ -2143,15 +2115,15 @@ class JobServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {number} [request.jobView]
-   *   Optional. The desired job attributes returned for jobs in the search
-   *   response. Defaults to
+   *   The desired job attributes returned for jobs in the search response.
+   *   Defaults to
    *   JobView.JOB_VIEW_SMALL
    *   if no value is specified.
    *
    *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
    * @param {number} [request.offset]
-   *   Optional. An integer that specifies the current offset (that is, starting
-   *   result location, amongst the jobs deemed by the API as relevant) in search
+   *   An integer that specifies the current offset (that is, starting result
+   *   location, amongst the jobs deemed by the API as relevant) in search
    *   results. This field is only considered if
    *   page_token is
    *   unset.
@@ -2167,8 +2139,7 @@ class JobServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {string} [request.orderBy]
-   *   Optional. The criteria determining how search results are sorted. Default
-   *   is
+   *   The criteria determining how search results are sorted. Default is
    *   `"relevance desc"`.
    *
    *   Supported options are:
@@ -2223,8 +2194,8 @@ class JobServiceClient {
    *     still applied unless explicitly disabled in
    *     diversification_level.
    * @param {number} [request.diversificationLevel]
-   *   Optional. Controls whether highly similar jobs are returned next to each
-   *   other in the search results. Jobs are identified as highly similar based on
+   *   Controls whether highly similar jobs are returned next to each other in
+   *   the search results. Jobs are identified as highly similar based on
    *   their titles, job categories, and locations. Highly similar results are
    *   clustered so that only one representative job of the cluster is
    *   displayed to the job seeker higher up in the results, with the other jobs
@@ -2236,12 +2207,12 @@ class JobServiceClient {
    *
    *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
    * @param {Object} [request.customRankingInfo]
-   *   Optional. Controls over how job documents get ranked on top of existing
-   *   relevance score (determined by API algorithm).
+   *   Controls over how job documents get ranked on top of existing relevance
+   *   score (determined by API algorithm).
    *
    *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
    * @param {boolean} [request.disableKeywordMatch]
-   *   Optional. Controls whether to disable exact keyword match on
+   *   Controls whether to disable exact keyword match on
    *   Job.title,
    *   Job.description,
    *   Job.company_display_name,
@@ -2310,11 +2281,9 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and a default tenant is created if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {Object[]} request.jobs
    *   Required. The jobs to be created.
    *
@@ -2433,18 +2402,16 @@ class JobServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant under which the job is created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created. For example, "projects/foo".
    * @param {Object[]} request.jobs
-   *   Required. The jobs to be updated.
+   *   The jobs to be updated.
    *
    *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
    * @param {Object} [request.updateMask]
-   *   Optional but strongly recommended to be provided for the best service
-   *   experience, also increase latency when checking status of batch operation.
+   *   Strongly recommended for the best service experience. Be aware that it will
+   *   also increase latency when checking the status of a batch operation.
    *
    *   If
    *   update_mask

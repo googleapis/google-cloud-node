@@ -23,7 +23,7 @@
  * with other calls, such as job searches, issued to the service by the client.
  *
  * @property {string} requestId
- *   Optional but highly recommended.
+ *   Strongly recommended for the best service experience.
  *
  *   A unique ID generated in the API responses. It can be found in
  *   ResponseMetadata.request_id.
@@ -49,8 +49,8 @@
  *   This object should have the same structure as [ProfileEvent]{@link google.cloud.talent.v4beta1.ProfileEvent}
  *
  * @property {string} eventNotes
- *   Optional. Notes about the event provided by recruiters or other users, for
- *   example, feedback on why a profile was bookmarked.
+ *   Notes about the event provided by recruiters or other users, for example,
+ *   feedback on why a profile was bookmarked.
  *
  * @typedef ClientEvent
  * @memberof google.cloud.talent.v4beta1
@@ -81,15 +81,15 @@ const ClientEvent = {
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
- *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+ *   example, "projects/foo/tenants/bar/jobs/baz".
  *
  * @property {string} profile
- *   Optional. The profile name
- *   associated with this client event.
+ *   The profile name associated
+ *   with this client event.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
+ *   for example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @typedef JobEvent
  * @memberof google.cloud.talent.v4beta1
@@ -252,16 +252,15 @@ const JobEvent = {
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
+ *   for example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @property {string[]} jobs
- *   Optional. The job name(s)
- *   associated with this client event. Leave it empty if the event isn't
- *   associated with a job.
+ *   The job name(s) associated with
+ *   this client event. Leave it empty if the event isn't associated with a job.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
- *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+ *   example, "projects/foo/tenants/bar/jobs/baz".
  *
  * @typedef ProfileEvent
  * @memberof google.cloud.talent.v4beta1

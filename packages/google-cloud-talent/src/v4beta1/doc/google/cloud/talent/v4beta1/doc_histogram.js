@@ -16,8 +16,6 @@
 // to be loaded as the JS file.
 
 /**
- * Input Only.
- *
  * The histogram request.
  *
  * @property {string} histogramQuery
@@ -39,8 +37,6 @@ const HistogramQuery = {
 };
 
 /**
- * Output only.
- *
  * Histogram result that matches
  * HistogramQuery specified in
  * searches.

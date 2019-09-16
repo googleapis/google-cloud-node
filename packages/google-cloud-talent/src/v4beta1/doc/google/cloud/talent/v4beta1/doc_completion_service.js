@@ -16,18 +16,16 @@
 // to be loaded as the JS file.
 
 /**
- * Input only.
- *
  * Auto-complete parameters.
  *
  * @property {string} parent
  *   Required. Resource name of tenant the completion is performed within.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
+ *   "projects/foo/tenant/bar".
  *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project".
+ *   If tenant id is unspecified, the default tenant is used, for
+ *   example, "projects/foo".
  *
  * @property {string} query
  *   Required. The query used to generate suggestions.
@@ -35,7 +33,7 @@
  *   The maximum number of allowed characters is 255.
  *
  * @property {string[]} languageCodes
- *   Optional. The list of languages of the query. This is
+ *   The list of languages of the query. This is
  *   the BCP-47 language code, such as "en-US" or "sr-Latn".
  *   For more information, see
  *   [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
@@ -68,23 +66,23 @@
  *   The maximum allowed page size is 10.
  *
  * @property {string} company
- *   Optional. If provided, restricts completion to specified company.
+ *   If provided, restricts completion to specified company.
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
- *   example, "projects/api-test-project/tenants/foo/companies/bar".
+ *   example, "projects/foo/tenants/bar/companies/baz".
  *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project/companies/bar".
+ *   If tenant id is unspecified, the default tenant is used, for
+ *   example, "projects/foo".
  *
  * @property {number} scope
- *   Optional. The scope of the completion. The defaults is
+ *   The scope of the completion. The defaults is
  *   CompletionScope.PUBLIC.
  *
  *   The number should be among the values of [CompletionScope]{@link google.cloud.talent.v4beta1.CompletionScope}
  *
  * @property {number} type
- *   Optional. The completion topic. The default is
+ *   The completion topic. The default is
  *   CompletionType.COMBINED.
  *
  *   The number should be among the values of [CompletionType]{@link google.cloud.talent.v4beta1.CompletionType}
@@ -152,8 +150,6 @@ const CompleteQueryRequest = {
 };
 
 /**
- * Output only.
- *
  * Response of auto-complete query.
  *
  * @property {Object[]} completionResults
@@ -175,8 +171,6 @@ const CompleteQueryResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Output only.
-   *
    * Resource that represents completion results.
    *
    * @property {string} suggestion

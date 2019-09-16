@@ -245,7 +245,7 @@ class TenantServiceClient {
    *   Required. Resource name of the project under which the tenant is created.
    *
    *   The format is "projects/{project_id}", for example,
-   *   "projects/api-test-project".
+   *   "projects/foo".
    * @param {Object} request.tenant
    *   Required. The tenant to be created.
    *
@@ -311,7 +311,7 @@ class TenantServiceClient {
    *   Required. The resource name of the tenant to be retrieved.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   "projects/foo/tenants/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -370,8 +370,7 @@ class TenantServiceClient {
    *
    *   This object should have the same structure as [Tenant]{@link google.cloud.talent.v4beta1.Tenant}
    * @param {Object} [request.updateMask]
-   *   Optional but strongly recommended for the best service
-   *   experience.
+   *   Strongly recommended for the best service experience.
    *
    *   If
    *   update_mask
@@ -440,7 +439,7 @@ class TenantServiceClient {
    *   Required. The resource name of the tenant to be deleted.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   "projects/foo/tenants/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -489,7 +488,7 @@ class TenantServiceClient {
    *   Required. Resource name of the project under which the tenant is created.
    *
    *   The format is "projects/{project_id}", for example,
-   *   "projects/api-test-project".
+   *   "projects/foo".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -604,7 +603,7 @@ class TenantServiceClient {
    *   Required. Resource name of the project under which the tenant is created.
    *
    *   The format is "projects/{project_id}", for example,
-   *   "projects/api-test-project".
+   *   "projects/foo".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this

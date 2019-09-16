@@ -24,9 +24,8 @@
  *   Resource name assigned to an application by the API.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}",
- *   for example,
- *   "projects/api-test-project/tenants/foo/profiles/bar/applications/baz".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+ *   For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
  *
  * @property {string} externalId
  *   Required. Client side application identifier, used to uniquely identify the
@@ -38,8 +37,8 @@
  *   Output only. Resource name of the candidate of this application.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}".
+ *   For example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @property {string} job
  *   One of either a job or a company is required.
@@ -47,8 +46,8 @@
  *   Resource name of the job which the candidate applied for.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}",
- *   for example, "projects/api-test-project/tenants/foo/jobs/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For example,
+ *   "projects/foo/tenants/bar/jobs/baz".
  *
  * @property {string} company
  *   One of either a job or a company is required.
@@ -56,11 +55,11 @@
  *   Resource name of the company which the candidate applied for.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}",
- *   for example, "projects/api-test-project/tenants/foo/companies/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}".
+ *   For example, "projects/foo/tenants/bar/companies/baz".
  *
  * @property {Object} applicationDate
- *   Optional. The application date.
+ *   The application date.
  *
  *   This object should have the same structure as [Date]{@link google.type.Date}
  *
@@ -73,19 +72,19 @@
  *   The number should be among the values of [ApplicationStage]{@link google.cloud.talent.v4beta1.ApplicationStage}
  *
  * @property {number} state
- *   Optional. The application state.
+ *   The application state.
  *
  *   The number should be among the values of [ApplicationState]{@link google.cloud.talent.v4beta1.ApplicationState}
  *
  * @property {Object[]} interviews
- *   Optional. All interviews (screen, onsite, and so on) conducted as part of
- *   this application (includes details such as user conducting the interview,
+ *   All interviews (screen, onsite, and so on) conducted as part of this
+ *   application (includes details such as user conducting the interview,
  *   timestamp, feedback, and so on).
  *
  *   This object should have the same structure as [Interview]{@link google.cloud.talent.v4beta1.Interview}
  *
  * @property {Object} referral
- *   Optional. If the candidate is referred by a employee.
+ *   If the candidate is referred by a employee.
  *
  *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
  *
@@ -95,19 +94,18 @@
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   Optional. The last update timestamp.
+ *   The last update timestamp.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {string} outcomeNotes
- *   Optional. Free text reason behind the recruitement outcome (for example,
- *   reason for withdraw / reject, reason for an unsuccessful finish, and so
- *   on).
+ *   Free text reason behind the recruitement outcome (for example, reason for
+ *   withdraw / reject, reason for an unsuccessful finish, and so on).
  *
  *   Number of characters allowed is 100.
  *
  * @property {number} outcome
- *   Optional. Outcome positiveness shows how positive the outcome is.
+ *   Outcome positiveness shows how positive the outcome is.
  *
  *   The number should be among the values of [Outcome]{@link google.cloud.talent.v4beta1.Outcome}
  *

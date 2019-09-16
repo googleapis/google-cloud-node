@@ -22,25 +22,43 @@
  *   Required. The resource name of the tenant under which the profile is
  *   created.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenants/foo".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
+ *
+ * @property {string} filter
+ *   The filter string specifies the profiles to be enumerated.
+ *
+ *   Supported operator: =, AND
+ *
+ *   The field(s) eligible for filtering are:
+ *
+ *   * `externalId`
+ *   * `groupId`
+ *
+ *   externalId and groupId cannot be specified at the same time. If both
+ *   externalId and groupId are provided, the API will return a bad request
+ *   error.
+ *
+ *   Sample Query:
+ *
+ *   * externalId = "externalId-1"
+ *   * groupId = "groupId-1"
  *
  * @property {string} pageToken
- *   Optional. The token that specifies the current offset (that is, starting
- *   result).
+ *   The token that specifies the current offset (that is, starting result).
  *
  *   Please set the value to
  *   ListProfilesResponse.next_page_token
  *   to continue the list.
  *
  * @property {number} pageSize
- *   Optional. The maximum number of profiles to be returned, at most 100.
+ *   The maximum number of profiles to be returned, at most 100.
  *
  *   Default is 100 unless a positive number smaller than 100 is specified.
  *
  * @property {Object} readMask
- *   Optional. A field mask to specify the profile fields to be listed in
- *   response. All fields are listed if it is unset.
+ *   A field mask to specify the profile fields to be listed in response.
+ *   All fields are listed if it is unset.
  *
  *   Valid values are:
  *
@@ -82,8 +100,8 @@ const ListProfilesResponse = {
  * @property {string} parent
  *   Required. The name of the tenant this profile belongs to.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenants/foo".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
  *
  * @property {Object} profile
  *   Required. The profile to be created.
@@ -105,8 +123,8 @@ const CreateProfileRequest = {
  *   Required. Resource name of the profile to get.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+ *   example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @typedef GetProfileRequest
  * @memberof google.cloud.talent.v4beta1
@@ -125,7 +143,7 @@ const GetProfileRequest = {
  *   This object should have the same structure as [Profile]{@link google.cloud.talent.v4beta1.Profile}
  *
  * @property {Object} updateMask
- *   Optional. A field mask to specify the profile fields to update.
+ *   A field mask to specify the profile fields to update.
  *
  *   A full update is performed if it is unset.
  *
@@ -192,8 +210,8 @@ const UpdateProfileRequest = {
  *   Required. Resource name of the profile to be deleted.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
- *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
+ *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+ *   example, "projects/foo/tenants/bar/profiles/baz".
  *
  * @typedef DeleteProfileRequest
  * @memberof google.cloud.talent.v4beta1
@@ -209,8 +227,8 @@ const DeleteProfileRequest = {
  * @property {string} parent
  *   Required. The resource name of the tenant to search within.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenants/foo".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenants/bar".
  *
  * @property {Object} requestMetadata
  *   Required. The meta information collected about the profile search user.
@@ -220,29 +238,29 @@ const DeleteProfileRequest = {
  *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
  *
  * @property {Object} profileQuery
- *   Optional. Search query to execute. See
+ *   Search query to execute. See
  *   ProfileQuery for more details.
  *
  *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
  *
  * @property {number} pageSize
- *   Optional. A limit on the number of profiles returned in the search results.
+ *   A limit on the number of profiles returned in the search results.
  *   A value above the default value 10 can increase search response time.
  *
  *   The maximum value allowed is 100. Otherwise an error is thrown.
  *
  * @property {string} pageToken
- *   Optional. The pageToken, similar to offset enables users of the API to
- *   paginate through the search results. To retrieve the first page of results,
- *   set the pageToken to empty. The search response includes a
+ *   The pageToken, similar to offset enables users of the API to paginate
+ *   through the search results. To retrieve the first page of results, set the
+ *   pageToken to empty. The search response includes a
  *   nextPageToken
  *   field that can be used to populate the pageToken field for the next page of
  *   results. Using pageToken instead of offset increases the performance of the
  *   API, especially compared to larger offset values.
  *
  * @property {number} offset
- *   Optional. An integer that specifies the current offset (that is, starting
- *   result) in search results. This field is only considered if
+ *   An integer that specifies the current offset (that is, starting result) in
+ *   search results. This field is only considered if
  *   page_token
  *   is unset.
  *
@@ -253,13 +271,13 @@ const DeleteProfileRequest = {
  *   pageSize = 10 and offset = 10 means to search from the second page.
  *
  * @property {boolean} disableSpellCheck
- *   Optional. This flag controls the spell-check feature. If `false`, the
+ *   This flag controls the spell-check feature. If `false`, the
  *   service attempts to correct a misspelled query.
  *
  *   For example, "enginee" is corrected to "engineer".
  *
  * @property {string} orderBy
- *   Optional. The criteria that determines how search results are sorted.
+ *   The criteria that determines how search results are sorted.
  *   Defaults is "relevance desc" if no value is specified.
  *
  *   Supported options are:
@@ -290,17 +308,16 @@ const DeleteProfileRequest = {
  *     in ascending order.
  *
  * @property {boolean} caseSensitiveSort
- *   Optional. When sort by field is based on alphabetical order, sort values
- *   case sensitively (based on ASCII) when the value is set to true. Default
- *   value is case in-sensitive sort (false).
+ *   When sort by field is based on alphabetical order, sort values case
+ *   sensitively (based on ASCII) when the value is set to true. Default value
+ *   is case in-sensitive sort (false).
  *
  * @property {Object[]} histogramQueries
- *   Optional. A list of expressions specifies histogram requests against
- *   matching profiles for
+ *   A list of expressions specifies histogram requests against matching
+ *   profiles for
  *   SearchProfilesRequest.
  *
- *   The expression syntax looks like a function definition with optional
- *   parameters.
+ *   The expression syntax looks like a function definition with parameters.
  *
  *   Function syntax: function_name(histogram_facet[, list of buckets])
  *
@@ -381,7 +398,7 @@ const DeleteProfileRequest = {
  *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
  *
  * @property {string} resultSetId
- *   Optional. An id that uniquely identifies the result set of a
+ *   An id that uniquely identifies the result set of a
  *   SearchProfiles
  *   call. The id should be retrieved from the
  *   SearchProfilesResponse
@@ -413,7 +430,7 @@ const DeleteProfileRequest = {
  *   to page through the results.
  *
  * @property {boolean} strictKeywordsSearch
- *   Optional. This flag is used to indicate whether the service will attempt to
+ *   This flag is used to indicate whether the service will attempt to
  *   understand synonyms and terms related to the search query or treat the
  *   query "as is" when it generates a set of results. By default this flag is
  *   set to false, thus allowing expanded results to also be returned. For
@@ -484,8 +501,6 @@ const SearchProfilesResponse = {
 };
 
 /**
- * Output only.
- *
  * Profile entry with metadata inside
  * SearchProfilesResponse.
  *

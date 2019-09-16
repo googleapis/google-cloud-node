@@ -22,10 +22,8 @@
  *   Required. Resource name of the tenant under which the company is created.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
- *
- *   Tenant id is optional and a default tenant is created if unspecified, for
- *   example, "projects/api-test-project".
+ *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+ *   is created, for example, "projects/foo".
  *
  * @property {Object} company
  *   Required. The company to be created.
@@ -50,7 +48,7 @@ const CreateCompanyRequest = {
  *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
  *   example, "projects/api-test-project/tenants/foo/companies/bar".
  *
- *   Tenant id is optional and the default tenant is used if unspecified, for
+ *   If tenant id is unspecified, the default tenant is used, for
  *   example, "projects/api-test-project/companies/bar".
  *
  * @typedef GetCompanyRequest
@@ -71,8 +69,7 @@ const GetCompanyRequest = {
  *   This object should have the same structure as [Company]{@link google.cloud.talent.v4beta1.Company}
  *
  * @property {Object} updateMask
- *   Optional but strongly recommended for the best service
- *   experience.
+ *   Strongly recommended for the best service experience.
  *
  *   If
  *   update_mask
@@ -102,10 +99,10 @@ const UpdateCompanyRequest = {
  *
  *   The format is
  *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
- *   example, "projects/api-test-project/tenants/foo/companies/bar".
+ *   example, "projects/foo/tenants/bar/companies/baz".
  *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project/companies/bar".
+ *   If tenant id is unspecified, the default tenant is used, for
+ *   example, "projects/foo/companies/bar".
  *
  * @typedef DeleteCompanyRequest
  * @memberof google.cloud.talent.v4beta1
@@ -122,20 +119,20 @@ const DeleteCompanyRequest = {
  *   Required. Resource name of the tenant under which the company is created.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
+ *   "projects/foo/tenant/bar".
  *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project".
+ *   If tenant id is unspecified, the default tenant will be used, for
+ *   example, "projects/foo".
  *
  * @property {string} pageToken
- *   Optional. The starting indicator from which to return results.
+ *   The starting indicator from which to return results.
  *
  * @property {number} pageSize
- *   Optional. The maximum number of companies to be returned, at most 100.
+ *   The maximum number of companies to be returned, at most 100.
  *   Default is 100 if a non-positive number is provided.
  *
  * @property {boolean} requireOpenJobs
- *   Optional. Set to true if the companies requested must have open jobs.
+ *   Set to true if the companies requested must have open jobs.
  *
  *   Defaults to false.
  *
@@ -152,8 +149,6 @@ const ListCompaniesRequest = {
 };
 
 /**
- * Output only.
- *
  * The List companies response object.
  *
  * @property {Object[]} companies

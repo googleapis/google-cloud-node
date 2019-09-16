@@ -251,10 +251,8 @@ class CompanyServiceClient {
    *   Required. Resource name of the tenant under which the company is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
-   *
-   *   Tenant id is optional and a default tenant is created if unspecified, for
-   *   example, "projects/api-test-project".
+   *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+   *   is created, for example, "projects/foo".
    * @param {Object} request.company
    *   Required. The company to be created.
    *
@@ -323,7 +321,7 @@ class CompanyServiceClient {
    *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
    *   example, "projects/api-test-project/tenants/foo/companies/bar".
    *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
+   *   If tenant id is unspecified, the default tenant is used, for
    *   example, "projects/api-test-project/companies/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -383,8 +381,7 @@ class CompanyServiceClient {
    *
    *   This object should have the same structure as [Company]{@link google.cloud.talent.v4beta1.Company}
    * @param {Object} [request.updateMask]
-   *   Optional but strongly recommended for the best service
-   *   experience.
+   *   Strongly recommended for the best service experience.
    *
    *   If
    *   update_mask
@@ -455,10 +452,10 @@ class CompanyServiceClient {
    *
    *   The format is
    *   "projects/{project_id}/tenants/{tenant_id}/companies/{company_id}", for
-   *   example, "projects/api-test-project/tenants/foo/companies/bar".
+   *   example, "projects/foo/tenants/bar/companies/baz".
    *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project/companies/bar".
+   *   If tenant id is unspecified, the default tenant is used, for
+   *   example, "projects/foo/companies/bar".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -507,10 +504,10 @@ class CompanyServiceClient {
    *   Required. Resource name of the tenant under which the company is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
+   *   "projects/foo/tenant/bar".
    *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   If tenant id is unspecified, the default tenant will be used, for
+   *   example, "projects/foo".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -518,7 +515,7 @@ class CompanyServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {boolean} [request.requireOpenJobs]
-   *   Optional. Set to true if the companies requested must have open jobs.
+   *   Set to true if the companies requested must have open jobs.
    *
    *   Defaults to false.
    *
@@ -633,10 +630,10 @@ class CompanyServiceClient {
    *   Required. Resource name of the tenant under which the company is created.
    *
    *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenant/foo".
+   *   "projects/foo/tenant/bar".
    *
-   *   Tenant id is optional and the default tenant is used if unspecified, for
-   *   example, "projects/api-test-project".
+   *   If tenant id is unspecified, the default tenant will be used, for
+   *   example, "projects/foo".
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -644,7 +641,7 @@ class CompanyServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {boolean} [request.requireOpenJobs]
-   *   Optional. Set to true if the companies requested must have open jobs.
+   *   Set to true if the companies requested must have open jobs.
    *
    *   Defaults to false.
    *

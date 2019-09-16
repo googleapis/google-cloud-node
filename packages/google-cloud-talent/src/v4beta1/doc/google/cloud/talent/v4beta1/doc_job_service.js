@@ -16,18 +16,14 @@
 // to be loaded as the JS file.
 
 /**
- * Input only.
- *
  * Create job request.
  *
  * @property {string} parent
  *   Required. The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
- *
- *   Tenant id is optional and a default tenant is created if unspecified, for
- *   example, "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenant/bar". If tenant id is unspecified a default tenant
+ *   is created. For example, "projects/foo".
  *
  * @property {Object} job
  *   Required. The Job to be created.
@@ -43,19 +39,17 @@ const CreateJobRequest = {
 };
 
 /**
- * Input only.
- *
  * Get job request.
  *
  * @property {string} name
  *   Required. The resource name of the job to retrieve.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
- *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+ *   example, "projects/foo/tenants/bar/jobs/baz".
  *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project/jobs/1234".
+ *   If tenant id is unspecified, the default tenant is used. For
+ *   example, "projects/foo/jobs/bar".
  *
  * @typedef GetJobRequest
  * @memberof google.cloud.talent.v4beta1
@@ -66,8 +60,6 @@ const GetJobRequest = {
 };
 
 /**
- * Input only.
- *
  * Update job request.
  *
  * @property {Object} job
@@ -76,8 +68,7 @@ const GetJobRequest = {
  *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
  *
  * @property {Object} updateMask
- *   Optional but strongly recommended to be provided for the best service
- *   experience.
+ *   Strongly recommended for the best service experience.
  *
  *   If update_mask
  *   is provided, only the specified fields in
@@ -98,19 +89,17 @@ const UpdateJobRequest = {
 };
 
 /**
- * Input only.
- *
  * Delete job request.
  *
  * @property {string} name
  *   Required. The resource name of the job to be deleted.
  *
  *   The format is
- *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}", for
- *   example, "projects/api-test-project/tenants/foo/jobs/1234".
+ *   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+ *   example, "projects/foo/tenants/bar/jobs/baz".
  *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project/jobs/1234".
+ *   If tenant id is unspecified, the default tenant is used. For
+ *   example, "projects/foo/jobs/bar".
  *
  * @typedef DeleteJobRequest
  * @memberof google.cloud.talent.v4beta1
@@ -121,18 +110,14 @@ const DeleteJobRequest = {
 };
 
 /**
- * Input only.
- *
  * Batch delete jobs request.
  *
  * @property {string} parent
  *   Required. The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
- *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+ *   is created. For example, "projects/foo".
  *
  * @property {string} filter
  *   Required. The filter string specifies the jobs to be deleted.
@@ -144,7 +129,7 @@ const DeleteJobRequest = {
  *   * `companyName` (Required)
  *   * `requisitionId` (Required)
  *
- *   Sample Query: companyName = "projects/api-test-project/companies/123" AND
+ *   Sample Query: companyName = "projects/foo/companies/bar" AND
  *   requisitionId = "req-1"
  *
  * @typedef BatchDeleteJobsRequest
@@ -156,18 +141,14 @@ const BatchDeleteJobsRequest = {
 };
 
 /**
- * Input only.
- *
  * List jobs request.
  *
  * @property {string} parent
  *   Required. The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
- *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+ *   is created. For example, "projects/foo".
  *
  * @property {string} filter
  *   Required. The filter string specifies the jobs to be enumerated.
@@ -177,23 +158,23 @@ const BatchDeleteJobsRequest = {
  *   The fields eligible for filtering are:
  *
  *   * `companyName` (Required)
- *   * `requisitionId` (Optional)
- *   * `status` (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+ *   * `requisitionId`
+ *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
  *   OPEN if no value is specified.
  *
  *   Sample Query:
  *
- *   * companyName = "projects/api-test-project/tenants/foo/companies/bar"
- *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+ *   * companyName = "projects/foo/tenants/bar/companies/baz"
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
  *   requisitionId = "req-1"
- *   * companyName = "projects/api-test-project/tenants/foo/companies/bar" AND
+ *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
  *   status = "EXPIRED"
  *
  * @property {string} pageToken
- *   Optional. The starting point of a query result.
+ *   The starting point of a query result.
  *
  * @property {number} pageSize
- *   Optional. The maximum number of jobs to be returned per page of results.
+ *   The maximum number of jobs to be returned per page of results.
  *
  *   If job_view is set
  *   to
@@ -204,7 +185,7 @@ const BatchDeleteJobsRequest = {
  *   Default is 100 if empty or a number < 1 is specified.
  *
  * @property {number} jobView
- *   Optional. The desired job attributes returned for jobs in the
+ *   The desired job attributes returned for jobs in the
  *   search response. Defaults to
  *   JobView.JOB_VIEW_FULL
  *   if no value is specified.
@@ -220,8 +201,6 @@ const ListJobsRequest = {
 };
 
 /**
- * Output only.
- *
  * List jobs response.
  *
  * @property {Object[]} jobs
@@ -250,21 +229,17 @@ const ListJobsResponse = {
 };
 
 /**
- * Input only.
- *
  * The Request body of the `SearchJobs` call.
  *
  * @property {string} parent
  *   Required. The resource name of the tenant to search within.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
- *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+ *   is created. For example, "projects/foo".
  *
  * @property {number} searchMode
- *   Optional. Mode of a search.
+ *   Mode of a search.
  *
  *   Defaults to
  *   SearchMode.JOB_SEARCH.
@@ -279,21 +254,20 @@ const ListJobsResponse = {
  *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
  *
  * @property {Object} jobQuery
- *   Optional. Query used to search against jobs, such as keyword, location
- *   filters, etc.
+ *   Query used to search against jobs, such as keyword, location filters, etc.
  *
  *   This object should have the same structure as [JobQuery]{@link google.cloud.talent.v4beta1.JobQuery}
  *
  * @property {boolean} enableBroadening
- *   Optional. Controls whether to broaden the search when it produces sparse
- *   results. Broadened queries append results to the end of the matching
- *   results list.
+ *   Controls whether to broaden the search when it produces sparse results.
+ *   Broadened queries append results to the end of the matching results
+ *   list.
  *
  *   Defaults to false.
  *
  * @property {boolean} requirePreciseResultSize
- *   Optional. Controls if the search job request requires the return of a
- *   precise count of the first 300 results. Setting this to `true` ensures
+ *   Controls if the search job request requires the return of a precise
+ *   count of the first 300 results. Setting this to `true` ensures
  *   consistency in the number of results per page. Best practice is to set this
  *   value to true if a client allows users to jump directly to a
  *   non-sequential search results page.
@@ -303,8 +277,7 @@ const ListJobsResponse = {
  *   Defaults to false.
  *
  * @property {Object[]} histogramQueries
- *   Optional. An expression specifies a histogram request against matching
- *   jobs.
+ *   An expression specifies a histogram request against matching jobs.
  *
  *   Expression syntax is an aggregation function call with histogram facets and
  *   other options.
@@ -415,16 +388,16 @@ const ListJobsResponse = {
  *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
  *
  * @property {number} jobView
- *   Optional. The desired job attributes returned for jobs in the search
- *   response. Defaults to
+ *   The desired job attributes returned for jobs in the search response.
+ *   Defaults to
  *   JobView.JOB_VIEW_SMALL
  *   if no value is specified.
  *
  *   The number should be among the values of [JobView]{@link google.cloud.talent.v4beta1.JobView}
  *
  * @property {number} offset
- *   Optional. An integer that specifies the current offset (that is, starting
- *   result location, amongst the jobs deemed by the API as relevant) in search
+ *   An integer that specifies the current offset (that is, starting result
+ *   location, amongst the jobs deemed by the API as relevant) in search
  *   results. This field is only considered if
  *   page_token is
  *   unset.
@@ -435,19 +408,18 @@ const ListJobsResponse = {
  *   from the second page).
  *
  * @property {number} pageSize
- *   Optional. A limit on the number of jobs returned in the search results.
+ *   A limit on the number of jobs returned in the search results.
  *   Increasing this value above the default value of 10 can increase search
  *   response time. The value can be between 1 and 100.
  *
  * @property {string} pageToken
- *   Optional. The token specifying the current offset within
+ *   The token specifying the current offset within
  *   search results. See
  *   SearchJobsResponse.next_page_token
  *   for an explanation of how to obtain the next set of query results.
  *
  * @property {string} orderBy
- *   Optional. The criteria determining how search results are sorted. Default
- *   is
+ *   The criteria determining how search results are sorted. Default is
  *   `"relevance desc"`.
  *
  *   Supported options are:
@@ -503,8 +475,8 @@ const ListJobsResponse = {
  *     diversification_level.
  *
  * @property {number} diversificationLevel
- *   Optional. Controls whether highly similar jobs are returned next to each
- *   other in the search results. Jobs are identified as highly similar based on
+ *   Controls whether highly similar jobs are returned next to each other in
+ *   the search results. Jobs are identified as highly similar based on
  *   their titles, job categories, and locations. Highly similar results are
  *   clustered so that only one representative job of the cluster is
  *   displayed to the job seeker higher up in the results, with the other jobs
@@ -517,13 +489,13 @@ const ListJobsResponse = {
  *   The number should be among the values of [DiversificationLevel]{@link google.cloud.talent.v4beta1.DiversificationLevel}
  *
  * @property {Object} customRankingInfo
- *   Optional. Controls over how job documents get ranked on top of existing
- *   relevance score (determined by API algorithm).
+ *   Controls over how job documents get ranked on top of existing relevance
+ *   score (determined by API algorithm).
  *
  *   This object should have the same structure as [CustomRankingInfo]{@link google.cloud.talent.v4beta1.CustomRankingInfo}
  *
  * @property {boolean} disableKeywordMatch
- *   Optional. Controls whether to disable exact keyword match on
+ *   Controls whether to disable exact keyword match on
  *   Job.title,
  *   Job.description,
  *   Job.company_display_name,
@@ -556,8 +528,6 @@ const SearchJobsRequest = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Input only.
-   *
    * Custom ranking information for
    * SearchJobsRequest.
    *
@@ -698,7 +668,8 @@ const SearchJobsRequest = {
   SearchMode: {
 
     /**
-     * The mode of the search method isn't specified.
+     * The mode of the search method isn't specified. The default search
+     * behavior is identical to JOB_SEARCH search behavior.
      */
     SEARCH_MODE_UNSPECIFIED: 0,
 
@@ -720,8 +691,6 @@ const SearchJobsRequest = {
 };
 
 /**
- * Output only.
- *
  * Response for SearchJob method.
  *
  * @property {Object[]} matchingJobs
@@ -790,8 +759,6 @@ const SearchJobsResponse = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 
   /**
-   * Output only.
-   *
    * Job entry with metadata inside
    * SearchJobsResponse.
    *
@@ -834,8 +801,6 @@ const SearchJobsResponse = {
   },
 
   /**
-   * Output only.
-   *
    * Commute details related to this job.
    *
    * @property {Object} jobLocation
@@ -866,11 +831,9 @@ const SearchJobsResponse = {
  * @property {string} parent
  *   Required. The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
- *
- *   Tenant id is optional and a default tenant is created if unspecified, for
- *   example, "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+ *   is created. For example, "projects/foo".
  *
  * @property {Object[]} jobs
  *   Required. The jobs to be created.
@@ -891,20 +854,18 @@ const BatchCreateJobsRequest = {
  * @property {string} parent
  *   Required. The resource name of the tenant under which the job is created.
  *
- *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenant/foo".
- *
- *   Tenant id is optional and the default tenant is used if unspecified, for
- *   example, "projects/api-test-project".
+ *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+ *   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+ *   is created. For example, "projects/foo".
  *
  * @property {Object[]} jobs
- *   Required. The jobs to be updated.
+ *   The jobs to be updated.
  *
  *   This object should have the same structure as [Job]{@link google.cloud.talent.v4beta1.Job}
  *
  * @property {Object} updateMask
- *   Optional but strongly recommended to be provided for the best service
- *   experience, also increase latency when checking status of batch operation.
+ *   Strongly recommended for the best service experience. Be aware that it will
+ *   also increase latency when checking the status of a batch operation.
  *
  *   If
  *   update_mask
@@ -934,8 +895,6 @@ const BatchUpdateJobsRequest = {
 };
 
 /**
- * Output only.
- *
  * The result of
  * JobService.BatchCreateJobs
  * or

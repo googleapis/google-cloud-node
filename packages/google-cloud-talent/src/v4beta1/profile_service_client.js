@@ -254,8 +254,26 @@ class ProfileServiceClient {
    *   Required. The resource name of the tenant under which the profile is
    *   created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenants/bar".
+   * @param {string} [request.filter]
+   *   The filter string specifies the profiles to be enumerated.
+   *
+   *   Supported operator: =, AND
+   *
+   *   The field(s) eligible for filtering are:
+   *
+   *   * `externalId`
+   *   * `groupId`
+   *
+   *   externalId and groupId cannot be specified at the same time. If both
+   *   externalId and groupId are provided, the API will return a bad request
+   *   error.
+   *
+   *   Sample Query:
+   *
+   *   * externalId = "externalId-1"
+   *   * groupId = "groupId-1"
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -263,8 +281,8 @@ class ProfileServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {Object} [request.readMask]
-   *   Optional. A field mask to specify the profile fields to be listed in
-   *   response. All fields are listed if it is unset.
+   *   A field mask to specify the profile fields to be listed in response.
+   *   All fields are listed if it is unset.
    *
    *   Valid values are:
    *
@@ -379,8 +397,26 @@ class ProfileServiceClient {
    *   Required. The resource name of the tenant under which the profile is
    *   created.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenants/bar".
+   * @param {string} [request.filter]
+   *   The filter string specifies the profiles to be enumerated.
+   *
+   *   Supported operator: =, AND
+   *
+   *   The field(s) eligible for filtering are:
+   *
+   *   * `externalId`
+   *   * `groupId`
+   *
+   *   externalId and groupId cannot be specified at the same time. If both
+   *   externalId and groupId are provided, the API will return a bad request
+   *   error.
+   *
+   *   Sample Query:
+   *
+   *   * externalId = "externalId-1"
+   *   * groupId = "groupId-1"
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
@@ -388,8 +424,8 @@ class ProfileServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {Object} [request.readMask]
-   *   Optional. A field mask to specify the profile fields to be listed in
-   *   response. All fields are listed if it is unset.
+   *   A field mask to specify the profile fields to be listed in response.
+   *   All fields are listed if it is unset.
    *
    *   Valid values are:
    *
@@ -436,8 +472,8 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required. The name of the tenant this profile belongs to.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenants/bar".
    * @param {Object} request.profile
    *   Required. The profile to be created.
    *
@@ -503,8 +539,8 @@ class ProfileServiceClient {
    *   Required. Resource name of the profile to get.
    *
    *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
-   *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+   *   example, "projects/foo/tenants/bar/profiles/baz".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -562,7 +598,7 @@ class ProfileServiceClient {
    *
    *   This object should have the same structure as [Profile]{@link google.cloud.talent.v4beta1.Profile}
    * @param {Object} [request.updateMask]
-   *   Optional. A field mask to specify the profile fields to update.
+   *   A field mask to specify the profile fields to update.
    *
    *   A full update is performed if it is unset.
    *
@@ -671,8 +707,8 @@ class ProfileServiceClient {
    *   Required. Resource name of the profile to be deleted.
    *
    *   The format is
-   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}",
-   *   for example, "projects/api-test-project/tenants/foo/profiles/bar".
+   *   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+   *   example, "projects/foo/tenants/bar/profiles/baz".
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -727,8 +763,8 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenants/bar".
    * @param {Object} request.requestMetadata
    *   Required. The meta information collected about the profile search user.
    *   This is used to improve the search quality of the service. These values are
@@ -736,7 +772,7 @@ class ProfileServiceClient {
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {Object} [request.profileQuery]
-   *   Optional. Search query to execute. See
+   *   Search query to execute. See
    *   ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
@@ -747,8 +783,8 @@ class ProfileServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {number} [request.offset]
-   *   Optional. An integer that specifies the current offset (that is, starting
-   *   result) in search results. This field is only considered if
+   *   An integer that specifies the current offset (that is, starting result) in
+   *   search results. This field is only considered if
    *   page_token
    *   is unset.
    *
@@ -758,12 +794,12 @@ class ProfileServiceClient {
    *   search from the 11th profile. This can be used for pagination, for example
    *   pageSize = 10 and offset = 10 means to search from the second page.
    * @param {boolean} [request.disableSpellCheck]
-   *   Optional. This flag controls the spell-check feature. If `false`, the
+   *   This flag controls the spell-check feature. If `false`, the
    *   service attempts to correct a misspelled query.
    *
    *   For example, "enginee" is corrected to "engineer".
    * @param {string} [request.orderBy]
-   *   Optional. The criteria that determines how search results are sorted.
+   *   The criteria that determines how search results are sorted.
    *   Defaults is "relevance desc" if no value is specified.
    *
    *   Supported options are:
@@ -793,16 +829,15 @@ class ProfileServiceClient {
    *   PersonName.PersonStructuredName.family_name
    *     in ascending order.
    * @param {boolean} [request.caseSensitiveSort]
-   *   Optional. When sort by field is based on alphabetical order, sort values
-   *   case sensitively (based on ASCII) when the value is set to true. Default
-   *   value is case in-sensitive sort (false).
+   *   When sort by field is based on alphabetical order, sort values case
+   *   sensitively (based on ASCII) when the value is set to true. Default value
+   *   is case in-sensitive sort (false).
    * @param {Object[]} [request.histogramQueries]
-   *   Optional. A list of expressions specifies histogram requests against
-   *   matching profiles for
+   *   A list of expressions specifies histogram requests against matching
+   *   profiles for
    *   SearchProfilesRequest.
    *
-   *   The expression syntax looks like a function definition with optional
-   *   parameters.
+   *   The expression syntax looks like a function definition with parameters.
    *
    *   Function syntax: function_name(histogram_facet[, list of buckets])
    *
@@ -882,7 +917,7 @@ class ProfileServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {string} [request.resultSetId]
-   *   Optional. An id that uniquely identifies the result set of a
+   *   An id that uniquely identifies the result set of a
    *   SearchProfiles
    *   call. The id should be retrieved from the
    *   SearchProfilesResponse
@@ -913,7 +948,7 @@ class ProfileServiceClient {
    *   SearchProfilesResponse
    *   to page through the results.
    * @param {boolean} [request.strictKeywordsSearch]
-   *   Optional. This flag is used to indicate whether the service will attempt to
+   *   This flag is used to indicate whether the service will attempt to
    *   understand synonyms and terms related to the search query or treat the
    *   query "as is" when it generates a set of results. By default this flag is
    *   set to false, thus allowing expanded results to also be returned. For
@@ -1043,8 +1078,8 @@ class ProfileServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the tenant to search within.
    *
-   *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
-   *   "projects/api-test-project/tenants/foo".
+   *   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+   *   "projects/foo/tenants/bar".
    * @param {Object} request.requestMetadata
    *   Required. The meta information collected about the profile search user.
    *   This is used to improve the search quality of the service. These values are
@@ -1052,7 +1087,7 @@ class ProfileServiceClient {
    *
    *   This object should have the same structure as [RequestMetadata]{@link google.cloud.talent.v4beta1.RequestMetadata}
    * @param {Object} [request.profileQuery]
-   *   Optional. Search query to execute. See
+   *   Search query to execute. See
    *   ProfileQuery for more details.
    *
    *   This object should have the same structure as [ProfileQuery]{@link google.cloud.talent.v4beta1.ProfileQuery}
@@ -1063,8 +1098,8 @@ class ProfileServiceClient {
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
    * @param {number} [request.offset]
-   *   Optional. An integer that specifies the current offset (that is, starting
-   *   result) in search results. This field is only considered if
+   *   An integer that specifies the current offset (that is, starting result) in
+   *   search results. This field is only considered if
    *   page_token
    *   is unset.
    *
@@ -1074,12 +1109,12 @@ class ProfileServiceClient {
    *   search from the 11th profile. This can be used for pagination, for example
    *   pageSize = 10 and offset = 10 means to search from the second page.
    * @param {boolean} [request.disableSpellCheck]
-   *   Optional. This flag controls the spell-check feature. If `false`, the
+   *   This flag controls the spell-check feature. If `false`, the
    *   service attempts to correct a misspelled query.
    *
    *   For example, "enginee" is corrected to "engineer".
    * @param {string} [request.orderBy]
-   *   Optional. The criteria that determines how search results are sorted.
+   *   The criteria that determines how search results are sorted.
    *   Defaults is "relevance desc" if no value is specified.
    *
    *   Supported options are:
@@ -1109,16 +1144,15 @@ class ProfileServiceClient {
    *   PersonName.PersonStructuredName.family_name
    *     in ascending order.
    * @param {boolean} [request.caseSensitiveSort]
-   *   Optional. When sort by field is based on alphabetical order, sort values
-   *   case sensitively (based on ASCII) when the value is set to true. Default
-   *   value is case in-sensitive sort (false).
+   *   When sort by field is based on alphabetical order, sort values case
+   *   sensitively (based on ASCII) when the value is set to true. Default value
+   *   is case in-sensitive sort (false).
    * @param {Object[]} [request.histogramQueries]
-   *   Optional. A list of expressions specifies histogram requests against
-   *   matching profiles for
+   *   A list of expressions specifies histogram requests against matching
+   *   profiles for
    *   SearchProfilesRequest.
    *
-   *   The expression syntax looks like a function definition with optional
-   *   parameters.
+   *   The expression syntax looks like a function definition with parameters.
    *
    *   Function syntax: function_name(histogram_facet[, list of buckets])
    *
@@ -1198,7 +1232,7 @@ class ProfileServiceClient {
    *
    *   This object should have the same structure as [HistogramQuery]{@link google.cloud.talent.v4beta1.HistogramQuery}
    * @param {string} [request.resultSetId]
-   *   Optional. An id that uniquely identifies the result set of a
+   *   An id that uniquely identifies the result set of a
    *   SearchProfiles
    *   call. The id should be retrieved from the
    *   SearchProfilesResponse
@@ -1229,7 +1263,7 @@ class ProfileServiceClient {
    *   SearchProfilesResponse
    *   to page through the results.
    * @param {boolean} [request.strictKeywordsSearch]
-   *   Optional. This flag is used to indicate whether the service will attempt to
+   *   This flag is used to indicate whether the service will attempt to
    *   understand synonyms and terms related to the search query or treat the
    *   query "as is" when it generates a set of results. By default this flag is
    *   set to false, thus allowing expanded results to also be returned. For

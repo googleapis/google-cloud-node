@@ -28,7 +28,7 @@
  *   tenant is created.
  *
  *   The format is "projects/{project_id}/tenants/{tenant_id}", for example,
- *   "projects/api-test-project/tenants/foo".
+ *   "projects/foo/tenants/bar".
  *
  * @property {string} externalId
  *   Required. Client side tenant identifier, used to uniquely identify the
@@ -37,8 +37,8 @@
  *   The maximum number of allowed characters is 255.
  *
  * @property {number} usageType
- *   Optional. Indicates whether data owned by this tenant may be used to
- *   provide product improvements across other tenants.
+ *   Indicates whether data owned by this tenant may be used to provide product
+ *   improvements across other tenants.
  *
  *   Defaults behavior is
  *   DataUsageType.ISOLATED
@@ -47,7 +47,7 @@
  *   The number should be among the values of [DataUsageType]{@link google.cloud.talent.v4beta1.DataUsageType}
  *
  * @property {string[]} keywordSearchableProfileCustomAttributes
- *   Optional. A list of keys of filterable
+ *   A list of keys of filterable
  *   Profile.custom_attributes,
  *   whose corresponding `string_values` are used in keyword searches. Profiles
  *   with `string_values` under these specified field keys are returned if any
