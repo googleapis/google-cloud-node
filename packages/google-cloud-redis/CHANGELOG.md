@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-redis/compare/v1.1.4...v1.2.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* use process versions object for client header ([#198](https://www.github.com/googleapis/nodejs-redis/issues/198)) ([67a2649](https://www.github.com/googleapis/nodejs-redis/commit/67a2649))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([a93010d](https://www.github.com/googleapis/nodejs-redis/commit/a93010d))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-redis/compare/v1.1.3...v1.1.4) (2019-08-05)
 
 
