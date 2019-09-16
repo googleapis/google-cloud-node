@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [0.12.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.11.0...v0.12.0) (2019-09-16)
+
+
+### Features
+
+* fuzzy extraction and regexp entities ([#430](https://www.github.com/googleapis/nodejs-dialogflow/issues/430)) ([60aab0b](https://www.github.com/googleapis/nodejs-dialogflow/commit/60aab0b))
+
 ## [0.11.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v0.10.3...v0.11.0) (2019-09-09)
 
 
