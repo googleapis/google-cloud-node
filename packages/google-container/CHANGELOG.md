@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.4...v1.2.0) (2019-09-16)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([9d931ff](https://www.github.com/googleapis/nodejs-cloud-container/commit/9d931ff))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-cloud-container/compare/v1.1.3...v1.1.4) (2019-08-28)
 
 
