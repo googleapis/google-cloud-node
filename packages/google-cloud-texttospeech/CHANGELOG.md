@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.2.0...v1.3.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **docs:** READMEs updated with new samples ([d3e09e0](https://www.github.com/googleapis/nodejs-text-to-speech/commit/d3e09e0))
+* add proto field behavior options ([#265](https://www.github.com/googleapis/nodejs-text-to-speech/issues/265)) ([1f184a3](https://www.github.com/googleapis/nodejs-text-to-speech/commit/1f184a3))
+
+
+### Features
+
+* code samples for ssml addresses tutorial ([#257](https://www.github.com/googleapis/nodejs-text-to-speech/issues/257)) ([e423f2a](https://www.github.com/googleapis/nodejs-text-to-speech/commit/e423f2a))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v1.1.4...v1.2.0) (2019-09-05)
 
 
