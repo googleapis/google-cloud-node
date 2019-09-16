@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.1.3...v1.2.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* set proper version # for x-goog-api-client ([aeb0de9](https://www.github.com/googleapis/nodejs-datalabeling/commit/aeb0de9))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([3bc5d92](https://www.github.com/googleapis/nodejs-datalabeling/commit/3bc5d92))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-datalabeling/compare/v1.1.2...v1.1.3) (2019-08-02)
 
 
