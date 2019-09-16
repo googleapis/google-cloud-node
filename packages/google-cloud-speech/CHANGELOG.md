@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.6...v3.3.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **docs:** stop linking reference documents to anchor ([d54da3d](https://www.github.com/googleapis/nodejs-speech/commit/d54da3d))
+
+
+### Features
+
+* introduces speaker diarization configuration ([8adb72a](https://www.github.com/googleapis/nodejs-speech/commit/8adb72a))
+* load protos from JSON, grpc-fallback support ([3cc8989](https://www.github.com/googleapis/nodejs-speech/commit/3cc8989))
+
 ### [3.2.6](https://www.github.com/googleapis/nodejs-speech/compare/v3.2.5...v3.2.6) (2019-08-27)
 
 
