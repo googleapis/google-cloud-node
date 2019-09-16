@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-kms/compare/v1.3.2...v1.4.0) (2019-09-16)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([628f665](https://www.github.com/googleapis/nodejs-kms/commit/628f665))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-kms/compare/v1.3.1...v1.3.2) (2019-08-28)
 
 
