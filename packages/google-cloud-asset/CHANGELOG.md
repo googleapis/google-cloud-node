@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-asset/compare/v1.2.1...v1.3.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **docs:** remove reference-docs anchor ([812bdc4](https://www.github.com/googleapis/nodejs-asset/commit/812bdc4))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([abe6f81](https://www.github.com/googleapis/nodejs-asset/commit/abe6f81))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-asset/compare/v1.2.0...v1.2.1) (2019-08-26)
 
 
