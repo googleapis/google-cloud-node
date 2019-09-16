@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.2.3...v1.3.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([68a0867](https://www.github.com/googleapis/nodejs-monitoring/commit/68a0867))
+* include the correct version of node in a header ([#286](https://www.github.com/googleapis/nodejs-monitoring/issues/286)) ([0c758f9](https://www.github.com/googleapis/nodejs-monitoring/commit/0c758f9))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([435c5d0](https://www.github.com/googleapis/nodejs-monitoring/commit/435c5d0))
+* **GroupServiceClient:** support recursive option when deleting group ([#294](https://www.github.com/googleapis/nodejs-monitoring/issues/294)) ([f7749af](https://www.github.com/googleapis/nodejs-monitoring/commit/f7749af))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-monitoring/compare/v1.2.2...v1.2.3) (2019-08-03)
 
 
