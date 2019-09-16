@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.5...v2.2.0) (2019-09-16)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([c79eae1](https://www.github.com/googleapis/nodejs-grafeas/commit/c79eae1))
+
 ### [2.1.5](https://www.github.com/googleapis/nodejs-grafeas/compare/v2.1.4...v2.1.5) (2019-08-28)
 
 
