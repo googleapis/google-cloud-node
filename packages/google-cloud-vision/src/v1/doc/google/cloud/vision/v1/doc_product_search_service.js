@@ -35,12 +35,10 @@
  *   characters long.
  *
  * @property {string} productCategory
- *   The category for the product identified by the reference image. This should
+ *   Immutable. The category for the product identified by the reference image. This should
  *   be either "homegoods-v2", "apparel-v2", "toys-v2", "packagedgoods-v1", or
  *   "general-v1" The legacy categories "homegoods", "apparel", and "toys" are
  *   still supported, but these should not be used for new products.
- *
- *   This field is immutable.
  *
  * @property {Object[]} productLabels
  *   Key-value pairs that can be attached to a product. At query time,
@@ -143,15 +141,13 @@ const ProductSet = {
  *   This field is ignored when creating a reference image.
  *
  * @property {string} uri
- *   The Google Cloud Storage URI of the reference image.
+ *   Required. The Google Cloud Storage URI of the reference image.
  *
  *   The URI must start with `gs://`.
  *
- *   Required.
- *
  * @property {Object[]} boundingPolys
- *   Bounding polygons around the areas of interest in the reference image.
- *   Optional. If this field is empty, the system will try to detect regions of
+ *   Optional. Bounding polygons around the areas of interest in the reference image.
+ *   If this field is empty, the system will try to detect regions of
  *   interest. At most 10 bounding polygons will be used.
  *
  *   The provided shape is converted into a non-rotated rectangle. Once
@@ -173,13 +169,13 @@ const ReferenceImage = {
  * Request message for the `CreateProduct` method.
  *
  * @property {string} parent
- *   The project in which the Product should be created.
+ *   Required. The project in which the Product should be created.
  *
  *   Format is
  *   `projects/PROJECT_ID/locations/LOC_ID`.
  *
  * @property {Object} product
- *   The product to create.
+ *   Required. The product to create.
  *
  *   This object should have the same structure as [Product]{@link google.cloud.vision.v1.Product}
  *
@@ -201,7 +197,7 @@ const CreateProductRequest = {
  * Request message for the `ListProducts` method.
  *
  * @property {string} parent
- *   The project OR ProductSet from which Products should be listed.
+ *   Required. The project OR ProductSet from which Products should be listed.
  *
  *   Format:
  *   `projects/PROJECT_ID/locations/LOC_ID`
@@ -244,7 +240,7 @@ const ListProductsResponse = {
  * Request message for the `GetProduct` method.
  *
  * @property {string} name
- *   Resource name of the Product to get.
+ *   Required. Resource name of the Product to get.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -261,7 +257,7 @@ const GetProductRequest = {
  * Request message for the `UpdateProduct` method.
  *
  * @property {Object} product
- *   The Product resource which replaces the one on the server.
+ *   Required. The Product resource which replaces the one on the server.
  *   product.name is immutable.
  *
  *   This object should have the same structure as [Product]{@link google.cloud.vision.v1.Product}
@@ -287,7 +283,7 @@ const UpdateProductRequest = {
  * Request message for the `DeleteProduct` method.
  *
  * @property {string} name
- *   Resource name of product to delete.
+ *   Required. Resource name of product to delete.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -304,12 +300,12 @@ const DeleteProductRequest = {
  * Request message for the `CreateProductSet` method.
  *
  * @property {string} parent
- *   The project in which the ProductSet should be created.
+ *   Required. The project in which the ProductSet should be created.
  *
  *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
  *
  * @property {Object} productSet
- *   The ProductSet to create.
+ *   Required. The ProductSet to create.
  *
  *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1.ProductSet}
  *
@@ -331,7 +327,7 @@ const CreateProductSetRequest = {
  * Request message for the `ListProductSets` method.
  *
  * @property {string} parent
- *   The project from which ProductSets should be listed.
+ *   Required. The project from which ProductSets should be listed.
  *
  *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
  *
@@ -373,7 +369,7 @@ const ListProductSetsResponse = {
  * Request message for the `GetProductSet` method.
  *
  * @property {string} name
- *   Resource name of the ProductSet to get.
+ *   Required. Resource name of the ProductSet to get.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
@@ -390,7 +386,7 @@ const GetProductSetRequest = {
  * Request message for the `UpdateProductSet` method.
  *
  * @property {Object} productSet
- *   The ProductSet resource which replaces the one on the server.
+ *   Required. The ProductSet resource which replaces the one on the server.
  *
  *   This object should have the same structure as [ProductSet]{@link google.cloud.vision.v1.ProductSet}
  *
@@ -414,7 +410,7 @@ const UpdateProductSetRequest = {
  * Request message for the `DeleteProductSet` method.
  *
  * @property {string} name
- *   Resource name of the ProductSet to delete.
+ *   Required. Resource name of the ProductSet to delete.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -431,13 +427,13 @@ const DeleteProductSetRequest = {
  * Request message for the `CreateReferenceImage` method.
  *
  * @property {string} parent
- *   Resource name of the product in which to create the reference image.
+ *   Required. Resource name of the product in which to create the reference image.
  *
  *   Format is
  *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
  *
  * @property {Object} referenceImage
- *   The reference image to create.
+ *   Required. The reference image to create.
  *   If an image ID is specified, it is ignored.
  *
  *   This object should have the same structure as [ReferenceImage]{@link google.cloud.vision.v1.ReferenceImage}
@@ -460,7 +456,7 @@ const CreateReferenceImageRequest = {
  * Request message for the `ListReferenceImages` method.
  *
  * @property {string} parent
- *   Resource name of the product containing the reference images.
+ *   Required. Resource name of the product containing the reference images.
  *
  *   Format is
  *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -508,7 +504,7 @@ const ListReferenceImagesResponse = {
  * Request message for the `GetReferenceImage` method.
  *
  * @property {string} name
- *   The resource name of the ReferenceImage to get.
+ *   Required. The resource name of the ReferenceImage to get.
  *
  *   Format is:
  *
@@ -526,7 +522,7 @@ const GetReferenceImageRequest = {
  * Request message for the `DeleteReferenceImage` method.
  *
  * @property {string} name
- *   The resource name of the reference image to delete.
+ *   Required. The resource name of the reference image to delete.
  *
  *   Format is:
  *
@@ -544,13 +540,13 @@ const DeleteReferenceImageRequest = {
  * Request message for the `AddProductToProductSet` method.
  *
  * @property {string} name
- *   The resource name for the ProductSet to modify.
+ *   Required. The resource name for the ProductSet to modify.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
  *
  * @property {string} product
- *   The resource name for the Product to be added to this ProductSet.
+ *   Required. The resource name for the Product to be added to this ProductSet.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -567,13 +563,13 @@ const AddProductToProductSetRequest = {
  * Request message for the `RemoveProductFromProductSet` method.
  *
  * @property {string} name
- *   The resource name for the ProductSet to modify.
+ *   Required. The resource name for the ProductSet to modify.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
  *
  * @property {string} product
- *   The resource name for the Product to be removed from this ProductSet.
+ *   Required. The resource name for the Product to be removed from this ProductSet.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -590,7 +586,7 @@ const RemoveProductFromProductSetRequest = {
  * Request message for the `ListProductsInProductSet` method.
  *
  * @property {string} name
- *   The ProductSet resource for which to retrieve Products.
+ *   Required. The ProductSet resource for which to retrieve Products.
  *
  *   Format is:
  *   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -659,17 +655,15 @@ const ListProductsInProductSetResponse = {
  *   `product-display-name` column refers to
  *   display_name, the
  *   `product-category` column refers to
- *   product_category, and
- *   the `labels` column refers to
- *   product_labels.
+ *   product_category, and the
+ *   `labels` column refers to product_labels.
  *
  *   The `image-id` column is optional but must be unique if provided. If it is
  *   empty, the system will automatically assign a unique id to the image.
  *
  *   The `product-display-name` column is optional. If it is empty, the system
- *   sets the display_name field
- *   for the product to a space (" "). You can update the `display_name` later
- *   by using the API.
+ *   sets the display_name field for the product to a
+ *   space (" "). You can update the `display_name` later by using the API.
  *
  *   If a `Product` with the specified `product-id` already exists, then the
  *   system ignores the `product-display-name`, `product-category`, and `labels`
@@ -727,12 +721,12 @@ const ImportProductSetsInputConfig = {
  * Request message for the `ImportProductSets` method.
  *
  * @property {string} parent
- *   The project in which the ProductSets should be imported.
+ *   Required. The project in which the ProductSets should be imported.
  *
  *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
  *
  * @property {Object} inputConfig
- *   The input content for the list of requests.
+ *   Required. The input content for the list of requests.
  *
  *   This object should have the same structure as [ImportProductSetsInputConfig]{@link google.cloud.vision.v1.ImportProductSetsInputConfig}
  *
@@ -748,10 +742,8 @@ const ImportProductSetsRequest = {
  * Response message for the `ImportProductSets` method.
  *
  * This message is returned by the
- * google.longrunning.Operations.GetOperation
- * method in the returned
- * google.longrunning.Operation.response
- * field.
+ * google.longrunning.Operations.GetOperation method in the returned
+ * google.longrunning.Operation.response field.
  *
  * @property {Object[]} referenceImages
  *   The list of reference_images that are imported successfully.
@@ -794,8 +786,7 @@ const ImportProductSetsResponse = {
  *
  * @property {Object} endTime
  *   The time when the batch request is finished and
- *   google.longrunning.Operation.done is
- *   set to true.
+ *   google.longrunning.Operation.done is set to true.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
@@ -873,7 +864,7 @@ const ProductSetPurgeConfig = {
  *   ProductSet will be deleted.
  *
  * @property {string} parent
- *   The project and location in which the Products should be deleted.
+ *   Required. The project and location in which the Products should be deleted.
  *
  *   Format is `projects/PROJECT_ID/locations/LOC_ID`.
  *

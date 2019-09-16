@@ -29,7 +29,8 @@
                             "(google.api.http).post": "/v1/images:annotate",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/images:annotate",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "requests"
                           }
                         },
                         "BatchAnnotateFiles": {
@@ -39,7 +40,8 @@
                             "(google.api.http).post": "/v1/files:annotate",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/files:annotate",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "requests"
                           }
                         },
                         "AsyncBatchAnnotateImages": {
@@ -49,7 +51,10 @@
                             "(google.api.http).post": "/v1/images:asyncBatchAnnotate",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/images:asyncBatchAnnotate",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "requests,output_config",
+                            "(google.longrunning.operation_info).response_type": "AsyncBatchAnnotateImagesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           }
                         },
                         "AsyncBatchAnnotateFiles": {
@@ -59,7 +64,10 @@
                             "(google.api.http).post": "/v1/files:asyncBatchAnnotate",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/files:asyncBatchAnnotate",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "requests",
+                            "(google.longrunning.operation_info).response_type": "AsyncBatchAnnotateFilesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           }
                         }
                       }
@@ -367,6 +375,30 @@
                         "racy": {
                           "type": "Likelihood",
                           "id": 9
+                        },
+                        "adultConfidence": {
+                          "type": "float",
+                          "id": 16
+                        },
+                        "spoofConfidence": {
+                          "type": "float",
+                          "id": 18
+                        },
+                        "medicalConfidence": {
+                          "type": "float",
+                          "id": 20
+                        },
+                        "violenceConfidence": {
+                          "type": "float",
+                          "id": 22
+                        },
+                        "racyConfidence": {
+                          "type": "float",
+                          "id": 24
+                        },
+                        "nsfwConfidence": {
+                          "type": "float",
+                          "id": 26
                         }
                       }
                     },
@@ -577,33 +609,15 @@
                         }
                       }
                     },
-                    "AnnotateFileResponse": {
-                      "fields": {
-                        "inputConfig": {
-                          "type": "InputConfig",
-                          "id": 1
-                        },
-                        "responses": {
-                          "rule": "repeated",
-                          "type": "AnnotateImageResponse",
-                          "id": 2
-                        },
-                        "totalPages": {
-                          "type": "int32",
-                          "id": 3
-                        },
-                        "error": {
-                          "type": "google.rpc.Status",
-                          "id": 4
-                        }
-                      }
-                    },
                     "BatchAnnotateImagesRequest": {
                       "fields": {
                         "requests": {
                           "rule": "repeated",
                           "type": "AnnotateImageRequest",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "parent": {
                           "type": "string",
@@ -642,12 +656,36 @@
                         }
                       }
                     },
+                    "AnnotateFileResponse": {
+                      "fields": {
+                        "inputConfig": {
+                          "type": "InputConfig",
+                          "id": 1
+                        },
+                        "responses": {
+                          "rule": "repeated",
+                          "type": "AnnotateImageResponse",
+                          "id": 2
+                        },
+                        "totalPages": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
                     "BatchAnnotateFilesRequest": {
                       "fields": {
                         "requests": {
                           "rule": "repeated",
                           "type": "AnnotateFileRequest",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "parent": {
                           "type": "string",
@@ -698,11 +736,17 @@
                         "requests": {
                           "rule": "repeated",
                           "type": "AnnotateImageRequest",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "outputConfig": {
                           "type": "OutputConfig",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "parent": {
                           "type": "string",
@@ -723,7 +767,10 @@
                         "requests": {
                           "rule": "repeated",
                           "type": "AsyncAnnotateFileRequest",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "parent": {
                           "type": "string",
@@ -971,21 +1018,24 @@
                           "responseType": "ProductSet",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/productSets",
-                            "(google.api.http).body": "product_set"
+                            "(google.api.http).body": "product_set",
+                            "(google.api.method_signature)": "parent,product_set,product_set_id"
                           }
                         },
                         "ListProductSets": {
                           "requestType": "ListProductSetsRequest",
                           "responseType": "ListProductSetsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/productSets"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/productSets",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetProductSet": {
                           "requestType": "GetProductSetRequest",
                           "responseType": "ProductSet",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/productSets/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/productSets/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateProductSet": {
@@ -993,14 +1043,16 @@
                           "responseType": "ProductSet",
                           "options": {
                             "(google.api.http).patch": "/v1/{product_set.name=projects/*/locations/*/productSets/*}",
-                            "(google.api.http).body": "product_set"
+                            "(google.api.http).body": "product_set",
+                            "(google.api.method_signature)": "product_set,update_mask"
                           }
                         },
                         "DeleteProductSet": {
                           "requestType": "DeleteProductSetRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/productSets/*}"
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/productSets/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateProduct": {
@@ -1008,21 +1060,24 @@
                           "responseType": "Product",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/products",
-                            "(google.api.http).body": "product"
+                            "(google.api.http).body": "product",
+                            "(google.api.method_signature)": "parent,product,product_id"
                           }
                         },
                         "ListProducts": {
                           "requestType": "ListProductsRequest",
                           "responseType": "ListProductsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/products"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/products",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetProduct": {
                           "requestType": "GetProductRequest",
                           "responseType": "Product",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/products/*}"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/products/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateProduct": {
@@ -1030,14 +1085,16 @@
                           "responseType": "Product",
                           "options": {
                             "(google.api.http).patch": "/v1/{product.name=projects/*/locations/*/products/*}",
-                            "(google.api.http).body": "product"
+                            "(google.api.http).body": "product",
+                            "(google.api.method_signature)": "product,update_mask"
                           }
                         },
                         "DeleteProduct": {
                           "requestType": "DeleteProductRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/products/*}"
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/products/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "CreateReferenceImage": {
@@ -1045,21 +1102,24 @@
                           "responseType": "ReferenceImage",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*/products/*}/referenceImages",
-                            "(google.api.http).body": "reference_image"
+                            "(google.api.http).body": "reference_image",
+                            "(google.api.method_signature)": "parent,reference_image,reference_image_id"
                           }
                         },
                         "DeleteReferenceImage": {
                           "requestType": "DeleteReferenceImageRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/products/*/referenceImages/*}"
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/products/*/referenceImages/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListReferenceImages": {
                           "requestType": "ListReferenceImagesRequest",
                           "responseType": "ListReferenceImagesResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/products/*}/referenceImages"
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/products/*}/referenceImages",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetReferenceImage": {
@@ -1074,7 +1134,8 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/productSets/*}:addProduct",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,product"
                           }
                         },
                         "RemoveProductFromProductSet": {
@@ -1082,14 +1143,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).post": "/v1/{name=projects/*/locations/*/productSets/*}:removeProduct",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,product"
                           }
                         },
                         "ListProductsInProductSet": {
                           "requestType": "ListProductsInProductSetRequest",
                           "responseType": "ListProductsInProductSetResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/productSets/*}/products"
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/productSets/*}/products",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ImportProductSets": {
@@ -1097,7 +1160,10 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/productSets:import",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,input_config",
+                            "(google.longrunning.operation_info).response_type": "ImportProductSetsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
                           }
                         },
                         "PurgeProducts": {
@@ -1105,12 +1171,19 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/products:purge",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "BatchOperationMetadata"
                           }
                         }
                       }
                     },
                     "Product": {
+                      "options": {
+                        "(google.api.resource).type": "vision.googleapis.com/Product",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/products/{product}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1126,7 +1199,10 @@
                         },
                         "productCategory": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "productLabels": {
                           "rule": "repeated",
@@ -1150,6 +1226,10 @@
                       }
                     },
                     "ProductSet": {
+                      "options": {
+                        "(google.api.resource).type": "vision.googleapis.com/ProductSet",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/productSets/{product_set}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1161,15 +1241,25 @@
                         },
                         "indexTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "indexError": {
                           "type": "google.rpc.Status",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
                     "ReferenceImage": {
+                      "options": {
+                        "(google.api.resource).type": "vision.googleapis.com/ReferenceImage",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/products/{product}/referenceImages/{reference_image}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1177,12 +1267,18 @@
                         },
                         "uri": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "boundingPolys": {
                           "rule": "repeated",
                           "type": "BoundingPoly",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1190,11 +1286,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "product": {
                           "type": "Product",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "productId": {
                           "type": "string",
@@ -1206,7 +1309,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1235,7 +1342,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/Product"
+                          }
                         }
                       }
                     },
@@ -1243,7 +1354,10 @@
                       "fields": {
                         "product": {
                           "type": "Product",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -1255,7 +1369,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/Product"
+                          }
                         }
                       }
                     },
@@ -1263,11 +1381,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "productSet": {
                           "type": "ProductSet",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "productSetId": {
                           "type": "string",
@@ -1279,7 +1404,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1308,7 +1437,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ProductSet"
+                          }
                         }
                       }
                     },
@@ -1316,7 +1449,10 @@
                       "fields": {
                         "productSet": {
                           "type": "ProductSet",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -1328,7 +1464,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ProductSet"
+                          }
                         }
                       }
                     },
@@ -1336,11 +1476,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/Product"
+                          }
                         },
                         "referenceImage": {
                           "type": "ReferenceImage",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "referenceImageId": {
                           "type": "string",
@@ -1352,7 +1499,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/Product"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1385,7 +1536,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ReferenceImage"
+                          }
                         }
                       }
                     },
@@ -1393,7 +1548,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ReferenceImage"
+                          }
                         }
                       }
                     },
@@ -1401,11 +1560,19 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ProductSet"
+                          }
                         },
                         "product": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/Product"
+                          }
                         }
                       }
                     },
@@ -1413,11 +1580,19 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ProductSet"
+                          }
                         },
                         "product": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/Product"
+                          }
                         }
                       }
                     },
@@ -1425,7 +1600,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "vision.googleapis.com/ProductSet"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -1477,11 +1656,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "inputConfig": {
                           "type": "ImportProductSetsInputConfig",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1554,7 +1740,11 @@
                         },
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "force": {
                           "type": "bool",
@@ -7126,7 +7316,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -7234,6 +7424,74 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
             }
           }
         },

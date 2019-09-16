@@ -646,6 +646,30 @@ const LocalizedObjectAnnotation = {
  *
  *   The number should be among the values of [Likelihood]{@link google.cloud.vision.v1.Likelihood}
  *
+ * @property {number} adultConfidence
+ *   Confidence of adult_score. Range [0, 1]. 0 means not confident, 1 means
+ *   very confident.
+ *
+ * @property {number} spoofConfidence
+ *   Confidence of spoof_score. Range [0, 1]. 0 means not confident, 1 means
+ *   very confident.
+ *
+ * @property {number} medicalConfidence
+ *   Confidence of medical_score. Range [0, 1]. 0 means not confident, 1 means
+ *   very confident.
+ *
+ * @property {number} violenceConfidence
+ *   Confidence of violence_score. Range [0, 1]. 0 means not confident, 1 means
+ *   very confident.
+ *
+ * @property {number} racyConfidence
+ *   Confidence of racy_score. Range [0, 1]. 0 means not confident, 1 means very
+ *   confident.
+ *
+ * @property {number} nsfwConfidence
+ *   Confidence of nsfw_score. Range [0, 1]. 0 means not confident, 1 means very
+ *   confident.
+ *
  * @typedef SafeSearchAnnotation
  * @memberof google.cloud.vision.v1
  * @see [google.cloud.vision.v1.SafeSearchAnnotation definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
@@ -980,42 +1004,10 @@ const AnnotateImageResponse = {
 };
 
 /**
- * Response to a single file annotation request. A file may contain one or more
- * images, which individually have their own responses.
- *
- * @property {Object} inputConfig
- *   Information about the file for which this response is generated.
- *
- *   This object should have the same structure as [InputConfig]{@link google.cloud.vision.v1.InputConfig}
- *
- * @property {Object[]} responses
- *   Individual responses to images found within the file. This field will be
- *   empty if the `error` field is set.
- *
- *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1.AnnotateImageResponse}
- *
- * @property {number} totalPages
- *   This field gives the total number of pages in the file.
- *
- * @property {Object} error
- *   If set, represents the error message for the failed request. The
- *   `responses` field will not be set in this case.
- *
- *   This object should have the same structure as [Status]{@link google.rpc.Status}
- *
- * @typedef AnnotateFileResponse
- * @memberof google.cloud.vision.v1
- * @see [google.cloud.vision.v1.AnnotateFileResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
- */
-const AnnotateFileResponse = {
-  // This is for documentation. Actual contents will be loaded by gRPC.
-};
-
-/**
  * Multiple image annotation requests are batched into a single service call.
  *
  * @property {Object[]} requests
- *   Individual image annotation requests for this batch.
+ *   Required. Individual image annotation requests for this batch.
  *
  *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1.AnnotateImageRequest}
  *
@@ -1100,10 +1092,42 @@ const AnnotateFileRequest = {
 };
 
 /**
+ * Response to a single file annotation request. A file may contain one or more
+ * images, which individually have their own responses.
+ *
+ * @property {Object} inputConfig
+ *   Information about the file for which this response is generated.
+ *
+ *   This object should have the same structure as [InputConfig]{@link google.cloud.vision.v1.InputConfig}
+ *
+ * @property {Object[]} responses
+ *   Individual responses to images found within the file. This field will be
+ *   empty if the `error` field is set.
+ *
+ *   This object should have the same structure as [AnnotateImageResponse]{@link google.cloud.vision.v1.AnnotateImageResponse}
+ *
+ * @property {number} totalPages
+ *   This field gives the total number of pages in the file.
+ *
+ * @property {Object} error
+ *   If set, represents the error message for the failed request. The
+ *   `responses` field will not be set in this case.
+ *
+ *   This object should have the same structure as [Status]{@link google.rpc.Status}
+ *
+ * @typedef AnnotateFileResponse
+ * @memberof google.cloud.vision.v1
+ * @see [google.cloud.vision.v1.AnnotateFileResponse definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/vision/v1/image_annotator.proto}
+ */
+const AnnotateFileResponse = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
  * A list of requests to annotate files using the BatchAnnotateFiles API.
  *
  * @property {Object[]} requests
- *   The list of file annotation requests. Right now we support only one
+ *   Required. The list of file annotation requests. Right now we support only one
  *   AnnotateFileRequest in BatchAnnotateFilesRequest.
  *
  *   This object should have the same structure as [AnnotateFileRequest]{@link google.cloud.vision.v1.AnnotateFileRequest}
@@ -1198,7 +1222,7 @@ const AsyncAnnotateFileResponse = {
  * Request for async image annotation for a list of images.
  *
  * @property {Object[]} requests
- *   Individual image annotation requests for this batch.
+ *   Required. Individual image annotation requests for this batch.
  *
  *   This object should have the same structure as [AnnotateImageRequest]{@link google.cloud.vision.v1.AnnotateImageRequest}
  *
@@ -1250,7 +1274,7 @@ const AsyncBatchAnnotateImagesResponse = {
  * call.
  *
  * @property {Object[]} requests
- *   Individual async file annotation requests for this batch.
+ *   Required. Individual async file annotation requests for this batch.
  *
  *   This object should have the same structure as [AsyncAnnotateFileRequest]{@link google.cloud.vision.v1.AsyncAnnotateFileRequest}
  *
