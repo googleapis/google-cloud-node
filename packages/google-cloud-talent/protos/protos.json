@@ -2804,6 +2804,16 @@
                           "type": "Certification",
                           "id": 23
                         },
+                        "applications": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 47
+                        },
+                        "assignments": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 48
+                        },
                         "customAttributes": {
                           "keyType": "string",
                           "type": "CustomAttribute",

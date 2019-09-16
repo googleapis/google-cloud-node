@@ -219,6 +219,12 @@
  *
  *   This object should have the same structure as [Certification]{@link google.cloud.talent.v4beta1.Certification}
  *
+ * @property {string[]} applications
+ *   The resource names of the candidate's applications.
+ *
+ * @property {string[]} assignments
+ *   The resource names of the candidate's assignments.
+ *
  * @property {Object.<string, Object>} customAttributes
  *   A map of fields to hold both filterable and non-filterable custom profile
  *   attributes that aren't covered by the provided structured fields. See
