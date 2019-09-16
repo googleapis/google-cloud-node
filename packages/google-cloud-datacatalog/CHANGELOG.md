@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.0.2...v1.1.0) (2019-09-15)
+
+
+### Bug Fixes
+
+* set proper version # for x-goog-api-client ([8d8b776](https://www.github.com/googleapis/nodejs-datacatalog/commit/8d8b776))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([13061f3](https://www.github.com/googleapis/nodejs-datacatalog/commit/13061f3))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v1.0.1...v1.0.2) (2019-08-05)
 
 
