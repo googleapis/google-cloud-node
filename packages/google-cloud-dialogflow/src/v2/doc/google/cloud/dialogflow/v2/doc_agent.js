@@ -237,7 +237,7 @@ const DeleteAgentRequest = {
  *   default 100 and at most 1000.
  *
  * @property {string} pageToken
- *   Optional. The next_page_token value returned from a previous list request.
+ *   The next_page_token value returned from a previous list request.
  *
  * @typedef SearchAgentsRequest
  * @memberof google.cloud.dialogflow.v2
@@ -291,8 +291,7 @@ const TrainAgentRequest = {
  *   Format: `projects/<Project ID>`.
  *
  * @property {string} agentUri
- *   Optional. The
- *   [Google Cloud Storage](https://cloud.google.com/storage/docs/)
+ *   Required. The [Google Cloud Storage](https://cloud.google.com/storage/docs/)
  *   URI to export the agent to.
  *   The format of this URI must be `gs://<bucket-name>/<object-name>`.
  *   If left unspecified, the serialized agent is returned inline.
@@ -317,16 +316,14 @@ const ExportAgentRequest = {
  *
  *   Example for how to export an agent to a zip file via a command line:
  *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:export'\
+ *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:export'\
  *     -X POST \
- *     -H 'Authorization: Bearer '$(gcloud auth application-default
- *     print-access-token) \
- *     -H 'Accept: application/json' \
- *     -H 'Content-Type: application/json' \
+ *     -H 'Authorization: Bearer' \
+ *     $(gcloud auth application-default print-access-token) \
+ *     -H 'Accept: application/json'
  *     --compressed \
- *     --data-binary '{}' \
- *   | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".* /\1/' \
- *   | base64 --decode > &lt;agent zip file&gt;</pre>
+ *     | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".* /\1/' \
+ *     | base64 --decode > &lt;agent zip file&gt;</pre>
  *
  * @typedef ExportAgentResponse
  * @memberof google.cloud.dialogflow.v2
@@ -352,13 +349,12 @@ const ExportAgentResponse = {
  *
  *   Example for how to import an agent via the command line:
  *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:import\
+ *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:import'\
  *      -X POST \
- *      -H 'Authorization: Bearer '$(gcloud auth application-default
- *      print-access-token) \
+ *      -H 'Authorization: Bearer'\
+ *      $(gcloud auth application-default print-access-token) \
  *      -H 'Accept: application/json' \
  *      -H 'Content-Type: application/json' \
- *      --compressed \
  *      --data-binary "{
  *         'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
  *      }"</pre>
@@ -387,13 +383,12 @@ const ImportAgentRequest = {
  *
  *   Example for how to restore an agent via the command line:
  *   <pre>curl \
- *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_name&gt;/agent:restore\
+ *     'https://dialogflow.googleapis.com/v2/projects/&lt;project_id&gt;/agent:restore'\
  *      -X POST \
- *      -H 'Authorization: Bearer '$(gcloud auth application-default
- *      print-access-token) \
+ *      -H 'Authorization: Bearer' \
+ *      $(gcloud auth application-default print-access-token) \
  *      -H 'Accept: application/json' \
  *      -H 'Content-Type: application/json' \
- *      --compressed \
  *      --data-binary "{
  *          'agentContent': '$(cat &lt;agent zip file&gt; | base64 -w 0)'
  *      }"</pre>

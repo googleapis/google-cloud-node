@@ -352,8 +352,8 @@ const QueryResult = {
  *   This object should have the same structure as [QueryInput]{@link google.cloud.dialogflow.v2.QueryInput}
  *
  * @property {boolean} singleUtterance
- *   DEPRECATED. Please use InputAudioConfig.single_utterance instead.
- *   Optional. If `false` (default), recognition does not cease until
+ *   Optional. Please use InputAudioConfig.single_utterance instead.
+ *   If `false` (default), recognition does not cease until
  *   the client closes the stream. If `true`, the recognizer will detect a
  *   single spoken utterance in input audio. Recognition ceases when it detects
  *   the audio's voice has stopped or paused. In this case, once a detected

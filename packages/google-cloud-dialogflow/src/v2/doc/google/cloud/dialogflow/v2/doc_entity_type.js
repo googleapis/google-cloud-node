@@ -45,6 +45,9 @@
  *
  *   This object should have the same structure as [Entity]{@link google.cloud.dialogflow.v2.Entity}
  *
+ * @property {boolean} enableFuzzyExtraction
+ *   Optional. Enables fuzzy entity extraction during classification.
+ *
  * @typedef EntityType
  * @memberof google.cloud.dialogflow.v2
  * @see [google.cloud.dialogflow.v2.EntityType definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/dialogflow/v2/entity_type.proto}
@@ -132,7 +135,13 @@ const EntityType = {
      * values. However, list entity types can contain references to other entity
      * types (with or without aliases).
      */
-    KIND_LIST: 2
+    KIND_LIST: 2,
+
+    /**
+     * Regexp entity types allow to specify regular expressions in entries
+     * values.
+     */
+    KIND_REGEXP: 3
   }
 };
 

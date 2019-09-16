@@ -1177,9 +1177,11 @@ describe('EntityTypesClient', () => {
       // Mock response
       const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
+      const enableFuzzyExtraction = true;
       const expectedResponse = {
         name: name2,
         displayName: displayName,
+        enableFuzzyExtraction: enableFuzzyExtraction,
       };
 
       // Mock Grpc layer
@@ -1241,9 +1243,11 @@ describe('EntityTypesClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const enableFuzzyExtraction = true;
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        enableFuzzyExtraction: enableFuzzyExtraction,
       };
 
       // Mock Grpc layer
@@ -1305,9 +1309,11 @@ describe('EntityTypesClient', () => {
       // Mock response
       const name = 'name3373707';
       const displayName = 'displayName1615086568';
+      const enableFuzzyExtraction = true;
       const expectedResponse = {
         name: name,
         displayName: displayName,
+        enableFuzzyExtraction: enableFuzzyExtraction,
       };
 
       // Mock Grpc layer

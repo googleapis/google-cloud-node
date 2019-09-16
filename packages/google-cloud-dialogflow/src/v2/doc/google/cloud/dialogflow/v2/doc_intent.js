@@ -429,7 +429,7 @@ const Intent = {
       // This is for documentation. Actual contents will be loaded by gRPC.
 
       /**
-       * Optional. Contains information about a button.
+       * Contains information about a button.
        *
        * @property {string} text
        *   Optional. The text to show on the button.
