@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.2.2...v2.3.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yargs to v14 ([0a1363c](https://www.github.com/googleapis/nodejs-video-intelligence/commit/0a1363c))
+* fixed typo enableAutomaticPunctuation2 in sample ([3188368](https://www.github.com/googleapis/nodejs-video-intelligence/commit/3188368))
+
+
+### Features
+
+* add streaming automl classification samples ([#284](https://www.github.com/googleapis/nodejs-video-intelligence/issues/284)) ([7bb53d5](https://www.github.com/googleapis/nodejs-video-intelligence/commit/7bb53d5))
+* load protos from JSON, grpc-fallback support ([#286](https://www.github.com/googleapis/nodejs-video-intelligence/issues/286)) ([a1c2898](https://www.github.com/googleapis/nodejs-video-intelligence/commit/a1c2898))
+* segment and shot label annotations support ([#281](https://www.github.com/googleapis/nodejs-video-intelligence/issues/281)) ([1787c6a](https://www.github.com/googleapis/nodejs-video-intelligence/commit/1787c6a))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.2.1...v2.2.2) (2019-08-05)
 
 
