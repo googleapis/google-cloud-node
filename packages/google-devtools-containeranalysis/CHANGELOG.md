@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.3.3...v1.4.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* set proper version # for x-goog-api-client ([8245809](https://www.github.com/googleapis/nodejs-containeranalysis/commit/8245809))
+* **deps:** update dependency @google-cloud/pubsub to ^0.32.0 ([#81](https://www.github.com/googleapis/nodejs-containeranalysis/issues/81)) ([7116630](https://www.github.com/googleapis/nodejs-containeranalysis/commit/7116630))
+* **docs:** remove anchor from reference doc link ([658df48](https://www.github.com/googleapis/nodejs-containeranalysis/commit/658df48))
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([766fa96](https://www.github.com/googleapis/nodejs-containeranalysis/commit/766fa96))
+
 ### [1.3.3](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v1.3.2...v1.3.3) (2019-08-16)
 
 
