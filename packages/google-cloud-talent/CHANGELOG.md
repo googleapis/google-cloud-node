@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.3.0...v1.4.0) (2019-09-16)
+
+
+### Features
+
+* candidate applications and assignments support ([#98](https://www.github.com/googleapis/nodejs-talent/issues/98)) ([0a9e8c1](https://www.github.com/googleapis/nodejs-talent/commit/0a9e8c1))
+* filter support ([#97](https://www.github.com/googleapis/nodejs-talent/issues/97)) ([3496527](https://www.github.com/googleapis/nodejs-talent/commit/3496527))
+* load protos from JSON, grpc-fallback support ([a0cee41](https://www.github.com/googleapis/nodejs-talent/commit/a0cee41))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-talent/compare/v1.2.0...v1.3.0) (2019-08-08)
 
 
