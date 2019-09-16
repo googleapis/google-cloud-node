@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.2.4...v1.3.0) (2019-09-16)
+
+
+### Features
+
+* load protos from JSON, grpc-fallback support ([7e284c8](https://www.github.com/googleapis/nodejs-dataproc/commit/7e284c8))
+
 ### [1.2.4](https://www.github.com/googleapis/nodejs-dataproc/compare/v1.2.3...v1.2.4) (2019-08-26)
 
 
