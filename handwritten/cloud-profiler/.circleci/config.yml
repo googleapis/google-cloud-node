@@ -59,17 +59,6 @@ workflows:
           filters: *release_tags
       - npmaudit:
           filters: *release_tags
-      - publish_npm:
-          requires:
-            - node8
-            - node10
-            - node11
-            - gocheck
-            - npmaudit
-          filters:
-            branches:
-              ignore: /.*/
-            <<: *release_tags
 
 jobs:
   node8:
@@ -99,20 +88,3 @@ jobs:
     docker:
       - image: circleci/golang:1.12
     <<: *gochecks
-
-  publish_npm:
-    docker:
-      - image: node:8
-        user: node
-    steps:
-      - checkout
-      - run:
-          name: Set NPM authentication.
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-      - run:
-          name: Install modules and dependencies.
-          command: npm install
-      - run:
-          name: Publish the module to npm.
-          command: npm publish
-
