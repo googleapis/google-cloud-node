@@ -3822,7 +3822,7 @@ describe('File', () => {
             predefinedAcl: options.predefinedAcl,
           },
           uri:
-            'https://www.googleapis.com/upload/storage/v1/b/' +
+            'https://storage.googleapis.com/upload/storage/v1/b/' +
             file.bucket.name +
             '/o',
         });
