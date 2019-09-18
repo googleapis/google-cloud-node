@@ -57,7 +57,7 @@
     "arrify": "^2.0.0",
     "compressible": "^2.0.12",
     "concat-stream": "^2.0.0",
-    "date-and-time": "^0.9.0",
+    "date-and-time": "^0.10.0",
     "duplexify": "^3.5.0",
     "extend": "^3.0.2",
     "gaxios": "^2.0.1",
