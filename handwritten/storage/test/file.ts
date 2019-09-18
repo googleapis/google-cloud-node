@@ -2083,6 +2083,28 @@ describe('File', () => {
     });
   });
 
+  describe('deleteResumableCache', () => {
+    it('should delete resumable file upload cache', done => {
+      file.generation = 123;
+
+      resumableUploadOverride = {
+        // tslint:disable-next-line no-any
+        upload(opts: any) {
+          assert.strictEqual(opts.bucket, file.bucket.name);
+          assert.strictEqual(opts.file, file.name);
+          assert.strictEqual(opts.generation, file.generation);
+
+          return {
+            deleteConfig: () => {
+              done();
+            },
+          };
+        },
+      };
+      file.deleteResumableCache();
+    });
+  });
+
   describe('download', () => {
     let fileReadStream: Readable;
 

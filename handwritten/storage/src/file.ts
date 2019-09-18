@@ -1856,6 +1856,47 @@ class File extends ServiceObject<File> {
     return stream as Writable;
   }
 
+  /**
+   * Delete failed resumable upload file cache.
+   *
+   * Resumable file upload cache the config file to restart upload in case of
+   * failure. In certain scenarios, the resumable upload will not works and
+   * upload file cache needs to be deleted to upload the same file.
+   *
+   * Following are some of the scenarios.
+   *
+   * Resumable file upload failed even though the file is successfully saved
+   * on the google storage and need to clean up a resumable file cache to
+   * update the same file.
+   *
+   * Resumable file upload failed due to pre-condition
+   * (i.e generation number is not matched) and want to upload a same
+   * file with the new generation number.
+   *
+   * @example
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   * const myBucket = storage.bucket('my-bucket');
+   *
+   * const file = myBucket.file('my-file', { generation: 0 });
+   * const contents = 'This is the contents of the file.';
+   *
+   * file.save(contents, function(err) {
+   *   if (err) {
+   *     file.deleteResumableCache();
+   *   }
+   * });
+   *
+   */
+  deleteResumableCache() {
+    const uploadStream = resumableUpload.upload({
+      bucket: this.bucket.name,
+      file: this.name,
+      generation: this.generation,
+    });
+    uploadStream.deleteConfig();
+  }
+
   download(options?: DownloadOptions): Promise<DownloadResponse>;
   download(options: DownloadOptions, callback: DownloadCallback): void;
   download(callback: DownloadCallback): void;

@@ -3003,6 +3003,29 @@ describe('storage', () => {
         files![1].metadata.generation
       );
     });
+
+    it('should throw an error Precondition Failed on overwrite with version 0, then save file with and without resumable', async () => {
+      const fileName = `test-${Date.now()}.txt`;
+
+      await bucketWithVersioning
+        .file(fileName)
+        .save('hello1', {resumable: false});
+      await assert.rejects(
+        async () => {
+          await bucketWithVersioning
+            .file(fileName, {generation: 0})
+            .save('hello2');
+        },
+        {
+          code: 412,
+          message: 'Precondition Failed',
+        }
+      );
+      await bucketWithVersioning
+        .file(fileName)
+        .save('hello3', {resumable: false});
+      await bucketWithVersioning.file(fileName).save('hello4');
+    });
   });
 
   describe('v2 signed urls', () => {
