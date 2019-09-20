@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.2.1...v3.3.0) (2019-09-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/pubsub to ^0.32.0 ([#849](https://www.github.com/googleapis/nodejs-storage/issues/849)) ([fdf70bb](https://www.github.com/googleapis/nodejs-storage/commit/fdf70bb))
+* add warning for unsupported keepAcl param in file#copy ([#841](https://www.github.com/googleapis/nodejs-storage/issues/841)) ([473bda0](https://www.github.com/googleapis/nodejs-storage/commit/473bda0))
+* remove unsupported keepAcl param ([#837](https://www.github.com/googleapis/nodejs-storage/issues/837)) ([5f69a3d](https://www.github.com/googleapis/nodejs-storage/commit/5f69a3d))
+* use storage.googleapis.com for api endpoint ([#854](https://www.github.com/googleapis/nodejs-storage/issues/854)) ([27fa02f](https://www.github.com/googleapis/nodejs-storage/commit/27fa02f))
+* **deps:** update dependency @google-cloud/pubsub to v1 ([#858](https://www.github.com/googleapis/nodejs-storage/issues/858)) ([31466f4](https://www.github.com/googleapis/nodejs-storage/commit/31466f4))
+* **deps:** update dependency date-and-time to ^0.10.0 ([#857](https://www.github.com/googleapis/nodejs-storage/issues/857)) ([e9ec9cf](https://www.github.com/googleapis/nodejs-storage/commit/e9ec9cf))
+
+
+### Features
+
+* adds support for  asyncIterators (via readable-stream@3 dependency) ([dd5ae7f](https://www.github.com/googleapis/nodejs-storage/commit/dd5ae7f))
+* allow removal of resumable upload cache ([#773](https://www.github.com/googleapis/nodejs-storage/issues/773)) ([da943db](https://www.github.com/googleapis/nodejs-storage/commit/da943db)), closes [#217](https://www.github.com/googleapis/nodejs-storage/issues/217)
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-storage/compare/v3.2.0...v3.2.1) (2019-08-28)
 
 
