@@ -78,6 +78,44 @@
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
+ * @property {Object} candidateUpdateTime
+ *   The timestamp when the profile was last updated as a result of a direct or
+ *   indirect action by a candidate.
+ *
+ *   These actions include:
+ *
+ *   * Direct actions such as the candidate submitting a new resume as part of a
+ *   job application to the agency, using a self-service tool such as a website
+ *   to update their profile, and so on.
+ *   * Indirect actions by the candidate such as uploading a resume to a job
+ *   board that is collected by the agency through a feed, providing a resume to
+ *   a recruiter who then uploads it into the ATS, and so on.
+ *   * Updates made to the candidate's profile by the recruiter as a result of
+ *   interacting with the candidate (for example adding a skill or work
+ *   preference, and so on). Changes to
+ *   recruiting_notes
+ *   are specifically excluded from this action type.
+ *
+ *   Note:
+ *   candidate_update_time
+ *   must be greater than or equal to
+ *   resume_update_time
+ *   or an error is thrown.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} resumeUpdateTime
+ *   The timestamp when the candidate's resume was added or updated on the
+ *   candidate's profile. Whether that resume was directly uploaded by a
+ *   candidate, pulled from a 3rd party job board feed, added by a recruiter,
+ *   and so on.
+ *
+ *   If this field is updated, it's expected that
+ *   resume is provided in the
+ *   create or update calls.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
  * @property {Object} resume
  *   The resume representing this profile.
  *
@@ -220,10 +258,10 @@
  *   This object should have the same structure as [Certification]{@link google.cloud.talent.v4beta1.Certification}
  *
  * @property {string[]} applications
- *   The resource names of the candidate's applications.
+ *   Output only. The resource names of the candidate's applications.
  *
  * @property {string[]} assignments
- *   The resource names of the candidate's assignments.
+ *   Output only. The resource names of the candidate's assignments.
  *
  * @property {Object.<string, Object>} customAttributes
  *   A map of fields to hold both filterable and non-filterable custom profile
@@ -256,6 +294,11 @@
  *   search query.  This is only returned in
  *   SearchProfilesResponse.
  *
+ * @property {Object[]} availabilitySignals
+ *   Output only. Candidate's availability signals.
+ *
+ *   This object should have the same structure as [AvailabilitySignal]{@link google.cloud.talent.v4beta1.AvailabilitySignal}
+ *
  * @property {Object[]} derivedAddresses
  *   Output only. Derived locations of the profile, resolved from
  *   Profile.addresses.
@@ -272,6 +315,42 @@
  * @see [google.cloud.talent.v4beta1.Profile definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/profile.proto}
  */
 const Profile = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Candidate availability signal.
+ *
+ * @property {number} type
+ *   Type of signal.
+ *
+ *   The number should be among the values of [AvailabilitySignalType]{@link google.cloud.talent.v4beta1.AvailabilitySignalType}
+ *
+ * @property {Object} lastUpdateTime
+ *   Timestamp of when the given availability activity last happened.
+ *
+ *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
+ *
+ * @property {Object} filterSatisfied
+ *   Indicates if the
+ *   last_update_time
+ *   is within
+ *   AvailabilityFilter.range.
+ *
+ *   Returned only in a search response when there is an
+ *   AvailabilityFilter in
+ *   ProfileQuery.availability_filters
+ *   where
+ *   signal_type
+ *   matches type.
+ *
+ *   This object should have the same structure as [BoolValue]{@link google.protobuf.BoolValue}
+ *
+ * @typedef AvailabilitySignal
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.AvailabilitySignal definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/profile.proto}
+ */
+const AvailabilitySignal = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

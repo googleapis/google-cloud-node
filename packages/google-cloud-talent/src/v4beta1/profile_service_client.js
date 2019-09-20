@@ -606,10 +606,13 @@ class ProfileServiceClient {
    *
    *   * external_id
    *   * source
+   *   * source_types
    *   * uri
    *   * is_hirable
    *   * create_time
    *   * update_time
+   *   * candidate_update_time
+   *   * resume_update_time
    *   * resume
    *   * person_names
    *   * addresses

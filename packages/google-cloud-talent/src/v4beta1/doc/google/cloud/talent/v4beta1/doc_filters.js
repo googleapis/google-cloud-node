@@ -434,6 +434,8 @@ const JobQuery = {
  *   (key1 = "TEST" OR LOWER(key1)="test" OR NOT EMPTY(key1))
  *
  * @property {Object} candidateAvailabilityFilter
+ *   Deprecated. Use availability_filters instead.
+ *
  *   The candidate availability filter which filters based on availability
  *   signals.
  *
@@ -452,6 +454,26 @@ const JobQuery = {
  *   for a specific job.
  *
  *   This object should have the same structure as [CandidateAvailabilityFilter]{@link google.cloud.talent.v4beta1.CandidateAvailabilityFilter}
+ *
+ * @property {Object[]} availabilityFilters
+ *   The availability filter which filters based on
+ *   Profile.availability_signals.
+ *
+ *   The availability filter helps a recruiter understand if a
+ *   specific candidate is likely to be actively seeking new job opportunities
+ *   based on an aggregated set of signals.  Specifically, the intent is NOT to
+ *   indicate the candidate's potential qualification / interest / close ability
+ *   for a specific job.
+ *
+ *   There can be at most one
+ *   AvailabilityFilter per
+ *   signal_type.
+ *   If there are multiple
+ *   AvailabilityFilter for a
+ *   signal_type,
+ *   an error is thrown.
+ *
+ *   This object should have the same structure as [AvailabilityFilter]{@link google.cloud.talent.v4beta1.AvailabilityFilter}
  *
  * @property {Object[]} personNameFilters
  *   Person name filter specifies person name of profiles to match on.
@@ -1023,6 +1045,8 @@ const TimeFilter = {
 };
 
 /**
+ * Deprecated. Use AvailabilityFilter instead.
+ *
  * Filter on availability signals.
  *
  * @property {boolean} negated
@@ -1034,6 +1058,36 @@ const TimeFilter = {
  * @see [google.cloud.talent.v4beta1.CandidateAvailabilityFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/filters.proto}
  */
 const CandidateAvailabilityFilter = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Filter on availability signals.
+ *
+ * @property {number} signalType
+ *   Required. Type of signal to apply filter on.
+ *
+ *   The number should be among the values of [AvailabilitySignalType]{@link google.cloud.talent.v4beta1.AvailabilitySignalType}
+ *
+ * @property {Object} range
+ *   Required. Range of times to filter candidate signals by.
+ *
+ *   This object should have the same structure as [TimestampRange]{@link google.cloud.talent.v4beta1.TimestampRange}
+ *
+ * @property {boolean} required
+ *   If multiple
+ *   AvailabilityFilter are
+ *   provided, the default behavior is to OR all filters, but if this field is
+ *   set to true, this particular
+ *   AvailabilityFilter will
+ *   be AND'ed against other
+ *   AvailabilityFilter.
+ *
+ * @typedef AvailabilityFilter
+ * @memberof google.cloud.talent.v4beta1
+ * @see [google.cloud.talent.v4beta1.AvailabilityFilter definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/talent/v4beta1/filters.proto}
+ */
+const AvailabilityFilter = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

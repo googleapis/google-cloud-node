@@ -799,6 +799,15 @@
                         "OUTCOME_NOT_AVAILABLE": 4
                       }
                     },
+                    "AvailabilitySignalType": {
+                      "values": {
+                        "AVAILABILITY_SIGNAL_TYPE_UNSPECIFIED": 0,
+                        "JOB_APPLICATION": 1,
+                        "RESUME_UPDATE": 2,
+                        "CANDIDATE_UPDATE": 3,
+                        "CLIENT_SUBMISSION": 4
+                      }
+                    },
                     "CompanyService": {
                       "options": {
                         "(google.api.default_host)": "jobs.googleapis.com",
@@ -1908,7 +1917,15 @@
                         },
                         "candidateAvailabilityFilter": {
                           "type": "CandidateAvailabilityFilter",
-                          "id": 16
+                          "id": 16,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "availabilityFilters": {
+                          "rule": "repeated",
+                          "type": "AvailabilityFilter",
+                          "id": 18
                         },
                         "personNameFilters": {
                           "rule": "repeated",
@@ -2206,10 +2223,35 @@
                       }
                     },
                     "CandidateAvailabilityFilter": {
+                      "options": {
+                        "deprecated": true
+                      },
                       "fields": {
                         "negated": {
                           "type": "bool",
                           "id": 1
+                        }
+                      }
+                    },
+                    "AvailabilityFilter": {
+                      "fields": {
+                        "signalType": {
+                          "type": "AvailabilitySignalType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "range": {
+                          "type": "TimestampRange",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "required": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -2735,6 +2777,14 @@
                           "type": "google.protobuf.Timestamp",
                           "id": 8
                         },
+                        "candidateUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 67
+                        },
+                        "resumeUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 68
+                        },
                         "resume": {
                           "type": "Resume",
                           "id": 53
@@ -2807,12 +2857,18 @@
                         "applications": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 47
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "assignments": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 48
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "customAttributes": {
                           "keyType": "string",
@@ -2833,6 +2889,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "availabilitySignals": {
+                          "rule": "repeated",
+                          "type": "AvailabilitySignal",
+                          "id": 70,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "derivedAddresses": {
                           "rule": "repeated",
                           "type": "Location",
@@ -2840,6 +2904,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "AvailabilitySignal": {
+                      "fields": {
+                        "type": {
+                          "type": "AvailabilitySignalType",
+                          "id": 1
+                        },
+                        "lastUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "filterSatisfied": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 3
                         }
                       }
                     },
