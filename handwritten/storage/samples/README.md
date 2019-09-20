@@ -23,6 +23,7 @@ objects to users via direct download.
   * [Storage Get Bucket Metadata.](#storage-get-bucket-metadata.)
   * [Buckets](#buckets)
   * [Encryption](#encryption)
+  * [Storage Set File Metadata.](#storage-set-file-metadata.)
   * [Files](#files)
   * [Activate HMAC SA Key.](#activate-hmac-sa-key.)
   * [Create HMAC SA Key.](#create-hmac-sa-key.)
@@ -125,6 +126,25 @@ __Usage:__
 
 
 `node encryption.js`
+
+
+-----
+
+
+
+
+### Storage Set File Metadata.
+
+Set file metadata.
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/fileSetMetadata.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/fileSetMetadata.js,samples/README.md)
+
+__Usage:__
+
+
+`node fileSetMetadata.js <BUCKET_NAME> <FILE_NAME>`
 
 
 -----
