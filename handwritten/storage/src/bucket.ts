@@ -2767,7 +2767,7 @@ class Bucket extends ServiceObject {
    * const storage = new Storage();
    * const bucket = storage.bucket('albums');
    *
-   * bucket.setStorageClass('regional', function(err, apiResponse) {
+   * bucket.setStorageClass('nearline', function(err, apiResponse) {
    *   if (err) {
    *     // Error handling omitted.
    *   }
@@ -2778,7 +2778,7 @@ class Bucket extends ServiceObject {
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * bucket.setStorageClass('regional').then(function() {});
+   * bucket.setStorageClass('nearline').then(function() {});
    */
   setStorageClass(
     storageClass: string,

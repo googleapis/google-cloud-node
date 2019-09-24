@@ -954,9 +954,9 @@ describe('storage', () => {
       await bucket.create();
       let [metadata] = await bucket.getMetadata();
       assert.strictEqual(metadata.storageClass, 'STANDARD');
-      await bucket.setStorageClass('multi-regional');
+      await bucket.setStorageClass('coldline');
       [metadata] = await bucket.getMetadata();
-      assert.strictEqual(metadata.storageClass, 'MULTI_REGIONAL');
+      assert.strictEqual(metadata.storageClass, 'COLDLINE');
     });
 
     describe('locationType', () => {
