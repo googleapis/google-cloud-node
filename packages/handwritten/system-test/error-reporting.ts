@@ -223,6 +223,12 @@ describe('Request/Response lifecycle mocking', () => {
         new Configuration({key, reportMode: 'always'}, logger),
         logger
       );
+      const fakeService = nock(
+        'https://clouderrorreporting.googleapis.com/v1beta1/projects/' +
+          process.env.GCLOUD_PROJECT
+      )
+        .persist()
+        .post('/events:report');
       fakeService.query({key}).reply(200, (uri: string) => {
         assert(uri.indexOf('key=' + key) > -1);
         return {};
