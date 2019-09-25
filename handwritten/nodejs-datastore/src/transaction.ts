@@ -445,8 +445,8 @@ class Transaction extends DatastoreRequest {
   }
 
   run(options?: RunOptions): Promise<RunResponse>;
-  run(callback?: RunCallback): void;
-  run(options?: RunOptions, callback?: RunCallback): void;
+  run(callback: RunCallback): void;
+  run(options: RunOptions, callback: RunCallback): void;
   /**
    * Begin a remote transaction. In the callback provided, run your
    * transactional commands.
