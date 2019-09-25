@@ -1,0 +1,31 @@
+{
+  "updateTime": "2019-09-24T20:54:52.953167Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.37.0",
+        "dockerImage": "googleapis/artman@sha256:0f66008f69061ea6d41499e2a34da3fc64fc7c9798077e3a37158653a135d801"
+      }
+    },
+    {
+      "template": {
+        "name": "node_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.5.2"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis-private",
+        "apiName": "workflows",
+        "apiVersion": "v1alpha1",
+        "language": "nodejs",
+        "generator": "gapic",
+        "config": "google/cloud/workflows/artman_workflows_v1alpha1.yaml"
+      }
+    }
+  ]
+}
