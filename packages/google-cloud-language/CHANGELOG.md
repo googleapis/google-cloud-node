@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-language/compare/v3.3.0...v3.4.0) (2019-09-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to ^1.6.1 ([#299](https://www.github.com/googleapis/nodejs-language/issues/299)) ([976bfab](https://www.github.com/googleapis/nodejs-language/commit/976bfab))
+
+
+### Features
+
+* .d.ts for protos ([#296](https://www.github.com/googleapis/nodejs-language/issues/296)) ([c279ff1](https://www.github.com/googleapis/nodejs-language/commit/c279ff1))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-language/compare/v3.2.6...v3.3.0) (2019-09-16)
 
 
