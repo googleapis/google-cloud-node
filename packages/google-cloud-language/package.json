@@ -42,7 +42,7 @@
     "predocs-test": "npm run docs"
   },
   "dependencies": {
-    "google-gax": "^1.0.0"
+    "google-gax": "^1.6.1"
   },
   "devDependencies": {
     "codecov": "^3.0.2",
