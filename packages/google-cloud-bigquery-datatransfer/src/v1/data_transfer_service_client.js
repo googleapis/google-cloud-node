@@ -287,7 +287,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
+   *   Required. The field will contain name of the resource requested, for example:
    *   `projects/{project_id}/dataSources/{data_source_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -343,7 +343,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The BigQuery project id for which data sources should be returned.
+   *   Required. The BigQuery project id for which data sources should be returned.
    *   Must be in the form: `projects/{project_id}`
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -456,7 +456,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The BigQuery project id for which data sources should be returned.
+   *   Required. The BigQuery project id for which data sources should be returned.
    *   Must be in the form: `projects/{project_id}`
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -502,12 +502,12 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The BigQuery project id where the transfer configuration should be created.
+   *   Required. The BigQuery project id where the transfer configuration should be created.
    *   Must be in the format projects/{project_id}/locations/{location_id}
    *   If specified location and location of the destination bigquery dataset
    *   do not match - the request will fail.
    * @param {Object} request.transferConfig
-   *   Data transfer configuration to create.
+   *   Required. Data transfer configuration to create.
    *
    *   This object should have the same structure as [TransferConfig]{@link google.cloud.bigquery.datatransfer.v1.TransferConfig}
    * @param {string} [request.authorizationCode]
@@ -593,11 +593,11 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.transferConfig
-   *   Data transfer configuration to create.
+   *   Required. Data transfer configuration to create.
    *
    *   This object should have the same structure as [TransferConfig]{@link google.cloud.bigquery.datatransfer.v1.TransferConfig}
    * @param {Object} request.updateMask
-   *   Required list of fields to be updated in this request.
+   *   Required. Required list of fields to be updated in this request.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {string} [request.authorizationCode]
@@ -683,7 +683,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
+   *   Required. The field will contain name of the resource requested, for example:
    *   `projects/{project_id}/transferConfigs/{config_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -730,7 +730,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
+   *   Required. The field will contain name of the resource requested, for example:
    *   `projects/{project_id}/transferConfigs/{config_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -785,7 +785,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The BigQuery project id for which data sources
+   *   Required. The BigQuery project id for which data sources
    *   should be returned: `projects/{project_id}`.
    * @param {string[]} [request.dataSourceIds]
    *   When specified, only configurations of requested data sources are returned.
@@ -900,7 +900,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   The BigQuery project id for which data sources
+   *   Required. The BigQuery project id for which data sources
    *   should be returned: `projects/{project_id}`.
    * @param {string[]} [request.dataSourceIds]
    *   When specified, only configurations of requested data sources are returned.
@@ -952,15 +952,15 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Transfer configuration name in the form:
+   *   Required. Transfer configuration name in the form:
    *   `projects/{project_id}/transferConfigs/{config_id}`.
    * @param {Object} request.startTime
-   *   Start time of the range of transfer runs. For example,
+   *   Required. Start time of the range of transfer runs. For example,
    *   `"2017-05-25T00:00:00+00:00"`.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
    * @param {Object} request.endTime
-   *   End time of the range of transfer runs. For example,
+   *   Required. End time of the range of transfer runs. For example,
    *   `"2017-05-30T00:00:00+00:00"`.
    *
    *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
@@ -1024,7 +1024,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
+   *   Required. The field will contain name of the resource requested, for example:
    *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1079,7 +1079,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
+   *   Required. The field will contain name of the resource requested, for example:
    *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -1126,7 +1126,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of transfer configuration for which transfer runs should be retrieved.
+   *   Required. Name of transfer configuration for which transfer runs should be retrieved.
    *   Format of transfer configuration resource name is:
    *   `projects/{project_id}/transferConfigs/{config_id}`.
    * @param {number[]} [request.states]
@@ -1248,7 +1248,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Name of transfer configuration for which transfer runs should be retrieved.
+   *   Required. Name of transfer configuration for which transfer runs should be retrieved.
    *   Format of transfer configuration resource name is:
    *   `projects/{project_id}/transferConfigs/{config_id}`.
    * @param {number[]} [request.states]
@@ -1303,7 +1303,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Transfer run name in the form:
+   *   Required. Transfer run name in the form:
    *   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -1421,7 +1421,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Transfer run name in the form:
+   *   Required. Transfer run name in the form:
    *   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -1477,7 +1477,7 @@ class DataTransferServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The data source in the form:
+   *   Required. The data source in the form:
    *   `projects/{project_id}/dataSources/{data_source_id}`
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,

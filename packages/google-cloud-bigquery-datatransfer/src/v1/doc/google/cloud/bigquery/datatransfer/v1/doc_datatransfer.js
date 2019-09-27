@@ -282,7 +282,7 @@ const DataSource = {
  * A request to get data source info.
  *
  * @property {string} name
- *   The field will contain name of the resource requested, for example:
+ *   Required. The field will contain name of the resource requested, for example:
  *   `projects/{project_id}/dataSources/{data_source_id}`
  *
  * @typedef GetDataSourceRequest
@@ -297,7 +297,7 @@ const GetDataSourceRequest = {
  * Request to list supported data sources and their data transfer settings.
  *
  * @property {string} parent
- *   The BigQuery project id for which data sources should be returned.
+ *   Required. The BigQuery project id for which data sources should be returned.
  *   Must be in the form: `projects/{project_id}`
  *
  * @property {string} pageToken
@@ -349,13 +349,13 @@ const ListDataSourcesResponse = {
  * with the calling user.
  *
  * @property {string} parent
- *   The BigQuery project id where the transfer configuration should be created.
+ *   Required. The BigQuery project id where the transfer configuration should be created.
  *   Must be in the format projects/{project_id}/locations/{location_id}
  *   If specified location and location of the destination bigquery dataset
  *   do not match - the request will fail.
  *
  * @property {Object} transferConfig
- *   Data transfer configuration to create.
+ *   Required. Data transfer configuration to create.
  *
  *   This object should have the same structure as [TransferConfig]{@link google.cloud.bigquery.datatransfer.v1.TransferConfig}
  *
@@ -398,7 +398,7 @@ const CreateTransferConfigRequest = {
  * transfer configuration, an authorization code needs to be provided.
  *
  * @property {Object} transferConfig
- *   Data transfer configuration to create.
+ *   Required. Data transfer configuration to create.
  *
  *   This object should have the same structure as [TransferConfig]{@link google.cloud.bigquery.datatransfer.v1.TransferConfig}
  *
@@ -421,7 +421,7 @@ const CreateTransferConfigRequest = {
  *     the user to copy the code and paste it in the application.
  *
  * @property {Object} updateMask
- *   Required list of fields to be updated in this request.
+ *   Required. Required list of fields to be updated in this request.
  *
  *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
  *
@@ -445,7 +445,7 @@ const UpdateTransferConfigRequest = {
  * A request to get data transfer information.
  *
  * @property {string} name
- *   The field will contain name of the resource requested, for example:
+ *   Required. The field will contain name of the resource requested, for example:
  *   `projects/{project_id}/transferConfigs/{config_id}`
  *
  * @typedef GetTransferConfigRequest
@@ -461,7 +461,7 @@ const GetTransferConfigRequest = {
  * and log messages will be deleted as well.
  *
  * @property {string} name
- *   The field will contain name of the resource requested, for example:
+ *   Required. The field will contain name of the resource requested, for example:
  *   `projects/{project_id}/transferConfigs/{config_id}`
  *
  * @typedef DeleteTransferConfigRequest
@@ -476,7 +476,7 @@ const DeleteTransferConfigRequest = {
  * A request to get data transfer run information.
  *
  * @property {string} name
- *   The field will contain name of the resource requested, for example:
+ *   Required. The field will contain name of the resource requested, for example:
  *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
  *
  * @typedef GetTransferRunRequest
@@ -491,7 +491,7 @@ const GetTransferRunRequest = {
  * A request to delete data transfer run information.
  *
  * @property {string} name
- *   The field will contain name of the resource requested, for example:
+ *   Required. The field will contain name of the resource requested, for example:
  *   `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
  *
  * @typedef DeleteTransferRunRequest
@@ -506,7 +506,7 @@ const DeleteTransferRunRequest = {
  * A request to list data transfers configured for a BigQuery project.
  *
  * @property {string} parent
- *   The BigQuery project id for which data sources
+ *   Required. The BigQuery project id for which data sources
  *   should be returned: `projects/{project_id}`.
  *
  * @property {string[]} dataSourceIds
@@ -558,7 +558,7 @@ const ListTransferConfigsResponse = {
  * all scheduled transfer runs.
  *
  * @property {string} parent
- *   Name of transfer configuration for which transfer runs should be retrieved.
+ *   Required. Name of transfer configuration for which transfer runs should be retrieved.
  *   Format of transfer configuration resource name is:
  *   `projects/{project_id}/transferConfigs/{config_id}`.
  *
@@ -635,7 +635,7 @@ const ListTransferRunsResponse = {
  * A request to get user facing log messages associated with data transfer run.
  *
  * @property {string} parent
- *   Transfer run name in the form:
+ *   Required. Transfer run name in the form:
  *   `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
  *
  * @property {string} pageToken
@@ -693,7 +693,7 @@ const ListTransferLogsResponse = {
  * already valid merely based on the user id.
  *
  * @property {string} name
- *   The data source in the form:
+ *   Required. The data source in the form:
  *   `projects/{project_id}/dataSources/{data_source_id}`
  *
  * @typedef CheckValidCredsRequest
@@ -722,17 +722,17 @@ const CheckValidCredsResponse = {
  * A request to schedule transfer runs for a time range.
  *
  * @property {string} parent
- *   Transfer configuration name in the form:
+ *   Required. Transfer configuration name in the form:
  *   `projects/{project_id}/transferConfigs/{config_id}`.
  *
  * @property {Object} startTime
- *   Start time of the range of transfer runs. For example,
+ *   Required. Start time of the range of transfer runs. For example,
  *   `"2017-05-25T00:00:00+00:00"`.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} endTime
- *   End time of the range of transfer runs. For example,
+ *   Required. End time of the range of transfer runs. For example,
  *   `"2017-05-30T00:00:00+00:00"`.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
