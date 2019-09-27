@@ -30,7 +30,8 @@
                               "responseType": "DataSource",
                               "options": {
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/dataSources/*}",
-                                "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/dataSources/*}"
+                                "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/dataSources/*}",
+                                "(google.api.method_signature)": "name"
                               }
                             },
                             "ListDataSources": {
@@ -38,7 +39,8 @@
                               "responseType": "ListDataSourcesResponse",
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/dataSources",
-                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/dataSources"
+                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/dataSources",
+                                "(google.api.method_signature)": "parent"
                               }
                             },
                             "CreateTransferConfig": {
@@ -48,7 +50,8 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/transferConfigs",
                                 "(google.api.http).body": "transfer_config",
                                 "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/transferConfigs",
-                                "(google.api.http).additional_bindings.body": "transfer_config"
+                                "(google.api.http).additional_bindings.body": "transfer_config",
+                                "(google.api.method_signature)": "parent,transfer_config"
                               }
                             },
                             "UpdateTransferConfig": {
@@ -58,7 +61,8 @@
                                 "(google.api.http).patch": "/v1/{transfer_config.name=projects/*/locations/*/transferConfigs/*}",
                                 "(google.api.http).body": "transfer_config",
                                 "(google.api.http).additional_bindings.patch": "/v1/{transfer_config.name=projects/*/transferConfigs/*}",
-                                "(google.api.http).additional_bindings.body": "transfer_config"
+                                "(google.api.http).additional_bindings.body": "transfer_config",
+                                "(google.api.method_signature)": "transfer_config,update_mask"
                               }
                             },
                             "DeleteTransferConfig": {
@@ -66,7 +70,8 @@
                               "responseType": "google.protobuf.Empty",
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/transferConfigs/*}",
-                                "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/transferConfigs/*}"
+                                "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/transferConfigs/*}",
+                                "(google.api.method_signature)": "name"
                               }
                             },
                             "GetTransferConfig": {
@@ -74,7 +79,8 @@
                               "responseType": "TransferConfig",
                               "options": {
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/transferConfigs/*}",
-                                "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/transferConfigs/*}"
+                                "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/transferConfigs/*}",
+                                "(google.api.method_signature)": "name"
                               }
                             },
                             "ListTransferConfigs": {
@@ -82,7 +88,8 @@
                               "responseType": "ListTransferConfigsResponse",
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/transferConfigs",
-                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/transferConfigs"
+                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/transferConfigs",
+                                "(google.api.method_signature)": "parent"
                               }
                             },
                             "ScheduleTransferRuns": {
@@ -93,7 +100,8 @@
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*/transferConfigs/*}:scheduleRuns",
                                 "(google.api.http).body": "*",
                                 "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/transferConfigs/*}:scheduleRuns",
-                                "(google.api.http).additional_bindings.body": "*"
+                                "(google.api.http).additional_bindings.body": "*",
+                                "(google.api.method_signature)": "parent,start_time,end_time"
                               }
                             },
                             "StartManualTransferRuns": {
@@ -111,7 +119,8 @@
                               "responseType": "TransferRun",
                               "options": {
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}",
-                                "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/transferConfigs/*/runs/*}"
+                                "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/transferConfigs/*/runs/*}",
+                                "(google.api.method_signature)": "name"
                               }
                             },
                             "DeleteTransferRun": {
@@ -119,7 +128,8 @@
                               "responseType": "google.protobuf.Empty",
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/transferConfigs/*/runs/*}",
-                                "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/transferConfigs/*/runs/*}"
+                                "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/transferConfigs/*/runs/*}",
+                                "(google.api.method_signature)": "name"
                               }
                             },
                             "ListTransferRuns": {
@@ -127,7 +137,8 @@
                               "responseType": "ListTransferRunsResponse",
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*/transferConfigs/*}/runs",
-                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/transferConfigs/*}/runs"
+                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/transferConfigs/*}/runs",
+                                "(google.api.method_signature)": "parent"
                               }
                             },
                             "ListTransferLogs": {
@@ -135,7 +146,8 @@
                               "responseType": "ListTransferLogsResponse",
                               "options": {
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*/transferConfigs/*/runs/*}/transferLogs",
-                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs"
+                                "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs",
+                                "(google.api.method_signature)": "parent"
                               }
                             },
                             "CheckValidCreds": {
@@ -145,7 +157,8 @@
                                 "(google.api.http).post": "/v1/{name=projects/*/locations/*/dataSources/*}:checkValidCreds",
                                 "(google.api.http).body": "*",
                                 "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/dataSources/*}:checkValidCreds",
-                                "(google.api.http).additional_bindings.body": "*"
+                                "(google.api.http).additional_bindings.body": "*",
+                                "(google.api.method_signature)": "name"
                               }
                             }
                           }
@@ -234,10 +247,17 @@
                           }
                         },
                         "DataSource": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/DataSource",
+                            "(google.api.resource).pattern": "projects/{project}/dataSources/{data_source}"
+                          },
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "dataSourceId": {
                               "type": "string",
@@ -337,7 +357,11 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/DataSource"
+                              }
                             }
                           }
                         },
@@ -345,7 +369,11 @@
                           "fields": {
                             "parent": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                              }
                             },
                             "pageToken": {
                               "type": "string",
@@ -366,7 +394,10 @@
                             },
                             "nextPageToken": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -374,11 +405,18 @@
                           "fields": {
                             "parent": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
                             },
                             "transferConfig": {
                               "type": "TransferConfig",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "authorizationCode": {
                               "type": "string",
@@ -394,7 +432,10 @@
                           "fields": {
                             "transferConfig": {
                               "type": "TransferConfig",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "authorizationCode": {
                               "type": "string",
@@ -402,7 +443,10 @@
                             },
                             "updateMask": {
                               "type": "google.protobuf.FieldMask",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "versionInfo": {
                               "type": "string",
@@ -414,7 +458,11 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferConfig"
+                              }
                             }
                           }
                         },
@@ -422,7 +470,11 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferConfig"
+                              }
                             }
                           }
                         },
@@ -430,7 +482,11 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferRun"
+                              }
                             }
                           }
                         },
@@ -438,7 +494,11 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferRun"
+                              }
                             }
                           }
                         },
@@ -446,7 +506,11 @@
                           "fields": {
                             "parent": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                              }
                             },
                             "dataSourceIds": {
                               "rule": "repeated",
@@ -468,11 +532,17 @@
                             "transferConfigs": {
                               "rule": "repeated",
                               "type": "TransferConfig",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "nextPageToken": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -480,7 +550,11 @@
                           "fields": {
                             "parent": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferConfig"
+                              }
                             },
                             "states": {
                               "rule": "repeated",
@@ -514,11 +588,17 @@
                             "transferRuns": {
                               "rule": "repeated",
                               "type": "TransferRun",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "nextPageToken": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -526,7 +606,11 @@
                           "fields": {
                             "parent": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferRun"
+                              }
                             },
                             "pageToken": {
                               "type": "string",
@@ -548,11 +632,17 @@
                             "transferMessages": {
                               "rule": "repeated",
                               "type": "TransferMessage",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "nextPageToken": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -560,7 +650,11 @@
                           "fields": {
                             "name": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/DataSource"
+                              }
                             }
                           }
                         },
@@ -576,15 +670,25 @@
                           "fields": {
                             "parent": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferConfig"
+                              }
                             },
                             "startTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "endTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         },
@@ -609,7 +713,10 @@
                           "fields": {
                             "parent": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "bigquerydatatransfer.googleapis.com/TransferConfig"
+                              }
                             },
                             "requestedTimeRange": {
                               "type": "TimeRange",
@@ -681,6 +788,17 @@
                           }
                         },
                         "TransferConfig": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/TransferConfig",
+                            "(google.api.resource).pattern": "projects/{project}/transferConfigs/{transfer_config}"
+                          },
+                          "oneofs": {
+                            "destination": {
+                              "oneof": [
+                                "destinationDatasetId"
+                              ]
+                            }
+                          },
                           "fields": {
                             "name": {
                               "type": "string",
@@ -720,15 +838,24 @@
                             },
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "nextRunTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 8
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "state": {
                               "type": "TransferState",
-                              "id": 10
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "userId": {
                               "type": "int64",
@@ -736,11 +863,25 @@
                             },
                             "datasetRegion": {
                               "type": "string",
-                              "id": 14
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
                         "TransferRun": {
+                          "options": {
+                            "(google.api.resource).type": "bigquerydatatransfer.googleapis.com/TransferRun",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/transferConfigs/{transfer_config}/runs/{run}"
+                          },
+                          "oneofs": {
+                            "destination": {
+                              "oneof": [
+                                "destinationDatasetId"
+                              ]
+                            }
+                          },
                           "fields": {
                             "name": {
                               "type": "string",
@@ -760,27 +901,45 @@
                             },
                             "startTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "endTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 5
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "updateTime": {
                               "type": "google.protobuf.Timestamp",
-                              "id": 6
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "params": {
                               "type": "google.protobuf.Struct",
-                              "id": 9
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "destinationDatasetId": {
                               "type": "string",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "dataSourceId": {
                               "type": "string",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             },
                             "state": {
                               "type": "TransferState",
@@ -792,7 +951,10 @@
                             },
                             "schedule": {
                               "type": "string",
-                              "id": 12
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -834,7 +996,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -942,6 +1104,74 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
             }
           }
         },
