@@ -59,11 +59,17 @@ const TranslateTextGlossaryConfig = {
  *   text, set to one of the language codes listed in Language Support.
  *
  * @property {string} parent
- *   Required. Location to make a regional or global call.
+ *   Required. Project or location to make a call. Must refer to a caller's
+ *   project.
  *
- *   Format: `projects/{project-id}/locations/{location-id}`.
+ *   Format: `projects/{project-id}` or
+ *   `projects/{project-id}/locations/{location-id}`.
  *
- *   For global calls, use `projects/{project-id}/locations/global`.
+ *   For global calls, use `projects/{project-id}/locations/global` or
+ *   `projects/{project-id}`.
+ *
+ *   Non-global location is required for requests using AutoML models or
+ *   custom glossaries.
  *
  *   Models and glossaries must be within the same region (have same
  *   location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
@@ -93,6 +99,16 @@ const TranslateTextGlossaryConfig = {
  *   an INVALID_ARGUMENT (400) error is returned.
  *
  *   This object should have the same structure as [TranslateTextGlossaryConfig]{@link google.cloud.translation.v3beta1.TranslateTextGlossaryConfig}
+ *
+ * @property {Object.<string, string>} labels
+ *   Optional. The labels with user-defined metadata for the request.
+ *
+ *   Label keys and values can be no longer than 63 characters
+ *   (Unicode codepoints), can only contain lowercase letters, numeric
+ *   characters, underscores and dashes. International characters are allowed.
+ *   Label values are optional. Label keys must start with a letter.
+ *
+ *   See https://cloud.google.com/translate/docs/labels for more information.
  *
  * @typedef TranslateTextRequest
  * @memberof google.cloud.translation.v3beta1
@@ -160,11 +176,14 @@ const Translation = {
  * The request message for language detection.
  *
  * @property {string} parent
- *   Required. Location to make a regional or global call.
+ *   Required. Project or location to make a call. Must refer to a caller's
+ *   project.
  *
- *   Format: `projects/{project-id}/locations/{location-id}`.
+ *   Format: `projects/{project-id}/locations/{location-id}` or
+ *   `projects/{project-id}`.
  *
- *   For global calls, use `projects/{project-id}/locations/global`.
+ *   For global calls, use `projects/{project-id}/locations/global` or
+ *   `projects/{project-id}`.
  *
  *   Only models within the same region (has same location-id) can be used.
  *   Otherwise an INVALID_ARGUMENT (400) error is returned.
@@ -186,6 +205,16 @@ const Translation = {
  * @property {string} mimeType
  *   Optional. The format of the source text, for example, "text/html",
  *   "text/plain". If left blank, the MIME type defaults to "text/html".
+ *
+ * @property {Object.<string, string>} labels
+ *   Optional. The labels with user-defined metadata for the request.
+ *
+ *   Label keys and values can be no longer than 63 characters
+ *   (Unicode codepoints), can only contain lowercase letters, numeric
+ *   characters, underscores and dashes. International characters are allowed.
+ *   Label values are optional. Label keys must start with a letter.
+ *
+ *   See https://cloud.google.com/translate/docs/labels for more information.
  *
  * @typedef DetectLanguageRequest
  * @memberof google.cloud.translation.v3beta1
@@ -234,11 +263,16 @@ const DetectLanguageResponse = {
  * The request message for discovering supported languages.
  *
  * @property {string} parent
- *   Required. Location to make a regional or global call.
+ *   Required. Project or location to make a call. Must refer to a caller's
+ *   project.
  *
- *   Format: `projects/{project-id}/locations/{location-id}`.
+ *   Format: `projects/{project-id}` or
+ *   `projects/{project-id}/locations/{location-id}`.
  *
- *   For global calls, use `projects/{project-id}/locations/global`.
+ *   For global calls, use `projects/{project-id}/locations/global` or
+ *   `projects/{project-id}`.
+ *
+ *   Non-global location is required for AutoML models.
  *
  *   Only models within the same region (have same location-id) can be used,
  *   otherwise an INVALID_ARGUMENT (400) error is returned.
@@ -371,12 +405,12 @@ const InputConfig = {
 };
 
 /**
- * The Google Cloud Storage location for the output content
+ * The Google Cloud Storage location for the output content.
  *
  * @property {string} outputUriPrefix
  *   Required. There must be no files under 'output_uri_prefix'.
- *   'output_uri_prefix' must end with "/", otherwise an INVALID_ARGUMENT (400)
- *   error is returned..
+ *   'output_uri_prefix' must end with "/" and start with "gs://", otherwise an
+ *   INVALID_ARGUMENT (400) error is returned.
  *
  * @typedef GcsDestination
  * @memberof google.cloud.translation.v3beta1
@@ -471,7 +505,7 @@ const OutputConfig = {
  * The batch translation request.
  *
  * @property {string} parent
- *   Required. Location to make a regional call.
+ *   Required. Location to make a call. Must refer to a caller's project.
  *
  *   Format: `projects/{project-id}/locations/{location-id}`.
  *
@@ -523,6 +557,16 @@ const OutputConfig = {
  * @property {Object.<string, Object>} glossaries
  *   Optional. Glossaries to be applied for translation.
  *   It's keyed by target language code.
+ *
+ * @property {Object.<string, string>} labels
+ *   Optional. The labels with user-defined metadata for the request.
+ *
+ *   Label keys and values can be no longer than 63 characters
+ *   (Unicode codepoints), can only contain lowercase letters, numeric
+ *   characters, underscores and dashes. International characters are allowed.
+ *   Label values are optional. Label keys must start with a letter.
+ *
+ *   See https://cloud.google.com/translate/docs/labels for more information.
  *
  * @typedef BatchTranslateTextRequest
  * @memberof google.cloud.translation.v3beta1

@@ -305,6 +305,21 @@ class TranslationServiceClient {
    * @param {string} request.targetLanguageCode
    *   Required. The BCP-47 language code to use for translation of the input
    *   text, set to one of the language codes listed in Language Support.
+   * @param {string} request.parent
+   *   Required. Project or location to make a call. Must refer to a caller's
+   *   project.
+   *
+   *   Format: `projects/{project-id}` or
+   *   `projects/{project-id}/locations/{location-id}`.
+   *
+   *   For global calls, use `projects/{project-id}/locations/global` or
+   *   `projects/{project-id}`.
+   *
+   *   Non-global location is required for requests using AutoML models or
+   *   custom glossaries.
+   *
+   *   Models and glossaries must be within the same region (have same
+   *   location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
    * @param {string} [request.mimeType]
    *   Optional. The format of the source text, for example, "text/html",
    *    "text/plain". If left blank, the MIME type defaults to "text/html".
@@ -314,15 +329,6 @@ class TranslationServiceClient {
    *   listed in Language Support. If the source language isn't specified, the API
    *   attempts to identify the source language automatically and returns the
    *   source language within the response.
-   * @param {string} [request.parent]
-   *   Required. Location to make a regional or global call.
-   *
-   *   Format: `projects/{project-id}/locations/{location-id}`.
-   *
-   *   For global calls, use `projects/{project-id}/locations/global`.
-   *
-   *   Models and glossaries must be within the same region (have same
-   *   location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
    * @param {string} [request.model]
    *   Optional. The `model` type requested for this translation.
    *
@@ -347,6 +353,15 @@ class TranslationServiceClient {
    *   an INVALID_ARGUMENT (400) error is returned.
    *
    *   This object should have the same structure as [TranslateTextGlossaryConfig]{@link google.cloud.translation.v3beta1.TranslateTextGlossaryConfig}
+   * @param {Object.<string, string>} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints), can only contain lowercase letters, numeric
+   *   characters, underscores and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
+   *
+   *   See https://cloud.google.com/translate/docs/labels for more information.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -368,9 +383,11 @@ class TranslationServiceClient {
    *
    * const contents = [];
    * const targetLanguageCode = '';
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * const request = {
    *   contents: contents,
    *   targetLanguageCode: targetLanguageCode,
+   *   parent: formattedParent,
    * };
    * client.translateText(request)
    *   .then(responses => {
@@ -404,12 +421,15 @@ class TranslationServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} [request.parent]
-   *   Required. Location to make a regional or global call.
+   * @param {string} request.parent
+   *   Required. Project or location to make a call. Must refer to a caller's
+   *   project.
    *
-   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *   Format: `projects/{project-id}/locations/{location-id}` or
+   *   `projects/{project-id}`.
    *
-   *   For global calls, use `projects/{project-id}/locations/global`.
+   *   For global calls, use `projects/{project-id}/locations/global` or
+   *   `projects/{project-id}`.
    *
    *   Only models within the same region (has same location-id) can be used.
    *   Otherwise an INVALID_ARGUMENT (400) error is returned.
@@ -428,6 +448,15 @@ class TranslationServiceClient {
    * @param {string} [request.mimeType]
    *   Optional. The format of the source text, for example, "text/html",
    *   "text/plain". If left blank, the MIME type defaults to "text/html".
+   * @param {Object.<string, string>} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints), can only contain lowercase letters, numeric
+   *   characters, underscores and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
+   *
+   *   See https://cloud.google.com/translate/docs/labels for more information.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -447,8 +476,8 @@ class TranslationServiceClient {
    *   // optional auth parameters.
    * });
    *
-   *
-   * client.detectLanguage({})
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * client.detectLanguage({parent: formattedParent})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -480,12 +509,17 @@ class TranslationServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} [request.parent]
-   *   Required. Location to make a regional or global call.
+   * @param {string} request.parent
+   *   Required. Project or location to make a call. Must refer to a caller's
+   *   project.
    *
-   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *   Format: `projects/{project-id}` or
+   *   `projects/{project-id}/locations/{location-id}`.
    *
-   *   For global calls, use `projects/{project-id}/locations/global`.
+   *   For global calls, use `projects/{project-id}/locations/global` or
+   *   `projects/{project-id}`.
+   *
+   *   Non-global location is required for AutoML models.
    *
    *   Only models within the same region (have same location-id) can be used,
    *   otherwise an INVALID_ARGUMENT (400) error is returned.
@@ -527,8 +561,8 @@ class TranslationServiceClient {
    *   // optional auth parameters.
    * });
    *
-   *
-   * client.getSupportedLanguages({})
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * client.getSupportedLanguages({parent: formattedParent})
    *   .then(responses => {
    *     const response = responses[0];
    *     // doThingsWith(response)
@@ -570,6 +604,16 @@ class TranslationServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Location to make a call. Must refer to a caller's project.
+   *
+   *   Format: `projects/{project-id}/locations/{location-id}`.
+   *
+   *   The `global` location is not supported for batch translation.
+   *
+   *   Only AutoML Translation models or glossaries within the same region (have
+   *   the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
+   *   error is returned.
    * @param {string} request.sourceLanguageCode
    *   Required. Source language code.
    * @param {string[]} request.targetLanguageCodes
@@ -587,16 +631,6 @@ class TranslationServiceClient {
    *   we don't generate output for duplicate inputs.
    *
    *   This object should have the same structure as [OutputConfig]{@link google.cloud.translation.v3beta1.OutputConfig}
-   * @param {string} [request.parent]
-   *   Required. Location to make a regional call.
-   *
-   *   Format: `projects/{project-id}/locations/{location-id}`.
-   *
-   *   The `global` location is not supported for batch translation.
-   *
-   *   Only AutoML Translation models or glossaries within the same region (have
-   *   the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
-   *   error is returned.
    * @param {Object.<string, string>} [request.models]
    *   Optional. The models to use for translation. Map's key is target language
    *   code. Map's value is model name. Value can be a built-in general model,
@@ -617,6 +651,15 @@ class TranslationServiceClient {
    * @param {Object.<string, Object>} [request.glossaries]
    *   Optional. Glossaries to be applied for translation.
    *   It's keyed by target language code.
+   * @param {Object.<string, string>} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints), can only contain lowercase letters, numeric
+   *   characters, underscores and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
+   *
+   *   See https://cloud.google.com/translate/docs/labels for more information.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -636,11 +679,13 @@ class TranslationServiceClient {
    *   // optional auth parameters.
    * });
    *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * const sourceLanguageCode = '';
    * const targetLanguageCodes = [];
    * const inputConfigs = [];
    * const outputConfig = {};
    * const request = {
+   *   parent: formattedParent,
    *   sourceLanguageCode: sourceLanguageCode,
    *   targetLanguageCodes: targetLanguageCodes,
    *   inputConfigs: inputConfigs,
@@ -664,11 +709,13 @@ class TranslationServiceClient {
    *     console.error(err);
    *   });
    *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * const sourceLanguageCode = '';
    * const targetLanguageCodes = [];
    * const inputConfigs = [];
    * const outputConfig = {};
    * const request = {
+   *   parent: formattedParent,
    *   sourceLanguageCode: sourceLanguageCode,
    *   targetLanguageCodes: targetLanguageCodes,
    *   inputConfigs: inputConfigs,
@@ -701,11 +748,13 @@ class TranslationServiceClient {
    *     console.error(err);
    *   });
    *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
    * const sourceLanguageCode = '';
    * const targetLanguageCodes = [];
    * const inputConfigs = [];
    * const outputConfig = {};
    * const request = {
+   *   parent: formattedParent,
    *   sourceLanguageCode: sourceLanguageCode,
    *   targetLanguageCodes: targetLanguageCodes,
    *   inputConfigs: inputConfigs,
@@ -859,7 +908,7 @@ class TranslationServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} [request.parent]
+   * @param {string} request.parent
    *   Required. The name of the project from which to list all of the glossaries.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -903,7 +952,9 @@ class TranslationServiceClient {
    * });
    *
    * // Iterate over all elements.
-   * client.listGlossaries({})
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   *
+   * client.listGlossaries({parent: formattedParent})
    *   .then(responses => {
    *     const resources = responses[0];
    *     for (const resource of resources) {
@@ -915,6 +966,8 @@ class TranslationServiceClient {
    *   });
    *
    * // Or obtain the paged response.
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   *
    *
    * const options = {autoPaginate: false};
    * const callback = responses => {
@@ -932,7 +985,7 @@ class TranslationServiceClient {
    *     return client.listGlossaries(nextRequest, options).then(callback);
    *   }
    * }
-   * client.listGlossaries({}, options)
+   * client.listGlossaries({parent: formattedParent}, options)
    *   .then(callback)
    *   .catch(err => {
    *     console.error(err);
@@ -971,7 +1024,7 @@ class TranslationServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} [request.parent]
+   * @param {string} request.parent
    *   Required. The name of the project from which to list all of the glossaries.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
@@ -997,8 +1050,8 @@ class TranslationServiceClient {
    *   // optional auth parameters.
    * });
    *
-   *
-   * client.listGlossariesStream({})
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * client.listGlossariesStream({parent: formattedParent})
    *   .on('data', element => {
    *     // doThingsWith(element)
    *   }).on('error', err => {

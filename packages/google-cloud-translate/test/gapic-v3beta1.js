@@ -63,9 +63,11 @@ describe('TranslationServiceClient', () => {
       // Mock request
       const contents = [];
       const targetLanguageCode = 'targetLanguageCode1323228230';
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
       const request = {
         contents: contents,
         targetLanguageCode: targetLanguageCode,
+        parent: formattedParent,
       };
 
       // Mock response
@@ -93,9 +95,11 @@ describe('TranslationServiceClient', () => {
       // Mock request
       const contents = [];
       const targetLanguageCode = 'targetLanguageCode1323228230';
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
       const request = {
         contents: contents,
         targetLanguageCode: targetLanguageCode,
+        parent: formattedParent,
       };
 
       // Mock Grpc layer
@@ -122,7 +126,10 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
-      const request = {};
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
 
       // Mock response
       const expectedResponse = {};
@@ -147,7 +154,10 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
-      const request = {};
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
 
       // Mock Grpc layer
       client._innerApiCalls.detectLanguage = mockSimpleGrpcMethod(
@@ -173,7 +183,10 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
-      const request = {};
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
 
       // Mock response
       const expectedResponse = {};
@@ -198,7 +211,10 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
-      const request = {};
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
 
       // Mock Grpc layer
       client._innerApiCalls.getSupportedLanguages = mockSimpleGrpcMethod(
@@ -224,11 +240,13 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
       const sourceLanguageCode = 'sourceLanguageCode1687263568';
       const targetLanguageCodes = [];
       const inputConfigs = [];
       const outputConfig = {};
       const request = {
+        parent: formattedParent,
         sourceLanguageCode: sourceLanguageCode,
         targetLanguageCodes: targetLanguageCodes,
         inputConfigs: inputConfigs,
@@ -273,11 +291,13 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
       const sourceLanguageCode = 'sourceLanguageCode1687263568';
       const targetLanguageCodes = [];
       const inputConfigs = [];
       const outputConfig = {};
       const request = {
+        parent: formattedParent,
         sourceLanguageCode: sourceLanguageCode,
         targetLanguageCodes: targetLanguageCodes,
         inputConfigs: inputConfigs,
@@ -428,7 +448,10 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
-      const request = {};
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
 
       // Mock response
       const nextPageToken = '';
@@ -463,7 +486,10 @@ describe('TranslationServiceClient', () => {
       });
 
       // Mock request
-      const request = {};
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const request = {
+        parent: formattedParent,
+      };
 
       // Mock Grpc layer
       client._innerApiCalls.listGlossaries = mockSimpleGrpcMethod(

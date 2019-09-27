@@ -17,6 +17,7 @@ API is part of the larger Cloud Machine Learning API family. Samples
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Hybrid Glossaries](#hybrid-glossaries)
   * [Quickstart](#quickstart)
   * [Translate](#translate)
 
@@ -82,6 +83,23 @@ node v3beta1/translate_list_codes_beta.js "your_project_id"
 ```
 
 ## Samples
+
+
+
+### Hybrid Glossaries
+
+View the [source code](https://github.com/googleapis/nodejs-translate/blob/master/samples/hybridGlossaries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/hybridGlossaries.js,samples/README.md)
+
+__Usage:__
+
+
+`node hybridGlossaries.js`
+
+
+-----
+
 
 
 

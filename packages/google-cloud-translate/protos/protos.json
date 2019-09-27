@@ -20,7 +20,8 @@
                   "nested": {
                     "TranslationService": {
                       "options": {
-                        "(google.api.default_host)": "translation.googleapis.com"
+                        "(google.api.default_host)": "translate.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-translation"
                       },
                       "methods": {
                         "TranslateText": {
@@ -40,7 +41,8 @@
                             "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*}:detectLanguage",
                             "(google.api.http).body": "*",
                             "(google.api.http).additional_bindings.post": "/v3beta1/{parent=projects/*}:detectLanguage",
-                            "(google.api.http).additional_bindings.body": "*"
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,model,mime_type"
                           }
                         },
                         "GetSupportedLanguages": {
@@ -48,7 +50,8 @@
                           "responseType": "SupportedLanguages",
                           "options": {
                             "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*}/supportedLanguages",
-                            "(google.api.http).additional_bindings.get": "/v3beta1/{parent=projects/*}/supportedLanguages"
+                            "(google.api.http).additional_bindings.get": "/v3beta1/{parent=projects/*}/supportedLanguages",
+                            "(google.api.method_signature)": "parent,display_language_code,model"
                           }
                         },
                         "BatchTranslateText": {
@@ -56,7 +59,9 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*}:batchTranslateText",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "BatchTranslateResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchTranslateMetadata"
                           }
                         },
                         "CreateGlossary": {
@@ -64,28 +69,36 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*}/glossaries",
-                            "(google.api.http).body": "glossary"
+                            "(google.api.http).body": "glossary",
+                            "(google.api.method_signature)": "parent,glossary",
+                            "(google.longrunning.operation_info).response_type": "Glossary",
+                            "(google.longrunning.operation_info).metadata_type": "CreateGlossaryMetadata"
                           }
                         },
                         "ListGlossaries": {
                           "requestType": "ListGlossariesRequest",
                           "responseType": "ListGlossariesResponse",
                           "options": {
-                            "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*}/glossaries"
+                            "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*}/glossaries",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "GetGlossary": {
                           "requestType": "GetGlossaryRequest",
                           "responseType": "Glossary",
                           "options": {
-                            "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/glossaries/*}"
+                            "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/glossaries/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "DeleteGlossary": {
                           "requestType": "DeleteGlossaryRequest",
                           "responseType": "google.longrunning.Operation",
                           "options": {
-                            "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/glossaries/*}"
+                            "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/glossaries/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "DeleteGlossaryResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteGlossaryMetadata"
                           }
                         }
                       }
@@ -94,11 +107,17 @@
                       "fields": {
                         "glossary": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "ignoreCase": {
                           "type": "bool",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -107,31 +126,61 @@
                         "contents": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "mimeType": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "sourceLanguageCode": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "targetLanguageCode": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "parent": {
                           "type": "string",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "model": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "glossaryConfig": {
                           "type": "TranslateTextGlossaryConfig",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -180,11 +229,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "model": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "string",
@@ -192,7 +248,15 @@
                         },
                         "mimeType": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -221,15 +285,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "displayLanguageCode": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "model": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -266,7 +340,10 @@
                       "fields": {
                         "inputUri": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -281,7 +358,10 @@
                       "fields": {
                         "mimeType": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "gcsSource": {
                           "type": "GcsSource",
@@ -293,7 +373,10 @@
                       "fields": {
                         "outputUriPrefix": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -316,35 +399,65 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "sourceLanguageCode": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetLanguageCodes": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "models": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "inputConfigs": {
                           "rule": "repeated",
                           "type": "InputConfig",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "outputConfig": {
                           "type": "OutputConfig",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "glossaries": {
                           "keyType": "string",
                           "type": "TranslateTextGlossaryConfig",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -424,6 +537,10 @@
                       }
                     },
                     "Glossary": {
+                      "options": {
+                        "(google.api.resource).type": "translate.googleapis.com/Glossary",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/glossaries/{glossary}"
+                      },
                       "oneofs": {
                         "languages": {
                           "oneof": [
@@ -435,7 +552,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "languagePair": {
                           "type": "LanguageCodePair",
@@ -451,15 +571,24 @@
                         },
                         "entryCount": {
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "submitTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "endTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -490,11 +619,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "glossary": {
                           "type": "Glossary",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -502,7 +638,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                          }
                         }
                       }
                     },
@@ -510,7 +650,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                          }
                         }
                       }
                     },
@@ -518,19 +662,32 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "pageToken": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "filter": {
                           "type": "string",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -629,7 +786,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -722,6 +879,38 @@
                 }
               }
             },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -773,22 +962,6 @@
                   "id": 2
                 }
               }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             }
           }
         },
