@@ -218,11 +218,12 @@ class PhishingProtectionServiceV1Beta1Client {
 
   /**
    * Reports a URI suspected of containing phishing content to be reviewed. Once
-   * the report review is completed, if its result verifies the existince of
-   * malicious phishing content, the site will be added the to [Google's Social
-   * Engineering lists](https://support.google.com/webmasters/answer/6350487/)
-   * in order to protect users that could get exposed to this threat in
-   * the future.
+   * the report review is complete, its result can be found in the Cloud
+   * Security Command Center findings dashboard for Phishing Protection. If the
+   * result verifies the existence of malicious phishing content, the site will
+   * be added the to [Google's Social Engineering
+   * lists](https://support.google.com/webmasters/answer/6350487/) in order to
+   * protect users that could get exposed to this threat in the future.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -230,7 +231,7 @@ class PhishingProtectionServiceV1Beta1Client {
    *   Required. The name of the project for which the report will be created,
    *   in the format "projects/{project_number}".
    * @param {string} request.uri
-   *   The URI that is being reported for phishing content to be analyzed.
+   *   Required. The URI that is being reported for phishing content to be analyzed.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

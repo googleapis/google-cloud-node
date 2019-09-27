@@ -23,7 +23,7 @@
  *   in the format "projects/{project_number}".
  *
  * @property {string} uri
- *   The URI that is being reported for phishing content to be analyzed.
+ *   Required. The URI that is being reported for phishing content to be analyzed.
  *
  * @typedef ReportPhishingRequest
  * @memberof google.cloud.phishingprotection.v1beta1
