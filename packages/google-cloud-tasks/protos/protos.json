@@ -168,7 +168,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
                           }
                         },
                         "filter": {
@@ -217,7 +217,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
                           }
                         },
                         "queue": {
@@ -299,7 +299,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Task"
                           }
                         },
                         "responseView": {
@@ -352,7 +352,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Task"
                           }
                         },
                         "task": {
@@ -819,7 +819,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
                           }
                         },
                         "filter": {
@@ -868,7 +868,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
                           }
                         },
                         "queue": {
@@ -950,7 +950,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Task"
                           }
                         },
                         "responseView": {
@@ -1003,7 +1003,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Task"
                           }
                         },
                         "task": {
@@ -1038,7 +1038,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Task"
                           }
                         },
                         "maxTasks": {
@@ -1600,7 +1600,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
                           }
                         },
                         "filter": {
@@ -1649,7 +1649,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
                           }
                         },
                         "queue": {
@@ -1731,7 +1731,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Task"
                           }
                         },
                         "responseView": {
@@ -1784,7 +1784,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Queue"
+                            "(google.api.resource_reference).child_type": "cloudtasks.googleapis.com/Task"
                           }
                         },
                         "task": {
