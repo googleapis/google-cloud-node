@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.3.0...v2.4.0) (2019-09-30)
+
+
+### Features
+
+* .d.ts for protos ([#293](https://www.github.com/googleapis/nodejs-video-intelligence/issues/293)) ([c49a0fb](https://www.github.com/googleapis/nodejs-video-intelligence/commit/c49a0fb))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v2.2.2...v2.3.0) (2019-09-16)
 
 
