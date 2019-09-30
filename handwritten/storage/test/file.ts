@@ -3040,6 +3040,29 @@ describe('File', () => {
           }
         );
       });
+
+      it('should generate v4 signed url with provided cname', done => {
+        const host = 'http://www.example.com';
+
+        file.getSignedUrl(
+          {
+            action: 'read',
+            cname: host,
+            version: 'v4',
+            expires: Date.now() + 2000,
+          },
+          (err: Error, signedUrl: string) => {
+            assert.ifError(err);
+            const expected =
+              'http://www.example.com/file-name.png?' +
+              'X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=client-email' +
+              '%2F20190318%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20190318T000000Z&' +
+              'X-Goog-Expires=2&X-Goog-SignedHeaders=host&X-Goog-Signature=b228276adbab';
+            assert.strictEqual(signedUrl, expected);
+            done();
+          }
+        );
+      });
     });
 
     describe('promptSaveAs', () => {

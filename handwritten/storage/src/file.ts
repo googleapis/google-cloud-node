@@ -2587,7 +2587,8 @@ class File extends ServiceObject<File> {
     }
 
     const extensionHeaders = Object.assign({}, config.extensionHeaders);
-    extensionHeaders.host = 'storage.googleapis.com';
+    const fqdn = new url.URL(config.cname || STORAGE_DOWNLOAD_BASE_URL);
+    extensionHeaders.host = fqdn.host;
     if (config.method === 'POST') {
       extensionHeaders['x-goog-resumable'] = 'start';
     }
@@ -2625,7 +2626,7 @@ class File extends ServiceObject<File> {
 
       const canonicalRequest = [
         config.method,
-        config.resource,
+        config.cname ? `/${config.name}` : config.resource,
         canonicalQueryParams,
         extensionHeadersString,
         signedHeaders,
