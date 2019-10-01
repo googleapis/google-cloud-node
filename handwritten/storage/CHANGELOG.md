@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [3.3.1](https://www.github.com/googleapis/nodejs-storage/compare/v3.3.0...v3.3.1) (2019-09-30)
+
+
+### Bug Fixes
+
+* create correct v4 signed url with cname ([#868](https://www.github.com/googleapis/nodejs-storage/issues/868)) ([ace3b5e](https://www.github.com/googleapis/nodejs-storage/commit/ace3b5e))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-storage/compare/v3.2.1...v3.3.0) (2019-09-19)
 
 
