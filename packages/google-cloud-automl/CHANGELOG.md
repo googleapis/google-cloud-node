@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.5.0...v1.6.0) (2019-10-01)
+
+
+### Features
+
+* adds ImageClassificationModelDeploymentMetadata ([42d766d](https://www.github.com/googleapis/nodejs-automl/commit/42d766d))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-automl/compare/v1.4.0...v1.5.0) (2019-09-05)
 
 
