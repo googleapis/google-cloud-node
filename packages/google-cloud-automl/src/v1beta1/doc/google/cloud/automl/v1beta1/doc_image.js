@@ -70,34 +70,38 @@ const ImageObjectDetectionDatasetMetadata = {
  *                 This is the default value.
  *   *   `mobile-low-latency-1` - A model that, in addition to providing
  *                 prediction via AutoML API, can also be exported (see
- *                 AutoMl.ExportModel) and used on a mobile or edge device
- *                 with TensorFlow afterwards. Expected to have low latency, but
- *                 may have lower prediction quality than other models.
+ *                 AutoMl.ExportModel)
+ *                 and used on a mobile or edge device with TensorFlow
+ *                 afterwards. Expected to have low latency, but may have lower
+ *                 prediction quality than other models.
  *   *   `mobile-versatile-1` - A model that, in addition to providing
  *                 prediction via AutoML API, can also be exported (see
- *                 AutoMl.ExportModel) and used on a mobile or edge device
- *                 with TensorFlow afterwards.
+ *                 AutoMl.ExportModel)
+ *                 and used on a mobile or edge device with TensorFlow
+ *                 afterwards.
  *   *   `mobile-high-accuracy-1` - A model that, in addition to providing
  *                 prediction via AutoML API, can also be exported (see
- *                 AutoMl.ExportModel) and used on a mobile or edge device
- *                 with TensorFlow afterwards.  Expected to have a higher
- *                 latency, but should also have a higher prediction quality
- *                 than other models.
+ *                 AutoMl.ExportModel)
+ *                 and used on a mobile or edge device with TensorFlow
+ *                 afterwards.  Expected to have a higher latency, but should
+ *                 also have a higher prediction quality than other models.
  *   *   `mobile-core-ml-low-latency-1` - A model that, in addition to providing
  *                 prediction via AutoML API, can also be exported (see
- *                 AutoMl.ExportModel) and used on a mobile device with Core
- *                 ML afterwards. Expected to have low latency, but may have
- *                 lower prediction quality than other models.
+ *                 AutoMl.ExportModel)
+ *                 and used on a mobile device with Core ML afterwards. Expected
+ *                 to have low latency, but may have lower prediction quality
+ *                 than other models.
  *   *   `mobile-core-ml-versatile-1` - A model that, in addition to providing
  *                 prediction via AutoML API, can also be exported (see
- *                 AutoMl.ExportModel) and used on a mobile device with Core
- *                 ML afterwards.
+ *                 AutoMl.ExportModel)
+ *                 and used on a mobile device with Core ML afterwards.
  *   *   `mobile-core-ml-high-accuracy-1` - A model that, in addition to
  *                 providing prediction via AutoML API, can also be exported
- *                 (see AutoMl.ExportModel) and used on a mobile device with
- *                 Core ML afterwards.  Expected to have a higher latency, but
- *                 should also have a higher prediction quality than other
- *                 models.
+ *                 (see
+ *                 AutoMl.ExportModel)
+ *                 and used on a mobile device with Core ML afterwards. Expected
+ *                 to have a higher latency, but should also have a higher
+ *                 prediction quality than other models.
  *
  * @typedef ImageClassificationModelMetadata
  * @memberof google.cloud.automl.v1beta1
@@ -160,6 +164,24 @@ const ImageClassificationModelMetadata = {
  * @see [google.cloud.automl.v1beta1.ImageObjectDetectionModelMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/image.proto}
  */
 const ImageObjectDetectionModelMetadata = {
+  // This is for documentation. Actual contents will be loaded by gRPC.
+};
+
+/**
+ * Model deployment metadata specific to Image Classification.
+ *
+ * @property {number} nodeCount
+ *   Input only. The number of nodes to deploy the model on. A node is an
+ *   abstraction of a machine resource, which can handle online prediction QPS
+ *   as given in the model's
+ *   node_qps.
+ *   Must be between 1 and 100, inclusive on both ends.
+ *
+ * @typedef ImageClassificationModelDeploymentMetadata
+ * @memberof google.cloud.automl.v1beta1
+ * @see [google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/automl/v1beta1/image.proto}
+ */
+const ImageClassificationModelDeploymentMetadata = {
   // This is for documentation. Actual contents will be loaded by gRPC.
 };
 

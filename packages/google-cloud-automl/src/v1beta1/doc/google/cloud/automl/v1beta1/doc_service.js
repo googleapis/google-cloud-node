@@ -483,6 +483,11 @@ const DeleteModelRequest = {
  *
  *   This object should have the same structure as [ImageObjectDetectionModelDeploymentMetadata]{@link google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata}
  *
+ * @property {Object} imageClassificationModelDeploymentMetadata
+ *   Model deployment metadata specific to Image Classification.
+ *
+ *   This object should have the same structure as [ImageClassificationModelDeploymentMetadata]{@link google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata}
+ *
  * @property {string} name
  *   Resource name of the model to deploy.
  *

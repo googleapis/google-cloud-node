@@ -1585,6 +1585,10 @@ class AutoMlClient {
    *   Model deployment metadata specific to Image Object Detection.
    *
    *   This object should have the same structure as [ImageObjectDetectionModelDeploymentMetadata]{@link google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata}
+   * @param {Object} [request.imageClassificationModelDeploymentMetadata]
+   *   Model deployment metadata specific to Image Classification.
+   *
+   *   This object should have the same structure as [ImageClassificationModelDeploymentMetadata]{@link google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.

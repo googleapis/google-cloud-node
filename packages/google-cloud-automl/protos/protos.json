@@ -495,7 +495,8 @@
                       "oneofs": {
                         "modelDeploymentMetadata": {
                           "oneof": [
-                            "imageObjectDetectionModelDeploymentMetadata"
+                            "imageObjectDetectionModelDeploymentMetadata",
+                            "imageClassificationModelDeploymentMetadata"
                           ]
                         }
                       },
@@ -503,6 +504,10 @@
                         "imageObjectDetectionModelDeploymentMetadata": {
                           "type": "ImageObjectDetectionModelDeploymentMetadata",
                           "id": 2
+                        },
+                        "imageClassificationModelDeploymentMetadata": {
+                          "type": "ImageClassificationModelDeploymentMetadata",
+                          "id": 4
                         },
                         "name": {
                           "type": "string",
@@ -2010,6 +2015,14 @@
                         "trainCostMilliNodeHours": {
                           "type": "int64",
                           "id": 7
+                        }
+                      }
+                    },
+                    "ImageClassificationModelDeploymentMetadata": {
+                      "fields": {
+                        "nodeCount": {
+                          "type": "int64",
+                          "id": 1
                         }
                       }
                     },
