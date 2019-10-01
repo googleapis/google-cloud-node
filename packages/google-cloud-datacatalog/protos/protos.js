@@ -118,6 +118,138 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#createEntryGroup}.
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @typedef CreateEntryGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.EntryGroup} [response] EntryGroup
+                         */
+    
+                        /**
+                         * Calls CreateEntryGroup.
+                         * @function createEntryGroup
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest} request CreateEntryGroupRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntryGroupCallback} callback Node-style callback called with the error, if any, and EntryGroup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataCatalog.prototype.createEntryGroup = function createEntryGroup(request, callback) {
+                            return this.rpcCall(createEntryGroup, $root.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest, $root.google.cloud.datacatalog.v1beta1.EntryGroup, request, callback);
+                        }, "name", { value: "CreateEntryGroup" });
+    
+                        /**
+                         * Calls CreateEntryGroup.
+                         * @function createEntryGroup
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest} request CreateEntryGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.EntryGroup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#getEntryGroup}.
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @typedef GetEntryGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.EntryGroup} [response] EntryGroup
+                         */
+    
+                        /**
+                         * Calls GetEntryGroup.
+                         * @function getEntryGroup
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest} request GetEntryGroupRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.DataCatalog.GetEntryGroupCallback} callback Node-style callback called with the error, if any, and EntryGroup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataCatalog.prototype.getEntryGroup = function getEntryGroup(request, callback) {
+                            return this.rpcCall(getEntryGroup, $root.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest, $root.google.cloud.datacatalog.v1beta1.EntryGroup, request, callback);
+                        }, "name", { value: "GetEntryGroup" });
+    
+                        /**
+                         * Calls GetEntryGroup.
+                         * @function getEntryGroup
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest} request GetEntryGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.EntryGroup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#deleteEntryGroup}.
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @typedef DeleteEntryGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteEntryGroup.
+                         * @function deleteEntryGroup
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest} request DeleteEntryGroupRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntryGroupCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataCatalog.prototype.deleteEntryGroup = function deleteEntryGroup(request, callback) {
+                            return this.rpcCall(deleteEntryGroup, $root.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteEntryGroup" });
+    
+                        /**
+                         * Calls DeleteEntryGroup.
+                         * @function deleteEntryGroup
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest} request DeleteEntryGroupRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#createEntry}.
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @typedef CreateEntryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.datacatalog.v1beta1.Entry} [response] Entry
+                         */
+    
+                        /**
+                         * Calls CreateEntry.
+                         * @function createEntry
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryRequest} request CreateEntryRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntryCallback} callback Node-style callback called with the error, if any, and Entry
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataCatalog.prototype.createEntry = function createEntry(request, callback) {
+                            return this.rpcCall(createEntry, $root.google.cloud.datacatalog.v1beta1.CreateEntryRequest, $root.google.cloud.datacatalog.v1beta1.Entry, request, callback);
+                        }, "name", { value: "CreateEntry" });
+    
+                        /**
+                         * Calls CreateEntry.
+                         * @function createEntry
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryRequest} request CreateEntryRequest message or plain object
+                         * @returns {Promise<google.cloud.datacatalog.v1beta1.Entry>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#updateEntry}.
                          * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
                          * @typedef UpdateEntryCallback
@@ -147,6 +279,39 @@
                          * @instance
                          * @param {google.cloud.datacatalog.v1beta1.IUpdateEntryRequest} request UpdateEntryRequest message or plain object
                          * @returns {Promise<google.cloud.datacatalog.v1beta1.Entry>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#deleteEntry}.
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @typedef DeleteEntryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteEntry.
+                         * @function deleteEntry
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryRequest} request DeleteEntryRequest message or plain object
+                         * @param {google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntryCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataCatalog.prototype.deleteEntry = function deleteEntry(request, callback) {
+                            return this.rpcCall(deleteEntry, $root.google.cloud.datacatalog.v1beta1.DeleteEntryRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteEntry" });
+    
+                        /**
+                         * Calls DeleteEntry.
+                         * @function deleteEntry
+                         * @memberof google.cloud.datacatalog.v1beta1.DataCatalog
+                         * @instance
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryRequest} request DeleteEntryRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
                          * @variation 2
                          */
     
@@ -1491,6 +1656,882 @@
                         return SearchCatalogResponse;
                     })();
     
+                    v1beta1.CreateEntryGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateEntryGroupRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ICreateEntryGroupRequest
+                         * @property {string|null} [parent] CreateEntryGroupRequest parent
+                         * @property {string|null} [entryGroupId] CreateEntryGroupRequest entryGroupId
+                         * @property {google.cloud.datacatalog.v1beta1.IEntryGroup|null} [entryGroup] CreateEntryGroupRequest entryGroup
+                         */
+    
+                        /**
+                         * Constructs a new CreateEntryGroupRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a CreateEntryGroupRequest.
+                         * @implements ICreateEntryGroupRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest=} [properties] Properties to set
+                         */
+                        function CreateEntryGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateEntryGroupRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @instance
+                         */
+                        CreateEntryGroupRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateEntryGroupRequest entryGroupId.
+                         * @member {string} entryGroupId
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @instance
+                         */
+                        CreateEntryGroupRequest.prototype.entryGroupId = "";
+    
+                        /**
+                         * CreateEntryGroupRequest entryGroup.
+                         * @member {google.cloud.datacatalog.v1beta1.IEntryGroup|null|undefined} entryGroup
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @instance
+                         */
+                        CreateEntryGroupRequest.prototype.entryGroup = null;
+    
+                        /**
+                         * Creates a new CreateEntryGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest} CreateEntryGroupRequest instance
+                         */
+                        CreateEntryGroupRequest.create = function create(properties) {
+                            return new CreateEntryGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEntryGroupRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest} message CreateEntryGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEntryGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.entryGroup != null && message.hasOwnProperty("entryGroup"))
+                                $root.google.cloud.datacatalog.v1beta1.EntryGroup.encode(message.entryGroup, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.entryGroupId != null && message.hasOwnProperty("entryGroupId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.entryGroupId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEntryGroupRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest} message CreateEntryGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEntryGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateEntryGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest} CreateEntryGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEntryGroupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 3:
+                                    message.entryGroupId = reader.string();
+                                    break;
+                                case 2:
+                                    message.entryGroup = $root.google.cloud.datacatalog.v1beta1.EntryGroup.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateEntryGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest} CreateEntryGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEntryGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateEntryGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateEntryGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.entryGroupId != null && message.hasOwnProperty("entryGroupId"))
+                                if (!$util.isString(message.entryGroupId))
+                                    return "entryGroupId: string expected";
+                            if (message.entryGroup != null && message.hasOwnProperty("entryGroup")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.EntryGroup.verify(message.entryGroup);
+                                if (error)
+                                    return "entryGroup." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateEntryGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest} CreateEntryGroupRequest
+                         */
+                        CreateEntryGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.entryGroupId != null)
+                                message.entryGroupId = String(object.entryGroupId);
+                            if (object.entryGroup != null) {
+                                if (typeof object.entryGroup !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest.entryGroup: object expected");
+                                message.entryGroup = $root.google.cloud.datacatalog.v1beta1.EntryGroup.fromObject(object.entryGroup);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateEntryGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest} message CreateEntryGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateEntryGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.entryGroup = null;
+                                object.entryGroupId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.entryGroup != null && message.hasOwnProperty("entryGroup"))
+                                object.entryGroup = $root.google.cloud.datacatalog.v1beta1.EntryGroup.toObject(message.entryGroup, options);
+                            if (message.entryGroupId != null && message.hasOwnProperty("entryGroupId"))
+                                object.entryGroupId = message.entryGroupId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateEntryGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateEntryGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateEntryGroupRequest;
+                    })();
+    
+                    v1beta1.GetEntryGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetEntryGroupRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IGetEntryGroupRequest
+                         * @property {string|null} [name] GetEntryGroupRequest name
+                         * @property {google.protobuf.IFieldMask|null} [readMask] GetEntryGroupRequest readMask
+                         */
+    
+                        /**
+                         * Constructs a new GetEntryGroupRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a GetEntryGroupRequest.
+                         * @implements IGetEntryGroupRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest=} [properties] Properties to set
+                         */
+                        function GetEntryGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetEntryGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @instance
+                         */
+                        GetEntryGroupRequest.prototype.name = "";
+    
+                        /**
+                         * GetEntryGroupRequest readMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} readMask
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @instance
+                         */
+                        GetEntryGroupRequest.prototype.readMask = null;
+    
+                        /**
+                         * Creates a new GetEntryGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.GetEntryGroupRequest} GetEntryGroupRequest instance
+                         */
+                        GetEntryGroupRequest.create = function create(properties) {
+                            return new GetEntryGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetEntryGroupRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetEntryGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest} message GetEntryGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEntryGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.readMask != null && message.hasOwnProperty("readMask"))
+                                $root.google.protobuf.FieldMask.encode(message.readMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetEntryGroupRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetEntryGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest} message GetEntryGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEntryGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetEntryGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.GetEntryGroupRequest} GetEntryGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEntryGroupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.readMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetEntryGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.GetEntryGroupRequest} GetEntryGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEntryGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetEntryGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetEntryGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.readMask);
+                                if (error)
+                                    return "readMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetEntryGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.GetEntryGroupRequest} GetEntryGroupRequest
+                         */
+                        GetEntryGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.readMask != null) {
+                                if (typeof object.readMask !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GetEntryGroupRequest.readMask: object expected");
+                                message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetEntryGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.GetEntryGroupRequest} message GetEntryGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetEntryGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.readMask = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.readMask != null && message.hasOwnProperty("readMask"))
+                                object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetEntryGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.GetEntryGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetEntryGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetEntryGroupRequest;
+                    })();
+    
+                    v1beta1.DeleteEntryGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteEntryGroupRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IDeleteEntryGroupRequest
+                         * @property {string|null} [name] DeleteEntryGroupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteEntryGroupRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a DeleteEntryGroupRequest.
+                         * @implements IDeleteEntryGroupRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest=} [properties] Properties to set
+                         */
+                        function DeleteEntryGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteEntryGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @instance
+                         */
+                        DeleteEntryGroupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteEntryGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest} DeleteEntryGroupRequest instance
+                         */
+                        DeleteEntryGroupRequest.create = function create(properties) {
+                            return new DeleteEntryGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEntryGroupRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest} message DeleteEntryGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEntryGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEntryGroupRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest} message DeleteEntryGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEntryGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteEntryGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest} DeleteEntryGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEntryGroupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteEntryGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest} DeleteEntryGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEntryGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteEntryGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteEntryGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteEntryGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest} DeleteEntryGroupRequest
+                         */
+                        DeleteEntryGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteEntryGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest} message DeleteEntryGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteEntryGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteEntryGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteEntryGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteEntryGroupRequest;
+                    })();
+    
+                    v1beta1.CreateEntryRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateEntryRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ICreateEntryRequest
+                         * @property {string|null} [parent] CreateEntryRequest parent
+                         * @property {string|null} [entryId] CreateEntryRequest entryId
+                         * @property {google.cloud.datacatalog.v1beta1.IEntry|null} [entry] CreateEntryRequest entry
+                         */
+    
+                        /**
+                         * Constructs a new CreateEntryRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a CreateEntryRequest.
+                         * @implements ICreateEntryRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryRequest=} [properties] Properties to set
+                         */
+                        function CreateEntryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateEntryRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @instance
+                         */
+                        CreateEntryRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateEntryRequest entryId.
+                         * @member {string} entryId
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @instance
+                         */
+                        CreateEntryRequest.prototype.entryId = "";
+    
+                        /**
+                         * CreateEntryRequest entry.
+                         * @member {google.cloud.datacatalog.v1beta1.IEntry|null|undefined} entry
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @instance
+                         */
+                        CreateEntryRequest.prototype.entry = null;
+    
+                        /**
+                         * Creates a new CreateEntryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryRequest} CreateEntryRequest instance
+                         */
+                        CreateEntryRequest.create = function create(properties) {
+                            return new CreateEntryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEntryRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryRequest} message CreateEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEntryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.entry != null && message.hasOwnProperty("entry"))
+                                $root.google.cloud.datacatalog.v1beta1.Entry.encode(message.entry, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.entryId != null && message.hasOwnProperty("entryId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.entryId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateEntryRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ICreateEntryRequest} message CreateEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateEntryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryRequest} CreateEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEntryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.CreateEntryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 3:
+                                    message.entryId = reader.string();
+                                    break;
+                                case 2:
+                                    message.entry = $root.google.cloud.datacatalog.v1beta1.Entry.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateEntryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryRequest} CreateEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateEntryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateEntryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.entryId != null && message.hasOwnProperty("entryId"))
+                                if (!$util.isString(message.entryId))
+                                    return "entryId: string expected";
+                            if (message.entry != null && message.hasOwnProperty("entry")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.Entry.verify(message.entry);
+                                if (error)
+                                    return "entry." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateEntryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.CreateEntryRequest} CreateEntryRequest
+                         */
+                        CreateEntryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.CreateEntryRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.CreateEntryRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.entryId != null)
+                                message.entryId = String(object.entryId);
+                            if (object.entry != null) {
+                                if (typeof object.entry !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.CreateEntryRequest.entry: object expected");
+                                message.entry = $root.google.cloud.datacatalog.v1beta1.Entry.fromObject(object.entry);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateEntryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.CreateEntryRequest} message CreateEntryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateEntryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.entry = null;
+                                object.entryId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.entry != null && message.hasOwnProperty("entry"))
+                                object.entry = $root.google.cloud.datacatalog.v1beta1.Entry.toObject(message.entry, options);
+                            if (message.entryId != null && message.hasOwnProperty("entryId"))
+                                object.entryId = message.entryId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateEntryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.CreateEntryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateEntryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateEntryRequest;
+                    })();
+    
                     v1beta1.UpdateEntryRequest = (function() {
     
                         /**
@@ -1709,6 +2750,193 @@
                         };
     
                         return UpdateEntryRequest;
+                    })();
+    
+                    v1beta1.DeleteEntryRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteEntryRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IDeleteEntryRequest
+                         * @property {string|null} [name] DeleteEntryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteEntryRequest.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a DeleteEntryRequest.
+                         * @implements IDeleteEntryRequest
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryRequest=} [properties] Properties to set
+                         */
+                        function DeleteEntryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteEntryRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @instance
+                         */
+                        DeleteEntryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteEntryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryRequest} DeleteEntryRequest instance
+                         */
+                        DeleteEntryRequest.create = function create(properties) {
+                            return new DeleteEntryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEntryRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryRequest} message DeleteEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEntryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteEntryRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IDeleteEntryRequest} message DeleteEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteEntryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryRequest} DeleteEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEntryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.DeleteEntryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteEntryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryRequest} DeleteEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteEntryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteEntryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteEntryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.DeleteEntryRequest} DeleteEntryRequest
+                         */
+                        DeleteEntryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.DeleteEntryRequest)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.DeleteEntryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteEntryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.DeleteEntryRequest} message DeleteEntryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteEntryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteEntryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.DeleteEntryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteEntryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteEntryRequest;
                     })();
     
                     v1beta1.GetEntryRequest = (function() {
@@ -2140,6 +3368,7 @@
                          * @property {string|null} [name] Entry name
                          * @property {string|null} [linkedResource] Entry linkedResource
                          * @property {google.cloud.datacatalog.v1beta1.EntryType|null} [type] Entry type
+                         * @property {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec|null} [gcsFilesetSpec] Entry gcsFilesetSpec
                          * @property {google.cloud.datacatalog.v1beta1.IBigQueryTableSpec|null} [bigqueryTableSpec] Entry bigqueryTableSpec
                          * @property {google.cloud.datacatalog.v1beta1.IBigQueryDateShardedSpec|null} [bigqueryDateShardedSpec] Entry bigqueryDateShardedSpec
                          * @property {string|null} [displayName] Entry displayName
@@ -2186,6 +3415,14 @@
                          * @instance
                          */
                         Entry.prototype.type = 0;
+    
+                        /**
+                         * Entry gcsFilesetSpec.
+                         * @member {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec|null|undefined} gcsFilesetSpec
+                         * @memberof google.cloud.datacatalog.v1beta1.Entry
+                         * @instance
+                         */
+                        Entry.prototype.gcsFilesetSpec = null;
     
                         /**
                          * Entry bigqueryTableSpec.
@@ -2239,13 +3476,24 @@
                         var $oneOfFields;
     
                         /**
+                         * Entry entryType.
+                         * @member {"type"|undefined} entryType
+                         * @memberof google.cloud.datacatalog.v1beta1.Entry
+                         * @instance
+                         */
+                        Object.defineProperty(Entry.prototype, "entryType", {
+                            get: $util.oneOfGetter($oneOfFields = ["type"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Entry typeSpec.
-                         * @member {"bigqueryTableSpec"|"bigqueryDateShardedSpec"|undefined} typeSpec
+                         * @member {"gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec"|undefined} typeSpec
                          * @memberof google.cloud.datacatalog.v1beta1.Entry
                          * @instance
                          */
                         Object.defineProperty(Entry.prototype, "typeSpec", {
-                            get: $util.oneOfGetter($oneOfFields = ["bigqueryTableSpec", "bigqueryDateShardedSpec"]),
+                            get: $util.oneOfGetter($oneOfFields = ["gcsFilesetSpec", "bigqueryTableSpec", "bigqueryDateShardedSpec"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -2283,6 +3531,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 $root.google.cloud.datacatalog.v1beta1.Schema.encode(message.schema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.gcsFilesetSpec != null && message.hasOwnProperty("gcsFilesetSpec"))
+                                $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec.encode(message.gcsFilesetSpec, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.sourceSystemTimestamps != null && message.hasOwnProperty("sourceSystemTimestamps"))
                                 $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.encode(message.sourceSystemTimestamps, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
@@ -2333,6 +3583,9 @@
                                     break;
                                 case 2:
                                     message.type = reader.int32();
+                                    break;
+                                case 6:
+                                    message.gcsFilesetSpec = $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec.decode(reader, reader.uint32());
                                     break;
                                 case 12:
                                     message.bigqueryTableSpec = $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec.decode(reader, reader.uint32());
@@ -2394,16 +3647,29 @@
                             if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
                                 if (!$util.isString(message.linkedResource))
                                     return "linkedResource: string expected";
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                properties.entryType = 1;
                                 switch (message.type) {
                                 default:
                                     return "type: enum value expected";
                                 case 0:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
+                            }
+                            if (message.gcsFilesetSpec != null && message.hasOwnProperty("gcsFilesetSpec")) {
+                                properties.typeSpec = 1;
+                                {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify(message.gcsFilesetSpec);
+                                    if (error)
+                                        return "gcsFilesetSpec." + error;
+                                }
+                            }
                             if (message.bigqueryTableSpec != null && message.hasOwnProperty("bigqueryTableSpec")) {
+                                if (properties.typeSpec === 1)
+                                    return "typeSpec: multiple values";
                                 properties.typeSpec = 1;
                                 {
                                     var error = $root.google.cloud.datacatalog.v1beta1.BigQueryTableSpec.verify(message.bigqueryTableSpec);
@@ -2469,6 +3735,15 @@
                             case 3:
                                 message.type = 3;
                                 break;
+                            case "FILESET":
+                            case 4:
+                                message.type = 4;
+                                break;
+                            }
+                            if (object.gcsFilesetSpec != null) {
+                                if (typeof object.gcsFilesetSpec !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.Entry.gcsFilesetSpec: object expected");
+                                message.gcsFilesetSpec = $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec.fromObject(object.gcsFilesetSpec);
                             }
                             if (object.bigqueryTableSpec != null) {
                                 if (typeof object.bigqueryTableSpec !== "object")
@@ -2512,7 +3787,6 @@
                             var object = {};
                             if (options.defaults) {
                                 object.name = "";
-                                object.type = options.enums === String ? "ENTRY_TYPE_UNSPECIFIED" : 0;
                                 object.displayName = "";
                                 object.description = "";
                                 object.schema = null;
@@ -2521,14 +3795,22 @@
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.type != null && message.hasOwnProperty("type"))
+                            if (message.type != null && message.hasOwnProperty("type")) {
                                 object.type = options.enums === String ? $root.google.cloud.datacatalog.v1beta1.EntryType[message.type] : message.type;
+                                if (options.oneofs)
+                                    object.entryType = "type";
+                            }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
                             if (message.schema != null && message.hasOwnProperty("schema"))
                                 object.schema = $root.google.cloud.datacatalog.v1beta1.Schema.toObject(message.schema, options);
+                            if (message.gcsFilesetSpec != null && message.hasOwnProperty("gcsFilesetSpec")) {
+                                object.gcsFilesetSpec = $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec.toObject(message.gcsFilesetSpec, options);
+                                if (options.oneofs)
+                                    object.typeSpec = "gcsFilesetSpec";
+                            }
                             if (message.sourceSystemTimestamps != null && message.hasOwnProperty("sourceSystemTimestamps"))
                                 object.sourceSystemTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.toObject(message.sourceSystemTimestamps, options);
                             if (message.linkedResource != null && message.hasOwnProperty("linkedResource"))
@@ -2558,6 +3840,265 @@
                         };
     
                         return Entry;
+                    })();
+    
+                    v1beta1.EntryGroup = (function() {
+    
+                        /**
+                         * Properties of an EntryGroup.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IEntryGroup
+                         * @property {string|null} [name] EntryGroup name
+                         * @property {string|null} [displayName] EntryGroup displayName
+                         * @property {string|null} [description] EntryGroup description
+                         * @property {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null} [dataCatalogTimestamps] EntryGroup dataCatalogTimestamps
+                         */
+    
+                        /**
+                         * Constructs a new EntryGroup.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents an EntryGroup.
+                         * @implements IEntryGroup
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IEntryGroup=} [properties] Properties to set
+                         */
+                        function EntryGroup(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EntryGroup name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @instance
+                         */
+                        EntryGroup.prototype.name = "";
+    
+                        /**
+                         * EntryGroup displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @instance
+                         */
+                        EntryGroup.prototype.displayName = "";
+    
+                        /**
+                         * EntryGroup description.
+                         * @member {string} description
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @instance
+                         */
+                        EntryGroup.prototype.description = "";
+    
+                        /**
+                         * EntryGroup dataCatalogTimestamps.
+                         * @member {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null|undefined} dataCatalogTimestamps
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @instance
+                         */
+                        EntryGroup.prototype.dataCatalogTimestamps = null;
+    
+                        /**
+                         * Creates a new EntryGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IEntryGroup=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.EntryGroup} EntryGroup instance
+                         */
+                        EntryGroup.create = function create(properties) {
+                            return new EntryGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EntryGroup message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.EntryGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IEntryGroup} message EntryGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntryGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.dataCatalogTimestamps != null && message.hasOwnProperty("dataCatalogTimestamps"))
+                                $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.encode(message.dataCatalogTimestamps, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EntryGroup message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.EntryGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IEntryGroup} message EntryGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntryGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EntryGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.EntryGroup} EntryGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntryGroup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.EntryGroup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    message.description = reader.string();
+                                    break;
+                                case 4:
+                                    message.dataCatalogTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EntryGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.EntryGroup} EntryGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntryGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EntryGroup message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EntryGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.dataCatalogTimestamps != null && message.hasOwnProperty("dataCatalogTimestamps")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.verify(message.dataCatalogTimestamps);
+                                if (error)
+                                    return "dataCatalogTimestamps." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EntryGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.EntryGroup} EntryGroup
+                         */
+                        EntryGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.EntryGroup)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.EntryGroup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.dataCatalogTimestamps != null) {
+                                if (typeof object.dataCatalogTimestamps !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.EntryGroup.dataCatalogTimestamps: object expected");
+                                message.dataCatalogTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.fromObject(object.dataCatalogTimestamps);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EntryGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.EntryGroup} message EntryGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EntryGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.dataCatalogTimestamps = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.dataCatalogTimestamps != null && message.hasOwnProperty("dataCatalogTimestamps"))
+                                object.dataCatalogTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.toObject(message.dataCatalogTimestamps, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EntryGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.EntryGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EntryGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return EntryGroup;
                     })();
     
                     v1beta1.CreateTagTemplateRequest = (function() {
@@ -2795,6 +4336,24 @@
                         };
     
                         return CreateTagTemplateRequest;
+                    })();
+    
+                    /**
+                     * EntryType enum.
+                     * @name google.cloud.datacatalog.v1beta1.EntryType
+                     * @enum {string}
+                     * @property {number} ENTRY_TYPE_UNSPECIFIED=0 ENTRY_TYPE_UNSPECIFIED value
+                     * @property {number} TABLE=2 TABLE value
+                     * @property {number} DATA_STREAM=3 DATA_STREAM value
+                     * @property {number} FILESET=4 FILESET value
+                     */
+                    v1beta1.EntryType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENTRY_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "TABLE"] = 2;
+                        values[valuesById[3] = "DATA_STREAM"] = 3;
+                        values[valuesById[4] = "FILESET"] = 4;
+                        return values;
                     })();
     
                     v1beta1.GetTagTemplateRequest = (function() {
@@ -4725,22 +6284,6 @@
                         return RenameTagTemplateFieldRequest;
                     })();
     
-                    /**
-                     * EntryType enum.
-                     * @name google.cloud.datacatalog.v1beta1.EntryType
-                     * @enum {string}
-                     * @property {number} ENTRY_TYPE_UNSPECIFIED=0 ENTRY_TYPE_UNSPECIFIED value
-                     * @property {number} TABLE=2 TABLE value
-                     * @property {number} DATA_STREAM=3 DATA_STREAM value
-                     */
-                    v1beta1.EntryType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "ENTRY_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[2] = "TABLE"] = 2;
-                        values[valuesById[3] = "DATA_STREAM"] = 3;
-                        return values;
-                    })();
-    
                     v1beta1.DeleteTagTemplateFieldRequest = (function() {
     
                         /**
@@ -5412,6 +6955,751 @@
                         };
     
                         return ListTagsResponse;
+                    })();
+    
+                    v1beta1.GcsFilesetSpec = (function() {
+    
+                        /**
+                         * Properties of a GcsFilesetSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IGcsFilesetSpec
+                         * @property {Array.<string>|null} [filePatterns] GcsFilesetSpec filePatterns
+                         * @property {Array.<google.cloud.datacatalog.v1beta1.IGcsFileSpec>|null} [sampleGcsFileSpecs] GcsFilesetSpec sampleGcsFileSpecs
+                         */
+    
+                        /**
+                         * Constructs a new GcsFilesetSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a GcsFilesetSpec.
+                         * @implements IGcsFilesetSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec=} [properties] Properties to set
+                         */
+                        function GcsFilesetSpec(properties) {
+                            this.filePatterns = [];
+                            this.sampleGcsFileSpecs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsFilesetSpec filePatterns.
+                         * @member {Array.<string>} filePatterns
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @instance
+                         */
+                        GcsFilesetSpec.prototype.filePatterns = $util.emptyArray;
+    
+                        /**
+                         * GcsFilesetSpec sampleGcsFileSpecs.
+                         * @member {Array.<google.cloud.datacatalog.v1beta1.IGcsFileSpec>} sampleGcsFileSpecs
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @instance
+                         */
+                        GcsFilesetSpec.prototype.sampleGcsFileSpecs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GcsFilesetSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec instance
+                         */
+                        GcsFilesetSpec.create = function create(properties) {
+                            return new GcsFilesetSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec} message GcsFilesetSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFilesetSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filePatterns != null && message.filePatterns.length)
+                                for (var i = 0; i < message.filePatterns.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePatterns[i]);
+                            if (message.sampleGcsFileSpecs != null && message.sampleGcsFileSpecs.length)
+                                for (var i = 0; i < message.sampleGcsFileSpecs.length; ++i)
+                                    $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.encode(message.sampleGcsFileSpecs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFilesetSpec} message GcsFilesetSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFilesetSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsFilesetSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFilesetSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.filePatterns && message.filePatterns.length))
+                                        message.filePatterns = [];
+                                    message.filePatterns.push(reader.string());
+                                    break;
+                                case 2:
+                                    if (!(message.sampleGcsFileSpecs && message.sampleGcsFileSpecs.length))
+                                        message.sampleGcsFileSpecs = [];
+                                    message.sampleGcsFileSpecs.push($root.google.cloud.datacatalog.v1beta1.GcsFileSpec.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsFilesetSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFilesetSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsFilesetSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsFilesetSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filePatterns != null && message.hasOwnProperty("filePatterns")) {
+                                if (!Array.isArray(message.filePatterns))
+                                    return "filePatterns: array expected";
+                                for (var i = 0; i < message.filePatterns.length; ++i)
+                                    if (!$util.isString(message.filePatterns[i]))
+                                        return "filePatterns: string[] expected";
+                            }
+                            if (message.sampleGcsFileSpecs != null && message.hasOwnProperty("sampleGcsFileSpecs")) {
+                                if (!Array.isArray(message.sampleGcsFileSpecs))
+                                    return "sampleGcsFileSpecs: array expected";
+                                for (var i = 0; i < message.sampleGcsFileSpecs.length; ++i) {
+                                    var error = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.verify(message.sampleGcsFileSpecs[i]);
+                                    if (error)
+                                        return "sampleGcsFileSpecs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsFilesetSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} GcsFilesetSpec
+                         */
+                        GcsFilesetSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.GcsFilesetSpec();
+                            if (object.filePatterns) {
+                                if (!Array.isArray(object.filePatterns))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.filePatterns: array expected");
+                                message.filePatterns = [];
+                                for (var i = 0; i < object.filePatterns.length; ++i)
+                                    message.filePatterns[i] = String(object.filePatterns[i]);
+                            }
+                            if (object.sampleGcsFileSpecs) {
+                                if (!Array.isArray(object.sampleGcsFileSpecs))
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.sampleGcsFileSpecs: array expected");
+                                message.sampleGcsFileSpecs = [];
+                                for (var i = 0; i < object.sampleGcsFileSpecs.length; ++i) {
+                                    if (typeof object.sampleGcsFileSpecs[i] !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFilesetSpec.sampleGcsFileSpecs: object expected");
+                                    message.sampleGcsFileSpecs[i] = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.fromObject(object.sampleGcsFileSpecs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsFilesetSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.GcsFilesetSpec} message GcsFilesetSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsFilesetSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.filePatterns = [];
+                                object.sampleGcsFileSpecs = [];
+                            }
+                            if (message.filePatterns && message.filePatterns.length) {
+                                object.filePatterns = [];
+                                for (var j = 0; j < message.filePatterns.length; ++j)
+                                    object.filePatterns[j] = message.filePatterns[j];
+                            }
+                            if (message.sampleGcsFileSpecs && message.sampleGcsFileSpecs.length) {
+                                object.sampleGcsFileSpecs = [];
+                                for (var j = 0; j < message.sampleGcsFileSpecs.length; ++j)
+                                    object.sampleGcsFileSpecs[j] = $root.google.cloud.datacatalog.v1beta1.GcsFileSpec.toObject(message.sampleGcsFileSpecs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsFilesetSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFilesetSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsFilesetSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsFilesetSpec;
+                    })();
+    
+                    v1beta1.GcsFileSpec = (function() {
+    
+                        /**
+                         * Properties of a GcsFileSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface IGcsFileSpec
+                         * @property {string|null} [filePath] GcsFileSpec filePath
+                         * @property {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null} [gcsTimestamps] GcsFileSpec gcsTimestamps
+                         * @property {number|Long|null} [sizeBytes] GcsFileSpec sizeBytes
+                         */
+    
+                        /**
+                         * Constructs a new GcsFileSpec.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a GcsFileSpec.
+                         * @implements IGcsFileSpec
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec=} [properties] Properties to set
+                         */
+                        function GcsFileSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GcsFileSpec filePath.
+                         * @member {string} filePath
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         */
+                        GcsFileSpec.prototype.filePath = "";
+    
+                        /**
+                         * GcsFileSpec gcsTimestamps.
+                         * @member {google.cloud.datacatalog.v1beta1.ISystemTimestamps|null|undefined} gcsTimestamps
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         */
+                        GcsFileSpec.prototype.gcsTimestamps = null;
+    
+                        /**
+                         * GcsFileSpec sizeBytes.
+                         * @member {number|Long} sizeBytes
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         */
+                        GcsFileSpec.prototype.sizeBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new GcsFileSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec instance
+                         */
+                        GcsFileSpec.create = function create(properties) {
+                            return new GcsFileSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFileSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec} message GcsFileSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFileSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.filePath);
+                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps"))
+                                $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.encode(message.gcsTimestamps, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.sizeBytes);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GcsFileSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.IGcsFileSpec} message GcsFileSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GcsFileSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GcsFileSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFileSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.GcsFileSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.filePath = reader.string();
+                                    break;
+                                case 2:
+                                    message.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.sizeBytes = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GcsFileSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GcsFileSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GcsFileSpec message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GcsFileSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                if (!$util.isString(message.filePath))
+                                    return "filePath: string expected";
+                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps")) {
+                                var error = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.verify(message.gcsTimestamps);
+                                if (error)
+                                    return "gcsTimestamps." + error;
+                            }
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (!$util.isInteger(message.sizeBytes) && !(message.sizeBytes && $util.isInteger(message.sizeBytes.low) && $util.isInteger(message.sizeBytes.high)))
+                                    return "sizeBytes: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GcsFileSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.GcsFileSpec} GcsFileSpec
+                         */
+                        GcsFileSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.GcsFileSpec)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.GcsFileSpec();
+                            if (object.filePath != null)
+                                message.filePath = String(object.filePath);
+                            if (object.gcsTimestamps != null) {
+                                if (typeof object.gcsTimestamps !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.GcsFileSpec.gcsTimestamps: object expected");
+                                message.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.fromObject(object.gcsTimestamps);
+                            }
+                            if (object.sizeBytes != null)
+                                if ($util.Long)
+                                    (message.sizeBytes = $util.Long.fromValue(object.sizeBytes)).unsigned = false;
+                                else if (typeof object.sizeBytes === "string")
+                                    message.sizeBytes = parseInt(object.sizeBytes, 10);
+                                else if (typeof object.sizeBytes === "number")
+                                    message.sizeBytes = object.sizeBytes;
+                                else if (typeof object.sizeBytes === "object")
+                                    message.sizeBytes = new $util.LongBits(object.sizeBytes.low >>> 0, object.sizeBytes.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GcsFileSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.GcsFileSpec} message GcsFileSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GcsFileSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.filePath = "";
+                                object.gcsTimestamps = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sizeBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sizeBytes = options.longs === String ? "0" : 0;
+                            }
+                            if (message.filePath != null && message.hasOwnProperty("filePath"))
+                                object.filePath = message.filePath;
+                            if (message.gcsTimestamps != null && message.hasOwnProperty("gcsTimestamps"))
+                                object.gcsTimestamps = $root.google.cloud.datacatalog.v1beta1.SystemTimestamps.toObject(message.gcsTimestamps, options);
+                            if (message.sizeBytes != null && message.hasOwnProperty("sizeBytes"))
+                                if (typeof message.sizeBytes === "number")
+                                    object.sizeBytes = options.longs === String ? String(message.sizeBytes) : message.sizeBytes;
+                                else
+                                    object.sizeBytes = options.longs === String ? $util.Long.prototype.toString.call(message.sizeBytes) : options.longs === Number ? new $util.LongBits(message.sizeBytes.low >>> 0, message.sizeBytes.high >>> 0).toNumber() : message.sizeBytes;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GcsFileSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.GcsFileSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GcsFileSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GcsFileSpec;
+                    })();
+    
+                    v1beta1.SystemTimestamps = (function() {
+    
+                        /**
+                         * Properties of a SystemTimestamps.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @interface ISystemTimestamps
+                         * @property {google.protobuf.ITimestamp|null} [createTime] SystemTimestamps createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] SystemTimestamps updateTime
+                         * @property {google.protobuf.ITimestamp|null} [expireTime] SystemTimestamps expireTime
+                         */
+    
+                        /**
+                         * Constructs a new SystemTimestamps.
+                         * @memberof google.cloud.datacatalog.v1beta1
+                         * @classdesc Represents a SystemTimestamps.
+                         * @implements ISystemTimestamps
+                         * @constructor
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
+                         */
+                        function SystemTimestamps(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SystemTimestamps createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         */
+                        SystemTimestamps.prototype.createTime = null;
+    
+                        /**
+                         * SystemTimestamps updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         */
+                        SystemTimestamps.prototype.updateTime = null;
+    
+                        /**
+                         * SystemTimestamps expireTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         */
+                        SystemTimestamps.prototype.expireTime = null;
+    
+                        /**
+                         * Creates a new SystemTimestamps instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps instance
+                         */
+                        SystemTimestamps.create = function create(properties) {
+                            return new SystemTimestamps(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SystemTimestamps.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SystemTimestamps.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SystemTimestamps message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SystemTimestamps.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SystemTimestamps.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SystemTimestamps message.
+                         * @function verify
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SystemTimestamps.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
+                                if (error)
+                                    return "expireTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
+                         */
+                        SystemTimestamps.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SystemTimestamps)
+                                return object;
+                            var message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.expireTime != null) {
+                                if (typeof object.expireTime !== "object")
+                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.expireTime: object expected");
+                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @static
+                         * @param {google.cloud.datacatalog.v1beta1.SystemTimestamps} message SystemTimestamps
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SystemTimestamps.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.expireTime = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
+                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SystemTimestamps to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SystemTimestamps.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SystemTimestamps;
                     })();
     
                     v1beta1.Schema = (function() {
@@ -8267,6 +10555,7 @@
                          * Properties of a TagTemplateField.
                          * @memberof google.cloud.datacatalog.v1beta1
                          * @interface ITagTemplateField
+                         * @property {string|null} [name] TagTemplateField name
                          * @property {string|null} [displayName] TagTemplateField displayName
                          * @property {google.cloud.datacatalog.v1beta1.IFieldType|null} [type] TagTemplateField type
                          */
@@ -8285,6 +10574,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * TagTemplateField name.
+                         * @member {string} name
+                         * @memberof google.cloud.datacatalog.v1beta1.TagTemplateField
+                         * @instance
+                         */
+                        TagTemplateField.prototype.name = "";
     
                         /**
                          * TagTemplateField displayName.
@@ -8330,6 +10627,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
                             if (message.type != null && message.hasOwnProperty("type"))
                                 $root.google.cloud.datacatalog.v1beta1.FieldType.encode(message.type, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.name);
                             return writer;
                         };
     
@@ -8364,6 +10663,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 6:
+                                    message.name = reader.string();
+                                    break;
                                 case 1:
                                     message.displayName = reader.string();
                                     break;
@@ -8405,6 +10707,9 @@
                         TagTemplateField.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 if (!$util.isString(message.displayName))
                                     return "displayName: string expected";
@@ -8428,6 +10733,8 @@
                             if (object instanceof $root.google.cloud.datacatalog.v1beta1.TagTemplateField)
                                 return object;
                             var message = new $root.google.cloud.datacatalog.v1beta1.TagTemplateField();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.displayName != null)
                                 message.displayName = String(object.displayName);
                             if (object.type != null) {
@@ -8454,11 +10761,14 @@
                             if (options.defaults) {
                                 object.displayName = "";
                                 object.type = null;
+                                object.name = "";
                             }
                             if (message.displayName != null && message.hasOwnProperty("displayName"))
                                 object.displayName = message.displayName;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = $root.google.cloud.datacatalog.v1beta1.FieldType.toObject(message.type, options);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     
@@ -9156,253 +11466,6 @@
                         })();
     
                         return FieldType;
-                    })();
-    
-                    v1beta1.SystemTimestamps = (function() {
-    
-                        /**
-                         * Properties of a SystemTimestamps.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @interface ISystemTimestamps
-                         * @property {google.protobuf.ITimestamp|null} [createTime] SystemTimestamps createTime
-                         * @property {google.protobuf.ITimestamp|null} [updateTime] SystemTimestamps updateTime
-                         * @property {google.protobuf.ITimestamp|null} [expireTime] SystemTimestamps expireTime
-                         */
-    
-                        /**
-                         * Constructs a new SystemTimestamps.
-                         * @memberof google.cloud.datacatalog.v1beta1
-                         * @classdesc Represents a SystemTimestamps.
-                         * @implements ISystemTimestamps
-                         * @constructor
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
-                         */
-                        function SystemTimestamps(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SystemTimestamps createTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         */
-                        SystemTimestamps.prototype.createTime = null;
-    
-                        /**
-                         * SystemTimestamps updateTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         */
-                        SystemTimestamps.prototype.updateTime = null;
-    
-                        /**
-                         * SystemTimestamps expireTime.
-                         * @member {google.protobuf.ITimestamp|null|undefined} expireTime
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         */
-                        SystemTimestamps.prototype.expireTime = null;
-    
-                        /**
-                         * Creates a new SystemTimestamps instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps=} [properties] Properties to set
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps instance
-                         */
-                        SystemTimestamps.create = function create(properties) {
-                            return new SystemTimestamps(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SystemTimestamps.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.ISystemTimestamps} message SystemTimestamps message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SystemTimestamps.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SystemTimestamps message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SystemTimestamps.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 2:
-                                    message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                case 3:
-                                    message.expireTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SystemTimestamps.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SystemTimestamps message.
-                         * @function verify
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SystemTimestamps.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
-                                if (error)
-                                    return "createTime." + error;
-                            }
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
-                                if (error)
-                                    return "updateTime." + error;
-                            }
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime")) {
-                                var error = $root.google.protobuf.Timestamp.verify(message.expireTime);
-                                if (error)
-                                    return "expireTime." + error;
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.datacatalog.v1beta1.SystemTimestamps} SystemTimestamps
-                         */
-                        SystemTimestamps.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.datacatalog.v1beta1.SystemTimestamps)
-                                return object;
-                            var message = new $root.google.cloud.datacatalog.v1beta1.SystemTimestamps();
-                            if (object.createTime != null) {
-                                if (typeof object.createTime !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.createTime: object expected");
-                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
-                            }
-                            if (object.updateTime != null) {
-                                if (typeof object.updateTime !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.updateTime: object expected");
-                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
-                            }
-                            if (object.expireTime != null) {
-                                if (typeof object.expireTime !== "object")
-                                    throw TypeError(".google.cloud.datacatalog.v1beta1.SystemTimestamps.expireTime: object expected");
-                                message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @static
-                         * @param {google.cloud.datacatalog.v1beta1.SystemTimestamps} message SystemTimestamps
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SystemTimestamps.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.createTime = null;
-                                object.updateTime = null;
-                                object.expireTime = null;
-                            }
-                            if (message.createTime != null && message.hasOwnProperty("createTime"))
-                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
-                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
-                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
-                            if (message.expireTime != null && message.hasOwnProperty("expireTime"))
-                                object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SystemTimestamps to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.datacatalog.v1beta1.SystemTimestamps
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SystemTimestamps.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return SystemTimestamps;
                     })();
     
                     return v1beta1;
@@ -10325,6 +12388,543 @@
                 };
     
                 return CustomHttpPattern;
+            })();
+    
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {string}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.pattern = [];
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {string}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
             })();
     
             return api;
@@ -15166,6 +17766,7 @@
                  * @property {boolean|null} [deprecated] MessageOptions deprecated
                  * @property {boolean|null} [mapEntry] MessageOptions mapEntry
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MessageOptions uninterpretedOption
+                 * @property {google.api.IResourceDescriptor|null} [".google.api.resource"] MessageOptions .google.api.resource
                  */
     
                 /**
@@ -15225,6 +17826,14 @@
                 MessageOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * MessageOptions .google.api.resource.
+                 * @member {google.api.IResourceDescriptor|null|undefined} .google.api.resource
+                 * @memberof google.protobuf.MessageOptions
+                 * @instance
+                 */
+                MessageOptions.prototype[".google.api.resource"] = null;
+    
+                /**
                  * Creates a new MessageOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.MessageOptions
@@ -15259,6 +17868,8 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        $root.google.api.ResourceDescriptor.encode(message[".google.api.resource"], writer.uint32(/* id 1053, wireType 2 =*/8426).fork()).ldelim();
                     return writer;
                 };
     
@@ -15309,6 +17920,9 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1053:
+                            message[".google.api.resource"] = $root.google.api.ResourceDescriptor.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -15366,6 +17980,11 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource")) {
+                        var error = $root.google.api.ResourceDescriptor.verify(message[".google.api.resource"]);
+                        if (error)
+                            return ".google.api.resource." + error;
+                    }
                     return null;
                 };
     
@@ -15399,6 +18018,11 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.resource"] != null) {
+                        if (typeof object[".google.api.resource"] !== "object")
+                            throw TypeError(".google.protobuf.MessageOptions..google.api.resource: object expected");
+                        message[".google.api.resource"] = $root.google.api.ResourceDescriptor.fromObject(object[".google.api.resource"]);
+                    }
                     return message;
                 };
     
@@ -15422,6 +18046,7 @@
                         object.noStandardDescriptorAccessor = false;
                         object.deprecated = false;
                         object.mapEntry = false;
+                        object[".google.api.resource"] = null;
                     }
                     if (message.messageSetWireFormat != null && message.hasOwnProperty("messageSetWireFormat"))
                         object.messageSetWireFormat = message.messageSetWireFormat;
@@ -15436,6 +18061,8 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.resource"] != null && message.hasOwnProperty(".google.api.resource"))
+                        object[".google.api.resource"] = $root.google.api.ResourceDescriptor.toObject(message[".google.api.resource"], options);
                     return object;
                 };
     
@@ -15466,6 +18093,8 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
+                 * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
                 /**
@@ -15478,6 +18107,7 @@
                  */
                 function FieldOptions(properties) {
                     this.uninterpretedOption = [];
+                    this[".google.api.fieldBehavior"] = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -15541,6 +18171,22 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.api.fieldBehavior.
+                 * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.resourceReference.
+                 * @member {google.api.IResourceReference|null|undefined} .google.api.resourceReference
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.resourceReference"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -15579,6 +18225,14 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
+                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            writer.int32(message[".google.api.fieldBehavior"][i]);
+                        writer.ldelim();
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
                 };
     
@@ -15635,6 +18289,19 @@
                             if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                 message.uninterpretedOption = [];
                             message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                            break;
+                        case 1052:
+                            if (!(message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length))
+                                message[".google.api.fieldBehavior"] = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message[".google.api.fieldBehavior"].push(reader.int32());
+                            } else
+                                message[".google.api.fieldBehavior"].push(reader.int32());
+                            break;
+                        case 1055:
+                            message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
                             break;
                         default:
                             reader.skipType(tag & 7);
@@ -15710,6 +18377,27 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
+                        if (!Array.isArray(message[".google.api.fieldBehavior"]))
+                            return ".google.api.fieldBehavior: array expected";
+                        for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
+                            switch (message[".google.api.fieldBehavior"][i]) {
+                            default:
+                                return ".google.api.fieldBehavior: enum value[] expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                                break;
+                            }
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
+                        var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
+                        if (error)
+                            return ".google.api.resourceReference." + error;
+                    }
                     return null;
                 };
     
@@ -15771,6 +18459,44 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.api.fieldBehavior"]) {
+                        if (!Array.isArray(object[".google.api.fieldBehavior"]))
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
+                        message[".google.api.fieldBehavior"] = [];
+                        for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
+                            switch (object[".google.api.fieldBehavior"][i]) {
+                            default:
+                            case "FIELD_BEHAVIOR_UNSPECIFIED":
+                            case 0:
+                                message[".google.api.fieldBehavior"][i] = 0;
+                                break;
+                            case "OPTIONAL":
+                            case 1:
+                                message[".google.api.fieldBehavior"][i] = 1;
+                                break;
+                            case "REQUIRED":
+                            case 2:
+                                message[".google.api.fieldBehavior"][i] = 2;
+                                break;
+                            case "OUTPUT_ONLY":
+                            case 3:
+                                message[".google.api.fieldBehavior"][i] = 3;
+                                break;
+                            case "INPUT_ONLY":
+                            case 4:
+                                message[".google.api.fieldBehavior"][i] = 4;
+                                break;
+                            case "IMMUTABLE":
+                            case 5:
+                                message[".google.api.fieldBehavior"][i] = 5;
+                                break;
+                            }
+                    }
+                    if (object[".google.api.resourceReference"] != null) {
+                        if (typeof object[".google.api.resourceReference"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
+                        message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
+                    }
                     return message;
                 };
     
@@ -15787,8 +18513,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.uninterpretedOption = [];
+                        object[".google.api.fieldBehavior"] = [];
+                    }
                     if (options.defaults) {
                         object.ctype = options.enums === String ? "STRING" : 0;
                         object.packed = false;
@@ -15796,6 +18524,7 @@
                         object.lazy = false;
                         object.jstype = options.enums === String ? "JS_NORMAL" : 0;
                         object.weak = false;
+                        object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -15814,6 +18543,13 @@
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
                             object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options);
                     }
+                    if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
+                        object[".google.api.fieldBehavior"] = [];
+                        for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                    }
+                    if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
+                        object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
                     return object;
                 };
     

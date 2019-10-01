@@ -61,9 +61,11 @@ describe('DataCatalogClient', () => {
       // Mock request
       const scope = {};
       const query = 'query107944136';
+      const orderBy = 'orderBy1234304744';
       const request = {
         scope: scope,
         query: query,
+        orderBy: orderBy,
       };
 
       // Mock response
@@ -101,9 +103,11 @@ describe('DataCatalogClient', () => {
       // Mock request
       const scope = {};
       const query = 'query107944136';
+      const orderBy = 'orderBy1234304744';
       const request = {
         scope: scope,
         query: query,
+        orderBy: orderBy,
       };
 
       // Mock Grpc layer
@@ -114,6 +118,289 @@ describe('DataCatalogClient', () => {
       );
 
       client.searchCatalog(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('createEntryGroup', () => {
+    it('invokes createEntryGroup without error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const entryGroupId = 'entryGroupId-43122680';
+      const entryGroup = {};
+      const request = {
+        parent: formattedParent,
+        entryGroupId: entryGroupId,
+        entryGroup: entryGroup,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
+        name: name,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createEntryGroup = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createEntryGroup(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createEntryGroup with error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+      const entryGroupId = 'entryGroupId-43122680';
+      const entryGroup = {};
+      const request = {
+        parent: formattedParent,
+        entryGroupId: entryGroupId,
+        entryGroup: entryGroup,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createEntryGroup = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createEntryGroup(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('getEntryGroup', () => {
+    it('invokes getEntryGroup without error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.entryGroupPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock response
+      const name2 = 'name2-1052831874';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
+        name: name2,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getEntryGroup = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.getEntryGroup(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes getEntryGroup with error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.entryGroupPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.getEntryGroup = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.getEntryGroup(request, (err, response) => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteEntryGroup', () => {
+    it('invokes deleteEntryGroup without error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.entryGroupPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteEntryGroup = mockSimpleGrpcMethod(request);
+
+      client.deleteEntryGroup(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteEntryGroup with error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.entryGroupPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteEntryGroup = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteEntryGroup(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
+        done();
+      });
+    });
+  });
+
+  describe('createEntry', () => {
+    it('invokes createEntry without error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.entryGroupPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]'
+      );
+      const entryId = 'entryId-2093663224';
+      const entry = {};
+      const request = {
+        parent: formattedParent,
+        entryId: entryId,
+        entry: entry,
+      };
+
+      // Mock response
+      const name = 'name3373707';
+      const linkedResource = 'linkedResource1544625012';
+      const displayName = 'displayName1615086568';
+      const description = 'description-1724546052';
+      const expectedResponse = {
+        name: name,
+        linkedResource: linkedResource,
+        displayName: displayName,
+        description: description,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createEntry = mockSimpleGrpcMethod(
+        request,
+        expectedResponse
+      );
+
+      client.createEntry(request, (err, response) => {
+        assert.ifError(err);
+        assert.deepStrictEqual(response, expectedResponse);
+        done();
+      });
+    });
+
+    it('invokes createEntry with error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedParent = client.entryGroupPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]'
+      );
+      const entryId = 'entryId-2093663224';
+      const entry = {};
+      const request = {
+        parent: formattedParent,
+        entryId: entryId,
+        entry: entry,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.createEntry = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.createEntry(request, (err, response) => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
@@ -183,6 +470,65 @@ describe('DataCatalogClient', () => {
         assert(err instanceof Error);
         assert.strictEqual(err.code, FAKE_STATUS_CODE);
         assert(typeof response === 'undefined');
+        done();
+      });
+    });
+  });
+
+  describe('deleteEntry', () => {
+    it('invokes deleteEntry without error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteEntry = mockSimpleGrpcMethod(request);
+
+      client.deleteEntry(request, err => {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('invokes deleteEntry with error', done => {
+      const client = new datacatalogModule.v1beta1.DataCatalogClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+
+      // Mock request
+      const formattedName = client.entryPath(
+        '[PROJECT]',
+        '[LOCATION]',
+        '[ENTRY_GROUP]',
+        '[ENTRY]'
+      );
+      const request = {
+        name: formattedName,
+      };
+
+      // Mock Grpc layer
+      client._innerApiCalls.deleteEntry = mockSimpleGrpcMethod(
+        request,
+        null,
+        error
+      );
+
+      client.deleteEntry(request, err => {
+        assert(err instanceof Error);
+        assert.strictEqual(err.code, FAKE_STATUS_CODE);
         done();
       });
     });
@@ -609,8 +955,10 @@ describe('DataCatalogClient', () => {
       };
 
       // Mock response
+      const name = 'name3373707';
       const displayName = 'displayName1615086568';
       const expectedResponse = {
+        name: name,
         displayName: displayName,
       };
 
@@ -684,8 +1032,10 @@ describe('DataCatalogClient', () => {
       };
 
       // Mock response
+      const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
       const expectedResponse = {
+        name: name2,
         displayName: displayName,
       };
 
@@ -758,8 +1108,10 @@ describe('DataCatalogClient', () => {
       };
 
       // Mock response
+      const name2 = 'name2-1052831874';
       const displayName = 'displayName1615086568';
       const expectedResponse = {
+        name: name2,
         displayName: displayName,
       };
 

@@ -129,6 +129,9 @@ class DataCatalogClient {
       entryPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
       ),
+      entryGroupPathTemplate: new gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}'
+      ),
       fieldPathTemplate: new gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}'
       ),
@@ -185,7 +188,12 @@ class DataCatalogClient {
     // and create an API call method for each.
     const dataCatalogStubMethods = [
       'searchCatalog',
+      'createEntryGroup',
+      'getEntryGroup',
+      'deleteEntryGroup',
+      'createEntry',
       'updateEntry',
+      'deleteEntry',
       'getEntry',
       'lookupEntry',
       'createTagTemplate',
@@ -271,7 +279,7 @@ class DataCatalogClient {
    * This is a custom method
    * (https://cloud.google.com/apis/design/custom_methods) and does not return
    * the complete resource, only the resource identifier and high level
-   * fields. Clients can subsequentally call Get methods.
+   * fields. Clients can subsequentally call `Get` methods.
    *
    * Note that searches do not have full recall. There may be results that match
    * your query but are not returned, even in subsequent pages of results. These
@@ -300,22 +308,23 @@ class DataCatalogClient {
    *   Note: Query tokens need to have a minimum of 3 characters for substring
    *   matching to work correctly. See [Data Catalog Search
    *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.
+   * @param {string} request.orderBy
+   *   Specifies the ordering of results, currently supported case-sensitive
+   *   choices are:
+   *
+   *     * `relevance`, only supports desecending
+   *     * `last_access_timestamp [asc|desc]`, defaults to descending if not
+   *       specified
+   *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
+   *       specified
+   *
+   *   If not specified, defaults to `relevance` descending.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {string} [request.orderBy]
-   *   Specifies the ordering of results, currently supported case-sensitive
-   *   choices are:
-   *   <ul>
-   *     <li> relevance </li>
-   *     <li> last_access_timestamp [asc|desc], defaults to descending if not
-   *     specified, </li>
-   *     <li> last_modified_timestamp [asc|desc], defaults to descending if not
-   *     specified. </li>
-   *   </ul>
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -350,9 +359,11 @@ class DataCatalogClient {
    * // Iterate over all elements.
    * const scope = {};
    * const query = '';
+   * const orderBy = '';
    * const request = {
    *   scope: scope,
    *   query: query,
+   *   orderBy: orderBy,
    * };
    *
    * client.searchCatalog(request)
@@ -369,9 +380,11 @@ class DataCatalogClient {
    * // Or obtain the paged response.
    * const scope = {};
    * const query = '';
+   * const orderBy = '';
    * const request = {
    *   scope: scope,
    *   query: query,
+   *   orderBy: orderBy,
    * };
    *
    *
@@ -440,22 +453,23 @@ class DataCatalogClient {
    *   Note: Query tokens need to have a minimum of 3 characters for substring
    *   matching to work correctly. See [Data Catalog Search
    *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference) for more information.
+   * @param {string} request.orderBy
+   *   Specifies the ordering of results, currently supported case-sensitive
+   *   choices are:
+   *
+   *     * `relevance`, only supports desecending
+   *     * `last_access_timestamp [asc|desc]`, defaults to descending if not
+   *       specified
+   *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
+   *       specified
+   *
+   *   If not specified, defaults to `relevance` descending.
    * @param {number} [request.pageSize]
    *   The maximum number of resources contained in the underlying API
    *   response. If page streaming is performed per-resource, this
    *   parameter does not affect the return value. If page streaming is
    *   performed per-page, this determines the maximum number of
    *   resources in a page.
-   * @param {string} [request.orderBy]
-   *   Specifies the ordering of results, currently supported case-sensitive
-   *   choices are:
-   *   <ul>
-   *     <li> relevance </li>
-   *     <li> last_access_timestamp [asc|desc], defaults to descending if not
-   *     specified, </li>
-   *     <li> last_modified_timestamp [asc|desc], defaults to descending if not
-   *     specified. </li>
-   *   </ul>
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -472,9 +486,11 @@ class DataCatalogClient {
    *
    * const scope = {};
    * const query = '';
+   * const orderBy = '';
    * const request = {
    *   scope: scope,
    *   query: query,
+   *   orderBy: orderBy,
    * };
    * client.searchCatalogStream(request)
    *   .on('data', element => {
@@ -494,27 +510,286 @@ class DataCatalogClient {
   }
 
   /**
+   * Alpha feature.
+   * Creates an EntryGroup.
+   * The user should enable the Data Catalog API in the project identified by
+   * the `parent` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project this entry group is in. Example:
+   *
+   *   * projects/{project_id}/locations/{location}
+   *
+   *   Note that this EntryGroup and its child resources may not actually be
+   *   stored in the location in this name.
+   * @param {string} request.entryGroupId
+   *   Required. The id of the entry group to create.
+   * @param {Object} request.entryGroup
+   *   Optional. The entry group to create. Defaults to an empty entry group.
+   *
+   *   This object should have the same structure as [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datacatalog = require('@google-cloud/datacatalog');
+   *
+   * const client = new datacatalog.v1beta1.DataCatalogClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.locationPath('[PROJECT]', '[LOCATION]');
+   * const entryGroupId = '';
+   * const entryGroup = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   entryGroupId: entryGroupId,
+   *   entryGroup: entryGroup,
+   * };
+   * client.createEntryGroup(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createEntryGroup(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.createEntryGroup(request, options, callback);
+  }
+
+  /**
+   * Alpha feature.
+   * Gets an EntryGroup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entry group. For example,
+   *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+   * @param {Object} [request.readMask]
+   *   Optional. The fields to return. If not set or empty, all fields are
+   *   returned.
+   *
+   *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [EntryGroup]{@link google.cloud.datacatalog.v1beta1.EntryGroup}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datacatalog = require('@google-cloud/datacatalog');
+   *
+   * const client = new datacatalog.v1beta1.DataCatalogClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.entryGroupPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]');
+   * client.getEntryGroup({name: formattedName})
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  getEntryGroup(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.getEntryGroup(request, options, callback);
+  }
+
+  /**
+   * Alpha feature.
+   * Deletes an EntryGroup. Only entry groups that do not contain entries can be
+   * deleted. The user should enable the Data Catalog API in the project
+   * identified by the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entry group. For example,
+   *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datacatalog = require('@google-cloud/datacatalog');
+   *
+   * const client = new datacatalog.v1beta1.DataCatalogClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.entryGroupPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]');
+   * client.deleteEntryGroup({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteEntryGroup(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteEntryGroup(request, options, callback);
+  }
+
+  /**
+   * Alpha feature.
+   * Creates an entry. Currently only entries of 'FILESET' type can be created.
+   * The user should enable the Data Catalog API in the project identified by
+   * the `parent` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the entry group this entry is in. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   *
+   *   Note that this Entry and its child resources may not actually be stored in
+   *   the location in this name.
+   * @param {string} request.entryId
+   *   Required. The id of the entry to create.
+   * @param {Object} request.entry
+   *   Required. The entry to create.
+   *
+   *   This object should have the same structure as [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datacatalog = require('@google-cloud/datacatalog');
+   *
+   * const client = new datacatalog.v1beta1.DataCatalogClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedParent = client.entryGroupPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]');
+   * const entryId = '';
+   * const entry = {};
+   * const request = {
+   *   parent: formattedParent,
+   *   entryId: entryId,
+   *   entry: entry,
+   * };
+   * client.createEntry(request)
+   *   .then(responses => {
+   *     const response = responses[0];
+   *     // doThingsWith(response)
+   *   })
+   *   .catch(err => {
+   *     console.error(err);
+   *   });
+   */
+  createEntry(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent,
+    });
+
+    return this._innerApiCalls.createEntry(request, options, callback);
+  }
+
+  /**
    * Updates an existing entry.
+   * The user should enable the Data Catalog API in the project identified by
+   * the `entry.name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {Object} request.entry
-   *   Required. The updated Entry.
+   *   Required. The updated entry.
    *
    *   This object should have the same structure as [Entry]{@link google.cloud.datacatalog.v1beta1.Entry}
    * @param {Object} [request.updateMask]
-   *   Optional. The fields to update on the entry.  If absent or empty, all
+   *   Optional. The fields to update on the entry. If absent or empty, all
    *   modifiable fields are updated.
    *
-   *   Modifiable fields in synced entries:
-   *
-   *   1. schema (Pub/Sub topics only)
-   *
-   *   Modifiable fields in native entries:
-   *
-   *   1. display_name
-   *   2. description
-   *   3. schema
+   *   Currently only `schema` field in Cloud Pub/Sub topic entries is modifiable.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -565,13 +840,73 @@ class DataCatalogClient {
   }
 
   /**
+   * Alpha feature.
+   * Deletes an existing entry. Only entries created through
+   * CreateEntry
+   * method can be deleted.
+   * The user should enable the Data Catalog API in the project identified by
+   * the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the entry. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
+   * @param {function(?Error)} [callback]
+   *   The function which will be called with the result of the API call.
+   * @returns {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   *
+   * const datacatalog = require('@google-cloud/datacatalog');
+   *
+   * const client = new datacatalog.v1beta1.DataCatalogClient({
+   *   // optional auth parameters.
+   * });
+   *
+   * const formattedName = client.entryPath('[PROJECT]', '[LOCATION]', '[ENTRY_GROUP]', '[ENTRY]');
+   * client.deleteEntry({name: formattedName}).catch(err => {
+   *   console.error(err);
+   * });
+   */
+  deleteEntry(request, options, callback) {
+    if (options instanceof Function && callback === undefined) {
+      callback = options;
+      options = {};
+    }
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      name: request.name,
+    });
+
+    return this._innerApiCalls.deleteEntry(request, options, callback);
+  }
+
+  /**
    * Gets an entry.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entry. For example,
-   *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}".
+   *   Required. The name of the entry. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *
+   *   Entry groups are logical groupings of entries. Currently, users cannot
+   *   create/modify entry groups. They are created by Data Catalog; they include
+   *   `@bigquery` for all BigQuery entries, and `@pubsub` for all Cloud Pub/Sub
+   *   entries.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -629,24 +964,25 @@ class DataCatalogClient {
    * @param {string} [request.linkedResource]
    *   The full name of the Google Cloud Platform resource the Data Catalog
    *   entry represents. See:
-   *   https://cloud.google.com/apis/design/resource_names#full_resource_name
+   *   https://cloud.google.com/apis/design/resource_names#full_resource_name.
    *   Full names are case-sensitive.
    *
    *   Examples:
-   *   "//bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId".
-   *   "//pubsub.googleapis.com/projects/projectId/topics/topicId"
+   *
+   *    * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
+   *    * //pubsub.googleapis.com/projects/projectId/topics/topicId
    * @param {string} [request.sqlResource]
    *   The SQL name of the entry. SQL names are case-sensitive.
    *
    *   Examples:
-   *   <ul>
-   *     <li>cloud_pubsub.project_id.topic_id</li>
-   *     <li>pubsub.project_id.`topic.id.with.dots`</li>
-   *     <li>bigquery.project_id.dataset_id.table_id</li>
-   *     <li>datacatalog.project_id.location_id.entry_group_id.entry_id</li>
-   *   </ul>
-   *   *_ids shoud satisfy the standard SQL rules for identifiers.
-   *   https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical
+   *
+   *     * `cloud_pubsub.project_id.topic_id`
+   *     * ``pubsub.project_id.`topic.id.with.dots` ``
+   *     * `bigquery.project_id.dataset_id.table_id`
+   *     * `datacatalog.project_id.location_id.entry_group_id.entry_id`
+   *
+   *   `*_id`s shoud satisfy the standard SQL rules for identifiers.
+   *   https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -688,13 +1024,19 @@ class DataCatalogClient {
   }
 
   /**
-   * Creates a tag template.
+   * Creates a tag template. The user should enable the Data Catalog API in
+   * the project identified by the `parent` parameter (see [Data Catalog
+   * Resource Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
+   * information).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project and the location this template is in.
-   *   Example: "projects/{project_id}/locations/{location}". Note that this
+   *   Example:
+   *
+   *   * projects/{project_id}/locations/{location}
+   *
    *   TagTemplate and its child resources may not actually be stored in the
    *   location in this name.
    * @param {string} request.tagTemplateId
@@ -763,8 +1105,9 @@ class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template. For example,
-   *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
+   *   Required. The name of the tag template. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -816,6 +1159,9 @@ class DataCatalogClient {
    * Updates a tag template. This method cannot be used to update the fields of
    * a template. The tag template fields are represented as separate resources
    * and should be updated using their own create/update/delete methods.
+   * The user should enable the Data Catalog API in the project identified by
+   * the `tag_template.name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -828,9 +1174,9 @@ class DataCatalogClient {
    *
    *   Allowed fields:
    *
-   *     * display_name
+   *     * `display_name`
    *
-   *   If update_mask is omitted, all of the allowed fields above will be updated.
+   *   If absent or empty, all of the allowed fields above will be updated.
    *
    *   This object should have the same structure as [FieldMask]{@link google.protobuf.FieldMask}
    * @param {Object} [options]
@@ -882,16 +1228,20 @@ class DataCatalogClient {
 
   /**
    * Deletes a tag template and all tags using the template.
+   * The user should enable the Data Catalog API in the project identified by
+   * the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template to delete. For example,
-   *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
+   *   Required. The name of the tag template to delete. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
    * @param {boolean} request.force
-   *   Required. Currently, this field must always be set to <code>true</code>.
+   *   Required. Currently, this field must always be set to `true`.
    *   This confirms the deletion of any possible tags using this template.
-   *   <code>force = false</code> will be supported in the future.
+   *   `force = false` will be supported in the future.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -937,21 +1287,27 @@ class DataCatalogClient {
   }
 
   /**
-   * Creates a field in a tag template.
+   * Creates a field in a tag template. The user should enable the Data Catalog
+   * API in the project identified by the `parent` parameter (see
+   * [Data Catalog Resource
+   * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
+   * information).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project this template is in. Example:
-   *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}".
+   *
+   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
+   *
    *   Note that this TagTemplateField may not actually be stored in the location
    *   in this name.
    * @param {string} request.tagTemplateFieldId
-   *   Required. The id of the tag template field to create.
+   *   Required. The ID of the tag template field to create.
    *   Field ids can contain letters (both uppercase and lowercase), numbers
-   *   (0-9), underscores (_) and dashes (-). Field ids must be at least 1
-   *   character long and at most 128 characters long. Field ids must also be
-   *   unique to their template.
+   *   (0-9), underscores (_) and dashes (-). Field IDs must be at least 1
+   *   character long and at most 128 characters long. Field IDs must also be
+   *   unique within their template.
    * @param {Object} request.tagTemplateField
    *   Required. The tag template field to create.
    *
@@ -1016,25 +1372,29 @@ class DataCatalogClient {
 
   /**
    * Updates a field in a tag template. This method cannot be used to update the
-   * field type.
+   * field type. The user should enable the Data Catalog API in the project
+   * identified by the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template field. For example,
-   *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
+   *   Required. The name of the tag template field. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    * @param {Object} request.tagTemplateField
    *   Required. The template to update.
    *
    *   This object should have the same structure as [TagTemplateField]{@link google.cloud.datacatalog.v1beta1.TagTemplateField}
    * @param {Object} [request.updateMask]
-   *   Optional. The field mask specifies the parts of the template to overwrite.
+   *   Optional. The field mask specifies the parts of the template to be updated.
    *   Allowed fields:
    *
-   *     * display_name
-   *     * type.enum_type
+   *     * `display_name`
+   *     * `type.enum_type`
    *
-   *   If update_mask is omitted, all of the allowed fields above will be updated.
+   *   If `update_mask` is not set or empty, all of the allowed fields above will
+   *   be updated.
    *
    *   When updating an enum type, the provided values will be merged with the
    *   existing values. Therefore, enum values can only be added, existing enum
@@ -1098,16 +1458,20 @@ class DataCatalogClient {
   }
 
   /**
-   * Renames a field in a tag template.
+   * Renames a field in a tag template. The user should enable the Data Catalog
+   * API in the project identified by the `name` parameter (see [Data Catalog
+   * Resource Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project) for more
+   * information).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template. For example,
-   *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
+   *   Required. The name of the tag template. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    * @param {string} request.newTagTemplateFieldId
    *   Required. The new ID of this tag template field. For example,
-   *   "my_new_field".
+   *   `my_new_field`.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1166,16 +1530,20 @@ class DataCatalogClient {
 
   /**
    * Deletes a field in a tag template and all uses of that field.
+   * The user should enable the Data Catalog API in the project identified by
+   * the `name` parameter (see [Data Catalog Resource Project]
+   * (/data-catalog/docs/concepts/resource-project) for more information).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template field to delete. For example,
-   *   "projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}".
+   *   Required. The name of the tag template field to delete. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
    * @param {boolean} request.force
-   *   Required. Currently, this field must always be set to <code>true</code>.
+   *   Required. Currently, this field must always be set to `true`.
    *   This confirms the deletion of this field from any tags using this field.
-   *   <code>force = false</code> will be supported in the future.
+   *   `force = false` will be supported in the future.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1226,14 +1594,21 @@ class DataCatalogClient {
 
   /**
    * Creates a tag on an Entry.
+   * Note: The project identified by the `parent` parameter for the
+   * [tag](https://cloud.google.com/data-catalog/docs/reference/rest/v1beta1/projects.locations.entryGroups.entries.tags/create#path-parameters)
+   * and the
+   * [tag
+   * template](https://cloud.google.com/data-catalog/docs/reference/rest/v1beta1/projects.locations.tagTemplates/create#path-parameters)
+   * used to create the tag must be from the same organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required.
-   *   The name of the resource to attach this tag to. Tags can be attached to
-   *   Entries. (example:
-   *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}").
+   *   Required. The name of the resource to attach this tag to. Tags can be attached to
+   *   Entries. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *
    *   Note that this Tag and its child resources may not actually be stored in
    *   the location in this name.
    * @param {Object} request.tag
@@ -1302,7 +1677,7 @@ class DataCatalogClient {
    *
    *   This object should have the same structure as [Tag]{@link google.cloud.datacatalog.v1beta1.Tag}
    * @param {Object} [request.updateMask]
-   *   Optional. The fields to update on the Tag.  If absent or empty, all
+   *   Optional. The fields to update on the Tag. If absent or empty, all
    *   modifiable fields are updated. Currently the only modifiable field is the
    *   field `fields`.
    *
@@ -1360,8 +1735,9 @@ class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag to delete. For example,
-   *   "projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}".
+   *   Required. The name of the tag to delete. Example:
+   *
+   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html} for the details.
@@ -1565,12 +1941,17 @@ class DataCatalogClient {
    * policy.
    * Supported resources are:
    *   - Tag templates.
+   *   - Entries.
+   *   - Entry groups.
    * Note, this method cannot be used to manage policies for BigQuery, Cloud
    * Pub/Sub and any external Google Cloud Platform resources synced to Cloud
    * Data Catalog.
    *
    * Callers must have following Google IAM permission
-   * `datacatalog.tagTemplates.setIamPolicy` to set policies on tag templates.
+   *   - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag
+   *     templates.
+   *   - `datacatalog.entries.setIamPolicy` to set policies on entries.
+   *   - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1643,12 +2024,17 @@ class DataCatalogClient {
    *
    * Supported resources are:
    *   - Tag templates.
+   *   - Entries.
+   *   - Entry groups.
    * Note, this method cannot be used to manage policies for BigQuery, Cloud
    * Pub/Sub and any external Google Cloud Platform resources synced to Cloud
    * Data Catalog.
    *
    * Callers must have following Google IAM permission
-   * `datacatalog.tagTemplates.getIamPolicy` to get policies on tag templates.
+   *   - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag
+   *     templates.
+   *   - `datacatalog.entries.getIamPolicy` to get policies on entries.
+   *   - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1712,8 +2098,10 @@ class DataCatalogClient {
    * If the resource does not exist, an empty set of permissions is returned
    * (We don't return a `NOT_FOUND` error).
    *
-   * Supported resource are:
-   *   - tag templates.
+   * Supported resources are:
+   *   - Tag templates.
+   *   - Entries.
+   *   - Entry groups.
    * Note, this method cannot be used to manage policies for BigQuery, Cloud
    * Pub/Sub and any external Google Cloud Platform resources synced to Cloud
    * Data Catalog.
@@ -1802,6 +2190,22 @@ class DataCatalogClient {
       location: location,
       entry_group: entryGroup,
       entry: entry,
+    });
+  }
+
+  /**
+   * Return a fully-qualified entry_group resource name string.
+   *
+   * @param {String} project
+   * @param {String} location
+   * @param {String} entryGroup
+   * @returns {String}
+   */
+  entryGroupPath(project, location, entryGroup) {
+    return this._pathTemplates.entryGroupPathTemplate.render({
+      project: project,
+      location: location,
+      entry_group: entryGroup,
     });
   }
 
@@ -1915,6 +2319,42 @@ class DataCatalogClient {
    */
   matchEntryFromEntryName(entryName) {
     return this._pathTemplates.entryPathTemplate.match(entryName).entry;
+  }
+
+  /**
+   * Parse the entryGroupName from a entry_group resource.
+   *
+   * @param {String} entryGroupName
+   *   A fully-qualified path representing a entry_group resources.
+   * @returns {String} - A string representing the project.
+   */
+  matchProjectFromEntryGroupName(entryGroupName) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .project;
+  }
+
+  /**
+   * Parse the entryGroupName from a entry_group resource.
+   *
+   * @param {String} entryGroupName
+   *   A fully-qualified path representing a entry_group resources.
+   * @returns {String} - A string representing the location.
+   */
+  matchLocationFromEntryGroupName(entryGroupName) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .location;
+  }
+
+  /**
+   * Parse the entryGroupName from a entry_group resource.
+   *
+   * @param {String} entryGroupName
+   *   A fully-qualified path representing a entry_group resources.
+   * @returns {String} - A string representing the entry_group.
+   */
+  matchEntryGroupFromEntryGroupName(entryGroupName) {
+    return this._pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
   }
 
   /**

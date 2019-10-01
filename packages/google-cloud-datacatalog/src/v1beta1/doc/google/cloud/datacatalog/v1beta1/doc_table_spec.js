@@ -25,13 +25,13 @@
  *
  * @property {Object} viewSpec
  *   Table view specification. This field should only be populated if
- *   table_source_type is BIGQUERY_VIEW.
+ *   `table_source_type` is `BIGQUERY_VIEW`.
  *
  *   This object should have the same structure as [ViewSpec]{@link google.cloud.datacatalog.v1beta1.ViewSpec}
  *
  * @property {Object} tableSpec
  *   Spec of a BigQuery table. This field should only be populated if
- *   table_source_type is BIGQUERY_TABLE.
+ *   `table_source_type` is `BIGQUERY_TABLE`.
  *
  *   This object should have the same structure as [TableSpec]{@link google.cloud.datacatalog.v1beta1.TableSpec}
  *
@@ -47,7 +47,7 @@ const BigQueryTableSpec = {
  * Table view specification.
  *
  * @property {string} viewQuery
- *   Output only. The query that defines the table view.
+ *   Required. Output only. The query that defines the table view.
  *
  * @typedef ViewSpec
  * @memberof google.cloud.datacatalog.v1beta1
@@ -61,12 +61,11 @@ const ViewSpec = {
  * Normal BigQuery table spec.
  *
  * @property {string} groupedEntry
- *   Output only. If the table is a dated shard, i.e. with name pattern
- *   [prefix]YYYYMMDD, grouped_entry is the Data Catalog resource name of the
- *   date sharded grouped entry, e.g.
- *   projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}
- *   /entries/{entry_id}.
- *   Otherwise, grouped_entry will be empty.
+ *   Output only. If the table is a dated shard, i.e., with name pattern
+ *   `[prefix]YYYYMMDD`, `grouped_entry` is the Data Catalog resource name of
+ *   the date sharded grouped entry, for example,
+ *   `projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}`.
+ *   Otherwise, `grouped_entry` is empty.
  *
  * @typedef TableSpec
  * @memberof google.cloud.datacatalog.v1beta1
@@ -77,20 +76,19 @@ const TableSpec = {
 };
 
 /**
- * Spec for a group of BigQuery tables with name pattern [prefix]YYYYMMDD.
+ * Spec for a group of BigQuery tables with name pattern `[prefix]YYYYMMDD`.
  * Context:
  * https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding
  *
  * @property {string} dataset
  *   Output only. The Data Catalog resource name of the dataset entry the
- *   current table belongs to, e.g.
- *   projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}
- *   /entries/{entry_id}
+ *   current table belongs to, for example,
+ *   `projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}`.
  *
  * @property {string} tablePrefix
  *   Output only. The table name prefix of the shards. The name of any given
- *   shard is [table_prefix]YYYYMMDD, e.g. for shard MyTable20180101, the
- *   table_prefix is "MyTable"
+ *   shard is `[table_prefix]YYYYMMDD`, for example, for shard
+ *   `MyTable20180101`, the `table_prefix` is `MyTable`.
  *
  * @property {number} shardCount
  *   Output only. Total number of shards.

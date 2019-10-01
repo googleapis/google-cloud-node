@@ -46,6 +46,62 @@ export namespace google {
                     public searchCatalog(request: google.cloud.datacatalog.v1beta1.ISearchCatalogRequest): Promise<google.cloud.datacatalog.v1beta1.SearchCatalogResponse>;
 
                     /**
+                     * Calls CreateEntryGroup.
+                     * @param request CreateEntryGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EntryGroup
+                     */
+                    public createEntryGroup(request: google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest, callback: google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntryGroupCallback): void;
+
+                    /**
+                     * Calls CreateEntryGroup.
+                     * @param request CreateEntryGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEntryGroup(request: google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest): Promise<google.cloud.datacatalog.v1beta1.EntryGroup>;
+
+                    /**
+                     * Calls GetEntryGroup.
+                     * @param request GetEntryGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EntryGroup
+                     */
+                    public getEntryGroup(request: google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest, callback: google.cloud.datacatalog.v1beta1.DataCatalog.GetEntryGroupCallback): void;
+
+                    /**
+                     * Calls GetEntryGroup.
+                     * @param request GetEntryGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEntryGroup(request: google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest): Promise<google.cloud.datacatalog.v1beta1.EntryGroup>;
+
+                    /**
+                     * Calls DeleteEntryGroup.
+                     * @param request DeleteEntryGroupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteEntryGroup(request: google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest, callback: google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntryGroupCallback): void;
+
+                    /**
+                     * Calls DeleteEntryGroup.
+                     * @param request DeleteEntryGroupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteEntryGroup(request: google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateEntry.
+                     * @param request CreateEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Entry
+                     */
+                    public createEntry(request: google.cloud.datacatalog.v1beta1.ICreateEntryRequest, callback: google.cloud.datacatalog.v1beta1.DataCatalog.CreateEntryCallback): void;
+
+                    /**
+                     * Calls CreateEntry.
+                     * @param request CreateEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createEntry(request: google.cloud.datacatalog.v1beta1.ICreateEntryRequest): Promise<google.cloud.datacatalog.v1beta1.Entry>;
+
+                    /**
                      * Calls UpdateEntry.
                      * @param request UpdateEntryRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Entry
@@ -58,6 +114,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateEntry(request: google.cloud.datacatalog.v1beta1.IUpdateEntryRequest): Promise<google.cloud.datacatalog.v1beta1.Entry>;
+
+                    /**
+                     * Calls DeleteEntry.
+                     * @param request DeleteEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteEntry(request: google.cloud.datacatalog.v1beta1.IDeleteEntryRequest, callback: google.cloud.datacatalog.v1beta1.DataCatalog.DeleteEntryCallback): void;
+
+                    /**
+                     * Calls DeleteEntry.
+                     * @param request DeleteEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteEntry(request: google.cloud.datacatalog.v1beta1.IDeleteEntryRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls GetEntry.
@@ -308,11 +378,46 @@ export namespace google {
                     type SearchCatalogCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.SearchCatalogResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#createEntryGroup}.
+                     * @param error Error, if any
+                     * @param [response] EntryGroup
+                     */
+                    type CreateEntryGroupCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.EntryGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#getEntryGroup}.
+                     * @param error Error, if any
+                     * @param [response] EntryGroup
+                     */
+                    type GetEntryGroupCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.EntryGroup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#deleteEntryGroup}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteEntryGroupCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#createEntry}.
+                     * @param error Error, if any
+                     * @param [response] Entry
+                     */
+                    type CreateEntryCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Entry) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#updateEntry}.
                      * @param error Error, if any
                      * @param [response] Entry
                      */
                     type UpdateEntryCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1beta1.Entry) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#deleteEntry}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteEntryCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.datacatalog.v1beta1.DataCatalog#getEntry}.
@@ -749,6 +854,396 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a CreateEntryGroupRequest. */
+                interface ICreateEntryGroupRequest {
+
+                    /** CreateEntryGroupRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEntryGroupRequest entryGroupId */
+                    entryGroupId?: (string|null);
+
+                    /** CreateEntryGroupRequest entryGroup */
+                    entryGroup?: (google.cloud.datacatalog.v1beta1.IEntryGroup|null);
+                }
+
+                /** Represents a CreateEntryGroupRequest. */
+                class CreateEntryGroupRequest implements ICreateEntryGroupRequest {
+
+                    /**
+                     * Constructs a new CreateEntryGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest);
+
+                    /** CreateEntryGroupRequest parent. */
+                    public parent: string;
+
+                    /** CreateEntryGroupRequest entryGroupId. */
+                    public entryGroupId: string;
+
+                    /** CreateEntryGroupRequest entryGroup. */
+                    public entryGroup?: (google.cloud.datacatalog.v1beta1.IEntryGroup|null);
+
+                    /**
+                     * Creates a new CreateEntryGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEntryGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest): google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest;
+
+                    /**
+                     * Encodes the specified CreateEntryGroupRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest.verify|verify} messages.
+                     * @param message CreateEntryGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEntryGroupRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest.verify|verify} messages.
+                     * @param message CreateEntryGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ICreateEntryGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEntryGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEntryGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest;
+
+                    /**
+                     * Decodes a CreateEntryGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEntryGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest;
+
+                    /**
+                     * Verifies a CreateEntryGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEntryGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEntryGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEntryGroupRequest message. Also converts values to other types if specified.
+                     * @param message CreateEntryGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEntryGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetEntryGroupRequest. */
+                interface IGetEntryGroupRequest {
+
+                    /** GetEntryGroupRequest name */
+                    name?: (string|null);
+
+                    /** GetEntryGroupRequest readMask */
+                    readMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents a GetEntryGroupRequest. */
+                class GetEntryGroupRequest implements IGetEntryGroupRequest {
+
+                    /**
+                     * Constructs a new GetEntryGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest);
+
+                    /** GetEntryGroupRequest name. */
+                    public name: string;
+
+                    /** GetEntryGroupRequest readMask. */
+                    public readMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new GetEntryGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEntryGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest): google.cloud.datacatalog.v1beta1.GetEntryGroupRequest;
+
+                    /**
+                     * Encodes the specified GetEntryGroupRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetEntryGroupRequest.verify|verify} messages.
+                     * @param message GetEntryGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEntryGroupRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GetEntryGroupRequest.verify|verify} messages.
+                     * @param message GetEntryGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGetEntryGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEntryGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEntryGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GetEntryGroupRequest;
+
+                    /**
+                     * Decodes a GetEntryGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEntryGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GetEntryGroupRequest;
+
+                    /**
+                     * Verifies a GetEntryGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEntryGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEntryGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GetEntryGroupRequest;
+
+                    /**
+                     * Creates a plain object from a GetEntryGroupRequest message. Also converts values to other types if specified.
+                     * @param message GetEntryGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.GetEntryGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEntryGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteEntryGroupRequest. */
+                interface IDeleteEntryGroupRequest {
+
+                    /** DeleteEntryGroupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteEntryGroupRequest. */
+                class DeleteEntryGroupRequest implements IDeleteEntryGroupRequest {
+
+                    /**
+                     * Constructs a new DeleteEntryGroupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest);
+
+                    /** DeleteEntryGroupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteEntryGroupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEntryGroupRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest): google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest;
+
+                    /**
+                     * Encodes the specified DeleteEntryGroupRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest.verify|verify} messages.
+                     * @param message DeleteEntryGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEntryGroupRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest.verify|verify} messages.
+                     * @param message DeleteEntryGroupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IDeleteEntryGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEntryGroupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEntryGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest;
+
+                    /**
+                     * Decodes a DeleteEntryGroupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEntryGroupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest;
+
+                    /**
+                     * Verifies a DeleteEntryGroupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEntryGroupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEntryGroupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteEntryGroupRequest message. Also converts values to other types if specified.
+                     * @param message DeleteEntryGroupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEntryGroupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateEntryRequest. */
+                interface ICreateEntryRequest {
+
+                    /** CreateEntryRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateEntryRequest entryId */
+                    entryId?: (string|null);
+
+                    /** CreateEntryRequest entry */
+                    entry?: (google.cloud.datacatalog.v1beta1.IEntry|null);
+                }
+
+                /** Represents a CreateEntryRequest. */
+                class CreateEntryRequest implements ICreateEntryRequest {
+
+                    /**
+                     * Constructs a new CreateEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ICreateEntryRequest);
+
+                    /** CreateEntryRequest parent. */
+                    public parent: string;
+
+                    /** CreateEntryRequest entryId. */
+                    public entryId: string;
+
+                    /** CreateEntryRequest entry. */
+                    public entry?: (google.cloud.datacatalog.v1beta1.IEntry|null);
+
+                    /**
+                     * Creates a new CreateEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ICreateEntryRequest): google.cloud.datacatalog.v1beta1.CreateEntryRequest;
+
+                    /**
+                     * Encodes the specified CreateEntryRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryRequest.verify|verify} messages.
+                     * @param message CreateEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ICreateEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateEntryRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.CreateEntryRequest.verify|verify} messages.
+                     * @param message CreateEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ICreateEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.CreateEntryRequest;
+
+                    /**
+                     * Decodes a CreateEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.CreateEntryRequest;
+
+                    /**
+                     * Verifies a CreateEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.CreateEntryRequest;
+
+                    /**
+                     * Creates a plain object from a CreateEntryRequest message. Also converts values to other types if specified.
+                     * @param message CreateEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.CreateEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an UpdateEntryRequest. */
                 interface IUpdateEntryRequest {
 
@@ -840,6 +1335,96 @@ export namespace google {
 
                     /**
                      * Converts this UpdateEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteEntryRequest. */
+                interface IDeleteEntryRequest {
+
+                    /** DeleteEntryRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteEntryRequest. */
+                class DeleteEntryRequest implements IDeleteEntryRequest {
+
+                    /**
+                     * Constructs a new DeleteEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IDeleteEntryRequest);
+
+                    /** DeleteEntryRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IDeleteEntryRequest): google.cloud.datacatalog.v1beta1.DeleteEntryRequest;
+
+                    /**
+                     * Encodes the specified DeleteEntryRequest message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryRequest.verify|verify} messages.
+                     * @param message DeleteEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IDeleteEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteEntryRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.DeleteEntryRequest.verify|verify} messages.
+                     * @param message DeleteEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IDeleteEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.DeleteEntryRequest;
+
+                    /**
+                     * Decodes a DeleteEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.DeleteEntryRequest;
+
+                    /**
+                     * Verifies a DeleteEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.DeleteEntryRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteEntryRequest message. Also converts values to other types if specified.
+                     * @param message DeleteEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.DeleteEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteEntryRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -1046,6 +1631,9 @@ export namespace google {
                     /** Entry type */
                     type?: (google.cloud.datacatalog.v1beta1.EntryType|null);
 
+                    /** Entry gcsFilesetSpec */
+                    gcsFilesetSpec?: (google.cloud.datacatalog.v1beta1.IGcsFilesetSpec|null);
+
                     /** Entry bigqueryTableSpec */
                     bigqueryTableSpec?: (google.cloud.datacatalog.v1beta1.IBigQueryTableSpec|null);
 
@@ -1083,6 +1671,9 @@ export namespace google {
                     /** Entry type. */
                     public type: google.cloud.datacatalog.v1beta1.EntryType;
 
+                    /** Entry gcsFilesetSpec. */
+                    public gcsFilesetSpec?: (google.cloud.datacatalog.v1beta1.IGcsFilesetSpec|null);
+
                     /** Entry bigqueryTableSpec. */
                     public bigqueryTableSpec?: (google.cloud.datacatalog.v1beta1.IBigQueryTableSpec|null);
 
@@ -1101,8 +1692,11 @@ export namespace google {
                     /** Entry sourceSystemTimestamps. */
                     public sourceSystemTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
 
+                    /** Entry entryType. */
+                    public entryType?: "type";
+
                     /** Entry typeSpec. */
-                    public typeSpec?: ("bigqueryTableSpec"|"bigqueryDateShardedSpec");
+                    public typeSpec?: ("gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec");
 
                     /**
                      * Creates a new Entry instance using the specified properties.
@@ -1170,6 +1764,114 @@ export namespace google {
 
                     /**
                      * Converts this Entry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EntryGroup. */
+                interface IEntryGroup {
+
+                    /** EntryGroup name */
+                    name?: (string|null);
+
+                    /** EntryGroup displayName */
+                    displayName?: (string|null);
+
+                    /** EntryGroup description */
+                    description?: (string|null);
+
+                    /** EntryGroup dataCatalogTimestamps */
+                    dataCatalogTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+                }
+
+                /** Represents an EntryGroup. */
+                class EntryGroup implements IEntryGroup {
+
+                    /**
+                     * Constructs a new EntryGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IEntryGroup);
+
+                    /** EntryGroup name. */
+                    public name: string;
+
+                    /** EntryGroup displayName. */
+                    public displayName: string;
+
+                    /** EntryGroup description. */
+                    public description: string;
+
+                    /** EntryGroup dataCatalogTimestamps. */
+                    public dataCatalogTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
+                    /**
+                     * Creates a new EntryGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EntryGroup instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IEntryGroup): google.cloud.datacatalog.v1beta1.EntryGroup;
+
+                    /**
+                     * Encodes the specified EntryGroup message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.EntryGroup.verify|verify} messages.
+                     * @param message EntryGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IEntryGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EntryGroup message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.EntryGroup.verify|verify} messages.
+                     * @param message EntryGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IEntryGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EntryGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EntryGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.EntryGroup;
+
+                    /**
+                     * Decodes an EntryGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EntryGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.EntryGroup;
+
+                    /**
+                     * Verifies an EntryGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EntryGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EntryGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.EntryGroup;
+
+                    /**
+                     * Creates a plain object from an EntryGroup message. Also converts values to other types if specified.
+                     * @param message EntryGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.EntryGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EntryGroup to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -1275,6 +1977,14 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** EntryType enum. */
+                enum EntryType {
+                    ENTRY_TYPE_UNSPECIFIED = 0,
+                    TABLE = 2,
+                    DATA_STREAM = 3,
+                    FILESET = 4
                 }
 
                 /** Properties of a GetTagTemplateRequest. */
@@ -2141,13 +2851,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** EntryType enum. */
-                enum EntryType {
-                    ENTRY_TYPE_UNSPECIFIED = 0,
-                    TABLE = 2,
-                    DATA_STREAM = 3
-                }
-
                 /** Properties of a DeleteTagTemplateFieldRequest. */
                 interface IDeleteTagTemplateFieldRequest {
 
@@ -2437,6 +3140,306 @@ export namespace google {
 
                     /**
                      * Converts this ListTagsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GcsFilesetSpec. */
+                interface IGcsFilesetSpec {
+
+                    /** GcsFilesetSpec filePatterns */
+                    filePatterns?: (string[]|null);
+
+                    /** GcsFilesetSpec sampleGcsFileSpecs */
+                    sampleGcsFileSpecs?: (google.cloud.datacatalog.v1beta1.IGcsFileSpec[]|null);
+                }
+
+                /** Represents a GcsFilesetSpec. */
+                class GcsFilesetSpec implements IGcsFilesetSpec {
+
+                    /**
+                     * Constructs a new GcsFilesetSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec);
+
+                    /** GcsFilesetSpec filePatterns. */
+                    public filePatterns: string[];
+
+                    /** GcsFilesetSpec sampleGcsFileSpecs. */
+                    public sampleGcsFileSpecs: google.cloud.datacatalog.v1beta1.IGcsFileSpec[];
+
+                    /**
+                     * Creates a new GcsFilesetSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsFilesetSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Encodes the specified GcsFilesetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                     * @param message GcsFilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsFilesetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFilesetSpec.verify|verify} messages.
+                     * @param message GcsFilesetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGcsFilesetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsFilesetSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsFilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Decodes a GcsFilesetSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsFilesetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Verifies a GcsFilesetSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsFilesetSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsFilesetSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GcsFilesetSpec;
+
+                    /**
+                     * Creates a plain object from a GcsFilesetSpec message. Also converts values to other types if specified.
+                     * @param message GcsFilesetSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.GcsFilesetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsFilesetSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GcsFileSpec. */
+                interface IGcsFileSpec {
+
+                    /** GcsFileSpec filePath */
+                    filePath?: (string|null);
+
+                    /** GcsFileSpec gcsTimestamps */
+                    gcsTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
+                    /** GcsFileSpec sizeBytes */
+                    sizeBytes?: (number|Long|null);
+                }
+
+                /** Represents a GcsFileSpec. */
+                class GcsFileSpec implements IGcsFileSpec {
+
+                    /**
+                     * Constructs a new GcsFileSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.IGcsFileSpec);
+
+                    /** GcsFileSpec filePath. */
+                    public filePath: string;
+
+                    /** GcsFileSpec gcsTimestamps. */
+                    public gcsTimestamps?: (google.cloud.datacatalog.v1beta1.ISystemTimestamps|null);
+
+                    /** GcsFileSpec sizeBytes. */
+                    public sizeBytes: (number|Long);
+
+                    /**
+                     * Creates a new GcsFileSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsFileSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.IGcsFileSpec): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Encodes the specified GcsFileSpec message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                     * @param message GcsFileSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.IGcsFileSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsFileSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.GcsFileSpec.verify|verify} messages.
+                     * @param message GcsFileSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.IGcsFileSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsFileSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsFileSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Decodes a GcsFileSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsFileSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Verifies a GcsFileSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsFileSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsFileSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.GcsFileSpec;
+
+                    /**
+                     * Creates a plain object from a GcsFileSpec message. Also converts values to other types if specified.
+                     * @param message GcsFileSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.GcsFileSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsFileSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SystemTimestamps. */
+                interface ISystemTimestamps {
+
+                    /** SystemTimestamps createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SystemTimestamps. */
+                class SystemTimestamps implements ISystemTimestamps {
+
+                    /**
+                     * Constructs a new SystemTimestamps.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps);
+
+                    /** SystemTimestamps createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SystemTimestamps expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SystemTimestamps instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SystemTimestamps instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                     * @param message SystemTimestamps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
+                     * @param message SystemTimestamps message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SystemTimestamps message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SystemTimestamps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SystemTimestamps
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Verifies a SystemTimestamps message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SystemTimestamps
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SystemTimestamps;
+
+                    /**
+                     * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
+                     * @param message SystemTimestamps
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1beta1.SystemTimestamps, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SystemTimestamps to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -3594,6 +4597,9 @@ export namespace google {
                 /** Properties of a TagTemplateField. */
                 interface ITagTemplateField {
 
+                    /** TagTemplateField name */
+                    name?: (string|null);
+
                     /** TagTemplateField displayName */
                     displayName?: (string|null);
 
@@ -3609,6 +4615,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.datacatalog.v1beta1.ITagTemplateField);
+
+                    /** TagTemplateField name. */
+                    public name: string;
 
                     /** TagTemplateField displayName. */
                     public displayName: string;
@@ -3980,108 +4989,6 @@ export namespace google {
                         TIMESTAMP = 4
                     }
                 }
-
-                /** Properties of a SystemTimestamps. */
-                interface ISystemTimestamps {
-
-                    /** SystemTimestamps createTime */
-                    createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps updateTime */
-                    updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps expireTime */
-                    expireTime?: (google.protobuf.ITimestamp|null);
-                }
-
-                /** Represents a SystemTimestamps. */
-                class SystemTimestamps implements ISystemTimestamps {
-
-                    /**
-                     * Constructs a new SystemTimestamps.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps);
-
-                    /** SystemTimestamps createTime. */
-                    public createTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps updateTime. */
-                    public updateTime?: (google.protobuf.ITimestamp|null);
-
-                    /** SystemTimestamps expireTime. */
-                    public expireTime?: (google.protobuf.ITimestamp|null);
-
-                    /**
-                     * Creates a new SystemTimestamps instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SystemTimestamps instance
-                     */
-                    public static create(properties?: google.cloud.datacatalog.v1beta1.ISystemTimestamps): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Encodes the specified SystemTimestamps message. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                     * @param message SystemTimestamps message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SystemTimestamps message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1beta1.SystemTimestamps.verify|verify} messages.
-                     * @param message SystemTimestamps message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.datacatalog.v1beta1.ISystemTimestamps, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SystemTimestamps message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SystemTimestamps
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Decodes a SystemTimestamps message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SystemTimestamps
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Verifies a SystemTimestamps message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SystemTimestamps message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SystemTimestamps
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1beta1.SystemTimestamps;
-
-                    /**
-                     * Creates a plain object from a SystemTimestamps message. Also converts values to other types if specified.
-                     * @param message SystemTimestamps
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.datacatalog.v1beta1.SystemTimestamps, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SystemTimestamps to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
             }
         }
     }
@@ -4423,6 +5330,230 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: google.api.ResourceDescriptor.History;
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
@@ -6159,6 +7290,9 @@ export namespace google {
 
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** MessageOptions .google.api.resource */
+            ".google.api.resource"?: (google.api.IResourceDescriptor|null);
         }
 
         /** Represents a MessageOptions. */
@@ -6279,6 +7413,12 @@ export namespace google {
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.api.fieldBehavior */
+            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */

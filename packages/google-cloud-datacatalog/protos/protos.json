@@ -25,7 +25,42 @@
                           "responseType": "SearchCatalogResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/catalog:search",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "scope,query,order_by"
+                          }
+                        },
+                        "CreateEntryGroup": {
+                          "requestType": "CreateEntryGroupRequest",
+                          "responseType": "EntryGroup",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/entryGroups",
+                            "(google.api.http).body": "entry_group",
+                            "(google.api.method_signature)": "parent,entry_group_id,entry_group"
+                          }
+                        },
+                        "GetEntryGroup": {
+                          "requestType": "GetEntryGroupRequest",
+                          "responseType": "EntryGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*}",
+                            "(google.api.method_signature)": "name,read_mask"
+                          }
+                        },
+                        "DeleteEntryGroup": {
+                          "requestType": "DeleteEntryGroupRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          }
+                        },
+                        "CreateEntry": {
+                          "requestType": "CreateEntryRequest",
+                          "responseType": "Entry",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*}/entries",
+                            "(google.api.http).body": "entry",
+                            "(google.api.method_signature)": "parent,entry_id,entry"
                           }
                         },
                         "UpdateEntry": {
@@ -33,14 +68,24 @@
                           "responseType": "Entry",
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{entry.name=projects/*/locations/*/entryGroups/*/entries/*}",
-                            "(google.api.http).body": "entry"
+                            "(google.api.http).body": "entry",
+                            "(google.api.method_signature)": "entry,update_mask"
+                          }
+                        },
+                        "DeleteEntry": {
+                          "requestType": "DeleteEntryRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "GetEntry": {
                           "requestType": "GetEntryRequest",
                           "responseType": "Entry",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}"
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "LookupEntry": {
@@ -55,14 +100,16 @@
                           "responseType": "TagTemplate",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/tagTemplates",
-                            "(google.api.http).body": "tag_template"
+                            "(google.api.http).body": "tag_template",
+                            "(google.api.method_signature)": "parent,tag_template_id,tag_template"
                           }
                         },
                         "GetTagTemplate": {
                           "requestType": "GetTagTemplateRequest",
                           "responseType": "TagTemplate",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}"
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "UpdateTagTemplate": {
@@ -70,14 +117,16 @@
                           "responseType": "TagTemplate",
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{tag_template.name=projects/*/locations/*/tagTemplates/*}",
-                            "(google.api.http).body": "tag_template"
+                            "(google.api.http).body": "tag_template",
+                            "(google.api.method_signature)": "tag_template,update_mask"
                           }
                         },
                         "DeleteTagTemplate": {
                           "requestType": "DeleteTagTemplateRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}"
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*}",
+                            "(google.api.method_signature)": "name,force"
                           }
                         },
                         "CreateTagTemplateField": {
@@ -85,7 +134,8 @@
                           "responseType": "TagTemplateField",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/tagTemplates/*}/fields",
-                            "(google.api.http).body": "tag_template_field"
+                            "(google.api.http).body": "tag_template_field",
+                            "(google.api.method_signature)": "parent,tag_template_field_id,tag_template_field"
                           }
                         },
                         "UpdateTagTemplateField": {
@@ -93,7 +143,8 @@
                           "responseType": "TagTemplateField",
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
-                            "(google.api.http).body": "tag_template_field"
+                            "(google.api.http).body": "tag_template_field",
+                            "(google.api.method_signature)": "name,tag_template_field,update_mask"
                           }
                         },
                         "RenameTagTemplateField": {
@@ -101,14 +152,16 @@
                           "responseType": "TagTemplateField",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}:rename",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,new_tag_template_field_id"
                           }
                         },
                         "DeleteTagTemplateField": {
                           "requestType": "DeleteTagTemplateFieldRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}"
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/tagTemplates/*/fields/*}",
+                            "(google.api.method_signature)": "name,force"
                           }
                         },
                         "CreateTag": {
@@ -116,7 +169,8 @@
                           "responseType": "Tag",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
-                            "(google.api.http).body": "tag"
+                            "(google.api.http).body": "tag",
+                            "(google.api.method_signature)": "parent,tag"
                           }
                         },
                         "UpdateTag": {
@@ -124,21 +178,24 @@
                           "responseType": "Tag",
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{tag.name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
-                            "(google.api.http).body": "tag"
+                            "(google.api.http).body": "tag",
+                            "(google.api.method_signature)": "tag,update_mask"
                           }
                         },
                         "DeleteTag": {
                           "requestType": "DeleteTagRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}"
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/entryGroups/*/entries/*/tags/*}",
+                            "(google.api.method_signature)": "name"
                           }
                         },
                         "ListTags": {
                           "requestType": "ListTagsRequest",
                           "responseType": "ListTagsResponse",
                           "options": {
-                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags"
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/entryGroups/*/entries/*}/tags",
+                            "(google.api.method_signature)": "parent"
                           }
                         },
                         "SetIamPolicy": {
@@ -146,7 +203,9 @@
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:setIamPolicy",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:setIamPolicy",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "GetIamPolicy": {
@@ -154,7 +213,9 @@
                           "responseType": "google.iam.v1.Policy",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:getIamPolicy",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:getIamPolicy",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         },
                         "TestIamPermissions": {
@@ -162,7 +223,9 @@
                           "responseType": "google.iam.v1.TestIamPermissionsResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta1/{resource=projects/*/locations/*/tagTemplates/*}:testIamPermissions",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{resource=projects/*/locations/*/entryGroups/*/entries/*}:testIamPermissions",
+                            "(google.api.http).additional_bindings.body": "*"
                           }
                         }
                       }
@@ -171,11 +234,17 @@
                       "fields": {
                         "scope": {
                           "type": "Scope",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "query": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -224,11 +293,91 @@
                         }
                       }
                     },
+                    "CreateEntryGroupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "entryGroupId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entryGroup": {
+                          "type": "EntryGroup",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEntryGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteEntryGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        }
+                      }
+                    },
+                    "CreateEntryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
+                        },
+                        "entryId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entry": {
+                          "type": "Entry",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "UpdateEntryRequest": {
                       "fields": {
                         "entry": {
                           "type": "Entry",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -236,11 +385,27 @@
                         }
                       }
                     },
+                    "DeleteEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
+                        }
+                      }
+                    },
                     "GetEntryRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
                         }
                       }
                     },
@@ -265,9 +430,19 @@
                       }
                     },
                     "Entry": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/Entry",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}"
+                      },
                       "oneofs": {
+                        "entryType": {
+                          "oneof": [
+                            "type"
+                          ]
+                        },
                         "typeSpec": {
                           "oneof": [
+                            "gcsFilesetSpec",
                             "bigqueryTableSpec",
                             "bigqueryDateShardedSpec"
                           ]
@@ -276,7 +451,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
+                          }
                         },
                         "linkedResource": {
                           "type": "string",
@@ -285,6 +463,10 @@
                         "type": {
                           "type": "EntryType",
                           "id": 2
+                        },
+                        "gcsFilesetSpec": {
+                          "type": "GcsFilesetSpec",
+                          "id": 6
                         },
                         "bigqueryTableSpec": {
                           "type": "BigQueryTableSpec",
@@ -312,27 +494,76 @@
                         }
                       }
                     },
+                    "EntryGroup": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/EntryGroup",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataCatalogTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "CreateTagTemplateRequest": {
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/TagTemplate"
+                          }
                         },
                         "tagTemplateId": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "tagTemplate": {
                           "type": "TagTemplate",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
+                      }
+                    },
+                    "EntryType": {
+                      "values": {
+                        "ENTRY_TYPE_UNSPECIFIED": 0,
+                        "TABLE": 2,
+                        "DATA_STREAM": 3,
+                        "FILESET": 4
                       }
                     },
                     "GetTagTemplateRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
+                          }
                         }
                       }
                     },
@@ -340,7 +571,10 @@
                       "fields": {
                         "tagTemplate": {
                           "type": "TagTemplate",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -352,11 +586,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
+                          }
                         },
                         "force": {
                           "type": "bool",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -364,11 +605,18 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Tag"
+                          }
                         },
                         "tag": {
                           "type": "Tag",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -376,7 +624,10 @@
                       "fields": {
                         "tag": {
                           "type": "Tag",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -388,7 +639,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
+                          }
                         }
                       }
                     },
@@ -396,15 +651,25 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplate"
+                          }
                         },
                         "tagTemplateFieldId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "tagTemplateField": {
                           "type": "TagTemplateField",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -412,11 +677,18 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
+                          }
                         },
                         "tagTemplateField": {
                           "type": "TagTemplateField",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
@@ -428,30 +700,37 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
+                          }
                         },
                         "newTagTemplateFieldId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
-                      }
-                    },
-                    "EntryType": {
-                      "values": {
-                        "ENTRY_TYPE_UNSPECIFIED": 0,
-                        "TABLE": 2,
-                        "DATA_STREAM": 3
                       }
                     },
                     "DeleteTagTemplateFieldRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/TagTemplateField"
+                          }
                         },
                         "force": {
                           "type": "bool",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -459,7 +738,11 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "datacatalog.googleapis.com/Tag"
+                          }
                         },
                         "pageSize": {
                           "type": "int32",
@@ -484,12 +767,79 @@
                         }
                       }
                     },
+                    "GcsFilesetSpec": {
+                      "fields": {
+                        "filePatterns": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sampleGcsFileSpecs": {
+                          "rule": "repeated",
+                          "type": "GcsFileSpec",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GcsFileSpec": {
+                      "fields": {
+                        "filePath": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gcsTimestamps": {
+                          "type": "SystemTimestamps",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sizeBytes": {
+                          "type": "int64",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "SystemTimestamps": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Schema": {
                       "fields": {
                         "columns": {
                           "rule": "repeated",
                           "type": "ColumnSchema",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -497,11 +847,17 @@
                       "fields": {
                         "column": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "type": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -558,7 +914,10 @@
                       "fields": {
                         "tableSourceType": {
                           "type": "TableSourceType",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "viewSpec": {
                           "type": "ViewSpec",
@@ -581,7 +940,10 @@
                       "fields": {
                         "viewQuery": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -589,7 +951,11 @@
                       "fields": {
                         "groupedEntry": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
                         }
                       }
                     },
@@ -597,7 +963,11 @@
                       "fields": {
                         "dataset": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Entry"
+                          }
                         },
                         "tablePrefix": {
                           "type": "string",
@@ -610,6 +980,10 @@
                       }
                     },
                     "Tag": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/Tag",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}/tags/{tag}"
+                      },
                       "oneofs": {
                         "scope": {
                           "oneof": [
@@ -624,11 +998,17 @@
                         },
                         "template": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "templateDisplayName": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "column": {
                           "type": "string",
@@ -637,7 +1017,10 @@
                         "fields": {
                           "keyType": "string",
                           "type": "TagField",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -656,7 +1039,10 @@
                       "fields": {
                         "displayName": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "doubleValue": {
                           "type": "double",
@@ -691,6 +1077,10 @@
                       }
                     },
                     "TagTemplate": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/TagTemplate",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -703,19 +1093,33 @@
                         "fields": {
                           "keyType": "string",
                           "type": "TagTemplateField",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
                     "TagTemplateField": {
+                      "options": {
+                        "(google.api.resource).type": "datacatalog.googleapis.com/TagTemplateField",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{field}"
+                      },
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 6
+                        },
                         "displayName": {
                           "type": "string",
                           "id": 1
                         },
                         "type": {
                           "type": "FieldType",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -752,7 +1156,10 @@
                               "fields": {
                                 "displayName": {
                                   "type": "string",
-                                  "id": 1
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
                                 }
                               }
                             }
@@ -768,22 +1175,6 @@
                           }
                         }
                       }
-                    },
-                    "SystemTimestamps": {
-                      "fields": {
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        },
-                        "expireTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3
-                        }
-                      }
                     }
                   }
                 }
@@ -795,7 +1186,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -903,6 +1294,74 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
             }
           }
         },

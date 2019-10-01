@@ -22,15 +22,19 @@
  * @property {string} name
  *   Required when used in
  *   UpdateTagRequest. The
- *   resource name of the tag in URL format. For example,
- *   projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}",
- *   where tag_id is a system-generated identifier. Note that this Tag may not
- *   actually be stored in the location in this name.
+ *   resource name of the tag in URL format. Example:
+ *
+ *   * projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
+ *
+ *   where `tag_id` is a system-generated identifier.
+ *   Note that this Tag may not actually be stored in the location in this name.
  *
  * @property {string} template
- *   Required. The resource name of the tag template that this tag uses. For
- *   example,
- *   projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}.
+ *   Required. The resource name of the tag template that this tag uses.
+ *   Example:
+ *
+ *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
+ *
  *   This field cannot be modified after creation.
  *
  * @property {string} templateDisplayName
@@ -40,11 +44,13 @@
  *   Resources like Entry can have schemas associated with them. This scope
  *   allows users to attach tags to an individual column based on that schema.
  *
- *   For attaching a tag to a nested column, use '.' to separate the column
- *   names: "outer_column.inner_column".
+ *   For attaching a tag to a nested column, use `.` to separate the column
+ *   names. Example:
+ *
+ *   * `outer_column.inner_column`
  *
  * @property {Object.<string, Object>} fields
- *   Required. This maps the id of a tag field to the value of & additional
+ *   Required. This maps the ID of a tag field to the value of and additional
  *   information about that field. Valid field IDs are defined by the tag's
  *   template. A tag must have at least 1 field and at most 500 fields.
  *
@@ -106,31 +112,32 @@ const TagField = {
 };
 
 /**
- * Tag templates defines the schema of the tags used to attach to Data Catalog
+ * A tag template defines the schema of the tags used to attach to Data Catalog
  * resources. It defines the mapping of accepted field names and types that can
  * be used within the tag. The tag template also controls the access to the tag.
  *
  * @property {string} name
  *   Required when used in
  *   UpdateTagTemplateRequest.
- *   The resource name of the tag template in URL format. For example,
- *   projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}.
+ *   The resource name of the tag template in URL format. Example:
+ *
+ *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
+ *
  *   Note that this TagTemplate and its child resources may not actually be
  *   stored in the location in this name.
  *
  * @property {string} displayName
- *   Optional. The display name for this template. Default value is an empty
- *   string.
+ *   Optional. The display name for this template. Defaults to an empty string.
  *
  * @property {Object.<string, Object>} fields
- *   Required. Map of tag template field ids to the settings for the field.
+ *   Required. Map of tag template field IDs to the settings for the field.
  *   This map is an exhaustive list of the allowed fields. This map must contain
  *   at least one field and at most 500 fields.
  *
  *   The keys to this map are tag template field IDs. Field IDs can contain
  *   letters (both uppercase and lowercase), numbers (0-9) and underscores (_).
- *   Field IDs must be at least 1 character long and at most 64 characters long.
- *   Field IDs must start with a letter or underscore.
+ *   Field IDs must be at least 1 character long and at most
+ *   64 characters long. Field IDs must start with a letter or underscore.
  *
  * @typedef TagTemplate
  * @memberof google.cloud.datacatalog.v1beta1
@@ -143,9 +150,17 @@ const TagTemplate = {
 /**
  * The template for an individual field within a tag template.
  *
+ * @property {string} name
+ *   Output only. The resource name of the tag template field in URL format.
+ *   Example:
+ *
+ *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template}/fields/{field}
+ *
+ *   Note that this TagTemplateField may not actually be stored in the location
+ *   in this name.
+ *
  * @property {string} displayName
- *   Optional. The display name for this field. Default value is an empty
- *   string.
+ *   Optional. The display name for this field. Defaults to an empty string.
  *
  * @property {Object} type
  *   Required. The type of value this tag field can contain.
@@ -180,12 +195,12 @@ const FieldType = {
 
   /**
    * @property {Object[]} allowedValues
-   *   Required. The set of allowed values for this enum. This set must not be
-   *   empty, the display names of the values in this set must not be empty and
-   *   the display names of the values must be case-insensitively unique within
-   *   this set. Currently, enum values can only be added to the list of allowed
-   *   values. Deletion and renaming of enum values are not supported. Can have
-   *   up to 500 allowed values.
+   *   Required on create; optional on update. The set of allowed values for
+   *   this enum. This set must not be empty, the display names of the values in
+   *   this set must not be empty and the display names of the values must be
+   *   case-insensitively unique within this set. Currently, enum values can
+   *   only be added to the list of allowed values. Deletion and renaming of
+   *   enum values are not supported. Can have up to 500 allowed values.
    *
    *   This object should have the same structure as [EnumValue]{@link google.cloud.datacatalog.v1beta1.EnumValue}
    *

@@ -19,24 +19,26 @@
  * Describes a Cloud Storage fileset entry.
  *
  * @property {string[]} filePatterns
- *   Patterns to identify a set of files in Google Cloud Storage.
+ *   Required. Patterns to identify a set of files in Google Cloud Storage.
  *
  *   Examples of valid file_patterns:
- *       "gs://bucket_name/*"        (matches all files in 'bucket_name')
- *       "gs://bucket_name/file*”    (matches files prefixed by "file" in
- *                                    'bucket_name')
- *       "gs://bucket_name/a/* /b"    (matches all files in 'bucket_name' that
- *                                    match a/* /b pattern, e.g. a/c/b, a/d/b)
- *       "gs://another_bucket/a.txt" (matches gs://another_bucket/a.txt)
+ *
+ *    * `gs://bucket_name/*`: matches all files in `bucket_name`
+ *    * `gs://bucket_name/file*`: matches files prefixed by `file` in
+ *                                `bucket_name`
+ *    * `gs://bucket_name/a/* /b`: matches all files in `bucket_name` that match
+ *                                `a/* /b` pattern, such as `a/c/b`, `a/d/b`
+ *    * `gs://another_bucket/a.txt`: matches `gs://another_bucket/a.txt`
  *
  * @property {Object[]} sampleGcsFileSpecs
- *   Output only. Sample files contained in this fileset, not all files
- *   contained in this fileset are represented here.
+ *   Output only. Sample files contained in this fileset, not all files contained in this
+ *   fileset are represented here.
  *
  *   This object should have the same structure as [GcsFileSpec]{@link google.cloud.datacatalog.v1beta1.GcsFileSpec}
  *
  * @typedef GcsFilesetSpec
  * @memberof google.cloud.datacatalog.v1beta1
+ * @see [google.cloud.datacatalog.v1beta1.GcsFilesetSpec definition in proto format]{@link https://github.com/googleapis/googleapis/blob/master/google/cloud/datacatalog/v1beta1/gcs_fileset_spec.proto}
  */
 const GcsFilesetSpec = {
   // This is for documentation. Actual contents will be loaded by gRPC.
@@ -46,20 +48,19 @@ const GcsFilesetSpec = {
  * Specifications of a single file in GCS.
  *
  * @property {string} filePath
- *   The full file path. Example: "gs://bucket_name/{dir1}/{dir2}/{filename}".
+ *   Required. The full file path. Example: `gs://bucket_name/a/b.txt`.
  *
  * @property {Object} gcsTimestamps
- *   Timestamps about the GCS file.
+ *   Output only. Timestamps about the GCS file.
  *
  *   This object should have the same structure as [SystemTimestamps]{@link google.cloud.datacatalog.v1beta1.SystemTimestamps}
  *
  * @property {number} sizeBytes
- *   The size of the file, in bytes.
+ *   Output only. The size of the file, in bytes.
  *
  * @typedef GcsFileSpec
  * @memberof google.cloud.datacatalog.v1beta1
  
-
  */
 const GcsFileSpec = {
   // This is for documentation. Actual contents will be loaded by gRPC.

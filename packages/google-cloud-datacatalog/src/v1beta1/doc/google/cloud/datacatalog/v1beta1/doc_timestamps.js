@@ -19,18 +19,18 @@
  * Timestamps about this resource according to a particular system.
  *
  * @property {Object} createTime
- *   Output only. The creation time of the resource within the given system.
+ *   The creation time of the resource within the given system.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} updateTime
- *   Output only. The last-modified time of the resource within the given
- *   system.
+ *   The last-modified time of the resource within the given system.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *
  * @property {Object} expireTime
  *   Output only. The expiration time of the resource within the given system.
+ *   Currently only apllicable to BigQuery resources.
  *
  *   This object should have the same structure as [Timestamp]{@link google.protobuf.Timestamp}
  *

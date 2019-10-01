@@ -47,8 +47,8 @@ const Schema = {
  *
  * @property {string} mode
  *   Optional. A column's mode indicates whether the values in this column are
- *   required, nullable, etc. Only 'NULLABLE', 'REQUIRED' and 'REPEATED' are
- *   supported. Default mode is 'NULLABLE'.
+ *   required, nullable, etc. Only `NULLABLE`, `REQUIRED` and `REPEATED` are
+ *   supported. Default mode is `NULLABLE`.
  *
  * @property {Object[]} subcolumns
  *   Optional. Schema of sub-columns. A column can have zero or more
