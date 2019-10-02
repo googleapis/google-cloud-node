@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@google-cloud/common": "^2.0.0",
-    "google-gax": "^1.0.0",
+    "google-gax": "^1.6.3",
     "protobufjs": "^6.8.6",
     "pumpify": "^2.0.0",
     "stream-events": "^1.0.4"
