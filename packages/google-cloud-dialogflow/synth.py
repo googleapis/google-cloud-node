@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICGenerator()
 versions = ['v2', 'v2beta1']
 for version in versions:
-    library = gapic.node_library('dialogflow', version)
+    library = gapic.node_library('dialogflow', version, config_path=version + '/artman_dialogflow_' + version + '.yaml')
     s.copy(library, excludes=['package.json', 'README.md', 'src/index.js'])
 
 common_templates = gcp.CommonTemplates()
