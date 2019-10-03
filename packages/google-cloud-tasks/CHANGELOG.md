@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.4.0...v1.5.0) (2019-10-03)
+
+
+### Bug Fixes
+
+* update paths in resource reference options ([#284](https://www.github.com/googleapis/nodejs-tasks/issues/284)) ([13b5db0](https://www.github.com/googleapis/nodejs-tasks/commit/13b5db0))
+* use compatible version of google-gax ([d6cae4e](https://www.github.com/googleapis/nodejs-tasks/commit/d6cae4e))
+* **docs:** use long names when class names collide ([#290](https://www.github.com/googleapis/nodejs-tasks/issues/290)) ([0215af8](https://www.github.com/googleapis/nodejs-tasks/commit/0215af8))
+
+
+### Features
+
+* .d.ts for protos ([#282](https://www.github.com/googleapis/nodejs-tasks/issues/282)) ([b15ba7d](https://www.github.com/googleapis/nodejs-tasks/commit/b15ba7d))
+* simplify Node sample ([#278](https://www.github.com/googleapis/nodejs-tasks/issues/278)) ([c6fa96d](https://www.github.com/googleapis/nodejs-tasks/commit/c6fa96d))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-tasks/compare/v1.3.0...v1.4.0) (2019-09-16)
 
 
