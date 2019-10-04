@@ -1203,6 +1203,17 @@ describe('File', () => {
           .resume();
       });
 
+      it('should not gunzip the response if "decompress: false" is passed', done => {
+        file
+          .createReadStream({decompress: false})
+          .once('error', done)
+          .on('data', (data: {}) => {
+            assert.strictEqual(data, GZIPPED_DATA);
+            done();
+          })
+          .resume();
+      });
+
       it('should emit errors from the gunzip stream', done => {
         const error = new Error('Error.');
         const createGunzipStream = through();
