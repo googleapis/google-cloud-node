@@ -780,13 +780,18 @@
                   },
                   "nested": {
                     "LanguageService": {
+                      "options": {
+                        "(google.api.default_host)": "language.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-language,https://www.googleapis.com/auth/cloud-platform"
+                      },
                       "methods": {
                         "AnalyzeSentiment": {
                           "requestType": "AnalyzeSentimentRequest",
                           "responseType": "AnalyzeSentimentResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta2/documents:analyzeSentiment",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
                           }
                         },
                         "AnalyzeEntities": {
@@ -794,7 +799,8 @@
                           "responseType": "AnalyzeEntitiesResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta2/documents:analyzeEntities",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
                           }
                         },
                         "AnalyzeEntitySentiment": {
@@ -802,7 +808,8 @@
                           "responseType": "AnalyzeEntitySentimentResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta2/documents:analyzeEntitySentiment",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
                           }
                         },
                         "AnalyzeSyntax": {
@@ -810,7 +817,8 @@
                           "responseType": "AnalyzeSyntaxResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta2/documents:analyzeSyntax",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
                           }
                         },
                         "ClassifyText": {
@@ -818,7 +826,8 @@
                           "responseType": "ClassifyTextResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta2/documents:classifyText",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
                           }
                         },
                         "AnnotateText": {
@@ -826,7 +835,8 @@
                           "responseType": "AnnotateTextResponse",
                           "options": {
                             "(google.api.http).post": "/v1beta2/documents:annotateText",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document,features"
                           }
                         }
                       }
@@ -919,9 +929,22 @@
                             "EVENT": 4,
                             "WORK_OF_ART": 5,
                             "CONSUMER_GOOD": 6,
-                            "OTHER": 7
+                            "OTHER": 7,
+                            "PHONE_NUMBER": 9,
+                            "ADDRESS": 10,
+                            "DATE": 11,
+                            "NUMBER": 12,
+                            "PRICE": 13
                           }
                         }
+                      }
+                    },
+                    "EncodingType": {
+                      "values": {
+                        "NONE": 0,
+                        "UTF8": 1,
+                        "UTF16": 2,
+                        "UTF32": 3
                       }
                     },
                     "Token": {
@@ -1294,7 +1317,10 @@
                       "fields": {
                         "document": {
                           "type": "Document",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "encodingType": {
                           "type": "EncodingType",
@@ -1323,7 +1349,10 @@
                       "fields": {
                         "document": {
                           "type": "Document",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "encodingType": {
                           "type": "EncodingType",
@@ -1348,7 +1377,10 @@
                       "fields": {
                         "document": {
                           "type": "Document",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "encodingType": {
                           "type": "EncodingType",
@@ -1373,7 +1405,10 @@
                       "fields": {
                         "document": {
                           "type": "Document",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "encodingType": {
                           "type": "EncodingType",
@@ -1403,7 +1438,10 @@
                       "fields": {
                         "document": {
                           "type": "Document",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -1420,11 +1458,17 @@
                       "fields": {
                         "document": {
                           "type": "Document",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "features": {
                           "type": "Features",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "encodingType": {
                           "type": "EncodingType",
@@ -1488,14 +1532,6 @@
                           "type": "ClassificationCategory",
                           "id": 6
                         }
-                      }
-                    },
-                    "EncodingType": {
-                      "values": {
-                        "NONE": 0,
-                        "UTF8": 1,
-                        "UTF16": 2,
-                        "UTF32": 3
                       }
                     }
                   }
@@ -2526,33 +2562,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
-            "Empty": {
-              "fields": {}
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -2562,202 +2571,6 @@
                 "nanos": {
                   "type": "int32",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "longrunning": {
-          "options": {
-            "cc_enable_arenas": true,
-            "csharp_namespace": "Google.LongRunning",
-            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
-            "java_multiple_files": true,
-            "java_outer_classname": "OperationsProto",
-            "java_package": "com.google.longrunning",
-            "php_namespace": "Google\\LongRunning"
-          },
-          "nested": {
-            "operationInfo": {
-              "type": "google.longrunning.OperationInfo",
-              "id": 1049,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Operations": {
-              "methods": {
-                "ListOperations": {
-                  "requestType": "ListOperationsRequest",
-                  "responseType": "ListOperationsResponse",
-                  "options": {
-                    "(google.api.http).get": "/v1/{name=operations}"
-                  }
-                },
-                "GetOperation": {
-                  "requestType": "GetOperationRequest",
-                  "responseType": "Operation",
-                  "options": {
-                    "(google.api.http).get": "/v1/{name=operations/**}"
-                  }
-                },
-                "DeleteOperation": {
-                  "requestType": "DeleteOperationRequest",
-                  "responseType": "google.protobuf.Empty",
-                  "options": {
-                    "(google.api.http).delete": "/v1/{name=operations/**}"
-                  }
-                },
-                "CancelOperation": {
-                  "requestType": "CancelOperationRequest",
-                  "responseType": "google.protobuf.Empty",
-                  "options": {
-                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
-                    "(google.api.http).body": "*"
-                  }
-                },
-                "WaitOperation": {
-                  "requestType": "WaitOperationRequest",
-                  "responseType": "Operation"
-                }
-              }
-            },
-            "Operation": {
-              "oneofs": {
-                "result": {
-                  "oneof": [
-                    "error",
-                    "response"
-                  ]
-                }
-              },
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "metadata": {
-                  "type": "google.protobuf.Any",
-                  "id": 2
-                },
-                "done": {
-                  "type": "bool",
-                  "id": 3
-                },
-                "error": {
-                  "type": "google.rpc.Status",
-                  "id": 4
-                },
-                "response": {
-                  "type": "google.protobuf.Any",
-                  "id": 5
-                }
-              }
-            },
-            "GetOperationRequest": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "ListOperationsRequest": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 4
-                },
-                "filter": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pageSize": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "pageToken": {
-                  "type": "string",
-                  "id": 3
-                }
-              }
-            },
-            "ListOperationsResponse": {
-              "fields": {
-                "operations": {
-                  "rule": "repeated",
-                  "type": "Operation",
-                  "id": 1
-                },
-                "nextPageToken": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "CancelOperationRequest": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "DeleteOperationRequest": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "WaitOperationRequest": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "timeout": {
-                  "type": "google.protobuf.Duration",
-                  "id": 2
-                }
-              }
-            },
-            "OperationInfo": {
-              "fields": {
-                "responseType": {
-                  "type": "string",
-                  "id": 1
-                },
-                "metadataType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
                 }
               }
             }
